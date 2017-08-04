@@ -5,6 +5,9 @@
 * [ISLE MVP](https://docs.google.com/document/d/1s_qWkRgHlRAH6SWuXid6dOYzBjcbqU6PV_gZ1sUu2iY/edit?usp=sharing)
 * [ISLE Supporters](https://docs.google.com/document/d/1ycx5ATbeWpUWvpZ6bwXws490CMgi0dyB9SBfPYUDEjk/edit?usp=sharing)
 
+## Funding Updates - we are getting close!
+Please see the "Funding" section in the [ISLE Executive Summary](https://docs.google.com/document/d/17tAFxR6_b7sxXkE1teNDQZv0UZ0LLSkX8K05-U6A6nw/edit?usp=sharing).
+
 ## What is Islandora Enterprise (ISLE)?
 Islandora Enterprise (ISLE) is a new project in development that will address one of the most significant pain-points in Islandora: installation and maintenance.
 
