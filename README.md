@@ -5,8 +5,39 @@
 * [ISLE MVP](https://docs.google.com/document/d/1s_qWkRgHlRAH6SWuXid6dOYzBjcbqU6PV_gZ1sUu2iY/edit?usp=sharing)
 * [ISLE Supporters](https://docs.google.com/document/d/1ycx5ATbeWpUWvpZ6bwXws490CMgi0dyB9SBfPYUDEjk/edit?usp=sharing)
 
-## Funding Updates - we are getting close!
-Please see the "Funding" section in the [ISLE Executive Summary](https://docs.google.com/document/d/17tAFxR6_b7sxXkE1teNDQZv0UZ0LLSkX8K05-U6A6nw/edit?usp=sharing).
+## Phase 1 Funding Successful - We raised $84,000!!
+We have successfully met our funding goal! In fact, we exceeded the goal, and have pledges totaling $85,400 from 16 higher-ed institutions plus Common Media, when our goal was only $84,000. (And one more institution still is considering offering support.)
+
+We have green-lighted the ISLE project! More than 20 institutions have expressed interest in using ISLE to update their Islandora servers.
+
+## Timeline
+We anticipate the ISLE project to be completed and available for public use around Feb 2018.
+
+## Next Steps
+A "Public Comment Period" will begin in mid-late September, along with documentation and planning, followed by prototype construction in early-mid October.
+
+## Communication and Updates
+This public project page will contain ISLE project updates and next steps.
+
+## The funding ISLE Supporters include:
+* Amherst College
+* Barnard College
+* California Institute of Technology
+* Colgate University
+* Grinnell College
+* Hamilton College
+* Hampshire College
+* Mount Holyoke College
+* Rensselaer Polytechnic Institute
+* Smith College
+* St. Lawrence University
+* Tulane University
+* University of Manitoba Libraries
+* Vassar College
+* Wesleyan University
+* Williams College
+* Common Media
+* Islandora Foundation (Board supports ISLE; not a funder)
 
 ## What is Islandora Enterprise (ISLE)?
 Islandora Enterprise (ISLE) is a new project in development that will address one of the most significant pain-points in Islandora: installation and maintenance.
@@ -19,11 +50,10 @@ Islandora is a powerful digital repository comprised of more than 80 different o
 
 ## How can you help?
 ISLE is seeking support from the Islandora community to see the project through. This support can take several forms, depending on your institution's resources and ability to contribute. To help ISLE succeed, you can:
-* Contribute time to development
-* Contribute time to testing
-* Contribute funding
-* Contribute to community outreach by sharing the project with others
-* Sign on as a likely adopter of the finished product to demonstrate community interest
+* Contribute time to testing or development
+* Contribute funding to enable more MVP Wishlist items or towards Phase II for CLAW
+* Tell others about ISLE
+* Add your institution to the [ISLE Supporters](https://docs.google.com/document/d/1ycx5ATbeWpUWvpZ6bwXws490CMgi0dyB9SBfPYUDEjk/edit?usp=sharing) to express your interest in adopting the finished product (this helps show community interest)
 
 ## Contributors welcome!
 * If you have questions, please contact [David Keiser-Clark](dwk2@williams.edu) or post them on the [Islandora listserv](https://groups.google.com/forum/?utm_source=digest&utm_medium=email#!forum/islandora/topics).
