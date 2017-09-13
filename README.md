@@ -5,7 +5,7 @@
 * [ISLE MVP](https://docs.google.com/document/d/1s_qWkRgHlRAH6SWuXid6dOYzBjcbqU6PV_gZ1sUu2iY/edit?usp=sharing)
 * [ISLE Supporters](https://docs.google.com/document/d/1ycx5ATbeWpUWvpZ6bwXws490CMgi0dyB9SBfPYUDEjk/edit?usp=sharing)
 
-## Phase 1 Funding Successful - We raised $84,000!!
+## Phase 1 Funding Successful - We've raised $89,400!!
 We have successfully met our funding goal! In fact, we exceeded the goal, and have pledges totaling $89,400 from 17 institutions of higher-education plus Common Media, when our goal was only $84,000.
 
 We have green-lighted the ISLE project! More than 20 institutions have expressed interest in using ISLE to update their Islandora servers.
