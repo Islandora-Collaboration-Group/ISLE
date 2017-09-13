@@ -6,7 +6,7 @@
 * [ISLE Supporters](https://docs.google.com/document/d/1ycx5ATbeWpUWvpZ6bwXws490CMgi0dyB9SBfPYUDEjk/edit?usp=sharing)
 
 ## Phase 1 Funding Successful - We raised $84,000!!
-We have successfully met our funding goal! In fact, we exceeded the goal, and have pledges totaling $85,400 from 16 higher-ed institutions plus Common Media, when our goal was only $84,000. (And one more institution still is considering offering support.)
+We have successfully met our funding goal! In fact, we exceeded the goal, and have pledges totaling $89,400 from 17 institutions of higher-education plus Common Media, when our goal was only $84,000.
 
 We have green-lighted the ISLE project! More than 20 institutions have expressed interest in using ISLE to update their Islandora servers.
 
@@ -33,6 +33,7 @@ This public project page will contain ISLE project updates and next steps.
 * St. Lawrence University
 * Tulane University
 * University of Manitoba Libraries
+* University of Pittsburgh
 * Vassar College
 * Wesleyan University
 * Williams College
