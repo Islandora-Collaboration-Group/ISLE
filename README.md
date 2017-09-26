@@ -11,7 +11,7 @@ We have successfully met our funding goal! In fact, we exceeded the goal, and ha
 We have green-lighted the ISLE project! More than 20 institutions have expressed interest in using ISLE to update their Islandora servers.
 
 ## Timeline
-We anticipate the ISLE project to be completed and available for public use around Feb 2018.
+We anticipate the ISLE project to be completed and available for public use around early Feb 2018.
 
 ## Next Steps
 A "Public Comment Period" will begin in mid-late September, along with documentation and planning, followed by prototype construction in early-mid October.
