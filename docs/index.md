@@ -16,7 +16,7 @@ Islandora is a powerful digital repository comprised of more than 80 different o
 ## How can you help?
 ISLE is seeking support from the Islandora community to see the project through. This support can take several forms, depending on your institution's resources and ability to contribute. To help ISLE succeed, you can:
 * Contribute time to testing or development
-* Contribute funding to enable more MVP Wishlist items or towards Phase II for CLAW
+* Contribute funding to enable more MVP Wishlist items or towards Phase II of ISLE
 * Tell others about ISLE
 * Add your institution to the [ISLE Supporters](https://docs.google.com/document/d/1ycx5ATbeWpUWvpZ6bwXws490CMgi0dyB9SBfPYUDEjk/edit?usp=sharing) to express your interest in adopting the finished product (this helps show community interest)
 
