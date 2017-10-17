@@ -1,5 +1,3 @@
-![Logo](assets/Islandora.png)
-
 # Islandora Enterprise (ISLE)
 
 Welcome to the Documentation for the Islandora Enterprise (ISLE) project.
