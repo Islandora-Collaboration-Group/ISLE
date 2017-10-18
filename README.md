@@ -2,7 +2,7 @@
 
 ## ISLE Documents
 * [ISLE Executive Summary](https://docs.google.com/document/d/17tAFxR6_b7sxXkE1teNDQZv0UZ0LLSkX8K05-U6A6nw/edit?usp=sharing)
-* [ISLE MVP](https://docs.google.com/document/d/1s_qWkRgHlRAH6SWuXid6dOYzBjcbqU6PV_gZ1sUu2iY/edit?usp=sharing)
+* [ISLE Public Specs] - coming soon (represents current version of former [ISLE MVP](https://docs.google.com/document/d/1s_qWkRgHlRAH6SWuXid6dOYzBjcbqU6PV_gZ1sUu2iY/edit?usp=sharing))
 * [ISLE Supporters](https://docs.google.com/document/d/1ycx5ATbeWpUWvpZ6bwXws490CMgi0dyB9SBfPYUDEjk/edit?usp=sharing)
 
 ## Phase 1 Funding Successful - We've raised $89,400!!
@@ -10,14 +10,23 @@ We have successfully met our funding goal! In fact, we exceeded the goal, and ha
 
 We have green-lighted the ISLE project! More than 20 institutions have expressed interest in using ISLE to update their Islandora servers.
 
-## Timeline
-We anticipate the ISLE project to be completed and available for public use around Feb 2018.
+## Timeline and Next Steps
+- 08/2016 - ISLE conceived and brought to the ICG and Common Media
+- 09/2016 - ISLE presented at ICG Hack/Doc @ Wesleyan University
+- 05/2017 - ISLE presented at Islandoracon annual conference (Hamilton, Ontario)
+- 09/2017 - Completed fundraising, green-lighted ISLE MVP, opened 3-week Public Comment Period
+- 11/2017 - Public prototype demonstration
+- 12/2017 - First of 6 institutional alpha tests
+- 02/2018 - Stable release of ISLE for Islandora 7x; freely available for public use
 
-## Next Steps
-A "Public Comment Period" will begin in mid-late September, along with documentation and planning, followed by prototype construction in early-mid October.
+## Communication of ISLE Project Updates
+Join our public [ISLE Updates google group](https://groups.google.com/forum/#!forum/isle-updates).
 
-## Communication and Updates
-This public project page will contain ISLE project updates and next steps.
+## ISLE Steering Committee
+- David Keiser-Clark (Chair), Williams
+- Carolyn Moritz, Vassar
+- Ben Rosner, Barnard
+- Steve Young, Hamilton
 
 ## The funding ISLE Supporters include:
 * Amherst College
