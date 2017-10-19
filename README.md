@@ -23,6 +23,7 @@ We have green-lighted the ISLE project! More than 20 institutions have expressed
 Join our public [ISLE Updates google group](https://groups.google.com/forum/#!forum/isle-updates).
 
 ## ISLE Steering Committee
+- Sarah Goldstein, Mount Holyoke College
 - David Keiser-Clark (Chair), Williams
 - Carolyn Moritz, Vassar
 - Ben Rosner, Barnard
