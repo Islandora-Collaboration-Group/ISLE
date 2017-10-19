@@ -6,12 +6,12 @@
 * [ISLE Supporters](https://docs.google.com/document/d/1ycx5ATbeWpUWvpZ6bwXws490CMgi0dyB9SBfPYUDEjk/edit?usp=sharing) (list of institutions)
 
 ## Phase 1 Funding Successful - We've raised $89,400!!
-We have successfully met our funding goal! In fact, we exceeded the goal, and have pledges totaling $89,400 from 17 institutions of higher-education plus Common Media, when our goal was only $84,000.
+We have successfully met our funding goal! In fact, we exceeded the goal, and have pledges totaling $89,400 from 17 institutions of higher-education plus Born-Digital, when our goal was only $84,000.
 
 We have green-lighted the ISLE project! More than 20 institutions have expressed interest in using ISLE to update their Islandora servers.
 
 ## Timeline and Next Steps
-- 08/2016 - ISLE conceived and brought to the ICG and Common Media
+- 08/2016 - ISLE conceived and brought to the ICG and Common Media/Born-Digital
 - 09/2016 - ISLE presented at ICG Hack/Doc @ Wesleyan University
 - 05/2017 - ISLE presented at Islandoracon annual conference (Hamilton, Ontario)
 - 09/2017 - Completed fundraising, green-lighted ISLE MVP, opened 3-week Public Comment Period
@@ -47,7 +47,7 @@ Participate in the [ISLE Updates google group](https://groups.google.com/forum/#
 * Vassar College
 * Wesleyan University
 * Williams College
-* Common Media
+* Born-Digital
 * Islandora Foundation (Board supports ISLE; not a funder)
 
 ## What is Islandora Enterprise (ISLE)?
