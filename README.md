@@ -2,7 +2,7 @@
 
 ## ISLE Documents
 * [ISLE Executive Summary](https://docs.google.com/document/d/17tAFxR6_b7sxXkE1teNDQZv0UZ0LLSkX8K05-U6A6nw/edit?usp=sharing) (a concise overview in plain English)
-* [ISLE Specifications](https://docs.google.com/document/d/1iTXYbBMtQ3TaujPXon01Hp6hVwnxYvsVXYa2G79SuWc/edit#) (current specs based on original [ISLE MVP](https://docs.google.com/document/d/1s_qWkRgHlRAH6SWuXid6dOYzBjcbqU6PV_gZ1sUu2iY/edit?usp=sharing))
+* [ISLE Specifications](https://docs.google.com/document/d/1iTXYbBMtQ3TaujPXon01Hp6hVwnxYvsVXYa2G79SuWc/edit#) (based on the original, and older, [ISLE MVP](https://docs.google.com/document/d/1s_qWkRgHlRAH6SWuXid6dOYzBjcbqU6PV_gZ1sUu2iY/edit?usp=sharing))
 * [ISLE Supporters](https://docs.google.com/document/d/1ycx5ATbeWpUWvpZ6bwXws490CMgi0dyB9SBfPYUDEjk/edit?usp=sharing)
 
 ## Phase 1 Funding Successful - We've raised $89,400!!
