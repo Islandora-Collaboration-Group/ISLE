@@ -1,4 +1,7 @@
-## Container Inventory
+## [STUB] Container Inventory
+
+- include environmental variables specific to containers
+- include accounts and passwords specific to containers.
 
 1. [MySQL](containers-mysql.md)  
     a. has the Drupal site (tbd name) database  

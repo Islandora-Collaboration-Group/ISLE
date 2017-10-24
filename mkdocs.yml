@@ -25,6 +25,10 @@ pages:
   - '1.3 System Overview':
     - '1.3 - System overview': '1_system_process_overview/1_3_system_overview/systemoverview.md'
     - '1.3 - Supported Specification Matrix table': '1_system_process_overview/1_3_system_overview/supported-specification-matrix-table.md'
+    - '1.3 - Supported Islandora Modules': '1_system_process_overview/1_3_system_overview/supported-islandora-modules.md'
+    - '1.3 - Supported Drupal Modules': '1_system_process_overview/1_3_system_overview/supported-drupal-modules.md'
+    - '1.3 - Supported Software Repositories': '1_system_process_overview/1_3_system_overview/supported-software-repositories.md'
+    - '1.3 - Supported SSL': '1_system_process_overview/1_3_system_overview/supported-ssl.md'
     - '1.3 - Release Process': '1_system_process_overview/1_3_system_overview/release-process.md'
   - '1.4 - Testing':
     - '1.4 - Testing - "Sample Data"': '1_system_process_overview/1_4_testing/sampledata.md'
@@ -34,12 +38,15 @@ pages:
 - 2. End-user guide:
   - '2.1 - Host System Requirements':
     - '2.1 - Basic Host Requirements': '2_enduser_guide/2_1_host_requirements/reqs-basic.md'
+    - '2.1 - Storage Requirements': '2_enduser_guide/2_1_host_requirements/host-storage-requirements.md'
     - '2.1 - Local Laptop Requirements': '2_enduser_guide/2_1_host_requirements/reqs-laptops.md'
     - '2.1 - Cloud (AWS) Hosting Requirements': '2_enduser_guide/2_1_host_requirements/reqs-cloud.md'
     - '2.1 - Onsite - Institutional datacenter Requirements': '2_enduser_guide/2_1_host_requirements/reqs-onsite.md'
     - '2.1 - Multi-Environment Requirements': '2_enduser_guide/2_1_host_requirements/reqs-multi-environments.md'
   - '2.2 - Usage Guide':
     - '2.2 - Overview': '2_enduser_guide/usage-guide.md'
+    - '2.2 - Ansible Installation': '2_enduser_guide/2_2_usage_guide/usage-install-ansible.md'
+    - '2.2 - Ansible Playbooks': '2_enduser_guide/2_2_usage_guide/usage-ansible-isle-playbooks.md'
     - '2.2 - Ansible Usage': '2_enduser_guide/2_2_usage_guide/usage-ansible-usage.md'
     - '2.2 - Ansible Quick Start Guide': '2_enduser_guide/2_2_usage_guide/usage-ansible-quick-start.md'
     - '2.2 - Host Server Setup':
@@ -49,19 +56,23 @@ pages:
       - '2.2 - Multi-Environment setup': '2_enduser_guide/2_2_usage_guide/usage-multi-environments-setup.md'
     - '2.2 - Basic Security': '2_enduser_guide/2_2_usage_guide/usage-security.md'
     - '2.2 - Communication and Ports': '2_enduser_guide/2_2_usage_guide/usage-coms-ports.md'
+    - '2.2 - Host Environmental Variables': '2_enduser_guide/2_2_usage_guide/host-environmental-vars.md'
     - '2.2 - Basic Firewall Setup': '2_enduser_guide/2_2_usage_guide/usage-firewall.md'
     - '2.2 - Maintenance of Hosts':
       - '2.2 - Packages': '2_enduser_guide/2_2_usage_guide/usage-hosts-packages.md'
-  - '2.3 Containers':
-    - '2.3 Container Inventory': '2_enduser_guide/2_3_containers/containers-inventory.md'
-    - '2.3 Container - Apache': '2_enduser_guide/2_3_containers/containers-apache.md'
-    - '2.3 Container - MySQL': '2_enduser_guide/2_3_containers/containers-mysql.md'
-    - '2.3 Container - Fedora': '2_enduser_guide/2_3_containers/containers-fedora.md'
-    - '2.3 Container - Gsearch': '2_enduser_guide/2_3_containers/containers-gsearch.md'
-    - '2.3 Container - Solr': '2_enduser_guide/2_3_containers/containers-solr.md'
-    - '2.3 Container - Certbot': '2_enduser_guide/2_3_containers/containers-certbot.md'
+  - '2.3 Docker Containers':
+    - '2.3 - Docker Commands': '2_enduser_guide/2_3_containers/docker-commands.md'
+    - '2.3 - Docker Compose Commands': '2_enduser_guide/2_3_containers/docker-compose-commands.md'
+    - '2.3 - Container Inventory': '2_enduser_guide/2_3_containers/containers-inventory.md'
+    - '2.3 - Container - Apache': '2_enduser_guide/2_3_containers/containers-apache.md'
+    - '2.3 - Container - MySQL': '2_enduser_guide/2_3_containers/containers-mysql.md'
+    - '2.3 - Container - Fedora': '2_enduser_guide/2_3_containers/containers-fedora.md'
+    - '2.3 - Container - Gsearch': '2_enduser_guide/2_3_containers/containers-gsearch.md'
+    - '2.3 - Container - Solr': '2_enduser_guide/2_3_containers/containers-solr.md'
+    - '2.3 - Container - Certbot': '2_enduser_guide/2_3_containers/containers-certbot.md'
   - '2.4 - ISLE Customization':
     - '2.4 - ISLE Customization Overview': '2_enduser_guide/2_4_customize/customization-points.md'
+    - '2.4 - Default accounts and passwords': '2_enduser_guide/2_4_customize/customization-accounts.md'
     - '2.4 - Directories': '2_enduser_guide/2_4_customize/customization-directories.md'
     - '2.4 - YAML files': '2_enduser_guide/2_4_customize/customization-yaml-files.md'
     - '2.4 - Drupal Application': '2_enduser_guide/2_4_customize/customization-drupal-applications.md'
@@ -70,6 +81,13 @@ pages:
     - '2.4 - Drupal Modules': '2_enduser_guide/2_4_customize/customization-drupal-modules.md'
     - '2.4 - Compile Processes': '2_enduser_guide/2_4_customize/customization-compile-processes.md'
     - '2.4 - Repositories': '2_enduser_guide/2_4_customize/customization-repositories.md'
+    - '2.4 - Configuration tools and commands': '2_enduser_guide/2_4_customize/customization-config-tools.md'
+    - '2.4 - Logs - How to configure logs': '2_enduser_guide/2_4_customize/customization-logs.md'
+    - '2.4 - SSL - Apache - How to manually configure SSL certificates': '2_enduser_guide/2_4_customize/customization-ssl-apache-manual.md'
+    - '2.4 - SSL - Apache - How to configure SSL certificates using Certbot and Lets Encrypt': '2_enduser_guide/2_4_customize/customization-ssl-apache-certbot.md'
+    - '2.4 - SSL - Tomcat - How to manually configure SSL certificates': '2_enduser_guide/2_4_customize/customization-ssl-tomcat-manual.md'
+    - '2.4 - SSL - Tomcat - How to configure SSL certificates using Certbot and Lets Encrypt': '2_enduser_guide/2_4_customize/customization-ssl-tomcat-certbot.md'
+    - '2.4 - How to migrate Customized settings, configurations and data from pre-existing sytems': '2_enduser_guide/2_4_customize/customization-pre-existing.md'
     - '2.4 - Configuration files to download':
       - '2.4 - Configuration files overview': '2_enduser_guide/2_4_customize/customization-download-files.md'
       - '2.4 - Apache': '2_enduser_guide/2_4_customize/customization-apache-files.md'
@@ -84,23 +102,47 @@ pages:
     - '2.4 - Security modifications': '2_enduser_guide/2_4_customize/customization-security.md'
   - '2.5 - ISLE Container Selection + Docker Compose Usage': '2_enduser_guide/2_5_container_selection/container-selection.md'
   - '2.6 - Data Management':
-    - '2.6 - Mount Points': '2_enduser_guide/2_6_data_management/mountpoints.md'
-    - '2.6 - Migrations': '2_enduser_guide/2_6_data_management/migrations.md'
-    - '2.6 - Upgrations': '2_enduser_guide/2_6_data_management/upgrations.md'
+    - '2.6 - Volumes and Mount Points':
+      - '2.6 - Mount Points':  '2_enduser_guide/2_6_data_management/mountpoints.md'
+      - '2.6 - How to attach pre-existing datastores to new containers': '2_enduser_guide/2_6_data_management/pre-existing-datastores.md'
+      - '2.6 - Configuration files paths': '2_enduser_guide/2_6_data_management/config-paths.md'
+      - '2.6 - Log files paths': '2_enduser_guide/2_6_data_management/paths-logs.md'
+      - '2.6 - Indices paths': '2_enduser_guide/2_6_data_management/paths-indicies.md'
+      - '2.6 - Databases paths': '2_enduser_guide/2_6_data_management/paths-databases.md'
+      - '2.6 - Triplestores paths': '2_enduser_guide/2_6_data_management/paths-triplestores.md'
+    - '2.6 - Migrations':
+      - '2.6 - How to migrate data from existing systems': '2_enduser_guide/2_6_data_management/data-migration.md'
+      - '2.6 - Migration Tools and scripts': '2_enduser_guide/2_6_data_management/migration-tools-scripts.md'
+      - '2.6 - Upgrations': '2_enduser_guide/2_6_data_management/upgrations.md'
   - '2.7 - Managing multiple environments':
-    - '2.7 - Recommended Git structure': '2_enduser_guide/2_7_managing_multiple_environments/git-structure.md'
-    - '2.7 - Data Replications and Movement': '2_enduser_guide/2_7_managing_multiple_environments/data-replications.md'
-    - '2.7 - Container Movement': '2_enduser_guide/2_7_managing_multiple_environments/container-movement.md'
+    - '2.7 - ISLE environment types':
+      - '2.7 - Sandbox': '2_enduser_guide/2_7_managing_multiple_environments/env-sandbox.md'
+      - '2.7 - Staging': '2_enduser_guide/2_7_managing_multiple_environments/env-staging.md'
+      - '2.7 - Production': '2_enduser_guide/2_7_managing_multiple_environments/env-production.md'
+    - '2.7 - Workflow process across environments': '2_enduser_guide/2_7_managing_multiple_environments/env-workflow.md'
+    - '2.7 - Recommended Git structure': '2_enduser_guide/2_7_managing_multiple_environments/env-git-structure.md'
+    - '2.7 - Data Replications and Movement': '2_enduser_guide/2_7_managing_multiple_environments/env-data-replications.md'
+    - '2.7 - Container Movement': '2_enduser_guide/2_7_managing_multiple_environments/env-container-movement.md'
 
 - 3. ISLE developer guide for ISLE Maintainers:
-  - '3.1 - Contributing to Docs': '3_dev_guide/dev-contributing-to-docs.md'
+  - '3.1 - Contributing to Docs': '3_dev_guide/3_1_docs/dev-contributing-to-docs.md'
+  - '3.1 - Documentation Style Guide': '3_dev_guide/3_1_docs/dev-docs-styleguide.md'
+  - '3.1 - Mkdocs Requirements': '3_dev_guide/3_1_docs/dev-mkdocs-requirements.md'
   - '3.2 - Overview of included Ansible Scripts':
-    - '3.2 - Considerations for future modification of ansible scripts': '3_dev_guide/3_2_overview_ansible/dev-modify-ansible-scripts.md'
+    - '3.2 - Considerations for future modification of ansible scripts': '3_dev_guide/3_2_ansible/dev-modify-ansible-scripts.md'
+    - '3.2 - How to customize the Ansible scripts': '3_dev_guide/3_2_ansible/dev-ansible-scripts-customize.md'
+    - '3.2 - Ansible Resources': '3_dev_guide/3_2_ansible/dev-ansible-resources.md'
   - '3.3 - Docker and Docker Compose config structure':
     - '3.3 - Overview of Docker and Docker Compose': '3_dev_guide/3_3_docker_compose/dev-overview-docker.md'
     - '3.3 - Inventory and description of customization elements': '3_dev_guide/3_3_docker_compose/dev-inventory.md'
-    - '3.3 - Explanation of Docker Compose and Dockerfile': '3_dev_guide/3_3_docker_compose/dev-docker-compose-dockerfile.md'
-  - '3.4 - Overview of Docker Hub System': '3_dev_guide/dev-docker-hub.md'
+    - '3.3 - How to customize Docker Compose files': '3_dev_guide/3_3_docker_compose/dev-docker-compose.md'
+    - '3.3 - How to customize Dockerfiles': '3_dev_guide/3_3_docker_compose/dev-docker-dockerfile.md'
+    - '3.3 - Docker Resources': '3_dev_guide/3_3_docker_compose/dev-docker-resources.md'
+  - '3.4 - Docker Images':
+    - '3.4 - Overview of Docker Hub System': '3_dev_guide/3_4_docker_images/dev-docker-hub.md'
+    - '3.4 - Docker Build Images': '3_dev_guide/3_4_docker_images/dev-docker-build-images.md'
+    - '3.4 - How to update Docker build images': '3_dev_guide/3_4_docker_images/dev-docker-update-build-images.md'
+    - '3.4 - Docker Tagging Policy': '3_dev_guide/3_4_docker_images/dev-docker-tagging-policy.md'
 
 - 4. Non-git based Documents or Resources:
   - '4.1 - Demos': '4_nongit/demos.md'
