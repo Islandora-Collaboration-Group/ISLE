@@ -14,6 +14,6 @@ By using tagged releases (images) for container software e.g. SOLR versions 4.2 
 * staging
 * production.
 
-For specific tags by version please reference, the Supported Specification Matrix [table](1_3_system_overview/supported-specification-matrix-table.md)
+For specific tags by version please reference, the Supported Specification Matrix [table](supported-specification-matrix-table.md)
 
 Additional platform customization and configuration will be handled by the creation of master Dockerfiles template whose values end-users can change for the appropriate institution specific values e.g. edits to schema.xml, config.xml, XSLTs, xacml permissions etc
