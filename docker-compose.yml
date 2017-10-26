@@ -1,0 +1,16 @@
+version: '2'
+services:
+  db:
+    build: ./mysql
+    image: isle-db:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=islemysqlrootpw2017
+      - MYSQL_DATABASE=fedora3
+      - MYSQL_USER=fedora_admin
+      - MYSQL_PASSWORD=islefeddb2017
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/initscripts:/docker-entrypoint-initdb.d
+      - ./data/mysql:/var/lib/mysql
+    container_name: isle-db
