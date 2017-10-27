@@ -9,7 +9,7 @@ A. Install Docker on the local laptop or server
   * Copy the project directory to a directory of your choice on the server or local laptop
     
   * Ensure that the permissions of all directories are to the deploy user e.g. ubuntu or islandora account (if created on host server)
-    * `sudo chown -R ubuntu:ubuntu /home/ubuntu/isle-mvp-caltech/`
+    * `sudo chown -R ubuntu:ubuntu /home/ubuntu/isle/`
 
 2. Open up a terminal and `cd` to the root of the Project directory
 
