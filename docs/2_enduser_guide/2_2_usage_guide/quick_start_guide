@@ -1,0 +1,671 @@
+
+
+## How to get Islandora on Docker running
+
+A. Install Docker on the local laptop or server
+  * (see section **Docker installation** if you need more info)
+
+1. Pull down project materials from the Git repository.
+  * Copy the project directory to a directory of your choice on the server or local laptop
+    
+  * Ensure that the permissions of all directories are to the deploy user e.g. ubuntu or islandora account (if created on host server)
+    * `sudo chown -R ubuntu:ubuntu /home/ubuntu/isle-mvp-caltech/`
+
+2. Open up a terminal and `cd` to the root of the Project directory
+
+3. `docker-compose create db`
+
+4. `docker-compose up -d db`
+
+5. Manually create the islandora_docker database with user & permissions on the MySQL container using one of the two methods described in this section **Image Build #1a MySQL (db) - Create the Drupal site database**
+
+6. Edit the `docker-compose.yml` and comment out the **fedora** volumes section like so :
+
+       fedora:
+         build: ./fedora
+         image: cal-fedora-islandora:latest
+         ports:
+          - "8080:8080"
+          - "8993:8993"
+         tty: true
+         depends_on:
+          - db
+         # volumes:
+         #  - ./data/fedora/data:/usr/local/fedora/data
+         container_name: cal-islandora-fedora
+
+7. Edit the web Apache vhost file contained within `isle>fedora>apache>site.conf`
+  * Change the `ServerName` to either an IP address of the host server and/or domain name e.g. fedora.islandora-docker.com (a working domain name is more optimal!)
+
+  * This value is currently commented out and will result in an **error** if not changed prior to build.
+
+8. `docker-compose build fedora`
+
+9. Ensure that the permissions of all directories are to the deploy user e.g. ubuntu or islandora account (if created on host server)
+
+  * `sudo chown -R ubuntu:ubuntu /home/ubuntu/isle/`
+
+10. Edit the `docker-compose.yml` and remove the comments out of the **fedora** volumes section like so:
+
+        fedora:
+          build: ./fedora
+          image: fedora-islandora:latest
+          ports:
+           - "8080:8080"
+           - "8993:8993"
+          tty: true
+          depends_on:
+           - db
+          volumes:
+           - ./data/fedora/data:/usr/local/fedora/data
+          container_name: islandora-fedora
+
+11. `docker-compose up -d fedora`
+
+12. Please perform these permissions fixes prior to the **check**
+
+  * `sudo chown -Rv ubuntu:ubuntu /home/ubuntu/isle/data/fedora` *Be sure to replace /home/ubuntu/ with the appropriate project path*
+
+  * `docker exec -it islandora-fedora bash`
+
+  * `chown -R tomcat7:tomcat7 /usr/local/fedora`
+
+  * `chown -R tomcat7:tomcat7 /var/lib/tomcat7`
+
+  * `chown -R tomcat7:tomcat7 /usr/share/tomcat7`
+
+  * `/usr/share/tomcat7/bin/shutdown.sh`
+
+  * `/usr/share/tomcat7/bin/startup.sh`
+
+  * `chown -R tomcat7:tomcat7 /usr/local/fedora` *yup, we really do this twice**
+
+  * `ls -1 /usr/local/fedora/data/fedora-xacml-policies/repository-policies` should now display
+    > ls -1 /usr/local/fedora/data
+      activemq-data
+      fedora-xacml-policies
+      objectStore
+      resourceIndex
+
+  * hit `Cntrl-D` to exit container. (*if necessary*)
+
+  * **Check** if fedora is running by opening a browser to either
+
+     * http://hostip:8080/manager/html or http://fedora.domainname.com:8080/manager/html
+
+     * Login using Tomcat admin creds (listed below in **Passwords section**)
+
+      * check that the value of "True" is set for fedora
+        * if not click the `Start` button, wait 20 seconds and it should change the value
+
+     * Navigate to http://hostip:8080/fedora/describe or http://fedora.domainname.com:8080/fedora/describe
+
+     * If all are working then move on to **step 13**
+
+     * Otherwise review and ensure that the first 12 steps were followed properly.
+
+13. Ensure that the content of the fedora repository-policies directory was created properly. **It can fail sometimes.**  
+
+  * `docker exec -it cal-islandora-fedora bash` (*if necessary*)
+
+  * Within the `usr/local/fedora/data/fedora-xacml-policies/repository-policies` directory, there should be **two folders** `default` and `islandora` with .xml files contained within.
+    > root@b7fcd4078fdd:/usr/local/fedora/data/fedora-xacml-policies/repository-policies# ls -1 *  
+    >
+    >default:  
+    >
+      deny-apim-if-not-localhost.xml  
+      deny-inactive-or-deleted-objects-or-datastreams-if-not-administrator.xml  
+      deny-reloadPolicies-if-not-localhost.xml  
+      deny-unallowed-file-resolution.xml  
+      permit-anything-to-administrator.xml  
+      permit-apia-unrestricted.xml  
+      permit-dsstate-check-unrestricted.xml  
+      permit-oai-unrestricted.xml  
+      permit-serverStatus-unrestricted.xml  
+      readme.txt  
+    >
+    >islandora:  
+      permit-apim-to-authenticated-user.xml  
+      permit-getDatastream-unrestricted.xml  
+      permit-getDatastreamHistory-unrestricted.xml  
+      permit-upload-to-authenticated-user.xml  
+
+     * If so, move onto **step 14**. hit `Cntrl-D` to exit the container.
+
+     * If not, hit `Cntrl-D` to exit container
+       * from the terminal, copy the two folders (default & islandora) from the project directory
+
+       > Example:
+       > `fedora>fedora>repository-policies` to the `data>fedora>data>fedora-xacml-policies>repository-policies` directory (okay to overwrite any preexisting content)
+         $ pwd
+         /home/ubuntu/isle
+
+       > cp -rv /home/ubuntu/isle/fedora/fedora/repository-policies/* /home/ubuntu/isle/data/fedora/data/fedora-xacml-policies/repository-policies/
+
+       * `chown -R ubuntu:ubuntu /home/ubuntu/isle/data/fedora/`
+         * *change ubuntu:ubuntu to the appropriate HOST user**
+
+       * `docker exec -it islandora-fedora bash`
+
+       * `sudo chown -R tomcat7:tomcat7 /usr/local/fedora`
+
+       * `/usr/share/tomcat7/bin/shutdown.sh`
+
+       * `/usr/share/tomcat7/bin/startup.sh`
+
+14. Edit the `docker-compose.yml` and comment out the **web** volumes section like so :
+
+        web:
+          build: ./web
+          image: web-islandora:latest
+          ports:
+            - "80:80"
+            tty: true
+            depends_on:
+            - db
+            - fedora
+          # volumes:
+          #   - ./data/web:/var/www/html
+          container_name: islandora-web
+
+15. Edit the web Apache vhost file contained within `isle>web>apache>site.conf`
+
+  * Change the `ServerName` to either the Ubuntu Host Server IP address and/or domain name e.g. web.islandora-docker.com
+
+  * It is currently commented out and will result in an error if not changed prior to build.
+
+16. Edit the web `drush.sh` file contained within `isle>web>site>drush.sh`:
+
+  * Line no. **8**
+
+     * Add a real email address if needed.
+
+     * **Please note:** *No email server is installed by default. You'll need to install Postfix, sendmail etc for this to work.*
+
+  * Line no. **12**
+     * `/usr/local/bin/drush -u 1 -y vset islandora_paged_content_djatoka_url "http://web.domain-name.com/adore-djatoka/"`
+
+     * Currently a test domain has been entered, replace with the external IP or domain name e.g. web.islandora-docker.com.
+
+     * **Please note:** *Djatoka on Tomcat, OpenSeadragon and the Paged Module all work "better" or sometimes at all if a real domain DNS name is used.*
+
+     * Entries of localhost, 127.0.0.1 won't work.
+
+     * Updating all vhosts `ServerName` value to only the IP address of the Host Server and then using the IP address only for this e.g. http://IP/adore-djatoka might work. (*not tested*)
+
+  * Line no. **30**
+     * The IP address for the Djatoka Base URL should be changed to preferably a domain name. Example below is also current setting in the `isle>web>site>drush.sh` file. **Must change prior to build.**
+  > /usr/local/bin/drush -u 1 -y vset --format=json islandora_openseadragon_settings '{"debugMode":0,"djatokaServerBaseURL":"http:\/\/web.islandora-docker.com\/adore-djatoka\/resolver","animationTime":"1.5","blendTime":"0.1","alwaysBlend":0,"autoHideControls":1,"immediateRender":0,"wrapHorizontal":0,"wrapVertical":0,"wrapOverlays":0,"panHorizontal":1,"panVertical":1,"showNavigator":1,"minZoomImageRatio":"0.8","maxZoomPixelRatio":"2","visibilityRatio":"0.5","springStiffness":"5.0","imageLoaderLimit":"5","clickTimeThreshold":"300","clickDistThreshold":"5","zoomPerClick":"2.0","zoomPerScroll":"1.2","zoomPerSecond":"2.0"}'
+
+17. `docker-compose build web`
+
+18. Copy from the project directory, all of the contents of the `web>drupal` directory to the `data>web` directory.
+
+  * ensure that the `.htaccess` file was copied over
+
+  > Example:
+  > `web>drupal` to the `data>web` directory (okay to overwrite any preexisting content)
+  $ pwd
+  /home/ubuntu/isle
+
+  > cp -rv /home/ubuntu/isle-mvp-caltech/web/drupal/. /home/ubuntu/isle/data/web/
+
+19. Within the `settings.php` file found in the `web>site` directory
+
+  * Edit the $base_url in the `settings.php` to http://hostip or http://web.islandora-docker.com
+
+  * Examples:
+     > $base_url = 'http://54.242.243.223';  // NO trailing slash!
+     > $base_url = 'http://web.islandora-docker.com';  // NO trailing slash!
+
+  * Then copy the `settings.php` file in the `web>site` directory to the `data>web>sites>default` directory.
+
+     > cp -rv /home/ubuntu/isle/web/site/settings.php /home/ubuntu/isle/data/web/sites/default/settings.php
+
+20. Edit the `docker-compose.yml` and remove the comments out of the **web** volumes section like so :
+
+        web:
+          build: ./web
+          image: web-islandora:latest
+          ports:
+            - "80:80"
+            tty: true
+            depends_on:
+            - db
+            - fedora
+          volumes:
+           - ./data/web:/var/www/html
+          container_name: islandora-web
+
+21. `docker-compose up -d web`
+
+22. **Check** if `islandora-web` container is running. It fails sometimes.
+
+  * `docker ps -a`
+
+  *  You should see output like: (*scroll all the way to the left to see example column NAMES*)
+  * **Check** for a container in the NAMES column called `islandora-web`
+
+  ```
+  CONTAINER ID        IMAGE                         COMMAND                 CREATED             STATUS              PORTS                                                    NAMES
+  33ec79d798ac        web-islandora:latest      "/usr/sbin/apache2..."   26 hours ago        Up 26 hours         0.0.0.0:80->80/tcp                                       cal-islandora-web
+  4be518c779e9        fedora-islandora:latest   "/opt/runtomcat.sh"      26 hours ago        Up 26 hours         0.0.0.0:8080->8080/tcp, 80/tcp, 0.0.0.0:8993->8993/tcp   cal-islandora-fedora
+  dce3d1f17c10        mysql:5.5.55              "docker-entrypoint..."   26 hours ago        Up 26 hours         0.0.0.0:3306->3306/tcp
+  ```
+
+  * If so, move onto next step.
+
+  * If not, run the command from step #18 again and repeat check process.
+
+23. `docker exec -it islandora-web bash`
+
+  * `chmod -R 777 /var/www/html`
+
+  * `chown -R islandora:www-data /var/www/html`
+
+  * `cd /tmp`
+
+  * `chmod 777 ./drush.sh`
+
+  * `su islandora`
+
+  * `./drush.sh`
+
+     * This process can take up to 20-40 minutes depending on the internet connection.
+
+  * Upon script completion, `exit` to return using the **root** account
+
+  * `chmod 777 /tmp/fix-permissions.sh`
+
+  * `/bin/bash /tmp/fix-permissions.sh --drupal_path=/var/www/html --drupal_user=islandora --httpd_group=www-data`
+
+  * `Cntrl-D` to leave the container
+
+24. Three **Checks** to be performed
+
+  * Open up a browser and navigate to http://hostip:80 or http://domain-name.com
+
+  * There should be a drupal site ready for you to login into.
+
+  * Login as the Drupal admin (password in **Passwords** section below)
+
+  * **Check** that the Fedora BaseURl is showing a green check mark.
+
+     * From the top overlay admin menu, navigate to `Administration>Islandora>Configuration`
+
+     * e.g. http://domain-name.com/islandora/object/islandora%3A4#overlay=admin/islandora/configure
+
+     * You should see a green check mark and/or the following.
+      > Fedora base URL *
+      > http://fedora:8080/fedora
+      > The URL to use for REST connections
+      > Successfully connected to Fedora Server (Version 3.8.1).
+
+  * **Check** that the settings for the OpenSeadragon Viewer's Djatoka Base URL are green and accepted
+
+     * From the top overlay admin menu, navigate to `Administration>Islandora>Islandora Viewers>OpenSeadragon`
+
+     * The `Djaotka server base URL` field should have `http:web.domainname.com/adore-djatoka/resolver` as a value.
+
+     * If you click the grey `Save Configuration` button at the bottom, the top part of the page will indicate a green `settings have been saved` message.
+
+  * **Check** that the settings for the Solr Index is displaying a green check mark.
+
+     * From the top overlay admin menu, navigate to `Administration>Islandora>Solr index`
+
+     * The Solr URL field should have an entry like `fedora:8080/solr`
+
+     * You should see the green check mark and a message like
+
+     > &#10004; Successfully connected to Solr server at fedora:8080/solr. (0.01 ms)
+
+  * If not, review and repeat steps 1-23.
+
+  * If so, you can move on to ingesting materials into your brand new Islandora Docker platform!
+
+---
+
+### Docker Installation
+
+Docker will need to be installed prior to use of these scripts and associated containers.
+
+* **Alert!** Ensure that any server, laptop etc used to host the Docker containers has free space in excess of 16GB+! These prototype containers & images are 1-4 GBs in size and the necessary storage footprint can add up quickly.
+
+Born-digital can recommend the following for Docker hosting platforms:
+* For local development, macOS Sierra (10.12.15) is stable for hosting Docker and its containers.
+  * No additional packages required.
+
+* For shared/remote use, Ubuntu Server 16.04 LTS is a good candidate.
+  * Network Time Protocol package `ntp` should be installed on this server.
+
+#### Docker Installation on an Ubuntu 16.04 LTS Host Server
+  * Installs both Docker CE and Docker Compose
+    * `sudo apt-get update`
+
+    * `sudo apt-get dist-upgrade`
+
+    * `sudo apt-get install apt-transport-https ca-certificates curl software-properties-common ntp`
+
+    * `curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -`
+
+    * **For amd-64**
+    `sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"`
+
+    * `sudo apt-get update`
+
+* **Check:** `apt-cache policy docker-ce` (ensures this is the repo for docker image)
+
+    * `sudo apt-get install docker-ce`
+
+    * Configure Docker to start on boot `sudo systemctl enable docker`
+
+* **Check** `docker --version`
+    * e.g. output = `Docker version 17.06.0-ce, build 02c1d87`
+
+
+* **Check** `docker ps -a`
+  * Should display
+  > CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+
+    * Wrap up installation with last part for Docker-compose
+
+    * `sudo -i`
+
+    * ``curl -L https://github.com/docker/compose/releases/download/1.15.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose` ``
+
+    * `chmod +x /usr/local/bin/docker-compose`
+
+* **Check** `docker-compose --version`
+      * e.g. output = `docker-compose version 1.15.0, build e12f3b9`
+
+---
+
+* (Optional) Follow steps (not fully tested) https://docs.docker.com/engine/installation/linux/linux-postinstall/
+
+* We have not done any testing using Centos/RHEL for Docker container hosting as of yet.
+
+* **Official** Docker Installation documentation
+  * https://docs.docker.com/engine/installation/
+    * Macintosh         https://docs.docker.com/docker-for-mac/install/
+    * Ubuntu/Debian     https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/
+    * Centos/RHEL       https://docs.docker.com/engine/installation/linux/docker-ce/centos/
+
+
+* **Unofficial** Docker Installation documentation
+     * https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04
+     * https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/
+
+---
+
+### Image names
+
+* mysql:5.5.55 (db)
+* cal-fedora-islandora:latest (fedora)
+* cal-web-islandora:latest (web)
+
+#### Image Build #1 MySQL (db) detailed notes
+
+**Please note:**
+
+> This part of the docker-compose.yml MySQL (db) section:
+>    environment:
+      - MYSQL_ROOT_PASSWORD=dockermysqlrootpw2017
+      - MYSQL_DATABASE=fedora3
+      - MYSQL_USER=fedora_admin
+      - MYSQL_PASSWORD=dockerfeddb2017
+automatically creates the fedora3 database. However this setting only allows for the creation of **ONE** database employing this method. Additional databases e.g. the Drupal site database are to be created manually. See next section.
+
+
+* The MySQL (db) container doesn't require a Dockerfile. Within the `docker-compose.yml` file, there is a line that indicates the image version (5.5) to pull from Docker Hub
+
+  ```
+  db:  
+    image: mysql:5.5.55
+  ```
+* [Dockerhub MySQL 5.5 image](https://hub.docker.com/_/mysql/)
+* [Github Repository](https://github.com/docker-library/mysql/blob/e8a0ed55678d27039905c50f8327f3a367e92498/5.5/Dockerfile)  
+
+
+#### Image Build #1a MySQL (db) - Create the Drupal site database
+
+You'll only need to perform this manual operation once initially.
+
+Please ensure that the database:
+ * is `utf8` encoded
+ * has the collation of `utf8_general_ci)`
+ * has a user e.g. `islandora_user` that can connect from @localhost or 127.0.0.1 with the appropriate access permissions.
+
+**Please Note:** *You are most welcome to change any of these accounts or passwords but understand that doing so will involve changes to settings.php, the Drupalfilter, Fedora's setup etc.*
+
+One can access the MySQL Server in **two ways** to create the Drupal Site database:
+
+**Method 1)** Use a 3rd Party GUI tool e.g. Workbench, Navicat or Sequel Pro.
+
+Example: (using Sequel Pro for MacOS)
+
+* Create a new database profile for connecting to the MySQL container.
+  * Host: 127.0.0.1
+  * Username:   root
+  * Passsword:  dockermysqlrootpw2017
+  * Database: (leave field blank)
+  * Port: 3306
+
+
+* Click the blue `Connect` button
+
+* From the `Choose Database` dropdown above, choose `Add Database`
+  * Database Name: `islandora_docker`
+  * Database Encoding: `UTF-8 Unicode (utf8)`
+  * Database Collation: `Default (utf8_general_ci)`
+
+
+* Additionally, you'll need to create:
+  * A user called: `islandora_user` with the appropriate access permissions
+  * Password for this user is: `islandoradockerdb2017`
+  * Change the localhost option to % (allows connection from etc)
+
+**Alternative Method 2)** `ssh` into the database container & run the appropriate MySQL commands
+
+ * `docker exec -it islandora-db bash` (*connects to db container without terminating container afterwards*)
+
+   * `mysql -uroot -pdockermysqlrootpw2017 -e "CREATE DATABASE islandora_docker CHARACTER SET utf8 COLLATE utf8_general_ci";`
+
+   * `mysql -uroot -pdockermysqlrootpw2017 -e "CREATE USER islandora_user@'%' IDENTIFIED BY 'islandoradockerdb2017'";`
+
+   * `mysql -uroot -pdockermysqlrootpw2017 -e "GRANT ALL PRIVILEGES ON islandora_docker.* TO 'islandora_user'@'%'";`
+
+   * `mysql -uroot -pdockermysqlrootpw2017 -e "GRANT ALL PRIVILEGES ON islandora_docker.* TO 'islandora_user'@'127.0.0.1'";`
+
+   * `mysql -uroot -pdockermysqlrootpw2017 -e "GRANT ALL PRIVILEGES ON islandora_docker.* TO 'islandora_user'@'localhost'";`
+
+* You can also connect in this manner: `mysql -uroot -pdockermysqlrootpw2017` and run commands accordingly.
+
+#### Image Build #2 Fedora (fedora) Notes
+
+* Process typically takes 45 - 60 minutes depending on internet connection.
+
+* You can ensure services are running by using the tomcat7 admin dashboard. There is a slight delay of about 10-20 seconds before files are written to the fedora data folder and the MySQL database itself.
+
+**Example:** Local laptop used running macOS and Docker for Mac.
+
+* Open up a web browser and navigate to: `127.0.0.1:8080/manager/html` (and enter the tomcat admin user and pw)
+
+**Please Note:** If the JAVA_OPTS settings for Java Memory are too low, they can be increased in the Fedora Dockerfile in this section:
+> #### Set up environmental variables for tomcat7 & dependencies installation
+> ENV JAVA_HOME=/usr/lib/jvm/java-8-oracle \
+> ...
+> JAVA_OPTS="-Djava.awt.headless=true -Xmx1024m -XX:MaxPermSize=256m -XX:+UseConcMarkSweepGC -Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true -Dkakadu.home=/opt/adore-djatoka-1.1/bin/Linux-x86-64 -Djava.library.path=/opt/adore-djatoka-1.1/lib/Linux-x86-64 -DLD_LIBRARY_PATH=/opt/adore-djatoka-1.1/lib/Linux-x86-64" \
+
+* Upon occasion, if the fedora container stops working or within the `usr/local/fedora/server/logs` there are tomcat7 related errors, it can be issues with the /var/lib/tomcat7/work directory. Delete it's content (not the directory though) and restart tomcat7.
+
+
+#### Image Build #3 Web (web) Notes
+
+* Process typically takes 45 - 60 minutes depending on internet connection.
+
+---
+
+**Container names**
+
+* islandora-db
+  * **Ports:**
+    * 3306 mysql
+
+
+* islandora-fedora
+  * **URLs:**
+    * tomcat7 admin panel (examples)
+      * http://ip-addressofhostserver:8080/manager/html
+      * http://fedora.domain-name.com:8080/manager/html
+    * fedora
+      * http://ip-addressofhostserver:8080/fedora/describe
+      * http://fedora.domain-name.com:8080/fedora/describe
+    * solr
+      * http://ip-addressofhostserver:8080/solr/#/
+      * http://fedora.domain-name.com:8080/solr/#/
+    * gsearch
+      * http://ip-addressofhostserver:8080/fedoragsearch/
+      * http://fedora.domain-name.com:8080/fedoragsearch/
+    * djatoka
+      * http://ip-addressofhostserver:8080/adore-djatoka/
+      * http://fedora.domain-name.com:8080/adore-djatoka/
+
+  * **Ports:**
+    * 80 http
+    * 8080
+    * 8993 Solr
+
+
+* islandora-web
+  * **URLs:** Drupal website
+    * http://domain-name.com or
+    * http://ip-addressofhostserver
+  * **Ports:** 80 http
+  * **Please note:** The Apache vhost is currently set for a test domain. Change!
+
+---
+
+## User accounts & passwords
+
+### MySQL (cal-islandora-db)
+
+| Database     | User Account  | Password      |
+| -------------| :-------------: |:-------------:|
+| All          | root          | dockermysqlrootpw2017 |
+| fedora3      | fedora_admin  | dockerfeddb2017 |
+| islandora_docker | islandora_user | islandoradockerdb2017 |
+
+**Please note:** The `islandora_docker` database username & password of `islandora_user` is used in the following configurations as well:   
+* [drupalfilter](https://wiki.duraspace.org/pages/viewpage.action?pageId=69833569)
+* *to connect the Drupal website*  `/var/www/sites/default/settings.php`
+
+### Fedora (islandora-fedora)
+
+| Service      | User Account    | Password      |
+| -------------| :-------------: |:-------------:|
+| Fedora       | fedoraAdmin     | dockerfedadmin2017 |
+| Fedora       | fedoraIntCallUser | dockerfedoraIntCallUserpw2017 |
+| drupalfilter | islandora_user  | islandoradockerdb2017 |
+| Gsearch      | fgsAdmin        | dockerfgsAdminpw2017 |
+| Tomcat       | truststore      | dockerkeystorepass2017 |
+| Tomcat       | admin           | dockertcadminpw2017 |
+| Tomcat       | manager         | dockertcmanpw2017 |
+
+### Web (islandora-web)
+
+| Service      | User Account    | Password      |
+| -------------| :-------------: |:-------------:|
+| Drupal site admin | islandora_docker_admin | islandoradockeradminpw2017 |
+| Drupal settings.php | islandora_user | islandoradockerdb2017 |
+
+---
+
+### Docker Commands
+
+To check if they are running:
+
+`docker ps -a`
+
+you should see output like:
+
+```
+CONTAINER ID        IMAGE                         COMMAND                 CREATED             STATUS              PORTS                                                    NAMES
+33ec79d798ac        web-islandora:latest          "/usr/sbin/apache2..."   26 hours ago        Up 26 hours         0.0.0.0:80->80/tcp                                       cal-islandora-web
+4be518c779e9        fedora-islandora:latest       "/opt/runtomcat.sh"      26 hours ago        Up 26 hours         0.0.0.0:8080->8080/tcp, 80/tcp, 0.0.0.0:8993->8993/tcp   cal-islandora-fedora
+dce3d1f17c10        mysql:5.5.55                  "docker-entrypoint..."   26 hours ago        Up 26 hours         0.0.0.0:3306->3306/tcp
+```
+
+To execute the next commands, you'll need to `cd` into the root of project directory where the `docker-compose.yml` file is.
+
+* To stop all containers at once:
+`docker-compose stop`
+
+* To start all containers at once: (once built)
+`docker-compose start`
+
+* To stop a container
+`docker-compose stop islandora-fedora`
+
+* To delete a container.
+  * First stop it if running, see step #3 above.
+  * `docker rm -f islandora-fedora`
+
+* To list all images
+`docker image ls`
+
+* To shell into a container without shutting it down:
+`docker exec -it islandora-web bash`
+
+* To exit the Fedora container without shutting it down:
+`Cntrl-D`
+
+---
+
+## Reference
+
+* Docker
+  * https://www.docker.com/
+  * https://www.docker.com/what-docker
+
+
+* Docker Containers
+  * https://www.docker.com/what-container
+  > A container image is a lightweight, stand-alone, executable package of a piece of software that includes everything needed to run it: code, runtime, system tools, system libraries, settings.   
+
+* Docker Compose
+  * https://docs.docker.com/compose/overview/
+  * https://docs.docker.com/compose/
+  * To remove containers https://docs.docker.com/compose/reference/rm/
+  * To remove images https://docs.docker.com/compose/reference/down/
+
+  * For this project, Docker Compose is used as an [`orchestration`](https://en.wikipedia.org/wiki/Orchestration_(computing) tool to run and manage all containers.
+
+  > "Orchestration is the automated arrangement, coordination, and management of computer systems, middleware, and services."
+
+  > "Compose is a tool for defining and running multi-container Docker applications. With Compose, you use a Compose file to configure your application's services. Then, using a single command, you create and start all the services from your configuration."
+
+* Docker Compose Environment variables
+  * https://docs.docker.com/compose/environment-variables/
+
+* Docker metrics
+  * https://docs.docker.com/engine/admin/runmetrics/
+  * `docker stats container name`
+  * *"You can use the docker stats command to live stream a container’s runtime metrics. The command supports CPU, memory usage, memory limit, and network IO metrics."*
+
+* Docker Documentation
+  * https://docs.docker.com/
+  * Docker MySQL Documentation https://github.com/docker-library/docs/tree/master/mysql#mysql_database
+
+* Docker Hub
+  * https://docs.docker.com/docker-hub/
+  * https://hub.docker.com/
+
+  > *"provides a centralized resource for container image discovery, distribution and change management, user and team collaboration, and workflow automation throughout the development pipeline."*
+
+* Docker Images
+ * https://docs.docker.com/engine/userguide/storagedriver/imagesandcontainers/
+ * https://docs.docker.com/engine/reference/commandline/images/
+
+ > *"An image is an inert, immutable, file that's essentially a snapshot of a container. Images are created with the build command, and they'll produce a container when started with run. Images are stored in a Docker registry such as registry.hub.docker.com"* - [stackoverflow](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=2&cad=rja&uact=8&ved=0ahUKEwjhmsnqzJPVAhWMHD4KHTpCDLEQFggpMAE&url=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F23735149%2Fdocker-image-vs-container&usg=AFQjCNGlK1F0jTe1107wdx2I8vFHvOoJIg)
+
+* Islandora Solr using Basic Config setup https://github.com/discoverygarden/basic-solr-config/wiki/Guide-to-Setting-up-GSearch-2.7-with-Solr-4.2.0.
