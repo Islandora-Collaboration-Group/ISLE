@@ -2,7 +2,7 @@
 
 ## How to get Islandora on Docker running
 
-A. Install Docker on the local laptop or server
+A. Install Docker and Docker Composed on the local laptop or server
   * (see section **Docker installation** if you need more info)
 
 1. Pull down project materials from the Git repository.
@@ -23,7 +23,7 @@ A. Install Docker on the local laptop or server
 
        fedora:
          build: ./fedora
-         image: cal-fedora-islandora:latest
+         image: fedora-islandora:latest
          ports:
           - "8080:8080"
           - "8993:8993"
@@ -32,7 +32,7 @@ A. Install Docker on the local laptop or server
           - db
          # volumes:
          #  - ./data/fedora/data:/usr/local/fedora/data
-         container_name: cal-islandora-fedora
+         container_name: islandora-fedora
 
 7. Edit the web Apache vhost file contained within `isle>fedora>apache>site.conf`
   * Change the `ServerName` to either an IP address of the host server and/or domain name e.g. fedora.islandora-docker.com (a working domain name is more optimal!)
