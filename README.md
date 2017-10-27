@@ -26,7 +26,7 @@ Participate in the [ISLE Updates google group](https://groups.google.com/forum/#
 - Sarah Goldstein, Mount Holyoke College
 - David Keiser-Clark (Chair), Williams College
 - Francesca Livermore, Wesleyan University
-- Carolyn Moritz, Vassar College
+- Carolyn Moritz (Testing Lead), Vassar College
 - Ben Rosner, Barnard College
 - Steve Young, Hamilton College
 
