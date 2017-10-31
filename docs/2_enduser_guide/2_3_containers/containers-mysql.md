@@ -46,7 +46,7 @@ Within the docker-compose.yml file, found at the root of the ISLE project Github
 ### Databases
 
 * `fedora3` Fedora database created by build process (empty)
-* `islesite` Drupal site database created by build process (empty, default)
+* `isle_site` Drupal site database created by build process (empty, default)
 
 Per the guidelines of the official MySQl Docker image [README](https://hub.docker.com/_/mysql/), section `Initializing a fresh instance`:
 
@@ -90,7 +90,7 @@ This script can be modified to create more databases upon container launch.
 ------------   | -------------       | :-------------:  | -------------                                                                |
 root           | islemysqlrootpw2017 | ALL              | has access to all databases with all db privileges                           |
 fedora_admin   | islefeddb2017       | fedora3          | has access to only the `fedora3` Fedora database. No grant privileges.       |
-islandora_user | islandoraisledb2017 | isle_site         | has access to only the `islesite` Drupal site database. No grant privileges. |
+islandora_user | islandoraisledb2017 | isle_site         | has access to only the `isle_site` Drupal site database. No grant privileges. |
 
 ### Ports
 Port 3306 on the MySQL container is mapped to 3306 on Host
