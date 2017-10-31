@@ -25,9 +25,8 @@ tests/TestNarrowSuite.php
 *.dmg
 *.gz
 *.iso
-*.jar
 *.rar
-*.tar
+
 
 # =========================
 # Folder config file
