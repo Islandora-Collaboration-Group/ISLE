@@ -7,10 +7,63 @@ services:
       - MYSQL_ROOT_PASSWORD=islemysqlrootpw2017
       - MYSQL_DATABASE=fedora3
       - MYSQL_USER=fedora_admin
-      - MYSQL_PASSWORD=islefeddb2017
+      - MYSQL_PASSWORD=dockerfeddb2017
     ports:
       - "3306:3306"
     volumes:
       - ./mysql/initscripts:/docker-entrypoint-initdb.d
       - ./data/mysql:/var/lib/mysql
+      - ./data/mysql/log:/var/log/mysql
     container_name: isle-db
+
+  fedora:
+    build: ./fedora
+    image: isle-fedora:latest
+    ports:
+      - "8080:8080"
+      - "8777:80"
+    tty: true
+    depends_on:
+      - db
+    volumes:
+    #  - ./data/fedora:/usr/local/fedora (this mount method doesn't work anymore)
+    - ./customize/fedora/tomcat/server.xml:/var/lib/tomcat7/conf/server.xml
+    - ./customize/fedora/tomcat/web.xml:/var/lib/tomcat7/conf/web.xml
+    - ./customize/fedora/tomcat/tomcat-users.xml:/var/lib/tomcat7/conf/tomcat-users.xml
+    #- ./customize/fedora/tomcat/tomcat7:/etc/init.d/tomcat7 (doesn't mount properly needs . mounts as a directory and then tomcat can't start)
+    #- ./customize/fedora/tomcat/setenv.sh:/usr/share/tomcat7/bin/setenv.sh
+    - ./customize/fedora/tomcat/logging.properties:/usr/share/tomcat7/conf/logging.properties
+    - ./customize/fedora/fedora/repository-policies/default:/usr/local/fedora/data/fedora-xacml-policies/repository-policies/default
+    - ./customize/fedora/fedora/repository-policies/islandora:/usr/local/fedora/data/fedora-xacml-policies/repository-policies/islandora
+    - ./customize/fedora/fedora/fedora-users.xml:/usr/local/fedora/server/config/fedora-users.xml
+    - ./customize/fedora/fedora/logback.xml:/usr/local/fedora/server/config/logback.xml
+    - ./customize/fedora/drupalfilter/filter-drupal.xml:/usr/local/fedora/server/config/filter-drupal.xml
+    - ./customize/fedora/adore-djatoka/index.html:/var/lib/tomcat7/webapps/adore-djatoka/index.html
+    - ./customize/fedora/adore-djatoka/log4j.properties:/var/lib/tomcat7/webapps/adore-djatoka/WEB-INF/classes/log4j.properties
+    - ./customize/fedora/apache/site.conf:/etc/apache2/sites-available/site.conf
+    - ./data/fedora/data:/usr/local/fedora/data
+    - ./data/fedora/log/fedora:/usr/local/fedora/server/logs
+    - ./data/fedora/log/apache:/var/log/apache2
+    - ./data/fedora/log/tomcat:/var/log/tomcat7
+    container_name: isle-fedora
+
+  solr:
+    build: ./solr
+    image: isle-solr:latest
+    ports:
+      - "8091:8080"
+      - "8993:8993"
+    tty: true
+    volumes:
+    - ./customize/solr/tomcat/server.xml:/var/lib/tomcat7/conf/server.xml
+    - ./customize/solr/tomcat/web.xml:/var/lib/tomcat7/conf/web.xml
+    - ./customize/solr/tomcat/tomcat-users.xml:/var/lib/tomcat7/conf/tomcat-users.xml
+    - ./customize/solr/tomcat/logging.properties:/usr/share/tomcat7/conf/logging.properties
+    - ./data/solr/log/:/var/log/tomcat7
+    - ./customize/solr/solr/solr.xml:/var/lib/tomcat7/conf/Catalina/localhost/solr.xml
+    - ./customize/solr/solr/solrconfig.xml:/usr/local/solr/collection1/conf/solrconfig.xml
+    - ./customize/solr/solr/schema.xml:/usr/local/solr/collection1/conf/schema.xml
+    - ./customize/solr/solr/log4j.properties:/var/lib/tomcat7/webapps/solr/WEB-INF/classes/log4j.properties
+    - ./customize/solr/solr/stopwords.txt:/usr/local/solr/collection1/conf/stopwords.txt
+    - ./data/solr:/usr/local/solr/collection1/data
+    container_name: isle-solr
