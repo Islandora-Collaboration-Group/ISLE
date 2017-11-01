@@ -35,7 +35,7 @@
        that you fully re-index after changing this setting as it can
        affect both how text is indexed and queried.
   -->
-  <luceneMatchVersion>4.10.4</luceneMatchVersion>
+  <luceneMatchVersion>4.10</luceneMatchVersion>
 
   <!-- <lib/> directives can be used to instruct Solr to load an Jars
        identified and use them to resolve any "plugins" specified in
@@ -101,8 +101,9 @@
        replication is in use, this should match the replication
        configuration.
     -->
-  <!-- <dataDir>${solr.data.dir:}</dataDir> -->
    <dataDir>${solr.data.dir:/usr/local/solr/collection1/data}</dataDir>
+
+
   <!-- The DirectoryFactory to use for indexes.
 
        solr.StandardDirectoryFactory is filesystem
@@ -343,7 +344,8 @@
          have some sort of hard autoCommit to limit the log size.
       -->
      <autoCommit>
-       <maxTime>1500</maxTime>
+       <maxDocs>200</maxDocs>
+       <maxTime>2000</maxTime>
        <openSearcher>true</openSearcher>
      </autoCommit>
 
@@ -780,7 +782,7 @@
        <str name="df">text</str>
 <str name="fl">*</str>
 <str name="q.alt">*:*</str>
-<str name="qf">dc.title^5 dc.subject^3 dc.description^3 dc.creator^3 dc.contributor^3 dc.type^1 dc.relation^1 dc.publisher^1 mods_identifier_local_ms^3 ds.WARC_FILTER^1 text_nodes_HOCR_hlt^1 mods_subject_hierarchicalGeographic_region_ms^3 mods_identifier_hdl_mt^3 dc.identifier^3 PID^0.5 catch_all_fields_mt^0.1</str>
+<str name="qf">dc.title^5 dc.subject^3 dc.description^3 dc.creator^3 dc.contributor^3 dc.type^1 dc.relation^1 dc.publisher^1 mods_identifier_local_ms^3 ds.WARC_FILTER^1 text_nodes_HOCR_hlt^1 mods_subject_hierarchicalGeographic_region_ms^3 mods_identifier_hdl_mt^3 dc.identifier^3 PID_kw^0.5 catch_all_fields_mt^0.1</str>
      </lst>
     <!-- In addition to defaults, "appends" params can be specified
          to identify values which should be appended to the list of

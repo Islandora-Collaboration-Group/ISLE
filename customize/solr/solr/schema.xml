@@ -109,7 +109,7 @@
 
          Consult the DateField javadocs for more information.
       -->
-    <fieldType name="date" class="solr.DateField" sortMissingLast="true" omitNorms="true"/>
+    <fieldType name="date" class="solr.TrieDateField" sortMissingLast="true" omitNorms="true" precisionStep="6" positionIncrementGap="100"/>
 
     <!-- solr.TextField allows the specification of custom text analyzers
          specified as a tokenizer and a list of token filters. Different
@@ -226,7 +226,7 @@
             <tokenizer class="solr.WhitespaceTokenizerFactory"/>
             <filter class="solr.LowerCaseFilterFactory"/>
             <filter class="solr.SnowballPorterFilterFactory" language="English" protected="protwords.txt"/>
-         </analyzer>
+        </analyzer>
     </fieldType>
 
     <!-- This is an example of using the KeywordTokenizer along
@@ -293,9 +293,7 @@
        boosting for the field, and saves some memory).  Only full-text
        fields or fields that need an index-time boost need norms.
    -->
-  <field name="_version_" type="long" indexed="true" stored="true"/>  
-
-  <field name="PID" type="string" indexed="true" stored="true" required="true"/>
+   <field name="PID" type="string" indexed="true" stored="true" required="true"/>
 
    <field name="PID_kw" type="text_keyword" indexed="true" stored="true" multiValued="false"/>
 
@@ -339,12 +337,16 @@
    <dynamicField name="*_et" type="edgedText" indexed="true" stored="true" multiValued="true"/>
    <dynamicField name="*_mlt" type="mappedLowerText" indexed="true" stored="true" multiValued='false'/>
 
+   <!-- islandora_solution_pack_oralhistories setup. This may collide with other dynamic fields. Use at own risk. -->
+   <!-- <dynamicField name="or_*" type="text" indexed="true" stored="true" multiValued="true"/> -->
+
    <!-- uncomment the following to ignore any fields that don't already match an existing
         field name or dynamic field, rather than reporting them as an error.
         alternately, change the type="ignored" to some other type e.g. "text" if you want
         unknown fields indexed and/or stored by default -->
    <field name="dc.description" type="text_fgs"  indexed="true"  stored="true" multiValued="true"/>
    <dynamicField name="*" type="text_fgs"  indexed="true"  stored="true" multiValued="true"/>
+   <field name="_version_" type="long" indexed="true" stored="true"/>
 
  </fields>
 
