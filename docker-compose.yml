@@ -41,10 +41,12 @@ services:
     - ./customize/fedora/adore-djatoka/index.html:/var/lib/tomcat7/webapps/adore-djatoka/index.html
     - ./customize/fedora/adore-djatoka/log4j.properties:/var/lib/tomcat7/webapps/adore-djatoka/WEB-INF/classes/log4j.properties
     - ./customize/fedora/apache/site.conf:/etc/apache2/sites-available/site.conf
+    - ./customize/fedora/gsearch/index.properties:/var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/index.properties
     - ./data/fedora/data:/usr/local/fedora/data
     - ./data/fedora/log/fedora:/usr/local/fedora/server/logs
     - ./data/fedora/log/apache:/var/log/apache2
     - ./data/fedora/log/tomcat:/var/log/tomcat7
+    #- ./data/solr:/usr/local/solr/collection1/data
     container_name: isle-fedora
 
   solr:

@@ -34,8 +34,41 @@ RUN apt-get update \
     python-mysqldb \
     libmysqlclient-dev \
     default-jdk \
+    maven \
+    git \
+    apt-transport-https \
+    apache2 \
+    openssl \
+    libapache2-mod-proxy-html \
+    libxml2-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+
+# Configure apache 1/2
+COPY apache/site.conf /etc/apache2/sites-available/site.conf
+COPY apache/servername.conf /etc/apache2/conf-available/servername.conf
+
+
+###
+# Add the islandora user
+RUN useradd -ms /bin/bash islandora
+
+# Configure apache 2/2
+RUN a2enconf servername \
+    && mkdir -p /var/www/html \
+    && chown islandora:www-data /var/www/html \
+    && chmod 0644 /etc/apache2/sites-available/site.conf \
+    && a2ensite site.conf \
+    && a2enmod rewrite deflate headers expires proxy proxy_http proxy_html proxy_connect xml2enc \
+    && a2dissite 000-default \
+    && a2dissite default-ssl
+
+###
+# Configure tmpreaper
+COPY tmpreaper/cron /etc/cron.d/tmpreaper-cron
+RUN chmod 0644 /etc/cron.d/tmpreaper-cron \
+    && touch /var/log/cron.log
 
 
 ###
@@ -48,43 +81,6 @@ RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | te
     && apt-get install -y curl dnsutils oracle-java8-installer oracle-java8-set-default ca-certificates \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-
-
-###
-# Configure tmpreaper
-COPY tmpreaper/cron /etc/cron.d/tmpreaper-cron
-RUN chmod 0644 /etc/cron.d/tmpreaper-cron \
-    && touch /var/log/cron.log
-
-###
-RUN apt-get update \
-    && apt-get install -y \
-    apt-transport-https \
-    apache2 \
-    openssl \
-    libapache2-mod-proxy-html \
-    libxml2-dev \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-
-# Configure apache
-COPY apache/site.conf /etc/apache2/sites-available/site.conf
-COPY apache/servername.conf /etc/apache2/conf-available/servername.conf
-
-###
-# Add the islandora user
-RUN useradd -ms /bin/bash islandora
-
-
-RUN a2enconf servername \
-    && mkdir -p /var/www/html \
-    && chown islandora:www-data /var/www/html \
-    && chmod 0644 /etc/apache2/sites-available/site.conf \
-    && a2ensite site.conf \
-    && a2enmod rewrite deflate headers expires proxy proxy_http proxy_html proxy_connect xml2enc \
-    && a2dissite 000-default \
-    && a2dissite default-ssl
 
 
 ###
@@ -277,6 +273,52 @@ RUN chown -R tomcat7:tomcat7 /opt/adore-djatoka-1.1 \
 
 COPY djatoka/index.html /var/lib/tomcat7/webapps/adore-djatoka/index.html
 COPY djatoka/log4j.properties var/lib/tomcat7/webapps/adore-djatoka/WEB-INF/classes/log4j.properties
+
+###
+# Gsearch
+#
+
+COPY gsearch/fedoragsearch-2.8.1.zip /tmp/fedoragsearch-2.8.1.zip
+
+RUN  /usr/bin/unzip -o /tmp/fedoragsearch-2.8.1.zip -d /tmp \
+    && /bin/cp -v /tmp/fedoragsearch-2.8.1/fedoragsearch.war /var/lib/tomcat7/webapps/ \
+    && chown -R tomcat7:tomcat7 /var/lib/tomcat7/webapps \
+    && chmod 0644 /var/lib/tomcat7/webapps/fedoragsearch.war \
+    && /usr/bin/unzip -o /var/lib/tomcat7/webapps/fedoragsearch.war -d /var/lib/tomcat7/webapps/fedoragsearch/ \
+    && chown -R tomcat7:tomcat7 /var/lib/tomcat7/webapps
+
+COPY gsearch/fgsconfig-basic-for-islandora.properties /var/lib/tomcat7/webapps/fedoragsearch/FgsConfig/fgsconfig-basic-for-islandora.properties
+COPY gsearch/fgsconfig-basic.xml /var/lib/tomcat7/webapps/fedoragsearch/FgsConfig/fgsconfig-basic.xml
+COPY gsearch/log4j.xml /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/log4j.xml
+
+
+RUN chown tomcat7:tomcat7 /var/lib/tomcat7/webapps/fedoragsearch/FgsConfig/fgsconfig-basic-for-islandora.properties \
+    && chmod 644 /var/lib/tomcat7/webapps/fedoragsearch/FgsConfig/fgsconfig-basic-for-islandora.properties \
+    && chown tomcat7:tomcat7 /var/lib/tomcat7/webapps/fedoragsearch/FgsConfig/fgsconfig-basic.xml \
+    && chown tomcat7:tomcat7 /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/log4j.xml \
+    && /usr/bin/ant -f /var/lib/tomcat7/webapps/fedoragsearch/FgsConfig/fgsconfig-basic.xml \
+    && chown -R tomcat7:tomcat7 /var/lib/tomcat7/webapps/fedoragsearch/ \
+    && cp -Rv /var/lib/tomcat7/webapps/fedoragsearch/FgsConfig/configForIslandora/fgsconfigFinal/. /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/
+
+COPY gsearch/foxmlToSolr.xslt /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/foxmlToSolr.xslt
+COPY gsearch/index.properties /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/index.properties
+
+
+RUN chown -R tomcat7:tomcat7 /var/lib/tomcat7/webapps/fedoragsearch/ \
+    && /usr/bin/git clone https://github.com/discoverygarden/dgi_gsearch_extensions.git /tmp/dgi_gsearch_extensions \
+    && cd /tmp/dgi_gsearch_extensions \
+    && /usr/bin/mvn package \
+    && /bin/cp /tmp/dgi_gsearch_extensions/target/gsearch_extensions-0.1.3-jar-with-dependencies.jar /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/lib/gsearch_extensions-0.1.3-jar-with-dependencies.jar \
+    && /bin/chown tomcat7:tomcat7 /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/lib/gsearch_extensions-0.1.3-jar-with-dependencies.jar \
+    && /usr/bin/git clone -b master https://github.com/discoverygarden/islandora_transforms.git /tmp/islandora_transforms \
+    && sed -i 's#/usr/local/fedora/tomcat#/var/lib/tomcat7#g' /tmp/islandora_transforms/*.xslt \
+    && /bin/cp -Rv /tmp/islandora_transforms /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms \
+    && chown -R tomcat7:tomcat7 /var/lib/tomcat7/webapps/fedoragsearch \
+    && chown tomcat7:tomcat7 /var/lib/tomcat7/webapps/fedoragsearch.war \
+    && chown -R tomcat7:tomcat7 /var/lib/tomcat7/ \
+    && sudo -s -u tomcat7 /usr/share/tomcat7/bin/startup.sh \
+    && sleep 70
+
 
 ADD tomcat/runservices.sh /opt/runservices.sh
 RUN chmod +x /opt/runservices.sh
