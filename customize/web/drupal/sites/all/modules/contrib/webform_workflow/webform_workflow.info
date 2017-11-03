@@ -1,0 +1,30 @@
+name = Webform Workflow
+description = Enables basic workflow functionality for a webform submission
+core = 7.x
+package = Webform
+
+dependencies[] = entity
+dependencies[] = entity_token
+dependencies[] = entityreference
+dependencies[] = inline_entity_form
+dependencies[] = webform (>=7.x-4.x)
+dependencies[] = token
+dependencies[] = views
+dependencies[] = views_bulk_operations
+
+files[] = includes/webform_workflow_state.controller.inc
+files[] = includes/webform_workflow_state.inline_entity_form.inc
+files[] = includes/views/handlers/webform_workflow_views_handler_field_state.inc
+files[] = includes/views/handlers/webform_workflow_views_handler_filter_state.inc
+
+files[] = tests/webform_workflow_base.test
+files[] = tests/webform_workflow_permissions.test
+
+stylesheets[all][] = includes/webform_workflow.css
+
+; Information added by Drupal.org packaging script on 2014-08-11
+version = "7.x-1.0-alpha2"
+core = "7.x"
+project = "webform_workflow"
+datestamp = "1407752937"
+

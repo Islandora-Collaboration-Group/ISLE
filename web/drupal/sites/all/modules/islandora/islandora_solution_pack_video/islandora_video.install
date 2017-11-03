@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * @file
+ * Hooks for installing/unintstalling this module.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * @see islandora_video_islandora_required_objects()
+ */
+function islandora_video_install() {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  islandora_install_solution_pack('islandora_video');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_video_uninstall() {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  $variables = array(
+    'islandora_video_viewers',
+    'islandora_video_ffmpeg_path',
+    'islandora_video_retain_original',
+    'islandora_video_make_archive',
+    'islandora_video_make_mp4_locally',
+    'islandora_video_make_ogg_locally',
+    'islandora_video_ffmpeg2theora_path',
+    'islandora_video_mp4_audio_codec',
+    'islandora_video_play_obj',
+    'islandora_video_max_obj_size',
+  );
+  array_map('variable_del', $variables);
+  islandora_install_solution_pack('islandora_video', 'uninstall');
+}
+
+/**
+ * Implements hook_update_N().
+ *
+ * Informs the user that the OGG derivative is no longer needed and can be
+ * removed from existing objects if desired.
+ */
+function islandora_video_update_7100(&$sandbox) {
+  drupal_set_message(t('The Islandora Video Solution Pack no longer needs the OGG datastream.
+  It previously existed as an access derivative for viewing in certain browsers. MP4 appears to be the standard now. As such,
+  the OGG datastream is now an optional derivative. If you would like to remove the OGG derivatives from existing
+  video objects you can run the associated command in the Drush script with the module.'), 'warning');
+}

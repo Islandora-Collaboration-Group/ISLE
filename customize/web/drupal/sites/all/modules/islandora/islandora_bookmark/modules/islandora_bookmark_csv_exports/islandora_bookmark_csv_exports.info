@@ -1,0 +1,11 @@
+name = Islandora Bookmark CSV Exports
+description = Allows users to construct configurations of fields and content for CSV exports.
+dependencies[] = islandora
+dependencies[] = islandora_bookmark
+depdenencies[] = islandora_solr
+files[] = includes/export.inc
+package = Islandora Tools
+configure = admin/islandora/tools/islandora-bookmark/csv_exports
+version = 7.x-dev
+core = 7.x
+

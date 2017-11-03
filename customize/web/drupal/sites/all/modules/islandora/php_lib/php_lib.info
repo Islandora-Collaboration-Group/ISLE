@@ -1,0 +1,19 @@
+name = PHP Lib
+description = A collection of interfaces classes and functions that can be used in a variety of environments.
+
+version = 7.x-dev
+package = Islandora Dependencies
+core = 7.x
+php = 5.2
+
+files[] = Enum.inc
+files[] = LazyMembers.inc
+files[] = Members.inc
+files[] = ReadOnlyMembers.inc
+files[] = ReadOnlyPrivateMembers.inc
+files[] = ReadOnlyProtectedMembers.inc
+files[] = tests/Array.test
+files[] = tests/Backtrace.test
+files[] = tests/DOMHelpers.test
+files[] = xml/EACCPFDocument.inc
+files[] = xml/XMLDocument.inc

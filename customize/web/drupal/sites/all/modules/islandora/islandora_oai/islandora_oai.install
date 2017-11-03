@@ -1,0 +1,236 @@
+<?PHP
+
+/**
+ * @file
+ * Installs required DB tables and default metadata prefixes for islandora_oai.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function islandora_oai_install() {
+  drupal_mkdir('public://islandora_oai_xsls');
+
+  db_insert('islandora_oai_metadata_formats')
+  ->fields(array(
+    'name' => 'oai_dc',
+    'metadata_prefix' => 'oai_dc',
+    'oai2_schema' => 'http://www.openarchives.org/OAI/2.0/oai_dc.xsd',
+    'metadata_namespace' => 'http://www.openarchives.org/OAI/2.0/oai_dc/',
+    'record_prefix' => 'dc',
+    'record_namespace' => 'http://purl.org/dc/elements/1.1/',
+  ))
+  ->execute();
+
+  db_insert('islandora_oai_metadata_formats')
+  ->fields(array(
+    'name' => 'oai_etdms',
+    'metadata_prefix' => 'oai_etdms',
+    'oai2_schema' => 'http://www.ndltd.org/standards/metadata/etdms/1-0/etdms.xsd',
+    'metadata_namespace' => 'http://www.ndltd.org/standards/metadata/etdms/1.0/',
+    'record_prefix' => 'thesis',
+    'record_namespace' => 'http://www.ndltd.org/standards/metadata/etdms/1.0/',
+  ))
+  ->execute();
+
+  db_insert('islandora_oai_metadata_formats')
+    ->fields(array(
+      'name' => 'mods',
+      'metadata_prefix' => 'mods',
+      'oai2_schema' => 'http://www.loc.gov/standards/mods/v3/mods-3-4.xsd',
+      'metadata_namespace' => 'http://www.loc.gov/mods/v3',
+      'record_prefix' => 'mods',
+      'record_namespace' => 'http://www.loc.gov/mods/v3',
+    ))
+    ->execute();
+}
+
+/**
+ * Implements hook_schema().
+ */
+function islandora_oai_schema() {
+  $schema = array();
+
+  $schema['islandora_oai_tokens'] = array(
+    'fields' => array(
+      'id' => array(
+        'type' => 'int',
+        'size' => 'big',
+        'not null' => TRUE,
+        'default' => 0,
+        'disp-width' => '20',
+      ),
+      'deliveredrecords' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'disp-width' => '11',
+      ),
+      'extquery' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+        'default' => '',
+      ),
+      'queryargs' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+        'default' => '',
+      ),
+      'setargs' => array(
+        'type' => 'varchar',
+        // Length of Fedora pid.
+        'length' => '64',
+        'not null' => FALSE,
+        'default' => '',
+      ),
+      'metadata_prefix' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+        'default' => '',
+      ),
+      'timestamp' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'disp-width' => '11',
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  $schema['islandora_oai_metadata_formats'] = array(
+    'description' => 'Stores information about OAI2 formats',
+    'fields' => array(
+      'name' => array(
+        'type' => 'varchar',
+        'length' => '100',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'metadata_prefix' => array(
+        'type' => 'varchar',
+        'length' => '100',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'oai2_schema' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'metadata_namespace' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'record_prefix' => array(
+        'type' => 'varchar',
+        'length' => '100',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'record_namespace' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+    ),
+    'primary key' => array('name'),
+  );
+  return $schema;
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_oai_uninstall() {
+  $upload_path = 'public://islandora_oai_xsls';
+  $removal_files = file_scan_directory($upload_path, '/(.*)/');
+
+  foreach ($removal_files as $file) {
+    @file_delete($file);
+  }
+  drupal_rmdir($upload_path);
+
+  $metadata_formats = array();
+  $results = db_query('SELECT metadata_prefix FROM {islandora_oai_metadata_formats} ORDER BY name');
+  foreach ($results as $row) {
+    $metadata_formats[] = $row->metadata_prefix;
+  }
+  $variable_variables = array(
+    'islandora_oai_metadata_datastream_id_!format',
+    'islandora_oai_transform_file_!format',
+    'islandora_oai_self_transform_file_!format',
+    'islandora_oai_include_object_links_for_!format',
+    'islandora_oai_object_links_for_!format_xpath',
+    'islandora_oai_object_links_for_!format_field',
+    'islandora_oai_object_links_for_!format_record_namespace',
+  );
+  foreach ($metadata_formats as $metadata_prefix) {
+    foreach ($variable_variables as $var) {
+      $field = format_string($var, array('!format' => $metadata_prefix));
+      variable_del($field);
+    }
+  }
+  $variables = array(
+    'islandora_oai_collection_field',
+    'islandora_oai_content_model_field',
+    'islandora_oai_date_field',
+    'islandora_oai_exclude_content_models',
+    'islandora_oai_exclude_islandora_namespace',
+    'islandora_oai_append_dc_thumbnail',
+    'islandora_oai_query_backend',
+    'islandora_oai_solr_state_field',
+    'islandora_oai_solr_collection_description_field',
+    'islandora_oai_solr_object_ancestors_field',
+  );
+  array_walk($variables, 'variable_del');
+}
+
+/**
+ * Renames database tables to reflect the new ones.
+ */
+function islandora_oai_update_7100(&$sandbox) {
+  if (db_table_exists('oai2_tokens')) {
+    db_rename_table('oai2_tokens', 'islandora_oai_tokens');
+  }
+
+  if (db_table_exists('oai2_metadata_formats')) {
+    db_rename_table('oai2_metadata_formats', 'islandora_oai_metadata_formats');
+  }
+}
+
+/**
+ * Add support for MODS.
+ */
+function islandora_oai_update_7101(&$sandbox) {
+  db_insert('islandora_oai_metadata_formats')
+    ->fields(array(
+      'name' => 'mods',
+      'metadata_prefix' => 'mods',
+      'oai2_schema' => 'http://www.loc.gov/standards/mods/v3/mods-3-4.xsd',
+      'metadata_namespace' => 'http://www.loc.gov/mods/v3',
+      'record_prefix' => 'mods',
+      'record_namespace' => 'http://www.loc.gov/mods/v3',
+    ))
+    ->execute();
+}
+
+/**
+ * Installs corrected ETDMS schema URL.
+ */
+function islandora_oai_update_7102() {
+  db_update('islandora_oai_metadata_formats')
+    ->fields(array(
+      'oai2_schema' => 'http://www.ndltd.org/standards/metadata/etdms/1-0/etdms.xsd',
+    ))
+    ->condition('name', 'oai_etdms')
+    ->condition('metadata_prefix', 'oai_etdms')
+    ->execute();
+}

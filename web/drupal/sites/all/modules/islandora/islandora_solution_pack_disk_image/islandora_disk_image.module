@@ -1,0 +1,174 @@
+<?php
+
+/**
+ * @file
+ * Handles the creation and display of disk image objects.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_disk_image_menu() {
+  $items = array();
+  $items['admin/islandora/solution_pack_config/disk_image'] = array(
+    'title' => 'Disk Images',
+    'description' => 'Configure the Disk Image Solution Pack.',
+    'page callback' => 'drupal_get_form',
+    'access arguments' => array('administer site configuration'),
+    'page arguments' => array('islandora_disk_image_admin'),
+    'file' => 'includes/admin.form.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ *
+ * We supply a pattern so we can overide templates at the theme level if needed.
+ * We can append a pid to a template and the new template file will be called
+ * (the pid's colon should be replaced with a dash)
+ */
+function islandora_disk_image_theme($existing, $type, $theme, $path) {
+  return array(
+    'islandora_disk_image' => array(
+      'template' => 'theme/islandora-disk-image',
+      'file' => 'theme/theme.inc',
+      'pattern' => 'islandora_disk_image__',
+      'variable' => array('object' => NULL),
+    ),
+  );
+}
+
+/**
+ * Implements hook_islandora_required_objects().
+ */
+function islandora_disk_image_islandora_required_objects(IslandoraTuque $connection) {
+  $module_path = drupal_get_path('module', 'islandora_disk_image');
+  // Disk Image Content Model.
+  $disk_image_content_model = $connection->repository->constructObject('islandora:sp_disk_image');
+  $disk_image_content_model->owner = 'fedoraAdmin';
+  $disk_image_content_model->label = 'Islandora Disk Image Content Model';
+  $disk_image_content_model->models = 'fedora-system:ContentModel-3.0';
+  // DS-COMPOSITE-MODEL Datastream.
+  $datastream = $disk_image_content_model->constructDatastream('DS-COMPOSITE-MODEL', 'X');
+  $datastream->label = 'DS-COMPOSITE-MODEL';
+  $datastream->mimetype = 'application/xml';
+  $datastream->setContentFromFile("$module_path/xml/islandora_disk_image_ds_composite_model.xml", FALSE);
+  $disk_image_content_model->ingestDatastream($datastream);
+  // Disk Image Collection.
+  $disk_image_collection = $connection->repository->constructObject('islandora:sp_disk_image_collection');
+  $disk_image_collection->owner = 'fedoraAdmin';
+  $disk_image_collection->label = 'Disk Image Collection';
+  $disk_image_collection->models = 'islandora:collectionCModel';
+  $disk_image_collection->relationships->add(FEDORA_RELS_EXT_URI, 'isMemberOfCollection', 'islandora:root');
+  // Collection Policy Datastream.
+  $datastream = $disk_image_collection->constructDatastream('COLLECTION_POLICY', 'X');
+  $datastream->label = 'Collection policy';
+  $datastream->mimetype = 'application/xml';
+  $datastream->setContentFromFile("$module_path/xml/islandora_disk_image_collection_policy.xml", FALSE);
+  $disk_image_collection->ingestDatastream($datastream);
+  // TN Datastream.
+  $datastream = $disk_image_collection->constructDatastream('TN', 'M');
+  $datastream->label = 'Thumbnail';
+  $datastream->mimetype = 'image/png';
+  $datastream->setContentFromFile("$module_path/images/folder.png", FALSE);
+  $disk_image_collection->ingestDatastream($datastream);
+  return array(
+    'islandora_disk_image' => array(
+      'title' => 'Islandora Disk Image',
+      'objects' => array(
+        $disk_image_content_model,
+        $disk_image_collection,
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_xml_form_builder_forms().
+ */
+function islandora_disk_image_xml_form_builder_forms() {
+  $module_path = drupal_get_path('module', 'islandora_disk_image');
+  return array(
+    'Disk Image MODS form' => array(
+      'form_file' => "$module_path/xml/islandora_disk_image_form_mods.xml",
+    ),
+  );
+}
+
+/**
+ * Implements hook_xml_form_builder_form_associations().
+ */
+function islandora_disk_image_xml_form_builder_form_associations() {
+  return array(
+    'islandora_disk_image_mods_form' => array(
+      'content_model' => 'islandora:sp_disk_image',
+      'form_name' => 'Disk Image MODS form',
+      'dsid' => 'MODS',
+      'title_field' => array(
+        'titleInfo', 'title',
+      ),
+      'transform' => 'mods_to_dc.xsl',
+      'template' => FALSE,
+    ),
+  );
+}
+
+/**
+ * Implements hook_CMODEL_PID_islandora_view_object().
+ */
+function islandora_disk_image_islandora_sp_disk_image_islandora_view_object($object, $page_number, $page_size) {
+  $output = theme('islandora_disk_image', array('object' => $object));
+  return array('' => $output);
+}
+
+/**
+ * Implements hook_islandora_ingest_steps().
+ */
+function islandora_disk_image_islandora_sp_disk_image_islandora_ingest_steps() {
+  return array(
+    'islandora_disk_image_upload' => array(
+      'weight' => 10,
+      'type' => 'form',
+      'form_id' => 'islandora_disk_image_upload_form',
+      'module' => 'islandora_disk_image',
+      'file' => 'includes/disk_image_upload.form.inc',
+    ),
+  );
+}
+
+/**
+ * Implements hook_islandora_CMODEL_PID_derivative().
+ */
+function islandora_disk_image_islandora_sp_disk_image_islandora_derivative() {
+  return array(
+    array(
+      'source_dsid' => 'PHOTO',
+      'destination_dsid' => 'JPG',
+      'weight' => '0',
+      'function' => array(
+        'islandora_disk_image_create_JPG_derivative',
+      ),
+      'file' => drupal_get_path('module', 'islandora_disk_image') . '/includes/derivatives.inc',
+    ),
+    array(
+      'source_dsid' => 'PHOTO',
+      'destination_dsid' => 'TN',
+      'weight' => '1',
+      'function' => array(
+        'islandora_disk_image_create_TN_derivative',
+      ),
+      'file' => drupal_get_path('module', 'islandora_disk_image') . '/includes/derivatives.inc',
+    ),
+    array(
+      'source_dsid' => 'OBJ',
+      'destination_dsid' => 'TECHMD_DFXML',
+      'weight' => '2',
+      'function' => array(
+        'islandora_disk_image_create_DFXML_derivative',
+      ),
+      'file' => drupal_get_path('module', 'islandora_disk_image') . '/includes/derivatives.inc',
+    ),
+  );
+}

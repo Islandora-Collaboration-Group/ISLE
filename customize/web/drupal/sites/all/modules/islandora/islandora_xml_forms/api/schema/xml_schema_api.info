@@ -1,0 +1,12 @@
+name = Islandora XML Schema API
+description = Provides functions and classes that allow for effective use of information stored within XML schemas.
+
+dependencies[] = php_lib
+package =  Islandora Dependencies
+version = 7.x-dev
+core = 7.x
+
+files[] = tests/ComplexType.test
+files[] = tests/Element.test
+files[] = tests/InsertOrderMap.test
+files[] = tests/Schema.test

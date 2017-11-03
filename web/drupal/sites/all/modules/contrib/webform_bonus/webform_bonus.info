@@ -1,0 +1,12 @@
+; $Id: $
+name = Webform Bonus Pack
+description = Provides Webform mapping component and .txt download option.
+core = 7.x
+package = Webform
+dependencies[] = webform
+; Information added by drupal.org packaging script on 2013-10-26
+version = "7.x-3.x-dev"
+core = "7.x"
+project = "webform_bonus"
+datestamp = "1382755536"
+

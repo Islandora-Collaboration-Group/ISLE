@@ -1,0 +1,155 @@
+<?php
+
+
+/**
+ * Implements hook_schema().
+ */
+function islandora_webform_schema() {
+
+  $schema['islandora_webform_webforms'] = array(
+    'description' => 'Holds webform configuration for use with islandora_webform functionality',
+    'fields' => array(
+      'entity_id' => array(
+        'description' => 'The node id of the webform that this configuration is associated with',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'enabled' => array(
+        'description' => 'Is the webform enabled to be tagged to islandora objects? 0 = No; 1 = Yes',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'cmodel_filter' => array(
+        'description' => 'If set, restricts eligible fedora objects which can be associated with this webform by the object\'s content model',
+        'type' => 'varchar',
+        'length' => 500,
+      ),
+      'collection_filter' => array(
+        'description' => 'If set, restricts eligible fedora objects which can be associated with this webform by which collection the object is a member of',
+        'type' => 'varchar',
+        'length' => 500,
+      ),
+      'pid_filter' => array(
+        'description' => 'If set, restricts eligible fedora objects which can be associated with this webform by the object\'s pid',
+        'type' => 'varchar',
+        'length' => 2000,
+      ),
+      'scope' => array(
+        'description' => 'Defines whether the link should appear on all objects matching the filters, or only on objects tagged for this webform. Options are "all" and "tagged"',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => 'tagged',
+      ),
+      'link_text' => array(
+        'description' => 'Sets the text for the link that appears on the object page',
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+      'link_help' => array(
+        'description' => 'Defines help text that appears with the link or as hover text',
+        'type' => 'varchar',
+        'length' => 2000,
+      ),
+    ),
+    'indexes' => array(
+      'enabled' => array('enabled'),
+      // Restrict indexes to 255 characters to prevent index limit errors.
+      'cmodel_filter' => array(array('cmodel_filter', 255)),
+      'pid_filter' => array(array('pid_filter', 255)),
+    ),
+    'primary key' => array('entity_id'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Implements hook_requirements().
+ *
+ * Ensure that islandora and webform versions are up to snuff.
+ */
+function islandora_webform_requirements($phase) {
+  $requirements = array();
+  switch($phase) {
+    case 'install':
+    case 'runtime':
+      $tests = array(
+        'islandora' => '7.x-1.5',
+        'webform' => '7.x-4.10',
+      );
+      $results = db_select('system', 's')
+        ->fields('s', array('name', 'info'))
+        ->condition('name', array_keys($tests))
+        ->execute()->fetchAll();
+      foreach($results as $result) {
+        $info = unserialize($result->info);
+        if(!empty($info['version'])) {
+          if(version_compare($info['version'], $tests[$result->name]) < 0 && $info['version'] != '7.x-dev') {
+            $requirements[$result->name] = array(
+              'title' => $result->name,
+              'description' => 'islandora_webform requires that ' . $result->name . ' be at least version ' . $tests[$result->name],
+              'value' => $info['version'],
+              'severity' => REQUIREMENT_ERROR,
+            );
+          }
+        }
+      }
+      break;
+  }
+  return $requirements;
+}
+
+/**
+ * Implements hook_schema_alter().
+ */
+function islandora_webform_schema_alter(&$schema) {
+  _islandora_webform_schema_alter($schema);
+}
+
+/**
+ * Implements hook_install().
+ */
+function islandora_webform_install() {
+  // Update schema. Add our additional fields.
+  $schema = array('webform' => array());
+  islandora_webform_schema_alter($schema);
+  foreach ($schema as $table => $table_def) {
+    foreach ($table_def['fields'] as $field => $spec) {
+      if(!db_field_exists($table, $field)) {
+        db_add_field($table, $field, $spec);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_webform_uninstall() {
+  // Update schema. Drop our additional fields.
+  $schema = array('webform' => array());
+  islandora_webform_schema_alter($schema);
+  foreach ($schema as $table => $table_def) {
+    foreach ($table_def['fields'] as $field => $spec) {
+      db_drop_field($table, $field);
+    }
+  }
+}
+
+/**
+ * Add webform_workflow state permissions schema to webform table.
+ */
+function islandora_webform_update_7001() {
+  islandora_webform_install();
+}
+
+/**
+ * Add draft_access field to webform table.
+ */
+function islandora_webform_update_7002() {
+  islandora_webform_install();
+}

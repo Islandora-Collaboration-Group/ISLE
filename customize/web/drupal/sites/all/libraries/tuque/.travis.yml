@@ -1,0 +1,40 @@
+sudo: required
+dist: trusty
+language: php
+
+matrix:
+  include:
+   #5.3.10 Ubuntu Precise exceptions (not 5.3.3 since there is no SSL support there)
+   # Fedora 3.5 has a bug that makes tests fail. we should deprecate it fully
+    #- php: 5.3
+    #  dist: precise
+    #  env: FEDORA_VERSION="3.5"
+    - php: 5.3
+      dist: precise
+      env: FEDORA_VERSION="3.6.2"
+    - php: 5.3
+      dist: precise
+      env: FEDORA_VERSION="3.7.0"
+    - php: 5.3
+      dist: precise
+      env: FEDORA_VERSION="3.8.1"
+php:
+  - 5.4
+  - 5.5
+  - 5.6
+  - 7.0
+  - 7.1
+env:
+  # Fedora 3.5 has a bug that makes tests fail. we should deprecate it fully
+  # - FEDORA_VERSION="3.5"
+  - FEDORA_VERSION="3.6.2"
+  - FEDORA_VERSION="3.7.0"
+  - FEDORA_VERSION="3.8.1"
+
+before_script:
+  - composer install
+  - $TRAVIS_BUILD_DIR/tests/scripts/travis_setup.sh
+script:
+  - vendor/bin/phpunit -c tests/travis.xml tests/
+notifications:
+  irc: "irc.freenode.org#islandora"

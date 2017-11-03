@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Main hooks for Islandora Badges.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_badges_menu() {
+  return array(
+    'admin/islandora/tools/badges' => array(
+      'title' => 'Islandora Badges Configuration',
+      'description' => 'Configure Badges integration.',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('islandora_badges_admin_form'),
+      'access arguments' => array('administer site configuration'),
+      'type' => MENU_NORMAL_ITEM,
+      'file' => 'includes/admin.form.inc',
+    ),
+    'admin/islandora/tools/badges/common' => array(
+      'title' => 'Islandora Badges Configuration',
+      'description' => 'Configure Badges integration.',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('islandora_badges_admin_form'),
+      'access arguments' => array('administer site configuration'),
+      'type' => MENU_DEFAULT_LOCAL_TASK,
+      'file' => 'includes/admin.form.inc',
+      'weight' => -9,
+    ),
+  );
+}

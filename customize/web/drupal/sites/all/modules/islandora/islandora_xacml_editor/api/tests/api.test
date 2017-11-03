@@ -1,0 +1,753 @@
+<?php
+/**
+ * @file
+ * Unit tests for XacmlRule, its child classes, and Xacml.
+ */
+
+/**
+ * Tests for the XACML API.
+ */
+class IslandoraXacmlApiUnitTestCase extends DrupalWebTestCase {
+
+  /**
+   * Provides info about the tests.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Islandora Xacml Api Unit Tests',
+      'description' => 'Unit tests for the Islandora Xacml Api',
+      'group' => 'Islandora XACML Editor',
+    );
+  }
+
+  /**
+   * Enables islandora_xacml_api.
+   */
+  public function setUp() {
+    parent::setUp('islandora_xacml_api');
+    module_load_include('inc', 'islandora_xacml_api', '/includes/xacml');
+    module_load_include('inc', 'islandora_xacml_api', '/includes/writer');
+  }
+
+  /**
+   * Test for management rule.
+   *
+   * Asserts that each of the expected methods subject to the management rule
+   * are contained in the rule's 'methods' array.
+   */
+  public function testManagementRuleHasCorrectMethods() {
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Pull the 'methods' array out of the rule.
+    $rule = $xacml->managementRule->getRuleArray();
+    $methods = $rule['methods'];
+
+    // List of methods we're expecting to see.
+    $expected_methods = array(
+      'addDatastream',
+      'addDisseminator',
+      'adminPing',
+      'getDisseminatorHistory',
+      'getNextPid',
+      'ingest',
+      'modifyDatastreamByReference',
+      'modifyDatastreamByValue',
+      'modifyDisseminator',
+      'modifyObject',
+      'purgeObject',
+      'purgeDatastream',
+      'purgeDisseminator',
+      'setDatastreamState',
+      'setDisseminatorState',
+      'setDatastreamVersionable',
+      'compareDatastreamChecksum',
+      'serverShutdown',
+      'serverStatus',
+      'upload',
+      'dsstate',
+      'resolveDatastream',
+      'reloadPolicies',
+    );
+
+    // Assert each of the expected methods is in the rule's 'methods' array.
+    foreach ($expected_methods as $method) {
+      $this->assertTrue(in_array($method, $methods), "Method $method is in the management rule.");
+    }
+  }
+
+  /**
+   * Test for viewing rule.
+   *
+   * Asserts that each of the expected methods subject to the viewing rule
+   * are contained in the rule's 'methods' array.
+   */
+  public function testViewingRuleHasCorrectMethods() {
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Pull the 'methods' array out of the rule.
+    $rule = $xacml->viewingRule->getRuleArray();
+    $methods = $rule['methods'];
+
+    // List of methods we're expecting to see.
+    $expected_methods = array(
+      'api-a',
+      'getDatastreamHistory',
+      'listObjectInResourceIndexResults',
+    );
+
+    // Assert each of the expected methods is in the rule's 'methods' array.
+    foreach ($expected_methods as $method) {
+      $this->assertTrue(in_array($method, $methods), "Method $method is in the viewing rule.");
+    }
+  }
+
+  /**
+   * TEst for datastream rule.
+   *
+   * Asserts that each of the expected methods subject to the datastream rule
+   * are contained in the rule's 'methods' array.
+   */
+  public function testDatastreamRuleHasCorrectMethods() {
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Pull the 'methods' array out of the rule.
+    $rule = $xacml->datastreamRule->getRuleArray();
+    $methods = $rule['methods'];
+
+    // List of methods we're expecting to see.
+    $expected_methods = array(
+      'getDatastreamDissemination',
+    );
+
+    // Assert each of the expected methods is in the rule's 'methods' array.
+    foreach ($expected_methods as $method) {
+      $this->assertTrue(in_array($method, $methods), "Method $method is in the datastream rule.");
+    }
+  }
+
+  /**
+   * Asserts that a new rule is not populated.
+   *
+   * I've yet to determine if this actually IS the desired behavior.
+   * New rules are only given the default fedoraAdmin user and administrator
+   * role if they are populated from an already existing rule.  Otherwise,
+   * they are added only when getRuleArray() is called.  This is performed
+   * in the functions that export the xacml rule, specifically the toXML and
+   * toDOM functions of the Xacml class, so we should be ok.  But it still
+   * all seems a little too brittle for my tastes.
+   */
+  public function testNewRuleIsNotPopulated() {
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Assert that the new rule is not populated.
+    $this->assertFalse($xacml->managementRule->isPopulated(), "New rule is not populated");
+  }
+
+  /**
+   * Asserts that after adding a user, the rule is populated.
+   */
+  public function testRuleWithUserIsPopulated() {
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Add a user.
+    $user_name = 'foo';
+    $xacml->managementRule->addUser($user_name);
+
+    // Assert that rule is now populated.
+    $this->assertTrue($xacml->managementRule->isPopulated(), "Rule with user is populated");
+  }
+
+  /**
+   * Asserts that after adding a role, the rule is populated.
+   */
+  public function testRuleWithRoleIsPopulated() {
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Add a role.
+    $role_name = 'bar';
+    $xacml->managementRule->addRole($role_name);
+
+    // Assert that rule is now populated.
+    $this->assertTrue($xacml->managementRule->isPopulated(), "Rule with role is populated");
+  }
+
+  /**
+   * Asserts that after adding both a user and a role, the rule is populated.
+   */
+  public function testRuleWithBothUserAndRoleIsPopulated() {
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Add a user.
+    $user_name = 'foo';
+    $xacml->managementRule->addUser($user_name);
+
+    // Add a role.
+    $role_name = 'bar';
+    $xacml->managementRule->addRole($role_name);
+
+    // Assert that rule is now populated.
+    $this->assertTrue($xacml->managementRule->isPopulated(), "Rule with both user and role is populated");
+  }
+
+  /**
+   * Tests xacml rule.
+   *
+   * Asserts that after removing all roles, an XacmlRule with a user is still
+   * considered populated.
+   */
+  public function testRuleWithUserAfterRemovingRolesIsPopulated() {
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Add a user.
+    $user_name = 'foo';
+    $xacml->managementRule->addUser($user_name);
+
+    // Add a role.
+    $role_name = 'bar';
+    $xacml->managementRule->addRole($role_name);
+
+    // Remove the role.
+    $xacml->managementRule->removeRole($role_name);
+
+    // Assert that rule is still populated.
+    $this->assertTrue($xacml->managementRule->isPopulated(), "Rule with user after removing roles is populated");
+  }
+
+  /**
+   * Test XacmlRule.
+   *
+   * Asserts that after removing all users, an XacmlRule with a role is still
+   * considered populated.
+   */
+  public function testRuleWithRoleAfterRemovingUsersIsPopulated() {
+    // Instantiate the xacml object..
+    $xacml = new Xacml();
+
+    // Add a user.
+    $user_name = 'foo';
+    $xacml->managementRule->addUser($user_name);
+
+    // Add a role.
+    $role_name = 'bar';
+    $xacml->managementRule->addRole($role_name);
+
+    // Remove the user.
+    $xacml->managementRule->removeRole($role_name);
+
+    // Assert that rule is still populated.
+    $this->assertTrue($xacml->managementRule->isPopulated(), "Rule with role after removing users is populated");
+  }
+
+  /**
+   * Test an empty rule.
+   *
+   * Asserts that a rule with users and no roles is not populated after
+   * removing all users.
+   */
+  public function testEmptyRuleAfterRemovingUsersIsNotPopulated() {
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Add a user.
+    $user_name = 'foo';
+    $xacml->managementRule->addUser($user_name);
+
+    // Remove the user.
+    $xacml->managementRule->removeUser($user_name);
+
+    // Assert that rule is not populated.
+    $this->assertFalse($xacml->managementRule->isPopulated(), "Empty rule after removing user is not populated");
+  }
+
+  /**
+   * TEst removing all roles.
+   *
+   * Asserts that a rule with no users and roles is not populated after
+   * removing all roles.
+   */
+  public function testEmptyRuleAfterRemovingRolesIsNotPopulated() {
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Add a role.
+    $role_name = 'foo';
+    $xacml->managementRule->addRole($role_name);
+
+    // Remove the role.
+    $xacml->managementRule->removeRole($role_name);
+
+    // Assert that rule is not populated.
+    $this->assertFalse($xacml->managementRule->isPopulated(), "Empty rule after removing role is not populated");
+  }
+
+  /**
+   * Test rule with no users and roles.
+   *
+   * Asserts that a rule with no users and roles is not populated after
+   * removing all users and roles.
+   */
+  public function testEmptyRuleAfterRemovingBothUsersAndRolesIsNotPopulated() {
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Add a user.
+    $user_name = 'foo';
+    $xacml->managementRule->addUser($user_name);
+
+    // Add a role.
+    $role_name = 'bar';
+    $xacml->managementRule->addRole($role_name);
+
+    // Remove the user.
+    $xacml->managementRule->removeUser($user_name);
+
+    // Remove the role.
+    $xacml->managementRule->removeRole($role_name);
+
+    // Assert that rule is not populated.
+    $this->assertFalse($xacml->managementRule->isPopulated(), "Empty rule after removing role and user is not populated");
+  }
+
+  /**
+   * Asserts that a user added to an XacmlRule has permission.
+   */
+  public function testAddedUserHasPermission() {
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Add a user.
+    $user_name = 'foo';
+    $xacml->managementRule->addUser($user_name);
+
+    // Assert that the newly added user has permission.
+    $this->assertTrue($xacml->managementRule->hasPermission($user_name, array(), FALSE), "Added user has permission in the xacml rule");
+  }
+
+  /**
+   * Asserts that a role added to an XacmlRule has permission.
+   */
+  public function testAddedRoleHasPermission() {
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Add a role.
+    $role_name = 'foo';
+    $xacml->managementRule->addRole($role_name);
+
+    // Assert that the newly added role has permission.
+    $this->assertTrue($xacml->managementRule->hasPermission(NULL, array($role_name), FALSE), "Added role has permission in the xacml rule");
+  }
+
+  /**
+   * Test that user who is removed from an xacml rule no longer has permission.
+   */
+  public function testRemovedUserDoesNotHavePermission() {
+
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Add a user.
+    $user_name = 'foo';
+    $xacml->managementRule->addUser($user_name);
+
+    // Remove the user.
+    $xacml->managementRule->removeUser($user_name);
+
+    // Assert that the newly added user has permission.
+    $this->assertFalse($xacml->managementRule->hasPermission($user_name, array(), FALSE), "Removed user does not have permission in the xacml rule");
+  }
+
+  /**
+   * Tests a role that is removed from an xacml rule no longer has permission.
+   */
+  public function testRemovedRoleDoesNotHavePermission() {
+
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Add a role.
+    $role_name = 'foo';
+    $xacml->managementRule->addRole($role_name);
+
+    // Remove the role.
+    $xacml->managementRule->removeRole($role_name);
+
+    // Assert that the newly added role has permission.
+    $this->assertFalse($xacml->managementRule->hasPermission(NULL, array($role_name), FALSE), "Removed role does not have permission in the xacml rule");
+  }
+
+  /**
+   * Utility function for tests.
+   *
+   * Utility function that instantiates and returns a DOMXPath object for the
+   * supplied Xacml object.  Used in the unit tests that verify elements
+   * of an Xacml object's DOM that results from the getDomDocument() function.
+   *
+   * @param Xacml $xacml
+   *   The xacml object that the DOMXPath will search
+   *
+   * @return DOMXPath
+   *   The DOMXPath to search the supplied Xacml object
+   */
+  protected function constructXPathForXacml($xacml) {
+
+    // XACML policy namespace.
+    $ns = 'urn:oasis:names:tc:xacml:1.0:policy';
+
+    // Create the xpath.
+    $xpath = new DOMXPath($xacml->getDomDocument());
+
+    // Register the namespace.
+    $xpath->registerNamespace("ns", $ns);
+
+    return $xpath;
+  }
+
+  /**
+   * Test the DOM.
+   *
+   * Asserts that when a user is added to an XacmlRule, the user appears in
+   * the XacmlRule's resultant DOM.
+   */
+  public function testAddedUserIsInDOM() {
+
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Add a dummy user.
+    $user_name = 'foo';
+    $xacml->managementRule->addUser($user_name);
+
+    // Get an DOMXPath to search the XACML.
+    $xpath = $this->constructXPathForXacml($xacml);
+
+    // Search the DOM for the dummy user in the management rule.
+    $query = "/ns:Policy/ns:Rule[@RuleId='deny-management-functions' and @Effect='Deny']/ns:Condition/ns:Apply/ns:Apply/ns:Apply/ns:AttributeValue[text()='$user_name']";
+
+    $results = $xpath->query($query)->item(0);
+
+    $this->assertNotNull($results, "The query for user $user_name return non-null results");
+    $this->assertEqual($results->nodeValue, $user_name, "Search result's nodeValue is equal to '$user_name'");
+
+  }
+
+  /**
+   * Test users in the dom.
+   *
+   * Asserts that when users are added to an XacmlRule using an array, that
+   * the users appear in the XacmlRule's resultant DOM.
+   */
+  public function testAddedUsersAreInDOM() {
+
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Add dummy users using an array.
+    $user_array = array('foo', 'bar');
+    $xacml->managementRule->addUser($user_array);
+
+    // Get an DOMXPath to search the Xacml.
+    $xpath = $this->constructXPathForXacml($xacml);
+
+    // Search the DOM for the dummy users in the management rule
+    // and assert their existence.
+    for ($i = 0; $i < count($user_array); $i++) {
+      $query = "/ns:Policy/ns:Rule[@RuleId='deny-management-functions' and @Effect='Deny']/ns:Condition/ns:Apply/ns:Apply/ns:Apply/ns:AttributeValue[text()='{$user_array[$i]}']";
+      $results = $xpath->query($query)->item(0);
+
+      $this->assertNotNull($results, "The query for user {$user_array[$i]} return non-null results");
+      $this->assertEqual($results->nodeValue, $user_array[$i], "Search result's nodeValue is equal to '{$user_array[$i]}'");
+    }
+  }
+
+  /**
+   * Make sure users not removed aren't in the dom.
+   *
+   * Asserts that when a user is removed from an XacmlRule that the user no
+   * longer appears in the XacmlRule's resultant DOM
+   */
+  public function testRemovedUserIsNotInDOM() {
+
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Add dummy user to the rule.
+    $user_name = 'foo';
+    $xacml->managementRule->addUser($user_name);
+
+    // Remove one of the dummy users.
+    $xacml->managementRule->removeUser($user_name);
+
+    // Get an DOMXPath to search the Xacml.
+    $xpath = $this->constructXPathForXacml($xacml);
+
+    // Search the DOM for the removed dummy user in the management rule
+    // and ensure it is not present.
+    $query = "/ns:Policy/ns:Rule[@RuleId='deny-management-functions' and @Effect='Deny']/ns:Condition/ns:Apply/ns:Apply/ns:Apply/ns:AttributeValue[text()='{$user_name}']";
+    $results = $xpath->query($query)->item(0);
+    $this->assertNull($results, "The query for user {$user_name} returns null results");
+  }
+
+  /**
+   * Make sure users aren't in the dome when they are removed.
+   *
+   * Asserts that when users are removed from an XacmlRule using an array
+   * that they no longer appear in the XacmlRule's resultant DOM
+   */
+  public function testRemovedUsersAreNotInDOM() {
+
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Add dummy users using an array.
+    $user_array = array('foo', 'bar');
+    $xacml->managementRule->addUser($user_array);
+
+    // Remove some of the dummy users.
+    $xacml->managementRule->removeUser($user_array);
+
+    // Get an DOMXPath to search the Xacml.
+    $xpath = $this->constructXPathForXacml($xacml);
+
+    // Search the DOM for the removed dummy users in the management rule
+    // and ensure they are not present.
+    for ($i = 0; $i < count($user_array); $i++) {
+      $query = "/ns:Policy/ns:Rule[@RuleId='deny-management-functions' and @Effect='Deny']/ns:Condition/ns:Apply/ns:Apply/ns:Apply/ns:AttributeValue[text()='{$user_array[$i]}']";
+      $results = $xpath->query($query)->item(0);
+      $this->assertNull($results, "The query for user {$user_array[$i]} returns null results");
+    }
+  }
+
+  /**
+   * Make sure roles are in the dom.
+   *
+   * Asserts that when a role is added to an XacmlRule, the role appears in
+   * the XacmlRule's resultant DOM.
+   */
+  public function testAddedRoleIsInDOM() {
+
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Add a dummy role.
+    $role_name = 'foo';
+    $xacml->managementRule->addRole($role_name);
+
+    // Get an DOMXPath to search the Xacml.
+    $xpath = $this->constructXPathForXacml($xacml);
+
+    // Search the DOM for the dummy role in the management rule.
+    $query = "/ns:Policy/ns:Rule[@RuleId='deny-management-functions' and @Effect='Deny']/ns:Condition/ns:Apply/ns:Apply/ns:Apply/ns:AttributeValue[text()='$role_name']";
+    $results = $xpath->query($query)->item(0);
+
+    // Assert.
+    $this->assertNotNull($results, "The query for role $role_name return non-null results");
+    $this->assertEqual($results->nodeValue, $role_name, "Search result's nodeValue is equal to '$role_name'");
+  }
+
+  /**
+   * Test roesl are in the DOM.
+   *
+   * Asserts that when a roles are added to an XacmlRule using an array, the
+   * roles appear in the XacmlRule's resultant DOM.
+   */
+  public function testAddedRolesAreInDOM() {
+
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Add dummy roles using an array.
+    $role_array = array('foo', 'bar');
+    $xacml->managementRule->addRole($role_array);
+
+    // Get an DOMXPath to search the Xacml.
+    $xpath = $this->constructXPathForXacml($xacml);
+
+    // Search the DOM for the dummy roles in the management rule
+    // and assert their existence.
+    for ($i = 0; $i < count($role_array); $i++) {
+      $query = "/ns:Policy/ns:Rule[@RuleId='deny-management-functions' and @Effect='Deny']/ns:Condition/ns:Apply/ns:Apply/ns:Apply/ns:AttributeValue[text()='{$role_array[$i]}']";
+      $results = $xpath->query($query)->item(0);
+
+      $this->assertNotNull($results, "The query for role {$role_array[$i]} return non-null results");
+      $this->assertEqual($results->nodeValue, $role_array[$i], "Search result's nodeValue is equal to '{$role_array[$i]}'");
+    }
+  }
+
+  /**
+   * Xacml test.
+   *
+   * Asserts that when a role is removed from an XacmlRule that the role no
+   * longer appears in the XacmlRule's resultant DOM
+   */
+  public function testRemovedRoleIsNotInDOM() {
+
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Add dummy role.
+    $role_name = 'foo';
+    $xacml->managementRule->addRole($role_name);
+
+    // Remove the dummy role.
+    $xacml->managementRule->removeRole($role_name);
+
+    // Get an DOMXPath to search the Xacml.
+    $xpath = $this->constructXPathForXacml($xacml);
+
+    // Search the DOM for the removed dummy role in the management rule
+    // and ensure it is not present.
+    $query = "/ns:Policy/ns:Rule[@RuleId='deny-management-functions' and @Effect='Deny']/ns:Condition/ns:Apply/ns:Apply/ns:Apply/ns:AttributeValue[text()='{$role_name}']";
+    $results = $xpath->query($query)->item(0);
+    $this->assertNull($results, "The query for role {$role_name} returns null results");
+  }
+
+  /**
+   * Test XACML.
+   *
+   * Asserts that when roles are removed from an XacmlRule using an array that
+   * the roles no longer appear in the XacmlRule's resultant DOM
+   */
+  public function testRemovedRolesAreNotInDOM() {
+
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Add dummy roles using an array.
+    $role_array = array('foo', 'bar');
+    $xacml->managementRule->addRole($role_array);
+
+    // Remove some of the dummy roles.
+    $xacml->managementRule->removeRole($role_array);
+
+    // Get an DOMXPath to search the Xacml.
+    $xpath = $this->constructXPathForXacml($xacml);
+
+    // Search the DOM for the removed dummy roles in the management rule
+    // and ensure they are not present.
+    for ($i = 0; $i < count($role_array); $i++) {
+      $query = "/ns:Policy/ns:Rule[@RuleId='deny-management-functions' and @Effect='Deny']/ns:Condition/ns:Apply/ns:Apply/ns:Apply/ns:AttributeValue[text()='{$role_array[$i]}']";
+      $results = $xpath->query($query)->item(0);
+      $this->assertNull($results, "The query for role {$role_array[$i]} returns null results");
+    }
+  }
+
+  /**
+   * Asserts that when a dsid is added to the datastream rule it is in DOM.
+   */
+  public function testAddedDsidIsInDOM() {
+
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Add a DSID to the datastream rule.
+    $dsid = 'foo';
+    $xacml->datastreamRule->addDsid($dsid);
+
+    // Add a user to the datastream rule so that it appears in the DOM.
+    $user_name = 'bar';
+    $xacml->datastreamRule->addUser($user_name);
+
+    // Get an DOMXPath to search the Xacml.
+    $xpath = $this->constructXPathForXacml($xacml);
+
+    // Query the DOM and assert the existence of the DSID.
+    $query = "/ns:Policy/ns:Rule[@RuleId='deny-dsid-mime']/ns:Target/ns:Resources/ns:Resource/ns:ResourceMatch/ns:AttributeValue";
+    $results = $xpath->query($query)->item(0);
+    $this->assertNotNull($results, "The query for DSID $dsid returns non-null results");
+    $this->assertEqual($results->nodeValue, $dsid, "The AttributeValue is $dsid");
+  }
+
+  /**
+   * Test DSID regex.
+   *
+   * Asserts that when a DSID regex is added to the datastream rule, it
+   * appears in the resultant DOM.
+   */
+  public function testAddedDsidRegexIsInDOM() {
+
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Add a DSID regex to the datasream rule.
+    $dsid_regex = 'foo';
+    $xacml->datastreamRule->addDsidRegex($dsid_regex);
+
+    // Add a user to the datastream rule so that it appears in the DOM.
+    $user_name = 'bar';
+    $xacml->datastreamRule->addUser($user_name);
+
+    // Get an DOMXPath to search the Xacml.
+    $xpath = $this->constructXPathForXacml($xacml);
+
+    // Query the DOM and assert the existence of the DSID regex.
+    $query = "/ns:Policy/ns:Rule[@RuleId='deny-dsid-mime']/ns:Target/ns:Resources/ns:Resource/ns:ResourceMatch/ns:AttributeValue";
+    $results = $xpath->query($query)->item(0);
+    $this->assertNotNull($results, "The query for DSID regex $dsid_regex returns non-null results");
+    $this->assertEqual($results->nodeValue, $dsid_regex, "The AttributeValue is $dsid_regex");
+  }
+
+  /**
+   * Asserts that when a mimetype is added to the datastream rule it is in DOM.
+   */
+  public function testAddedMimetypeIsInDOM() {
+
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Add a mimetype to the datasream rule.
+    $mimetype = 'foo';
+    $xacml->datastreamRule->addMimeType($mimetype);
+
+    // Add a user to the datastream rule so that it appears in the DOM.
+    $user_name = 'bar';
+    $xacml->datastreamRule->addUser($user_name);
+
+    // Get an DOMXPath to search the Xacml.
+    $xpath = $this->constructXPathForXacml($xacml);
+
+    // Query the DOM and assert the existence of the mimetype.
+    $query = "/ns:Policy/ns:Rule[@RuleId='deny-dsid-mime']/ns:Target/ns:Resources/ns:Resource/ns:ResourceMatch/ns:AttributeValue";
+    $results = $xpath->query($query)->item(0);
+    $this->assertNotNull($results, "The query for mimetype $mimetype returns non-null results");
+    $this->assertEqual($results->nodeValue, $mimetype, "The AttributeValue is $mimetype");
+  }
+
+  /**
+   * Tests.
+   *
+   * Asserts that when a mimetype regex is added to the datastream rule, it
+   * appears in the resultant DOM.
+   */
+  public function testAddedMimetypeRegexIsInDOM() {
+
+    // Instantiate the xacml object.
+    $xacml = new Xacml();
+
+    // Add a mimetype regex to the datasream rule.
+    $mimetype_regex = 'foo';
+    $xacml->datastreamRule->addMimeType($mimetype_regex);
+
+    // Add a user to the datastream rule so that it appears in the DOM.
+    $user_name = 'bar';
+    $xacml->datastreamRule->addUser($user_name);
+
+    // Get an DOMXPath to search the XACML.
+    $xpath = $this->constructXPathForXacml($xacml);
+
+    // Query the DOM and assert the existence of the mimetype regex.
+    $query = "/ns:Policy/ns:Rule[@RuleId='deny-dsid-mime']/ns:Target/ns:Resources/ns:Resource/ns:ResourceMatch/ns:AttributeValue";
+    $results = $xpath->query($query)->item(0);
+    $this->assertNotNull($results, "The query for mimetype regex $mimetype_regex returns non-null results");
+    $this->assertEqual($results->nodeValue, $mimetype_regex, "The AttributeValue is $mimetype_regex");
+  }
+
+}

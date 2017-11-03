@@ -1,0 +1,100 @@
+<?php
+/**
+ * @file
+ * Base class for Webform Workflow tests.
+ */
+
+abstract class WebformWorkflowBaseTestCase extends DrupalWebTestCase {
+
+  /**
+   * Overrides parent::getInfo().
+   */
+  public function setUp($modules = array()) {
+    $combined_modules = array_merge(array(
+      'webform',
+      'webform_workflow',
+    ), $modules);
+    parent::setUp($combined_modules);
+  }
+
+  /**
+   * Create a webform submission (programmatically).
+   */
+  protected function createDummySubmission($node, $submitter = NULL, $draft = FALSE, array $values = array()) {
+    $form_state = array();
+    $form_state['values']['submitted'] = $values;
+    if (!$submitter) {
+      $submitter = $this->drupalCreateUser();
+    }
+    module_load_include('inc', 'webform', 'includes/webform.submissions');
+    $submission = webform_submission_create($node, $submitter, $form_state);
+    $submission->is_draft = $draft;
+    webform_submission_insert($node, $submission);
+    return $submission;
+  }
+
+  /**
+   * Create a dummy webform node (programmatically).
+   */
+  protected function createDummyWebform(array $settings = array()) {
+    if (!isset($settings['type'])) {
+      $types = webform_node_types();
+      $settings['type'] = reset($types);
+    }
+    return $this->drupalCreateNode($settings);
+  }
+
+  /**
+   * Enable workflow for a webform (programmatically).
+   */
+  protected function enableWorkflow($node, array $data = array()) {
+    if (webform_workflow_is_enabled($node)) {
+      return;
+    }
+    if (!in_array($node->type, webform_node_types())) {
+      throw new Exception('Cannot enable workflow for a non-webform node');
+    }
+    $data += array('emails' => webform_workflow_get_default_email());
+    db_merge('webform_workflow')
+      ->key(array('nid' => $node->nid))
+      ->fields(array(
+        'workflow' => 1,
+        'data' => serialize($data),
+      ))
+      ->execute();
+    $node->webform_workflow = (object) array('workflow' => 1, 'data' => $data);
+  }
+
+  /**
+   * Create a dummy webform workflow state (programmatically).
+   *
+   * @return object
+   *   The state entity.
+   */
+  protected function createDummyState(array $values = array(), $save = TRUE) {
+    $values += array('label' => $this->randomString());
+    $state = entity_create('webform_workflow_state', $values);
+    if ($save) {
+      entity_save('webform_workflow_state', $state);
+    }
+    return $state;
+  }
+
+  /**
+   * Add a workflow state to a webform (programmatically).
+   *
+   * @return object
+   *   The state entity.
+   */
+  protected function addStateToWebform($state, $node) {
+    $this->enableWorkflow($node);
+    if (!$state->wsid) {
+      entity_save('webform_workflow_state', $state);
+    }
+    $node_wrapper = entity_metadata_wrapper('node', $node);
+    $node_wrapper->webform_workflow_states[] = $state;
+    $node_wrapper->save();
+    return $state;
+  }
+
+}

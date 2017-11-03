@@ -1,0 +1,135 @@
+<?php
+
+/**
+ * @file
+ * Configuration module for Islandora Solr.
+ */
+
+/**
+ * Implements hook_islandora_solr_primary_display().
+ */
+function islandora_solr_config_islandora_solr_primary_display() {
+  return array(
+    'grid' => array(
+      'name' => t('Grid'),
+      'module' => 'islandora_solr_config',
+      'file' => 'includes/grid_results.inc',
+      'class' => "IslandoraSolrResultsGrid",
+      'function' => "displayResults",
+      'description' => t("Display search results as a grid view"),
+    ),
+    'table' => array(
+      'name' => t('Table'),
+      'module' => 'islandora_solr_config',
+      'file' => 'includes/table_results.inc',
+      'class' => "IslandoraSolrResultsTable",
+      'function' => "displayResults",
+      'description' => t("Display search results as tabular output"),
+      'configuration' => 'admin/islandora/search/islandora_solr/table_profile',
+    ),
+  );
+}
+
+/**
+ * Implements hook_islandora_solr_secondary_display().
+ */
+function islandora_solr_config_islandora_solr_secondary_display() {
+  global $base_path;
+  $path = $base_path . drupal_get_path('module', 'islandora_solr_config');
+  return array(
+    'csv' => array(
+      'name' => t('CSV'),
+      'module' => 'islandora_solr_config',
+      'file' => 'includes/csv_results.inc',
+      'class' => 'IslandoraSolrResultsCSV',
+      'function' => 'printCSV',
+      'description' => t("Download complete resultset as a CSV Spreadsheet"),
+      'logo' => '<img src="' . $path . '/images/csv.png" class="secondary-display-csv" alt="' . t("CSV Spreadsheet") . '">',
+    ),
+    'rss' => array(
+      'name' => t('RSS'),
+      'module' => 'islandora_solr_config',
+      'file' => 'includes/rss_results.inc',
+      'class' => 'IslandoraSolrResultsRSS',
+      'function' => 'printRSS',
+      'description' => t("Show search results as RSS feed"),
+      'logo' => '<img src="' . $path . '/images/rss.png" class="secondary-display-rss" alt="' . t("RSS Feed") . '">',
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_solr_config_menu() {
+  $items['admin/islandora/search/islandora_solr/rss'] = array(
+    'title' => 'RSS settings',
+    'description' => 'Configure rss search settings.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_solr_config_admin_rss_settings'),
+    'access arguments' => array('administer islandora solr'),
+    'file' => 'includes/admin.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+  $items['admin/islandora/search/islandora_solr/table_profile'] = array(
+    'title' => 'Table Profile Settings',
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_solr_config_admin_table_profile_settings'),
+    'access arguments' => array('administer islandora solr'),
+    'file' => 'includes/admin.inc',
+  );
+  return $items;
+}
+/**
+ * Implements hook_theme().
+ */
+function islandora_solr_config_theme() {
+  $path = drupal_get_path('module', 'islandora_solr_config');
+
+  return array(
+    'islandora_solr_grid' => array(
+      'path' => $path . '/theme',
+      'template' => 'islandora-solr-grid',
+      'variables' => array('results' => NULL, 'elements' => array()),
+    ),
+    'islandora_solr_table' => array(
+      'path' => $path . '/theme',
+      'template' => 'islandora-solr-table',
+      'variables' => array(
+        'header' => NULL,
+        'rows' => NULL,
+        'elements' => array(),
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_islandora_solr_query().
+ *
+ * Takes the current results limit (admin default or from url parameter) and
+ * finds the closed number that is dividable by 4 and 3, so when the layout is
+ * sized down in a responsive layout, the last row of results won't show
+ * 'trailing' results.
+ */
+function islandora_solr_config_islandora_solr_query($islandora_solr_query) {
+
+  // We're dealing with the grid display.
+  if ($islandora_solr_query->display == 'grid') {
+    // Set results limit.
+    $limit = $islandora_solr_query->solrLimit;
+    // Not dividable yet.
+    $dividable = FALSE;
+    while ($dividable == FALSE) {
+      // Dividable by 4 and 3.
+      if (($limit % 4) == 0 && ($limit % 3) == 0) {
+        $dividable = TRUE;
+        $solr_limit = $limit;
+      }
+      $limit++;
+    }
+    // Set new limit.
+    $islandora_solr_query->solrLimit = $solr_limit;
+  }
+}

@@ -1,0 +1,74 @@
+<?php
+
+/**
+ * @file
+ * Implements hooks and callbacks for installing this module.
+ */
+
+/**
+ * Checks to see if the given command exists.
+ *
+ * @param string $name
+ *   The name of the program to check.
+ *
+ * @return bool
+ *   TRUE if the command is exists, FALSE otherwise.
+ */
+function bibutils_install_command_exists($name) {
+  $return_value = FALSE;
+  system("hash $name 2>&-", $return_value);
+  return $return_value === 0;
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function bibutils_requirements($phase) {
+  $requriements = array();
+  $t = get_t();
+
+  $commands = array(
+    'ris2xml' => array(
+      'title' => $t('Bibutils: RIS files to MODS converter'),
+      'command' => variable_get('bibutils_ris2xml_path', 'ris2xml'),
+    ),
+    'endx2xml' => array(
+      'title' => $t('Bibutils: EndNote XML to MODS converter'),
+      'command' => variable_get('bibutils_endx2xml_path', 'endx2xml'),
+    ),
+  );
+
+  foreach ($commands as $base => $info) {
+    extract($info);
+
+    $requirements[$base] = array(
+      'title' => $title,
+    );
+    // Exists on $PATH.
+    if (bibutils_install_command_exists($command)) {
+      $requirements[$base] += array(
+        'value' => $t('Found.'),
+        'severity' => REQUIREMENT_OK,
+      );
+    }
+    else {
+      // Couldn't find.
+      $requirements[$base] += array(
+        'value' => $t('Not found.'),
+        'description' => $t('Unable to find %base at the configured location (%command).', array(
+          '%base' => $base,
+          '%command' => $command,
+        )),
+        'severity' => REQUIREMENT_WARNING,
+      );
+
+      if ($phase == 'runtime') {
+        $description = $t('Visit the <a href="@url">Bibutils configuration page</a> to enter an alternate path.', array(
+                         '@url' => url('admin/islandora/solution_pack_config/scholar/bibutils')));
+        $requirements[$base]['description'] .= ' ' . $description;
+      }
+    }
+  }
+
+  return $requirements;
+}

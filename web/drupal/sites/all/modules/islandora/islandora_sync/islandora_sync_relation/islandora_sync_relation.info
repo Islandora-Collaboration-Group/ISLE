@@ -1,0 +1,5 @@
+name = Islandora Sync Relation
+description = Integrates Relation (and related modules) with Islandora Sync
+core = 7.x
+dependencies[] = islandora_sync
+dependencies[] = relation

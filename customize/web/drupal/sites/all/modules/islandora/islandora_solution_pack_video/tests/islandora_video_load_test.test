@@ -1,0 +1,101 @@
+<?php
+
+/**
+ * @file
+ * A video load test. Instructions for its use are in the README.
+ */
+
+class IslandoraVideoLoadTestCase extends IslandoraCollectionWebTestCase {
+
+  /**
+   * Get test information.
+   *
+   * @see IslandoraWebTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Video Load Test',
+      'description' => 'Ingests and purges ten videos, creates derivatives for them, and compares the ingested OBJ datastream with the original file.',
+      'group' => 'Islandora Video',
+    );
+  }
+
+  /**
+   * Set up the test environment.
+   *
+   * @see IslandoraWebTestCase::setUp()
+   */
+  public function setUp() {
+    parent::setUp(array(
+      'islandora',
+      'islandora_video',
+      'islandora_basic_collection',
+    ));
+  }
+
+  /**
+   * Creates an administrative user and attempts to ingest a video file.
+   */
+  public function testVideoLoad() {
+
+    // Sets up the testing space.
+    $user = $this->drupalCreateUser(array(
+      'view fedora repository objects',
+      'ingest fedora objects',
+      'administer site configuration',
+      'manage object properties',
+      'delete fedora objects and datastreams',
+      'create child collection',
+    ));
+    $this->drupalLogin($user);
+
+    $label = $this->randomName(16);
+    $suffix = $this->randomName(16);
+    $collectionpid = 'islandora:' . $suffix;
+    $this->createTestCollection($label, 'islandora:sp_videoCModel', $collectionpid);
+
+    // Ensures derivative creation is turned on.
+    $edit = array(
+      'islandora_video_retain_original' => TRUE,
+      'islandora_video_make_archive' => TRUE,
+      'islandora_video_make_mp4_locally' => TRUE,
+      'islandora_video_make_ogg_locally' => TRUE,
+      'islandora_video_make_thumbnail_locally' => TRUE,
+    );
+    $this->drupalPost('admin/islandora/solution_pack_config/video', $edit, 'Save configuration');
+
+    // Some preparation for going through the folder full of videos.
+    // Essentially, we're checking that the files have an appropriate extension
+    // and that they are no bigger than the post_max_size set in php.ini.
+    $files = glob(drupal_get_path('module', 'islandora_video') . '/tests/fixtures/load/*.{ogg,mp4,mov,qt,m4a,avi}', GLOB_BRACE);
+    $php_max_filesize = ini_get('post_max_size');
+    $max_bytes = trim($php_max_filesize);
+    $last = strtolower($max_bytes[strlen($max_bytes) - 1]);
+    switch ($last) {
+      case 'g':
+        $max_bytes *= 1024;
+      case 'm':
+        $max_bytes *= 1024;
+      case 'k':
+        $max_bytes *= 1024;
+    }
+
+    foreach ($files as $file) {
+      if ($max_bytes >= filesize($file)) {
+        $path = 'islandora/object/' . $collectionpid . '/manage/overview/ingest';
+        $handle = fopen($file, 'r');
+        $contents = fread($handle, filesize($file));
+        fclose($handle);
+        $edit = array(
+          'files[file]' => $file,
+        );
+        $this->drupalPost($path, $edit, t('Ingest'));
+        $object = $this->getObjectFromPath($this->url);
+        $this->assertTrue($contents == $object['OBJ']->content, "OBJ datastream matches {$file}", 'Islandora');
+      }
+    }
+
+    // Attempts to delete the collection, removing all objects in batch.
+    $this->deleteTestCollection($collectionpid);
+  }
+}

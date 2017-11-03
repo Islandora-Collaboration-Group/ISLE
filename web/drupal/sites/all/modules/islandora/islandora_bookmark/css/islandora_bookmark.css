@@ -1,0 +1,56 @@
+/**
+ * @file
+ * Styles for Islandora Bookmark.
+ */
+div.islandora-bookmark-users div.form-item {
+  width: 200px;
+  display: inline-block;
+  display: -moz-inline-block;
+  margin-right: 10px;
+  *display: inline;
+  *zoom: 1;
+  *vertical-align: 2%;
+}
+
+div.islandora-bookmark-listname div.form-item {
+  display: inline-block;
+  display: -moz-inline-block;
+  margin-right: 10px;
+  *display: inline;
+  *zoom: 1;
+  *vertical-align: 2%;
+}
+
+div.islandora-bookmark-adduser div.form-item {
+  display: inline-block;
+  display: -moz-inline-block;
+  margin-right: 10px;
+  *display: inline;
+  *zoom: 1;
+  *vertical-align: 2%;
+}
+
+div.islandora-bookmark-error-message {
+  background-image: linear-gradient(#ee5f5b, #c43c35);
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+#islandora-bookmark .form-item-add-bookmarks {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+#islandora-bookmark-detailed-form table .operations {
+  width: 100px;
+}
+
+#islandora-bookmark-rss-format {
+  float: right;
+  display: block;
+  clear: both;
+}
+
+#islandora-bookmark-detailed-list {
+  clear: both;
+}

@@ -1,0 +1,87 @@
+<?php
+
+/**
+ * @file
+ * Implements hooks and callbacks for this module.
+ */
+
+// Constants Permission/Menu/Theme.
+define('CSL_MANAGE_PERM', 'Manage CSL Citations');
+define('CSL_MANAGE_MENU', 'admin/islandora/tools/csl');
+define('CSL_MANAGE_TABLE_THEME', 'csl_manage_table');
+
+/**
+ * Implements hook_menu().
+ */
+function csl_menu() {
+  $items = array();
+
+  $items[CSL_MANAGE_MENU] = array(
+    'title' => 'CSL Styles',
+    'description' => 'List, add or remove the installed CSL Styles.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('csl_manage_form'),
+    'access arguments' => array(CSL_MANAGE_PERM),
+    'file' => 'includes/csl.form.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function csl_permission() {
+  return array(
+    CSL_MANAGE_PERM => array(
+      'title' => t('Manage CSL Citations'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_theme().
+ */
+function csl_theme() {
+  return array(
+    CSL_MANAGE_TABLE_THEME => array(
+      'render element' => 'element',
+    ),
+  );
+}
+
+
+/**
+ * Theme a form table for this module.
+ *
+ * @param array $args
+ *   An associtive array of config.
+ *
+ * @return sting
+ *   HTML that renders a table.
+ */
+function theme_csl_manage_table(array $args) {
+  $element = $args['element'];
+
+  $rows = array();
+  foreach (element_children($element['rows']) as $child) {
+    $fields = array();
+    $setting = $element['rows'][$child];
+    foreach (element_children($setting) as $property) {
+      $fields[] = drupal_render($setting[$property]);
+    }
+    $rows[] = array(
+      'data' => $fields,
+      'class' => isset($setting['#attributes']['class']) ? $setting['#attributes']['class'] : NULL,
+    );
+  }
+
+  $attributes = isset($element['#id']) ? array('id' => $element['#id']) : NULL;
+
+  return theme('table', array(
+    'header' => $element['#header'],
+    'rows' => $rows,
+    'attributes' => $attributes,
+  ));
+}

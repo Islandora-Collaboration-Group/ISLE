@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Defines all the hooks this module implements.
+ */
+
+// Constant (deprecated).
+define('ISLANDORA_OCR_TESSERACT_REQUIRED_VERSION', '3.02.02');
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_ocr_menu() {
+  return array(
+    'admin/islandora/tools/ocr' => array(
+      'title' => 'OCR Tool',
+      'description' => 'Configure OCR generation.',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('islandora_ocr_admin_settings_form'),
+      'access arguments' => array('administer site configuration'),
+      'file' => 'includes/admin.form.inc',
+      'type' => MENU_NORMAL_ITEM,
+    ),
+  );
+}

@@ -1,0 +1,54 @@
+<?php
+/**
+ * @file
+ * Install/uninstall functions for the islandora_bookmark_csv_exports module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function islandora_bookmark_csv_exports_schema() {
+  $schema['islandora_bookmark_csv_exports'] = array(
+    'description' => 'Stores CSV configurations and their associated fields.',
+    'fields' => array(
+      'configuration_id' => array(
+        'description' => 'The ID of the configuration',
+        'type' => 'serial',
+        'length' => 11,
+        'not null' => TRUE,
+      ),
+      'configuration_name' => array(
+        'description' => 'The name of the configuration (used in the UI).',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'descrip' => array(
+        'description' => 'The supplied description of the list (used in the UI).',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+      ),
+      'delimiter' => array(
+        'description' => 'The glue to piece together multi valued fields pulled from Solr.',
+        'type' => 'varchar',
+        'length' => 10,
+      ),
+      'machine_name' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'The machine readable name for this config.',
+        'not null' => TRUE,
+      ),
+      'config_fields' => array(
+        'type' => 'blob',
+        'not null' => FALSE,
+        'size' => 'big',
+        'serialize' => TRUE,
+        'description' => 'A serialized array of name value pairs that store fields for export.',
+      ),
+    ),
+    'primary key' => array('configuration_id'),
+  );
+  return $schema;
+}

@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * islandora_newspaper.install
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * @see islandora_newspaper_islandora_required_objects()
+ */
+function islandora_newspaper_install() {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  islandora_install_solution_pack('islandora_newspaper');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_newspaper_uninstall() {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  islandora_install_solution_pack('islandora_newspaper', 'uninstall');
+  $variables = array('islandora_newspaper_page_viewers');
+  array_walk($variables, 'variable_del');
+}

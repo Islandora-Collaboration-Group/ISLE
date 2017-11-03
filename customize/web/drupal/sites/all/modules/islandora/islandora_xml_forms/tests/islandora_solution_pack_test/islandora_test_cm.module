@@ -1,0 +1,57 @@
+<?php
+/**
+ * @file
+ * Module file for the test solution pack.
+ */
+
+/**
+ * Implements hook_islandora_required_objects().
+ */
+function islandora_test_cm_islandora_required_objects(IslandoraTuque $connection) {
+  $module_path = drupal_get_path('module', 'islandora_test_cm');
+  // Test Content Model.
+  $test_content_model = $connection->repository->constructObject('islandora:testCModel');
+  $test_content_model->owner = 'fedoraAdmin';
+  $test_content_model->label = 'Islandora Test Content Model';
+  $test_content_model->models = 'fedora-system:ContentModel-3.0';
+  // DS-COMPOSITE-MODEL Datastream.
+  $datastream = $test_content_model->constructDatastream('DS-COMPOSITE-MODEL', 'X');
+  $datastream->label = 'DS-COMPOSITE-MODEL';
+  $datastream->mimetype = 'application/xml';
+  $datastream->setContentFromFile("$module_path/xml/islandora_test_cm_ds_composite_model.xml", FALSE);
+  $test_content_model->ingestDatastream($datastream);
+  return array(
+    'islandora_test_cm' => array(
+      'title' => 'Islandora Test',
+      'objects' => array($test_content_model),
+    ),
+  );
+}
+
+/**
+ * Implements hook_xml_form_builder_forms().
+ */
+function islandora_test_cm_xml_form_builder_forms() {
+  $module_path = drupal_get_path('module', 'islandora_test_cm');
+  return array(
+    'Test Solution Pack MODS Form' => array(
+      'form_file' => "$module_path/xml/islandora_test_cm_form_mods.xml",
+    ),
+  );
+}
+
+/**
+ * Implements hook_xml_form_builder_form_associations().
+ */
+function islandora_test_cm_xml_form_builder_form_associations() {
+  return array(
+    'islandora_test_cm_mods_form' => array(
+      'content_model' => 'islandora:testCModel',
+      'form_name' => 'Test Solution Pack MODS Form',
+      'dsid' => 'MODS',
+      'title_field' => array('titleInfo', 'title'),
+      'transform' => 'mods_to_dc.xsl',
+      'template' => FALSE,
+    ),
+  );
+}

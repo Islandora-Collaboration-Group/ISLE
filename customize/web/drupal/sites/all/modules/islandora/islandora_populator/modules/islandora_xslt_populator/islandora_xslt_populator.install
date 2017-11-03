@@ -1,0 +1,84 @@
+<?php
+
+/**
+ * @file
+ * Installation and update hook implementations.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function islandora_xslt_populator_schema() {
+  $schema = array();
+
+  $schema['islandora_xslt_populator'] = array(
+    'description' => 'XSLT Populators',
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'title' => array(
+        'type' => 'varchar',
+        'description' => 'Title to show for the given XSLT populator.',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'description' => array(
+        'type' => 'text',
+        'description' => 'Title to show for the given XSLT populator.',
+        'size' => 'big',
+        'not null' => TRUE,
+      ),
+      'xslt' => array(
+        'description' => 'File ID of the XSLT.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+      ),
+      'datastream_id' => array(
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+      ),
+      'machine_name' => array(
+        'type' => 'varchar',
+        'description' => 'Machine name used for features.',
+        'length' => 255,
+        'not null' => FALSE,
+      ),
+      'original_dsid' => array(
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+    ),
+    'primary key' => array('id'),
+    'unique keys' => array(
+      'machine_name' => array('machine_name'),
+    ),
+    'foreign keys' => array(
+      'file_id' => array(
+        'table' => 'file_managed',
+        'columns' => array('xslt' => 'fid'),
+      ),
+    ),
+  );
+
+  return $schema;
+}
+
+
+/**
+ * Adds the original_dsid column for optional storing the uploaded file.
+ */
+function islandora_xslt_populator_update_7001(&$sandbox) {
+  db_add_field('islandora_xslt_populator', 'original_dsid', array(
+    'type' => 'varchar',
+    'length' => 64,
+    'not null' => FALSE,
+    'default' => NULL,
+  ));
+}

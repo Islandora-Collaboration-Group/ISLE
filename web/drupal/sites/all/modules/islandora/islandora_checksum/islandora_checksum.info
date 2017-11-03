@@ -1,0 +1,7 @@
+name = Islandora Checksum
+description = "Allow the creation of checksums."
+package = Islandora Tools
+version = 7.x-dev
+core = 7.x
+configure = admin/islandora/tools/checksum
+dependencies[] = islandora

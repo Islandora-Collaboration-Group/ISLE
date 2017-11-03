@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<exslt:function xmlns:exslt="http://exslt.org/documentation" 
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+			xmlns:dc="http://purl.org/dc/elements/1.1/" 
+			xmlns:html="http://www.w3.org/1999/xhtml" 
+			xmlns:vcf="http://www.ietf.org/internet-drafts/draft-dawson-vcard-xml-dtd-03.txt" 
+			version="2" module="str" status="new">
+
+<exslt:name>decode-uri</exslt:name>
+
+<rdf:Description ID="str:decode-uri">
+   <dc:subject>EXSLT</dc:subject>
+   <dc:subject>str</dc:subject>
+   <dc:subject>decode-uri</dc:subject>
+
+   <exslt:revision>
+	<rdf:Description ID="str:decode-uri.2">
+         <exslt:version>2</exslt:version>
+         <dc:creator email="mike@skew.org">Mike Brown</dc:creator>
+         <dc:date>2002-12-02</dc:date>
+         <dc:description>Updated the function syntax to include information on [<a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396</a>] and character encoding.</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+
+</rdf:Description>
+
+<exslt:user-doc xmlns="">
+   <html:div>
+      <html:p>
+         The <html:code>str:decode-uri</html:code> function decodes a string that has been URI-encoded. 
+      </html:p>
+   </html:div>
+</exslt:user-doc>
+
+<exslt:doc>
+   <html:div>
+      <html:p>
+         The <html:code>str:decode-uri</html:code> function returns its first argument string with URI escape sequences, as described in [<html:a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396</html:a>] section 2.4.1, converted back to the characters they represent.
+      </html:p>
+      <html:p>
+         The optional second argument to the function supplies a character encoding name, which can be given case-insensitively, and should be listed in [<html:a href="http://www.iana.org/assignments/character-sets">Charsets</html:a>]. If the named encoding is supported by the function implementation, then it is used as the basis for interpreting the octet sequences obtained when unescaping non-ASCII characters. UTF-8 is the default encoding, and is the only encoding required to be supported by this function. If the encoding is given as an empty string or is not supported, then an empty string is returned. If the encoding is supported, but an escaped octet sequence in the string cannot be decoded to a character in that encoding, then the sequence is ignored.
+      </html:p>
+      <html:p>
+	   Examples:
+	</html:p>
+	<html:p>
+	   <html:code>str:decode-uri('http://www.example.com/my%20r%E9sum%C3%A9.html')</html:code><html:br/>
+	   returns<html:br/>
+	   <html:code>http://www.example.com/my r&#233;sum&#233;.html</html:code>
+	</html:p>
+	<html:p>
+         <html:code>str:decode-uri('http://www.example.com/my%20r%E9sum%E9.html','iso-8859-1')</html:code><html:br/>
+	   returns<html:br/>
+	   <html:code>http://www.example.com/my r&#233;sum&#233;.html</html:code> if the implementation supports iso-8859-1.
+      </html:p>
+   </html:div>
+</exslt:doc>
+
+<exslt:definition>
+   <exslt:return type="string">
+      <html:div/>
+   </exslt:return>
+   <exslt:arg name="uri" type="string" default="''" optional="no">
+      <html:div/>
+   </exslt:arg>
+   <exslt:arg name="uri" type="string" default="''" optional="no">
+      <html:div/>
+   </exslt:arg>
+</exslt:definition>
+
+<exslt:implementations>
+   <exslt:vendor-implementation
+          version="1"
+          vendor="4XSLT, from 4Suite."
+          vendor-url="http://4Suite.org"
+          vendor-version="0.12.0a3" />
+   <exslt:implementation src="str.decode-uri.js" language="exslt:javascript" version="1">
+      <rdf:Description ID="str:decode-uri.exslt:javascript">
+         <dc:subject>EXSLT</dc:subject>
+         <dc:subject>str</dc:subject>
+         <dc:subject>decode-uri</dc:subject>
+         <dc:subject>exslt:javascript</dc:subject>
+         <exslt:revision>
+            <rdf:Description ID="str:decode-uri.exslt:javascript.1">
+               <exslt:version>1</exslt:version>
+               <dc:creator rdf:parseType="Resource">
+                  <vcf:fn>Chris Bayes</vcf:fn>
+                  <vcf:email>chris@bayes.co.uk</vcf:email>
+                  <vcf:url>http://www.bayes.co.uk</vcf:url>
+               </dc:creator>
+               <dc:date>2001-06-26</dc:date>
+               <dc:description/>
+            </rdf:Description>
+         </exslt:revision>
+      </rdf:Description>
+   </exslt:implementation>
+   <exslt:implementation src="str.decode-uri.msxsl.xsl" language="exslt:msxsl" version="1">
+      <rdf:Description ID="str:decode-uri.exslt:msxsl">
+         <dc:subject>EXSLT</dc:subject>
+         <dc:subject>str</dc:subject>
+         <dc:subject>decode-uri</dc:subject>
+         <dc:subject>exslt:msxsl</dc:subject>
+         <exslt:revision>
+            <rdf:Description ID="str:decode-uri.exslt:msxsl.1">
+               <exslt:version>1</exslt:version>
+               <dc:creator rdf:parseType="Resource">
+                  <vcf:fn>Chris Bayes</vcf:fn>
+                  <vcf:email>chris@bayes.co.uk</vcf:email>
+                  <vcf:url>http://www.bayes.co.uk</vcf:url>
+               </dc:creator>
+               <dc:date>2001-06-26</dc:date>
+               <dc:description/>
+            </rdf:Description>
+         </exslt:revision>
+      </rdf:Description>
+   </exslt:implementation>
+</exslt:implementations>
+
+<exslt:use-cases/>
+
+</exslt:function>
+

@@ -1,0 +1,73 @@
+<?php
+
+/**
+ * @file
+ * Main hooks for Islandora Altmentrics.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_altmetrics_menu() {
+  return array(
+    'admin/islandora/tools/badges/altmetrics' => array(
+      'title' => 'Altmetrics',
+      'description' => 'Configure Altmetrics integration.',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('islandora_altmetrics_admin_form'),
+      'access arguments' => array('administer site configuration'),
+      'type' => MENU_LOCAL_TASK,
+      'file' => 'includes/admin.form.inc',
+    ),
+  );
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function islandora_altmetrics_block_info() {
+  return array(
+    'islandora_altmetrics_altmetrics' => array(
+      'visibility' => BLOCK_VISIBILITY_LISTED,
+      'pages' => 'islandora/object/*',
+      'cache' => DRUPAL_CACHE_PER_PAGE,
+      'info' => t('Islandora Altmetrics Badge'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function islandora_altmetrics_block_view($delta) {
+  module_load_include('inc', 'islandora_badges', 'includes/utilities');
+  $to_render = array();
+  if ($delta == 'islandora_altmetrics_altmetrics') {
+    $object = menu_get_object('islandora_object', 2);
+    if ($object) {
+      if (islandora_badges_show_for_cmodel($object)) {
+        // Use new customizable list of cmodels.
+        $doi = islandora_badges_get_doi($object);
+        if ($doi) {
+          // Only generate block if a result exists - check API callback.
+          $file_headers = @get_headers("http://api.altmetric.com/v1/doi/" . $doi . "?callback=my_callback");
+          if ($file_headers['0'] != 'HTTP/1.1 404 Not Found') {
+            // Embed Altmetrics.
+            $to_render['content']['altmetrics'] = array(
+              '#type' => 'container',
+              '#attributes' => array(
+                'class' => array('altmetric-embed'),
+                'data-badge-type' => variable_get('islandora_altmetrics_badge', 'Default'),
+                'data-doi' => $doi,
+                'data-badge-popover' => variable_get('islandora_altmetrics_popover', 'right'),
+                'data-hide-no-mentions' => 'true',
+              ),
+            );
+            drupal_add_js('https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js', 'external');
+          }
+        }
+      }
+    }
+  }
+  return $to_render;
+}

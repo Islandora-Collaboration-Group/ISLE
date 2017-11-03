@@ -1,0 +1,112 @@
+<?php
+
+/**
+ * @file
+ * Installation hooks.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function islandora_batch_report_schema() {
+  $schema = array();
+
+  $schema['islandora_batch_report_objects_processed'] = array(
+    'description' => 'Holds information on the batch processed object.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'An incremental table id.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'pid' => array(
+        'description' => 'An identifier which was allocated for this object.',
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'length' => 255,
+      ),
+      'contentmodel' => array(
+        'description' => 'The content model for the object.',
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'length' => 255,
+      ),
+      'label' => array(
+        'description' => 'The object label.',
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'length' => 255,
+      ),
+      'successful' => array(
+        'description' => 'The processing status of the set.',
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0,
+        'unsigned' => FALSE,
+      ),
+      'timestamp' => array(
+        'description' => 'A Unix timestamp indicating when the set was processed.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'pid' => array('pid'),
+      'timestamp' => array('timestamp'),
+    ),
+  );
+
+  $schema['islandora_batch_report_sets_processed'] = array(
+    'description' => 'Stats of the batch set after it has been processed from the queue.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'An incremental table id.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'sid' => array(
+        'description' => 'ID of the set to which this object belongs.',
+        'type' => 'int',
+        'size' => 'big',
+        'not null' => FALSE,
+      ),
+      'successful' => array(
+        'description' => 'The processing status of the set.',
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0,
+        'unsigned' => FALSE,
+      ),
+      'timestamp' => array(
+        'description' => 'A Unix timestamp indicating when the set was processed.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'sid' => array('sid'),
+      'timestamp' => array('timestamp'),
+    ),
+  );
+
+  return $schema;
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_batch_report_uninstall() {
+  $variables = array(
+    'islandora_batch_report_daily_report_last_sent',
+    'islandora_batch_report_send_report_after',
+  );
+  array_walk($variables, 'variable_del');
+}

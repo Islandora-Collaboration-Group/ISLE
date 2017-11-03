@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @file
+ * Install and update hook implementations.
+ */
+
+/**
+ * Deal with refactor of functions to islandora_doi.
+ */
+function doi_importer_update_7100() {
+  module_enable(array('islandora_doi'));
+  $variables = array(
+    'doi_importer_openurl' => array(
+      'default' => 'http://www.crossref.org/openurl',
+      'new' => 'islandora_doi_openurl',
+    ),
+    'doi_importer_openurl_pid' => array(
+      'default' => 'user@example.com',
+      'new' => 'islandora_doi_openurl_pid',
+    ),
+  );
+  foreach ($variables as $variable => $info) {
+    $value = variable_get($variable, $info['default']);
+    if ($value != $info['default']) {
+      variable_set($info['new'], $value);
+    }
+    variable_del($variable);
+  }
+}

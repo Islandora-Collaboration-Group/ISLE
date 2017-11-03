@@ -1,0 +1,11 @@
+name = "Date Picker Block"
+description = "Provides a block with a date filter that can be used to filter a view."
+package = Date/Time
+core = 7.x
+dependencies[] = datepicker
+; Information added by drupal.org packaging script on 2013-06-17
+version = "7.x-1.0"
+core = "7.x"
+project = "datepicker"
+datestamp = "1371448251"
+

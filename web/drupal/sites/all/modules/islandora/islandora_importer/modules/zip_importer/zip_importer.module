@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * @file
+ * Defines all the hooks this module implements.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function zip_importer_menu() {
+  return array(
+    'admin/islandora/tools/zipimporter' => array(
+      'title' => 'Zip Importer',
+      'description' => 'Configure the Zip Importer.',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('zip_importer_admin_settings_form'),
+      'access arguments' => array('administer site configuration'),
+      'file' => 'includes/admin.form.inc',
+      'type' => MENU_NORMAL_ITEM,
+    ),
+  );
+}
+
+/**
+ * Implements hook_islandora_importer().
+ */
+function zip_importer_islandora_importer() {
+  return array(
+    'zip_importer' => array(
+      'title' => t('ZIP File Importer'),
+      'class' => 'ZipBatchImporter',
+    ),
+  );
+}
+
+/**
+ * Implements hook_help().
+ */
+function zip_importer_help($path, $args) {
+  if ($path == 'islandora/object/%islandora_object/manage/collection/batch_import') {
+    return '<p>' . t('The "ZIP File Importer" allows for batch imports in a very similar manner
+      to the Drupal 6 batch ingester, where a zip file could be uploaded and objects created
+      based on the names of the files contained. The files are grouped by dropping the extension,
+      so "my_file.xml" and "my_file.pdf" would be used to create a single object. Currently,
+      the XML files can contain MODS, MARCXML or DC metadata; if no XML is given, basic MODS
+      (and DC) metadata will be generated with just the base filename. For other files, we try
+      to match mimetypes against those declared for datastreams in the selected content model\'s
+      "DS-COMPOSITE" stream.') .
+    '</p>';
+  }
+}

@@ -1,0 +1,11 @@
+name = Islandora OAI Provider
+description = "Provides access to an Islandora repository via the OAI-PMH 2.0. Based on the OAI2 for CCK module."
+dependencies[] = islandora_solr
+dependencies[] = islandora
+configure = admin/islandora/tools/islandora-oai
+version = 7.x-dev
+core = 7.x
+package = Islandora Tools
+files[] = includes/admin.form.inc
+files[] = tests/islandora_oai_error_handling.test
+files[] = tests/utilities.inc

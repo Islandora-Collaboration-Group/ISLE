@@ -1,0 +1,13 @@
+/* admin markup for islandora_solr_facet_pages */
+
+
+table#islandora-solr-facet-pages-admin-table tr input
+{
+  width: 80%;  
+}
+
+table#islandora-solr-facet-pages-admin-table tr th,
+table#islandora-solr-facet-pages-admin-table tr td
+{
+  padding: 0.7em 0.5em;
+}

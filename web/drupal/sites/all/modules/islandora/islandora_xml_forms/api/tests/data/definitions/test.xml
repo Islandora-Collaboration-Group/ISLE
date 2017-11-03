@@ -1,0 +1,55 @@
+<definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://localhost/XMLFormDefinition.xsd">
+    <properties>
+        <document>
+            <root>
+                <local_name>mods</local_name>
+                <prefix>mods</prefix>
+                <uri>http://www.loc.gov/mods/v3</uri>
+            </root>
+            <namespaces>
+                <namespace prefix="mods">http://www.loc.gov/mods/v3</namespace>
+            </namespaces>
+            <!-- <schema name="mods">http://www.loc.gov/standards/mods/v3/mods-3-4.xsd</schema> -->
+        </document>
+    </properties>
+    <form>
+        <properties>
+            <access>true</access>
+            <ahah>
+                <path>asdf/asdf</path>
+                <keypress>true</keypress>
+            </ahah>
+        </properties>
+        <children>
+            <element name="first">
+                <properties>
+                    <title>first</title>
+                    <type>textfield</type>
+                    <weight>0</weight>
+                </properties>
+            </element>
+            <element name="tabs">
+                <properties>
+                    <type>tabs</type>
+                    <title>second</title>
+                </properties>
+                <children>
+                    <element name="panel">
+                        <properties>
+                            <type>tabpanel</type>
+                            <title>panel</title>
+                        </properties>
+                        <children>
+                            <element>
+                                <properties>
+                                    <type>textfield</type>
+                                </properties>
+                            </element>
+                        </children>
+                    </element>
+                </children>
+            </element>
+        </children>
+    </form>
+</definition>

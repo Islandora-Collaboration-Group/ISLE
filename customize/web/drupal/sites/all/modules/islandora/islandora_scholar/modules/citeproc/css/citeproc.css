@@ -1,0 +1,26 @@
+/* 
+    Document   : citeproc
+    Created on : Oct 11, 2011, 5:56:20 PM
+    Author     : nbanks
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+.csl-entry > div { 
+  display: inline;
+}
+
+.csl-entry {
+  margin: 1em;
+}
+
+.csl-entry > div.csl-indent {
+  display: block;
+  padding-top: 1em;
+  padding-left: 1em;
+}

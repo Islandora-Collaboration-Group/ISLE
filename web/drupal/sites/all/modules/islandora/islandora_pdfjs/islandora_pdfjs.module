@@ -1,0 +1,80 @@
+<?php
+
+/**
+ * @file
+ * Defines all the hooks this module implements.
+ */
+
+
+/**
+ * Implements hook_theme().
+ */
+function islandora_pdfjs_theme() {
+  return array(
+    'islandora_pdfjs' => array(
+      'file' => 'theme/theme.inc',
+      'template' => 'theme/islandora-pdfjs',
+      'variables' => array(
+        'fedora_object' => NULL,
+        'dsid' => NULL,
+      ),
+    ),
+    'viewer' => array(
+      'file' => 'theme/theme.inc',
+      'template' => 'theme/viewer',
+      'variables' => array(
+        'fedora_object' => NULL,
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_islandora_viewer_info().
+ */
+function islandora_pdfjs_islandora_viewer_info() {
+  return array(
+    'islandora_pdfjs' => array(
+      'label' => t('pdf.js Reader'),
+      'description' => t('Mozilla pdf.js Reader.'),
+      'configuration' => '',
+      'callback' => 'islandora_pdfjs_viewer_callback',
+      'model' => array(
+        'islandora:sp_pdf',
+        'islandora:bookCModel',
+        'islandora:pageCModel',
+        'islandora:newspaperIssueCModel'),
+      'mimetype' => array('application/pdf'),
+    ),
+  );
+}
+
+/**
+ * Callback function for the viewer.
+ *
+ * @param array $params
+ *   The params for the theme function 'islandora_pdfjs'.
+ *
+ * @param IslandoraAbstractObject $fedora_object
+ *   The object that we are viewing.
+ *
+ * @return string
+ *   HTML repersentation of the pdf.js Reader.
+ */
+function islandora_pdfjs_viewer_callback(array $params, $fedora_object = NULL) {
+  $dsid = NULL;
+  if (isset($params['dsid']) && !empty($params['dsid']) && isset($fedora_object[$dsid])) {
+    $dsid = $params['dsid'];
+  }
+  else {
+    if (isset($fedora_object['PDF'])) {
+      $dsid = 'PDF';
+    }
+    elseif (isset($fedora_object['OBJ']) && $fedora_object['OBJ']->mimetype == 'application/pdf') {
+      $dsid = 'OBJ';
+    }
+  }
+  if ($dsid && islandora_datastream_access(ISLANDORA_VIEW_OBJECTS, $fedora_object[$dsid])) {
+    return theme('islandora_pdfjs', array('fedora_object' => $fedora_object, 'dsid' => $dsid));
+  }
+}

@@ -1,0 +1,9 @@
+name = Islandora Newspaper Batch
+description = "Batch ingest newspaper issue and page objects"
+package = Islandora
+version = 7.x-dev
+core = 7.x
+dependencies[] = islandora_batch
+dependencies[] = islandora_newspaper
+files[] = includes/islandora_newspaper_batch.inc
+php = 5.3

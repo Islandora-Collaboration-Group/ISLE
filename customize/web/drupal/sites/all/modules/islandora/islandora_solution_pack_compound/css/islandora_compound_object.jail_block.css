@@ -1,0 +1,93 @@
+/* Display in Content Region */
+
+#block-islandora-compound-object-compound-jail-display {
+    height: 200px;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    overflow: -moz-scrollbars-vertical;
+    font-size: 90%;
+}
+#block-islandora-compound-object-compound-jail-display > div {
+  border-bottom: 1px dotted #ccc;
+  padding-bottom: 1em;
+  padding-right: 10px;
+}
+#block-islandora-compound-object-compound-jail-display a {
+  display: block;
+}
+#block-islandora-compound-object-compound-jail-display .content a {
+    display: inline-block;
+    max-width: 20%;
+    vertical-align: top;
+    line-height: 1.25em;
+} 
+#block-islandora-compound-object-compound-jail-display .content img {
+    margin: 0.5em 0.5em 1em 0;
+    max-width: 70%;
+    border-bottom: 1px dotted #ccc;
+    padding-bottom: 1em;
+}
+
+/* Display in Sidebar Region */
+
+.sidebar #block-islandora-compound-object-compound-jail-display {
+  height: 100%;
+  width: auto;
+  min-height: 400px;
+  max-height: 1100px;
+}
+.sidebar #block-islandora-compound-object-compound-jail-display .content img {
+    width: 100%;
+    max-width: 85%;
+}
+.sidebar #block-islandora-compound-object-compound-jail-display .content a {
+    display: inline-block;
+    max-width: 100%;
+}
+
+/* Shared */
+
+#block-islandora-compound-object-compound-jail-display .form-type-item:first-child {
+	margin: 0;
+  font-size: 100%;
+  font-weight: bold;
+}
+
+#block-islandora-compound-object-compound-jail-display .form-type-item:nth-child(2) {
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 0.5em;
+}
+
+html:not(.js) #block-islandora-compound-object-compound-jail-display img.islandora-compound-object-jail {
+    display: none;
+}
+
+/* Tabs Controls */
+
+.tabs.primary > a {
+  float: left;
+}
+
+#islandora-compound-sequence-position, #islandora-compound-previous-link, #islandora-compound-next-link {
+	float: right;
+	line-height: 2.5em;
+	padding: 0 0.15em;
+	margin-bottom: 2em;
+}
+
+/* Solution Pack Overrides */
+
+a.islandora-pdf-link {
+  clear: both;
+  float: left;
+  margin: 5px 0 0 5px;
+}
+
+.islandora-compound-object-jail-active {
+    border:0.2em solid;
+}
+
+.islandora-compound-object-jail.islandora-compound-object-jail-active {
+    max-width: 98%;
+}

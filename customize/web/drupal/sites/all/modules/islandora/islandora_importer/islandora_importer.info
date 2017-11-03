@@ -1,0 +1,8 @@
+name = Islandora Batch Importer
+description = Pluggable importer of object records.
+package = Islandora Tools
+dependencies[] = islandora
+dependencies[] = islandora_batch
+files[] = includes/importer.inc
+version = 7.x-dev
+core = 7.x

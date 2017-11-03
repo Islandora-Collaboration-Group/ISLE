@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../style/module.xsl" ?>
+<exslt:module xmlns:exslt="http://exslt.org/documentation"
+              version="2" prefix="func">
+
+<exslt:name>Functions</exslt:name>
+
+<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                 xmlns:dc="http://purl.org/dc/elements/1.1/"
+                 ID="func">
+   <dc:subject>EXSLT</dc:subject>
+   <dc:subject>functions</dc:subject>
+   <dc:subject>module</dc:subject>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="func.2">
+         <exslt:version>2</exslt:version>
+         <dc:creator>Jeni Tennison</dc:creator>
+         <dc:date>2001-03-31</dc:date>
+         <dc:description>
+            <ul xmlns="http://www.w3.org/1999/xhtml">
+               <li>Changed the prefix from <code>exsl</code> to <code>func</code>.</li>
+               <li>Added a brief rationale for the module.</li>
+               <li>Included most recent versions of functions.</li>
+            </ul>
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="func.2.1">
+         <exslt:version>2.1</exslt:version>
+         <dc:creator>Jeni Tennison</dc:creator>
+         <dc:date>2001-05-20</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            Added <a href="elements/script"><code>func:script</code></a> to module.
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="func.2.2">
+         <exslt:version>2.2</exslt:version>
+         <dc:creator>Jeni Tennison</dc:creator>
+         <dc:date>2001-05-22</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            Added <a href="elements/function"><code>func:function</code></a> and <a href="elements/result"><code>func:result</code></a> to the core.
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+</rdf:Description>
+
+<exslt:doc>
+   <section>
+      <para>
+         EXSLT - Functions are those extension elements and functions that allow users to define their own functions for use in expressions and patterns in XSLT.
+      </para>
+      <para>
+         The functions available in XPath cover only basic functionality.  While a stylesheet author can often use XSLT code to achieve a goal, it would often be simpler to use a function instead.  It's impossible to predict all the functions authors might need, and it also adds portability to a stylesheet if authors can write their own functions (as long as the function implementations are understood by the XSLT processor).  These could be defined in any language, but the one language that XSLT processors can all understand is XSLT, so it makes sense to define functions using XSLT instructions.  However, XSLT as it stands cannot support the return of values other than result tree fragments; to write functions that return node sets and so on, we need an extension element.
+      </para>
+   </section>
+</exslt:doc>
+
+<exslt:elements>
+   <exslt:element name="function" version="3" core="yes" />
+   <exslt:element name="result" version="3" core="yes" />
+   <exslt:element name="script" version="1" core="no" />
+</exslt:elements>
+
+</exslt:module>

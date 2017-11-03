@@ -1,0 +1,72 @@
+<?php
+
+/**
+ * @file
+ * Attempts to replace the thumbnail datastream of a collection.
+ */
+
+class IslandoraReplaceDatastreamTestCase extends IslandoraCollectionWebTestCase {
+
+  /**
+   * Get test information.
+   *
+   * @see IslandoraWebTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Replace Datastream',
+      'description' => 'Generates a random collection and replaces its thumbnail datastream',
+      'group' => 'Islandora Basic Collection',
+    );
+  }
+
+  /**
+   * Set up the test environment.
+   *
+   * @see IslandoraWebTestCase::setUp
+   */
+  public function setUp() {
+    parent::setUp(array(
+      'islandora',
+      'islandora_basic_collection',
+    ));
+  }
+
+  /**
+   * Attempts to replace the thumbnail datastream of a collection.
+   *
+   * Also checks to see that the original has been replaced.
+   */
+  public function testReplaceDatastream() {
+
+    // Sets up the testing space.
+    $user = $this->drupalCreateUser(array_keys(module_invoke_all('permission')));
+    $this->drupalLogin($user);
+
+    $label = $this->randomName(16);
+    $suffix = $this->randomName(16);
+    $collectionpid = 'islandora:' . $suffix;
+    $this->createTestCollection($label, 'islandora:collectionCModel', $collectionpid);
+
+    // Attempts to remove the original TN datastream.
+    $edit = array();
+    $this->drupalPost('islandora/object/' . $collectionpid . '/datastream/TN/delete', $edit, 'Delete');
+    $this->drupalGet('islandora/object/' . $collectionpid . '/manage/datastreams');
+    $this->assertNoLink('TN', 'Thumbnail datastream successfully deleted', 'Islandora');
+
+    // Attempts to replace the datastream.
+    $path = 'islandora/object/' . $collectionpid . '/manage/datastreams/add';
+    $file = drupal_get_path('module', 'islandora_basic_collection') . '/tests/fixtures/TN.jpg';
+    $edit = array(
+      'dsid' => 'TN',
+      'label' => 'Thumbnail image',
+      'files[file]' => $file,
+    );
+    $this->drupalPost($path, $edit, 'Add Datastream');
+    $this->drupalGet('islandora/object/' . $collectionpid . '/manage/datastreams');
+    $this->assertLink('TN', 0, 'Thumbnail datastream successfully created', 'Islandora');
+    $this->clickLink('TN');
+    $this->assertNoText('PNG', 'PNG thumbnail correctly replaced with JPG', 'Islandora');
+    $this->deleteTestCollection($collectionpid);
+  }
+}

@@ -1,0 +1,13 @@
+.islandora-openseadragon {
+  display: block;
+  width: 100%;
+  height: 500px;
+}
+.islandora-openseadragon canvas {
+  background-color: #000 !important; /* should be replaced with OpenSeadragon setting */
+}
+
+.islandora-openseadragon-highlight {
+  background-color: #f00;
+  opacity: 0.5;
+}

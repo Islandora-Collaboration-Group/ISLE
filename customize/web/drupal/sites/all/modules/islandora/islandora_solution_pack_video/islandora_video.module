@@ -1,0 +1,196 @@
+<?php
+
+/**
+ * @file
+ * Hooks and callbacks for this module.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_video_menu() {
+  $items = array();
+  $items['admin/islandora/solution_pack_config/video'] = array(
+    'title' => 'Video Solution Pack',
+    'description' => 'Define ingest behavior and select video player.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_video_admin'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'includes/admin.form.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function islandora_video_theme($existing, $type, $theme, $path) {
+  return array(
+    'islandora_video' => array(
+      'template' => 'theme/islandora-video',
+      'file' => 'theme/theme.inc',
+      'pattern' => 'islandora_video__',
+      'variables' => array('object' => NULL),
+    ),
+  );
+}
+
+/**
+ * Implements hook_islandora_required_objects().
+ */
+function islandora_video_islandora_required_objects(IslandoraTuque $connection) {
+  $module_path = drupal_get_path('module', 'islandora_video');
+  // Video Content Model.
+  $video_content_model = $connection->repository->constructObject('islandora:sp_videoCModel');
+  $video_content_model->owner = 'fedoraAdmin';
+  $video_content_model->label = 'Islandora Video Content Model';
+  $video_content_model->models = 'fedora-system:ContentModel-3.0';
+  // DS-COMPOSITE-MODEL Datastream.
+  $datastream = $video_content_model->constructDatastream('DS-COMPOSITE-MODEL', 'X');
+  $datastream->label = 'DS-COMPOSITE-MODEL';
+  $datastream->mimetype = 'application/xml';
+  $datastream->setContentFromFile("$module_path/xml/islandora_video_ds_composite_model.xml", FALSE);
+  $video_content_model->ingestDatastream($datastream);
+  // Video Collection.
+  $video_collection = $connection->repository->constructObject('islandora:video_collection');
+  $video_collection->owner = 'fedoraAdmin';
+  $video_collection->label = 'Video Collection';
+  $video_collection->models = 'islandora:collectionCModel';
+  $video_collection->relationships->add(FEDORA_RELS_EXT_URI, 'isMemberOfCollection', 'islandora:root');
+  // Collection Policy Datastream.
+  $datastream = $video_collection->constructDatastream('COLLECTION_POLICY', 'X');
+  $datastream->label = 'Collection policy';
+  $datastream->mimetype = 'application/xml';
+  $datastream->setContentFromFile("$module_path/xml/islandora_video_collection_policy.xml", FALSE);
+  $video_collection->ingestDatastream($datastream);
+  // TN Datastream.
+  $datastream = $video_collection->constructDatastream('TN', 'M');
+  $datastream->label = 'Thumbnail';
+  $datastream->mimetype = 'image/png';
+  $datastream->setContentFromFile("$module_path/images/folder.png", FALSE);
+  $video_collection->ingestDatastream($datastream);
+  return array(
+    'islandora_video' => array(
+      'title' => 'Islandora Video',
+      'objects' => array(
+        $video_content_model,
+        $video_collection,
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_xml_form_builder_forms().
+ */
+function islandora_video_xml_form_builder_forms() {
+  $module_path = drupal_get_path('module', 'islandora_video');
+  return array(
+    'Video MODS form' => array(
+      'form_file' => "$module_path/xml/islandora_video_form_mods.xml",
+    ),
+  );
+}
+
+/**
+ * Implements hook_xml_form_builder_form_associations().
+ */
+function islandora_video_xml_form_builder_form_associations() {
+  return array(
+    'islandora_video_mods_form' => array(
+      'content_model' => 'islandora:sp_videoCModel',
+      'form_name' => 'Video MODS form',
+      'dsid' => 'MODS',
+      'title_field' => array('titleInfo', 'title'),
+      'transform' => 'mods_to_dc.xsl',
+      'template' => FALSE,
+    ),
+  );
+}
+
+/**
+ * Implements hook_CMODEL_PID_islandora_view_object().
+ */
+function islandora_video_islandora_sp_videoCModel_islandora_view_object($object, $page_number, $page_size) {
+  $output = theme('islandora_video', array('object' => $object));
+  return array('' => $output);
+}
+
+/**
+ * Implements hook_islandora_ingest_steps().
+ */
+function islandora_video_islandora_sp_videoCModel_islandora_ingest_steps() {
+  return array(
+    'islandora_video_upload' => array(
+      'weight' => 10,
+      'type' => 'form',
+      'form_id' => 'islandora_video_upload_form',
+      'module' => 'islandora_video',
+      'file' => 'includes/video_upload.form.inc',
+    ),
+  );
+}
+
+/**
+ * Implements hook_islandora_CMODEL_PID_derivative().
+ */
+function islandora_video_islandora_sp_videoCModel_islandora_derivative() {
+  $derivatives = array();
+  if (variable_get('islandora_video_make_thumbnail_locally', TRUE)) {
+    $derivatives[] = array(
+      'source_dsid' => 'OBJ',
+      'destination_dsid' => 'TN',
+      'weight' => '0',
+      'function' => array(
+        'islandora_video_create_thumbnail',
+      ),
+      'file' => drupal_get_path('module', 'islandora_video') . '/includes/derivatives.inc',
+    );
+  }
+  if (variable_get('islandora_video_make_mp4_locally', TRUE)) {
+    $derivatives[] = array(
+      'source_dsid' => 'OBJ',
+      'destination_dsid' => 'MP4',
+      'weight' => '1',
+      'function' => array(
+        'islandora_video_create_mp4',
+      ),
+      'file' => drupal_get_path('module', 'islandora_video') . '/includes/derivatives.inc',
+    );
+  }
+  if (variable_get('islandora_video_make_ogg_locally', FALSE)) {
+    $derivatives[] = array(
+      'source_dsid' => 'OBJ',
+      'destination_dsid' => 'OGG',
+      'weight' => '2',
+      'function' => array(
+        'islandora_video_create_ogg',
+      ),
+      'file' => drupal_get_path('module', 'islandora_video') . '/includes/derivatives.inc',
+    );
+  }
+  if (variable_get('islandora_video_make_archive', TRUE)) {
+    $derivatives[] = array(
+      'source_dsid' => 'OBJ',
+      'destination_dsid' => 'MKV',
+      'weight' => '3',
+      'function' => array(
+        'islandora_video_create_mkv',
+      ),
+      'file' => drupal_get_path('module', 'islandora_video') . '/includes/derivatives.inc',
+    );
+  }
+  return $derivatives;
+}
+
+/**
+ * Implements hook_file_mimetype_mapping_alter().
+ */
+function islandora_video_file_mimetype_mapping_alter(&$mapping) {
+  // Make sure the mapping is sensible for video/mp4 by removing
+  // it from array and adding it to end so it has priority.
+  $code = $mapping['extensions']['mp4'];
+  unset($mapping['extensions']['mp4']);
+  $mapping['extensions']['mp4'] = $code;
+}

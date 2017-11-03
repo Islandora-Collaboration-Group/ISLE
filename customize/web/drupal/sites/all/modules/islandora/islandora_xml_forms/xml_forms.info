@@ -1,0 +1,12 @@
+name = Islandora XML Forms
+description = Build, store and render Drupal forms that allow for manipulation of XML files.
+dependencies[] = xml_form_api
+dependencies[] = xml_form_builder
+dependencies[] = xml_form_elements
+files[] = tests/islandora_xml_forms_associate.test
+files[] = tests/islandora_xml_forms_basic_operations.test
+files[] = tests/islandora_xml_forms_test_cm_tests.test
+package = Islandora Tools
+version = 7.x-dev
+core = 7.x
+

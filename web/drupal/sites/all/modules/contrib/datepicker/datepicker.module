@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * Implements hook_element_info().
+ */
+function datepicker_element_info() {
+  $date_types = date_popup_element_info();
+  $types['datepicker'] = $date_types['date_popup'];
+  $types['datepicker']['#process'] = array('datepicker_element_process');
+  return $types;
+}
+
+function datepicker_element_process($element, &$form_state, $form) {
+  $element = date_popup_element_process($element, $form_state, $form);
+  unset($element['date']['#title']);
+  unset($element['date']['#description']);
+  $element['date']['#attached']['js'] = array(
+    drupal_get_path('module', 'datepicker') . '/datepicker.js',
+  );
+  $css_id = $element['date']['#id'];
+  $js = drupal_add_js();
+  foreach ($js['settings']['data'] as $i => $data) {
+    if (isset($data['datePopup'][$css_id])) {
+      $data['datePopup'][$css_id]['func'] = 'datepicker-inline';
+      $data['datePopup'][$css_id]['settings']['altField'] = '#' . $css_id;
+      $data['datePopup'][$css_id]['settings']['defaultDate'] = $element['date']['#value'];
+      drupal_add_js($data, 'setting');
+      break;
+    }
+  }
+  return $element;
+}

@@ -1,0 +1,8 @@
+name = "Islandora example simple text"
+description = "An example Islandora Repository module to handle simple text"
+dependencies[] = islandora
+dependencies[] = xml_forms
+package = Islandora Solution Packs
+core = 7.x
+version = 7.x-dev
+stylesheets[all][] = css/islandora_example_simple_text.css

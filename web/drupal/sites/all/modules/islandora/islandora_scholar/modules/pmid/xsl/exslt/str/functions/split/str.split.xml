@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="../../../style/function.xsl" ?><exslt:function xmlns:exslt="http://exslt.org/documentation" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:vcf="http://www.ietf.org/internet-drafts/draft-dawson-vcard-xml-dtd-03.txt" version="1" module="str" status="new">
+   <exslt:name>split</exslt:name>
+   <rdf:Description ID="str:split">
+      <dc:subject>EXSLT</dc:subject>
+      <dc:subject>str</dc:subject>
+      <dc:subject>split</dc:subject>
+      <exslt:revision>
+         <rdf:Description ID="str:split.1">
+            <exslt:version>1</exslt:version>
+            <dc:creator rdf:parseType="Resource">
+               <vcf:fn>Kipp Howard</vcf:fn>
+               <vcf:email>khoward@courtlink.com</vcf:email>
+            </dc:creator>
+            <dc:date>2001-10-15</dc:date>
+            <dc:description>
+               <html:div>
+         The <html:code>str:split</html:code> function splits a string at the occurrences of a pattern string.
+      </html:div>
+            </dc:description>
+         </rdf:Description>
+      </exslt:revision>
+      <exslt:revision>
+         <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                          xmlns:dc="http://purl.org/dc/elements/1.1/"
+                          ID="str:split.1.1">
+            <exslt:version>1.1</exslt:version>
+            <dc:creator email="craig.stewart@nottingham.ac.uk" 
+                        url="">Craig Stewart</dc:creator>
+            <dc:date>2002-08-20</dc:date>
+            <dc:description xmlns="http://www.w3.org/1999/xhtml">Added 4XSLT implementation to the list.</dc:description>
+         </rdf:Description>
+      </exslt:revision>
+   </rdf:Description>
+   <exslt:doc>
+      <html:div>
+         <html:p>
+         The <html:code>str:split</html:code> function splits up a string and returns a node set of <html:code>token</html:code> elements, each containing one token from the string.
+      </html:p>
+         <html:p>
+         The first argument is the string to be split.  The second argument is a pattern string.  The string given by the first argument is split at any occurrence of this pattern.  For example:
+      </html:p>
+         <html:pre>
+str:split('a, simple, list', ', ')      
+      </html:pre>
+         <html:p>
+         Gives the node set consisting of:
+      </html:p>
+         <html:pre>
+&lt;token&gt;a&lt;/token&gt;
+&lt;token&gt;simple&lt;/token&gt;
+&lt;token&gt;list&lt;/token&gt;
+</html:pre>
+         <html:p>
+         If the second argument is omitted, the default is the string <html:code>'&amp;#x20;'</html:code> (i.e. a space).  Thus:
+      </html:p>
+         <html:pre>
+str:split('date math str')      
+      </html:pre>
+         <html:p>
+         Gives the node set consisting of:
+      </html:p>
+         <html:pre>
+&lt;token&gt;date&lt;/token&gt;
+&lt;token&gt;math&lt;/token&gt;
+&lt;token&gt;str&lt;/token&gt;
+</html:pre>
+        <html:p>
+          If the second argument is an empty string, the function returns a set of <html:code>token</html:code> elements, each of which holds a single character. Thus:
+        </html:p>
+        <html:pre>
+str:split('foo', '')          
+        </html:pre>
+        <html:p>
+          Gives the node set consisting of:
+        </html:p>
+        <html:pre>
+&lt;token&gt;f&lt;/token&gt;
+&lt;token&gt;o&lt;/token&gt;
+&lt;token&gt;o&lt;/token&gt;
+</html:pre>       
+         <html:p>
+            The template version of this function returns a result tree fragment consisting of a number of <html:code>token</html:code> elements.
+         </html:p>
+      </html:div>
+   </exslt:doc>
+   <exslt:definition>
+      <exslt:return type="node-set">
+         <html:div/>
+      </exslt:return>
+      <exslt:arg name="string" type="string" default="''" optional="no">
+         <html:div/>
+      </exslt:arg>
+      <exslt:arg name="pattern" type="string" default="'&amp;#x20;'" optional="yes">
+         <html:div/>
+      </exslt:arg>
+   </exslt:definition>
+   <exslt:implementations>
+      <exslt:vendor-implementation
+              version="1"
+              vendor="4XSLT, from 4Suite."
+              vendor-url="http://4Suite.org"
+              vendor-version="0.12.0a3" />
+      <exslt:implementation src="str.split.function.xsl" language="exslt:exslt" version="1">
+         <exslt:doc>
+            <html:div xmlns="http://www.w3.org/1999/xhtml">
+               This implementation relies on the <a href="http://www.exslt.org/exsl/functions/node-set">
+                  <code>exsl:node-set()</code>
+               </a> function.
+            </html:div>
+         </exslt:doc>
+      </exslt:implementation>
+      <exslt:implementation src="str.split.template.xsl" language="exslt:xslt" version="1"/>
+   </exslt:implementations>
+   <exslt:use-cases />
+</exslt:function>

@@ -1,0 +1,608 @@
+<?php
+
+/**
+ * @file
+ * Implements hooks and callbacks for this module.
+ */
+
+// Doesn't make sense to use either of the Islandora RELS-EXT or RELS-INT
+// namespaces, as our predicates can occur in both.
+define('ISLANDORA_SCHOLAR_EMBARGO_RELS_URI', 'info:islandora/islandora-system:def/scholar#');
+define('ISLANDORA_SCHOLAR_EMBARGO_NOTIFICATION_PRED', 'embargo-expiry-notification-date');
+define('ISLANDORA_SCHOLAR_EMBARGO_EXPIRY_PRED', 'embargo-until');
+define('ISLANDORA_SCHOLAR_EMBARGO_CAN_EMBARGO_OWNED', 'can embargo owned objects');
+define('ISLANDORA_SCHOLAR_EMBARGO_CAN_EMBARGO_ANY', 'can embargo any object');
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_scholar_embargo_menu() {
+  $items['islandora/object/%islandora_object/manage/embargo'] = array(
+    'title' => 'Embargo',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_scholar_embargo_form', 2),
+    'type' => MENU_LOCAL_TASK,
+    'access callback' => 'islandora_scholar_access',
+    'access arguments' => array(2),
+    'file' => 'includes/embargo.inc',
+  );
+  $items['admin/islandora/solution_pack_config/embargo'] = array(
+    'title' => 'Islandora Scholar Embargo',
+    'description' => 'Configure the Embargo module.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_embargo_admin'),
+    'access arguments' => array(ISLANDORA_SCHOLAR_EMBARGO_CAN_EMBARGO_ANY),
+    'file' => 'includes/admin.form.inc',
+  );
+  $items['admin/islandora/solution_pack_config/embargo/settings'] = array(
+    'title' => 'Embargo settings',
+    'description' => 'Configure the Embargo module.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_embargo_admin'),
+    'access arguments' => array(ISLANDORA_SCHOLAR_EMBARGO_CAN_EMBARGO_ANY),
+    'file' => 'includes/admin.form.inc',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+  $items['admin/islandora/solution_pack_config/embargo/list'] = array(
+    'title' => 'Manage Embargoed Items',
+    'file' => 'includes/embargo_manage.inc',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_scholar_embargo_manage_form'),
+    'type' => MENU_LOCAL_TASK,
+    'access arguments' => array(ISLANDORA_SCHOLAR_EMBARGO_CAN_EMBARGO_ANY),
+  );
+  $items['admin/islandora/solution_pack_config/embargo/roles'] = array(
+    'title' => 'Manage Embargo Roles',
+    'file' => 'includes/embargo_roles_manage.inc',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_scholar_embargo_manage_roles_admin_form'),
+    'type' => MENU_LOCAL_TASK,
+    'access arguments' => array(ISLANDORA_SCHOLAR_EMBARGO_CAN_EMBARGO_ANY),
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_islandora_object_access().
+ */
+function islandora_scholar_embargo_islandora_object_access($op, $object, $user) {
+  module_load_include('inc', 'islandora_scholar_embargo', 'includes/embargo');
+  if ($op == 'administer islandora_xacml_editor') {
+    $embargoed = islandora_scholar_embargo_get_embargoed($object);
+    if (!empty($embargoed)) {
+      return FALSE;
+    }
+  }
+}
+
+/**
+ * Implements hook_islandora_datastream_access().
+ */
+function islandora_scholar_embargo_islandora_datastream_access($op, $islandora_datastream, $user) {
+  module_load_include('inc', 'islandora_scholar_embargo', 'includes/embargo');
+  if (($op == ISLANDORA_PURGE || $op == ISLANDORA_REPLACE_DATASTREAM_CONTENT) && $islandora_datastream->id == 'POLICY') {
+    $embargoed = islandora_scholar_embargo_get_embargoed($islandora_datastream->parent);
+    if (!empty($embargoed)) {
+      return FALSE;
+    }
+  }
+}
+
+/**
+ * Implements hook_permission().
+ */
+function islandora_scholar_embargo_permission() {
+  return array(
+    ISLANDORA_SCHOLAR_EMBARGO_CAN_EMBARGO_OWNED => array(
+      'title' => t('Manage embargo on own objects'),
+      'description' => t("User can add or remove embargo on their own objects only."),
+    ),
+    ISLANDORA_SCHOLAR_EMBARGO_CAN_EMBARGO_ANY => array(
+      'title' => t('Manage embargo on any objects'),
+      'description' => t("User can add or remove embargo on any object in repository. Note that XACML policies can override this setting; use the <a href='/admin/islandora/solution_pack_config/embargo/roles'>Islandora Scholar Embargo roles configuration page</a> to establish trusted roles to write to embargoed objects."),
+    ),
+  );
+}
+
+
+/**
+ * Returns access to menu path based on content mode and user permissions.
+ *
+ * @global object $user
+ *
+ * @param AbstractObject $object
+ *   The object to test.
+ *
+ * @return bool
+ *   TRUE if access is allowed FALSE otherwise.
+ */
+function islandora_scholar_access($object = NULL) {
+  global $user;
+  // Beware that this repersents a cross-site security issue in that users of a
+  // different multi-site with the same name will have access to this page.
+  $user_access = (user_access(ISLANDORA_SCHOLAR_EMBARGO_CAN_EMBARGO_OWNED) && $object->owner == $user->name) || user_access(ISLANDORA_SCHOLAR_EMBARGO_CAN_EMBARGO_ANY);
+
+  $allowed_cmodels = variable_get('islandora_embargo_content_models', array('ir:citationCModel', 'ir:thesisCModel'));
+  $model_access = count(array_intersect($allowed_cmodels, $object->models)) > 0;
+
+  $user_model_and_object_access = $user_access && $model_access && (
+    (!isset($object['POLICY']) && islandora_object_access(ISLANDORA_ADD_DS, $object)) ||
+    (isset($object['POLICY']) && islandora_datastream_access(ISLANDORA_METADATA_EDIT, $object['POLICY']))
+  );
+
+  return $user_model_and_object_access;
+}
+
+/**
+ * Build the array containing a couple tokens needed for mail messages.
+ *
+ * @param array $params
+ *   Properties to include in the Mail tokens.
+ *
+ * @return array
+ *   Mail tokens.
+ */
+function islandora_scholar_embargo_mail_tokens($params, $language) {
+  global $base_url;
+  $date = $params['expiry_date'] == 'indefinite' ? 'indefinite' : format_date(strtotime($params['expiry_date']));
+  if ($params['expiry_date']) {
+    $to_return = array(
+      '!item' => l(
+          $params['item_title'],
+          'islandora/object/' . $params['pid']
+      ),
+      '@dsid' => $params['dsid'],
+      '@date' => $date,
+      '!site' => $base_url,
+    );
+  }
+  return $to_return;
+}
+
+/**
+ * Implements hook_mail().
+ *
+ * Adds messages for pre_expiry and lifted_embargo.
+ */
+function islandora_scholar_embargo_mail($key, &$message, $params) {
+  global $language;
+  $variables = islandora_scholar_embargo_mail_tokens($params, 'English');
+
+  switch ($key) {
+    case 'pre_expiry':
+      $message['subject'] = t('Notification from !site', $variables);
+      if (empty($params['dsid']) && $params['dsid'] !== '0') {
+        $message['body'][] = t('The embargo period for the object !item will expire on @date.', $variables);
+      }
+      else {
+        $message['body'][] = t('The embargo period for the @dsid datastream(s) on the object !item will expire on @date.', $variables);
+      }
+      break;
+
+    case 'lifted_embargo':
+      $message['subject'] = t('Notification from !site', $variables);
+      if (empty($params['dsid']) && $params['dsid'] !== '0') {
+        $message['body'][] = t('The embargo period for the object !item has expired, or the embargo has been manually lifted.', $variables);
+      }
+      else {
+        $message['body'][] = t('The embargo period for the @dsid datastream(s) on the object !item has expired, or the embargo has been manually lifted.', $variables);
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_cron().
+ *
+ * Detect items whose embargo is either about to expire to notify or has expired
+ * to lift.
+ */
+function islandora_scholar_embargo_cron() {
+  // Detect embargoes expiring soon, send out notification.
+  $now = time();
+  $pre_expiry = strtotime("-10DAYS", $now);
+  $now = gmdate("Y-m-d\TH:i:s\Z", $now);
+  $pre_expiry = gmdate("Y-m-d\TH:i:s\Z", $pre_expiry);
+
+  $ise_uri = ISLANDORA_SCHOLAR_EMBARGO_RELS_URI;
+  $eu = ISLANDORA_SCHOLAR_EMBARGO_EXPIRY_PRED;
+  $np = ISLANDORA_SCHOLAR_EMBARGO_NOTIFICATION_PRED;
+  // Force the cron to run as user 1 so we don't get locked out of objects.
+  $user = user_load(1);
+  $repository = islandora_get_tuque_connection($user);
+  $query = <<<EOQ
+PREFIX is: <$ise_uri>
+SELECT ?embargoed ?date ?notify
+FROM <#ri>
+WHERE {
+  ?embargoed is:$eu ?date ;
+             is:$np ?notify .
+  FILTER(
+    ?notify < '$now'^^xsd:dateTime &&
+    ?date > '$pre_expiry'^^xsd:dateTime) .
+}
+EOQ;
+
+  $results = $repository->repository->ri->sparqlQuery($query);
+  $expiry_emails = array();
+  foreach ($results as $result) {
+    $full_pid = $result['embargoed']['value'];
+    $pid_parts = explode('/', $full_pid);
+    $params['pid'] = $pid_parts[0];
+    $params['dsid'] = array();
+    $item = islandora_object_load($pid_parts[0]);
+    $params['item_title'] = $item->label;
+    if (isset($pid_parts[1])) {
+      $dsid = $pid_parts[1];
+      $params['dsid'][] = $pid_parts[1];
+    }
+    else {
+      $dsid = NULL;
+      $params['dsid'] = NULL;
+    }
+    $params['expiry_date'] = $result['date']['value'];
+    $params['notification_date'] = isset($result['notify']['value']) ? $result['notify']['value'] : NULL;
+    $key = isset($result['notify']['value']) ? 'pre_expiry' : 'lifted_embargo';
+    if (!isset($expiry_emails[$params['pid']])) {
+      $expiry_emails[$params['pid']] = array(
+        'pid' => $params['pid'],
+        'key' => $key,
+        'params' => $params,
+      );
+    }
+    else {
+      $expiry_emails[$params['pid']]['params']['dsid'] = array_merge($expiry_emails[$params['pid']]['params']['dsid'], $params['dsid']);
+    }
+
+    if (isset($params['dsid']) && isset($item[$dsid])) {
+      rules_invoke_event('islandora_scholar_datastream_embargo_expiring', $item, $item[$dsid]);
+    }
+    else {
+      rules_invoke_event('islandora_scholar_object_embargo_expiring', $item);
+    }
+  }
+
+  foreach ($expiry_emails as $notification) {
+    // Send emails here.
+    $item = islandora_object_load($notification['pid']);
+    islandora_embargo_user_notify($notification['key'], $item, $notification['params']);
+  }
+
+  // Inform rules and users of expired embargoes.
+  $query = <<<EOQ
+PREFIX is: <$ise_uri>
+SELECT ?expired ?date
+FROM <#ri>
+WHERE {
+  ?expired is:$eu ?date .
+  FILTER(?date < '$now'^^xsd:dateTime) .
+}
+EOQ;
+  $results = $repository->repository->ri->sparqlQuery($query);
+  $expired_emails = array();
+  foreach ($results as $result) {
+    $params = array();
+    $full_pid = $result['expired']['value'];
+    $pid_parts = explode('/', $full_pid);
+    $params['pid'] = $pid_parts[0];
+    $params['dsid'] = array();
+    $item = islandora_object_load($pid_parts[0]);
+    $params['item_title'] = $item->label;
+    if (isset($pid_parts[1])) {
+      $dsid = $pid_parts[1];
+      $params['dsid'][] = $pid_parts[1];
+    }
+    else {
+      $dsid = NULL;
+      $params['dsid'] = NULL;
+    }
+    $params['expiry_date'] = $result['date']['value'];
+    $params['notification_date'] = isset($result['notify']['value']) ? $result['notify']['value'] : NULL;
+    $key = 'lifted_embargo';
+    if (!isset($expired_emails[$params['pid']])) {
+      $expired_emails[$params['pid']] = array(
+        'pid' => $params['pid'],
+        'key' => $key,
+        'params' => $params,
+      );
+    }
+    else {
+      $expired_emails[$params['pid']]['params']['dsid'] = array_merge($expired_emails[$params['pid']]['params']['dsid'], $params['dsid']);
+    }
+    // XXX: This needs to be removed as it is no longer shipped with the module
+    // and is considered deprecated of 7.x-1.6.
+    if (isset($params['dsid']) && isset($item[$dsid])) {
+      rules_invoke_event('islandora_scholar_datastream_embargo_expired', $item, $item[$dsid]);
+    }
+    else {
+      rules_invoke_event('islandora_scholar_object_embargo_expired', $item);
+    }
+  }
+  foreach ($expired_emails as $notification) {
+    // Send emails here.
+    $item = islandora_object_load($notification['pid']);
+    rules_invoke_event('islandora_scholar_datastreams_embargo_expired', $item, $notification['params']['dsid']);
+  }
+}
+
+/**
+ * Implements hook_islandora_scholar_embargo_users_to_notify().
+ */
+function islandora_scholar_embargo_islandora_scholar_embargo_users_to_notify(AbstractObject $object) {
+  if (!variable_get('islandora_scholar_embargo_suppress_default_emails', FALSE)) {
+    $users = array(user_load(1));
+    $owner = $object->owner;
+    $owner = is_numeric($owner) ? user_load($owner) : user_load_by_name($owner);
+    if ($owner) {
+      $users[] = $owner;
+    }
+  }
+
+  else {
+    $users = array();
+  }
+
+  return $users;
+}
+
+/**
+ * Get info for the individuals to notify, in a format comparable to the $user.
+ *
+ * (An array of stdClasses, each of which contain at least an email property.)
+ *
+ * @param AbstractObject $object
+ *   The owner of the given object will be notified.
+ *
+ * @return array
+ *   An array of user objects to notify.
+ */
+function islandora_scholar_embargo_users_to_notify(AbstractObject $object) {
+  $users = module_invoke_all('islandora_scholar_embargo_users_to_notify', $object);
+  drupal_alter('islandora_scholar_embargo_users_to_notify', $users, $object);
+  $unique_users = array();
+  // Filter down the users so we don't send multiple e-mails potentially.
+  foreach ($users as $user) {
+    if (!isset($unique_users[$user->uid])) {
+      $unique_users[$user->uid] = $user;
+    }
+  }
+  return $unique_users;
+}
+
+/**
+ * Remove the embargo on the indicated item.
+ *
+ * The item embargoed is identified by both the pid and dsid values.
+ *
+ * @param string $param
+ *   Either a string containing a Fedora PID or an AbstractObject, representing
+ *   either the item disembargoed, or the item in which the datastream to be
+ *   embargoed exists.
+ * @param mixed $ds
+ *   NULL--meaning the object should be disembargoed
+ *   An array representing a list of datastream IDs to be disembargoed.
+ */
+function islandora_scholar_embargo_lift_embargo($param, $ds = NULL) {
+  $item = $param instanceof AbstractObject ?
+    $param :
+    islandora_object_load($param);
+  $dsid = $ds instanceof AbstractDatastream ? $ds->id : $ds;
+  $pid = $item->id;
+  $xacml = new IslandoraXacml($item);
+  if ($dsid === NULL) {
+    $rels = $item->relationships->get(ISLANDORA_SCHOLAR_EMBARGO_RELS_URI, ISLANDORA_SCHOLAR_EMBARGO_EXPIRY_PRED);
+    $item->relationships->remove(ISLANDORA_SCHOLAR_EMBARGO_RELS_URI, ISLANDORA_SCHOLAR_EMBARGO_EXPIRY_PRED);
+    $item->relationships->remove(ISLANDORA_SCHOLAR_EMBARGO_RELS_URI, ISLANDORA_SCHOLAR_EMBARGO_NOTIFICATION_PRED);
+    $xacml->viewingRule->clear();
+  }
+  else {
+    // XXX: Casting to array to support external modules calling embargo as the
+    // function signature used to accept a string for datastream id.
+    $dsid = (array) $dsid;
+    foreach ($dsid as $datastream_id) {
+      if (!isset($item[$datastream_id])) {
+        $embargo_ds = $item->constructDatastream($datastream_id);
+      }
+      else {
+        $embargo_ds = $item[$datastream_id];
+      }
+      $rels = $embargo_ds->relationships->get(ISLANDORA_SCHOLAR_EMBARGO_RELS_URI, ISLANDORA_SCHOLAR_EMBARGO_EXPIRY_PRED);
+      $embargo_ds->relationships->remove(ISLANDORA_SCHOLAR_EMBARGO_RELS_URI, ISLANDORA_SCHOLAR_EMBARGO_EXPIRY_PRED);
+      $embargo_ds->relationships->remove(ISLANDORA_SCHOLAR_EMBARGO_RELS_URI, ISLANDORA_SCHOLAR_EMBARGO_NOTIFICATION_PRED);
+      $xacml->datastreamRule->removeDsid($datastream_id);
+    }
+  }
+
+  $xacml->writeBackToFedora();
+
+  // Only notify if the object exists in the repository.
+  if ($item instanceof FedoraObject && isset($rels) && !empty($rels)) {
+    $expiry = $rels[0]['object']['value'];
+    // Send email notification.
+    $params['pid'] = $pid;
+    $params['item_title'] = $item->label;
+    $params['dsid'] = isset($dsid) ? $dsid : NULL;
+    $params['expiry_date'] = $expiry;
+    $key = 'lifted_embargo';
+    islandora_embargo_user_notify($key, $item, $params);
+  }
+  if (isset($dsid)) {
+    foreach ($dsid as $ds) {
+      if (isset($item[$ds])) {
+        rules_invoke_event('islandora_scholar_datastream_embargo_lifted', $item, $item[$ds]);
+      }
+    }
+  }
+  else {
+    rules_invoke_event('islandora_scholar_object_embargo_lifted', $item);
+  }
+}
+
+/**
+ * Set an item to be embargoed.
+ *
+ * One oddity:  an $end of NULL will clear any embargo...  Only meant to be
+ * used behind the scenes, to avoid triggering actions.
+ *
+ * @param mixed $param
+ *   A string containing a Fedora PID or an AbstractObject. Which is either the
+ *   item to be embargoed, or the item in which the datastream to be embargoed
+ *   exists.
+ * @param mixed $dsid
+ *   Either NULL--meaning the object should be embargoed--or an array
+ *   representing a group of datastream IDs to be embargoed.
+ * @param string $end
+ *   Either an xsd:dateTime compliant string for when to lift the embargo, or
+ *   the string 'indefinite' to require it to be manually lifted.
+ */
+function islandora_scholar_embargo_set_embargo($param, $dsid = NULL, $end = 'indefinite') {
+  if ($param instanceof AbstractObject) {
+    $item = $param;
+  }
+  else {
+    $item = islandora_object_load($param);
+  }
+  $type = RELS_TYPE_PLAIN_LITERAL;
+  $notification = NULL;
+  $item->relationships->registerNamespace('islandora-embargo', ISLANDORA_SCHOLAR_EMBARGO_RELS_URI);
+  // XXX We assume the end date is properly formatted...
+  if ($end != 'indefinite' && $end !== NULL) {
+    $type = RELS_TYPE_DATETIME;
+    // XXX:  Make the notification interval configurable.
+    $end = gmdate("Y-m-d\TH:i:s\Z", strtotime($end));
+    $notification = gmdate("Y-m-d\TH:i:s\Z", strtotime('-10DAYS', strtotime($end)));
+  }
+
+  $xacml = new IslandoraXacml($item);
+
+  $users = islandora_scholar_embargo_users_to_notify($item);
+  $roles = variable_get('islandora_scholar_embargo_whitelisted_roles', array());
+
+  if ($dsid === NULL) {
+    $item->relationships->remove(ISLANDORA_SCHOLAR_EMBARGO_RELS_URI, ISLANDORA_SCHOLAR_EMBARGO_EXPIRY_PRED);
+    $item->relationships->remove(ISLANDORA_SCHOLAR_EMBARGO_RELS_URI, ISLANDORA_SCHOLAR_EMBARGO_NOTIFICATION_PRED);
+
+    if ($end !== NULL) {
+      $item->relationships->add(ISLANDORA_SCHOLAR_EMBARGO_RELS_URI, ISLANDORA_SCHOLAR_EMBARGO_EXPIRY_PRED, $end, $type);
+
+      if ($notification !== NULL) {
+        $item->relationships->add(ISLANDORA_SCHOLAR_EMBARGO_RELS_URI, ISLANDORA_SCHOLAR_EMBARGO_NOTIFICATION_PRED, $notification, $type);
+      }
+      foreach ($users as $user) {
+        $xacml->viewingRule->addUser($user->name);
+      }
+      foreach ($roles as $role) {
+        $xacml->viewingRule->addRole($role);
+      }
+    }
+  }
+  else {
+    // XXX: Casting to array to support external modules calling embargo as the
+    // function signature used to accept a string for datastream id.
+    $dsid = (array) $dsid;
+    foreach ($dsid as $datastream_id) {
+      // Handles the case where we are setting an embargo before adding the
+      // embargoed datastream to the object.
+      if (!isset($item[$datastream_id])) {
+        $embargo_ds = $item->constructDatastream($datastream_id);
+      }
+      else {
+        $embargo_ds = $item[$datastream_id];
+      }
+      $embargo_ds->relationships->registerNamespace('islandora-embargo', ISLANDORA_SCHOLAR_EMBARGO_RELS_URI);
+      $embargo_ds->relationships->remove(ISLANDORA_SCHOLAR_EMBARGO_RELS_URI, ISLANDORA_SCHOLAR_EMBARGO_EXPIRY_PRED);
+      $embargo_ds->relationships->remove(ISLANDORA_SCHOLAR_EMBARGO_RELS_URI, ISLANDORA_SCHOLAR_EMBARGO_NOTIFICATION_PRED);
+
+      $embargo_ds->relationships->add(ISLANDORA_SCHOLAR_EMBARGO_RELS_URI, ISLANDORA_SCHOLAR_EMBARGO_EXPIRY_PRED, $end, $type);
+
+      if ($end !== NULL) {
+        if ($notification !== NULL) {
+          $embargo_ds->relationships->add(ISLANDORA_SCHOLAR_EMBARGO_RELS_URI, ISLANDORA_SCHOLAR_EMBARGO_NOTIFICATION_PRED, $notification, $type);
+        }
+        $xacml->datastreamRule->addDsid($datastream_id);
+        foreach ($users as $user) {
+          $xacml->datastreamRule->addUser($user->name);
+        }
+        foreach ($roles as $role) {
+          $xacml->datastreamRule->addRole($role);
+        }
+      }
+    }
+  }
+  // If we had to add users, roles or DSIDs, commit the changes and update the
+  // POLICY.
+  if (!empty($users) || !empty($roles) || !is_null($dsid)) {
+    $xacml->writeBackToFedora();
+  }
+}
+
+/**
+ * Sends mail to users.
+ *
+ * @param array $params
+ *   Array of parameters defining required behaviour.
+ * @param string $key
+ *   Defines required action.
+ */
+function islandora_scholar_embargo_send($params, $key) {
+  $module = 'islandora_scholar_embargo';
+  $to = $params['to'];
+  $from = variable_get('site_mail', 'admin@example.com');
+  $language = language_default();
+  $send = TRUE;
+  // Implode the datastream IDs so we don't spam e-mails for each datastream
+  // being lifted.
+  if ($params['dsid']) {
+    $params['dsid'] = implode(', ', $params['dsid']);
+  }
+  $result = drupal_mail($module, $key, $to, $language, $params, $from, $send);
+  if ($result['result'] == TRUE) {
+    drupal_set_message(t('Notification has been sent to @to.', array('@to' => $to)), 'status', FALSE);
+  }
+  else {
+    drupal_set_message(t('There was a problem sending your message and it was not sent.'), 'error', FALSE);
+  }
+}
+
+/**
+ * Send email notifications.
+ *
+ * @param string $key
+ *   Key identifying operation type
+ * @param IslandoraFedoraItem $item
+ *   Tuque item representing object on which embargo is acting.
+ * @param array $params
+ *   Setup array of mail parameters
+ */
+function islandora_embargo_user_notify($key, $item, $params) {
+  $users = islandora_scholar_embargo_users_to_notify($item);
+  switch ($key) {
+    case 'pre_expiry':
+      $pred = ISLANDORA_SCHOLAR_EMBARGO_NOTIFICATION_PRED;
+      break;
+  }
+
+  foreach ($users as $user) {
+    if (isset($user->mail)) {
+      $params['to'] = $user->mail;
+      islandora_scholar_embargo_send($params, $key);
+    }
+  }
+
+  if (isset($pred)) {
+    if ($params['dsid'] === NULL) {
+      $item->relationships->remove(ISLANDORA_SCHOLAR_EMBARGO_RELS_URI, $pred);
+    }
+    else {
+      foreach ($params['dsid'] as $dsid) {
+        if (!isset($item[$dsid])) {
+          $embargo_ds = $item->constructDatastream($dsid);
+        }
+        else {
+          $embargo_ds = $item[$dsid];
+        }
+        $embargo_ds->relationships->remove(ISLANDORA_SCHOLAR_EMBARGO_RELS_URI, $pred);
+      }
+    }
+  }
+}

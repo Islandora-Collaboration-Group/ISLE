@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<dsCompositeModel xmlns="info:fedora/fedora-system:def/dsCompositeModel#">
+  <!-- using this as a guide -->
+  <dsTypeModel ID="DC">
+    <form FORMAT_URI="http://www.openarchives.org/OAI/2.0/oai_dc/" MIME="application/xml"/>
+  </dsTypeModel>
+  <dsTypeModel ID="RELS-EXT" optional="true">
+    <form FORMAT_URI="info:fedora/fedora-system:FedoraRELSExt-1.0" MIME="application/rdf+xml"/>
+  </dsTypeModel>
+  <dsTypeModel ID="RELS-INT" optional="true">
+    <form FORMAT_URI="info:fedora/fedora-system:FedoraRELSInt-1.0" MIME="application/rdf+xml"/>
+  </dsTypeModel>
+  <dsTypeModel ID="MODS" optional="true">
+    <form FORMAT_URI="http://www.loc.gov/mods/v3" MIME="application/xml"/>
+  </dsTypeModel>
+  <dsTypeModel ID="OBJ" optional="true">
+    <form MIME="audio/mpeg"/>
+    <form MIME="audio/wav"/>
+    <form MIME="audio/x-wav"/>
+    <form MIME="audio/vnd.wave"/>
+    <form MIME="audio/flac"/>
+  </dsTypeModel>
+  <dsTypeModel ID="PROXY_MP3" optional="false">
+    <form MIME="audio/mpeg"/>
+  </dsTypeModel>
+  <dsTypeModel ID="TN" optional="false">
+    <form MIME="image/jpeg"/>
+    <form MIME="image/png"/>
+    <form MIME="image/gif"/>
+  </dsTypeModel>
+  <dsTypeModel ID="TECHMD">
+    <form MIME="application/xml"/>
+  </dsTypeModel>
+</dsCompositeModel>

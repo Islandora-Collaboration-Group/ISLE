@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for this module.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_ocr_uninstall() {
+  $variables = array(
+    'islandora_ocr_tesseract',
+    'islandora_ocr_tesseract_enabled_languages',
+  );
+  array_walk($variables, 'variable_del');
+  islandora_ocr_cleanup_derivatives();
+}
+
+/**
+ * Implements hook_disable().
+ */
+function islandora_ocr_disable() {
+  islandora_ocr_cleanup_derivatives();
+}
+
+/**
+ * Implements hook_enable().
+ */
+function islandora_ocr_enable() {
+  drupal_set_message(t('Note: Enabling the Islandora OCR module only enables support for OCR. It does NOT automatically add OCR functionality to modules whose OCR settings are disabled by default. Please check the OCR settings in the administration pages for any OCR-compatible Solution Packs.'), 'warning');
+}
+
+/**
+ * Cleans up variables used in derivative generation.
+ */
+function islandora_ocr_cleanup_derivatives() {
+  if (module_exists('islandora_book')) {
+    $book = variable_get('islandora_book_ingest_derivatives');
+    $book['ocr'] = FALSE;
+    variable_set('islandora_book_ingest_derivatives', $book);
+  }
+
+  if (module_exists('islandora_newspaper')) {
+    $newspaper = variable_get('islandora_newspaper_ingest_derivatives');
+    $newspaper['ocr'] = FALSE;
+    variable_set('islandora_newspaper_ingest_derivatives', $newspaper);
+  }
+}

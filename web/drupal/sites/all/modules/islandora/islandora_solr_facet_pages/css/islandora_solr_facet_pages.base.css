@@ -1,0 +1,20 @@
+/* base markup for islandora_solr_facet_pages */
+
+/* Letterer */
+ul.islandora-solr-facet-pages-letterer li
+{
+  background-image: none;
+  display: inline;
+  padding: 0;
+  text-align: center;
+}
+
+ul.islandora-solr-facet-pages-letterer li
+{
+  margin: 2px 5px;
+}
+
+ul.islandora-solr-facet-pages-letterer li.active a
+{
+  text-decoration: underline;
+}

@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * Installation hooks for Islandora Badges.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_badges_uninstall() {
+  $vars = array(
+    'islandora_badges_doi_xpath',
+    'islandora_badges_selected_cmodels',
+  );
+  array_walk($vars, 'variable_del');
+}

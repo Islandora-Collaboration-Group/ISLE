@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Implementations of installation hooks.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_solr_config_uninstall() {
+
+  // Removing variables.
+  $variables = array(
+    'islandora_solr_table_profile_display_row_no',
+    'islandora_solr_table_profile_table_class',
+  );
+  foreach ($variables as $variable) {
+    variable_del($variable);
+  }
+}

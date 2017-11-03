@@ -1,0 +1,7 @@
+TODO
+----
+- add ability to sort by number of results as well.
+- add ability to split up results in sections. eg: Aa-Ac, Ad-Ag, Ah-Aj, etc.
+- code works great, but OOP might be handier code architecture
+- make admin table dragable 
+

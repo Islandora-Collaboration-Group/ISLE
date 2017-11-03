@@ -1,0 +1,162 @@
+@import "../../shared-imports/vars";
+
+.jw-settings-menu {
+    display: none;
+    position: absolute;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+    right: 12px;
+    bottom: @controlbar-height;
+    max-width: 284px;
+    background-color: @menu-background-color;
+    pointer-events: auto;
+
+    .jw-settings-open & {
+        display: flex;
+    }
+
+    .jw-breakpoint-7 &,
+    .jw-breakpoint-6 &,
+    .jw-breakpoint-5 & {
+        .rect(284px, 232px);
+        max-height: 232px;
+    }
+
+    .jw-breakpoint-4 &,
+    .jw-breakpoint-3 & {
+        .rect(284px, 192px);
+        max-height: 192px;
+    }
+
+    .jw-breakpoint-2 & {
+        .rect(284px, 179px);
+        max-height: 179px;
+    }
+
+    .jw-flag-small-player & {
+        bottom: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        max-width: none;
+    }
+
+    .jw-icon.jw-button-color {
+        &::after {
+            &:extend(._pseudo, ._bottomleft, ._right);
+            .rect(24px, 100%);
+            box-shadow: inset 0 -3px 0 -1px currentColor;
+            margin: auto;
+            opacity: 0;
+            transition: opacity 150ms @default-timing-function;
+        }
+
+        &[aria-checked="true"] {
+            &::after {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.jw-settings-topbar {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    width: 100%;
+    background-color: @controlbar-background;
+    padding: 3px 5px 0;
+
+    .jw-settings-close {
+        margin-left: auto;
+    }
+}
+
+.jw-settings-submenu {
+    &:extend(._stretch);
+    display: none;
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 8px 20px 0 5px;
+
+    &.jw-settings-submenu-active {
+        display: block;
+    }
+
+    &::-webkit-scrollbar {
+        background-color: transparent;
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: @white;
+        border: 1px solid @menu-background-color;
+        border-radius: 6px;
+    }
+
+    .jw-flag-touch & {
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+.jw-settings-content-item {
+    color: @inactive-color;
+    width: 100%;
+    font-size: 12px;
+    line-height: 1;
+    padding: 7px 0 7px 15px;
+    cursor: pointer;
+
+    &.jw-settings-item-active {
+        color: @active-color;
+        font-weight: bold;
+    }
+
+    &:hover,
+    &:focus {
+        color: @hover-color;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    .jw-flag-small-player & {
+        line-height: 1.75;
+    }
+}
+
+.jw-settings-open {
+    .jw-breakpoint-2 &,
+    .jw-flag-small-player &,
+    .jw-flag-touch & {
+        .jw-display-container {
+            display: none;
+        }
+
+        &.jw-controls {
+            z-index: 1;
+        }
+    }
+
+    .jw-flag-small-player & {
+        .jw-controlbar {
+            display: none;
+        }
+    }
+
+    .jw-icon-settings {
+        &::after {
+            opacity: 1;
+        }
+    }
+
+    .jw-tooltip-settings {
+        display: none;
+    }
+}
+
+.jw-sharing-link {
+    cursor: pointer;
+}

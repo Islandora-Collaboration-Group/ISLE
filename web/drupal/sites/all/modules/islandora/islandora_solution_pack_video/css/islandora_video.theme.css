@@ -1,0 +1,71 @@
+.islandora-video-content {
+  background-color: #F2F2F2;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 15px;
+  width: auto;
+  max-width: 100%;
+  float: left;
+}
+
+.islandora-video-content img {
+  margin: 0;
+  display: block;
+}
+
+.islandora-video-metadata {
+  display: block;
+  clear: both;
+}
+
+/* This is kept for legacy reasons. */
+dl.islandora-video-fields {
+  width: 100%;
+}
+
+dl.islandora-metadata-fields {
+    width:100%;
+}
+
+.islandora-video-metadata dt {
+  font-weight: normal;
+  text-align: right;
+  font-weight: bold;
+  padding-right: 0;
+}
+
+.islandora-video-metadata dd {
+  padding-left: 40px;
+}
+
+
+.islandora-video-metadata dt,
+.islandora-video-metadata dd {
+  border-top: 1px solid #e5e5e5;
+}
+
+.islandora-video-metadata dt.first,
+.islandora-video-metadata dd.first {
+  border-top: 0;
+}
+
+body.two-sidebars .islandora-video-sidebar {
+    clear: both;
+    width: 100%;
+}
+
+@media all and (min-width: 768px) {
+
+  body.no-sidebars .islandora-video-sidebar {
+    padding-left: 20px;
+  }
+
+  body.no-sidebars .islandora-video-sidebar {
+    float: right; /* LTR */
+    width: 35%;
+    clear: none;
+  }
+
+}

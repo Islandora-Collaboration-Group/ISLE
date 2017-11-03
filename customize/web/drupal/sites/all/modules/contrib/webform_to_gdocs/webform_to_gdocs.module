@@ -1,0 +1,198 @@
+<?php
+
+require_once __DIR__ . '/google-api-php-client/src/Google/autoload.php';
+
+/**
+ * Implements hook_menu().
+ */
+function webform_to_gdocs_menu() {
+
+  $items['admin/config/content/webform/overview'] = array(
+    'title' => 'Webform settings',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+
+  $items['admin/config/content/webform/gdocs'] = array(
+    'title' => 'Webform to Google Docs',
+    'description' => 'Configure the Webform to Google Docs module.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('webform_to_gdocs_configure_form'),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer webform_to_gdocs'),
+    'file' => 'includes/webform_to_gdocs.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  $items['node/%webform_menu/webform/gdocs'] = array(
+    'title' => 'Google Docs',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('webform_to_gdocs_attach_form', 1),
+    'access callback' => 'user_access',
+    'access arguments' => array('attach webform to gdocs'),
+    'file' => 'includes/webform_to_gdocs.attach.inc',
+    'weight' => 10,
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  $items['webform_to_gdocs/oauth2callback'] = array(
+    'page callback' => 'webform_to_gdocs_oauth2callback',
+    'access callback' => true,
+    'file' => 'includes/oauth2callback.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_perm().
+ */
+function webform_to_gdocs_perm() {
+  return array('administer webform_to_gdocs', 'attach webform to gdocs');
+}
+
+/**
+ * Implements hook_nodeapi().
+ */
+function webform_to_gdocs_nodeapi(&$node, $op) {
+  // Delete any webform_to_gdocs references to this node.
+  if ($op == 'delete') {
+    db_query("DELETE FROM {webform_to_gdocs_webforms} WHERE nid = %d", $node->nid);
+  }
+}
+
+/**
+ * Callbacks for a Webform submission.
+ */
+function webform_to_gdocs_webform_submission_insert($node, $submission) {
+  // Is this Webform attached to a Google Doc?
+  $qresult = db_query("SELECT * FROM {webform_to_gdocs_webforms} gw WHERE gw.nid = :nid LIMIT 1", array(':nid' =>$node->nid));
+  $result = $qresult->fetchAssoc();
+
+  if (0 == $qresult->rowCount() || empty($result['gdoc_name']) || empty($result['gdoc_sheet'])) {
+    return;
+  }
+
+  // Build out row to insert.
+  $google_row = array();
+
+  foreach ($submission->data as $key => $value) {
+
+    // Determine what data to store depending upon component type.
+    switch ($node->webform['components'][$key]['type']) {
+
+      case 'select':
+
+        $insert_value = '';
+
+        $options = explode("\n", $node->webform['components'][$key]['extra']['items']);
+
+        foreach ($options as &$option) {
+
+          $parts = explode('|', $option);
+
+          if (in_array($parts[0], $value)) {
+            $insert_value .= $parts[1] . "\n";
+          }
+        }
+
+        $insert_value = trim($insert_value);
+        break;
+
+      case 'date':
+      case 'email':
+      case 'number':
+      case 'textarea':
+      case 'textfield':
+      case 'time':
+        $insert_value = implode(', ', $value);
+        break;
+
+      default:
+        $insert_value = '';
+        break;
+
+    }
+
+    $spreadsheet_column = $node->webform['components'][$key]['form_key'];
+
+    $google_row[$spreadsheet_column] = $insert_value;
+  }
+  try {
+    // Ensure we have a working access token.
+    _webform_to_gdocs_google_drive_get_service();
+    $access_token = variable_get('webform_to_gdocs_access_token', '');
+    $access_token = @json_decode($access_token);
+
+    // Insert it via Google Spreadsheets API.
+    $ch = curl_init();
+    $url = 'https://spreadsheets.google.com/feeds/list/' . $result['gdoc_name'] . '/' . $result['gdoc_sheet'] . '/private/full';
+
+    $post_body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:gsx="http://schemas.google.com/spreadsheets/2006/extended">';
+    foreach ($google_row as $col => $val) {
+      // Only allow alphanumeric + underscores in column name.
+      $col = preg_replace("/[^\da-z]/i", '', $col);
+      $post_body .= '<gsx:' . $col . '>' . check_plain($val) . '</gsx:' . $col . '>';
+    }
+    $post_body .= '</entry>';
+
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $post_body);
+    curl_setopt($ch, CURLOPT_HEADER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Authorization: Bearer ' . $access_token->access_token,
+        'Content-type: application/atom+xml'
+    ));
+
+    $result = curl_exec($ch);
+
+    $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    if (!in_array(intval($httpcode), array(200, 201))) {
+      throw new Exception("Invalid response code ({$httpcode}) from Google Docs API.");
+    }
+
+    curl_close($ch);
+
+  } catch (Exception $e) {
+    $msg = $e->getMessage();
+    watchdog('webform_to_gdocs', $msg);
+    $to = variable_get('webform_to_gdocs_error_email_address', false);
+    if ($to) {
+      mail($to, "Error inserting webform submission into Google doc, {$node->title}", $msg);
+    }
+  }
+}
+
+function _webform_to_gdocs_google_api_scopes() {
+  return array(
+    'https://www.googleapis.com/auth/drive',
+    'https://spreadsheets.google.com/feeds',
+    'https://www.googleapis.com/auth/userinfo.email',
+    'https://www.googleapis.com/auth/plus.me',
+  );
+}
+
+function _webform_to_gdocs_google_drive_get_service() {
+
+  $client = new Google_Client();
+
+  $client->setApplicationName(variable_get('webform_to_gdocs_app_name', ''));
+  $client->setClientId(variable_get('webform_to_gdocs_client_id', ''));
+  $client->setClientSecret(variable_get('webform_to_gdocs_client_secret', ''));
+  $client->setScopes(_webform_to_gdocs_google_api_scopes());
+
+  $access_token = variable_get('webform_to_gdocs_access_token', '');
+  $client->setAccessToken($access_token);
+
+  if ($client->getAuth()->isAccessTokenExpired()) {
+
+    $access_token_decoded = json_decode($access_token);
+    $client->getAuth()->refreshToken($access_token_decoded->refresh_token);
+
+    $new_access_token = $client->getAccessToken();
+    variable_set('webform_to_gdocs_access_token', $new_access_token);
+  }
+
+  return new Google_Service_Drive($client);
+}

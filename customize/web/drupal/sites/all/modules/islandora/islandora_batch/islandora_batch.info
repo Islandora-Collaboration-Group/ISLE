@@ -1,0 +1,14 @@
+name = Islandora Batch
+description = "Batch ingest objects"
+package = Islandora Tools
+version = 7.x-dev
+core = 7.x
+dependencies[] = islandora
+files[] = includes/preprocessor_base.inc
+files[] = includes/islandora_batch_object_base.inc
+files[] = includes/islandora_scan_batch.inc
+files[] = views/handlers/IslandoraBatchStateFieldHandler.inc
+files[] = views/handlers/IslandoraBatchViewsFieldHandlerAction.inc
+stylesheets[all][] = css/views_table_contextual_links_fix.css
+php = 5.3
+

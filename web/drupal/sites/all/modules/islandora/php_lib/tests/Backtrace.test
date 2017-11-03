@@ -1,0 +1,44 @@
+<?php
+// @codingStandardsIgnoreStart
+/**
+ * @file
+ * Unit Tests.
+ */
+
+/**
+ * Unit Tests for the FormControl class.
+ */
+class PHPLib_Backtrace_TestCase extends DrupalUnitTestCase {
+
+  /**
+   * Get Test info.
+   *
+   * @return array
+   *   Properties that are displayed in the test selection form.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Backtrace Unit Tests.',
+      'description' => 'Unit tests for Backtrace.inc.',
+      'group' => 'PHP Lib',
+    );
+  }
+
+  /**
+   * SetUp() performs any pre-requisite tasks that need to happen.
+   */
+  public function setUp() {
+    // Enable any modules required for the test.
+    parent::setUp('php_lib');
+    module_load_include('inc', 'php_lib', 'Backtrace');
+  }
+
+  /**
+   * Test constructing the Form definition.
+   */
+  public function testFunctions() {
+
+  }
+
+}
+// @codingStandardsIgnoreEnd

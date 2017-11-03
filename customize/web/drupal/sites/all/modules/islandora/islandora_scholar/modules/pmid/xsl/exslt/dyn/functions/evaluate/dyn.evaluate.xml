@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<exslt:function xmlns:exslt="http://exslt.org/documentation" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:vcf="http://www.ietf.org/internet-drafts/draft-dawson-vcard-xml-dtd-03.txt" version="1" module="dyn" status="new">
+   <exslt:name>evaluate</exslt:name>
+   <rdf:Description ID="dyn:evaluate">
+      <dc:subject>EXSLT</dc:subject>
+      <dc:subject>dyn</dc:subject>
+      <dc:subject>evaluate</dc:subject>
+      <exslt:revision>
+         <rdf:Description ID="dyn:evaluate.1">
+            <exslt:version>1</exslt:version>
+            <dc:creator rdf:parseType="Resource">
+               <vcf:fn>Craeg K. Strong</vcf:fn>
+               <vcf:email>cstrong@arielpartners.com</vcf:email>
+            </dc:creator>
+            <dc:date>2001-11-25</dc:date>
+            <dc:description>
+               <html:div><!-- if you want to use DocBook, add written-in="docbook" to summary element -->
+         Evaluates a string as an XPath expression.
+      </html:div>
+            </dc:description>
+         </rdf:Description>
+      </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="dyn:evaluate.1.1">
+         <exslt:version>1.1</exslt:version>
+         <dc:creator email="craig.stewart@nottingham.ac.uk" 
+                     url="">Craig Stewart</dc:creator>
+         <dc:date>2002-08-21</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">Added 4XSLT and libxslt implementation to the list.</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="dyn:evaluate.1.2">
+         <exslt:version>1.2</exslt:version>
+         <dc:creator email="craig.stewart@nottingham.ac.uk" 
+                     url="">Craig Stewart</dc:creator>
+         <dc:date>2002-11-12</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">Updated 4XSLT version to 0.12.0a3.</dc:description>
+      </rdf:Description>
+   </exslt:revision> 
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="dyn:evaluate.1.3">
+         <exslt:version>1.3</exslt:version>
+         <dc:creator email="craig.stewart@nottingham.ac.uk" 
+                     url="">Craig Stewart</dc:creator>
+         <dc:date>2003-01-30</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">Added Xalan-J implementation to the list.</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   </rdf:Description>
+   <exslt:doc>
+      <html:div><!-- if you want to use DocBook, add written-in="docbook" to documentation element -->
+         <html:p>
+        The <html:code>dyn:evaluate</html:code> function evaluates a string as an XPath expression and returns the resulting value, which might be a boolean, number, string, node set, result tree fragment or external object. The sole argument is the string to be evaluated.
+      </html:p>
+         <html:p>
+        The string is always evaluated exactly as if it had been literally included in place of the call to the <html:code>dyn:evaluate</html:code> function. For example:
+      </html:p>
+         <html:pre>
+&lt;xsl:value-of select="dyn:evaluate('my:extension(. * $variable)')" /&gt;
+</html:pre>
+         <html:p>
+        Creates a text node with exactly the same value as:
+      </html:p>
+         <html:pre>
+&lt;xsl:value-of select="my:extension(. * $variable)" /&gt;
+</html:pre>
+         <html:p>
+        In other words, the context information used when evaluating the XPath expression passed as the argument to the <html:code>dyn:evaluate</html:code> function is exactly the same as the context information used when evaluating the <html:code>dyn:evaluate</html:code> function. This context information includes:
+      </html:p>
+         <html:ul>
+            <html:li>the context node, such that paths are evaluated relative to the context node at the point where the <html:code>dyn:evaluate</html:code> function is called</html:li>
+            <html:li>the context position, such that the expression can contain calls to the <html:code>position</html:code> function</html:li>
+            <html:li>the context size, such that the expression can contain calls to the <html:code>last</html:code> function</html:li>
+            <html:li>variable bindings, such that the expression can contain variable references</html:li>
+            <html:li>function library, such that the expression can contain calls to extension functions</html:li>
+            <html:li>namespace declarations, such that paths can contain prefixes</html:li>
+            <html:li>the current node, such that the expression can contain calls to the <html:code>current</html:code> function</html:li>
+            <html:li>key definitions, such that the expression can contain calls to the <html:code>key</html:code> function</html:li>
+            <html:li>decimal formats, such that the expression can contain calls to the <html:code>format-number</html:code> function</html:li>
+         </html:ul>
+        <html:p>
+          If the expression string passed as the second argument is an invalid XPath expression (including an empty string), this function returns an empty node set.
+        </html:p>
+         <html:p>
+        You should only use this function if the expression must be constructed dynamically - otherwise it is much more efficient to use the expression literally. For expressions that simply give an element or attribute's name (to select a child element or attribute), it is more efficient to use an expression in the style:
+      </html:p>
+         <html:pre>
+*[name() = $expression]
+</html:pre>
+      </html:div>
+   </exslt:doc>
+   <exslt:definition>
+      <exslt:return type="object">
+         <html:div/>
+      </exslt:return>
+      <exslt:arg name="expression" type="string" default="'.'" optional="no">
+         <html:div/>
+      </exslt:arg>
+   </exslt:definition>
+   <exslt:implementations>
+      <exslt:vendor-implementation
+              version="1"
+              vendor="Xalan-J from Apache"
+              vendor-url="http://xml.apache.org/xalan-j"
+              vendor-version="2.4.1" />
+      <exslt:vendor-implementation
+              version="1"
+              vendor="4XSLT, from 4Suite."
+              vendor-url="http://4Suite.org"
+              vendor-version="0.12.0a3" />
+      <exslt:vendor-implementation
+              version="1"
+              vendor="libxslt from Daniel Veillard et al."
+              vendor-url="http://xmlsoft.org/XSLT/"
+              vendor-version="1.0.19" />
+   </exslt:implementations>
+   <exslt:use-cases/>
+</exslt:function>

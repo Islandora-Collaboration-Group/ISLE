@@ -1,0 +1,22 @@
+name = Objective Forms
+description = Provides functions and classes that allow Drupal Forms to be treated as objects.
+
+dependencies[] = php_lib
+package = Islandora Dependencies
+version = 7.x-dev
+core = 7.x
+
+files[] = Form.inc
+files[] = FormElement.inc
+files[] = FormElementRegistry.inc
+files[] = FormPopulator.inc
+files[] = FormProperty.inc
+files[] = FormPropertyInterface.inc
+files[] = FormStorage.inc
+files[] = FormValueTracker.inc
+files[] = FormValues.inc
+files[] = tests/Form.test
+files[] = tests/FormElement.test
+files[] = tests/FormElementRegistry.test
+files[] = tests/FormValues.test
+files[] = tests/Utils.test

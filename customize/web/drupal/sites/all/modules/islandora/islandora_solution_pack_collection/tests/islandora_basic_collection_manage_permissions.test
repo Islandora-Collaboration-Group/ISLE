@@ -1,0 +1,85 @@
+<?php
+
+/**
+ * @file
+ * Tests permissions in the islandora basic collection.
+ */
+
+class IslandoraBasicCollectionPermissionsTestCase extends IslandoraWebTestCase {
+
+  /**
+   * Get test information.
+   *
+   * @see DrupalWebTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Islandora Basic Collection Manage Permissions',
+      'description' => 'Ensure the manage tab is shown based on current permissions.',
+      'group' => 'Islandora Basic Collection',
+    );
+  }
+
+  /**
+   * Set up test.
+   *
+   * @see DrupalWebTestCase::setUp()
+   */
+  public function setUp() {
+    parent::setUp(array('islandora_basic_collection'));
+  }
+
+  /**
+   * Test the permissions the module provides.
+   */
+  public function testManageCollectionPermissions() {
+    // Test permission ISLANDORA_VIEW_OBJECTS.
+    $user = $this->drupalCreateUser(array(ISLANDORA_VIEW_OBJECTS));
+    $this->drupalLogin($user);
+    $this->clickLink(t('Islandora Repository'));
+    $this->assertNoLink('Manage', 'Manage tab is not on current page.');
+
+    // Test permission ISLANDORA_VIEW_OBJECTS,
+    // ISLANDORA_BASIC_COLLECTION_CREATE_CHILD_COLLECTION.
+    $user = $this->drupalCreateUser(array(
+      ISLANDORA_VIEW_OBJECTS,
+      ISLANDORA_INGEST,
+      ISLANDORA_BASIC_COLLECTION_CREATE_CHILD_COLLECTION,
+    ));
+    $this->drupalLogin($user);
+    $this->clickLink(t('Islandora Repository'));
+    $this->assertLink('Manage', 0, 'Manage tab is on current page.');
+    $this->clickLink(t('Manage'));
+    $this->assertLink('Collection', 0, 'Collection tab is on current page.');
+    $this->assertNoLink('Properties', 'Properties tab is not on current page.');
+
+    // Test permission ISLANDORA_VIEW_OBJECTS,
+    // ISLANDORA_BASIC_COLLECTION_MANAGE_COLLECTION_POLICY.
+    $user = $this->drupalCreateUser(array(
+      ISLANDORA_VIEW_OBJECTS,
+      ISLANDORA_BASIC_COLLECTION_MANAGE_COLLECTION_POLICY,
+      ISLANDORA_METADATA_EDIT,
+    ));
+    $this->drupalLogin($user);
+    $this->clickLink(t('Islandora Repository'));
+    $this->assertLink('Manage', 0, 'Manage tab is on current page.');
+    $this->clickLink(t('Manage'));
+    $this->assertLink('Collection', 0, 'Collection tab is on current page.');
+    $this->assertNoLink('Properties', 'Properties tab is not on current page.');
+
+    // Test permission ISLANDORA_VIEW_OBJECTS,
+    // ISLANDORA_BASIC_COLLECTION_MIGRATE_COLLECTION_MEMBERS.
+    $user = $this->drupalCreateUser(array(
+      ISLANDORA_VIEW_OBJECTS,
+      ISLANDORA_BASIC_COLLECTION_MIGRATE_COLLECTION_MEMBERS,
+      ISLANDORA_METADATA_EDIT,
+    ));
+    $this->drupalLogin($user);
+    $this->clickLink(t('Islandora Repository'));
+    $this->assertLink('Manage', 0, 'Manage tab is on current page.');
+    $this->clickLink(t('Manage'));
+    $this->assertLink('Collection', 0, 'Collection tab is on current page.');
+    $this->assertNoLink('Properties', 'Properties tab is not on current page.');
+  }
+
+}

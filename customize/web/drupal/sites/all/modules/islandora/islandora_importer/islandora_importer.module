@@ -1,0 +1,193 @@
+<?php
+
+/**
+ * @file
+ * Defines all the hooks this module implements.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_importer_menu() {
+  return array(
+    'islandora/object/%islandora_object/manage/collection/batch_import' => array(
+      'title' => 'Batch Import Objects',
+      'type' => MENU_LOCAL_ACTION,
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('islandora_importer_form', 2),
+      'access callback' => 'islandora_importer_access_callback',
+      'access arguments' => array(2),
+    ),
+  );
+}
+
+/**
+ * Implements hook_admin_paths().
+ */
+function islandora_importer_admin_paths() {
+  return array(
+    'islandora/object/*/manage/collection/batch_import' => TRUE,
+  );
+}
+
+/**
+ * Wrap a module_invoke_all() call.
+ */
+function islandora_importer_get_options() {
+  $options = module_invoke_all('islandora_importer');
+  drupal_alter('islandora_importer', $options);
+  return $options;
+}
+
+/**
+ * Access callback for menu path.
+ */
+function islandora_importer_access_callback($object) {
+  if (!islandora_object_access(ISLANDORA_INGEST, $object)) {
+    return FALSE;
+  }
+  $has_import_options = count(islandora_importer_get_options()) > 0;
+  // For now only permit batch importing into collections?
+  $is_collection = in_array('islandora:collectionCModel', $object->models);
+  return $is_collection && $has_import_options;
+}
+
+/**
+ * Multi-step form builder.
+ *
+ * Initially, allows the user to select an importer; when a selection has been
+ * made, get the form from the "batch class".
+ *
+ * @param array $form
+ *   The Drupal form definition.
+ * @param array $form_state
+ *   The Drupal form state.
+ * @param AbstractObject $collection
+ *   An AbstractObject for the collection that we are ingesting into.
+ *
+ * @return array
+ *   The Drupal form definition.
+ */
+function islandora_importer_form(array $form, array &$form_state, AbstractObject $collection) {
+  if (isset($form_state['storage']['importer'])) {
+    // Importers need something like:
+    // The first three correspond the the parameters to module_load_include,
+    // and the class is one which extends IslandoraBatchImporter
+    // (which is defined in islandora_importer.inc)
+    extract($form_state['storage']['importer']);
+    if (is_subclass_of($class, 'IslandoraBatchImporter')) {
+      return $class::getForm($form_state);
+    }
+    else {
+      drupal_set_message(t("The %title importer does not correctly subclass IslandoraBatchImporter. Inform the particular importer module's maintainer!", array('%title' => $title)), 'error');
+      unset($form_state['storage']['options'][$form_state['storage']['importer_name']]);
+      unset($form_state['storage']['importer']);
+    }
+  }
+
+  if (!isset($form_state['storage']['importer'])) {
+    $options = islandora_importer_get_options();
+    if (!isset($form_state['storage']['options'])) {
+      $form_state['storage']['options'] = $options;
+    }
+    if (count($options) > 0) {
+      $ops = array();
+      foreach (array_keys($options) as $op) {
+        $ops[$op] = $options[$op]['title'];
+      }
+
+      if (!isset($form_state['storage']['parent_pid'])) {
+        $form_state['storage']['parent_pid'] = $collection->id;
+      }
+
+      $form = array_merge($form, array(
+        'importer' => array(
+          '#type' => 'select',
+          '#title' => t('Importer'),
+          '#description' => t('Select which importer to use.'),
+          '#options' => $ops,
+        ),
+        'submit' => array(
+          '#type' => 'submit',
+          '#value' => t('Next'),
+        ),
+      ));
+
+      return $form;
+    }
+    else {
+      drupal_set_message(t('There are no valid importer plugins enabled.'), 'error');
+      return $form;
+    }
+  }
+}
+
+/**
+ * Batch form validation handler.
+ */
+function islandora_importer_form_validate(array $form, array &$form_state) {
+  if (isset($form_state['storage']['importer'])) {
+    extract($form_state['storage']['importer']);
+    if (is_subclass_of($class, 'IslandoraBatchImporter') && !$class::readyForBatch($form_state)) {
+      form_set_error('', t('Not ready to start the batch ingest.  Make sure all necessary information has been entered.'));
+    }
+  }
+}
+
+/**
+ * Default batch form submit handler.
+ *
+ * If we do not have an importer (we're selecting one), save the selection into
+ * storage.
+ *
+ * If we do (and are of course not being overridden by the form from an
+ * individual importer plugin), we ask the batch class if we have what they need
+ * (providing them with the form state to check) and if so, ask for them to
+ * package up what they need into a serializable format to pass along in a
+ * batch operation and finally kick off the batch process.
+ *
+ * @param array $form
+ *   An array containing the form structure.
+ * @param array $form_state
+ *   An array containing the form state.
+ */
+function islandora_importer_form_submit(array $form, array &$form_state) {
+  if (isset($form_state['storage']['importer'])) {
+    extract($form_state['storage']['importer']);
+    if (is_subclass_of($class, 'IslandoraBatchImporter')) {
+
+      $preprocessor = new $class(
+        islandora_get_tuque_connection(),
+        $class::getBatchInfo($form_state),
+        $form_state['storage']['parent_pid']
+      );
+
+      if ($preprocessor->ingestImmediately()) {
+        // Ingest should be started by normal form submission process.
+        islandora_batch_set_operations(array(
+          'preprocessor' => $preprocessor,
+        ));
+      }
+      else {
+        // Just preprocess the set.
+        islandora_batch_handle_preprocessor($preprocessor);
+        module_load_include('inc', 'islandora_batch', 'includes/db');
+        drupal_set_message(t('<a href="@url">Set @id</a> was preprocessed, containing @count objects.', array(
+          '@url' => url('islandora_batch/reports/queue/' . $preprocessor->getSetId()),
+          '@id' => $preprocessor->getSetId(),
+          '@count' => islandora_batch_get_count_of_queued_set_objects($preprocessor->getSetId()),
+        )));
+      }
+    }
+  }
+  else {
+    $importer_name = $form_state['values']['importer'];
+    $form_state['storage']['importer_name'] = $importer_name;
+    $form_state['storage']['importer'] = $form_state['storage']['options'][$importer_name];
+
+    if (!isset($form_state['storage']['parent_pid'])) {
+      $form_state['storage']['parent_pid'] = $form_state['values']['parent_pid'];
+    }
+    $form_state['rebuild'] = TRUE;
+  }
+}

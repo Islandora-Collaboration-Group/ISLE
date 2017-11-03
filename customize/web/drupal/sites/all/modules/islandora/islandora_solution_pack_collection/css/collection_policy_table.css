@@ -1,0 +1,15 @@
+/*
+    Document   : collection_policy_table.css
+    Created on : June 25, 2015
+    Description: CSS for collection policy table,
+*/
+
+.collection_policy_table_prompt {
+  width: 35%;
+}
+.collection_policy_table_namespace {
+  width: 10%;
+}
+.collection_policy_table_title {
+  width: 50%;
+}

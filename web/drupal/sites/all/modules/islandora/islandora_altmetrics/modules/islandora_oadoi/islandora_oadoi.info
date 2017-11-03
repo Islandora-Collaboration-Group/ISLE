@@ -1,0 +1,5 @@
+name = Islandora oaDOI
+core = 7.x
+description = Islandora oaDOI linking.
+dependencies[] = islandora_badges
+package = Islandora Tools

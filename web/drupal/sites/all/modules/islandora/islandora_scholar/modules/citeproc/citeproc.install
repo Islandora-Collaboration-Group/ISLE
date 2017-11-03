@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Installation hooks and friends.
+ */
+
+/**
+ * Notify about new dependencies, just in case.
+ */
+function citeproc_update_7100() {
+  if (!module_exists('libraries') || !libraries_get_path('citeproc-php')) {
+    drupal_set_message(t('The "citeproc" module is now dependent on "libraries", and the "citeproc-php" library must be installed. See the README for more info.'), 'warning');
+  }
+}

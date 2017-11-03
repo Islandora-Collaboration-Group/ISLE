@@ -1,0 +1,57 @@
+<?php
+/**
+ * @file
+ * Module used to handle book batches through the UI and drush.
+ */
+
+/**
+ * Implements hook_CMODEL_PID_islandora_object_ingested().
+ */
+function islandora_book_batch_islandora_bookCModel_islandora_object_ingested($object) {
+  if ($object->relationships->get(ISLANDORA_RELS_EXT_URI, 'book-batched', 'true', RELS_TYPE_PLAIN_LITERAL)) {
+    if (module_exists('rules')) {
+      // Allow rules to respond to this event. (To allow configurable messages
+      // for mailing and such).
+      rules_invoke_event('islandora_book_batch_ingested', $object->id);
+    }
+    $object->relationships->remove(ISLANDORA_RELS_EXT_URI, 'book-batched', 'true', RELS_TYPE_PLAIN_LITERAL);
+    $object->relationships->remove(ISLANDORA_RELS_EXT_URI, 'email-admin-when-ingested', 'true', RELS_TYPE_PLAIN_LITERAL);
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_book_batch_menu() {
+  $items = array();
+
+  $items['islandora/object/%islandora_object/manage/collection/book_batch'] = array(
+    'title' => 'Book Batch',
+    'access callback' => 'islandora_book_batch_menu_access',
+    'access arguments' => array(2),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_book_batch_form', 2),
+    'file' => 'includes/batch.form.inc',
+    'type' => MENU_LOCAL_ACTION,
+  );
+
+  return $items;
+}
+
+/**
+ * Menu access callback.
+ */
+function islandora_book_batch_menu_access($object) {
+  if (!islandora_object_access(ISLANDORA_INGEST, $object)) {
+    return FALSE;
+  }
+
+  $c = 'COLLECTION_POLICY';
+  if (isset($object[$c]) && islandora_datastream_access(ISLANDORA_VIEW_OBJECTS, $object[$c])) {
+    $cp = new CollectionPolicy($object[$c]->content);
+
+    return array_key_exists('islandora:bookCModel', $cp->getContentModels());
+  }
+
+  return FALSE;
+}

@@ -1,0 +1,23 @@
+<?php
+/**
+ * @file
+ * Install hooks for the module.
+ */
+
+
+/**
+ * Rename the datepicker element as it collides with another element.
+ */
+function xml_form_elements_update_7001(&$sandbox) {
+  $batch = array(
+    'operations' => array(
+      array('xml_form_elements_rename_datepicker_batch_operation', array()),
+    ),
+    'title' => t('Renaming datepicker element...'),
+    'init_message' => t('Preparing to rename element.'),
+    'progress_message' => t('Time elapsed: @elapsed <br/>Estimated time remaining @estimate.'),
+    'error_message' => t('An error has occurred.'),
+    'file' => drupal_get_path('module', 'xml_form_elements') . '/includes/update.batch.inc',
+  );
+  batch_set($batch);
+}

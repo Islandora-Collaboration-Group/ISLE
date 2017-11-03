@@ -1,0 +1,78 @@
+
+.islandora-large-image-content {
+  background-color: #F2F2F2;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 15px;
+}
+
+.islandora-large-image-content img {
+  margin: 0;
+  display: block;
+}
+
+.islandora-large-image-metadata {
+  display: block;
+  clear: both;
+}
+
+/* This is kept for legacy reasons. */
+dl.islandora-large-image-fields {
+  width: 100%;
+}
+
+dl.islandora-metadata-fields {
+    width:100%;
+}
+
+.islandora-large-image-metadata dt {
+  font-weight: normal;
+  text-align: right;
+  font-weight: bold;
+  padding-right: 0;
+}
+
+.islandora-large-image-metadata dd {
+  padding-left: 40px;
+}
+
+
+.islandora-large-image-metadata dt,
+.islandora-large-image-metadata dd {
+  border-top: 1px solid #e5e5e5;
+}
+
+.islandora-large-image-metadata dt.first,
+.islandora-large-image-metadata dd.first {
+  border-top: 0;
+}
+
+body.two-sidebars .islandora-large-image-sidebar {
+    clear: both;
+    width: 100%;
+}
+
+a#clip {
+  margin-left: 5px;
+}
+
+@media all and (min-width: 768px) {
+
+  body.no-sidebars .islandora-large-image-content {
+    width: 65%;
+    float: left; /* LTR */
+  }
+
+  body.no-sidebars .islandora-large-image-sidebar {
+    padding-left: 20px;
+  }
+
+  body.no-sidebars .islandora-large-image-sidebar {
+    float: right; /* LTR */
+    width: 35%;
+    clear: none;
+  }
+
+}

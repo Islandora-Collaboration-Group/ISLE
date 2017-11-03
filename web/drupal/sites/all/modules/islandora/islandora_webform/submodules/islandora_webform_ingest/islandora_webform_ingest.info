@@ -1,0 +1,6 @@
+name = Islandora Webform Ingest
+description = Permits islandora webforms to serve as sources for fedora object metadata.
+core = 7.x
+package = Islandora
+dependencies[] = islandora_webform
+dependencies[] = xml_forms

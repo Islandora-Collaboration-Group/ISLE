@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * Support code to harvest records, given DOIs.
+ */
+
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_doi_menu() {
+  return array(
+    'admin/islandora/solution_pack_config/scholar/islandora_doi' => array(
+      'title' => 'DOI Configuration',
+      'type' => MENU_LOCAL_TASK,
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('islandora_doi_admin_form'),
+      'access arguments' => array('access administration pages'),
+      'file' => 'includes/admin.form.inc',
+    ),
+  );
+}

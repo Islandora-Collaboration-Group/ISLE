@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "/schema/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:html="http://www.w3.org/1999/xhtml"><head><title>EXSLT - str:tokenize - Implementer Page</title><link rel="stylesheet" href="base.css"/></head><body><h1 id="#title"><a href="http://www.exslt.org/">EXSLT</a> - <a href="http://www.exslt.org/str">str</a>:<a href="http://www.exslt.org/str/functions/tokenize">tokenize</a> - Implementer Page</h1><table><tr><td id="menu"><p class="level1"><a href="index.html">User Page</a></p><p class="level1"><a href="../../../howto.html">How To</a></p><p class="level1"><a href="../../../download.html">Downloads</a></p><p class="level1">Modules</p><p class="level2"><a href="../../../date/date.html">Dates and Times</a></p><p class="level2"><a href="../../../dyn/dyn.html">Dynamic</a></p><p class="level2"><a href="../../../exsl/exsl.html">Common</a></p><p class="level2"><a href="../../../func/func.html">Functions</a></p><p class="level2"><a href="../../../math/math.html">Math</a></p><p class="level2"><a href="../../../random/random.html">Random</a></p><p class="level2"><a href="../../../regexp/regexp.html">Regular Expressions</a></p><p class="level2"><a href="../../../set/set.html">Sets</a></p><p class="level2"><a href="../../../str/str.html">Strings</a></p><p class="level3"><a href="../../functions/align/str.align.html">str:align()</a></p><p class="level3"><a href="../../functions/concat/str.concat.html">str:concat()</a></p><p class="level3"><a href="../../functions/decode-uri/str.decode-uri.html">str:decode-uri()</a></p><p class="level3"><a href="../../functions/encode-uri/str.encode-uri.html">str:encode-uri()</a></p><p class="level3"><a href="../../functions/padding/str.padding.html">str:padding()</a></p><p class="level3"><a href="../../functions/replace/str.replace.html">str:replace()</a></p><p class="level3"><a href="../../functions/split/str.split.html">str:split()</a></p><p class="level3"><a href="../../functions/tokenize/str.tokenize.html">str:tokenize()</a></p><p class="level1"><a href="../../../submissions/">Submissions</a></p><p class="level1"><a href="../../../list">Mailing List</a></p><p class="level1"><a href="../../../contact.html">Contact</a></p></td><td id="content"><p><b>Version: </b>1<br/><b>Status: </b>new<br/><b>User Page: </b><a href="index.html">index.html</a><br/><b>XML Definition: </b><a href="str.tokenize.xml">str.tokenize.xml</a><br/><b>Function Package: </b><a href="str.tokenize.zip">str.tokenize.zip</a></p><h4>Function Syntax</h4><pre><var>node-set</var> <b>str:tokenize</b>(<var>string</var>, <var>string</var>?)</pre><h4>Template Syntax</h4><pre>&lt;xsl:call-template name="<b>str:tokenize</b>"&gt;
+   &lt;xsl:with-param name="string" select="<var>string</var>" /&gt;
+   &lt;xsl:with-param name="delimiters" select="<var>string</var>" /&gt;?
+&lt;/xsl:call-template&gt;</pre><div><p>
+         The <code>str:tokenize</code> function splits up a string and returns a node set of <code>token</code> elements, each containing one token from the string.
+      </p><p>
+         The first argument is the string to be tokenized.  The second argument is a string consisting of a number of characters.  Each character in this string is taken as a delimiting character.  The string given by the first argument is split at any occurrence of any of these characters.  For example:
+      </p><pre>
+str:tokenize('2001-06-03T11:40:23', '-T:')      
+      </pre><p>
+         Gives the node set consisting of:
+      </p><pre>
+&lt;token&gt;2001&lt;/token&gt;
+&lt;token&gt;06&lt;/token&gt;
+&lt;token&gt;03&lt;/token&gt;
+&lt;token&gt;11&lt;/token&gt;
+&lt;token&gt;40&lt;/token&gt;
+&lt;token&gt;23&lt;/token&gt;
+</pre><p>
+         If the second argument is omitted, the default is the string <code>'&amp;#x9;&amp;#xA;&amp;#xD;&amp;#x20;'</code> (i.e. whitespace characters).  Thus:
+      </p><pre>
+str:tokenize('date math str')      
+      </pre><p>
+         Gives the node set consisting of:
+      </p><pre>
+&lt;token&gt;date&lt;/token&gt;
+&lt;token&gt;math&lt;/token&gt;
+&lt;token&gt;str&lt;/token&gt;
+</pre><p>
+          If the second argument is an empty string, the function returns a set of <code>token</code> elements, each of which holds a single character. Thus:
+        </p><pre>
+str:tokenize('foo', '')          
+        </pre><p>
+          Gives the node set consisting of:
+        </p><pre>
+&lt;token&gt;f&lt;/token&gt;
+&lt;token&gt;o&lt;/token&gt;
+&lt;token&gt;o&lt;/token&gt;
+</pre><p>
+            The template version of this function returns a result tree fragment consisting of a number of <code>token</code> elements.
+         </p></div><p>
+      An implementation of this extension 
+      function
+      in the EXSLT str namespace must conform to the behaviour described in this document.
+   </p><h2>Implementations</h2><p>
+            Built-in support for <code>str:tokenize</code> is available in the following XSLT processors:
+         </p><table><tr><th class="rowhead">Processor</th><th>Processor Version</th><th>Implemented Version</th></tr><tr><td class="rowhead"><a href="http://4Suite.org">4XSLT, from 4Suite.</a></td><td>0.12.0a3</td><td>1</td></tr><tr><td class="rowhead"><a href="http://xmlsoft.org/XSLT/">libxslt from Daniel Veillard et al.</a></td><td>1.0.19</td><td>1</td></tr></table><p>
+            The following implementations of <code>str:tokenize</code> are available:
+         </p><table><tr><th class="rowhead">Language</th><th>Implemented Version</th><th>Creator</th><th>Date</th><th>Download</th></tr><tr><td class="rowhead"><a href="str.tokenize.function.xsl.html">EXSLT Function</a></td><td>1</td><td><a href="mailto:mail@jenitennison.com">Jeni Tennison</a></td><td>2001-06-03</td><td><a href="str.tokenize.function.xsl">str.tokenize.function.xsl</a></td></tr><tr><td class="rowhead"><a href="str.tokenize.template.xsl.html">XSLT Template</a></td><td>1</td><td><a href="mailto:mail@jenitennison.com">Jeni Tennison</a></td><td>2001-06-03</td><td><a href="str.tokenize.template.xsl">str.tokenize.template.xsl</a></td></tr><tr><td class="rowhead"><a href="str.tokenize.js.html">Javascript</a></td><td>1</td><td><a href="mailto:chris@bayes.co.uk">Chris Bayes</a></td><td>2001-06-21</td><td><a href="str.tokenize.js">str.tokenize.js</a></td></tr><tr><td class="rowhead"><a href="str.tokenize.msxsl.xsl.html">Msxsl</a></td><td>1</td><td><a href="mailto:chris@bayes.co.uk">Chris Bayes</a></td><td>2001-06-21</td><td><a href="str.tokenize.msxsl.xsl">str.tokenize.msxsl.xsl</a></td></tr></table><h2>Use Cases</h2><p><b>Use Case Package: </b><a href="str.tokenize.use-cases.zip">str.tokenize.use-cases.zip</a></p><p>
+      The following use cases illustrate the functionality of <code>str:tokenize</code>.
+   </p><table><tr><th class="rowhead">Details</th><th>Calling Stylesheet</th><th>XML Data</th><th>Expected Result</th><th>Category</th><th>Template</th></tr><tr><td class="rowhead"><a href="str.tokenize.use-case.1.html">1</a></td><td><a href="str.tokenize.1.xsl">str.tokenize.1.xsl</a></td><td><a href="str.tokenize.data.1.xml">str.tokenize.data.1.xml</a></td><td>-</td><td>example</td><td>N</td></tr></table><h2>Change History</h2><p><b>Submitted: </b>2001-06-03<br/><b>Creator: </b><a href="mailto:mail@jenitennison.com">Jeni Tennison</a>(<a href="http://www.jenitennison.com/">http://www.jenitennison.com/</a>)</p><dc:description xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:exslt="http://exslt.org/documentation" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:vcf="http://www.ietf.org/internet-drafts/draft-dawson-vcard-xml-dtd-03.txt"><html:div>
+         The <html:code>str:tokenize</html:code> function splits a string at the occurrences of given characters.
+      </html:div></dc:description><table><tr><th class="rowhead">Version</th><th>Modified</th><th>By</th><th>Details</th></tr><tr><td class="rowhead">1.1</td><td style="width: 5em;">2001-06-21</td><td><a href="mailto:mail@jenitennison.com">Jeni Tennison</a></td><td style="text-align: left;"><dc:description xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:exslt="http://exslt.org/documentation" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:vcf="http://www.ietf.org/internet-drafts/draft-dawson-vcard-xml-dtd-03.txt"><html:div>
+                  Added Javascript and MSXML implementations.
+               </html:div></dc:description></td></tr><tr><td class="rowhead">1.2</td><td style="width: 5em;">2001-11-18</td><td><a href="mailto:mail@jenitennison.com">Jeni Tennison</a></td><td style="text-align: left;"><dc:description xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:exslt="http://exslt.org/documentation" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:vcf="http://www.ietf.org/internet-drafts/draft-dawson-vcard-xml-dtd-03.txt"><html:div>
+                  Indicated behaviour when second argument is an empty string; str:tokenize() should return a list of tokens, each containing a single character.
+               </html:div></dc:description></td></tr><tr><td class="rowhead">1.3</td><td style="width: 5em;">2002-08-21</td><td><a href="mailto:craig.stewart@nottingham.ac.uk">Craig Stewart</a></td><td style="text-align: left;"><p><dc:description xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:exslt="http://exslt.org/documentation" xmlns:vcf="http://www.ietf.org/internet-drafts/draft-dawson-vcard-xml-dtd-03.txt">Added 4XSLT and libxslt implementation to the list.</dc:description></p></td></tr><tr><td class="rowhead">1.4</td><td style="width: 5em;">2002-11-12</td><td><a href="mailto:craig.stewart@nottingham.ac.uk">Craig Stewart</a></td><td style="text-align: left;"><p><dc:description xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:exslt="http://exslt.org/documentation" xmlns:vcf="http://www.ietf.org/internet-drafts/draft-dawson-vcard-xml-dtd-03.txt">Updated 4XSLT version to 0.12.0a3.</dc:description></p></td></tr></table></td></tr></table><div id="colophon"><p><a href="http://www.exslt.org/str/functions/tokenize/str.tokenize.html">http://www.exslt.org/str/functions/tokenize/str.tokenize.html</a> last modified 2002-11-12</p></div></body></html>

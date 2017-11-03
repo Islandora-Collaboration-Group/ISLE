@@ -1,0 +1,203 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../../style/element.xsl" ?>
+<exslt:element xmlns:exslt="http://exslt.org/documentation" 
+               version="3" module="func" status="stable">
+
+<exslt:name>result</exslt:name>
+
+<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                 xmlns:dc="http://purl.org/dc/elements/1.1/"
+                 ID="func:result">
+   <dc:subject>EXSLT</dc:subject>
+   <dc:subject>func</dc:subject>
+   <dc:subject>result</dc:subject>
+   <dc:rights>public domain</dc:rights>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="func:result.5">
+         <exslt:version>3</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com">Jeni Tennison</dc:creator>
+         <dc:date>2001-03-31</dc:date>
+         <dc:description>
+            <ul xmlns="http://www.w3.org/1999/xhtml">
+               <li>Added static constraint such that <code>func:result</code> cannot have any following sibling elements aside from <a href="http://www.w3.org/TR/xslt#element-fallback" class="offsite"><code>xsl:fallback</code></a>.</li>
+               <li>Made the instantiation of more than one <code>func:result</code> element an unrecoverable error.</li>
+               <li>Changed the result of a calling a function where no <code>func:result</code> element is instantiated to be an empty string rather than an empty result tree fragment.</li>
+            </ul>
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="func:result.3.1">
+         <exslt:version>3.1</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com">Jeni Tennison</dc:creator>
+         <dc:date>2001-04-28</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            Added static constraint that forces <code>func:result</code> to be a descendant of <a href="../function"><code>func:function</code></a>.
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="func:result.3.2">
+         <exslt:version>3.2</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com">Jeni Tennison</dc:creator>
+         <dc:date>2001-05-22</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            <ul>
+               <li>Added vendor implementations in Saxon and 4XSLT</li>
+               <li>Changed status to stable</li>
+            </ul>
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="func:result.3.3">
+         <exslt:version>3.3</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com">Jeni Tennison</dc:creator>
+         <dc:date>2001-08-15</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            Added vendor implementation in libxslt.
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="func:result.3.4">
+         <exslt:version>3.4</exslt:version>
+         <dc:creator email="craig.stewart@nottingham.ac.uk" 
+                     url="">Craig Stewart</dc:creator>
+         <dc:date>2002-08-20</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">Added Xalan-J implementation to the list.</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="func:result.3.5">
+         <exslt:version>3.5</exslt:version>
+         <dc:creator email="craig.stewart@nottingham.ac.uk" 
+                     url="">Craig Stewart</dc:creator>
+         <dc:date>2002-11-12</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">Updated 4XSLT version to 0.12.0a3.</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+</rdf:Description>
+
+<exslt:doc xmlns:html="http://www.w3.org/1999/xhtml">
+   <html:div xmlns="http://www.w3.org/1999/xhtml">
+      <p>
+         When an <code>func:result</code> element is instantiated, during the instantiation of a <a href="../function">func:function</a> element, the function returns with its value.  The value of the <code>func:result</code> element is determined in a similar way to variable-binding elements as described in [<a class="offsite" href="http://www.w3.org/TR/xslt#variable-values">11.2 Values of Variables and Parameters</a>] of [<a href="http://www.w3.org/TR/xslt" class="offsite">XSLT</a>].
+      </p>
+      <p>
+         It is an error for a <code>func:result</code> element to not be a descendant of <a href="../function"><code>func:function</code></a>.  It is an error for a <code>func:result</code> element to have any following sibling elements aside from the <a href="http://www.w3.org/TR/xslt#element-fallback" class="offsite"><code>xsl:fallback</code></a> element.
+      </p>
+      <p>
+         It is an error if instantiating the content of the <a href="../function"><code>func:function</code></a> element results in the instantion of more than one <code>func:result</code> elements.
+      </p>
+      <p>
+         Thus the following is an error if the value of the context node when the function is called is equal to the string <code>'yes'</code>, as two <code>func:result</code> elements are instantiated: one within the <a href="http://www.w3.org/TR/xslt#element-if" class="offsite"><code>xsl:if</code></a> and one directly within the <a href="../function"><code>func:function</code></a>:
+      </p>
+      <pre class="error">
+&lt;func:function name="my:func1">
+   &lt;xsl:if test=". = 'yes'">
+      &lt;func:result select="true()" />
+   &lt;/<code>xsl:if</code>>
+   &lt;func:result select="false()" />
+&lt;/func:function></pre>
+      <p>
+         It is an error if a <code>func:result</code> element occurs within an <code>func:result</code> element.  Thus the following is an error:
+      </p>
+      <pre class="error">
+&lt;func:function name="my:func2">
+   &lt;func:result>
+      &lt;func:result select="." />
+   &lt;/func:result>
+&lt;/func:function></pre>
+      <p>
+         It is an error if instantiating the content of a variable-binding element (i.e. <a class="offsite" href="http://www.w3.org/TR/xslt#element-variable"><code>xsl:variable</code></a>, <a class="offsite" href="http://www.w3.org/TR/xslt#element-param"><code>xsl:param</code></a>) results in the instantiation of an <code>func:result</code> element. Thus the following is an error:
+      </p>
+      <pre class="error">
+&lt;func:function name="my:func3">
+   &lt;xsl:variable name="foo">
+      &lt;func:result select="." />
+   &lt;/xsl:variable>
+&lt;/func:function></pre>
+
+      <h3>Return Values</h3>
+
+      <p>
+         The <code>func:result</code> element can specify the value of the variable in three alternative ways.
+      </p>
+      <ul>
+         <li>
+            <p>
+               If the <code>func:result</code> element has a <code>select</code> attribute, then the value of the attribute must be an expression and the returned value is the object that results from evaluating the expression. In this case, the content must be empty.
+            </p>
+         </li>
+         <li>
+            <p>
+               If the <code>func:result</code> element does not have a <code>select</code> attribute and has non-empty content (i.e. the <code>func:result</code> element has one or more child nodes), then the content of the <code>func:result</code> element specifies the value.  The content of the <code>func:result</code> element is a template, which is instantiated to give the returned value. The value is a result tree fragment equivalent to a node-set containing just a single root node having as children the sequence of nodes produced by instantiating the template. The base URI of the nodes in the result tree fragment is the base URI of the <code>func:result</code> element.
+            </p>
+            <p>
+               It is an error if a member of the sequence of nodes created by instantiating the template is an attribute node or a namespace node, since a root node cannot have an attribute node or a namespace node as a child. An XSLT processor may signal the error; if it does not signal the error, it must recover by not adding the attribute node or namespace node.
+            </p>
+         </li>
+         <li>
+            <p>
+               If the <code>func:result</code> element has empty content and does not have a <code>select</code> attribute, then the returned value is an empty string. Thus
+            </p>
+            <pre>&lt;func:result /></pre>
+            <p>
+               is equivalent to
+            </p>
+            <pre>&lt;func:result select="''"/></pre>
+         </li>
+      </ul>
+   </html:div>
+</exslt:doc>
+
+<exslt:definition xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:sequence>
+      <xs:group ref="xsl:template" />
+   </xs:sequence>
+   <xs:attribute name="select" type="xpath:expression" />
+</exslt:definition>
+
+<exslt:implementations>
+   <exslt:vendor-implementation
+           version="3"
+           vendor="4XSLT, from 4Suite."
+           vendor-url="http://4Suite.org"
+           vendor-version="0.12.0a3" />
+   <exslt:vendor-implementation
+           version="3"
+           vendor="SAXON 6.3 from Michael Kay"
+           vendor-url="http://users.iclway.co.uk/mhkay/saxon/index.html"
+           vendor-version="6.3" />
+   <exslt:vendor-implementation
+           version="3"
+           vendor="libxslt from Daniel Veillard; implementation by Thomas Broyer"
+           vendor-url="http://xmlsoft.org/XSLT/"
+           vendor-version="1.0.19" />
+   <exslt:vendor-implementation
+           version="3"
+           vendor="Xalan-J from Apache"
+           vendor-url="http://xml.apache.org/xalan-j"
+           vendor-version="2.4.D1" />
+</exslt:implementations>
+
+<exslt:use-cases />
+
+</exslt:element>

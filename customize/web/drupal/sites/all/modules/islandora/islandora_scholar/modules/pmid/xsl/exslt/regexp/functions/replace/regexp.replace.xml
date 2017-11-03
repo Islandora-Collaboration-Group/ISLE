@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<exslt:function xmlns:exslt="http://exslt.org/documentation" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:vcf="http://www.ietf.org/internet-drafts/draft-dawson-vcard-xml-dtd-03.txt" version="1" module="regexp" status="new">
+   <exslt:name>replace</exslt:name>
+   <rdf:Description ID="regexp:replace">
+      <dc:subject>EXSLT</dc:subject>
+      <dc:subject>regexp</dc:subject>
+      <dc:subject>replace</dc:subject>
+      <exslt:revision>
+         <rdf:Description ID="regexp:replace.1">
+            <exslt:version>1</exslt:version>
+            <dc:creator rdf:parseType="Resource">
+               <vcf:fn>Chris Bayes</vcf:fn>
+               <vcf:email>chris@bayes.co.uk</vcf:email>
+               <vcf:url>http://www.bayes.co.uk</vcf:url>
+            </dc:creator>
+            <dc:date>2001-06-24</dc:date>
+            <dc:description>
+               <html:div>
+                  <html:p>Replaces according to a regular expression.</html:p>
+               </html:div>
+            </dc:description>
+         </rdf:Description>
+      </exslt:revision>
+      <exslt:revision>
+         <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                          xmlns:dc="http://purl.org/dc/elements/1.1/"
+                          ID="regexp:replace.1.1">
+            <exslt:version>1.1</exslt:version>
+            <dc:creator email="craig.stewart@nottingham.ac.uk" 
+                        url="">Craig Stewart</dc:creator>
+            <dc:date>2002-08-20</dc:date>
+            <dc:description xmlns="http://www.w3.org/1999/xhtml">Added 4XSLT implementation to the list.</dc:description>
+         </rdf:Description>
+      </exslt:revision>
+      <exslt:revision>
+         <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                          xmlns:dc="http://purl.org/dc/elements/1.1/"
+                          ID="regexp:replace.1.2">
+            <exslt:version>1.2</exslt:version>
+            <dc:creator email="craig.stewart@nottingham.ac.uk" 
+                        url="">Craig Stewart</dc:creator>
+            <dc:date>2002-11-12</dc:date>
+            <dc:description xmlns="http://www.w3.org/1999/xhtml">Updated 4XSLT version to 0.12.0a3.</dc:description>
+         </rdf:Description>
+      </exslt:revision>
+   </rdf:Description>
+   <exslt:doc>
+      <html:div>
+         <html:p>
+         The <html:code>regexp:replace</html:code> function replaces the parts of a string that match a regular expression with another string.
+      </html:p>
+         <html:p>
+         The first argument is the string to be matched and replaced.  The second argument is a regular expression that follows the Javascript regular expression syntax.  The fourth argument is the string to replace the matched parts of the string.
+      </html:p>
+         <html:p>
+         The third argument is a string consisting of character flags to be used by the match.  If a character is present then that flag is true.  The flags are:
+      </html:p>
+         <html:ul>
+            <html:li>
+               <html:code>g</html:code>: global replace - all occurrences of the regular expression in the string are replaced.  If this character is not present, then only the first occurrence of the regular expression is replaced.</html:li>
+            <html:li>
+               <html:code>i</html:code>: case insensitive - the regular expression is treated as case insensitive.  If this character is not present, then the regular expression is case sensitive.</html:li>
+         </html:ul>
+      </html:div>
+   </exslt:doc>
+   <exslt:definition>
+      <exslt:return type="string">
+         <html:div/>
+      </exslt:return>
+      <exslt:arg name="string" type="string" default="''" optional="no">
+         <html:div/>
+      </exslt:arg>
+      <exslt:arg name="regExp" type="string" default="''" optional="no">
+         <html:div/>
+      </exslt:arg>
+      <exslt:arg name="flags" type="string" default="''" optional="no">
+         <html:div/>
+      </exslt:arg>
+      <exslt:arg name="repStr" type="string" default="''" optional="no">
+         <html:div/>
+      </exslt:arg>
+   </exslt:definition>
+   <exslt:implementations>
+      <exslt:vendor-implementation
+              version="1"
+              vendor="4XSLT, from 4Suite."
+              vendor-url="http://4Suite.org"
+              vendor-version="0.12.0a3" />
+      <exslt:implementation src="regexp.replace.js" language="exslt:javascript" version="1">
+         <rdf:Description ID="regexp:replace.exslt:javascript">
+            <dc:subject>EXSLT</dc:subject>
+            <dc:subject>regexp</dc:subject>
+            <dc:subject>replace</dc:subject>
+            <dc:subject>exslt:javascript</dc:subject>
+            <exslt:revision>
+               <rdf:Description ID="regexp:replace.exslt:javascript.1">
+                  <exslt:version>1</exslt:version>
+                  <dc:creator rdf:parseType="Resource">
+                     <vcf:fn>Chris Bayes</vcf:fn>
+                     <vcf:email>chris@bayes.co.uk</vcf:email>
+                     <vcf:url>http://www.bayes.co.uk</vcf:url>
+                  </dc:creator>
+                  <dc:date>2001-06-24</dc:date>
+               </rdf:Description>
+            </exslt:revision>
+         </rdf:Description>
+      </exslt:implementation>
+      <exslt:implementation src="regexp.replace.msxsl.xsl" language="exslt:msxsl" version="1">
+         <rdf:Description ID="regexp:replace.exslt:msxsl">
+            <dc:subject>EXSLT</dc:subject>
+            <dc:subject>regexp</dc:subject>
+            <dc:subject>replace</dc:subject>
+            <dc:subject>exslt:msxsl</dc:subject>
+            <exslt:revision>
+               <rdf:Description ID="regexp:replace.exslt:msxsl.1">
+                  <exslt:version>1</exslt:version>
+                  <dc:creator rdf:parseType="Resource">
+                     <vcf:fn>Chris Bayes</vcf:fn>
+                     <vcf:email>chris@bayes.co.uk</vcf:email>
+                     <vcf:url>http://www.bayes.co.uk</vcf:url>
+                  </dc:creator>
+                  <dc:date>2001-06-24</dc:date>
+               </rdf:Description>
+            </exslt:revision>
+         </rdf:Description>
+      </exslt:implementation>
+   </exslt:implementations>
+   <exslt:use-cases>
+      <exslt:use-case type="example" xslt="regexp.replace.1.xsl" data="regexp.replace.data.1.xml" result="regexp.replace.result.1.xml">
+         <rdf:Description ID="regexp:replace.use-case">
+            <dc:subject>EXSLT</dc:subject>
+            <dc:subject>regexp</dc:subject>
+            <dc:subject>replace</dc:subject>
+            <dc:subject>example</dc:subject>
+            <exslt:revision>
+               <rdf:Description ID="regexp:replace.use-case.1">
+                  <exslt:version/>
+                  <dc:creator rdf:parseType="Resource">
+                     <vcf:fn>Chris Bayes</vcf:fn>
+                     <vcf:email>chris@bayes.co.uk</vcf:email>
+                     <vcf:url>http://www.bayes.co.uk</vcf:url>
+                  </dc:creator>
+                  <dc:date>2001-06-24</dc:date>
+               </rdf:Description>
+            </exslt:revision>
+         </rdf:Description>
+      </exslt:use-case>
+   </exslt:use-cases>
+</exslt:function>

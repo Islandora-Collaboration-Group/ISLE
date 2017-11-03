@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:grg="http://www.isotc211.org/2005/grg" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco" targetNamespace="http://www.isotc211.org/2005/grg" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.1">
+	<!-- ================================= Annotation ================================ -->
+	<xs:annotation>
+		<xs:documentation>This file was generated from ISO TC/211 UML class diagrams == 08-03-2010 11:16:21 ====== </xs:documentation>
+	</xs:annotation>
+	<!-- ================================== Imports ================================== -->
+	<xs:import namespace="http://www.isotc211.org/2005/gmd" schemaLocation="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/gmd/gmd.xsd"/>
+	<xs:import namespace="http://www.isotc211.org/2005/gco" schemaLocation="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/gco/gco.xsd"/>
+	<!-- ########################################################################### -->
+	<!-- ########################################################################### -->
+	<!-- ================================== Classes ================================= -->
+	<xs:complexType name="RE_AlternativeExpression_Type">
+		<xs:complexContent>
+			<xs:extension base="gco:AbstractObject_Type">
+				<xs:sequence>
+					<xs:element name="name" type="gco:CharacterString_PropertyType"/>
+					<xs:element name="definition" type="gco:CharacterString_PropertyType" minOccurs="0"/>
+					<xs:element name="description" type="gco:CharacterString_PropertyType" minOccurs="0"/>
+					<xs:element name="fieldOfApplication" type="grg:RE_FieldOfApplication_PropertyType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="locale" type="grg:RE_Locale_PropertyType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ........................................................................ -->
+	<xs:element name="RE_AlternativeExpression" type="grg:RE_AlternativeExpression_Type"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="RE_AlternativeExpression_PropertyType">
+		<xs:sequence>
+			<xs:element ref="grg:RE_AlternativeExpression" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gco:ObjectReference"/>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+	<!-- =========================================================================== -->
+	<xs:complexType name="AbstractRE_ProposalManagementInformation_Type" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="gco:AbstractObject_Type">
+				<xs:sequence>
+					<xs:element name="dateProposed" type="gco:Date_PropertyType"/>
+					<xs:element name="justification" type="gco:CharacterString_PropertyType"/>
+					<xs:element name="status" type="grg:RE_DecisionStatus_PropertyType"/>
+					<xs:element name="disposition" type="grg:RE_Disposition_PropertyType" minOccurs="0"/>
+					<xs:element name="dateDisposed" type="gco:Date_PropertyType" minOccurs="0"/>
+					<xs:element name="controlBodyDecisionEvent" type="gco:CharacterString_PropertyType" minOccurs="0"/>
+					<xs:element name="controlBodyNotes" type="gco:CharacterString_PropertyType" minOccurs="0"/>
+					<xs:element name="registerManagerNotes" type="gco:CharacterString_PropertyType" minOccurs="0"/>
+					<xs:element name="sponsor" type="grg:RE_SubmittingOrganization_PropertyType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ........................................................................ -->
+	<xs:element name="AbstractRE_ProposalManagementInformation" type="grg:AbstractRE_ProposalManagementInformation_Type" abstract="true"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="RE_ProposalManagementInformation_PropertyType">
+		<xs:sequence>
+			<xs:element ref="grg:AbstractRE_ProposalManagementInformation" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gco:ObjectReference"/>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+	<!-- =========================================================================== -->
+	<xs:complexType name="RE_RegisterOwner_Type">
+		<xs:complexContent>
+			<xs:extension base="grg:AbstractRegisterStakeholder_Type"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ........................................................................ -->
+	<xs:element name="RE_RegisterOwner" type="grg:RE_RegisterOwner_Type" substitutionGroup="grg:AbstractRegisterStakeholder"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="RE_RegisterOwner_PropertyType">
+		<xs:sequence>
+			<xs:element ref="grg:RE_RegisterOwner" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gco:ObjectReference"/>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+	<!-- =========================================================================== -->
+	<xs:complexType name="RE_SubmittingOrganization_Type">
+		<xs:complexContent>
+			<xs:extension base="grg:AbstractRegisterStakeholder_Type"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ........................................................................ -->
+	<xs:element name="RE_SubmittingOrganization" type="grg:RE_SubmittingOrganization_Type" substitutionGroup="grg:AbstractRegisterStakeholder"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="RE_SubmittingOrganization_PropertyType">
+		<xs:sequence>
+			<xs:element ref="grg:RE_SubmittingOrganization" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gco:ObjectReference"/>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+	<!-- =========================================================================== -->
+	<xs:complexType name="RE_AmendmentInformation_Type">
+		<xs:complexContent>
+			<xs:extension base="grg:AbstractRE_ProposalManagementInformation_Type">
+				<xs:sequence>
+					<xs:element name="amendmentType" type="grg:RE_AmendmentType_PropertyType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ........................................................................ -->
+	<xs:element name="RE_AmendmentInformation" type="grg:RE_AmendmentInformation_Type" substitutionGroup="grg:AbstractRE_ProposalManagementInformation"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="RE_AmendmentInformation_PropertyType">
+		<xs:sequence>
+			<xs:element ref="grg:RE_AmendmentInformation" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gco:ObjectReference"/>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+	<!-- =========================================================================== -->
+	<xs:complexType name="RE_Version_Type">
+		<xs:complexContent>
+			<xs:extension base="gco:AbstractObject_Type">
+				<xs:sequence>
+					<xs:element name="versionNumber" type="gco:CharacterString_PropertyType"/>
+					<xs:element name="versionDate" type="gco:Date_PropertyType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ........................................................................ -->
+	<xs:element name="RE_Version" type="grg:RE_Version_Type"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="RE_Version_PropertyType">
+		<xs:sequence>
+			<xs:element ref="grg:RE_Version" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gco:ObjectReference"/>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+	<!-- =========================================================================== -->
+	<xs:complexType name="RE_ClarificationInformation_Type">
+		<xs:complexContent>
+			<xs:extension base="grg:AbstractRE_ProposalManagementInformation_Type">
+				<xs:sequence>
+					<xs:element name="proposedChange" type="gco:CharacterString_PropertyType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ........................................................................ -->
+	<xs:element name="RE_ClarificationInformation" type="grg:RE_ClarificationInformation_Type" substitutionGroup="grg:AbstractRE_ProposalManagementInformation"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="RE_ClarificationInformation_PropertyType">
+		<xs:sequence>
+			<xs:element ref="grg:RE_ClarificationInformation" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gco:ObjectReference"/>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+	<!-- =========================================================================== -->
+	<xs:complexType name="RE_AdditionInformation_Type">
+		<xs:complexContent>
+			<xs:extension base="grg:AbstractRE_ProposalManagementInformation_Type"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ........................................................................ -->
+	<xs:element name="RE_AdditionInformation" type="grg:RE_AdditionInformation_Type" substitutionGroup="grg:AbstractRE_ProposalManagementInformation"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="RE_AdditionInformation_PropertyType">
+		<xs:sequence>
+			<xs:element ref="grg:RE_AdditionInformation" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gco:ObjectReference"/>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+	<!-- =========================================================================== -->
+	<xs:complexType name="RE_ItemClass_Type">
+		<xs:complexContent>
+			<xs:extension base="gco:AbstractObject_Type">
+				<xs:sequence>
+					<xs:element name="name" type="gco:CharacterString_PropertyType"/>
+					<xs:element name="technicalStandard" type="gmd:CI_Citation_PropertyType"/>
+					<xs:element name="alternativeNames" type="grg:RE_AlternativeName_PropertyType" maxOccurs="unbounded"/>
+					<xs:element name="describedItem" type="grg:RE_RegisterItem_PropertyType" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ........................................................................ -->
+	<xs:element name="RE_ItemClass" type="grg:RE_ItemClass_Type"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="RE_ItemClass_PropertyType">
+		<xs:sequence>
+			<xs:element ref="grg:RE_ItemClass" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gco:ObjectReference"/>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+	<!-- =========================================================================== -->
+	<xs:complexType name="RE_ReferenceSource_Type">
+		<xs:complexContent>
+			<xs:extension base="gco:AbstractObject_Type">
+				<xs:sequence>
+					<xs:element name="citation" type="gmd:CI_Citation_PropertyType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ........................................................................ -->
+	<xs:element name="RE_ReferenceSource" type="grg:RE_ReferenceSource_Type"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="RE_ReferenceSource_PropertyType">
+		<xs:sequence>
+			<xs:element ref="grg:RE_ReferenceSource" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gco:ObjectReference"/>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+	<!-- =========================================================================== -->
+	<xs:complexType name="RE_RegisterManager_Type">
+		<xs:complexContent>
+			<xs:extension base="grg:AbstractRegisterStakeholder_Type"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ........................................................................ -->
+	<xs:element name="RE_RegisterManager" type="grg:RE_RegisterManager_Type" substitutionGroup="grg:AbstractRegisterStakeholder"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="RE_RegisterManager_PropertyType">
+		<xs:sequence>
+			<xs:element ref="grg:RE_RegisterManager" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gco:ObjectReference"/>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+	<!-- =========================================================================== -->
+	<xs:complexType name="RE_FieldOfApplication_Type">
+		<xs:complexContent>
+			<xs:extension base="gco:AbstractObject_Type">
+				<xs:sequence>
+					<xs:element name="name" type="gco:CharacterString_PropertyType"/>
+					<xs:element name="description" type="gco:CharacterString_PropertyType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ........................................................................ -->
+	<xs:element name="RE_FieldOfApplication" type="grg:RE_FieldOfApplication_Type"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="RE_FieldOfApplication_PropertyType">
+		<xs:sequence>
+			<xs:element ref="grg:RE_FieldOfApplication" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gco:ObjectReference"/>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+	<!-- =========================================================================== -->
+	<xs:complexType name="RE_Register_Type">
+		<xs:complexContent>
+			<xs:extension base="gco:AbstractObject_Type">
+				<xs:sequence>
+					<xs:element name="name" type="gco:CharacterString_PropertyType"/>
+					<xs:element name="contentSummary" type="gco:CharacterString_PropertyType"/>
+					<xs:element name="uniformResourceIdentifier" type="gmd:CI_OnlineResource_PropertyType" maxOccurs="unbounded"/>
+					<xs:element name="operatingLanguage" type="grg:RE_Locale_PropertyType"/>
+					<xs:element name="alternativeLanguages" type="grg:RE_Locale_PropertyType" maxOccurs="unbounded"/>
+					<xs:element name="version" type="grg:RE_Version_PropertyType" minOccurs="0"/>
+					<xs:element name="dateOfLastChange" type="gco:Date_PropertyType" minOccurs="0"/>
+					<xs:element name="owner" type="grg:RE_RegisterOwner_PropertyType"/>
+					<xs:element name="submitter" type="grg:RE_SubmittingOrganization_PropertyType" maxOccurs="unbounded"/>
+					<xs:element name="containedItemClass" type="grg:RE_ItemClass_PropertyType" maxOccurs="unbounded"/>
+					<xs:element name="citation" type="grg:RE_ReferenceSource_PropertyType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="manager" type="grg:RE_RegisterManager_PropertyType"/>
+					<xs:element name="containedItem" type="grg:RE_RegisterItem_PropertyType" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ........................................................................ -->
+	<xs:element name="RE_Register" type="grg:RE_Register_Type"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="RE_Register_PropertyType">
+		<xs:sequence>
+			<xs:element ref="grg:RE_Register" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gco:ObjectReference"/>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+	<!-- =========================================================================== -->
+	<xs:complexType name="RE_Reference_Type">
+		<xs:complexContent>
+			<xs:extension base="gco:AbstractObject_Type">
+				<xs:sequence>
+					<xs:element name="itemIdentifierAtSource" type="gco:CharacterString_PropertyType"/>
+					<xs:element name="similarity" type="grg:RE_SimilarityToSource_PropertyType"/>
+					<xs:element name="referenceText" type="gco:CharacterString_PropertyType" minOccurs="0"/>
+					<xs:element name="notes" type="gco:CharacterString_PropertyType" minOccurs="0"/>
+					<xs:element name="sourceCitation" type="grg:RE_ReferenceSource_PropertyType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ........................................................................ -->
+	<xs:element name="RE_Reference" type="grg:RE_Reference_Type"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="RE_Reference_PropertyType">
+		<xs:sequence>
+			<xs:element ref="grg:RE_Reference" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gco:ObjectReference"/>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+	<!-- =========================================================================== -->
+	<xs:complexType name="RE_AlternativeName_Type">
+		<xs:complexContent>
+			<xs:extension base="gco:AbstractObject_Type">
+				<xs:sequence>
+					<xs:element name="name" type="gco:CharacterString_PropertyType"/>
+					<xs:element name="locale" type="grg:RE_Locale_PropertyType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ........................................................................ -->
+	<xs:element name="RE_AlternativeName" type="grg:RE_AlternativeName_Type"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="RE_AlternativeName_PropertyType">
+		<xs:sequence>
+			<xs:element ref="grg:RE_AlternativeName" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gco:ObjectReference"/>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+	<!-- =========================================================================== -->
+	<xs:complexType name="RE_SubregisterDescription_Type">
+		<xs:complexContent>
+			<xs:extension base="grg:RE_RegisterItem_Type">
+				<xs:sequence>
+					<xs:element name="uniformResourceIdentifier" type="gmd:CI_OnlineResource_PropertyType"/>
+					<xs:element name="operatingLanguage" type="grg:RE_Locale_PropertyType"/>
+					<xs:element name="containedItemClass" type="grg:RE_ItemClass_PropertyType" maxOccurs="unbounded"/>
+					<xs:element name="subregisterManager" type="grg:RE_RegisterManager_PropertyType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ........................................................................ -->
+	<xs:element name="RE_SubregisterDescription" type="grg:RE_SubregisterDescription_Type" substitutionGroup="grg:RE_RegisterItem"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="RE_SubregisterDescription_PropertyType">
+		<xs:sequence>
+			<xs:element ref="grg:RE_SubregisterDescription" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gco:ObjectReference"/>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+	<!-- =========================================================================== -->
+	<xs:complexType name="RE_RegisterItem_Type">
+		<xs:complexContent>
+			<xs:extension base="gco:AbstractObject_Type">
+				<xs:sequence>
+					<xs:element name="itemIdentifier" type="gco:Integer_PropertyType"/>
+					<xs:element name="name" type="gco:CharacterString_PropertyType"/>
+					<xs:element name="status" type="grg:RE_ItemStatus_PropertyType"/>
+					<xs:element name="dateAccepted" type="gco:Date_PropertyType" minOccurs="0"/>
+					<xs:element name="dateAmended" type="gco:Date_PropertyType" minOccurs="0"/>
+					<xs:element name="definition" type="gco:CharacterString_PropertyType"/>
+					<xs:element name="description" type="gco:CharacterString_PropertyType" minOccurs="0"/>
+					<xs:element name="fieldOfApplication" type="grg:RE_FieldOfApplication_PropertyType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="alternativeExpressions" type="grg:RE_AlternativeExpression_PropertyType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="amendmentInformation" type="grg:RE_AmendmentInformation_PropertyType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="clarificationInformation" type="grg:RE_ClarificationInformation_PropertyType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="additionInformation" type="grg:RE_AdditionInformation_PropertyType" maxOccurs="unbounded"/>
+					<xs:element name="itemClass" type="grg:RE_ItemClass_PropertyType"/>
+					<xs:element name="specificationSource" type="grg:RE_Reference_PropertyType" minOccurs="0"/>
+					<xs:element name="specificationLineage" type="grg:RE_Reference_PropertyType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="successor" type="grg:RE_RegisterItem_PropertyType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="predecessor" type="grg:RE_RegisterItem_PropertyType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ........................................................................ -->
+	<xs:element name="RE_RegisterItem" type="grg:RE_RegisterItem_Type"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="RE_RegisterItem_PropertyType">
+		<xs:sequence>
+			<xs:element ref="grg:RE_RegisterItem" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gco:ObjectReference"/>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+	<!-- =========================================================================== -->
+	<xs:complexType name="RE_Locale_Type">
+		<xs:complexContent>
+			<xs:extension base="gco:AbstractObject_Type">
+				<xs:sequence>
+					<xs:element name="name" type="gco:CharacterString_PropertyType"/>
+					<xs:element name="language" type="gmd:LanguageCode_PropertyType"/>
+					<xs:element name="country" type="gco:CharacterString_PropertyType"/>
+					<xs:element name="characterEncoding" type="gmd:MD_CharacterSetCode_PropertyType"/>
+					<xs:element name="citation" type="gmd:CI_Citation_PropertyType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ........................................................................ -->
+	<xs:element name="RE_Locale" type="grg:RE_Locale_Type"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="RE_Locale_PropertyType">
+		<xs:sequence>
+			<xs:element ref="grg:RE_Locale" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gco:ObjectReference"/>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+	<!-- =========================================================================== -->
+	<xs:complexType name="AbstractRegisterStakeholder_Type" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="gco:AbstractObject_Type">
+				<xs:sequence>
+					<xs:element name="name" type="gco:CharacterString_PropertyType"/>
+					<xs:element name="contact" type="gmd:CI_ResponsibleParty_PropertyType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ........................................................................ -->
+	<xs:element name="AbstractRegisterStakeholder" type="grg:AbstractRegisterStakeholder_Type" abstract="true"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="RegisterStakeholder_PropertyType">
+		<xs:sequence>
+			<xs:element ref="grg:AbstractRegisterStakeholder" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="gco:ObjectReference"/>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+	<!-- =========================================================================== -->
+	<xs:simpleType name="RE_DecisionStatus_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="pending"/>
+			<xs:enumeration value="tentative"/>
+			<xs:enumeration value="final"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- ........................................................................ -->
+	<xs:element name="RE_DecisionStatus" type="grg:RE_DecisionStatus_Type" substitutionGroup="gco:CharacterString"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="RE_DecisionStatus_PropertyType">
+		<xs:sequence>
+			<xs:element ref="grg:RE_DecisionStatus" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+	<!-- =========================================================================== -->
+	<xs:simpleType name="RE_ItemStatus_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="notValid"/>
+			<xs:enumeration value="valid"/>
+			<xs:enumeration value="superseded"/>
+			<xs:enumeration value="retired"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- ........................................................................ -->
+	<xs:element name="RE_ItemStatus" type="grg:RE_ItemStatus_Type" substitutionGroup="gco:CharacterString"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="RE_ItemStatus_PropertyType">
+		<xs:sequence>
+			<xs:element ref="grg:RE_ItemStatus" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+	<!-- =========================================================================== -->
+	<xs:simpleType name="RE_AmendmentType_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="supersession"/>
+			<xs:enumeration value="retirement"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- ........................................................................ -->
+	<xs:element name="RE_AmendmentType" type="grg:RE_AmendmentType_Type" substitutionGroup="gco:CharacterString"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="RE_AmendmentType_PropertyType">
+		<xs:sequence>
+			<xs:element ref="grg:RE_AmendmentType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+	<!-- =========================================================================== -->
+	<xs:simpleType name="RE_Disposition_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="withdrawn"/>
+			<xs:enumeration value="accepted"/>
+			<xs:enumeration value="notAccepted"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- ........................................................................ -->
+	<xs:element name="RE_Disposition" type="grg:RE_Disposition_Type" substitutionGroup="gco:CharacterString"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="RE_Disposition_PropertyType">
+		<xs:sequence>
+			<xs:element ref="grg:RE_Disposition" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+	<!-- =========================================================================== -->
+	<!-- ........................................................................ -->
+	<xs:element name="RE_SimilarityToSource" type="gco:CodeListValue_Type" substitutionGroup="gco:CharacterString"/>
+	<!-- ........................................................................ -->
+	<xs:complexType name="RE_SimilarityToSource_PropertyType">
+		<xs:sequence>
+			<xs:element ref="grg:RE_SimilarityToSource" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute ref="gco:nilReason"/>
+	</xs:complexType>
+	<!-- =========================================================================== -->
+</xs:schema>

@@ -1,0 +1,60 @@
+sudo: required
+dist: trusty
+language: php
+
+matrix:
+  include:
+   #5.3.3 Ubuntu Precise exceptions
+    - php: 5.3.3
+      dist: precise
+      env: FEDORA_VERSION="3.5"
+    - php: 5.3.3
+      dist: precise
+      env: FEDORA_VERSION="3.6.2"
+    - php: 5.3.3
+      dist: precise
+      env: FEDORA_VERSION="3.7.0"
+    - php: 5.3.3
+      dist: precise
+      env: FEDORA_VERSION="3.8.1"
+php:
+  - 5.4
+  - 5.5
+  - 5.6
+  - 7.0
+  - 7.1
+env:
+  - FEDORA_VERSION="3.5"
+  - FEDORA_VERSION="3.6.2"
+  - FEDORA_VERSION="3.7.0"
+  - FEDORA_VERSION="3.8.1"
+
+branches:
+  only:
+    - /^7.x/
+before_install:
+  - cd $HOME
+  - git clone -b 7.x git://github.com/Islandora/islandora.git
+  - git clone -b 7.x git://github.com/Islandora/php_lib.git
+  - git clone -b 7.x git://github.com/Islandora/objective_forms.git
+  - git clone -b 7.x git://github.com/Islandora/islandora_solution_pack_collection.git
+  - git clone -b 7.x git://github.com/Islandora/islandora_xml_forms.git
+  - git clone -b 7.x git://github.com/Islandora/islandora_form_fieldpanel.git
+  - export ISLANDORA_DIR=$HOME/islandora
+  - $HOME/islandora/tests/scripts/travis_setup.sh
+  - cd $HOME/drupal-*
+  - ln -s $TRAVIS_BUILD_DIR sites/all/modules/islandora_form_fieldpanel
+  - ln -s $HOME/islandora_xml_forms sites/all/modules/islandora_xml_forms
+  - ln -s $HOME/php_lib sites/all/modules/php_lib
+  - ln -s $HOME/objective_forms sites/all/modules/objective_forms
+  - ln -s $HOME/islandora_solution_pack_test sites/all/modules/islandora_solution_pack_test
+  - ln -s $HOME/islandora_solution_pack_collection sites/all/modules/islandora_solution_pack_collection
+  - drush en --yes --user=1 xml_form_builder xml_form_elements islandora_basic_collection xml_form_api
+  - drush en --yes --user=1 islandora_form_fieldpanel
+script:
+  - ant -buildfile sites/all/modules/islandora_form_fieldpanel/build.xml lint
+  - $ISLANDORA_DIR/tests/scripts/line_endings.sh sites/all/modules/islandora_form_fieldpanel
+  - drush coder-review --reviews=production,security,style,i18n,potx,sniffer islandora_form_fieldpanel
+  - phpcpd --names *.module,*.inc,*.test --exclude api/schema sites/all/modules/islandora_form_fieldpanel
+notifications:
+  irc: "irc.freenode.org#islandora"

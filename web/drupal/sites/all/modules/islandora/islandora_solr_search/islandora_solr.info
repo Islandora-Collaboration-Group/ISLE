@@ -1,0 +1,13 @@
+name = Islandora Solr
+dependencies[] = islandora
+description = Searches an Islandora Solr index
+package = Islandora Search
+configure = admin/config/islandora_solr
+version = 7.x-dev
+core = 7.x
+files[] = SolrPhpClient/Apache/Solr/Service.php
+files[] = includes/query_processor.inc
+files[] = includes/results.inc
+files[] = tests/islandora_solr_query_processor.test
+files[] = tests/islandora_solr_simple_search.test
+stylesheets[all][] = css/islandora_solr.base.css

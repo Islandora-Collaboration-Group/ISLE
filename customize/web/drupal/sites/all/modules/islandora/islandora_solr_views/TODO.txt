@@ -1,0 +1,114 @@
+TODO:
+=====
+
+Normal Priority
+---------------
+- add custom formatters. (formatters should maybe be added in the islandora_solr module, but called in islandora_solr_views as well)
+- Query parser filters should also work as an argument
+- expose options how to handle multivalued fields
+- Pull in human readable names (and help texts?) for islandora solr views handlers
+- field reorder not working?
+
+- field handler: purge/delete object link
+
+object: active/inactive delete purge
+ds: view download edit delete
+
+
+Low Priority
+------------
+
+- Link field to object only apply on non-multivalue fields
+- create views display for using views in our normal search results at islandora/search.
+- field handler: url alias (when url alias support will be added to islandora)
+
+
+
+Sorting:
+multiValued="false"
+indexed="true"
+non-tokenized (no analyzer or single term analyser (KeywordTokenizer))
+
+M == false, I == true, T == false
+
+@TODO: Finetune/debug all handlers.
+-> solr field types:
+string - boolean
+integer - long - float - double
+sint - slong - sfloat - sdouble
+text - fgs_text - text_ws - textTight
+date
+alphaOnlySort
+ignored
+
+
+Note: adding functionality should always extend the islandora solr base handlers, not the extended views core handlers
+
+
+@TODO: automatically replaced the dots in default values of exposed filter parameters. Maybe that should be added on form validate too.
+@TODO: fix odd space issue when filtering value with a space (both _s and _it)
+
+@TODO: add field handler for date formatting. (with date module api?)
+@TODO: field with simple link to object. Form: 'text to display'
+@TODO: formatter options on strings and text field handlers: default/drupalformatters/plaintext/trimmed?
+@TODO: formatting for boolean: TRUE/FALSE, YES/NO 1/0
+
+@TODO: field handler: datastream URL
+@TODO: field handler: datastream rendered media types: image, text, pdf, video, audio, playlists, swf object, csv, metadata datastream as formatted table
+image => output in img element, can be linked to object. DS = TN or user input
+text => .txt file rendered as plain text. can be linked to object. DS = user input
+pdf => text = user input? DS = User input
+video => basic html5 support? DS = user input
+audio => basic html5 support? DS = user input
+playlists => would be a different view type?
+swf object => embedding wrapper. DS = user input
+csv => as formatted table. DS = user input. (multiple formatted tables would almost never look good though.)
+XML metadata datastream => as formatted table. DS = DC, MODS, FGS or user input.
+
+For all media types, Shadowbox support?
+Need encoded titles for media objects.
+
+@TODO: how are fedora object access settings set? As a field or when rendering the results?
+
+
+
+Sample solr query
+=================
+
+/solr/select?start=0
+&rows=2
+&&fl=label,content,entity_id,id,ss_name,ds_created,ss_language,im_vid_2,tid,id,entity_id,entity_type,bundle,bundle_name,label,is_comment_count,ds_created,ds_changed,score,path,url,is_uid,tos_name,tm_node
+&qf=taxonomy_names^2.0
+&qf=label^5.0
+&qf=content^40
+&qf=tos_name^3.0
+&qf=tos_content_extra^0.1
+&facet=true
+&facet.sort=count
+&facet.mincount=1
+&facet.field=im_field_tags
+&facet.field=im_field_content_model
+&facet.field=is_uid
+&facet.field=ss_language
+&facet.field=bundle
+&f.im_field_tags.facet.limit=50
+&f.im_field_tags.facet.mincount=1
+&f.im_field_content_model.facet.limit=50
+&f.im_field_content_model.facet.mincount=1
+&facet.date=ds_changed
+&facet.date=ds_created
+&f.ds_changed.facet.date.start=2012-02-26T00:00:00Z/DAY
+&f.ds_changed.facet.date.end=2012-03-02T00:00:00Z+1DAY/DAY
+&f.ds_changed.facet.date.gap=+1DAY
+&f.ds_changed.facet.limit=50
+&f.ds_created.facet.date.start=2012-02-26T01:54:00Z/MINUTE
+&f.ds_created.facet.date.end=2012-02-26T02:24:00Z+1MINUTE/MINUTE
+&f.ds_created.facet.date.gap=+1MINUTE
+&f.ds_created.facet.limit=50
+&f.is_uid.facet.limit=50
+&f.is_uid.facet.mincount=1
+&f.ss_language.facet.limit=50
+&f.ss_language.facet.mincount=1
+&f.bundle.facet.limit=50
+&f.bundle.facet.mincount=1
+&wt=json&json.nl=map

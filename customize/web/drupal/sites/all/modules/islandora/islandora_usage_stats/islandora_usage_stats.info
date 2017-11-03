@@ -1,0 +1,11 @@
+name = Islandora Usage Stats
+description = Allows the collection and review of traffic data on objects and datastreams.
+package = Islandora Tools
+version = 7.x-dev
+core = 7.x
+dependencies[] = islandora
+dependencies[] = views
+dependencies[] = datepicker_views
+dependencies[] = views_data_export
+dependencies[] = islandora_basic_collection
+configure = admin/islandora/tools/islandora_usage_stats

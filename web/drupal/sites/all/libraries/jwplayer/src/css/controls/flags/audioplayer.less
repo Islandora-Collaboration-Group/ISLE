@@ -1,0 +1,78 @@
+@import "../../shared-imports/vars";
+
+.jw-flag-audio-player {
+    background-color: @black;
+
+    &:not(.jw-flag-flash-blocked) .jw-media {
+        visibility: hidden;
+    }
+
+    .jw-title {
+        background: none;
+    }
+
+    // min 44px object tag prevents IE11 CORS Flash Blocking
+    object {
+        min-height: @mobile-touch-target;
+    }
+
+    .jw-preview, // overrides 'block' from .jw-state-idle
+    .jw-display, // overrides 'block' from .jw-flag-touch.jw-state-paused
+    .jw-title, // overrides 'block' from .jw-state-idle
+    .jw-nextup-container {
+        display: none;
+    }
+
+    .jw-controlbar {
+        // prevents children from exploding out of this container when set too small
+        position: relative;
+
+        .jw-button-container {
+            padding-right: 3px;
+            padding-left: 0;
+        }
+
+        .jw-icon-tooltip,
+        .jw-icon-inline {
+            display: none;
+        }
+
+        .jw-icon-volume:not(.jw-icon-tooltip),
+        .jw-icon-playback,
+        .jw-icon-next,
+        .jw-icon-rewind,
+        .jw-icon-cast,
+        .jw-icon-live,
+        .jw-icon-airplay,
+        .jw-logo-button,
+        .jw-text-elapsed,
+        .jw-text-duration {
+            display: flex;
+            flex: 0 0 auto;
+        }
+
+        .jw-text-duration,
+        .jw-text-countdown {
+            padding-right: 10px;
+        }
+
+        .jw-slider-time {
+            display: flex;
+            flex: 0 1 auto;
+            align-items: center;
+        }
+    }
+
+    &.jw-flag-small-player {
+        .jw-text-elapsed,
+        .jw-text-duration {
+            display: none;
+        }
+    }
+
+    &.jw-flag-ads {
+        .jw-slider-time {
+            display: none;
+        }
+    }
+}

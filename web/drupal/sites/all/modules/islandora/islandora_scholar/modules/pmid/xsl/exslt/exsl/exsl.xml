@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<exslt:module xmlns:exslt="http://exslt.org/documentation"
+              version="1" prefix="exsl">
+
+<exslt:name>Common</exslt:name>
+
+<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                 xmlns:dc="http://purl.org/dc/elements/1.1/"
+                 ID="exsl">
+   <dc:subject>EXSLT</dc:subject>
+   <dc:subject>Common</dc:subject>
+   <dc:subject>module</dc:subject>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="exsl.1">
+         <exslt:version>1</exslt:version>
+         <dc:creator>Jeni Tennison</dc:creator>
+         <dc:date>2001-03-28</dc:date>
+         <dc:description>A module of common functions.</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="exsl.1.1">
+         <exslt:version>1.1</exslt:version>
+         <dc:creator>Jeni Tennison</dc:creator>
+         <dc:date>2001-05-22</dc:date>
+         <dc:description>Moved exsl:node-set and exsl:object-type into the core.</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+</rdf:Description>
+
+<exslt:doc xmlns="">
+   <section>
+      <para>
+         EXSLT - Common covers common, basic extension elements and functions.
+      </para>
+   </section>
+</exslt:doc>
+
+<exslt:functions>
+   <exslt:function name="node-set" version="2" core="yes" />
+   <exslt:function name="object-type" version="2" core="yes" />
+</exslt:functions>
+
+<exslt:elements>
+   <exslt:element name="document" version="1" core="no" />
+</exslt:elements>
+
+</exslt:module>

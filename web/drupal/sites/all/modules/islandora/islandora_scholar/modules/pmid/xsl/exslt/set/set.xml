@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<exslt:module xmlns:exslt="http://exslt.org/documentation"
+              version="1" prefix="set">
+
+<exslt:name>Sets</exslt:name>
+
+<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                 xmlns:dc="http://purl.org/dc/elements/1.1/"
+                 ID="set">
+   <dc:subject>EXSLT</dc:subject>
+   <dc:subject>Sets</dc:subject>
+   <dc:subject>module</dc:subject>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="set.1">
+         <exslt:version>1</exslt:version>
+         <dc:creator>Jeni Tennison</dc:creator>
+         <dc:date>2001-03-28</dc:date>
+         <dc:description>A module of functions dealing with set manipulation.</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="set.1.1">
+         <exslt:version>1.1</exslt:version>
+         <dc:creator>Jeni Tennison</dc:creator>
+         <dc:date>2001-05-22</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            Moved <a href="functions/difference" class="function">set:difference</a>, <a href="functions/intersection" class="function">set:intersection</a>, <a href="functions/distinct" class="function">set:distinct</a>, <a href="functions/has-same-node" class="function">set:has-same-node</a>, <a href="functions/leading" class="function">set:leading</a> and <a href="functions/trailing" class="function">set:traling</a> into the core.
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+</rdf:Description>
+
+<exslt:doc xmlns="">
+   <section>
+      <para>
+         EXSLT - Sets covers those extension elements and functions that provide facilities to do with set manipulation.
+      </para>
+   </section>
+</exslt:doc>
+
+<exslt:functions>
+   <exslt:function name="difference" version="1" core="yes" />
+   <exslt:function name="intersection" version="1" core="yes" />
+   <exslt:function name="distinct" version="1" core="yes" />
+   <exslt:function name="has-same-node" version="1" core="yes" />
+   <exslt:function name="leading" version="1" core="yes" />
+   <exslt:function name="trailing" version="1" core="yes" />
+</exslt:functions>
+
+</exslt:module>

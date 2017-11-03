@@ -1,0 +1,13 @@
+/**
+ * Set up a pseudo-element.
+ *
+ */
+.pseudo(@content: ""; @display: block;) {
+    content: @content;
+    display: @display;
+}
+
+/* stylelint-disable-next-line selector-class-pattern */
+._pseudo {
+    .pseudo();
+}

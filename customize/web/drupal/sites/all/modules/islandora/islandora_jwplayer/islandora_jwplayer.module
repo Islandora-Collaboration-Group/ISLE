@@ -1,0 +1,74 @@
+<?php
+/**
+ * @file
+ * An Islandora viewer module using jwplayer.
+ *
+ * @todo
+ *   Try and get libraries dependency working.
+ */
+
+/**
+ * Implements hook_islandora_viewer_info().
+ */
+function islandora_jwplayer_islandora_viewer_info() {
+  return array(
+    'islandora_jwplayer' => array(
+      'label' => t('JW Player'),
+      'description' => t('JW Player for audio and video.'),
+      'callback' => 'islandora_jwplayer_callback',
+      'mimetype' => array('audio/mpeg', 'video/mp4'),
+    ),
+  );
+}
+
+/**
+ * Callback function to process audio player.
+ *
+ * @param array $params
+ *   Array with configuration info for the audio player.
+ *
+ * @return string
+ *   The marked up output to render JW Player.
+ */
+function islandora_jwplayer_callback($params = array()) {
+  // @TODO: Make it such that a default thumbnail can be used, if one is not
+  // provided in the parameters.
+  $required = array('url', 'mime', 'tn');
+  if (count(array_intersect($required, array_keys($params))) === count($required)) {
+    // This should be a theme function.
+    $output = "<div id=\"mediaplayer\">Loading JW Player...</div>";
+
+    $jwpath = libraries_get_path("jwplayer");
+    drupal_add_js($jwpath . "/jwplayer.js", array(
+      // XXX: Can not be allowed to be aggregated, as underlying library code
+      // tries to access other resources relative to the path from which this
+      // is loaded.
+      'preprocess' => FALSE,
+    ));
+
+    // We have to hack a file name into the URL because jwplayer removed support
+    // for specifying mimetype.
+    $mime_detect = new MimeDetect();
+    $extension = $mime_detect->getExtension($params["mime"]);
+
+    // Using "default" is no longer valid in JW Player 6, we will default to
+    // the height and width given in the support docs.
+    // @TODO: JW Player 6 supports responsive widths and heights, potentially
+    // implement this? http://www.longtailvideo.com/support/jw-player/28839/embe
+    // dding-the-player?
+    $width = isset($params['width']) ? $params['width'] : '480';
+    $height = isset($params['height']) ? $params['height'] : '270';
+    $player_params = array(
+      "thumbnail" => $params["tn"],
+      "file" => $params["url"] . '/file_name_spoof.' . $extension,
+      "width" => $width,
+      "height" => $height,
+    );
+    drupal_add_js(array("islandora_jwplayer" => $player_params), 'setting');
+
+    $mypath = drupal_get_path("module", "islandora_jwplayer");
+    drupal_add_js($mypath . "/js/player.js", array('preprocess' => FALSE));
+
+    return $output;
+  }
+}

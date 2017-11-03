@@ -1,0 +1,11 @@
+name = "Islandora basic image"
+description = "A default Islandora Repository module to handle images"
+dependencies[] = islandora
+dependencies[] = imagemagick
+package = Islandora Solution Packs
+core = 7.x
+version = 7.x-dev
+configure = admin/islandora/solution_pack_config/basic_image
+stylesheets[all][] = css/islandora_basic_image.theme.css
+files[] = tests/islandora_basic_image_ingest_purge.test
+

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gmi:LE_ProcessStep xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gmi="http://www.isotc211.org/2005/gmi" xsi:schemaLocation="http://www.isotc211.org/2005/gco http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/gco/gco.xsd http://www.isotc211.org/2005/gmd http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/gmd/gmd.xsd http://www.isotc211.org/2005/gmi ../../gmi/gmi.xsd" id="ps_144">
+	<gmd:description>
+		<gco:CharacterString>Orbital processing: Input level 1 data, calibration, cloud screening, sst and optical thicknesses computations. Gridded products of aerosol observations are produced weekly from the afternoon satellite data.</gco:CharacterString>
+	</gmd:description>
+	<gmd:dateTime>
+		<gco:DateTime>2011-07-26T16:46:30</gco:DateTime>
+	</gmd:dateTime>
+	<gmd:processor>
+		<gmd:CI_ResponsibleParty>
+			<gmd:individualName>
+				<gco:CharacterString>John F. Sapper</gco:CharacterString>
+			</gmd:individualName>
+			<gmd:organisationName>
+				<gco:CharacterString>DOC/NOAA/NESDIS/OSDPD &gt; Office of Satellite Data Processing and Distribution, NESDIS, NOAA, U.S. Department of Commerce</gco:CharacterString>
+			</gmd:organisationName>
+			<gmd:positionName>
+				<gco:CharacterString>physical scientist</gco:CharacterString>
+			</gmd:positionName>
+			<gmd:contactInfo>
+				<gmd:CI_Contact>
+					<gmd:phone>
+						<gmd:CI_Telephone>
+							<gmd:voice>
+								<gco:CharacterString>(555)-555-0199</gco:CharacterString>
+							</gmd:voice>
+						</gmd:CI_Telephone>
+					</gmd:phone>
+					<gmd:address>
+						<gmd:CI_Address>
+							<gmd:deliveryPoint>
+								<gco:CharacterString>5200 Auth Road</gco:CharacterString>
+							</gmd:deliveryPoint>
+							<gmd:city>
+								<gco:CharacterString>Camp Springs</gco:CharacterString>
+							</gmd:city>
+							<gmd:administrativeArea>
+								<gco:CharacterString>MD</gco:CharacterString>
+							</gmd:administrativeArea>
+							<gmd:postalCode>
+								<gco:CharacterString>20746</gco:CharacterString>
+							</gmd:postalCode>
+							<gmd:country>
+								<gco:CharacterString>USA</gco:CharacterString>
+							</gmd:country>
+							<gmd:electronicMailAddress>
+								<gco:CharacterString>john.doe@gov.gov</gco:CharacterString>
+							</gmd:electronicMailAddress>
+						</gmd:CI_Address>
+					</gmd:address>
+					<gmd:hoursOfService>
+						<gco:CharacterString>7:00 AM-3:30 PM Eastern</gco:CharacterString>
+					</gmd:hoursOfService>
+				</gmd:CI_Contact>
+			</gmd:contactInfo>
+			<gmd:role>
+				<gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="processor">processor</gmd:CI_RoleCode>
+			</gmd:role>
+		</gmd:CI_ResponsibleParty>
+	</gmd:processor>
+	<gmd:source xlink:href="./anotherfile#src_AEROBS_File"/>
+	<gmd:source xlink:href="./anotherfile#src_AVHRR_GAC"/>
+	<gmd:source xlink:href="./anotherfile#src_BR_CLIMATE"/>
+	<gmd:source xlink:href="./anotherfile#src_Land_Sea_Tag"/>
+	<gmd:source xlink:href="./anotherfile#src_gov.noaa.class_SST100"/>
+	<gmi:output xlink:href="./anotherfile#src_gov.noaa.class_AERO100"/>
+	<gmi:processingInformation>
+		<gmi:LE_Processing>
+			<gmi:identifier>
+				<gmd:MD_Identifier>
+					<gmd:code>
+						<gco:CharacterString>gov.noaa.ngdc.fgdccitation:99999</gco:CharacterString>
+					</gmd:code>
+				</gmd:MD_Identifier>
+			</gmi:identifier>
+			<gmi:algorithm>
+				<gmi:LE_Algorithm>
+					<gmi:citation>
+						<gmd:CI_Citation>
+							<gmd:title>
+								<gco:CharacterString>Algorithm - Calculate Aerosol Observations</gco:CharacterString>
+							</gmd:title>
+							<gmd:date>
+								<gmd:CI_Date>
+									<gmd:date>
+										<gco:Date>2004-01</gco:Date>
+									</gmd:date>
+									<gmd:dateType>
+										<gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication">publication</gmd:CI_DateTypeCode>
+									</gmd:dateType>
+								</gmd:CI_Date>
+							</gmd:date>
+							<gmd:citedResponsibleParty>
+								<gmd:CI_ResponsibleParty uuid="82A5DD1B227DB8D0E040AC8C5AB41A44">
+									<gmd:organisationName>
+										<gco:CharacterString>DOC/NOAA/NESDIS &gt; National Environmental Satellite Data and Information Service, NOAA, U.S. Department of Commerce</gco:CharacterString>
+									</gmd:organisationName>
+									<gmd:contactInfo>
+										<gmd:CI_Contact>
+											<gmd:phone>
+												<gmd:CI_Telephone>
+													<gmd:voice>
+														<gco:CharacterString>(555)-555-0199</gco:CharacterString>
+													</gmd:voice>
+													<gmd:facsimile>
+														<gco:CharacterString>(555)-555-0198</gco:CharacterString>
+													</gmd:facsimile>
+												</gmd:CI_Telephone>
+											</gmd:phone>
+											<gmd:address>
+												<gmd:CI_Address>
+													<gmd:deliveryPoint>
+														<gco:CharacterString>1335 East-West Highway</gco:CharacterString>
+													</gmd:deliveryPoint>
+													<gmd:city>
+														<gco:CharacterString>Silver Spring</gco:CharacterString>
+													</gmd:city>
+													<gmd:administrativeArea>
+														<gco:CharacterString>MD</gco:CharacterString>
+													</gmd:administrativeArea>
+													<gmd:postalCode>
+														<gco:CharacterString>20910</gco:CharacterString>
+													</gmd:postalCode>
+													<gmd:country>
+														<gco:CharacterString>USA</gco:CharacterString>
+													</gmd:country>
+												</gmd:CI_Address>
+											</gmd:address>
+										</gmd:CI_Contact>
+									</gmd:contactInfo>
+									<gmd:role>
+										<gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="originator">originator</gmd:CI_RoleCode>
+									</gmd:role>
+								</gmd:CI_ResponsibleParty>
+							</gmd:citedResponsibleParty>
+						</gmd:CI_Citation>
+					</gmi:citation>
+					<gmi:description>
+						<gco:CharacterString>Aerosol products are produced on a weekly basis, using a revised (Phase 2) single channel algorithm for aerosol optical thickness retrieval over oceans from radiances in Channel 1. This algorithm scales the upward satellite radiances in cloud-free conditions to aerosol optical thickness using an updated radiative transfer model of the ocean and atmosphere. The primary products are a global one degree map of Aerosol Optical Thickness based on a composite of one week's worth of data and the monthly mean product.</gco:CharacterString>
+					</gmi:description>
+				</gmi:LE_Algorithm>
+			</gmi:algorithm>
+			<gmi:algorithm>
+				<gmi:LE_Algorithm>
+					<gmi:citation>
+						<gmd:CI_Citation uuid="82A5DD19539FCBECE040AC8C5AB41A40">
+							<gmd:title>
+								<gco:CharacterString>Operational Aerosol Observations (AEROBS) from AVHRR/3 On Board NOAA-KLM Satellites</gco:CharacterString>
+							</gmd:title>
+							<gmd:date>
+								<gmd:CI_Date>
+									<gmd:date>
+										<gco:Date>2004-01</gco:Date>
+									</gmd:date>
+									<gmd:dateType>
+										<gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication">publication</gmd:CI_DateTypeCode>
+									</gmd:dateType>
+								</gmd:CI_Date>
+							</gmd:date>
+							<gmd:citedResponsibleParty>
+								<gmd:CI_ResponsibleParty>
+									<gmd:individualName>
+										<gco:CharacterString>Doe, John</gco:CharacterString>
+									</gmd:individualName>
+									<gmd:role>
+										<gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="originator">originator</gmd:CI_RoleCode>
+									</gmd:role>
+								</gmd:CI_ResponsibleParty>
+							</gmd:citedResponsibleParty>
+							<gmd:series>
+								<gmd:CI_Series>
+									<gmd:name>
+										<gco:CharacterString>Journal of Atmospheric and Oceanic Technology</gco:CharacterString>
+									</gmd:name>
+									<gmd:issueIdentification>
+										<gco:CharacterString>Vol. 21, No. 1</gco:CharacterString>
+									</gmd:issueIdentification>
+									<gmd:page>
+										<gco:CharacterString>pp. 3-26</gco:CharacterString>
+									</gmd:page>
+								</gmd:CI_Series>
+							</gmd:series>
+						</gmd:CI_Citation>
+					</gmi:citation>
+					<gmi:description>
+						<gco:CharacterString>Describes the AEROBS processing and gives examples of aerosol products, along with a preliminary diagnostics of their quality using some of the previously developed self-consistency checks.</gco:CharacterString>
+					</gmi:description>
+				</gmi:LE_Algorithm>
+			</gmi:algorithm>
+		</gmi:LE_Processing>
+	</gmi:processingInformation>
+</gmi:LE_ProcessStep>

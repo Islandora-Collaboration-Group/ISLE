@@ -1,0 +1,92 @@
+<?php
+/**
+ * @file
+ * Defines general hook implementations for the module.
+ */
+
+define('ISLANDORA_BOOKMARK_CSV_EXPORTS_PERMISSION', 'administer islandora_bookmark_csv_exports');
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_bookmark_csv_exports_menu() {
+  $items = array();
+  $items['admin/islandora/tools/islandora-bookmark/csv_exports'] = array(
+    'title' => 'CSV Exports',
+    'description' => 'Configure settings for the Bookmark CSV Exports module.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_bookmark_csv_exports_overview_form'),
+    'access arguments' => array('administer islandora_bookmark_csv_exports'),
+    'file' => 'includes/overview.form.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 1,
+  );
+  $items['admin/islandora/tools/islandora-bookmark/csv_exports/config/%'] = array(
+    'title callback' => 'islandora_bookmark_csv_exports_display_configuration_name',
+    'title arguments' => array(6),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_bookmark_csv_exports_config_form', 6),
+    'access callback' => 'islandora_bookmark_csv_exports_access',
+    'access arguments' => array(6),
+    'file' => 'includes/config.form.inc',
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function islandora_bookmark_csv_exports_permission() {
+  return array(
+    ISLANDORA_BOOKMARK_CSV_EXPORTS_PERMISSION => array(
+      'title' => 'Create and manage Bookmark CSV exports configurations',
+    ),
+  );
+}
+
+/**
+ * Access callback for accessing a configuration based upon ID.
+ *
+ * @param int $configuration_id
+ *   The configuration ID of the list we are accessing.
+ *
+ * @return bool
+ *   TRUE if the user has permission and the config exists, FALSE otherwise.
+ */
+function islandora_bookmark_csv_exports_access($configuration_id) {
+  module_load_include('inc', 'islandora_bookmark_csv_exports', 'includes/db');
+  return islandora_bookmark_csv_exports_configuration_exists($configuration_id) && user_access(ISLANDORA_BOOKMARK_CSV_EXPORTS_PERMISSION);
+}
+
+/**
+ * Title callback for the configuration display.
+ *
+ * @param int $configuration_id
+ *   The ID of the configuration we are retrieving the name of.
+ *
+ * @return string
+ *   The name of the configuration that is to be edited.
+ */
+function islandora_bookmark_csv_exports_display_configuration_name($configuration_id) {
+  module_load_include('inc', 'islandora_bookmark_csv_exports', 'includes/db');
+  $configuration_name = islandora_bookmark_csv_exports_retrieve_configuration_name($configuration_id);
+  return format_string('@configuration_name export configuration', array('@configuration_name' => $configuration_name));
+}
+
+/**
+ * Implements hook_islandora_bookmark_export_handler().
+ */
+function islandora_bookmark_csv_exports_islandora_bookmark_export_handler() {
+  module_load_include('inc', 'islandora_bookmark_csv_exports', 'includes/db');
+  $configs = islandora_bookmark_csv_exports_get_configurations();
+  $handlers = array();
+  foreach ($configs as $config) {
+    if (!empty($config['descrip']) && $config['fields']) {
+      $handlers['Bookmark CSV'][$config['machine_name']] = array(
+        'human_readable' => $config['descrip'],
+        'callable' => array(new IslandoraBookmarkCSVExportsExport($config['id']), 'export'),
+      );
+    }
+  }
+  return $handlers;
+}

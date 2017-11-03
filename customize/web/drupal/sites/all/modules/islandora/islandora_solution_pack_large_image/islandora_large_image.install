@@ -1,0 +1,57 @@
+<?php
+
+/**
+ * @file
+ * islandora_large_image.install
+ */
+
+/**
+ * Implements hook_requirements().
+ */
+function islandora_large_image_requirements($phase) {
+  module_load_include('inc', 'islandora', 'includes/utilities');
+  $requirements = array();
+  if ($phase == 'install') {
+    $t = get_t();
+    $out = array();
+    $ret = 1;
+
+    $command = 'command -v kdu_compress >/dev/null 2>&1';
+
+    if (islandora_deployed_on_windows()) {
+      $command = 'kdu_compress >NUL 2>&1';
+    }
+
+    exec($command, $out, $ret);
+
+    if ($ret != 0) {
+      $requirements['kakadu'] = array(
+        'title' => $t("Kakadu Image Compression"),
+        'value' => $t("Not installed"),
+        'severity' => REQUIREMENT_ERROR,
+        'description' => $t('Ensure that adore-djatoka is installed and that kdu_compress is accessible by PHP.'),
+      );
+    }
+  }
+  return $requirements;
+}
+
+/**
+ * Implements hook_install().
+ *
+ * @see islandora_large_image_islandora_required_objects()
+ */
+function islandora_large_image_install() {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  islandora_install_solution_pack('islandora_large_image');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_large_image_uninstall() {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  islandora_install_solution_pack('islandora_large_image', 'uninstall');
+  $variables = array('islandora_large_image_viewers');
+  array_walk($variables, 'variable_del');
+}

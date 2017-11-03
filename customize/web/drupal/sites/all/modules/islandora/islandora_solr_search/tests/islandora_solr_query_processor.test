@@ -1,0 +1,118 @@
+<?php
+
+/**
+ * @file
+ * Ingests an object and uses the query processor to check Solr's index for it.
+ */
+
+class IslandoraSolrQueryProcessorTestCase extends IslandoraWebTestCase {
+
+  /**
+   * Get test information.
+   *
+   * @see IslandoraWebTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Islandora Solr Query Processor',
+      'description' => 'Indexes an object and searches for its DC title via the Islandora Query Processor.',
+      'group' => 'Islandora Solr Search',
+    );
+  }
+
+  /**
+   * Set up the test environment.
+   *
+   * @see IslandoraWebTestCase::setUp()
+   */
+  public function setUp() {
+    $this->solr_url = variable_get('islandora_solr_url', 'http://localhost:8080/solr');
+    parent::setUp(array(
+      'islandora_solr',
+    ));
+  }
+
+  /**
+   * Ingests an object and checks the Solr index for it via the query processor.
+   */
+  public function testSolrQueryProcessor() {
+
+    // Before we do anything, let's check if we're even connected to Solr.
+    $this->assertTrue(islandora_solr_ping($this->solr_url), t('Connected to Solr at %solr_url successfully.', array('%solr_url' => $this->solr_url)), 'Islandora');
+    $user = $this->drupalCreateUser(array_keys(module_invoke_all('permission')));
+    $this->drupalLogin($user);
+
+    // We're setting up our query processor and building our query
+    // up here so it doesn't interfere with the results data down there.
+    $object_label = $this->randomName(16);
+    module_load_include('inc', 'islandora_solr', 'query_processor');
+    $query_processor = new IslandoraSolrQueryProcessor();
+    $query_processor->internalSolrParams['type'] = 'dismax';
+    $query_processor->buildQuery("dc.title:{$object_label}");
+
+    // Defines, constructs, then ingests the test object with our new MODS.
+    $object_pid = 'islandora:' . $this->randomName(16);
+    $object_properties = array(
+      'label' => $object_label,
+      'pid' => $object_pid,
+    );
+    $this->ingestConstructedObject($object_properties);
+    $ingest_time = microtime(TRUE);
+    sleep(5);
+
+    // And now to hammer Solr with the query processor until we find something!
+    // If it takes more than 10000 passes, well ... I've seen it take up to 600
+    // before it gets indexed. I mean, Solr is bad sometimes, but not THAT bad.
+    $i = 0;
+    while ($i <= 10) {
+      $query_processor->executeQuery();
+      $i++;
+      if (isset($query_processor->islandoraSolrResult['response']['objects'][0]['solr_doc'])) {
+        $completion_time = microtime(TRUE);
+        $indexing_time = round($completion_time - $ingest_time, 3);
+        $this->pass(t("Solr doc for object %object_label (PID: %object_pid) found in the index after %i pass(es) and %indexing_time seconds.", array(
+          '%object_label' => $object_label,
+          '%object_pid' => $object_pid,
+          '%i' => $i,
+          '%indexing_time' => $indexing_time,
+        )), 'Islandora');
+        break;
+      }
+      elseif ($i == 10) {
+        $completion_time = microtime(TRUE);
+        $indexing_time = round($completion_time - $ingest_time, 3);
+        $this->fail(t("Solr doc for object %object_label (PID: %object_pid) not found in the index despite making %i passes (total query time: %indexing_time seconds).", array(
+          '%object_label' => $object_label,
+          '%object_pid' => $object_pid,
+          '%i' => $i,
+          '%indexing_time' => $indexing_time,
+        )), 'Islandora');
+        break;
+      }
+      sleep(1);
+    }
+
+    // And is it gone?
+    $this->deleteObject($object_pid);
+    $i = 0;
+    while ($i <= 10) {
+      $query_processor->executeQuery();
+      $i++;
+      if (!isset($query_processor->islandoraSolrResult['response']['objects'][0]['solr_doc'])) {
+        $this->pass(t("After removing object %object_pid, its entry was no longer found in the Solr index after %i passes.", array(
+          '%object_pid' => $object_pid,
+          '%i' => $i,
+        )), 'Islandora');
+        break;
+      }
+      elseif ($i == 10) {
+        $this->fail(t("Object %object_pid persists in the Solr index despite %i passes.", array(
+          '%object_pid' => $object_pid,
+          '%i' => $i,
+        )), 'Islandora');
+        break;
+      }
+      sleep(1);
+    }
+  }
+}

@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<exslt:function xmlns:exslt="http://exslt.org/documentation" 
+               version="1" module="date" status="implemented">
+
+<exslt:name>sum</exslt:name>
+
+<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                 xmlns:dc="http://purl.org/dc/elements/1.1/"
+                 ID="date:sum">
+   <dc:subject>EXSLT</dc:subject>
+   <dc:subject>date</dc:subject>
+   <dc:subject>sum</dc:subject>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="date:sum.1">
+         <exslt:version>1</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com/">
+            Jeni Tennison
+         </dc:creator>
+         <dc:date>2001-05-12</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            Adds a set of durations together.
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="date:sum.1.1">
+         <exslt:version>1.1</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com/">
+            Jeni Tennison
+         </dc:creator>
+         <dc:date>2001-06-11</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            Added Javascript implementation.
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="date:sum.1.2">
+         <exslt:version>1.2</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com/">
+            Jeni Tennison
+         </dc:creator>
+         <dc:date>2001-06-16</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            <ul>
+               <li>Updated Javascript implementation.</li>
+               <li>Added Microsoft-specific stylesheet.</li>
+            </ul>
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+</rdf:Description>
+
+<exslt:doc xmlns:html="http://www.w3.org/1999/xhtml"
+           xmlns="">
+   <html:div xmlns="http://www.w3.org/1999/xhtml">
+      <p>
+         The <code>date:sum</code> function adds a set of durations together.  The string values of the nodes in the node set passed as an argument are interpreted as durations and added together as if using the <a href="/date/functions/add-duration"><code>date:add-duration</code></a> function.
+      </p>
+      <p>
+         The string values of the nodes in the node set passed as the argument must be in the format defined for <code>xs:duration</code> in [<a href="http://www.w3.org/TR/xmlschema-2/#duration" class="offsite">3.2.6 duration</a>] of [<a href="http://www.w3.org/TR/xmlschema-2/" class="offsite">XML Schema Part 2: Datatypes</a>].  If any of the string values of these nodes are not in this format, or if the node set is empty, the function returns an empty string (<code>''</code>).
+      </p>
+      <p>
+         The result is a string in the format defined for <code>xs:duration</code> in [<a href="http://www.w3.org/TR/xmlschema-2/#duration" class="offsite">3.2.6 duration</a>] of [<a href="http://www.w3.org/TR/xmlschema-2/" class="offsite">XML Schema Part 2: Datatypes</a>].
+      </p>
+      <p class="note">
+         The durations can be summed by summing the numbers given for each of the components in the durations.
+      </p>
+   </html:div>
+</exslt:doc>
+
+<exslt:definition xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <exslt:return type="string" />
+   <exslt:arg name="nodes" type="node-set" 
+              optional="no" />
+</exslt:definition>
+
+<exslt:implementations>
+   <exslt:implementation src="date.js" language="exslt:javascript" 
+                         version="1">
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="date:sum.js">
+         <dc:subject>EXSLT</dc:subject>
+         <dc:subject>date</dc:subject>
+         <dc:subject>sum</dc:subject>
+         <dc:subject>Javascript</dc:subject>
+         <exslt:revision>
+            <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                             xmlns:dc="http://purl.org/dc/elements/1.1/"
+                             ID="date:sum.js.1">
+               <exslt:version>1</exslt:version>
+               <dc:creator xmlns:vcf="http://www.ietf.org/internet-drafts/draft-dawson-vcard-xml-dtd-03.txt" rdf:parseType="Resource">
+                  <vcf:fn>Chris Bayes</vcf:fn>
+                  <vcf:email>chris@bayes.co.uk</vcf:email>
+                  <vcf:url>http://www.bayes.co.uk</vcf:url>
+               </dc:creator>
+               <dc:date>2001-06-11</dc:date>
+            </rdf:Description>
+         </exslt:revision>
+         <exslt:revision>
+            <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                             xmlns:dc="http://purl.org/dc/elements/1.1/"
+                             ID="date:sum.js.2">
+               <exslt:version>2</exslt:version>
+               <dc:creator xmlns:vcf="http://www.ietf.org/internet-drafts/draft-dawson-vcard-xml-dtd-03.txt" rdf:parseType="Resource">
+                  <vcf:fn>Chris Bayes</vcf:fn>
+                  <vcf:email>chris@bayes.co.uk</vcf:email>
+                  <vcf:url>http://www.bayes.co.uk</vcf:url>
+               </dc:creator>
+               <dc:date>2001-06-16</dc:date>
+            </rdf:Description>
+         </exslt:revision>
+      </rdf:Description>
+   </exslt:implementation>
+   <exslt:implementation src="date.msxsl.xsl" language="exslt:msxsl"
+                         version="1">
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="date:sum.msxsl">
+         <dc:subject>EXSLT</dc:subject>
+         <dc:subject>date</dc:subject>
+         <dc:subject>sum</dc:subject>
+         <dc:subject>MSXML</dc:subject>
+         <exslt:revision>
+            <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                             xmlns:dc="http://purl.org/dc/elements/1.1/"
+                             ID="date:sum.msxsl.1">
+               <exslt:version>1</exslt:version>
+               <dc:creator xmlns:vcf="http://www.ietf.org/internet-drafts/draft-dawson-vcard-xml-dtd-03.txt" rdf:parseType="Resource">
+                  <vcf:fn>Chris Bayes</vcf:fn>
+                  <vcf:email>chris@bayes.co.uk</vcf:email>
+                  <vcf:url>http://www.bayes.co.uk</vcf:url>
+               </dc:creator>
+               <dc:date>2001-06-16</dc:date>
+            </rdf:Description>
+         </exslt:revision>
+      </rdf:Description>
+   </exslt:implementation>
+</exslt:implementations>
+
+<exslt:use-cases />
+
+</exslt:function>

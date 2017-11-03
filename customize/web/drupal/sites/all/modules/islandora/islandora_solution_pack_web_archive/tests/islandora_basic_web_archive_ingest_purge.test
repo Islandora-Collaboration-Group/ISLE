@@ -1,0 +1,121 @@
+<?php
+
+/**
+ * @file
+ * Attempts to ingest warc into a randomly generated web archive collection
+ */
+
+/**
+ * Naive checking of WARC_FILTERED and WARC_CSV.
+ */
+class WARCDerivativeDatastreamValidator extends DatastreamValidator {
+
+  /**
+   * Check WARC_FILTERED and WARC_CSV for content.
+   *
+   * If the WARC_FILTERED or WARC_CSV derivation fails, an empty datastream is
+   * generated, so we can at least validate here that they create something.
+   */
+  protected function assertContent() {
+    $assertion = strlen($this->datastreamContent) > 0;
+    $pass = "Datastream {$this->datastream} has content.";
+    $fail = "Datastream {$this->datastream} is an empty file.";
+    $message = $assertion ? $pass : $fail;
+    $this->addResult($assertion, $message);
+  }
+}
+
+class IslandoraWebArchiveIngestTestCase extends IslandoraCollectionWebTestCase {
+
+  /**
+   * Get test information.
+   *
+   * @see IslandoraWebTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Web Archive Ingest/Purge',
+      'description' => 'Ingests and purges a warc from a randomly generated web archive collection',
+      'group' => 'Islandora Web Archive',
+    );
+  }
+
+  /**
+   * Set up the test environment.
+   *
+   * @see IslandoraWebTestCase::setUp()
+   */
+  public function setUp() {
+    $this->executables = array(
+      'islandora_web_archive_warcfilter_path' => variable_get('islandora_web_archive_warcfilter_path', '/usr/local/bin/warcfilter'),
+      'islandora_web_archive_warcindex_path' => variable_get('islandora_web_archive_warcindex_path', '/usr/local/bin/warcindex'),
+      'image_toolkit' => variable_get('image_toolkit', 'imagemagick'),
+      'imagemagick_convert' => variable_get('imagemagick_convert', '/usr/bin/convert'),
+    );
+    parent::setUp(array(
+      'islandora',
+      'islandora_web_archive',
+      'islandora_basic_collection',
+    ));
+    foreach ($this->executables as $variable => $value) {
+      variable_set($variable, $value);
+    }
+  }
+
+  /**
+   * Creates an administrative user and attempts to ingest a test warc.
+   */
+  public function testIngestPurgeBasicImage() {
+    $user = $this->drupalCreateUser(array(
+      'view fedora repository objects',
+      'ingest fedora objects',
+      'administer site configuration',
+      'manage object properties',
+      'delete fedora objects and datastreams',
+      'create child collection',
+    ));
+    $this->drupalLogin($user);
+
+    $label = $this->randomName(16);
+    $suffix = $this->randomName(16);
+    $collectionpid = 'islandora:' . $suffix;
+    $this->createTestCollection($label, 'islandora:sp_web_archive', $collectionpid);
+
+    // Attempts to create an object.
+    $path = 'islandora/object/' . $collectionpid . '/manage/overview/ingest';
+    $edit = array();
+    $fixtures_path = drupal_get_path('module', 'islandora_web_archive') . '/tests/fixtures';
+    $edit['files[warc_file]'] = "$fixtures_path/test.warc";
+    $edit['upload_screenshot'] = TRUE;
+    $edit['files[screenshot_file]'] = "$fixtures_path/test.jpg";
+    $edit['upload_pdf'] = TRUE;
+    $edit['files[pdf_file]'] = "$fixtures_path/test.pdf";
+    $this->drupalPost($path, $edit, t('Ingest'));
+    $this->assertText('New Object', 'WARC object was created', 'Islandora');
+    $path = $this->url;
+    $warcpath = $path . '/datastream/OBJ/New%20Object.warc';
+    $this->assertLinkByHref($warcpath, 0, t('Ingested warc found on view page'), t('Islandora'));
+
+    // Determines whether or not the appropriate datastreams were created.
+    $object = $this->getObjectFromPath($this->url);
+    $datastreams = array(
+      'RELS-EXT',
+      'DC',
+      'OBJ',
+      'TN',
+      'JPG',
+      'PDF',
+      'WARC_CSV',
+      'WARC_FILTERED',
+    );
+    $this->assertDatastreams($object, $datastreams);
+    $datastreams = array(
+      array('TN', 'image'),
+      array('JPG', 'image'),
+      array('PDF', 'PDF'),
+      array('WARC_CSV', 'WARCDerivative'),
+      array('WARC_FILTERED', 'WARCDerivative'),
+    );
+    $this->validateDatastreams($object, $datastreams);
+  }
+}

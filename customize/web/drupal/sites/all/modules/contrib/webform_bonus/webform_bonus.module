@@ -1,0 +1,104 @@
+<?php
+
+module_load_include('inc', 'webform', 'includes/webform.export');
+
+/**
+ * Implementation of hook_webform_component_info().
+ */
+function webform_bonus_webform_component_info() {
+  return array(
+    'mapping' => array(
+      'label' => t('Mapping'),
+      'description' => t('Hidden Webform component, which returns value mapped to value of another component.'),
+      'file' => 'components/mapping.inc',
+      'features' => array(
+        'csv' => FALSE,
+        'required' => FALSE,
+        'email_address' => TRUE,
+        'email_name' => TRUE,
+        'conditional' => FALSE,
+        'group' => FALSE,
+      ),
+    ),
+    'summary' => array(
+      'label' => t('Summary'),
+      'description' => t('Creates Review page.'),
+      'file' => 'components/summary.inc',
+      'features' => array(
+        'required' => FALSE,
+        'conditional' => FALSE,
+      ),
+    ),
+  );
+}
+
+
+/**
+ * Imlementation of hook_webform_submission_presave().
+ * Used by mapping component.
+ */
+function webform_bonus_webform_submission_presave($node, &$submission) {
+  foreach ($node->webform['components'] as $id => $c) {
+    if ($c['type'] == 'mapping' && isset($submission->data[$c['extra']['mapped_component']])) {
+      $map = array();
+      $items = explode("\n", $c['extra']['items']);
+      foreach ($items as $item) {
+        $item_arr = explode('|', $item);
+        $map[trim($item_arr[0])][] = trim($item_arr[1]);
+      }
+      $new_value = array();
+      foreach ($submission->data[$c['extra']['mapped_component']]['value'] as $key) {
+        if (isset($map[$key])) {
+          $new_value = array_merge($new_value, $map[$key]);
+        }
+      }
+      $new_value = array_unique($new_value);
+      if (!empty($new_value)) {
+        $submission->data[$c['cid']]['value'] = $new_value;
+      }
+    }
+  }
+}
+
+
+/**
+ * Implementation of hook_webform_exporters().
+ *
+ * Defines the exporters this module implements.
+ *
+ * @return
+ *   An "array of arrays", keyed by content-types. The 'handler' slot
+ *   should point to the PHP class implementing this flag.
+ */
+function webform_bonus_webform_exporters() {
+  return array(
+    'txt_delimited' => array(
+      'title' => t('Force txt extention'),
+      'description' => t('A plain text file delimited by commas, tabs, or other characters.'),
+      'handler' => 'webform_bonus_exporter_delimited_txt',
+    ),
+
+  );
+}
+
+/**
+ * Own txt exporter.
+ */
+class webform_bonus_exporter_delimited_txt extends webform_exporter_delimited {
+  function set_headers($filename) {
+    parent::set_headers($filename);
+
+    // Convert tabs.
+    if ($this->delimiter == "\t") {
+      $extension = 'txt';
+      $content_type = 'text/plain';
+    }
+    else {
+      $extension = 'txt';
+      $content_type = 'text/plain';
+    }
+
+    drupal_add_http_header('Content-Type', $content_type);
+    drupal_add_http_header('Content-Disposition', "attachment; filename=$filename.$extension");
+  }
+}

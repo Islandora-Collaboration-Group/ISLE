@@ -1,0 +1,382 @@
+/* Any commented out ode was present in the original source. */
+/*
+body {
+     background: #eeeeee;
+     padding: 5 5 5 5;
+}
+*/
+#canvasViewport {
+  border: 1px solid #000;
+  height: 600px;
+  margin: 20px;
+  overflow: hidden;
+  position: relative;
+  width: 600px;
+}
+
+#fullCanvasFrame {
+  position: absolute;
+  cursor: move;
+}
+/*
+.title {
+       border: 1px solid black;
+       position: relative;
+       left: 10%;
+       background: white;
+       height: 100;
+       width: 80%;
+       text-align: left;
+       padding: 0 0 0 30;
+}
+*/
+.titleInner {
+	    position: absolute;
+	    height: 30px;
+	    top: 0px;
+	    padding: 0 0 0 100;
+	    margin: 0 0 0 0;
+}
+
+.titleMainText {
+	    font-family: cursive;
+	    font-weight: bold;
+	    color: #D03030;
+	    font-size: 40px;
+}
+
+.titleSubText {
+	    font-family: cursive;
+	    color: black;
+	    font-size: 20px;
+}
+
+/*
+.links {
+       position: absolute;
+}
+.content {
+	 position: absolute;
+	 top: 130px;
+	 left: 200px;
+	 right: 20px;
+	 background: white;
+
+	 padding: 3px;
+	 border: 2px solid #707070;
+
+}
+*/
+.contentTitle {
+	      font-family: cursive;
+	      color: #D03030;
+	      font-size: 18;
+}
+
+.bluedot {
+	 color: #6060FF;
+}
+
+.pinkdot {
+	 color: #FF60FF;
+}
+
+.menulist {
+	  border: 1px dashed black;
+	  background: #d0c0a0;
+	  font-family: sans-serif;
+	  padding: 1 1 1 1;
+	  width: 180px;
+	  font-size: 18px;
+
+}
+
+.menuhead {
+	  text-align: center;
+	  background: #fae1d4;
+	  border: 1px solid #d0c0a0;
+	  font-weight: bold;
+	  padding: 3px;
+}
+
+.menuitem {
+	  background: #ead1b4;
+	  border: 1px solid #d0c0a0;
+	  padding: 2 2 2 2;
+}
+
+#show_body li span.ui-icon { position: absolute; margin-left: -5px; }
+
+.selectedItem {
+	      color: black;
+}
+
+.menuitem LI:hover {
+		background: #f4efd7
+}
+/*
+A:link {
+       color: #77421c;
+       text-decoration: none
+}
+
+:visited {
+       color: #77421c;
+       text-decoration: none
+}
+*/
+.modelDiagram {
+	      float: right;
+	      border: 1px solid black;
+	      margin-left: 7px;
+	      margin-right: 2px;
+}
+/*
+.svg_canvas_wrapper {
+}
+*/
+.canvas{
+	position: absolute;
+	border: 1px solid black;
+}
+
+.img_anno {
+	position: absolute;
+}
+
+.img_annoClip {
+	position: absolute;
+}
+.audio_anno {
+	border: 1px solid #505050;
+}
+
+.audio_button {
+	height: 32px;
+}
+
+.text_anno {
+	background: #ffffaa;
+	position:absolute;
+	font-size: 10pt;
+	text-align: justify;
+	opacity: 0.7;
+}
+
+.text_anno_rubric {
+	color:red;
+}
+
+.text_anno_initial {
+	font-size: 18pt;
+	text-align: center;
+}
+
+.menu_head {
+	border:1px solid #998675;
+}
+
+
+.menu_button {
+	border:1px solid #998675;
+}
+
+.menu_body {
+	z-index: 10000;
+	position: absolute;
+	margin:0;
+	padding:0;
+	list-style:none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	display:none;
+	width:184px;
+	border-right:1px solid #998675;
+	border-bottom:1px solid #998675;
+	border-left:1px solid #998675;
+}
+
+.menubody_hover {
+	background: #707070;
+}
+
+.menu_body li {
+	background:#594e4b;
+	font-size: 14px;
+	color: white;
+	padding-left: 10px;
+	padding-right: 5px;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	list-style:none;
+	margin: 0;
+}
+.menu_body li.alt {background:#463f3d;}
+
+.canvasUri {
+	z-index: 12000;
+	background: white;
+}
+
+.create_box {
+	font-size: 10pt;
+	position: absolute;
+}
+
+#create_body li {
+	padding-top:2px;
+	padding-bottom: 2px;
+	background: #a0a0a0;
+	}
+
+#create_body li.alt {
+	background: #c0c0c0;
+}
+
+
+.create_annotation_box {
+	font-size: 10pt;
+	position: absolute;
+	width: 400px;
+
+	}
+
+.comment_title {
+	background: #e0e0e0;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	padding-left: 5px;
+
+}
+
+.comment_text {
+	background: white;
+	padding-left: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+.dragBox {
+	background: white;
+	width: 400px;
+	border: 1px solid black;
+	position: absolute;
+}
+
+.dragHead {
+	text-align: center;
+	background: #b0b0b0;
+	border-bottom: 1px solid black;
+	padding: 2 2 2 2;
+	}
+
+.dragBlock {
+	background: white;
+	padding-top: 5px;
+}
+
+#comment_annos {
+	right: 230;
+	top: 30;
+}
+
+#seqSel {
+	right:30;
+	top: 30;
+}
+
+#seqSel_block {
+	padding-left: 3px;
+}
+
+#seqSel_block span {
+	color: blue;
+}
+
+#imgSel {
+	width: 200;
+	right:15;
+	top: 30;
+}
+
+.imgSel_txt {
+	font-size: 12pt;
+	padding-left: 8px;
+}
+
+.imgSelul {
+	margin:0;
+	padding:0;
+	list-style:none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	border-right:1px solid #998675;
+	border-bottom:1px solid #998675;
+	border-left:1px solid #998675;
+}
+
+.imgSelul li {
+	background:#a0a0a0;
+	font-size: 14px;
+	color: black;
+	padding-left: 10px;
+	padding-right: 5px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	list-style:none;
+	margin: 0;
+}
+.imgSelul li.alt {background:#c0c0c0;}
+
+.imgSel_canvas {
+	font-weight: bold;
+}
+
+.iconMenuBar li {
+	display: inline;
+	list-style-type: none;
+	padding-right: 20px;
+}
+
+.annoShapeLi {
+	width: 25px;
+	border: 1px solid black;
+}
+
+
+.waltersabstract {
+	color: #303030;
+	font-size: 10pt;
+}
+
+
+#seqList {
+	list-style-type: none;
+}
+/*
+.seqItem {
+
+}
+*/
+.titleEdit {
+	float: left;
+	width: 350px;
+}
+
+.widthEdit {
+	float: left;
+	width: 50px;
+}
+
+.heightEdit {
+	float: left;
+	width: 50px;
+}
+
+.menuEdit {
+	float: left;
+	width: 50px;
+}

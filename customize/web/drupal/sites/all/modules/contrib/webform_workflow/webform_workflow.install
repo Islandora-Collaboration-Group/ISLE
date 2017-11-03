@@ -1,0 +1,212 @@
+<?php
+/**
+ * @file
+ * Webform Workflow module install/schema hooks.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function webform_workflow_schema() {
+  $schema['webform_workflow_state'] = array(
+    'fields' => array(
+      'wsid' => array(
+        'description' => 'The primary key for the workflow state.',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => "The {users}.uid of the state's owner or creator.",
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'label' => array(
+        'description' => 'The name of the state.',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'color' => array(
+        'description' => 'A color to display for this state.',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
+      'permissions' => array(
+        'description' => 'Permissions for various operations: a serialized associative array.',
+        'type' => 'blob',
+        'serialize' => TRUE,
+        'not null' => FALSE,
+      ),
+      'created' => array(
+        'description' => 'The Unix timestamp for when the state was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'changed' => array(
+        'description' => 'The Unix timestamp for when the state was most recently changed.',
+        'type' => 'int',
+        'not null' => FALSE,
+      ),
+    ),
+    'primary key' => array('wsid'),
+    'indexes' => array(
+      'label' => array('label'),
+      'uid' => array('uid'),
+      'date' => array('created', 'changed'),
+    ),
+  );
+
+  $schema['webform_workflow_submissions'] = array(
+    'fields' => array(
+      'sid' => array(
+        'description' => 'The {webform_submissions}.sid this state is attached to.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'wsid' => array(
+        'description' => 'The {webform_workflow_state}.wsid of the state this submission is in.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('sid', 'wsid'),
+  );
+
+  $schema['webform_workflow'] = array(
+    'fields' => array(
+      'nid' => array(
+        'description' => 'The {webform}.nid',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'workflow' => array(
+        'description' => 'Whether workflow is enabled for this webform.',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'data' => array(
+        'description' => 'Any extra data attached to the webform. E.g. email template',
+        'type' => 'blob',
+        'not null' => FALSE,
+      ),
+    ),
+    'primary key' => array('nid'),
+  );
+
+  $schema['webform_workflow_transition'] = array(
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary key for the transition.',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'sid' => array(
+        'description' => 'The primary key for the webform submission.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => 'The {webform}.nid for the webform.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'timestamp' => array(
+        'description' => 'The timestamp of the transition.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'new_state_wsid' => array(
+        'description' => 'The {webform_workflow_state}.wsid of the new submission state.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+      ),
+      'old_state_wsid' => array(
+        'description' => 'The {webform_workflow_state}.wsid of the previous submission state.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+      ),
+      'uid' => array(
+        'description' => 'The {users}.uid this transition was made by (if applicable).',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+      ),
+      'message' => array(
+        'description' => 'A log message.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+      ),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'submission' => array('nid', 'sid'),
+      'timestamp' => array('timestamp'),
+      'uid' => array('uid'),
+      'new_state_wsid' => array('new_state_wsid'),
+      'old_state_wsid' => array('old_state_wsid'),
+    ),
+  );
+
+  return $schema;
+}
+
+/**
+ * Implements hook_install().
+ */
+function webform_workflow_install() {
+  field_info_cache_clear();
+
+  // Create default fields.
+  module_load_include('inc', 'webform_workflow', 'includes/webform_workflow.field_bases');
+  foreach (_webform_workflow_field_bases() as $field_name => $field_base) {
+    if (field_info_field($field_name)) {
+      continue;
+    }
+    field_create_field($field_base);
+  }
+
+  module_load_include('inc', 'webform_workflow', 'includes/webform_workflow.field_instances');
+
+  // Create default instances for nodes.
+  foreach (webform_node_types() as $bundle) {
+    foreach (_webform_workflow_node_field_instances() as $instance) {
+      if (field_info_instance('node', $instance['field_name'], $bundle)) {
+        continue;
+      }
+      $instance['bundle'] = $bundle;
+      field_create_instance($instance);
+    }
+  }
+
+  // Create default instances for workflow states.
+  foreach (_webform_workflow_state_field_instances() as $instance) {
+    if (field_info_instance('webform_workflow_state', $instance['field_name'], $instance['bundle'])) {
+      continue;
+    }
+    field_create_instance($instance);
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function webform_workflow_uninstall() {
+  // Delete default fields.
+  module_load_include('inc', 'webform_workflow', 'includes/webform_workflow.field_bases');
+  foreach (array_keys(_webform_workflow_field_bases()) as $field_name) {
+    field_delete_field($field_name);
+  }
+}

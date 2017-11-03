@@ -1,0 +1,517 @@
+<?php
+
+/**
+ * @file
+ * Sync data between Drupal and Fedora Commons.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_sync_menu() {
+  $items['admin/structure/types/manage/%/fedora'] = array(
+    'title' => 'Fedora Commons',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_sync_bundle_settings_form', 4),
+    'access arguments' => array('islandora sync settings'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'includes/bundle_settings.form.inc',
+  );
+  $items['admin/structure/types/manage/%/fields/%/fedora'] = array(
+    'title' => 'Fedora Commons',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_sync_field_settings_form', 4, 6),
+    'access arguments' => array('islandora sync settings'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'includes/field_settings.form.inc',
+  );
+  $items['admin/islandora/tools/sync/xml-datastreams'] = array(
+    'title' => 'XML Datastream Settings',
+    'page callback' => 'islandora_sync_xml_ds_page',
+    'access arguments' => array('islandora sync settings'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'includes/xml_ds_settings.form.inc',
+  );
+  $items['admin/islandora/tools/sync/xml-datastreams/add'] = array(
+    'title' => 'Add XML Datastream Settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_sync_xml_ds_add'),
+    'access arguments' => array('islandora sync settings'),
+    'type' => MENU_LOCAL_ACTION,
+    'file' => 'includes/xml_ds_settings.form.inc',
+  );
+  $items['admin/islandora/tools/sync/xml-datastreams/%/edit'] = array(
+    'title' => 'Edit XML Datastream Settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_sync_xml_ds_add', 5),
+    'access arguments' => array('islandora sync settings'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/xml_ds_settings.form.inc',
+  );
+  $items['admin/islandora/tools/sync/xml-datastreams/%/delete'] = array(
+    'title' => 'Delete XML Datastream Settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_sync_xml_ds_delete', 5),
+    'access arguments' => array('islandora sync settings'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/xml_ds_settings.form.inc',
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function islandora_sync_permission() {
+  return array(
+    'islandora sync settings' => array(
+      'title' => t('Administer Islandora sync settings'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_islandora_object_ingested().
+ */
+function islandora_sync_islandora_object_ingested(FedoraObject $object) {
+  $obj_ids = &drupal_static(__FUNCTION__);
+  if (!is_array($obj_ids)) {
+    $obj_ids = array();
+  }
+
+  $bundles_info = db_query("SELECT * FROM {islandora_sync_type_settings} ists
+    INNER JOIN {islandora_sync_type_cmodel} istc ON istc.bundle = ists.bundle
+    WHERE istc.cmodel IN (:models)
+    AND ists.sync_drupal = 1
+    AND ists.sync_drupal_create = 1", array(':models' => $object->models)
+  )->fetchAll();
+
+  foreach ($bundles_info as $bundle_info) {
+    if (!isset($obj_ids[$bundle_info->bundle])) {
+      $obj_ids[$bundle_info->bundle] = array();
+    }
+    if (in_array($object->id, $obj_ids[$bundle_info->bundle])) {
+      continue;
+    }
+    $obj_ids[$bundle_info->bundle][] = $object->id;
+    if ($bundle_info && $bundle_info->sync_drupal_timing == 'real_time') {
+      module_load_include('inc', 'islandora_sync', 'includes/import_to_drupal');
+      islandora_sync_import_from_pid($object->id, $bundle_info->bundle);
+    }
+    elseif ($bundle_info) {
+      islandora_sync_queue_operation($object->id, $bundle_info->entity_type, $bundle_info->bundle, 'sync_drupal');
+    }
+  }
+}
+
+/**
+ * Implements hook_islandora_object_modified().
+ */
+function islandora_sync_islandora_object_modified(FedoraObject $object) {
+  islandora_sync_update_from_fedora($object);
+}
+
+/**
+ * Implements hook_islandora_object_purged().
+ */
+function islandora_sync_islandora_object_purged($pid) {
+  $nids = islandora_sync_get_nids_from_pid($pid);
+
+  foreach ($nids as $nid) {
+    if ($nid) {
+      $node = node_load($nid);
+      $bundle_info = islandora_sync_get_bundle_settings($node->type);
+
+      if ($bundle_info->sync_drupal_delete) {
+        if ($bundle_info->sync_drupal_timing == 'real_time') {
+          entity_delete($bundle_info->entity_type, $nid);
+          db_delete('islandora_sync_map')->condition('pid', $pid)->execute();
+        }
+        else {
+          islandora_sync_queue_operation($pid, $bundle_info->entity_type, $node->type, 'delete_drupal', $node->nid);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_islandora_datastream_ingested().
+ */
+function islandora_sync_islandora_datastream_ingested(FedoraObject $object, FedoraDatastream $datastream) {
+  islandora_sync_update_from_fedora($object, $datastream->id);
+}
+
+/**
+ * Implements hook_islandora_datatastream_modified().
+ */
+function islandora_sync_islandora_datastream_modified(FedoraObject $object, FedoraDatastream $datastream) {
+  islandora_sync_update_from_fedora($object, $datastream->id);
+}
+
+/**
+ * Implements hook_islandora_datastream_purged().
+ */
+function islandora_sync_islandora_datastream_purged(FedoraObject $object, $dsid) {
+  $nids = islandora_sync_get_nids_from_pid($object->id);
+
+  foreach ($nids as $nid) {
+    if ($nid) {
+      $node = node_load($nid);
+      $bundle_info = islandora_sync_get_bundle_settings($node->type);
+
+      if ($bundle_info->sync_drupal_update) {
+        $has_non_managed = db_select('islandora_sync_fields', 'f')
+          ->fields('f', array())
+          ->condition('dsid', $dsid)
+          ->condition('bundle', $node->type)
+          ->condition('export_type', 'managed_datastream', '!=')
+          ->countQuery()
+          ->execute()
+          ->fetchField() > 0;
+
+        if ($has_non_managed) {
+          // Handle like a normal update.
+          islandora_sync_update_from_fedora($object);
+        }
+        elseif ($bundle_info->sync_drupal_timing == 'real_time') {
+          $managed_datastream_fields = db_select('islandora_sync_fields', 'f')
+            ->fields('f', array())
+            ->condition('dsid', $dsid)
+            ->condition('bundle', $node->type)
+            ->condition('export_type', 'managed_datastream')
+            ->execute();
+          foreach ($managed_datastream_fields as $managed_file_field) {
+            islandora_sync_delete_field_by_dsid($node, $dsid, $managed_file_field);
+          }
+        }
+        else {
+          islandora_sync_queue_operation(
+            $object->id,
+            $bundle_info->entity_type,
+            $node->type,
+            'delete_datastream_field',
+            $node->nid,
+            array('dsid' => $dsid)
+          );
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_cron().
+ */
+function islandora_sync_cron() {
+  module_load_include('inc', 'islandora_sync', 'includes/import_to_drupal');
+  module_load_include('inc', 'islandora_sync', 'includes/export_to_fedora');
+  $queue_items = db_query("SELECT id FROM {islandora_sync_queue} WHERE processed_time IS NULL ORDER BY id ASC")->fetchCol();
+  foreach ($queue_items as $item_id) {
+    $item = db_query("SELECT * FROM {islandora_sync_queue} WHERE id = :id", array(':id' => $item_id))->fetchObject();
+    switch ($item->operation) {
+      case 'sync_drupal':
+        $nid = islandora_sync_import_from_pid($item->pid, $item->bundle);
+        $item->entity_id = $nid;
+        db_update('islandora_sync_queue')
+          ->fields(array('entity_id' => $nid))
+          ->condition('pid', $item->pid)
+          ->execute();
+        break;
+
+      case 'sync_fedora':
+        $node = node_load($item->entity_id);
+        $type_info = islandora_sync_get_bundle_settings($item->bundle);
+        islandora_sync_export_from_node($node, $type_info);
+        break;
+
+      case 'update_drupal':
+        $data = unserialize($item->data);
+        islandora_sync_import_from_pid($item->pid, $item->bundle, $item->entity_id, $data['dsid']);
+        break;
+
+      case 'delete_datastream_field':
+        $node = node_load($item->entity_id);
+        $data = unserialize($item->data);
+        islandora_sync_delete_field_by_dsid($node, $data['dsid']);
+        break;
+
+      case 'delete_drupal':
+        node_delete($item->entity_id);
+        db_delete('islandora_sync_map')->condition('pid', $item->pid)->execute();
+        break;
+
+    }
+
+    // Should check for success.
+    $item->processed_time = time();
+    drupal_write_record('islandora_sync_queue', $item, 'id');
+  }
+}
+
+/**
+ * Callback for a number of object related update events.
+ */
+function islandora_sync_update_from_fedora(FedoraObject $object, $ds_id = NULL) {
+  $nids = islandora_sync_get_nids_from_pid($object->id);
+
+  foreach ($nids as $nid) {
+    $node = node_load($nid);
+    $bundle_info = db_query("SELECT * FROM {islandora_sync_type_settings} ists
+      INNER JOIN {islandora_sync_type_cmodel} istc ON istc.bundle = ists.bundle
+      WHERE istc.cmodel IN (:models)
+      AND ists.sync_drupal = 1
+      AND ists.bundle = :bundle
+      AND ists.sync_drupal_update = 1", array(':bundle' => $node->type, ':models' => $object->models)
+    )->fetchObject();
+    if ($bundle_info && $bundle_info->sync_drupal_timing == 'real_time') {
+      module_load_include('inc', 'islandora_sync', 'includes/import_to_drupal');
+      islandora_sync_import_from_pid($object->id, $bundle_info->bundle, $nid, $ds_id);
+    }
+    elseif ($bundle_info) {
+      islandora_sync_queue_operation(
+        $object->id,
+        $bundle_info->entity_type,
+        $bundle_info->bundle,
+        'update_drupal',
+        $nid,
+        array('dsid' => $ds_id)
+      );
+    }
+  }
+
+}
+
+/**
+ * Delete node field values based on the field mapping to a datastream ID.
+ */
+function islandora_sync_delete_field_by_dsid($node, $dsid, $field_in = NULL) {
+  if (is_null($field_in)) {
+    $fields = db_query("SELECT * FROM {islandora_sync_fields}
+      WHERE dsid = :dsid
+      AND bundle = :bundle",
+      array(':dsid' => $dsid, ':bundle' => $node->type)
+    );
+  }
+  else {
+    $fields = array($field_in);
+  }
+
+  foreach ($fields as $field_info) {
+    $fid = isset($node->{$field_info->field}[$node->language][0]['fid']) ? $node->{$field_info->field}[$node->language][0]['fid'] : FALSE;
+    if ($fid) {
+      $file = file_load($fid);
+      file_delete($file);
+    }
+    $node->{$field_info->field} = array();
+  }
+  node_save($node);
+}
+
+/**
+ * Implements hook_node_insert().
+ */
+function islandora_sync_node_insert($node) {
+  $type_info = islandora_sync_get_bundle_settings($node->type);
+
+  if (isset($type_info->id) && $type_info->sync_fedora && $type_info->sync_fedora_create) {
+    if ($type_info->sync_fedora_timing == 'real_time') {
+      module_load_include('inc', 'islandora_sync', 'includes/export_to_fedora');
+      islandora_sync_export_from_node($node, $type_info);
+    }
+    else {
+      $queue['type'] = $type_info->entity_type;
+      $queue['bundle'] = $type_info->bundle;
+      $queue['entity_id'] = $node->nid;
+      $queue['operation'] = 'sync_fedora';
+      drupal_write_record('islandora_sync_queue', $queue);
+    }
+  }
+}
+
+/**
+ * Implements hook_node_type_delete().
+ */
+function islandora_sync_node_type_delete($info) {
+  db_delete('islandora_sync_type_settings')
+    ->condition('bundle', $info->type)
+    ->execute();
+  db_delete('islandora_sync_type_cmodel')
+    ->condition('bundle', $info->type)
+    ->execute();
+}
+
+/**
+ * Implements hook_field_delete_instance().
+ */
+function islandora_sync_field_delete_instance($instance) {
+  db_delete('islandora_sync_fields')
+    ->condition('bundle', $instance['bundle'])
+    ->condition('field', $instance['field_name'])
+    ->execute();
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function islandora_sync_module_implements_alter(&$implementations, $hook) {
+  $hooks = array(
+    'form_field_ui_field_overview_form_alter',
+    'form_alter',
+    'islandora_object_ingested',
+  );
+
+  if (in_array($hook, $hooks) && isset($implementations['islandora_sync'])) {
+    $group = $implementations['islandora_sync'];
+    unset($implementations['islandora_sync']);
+    $implementations['islandora_sync'] = $group;
+  }
+}
+
+/**
+ * Implements hook_form_field_ui_field_overview_form_alter().
+ */
+function islandora_sync_form_field_ui_field_overview_form_alter(&$form, &$form_state, $form_id) {
+  // @TODO: don't hardcode.
+  $form['fields']['#header'][6]['colspan'] = 3;
+  foreach ($form['fields'] as $field_name => $values) {
+    // @TODO: find a better way.
+    $row_types = array('field', 'extra_field', 'group');
+    if (isset($values['#row_type']) && in_array($values['#row_type'], $row_types)) {
+      $form['fields'][$field_name]['fedora'] = array(
+        '#type' => 'link',
+        '#title' => t('fedora'),
+        '#href' => 'admin/structure/types/manage/' . $form['#bundle'] . '/fields/' . $field_name . '/fedora',
+        '#options' => array('attributes' => array('title' => t('Manage Fedora Commons mappings.'))),
+      );
+    }
+    elseif ($field_name[0] != '#') {
+      $form['fields'][$field_name]['fedora'] = array('#markup' => '');
+    }
+  }
+}
+
+/**
+ * Implements hook_features_api().
+ */
+function islandora_sync_features_api() {
+  return array(
+    'islandora_sync_field_datastreams' => array(
+      'name' => t('Field to Fedora mappings'),
+      'file' => drupal_get_path('module', 'islandora_sync') . '/includes/features.inc',
+      'default_file' => FEATURES_DEFAULTS_INCLUDED_COMMON,
+      'feature_source' => TRUE,
+    ),
+    'islandora_sync_bundle_settings' => array(
+      'name' => t('Islandora Sync content type settings'),
+      'file' => drupal_get_path('module', 'islandora_sync') . 'includes/features.inc',
+      'default_file' => FEATURES_DEFAULTS_INCLUDED_COMMON,
+      'feature_source' => TRUE,
+    ),
+    'islandora_sync_xml_ds_settings' => array(
+      'name' => t('Islandora Sync XML datastream settings'),
+      'file' => drupal_get_path('module', 'islandora_sync') . 'includes/features.inc',
+      'default_file' => FEATURES_DEFAULTS_INCLUDED_COMMON,
+      'features_source' => TRUE,
+    ),
+  );
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function islandora_sync_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'islandora_sync') . '/includes',
+  );
+}
+
+/**
+ * Create a queue entry for later processing by cron.
+ */
+function islandora_sync_queue_operation($pid, $entity_type, $entity_bundle, $operation, $nid = NULL, $data = NULL) {
+  $queue = array();
+  $queue['pid'] = $pid;
+  $queue['type'] = $entity_type;
+  $queue['bundle'] = $entity_bundle;
+  $queue['operation'] = $operation;
+  if (!is_null($nid)) {
+    $queue['entity_id'] = $nid;
+  }
+  if (!is_null($data)) {
+    $queue['data'] = $data;
+  }
+  drupal_write_record('islandora_sync_queue', $queue);
+}
+
+/**
+ * Get a list of content models.
+ */
+function islandora_sync_get_content_models() {
+  module_load_include('inc', 'islandora', 'includes/utilities');
+
+  $message = islandora_deprecated('7.x-1.7', 'Use islandora_get_content_models() from "islandora".');
+  trigger_error(filter_xss($message), E_USER_DEPRECATED);
+
+  return array_keys(islandora_get_content_models(TRUE));
+}
+
+/**
+ * Get the node IDs based on a Fedora pid from the map table.
+ */
+function islandora_sync_get_nids_from_pid($pid) {
+  $nids = db_query("SELECT entity_id FROM {islandora_sync_map} WHERE pid = :pid",
+    array(':pid' => $pid)
+  )->fetchCol();
+  return $nids;
+}
+
+/**
+ * Get the cmodels that have been configured to be mapped to a node bundle.
+ */
+function islandora_sync_get_bundle_cmodels($bundle) {
+  $cmodels = db_query("SELECT cmodel FROM {islandora_sync_type_cmodel} WHERE bundle = :bundle",
+    array(':bundle' => $bundle)
+  )->fetchCol();
+  return $cmodels;
+}
+
+/**
+ * Get the islandora_sync bundle related settings for a node type.
+ */
+function islandora_sync_get_bundle_settings($bundle) {
+  $settings = db_query("SELECT * FROM {islandora_sync_type_settings} WHERE entity_type = 'node' AND bundle = :bundle",
+    array(':bundle' => $bundle)
+  )->fetchObject();
+  return $settings;
+}
+
+/**
+ * Get the islandora_sync field settings for a node's field.
+ */
+function islandora_sync_get_field_settings($type, $field) {
+  $settings = db_query("SELECT * FROM {islandora_sync_fields} WHERE bundle = :bundle AND field = :field",
+    array(':bundle' => $type, ':field' => $field)
+  )->fetchAll();
+  return $settings;
+}
+
+/**
+ * Implements hook_node_delete().
+ */
+function islandora_sync_node_delete($node) {
+  $node_path = "public://islandora_sync/$node->nid";
+  if (file_prepare_directory($node_path)) {
+    $removal_files = file_scan_directory($node_path, '/(.*)/');
+
+    foreach ($removal_files as $file) {
+      $file = (object) $file;
+      $file->fid = db_query("SELECT fid FROM {file_managed} WHERE uri = :uri",
+        array(':uri' => $file->uri)
+      )->fetchField();
+      @file_delete($file);
+    }
+    @drupal_rmdir($node_path);
+  }
+}

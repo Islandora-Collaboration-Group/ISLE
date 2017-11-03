@@ -1,0 +1,23 @@
+#islandora_webform_object_tag_links a.untag-link,
+#islandora_webform_object_tag_links a.tag-link {
+  color:#808080;
+  font-style: italic;
+}
+
+#islandora_webform_object_tag_links .webform-links-wrapper {
+  padding:0px 0px 0px 10px;
+}
+
+#islandora_webform_object_tag_links .webform-links-wrapper.opened {
+  padding:10px 10px 10px 10px;
+  margin:10px 0px;
+  border:1px solid darkgray;
+}
+
+#islandora_webform_object_tag_links .webform-links-wrapper a.webform-link {
+  display:block;
+}
+#islandora_webform_object_tag_links .webform-links-wrapper.opened a.webform-link.ajax-processed {
+  display:none;
+  visibility:hidden;
+}

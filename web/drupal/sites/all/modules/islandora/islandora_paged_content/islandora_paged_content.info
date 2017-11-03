@@ -1,0 +1,10 @@
+name = Islandora Paged Content
+description = Libraries for paged content in Islandora.
+dependencies[] = islandora
+dependencies[] = file
+files[] = tests/pdfinfo.test
+files[] = tests/pdftotext.test
+files[] = tests/ghostscript.test
+package = Islandora Solution Packs
+version = 7.x-dev
+core = 7.x

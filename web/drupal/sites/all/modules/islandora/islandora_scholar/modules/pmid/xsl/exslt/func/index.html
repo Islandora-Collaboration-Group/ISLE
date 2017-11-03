@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "/schema/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:html="http://www.w3.org/1999/xhtml"><head><title>EXSLT - Functions</title><link rel="stylesheet" href="base.css"/></head><body><h1 id="#title"><a href="http://www.exslt.org/">EXSLT</a> - <a href="http://www.exslt.org/func/">Functions</a></h1><table><tr><td id="menu"><p class="level1"><a href="func.html">Implementer Page</a></p><p class="level1"><a href="../howto.html">How To</a></p><p class="level1"><a href="../download.html">Downloads</a></p><p class="level1">Modules</p><p class="level2"><a href="../date/index.html">Dates and Times</a></p><p class="level2"><a href="../dyn/index.html">Dynamic</a></p><p class="level2"><a href="../exsl/index.html">Common</a></p><p class="level2"><a href="../func/index.html">Functions</a></p><p class="level3"><a href="elements/function/index.html">func:function</a></p><p class="level3"><a href="elements/result/index.html">func:result</a></p><p class="level3"><a href="elements/script/index.html">func:script</a></p><p class="level2"><a href="../math/index.html">Math</a></p><p class="level2"><a href="../random/index.html">Random</a></p><p class="level2"><a href="../regexp/index.html">Regular Expressions</a></p><p class="level2"><a href="../set/index.html">Sets</a></p><p class="level2"><a href="../str/index.html">Strings</a></p><p class="level1"><a href="../submissions/">Submissions</a></p><p class="level1"><a href="../list">Mailing List</a></p><p class="level1"><a href="../contact.html">Contact</a></p></td><td id="content"><p><b>Implementer Page: </b><a href="func.html">func.html</a><br/><b><a href="../howto.html#module-level">Module Package</a>: </b><a href="func.zip">func.zip</a></p><p>
+         EXSLT - Functions are those extension elements and functions that allow users to define their own functions for use in expressions and patterns in XSLT.
+      </p><p>
+         The functions available in XPath cover only basic functionality.  While a stylesheet author can often use XSLT code to achieve a goal, it would often be simpler to use a function instead.  It's impossible to predict all the functions authors might need, and it also adds portability to a stylesheet if authors can write their own functions (as long as the function implementations are understood by the XSLT processor).  These could be defined in any language, but the one language that XSLT processors can all understand is XSLT, so it makes sense to define functions using XSLT instructions.  However, XSLT as it stands cannot support the return of values other than result tree fragments; to write functions that return node sets and so on, we need an extension element.
+      </p><p>
+      XSLT processors may support any number of the extension elements and functions given in this module.
+   </p><p class="note">
+      Using EXSLT will only make your stylesheet portable amongst the implementations that support EXSLT. Note that there is no requirement for XSLT processors that are compliant to XSLT to support the extensions described within EXSLT.
+   </p><h2>Namespace</h2><p>
+      The namespace for EXSLT - Functions is:
+   </p><pre>http://exslt.org/functions</pre><p>
+      Throughout this document, the prefix <code>func</code> is used to refer to this namespace. Any other prefix can be used within a particular stylesheet (though a prefix must be specified to enable the extension functions to be recognised as extensions).
+   </p><p>
+      To use these extensions, you need to declare this namespace as an extension namespace in your stylesheet.  If your processor supports this module, then that's all you need to do, but if it doesn't, then you need to use a specific third-party implementation or the module stylesheet.  Typically, your stylesheet will look like:
+   </p><pre>
+&lt;xsl:stylesheet version="1.0"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:func="http://exslt.org/functions"
+                extension-element-prefixes="func"&gt;
+
+&lt;xsl:import href="func.xsl" /&gt;
+
+...
+              
+&lt;/xsl:stylesheet&gt;
+</pre><h2>Elements</h2><h3>Core Elements</h3><p>
+            The following extension elements are considered stable and are core to EXSLT - Functions.  Processors that claim support of EXSLT - Functions support these elements.
+         </p><table><tr><th class="rowhead">Element</th><th>Syntax</th><th>Download</th></tr><tr><td class="rowhead"><a href="elements/function/index.html">func:function</a></td><td style="text-align: left; font-size: 80%;"><pre>&lt;func:function
+   <b>name</b> = <var>QName</var>&gt;
+   &lt;-- Content: (<a href="http://www.w3.org/TR/xslt#element-param">xsl:param</a>* | <var>template</var>) --&gt;
+&lt;/func:function&gt;</pre></td><td><a href="elements/function/func.function.zip">func.function.zip</a></td></tr><tr><td class="rowhead"><a href="elements/result/index.html">func:result</a></td><td style="text-align: left; font-size: 80%;"><pre>&lt;func:result
+   select = <var>expression</var>&gt;
+   &lt;-- Content: <var>template</var> --&gt;
+&lt;/func:result&gt;</pre></td><td><a href="elements/result/func.result.zip">func.result.zip</a></td></tr></table><h3>Other Elements</h3><p>
+               The following extension elements are not considered stable and are not part of the core of EXSLT - Functions.  Processors that claim support of EXSLT - Functions might not support these elements.
+            </p><table><tr><th class="rowhead">Element</th><th>Syntax</th><th>Download</th></tr><tr><td class="rowhead"><a href="elements/script/index.html">func:script</a></td><td style="text-align: left; font-size: 80%;"><pre>&lt;func:script
+   <b>implements-prefix</b> = <var>ncname</var>
+   <b>language</b> = <var>qname-and-not-ncname</var>
+   <b>src</b> = <var>uri-reference</var>
+   archive = <var>uri-reference</var> /&gt;</pre></td><td><a href="elements/script/func.script.zip">func.script.zip</a></td></tr></table></td></tr></table><div id="colophon"><p><a href="http://www.exslt.org/func/index.html">http://www.exslt.org/func/index.html</a> last modified 2001-05-22</p></div></body></html>

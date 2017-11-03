@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<exslt:function xmlns:exslt="http://exslt.org/documentation" 
+                version="1" module="set" status="stable">
+
+<exslt:name>difference</exslt:name>
+
+<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                 xmlns:dc="http://purl.org/dc/elements/1.1/"
+                 ID="set:difference">
+   <dc:subject>EXSLT</dc:subject>
+   <dc:subject>set</dc:subject>
+   <dc:subject>difference</dc:subject>
+   <dc:rights>public domain</dc:rights>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="set:difference.1">
+         <exslt:version>1</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com">Jeni Tennison</dc:creator>
+         <dc:date>2001-03-28</dc:date>
+         <dc:description>Returns the nodes in the first node set that are not in the second node set.</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="set:difference.1.1">
+         <exslt:version>1.1</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com">Jeni Tennison</dc:creator>
+         <dc:date>2001-05-08</dc:date>
+         <dc:description>Added a description of how the template-equivalent to the function works.</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="set:difference.1.2">
+         <exslt:version>1.2</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com">Jeni Tennison</dc:creator>
+         <dc:date>2001-05-22</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            <ul>
+               <li>Added vendor implementations in Saxon and 4XSLT</li>
+               <li>Changed status to stable</li>
+            </ul>
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="set:difference.1.3">
+         <exslt:version>1.3</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com">Jeni Tennison</dc:creator>
+         <dc:date>2001-06-11</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            Added vendor implementation in jd.xslt.
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="set:difference.1.4">
+         <exslt:version>1.4</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com">Jeni Tennison</dc:creator>
+         <dc:date>2001-08-23</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            Added vendor implementation in libxslt.
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="set:difference.1.5">
+         <exslt:version>1.5</exslt:version>
+         <dc:creator email="craig.stewart@nottingham.ac.uk" 
+                     url="">Craig Stewart</dc:creator>
+         <dc:date>2002-08-20</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">Added Xalan-J implementation to the list.</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="set:difference.1.6">
+         <exslt:version>1.6</exslt:version>
+         <dc:creator email="craig.stewart@nottingham.ac.uk" 
+                     url="">Craig Stewart</dc:creator>
+         <dc:date>2002-11-12</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">Updated 4XSLT version to 0.12.0a3.</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+</rdf:Description>
+
+<exslt:doc xmlns="">
+   <section>
+      <para>
+         The <function>set:difference</function> function returns the difference between two node sets - those nodes that are in the node set passed as the first argument that are not in the node set passed as the second argument.
+      </para>
+      <para>
+         The <literal>set:difference</literal> template applies templates to these nodes in <literal>set:difference</literal> mode.  By default, the nodes are copied by this template, so that a result tree fragment consisting of the nodes is returned.
+      </para>
+   </section>
+</exslt:doc>
+
+<exslt:definition>
+   <exslt:return type="node-set" />
+   <exslt:arg name="nodes1" type="node-set" default="/.." />
+   <exslt:arg name="nodes2" type="node-set" default="/.." />
+</exslt:definition>
+
+<exslt:implementations>
+   <exslt:vendor-implementation
+           version="1"
+           vendor="4XSLT, from 4Suite."
+           vendor-url="http://4Suite.org"
+           vendor-version="0.12.0a3" />
+   <exslt:vendor-implementation
+           version="1"
+           vendor="SAXON from Michael Kay"
+           vendor-url="http://users.iclway.co.uk/mhkay/saxon/index.html"
+           vendor-version="6.3" />
+   <exslt:vendor-implementation
+           version="1"
+           vendor="jd.xslt from Johannes D&#246;bler"
+           vendor-url="http://www.aztecrider.com/xslt/"
+           vendor-version="1.0.9" />
+   <exslt:vendor-implementation
+           version="1"
+           vendor="libxslt from Daniel Veillard; implementation by Thomas Broyer"
+           vendor-url="http://xmlsoft.org/XSLT/"
+           vendor-version="1.0.19" />
+   <exslt:vendor-implementation
+           version="1"
+           vendor="Xalan-J from Apache"
+           vendor-url="http://xml.apache.org/xalan-j"
+           vendor-version="2.4.D1" />
+   <exslt:implementation language="exslt:xslt" version="1" src="set.difference.template.xsl" />
+   <exslt:implementation language="exslt:exslt" version="1" src="set.difference.function.xsl" />
+</exslt:implementations>
+
+<exslt:use-cases>
+   <exslt:use-case type="example" data="set.difference.data.1.xml" 
+                   xslt="set.difference.1.xsl" 
+                   result="set.difference.result.1.xml">
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="set:difference.use-case.1">
+         <dc:subject>EXSLT</dc:subject>
+         <dc:subject>sets</dc:subject>
+         <dc:subject>difference</dc:subject>
+         <dc:subject>use case</dc:subject>
+         <exslt:revision>
+            <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                             xmlns:dc="http://purl.org/dc/elements/1.1/"
+                             ID="set:difference.use-case.1.1">
+               <exslt:version>1</exslt:version>
+               <dc:creator email="mhkay@iclway.co.uk">Mike Kay</dc:creator>
+               <dc:date>2001-04-28</dc:date>
+               <dc:description>Tests functionality of set:intersection() and set:difference().</dc:description>
+            </rdf:Description>
+         </exslt:revision>
+      </rdf:Description>
+   </exslt:use-case>
+</exslt:use-cases>
+
+</exslt:function>

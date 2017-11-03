@@ -1,0 +1,342 @@
+<?php
+/**
+ * @file
+ * Tests for CSLDateParser. Translated from citeproc-js.
+ */
+
+require_once dirname(__FILE__) . '/../includes/CSLDateparser.php';
+
+use \PHPUnit\Framework\TestCase;
+
+/**
+ * Tests for CSLDateParser.
+ * @todo check out what the toArray test was testing and make a test using the
+ * class interface.
+ */
+class CSLDateParserTest extends TestCase {
+  /**
+   * Clean up and set default used in tests.
+   */
+  protected function setUp() {
+    CSLDateParser::getInstance(NULL, TRUE)->returnAsKeys();
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse001() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("Wed 24 Oct 2000");
+    $this->assertEquals("10", $res["month"]);
+    $this->assertEquals("24", $res["day"]);
+    $this->assertEquals("2000", $res["year"]);
+    $this->assertEquals(3, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse003() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("19??-10");
+    $this->assertEquals("10", $res["month"]);
+    $this->assertEquals("19??", $res["year"]);
+    $this->assertEquals(2, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse004() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("myauntsally 23");
+    $this->assertEquals("myauntsally 23", $res["literal"]);
+    $this->assertEquals(1, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse005() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("\"[Dec 23, 2009]\"");
+    $this->assertEquals("[Dec 23, 2009]", $res["literal"]);
+    $this->assertEquals(1, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse006() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("Aug 31, 2000");
+    $this->assertEquals("2000", $res["year"]);
+    $this->assertEquals("31", $res["day"]);
+    $this->assertEquals("8", $res["month"]);
+    $this->assertEquals(3, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse007() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("31 Aug 2000");
+    $this->assertEquals("2000", $res["year"]);
+    $this->assertEquals("31", $res["day"]);
+    $this->assertEquals("8", $res["month"]);
+    $this->assertEquals(3, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse008() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("08-31-2000");
+    $this->assertEquals("2000", $res["year"]);
+    $this->assertEquals("31", $res["day"]);
+    $this->assertEquals("8", $res["month"]);
+    $this->assertEquals(3, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse009() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("2000-8-31");
+    $this->assertEquals("2000", $res["year"]);
+    $this->assertEquals("31", $res["day"]);
+    $this->assertEquals("8", $res["month"]);
+    $this->assertEquals(3, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse010() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("Sum 2000");
+    $this->assertEquals("2000", $res["year"]);
+    $this->assertEquals("14", $res["month"]);
+    $this->assertEquals("2", $res["season"]);
+    $this->assertEquals(3, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse011() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("Trinity 2001");
+    $this->assertEquals("Trinity", $res["season"]);
+    $this->assertEquals("2001", $res["year"]);
+    $this->assertEquals(2, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse012() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("Spring 2000 - Summer 2001");
+    $this->assertEquals("14", $res["month_end"]);
+    $this->assertEquals("2000", $res["year"]);
+    $this->assertEquals("2001", $res["year_end"]);
+    $this->assertEquals("13", $res["month"]);
+    $this->assertEquals("1", $res["season"]);
+    $this->assertEquals("2", $res["season_end"]);
+    $this->assertEquals(6, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse013() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("circa 08-31-2000");
+    $this->assertEquals("1", $res["circa"]);
+    $this->assertEquals("2000", $res["year"]);
+    $this->assertEquals("31", $res["day"]);
+    $this->assertEquals("8", $res["month"]);
+    $this->assertEquals(4, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse014() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("circa 2000-31-08");
+    $this->assertEquals("1", $res["circa"]);
+    $this->assertEquals("2000", $res["year"]);
+    $this->assertEquals("31", $res["day"]);
+    $this->assertEquals("8", $res["month"]);
+    $this->assertEquals(4, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse015() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("circa Aug 31, 2000");
+    $this->assertEquals("1", $res["circa"]);
+    $this->assertEquals("2000", $res["year"]);
+    $this->assertEquals("31", $res["day"]);
+    $this->assertEquals("8", $res["month"]);
+    $this->assertEquals(4, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse016() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("Aug 31 2000 ?");
+    $this->assertEquals("1", $res["circa"]);
+    $this->assertEquals("2000", $res["year"]);
+    $this->assertEquals("31", $res["day"]);
+    $this->assertEquals("8", $res["month"]);
+    $this->assertEquals(4, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse017() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("[31 Aug 2000?]");
+    $this->assertEquals("1", $res["circa"]);
+    $this->assertEquals("2000", $res["year"]);
+    $this->assertEquals("31", $res["day"]);
+    $this->assertEquals("8", $res["month"]);
+    $this->assertEquals(4, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse018() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("200BC");
+    $this->assertEquals("-200", $res["year"]);
+    $this->assertEquals(1, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse019() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("200bc");
+    $this->assertEquals("-200", $res["year"]);
+    $this->assertEquals(1, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse020() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("200 b.c.");
+    $this->assertEquals("-200", $res["year"]);
+    $this->assertEquals(1, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse021() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("250AD");
+    $this->assertEquals("250", $res["year"]);
+    $this->assertEquals(1, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse022() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("250ad");
+    $this->assertEquals("250", $res["year"]);
+    $this->assertEquals(1, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse023() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("250 a.d.");
+    $this->assertEquals("250", $res["year"]);
+    $this->assertEquals(1, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse024() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("2000-2001");
+    $this->assertEquals("2001", $res["year_end"]);
+    $this->assertEquals("2000", $res["year"]);
+    $this->assertEquals(2, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse025() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("Aug - Sep 2000");
+    $this->assertEquals("9", $res["month_end"]);
+    $this->assertEquals("8", $res["month"]);
+    $this->assertEquals("2000", $res["year_end"]);
+    $this->assertEquals("2000", $res["year"]);
+    $this->assertEquals(4, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse026() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("Aug 15-20 2000");
+    $this->assertEquals("2000", $res["year_end"]);
+    $this->assertEquals("8", $res["month"]);
+    $this->assertEquals("20", $res["day_end"]);
+    $this->assertEquals("2000", $res["year"]);
+    $this->assertEquals("8", $res["month_end"]);
+    $this->assertEquals("15", $res["day"]);
+    $this->assertEquals(6, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse027() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("Aug 2000-Sep 2000");
+    $this->assertEquals("9", $res["month_end"]);
+    $this->assertEquals("8", $res["month"]);
+    $this->assertEquals("2000", $res["year_end"]);
+    $this->assertEquals("2000", $res["year"]);
+    $this->assertEquals(4, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse029() {
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("Aug 15 2000 - Aug 20 2000");
+    $this->assertEquals("2000", $res["year_end"]);
+    $this->assertEquals("8", $res["month"]);
+    $this->assertEquals("20", $res["day_end"]);
+    $this->assertEquals("2000", $res["year"]);
+    $this->assertEquals("8", $res["month_end"]);
+    $this->assertEquals("15", $res["day"]);
+    $this->assertEquals(6, count($res));
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse030() {
+    CSLDateParser::getInstance(NULL, FALSE)->returnAsArray();
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("May 1 2000");
+    $this->assertEquals("2000", $res["date-parts"][0][0]);
+    $this->assertEquals("5", $res["date-parts"][0][1]);
+    $this->assertEquals("1", $res["date-parts"][0][2]);
+  }
+
+  /**
+   * A test that does something that should be documented and not numbered.
+   */
+  public function testDateparse031() {
+    CSLDateParser::getInstance(NULL, FALSE)->returnAsArray();
+    $res = CSLDateParser::getInstance(NULL, FALSE)->parse("June 3 1998 - 1999");
+    $this->assertEquals("1998", $res["date-parts"][0][0]);
+    $this->assertEquals("6", $res["date-parts"][0][1]);
+    $this->assertEquals("3", $res["date-parts"][0][2]);
+    $this->assertEquals("1999", $res["date-parts"][1][0]);
+    $this->assertEquals("6", $res["date-parts"][1][1]);
+    $this->assertEquals("3", $res["date-parts"][1][2]);
+  }
+}

@@ -1,0 +1,8 @@
+a.islandora_webform_ingest.ingested {
+  color:red;
+}
+
+#iwi-preview-ingest-submission-form .submitted-value {
+  background-color:lightblue;
+  border-color:#000;
+}

@@ -1,0 +1,34 @@
+<?php
+/**
+ * @file
+ * Module used to handle newspaper batches through the UI and drush.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_newspaper_batch_menu() {
+  $items = array();
+
+  $items['islandora/object/%islandora_object/manage/newspaper_batch'] = array(
+    'title' => 'Newspaper Batch',
+    'access callback' => 'islandora_newspaper_batch_menu_access',
+    'access arguments' => array(2),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_newspaper_batch_form', 2),
+    'file' => 'includes/batch.form.inc',
+    'type' => MENU_LOCAL_ACTION,
+  );
+
+  return $items;
+}
+
+/**
+ * Menu access callback.
+ */
+function islandora_newspaper_batch_menu_access($object) {
+  if (!islandora_object_access(ISLANDORA_INGEST, $object)) {
+    return FALSE;
+  }
+  return in_array('islandora:newspaperCModel', $object->models);
+}

@@ -1,0 +1,51 @@
+/* Style sheet for grid display */
+
+.islandora-solr-grid
+{
+  margin: 1.5em auto;
+  overflow: hidden;
+  width: 96%;
+}
+
+dl.solr-grid-field
+{
+  width: 20%;
+  min-width: 100px;
+  min-height: 180px;
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: top;
+  margin: 1.5em 2%;
+  zoom: 1;
+  *display: inline;
+  _height: 180px;
+}
+
+dt.solr-grid-thumb img
+{
+  max-width: 100%;
+  *width: 100%;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+dd.solr-grid-caption
+{
+  margin: 0;
+  padding: 0;
+}
+
+
+
+/* Style sheet for table display */
+
+table.islandora-solr-results-table tr
+{
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+table.islandora-solr-results-table tr td
+{
+  padding: 0 2px;
+}

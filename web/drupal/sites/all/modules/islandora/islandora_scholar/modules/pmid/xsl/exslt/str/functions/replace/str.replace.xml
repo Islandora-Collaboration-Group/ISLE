@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<exslt:function xmlns:exslt="http://exslt.org/documentation" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:vcf="http://www.ietf.org/internet-drafts/draft-dawson-vcard-xml-dtd-03.txt" version="1" module="str" status="new">
+   <exslt:name>replace</exslt:name>
+   <rdf:Description ID="str:replace">
+      <dc:subject>EXSLT</dc:subject>
+      <dc:subject>str</dc:subject>
+      <dc:subject>replace</dc:subject>
+      <exslt:revision>
+         <rdf:Description ID="str:replace.1">
+            <exslt:version>1</exslt:version>
+            <dc:creator rdf:parseType="Resource">
+               <vcf:fn>
+         Jeni Tennison
+      </vcf:fn>
+               <vcf:email>mail@jenitennison.com</vcf:email>
+               <vcf:url>http://www.jenitennison.com/</vcf:url>
+            </dc:creator>
+            <dc:date>2001-06-08</dc:date>
+            <dc:description>
+               <dc:description>
+                  <html:div>
+         The <html:code>str:replace</html:code> function replaces occurrences of strings within a string with another string or with nodes.
+      </html:div>
+               </dc:description>
+            </dc:description>
+         </rdf:Description>
+      </exslt:revision>
+      <exslt:revision>
+         <rdf:Description ID="str:replace.1.1">
+            <exslt:version>1.1</exslt:version>
+            <dc:creator rdf:parseType="Resource">
+               <vcf:fn>Jeni Tennison</vcf:fn>
+               <vcf:email>mail@jenitennison.com</vcf:email>
+               <vcf:url>http://www.jenitennison.com/</vcf:url>
+            </dc:creator>
+            <dc:date>2001-11-18</dc:date>
+            <dc:description>
+               <html:div>
+                  Indicated behaviour when one of the search nodes in the second argument is an empty string; str:replace() should insert the relevant replace nodes between each character in the original string.
+               </html:div>
+            </dc:description>
+         </rdf:Description>
+      </exslt:revision>
+      <exslt:revision>
+         <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                          xmlns:dc="http://purl.org/dc/elements/1.1/"
+                          ID="str:replace.1.2">
+            <exslt:version>1.2</exslt:version>
+            <dc:creator email="craig.stewart@nottingham.ac.uk" 
+                        url="">Craig Stewart</dc:creator>
+            <dc:date>2002-08-20</dc:date>
+            <dc:description xmlns="http://www.w3.org/1999/xhtml">Added 4XSLT implementation to the list.</dc:description>
+         </rdf:Description>
+      </exslt:revision>
+      <exslt:revision>
+         <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                          xmlns:dc="http://purl.org/dc/elements/1.1/"
+                          ID="str:replace.1.3">
+            <exslt:version>1.3</exslt:version>
+            <dc:creator email="craig.stewart@nottingham.ac.uk" 
+                        url="">Craig Stewart</dc:creator>
+            <dc:date>2002-11-12</dc:date>
+            <dc:description xmlns="http://www.w3.org/1999/xhtml">Updated 4XSLT version to 0.12.0a3.</dc:description>
+         </rdf:Description>
+      </exslt:revision>
+      <exslt:revision>
+         <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                          xmlns:dc="http://purl.org/dc/elements/1.1/"
+                          ID="str:replace.1.4">
+            <exslt:version>1.4</exslt:version>
+            <dc:creator email="craig.stewart@nottingham.ac.uk" 
+                        url="">Craig Stewart</dc:creator>
+            <dc:date>2002-11-12</dc:date>
+            <dc:description xmlns="http://www.w3.org/1999/xhtml">Removed 4XSLT implmentation, due to bugged support.</dc:description>
+         </rdf:Description>
+      </exslt:revision>
+   </rdf:Description>
+   <exslt:doc>
+      <html:div>
+         <html:p>
+         The <html:code>str:replace</html:code> function replaces any occurrences of search strings within a string with replacement nodes to create a node set.
+      </html:p>
+         <html:p>
+         The first argument gives the string within which strings are to be replaced.
+      </html:p>
+         <html:p>
+         The second argument is an object which specifies a search string list.  If the second argument is a node set, then the search string list consists of the result of converting each of the nodes in the node set to a string as by the <html:a href="http://www.w3.org/TR/xpath#function-string" class="offsite">
+               <html:code>string()</html:code>
+            </html:a> function, listed in document order.  If the second argument is not a node set, then the second argument is converted to a string as by the <html:a href="http://www.w3.org/TR/xpath#function-string" class="offsite">
+               <html:code>string()</html:code>
+            </html:a> function and the search string list consists of this string only.
+      </html:p>
+         <html:p>
+         The third argument is an object which specifies a replacement node list.  If the third argument is a node set, then the replacement node list consists of the nodes in the node set in document order.  If the third argument is not a node set, then the replacement node list consists of a single text node whose string value is the same as the result of converting the third argument to a string as by the <html:a href="http://www.w3.org/TR/xpath#function-string" class="offsite">
+               <html:code>string()</html:code>
+            </html:a> function.
+      </html:p>
+         <html:p>
+         It is an error if any of the nodes in the replacement node list are attribute nodes or namespace nodes.  An XSLT processor may recover from this error by treating these nodes as text nodes with an empty string value.
+      </html:p>
+         <html:p>
+         The <html:code>str:replace</html:code> function works by replacing each occurence of a string in the search string list within the first argument string by the equivalently positioned node in the replacement node list.  If there is no equivalently positioned node in the replacement node list then the search string is deleted from the string.
+      </html:p>
+      <html:p>
+         The longest search strings are replaced first. If a search string is empty, then the equivalently positioned replacement node is inserted between every character in the string.
+      </html:p>
+      </html:div>
+   </exslt:doc>
+   <exslt:definition>
+      <exslt:return type="node-set">
+         <html:div/>
+      </exslt:return>
+      <exslt:arg name="string" type="string" default="''" optional="no">
+         <html:div/>
+      </exslt:arg>
+      <exslt:arg name="search" type="object" default="/.." optional="no">
+         <html:div/>
+      </exslt:arg>
+      <exslt:arg name="replace" type="object" default="/.." optional="no">
+         <html:div/>
+      </exslt:arg>
+   </exslt:definition>
+   <exslt:implementations>
+      <exslt:implementation src="str.replace.function.xsl" 
+                            language="exslt:exslt" 
+                            version="1.1">
+         <exslt:doc>
+            <html:div xmlns="http://www.w3.org/1999/xhtml">
+               This implementation relies on the <a href="http://www.exslt.org/exsl/functions/node-set"><code>exsl:node-set()</code></a> function.
+            </html:div>
+         </exslt:doc>
+      </exslt:implementation>
+      <exslt:implementation src="str.replace.template.xsl" 
+                            language="exslt:xslt" 
+                            version="1.1">
+         <exslt:doc>
+            <html:div xmlns="http://www.w3.org/1999/xhtml">
+               This implementation relies on the <a href="http://www.exslt.org/exsl/functions/node-set"><code>exsl:node-set()</code></a> function.
+            </html:div>
+         </exslt:doc>
+      </exslt:implementation>
+   </exslt:implementations>
+   <exslt:use-cases/>
+</exslt:function>

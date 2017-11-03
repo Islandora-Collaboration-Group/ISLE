@@ -1,0 +1,57 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for this module.
+ */
+
+/**
+ * Implements hook_requirements().
+ */
+function islandora_audio_requirements($phase) {
+  $t = get_t();
+  $lame = variable_get('islandora_lame_url', '/usr/bin/lame');
+  $value = $t('Avaliable');
+  $description = NULL;
+  $severity = REQUIREMENT_OK;
+  if (!is_executable($lame)) {
+    $value = $t('Not Found');
+    $description = $t('Islandora is not configured to process audio. Click <a href="http://lame.sourceforge.net/download.php">here</a> for installation instructions.');
+    $severity = REQUIREMENT_WARNING;
+    if (variable_get('islandora_audio_defer_derivatives_on_ingest', FALSE)) {
+      $severity = REQUIREMENT_INFO;
+    }
+  }
+  return array(
+    array(
+      'title' => $t('LAME'),
+      'value' => $value,
+      'description' => $description,
+      'severity' => $severity,
+    ),
+  );
+}
+
+/**
+ * Implements hook_install().
+ */
+function islandora_audio_install() {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  islandora_install_solution_pack('islandora_audio');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_audio_uninstall() {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  islandora_install_solution_pack('islandora_audio', 'uninstall');
+  $variables = array(
+    'islandora_audio_defer_derivatives_on_ingest',
+    'islandora_audio_viewers',
+    'islandora_lame_url',
+    'islandora_audio_obj_fallback',
+    'islandora_audio_vbr_quality',
+  );
+  array_walk($variables, 'variable_del');
+}

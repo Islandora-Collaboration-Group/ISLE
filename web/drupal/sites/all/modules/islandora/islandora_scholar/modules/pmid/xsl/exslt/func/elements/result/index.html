@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "/schema/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:html="http://www.w3.org/1999/xhtml"><head><title>EXSLT - func:result</title><link rel="stylesheet" href="base.css"/></head><body><h1 id="#title"><a href="http://www.exslt.org/">EXSLT</a> - <a href="http://www.exslt.org/func">func</a>:<a href="http://www.exslt.org/func/elements/result">result</a></h1><table><tr><td id="menu"><p class="level1"><a href="func.result.html">Implementer Page</a></p><p class="level1"><a href="../../../howto.html">How To</a></p><p class="level1"><a href="../../../download.html">Downloads</a></p><p class="level1">Modules</p><p class="level2"><a href="../../../date/index.html">Dates and Times</a></p><p class="level2"><a href="../../../dyn/index.html">Dynamic</a></p><p class="level2"><a href="../../../exsl/index.html">Common</a></p><p class="level2"><a href="../../../func/index.html">Functions</a></p><p class="level3"><a href="../../elements/function/index.html">func:function</a></p><p class="level3"><a href="../../elements/result/index.html">func:result</a></p><p class="level3"><a href="../../elements/script/index.html">func:script</a></p><p class="level2"><a href="../../../math/index.html">Math</a></p><p class="level2"><a href="../../../random/index.html">Random</a></p><p class="level2"><a href="../../../regexp/index.html">Regular Expressions</a></p><p class="level2"><a href="../../../set/index.html">Sets</a></p><p class="level2"><a href="../../../str/index.html">Strings</a></p><p class="level1"><a href="../../../submissions/">Submissions</a></p><p class="level1"><a href="../../../list">Mailing List</a></p><p class="level1"><a href="../../../contact.html">Contact</a></p></td><td id="content"><p><b>Implementer Page: </b><a href="func.result.html">func.result.html</a><br/><b>Element Package: </b><a href="func.result.zip">func.result.zip</a></p><h4>Element Syntax</h4><pre>&lt;func:result
+   select = <var>expression</var>&gt;
+   &lt;-- Content: <var>template</var> --&gt;
+&lt;/func:result&gt;</pre><div><p>
+         When an <code>func:result</code> element is instantiated, during the instantiation of a <a href="../function">func:function</a> element, the function returns with its value.  The value of the <code>func:result</code> element is determined in a similar way to variable-binding elements as described in [<a class="offsite" href="http://www.w3.org/TR/xslt#variable-values">11.2 Values of Variables and Parameters</a>] of [<a href="http://www.w3.org/TR/xslt" class="offsite">XSLT</a>].
+      </p><p>
+         It is an error for a <code>func:result</code> element to not be a descendant of <a href="../function"><code>func:function</code></a>.  It is an error for a <code>func:result</code> element to have any following sibling elements aside from the <a href="http://www.w3.org/TR/xslt#element-fallback" class="offsite"><code>xsl:fallback</code></a> element.
+      </p><p>
+         It is an error if instantiating the content of the <a href="../function"><code>func:function</code></a> element results in the instantion of more than one <code>func:result</code> elements.
+      </p><p>
+         Thus the following is an error if the value of the context node when the function is called is equal to the string <code>'yes'</code>, as two <code>func:result</code> elements are instantiated: one within the <a href="http://www.w3.org/TR/xslt#element-if" class="offsite"><code>xsl:if</code></a> and one directly within the <a href="../function"><code>func:function</code></a>:
+      </p><pre class="error">
+&lt;func:function name="my:func1"&gt;
+   &lt;xsl:if test=". = 'yes'"&gt;
+      &lt;func:result select="true()" /&gt;
+   &lt;/<code>xsl:if</code>&gt;
+   &lt;func:result select="false()" /&gt;
+&lt;/func:function&gt;</pre><p>
+         It is an error if a <code>func:result</code> element occurs within an <code>func:result</code> element.  Thus the following is an error:
+      </p><pre class="error">
+&lt;func:function name="my:func2"&gt;
+   &lt;func:result&gt;
+      &lt;func:result select="." /&gt;
+   &lt;/func:result&gt;
+&lt;/func:function&gt;</pre><p>
+         It is an error if instantiating the content of a variable-binding element (i.e. <a class="offsite" href="http://www.w3.org/TR/xslt#element-variable"><code>xsl:variable</code></a>, <a class="offsite" href="http://www.w3.org/TR/xslt#element-param"><code>xsl:param</code></a>) results in the instantiation of an <code>func:result</code> element. Thus the following is an error:
+      </p><pre class="error">
+&lt;func:function name="my:func3"&gt;
+   &lt;xsl:variable name="foo"&gt;
+      &lt;func:result select="." /&gt;
+   &lt;/xsl:variable&gt;
+&lt;/func:function&gt;</pre><h3>Return Values</h3><p>
+         The <code>func:result</code> element can specify the value of the variable in three alternative ways.
+      </p><ul><li><p>
+               If the <code>func:result</code> element has a <code>select</code> attribute, then the value of the attribute must be an expression and the returned value is the object that results from evaluating the expression. In this case, the content must be empty.
+            </p></li><li><p>
+               If the <code>func:result</code> element does not have a <code>select</code> attribute and has non-empty content (i.e. the <code>func:result</code> element has one or more child nodes), then the content of the <code>func:result</code> element specifies the value.  The content of the <code>func:result</code> element is a template, which is instantiated to give the returned value. The value is a result tree fragment equivalent to a node-set containing just a single root node having as children the sequence of nodes produced by instantiating the template. The base URI of the nodes in the result tree fragment is the base URI of the <code>func:result</code> element.
+            </p><p>
+               It is an error if a member of the sequence of nodes created by instantiating the template is an attribute node or a namespace node, since a root node cannot have an attribute node or a namespace node as a child. An XSLT processor may signal the error; if it does not signal the error, it must recover by not adding the attribute node or namespace node.
+            </p></li><li><p>
+               If the <code>func:result</code> element has empty content and does not have a <code>select</code> attribute, then the returned value is an empty string. Thus
+            </p><pre>&lt;func:result /&gt;</pre><p>
+               is equivalent to
+            </p><pre>&lt;func:result select="''"/&gt;</pre></li></ul></div><h2>Implementations</h2><p>
+                  The following XSLT processors support <code>func:result</code>:
+               </p><ul><li><a href="http://4Suite.org">4XSLT, from 4Suite.</a> (version 0.12.0a3)</li><li><a href="http://users.iclway.co.uk/mhkay/saxon/index.html">SAXON 6.3 from Michael Kay</a> (version 6.3)</li><li><a href="http://xmlsoft.org/XSLT/">libxslt from Daniel Veillard; implementation by Thomas Broyer</a> (version 1.0.19)</li><li><a href="http://xml.apache.org/xalan-j">Xalan-J from Apache</a> (version 2.4.D1)</li></ul><p>There are currently no third-party implementations of <code>func:result</code>.</p></td></tr></table><div id="colophon"><p><a href="http://www.exslt.org/func/elements/result/index.html">http://www.exslt.org/func/elements/result/index.html</a> last modified 2002-11-12</p></div></body></html>

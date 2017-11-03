@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * This file contains all install related hooks.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_fits_uninstall() {
+  $variables = array(
+    'islandora_fits_techmd_dsid',
+    'islandora_fits_executable_path',
+  );
+  array_walk($variables, 'variable_del');
+}

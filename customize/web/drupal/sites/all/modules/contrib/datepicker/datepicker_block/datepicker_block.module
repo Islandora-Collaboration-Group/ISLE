@@ -1,0 +1,132 @@
+<?php
+
+/**
+ * Implements hook_block_info().
+ */
+function datepicker_block_block_info() {
+  $info = array();
+  $info[0] = array(
+    'info' => t('Date picker'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  return $info;
+}
+
+/**
+ * Implements hook_block_configure().
+ */
+function datepicker_block_block_configure($delta = '') {
+  $form = array();
+  $form['datepicker_block_path'] = array(
+    '#title' => t('Form action path'),
+    '#type' => 'textfield',
+    '#description' => t('Enter the path you want to use as the form action.'),
+  );
+  $form['datepicker_block_field_type'] = array(
+    '#title' => t('Populate date field type'),
+    '#type' => 'select',
+    '#options' => array(
+      'single' => t('Single date'),
+      'range' => t('Date range'),
+      'multiple' => t('Multiple date fields'),
+    ),
+  );
+  $form['datepicker_block_identifier'] = array(
+    '#title' => t('Filter identifier'),
+    '#type' => 'textfield',
+    '#description' => t('The filter key to populate from this block. If using multiple datefields separate them with a | character, eg date_from|date_to'),
+  );
+  $form['datepicker_block_format'] = array(
+    '#title' => t('Date format'),
+    '#type' => 'textfield',
+    '#description' => t('The PHP date format that is used in the query string.'),
+  );
+  foreach (array_keys($form) as $key) {
+    $form[$key]['#default_value'] = datepicker_block_defaults(substr($key, strlen('datepicker_block_')));
+  }
+  return $form;
+}
+
+/**
+ * Implements hook_block_save().
+ */
+function datepicker_block_block_save($delta = '', $edit = array()) {
+  if ($delta == 0) {
+    foreach ($edit as $key => $value) {
+      variable_set($key, $value);
+    }
+  }
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function datepicker_block_block_view($delta = '') {
+  return array(
+    'subject' => t('Date picker'),
+    'content' => drupal_get_form('datepicker_block_form'),
+  );
+}
+
+/**
+ * Event finder block form callback.
+ */
+function datepicker_block_form() {
+  $form = array();
+  $form['finder'] = array(
+    '#type' => 'datepicker',
+    '#date_format' => 'd/m/Y',
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Search'),
+  );
+  return $form;
+}
+
+/**
+ * Submit handler for the event finder block form.
+ */
+function datepicker_block_form_submit(&$form, &$form_state) {
+  $values =& $form_state['values'];
+  $path = datepicker_block_defaults('path');
+  $identifier = datepicker_block_defaults('identifier');
+  $field_type = datepicker_block_defaults('field_type');
+  $format = datepicker_block_defaults('format');
+  if ($field_type == 'range') {
+    $query = array(
+      $identifier . '[min][date]' => date($format, strtotime($values['finder'])),
+      $identifier . '[max][date]' => date($format, strtotime($values['finder']) + 86400),
+    );
+  }
+  elseif ($field_type == 'single') {
+    $query = array(
+      $identifier . '[value][date]' => date($format, strtotime($values['finder'])),
+    );
+  }
+  else {
+    $ids = explode('|', $identifier);
+    $query = array();
+    foreach ($ids as $id) {
+      $query[$id . '[value][date]'] = date($format, strtotime($values['finder']));
+    }
+  }
+  $form_state['redirect'] = array($path, array('query' => $query));
+  $values =& $form_state['values'];
+}
+
+/**
+ *
+ */
+function datepicker_block_defaults($key) {
+  $defaults = array(
+    'format' => 'Y-m-d',
+    'identifier' => 'date_filter',
+    'path' => '',
+    'range' => 'range',
+    'type' => 'textfield',
+  );
+  $variable_name = 'datepicker_block_' . $key;
+  $fallback = (isset($defaults[$key]) ? $defaults[$key] : '');
+  return variable_get($variable_name, $fallback);
+ }

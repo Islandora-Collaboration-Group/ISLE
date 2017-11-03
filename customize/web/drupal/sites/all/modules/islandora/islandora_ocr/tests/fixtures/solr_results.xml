@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<response>
+
+<lst name="responseHeader">
+  <int name="status">0</int>
+  <int name="QTime">4</int>
+  <lst name="params">
+    <str name="hl.fragsize">18</str>
+    <str name="hl.tag.post">}}}</str>
+    <str name="indent">on</str>
+    <str name="hl.fragmenter">gap</str>
+    <str name="hl.tag.pre">{{{</str>
+    <str name="hl.fl">HOCR.field.text_hlt</str>
+    <str name="hl">true</str>
+    <str name="version">2.2</str>
+    <str name="defType">dismax</str>
+    <str name="fl">PID,RELS-EXT.field.isSequenceNumber_txt</str>
+    <str name="hl.snippets">200</str>
+    <str name="hl.useFastVectorHighlighter">true</str>
+    <str name="q">quick lazy fox fox</str>
+    <str name="qt">standard</str>
+    <str name="fq">RELS-EXT.field.isMemberOf_txt:("info:fedora/islandora:314" OR "islandora:314")</str>
+  </lst>
+</lst>
+<result name="response" numFound="1" start="0">
+  <doc>
+    <str name="PID">islandora:317</str>
+    <arr name="RELS-EXT.field.isSequenceNumber_txt"><str>3</str></arr>
+  </doc>
+</result>
+<lst name="highlighting">
+  <lst name="islandora:317">
+    <arr name="HOCR.field.text_hlt">
+      <str>over the {{{lazy}}} {{{fox}}}. The</str>
+      <str>over the {{{lazy}}} {{{fox}}}. The</str>
+      <str>over the {{{lazy}}} {{{fox}}}. The</str>
+      <str>over the {{{lazy}}} {{{fox}}}.</str>
+      <str>format. The {{{quick}}} brown dog</str>
+      <str>The {{{quick}}} brown dog jumped</str>
+      <str>The {{{quick}}} brown dog jumped</str>
+      <str>The {{{quick}}} brown dog jumped</str>
+    </arr>
+  </lst>
+</lst>
+</response>

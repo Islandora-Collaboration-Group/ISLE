@@ -13,7 +13,6 @@ archives
 tmp
 temp
 .idea
-.htaccess
 .htpasswd
 tests/TestNarrowSuite.php
 

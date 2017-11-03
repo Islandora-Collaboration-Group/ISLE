@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for this Web ARChive SP.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function islandora_web_archive_install() {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  islandora_install_solution_pack('islandora_web_archive');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_web_archive_uninstall() {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  variable_del('islandora_web_archive_wkhtmltopdf_path');
+  variable_del('slandora_web_archive_make_wkhtmltopdf_locally');
+  variable_del('islandora_web_archive_wkhtmltoimage_path');
+  variable_del('slandora_web_archive_make_wkhtmltoimage_locally');
+  variable_del('islandora_web_archive_pngcrush_path');
+  variable_del('islandora_web_archive_make_pngcrush_locally');
+  variable_del('islandora_web_archive_wget_path');
+  variable_del('islandora_web_archive_make_warc_locally');
+  islandora_install_solution_pack('islandora_web_archive', 'uninstall');
+}
+
+/**
+ * Print and log a message about possible lost physicalDescription data.
+ *
+ * @see https://jira.duraspace.org/browse/ISLANDORA-1422
+ */
+function islandora_web_archive_update_7100(&$sandbox) {
+  $t = get_t();
+  watchdog('islandora_web_archive', 'The original default form had incorrect XPath for the titleInfo block for relatedItem type="host" block. Existing mods:titleInfo fields will exist at the top level instead of nested in the relatedItem type="host" block.', array(), WATCHDOG_NOTICE, l(t('ISLANDORA-1422'), 'https://jira.duraspace.org/browse/ISLANDORA-1422', array('external' => TRUE)));
+  return $t('The original default form had incorrect XPath for the titleInfo block for relatedItem type="host" block. Existing mods:titleInfo fields will exist at the top level instead of nested in the relatedItem type="host" block. Please consult the !url for further information.',
+    array(
+      '!url' => l(t('ticket'), 'https://jira.duraspace.org/browse/ISLANDORA-1422', array('absolute' => TRUE)),
+    )
+  );
+}

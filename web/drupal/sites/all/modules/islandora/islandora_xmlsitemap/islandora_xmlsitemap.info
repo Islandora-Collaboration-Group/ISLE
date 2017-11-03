@@ -1,0 +1,9 @@
+name = Islandora XML sitemap
+description = Creates an XML sitemap conforming to the <a href="http://sitemaps.org/">sitemaps.org protocol</a>.
+package = Islandora Tools
+core = 7.x
+dependencies[] = islandora
+dependencies[] = xmlsitemap_custom
+dependencies[] = islandora_solr
+configure = admin/islandora/xmlsitemap
+version = 7.x-dev

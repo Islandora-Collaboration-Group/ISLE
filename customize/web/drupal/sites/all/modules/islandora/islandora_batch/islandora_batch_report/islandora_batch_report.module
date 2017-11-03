@@ -1,0 +1,87 @@
+<?php
+
+/**
+ * @file
+ * Module for Batch ingest statistic tracking and reporting.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_batch_report_menu() {
+  $items = array();
+
+  $items['admin/islandora/tools/batchreport'] = array(
+    'title' => 'Islandora Batch Reporting Settings',
+    'description' => 'Configure settings for Islandora Batch Reporting.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_batch_report_admin_form'),
+    'file' => 'includes/admin.form.inc',
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_islandora_batch_object_processed().
+ *
+ * Log processed objects and sets into database.
+ */
+function islandora_batch_report_islandora_batch_object_processed($object, $state) {
+  module_load_include('inc', 'islandora_batch_report', 'includes/db');
+  module_load_include('inc', 'islandora_batch', 'includes/db');
+  $content_models = $object->relationships->get(FEDORA_MODEL_URI, 'hasModel');
+  $content_model = (isset($content_models[0]['object']['value']) ? $content_models[0]['object']['value'] : '');
+
+  // Log object details in database.
+  islandora_batch_report_log_object($object, $content_model, $state);
+
+  // Batch ingest can process outside of a specific set so it needs to check
+  // the set from each object and update the database accordingly.
+  $set_id = islandora_batch_get_set_for_object($object->id);
+  // Check the set status.
+  $set_failed = islandora_batch_check_if_set_failed_ingest($set_id);
+  $set_ingested = islandora_batch_check_if_set_is_fully_ingested($set_id);
+  if ($set_failed || $set_ingested) {
+    if ($set_failed) {
+      $set_status = 0;
+    }
+    else {
+      $set_status = 1;
+    }
+    // See if it already exists in the table within the day and has the same
+    // processing status.
+    $set_exists_in_database = islandora_batch_report_check_if_set_was_added($set_id, $set_status);
+    if (!$set_exists_in_database) {
+      // Log set details in database.
+      islandora_batch_report_log_set($set_id, $set_status);
+    }
+  }
+}
+
+/**
+ * Implements hook_cron().
+ */
+function islandora_batch_report_cron() {
+  module_load_include('inc', 'islandora_batch_report', 'includes/cron');
+  $min_wait_time = 0;
+  $timestamp = time();
+  $last_sent_report = variable_get('islandora_batch_report_daily_report_last_sent', '');
+  $send_report_after = variable_get('islandora_batch_report_send_report_after', '23:00');
+  if (!empty($last_sent_report)) {
+    // Min wait time till the report is sent again is 24 hours - cron (4 min),
+    // since the drupal cron has a hard coded max execution time of 240 seconds.
+    // This takes care of the report triggering the rule invoke multiple times
+    // within the same period of time.
+    $min_wait_time = strtotime('+23 hours +56 minutes', $last_sent_report);
+  }
+  // Only email the daily report one time per 24 hours after the time set by the
+  // admin to send the report after.
+  if ((empty($last_sent_report) || $timestamp > $min_wait_time) && (date('H:i') > date('H:i', strtotime($send_report_after)))) {
+    islandora_batch_report_prepare_daily_email_report();
+    // Update last run time.
+    variable_set('islandora_batch_report_daily_report_last_sent', $timestamp);
+  }
+}

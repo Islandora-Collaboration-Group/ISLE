@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * islandora_disk_image.install
+ */
+
+/**
+ * Implements hook_install().
+ */
+function islandora_disk_image_install() {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  islandora_install_solution_pack('islandora_disk_image');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_disk_image_uninstall() {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  variable_del('islandora_disk_image_fiwalk_path');
+  islandora_install_solution_pack('islandora_disk_image', 'uninstall');
+}

@@ -1,0 +1,15 @@
+Index: webform/includes/webform.report.inc
+===================================================================
+--- webform/includes/webform.report.inc	(revision 591)
++++ webform/includes/webform.report.inc	(working copy)
+@@ -615,7 +615,9 @@
+   $exporter->set_headers($export_name);
+   @readfile($file_name);  // The @ makes it silent.
+   @unlink($file_name);  // Clean up, the @ makes it silent.
+-  exit();
++  if (!(module_exists('webform_digest') && $GLOBALS['webform_digest_send'])) {
++    exit();
++  }
+ }
+ 
+ /**

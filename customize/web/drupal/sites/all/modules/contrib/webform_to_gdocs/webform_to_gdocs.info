@@ -1,0 +1,12 @@
+name = Webform to Google Docs
+description = Allows Webform Submissions to be automatically entered into Google Spreadsheets.
+core = 7.x
+package = Webform
+dependencies[] = webform
+
+; Information added by Drupal.org packaging script on 2016-05-15
+version = "7.x-4.3"
+core = "7.x"
+project = "webform_to_gdocs"
+datestamp = "1463329140"
+

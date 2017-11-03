@@ -1,0 +1,163 @@
+<?php
+// @codingStandardsIgnoreStart
+/**
+ * @file
+ * Unit Tests.
+ */
+
+/**
+ * Unit Tests for the FormControl class.
+ */
+class PHPLib_DelimitedFile_TestCase extends DrupalUnitTestCase {
+
+  protected $filename;
+
+  /**
+   * Get Test info.
+   *
+   * @return array
+   *   Properties that are displayed in the test selection form.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'DelimintedFile Unit Tests.',
+      'description' => 'Unit tests for class DelimitedFile.',
+      'group' => 'PHP Lib',
+    );
+  }
+
+  public function setUp() {
+    parent::setUp('php_lib');
+    module_load_include('inc', 'php_lib', 'File');
+    $this->filename = file_create_filename("temp", file_directory_temp());
+  }
+
+  public function tearDown() {
+    parent::tearDown();
+    unlink($this->filename);
+  }
+
+  private function writeToFile($content) {
+    $handle = fopen($this->filename, 'wb');
+    fwrite($handle, $content);
+    fclose($handle);
+  }
+
+  /**
+   * DelimitedFile::isDelimiter().
+   */
+  public function test_isDelimiter() {
+    $delimiters = array('|', "\r\n");
+    $this->writeToFile("a|b\nc\r\nd");
+    $values = array(FALSE, TRUE, FALSE, FALSE, FALSE, TRUE, TRUE, FALSE, TRUE);
+    // Includes EOF delimiter.
+    $file = new DelimitedFile(fopen($this->filename, 'rb'), TextFile::UNIX, $delimiters);
+    $successful = TRUE;
+    foreach ($values as $value) {
+      if ($file->isDelimiter() !== $value) {
+        $successful = FALSE;
+        $this->assert($successful, t('DelimitedFile::isDelimiter() incorrectly identified "%char"', array('%char' => addcslashes($file->peekc(), "\r\n"))));
+        break;
+      }
+      $file->seek(1, SEEK_CUR);
+    }
+    $this->assert($successful, "DelimitedFile::isDelimiter() correctly identified all delimiters.");
+    unset($file);
+    // Destroy the reference to the file.
+  }
+
+  /**
+   * DelimitedFile::seekAfterDelimiter().
+   */
+  public function test_seekAfterDelimiter() {
+    $delimiters = array('|', "\r\n");
+    $content = "a|b\nc\r\nd";
+    $this->writeToFile($content);
+    $values = array(0, 2, 2, 3, 4, 7, 7, 7, 7);
+    // Includes EOF delimiter.
+    $file = new DelimitedFile(fopen($this->filename, 'rb'), TextFile::UNIX, $delimiters);
+    $successful = TRUE;
+    for ($i = 0; $i < strlen($content); $i++) {
+      $file->seek($i);
+      if ($file->seekAfterDelimiter() !== $values[$i]) {
+        $successful = FALSE;
+        $this->assert($successful, t('DelimitedFile::seekAfterDelimiter() incorrectly moved to "%actual" (expected: "%expected")', array(
+              '%actual' => $file->pos,
+              '%expected' => $values[$i]))
+        );
+        break;
+      }
+    }
+    $this->assert($successful, "DelimitedFile::seekAfterDelimiter() correctly moved pointer to end of all delimiters.");
+    unset($file);
+    // Destroy the reference to the file.
+  }
+
+  /**
+   * DelimitedFile::getField().
+   */
+  public function test_getfield() {
+    $delimiters = array('|', ',', "\r\n");
+    $this->writeToFile("field one|field\ntwo\r\nfield three,field four");
+    $values = array('field one', "field\ntwo", 'field three', 'field four', FALSE);
+    $file = new DelimitedFile(fopen($this->filename, 'rb'), TextFile::UNIX, $delimiters);
+    $successful = TRUE;
+    foreach ($values as $value) {
+      $field = $file->getField();
+      if (strcmp($field, $value)) {
+        $successful = FALSE;
+        $this->assert($successful, t('DelimitedFile::getField() incorrectly returned field "%actual" (expected: "%expected")', array(
+              '%expected' => $value,
+              '%actual' => $field))
+        );
+        break;
+      }
+    }
+    $this->assert($successful, "DelimitedFile::getField() correctly identified all fields.");
+    unset($file);
+    // Destroy the reference to the file.
+  }
+
+  /**
+   * DelimitedFile::getField().
+   */
+  public function test_getfields() {
+    $delimiters = array('|', ',', "\r\n");
+    $this->writeToFile("field one|field\ntwo\r\nfield three,field four");
+    $values = array('field one', "field\ntwo", 'field three', 'field four');
+    $file = new DelimitedFile(fopen($this->filename, 'rb'), TextFile::UNIX, $delimiters);
+    $successful = TRUE;
+    $fields = $file->getFields(0);
+    $this->assert(empty($fields), t('DelimitedFile::getFields() didn\'t return any fields for a count of 0.'));
+    $fields = $file->getFields(2);
+    $this->assertEqual(count($fields), 2, t('DelimitedFile::getFields() returned the correct number of fields for the request of 2.'));
+    $file->rewind();
+    $fields = $file->getFields(count($values));
+    $this->assertEqual($fields, $values, t('DelimitedFile::getFields() retrieved all fields.'));
+    // General test.
+    $delimiters = array(',', "\n");
+    $this->writeToFile("one,two\nthree,four\nfive,six");
+    $values = array(
+      array('one', 'two'),
+      array('three', 'four'),
+      array('five', 'six'),
+    );
+    $file = new DelimitedFile(fopen($this->filename, 'rb'), TextFile::UNIX, $delimiters);
+    $line = 0;
+    $successful = TRUE;
+    foreach ($values as $value) {
+      $fields = $file->getFields(count($value));
+      if ($fields != $value) {
+        $successful = FALSE;
+        $this->assert($successful, t('DelimitedFile::getFields() failed to get the expected fields on %line.', array('%line' => $line)));
+        break;
+      }
+      $line++;
+    }
+    $this->assert($successful, t('DelimitedFile::getFields() correctly read all lines in the file.'));
+    unset($file);
+    // Destroy the reference to the file.
+  }
+
+}
+// @codingStandardsIgnoreEnd

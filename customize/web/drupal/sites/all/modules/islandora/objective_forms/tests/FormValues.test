@@ -1,0 +1,100 @@
+<?php
+
+/**
+ * @file
+ * Objective form values test case
+ */
+
+class ObjectiveFormValuesTestCase extends DrupalWebTestCase {
+
+  // @codingStandardsIgnoreStart
+  // don't know if this functin is being call all over the place
+  protected $privileged_user;
+  // @codingStandardsIgnoreEnd
+
+  /**
+   * Get Test info.
+   *
+   * @return array
+   *   Properties that are displayed in the test selection form.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Form Values Unit Tests.',
+      'description' => 'Unit tests for FormValue.inc.',
+      'group' => 'Objective Forms',
+    );
+  }
+
+  /**
+   * SetUp() performs any pre-requisite tasks that need to happen.
+   */
+  public function setUp() {
+    // Enable any modules required for the test.
+    parent::setUp('objective_forms');
+    module_load_include('inc', 'objective_forms', 'FormValues');
+    $this->privileged_user = $this->drupalCreateUser(array('access content'));
+    $this->drupalLogin($this->privileged_user);
+  }
+
+  /**
+   * Function prepForm.
+   */
+  public function prepForm($form_id, &$form, &$form_state) {
+    drupal_prepare_form($form_id, $form, $form_state);
+    drupal_process_form($form_id, $form, $form_state);
+  }
+
+  /**
+   * Function tearDown.
+   */
+  public function tearDown() {
+    $this->drupalLogout($this->privileged_user);
+    parent::tearDown();
+  }
+
+  /**
+   * Test constructing the Form definition.
+   */
+  public function testConstructingFormDefinition() {
+
+    $form_path = 'objective/forms/test/objective_forms_test_form_values_form';
+    $this->drupalGet($form_path);
+    $edit = array(
+      'first' => 'test value',
+    );
+    $this->drupalPost($form_path, $edit, 'Submit');
+    if (variable_get('test', NULL) == 'TESTING') {
+      $this->pass('It was called!');
+    }
+    else {
+      $this->pass('It failed!');
+    }
+  }
+}
+
+/**
+ * Test test_form_values_form.
+ */
+function objective_forms_test_form_values_form(array $form, array &$form_state) {
+  module_load_include('inc', 'objective_forms', 'Form');
+  $drupal_form = array(
+    'first' => array(
+      '#type' => 'textfield',
+      '#title' => 'first',
+    ),
+    'submit' => array(
+      '#type' => 'submit',
+      '#value' => 'Submit',
+    ),
+  );
+  $form = new Form($drupal_form, $form_state);
+  return $form->toArray($form_state);
+}
+
+/**
+ * Function test_form_values_form_submit.
+ */
+function objective_forms_test_form_values_form_submit(array $form, array &$form_state) {
+  variable_set('test', 'TESTING');
+}

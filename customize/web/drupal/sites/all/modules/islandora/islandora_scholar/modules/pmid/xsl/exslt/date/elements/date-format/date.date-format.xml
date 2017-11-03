@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<exslt:element xmlns:exslt="http://exslt.org/documentation" 
+               version="1" module="date" status="new">
+
+<exslt:name>date-format</exslt:name>
+
+<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                 xmlns:dc="http://purl.org/dc/elements/1.1/"
+                 ID="date:date-format">
+   <dc:subject>EXSLT</dc:subject>
+   <dc:subject>date</dc:subject>
+   <dc:subject>date-format</dc:subject>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="date:date-format.1">
+         <exslt:version>1</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com/">
+            Jeni Tennison
+         </dc:creator>
+         <dc:date>2001-05-13</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            Defines a date format used to interpret a format pattern within <a href="/date/functions/format-date"><code>format-date</code></a> and <a href="/date/functions/parse-date"><code>date:parse-date</code></a>.
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+</rdf:Description>
+
+<exslt:doc xmlns:html="http://www.w3.org/1999/xhtml"
+           xmlns="">
+   <html:div xmlns="http://www.w3.org/1999/xhtml">
+      <p>
+         The <code>date:date-format</code> element declares a <code>date format</code>, which controls the interpretation of a format pattern used by the <a href="/date/functions/format-date"><code>date:format-date</code></a> and <a href="/date/functions/parse-date"><code>date:parse-date</code></a> functions.
+      </p>
+      <p>
+         If there is a <code>name</code> attribute, then the element declares a named date format; otherwise, it declares the default date format. The value of the <code>name</code> attribute is a <a href="http://www.w3.org/TR/REC-xml-names#NT-QName" class="offsite">QName</a>, which is expanded as described in [<a href="http://www.w3.org/TR/xslt#qname" class="offsite">2.4 Qualified Names</a>] of [<a href="http://www.w3.org/TR/xslt" class="offsite">XSLT</a>]. It is an error to declare either the default date format or a date format with a given name more than once (even with different import precedence), unless it is declared every time with the same value for all attributes (taking into account any default values).
+      </p>
+      <p>
+         The <code>calendar</code> attribute specifies the calendar used to interpret format strings using the date format.  The value must be a <a href="http://www.w3.org/TR/REC-xml-names#NT-QName" class="offsite">QName</a>. If the <a href="http://www.w3.org/TR/REC-xml-names#NT-QName" class="offsite">QName</a> does not have a prefix, then it identifies calendar specified in this document and must be <code>gregorian</code>. If the <a href="http://www.w3.org/TR/REC-xml-names#NT-QName" class="offsite">QName</a> has a prefix, then the <a href="http://www.w3.org/TR/REC-xml-names#NT-QName" class="offsite">QName</a> is expanded into an expanded-name as described in [<a href="http://www.w3.org/TR/xslt#qname" class="offsite">2.4 Qualified Names</a>] of [<a href="http://www.w3.org/TR/xslt" class="offsite">XSLT</a>]; the expanded-name identifies the calendar; the interpretation of the format pattern used in the <a href="/date/functions/format-date"><code>date:format-date</code></a> and <a href="/date/functions/parse-date"><code>date:parse-date</code></a> functions in this case is not specified by this document.  If the processor does not support the calendar used by the date format used in these functions, the result of these functions is an empty string (<code>''</code>).
+      </p>
+      <p>
+         If there is no <code>calendar</code> attribute or it has the value <code>gregorian</code>, then the date/time being processed is interpreted as using the Gregorian calendar, with the same assumptions as made by the JDK 1.1 <a href="http://java.sun.com/products/jdk/1.1/docs/api/java.util.GregorianCalendar.html" class="offsite">GregorianCalendar</a> class.  If this date format is used by the <a href="/date/functions/format-date"><code>date:format-date</code></a> or <a href="/date/functions/parse-date"><code>date:parse-date</code></a> function, then the format pattern strings that they use must be in the syntax specified by the JDK 1.1 <a href="http://java.sun.com/products/jdk/1.1/docs/api/java.text.SimpleDateFormat.html" class="offsite">SimpleDateFormat</a> class.  The format pattern string is interpreted as described for the JDK 1.1 <a href="http://java.sun.com/products/jdk/1.1/docs/api/java.text.SimpleDateFormat.html" class="offsite">SimpleDateFormat</a> class.
+      </p>
+      <p>
+         The <code>lang</code> attribute specifies the language of the strings used in formatting the date; it has the same range of values as xml:lang [<a href="http://www.w3.org/TR/1998/REC-xml-19980210" class="offsite">XML</a>]; if no <code>lang</code> value is specified or if the processor does not support the specified language, the language should be determined from the system environment.
+      </p>
+      <p>
+         The <code>first-day-in-week</code> attribute specifies the day that's used as the first day of the week for calculating numbers of the week in month, week in year and day in week.  If the calendar is Gregorian, then it must be one of the strings <code>sunday</code>, <code>monday</code>, <code>tuesday</code>, <code>wednesday</code>, <code>thursday</code>, <code>friday</code> or <code>saturday</code>.  Otherwise the values are restricted based on the calendar being used for the date format.
+      </p>
+   </html:div>
+</exslt:doc>
+
+<exslt:definition xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:attribute name="name" type="xsl:qname" />
+   <xs:attribute name="calendar" required="no">
+      <xs:simpleType>
+         <xs:union memberTypes="xsl:qname-but-not-ncname">
+            <xs:simpleType>
+               <xs:restriction base="xs:NMTOKEN">
+                  <xs:enumeration value="gregorian" />
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:union>
+      </xs:simpleType>
+   </xs:attribute>
+   <xs:attribute name="lang" type="xs:language" />
+   <xs:attribute name="first-day-of-week">
+      <xs:simpleType>
+         <xs:union memberTypes="xsl:string">
+            <xs:restriction base="xs:NMTOKEN">
+               <xs:enumeration value="sunday" />
+               <xs:enumeration value="monday" />
+               <xs:enumeration value="tuesday" />
+               <xs:enumeration value="wednesday" />
+               <xs:enumeration value="thursday" />
+               <xs:enumeration value="friday" />
+               <xs:enumeration value="saturday" />
+            </xs:restriction>
+         </xs:union>
+      </xs:simpleType>
+   </xs:attribute>
+</exslt:definition>
+
+<exslt:implementations />
+
+<exslt:use-cases />
+
+</exslt:element>

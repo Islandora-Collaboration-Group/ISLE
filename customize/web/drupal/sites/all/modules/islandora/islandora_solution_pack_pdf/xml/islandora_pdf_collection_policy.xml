@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<collection_policy xmlns="http://www.islandora.ca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="" xsi:schemaLocation="http://www.islandora.ca http://syn.lib.umanitoba.ca/collection_policy.xsd">
+  <content_models>
+    <content_model name="Islandora PDF content model" dsid="" namespace="islandora:pdf" pid="islandora:sp_pdf"/>
+    <!-- Maintained for backwards-compatibility -->
+    <content_model name="Strict PDF content model" dsid="" namespace="islandora:strictpdf" pid="islandora:sp_strict_pdf"/>
+  </content_models>
+  <search_terms>
+  </search_terms>
+  <relationship>isMemberOfCollection</relationship>
+</collection_policy>

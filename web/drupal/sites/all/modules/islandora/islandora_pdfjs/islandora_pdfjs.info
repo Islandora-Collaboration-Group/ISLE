@@ -1,0 +1,6 @@
+name = "Islandora pdf.js"
+description = "Implements the Mozilla pdf.js for use with Islandora."
+dependencies[] = libraries
+package = Islandora Viewers
+version = 7.x-dev
+core = 7.x

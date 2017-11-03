@@ -1,0 +1,230 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../../../style/element.xsl" ?>
+<exslt:element xmlns:exslt="http://exslt.org/documentation" 
+               version="1" module="exsl" status="new">
+
+<exslt:name>document</exslt:name>
+
+<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                 xmlns:dc="http://purl.org/dc/elements/1.1/"
+                 ID="exsl:document">
+   <dc:subject>EXSLT</dc:subject>
+   <dc:subject>exsl</dc:subject>
+   <dc:subject>document</dc:subject>
+   <dc:subject>output</dc:subject>
+   <dc:rights>public domain</dc:rights>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="exsl:document.1">
+         <exslt:version>1</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com/">
+            Jeni Tennison
+         </dc:creator>
+         <dc:date>2001-04-24</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            The <code>exsl:document</code> element is used to create multiple result documents.
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="exsl:document.1.1">
+         <exslt:version>1.1</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com/">
+            Jeni Tennison
+         </dc:creator>
+         <dc:date>2001-08-15</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            Added vendor implementation in libxslt.
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+</rdf:Description>
+
+<exslt:doc xmlns:html="http://www.w3.org/1999/xhtml">
+   <html:div xmlns="http://www.w3.org/1999/xhtml">
+      <p>
+         The <code>exsl:document</code> element is used to create multiple result documents. As well as the main result document, there can be subsidiary result documents. Each subsidiary result document is created using an <code>exsl:document</code> element. The content of the <code>exsl:document</code> element is a template; this is instantiated to create a sequence of nodes; a root node is created with this sequence of nodes as its children; the tree with this root node represents the subsidiary result document. The <code>href</code> attribute specifies where the subsidiary document should be stored; it must be an absolute or relative URI; it must not have a fragment identifier. For example, the following would create a main result document specifying an HTML frameset with two frames, together with two subsidiary documents, one for the contents of each frame:
+      </p>
+      <pre><![CDATA[<xsl:template match="/">
+  <html>
+    <head><title>Frame example</title></head>
+    <frameset cols="20%, 80%">
+      <frame src="toc.html"/>
+      <exsl:document href="toc.html">
+        <html>
+          <head><title>Table of Contents</title></head>
+          <body>
+             <xsl:apply-templates mode="toc" select="*"/>
+          </body>
+        </html>
+      </exsl:document>
+      <frame src="body.html"/>
+      <exsl:document href="body.html">
+        <html>
+          <head><title>Body</title></head>
+          <body>
+             <xsl:apply-templates select="*"/>
+          </body>
+        </html>
+      </exsl:document>
+    </frameset>
+  </html>
+</xsl:template>]]></pre>
+      <p>
+         The attributes on <a href="http://www.w3.org/TR/xslt#element-output" class="offsite"><code>xsl:output</code></a> elements affect only the main result document. The output of a subsidiary result document is controlled by the attributes on the <code>exsl:document</code> element that was used to create that subsidiary result document. With the exception of the <code>href</code> attribute which is allowed only on <code>exsl:document</code>, the attributes on <code>exsl:document</code> are applied to a subsidiary result document in the same way that the attributes on <a href="http://www.w3.org/TR/xslt#element-output" class="offsite"><code>xsl:output</code></a> are applied to the main result document. In particular, the <code>method</code> attribute on an <code>exsl:document</code> element is defaulted based on the content of the subsidiary document created by that <code>exsl:document</code> element, not based on the content of the main result document.
+      </p>
+      <p>
+         Normally, <code>exsl:document</code> can be understood as directly creating an additional result document. However, when <code>exsl:document</code> is used within <a href="http://www.w3.org/TR/xslt#element-variable" class="offsite"><code>xsl:variable</code></a> or <a href="http://www.w3.org/TR/xslt#element-param" class="offsite"><code>xsl:param</code></a> elements, the following more sophisticated conceptual model is needed.
+      </p>
+      <p>
+         Documents involved in XSLT processing can be divided into two categories.
+      </p>
+      <p>
+         One category contains the documents that the XSLT processor constructs by instantiating templates; these are the main result document, subsidiary documents created by <code>exsl:document</code>, and documents created by a variable-binding element with content.
+      </p>
+      <p>
+         The other category contains the documents constructed by parsing or other processes external to the XSLT processor; these are the main source document and documents returned by the <a href="http://www.w3.org/TR/xpath#function-document" class="offsite"><code>document</code></a> function.
+      </p>
+      <p>
+         With each document in the former category, an XSLT processor associates a possibly empty set of subsidiary documents. The relationship between a document and its associated subsidiary documents thus organizes documents in this category into one or more unordered trees, where the associated subsidiary documents of a document are considered the children of that document. The main result document is the root of one such tree; the documents created by variable-binding elements with content are the roots of the other trees. Each subsidiary document created by an <code>exsl:document</code> element has a parent within this tree of documents.
+      </p>
+      <p>
+         During the processing of a stylesheet, there is a current result document; initially this is the main result document; the current result document is changed by the <code>exsl:document</code> element and by variable-binding elements with content. When an <code>exsl:document</code> element is instantiated, the content is instantiated with the subsidiary document being created by that <code>exsl:document</code> element as the current result document. When a variable-binding element with content is instantiated, the content is instantiated with the document being created (that is, the document whose root node is the sole member of the node-set that will be the value of the variable defined by that element) as the current result document. A document created by the instantiation of an <code>exsl:document</code> is not automatically output; instead, it is added to the set of subsidiary documents associated with the current result document.
+      </p>
+      <p class="note">
+         NOTE: The <code>exsl:document</code> is allowed inside <a href="http://www.w3.org/Tr/xslt#element-attribute" class="offsite"><code>xsl:attribute</code></a>, <a href="http://www.w3.org/TR/xslt#element-comment" class="offsite"><code>xsl:comment</code></a> and <a href="http://www.w3.org/TR/xslt#element-processing-instruction" class="offsite"><code>xsl:processing-instruction</code></a> and behaves in those contexts in the same way as elsewhere.
+      </p>
+      <p class="issue">
+         Issue (message-document): What should happen if exsl:document occurs inside <a href="http://www.w3.org/TR/xslt#element-message" class="offsite"><code>xsl:message</code></a>?
+      </p>
+      <p>
+         When a root node is copied with <a href="http://www.w3.org/TR/xslt#element-copy" class="offsite"><code>xsl:copy</code></a> or <a href="http://www.w3.org/TR/xslt#element-copy-of" class="offsite"><code>xsl:copy-of</code></a>, the subsidiary documents associated with the document of which it is the root node are copied and added to the set of subsidiary documents associated with the current result document. Copying a subsidiary document copies its subsidiary documents recursively.
+      </p>
+      <p>
+         Output conceptually follows the construction of the main result document and any subsidiary documents. The XSLT processor outputs the main result document and its associated subsidiary documents; when the XSLT processor outputs a subsidiary document it also recursively outputs its associated subsidiary documents. Apart from this, no other subsidiary documents are output. A subsidiary document associated with the document created by a variable-binding element with content is not output; only copies created by the copying of the root node of that document are ever output.
+      </p>
+      <p>
+         For each document that is output, there is an absolute URI that can, in the appropriate circumstances, be used to access that document. Call this the output URI of the document. The output URI of the main result document is system-dependent, typically specified when the XSLT processor is invoked. When the <code>href</code> attribute of a subsidiary document is an absolute URI, then that absolute URI serves as the output URI. When the <code>href</code> attribute of a subsidiary document is a relative URI, the relative URI is resolved into an absolute URI only if and when the subsidiary document is output. The output URI of the document with which the subsidiary document is associated (ie the output URI of its parent in the tree of documents) is used as the base URI. The resulting absolute URI is used as the output URI of the subsidiary document.
+      </p>
+      <p class="note">
+         NOTE: The output URI of a document is not dependent on the base URI of the root node of the document.
+      </p>
+      <p>
+         It is an error if the set of documents to be output as the result of a single XSLT transformation (that is, the main result document and its subsidiary documents recursively) contain two documents with the same output URI.
+      </p>
+   </html:div>
+</exslt:doc>
+
+<exslt:definition xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <!-- enter the content model and attributes for the element using XML Schema;
+        use xs:element/@ref and xs:attribute/@ref to specify elements and 
+        attributes; use xs:group/@ref and xs:attributeGroup/@ref to point to 
+        XSLT model groups -->
+   <xs:sequence>
+      <xs:group ref="xsl:template" />
+   </xs:sequence>
+   <xs:attribute name="href" type="xsl:uri-reference" use="required">
+      <xs:annotation>
+         <xs:appinfo><exslt:avt /></xs:appinfo>
+      </xs:annotation>
+   </xs:attribute>
+   <xs:attribute name="method">
+      <xs:annotation>
+         <xs:appinfo><exslt:avt /></xs:appinfo>
+      </xs:annotation>
+      <xs:simpleType>
+         <xs:union memberTypes="xsl:qname-but-not-ncname">
+            <xs:simpleType>
+               <xs:restriction base="xs:NMTOKEN">
+                  <xs:enumeration value="xml" />
+                  <xs:enumeration value="html" />
+                  <xs:enumeration value="text" />
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:union>
+      </xs:simpleType>
+   </xs:attribute>
+   <xs:attribute name="version" type="xsl:nmtoken">
+      <xs:annotation>
+         <xs:appinfo><exslt:avt /></xs:appinfo>
+      </xs:annotation>
+   </xs:attribute>
+   <xs:attribute name="encoding" type="xs:string">
+      <xs:annotation>
+         <xs:appinfo><exslt:avt /></xs:appinfo>
+      </xs:annotation>
+   </xs:attribute>
+   <xs:attribute name="omit-xml-declaration">
+      <xs:annotation>
+         <xs:appinfo><exslt:avt /></xs:appinfo>
+      </xs:annotation>
+      <xs:simpleType>
+         <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="yes" />
+            <xs:enumeration value="no" />
+         </xs:restriction>
+      </xs:simpleType>
+   </xs:attribute>
+   <xs:attribute name="standalone">
+      <xs:annotation>
+         <xs:appinfo><exslt:avt /></xs:appinfo>
+      </xs:annotation>
+      <xs:simpleType>
+         <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="yes" />
+            <xs:enumeration value="no" />
+         </xs:restriction>
+      </xs:simpleType>
+   </xs:attribute>
+   <xs:attribute name="doctype-public" type="xs:string">
+      <xs:annotation>
+         <xs:appinfo><exslt:avt /></xs:appinfo>
+      </xs:annotation>
+   </xs:attribute>
+   <xs:attribute name="doctype-system" type="xs:string">
+      <xs:annotation>
+         <xs:appinfo><exslt:avt /></xs:appinfo>
+      </xs:annotation>
+   </xs:attribute>
+   <xs:attribute name="cdata-section-elements" type="xsl:qnames">
+      <xs:annotation>
+         <xs:appinfo><exslt:avt /></xs:appinfo>
+      </xs:annotation>
+   </xs:attribute>
+   <xs:attribute name="indent">
+      <xs:annotation>
+         <xs:appinfo><exslt:avt /></xs:appinfo>
+      </xs:annotation>
+      <xs:simpleType>
+         <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="yes" />
+            <xs:enumeration value="no" />
+         </xs:restriction>
+      </xs:simpleType>
+   </xs:attribute>
+   <xs:attribute name="media-type" type="xs:string">
+      <xs:annotation>
+         <xs:appinfo><exslt:avt /></xs:appinfo>
+      </xs:annotation>
+   </xs:attribute>
+</exslt:definition>
+
+<exslt:implementations>
+   <exslt:vendor-implementation
+           version="1"
+           vendor="libxslt from Daniel Veillard; implementation by Thomas Broyer"
+           vendor-url="http://xmlsoft.org/XSLT/"
+           vendor-version="1.0.19" />
+</exslt:implementations>
+
+<exslt:use-cases>
+   <!-- enter any use cases; see
+        http://www.exslt.org/submissions/use-case-template.xml -->
+</exslt:use-cases>
+
+</exslt:element>

@@ -1,0 +1,178 @@
+WARC/1.0
+WARC-Type: warcinfo
+Content-Type: application/warc-fields
+WARC-Date: 2013-08-02T18:56:55Z
+WARC-Record-ID: <urn:uuid:c6f5b7c3-e95e-49ef-8243-2edc27dd1003>
+WARC-Filename: test.warc
+WARC-Block-Digest: sha1:KXMAVBLFEKNUF2DEEAXLY2Z76AEYD5IO
+Content-Length: 290
+
+software: Wget/1.14 (linux-gnu)
+format: WARC File Format 1.0
+conformsTo: http://bibnum.bnf.fr/WARC/WARC_ISO_28500_version1_latestdraft.pdf
+robots: classic
+wget-arguments: "--mirror" "--page-requisites" "--warc-file=test" "--no-warc-compression" "http://www.boycottmellenpress.com/" 
+
+
+
+WARC/1.0
+WARC-Type: request
+WARC-Target-URI: http://www.boycottmellenpress.com/
+Content-Type: application/http;msgtype=request
+WARC-Date: 2013-08-02T18:56:55Z
+WARC-Record-ID: <urn:uuid:28cbbf00-6b02-48b8-8a7b-621a620969e1>
+WARC-IP-Address: 50.23.239.98
+WARC-Warcinfo-ID: <urn:uuid:c6f5b7c3-e95e-49ef-8243-2edc27dd1003>
+WARC-Block-Digest: sha1:QR775IO5R263VLKHSLCKM5QQPHW4RE2G
+Content-Length: 124
+
+GET / HTTP/1.1
+User-Agent: Wget/1.14 (linux-gnu)
+Accept: */*
+Host: www.boycottmellenpress.com
+Connection: Keep-Alive
+
+
+
+WARC/1.0
+WARC-Type: response
+WARC-Record-ID: <urn:uuid:a0c92c50-f2b3-48c3-8694-c6e51bb88766>
+WARC-Warcinfo-ID: <urn:uuid:c6f5b7c3-e95e-49ef-8243-2edc27dd1003>
+WARC-Concurrent-To: <urn:uuid:28cbbf00-6b02-48b8-8a7b-621a620969e1>
+WARC-Target-URI: http://www.boycottmellenpress.com/
+WARC-Date: 2013-08-02T18:56:55Z
+WARC-IP-Address: 50.23.239.98
+WARC-Block-Digest: sha1:JZMJ2LYTDCZ5CAXDY7LI7RJ57I2EXD6K
+WARC-Payload-Digest: sha1:PP6HSHOIZJL47D2UMVB4ZCK3QC7CUVJM
+Content-Type: application/http;msgtype=response
+Content-Length: 3282
+
+HTTP/1.1 200 OK
+Date: Fri, 02 Aug 2013 18:56:55 GMT
+Server: Apache
+Last-Modified: Wed, 12 Jun 2013 18:41:15 GMT
+ETag: "39947c5-bbc-4def95bc988c0"
+Accept-Ranges: bytes
+Content-Length: 3004
+Keep-Alive: timeout=2, max=100
+Connection: Keep-Alive
+Content-Type: text/html
+
+<!DOCTYPE html>
+<html class=no-js manifest=a.appcache>
+  <head>
+    <title>Boycott Edwin Mellen Press</title>
+    <meta name=description content="Boycott Edwin Mellen Press">
+    <meta name=viewport content="width=device-width">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Gentium+Book+Basic' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+      body {
+        -webkit-font-smoothing: antialiased;
+        padding-top: 2.5%; 
+        padding-right: 15%;
+        padding-left: 15%;
+        padding-bottom: 10%;
+        text-align: center;
+        background: #EF4723;
+        color: #222;
+        min-height: 100%;
+      }
+      h1 {
+        text-transform: uppercase; 
+        margin: 0 0 32px 0;
+        text-align: center;
+        font: 800 128px/128px "open sans";
+      }
+      h2 {
+        text-transform: uppercase;
+        font: 800 48px/48px "open sans";
+      }
+      p {
+        text-align: center;
+        font: 400 18px/18px "gentium book basic";
+      }
+      a, a:visited { 
+        color: #eee;
+      }
+    </style>
+  </head>
+    <body>
+      <h2>Are we still boycotting</h2>
+      <h2>Edwin Mellen Press?</h2>
+      <h1>YES</h1>
+      <h2>Why?</h2>
+      <p>The continued reprehensible behaviour by Edwin Mellen Press and Herbert Richardson: <a href="http://scienceblogs.com/confessions/2013/02/09/publisher-hits-new-low-suing-librarian-for-criticizing-their-books" target="blank">the lawsuits against Dale Askey</a>, <a href="http://scholarlykitchen.sspnet.org/2013/03/29/posts-removed-because-weve-received-letters-from-edwin-mellen-press-attorney/" target="_blank">threats against The Scholarly Kitchen</a>, and <a href="http://www.thedigitalshift.com/2013/03/roy-tennant-digital-libraries/the-strange-case-of-edwin-mellen-press/" target="_blank">the registration of domain names using Dale Askey's name</a>.</p>
+      <p>This behaviour is an affront to freedom of expression, academic freedom, and scholarship in general.</p>
+      <p>There are plenty of options are available for constructive dialogue with critics, and customers. Lawsuits, take down notices, and registering domain names of lawsuit opponents, are definitely not the best choices.</p>
+      <!--Uhh, also, Nazis. For serious! http://www.wgrz.com/news/article/217153/37/Official-Announcement-On-Discovery-Of-Nazi-Diary-Due-Thursday -->
+      <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-2879197-23']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+      </script>
+    </body>
+  </html>
+
+
+WARC/1.0
+WARC-Type: resource
+WARC-Record-ID: <urn:uuid:473c826c-88a8-4ec2-85b0-ba1864dd262f>
+WARC-Warcinfo-ID: <urn:uuid:c6f5b7c3-e95e-49ef-8243-2edc27dd1003>
+WARC-Target-URI: metadata://gnu.org/software/wget/warc/MANIFEST.txt
+WARC-Date: 2013-08-02T18:56:55Z
+WARC-Block-Digest: sha1:B3E6INU3IGAN2QPIYK4RD2GVFTBON7LC
+Content-Type: text/plain
+Content-Length: 48
+
+<urn:uuid:c6f5b7c3-e95e-49ef-8243-2edc27dd1003>
+
+
+WARC/1.0
+WARC-Type: resource
+WARC-Record-ID: <urn:uuid:473c826c-88a8-4ec2-85b0-ba1864dd262f>
+WARC-Warcinfo-ID: <urn:uuid:c6f5b7c3-e95e-49ef-8243-2edc27dd1003>
+WARC-Target-URI: metadata://gnu.org/software/wget/warc/wget_arguments.txt
+WARC-Date: 2013-08-02T18:56:55Z
+WARC-Block-Digest: sha1:ASJRQZDJVEMYR73OBMKVK24JQBFD6SY3
+Content-Type: text/plain
+Content-Length: 112
+
+"--mirror" "--page-requisites" "--warc-file=test" "--no-warc-compression" "http://www.boycottmellenpress.com/" 
+
+
+WARC/1.0
+WARC-Type: resource
+WARC-Record-ID: <urn:uuid:1a199c89-57ea-453c-bd00-c29d130ccb69>
+WARC-Warcinfo-ID: <urn:uuid:c6f5b7c3-e95e-49ef-8243-2edc27dd1003>
+WARC-Concurrent-To: <urn:uuid:473c826c-88a8-4ec2-85b0-ba1864dd262f>
+WARC-Target-URI: metadata://gnu.org/software/wget/warc/wget.log
+WARC-Date: 2013-08-02T18:56:55Z
+WARC-Block-Digest: sha1:BKDZ3T4O65RGWRM6CC2NWIPVKVFCSAM7
+Content-Type: text/plain
+Content-Length: 691
+
+Opening WARC file ‘test.warc’.
+
+--2013-08-02 14:56:55--  http://www.boycottmellenpress.com/
+Resolving www.boycottmellenpress.com (www.boycottmellenpress.com)... 50.23.239.98
+Connecting to www.boycottmellenpress.com (www.boycottmellenpress.com)|50.23.239.98|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 3004 (2.9K) [text/html]
+Saving to: ‘www.boycottmellenpress.com/index.html’
+
+     0K ..                                                    100%  386M=0s
+
+2013-08-02 14:56:55 (386 MB/s) - ‘www.boycottmellenpress.com/index.html’ saved [3004/3004]
+
+FINISHED --2013-08-02 14:56:55--
+Total wall clock time: 0.3s
+Downloaded: 1 files, 2.9K in 0s (386 MB/s)
+
+

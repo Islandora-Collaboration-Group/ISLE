@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<exslt:function xmlns:exslt="http://exslt.org/documentation" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:vcf="http://www.ietf.org/internet-drafts/draft-dawson-vcard-xml-dtd-03.txt" version="1" module="regexp" status="new">
+   <exslt:name>match</exslt:name>
+   <rdf:Description ID="regexp:match">
+      <dc:subject>EXSLT</dc:subject>
+      <dc:subject>regexp</dc:subject>
+      <dc:subject>match</dc:subject>
+      <exslt:revision>
+         <rdf:Description ID="regexp:match.1">
+            <exslt:version>1</exslt:version>
+            <dc:creator rdf:parseType="Resource">
+               <vcf:fn>Chris Bayes</vcf:fn>
+               <vcf:email>chris@bayes.co.uk</vcf:email>
+               <vcf:url>http://www.bayes.co.uk</vcf:url>
+            </dc:creator>
+            <dc:date>2001-06-24</dc:date>
+            <dc:description>
+               <html:div>
+                  <html:p>Returns the nodes that match a regular expression.</html:p>
+               </html:div>
+            </dc:description>
+         </rdf:Description>
+      </exslt:revision>
+      <exslt:revision>
+         <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                          xmlns:dc="http://purl.org/dc/elements/1.1/"
+                          ID="regexp:match.1.1">
+            <exslt:version>1.1</exslt:version>
+            <dc:creator email="craig.stewart@nottingham.ac.uk" 
+                        url="">Craig Stewart</dc:creator>
+            <dc:date>2002-08-20</dc:date>
+            <dc:description xmlns="http://www.w3.org/1999/xhtml">Added 4XSLT implementation to the list.</dc:description>
+         </rdf:Description>
+      </exslt:revision>
+      <exslt:revision>
+         <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                          xmlns:dc="http://purl.org/dc/elements/1.1/"
+                          ID="regexp:match.1.2">
+            <exslt:version>1.2</exslt:version>
+            <dc:creator email="craig.stewart@nottingham.ac.uk" 
+                        url="">Craig Stewart</dc:creator>
+            <dc:date>2002-11-12</dc:date>
+            <dc:description xmlns="http://www.w3.org/1999/xhtml">Updated 4XSLT version to 0.12.0a3.</dc:description>
+         </rdf:Description>
+      </exslt:revision>
+   </rdf:Description>
+   <exslt:doc>
+      <html:div>
+         <html:p>
+         The <html:code>regexp:match</html:code> function lets you get hold of the substrings of the string passed as the first argument that match the captured parts of the regular expression passed as the second argument.
+      </html:p>
+         <html:p>
+         The second argument is a regular expression that follows the Javascript regular expression syntax.
+      </html:p>
+         <html:p>
+         The third argument is a string consisting of character flags to be used by the match.  If a character is present then that flag is true.  The flags are:
+      </html:p>
+         <html:ul>
+            <html:li>
+               <html:code>g</html:code>: global match - the submatches from all the matches in the string are returned.  If this character is not present, then only the submatches from the first match in the string are returned.</html:li>
+            <html:li>
+               <html:code>i</html:code>: case insensitive - the regular expression is treated as case insensitive.  If this character is not present, then the regular expression is case sensitive.</html:li>
+         </html:ul>
+         <html:p>
+         The <html:code>regexp:match</html:code> function returns a node set of <html:code>match</html:code> elements, each of whose string value is equal to a portion of the first argument string that was captured by the regular expression.  If the match is not global, the first match element has a value equal to the portion of the string matched by the entire regular expression.
+      </html:p>
+         <html:p>
+         The following example illustrates a non-global match:
+      </html:p>
+         <html:pre>
+&lt;xsl:for-each select="regExp:match('http://www.bayes.co.uk/xml/index.xml?/xml/utils/rechecker.xml', 
+                                   '(\w+):\/\/([^/:]+)(:\d*)?([^# ]*)')"&gt;
+   Part &lt;xsl:value-of select="position()" /&gt; = &lt;xsl:value-of select="." /&gt;
+&lt;/xsl:for-each&gt;
+      </html:pre>
+         <html:p>
+         Gives the following result:
+      </html:p>
+         <html:pre>
+Part 1 = http://www.bayes.co.uk/xml/index.xml?/xml/utils/rechecker.xml
+Part 2 = http
+Part 3 = www.bayes.co.uk
+Part 4 =
+Part 5 = /xml/index.xml?/xml/utils/rechecker.xml
+      </html:pre>
+         <html:p>
+         The following example illustrates a global match:
+      </html:p>
+         <html:pre>
+&lt;xsl:for-each select="regExp:match('This is a test string', '(\w+)', 'g'"&gt;
+   Part &lt;xsl:value-of select="position()" /&gt; = &lt;xsl:value-of select="." /&gt;
+&lt;/xsl:for-each&gt;
+      </html:pre>
+         <html:p>
+         Gives the following result:
+      </html:p>
+         <html:pre>
+Part 1 = This
+Part 2 = is
+Part 3 = a
+Part 4 = test
+Part 5 = string
+      </html:pre>
+         <html:p>
+         The following example illustrates another global match:
+      </html:p>
+         <html:pre>
+&lt;xsl:for-each select="regExp:match('This is a test string', '([a-z])+ ', 'g')"&gt;
+   Part &lt;xsl:value-of select="position()" /&gt; = &lt;xsl:value-of select="." /&gt;
+&lt;/xsl:for-each&gt;
+      </html:pre>
+         <html:p>
+         Gives the following result:
+      </html:p>
+         <html:pre>
+Part 1 = his
+Part 2 = is
+Part 3 = a
+Part 4 = test
+      </html:pre>
+         <html:p>
+         The following example illustrates a global, case-insensitive match:
+      </html:p>
+         <html:pre>
+&lt;xsl:for-each select="regExp:match('This is a test string', '([a-z])+ ', 'gi')"&gt;
+   Part &lt;xsl:value-of select="position()" /&gt; = &lt;xsl:value-of select="." /&gt;
+&lt;/xsl:for-each&gt;
+      </html:pre>
+         <html:p>
+         Gives the following result:
+      </html:p>
+         <html:pre>
+Part 1 = This
+Part 2 = is
+Part 3 = a
+Part 4 = test
+      </html:pre>
+      </html:div>
+   </exslt:doc>
+   <exslt:definition>
+      <exslt:return type="object">
+         <html:div/>
+      </exslt:return>
+      <exslt:arg name="string" type="string" default="''" optional="no">
+         <html:div/>
+      </exslt:arg>
+      <exslt:arg name="regExp" type="string" default="''" optional="no">
+         <html:div/>
+      </exslt:arg>
+      <exslt:arg name="flags" type="string" default="''" optional="yes">
+         <html:div/>
+      </exslt:arg>
+   </exslt:definition>
+   <exslt:implementations>
+      <exslt:vendor-implementation
+              version="1"
+              vendor="4XSLT, from 4Suite."
+              vendor-url="http://4Suite.org"
+              vendor-version="0.12.0a3" />
+      <exslt:implementation src="regexp.match.js" language="exslt:javascript" version="1">
+         <rdf:Description ID="regexp:match.exslt:javascript">
+            <dc:subject>EXSLT</dc:subject>
+            <dc:subject>regexp</dc:subject>
+            <dc:subject>match</dc:subject>
+            <dc:subject>exslt:javascript</dc:subject>
+            <exslt:revision>
+               <rdf:Description ID="regexp:match.exslt:javascript.1">
+                  <exslt:version>1</exslt:version>
+                  <dc:creator rdf:parseType="Resource">
+                     <vcf:fn>Chris Bayes</vcf:fn>
+                     <vcf:email>chris@bayes.co.uk</vcf:email>
+                     <vcf:url>http://www.bayes.co.uk</vcf:url>
+                  </dc:creator>
+                  <dc:date>2001-06-24</dc:date>
+               </rdf:Description>
+            </exslt:revision>
+         </rdf:Description>
+      </exslt:implementation>
+      <exslt:implementation src="regexp.match.msxsl.xsl" language="exslt:msxsl" version="1">
+         <rdf:Description ID="regexp:match.exslt:msxsl">
+            <dc:subject>EXSLT</dc:subject>
+            <dc:subject>regexp</dc:subject>
+            <dc:subject>match</dc:subject>
+            <dc:subject>exslt:msxsl</dc:subject>
+            <exslt:revision>
+               <rdf:Description ID="regexp:match.exslt:msxsl.1">
+                  <exslt:version>1</exslt:version>
+                  <dc:creator rdf:parseType="Resource">
+                     <vcf:fn>Chris Bayes</vcf:fn>
+                     <vcf:email>chris@bayes.co.uk</vcf:email>
+                     <vcf:url>http://www.bayes.co.uk</vcf:url>
+                  </dc:creator>
+                  <dc:date>2001-06-24</dc:date>
+               </rdf:Description>
+            </exslt:revision>
+         </rdf:Description>
+      </exslt:implementation>
+   </exslt:implementations>
+   <exslt:use-cases>
+      <exslt:use-case type="example" xslt="regexp.match.1.xsl" data="regexp.match.data.1.xml" result="regexp.match.result.1.xml">
+         <rdf:Description ID="regexp:match.use-case">
+            <dc:subject>EXSLT</dc:subject>
+            <dc:subject>regexp</dc:subject>
+            <dc:subject>match</dc:subject>
+            <dc:subject>example</dc:subject>
+            <exslt:revision>
+               <rdf:Description ID="regexp:match.use-case.1">
+                  <exslt:version/>
+                  <dc:creator rdf:parseType="Resource">
+                     <vcf:fn>Chris Bayes</vcf:fn>
+                     <vcf:email>chris@bayes.co.uk</vcf:email>
+                     <vcf:url>http://www.bayes.co.uk</vcf:url>
+                  </dc:creator>
+                  <dc:date>2001-06-24</dc:date>
+               </rdf:Description>
+            </exslt:revision>
+         </rdf:Description>
+      </exslt:use-case>
+   </exslt:use-cases>
+</exslt:function>

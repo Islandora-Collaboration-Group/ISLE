@@ -1,0 +1,10 @@
+name = "Islandora Disk Image Solution Pack"
+description = "A default Islandora module to handle disk images"
+dependencies[] = islandora
+dependencies[] = imagemagick
+package = Islandora Solution Packs
+version = 7.x-dev
+core = 7.x
+configure = admin/islandora/solution_pack_config/disk_image
+stylesheets[all][] = css/islandora_disk_image.theme.css
+files[] = tests/islandora_disk_image_ingest_purge.test

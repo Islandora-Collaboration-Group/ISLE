@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<exslt:function xmlns:exslt="http://exslt.org/documentation" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:vcf="http://www.ietf.org/internet-drafts/draft-dawson-vcard-xml-dtd-03.txt" version="1" module="random" status="implemented">
+   <exslt:name>random-sequence</exslt:name>
+   <rdf:Description ID="random:random-sequence">
+      <dc:subject>EXSLT</dc:subject>
+      <dc:subject>random-sequence</dc:subject>
+      <dc:subject>random</dc:subject>
+      <dc:subject>random number</dc:subject>
+      <exslt:revision>
+         <rdf:Description ID="random:random-sequence.1">
+            <exslt:version>1</exslt:version>
+            <dc:creator rdf:parseType="Resource">
+               <vcf:fn>James Fuller</vcf:fn>
+               <vcf:email>jim.fuller@ruminate.co.uk</vcf:email>
+               <vcf:url>http://www.ruminate.co.uk</vcf:url>
+            </dc:creator>
+            <dc:date>2003-10-10</dc:date>
+            <dc:description>
+               <dc:description>
+                  <html:div>The <html:code>random:random-sequence</html:code> function returns a sequence of random numbers between 0 and 1.</html:div>
+               </dc:description>
+            </dc:description>
+         </rdf:Description>
+      </exslt:revision>
+   </rdf:Description>
+   <exslt:doc>
+      <html:div>
+         <html:p>
+            The random:random-sequence function returns a sequence of random numbers between 0 and 1. 
+         </html:p>
+         <html:p>
+            function usage
+         </html:p>
+         <html:pre><![CDATA[
+      <xsl:call-template name="random:random-sequence">
+         <xsl:with-param name="numberOfItems" select="number" />
+         <xsl:with-param name="seed" select="number" />
+      </xsl:call-template>]]></html:pre>
+         <html:p>
+            You may supply the function with an arguement that defines the number of random numbers to generate, with the default value of 1. A seed number maybe provided to the function, with a default value directly related to the current time.
+         </html:p>
+      </html:div>
+   </exslt:doc>
+   <exslt:definition>
+      <exslt:return type="number+" />
+ 
+      <exslt:arg name="numberOfItems" 
+           type="number" 
+           default="1"
+           optional="yes" />
+           
+      <exslt:arg name="seed" 
+           type="number" 
+           default="current-time()"
+           optional="yes" />           
+   </exslt:definition>
+</exslt:function>

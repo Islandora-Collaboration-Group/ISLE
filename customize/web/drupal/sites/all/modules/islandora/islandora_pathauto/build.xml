@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="islandora_solution_pack_pdf" default="build">
+  <target name="build" depends="lint" />
+  <target name="lint" description="Perform syntax check of sourcecode files">
+    <apply executable="php" failonerror="true">
+      <arg value="-l" />
+
+      <fileset dir="${basedir}">
+        <include name="**/*.php" />
+        <include name="**/*.inc" />
+        <include name="**/*.module" />
+        <include name="**/*.install" />
+        <include name="**/*.test" />
+        <modified />
+      </fileset>
+    </apply>
+  </target>
+</project>

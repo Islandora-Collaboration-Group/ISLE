@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * Implements hook_views_api().
+ */
+function datepicker_views_views_api() {
+  return array(
+    'api' => 3,
+  );
+}
+
+/**
+ * Implements hook_views_data_alter().
+ */
+function datepicker_views_views_data_alter(&$data) {
+  $tables = date_views_base_tables();
+  foreach ($tables as $base_table => $entity) {
+    // The flexible date filter.
+    $data[$base_table]['date_filter']['filter']['handler'] = 'datepicker_views_filter_handler';
+  }
+}

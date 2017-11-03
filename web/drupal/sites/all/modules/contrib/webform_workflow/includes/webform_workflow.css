@@ -1,0 +1,97 @@
+/**
+ * @file
+ * CSS for the Webform Workflow module.
+ */
+
+.webform-workflow-state-permissions .form-item {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+/* The form used for changing the state of a submission */
+.webform-workflow-submission-state-form .form-item,
+.webform-workflow-submission-state-form .form-actions {
+  margin: 0 10px 0 0;
+  padding: 5px 0;
+}
+.webform-workflow-submission-state-form #edit-current-state,
+.webform-workflow-submission-state-form .form-item-new-state {
+  display: inline-block;
+  margin-right: 20px;
+  vertical-align: top;
+}
+.webform-workflow-submission-state-form .form-item-new-state {
+  margin-right: 0;
+}
+
+/* The <blockquote> containing the log message for a state change */
+.webform-workflow-log-message {
+  margin: 0 10px;
+  padding: 0 10px;
+  border-left: 2px solid #CCC;
+}
+
+/* State colors */
+.webform-workflow-state-color-options {
+  margin: 5px 0;
+}
+.webform-workflow-state-color-options li {
+  cursor: pointer;
+  display: inline-block;
+  list-style-type: none;
+  margin: 0 10px 5px 0;
+}
+.webform-workflow-state-color-options li:last-child {
+  margin-right: 0;
+}
+.webform-workflow-state-color-options .selected {
+  outline: 1px dashed #555;
+}
+.webform-workflow-state-label {
+  border: 1px solid transparent;
+  border-radius: 3px;
+  display: inline-block;
+  max-width: 200px;
+  overflow: hidden;
+  padding: 3px 5px;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.webform-workflow-state-color-none {
+  border: 1px solid #CCC;
+}
+.webform-workflow-state-color-amber {
+  background-color: #FF7E00;
+  color: #FFF;
+}
+.webform-workflow-state-color-blue {
+  background-color: #00C;
+  color: #FFF;
+}
+.webform-workflow-state-color-green {
+  background-color: #0B0;
+  color: #FFF;
+}
+.webform-workflow-state-color-purple {
+  background-color: #93C;
+  color: #FFF;
+}
+.webform-workflow-state-color-red {
+  background-color: #C00;
+  color: #FFF;
+}
+.webform-workflow-state-color-yellow {
+  background-color: #FF0;
+  color: #000;
+}
+
+.webform-workflow-state,
+.webform-workflow-state-select {
+  font-size: larger;
+}
+.webform-workflow-state-select .webform-workflow-state-color-none {
+  background-color: #FFF;
+  border: none;
+  color: #000;
+}

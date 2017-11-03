@@ -1,0 +1,63 @@
+<?php
+
+/**
+ * @file
+ * Objective Utils test case
+ */
+
+class ObjectiveUtilsTestCase extends DrupalUnitTestCase {
+
+  /**
+   * Get Test info.
+   *
+   * @return array
+   *   Properties that are displayed in the test selection form.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Unit Tests for Utility functions.',
+      'description' => 'Unit tests for Utils.inc.',
+      'group' => 'Objective Forms',
+    );
+  }
+
+  /**
+   * SetUp() performs any pre-requisite tasks that need to happen.
+   */
+  public function setUp() {
+    // Enable any modules required for the test.
+    parent::setUp('objective_forms');
+    module_load_include('inc', 'objective_forms', 'Utils');
+  }
+
+  /**
+   * Test constructing the Form definition.
+   */
+  public function testConstructiogFormDefinition() {
+    $form = array(
+      '#title' => 'root',
+      'first' => array(
+        '#title' => 'first',
+        'second' => array(
+          '#title' => 'second',
+          '#hash' => 2,
+        ),
+        '#hash' => 1,
+      ),
+      'third' => array(
+        '#title' => 'third',
+        '#hash' => 3,
+      ),
+      '#hash' => 0,
+    );
+    $element = &find_element($form, 0);
+    $this->assertIdentical($element, $form);
+    $element = &find_element($form, 1);
+    $this->assertEqual($element, $form['first']);
+    $element = &find_element($form, 2);
+    $this->assertIdentical($element, $form['first']['second']);
+    $element = &find_element($form, 3);
+    $this->assertIdentical($element, $form['third']);
+  }
+
+}

@@ -1,0 +1,6 @@
+name = Islandora XSLT Populator
+description = "Populator plugin to allow the addition of populators using XSLT transforms."
+package = Islandora
+dependencies[] = islandora_populator
+version = 7.x-dev
+core = 7.x

@@ -1,0 +1,66 @@
+/**
+ * @file
+ * Styles for rendering grids/lists of objects.
+ */
+
+div.islandora-objects > div {
+  overflow: hidden;
+  margin: 0 auto;
+  width: 100%;
+  display: inline-block;
+}
+
+/* img styling (max-width) - Setting a max width to ensure a thumbnails width
+ * does not exceed that of its parent container (ex: 20%).
+ *
+ * img styling (max-height) - Avoid making assumptions on max height here, allowing auto
+ * height based on max-width of 100%. Consider overriding this file in your theme,
+ * or adding your own CSS to address a maximum thumbnail height.
+ */
+.islandora-object img {
+  max-width: 100%;
+}
+
+.islandora-objects-list-item {
+  clear: both;
+  width: 100%;
+}
+
+.islandora-objects-list-item dl dt {
+  clear: left;
+  float: left;
+  padding: 3px 0 0;
+  text-align: center;
+  width: 100px;
+}
+
+.islandora-objects-list-item dl dd {
+  margin: 0 0 0 130px;
+}
+
+/*Grid - Displays grid using dl formatted inline */
+.islandora-objects-grid dl {
+  width: 20%;
+  min-width: 100px;
+  min-height: 180px;
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: top;
+  margin: 1.5em 1.84%;
+  zoom: 1;
+  *display: inline;
+  _height: 180px;
+}
+
+.islandora-objects-grid-item {
+  display: inline;
+}
+
+.islandora-objects-grid dd {
+  margin: 0;
+  padding: 0;
+}
+
+.islandora-objects-display-switch {
+  float: right;
+}

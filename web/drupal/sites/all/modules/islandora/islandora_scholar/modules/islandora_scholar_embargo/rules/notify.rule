@@ -1,0 +1,11 @@
+{ "islandora_scholar_embargo_datastreams_lift_expired_embargo" : {
+    "LABEL" : "islandora_scholar_embargo_datastreams_lift_expired_embargo",
+    "PLUGIN" : "reaction rule",
+    "OWNER" : "rules",
+    "REQUIRES" : [ "islandora_scholar_embargo" ],
+    "ON" : { "islandora_scholar_datastreams_embargo_expired" : [] },
+    "DO" : [
+      { "islandora_scholar_embargo_lift_embargo" : { "object" : [ "object" ], "datastream" : [ "datastreams" ] } }
+    ]
+  }
+}

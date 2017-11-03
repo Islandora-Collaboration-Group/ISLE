@@ -1,0 +1,83 @@
+
+TODO:
+=====
+
+Highest priority
+----------------
+
+- create confirmation dialog for reset button, because Jason.
+
+
+High priority
+-------------
+
+- js improvements:
+http://wunderroot.com/blog/parentsiblingstimlost/2012-11-29
+http://drupal.stackexchange.com/questions/50216/how-to-trigger-a-form-and-pass-variables-to-form-state-with-jquery/53063#53063
+
+- rewrite the way we do BuildAndExecuteQuery.
+  $query = new IslandoraSolrQueryProcessor();
+  $query->solrLimit = $limit;
+  $query->solrStart = $start;
+  $query->solrQuery = restore_slashes($query); // do restore slashes internally
+  $query->solrParams = $params; // split this out.
+  $query->executeQuery();
+
+- based on Solr version, use edismax by default for simple search.
+- create import/export functionality
+
+- bug when reordering field and then clicking configure
+- but when changing solr url and then using the autocomplete.
+- throw warning if adding a sort field isn't sortable
+
+- some bugs in modal dialog resizing (facets)
+- clean up table headers
+- create doxygen code + wrapper doxygen
+- clean up code (run through coder)
+
+- when populating fields, if a solr field has a label in another field, maybe the default label can be the one already filled out? If the current one is empty still?
+- pressing 'enter' on 'add field' results in errors and no js callback
+
+- make labels translatable: http://drupal.org/node/1114010
+
+- we could save us some code by storing the primary display settings in a DB table
+- add luke check for date fields (breaks if not)
+- more user friendly controls + advanced option
+- don't prepopulate advanced search field if dropdown does not equal the solr field in url
+
+- port from D6 to D7:
+-- limit search results (block)
+-- look for details (permissions, string handling, css, etc..)
+-- rss feed + config
+
+- update README.txt
+
+Normal Priority
+---------------
+
+- rename 'solr_field_settings' to 'settings'
+- clean up IslandoraSolrResults.
+- use libraries module for flot
+- Facet settings: add checkbox to display facet as a separate block. Can be nice for sliders to display in the content top or bottom.
+- improve settings display. add little icon with settings in tooltip? misc/message-16-help.png
+- add ability to add permission callback or permission id to solr display profiles
+- add a check to see if the context is the search results page. Currently we
+check if IslandoraSolrQueryProcessor::display is set, which is not ideal.
+- update hook_help functions
+- add a parameter to the luke function to return a single document.
+- check if spaces could be replaced by + or %20 , which would simplify some functions (splitting strings)
+http://archive.apache.org/dist/lucene/solr/ref-guide/
+- don't hardcode php solr library, instead override it.
+- add ajax_command_changed() to the vertical tabs to show something has changed.
+- add watchdog messages on error.
+- some snippets of markup could go in theme functions
+
+Low Priority
+------------
+
+- tabledrag should update the table with ajax.
+- hook_alter instead of module invoke all for object manipulation
+- provide integration with display suite
+- Boolean operators as query seem to choke
+
+- when changing primary display, keep &limit in the url or should it show the default? Displays can override this though.

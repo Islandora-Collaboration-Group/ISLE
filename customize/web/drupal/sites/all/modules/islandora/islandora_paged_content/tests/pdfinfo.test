@@ -1,0 +1,68 @@
+<?php
+
+/**
+ * @file
+ * Unit tests for tools extracting PDF into paged content and individual pages.
+ */
+
+class PDFInfoTestCase extends DrupalWebTestCase {
+
+  /**
+   * Gets info to display to describe this test.
+   *
+   * @see DrupalUnitTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'PDFInfo Unit Tests',
+      'description' => 'Ensure that wrapper functions for pdfinfo work correctly.',
+      'group' => 'Islandora Paged Content',
+    );
+  }
+
+  /**
+   * Sets up the requirements for this test.
+   *
+   * @see DrupalUnitTestCase::setUp()
+   */
+  public function setUp() {
+    module_load_include('inc', 'islandora_paged_content', 'includes/utilities');
+    parent::setUp('islandora_paged_content');
+  }
+
+  /**
+   * Test that pdfinfo is available.
+   */
+  public function testPDFInfoExistence() {
+    $pdf_info = islandora_paged_content_pdfinfo_availability();
+    if (!$pdf_info) {
+      $this->fail('Valid version of pdfinfo was not found.');
+    }
+    else {
+      $this->pass('Valid version of pdfinfo was found.');
+    }
+  }
+
+  /**
+   * Test that PDFs have the correct number of pages.
+   */
+  public function testPDFInfoNumberOfPages() {
+    $test_pdf_1 = drupal_get_path('module', 'islandora_paged_content') . '/tests/fixtures/2010.08.25_McGill_Librarians.pdf';
+    $test_pdf_2 = drupal_get_path('module', 'islandora_paged_content') . '/tests/fixtures/arl-carl-statement-supporting-askey-mcmaster-final.pdf';
+
+    $num_of_pages_1 = islandora_paged_content_length_of_pdf($test_pdf_1);
+
+    $this->assertEqual($num_of_pages_1, 12, 'First test PDF returned the correct number of pages (12)');
+    $num_of_pages_2 = islandora_paged_content_length_of_pdf($test_pdf_2);
+    $this->assertEqual($num_of_pages_2, 1, 'Second test PDF returned the correct number of pages (1)');
+  }
+
+  /**
+   * Test that a non-valid URI returns FALSE.
+   */
+  public function testPDFInfoNonValidURI() {
+    $test_pdf = "temporary://totally_doesnt_exist.pdf";
+    $num_pages = islandora_paged_content_length_of_pdf($test_pdf);
+    $this->assertFalse($num_pages, 'No page count was returned for a non-existent PDF.');
+  }
+}

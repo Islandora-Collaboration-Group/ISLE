@@ -1,0 +1,152 @@
+@import "../../shared-imports/vars";
+
+.jwplayer.jw-flag-ads {
+    .jw-preview,
+    .jw-logo,
+    .jw-captions.jw-captions-enabled,
+    .jw-nextup-container,
+    .jw-autostart-mute,
+    .jw-text-duration,
+    .jw-text-elapsed {
+        display: none;
+    }
+
+    /* captions styles code specific to native text track rendering */
+    video::-webkit-media-text-track-container {
+        display: none;
+    }
+
+    &.jw-flag-small-player {
+        .jw-display-icon-rewind,
+        .jw-display-icon-next,
+        .jw-display-icon-display {
+            display: none;
+        }
+
+        &.jw-state-buffering .jw-display-icon-display {
+            display: inline-block;
+        }
+    }
+
+    .jw-controlbar {
+        flex-wrap: wrap-reverse;
+
+        .jw-slider-time {
+            height: auto;
+            padding: 0;
+            pointer-events: none;
+
+            .jw-slider-container {
+                height: @slider-fixed-rail-height;
+            }
+
+            .jw-rail,
+            .jw-knob,
+            .jw-buffer,
+            .jw-cue,
+            .jw-icon-settings {
+                display: none;
+            }
+
+            .jw-progress {
+                transform: none;
+                top: auto;
+            }
+        }
+
+        .jw-tooltip,
+        .jw-icon-tooltip:not(.jw-icon-volume),
+        .jw-icon-inline:not(.jw-icon-playback):not(.jw-icon-fullscreen):not(.jw-icon-volume) {
+            display: none;
+        }
+
+        .jw-volume-tip {
+            padding: @slider-fixed-knob-height 0;
+        }
+
+        .jw-text-alt {
+            display: flex;
+        }
+    }
+
+    // Control bar should always be visible during ad playback on touch devices
+    // except when jw-flag-ads-vpaid is set
+    &.jw-flag-ads.jw-state-playing.jw-flag-touch:not(.jw-flag-ads-vpaid) {
+        &,
+        &.jw-flag-autostart {
+            .jw-controls .jw-controlbar {
+                display: flex;
+                pointer-events: all;
+                visibility: visible;
+                opacity: 1;
+            }
+
+            &.jw-flag-user-inactive .jw-controls-backdrop {
+                opacity: 1;
+                // Change gradient height with background-size
+                background-size: 100% 60px;
+            }
+        }
+    }
+
+    .jw-nextup-container {
+        bottom: @mobile-touch-target;
+    }
+
+    .jw-icon,
+    .jw-slider-horizontal {
+        pointer-events: all;
+    }
+}
+
+.jwplayer.jw-flag-ads-googleima {
+    &.jw-flag-touch {
+        .jw-controlbar {
+            font-size: 1em;
+        }
+
+        .jw-display-icon-display,
+        .jw-display-icon-display .jw-icon-display {
+            pointer-events: none;
+        }
+    }
+
+    &.jw-flag-small-player {
+        .jw-controlbar .jw-icon {
+            height: 30px;
+        }
+
+        .jw-icon-fullscreen {
+            display: none;
+        }
+    }
+}
+
+.jwplayer.jw-flag-ads-vpaid,
+.jwplayer.jw-flag-touch.jw-flag-ads-vpaid {
+    .jw-display-container,
+    .jw-skip {
+        display: none;
+    }
+}
+
+.jwplayer.jw-flag-ads-vpaid {
+    &.jw-flag-small-player {
+        .jw-controls {
+            background: none;
+
+            &::after {
+                content: none;
+            }
+        }
+    }
+}
+
+.jwplayer.jw-flag-ads-hide-controls {
+    .jw-controls-backdrop,
+    .jw-controls {
+        /* Important is required to controls are never displayed */
+        /* stylelint-disable-next-line declaration-no-important */
+        display: none !important;
+    }
+}

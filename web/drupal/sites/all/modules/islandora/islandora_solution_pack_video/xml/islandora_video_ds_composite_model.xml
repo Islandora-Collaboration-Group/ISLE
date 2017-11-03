@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<dsCompositeModel xmlns="info:fedora/fedora-system:def/dsCompositeModel#">
+  <dsTypeModel ID="DC">
+    <form FORMAT_URI="http://www.openarchives.org/OAI/2.0/oai_dc/" MIME="application/xml"/>
+  </dsTypeModel>
+  <dsTypeModel ID="RELS-EXT" optional="true">
+    <form FORMAT_URI="info:fedora/fedora-system:FedoraRELSExt-1.0" MIME="application/rdf+xml"/>
+  </dsTypeModel>
+  <dsTypeModel ID="RELS-INT" optional="true">
+    <form FORMAT_URI="info:fedora/fedora-system:FedoraRELSInt-1.0" MIME="application/rdf+xml"/>
+  </dsTypeModel>
+  <dsTypeModel ID="MODS" optional="true">
+    <form FORMAT_URI="http://www.loc.gov/mods/v3" MIME="application/xml"/>
+  </dsTypeModel>
+  <dsTypeModel ID="OBJ" optional="true">
+    <form MIME="video/mp4"/>
+    <form MIME="video/quicktime"/>
+    <form MIME="video/m4v"/>
+    <form MIME="video/x-matroska"/>
+    <form MIME="video/ogg"/>
+    <form MIME="video/x-msvideo"/>
+    <form MIME="video/avi"/>
+  </dsTypeModel>
+  <dsTypeModel ID="TECHMD">
+    <form MIME="application/xml"/>
+  </dsTypeModel>
+  <dsTypeModel ID="TN" optional="false">
+    <form MIME="image/jpeg"/>
+    <form MIME="image/png"/>
+    <form MIME="image/gif"/>
+  </dsTypeModel>
+  <dsTypeModel ID="OGG" optional="false">
+    <form MIME="video/ogg"/>
+  </dsTypeModel>
+  <dsTypeModel ID="MKV" optional="false">
+    <form MIME="video/x-matroska"/>
+  </dsTypeModel>
+  <dsTypeModel ID="TECHMD_FITS" optional="false">
+    <form MIME="application/xml"/>
+  </dsTypeModel>
+  <dsTypeModel ID="MP4" optional="false">
+    <form MIME="video/mp4"/>
+  </dsTypeModel>
+</dsCompositeModel>

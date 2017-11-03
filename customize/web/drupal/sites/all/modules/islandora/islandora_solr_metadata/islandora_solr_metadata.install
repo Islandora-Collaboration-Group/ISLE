@@ -1,0 +1,256 @@
+<?php
+
+/**
+ * @file
+ * Implementations of installation hooks.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function islandora_solr_metadata_schema() {
+  $schema['islandora_solr_metadata_associations'] = array(
+    'description' => 'Table that stores saved configuration names.',
+    'fields' => array(
+      'configuration_id' => array(
+        'description' => 'Unique ID given to each association',
+        'type' => 'serial',
+        'length' => 11,
+        'not null' => TRUE,
+      ),
+      'configuration_name' => array(
+        'description' => 'The name of the configuration which this field belongs to',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'description_field' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+        'description' => 'The field name as indexed in Solr to be used for displaying description metadata',
+      ),
+      'description_label' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'The label for the description metadata',
+        'default' => NULL,
+      ),
+      'description_data' => array(
+        'type' => 'blob',
+        'not null' => FALSE,
+        'size' => 'big',
+        'serialize' => TRUE,
+        'description' => 'A serialized array of name value pairs that store extra description field settings.',
+      ),
+      'machine_name' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'description' => 'The machine readable name for this association',
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('configuration_id'),
+  );
+  $schema['islandora_solr_metadata_fields'] = array(
+    'description' => 'Table that stores Islandora Solr Metadata field settings.',
+    'fields' => array(
+      'configuration_id' => array(
+        'type' => 'int',
+        'length' => 11,
+        'not null' => TRUE,
+        'description' => 'The ID of the configuration which this field belongs to',
+      ),
+      'solr_field' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'The field name as indexed in Solr',
+      ),
+      'data' => array(
+        'type' => 'blob',
+        'not null' => FALSE,
+        'size' => 'big',
+        'serialize' => TRUE,
+        'description' => 'A serialized array of name value pairs that store permissions field settings.',
+      ),
+      'weight' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Weight of the field within field type.',
+      ),
+    ),
+    'primary key' => array('configuration_id', 'solr_field'),
+  );
+  $schema['islandora_solr_metadata_cmodels'] = array(
+    'description' => 'Table that stores content models associated to configurations',
+    'fields' => array(
+      'configuration_id' => array(
+        'type' => 'int',
+        'length' => 11,
+        'not null' => TRUE,
+        'description' => 'The ID of the configuration which this field belongs to',
+      ),
+      'cmodel' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'The name of the content model assigned to this configuration',
+      ),
+    ),
+    'primary_key' => array('configuration_id', 'cmodel'),
+  );
+  return $schema;
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_solr_metadata_uninstall() {
+  $variables = array(
+    'islandora_solr_metadata_omit_empty_values',
+    'islandora_solr_metadata_dedup_values',
+    'islandora_solr_metadata_field_value_separator',
+  );
+  array_walk($variables, 'variable_del');
+}
+
+/**
+ * Add the hyperlink column to the database going forward.
+ */
+function islandora_solr_metadata_update_7100() {
+  db_add_field('islandora_solr_metadata_fields', 'hyperlink', array(
+    'type' => 'int',
+    'size' => 'tiny',
+    'not null' => TRUE,
+    'default' => 0,
+  ));
+}
+
+/**
+ * Add additional columns needed to give new configuration options.
+ */
+function islandora_solr_metadata_update_7101() {
+  db_add_field('islandora_solr_metadata_fields', 'permissions', array(
+    'type' => 'blob',
+    'not null' => FALSE,
+    'size' => 'big',
+    'serialize' => TRUE,
+    'description' => 'A serialized array of name value pairs that store permissions field settings.',
+  ));
+  db_add_field('islandora_solr_metadata_fields', 'date_format', array(
+    'type' => 'varchar',
+    'length' => 255,
+    'not null' => FALSE,
+    'description' => 'The PHP date format used for dates.',
+  ));
+  db_add_field('islandora_solr_metadata_fields', 'structured_data', array(
+    'type' => 'blob',
+    'not null' => FALSE,
+    'size' => 'big',
+    'serialize' => TRUE,
+    'description' => 'A serialized array containing a namespace, prefix and value to be used for marking up data for SEO.',
+  ));
+}
+
+/**
+ * Move columns into new blob.
+ */
+function islandora_solr_metadata_update_7102() {
+  $transaction = db_transaction();
+  db_add_field('islandora_solr_metadata_fields', 'data', array(
+    'type' => 'blob',
+    'not null' => FALSE,
+    'size' => 'big',
+    'serialize' => TRUE,
+    'description' => 'Serialized associative array with misc display parameters.',
+  ));
+  $fields_to_remove = drupal_map_assoc(array(
+      'display_label',
+      'hyperlink',
+      'date_format',
+      'permissions',
+      'structured_data',
+  ));
+  $results = db_select('islandora_solr_metadata_fields', 'f')
+    ->fields('f')
+    ->execute();
+  while ($result = $results->fetchAssoc()) {
+    db_update('islandora_solr_metadata_fields')
+      ->fields(array('data' => serialize(array_intersect_key($result, $fields_to_remove))))
+      ->condition('configuration_id', $result['configuration_id'])
+      ->condition('solr_field', $result['solr_field'])
+      ->execute();
+  }
+  foreach ($fields_to_remove as $field) {
+    db_drop_field('islandora_solr_metadata_fields', $field);
+  }
+}
+
+/**
+ * Create a new input format to use for filtering.
+ */
+function islandora_solr_metadata_update_7103() {
+  $t = get_t();
+  $format = filter_format_load('filtered_html');
+  $format->format = 'islandora_solr_metadata_filtered_html';
+  $format->name = $t('Islandora Solr Metadata Filtered HTML');
+  $format->filters = filter_list_format('filtered_html');
+  foreach ($format->filters as $key => $filter) {
+    $format->filters[$key] = (array) $filter;
+  }
+  $to_exist = array(
+    '<a>',
+    '<span>',
+  );
+  $tags = $format->filters['filter_html']['settings']['allowed_html'];
+  foreach ($to_exist as $add) {
+    if (strpos($tags, $add) === FALSE) {
+      $tags .= " $add";
+    }
+  }
+
+  $format->filters['filter_html']['settings']['allowed_html'] = $tags;
+  filter_format_save($format);
+}
+
+/**
+ * Create a new storage field to use for description truncation.
+ */
+function islandora_solr_metadata_update_7104() {
+  db_add_field('islandora_solr_metadata_associations', 'description_data', array(
+    'type' => 'blob',
+    'not null' => FALSE,
+    'size' => 'big',
+    'serialize' => TRUE,
+    'description' => 'A serialized array of name value pairs that store extra description field settings.',
+  ));
+}
+
+/**
+ * Implements hook_install().
+ */
+function islandora_solr_metadata_install() {
+  $t = get_t();
+  $format = filter_format_load('filtered_html');
+  $format->format = 'islandora_solr_metadata_filtered_html';
+  $format->name = $t('Islandora Solr Metadata Filtered HTML');
+  $format->filters = filter_list_format('filtered_html');
+  foreach ($format->filters as $key => $filter) {
+    $format->filters[$key] = (array) $filter;
+  }
+  $to_exist = array(
+    '<a>',
+    '<span>',
+  );
+  $tags = $format->filters['filter_html']['settings']['allowed_html'];
+  foreach ($to_exist as $add) {
+    if (strpos($tags, $add) === FALSE) {
+      $tags .= " $add";
+    }
+  }
+
+  $format->filters['filter_html']['settings']['allowed_html'] = $tags;
+  filter_format_save($format);
+}

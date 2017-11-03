@@ -1,0 +1,54 @@
+/* Base style sheet for islandora solr */
+
+
+/* solr results wrapper elements */
+
+#islandora-solr-top
+{
+  min-height: 25px;
+}
+
+/* Secondary display profiles */
+ul#secondary-display-profiles
+{
+  float:right;
+  margin: 0px 0px 0px 0px;
+}
+
+.item-list ul#secondary-display-profiles li
+{
+  display: inline-block;
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+  background-image: none;
+}
+
+
+/* facets */
+
+.block ul.islandora-solr-facet {
+  padding: 0 0 0 1em;
+}
+
+/* hide the 2nd list if a facet list is split in two */
+.islandora-solr-facet.hidden
+{
+  display: none;
+}
+
+.plusminus
+{
+  float: right;
+}
+
+
+/* advanced search block */
+
+#islandora-solr-advanced-search-form div.form-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+#islandora-solr-advanced-search-form div.form-item-islandora-solr-allow-preserve-filters {
+  display: block;
+}

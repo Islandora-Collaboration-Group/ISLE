@@ -1,0 +1,407 @@
+<?php
+
+/**
+ * @file
+ * Installation/upgrade hooks.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_xacml_api_uninstall() {
+  $variables = array(
+    'islandora_xacml_api_save_relationships',
+    'islandora_xacml_api_rels_viewable_role',
+    'islandora_xacml_api_rels_viewable_user',
+  );
+  array_walk($variables, 'variable_del');
+}
+
+/**
+ * Fix "inheritXacmlFrom" literals to be URIs.
+ */
+function islandora_xacml_api_update_7100(&$sandbox) {
+  drupal_load('module', 'islandora');
+  $tuque = islandora_get_tuque_connection();
+  $pred = 'inheritXacmlFrom';
+
+  $query = <<<EOQ
+SELECT DISTINCT ?object
+FROM <#ri>
+WHERE {
+  ?object <fedora-rels-ext:$pred> ?parent
+  FILTER (IsLITERAL(?parent))
+}
+
+EOQ;
+
+  if (!isset($sandbox['total'])) {
+    $sandbox['progress'] = 0;
+    $sandbox['total'] = $tuque->repository->ri->countQuery($query, 'sparql');
+    if ($sandbox['total'] == 0) {
+      // Nothing to process.
+      $sandbox['#finished'] = 1;
+      return t('Nothing to fix.');
+    }
+    $sandbox['result_stash'] = array();
+  }
+
+  if (empty($sandbox['result_stash'])) {
+    $offset = 100;
+    $limited_query = $query . <<<EOQ
+LIMIT $offset
+EOQ;
+
+    $sandbox['result_stash'] = $tuque->repository->ri->sparqlQuery($limited_query);
+    if (empty($sandbox['result_stash'])) {
+      // Ran out of items early?
+      $sandbox['#finished'] = 1;
+      return t('Updated @count PID(s) and ran out of items early... Somebody manually updated a document?', array(
+        '@count' => $sandbox['total'],
+      ));
+    }
+  }
+
+  $result = array_pop($sandbox['result_stash']);
+  $updating_pid = $result['object']['value'];
+  $object_to_update = islandora_object_load($updating_pid);
+  $rels = $object_to_update->relationships;
+  $xacml_parents = array_merge($rels->get(ISLANDORA_RELS_EXT_URI, $pred), $rels->get(FEDORA_RELS_EXT_URI, $pred));
+  $xacml_parent = reset($xacml_parents);
+  if ($xacml_parent) {
+    $rels->autoCommit = FALSE;
+    $rels->remove(FEDORA_RELS_EXT_URI, $pred);
+    $rels->remove(ISLANDORA_RELS_EXT_URI, $pred);
+    $rels->add(ISLANDORA_RELS_EXT_URI, $pred, $xacml_parent['object']['value'], RELS_TYPE_URI);
+    $rels->commitRelationships();
+    watchdog('islandora_xacml_api', 'Converted deprecated "@pred" literal to currently-supported URI for @pid.', array(
+      '@pred' => $pred,
+      '@pid' => $updating_pid,
+    ));
+  }
+  else {
+    // Should never be able to get here really... Somebody else is running
+    // this at the same time?
+    watchdog('islandora_xacml_api', 'Selected @pid to update "@pred" literal, but was missing relationships when we checked!?', array(
+      '@pred' => $pred,
+      '@pid' => $object_to_update->id,
+    ));
+  }
+
+  $sandbox['progress'] = min($sandbox['total'], $sandbox['progress'] + 1);
+  $sandbox['#finished'] = $sandbox['progress'] / $sandbox['total'];
+  if ($sandbox['#finished'] >= 1) {
+    return t('Updated @count PID(s).', array(
+      '@count' => $sandbox['total'],
+    ));
+  }
+}
+
+/**
+ * Ensure RELS-EXT/-INT relationships are present.
+ *
+ * @see https://jira.duraspace.org/browse/ISLANDORA-1183
+ */
+function islandora_xacml_api_update_7102(&$sandbox) {
+  if (!variable_get('islandora_xacml_api_save_relationships', TRUE)) {
+    return t('Relationships are disabled, nothing to do.');
+  }
+
+  drupal_set_message(t('Please run the islandora_xacml_api_relationships_update_batch drush command.'));
+  return t('Please run the islandora_xacml_api_relationships_update_batch drush command.');
+}
+
+/**
+ * Remove superfluous relationship from the RELS-INT in the RELS-EXT namespace.
+ *
+ * @see https://jira.duraspace.org/browse/ISLANDORA-1273
+ */
+function islandora_xacml_api_update_7103(&$sandbox) {
+  if (!variable_get('islandora_xacml_api_save_relationships', TRUE)) {
+    return t('Relationships are disabled, nothing to do.');
+  }
+  drupal_load('module', 'islandora');
+  $tuque = islandora_get_tuque_connection();
+  $rels_ext_uri = ISLANDORA_RELS_EXT_URI;
+
+  $query = <<<EOQ
+SELECT DISTINCT ?ds FROM <#ri> WHERE {
+  {
+    {
+      ?ds <{$rels_ext_uri}isManageableByRole> ?role
+    }
+    UNION {
+      ?ds <{$rels_ext_uri}isManageableByUser> ?user
+    }
+  }
+  ?obj <fedora-view:disseminates> ?ds
+}
+EOQ;
+
+  if (!isset($sandbox['total'])) {
+    $sandbox['progress'] = 0;
+    $sandbox['total'] = $tuque->repository->ri->countQuery($query, 'sparql');
+    if ($sandbox['total'] == 0) {
+      // Nothing to process.
+      $sandbox['#finished'] = 1;
+      return t('Nothing to fix.');
+    }
+    $sandbox['result_stash'] = array();
+  }
+
+  if (empty($sandbox['result_stash'])) {
+    $offset = 100;
+    $limited_query = $query . <<<EOQ
+LIMIT $offset
+EOQ;
+
+    $sandbox['result_stash'] = $tuque->repository->ri->sparqlQuery($limited_query);
+    if (empty($sandbox['result_stash'])) {
+      // Ran out of items early?
+      $sandbox['#finished'] = 1;
+      return t('Updated @count PID(s) and ran out of items early... Somebody manually updated a document?', array(
+        '@count' => $sandbox['total'],
+      ));
+    }
+  }
+
+  $result = array_pop($sandbox['result_stash']);
+  $datastream_uri = $result['ds']['value'];
+
+  $parts = explode('/', $datastream_uri);
+  $pid = $parts[0];
+  $ds = $parts[1];
+  $object_to_update = islandora_object_load($pid);
+
+  // Add temp ds to existing update because if the hook fails,
+  // it's still pending.
+  if (!isset($object_to_update[$ds])) {
+    $temp_ds = $object_to_update->constructDatastream($ds);
+  }
+  else {
+    $temp_ds = $object_to_update[$ds];
+  }
+
+  $manageable_by_user = 'isManageableByUser';
+  $manageable_by_role = 'isManageableByRole';
+  $temp_ds->relationships->remove(ISLANDORA_RELS_EXT_URI, $manageable_by_user);
+  $temp_ds->relationships->remove(ISLANDORA_RELS_EXT_URI, $manageable_by_role);
+  watchdog('islandora_xacml_api', 'Removed superfluous RELS-INT (RELS-EXT NS) relationship for @pid on the @ds datastream.', array(
+    '@pid' => $pid,
+    '@ds' => $ds,
+  ));
+
+  $sandbox['progress'] = min($sandbox['total'], $sandbox['progress'] + 1);
+  $sandbox['#finished'] = $sandbox['progress'] / $sandbox['total'];
+  if ($sandbox['#finished'] >= 1) {
+    return t('Updated @count PID(s).', array(
+      '@count' => $sandbox['total'],
+    ));
+  }
+}
+
+/**
+ * Remove superfluous relationship from the RELS-INT in the RELS-INT namespace.
+ *
+ * @see https://jira.duraspace.org/browse/ISLANDORA-1273
+ */
+function islandora_xacml_api_update_7104(&$sandbox) {
+  if (!variable_get('islandora_xacml_api_save_relationships', TRUE)) {
+    return t('Relationships are disabled, nothing to do.');
+  }
+  drupal_load('module', 'islandora');
+  $tuque = islandora_get_tuque_connection();
+  $rels_int_uri = ISLANDORA_RELS_INT_URI;
+
+  $query = <<<EOQ
+SELECT DISTINCT ?ds FROM <#ri> WHERE {
+  {
+    {
+      ?ds <{$rels_int_uri}isManageableByRole> ?role
+    }
+    UNION {
+      ?ds <{$rels_int_uri}isManageableByUser> ?user
+    }
+  }
+  ?obj <fedora-view:disseminates> ?ds
+}
+EOQ;
+
+  if (!isset($sandbox['total'])) {
+    $sandbox['progress'] = 0;
+    $sandbox['total'] = $tuque->repository->ri->countQuery($query, 'sparql');
+    if ($sandbox['total'] == 0) {
+      // Nothing to process.
+      $sandbox['#finished'] = 1;
+      return t('Nothing to fix.');
+    }
+    $sandbox['result_stash'] = array();
+  }
+
+  if (empty($sandbox['result_stash'])) {
+    $offset = 100;
+    $limited_query = $query . <<<EOQ
+LIMIT $offset
+EOQ;
+
+    $sandbox['result_stash'] = $tuque->repository->ri->sparqlQuery($limited_query);
+    if (empty($sandbox['result_stash'])) {
+      // Ran out of items early?
+      $sandbox['#finished'] = 1;
+      return t('Updated @count PID(s) and ran out of items early... Somebody manually updated a document?', array(
+        '@count' => $sandbox['total'],
+      ));
+    }
+  }
+
+  $result = array_pop($sandbox['result_stash']);
+  $datastream_uri = $result['ds']['value'];
+
+  $parts = explode('/', $datastream_uri);
+  $pid = $parts[0];
+  $ds = $parts[1];
+  $object_to_update = islandora_object_load($pid);
+
+  if (!isset($object_to_update[$ds])) {
+    $temp_ds = $object_to_update->constructDatastream($ds);
+  }
+  else {
+    $temp_ds = $object_to_update[$ds];
+  }
+
+  $manageable_by_user = 'isManageableByUser';
+  $manageable_by_role = 'isManageableByRole';
+  $temp_ds->relationships->remove(ISLANDORA_RELS_INT_URI, $manageable_by_user);
+  $temp_ds->relationships->remove(ISLANDORA_RELS_INT_URI, $manageable_by_role);
+  watchdog('islandora_xacml_api', 'Removed superfluous RELS-INT (RELS-INT NS) relationship for @pid on the @ds datastream.', array(
+    '@pid' => $pid,
+    '@ds' => $ds,
+  ));
+
+  $sandbox['progress'] = min($sandbox['total'], $sandbox['progress'] + 1);
+  $sandbox['#finished'] = $sandbox['progress'] / $sandbox['total'];
+  if ($sandbox['#finished'] >= 1) {
+    return t('Updated @count PID(s).', array(
+      '@count' => $sandbox['total'],
+    ));
+  }
+}
+
+/**
+ * Remove superfluous relationships from the RELS-INT DS.
+ *
+ * Removes from both RELS-EXT and RELS-INT namespace and
+ * whether or not the datastream exists.
+ *
+ * Force tuque connection to user 1 incase of xacml.
+ *
+ * @see https://jira.duraspace.org/browse/ISLANDORA-1273
+ */
+function islandora_xacml_api_update_7105(&$sandbox) {
+  if (!variable_get('islandora_xacml_api_save_relationships', TRUE)) {
+    return t('Relationships are disabled, nothing to do.');
+  }
+  drupal_load('module', 'islandora');
+  drupal_static_reset('islandora_get_tuque_connection');
+  $user = user_load(1);
+  $tuque = islandora_get_tuque_connection($user);
+  $rels_int_uri = ISLANDORA_RELS_INT_URI;
+  $rels_ext_uri = ISLANDORA_RELS_EXT_URI;
+
+  $query = <<<EOQ
+SELECT DISTINCT ?ds FROM <#ri> WHERE {
+  {
+    {
+      ?ds <{$rels_int_uri}isManageableByRole> ?role
+    }
+    UNION {
+      ?ds <{$rels_int_uri}isManageableByUser> ?user
+    }
+    UNION {
+      ?ds <{$rels_ext_uri}isManageableByRole> ?user
+    }
+    UNION {
+      ?ds <{$rels_ext_uri}isManageableByUser> ?user
+    }
+    OPTIONAL {
+      ?ds <fedora-model:hasModel> ?model
+    }
+  }
+  FILTER (!bound(?model))
+}
+EOQ;
+
+  if (!isset($sandbox['total'])) {
+    $sandbox['progress'] = 0;
+    $sandbox['total'] = $tuque->repository->ri->countQuery($query, 'sparql');
+    if ($sandbox['total'] == 0) {
+      // Nothing to process.
+      $sandbox['#finished'] = 1;
+      return t('Nothing to fix.');
+    }
+    $sandbox['result_stash'] = array();
+  }
+
+  if (empty($sandbox['result_stash'])) {
+    $offset = 100;
+    $limited_query = $query . <<<EOQ
+LIMIT $offset
+EOQ;
+
+    $sandbox['result_stash'] = $tuque->repository->ri->sparqlQuery($limited_query);
+    if (empty($sandbox['result_stash'])) {
+      // Ran out of items early?
+      $sandbox['#finished'] = 1;
+      return t('Updated @count PID(s) and ran out of items early... Somebody manually updated a document?', array(
+        '@count' => $sandbox['total'],
+      ));
+    }
+  }
+
+  $result = array_pop($sandbox['result_stash']);
+  $datastream_uri = $result['ds']['value'];
+
+  $parts = explode('/', $datastream_uri);
+  $pid = $parts[0];
+  $ds = $parts[1];
+  $object_to_update = islandora_object_load($pid);
+
+  if (!isset($object_to_update[$ds])) {
+    $temp_ds = $object_to_update->constructDatastream($ds);
+  }
+  else {
+    $temp_ds = $object_to_update[$ds];
+  }
+
+  $manageable_by_user = 'isManageableByUser';
+  $manageable_by_role = 'isManageableByRole';
+  $temp_ds->relationships->remove(ISLANDORA_RELS_EXT_URI, $manageable_by_user);
+  $temp_ds->relationships->remove(ISLANDORA_RELS_EXT_URI, $manageable_by_role);
+  $temp_ds->relationships->remove(ISLANDORA_RELS_INT_URI, $manageable_by_user);
+  $temp_ds->relationships->remove(ISLANDORA_RELS_INT_URI, $manageable_by_role);
+  watchdog('islandora_xacml_api', 'Removed superfluous RELS-INT relationship for @pid on the @ds datastream.', array(
+    '@pid' => $pid,
+    '@ds' => $ds,
+  ));
+
+  $sandbox['progress'] = min($sandbox['total'], $sandbox['progress'] + 1);
+  $sandbox['#finished'] = $sandbox['progress'] / $sandbox['total'];
+  if ($sandbox['#finished'] >= 1) {
+    return t('Updated @count PID(s).', array(
+      '@count' => $sandbox['total'],
+    ));
+  }
+}
+
+/**
+ * Ensure RELS-INT relationships are present.
+ *
+ * @see https://jira.duraspace.org/browse/ISLANDORA-2067
+ */
+function islandora_xacml_api_update_7106(&$sandbox) {
+  if (!variable_get('islandora_xacml_api_save_relationships', TRUE)) {
+    return t('Relationships are disabled, if they were previously enabled it may be prudent to temporarily re-enable and run the isalndora-xacml-api-relationships-missing-rels-int-batch command to ensure consistency.');
+  }
+  drupal_set_message(t('Please run the islandora-xacml-api-relationships-missing-rels-int-batch drush command.'));
+  return t('Please run the islandora-xacml-api-relationships-missing-rels-int-batch command.');
+}

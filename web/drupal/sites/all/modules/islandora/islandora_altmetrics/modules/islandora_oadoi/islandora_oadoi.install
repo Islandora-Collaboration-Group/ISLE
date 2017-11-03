@@ -1,0 +1,15 @@
+<?php
+/**
+ * @file
+ * Installation hooks for oaDOI badges.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_oadoi_uninstall() {
+  $vars = array(
+    islandora_oadoi_linktext,
+  );
+  array_walk($vars, 'variable_del');
+}

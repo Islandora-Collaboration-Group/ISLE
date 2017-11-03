@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * @file
+ * Attempts to create and remove a randomly generated image collection
+ */
+
+class IslandoraBasicCollectionIngestTestCase extends IslandoraCollectionWebTestCase {
+
+  /**
+   * Get test information.
+   *
+   * @see IslandoraWebTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Basic Collection Ingest/Purge',
+      'description' => 'Creates and deletes a randomly generated collection',
+      'group' => 'Islandora Basic Collection',
+    );
+  }
+
+  /**
+   * Set up the test environment.
+   *
+   * @see IslandoraWebTestCase::setUp()
+   */
+  public function setUp() {
+    parent::setUp(array(
+      'islandora',
+      'islandora_basic_collection',
+      'xml_form_builder',
+    ));
+  }
+
+  /**
+   * Creates an administrative user and attempts to ingest a test image.
+   */
+  public function testIngestPurgeBasicCollection() {
+    // Log in.
+    $user = $this->drupalCreateUser(array_keys(module_invoke_all('permission')));
+    $this->drupalLogin($user);
+
+    // Add a collection.
+    $label = $this->randomName(16);
+    $pid = 'islandora:' . $this->randomName();
+    $this->drupalPost('islandora/object/islandora:root/manage/overview/ingest', array('pid' => $pid), 'Next');
+    $this->drupalPost(NULL, array('titleInfo[title]' => $label), 'Ingest');
+
+    // Check if we made a collection correctly.
+    $object = islandora_object_load($pid);
+    $this->assertTrue($object, "Collection '$pid' was created.", 'Islandora');
+  }
+}

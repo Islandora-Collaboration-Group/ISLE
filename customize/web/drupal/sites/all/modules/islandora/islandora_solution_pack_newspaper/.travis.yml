@@ -1,0 +1,69 @@
+sudo: required
+dist: trusty
+language: php
+
+matrix:
+  include:
+   #5.3.3 Ubuntu Precise exceptions
+    - php: 5.3.3
+      dist: precise
+      env: FEDORA_VERSION="3.5"
+    - php: 5.3.3
+      dist: precise
+      env: FEDORA_VERSION="3.6.2"
+    - php: 5.3.3
+      dist: precise
+      env: FEDORA_VERSION="3.7.0"
+    - php: 5.3.3
+      dist: precise
+      env: FEDORA_VERSION="3.8.1"
+php:
+  - 5.4
+  - 5.5
+  - 5.6
+  - 7.0
+  - 7.1
+env:
+  - FEDORA_VERSION="3.5"
+  - FEDORA_VERSION="3.6.2"
+  - FEDORA_VERSION="3.7.0"
+  - FEDORA_VERSION="3.8.1"
+
+branches:
+  only:
+    - /^7.x/
+before_install:
+  - cd $HOME
+  - git clone -b 7.x git://github.com/Islandora/islandora.git
+  - git clone -b 7.x git://github.com/Islandora/islandora_solution_pack_collection.git
+  - git clone -b 7.x git://github.com/Islandora/islandora_paged_content.git
+  - git clone -b 7.x git://github.com/Islandora/islandora_ocr.git
+  - git clone -b 7.x git://github.com/Islandora/islandora_solution_pack_large_image.git
+  - git clone -b 7.x git://github.com/Islandora/php_lib.git
+  - git clone -b 7.x git://github.com/Islandora/islandora_xml_forms.git
+  - git clone -b 7.x git://github.com/Islandora/objective_forms.git
+  - export ISLANDORA_DIR=$HOME/islandora
+  - $HOME/islandora/tests/scripts/travis_setup.sh
+  - sudo sh $TRAVIS_BUILD_DIR/tests/scripts/adore.sh
+  - sudo sh $TRAVIS_BUILD_DIR/tests/scripts/tesseract.sh
+  - cd $HOME/drupal-*
+  - ln -s $TRAVIS_BUILD_DIR sites/all/modules/islandora_solution_pack_newspaper
+  - ln -s $HOME/islandora_paged_content sites/all/modules/islandora_paged_content
+  - ln -s $HOME/islandora_solution_pack_collection sites/all/modules/islandora_solution_pack_collection
+  - ln -s $HOME/islandora_ocr sites/all/modules/islandora_ocr
+  - ln -s $HOME/islandora_solution_pack_large_image sites/all/modules/islandora_solution_pack_large_image
+  - ln -s $HOME/php_lib sites/all/modules/php_lib
+  - ln -s $HOME/islandora_xml_forms sites/all/modules/islandora_xml_forms
+  - ln -s $HOME/objective_forms sites/all/modules/objective_forms
+  - drush dl imagemagick
+  - drush en --user=1 --yes imagemagick islandora_newspaper islandora_paged_content islandora_basic_collection islandora_ocr xml_form_builder islandora_large_image
+  - drush vset islandora_ocr_tesseract `which tesseract`
+  - drush vset islandora_book_tesseract `which tesseract`
+script:
+  - ant -buildfile sites/all/modules/islandora_solution_pack_newspaper/build.xml lint
+  - $ISLANDORA_DIR/tests/scripts/line_endings.sh sites/all/modules/islandora_solution_pack_newspaper
+  - drush coder-review --reviews=production,security,style,i18n,potx,sniffer islandora_newspaper
+  - phpcpd --names *.module,*.inc,*.test sites/all/modules/islandora_solution_pack_newspaper
+  - php scripts/run-tests.sh --php `phpenv which php` --url http://localhost:8081 --verbose --class IslandoraNewspaperPageIngestTestCase
+notifications:
+  irc: "irc.freenode.org#islandora"

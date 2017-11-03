@@ -1,0 +1,125 @@
+@import "../../shared-imports/vars";
+@import "icons";
+
+.jw-nextup-container {
+    .bottomleft((@mobile-touch-target * 1.5), 0);
+    background-color: transparent;
+    cursor: pointer;
+    margin: 0 auto;
+    padding: 12px;
+    pointer-events: none;
+    right: 0;
+    text-align: right;
+    visibility: hidden;
+    width: 100%;
+
+    .jw-flag-small-player &,
+    .jw-settings-open & {
+        display: none;
+    }
+}
+
+.jw-nextup {
+    background: @nextup-body-background;
+    border-radius: @nextup-border-radius;
+    box-shadow: 0 0 10px fade(@black, 50%);
+    color: @inactive-color;
+    display: inline-block;
+    max-width: 280px;
+    overflow: hidden;
+    opacity: 0;
+    position: relative;
+    width: 64%;
+    pointer-events: all;
+    transform: translate(0, -5px);
+    transition: 150ms @default-timing-function;
+    transition-property: opacity, transform;
+    transition-delay: 0s;
+
+    &:hover .jw-nextup-tooltip {
+        color: @active-color;
+    }
+
+    &.jw-nextup-thumbnail-visible {
+        max-width: 400px;
+
+        .jw-nextup-thumbnail {
+            display: block;
+        }
+    }
+}
+
+.jw-nextup-container-visible {
+    visibility: visible;
+
+    .jw-nextup {
+        opacity: 1;
+        transform: translate(0, 0);
+        transition-delay: 0s, 0s, 150ms;
+    }
+}
+
+.jw-nextup-tooltip {
+    display: flex;
+    height: 80px;
+}
+
+.jw-nextup-thumbnail {
+    width: 120px;
+    background-position: center;
+    background-size: cover;
+    flex: 0 0 auto;
+    display: none;
+}
+
+.jw-nextup-body {
+    flex: 1 1 auto;
+    overflow: hidden;
+    padding: 0.75em 0.875em;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+}
+
+.jw-nextup-header,
+.jw-nextup-title {
+    font-size: 14px;
+    line-height: 1.35;
+}
+
+.jw-nextup-header {
+    font-weight: bold;
+}
+
+.jw-nextup-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.jw-nextup-duration {
+    align-self: flex-end;
+    text-align: right;
+    font-size: 12px;
+}
+
+.jw-nextup-close {
+    &:extend(._topright);
+    .square(24px);
+    border: none;
+    color: @inactive-color;
+    cursor: pointer;
+    margin: 6px;
+    visibility: hidden;
+
+    &:hover {
+        color: @active-color;
+    }
+}
+
+.jw-nextup-sticky {
+    .jw-nextup-close {
+        visibility: visible;
+    }
+}

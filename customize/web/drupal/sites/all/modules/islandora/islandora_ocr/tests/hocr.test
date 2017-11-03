@@ -1,0 +1,108 @@
+<?php
+
+/**
+ * @file
+ * Unit test for the HOCR class.
+ */
+
+/**
+ * HOCR unit tests.
+ */
+class HOCRUnitTestCase extends DrupalWebTestCase {
+
+  /**
+   * Gets info to display to describe this test.
+   *
+   * @see DrupalWebTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'HOCR class Unit Tests',
+      'description' => 'Ensure that HOCR parsing works.',
+      'group' => 'Islandora OCR',
+    );
+  }
+
+  /**
+   * Sets up the requirements for this test.
+   *
+   * @see DrupalWebTestCase::setUp()
+   */
+  public function setUp() {
+    parent::setUp('islandora_ocr');
+  }
+
+  /**
+   * Test finding word coordinates and information.
+   */
+  public function testHOCR() {
+    // Test invalid arguments throw exceptions.
+    try {
+      $file = drupal_get_path('module', 'islandora_ocr') . '/tests/fixtures/test.tif';
+      $hocr = new HOCR($file);
+      $this->fail('InvalidArgumentException not thrown when invalid file parameter given.');
+    }
+    catch (InvalidArgumentException $e) {
+      $this->pass('InvalidArgumentException thrown when invalid file parameter given.');
+    }
+    // Test correct arguments do not throw.
+    try {
+      $file = drupal_get_path('module', 'islandora_ocr') . '/tests/fixtures/test.tif.html';
+      $file = drupal_realpath($file);
+      $hocr = new HOCR($file);
+      $this->pass('No exception thrown when valid file parameter given.');
+    }
+    catch (Exception $e) {
+      $this->fail('Exception thrown when valid file parameter given. ' . $file);
+    }
+    // Expecting count(//*[text()='the' or text()='The']) == 9
+    $results = $hocr->search('ThE');
+    $this->assertEqual(count($results), 9, 'Default search was case-insensitive; search for "ThE" returned expected number of results');
+    $filter = function ($o) {
+      return $o['class'] != 'ocrx_word';
+    };
+    $classes = array_filter($results, $filter);
+    $this->assertEqual(count($classes), 0, 'Default search only returned "ocrx_word" properties for "ThE".');
+    // Expecting count(//*[text()='the']) == 5
+    $results = $hocr->search('the', array('case_sensitive' => TRUE));
+    $this->assertEqual(count($results), 5, 'Case-sensitive search for "the" returned the expected number of results');
+    // Get the unknown page dimensions returns false.
+    $dimensions = $hocr->getPageDimensions(1);
+    $this->assertFalse($dimensions, 'Get page dimensions returned FALSE for unknown page');
+    // Get the page dimensions.
+    $dimensions = $hocr->getPageDimensions();
+    $this->assertEqual($dimensions, array('width' => 640, 'height' => 480), 'Get page dimensions returned correct value');
+    // Test Phrase matching.
+    $results = $hocr->search('test the', array(
+      'case_sensitive' => TRUE,
+      'match_exact_phrase' => TRUE,
+    ));
+    $this->assertEqual(count($results), 2, 'Searching for match of exact phrase "the test" returned expected number of results');
+    // Test Phrase matching case-insensitive.
+    $results = $hocr->search('tESt tHe', array(
+      'case_sensitive' => FALSE,
+      'match_exact_phrase' => TRUE,
+    ));
+    $this->assertEqual(count($results), 2, 'Searching for match of exact case-insensitive phrase "the test" returned expected number of results');
+    // Test against Phrase matching.
+    $results = $hocr->search('test the', array(
+      'case_sensitive' => TRUE,
+      'match_exact_phrase' => FALSE,
+    ));
+    $this->assertEqual(count($results), 6, 'Test against exact phrase "the test" returned expected number of results');
+    // Test Solr matching.
+    $file = drupal_get_path('module', 'islandora_ocr') . '/tests/fixtures/solr_results.xml';
+    $solr_results = simplexml_load_file($file);
+    $results = $solr_results->xpath("/response/lst[@name='responseHeader']/lst[@name='params']/str");
+    $solr_params = array();
+    foreach ($results as $param) {
+      $solr_params[(string) $param['name']] = (string) $param;
+    }
+    $results = $solr_results->xpath("/response/lst[@name='highlighting']/lst/arr/str");
+    $results = $hocr->search($results, array(
+                 'case_sensitive' => TRUE,
+                 'solr' => $solr_params,
+                 'match_exact_phrase' => FALSE));
+    $this->assertEqual(count($results), 12, 'Solr search for "quick lazy fox" returned expected number of results');
+  }
+}

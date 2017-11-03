@@ -1,0 +1,103 @@
+<?php
+
+/**
+ * @file
+ * Attempts to ingest a video file into a randomly generated video collection.
+ */
+
+class IslandoraVideoAndDerivativesIngestTestCase extends IslandoraCollectionWebTestCase {
+
+  /**
+   * Get test information.
+   *
+   * @see IslandoraWebTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Video Ingest/Purge (With Derivatives)',
+      'description' => 'Ingests and purges a video file from a randomly generated video collection with ffmpeg and ffmpeg2theora derivatives',
+      'group' => 'Islandora Video',
+    );
+  }
+
+  /**
+   * Set up the test environment.
+   *
+   * @see IslandoraWebTestCase::setUp()
+   */
+  public function setUp() {
+    parent::setUp(array(
+      'islandora',
+      'islandora_video',
+      'islandora_basic_collection',
+    ));
+  }
+
+  /**
+   * Creates an administrative user and attempts to ingest a video file.
+   */
+  public function testIngestPurgeVideoAndDerivatives() {
+
+    // Sets up the testing space.
+    $user = $this->drupalCreateUser(array_keys(module_invoke_all('permission')));
+    $this->drupalLogin($user);
+
+    $label = $this->randomName(16);
+    $suffix = $this->randomName(16);
+    $collectionpid = 'islandora:' . $suffix;
+    $this->createTestCollection($label, 'islandora:sp_videoCModel', $collectionpid);
+
+    // Ensures derivative creation is turned on.
+    $edit = array(
+      'islandora_video_retain_original' => TRUE,
+      'islandora_video_make_archive' => TRUE,
+      'islandora_video_make_mp4_locally' => TRUE,
+      'islandora_video_make_ogg_locally' => TRUE,
+      'islandora_video_make_thumbnail_locally' => TRUE,
+    );
+    $this->drupalPost('admin/islandora/solution_pack_config/video', $edit, 'Save configuration');
+
+    // Attempts to create an object.
+    $path = 'islandora/object/' . $collectionpid . '/manage/overview/ingest';
+    $edit = array();
+    $file = drupal_get_path('module', 'islandora_video') . '/tests/fixtures/test.avi';
+    $handle = fopen($file, 'r');
+    $contents = fread($handle, filesize($file));
+    fclose($handle);
+    $edit['files[file]'] = $file;
+    $this->drupalPost($path, $edit, t('Ingest'));
+    $this->assertText('New Object', 'Video object was created', 'Islandora');
+
+    // Determines whether or not the appropriate datastreams were created.
+    $object = $this->getObjectFromPath($this->url);
+    $datastreams = array(
+      'RELS-EXT',
+      'DC',
+      'OBJ',
+      'MP4',
+      'OGG',
+      'MKV',
+      'TN',
+    );
+    $this->assertDatastreams($object, $datastreams);
+
+    $datastreams = array(
+      array('MP4', 'mp4'),
+      array('OGG', 'ogg'),
+      array('MKV', 'mkv'),
+      array('TN', 'image'),
+    );
+    $this->validateDatastreams($object, $datastreams);
+
+    // Checks if the OBJ datastream is valid.
+    // TODO: Make an actual .avi validator you goof.
+    if (isset($object['OBJ'])) {
+      $avi = $object['OBJ']->content;
+      $this->assertTrue($avi == $contents, 'OBJ datastream matches binary of originally ingested object', 'Islandora');
+    }
+
+    // Attempts to delete the object and then collection.
+    $this->deleteObject($object->id);
+    $this->deleteTestCollection($collectionpid);
+  }
+}

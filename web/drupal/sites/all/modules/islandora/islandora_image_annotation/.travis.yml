@@ -1,0 +1,29 @@
+language: php
+php:
+  - 5.3.3
+  - 5.4
+  - 5.5
+branches:
+  only:
+    - /^7.x/
+env:
+  - FEDORA_VERSION="3.5"
+  - FEDORA_VERSION="3.6.2"
+  - FEDORA_VERSION="3.7.0"
+before_install:
+  - cd $HOME
+  - git clone -b 7.x git://github.com/Islandora/islandora.git
+  - export ISLANDORA_DIR=$HOME/islandora
+  - $HOME/islandora/tests/scripts/travis_setup.sh
+  - cd $HOME/drupal-*
+  - ln -s $TRAVIS_BUILD_DIR sites/all/modules/islandora_image_annotation
+  - drush en --yes --user=1 islandora_basic_collection
+  # Moving JS out to avoid coder, some is external code.
+  - mv -v $TRAVIS_BUILD_DIR/js $HOME
+  - mv -v $TRAVIS_BUILD_DIR/lib $HOME
+  - mv -v $TRAVIS_BUILD_DIR/shared_canvas $HOME
+script:
+  - ant -buildfile sites/all/modules/islandora_image_annotation/build.xml lint
+  - $ISLANDORA_DIR/tests/scripts/line_endings.sh sites/all/modules/islandora_image_annotation
+  - drush coder-review --reviews=production,security,style,i18n,potx,sniffer islandora_image_annotation
+  - phpcpd --names *.module,*.inc,*.test sites/all/modules/islandora_image_annotation

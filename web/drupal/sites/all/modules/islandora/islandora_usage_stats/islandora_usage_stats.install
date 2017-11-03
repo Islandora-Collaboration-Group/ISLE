@@ -1,0 +1,674 @@
+<?php
+
+/**
+ * @file
+ * Install/uninstall hooks.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_usage_stats_uninstall() {
+  $variables = array(
+    'islandora_usage_stats_ip_list',
+    'islandora_usage_stats_cooldown_seconds',
+    'islandora_usage_stats_exclude_bots',
+    'islandora_usage_stats_top_downloads_block_display_rows',
+    'islandora_usage_stats_top_search_block_display_rows',
+  );
+  array_walk($variables, 'variable_del');
+}
+
+/**
+ * Implements hook_schema().
+ */
+function islandora_usage_stats_schema() {
+  $schema['islandora_usage_stats_datastreams'] = array(
+    'description' => 'Contains datastream information.',
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'dsid' => array(
+        'description' => 'The datastream identifier.',
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+      'pid_id' => array(
+        'description' => 'The pid id foreign relations.',
+        'type' => 'int',
+        'not NULL' => TRUE,
+      ),
+      'ds_label' => array(
+        'description' => 'The datastream label.',
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+    ),
+    'foreign keys' => array(
+      'pid_id' => array(
+        'table' => 'islandora_usage_stats_objects',
+        'columns' => array('pid_id' => 'id'),
+      ),
+    ),
+    'primary key' => array('id'),
+    'unique keys' => array(
+      'pid_dsid' => array('pid_id', 'dsid'),
+    ),
+  );
+  $schema['islandora_usage_stats_top_searches'] = array(
+    'description' => 'Used to log top searches.',
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'term' => array(
+        'description' => 'Search term.',
+        'type' => 'text',
+        'size' => 'medium',
+      ),
+      'search_total' => array(
+        'description' => 'The total times this term has been searched.',
+        'type' => 'int',
+        'not NULL' => TRUE,
+      ),
+    ),
+    'indexes' => array(
+      // 767 is maximum index size in worst case.
+      // But if UTF8 is used then it is 3x. so 255
+      'term_index' => array(array('term', 255)),
+    ),
+    'primary key' => array('id'),
+  );
+
+  $schema['islandora_usage_stats_object_access_log'] = array(
+    'description' => 'This table is used to store the usage information for Fedora objects.',
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'pid_id' => array(
+        'description' => 'PID ID of the object.',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'time' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'ip' => array(
+        'description' => 'IP of user that accessed the object.',
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'Drupal user that accessed the object.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array(
+      'id',
+    ),
+    'indexes' => array(
+      'pid_id_index' => array('pid_id'),
+    ),
+  );
+
+  $schema['islandora_usage_stats_object_ds_access_log'] = array(
+    'description' => 'This table is used to store the usage information for Fedora datastreams.',
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'ds_id' => array(
+        'description' => 'Database datastream ID.',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'time' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'ip' => array(
+        'description' => 'IP of user that accessed the object.',
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'Drupal user that accessed the object.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array(
+      'id',
+    ),
+    'foreign keys' => array(
+      'ds_id' => array(
+        'table' => 'islandora_usage_stats_datastreams',
+        'columns' => array('ds_id' => 'id'),
+      ),
+    ),
+    'indexes' => array(
+      'ds_id' => array('ds_id'),
+    ),
+  );
+
+  $schema['islandora_usage_stats_objects'] = array(
+    'description' => 'Used to specify object information in the DB; primarily for views.',
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'label' => array(
+        'description' => 'Object label in Fedora.',
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+      'pid' => array(
+        'description' => 'The PID of the object.',
+        'type' => 'varchar',
+        'length' => 64,
+        'not NULL' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
+    'unique keys' => array(
+      'pid' => array('pid'),
+    ),
+  );
+
+  $schema['islandora_usage_stats_collection_access_log'] = array(
+    'description' => 'Used to log the parent collection(s) of an object being visited.',
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'object_access_id' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'collection' => array(
+        'description' => 'The PID ID of the collection.',
+        'type' => 'int',
+        'not NULL' => TRUE,
+      ),
+    ),
+    'foreign keys' => array(
+      'object_acces_id' => array(
+        'table' => 'islandora_usage_stats_object_access_log',
+        'columns' => array('object_access_id' => 'id'),
+      ),
+      'collection' => array(
+        'table' => 'islandora_usage_stats_objects',
+        'columns' => array('collection' => 'id'),
+      ),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'object_access_id_index' => array('object_access_id'),
+      'collection_index' => array('collection'),
+    ),
+  );
+  $schema['islandora_usage_stats_content_model_access_log'] = array(
+    'description' => 'Used to log the content model(s) when an object is visited.',
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'object_access_id' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'content_model' => array(
+        'description' => 'The PID ID of the content model.',
+        'type' => 'int',
+        'not NULL' => TRUE,
+      ),
+    ),
+    'foreign keys' => array(
+      'object_access_id' => array(
+        'table' => 'islandora_usage_stats_object_access_log',
+        'columns' => array('object_access_id' => 'id'),
+      ),
+      'content_model' => array(
+        'table' => 'islandora_usage_stats_objects',
+        'columns' => array('content_model' => 'id'),
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+  return $schema;
+}
+
+/**
+ * Updates schema to support collections and content models.
+ */
+function islandora_usage_stats_update_7001(&$sandbox) {
+  $schema = array();
+  $sandbox['#finished'] = 0;
+  $pid_tables = array(
+    'islandora_usage_stats_object_ds_downloads',
+    'islandora_usage_stats_object_access_log',
+    'islandora_usage_stats_object_ds_access_log',
+    'islandora_usage_stats_object_views',
+  );
+  // Add new tables.
+  if (!isset($sandbox['done_first_pass'])) {
+    $sandbox['done_first_pass'] = TRUE;
+    $schema['islandora_usage_stats_objects'] = array(
+      'description' => 'Used to specify object information in the DB; primarily for views.',
+      'fields' => array(
+        'id' => array(
+          'type' => 'serial',
+          'not null' => TRUE,
+        ),
+        'label' => array(
+          'description' => 'Object label in Fedora.',
+          'type' => 'varchar',
+          'length' => 255,
+        ),
+        'pid' => array(
+          'description' => 'The PID of the object.',
+          'type' => 'varchar',
+          'length' => 64,
+          'not NULL' => TRUE,
+        ),
+      ),
+      'primary key' => array('id'),
+      'unique keys' => array(
+        'pid' => array('pid'),
+      ),
+    );
+    $schema['islandora_usage_stats_collection_access_log'] = array(
+      'description' => 'Used to log the parent collection(s) of an object being visited.',
+      'fields' => array(
+        'id' => array(
+          'type' => 'serial',
+          'not null' => TRUE,
+        ),
+        'object_access_id' => array(
+          'type' => 'int',
+          'not null' => TRUE,
+        ),
+        'collection' => array(
+          'description' => 'The PID ID of the collection.',
+          'type' => 'int',
+          'not NULL' => TRUE,
+        ),
+      ),
+      'foreign keys' => array(
+        'object_acces_id' => array(
+          'table' => 'islandora_usage_stats_object_access_log',
+          'columns' => array('object_access_id' => 'id'),
+        ),
+        'collection' => array(
+          'table' => 'islandora_usage_stats_objects',
+          'columns' => array('collection' => 'id'),
+        ),
+      ),
+      'primary key' => array('id'),
+    );
+    $schema['islandora_usage_stats_content_model_access_log'] = array(
+      'description' => 'Used to log the content model(s) when an object is visited.',
+      'fields' => array(
+        'id' => array(
+          'type' => 'serial',
+          'not null' => TRUE,
+        ),
+        'object_access_id' => array(
+          'type' => 'int',
+          'not null' => TRUE,
+        ),
+        'content_model' => array(
+          'description' => 'The PID ID of the content model.',
+          'type' => 'int',
+          'not NULL' => TRUE,
+        ),
+      ),
+      'foreign keys' => array(
+        'object_access_id' => array(
+          'table' => 'islandora_usage_stats_object_access_log',
+          'columns' => array('object_access_id' => 'id'),
+        ),
+        'content_model' => array(
+          'table' => 'islandora_usage_stats_objects',
+          'columns' => array('content_model' => 'id'),
+        ),
+      ),
+      'primary key' => array('id'),
+    );
+    foreach ($schema as $name => $schema_info) {
+      db_create_table($name, $schema_info);
+    }
+    $pid_queries = array();
+    foreach ($pid_tables as $table) {
+      db_drop_index($table, 'pid');
+      db_add_field(
+        $table,
+        'pid_id',
+        array(
+          'description' => 'PID ID of the object.',
+          'type' => 'int',
+          'not null' => TRUE,
+          'initial' => 1,
+        )
+      );
+      $pid_queries[] = db_select($table)
+        ->fields($table, array('pid'))
+        ->groupBy('pid');
+    }
+    // Populate PID table with existing PIDS.
+    foreach ($pid_queries as $query) {
+      if (!isset($pid_query)) {
+        $pid_query = $query;
+      }
+      else {
+        $pid_query->union($query);
+      }
+    }
+    db_insert('islandora_usage_stats_objects')
+      ->from($pid_query)
+      ->execute();
+    // Populate PID ID columns, and drop the PID column.
+    foreach ($pid_tables as $table) {
+      db_update($table)
+        ->expression(
+          "$table.pid_id",
+          "(SELECT islandora_usage_stats_objects.id FROM
+            islandora_usage_stats_objects WHERE $table.pid = islandora_usage_stats_objects.pid)"
+        )
+        ->execute();
+      db_drop_field($table, 'pid');
+    }
+    $sandbox['total'] = db_select('islandora_usage_stats_objects')
+      ->fields('islandora_usage_stats_objects', array('pid'))
+      ->countQuery()
+      ->execute()
+      ->fetchField();
+  }
+  // Populate label info in object table (batch).
+  $step = 10;
+  if (!isset($sandbox['progress'])) {
+    $sandbox['progress'] = 0;
+  }
+  $query = db_select('islandora_usage_stats_objects')
+    ->fields('islandora_usage_stats_objects', array('pid'))
+    ->orderBy('islandora_usage_stats_objects.id')
+    ->range($sandbox['progress'], $step)
+    ->execute();
+
+  $results = $query->fetchAllAssoc('pid');
+  $pids = array_keys($results);
+  foreach ($pids as $pid) {
+    $object = islandora_object_load($pid);
+    db_update('islandora_usage_stats_objects')
+      ->fields(array('label' => $object->label))
+      ->condition('pid', $pid)
+      ->execute();
+  }
+  $sandbox['progress'] = $sandbox['progress'] + $step;
+  $sandbox['#finished'] = $sandbox['progress'] / $sandbox['total'];
+  if ($sandbox['#finished'] >= 1) {
+    return t('Updated database to support logging collection and content model events.');
+  }
+}
+
+/**
+ * Adds support for top search/top downloads monitoring in islandora.
+ */
+function islandora_usage_stats_update_7002() {
+  $schema['islandora_usage_stats_top_searches'] = array(
+    'description' => 'Used to log top searches',
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'term' => array(
+        'description' => 'Search term',
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+      'search_total' => array(
+        'description' => 'The total times this term has been searched.',
+        'type' => 'int',
+        'not NULL' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  $schema['islandora_usage_stats_top_downloads'] = array(
+    'description' => 'This table is used to store datastream download count for all fedora objects',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Unique id for each row',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'pid_id' => array(
+        'description' => 'PID ID of the object.',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'ds_id' => array(
+        'description' => 'The ds relation to the datastreams table',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'downloads' => array(
+        'description' => 'The number of views an object has received',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'time' => array(
+        'description' => 'The time in number of seconds of the last download of the object',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array(
+      'id',
+    ),
+    'foreign keys' => array(
+      'ds_id' => array(
+        'table' => 'islandora_usage_stats_datastreams',
+        'columns' => array('ds_id' => 'id'),
+      ),
+      'pid_id' => array(
+        'table' => 'islandora_usage_stats_objects',
+        'columns' => array('pid_id' => 'id'),
+      ),
+    ),
+    'indexes' => array(
+      'ds_id' => array(
+        'ds_id',
+      ),
+    ),
+  );
+
+  $schema['islandora_usage_stats_datastreams'] = array(
+    'description' => 'Used to log top searches',
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'dsid' => array(
+        'description' => 'The datastream identifier',
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+      'pid_id' => array(
+        'description' => 'The pid id forign relations',
+        'type' => 'int',
+        'not NULL' => TRUE,
+      ),
+      'ds_label' => array(
+        'description' => 'The datastream label',
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+    ),
+    'foreign keys' => array(
+      'pid_id' => array(
+        'table' => 'islandora_usage_stats_objects',
+        'columns' => array('pid_id' => 'id'),
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+  db_create_table('islandora_usage_stats_top_downloads', $schema['islandora_usage_stats_top_downloads']);
+  db_create_table('islandora_usage_stats_top_searches', $schema['islandora_usage_stats_top_searches']);
+  db_create_table('islandora_usage_stats_datastreams', $schema['islandora_usage_stats_datastreams']);
+  return t('Updated database to support top search logging, and top downloads.');
+}
+
+/**
+ * Large rework of module. All object and datastream records will be lost.
+ */
+function islandora_usage_stats_update_7003() {
+  db_drop_table('islandora_usage_stats_object_views');
+  db_drop_table('islandora_usage_stats_object_ds_downloads');
+  db_drop_table('islandora_usage_stats_top_downloads');
+
+  db_add_unique_key('islandora_usage_stats_datastreams', 'pid_dsid', array('pid_id', 'dsid'));
+
+  // Just re-create the tables.
+  db_drop_table('islandora_usage_stats_object_ds_access_log');
+  db_drop_table('islandora_usage_stats_object_access_log');
+  $schema = array();
+  $schema['islandora_usage_stats_object_access_log'] = array(
+    'description' => 'This table is used to store the usage information for Fedora objects.',
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'pid_id' => array(
+        'description' => 'PID ID of the object.',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'time' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'ip' => array(
+        'description' => 'IP of user that accessed the object.',
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'Drupal user that accessed the object.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array(
+      'id',
+    ),
+  );
+
+  $schema['islandora_usage_stats_object_ds_access_log'] = array(
+    'description' => 'This table is used to store the usage information for Fedora datastreams.',
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'ds_id' => array(
+        'description' => 'Database datastream ID.',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'time' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'ip' => array(
+        'description' => 'IP of user that accessed the object.',
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'Drupal user that accessed the object.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array(
+      'id',
+    ),
+    'foreign keys' => array(
+      'ds_id' => array(
+        'table' => 'islandora_usage_stats_datastreams',
+        'columns' => array('ds_id' => 'id'),
+      ),
+    ),
+    'indexes' => array(
+      'ds_id' => array('ds_id'),
+    ),
+  );
+  db_create_table('islandora_usage_stats_object_ds_access_log', $schema['islandora_usage_stats_object_ds_access_log']);
+  db_create_table('islandora_usage_stats_object_access_log', $schema['islandora_usage_stats_object_access_log']);
+
+  // Now we always log.
+  variable_del('islandora_usage_stats_use_access_log');
+  variable_del('islandora_usage_stats_alter_pdf_display');
+}
+
+/**
+ * Adding indexes to speed views.
+ */
+function islandora_usage_stats_update_7004() {
+  db_add_index('islandora_usage_stats_object_access_log', 'pid_id_index', array('pid_id'));
+  db_add_index('islandora_usage_stats_collection_access_log', 'object_access_id_index', array('object_access_id'));
+  db_add_index('islandora_usage_stats_collection_access_log', 'collection_index', array('collection'));
+}
+
+/**
+ * Fix to search stats table, increasing the size of search strings allowed.
+ */
+function islandora_usage_stats_update_7005() {
+  db_change_field(
+    'islandora_usage_stats_top_searches',
+    'term',
+    'term',
+    array(
+      'description' => 'Search term.',
+      'type' => 'text',
+      'size' => 'medium',
+    ),
+    array(
+      'indexes' => array(
+        // 767 is maximum index size in worst case.
+        // But if UTF8 is used it is 3x. So 255
+        'term_index' => array(array('term', 255)),
+      ),
+    )
+  );
+}

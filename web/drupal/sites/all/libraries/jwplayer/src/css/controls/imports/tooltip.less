@@ -1,0 +1,154 @@
+@import "../../shared-imports/vars";
+
+.jw-icon-tooltip.jw-open .jw-overlay {
+    opacity: 1;
+    transition-delay: 0s;
+    visibility: visible;
+}
+
+.jw-slider-time .jw-overlay:before {
+    height: 1em;
+    top: auto;
+}
+
+.jw-volume-tip {
+    padding: @slider-fixed-knob-height 0 (@slider-fixed-knob-height * 2);
+}
+
+.jw-time-tip {
+    .rect(100%, auto);
+    box-shadow: 0 0 10px fade(@black, 40%);
+    color: @tooltip-background-color;
+    display: block;
+    margin: 0 0 @tooltip-arrow-size;
+    pointer-events: none;
+    position: relative;
+    z-index: 0;
+
+    &::after {
+        &:extend(._pseudo);
+        .topleft(100%, 50%);
+        .square(@tooltip-arrow-size);
+        border-radius: 1px;
+        background-color: currentColor;
+        transform-origin: 75% 50%;
+        transform: translate(-50%, -50%) rotate(45deg);
+        z-index: -1;
+    }
+
+    .jw-text {
+        background-color: @tooltip-background-color;
+        border-radius: 1px;
+        color: @tooltip-color;
+        font-size: @tooltip-font-size;
+        height: auto;
+        line-height: 1;
+        padding: (@tooltip-arrow-size / 2) @tooltip-font-size;
+        display: inline-block;
+        min-width: 100%;
+        vertical-align: middle;
+    }
+}
+
+.jw-controlbar {
+    .jw-overlay {
+        .bottomleft(100%, 50%);
+        margin: 0;
+        min-height: @mobile-touch-target;
+        min-width: @mobile-touch-target;
+        opacity: 0;
+        transition: 150ms @default-timing-function;
+        transition-property: opacity, visibility;
+        transition-delay: 0s, 150ms;
+        transform: translate(-50%, 0);
+        visibility: hidden;
+        width: 100%;
+        z-index: 1;
+
+        .jw-contents {
+            position: relative;
+        }
+    }
+
+    .jw-option {
+        position: relative;
+        white-space: nowrap;
+        cursor: pointer;
+        list-style: none;
+        height: 1.5em;
+        font-family: inherit;
+        line-height: 1.5em;
+        padding: 0 0.5em;
+        font-size: 0.8em;
+        margin: 0;
+
+        &::before {
+            padding-right: 0.125em;
+        }
+    }
+}
+
+.jw-controlbar,
+.jw-settings-menu {
+    .jw-tooltip {
+        &:extend(.jw-time-tip all);
+        .bottomleft(100%, 50%);
+        opacity: 0;
+        transform: translate(-50%, 0);
+        transition: 100ms 0s @default-timing-function;
+        transition-property: opacity, transform, visibility;
+        visibility: hidden;
+        white-space: nowrap;
+        width: auto;
+        z-index: 1;
+
+        &.jw-open {
+            opacity: 1;
+            transform: translate(-50%, (-@tooltip-font-size));
+            transition-duration: 150ms;
+            transition-delay: @tooltip-popup-delay, 0s, @tooltip-popup-delay;
+            visibility: visible;
+        }
+    }
+
+    .jw-icon:focus > .jw-tooltip {
+        &:extend(.jw-controlbar .jw-tooltip.jw-open);
+    }
+}
+
+.jw-tooltip-time {
+    .rect(0, auto);
+    bottom: 100%;
+    line-height: normal;
+    padding: 0;
+    pointer-events: none;
+    user-select: none;
+
+    .jw-overlay {
+        bottom: 0;
+        min-height: 0;
+        width: auto;
+    }
+}
+
+.jw-tooltip {
+    bottom: @controlbar-height;
+    display: none;
+    position: absolute;
+
+    .jw-text {
+        height: 100%;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 246px;
+        overflow: hidden;
+    }
+
+    .jw-flag-audio-player & {
+        display: none;
+    }
+}
+
+.jw-flag-small-player .jw-time-thumb {
+    display: none;
+}

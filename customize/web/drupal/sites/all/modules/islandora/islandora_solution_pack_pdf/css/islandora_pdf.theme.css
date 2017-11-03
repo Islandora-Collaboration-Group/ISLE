@@ -1,0 +1,82 @@
+/*
+    Document   : islandora_basic_collection.theme
+    Created on : May 23, 2012, 11:23:56 AM
+    Description: The basic pdf page is a simple flexible layout page
+    that breaks down to two columns when 2 sidebars are visible
+*/
+
+a.islandora-pdf-link {
+  margin-left: 5px;
+}
+
+.islandora-pdf-content {
+  background-color: #F2F2F2;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 15px;
+  float: left;
+  width: 100%;
+  max-width: 100%;
+}
+
+.islandora-pdf-content img {
+  margin: 0;
+  display: block;
+}
+
+.islandora-pdf-metadata {
+  display: block;
+  clear: both;
+}
+
+/* This is kept for legacy reasons */
+dl.islandora-pdf-fields {
+  width:100%;
+}
+
+dl.islandora-metadata-fields {
+    width:100%;
+}
+
+.islandora-pdf-metadata dt {
+  font-weight: normal;
+  text-align: right;
+  font-weight: bold;
+  padding-right: 0;
+}
+
+.islandora-pdf-metadata dd {
+  padding-left: 40px;
+}
+
+
+.islandora-pdf-metadata dt,
+.islandora-pdf-metadata dd {
+  border-top:1px solid #e5e5e5;
+}
+
+.islandora-pdf-metadata dt.first,
+.islandora-pdf-metadata dd.first {
+  border-top:0;
+}
+
+body.two-sidebars .islandora-pdf-sidebar {
+    clear: both;
+    width: 100%;
+}
+
+@media all and (min-width: 768px) {
+
+  body.no-sidebars .islandora-pdf-sidebar {
+    padding-left: 20px;
+  }
+
+  body.no-sidebars .islandora-pdf-sidebar {
+    float: right; /* LTR */
+    width: 35%;
+    clear: none;
+  }
+
+}

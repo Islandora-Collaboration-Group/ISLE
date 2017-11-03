@@ -1,0 +1,9 @@
+.islandora-newspaper-empty-issues .form-item.form-type-textfield,
+.islandora-newspaper-empty-issues .form-item.form-type-textfield input {
+    display: inline-block;
+    margin: 0;
+}
+
+.islandora-newspaper-empty-issues .form-item.form-type-textfield input {
+    margin-right: 10px;
+}

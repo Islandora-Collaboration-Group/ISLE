@@ -1,0 +1,76 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for this module.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * @see islandora_book_islandora_required_objects()
+ */
+function islandora_scholar_install() {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  islandora_install_solution_pack('islandora_scholar');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_scholar_uninstall() {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  islandora_install_solution_pack('islandora_scholar', 'uninstall');
+  $variables = array(
+    'islandora_scholar_use_standard_metadata_display',
+    'islandora_scholar_users_choose_display_csl',
+    'islandora_scholar_specify_document_versions',
+    'islandora_scholar_document_versions',
+    'islandora_scholar_specify_use_permissions',
+    'islandora_scholar_use_permissions',
+    'islandora_scholar_romeo_enable',
+    'islandora_scholar_thumbnail_width',
+    'islandora_scholar_thumbnail_height',
+    'islandora_scholar_path_to_pdftotext',
+    'islandora_scholar_preview_width',
+    'islandora_scholar_preview_height',
+    'islandora_scholar_issn_cache_time',
+    'islandora_scholar_romeo_key',
+    'islandora_scholar_romeo_url',
+    'islandora_scholar_romeo_cache_time',
+    'islandora_scholar_create_fulltext',
+    'islandora_scholar_preview_density',
+  );
+  array_walk($variables, 'variable_del');
+}
+
+/**
+ * Print and log a message about updating derivative PDFs.
+ */
+function islandora_scholar_update_7100(&$sandbox) {
+  drupal_set_message(filter_xss(t('Existing citations with PDF datastreams should have derivatives created for them via Drush. Please consult the !url for further information.',
+    array(
+      '!url' => l(t('README'), 'https://github.com/islandora/islandora_scholar/blob/7.x/README.md', array('absolute' => TRUE)),
+    )
+  )));
+  watchdog('islandora_scholar', 'Existing citations with PDF datastreams should have derivatives created for them via Drush.', array(), WATCHDOG_NOTICE, l(t('README'), 'https://github.com/islandora/islandora_scholar/blob/7.x/README.md', array('external' => TRUE)));
+}
+
+/**
+ * Print and log a message about possible lost physicalDescription data.
+ */
+function islandora_scholar_update_7101(&$sandbox) {
+  drupal_set_message(filter_xss(t('Existing mods:physicalDescription fields with an @authority="local" may become hidden with this update. Please consult the !url for further information.',
+    array(
+      '!url' => l(t('ticket'), 'https://jira.duraspace.org/browse/ISLANDORA-1350', array('absolute' => TRUE)),
+    )
+  )));
+  watchdog('islandora_scholar', 'Existing mods:physicalDescription fields with an @authority="local" may become hidden with this update.', array(), WATCHDOG_NOTICE, l(t('ISLANDORA-1350'), 'https://jira.duraspace.org/browse/ISLANDORA-1350', array('external' => TRUE)));
+}
+
+/**
+ * Print out a message informing about the change in permissions.
+ */
+function islandora_scholar_update_7102(&$sandbox) {
+  return t('The permission to administer the Islandora Scholar module has been changed to "Administer site configuration"; roles that could previously access Islandora Scholar management pages via the "Use the administration pages and help" permission will no longer be able to do so. Permissions may need to be reviewed.');
+}

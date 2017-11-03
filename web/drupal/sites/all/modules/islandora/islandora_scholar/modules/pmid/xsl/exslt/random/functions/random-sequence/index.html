@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "/schema/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:html="http://www.w3.org/1999/xhtml"><head><title>EXSLT - random:random-sequence</title><link rel="stylesheet" href="base.css"/></head><body><h1 id="#title"><a href="http://www.exslt.org/">EXSLT</a> - <a href="http://www.exslt.org/random">random</a>:<a href="http://www.exslt.org/random/functions/random-sequence">random-sequence</a></h1><table><tr><td id="menu"><p class="level1"><a href="random.random-sequence.html">Implementer Page</a></p><p class="level1"><a href="../../../howto.html">How To</a></p><p class="level1"><a href="../../../download.html">Downloads</a></p><p class="level1">Modules</p><p class="level2"><a href="../../../date/index.html">Dates and Times</a></p><p class="level2"><a href="../../../dyn/index.html">Dynamic</a></p><p class="level2"><a href="../../../exsl/index.html">Common</a></p><p class="level2"><a href="../../../func/index.html">Functions</a></p><p class="level2"><a href="../../../math/index.html">Math</a></p><p class="level2"><a href="../../../random/index.html">Random</a></p><p class="level3"><a href="../../functions/random-sequence/index.html">random:random-sequence()</a></p><p class="level2"><a href="../../../regexp/index.html">Regular Expressions</a></p><p class="level2"><a href="../../../set/index.html">Sets</a></p><p class="level2"><a href="../../../str/index.html">Strings</a></p><p class="level1"><a href="../../../submissions/">Submissions</a></p><p class="level1"><a href="../../../list">Mailing List</a></p><p class="level1"><a href="../../../contact.html">Contact</a></p></td><td id="content"><p><b>Implementer Page: </b><a href="random.random-sequence.html">random.random-sequence.html</a><br/><b>Function Package: </b><a href="random.random-sequence.zip">random.random-sequence.zip</a></p><h4>Function Syntax</h4><pre><var>number+</var> <b>random:random-sequence</b>(<var>number</var>?, <var>number</var>?)</pre><div><p>
+            The random:random-sequence function returns a sequence of random numbers between 0 and 1. 
+         </p><p>
+            function usage
+         </p><pre>
+      &lt;xsl:call-template name="random:random-sequence"&gt;
+         &lt;xsl:with-param name="numberOfItems" select="number" /&gt;
+         &lt;xsl:with-param name="seed" select="number" /&gt;
+      &lt;/xsl:call-template&gt;</pre><p>
+            You may supply the function with an arguement that defines the number of random numbers to generate, with the default value of 1. A seed number maybe provided to the function, with a default value directly related to the current time.
+         </p></div></td></tr></table><div id="colophon"><p><a href="http://www.exslt.org/random/functions/random-sequence/index.html">http://www.exslt.org/random/functions/random-sequence/index.html</a> last modified 2003-10-10</p></div></body></html>

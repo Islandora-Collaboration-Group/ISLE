@@ -1,0 +1,16 @@
+TODO
+----
+
+High
+
+- clean up preprocess function
+- availablity for multiple url's through array (newspapers)
+- check for DZI, djatoka as fallback
+- check for djatoka availability first.
+
+Medium
+* documentation
+* remove conditional dependency on islandora_paged_content
+
+Low
+

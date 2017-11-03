@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<exslt:function xmlns:exslt="http://exslt.org/documentation" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:vcf="http://www.ietf.org/internet-drafts/draft-dawson-vcard-xml-dtd-03.txt" version="1" module="dyn" status="new">
+   <exslt:name>map</exslt:name>
+   <rdf:Description ID="dyn:map">
+      <dc:subject>EXSLT</dc:subject>
+      <dc:subject>dyn</dc:subject>
+      <dc:subject>map</dc:subject>
+      <exslt:revision>
+         <rdf:Description ID="dyn:map.1">
+            <exslt:version>1</exslt:version>
+            <dc:creator rdf:parseType="Resource">
+               <vcf:fn>Uche Ogbuji</vcf:fn>
+               <vcf:email>uche.ogbuji@fourthought.com</vcf:email>
+            </dc:creator>
+            <dc:date>2001-11-25</dc:date>
+            <dc:description>
+               <html:div><!-- if you want to use DocBook, add written-in="docbook" to summary element -->
+         Returns a node set containing the results of evaluating an XPath expression on each of a set of nodes.
+      </html:div>
+            </dc:description>
+         </rdf:Description>
+      </exslt:revision>
+   </rdf:Description>
+   <exslt:doc>
+      <html:div><!-- if you want to use DocBook, add written-in="docbook" to documentation element -->
+         <html:p>
+        The <html:code>dyn:map</html:code> function evaluates the expression passed as the second argument for each of the nodes passed as the first argument, and returns a node set of those values.
+      </html:p>
+         <html:p>
+        The expressions are evaluated relative to the nodes passed as the first argument. In other words, the value for each node is calculated by evaluating the XPath expression with all context information being the same as that for the call to the <html:code>dyn:map</html:code> function itself, except for the following:
+      </html:p>
+         <html:ul>
+            <html:li>the context node is the node whose value is being calculated</html:li>
+            <html:li>the context position is the position of the node within the node set passed as the first argument to the <html:code>dyn:map</html:code> function, arranged in document order</html:li>
+            <html:li>the context size is the number of nodes passed as the first argument to the <html:code>dyn:map</html:code> function</html:li>
+         </html:ul>
+         <html:p>
+        If the expression string passed as the second argument is an invalid XPath expression (including an empty string), this function returns an empty node set.
+      </html:p>
+         <html:p>
+        If the XPath expression evaluates as a node set, the <html:code>dyn:map</html:code> function returns the union of the node sets returned by evaluating the expression for each of the nodes in the first argument. Note that this may mean that the node set resulting from the call to the <html:code>dyn:map</html:code> function contains a different number of nodes from the number in the node set passed as the first argument to the function.
+      </html:p>
+         <html:p>
+        If the XPath expression evaluates as a number, the <html:code>dyn:map</html:code> function returns a node set containing one <html:code>exsl:number</html:code> element (namespace <html:code>http://exslt.org/common</html:code>) for each node in the node set passed as the first argument to the <html:code>dyn:map</html:code> function, in document order. The string value of each <html:code>exsl:number</html:code> element is the same as the result of converting the number resulting from evaluating the expression to a string as with the <html:a href="http://www.w3.org/xpath#function-number">
+               <html:code>number</html:code>
+            </html:a> function, with the exception that <html:code>Infinity</html:code> results in an <html:code>exsl:number</html:code> holding the highest number the implementation can store, and <html:code>-Infinity</html:code> results in an <html:code>exsl:number</html:code> holding the lowest number the implementation can store.
+      </html:p>
+         <html:p>
+        If the XPath expression evaluates as a boolean, the <html:code>dyn:map</html:code> function returns a node set containing one <html:code>exsl:boolean</html:code> element (namespace <html:code>http://exslt.org/common</html:code>) for each node in the node set passed as the first argument to the <html:code>dyn:map</html:code> function, in document order. The string value of each <html:code>exsl:boolean</html:code> element is <html:code>'true'</html:code> if the expression evaluates as true for the node, and <html:code>''</html:code> if the expression evaluates as false.
+      </html:p>
+         <html:p>
+        Otherwise, the <html:code>dyn:map</html:code> function returns a node set containing one <html:code>exsl:string</html:code> element (namespace <html:code>http://exslt.org/common</html:code>) for each node in the node set passed as the first argument to the <html:code>dyn:map</html:code> function, in document order. The string value of each <html:code>exsl:string</html:code> element is the same as the result of converting the result of evaluating the expression for the relevant node to a string as with the <html:a href="http://www.w3.org/xpath#function-string">
+               <html:code>string</html:code>
+            </html:a> function.
+      </html:p>
+      </html:div>
+   </exslt:doc>
+   <exslt:definition>
+      <exslt:return type="node-set">
+         <html:div/>
+      </exslt:return>
+      <exslt:arg name="nodes" type="node-set" optional="no">
+         <html:div/>
+      </exslt:arg>
+      <exslt:arg name="expression" type="string" optional="no">
+         <html:div/>
+      </exslt:arg>
+   </exslt:definition>
+   <exslt:implementations/>
+   <exslt:use-cases/>
+</exslt:function>

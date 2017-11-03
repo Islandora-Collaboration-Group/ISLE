@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Implements hooks and callbacks for this module.
+ */
+
+/**
+ * Implements hook_islandora_importer().
+ */
+function endnotexml_importer_islandora_importer() {
+  return array(
+    'endnotexml_importer' => array(
+      'title' => t('EndNote XML Importer'),
+      'class' => 'EndNoteXMLImporter',
+    ),
+  );
+}

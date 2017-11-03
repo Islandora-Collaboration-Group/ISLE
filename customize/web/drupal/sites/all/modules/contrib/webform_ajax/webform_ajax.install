@@ -1,0 +1,52 @@
+<?php
+/**
+ * @file
+ * Webform AJAX install file.
+ *
+ * Alter Webform table schema to add the AJAX property to a webform.
+ */
+
+/**
+ * Implements hook_schema_alter().
+ */
+function webform_ajax_schema_alter(&$schema) {
+  // Define our additional fields.
+  if (isset($schema['webform'])) {
+    // Declare new column for webform_ajax property.
+    $schema['webform']['fields']['webform_ajax'] = array(
+      'description' => 'Value of a webform for AJAX with confirm screen (1), no confirm screen (-1) or no AJAX (0).',
+      'type' => 'int',
+      'size' => 'tiny',
+      'not null' => TRUE,
+      'default' => 0,
+    );
+  }
+}
+
+/**
+ * Implements hook_install().
+ */
+function webform_ajax_install() {
+  // Update schema. Add our additional fields.
+  $schema = array('webform' => array());
+  webform_ajax_schema_alter($schema);
+  foreach ($schema as $table => $table_def) {
+    foreach ($table_def['fields'] as $field => $spec) {
+      db_add_field($table, $field, $spec);
+    }
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function webform_ajax_uninstall() {
+  // Update schema. Drop our additional fields.
+  $schema = array('webform' => array());
+  webform_ajax_schema_alter($schema);
+  foreach ($schema as $table => $table_def) {
+    foreach ($table_def['fields'] as $field => $spec) {
+      db_drop_field($table, $field);
+    }
+  }
+}

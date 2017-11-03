@@ -1,0 +1,111 @@
+<?php
+
+/**
+ * @file
+ * General hook implementations.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_populator_menu() {
+  return array(
+    'admin/islandora/populator' => array(
+      'title' => 'Populator Configuration',
+      'description' => 'Module configuration and settings.',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('islandora_populator_admin_form'),
+      'access arguments' => array('administer site configuration'),
+      'file' => 'includes/admin.form.inc',
+    ),
+  );
+}
+
+/**
+ * Helper function; get available populators.
+ */
+function islandora_populator_get_populators() {
+  $populators =& drupal_static(__FUNCTION__, array());
+
+  if (empty($populators)) {
+    $default = array(
+      'default' => array(
+        'title' => t('None'),
+        'description' => t('Metadata will have to be added manually (default).'),
+        'type' => NULL,
+      ),
+    );
+    $populators = $default + module_invoke_all('islandora_populator');
+    drupal_alter('islandora_populator', $populators);
+  }
+
+  return $populators;
+}
+
+/**
+ * Implements hook_islandora_ingest_steps().
+ */
+function islandora_populator_islandora_ingest_steps(array &$form_state) {
+  $steps = array();
+
+  module_load_include('inc', 'islandora', 'includes/ingest.form');
+  module_load_include('inc', 'islandora', 'includes/utilities');
+  $shared_storage = islandora_ingest_form_get_shared_storage($form_state);
+
+  // Bail out if we are disabled.
+  if (variable_get('islandora_populator_enable_cmodel_limiting', FALSE)
+      && !array_intersect(variable_get('islandora_populator_enabled_cmodels', array()), $shared_storage['models'])) {
+    return array();
+  }
+
+  $datastreams = islandora_get_datastreams_requirements_from_models($shared_storage['models']);
+  $applicable_filter = function ($populator) use ($datastreams) {
+    return $populator['type'] != 'inline' || array_intersect_key($datastreams, $populator['output']);
+  };
+  $all_populators = islandora_populator_get_populators();
+  $populators = array_filter($all_populators, $applicable_filter);
+  if (count($populators) > 1) {
+    $steps['islandora_populator_select'] = array(
+      'type' => 'form',
+      'weight' => 1,
+      'form_id' => 'islandora_populator_select_form',
+      'args' => array($populators),
+      'module' => 'islandora_populator',
+      'file' => 'includes/select.form.inc',
+    );
+    $step_storage = islandora_ingest_form_get_step_storage($form_state, 'islandora_populator_select');
+    if (isset($step_storage['selected']) && $step_storage['selected'] != 'default' && isset($populators[$step_storage['selected']])) {
+      $populator = $populators[$step_storage['selected']];
+
+      $populator += array('files' => array());
+      foreach ($populator['files'] as $file_info) {
+        list($ext, $module, $path) = $file_info;
+        form_load_include($form_state, $ext, $module, $path);
+      }
+
+      $steps['islandora_populator_input'] = array(
+        'type' => 'form',
+        'weight' => $steps['islandora_populator_select']['weight'] + 1,
+        'form_id' => ($populator['type'] == 'form' ?
+          $populator['form'] :
+          'islandora_populator_input_form'),
+        'args' => array($step_storage['selected'], $populator),
+        'module' => 'islandora_populator',
+        'file' => "includes/input.form.inc",
+      );
+    }
+  }
+
+  return $steps;
+}
+
+/**
+ * Implements hook_islandora_ingest_steps_alter().
+ */
+function islandora_populator_islandora_ingest_steps_alter(array &$steps, array &$form_state) {
+  if (isset($steps['xml_form_builder_metadata_step'])) {
+    if (array_key_exists('islandora_populator_select', $steps)) {
+      $steps['islandora_populator_select']['args'][0]['default']['description'] = t("An opportunity will be provided to enter metadata.");
+    }
+  }
+}

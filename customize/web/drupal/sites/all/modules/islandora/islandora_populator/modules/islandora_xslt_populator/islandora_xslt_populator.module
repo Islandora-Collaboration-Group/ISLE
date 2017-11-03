@@ -1,0 +1,97 @@
+<?php
+
+/**
+ * @file
+ * General hook implementations.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_xslt_populator_menu() {
+  $items = array();
+
+  $items['admin/islandora/tools/xslt_populator'] = array(
+    'title' => 'XSLT Populator',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_xslt_populator_admin_form'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'includes/admin.form.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_islandora_populator().
+ */
+function islandora_xslt_populator_islandora_populator() {
+  module_load_include('inc', 'islandora_xslt_populator', 'includes/db');
+  $populators = islandora_xslt_populator_get_populators();
+
+  $items = array();
+
+  foreach ($populators as $id => $info) {
+    $values = array(
+      'title' => t('XSLT Populator: @title', array(
+        '@title' => $info['title'],
+      )),
+      'description' => $info['description'],
+      'type' => 'inline',
+      'form' => array(
+        'file' => array(
+          '#type' => 'managed_file',
+          '#title' => t('@title, input file', array(
+            '@title' => $info['title'],
+          )),
+          '#description' => check_plain($info['description']),
+          '#required' => TRUE,
+          '#upload_validators' => array(
+            'file_validate_extensions' => array('xml xslt xsl'),
+          ),
+          '#element_validate' => array(
+            'islandora_xslt_populator_validate_file',
+          ),
+          '#islandora_plupload_do_not_alter' => TRUE,
+        ),
+        'info' => array(
+          '#type' => 'value',
+          '#value' => json_encode($info),
+        ),
+      ),
+      'output' => array(
+        $info['datastream_id'] => array(
+          'callback' => 'islandora_xslt_populator_populate',
+        ),
+      ),
+      'files' => array(
+        array('inc', 'islandora_xslt_populator', 'includes/populate'),
+      ),
+    );
+    if (!is_null($info['original_dsid'])) {
+      $values['output'][$info['original_dsid']] = array(
+        'callback' => 'islandora_xslt_populator_populate_original_dsid',
+      );
+    }
+    $items["islandora_xslt_populator--$id"] = $values;
+  }
+
+  return $items;
+}
+
+/**
+ * Implements hook_features_api().
+ */
+function islandora_xslt_populator_features_api() {
+  $items = array();
+  $mod_path = drupal_get_path('module', 'islandora_xslt_populator');
+
+  $items['islandora_xslt_populator_definitions'] = array(
+    'name' => t('Islandora XSLT Populator Definitions'),
+    'file' => "$mod_path/includes/features.inc",
+    'default_hook' => 'islandora_xslt_populator_definition_defaults',
+    'feature_source' => TRUE,
+  );
+
+  return $items;
+}

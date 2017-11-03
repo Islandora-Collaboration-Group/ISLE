@@ -1,0 +1,408 @@
+/* box model */
+
+BODY {
+	margin: 1em;
+	}
+
+H1 {
+	padding: 0.3em 0.5em 0.3em 0.5em;
+	margin: 0em;
+	}
+
+H2 {
+	padding: 0.2em 1em 0.2em 0.8em;
+	margin: 1em 0em 0em 0em;
+	}
+
+H3 {
+	padding: 0.1em 1em 0.2em 0.8em;
+	margin: 0em;
+	}
+
+H4 {
+	padding: 0em;
+	margin: 0.5em 1em;
+	}
+
+H5 {
+	padding: 0em;
+	margin: 0em 1em;
+	}
+
+P, TABLE {
+	margin: 0.5em 1em;
+	}
+
+UL, OL {
+	margin: 0.5em 2em;
+	}
+
+UL UL, UL OL, OL UL, OL OL {
+	margin: 0.5em 0em;
+	}
+
+TD.implementations UL {
+	margin: 0.5em 0em;
+	}
+
+TD.implementations LI {
+	margin: 0em 2em;
+	}
+
+LI {
+	margin: 0.5em 2em;
+	list-style-type: disc;
+	}
+
+LI P {
+	margin: 0em;
+	}
+
+DL {
+	margin: 0.5em 2em 1em 2em;
+	}
+
+DT {
+	margin: 1em;
+	clear: both;
+	}
+
+DD {
+	margin: -0.5em 0em -0.5em 2em;
+	}
+
+DD UL, DD OL {
+	margin-left: 0em;
+	}
+
+BLOCKQUOTE {
+	margin-left: 3em;
+	}
+
+IMG {
+	position: relative;
+	}
+
+TABLE {
+	width: 100%;
+	margin: 0em;
+	}
+
+PRE {
+	padding: 0.5em 3em 0.5em 3em;
+	margin: 0em;
+	}
+
+#content TD PRE {
+	padding: 0em;
+	}
+
+PRE.copyright {
+	padding: 0em;
+	margin: 0em;
+	}
+
+.issue {
+	padding: 0em 3em;
+	margin: 0em;
+	}
+
+#menu {
+	width: 20%;
+	padding: 0em;
+	}
+
+P.level1, P.level2, P.level3, P.level4 {
+	padding: 0em 1em;
+	margin: 0em;
+	}
+
+P.level1 {
+	margin: 0em 0em 3px 0em;
+	}
+
+P.level2 {
+	margin: 0em 0em 1px 0em;
+	}
+
+P.level3 {
+	margin-left: 1em;
+	}
+
+P.level4 {
+	margin-left: 2em;
+	}
+
+#content TH, #content TD {
+	margin: 0em;
+	padding: 0em 0.5em;
+	}
+
+#navigation, #content, #colophon P {
+	margin-top: 2px;
+	}
+
+TD.implementations {
+	width: 25%;
+	}
+
+/* fonts */
+BODY, TR {
+	font-family: 'Trebuchet MS', Arial, sans-serif;
+	}
+
+H1, H2, H3, H4, H5, H6 {
+	font-family: 'Trebuchet MS', Arial, sans-serif;
+	}
+
+H1 {
+	font-size: 173%;
+	font-weight: bold;
+	}
+
+H2 {
+	font-size: 120%;
+	font-weight: bold;
+	}
+
+H3 {
+	font-size: 120%;
+	font-weight: bold;
+	}
+
+H4 {
+	font-size: 100%;
+	font-weight: bold;
+	}
+
+H5 {
+	font-size: 100%
+	font-weight: normal;
+	font-style: italic;
+	}
+
+#navigation TD {
+	font-weight: bold;
+	}
+
+DT {
+	font-weight: bold;
+	}
+
+PRE, CODE {
+	font-size: 100%;
+	}
+
+A:link, A:visited, A:active, A:hover {
+	font-weight: bold;
+	}
+
+A.offsite:link, A.offsite:visited, A.offsite:active, A.offsite:hover {
+	font-weight: normal;
+	}
+
+#menu P.level1, P.level1 A:link, P.level1 A:visited, P.level1 A:hover {
+	font-weight: bold;
+	}
+
+#menu P.level2, P.level2 A:link, P.level2 A:visited {
+	font-weight: normal;
+	}
+
+#menu P.level3, P.level3 A:link, P.level3 A:visited {
+	font-weight: normal;
+	}
+
+#menu P.level3, #menu P.level4 {
+    font-size: 83%;
+	}
+
+#menu P.level4, P.level4 A:link, P.level4 A:visited {
+	font-weight: normal;
+	font-style: italic;
+	}
+
+.note {
+	font-family: 'Trebuchet MS', Arial, sans-serif;
+	font-size: 100%;
+	font-style: italic;
+	}
+
+#colophon {
+	font-size: 69%;
+	}
+
+/* colours */
+BODY {
+	background: white;
+	color: black;
+	border: 0px none white;
+	}
+
+/* this is to make Navigator fill the entire line */
+H1, #content {
+	border: 1px solid white;
+	width: 100%;
+	}
+
+H1, H1 A:link, H1 A:visited, H1 A:active, H1 A:hover {
+    background: #401;
+	color: white;
+	}
+
+H2 {
+	border-top: 5px solid white;
+	width: 100%;
+	}
+
+H2, H2 A:link, H2 A:visited, H2 A:active, H2 A:hover {
+	background: #041;
+	color: white;
+	}
+
+
+H3 {
+	border-top: 3px solid white;
+	width: 100%;
+	}
+
+H3, H3 A:link, H3 A:visited, H3 A:active, H3 A:hover {
+	color: #041;
+	background: #EFE;
+	}
+
+#content TABLE {
+	border-collapse: collapse;
+	}
+
+#content TH {
+	background: #041;
+	color: white;
+	}
+
+#content TD {
+	background: #EFE;
+	color: black;
+    border: 1px solid #041;
+	}
+
+#content, #navigation {
+	background: #EFE;
+	color: black;
+	}
+
+HR {
+	color: #041;
+	background: #041;
+	}
+
+IMG, A:link IMG, A:visited IMG, A:hover IMG, A:active IMG {
+	border: 0px none white;
+	background: transparent;
+	}
+
+A:link, A:visited, A:active, A:hover {
+	color: #052;
+	background: transparent;
+	border: 0px none white;
+	}
+
+.note {
+	color: #333;
+	}
+
+.note A:link, .note A:visited, .note A:hover {
+    background: transparent;
+	color: #041;
+	}
+
+.error {
+	color: #C00;
+	}
+
+#colophon {
+	color: #333;
+	background: #FEE;
+	}
+
+#colophon A:link, #colophon A:visited, #colophon A:hover {
+	color: #401;
+	background: transparent;
+	}
+
+TD.implementations {
+	border-left: 1px solid #041;
+	}
+
+#menu {
+	background: #EEF;
+	color: #014;
+	}
+
+#menu P.level1, P.level1 A:link, P.level1 A:visited, P.level1 A:active P.level1 A:hover {
+	background: #014;
+	color: white;
+	}
+
+#menu P.level2, P.level2 A:link, P.level2 A:visited, P.level2 A:active P.level2 A:hover, 
+#menu P.level3, P.level3 A:link, P.level3 A:visited, P.level3 A:active P.level3 A:hover, 
+#menu P.level4, P.level4 A:link, P.level4 A:visited, P.level4 A:active P.level4 A:hover {
+	background: #EEF;
+	color: #014;
+	}
+
+
+P.level2 A:hover, P.level3 A:hover, P.level4 A:hover {
+	text-decoration: underline;
+	}
+
+
+/* text */
+OL OL LI {
+	list-style: lower-alpha;
+	}
+
+TH {
+	text-align: left;
+	}
+
+TD {
+	vertical-align: top;
+	}
+
+#content TH, #content TD {
+	text-align: center;
+	}
+
+#content TH.rowhead, #content TD.rowhead {
+	text-align: left;
+	}
+
+H1 {
+	text-transform: uppercase;
+	}
+
+H2 {
+	text-transform: uppercase;
+	}
+
+H4 {
+	text-transform: lowercase;
+	}
+
+#menu {
+	text-transform: lowercase;
+	}
+
+#navigation TD {
+	text-transform: uppercase;
+	text-align: center;
+	}
+
+A.offsite {
+    text-decoration: underline;
+	}
+
+A, A.function, A.element {
+	text-decoration: none;
+	}
