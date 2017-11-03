@@ -11,6 +11,10 @@
      * Add the following:
       >127.0.0.1       localhost islandora-docker.com fedora web fedora.islandora-docker.com web.islandora-docker.com
 
+* Clone the ISLE repository
+     * Open a terminal and enter: `git clone https://github.com/Islandora-Collaboration-Group/ISLE`
+     * `cd /yourpathto/ISLE` 
+
 ---
 
 ### Build process
