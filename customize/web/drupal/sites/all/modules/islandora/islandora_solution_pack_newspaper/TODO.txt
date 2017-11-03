@@ -1,0 +1,32 @@
+TODO:
+=====
+
+high
+----
+
+- provide newspaper display
+- provide issue display
+- provide page display
+
+- ingest newspapers
+- ingest issues
+- ingest pages
+
+- create derivatives
+
+- create batch ingest script with drush
+
+
+medium
+------
+
+
+
+low
+---
+
+
+done
+----
+
+- ingest correct sp objects

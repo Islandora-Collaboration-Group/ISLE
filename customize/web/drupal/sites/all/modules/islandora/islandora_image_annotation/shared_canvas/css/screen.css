@@ -1,0 +1,62 @@
+/* column container */
+.colmask {
+  position: absolute;
+  /* This fixes the IE7 overflow hidden bug */
+  clear: both;
+  float: left;
+  width: 100%;
+  /* width of whole page */
+  overflow: hidden;
+  /* This chops off any overhanging divs */
+  
+  top: 28px;
+  bottom: 35px;
+  left: 0px;
+  right: 0px;
+}
+
+/* common column settings */
+.colright, .colmid, .colleft {
+  float: left;
+  width: 100%;
+  /* width of page */
+  position: relative;
+}
+
+.col1, .col2, .col3 {
+  float: left;
+  position: relative;
+  padding: 0 0 0px 0;
+  /* no left and right padding on columns, we just make them narrower instead
+				only padding top and bottom is included here, make it whatever value you need */
+  overflow: hidden;
+  
+  height: 100%;
+}
+
+/* 3 Column settings */
+.threecol {
+  background: #eee;
+}
+.threecol .colmid {
+  right: 40%;
+  background: #fff;
+  height: 100%;
+}
+.threecol .colleft {
+  right: 42%;
+  background: #f4f4f4;
+  height: 100%;
+}
+.threecol .col1 {
+  width: 42%;
+  left: 100%;
+}
+.threecol .col2 {
+  width: 17.5%;
+  left: 40.5%;
+}
+.threecol .col3 {
+  width: 40%;
+  left: 82.5%;
+}

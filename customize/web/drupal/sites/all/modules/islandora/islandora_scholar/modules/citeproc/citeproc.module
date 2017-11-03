@@ -1,0 +1,173 @@
+<?php
+
+/**
+ * @file
+ * Implements hooks and callbacks for this module.
+ */
+
+/**
+ * Get the default style.
+ *
+ * @return array
+ *   An associative array with two pairs:
+ *   - name: A name for the style.
+ *   - data: A string containg the XML representing the CSL style.
+ *   or boolean FALSE on failure.
+ */
+function citeproc_default_style() {
+  $style = CSL::GetDefaultName();
+  return citeproc_style($style);
+}
+
+/**
+ * Retrieve the indicated style.
+ *
+ * @param string $style
+ *   A string identifying the style in the database.
+ *
+ * @return array
+ *   An associative array with two pairs:
+ *   - name: A name for the style.
+ *   - data: A string containg the XML representing the CSL style.
+ *   or boolean FALSE on failure.
+ */
+function citeproc_style($style) {
+  $doc = CSL::Get($style, TRUE);
+  if (!empty($doc)) {
+    return array(
+      'name' => $style,
+      'data' => $doc,
+    );
+  }
+  return FALSE;
+}
+
+/**
+ * Get an value which should be unique in the output being rendered.
+ *
+ * Was using uniqid(); however, it can be slower than cold molasses...
+ * Possibly using /dev/random behind the scenes, which blocks for 'better'
+ * randomness...  Anyway...  This works.
+ *
+ * @return string
+ *   ID to use in citeproc HTML IDs
+ */
+function citeproc_get_id() {
+  $i = &drupal_static(__FUNCTION__, 0);
+  return format_string('citeproc_idnum_!id', array(
+    '!id' => $i++,
+  ));
+}
+
+/**
+ * Helper function, to get an instance of the citeproc with the given style.
+ *
+ * @param array $style
+ *   An associative array with two pairs:
+ *   - name: A name for the style.
+ *   - data: A string containg the XML representing the CSL style.
+ *
+ * @return citeproc
+ *   An instance of the CiteProc-PHP processor, for the given style.
+ */
+function citeproc_get_citeproc_php_instance($style) {
+  $citeprocs = &drupal_static(__FUNCTION__, array());
+
+  if (!array_key_exists($style['name'], $citeprocs) && $citeproc_php_path = libraries_get_path('citeproc-php')) {
+    require_once "$citeproc_php_path/CiteProc.php";
+
+    global $language;
+
+    $citeprocs[$style['name']] = new CiteProc($style['data'], $language->language);
+  }
+
+  return $citeprocs[$style['name']];
+}
+
+/**
+ * Produces a bibliography in the given style, using the given object.
+ *
+ * @param array $style
+ *   An associative array with two pairs:
+ *   - name: A name for the style.
+ *   - data: A string containg the XML representing the CSL style.
+ * @param object $raw
+ *   An object containing extracted fields used by CSLs might be produced in a
+ *   manner similar to _citeproc_array_to_object()... Essentially, objects
+ *   instead of associative arrays.
+ *
+ * @return string
+ *   The markup for the bibliography, as given by citeproc::render().
+ */
+function citeproc_bibliography_from_object($style, $raw) {
+  $citeproc = citeproc_get_citeproc_php_instance($style);
+
+  return $citeproc->render($raw, 'bibliography');
+}
+
+/**
+ * Produces a citation in the given style, using the given object.
+ *
+ * @param array $style
+ *   An associative array with two pairs:
+ *   - name: A name for the style.
+ *   - data: A string containg the XML representing the CSL style.
+ * @param object $raw
+ *   An object containing extracted fields used by CSLs might be produced in a
+ *   manner similar to _citeproc_array_to_object()... Essentially, objects
+ *   instead of associative arrays.
+ *
+ * @return string
+ *   The markup for the citation, as given by citeproc::render().
+ */
+function citeproc_citation_from_object($style, $raw) {
+  $citeproc = citeproc_get_citeproc_php_instance($style);
+
+  return $citeproc->render($raw, 'citation');
+}
+
+/**
+ * Produces a citation in the given style, representing the given MODS record.
+ *
+ * @param array $style
+ *   An associative array with two pairs:
+ *   - name: A name for the style.
+ *   - data: A string containg the XML representing the CSL style.
+ * @param mixed $mods
+ *   Either a string or a DOMNode, representing a MODS record.
+ *
+ * @return string
+ *   The markup for the bibliography, as given by
+ *   citeproc_bibliography_from_object().
+ */
+function citeproc_bibliography_from_mods($style, $mods) {
+  module_load_include('inc', 'citeproc', 'includes/converter');
+
+  $raw = convert_mods_to_citeproc_jsons($mods);
+  $raw = _citeproc_array_to_object($raw);
+
+  return citeproc_bibliography_from_object($style, $raw);
+}
+
+/**
+ * Produces a citation in the given style, representing the given MODS record.
+ *
+ * @param array $style
+ *   An associative array with two pairs:
+ *   - name: A name for the style.
+ *   - data: A string containg the XML representing the CSL style.
+ * @param mixed $mods
+ *   Either a string or a DOMNode, representing a MODS record.
+ *
+ * @return string
+ *   The markup for the citation, as given by
+ *   citeproc_citation_from_object().
+ */
+function citeproc_citation_from_mods($style, $mods) {
+  module_load_include('inc', 'citeproc', 'includes/converter');
+
+  $raw = convert_mods_to_citeproc_jsons($mods);
+  $raw = _citeproc_array_to_object($raw);
+
+  return citeproc_citation_from_object($style, $raw);
+}

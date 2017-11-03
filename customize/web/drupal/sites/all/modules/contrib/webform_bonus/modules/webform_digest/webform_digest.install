@@ -1,0 +1,90 @@
+<?php
+
+/**
+ * Implementation of hook_schema().
+ */
+function webform_digest_schema() {
+  $schema = array();
+
+  $schema['webform_digest'] = array(
+    'description' => 'Table for storing properties of Webform Digest module.',
+    'fields' => array(
+      'nid' => array(
+        'description' => 'The node identifier of a webform.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'enabled' => array(
+        'description' => 'Boolean value indicates if Webform Digest is enabled for a webform.',
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'new_data' => array(
+        'description' => 'Boolean value indicates if only new data since last email should be sent.',
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'period' => array(
+        'description' => 'Indicates how often digest should be sent.',
+        'type' => 'text',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'daily_granularity' => array(
+        'description' => 'Day of week/month when digest should be sent.',
+        'type' => 'int',
+        'size' => 'small',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'hourly_granularity' => array(
+        'description' => 'Hour when digest should be sent.',
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'sent' => array(
+        'description' => 'The Unix timestamp when the latest digest have been sent.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'settings' => array(
+        'description' => 'Serialized $form_state of download form.',
+        'type' => 'text',
+        'not null' => TRUE,
+        'size' => 'normal',
+        'default' => '',
+      ),
+    ),
+    'indexes' => array(
+      'webform_digest_sent' => array('sent'),
+    ),
+    'primary key' => array('nid'),
+  );
+
+  return $schema;
+}
+
+
+/**
+ * Implementation of hook_install().
+ */
+function webform_digest_install() {
+  drupal_install_schema('webform_digest');
+}
+
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function webform_digest_uninstall() {
+  drupal_uninstall_schema('webform_digest');
+}

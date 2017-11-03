@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gmi:MI_AcquisitionInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gmi="http://www.isotc211.org/2005/gmi" xsi:schemaLocation="http://www.isotc211.org/2005/gco http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/gco/gco.xsd http://www.isotc211.org/2005/gmd http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/gmd/gmd.xsd http://www.isotc211.org/2005/gmi ../../gmi/gmi.xsd" id="C_1">
+	<gmi:instrument>
+		<gmi:MI_Instrument uuid="8293FAD4B86475F2E040AC8C5AB4576F">
+			<gmi:citation>
+				<gmd:CI_Citation>
+					<gmd:title>
+						<gco:CharacterString>The Advanced Very High Resolution Radiometer</gco:CharacterString>
+					</gmd:title>
+					<gmd:date>
+						<gmd:CI_Date>
+							<gmd:date>
+								<gco:Date>1997</gco:Date>
+							</gmd:date>
+							<gmd:dateType>
+								<gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication">publication</gmd:CI_DateTypeCode>
+							</gmd:dateType>
+						</gmd:CI_Date>
+					</gmd:date>
+					<gmd:identifier>
+						<gmd:MD_Identifier>
+							<gmd:code>
+								<gco:CharacterString>gov.noaa.ngdc.fgdccitation:26722</gco:CharacterString>
+							</gmd:code>
+						</gmd:MD_Identifier>
+					</gmd:identifier>
+					<gmd:citedResponsibleParty>
+						<gmd:CI_ResponsibleParty>
+							<gmd:individualName>
+								<gco:CharacterString>Doe, Jane</gco:CharacterString>
+							</gmd:individualName>
+							<gmd:role>
+								<gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="originator">originator</gmd:CI_RoleCode>
+							</gmd:role>
+						</gmd:CI_ResponsibleParty>
+					</gmd:citedResponsibleParty>
+				</gmd:CI_Citation>
+			</gmi:citation>
+			<gmi:identifier>
+				<gmd:MD_Identifier>
+					<gmd:code>
+						<gco:CharacterString>AVHRR/3 &gt; Advanced Very High Resolution Radiometer/3</gco:CharacterString>
+					</gmd:code>
+				</gmd:MD_Identifier>
+			</gmi:identifier>
+			<gmi:type>
+				<gco:CharacterString>imager</gco:CharacterString>
+			</gmi:type>
+			<gmi:description>
+				<gco:CharacterString>Instrument Type: imager, Operational Mode: cross-track, Collection Type: whiskbroom, Other Information:</gco:CharacterString>
+			</gmi:description>
+		</gmi:MI_Instrument>
+	</gmi:instrument>
+	<gmi:operation>
+		<gmi:MI_Operation>
+			<gmi:description>
+				<gco:CharacterString>The polar orbiting satellites are able to collect global data on a daily basis for a variety of land, ocean and atmospheric applications. Data from the POES series supports a broad range of environmental monitoring applications including weather analysis and forecasting, climate research and prediction, global sea surface temperature measurements, atmospheric soundings of temperature and humidity, ocean dynamics research, volcanic eruption monitoring, forest fire detection, global vegetation analysis, search and rescue, and many other applications.</gco:CharacterString>
+			</gmi:description>
+			<gmi:identifier>
+				<gmd:MD_Identifier>
+					<gmd:authority>
+						<gmd:CI_Citation>
+							<gmd:title>
+								<gco:CharacterString>NASA/Global Change Master Directory (GCMD) Earth Science Keywords</gco:CharacterString>
+							</gmd:title>
+							<gmd:date>
+								<gmd:CI_Date>
+									<gmd:date>
+										<gco:Date>2007-04</gco:Date>
+									</gmd:date>
+									<gmd:dateType>
+										<gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="revision">revision</gmd:CI_DateTypeCode>
+									</gmd:dateType>
+								</gmd:CI_Date>
+							</gmd:date>
+							<gmd:edition>
+								<gco:CharacterString>Version 6.0.0.0.0</gco:CharacterString>
+							</gmd:edition>
+							<gmd:editionDate>
+								<gco:Date>2007-04</gco:Date>
+							</gmd:editionDate>
+							<gmd:citedResponsibleParty>
+								<gmd:CI_ResponsibleParty>
+									<gmd:organisationName>
+										<gco:CharacterString>NASA/GSFC/SED/ESD/GCDC/GCMD &gt; Global Change Master Directory, Global Change Data Center, Earth Sciences Division, Science and Exploration Directorate, Goddard Space Flight Center, NASA</gco:CharacterString>
+									</gmd:organisationName>
+									<gmd:contactInfo>
+										<gmd:CI_Contact>
+											<gmd:onlineResource>
+												<gmd:CI_OnlineResource>
+													<gmd:linkage>
+														<gmd:URL>http://gcmd.gsfc.nasa.gov/Resources/valids/archives/keyword_list.html</gmd:URL>
+													</gmd:linkage>
+													<gmd:protocol>
+														<gco:CharacterString>http</gco:CharacterString>
+													</gmd:protocol>
+													<gmd:applicationProfile>
+														<gco:CharacterString>web browser</gco:CharacterString>
+													</gmd:applicationProfile>
+													<gmd:name>
+														<gco:CharacterString>GCMD Keywords, Version 6.0.0.0.0</gco:CharacterString>
+													</gmd:name>
+													<gmd:description>
+														<gco:CharacterString>Thesuarus for earth science keywords and associated directories hosted and maintained by NASA.</gco:CharacterString>
+													</gmd:description>
+													<gmd:function>
+														<gmd:CI_OnLineFunctionCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="information">information</gmd:CI_OnLineFunctionCode>
+													</gmd:function>
+												</gmd:CI_OnlineResource>
+											</gmd:onlineResource>
+										</gmd:CI_Contact>
+									</gmd:contactInfo>
+									<gmd:role>
+										<gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="resourceProvider">resourceProvider</gmd:CI_RoleCode>
+									</gmd:role>
+								</gmd:CI_ResponsibleParty>
+							</gmd:citedResponsibleParty>
+						</gmd:CI_Citation>
+					</gmd:authority>
+					<gmd:code>
+						<gco:CharacterString>POES &gt; Polar-orbiting Operational Environmental Satellites</gco:CharacterString>
+					</gmd:code>
+				</gmd:MD_Identifier>
+			</gmi:identifier>
+			<gmi:status>
+				<gmd:MD_ProgressCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#MD_ProgressCode" codeListValue="onGoing">onGoing</gmd:MD_ProgressCode>
+			</gmi:status>
+			<gmi:type>
+				<gmi:MI_OperationTypeCode codeList="../Codelist/gmiCodelists.xml#MI_OperationTypeCode" codeListValue="real">real</gmi:MI_OperationTypeCode>
+			</gmi:type>
+		</gmi:MI_Operation>
+	</gmi:operation>
+	<gmi:platform>
+		<gmi:MI_Platform uuid="8293A0696440322CE040AC8C5AB453FE">
+			<gmi:identifier>
+				<gmd:MD_Identifier>
+					<gmd:code>
+						<gco:CharacterString>NOAA-16 &gt; National Oceanic &amp; Atmospheric Administration-16</gco:CharacterString>
+					</gmd:code>
+				</gmd:MD_Identifier>
+			</gmi:identifier>
+			<gmi:description>
+				<gco:CharacterString>NOAA-16 (L) - Launched: September 21, 2000. Instruments: AVHRR/3, TOVS (HIRS/3, AMSU-A1, AMSU-A2, AMSU-B), SBUV/2, SEM/2, SARSAT (SARR, SARP/2) and DCS/2. Operational Dates: March 20, 2001 to            Present. Operational Status: PM Secondary.</gco:CharacterString>
+			</gmi:description>
+			<gmi:sponsor>
+				<gmd:CI_ResponsibleParty uuid="86832756-32CE-46E2-E040-0AC8C5AB43743">
+					<gmd:organisationName>
+						<gco:CharacterString>DOC/NOAA/NESDIS/OSO &gt; Office of Satellite Operations, NESDIS, NOAA, U.S. Department of Commerce</gco:CharacterString>
+					</gmd:organisationName>
+					<gmd:contactInfo>
+						<gmd:CI_Contact>
+							<gmd:address>
+								<gmd:CI_Address>
+									<gmd:deliveryPoint>
+										<gco:CharacterString>NOAA / NESDIS Office of Satellite Operations, NSOF Bldg. 4231 Suitland Road</gco:CharacterString>
+									</gmd:deliveryPoint>
+									<gmd:city>
+										<gco:CharacterString>Suitland</gco:CharacterString>
+									</gmd:city>
+									<gmd:administrativeArea>
+										<gco:CharacterString>MD</gco:CharacterString>
+									</gmd:administrativeArea>
+									<gmd:postalCode>
+										<gco:CharacterString>20746-4304</gco:CharacterString>
+									</gmd:postalCode>
+									<gmd:country>
+										<gco:CharacterString>USA</gco:CharacterString>
+									</gmd:country>
+								</gmd:CI_Address>
+							</gmd:address>
+						</gmd:CI_Contact>
+					</gmd:contactInfo>
+					<gmd:role>
+						<gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="sponsor">sponsor</gmd:CI_RoleCode>
+					</gmd:role>
+				</gmd:CI_ResponsibleParty>
+			</gmi:sponsor>
+			<gmi:sponsor>
+				<gmd:CI_ResponsibleParty uuid="86832756-32D8-46E2-E040-0AC8C5AB43743">
+					<gmd:organisationName>
+						<gco:CharacterString>NASA/GSFC &gt; Goddard Space Flight Center, NASA</gco:CharacterString>
+					</gmd:organisationName>
+					<gmd:contactInfo>
+						<gmd:CI_Contact>
+							<gmd:address>
+								<gmd:CI_Address>
+									<gmd:deliveryPoint>
+										<gco:CharacterString>NASA Goddard Space Flight Center</gco:CharacterString>
+									</gmd:deliveryPoint>
+									<gmd:city>
+										<gco:CharacterString>Greenbelt</gco:CharacterString>
+									</gmd:city>
+									<gmd:administrativeArea>
+										<gco:CharacterString>MD</gco:CharacterString>
+									</gmd:administrativeArea>
+									<gmd:postalCode>
+										<gco:CharacterString>20771</gco:CharacterString>
+									</gmd:postalCode>
+									<gmd:country>
+										<gco:CharacterString>USA</gco:CharacterString>
+									</gmd:country>
+									<gmd:electronicMailAddress>
+										<gco:CharacterString>nasa@gov.gov</gco:CharacterString>
+									</gmd:electronicMailAddress>
+								</gmd:CI_Address>
+							</gmd:address>
+							<gmd:hoursOfService>
+								<gco:CharacterString>9 AM to 5 PM ET</gco:CharacterString>
+							</gmd:hoursOfService>
+						</gmd:CI_Contact>
+					</gmd:contactInfo>
+					<gmd:role>
+						<gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="sponsor">sponsor</gmd:CI_RoleCode>
+					</gmd:role>
+				</gmd:CI_ResponsibleParty>
+			</gmi:sponsor>
+			<gmi:instrument>
+				<gmi:MI_Instrument uuid="8293FAD4B86475F2E040AC8C5AB4576F">
+					<gmi:citation>
+						<gmd:CI_Citation>
+							<gmd:title>
+								<gco:CharacterString>The Advanced Very High Resolution Radiometer</gco:CharacterString>
+							</gmd:title>
+							<gmd:date>
+								<gmd:CI_Date>
+									<gmd:date>
+										<gco:Date>1997</gco:Date>
+									</gmd:date>
+									<gmd:dateType>
+										<gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication">publication</gmd:CI_DateTypeCode>
+									</gmd:dateType>
+								</gmd:CI_Date>
+							</gmd:date>
+							<gmd:identifier>
+								<gmd:MD_Identifier>
+									<gmd:code>
+										<gco:CharacterString>gov.noaa.ngdc.fgdccitation:26722</gco:CharacterString>
+									</gmd:code>
+								</gmd:MD_Identifier>
+							</gmd:identifier>
+							<gmd:citedResponsibleParty>
+								<gmd:CI_ResponsibleParty>
+									<gmd:individualName>
+										<gco:CharacterString>Doe, Jane</gco:CharacterString>
+									</gmd:individualName>
+									<gmd:role>
+										<gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="originator">originator</gmd:CI_RoleCode>
+									</gmd:role>
+								</gmd:CI_ResponsibleParty>
+							</gmd:citedResponsibleParty>
+							<gmd:citedResponsibleParty>
+								<gmd:CI_ResponsibleParty>
+									<gmd:individualName>
+										<gco:CharacterString>Doe, John</gco:CharacterString>
+									</gmd:individualName>
+									<gmd:role>
+										<gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="publisher">publisher</gmd:CI_RoleCode>
+									</gmd:role>
+								</gmd:CI_ResponsibleParty>
+							</gmd:citedResponsibleParty>
+						</gmd:CI_Citation>
+					</gmi:citation>
+					<gmi:citation>
+						<gmd:CI_Citation>
+							<gmd:title>
+								<gco:CharacterString>NOAA KLM User's Guide, Section 3.1, Advanced Very High Resolution Radiometer/3 (AVHRR/3)</gco:CharacterString>
+							</gmd:title>
+							<gmd:date>
+								<gmd:CI_Date>
+									<gmd:date>
+										<gco:Date>2000-09</gco:Date>
+									</gmd:date>
+									<gmd:dateType>
+										<gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication">publication</gmd:CI_DateTypeCode>
+									</gmd:dateType>
+								</gmd:CI_Date>
+							</gmd:date>
+							<gmd:edition>
+								<gco:CharacterString>September 2000 Revision</gco:CharacterString>
+							</gmd:edition>
+							<gmd:identifier>
+								<gmd:MD_Identifier>
+									<gmd:code>
+										<gco:CharacterString>gov.noaa.ngdc.fgdccitation:26723</gco:CharacterString>
+									</gmd:code>
+								</gmd:MD_Identifier>
+							</gmd:identifier>
+							<gmd:citedResponsibleParty>
+								<gmd:CI_ResponsibleParty>
+									<gmd:individualName>
+										<gco:CharacterString>Doe, John</gco:CharacterString>
+									</gmd:individualName>
+									<gmd:role>
+										<gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="originator">originator</gmd:CI_RoleCode>
+									</gmd:role>
+								</gmd:CI_ResponsibleParty>
+							</gmd:citedResponsibleParty>
+						</gmd:CI_Citation>
+					</gmi:citation>
+					<gmi:identifier>
+						<gmd:MD_Identifier>
+							<gmd:code>
+								<gco:CharacterString>AVHRR/3 &gt; Advanced Very High Resolution Radiometer/3</gco:CharacterString>
+							</gmd:code>
+						</gmd:MD_Identifier>
+					</gmi:identifier>
+					<gmi:type>
+						<gco:CharacterString>imager</gco:CharacterString>
+					</gmi:type>
+					<gmi:description>
+						<gco:CharacterString>Instrument Type: imager, Operational Mode: cross-track, Collection Type: whiskbroom, Other Information:</gco:CharacterString>
+					</gmi:description>
+				</gmi:MI_Instrument>
+			</gmi:instrument>
+		</gmi:MI_Platform>
+	</gmi:platform>
+</gmi:MI_AcquisitionInformation>

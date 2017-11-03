@@ -1,0 +1,10 @@
+name = Pubmed Importer
+description = Importer plugin for Pubmed IDs, to create citation objects.
+package = Islandora Solution Packs
+dependencies[] = islandora
+dependencies[] = islandora_importer
+dependencies[] = islandora_scholar
+dependencies[] = islandora_pmid
+files[] = includes/importer.inc
+version = 7.x-dev
+core = 7.x

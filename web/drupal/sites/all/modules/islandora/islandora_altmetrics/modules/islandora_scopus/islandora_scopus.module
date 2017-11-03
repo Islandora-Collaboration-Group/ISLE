@@ -1,0 +1,82 @@
+<?php
+
+/**
+ * @file
+ * Normal module functions.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_scopus_menu() {
+  return array(
+    'admin/islandora/tools/badges/scopus' => array(
+      'title' => 'Scopus',
+      'description' => 'Configure Scopus integration.',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('islandora_scopus_admin_form'),
+      'access arguments' => array('administer site configuration'),
+      'type' => MENU_LOCAL_TASK,
+      'file' => 'includes/admin.form.inc',
+    ),
+  );
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function islandora_scopus_block_info() {
+  return array(
+    'islandora_scopus_badge' => array(
+      'visibility' => BLOCK_VISIBILITY_LISTED,
+      'pages' => 'islandora/object/*',
+      'cache' => DRUPAL_CACHE_PER_PAGE,
+      'info' => t('Islandora Scopus Badge'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function islandora_scopus_block_view($delta = '') {
+  module_load_include('inc', 'islandora_badges', 'includes/utilities');
+  module_load_include('inc', 'islandora_scopus', 'includes/utilities');
+  $to_render = array();
+  if ($delta == 'islandora_scopus_badge') {
+    $api_key = variable_get('islandora_scopus_api_key', '');
+    if ($api_key) {
+      $object = menu_get_object('islandora_object', 2);
+      if ($object) {
+        $doi = islandora_badges_get_doi($object);
+        if ($doi) {
+          $id = islandora_scopus_get_id('doi', $doi);
+        }
+        // TODO: Extend to allow PMID, etc.
+        if (isset($id)) {
+          $headers = array('Accept' => 'text/html', 'X-ELS-APIKey' => $api_key);
+          $data = http_build_query(array(
+            'scopus_id' => $id,
+            'apiKey' => $api_key,
+            'httpAccept' => 'text/html',
+          ));
+          $scopus_url = "http://api.elsevier.com:80/content/abstract/citation-count?{$data}";
+          $response = drupal_http_request($scopus_url, array('headers' => $headers));
+          // Hit the API.
+          if ($response->code == 200) {
+            if (!preg_match('/alt=\"unavailable\"/', $response->data)) {
+              $to_render['content']['islandora_scopus'] = array(
+                '#type' => 'container',
+                '#attributes' => array(
+                  'class' => 'islandora_scopus_embed',
+                ),
+                '#children' => $response->data,
+              );
+            }
+          }
+        }
+      }
+    }
+  }
+  return $to_render;
+}

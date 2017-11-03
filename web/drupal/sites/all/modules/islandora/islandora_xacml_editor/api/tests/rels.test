@@ -1,0 +1,96 @@
+<?php
+
+/**
+ * @file
+ * Test relationship writing in XACML.
+ */
+
+class IslandoraXacmlApiRelsWritingTest extends IslandoraWebTestCase {
+  /**
+   * Inherits.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Islandora XACML API Relationships',
+      'description' => 'Ensure that relationships are written appropriately.',
+      'group' => 'Islandora XACML Editor',
+    );
+  }
+
+  /**
+   * Inherits.
+   */
+  public function setUp() {
+    parent::setUp('islandora_xacml_api');
+
+    // Our setup... Create the object.
+    variable_set('islandora_xacml_api_save_relationships', TRUE);
+    $this->repository = islandora_get_tuque_connection()->repository;
+    $this->object = $this->repository->constructObject('no:ingest');
+    $this->datastream = $this->object->constructDatastream('THE_DATA', 'M');
+    $this->datastream->label = 'label';
+    $this->datastream->mimetype = 'text/plain';
+    $this->datastream->content = 'le content';
+    $this->object->ingestDatastream($this->datastream);
+  }
+
+  /**
+   * Test writing of "role" relationships.
+   */
+  public function testRoleRels() {
+    $xacml = new IslandoraXacml($this->object);
+    $xacml->viewingRule->addRole('viewers');
+    $xacml->managementRule->addRole('managers');
+    $xacml->datastreamRule->addDsid($this->datastream->id);
+    $xacml->datastreamRule->addRole('asdfers');
+    $xacml->writeBackToFedora();
+
+    $this->assertTrue($this->object->relationships->get(ISLANDORA_RELS_EXT_URI, 'isViewableByRole', 'viewers', RELS_TYPE_PLAIN_LITERAL), 'Viewing relationship exists for added viewing role.');
+    $this->assertTrue($this->object->relationships->get(ISLANDORA_RELS_EXT_URI, 'isViewableByRole', 'managers', RELS_TYPE_PLAIN_LITERAL), 'Viewing relationship exists for add managment role.');
+    $this->assertTrue($this->object->relationships->get(ISLANDORA_RELS_EXT_URI, 'isViewableByRole', 'asdfers', RELS_TYPE_PLAIN_LITERAL), 'Viewing relationship exists on object for datastream access role.');
+    $this->assertTrue($this->datastream->relationships->get(ISLANDORA_RELS_INT_URI, 'isViewableByRole', 'asdfers', RELS_TYPE_PLAIN_LITERAL), 'Viewing relationship exists on datastream for datastream access role.');
+
+    $this->assertFalse($this->object->relationships->get(ISLANDORA_RELS_EXT_URI, 'isManageableByRole', 'viewers', RELS_TYPE_PLAIN_LITERAL), 'Management relationship does not exist for added viewing role.');
+    $this->assertTrue($this->object->relationships->get(ISLANDORA_RELS_EXT_URI, 'isManageableByRole', 'managers', RELS_TYPE_PLAIN_LITERAL), 'Management relationship exists for managment role.');
+    $this->assertFalse($this->object->relationships->get(ISLANDORA_RELS_EXT_URI, 'isManageableByRole', 'asdfers', RELS_TYPE_PLAIN_LITERAL), 'Management relationship does not exist for datastream access role.');
+  }
+
+  /**
+   * Test writing of "user" relationships.
+   */
+  public function testUserRels() {
+    $xacml = new IslandoraXacml($this->object);
+    $xacml->viewingRule->addUser('viewer');
+    $xacml->managementRule->addUser('manager');
+    $xacml->datastreamRule->addDsid($this->datastream->id);
+    $xacml->datastreamRule->addUser('asdfer');
+    $xacml->writeBackToFedora();
+
+    $this->assertTrue($this->object->relationships->get(ISLANDORA_RELS_EXT_URI, 'isViewableByUser', 'viewer', RELS_TYPE_PLAIN_LITERAL), 'Viewing relationship exists for added viewing user.');
+    $this->assertTrue($this->object->relationships->get(ISLANDORA_RELS_EXT_URI, 'isViewableByUser', 'manager', RELS_TYPE_PLAIN_LITERAL), 'Viewing relationship exists for add managment user.');
+    $this->assertTrue($this->object->relationships->get(ISLANDORA_RELS_EXT_URI, 'isViewableByUser', 'asdfer', RELS_TYPE_PLAIN_LITERAL), 'Viewing relationship exists on object for datastream access user.');
+    $this->assertTrue($this->datastream->relationships->get(ISLANDORA_RELS_INT_URI, 'isViewableByUser', 'asdfer', RELS_TYPE_PLAIN_LITERAL), 'Viewing relationship exists on datastream for datastream access user.');
+
+    $this->assertFalse($this->object->relationships->get(ISLANDORA_RELS_EXT_URI, 'isManageableByUser', 'viewer', RELS_TYPE_PLAIN_LITERAL), 'Management relationship does not exist for added viewing user.');
+    $this->assertTrue($this->object->relationships->get(ISLANDORA_RELS_EXT_URI, 'isManageableByUser', 'manager', RELS_TYPE_PLAIN_LITERAL), 'Management relationship exists for managment user.');
+    $this->assertFalse($this->object->relationships->get(ISLANDORA_RELS_EXT_URI, 'isManageableByUser', 'asdfer', RELS_TYPE_PLAIN_LITERAL), 'Management relationship does not exist for datastream access user.');
+  }
+
+  /**
+   * Test if writing "roles" first affects the ability of writing "users".
+   */
+  public function testRoleUserRels() {
+    $this->testRoleRels();
+    $this->testUserRels();
+    $this->testRoleRels();
+  }
+
+  /**
+   * Test if writing "users" first affects the ability of writing "roles".
+   */
+  public function testUserRoleRels() {
+    $this->testUserRels();
+    $this->testRoleRels();
+    $this->testUserRels();
+  }
+}

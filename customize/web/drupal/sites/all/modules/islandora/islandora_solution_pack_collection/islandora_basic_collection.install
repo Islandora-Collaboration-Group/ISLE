@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * @file
+ * This file contains all install functions.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * @see islandora_basic_collection_islandora_required_objects()
+ */
+function islandora_basic_collection_install() {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  islandora_install_solution_pack('islandora_basic_collection');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_basic_collection_uninstall() {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  islandora_install_solution_pack('islandora_basic_collection', 'uninstall');
+  $variables = array(
+    'islandora_basic_collection_metadata_info_table_drag_attributes',
+    'islandora_basic_collection_generate_uuid',
+    'islandora_basic_collection_page_size',
+    'islandora_basic_collection_disable_collection_policy_delete',
+    'islandora_basic_collection_default_view',
+    'islandora_basic_collection_listing_block_links_to_render',
+    'islandora_basic_collection_listing_block_content_models_to_restrict',
+    'islandora_basic_collection_object_count_listing_content_models_to_restrict',
+    'islandora_basic_collection_object_count_listing_phrase',
+    'islandora_basic_collection_object_count_listing_placeholder',
+    'islandora_basic_collection_display_backend',
+    'islandora_basic_collection_disable_display_generation',
+    'islandora_basic_collection_admin_page_size',
+  );
+  array_walk($variables, 'variable_del');
+}
+
+/**
+ * Default collection paging update.
+ */
+function islandora_basic_collection_update_7001() {
+  $old_var = variable_get('islandora_basic_collection_page_size');
+  if ($old_var == '10') {
+    variable_set('islandora_basic_collection_page_size', '12');
+  }
+}

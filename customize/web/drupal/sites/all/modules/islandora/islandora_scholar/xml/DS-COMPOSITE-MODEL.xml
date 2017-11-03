@@ -1,0 +1,26 @@
+<dsCompositeModel xmlns="info:fedora/fedora-system:def/dsCompositeModel#">
+  <dsTypeModel ID="DC" >
+      <form FORMAT_URI="http://www.openarchives.org/OAI/2.0/oai_dc/" MIME="text/xml"></form>
+  </dsTypeModel>
+  <dsTypeModel ID="RELS-EXT" optional="true">
+      <form FORMAT_URI="info:fedora/fedora-system:FedoraRELSExt-1.0" MIME="application/rdf+xml"></form>
+  </dsTypeModel>
+  <dsTypeModel ID="RELS-INT" optional="true">
+      <form FORMAT_URI="info:fedora/fedora-system:FedoraRELSInt-1.0" MIME="application/rdf+xml"></form>
+  </dsTypeModel>
+  <dsTypeModel ID="MODS" optional="false">
+    <form MIME="text/xml"></form>
+  </dsTypeModel>
+  <dsTypeModel ID="PDF">
+    <form MIME="application/pdf"/>
+  </dsTypeModel>
+  <dsTypeModel ID="FULL_TEXT" optional="false">
+    <form MIME="text/plain"></form>
+  </dsTypeModel>
+  <dsTypeModel ID="TN" optional="false">
+    <form MIME="image/jpeg"></form>
+  </dsTypeModel>
+  <dsTypeModel ID="PREVIEW" optional="false">
+    <form MIME="image/jpeg"></form>
+  </dsTypeModel>
+</dsCompositeModel>

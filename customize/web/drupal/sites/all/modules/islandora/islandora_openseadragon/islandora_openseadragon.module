@@ -1,0 +1,137 @@
+<?php
+
+/**
+ * @file
+ * Hooks and callbacks for this module.
+ */
+
+define('ISLANDORA_OPENSEADRAGON_REQUIRED_VERSION', '2.2.1');
+define('ISLANDORA_OPENSEADRAGON_DEFAULT_TILE_SIZE', 256);
+define('ISLANDORA_OPENSEADRAGON_DEFAULT_TILE_OVERLAP', 0);
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_openseadragon_menu() {
+  return array(
+    'admin/islandora/islandora_viewers/openseadragon' => array(
+      'title' => 'OpenSeadragon',
+      'description' => 'Configure the OpenSeadragon viewer.',
+      'page callback' => 'drupal_get_form',
+      'access arguments' => array('administer site configuration'),
+      'page arguments' => array('islandora_openseadragon_admin'),
+      'file' => 'includes/admin.form.inc',
+      'type' => MENU_NORMAL_ITEM,
+    ),
+    'islandora/object/%islandora_object/download_clip' => array(
+      'page callback' => 'islandora_openseadragon_download_clip',
+      'page arguments' => array(2),
+      'type' => MENU_CALLBACK,
+      'access callback' => 'islandora_object_access',
+      'access arguments' => array(ISLANDORA_VIEW_OBJECTS, 2),
+      'file' => 'includes/download.clip.inc',
+      'load arguments' => array(2),
+    ),
+  );
+}
+
+/**
+ * Implements hook_theme().
+ */
+function islandora_openseadragon_theme() {
+  return array(
+    'islandora_openseadragon_viewer' => array(
+      'variables' => array(
+        // @deprecated (7.x-1.10):
+        // 'uri' and 'fedora_object' has been replaced by the use of 'pid' and
+        // 'tile_sources'.
+        'uri' => '',
+        'fedora_object' => NULL,
+        'pid' => NULL,
+        'tile_sources' => array(),
+      ),
+      'file' => 'theme/theme.inc',
+      'template' => 'theme/islandora-openseadragon',
+    ),
+    // A link for clipping JP2 datastreams via djatoka.
+    'islandora_openseadragon_clipper' => array(
+      'file' => 'theme/theme.inc',
+      'variables' => array(
+        'pid' => NULL,
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_islandora_viewer_info().
+ */
+function islandora_openseadragon_islandora_viewer_info() {
+  return array(
+    // @XXX The element returned has a width:100% but no natural flow width; it
+    // is completely dependent on it's parent.
+    'islandora_openseadragon' => array(
+      'label' => t('OpenSeadragon'),
+      // Later we'll add DZI too.
+      'description' => t('OpenSeadragon viewer with djatoka as tilesource.'),
+      'configuration' => 'admin/islandora/islandora_viewers/openseadragon',
+      'callback' => 'islandora_openseadragon_callback',
+      // DZI has xml as mimetype? Not sure how to handle that.
+      'mimetype' => array('image/jp2'),
+    ),
+  );
+}
+
+/**
+ * Callback function for the viewer.
+ *
+ * @param array $params
+ *   Params required by the theme. We require the keys:
+ *   - jp2_url: The URL to the JP2 image.
+ * @param AbstractObject $object
+ *   The object that we are viewing.
+ *
+ * @return string
+ *   HTML representation of the OpenSeadragon viewer
+ */
+function islandora_openseadragon_callback(array $params = array(), AbstractObject $object = NULL) {
+  module_load_include('inc', 'islandora_openseadragon', 'includes/utilities');
+  $pid = isset($object->id) ? $object->id : NULL;
+  if ($pid == NULL && isset($params['jp2_url'])) {
+    // Attempt to extract it from the 'jp2_url' if the object is not provided.
+    $matches = array();
+    preg_match('/object\/([^\/]*)\/datastream/', $params['jp2_url'], $matches);
+    $pid = isset($matches[1]) ? $matches[1] : NULL;
+  }
+  if (isset($params['jp2_url']) && !empty($params['jp2_url'])) {
+    return theme('islandora_openseadragon_viewer', array(
+      'pid' => $pid,
+      'tile_sources' => islandora_openseadragon_identifier_tile_source($params['jp2_url']),
+    ));
+  }
+}
+
+/**
+ * Implements hook_process_theme().
+ */
+function islandora_openseadragon_preprocess_islandora_object_print(array &$variables) {
+  if (isset($_GET['clip'])) {
+    module_load_include('inc', 'islandora_openseadragon', 'includes/utilities');
+    $clip_parts = islandora_openseadragon_construct_clip_url($_GET['clip']);
+    if ($clip_parts) {
+      $variables['clip'] = $clip_parts['original_params'];
+      $variables['content']['clip'] = array(
+        '#weight' => 0,
+        '#prefix' => "<div id='clip'>",
+        '#markup' => theme_image(array(
+          'path' => $clip_parts['image_url'],
+          'attributes' => $clip_parts['dimensions'],
+        )),
+        '#suffix' => '</div>',
+      );
+    }
+    else {
+      drupal_set_message(t('Invalid clip parameters passed.'), 'error');
+    }
+  }
+}

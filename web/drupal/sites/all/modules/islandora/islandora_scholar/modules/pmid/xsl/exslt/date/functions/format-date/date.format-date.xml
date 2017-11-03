@@ -1,0 +1,218 @@
+<?xml version="1.0"?>
+<exslt:function xmlns:exslt="http://exslt.org/documentation" 
+               version="2" module="date" status="implemented">
+
+<exslt:name>format-date</exslt:name>
+
+<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                 xmlns:dc="http://purl.org/dc/elements/1.1/"
+                 ID="date:format-date">
+   <dc:subject>EXSLT</dc:subject>
+   <dc:subject>format-date</dc:subject>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="date:format-date.2">
+         <exslt:version>2</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com/">
+            Jeni Tennison
+         </dc:creator>
+         <dc:date>2001-06-07</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            Removed third (optional date format) argument.
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="date:format-date.2.1">
+         <exslt:version>2.1</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com/">
+            Jeni Tennison
+         </dc:creator>
+         <dc:date>2001-06-11</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            Added Javascript implementation.
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="date:format-date.2.2">
+         <exslt:version>2.2</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com/">
+            Jeni Tennison
+         </dc:creator>
+         <dc:date>2001-06-16</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            <ul>
+               <li>Updated Javascript implementation.</li>
+               <li>Added Microsoft-specific stylesheet.</li>
+            </ul>
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="date:format-date.2.3">
+         <exslt:version>2.3</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com/">
+            Jeni Tennison
+         </dc:creator>
+         <dc:date>2001-08-10</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            Added XSLT template and EXSLT - Functions implementation.
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+</rdf:Description>
+
+<exslt:doc xmlns:html="http://www.w3.org/1999/xhtml"
+           xmlns="">
+   <html:div xmlns="http://www.w3.org/1999/xhtml">
+      <p>
+         The <code>date:format-date</code> function formats a date/time according to a pattern.
+      </p>
+      <p>
+         The first argument to <code>date:format-date</code> specifies the date/time to be formatted.  It must be right or left-truncated date/time strings in one of the formats defined in [<a href="http://www.w3.org/TR/xmlschema-2/" class="offsite">XML Schema Part 2: Datatypes</a>].  The permitted formats are as follows:
+      </p>
+      <ul>
+         <li>
+            <a href="http://www.w3.org/TR/xmlschema-2/#dateTime" class="offsite"><code>xs:dateTime</code></a> (<code><var>CCYY</var>-<var>MM</var>-<var>DD</var>T<var>hh</var>:<var>mm</var>:<var>ss</var></code>)
+         </li>
+         <li>
+            <a href="http://www.w3.org/TR/xmlschema-2/#date" class="offsite"><code>xs:date</code></a> (<code><var>CCYY</var>-<var>MM</var>-<var>DD</var></code>)
+         </li>
+         <li>
+            <a href="http://www.w3.org/TR/xmlschema-2/#time" class="offsite"><code>xs:time</code></a> (<code><var>hh</var>:<var>mm</var>:<var>ss</var></code>)
+         </li>
+         <li>
+            <a href="http://www.w3.org/TR/xmlschema-2/#gYearMonth" class="offsite"><code>xs:gYearMonth</code></a> (<code><var>CCYY</var>-<var>MM</var></code>)
+         </li>
+         <li>
+            <a href="http://www.w3.org/TR/xmlschema-2/#gYear" class="offsite"><code>xs:gYear</code></a> (<code><var>CCYY</var></code>)
+         </li>
+         <li>
+            <a href="http://www.w3.org/TR/xmlschema-2/#gMonthDay" class="offsite"><code>xs:gMonthDay</code></a> (<code>--<var>MM</var>-<var>DD</var></code>)
+         </li>
+         <li>
+            <a href="http://www.w3.org/TR/xmlschema-2/#gMonth" class="offsite"><code>xs:gMonth</code></a> (<code>--<var>MM</var>--</code>)
+         </li>
+         <li>
+            <a href="http://www.w3.org/TR/xmlschema-2/#gDay" class="offsite"><code>xs:gDay</code></a> (<code>---<var>DD</var></code>)
+         </li>
+      </ul>
+      <p>
+         The second argument is a string that gives the format pattern used to format the date.  The format pattern must be in the syntax specified by the JDK 1.1 <a href="http://java.sun.com/products/jdk/1.1/docs/api/java.text.SimpleDateFormat.html" class="offsite">SimpleDateFormat</a> class.  The format pattern string is interpreted as described for the JDK 1.1 <a href="http://java.sun.com/products/jdk/1.1/docs/api/java.text.SimpleDateFormat.html" class="offsite">SimpleDateFormat</a> class.
+      </p>
+      <p>
+         If the date/time format is right-truncated (i.e. in a format other than <code>xs:time</code>, or <code>xs:dateTime</code>) then any missing components are assumed to be as follows: if no month is specified, it is given a month of <code>01</code>; if no day is specified, it is given a day of <code>01</code>; if no time is specified, it is given a time of <code>00:00:00</code>.
+      </p>
+      <p>
+         If the date/time format is left-truncated (i.e. <code>xs:time</code>, <code>xs:gMonthDay</code>, <code>xs:gMonth</code> or <code>xs:gDay</code>) and the format pattern has a token that uses a component that is missing from the date/time format used, then that token is replaced with an empty string (<code>''</code>) within the result.
+      </p>
+   </html:div>
+</exslt:doc>
+
+<exslt:definition xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <exslt:return type="string" />
+   <exslt:arg name="date-time" type="string" 
+              optional="no" />
+   <exslt:arg name="pattern" type="string" 
+              optional="no" />
+</exslt:definition>
+
+<exslt:implementations>
+   <exslt:implementation src="date.js" language="exslt:javascript" 
+                         version="2">
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="date:format-date.js">
+         <dc:subject>EXSLT</dc:subject>
+         <dc:subject>date</dc:subject>
+         <dc:subject>format-date</dc:subject>
+         <dc:subject>Javascript</dc:subject>
+         <exslt:revision>
+            <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                             xmlns:dc="http://purl.org/dc/elements/1.1/"
+                             ID="date:format-date.js.1">
+               <exslt:version>1</exslt:version>
+               <dc:creator xmlns:vcf="http://www.ietf.org/internet-drafts/draft-dawson-vcard-xml-dtd-03.txt" rdf:parseType="Resource">
+                  <vcf:fn>Chris Bayes</vcf:fn>
+                  <vcf:email>chris@bayes.co.uk</vcf:email>
+                  <vcf:url>http://www.bayes.co.uk</vcf:url>
+               </dc:creator>
+               <dc:date>2001-06-11</dc:date>
+            </rdf:Description>
+         </exslt:revision>
+         <exslt:revision>
+            <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                             xmlns:dc="http://purl.org/dc/elements/1.1/"
+                             ID="date:format-date.js.2">
+               <exslt:version>2</exslt:version>
+               <dc:creator xmlns:vcf="http://www.ietf.org/internet-drafts/draft-dawson-vcard-xml-dtd-03.txt" rdf:parseType="Resource">
+                  <vcf:fn>Chris Bayes</vcf:fn>
+                  <vcf:email>chris@bayes.co.uk</vcf:email>
+                  <vcf:url>http://www.bayes.co.uk</vcf:url>
+               </dc:creator>
+               <dc:date>2001-06-16</dc:date>
+            </rdf:Description>
+         </exslt:revision>
+      </rdf:Description>
+   </exslt:implementation>
+   <exslt:implementation src="date.msxsl.xsl" language="exslt:msxsl"
+                         version="2">
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="date:format-date.msxsl">
+         <dc:subject>EXSLT</dc:subject>
+         <dc:subject>date</dc:subject>
+         <dc:subject>format-date</dc:subject>
+         <dc:subject>MSXML</dc:subject>
+         <exslt:revision>
+            <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                             xmlns:dc="http://purl.org/dc/elements/1.1/"
+                             ID="date:format-date.msxsl.1">
+               <exslt:version>1</exslt:version>
+               <dc:creator xmlns:vcf="http://www.ietf.org/internet-drafts/draft-dawson-vcard-xml-dtd-03.txt" rdf:parseType="Resource">
+                  <vcf:fn>Chris Bayes</vcf:fn>
+                  <vcf:email>chris@bayes.co.uk</vcf:email>
+                  <vcf:url>http://www.bayes.co.uk</vcf:url>
+               </dc:creator>
+               <dc:date>2001-06-16</dc:date>
+            </rdf:Description>
+         </exslt:revision>
+      </rdf:Description>
+   </exslt:implementation>
+   <exslt:implementation src="date.format-date.function.xsl" language="exslt:exslt" 
+                         version="2">
+      <exslt:doc xmlns:html="http://www.w3.org/1999/xhtml">
+         <html:div xmlns="http://www.w3.org/1999/xhtml">
+            <p>
+               This implementation uses <a href="http://www.exslt.org/str/functions/padding"><code>str:padding()</code></a>.
+            </p>
+         </html:div>
+      </exslt:doc>
+   </exslt:implementation>
+   <exslt:implementation src="date.format-date.template.xsl" language="exslt:xslt" 
+                         version="2">
+      <exslt:doc xmlns:html="http://www.w3.org/1999/xhtml">
+         <html:div xmlns="http://www.w3.org/1999/xhtml">
+            <p>
+               This implementation uses the <a href="http://www.exslt.org/str/functions/padding"><code>str:padding</code></a> template.
+            </p>
+         </html:div>
+      </exslt:doc>
+   </exslt:implementation>
+</exslt:implementations>
+
+<exslt:use-cases />
+
+</exslt:function>

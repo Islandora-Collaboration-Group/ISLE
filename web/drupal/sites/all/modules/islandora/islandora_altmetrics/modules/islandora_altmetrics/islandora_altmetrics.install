@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * Installation hooks for Islandora Altmetrics.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_altmetrics_uninstall() {
+  $vars = array(
+    'islandora_altmetrics_badge',
+    'islandora_altmetrics_popover',
+  );
+  array_walk($vars, 'variable_del');
+}

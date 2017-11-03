@@ -1,0 +1,132 @@
+<?php
+
+/**
+ * @file
+ * Tests to see if the hooks get called when appropriate.
+ *
+ * In the test module 'islandora_hooked_access_test' there are implementations
+ * of hooks being tested. These implementations modifies the session, and
+ * that's how we test if the hook gets called.
+ *
+ * To make sense of these tests reference islandora_hooked_access_test.module.
+ */
+
+class IslandoraXacmlHookedAccessTestCase extends IslandoraWebTestCase {
+
+  /**
+   * Gets info to display to describe this test.
+   *
+   * @see IslandoraWebTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Islandora XACML Hooked Access Hook Implementation',
+      'description' => 'Ensure that the hooked access callback returns appropriate results.',
+      'group' => 'Islandora XACML Editor',
+    );
+  }
+
+  /**
+   * Creates an admin user and a connection to a fedora repository.
+   *
+   * @see IslandoraWebTestCase::setUp()
+   */
+  public function setUp() {
+    parent::setUp('islandora_xacml_api');
+    $this->repository = $this->admin->repository;
+    $this->objects = array(
+      'test:testAccessHook',
+    );
+    $this->access_ops = array(
+      ISLANDORA_VIEW_OBJECTS,
+    );
+    $this->management_ops = array(
+      ISLANDORA_MANAGE_PROPERTIES,
+      ISLANDORA_METADATA_EDIT,
+      ISLANDORA_ADD_DS,
+      ISLANDORA_PURGE,
+      ISLANDORA_INGEST,
+    );
+    $this->purgeTestObjects();
+    $this->dsid = 'asdf';
+    $this->createTestObjects();
+    $this->object = $this->repository->getObject('test:testAccessHook');
+  }
+
+  /**
+   * Free any objects/resources created for this test.
+   *
+   * @see IslandoraWebTestCase::tearDown()
+   */
+  public function tearDown() {
+    $this->purgeTestObjects();
+    unset($this->repository);
+    parent::tearDown();
+  }
+
+  /**
+   * Create test object(s).
+   */
+  public function createTestObjects() {
+    $all_perms = array_merge($this->access_ops, $this->management_ops);
+
+    // Privileged accoding to Drupal, will deny via XACML.
+    $this->user_deny = $user_deny = $this->drupalCreateUser($all_perms);
+    // Unprivileged according to Drupal, will allow via XACML.
+    $this->user_allow = $user_allow = $this->drupalCreateUser($all_perms);
+
+    foreach ($this->objects as $object_id) {
+      $object = $this->repository->constructObject($object_id);
+      $object->label = $object_id;
+      $object->models = 'a-fake:model';
+
+      $datastream = $object->constructDatastream($this->dsid, 'M');
+      $datastream->label = 'fdsa';
+      $datastream->mimetype = 'text/plain';
+      $datastream->content = 'Some kinda awesome content stuffs...';
+
+      $object->ingestDatastream($datastream);
+
+      $xacml = new IslandoraXacml($object);
+      $xacml->viewingRule->addUser($user_allow->name);
+      $xacml->managementRule->addUser($user_allow->name);
+      $xacml->writeBackToFedora();
+
+      $object = $this->repository->ingestObject($object);
+    }
+  }
+
+  /**
+   * Purge any objects created by the test's in this class.
+   */
+  public function purgeTestObjects() {
+    foreach ($this->objects as $object) {
+      try {
+        $object = $this->repository->getObject($object);
+        $this->repository->purgeObject($object->id);
+      }
+      catch (Exception $e) {
+        // Meh... Either it didn't exist or the purge failed.
+      }
+    }
+  }
+
+  /**
+   * Test all XACML operations on object.
+   */
+  public function testAllXacmlAccess() {
+    $user_allow = $this->user_allow;
+    $user_deny = $this->user_deny;
+
+    foreach ($this->access_ops as $op) {
+      $this->assertTrue(islandora_object_access($op, $this->object, $user_allow), "Allow object access: $op");
+      $this->assertFalse(islandora_object_access($op, $this->object, $user_deny), "Deny object access: $op");
+      $this->assertTrue(islandora_datastream_access($op, $this->object[$this->dsid], $user_allow), "Allow datastream access: $op");
+      $this->assertFalse(islandora_datastream_access($op, $this->object[$this->dsid], $user_deny), "Deny datastream access: $op");
+    }
+    foreach ($this->management_ops as $op) {
+      $this->assertTrue(islandora_object_access($op, $this->object, $user_allow), "Allow object access: $op");
+      $this->assertFalse(islandora_object_access($op, $this->object, $user_deny), "Deny object access: $op");
+    }
+  }
+}

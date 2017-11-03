@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for this module.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * @see islandora_book_islandora_required_objects()
+ */
+function islandora_book_install() {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  islandora_install_solution_pack('islandora_book');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_book_uninstall() {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  islandora_install_solution_pack('islandora_book', 'uninstall');
+  $variables = array(
+    'islandora_book_ingest_derivatives',
+    'islandora_book_metadata_display',
+  );
+  array_walk($variables, 'variable_del');
+}

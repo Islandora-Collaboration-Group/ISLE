@@ -1,0 +1,120 @@
+<?php
+// @codingStandardsIgnoreStart
+/**
+ * @file
+ * Unit Tests.
+ */
+
+/**
+ * Unit Tests for the FormControl class.
+ */
+class PHPLib_DOMHelpers_TestCase extends DrupalUnitTestCase {
+
+  /**
+   * Get Test info.
+   *
+   * @return array
+   *   Properties that are displayed in the test selection form.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'DOMHelpers Unit Tests.',
+      'description' => 'Unit tests for DOMHelper.inc.',
+      'group' => 'PHP Lib',
+    );
+  }
+
+  /**
+   * SetUp() performs any pre-requisite tasks that need to happen.
+   */
+  public function setUp() {
+    // Enable any modules required for the test.
+    parent::setUp('php_lib');
+    module_load_include('inc', 'php_lib', 'DOMHelpers');
+  }
+
+  /**
+   * Test constructing the Form definition.
+   */
+  public function testGetDomNodeXPath() {
+    $xml = <<<EOT
+    <root>
+      <a>
+        <b></b>
+        <c></c>
+      </a>
+      <c>
+      </c>
+      <a>
+        <b></b>
+      </a>
+    </root>
+EOT;
+    $doc = new DOMDocument();
+    $doc->loadXML($xml);
+    $root = $doc->documentElement;
+    $path = get_dom_node_xpath($root);
+    $this->assertEqual($path, "/*[local-name() = 'root'][1]", 'get_dom_node_xpath: Path to root element.');
+    $list = $root->getElementsByTagName('a');
+    $a1 = $list->item(0);
+    $path = get_dom_node_xpath($a1);
+    $this->assertEqual($path, "/*[local-name() = 'root'][1]/*[local-name() = 'a'][1]", 'get_dom_node_xpath: Path to first child element.');
+    $a2 = $list->item(1);
+    $path = get_dom_node_xpath($a2);
+    $this->assertEqual($path, "/*[local-name() = 'root'][1]/*[local-name() = 'a'][2]", 'get_dom_node_xpath: Path to same type of child element seperated by a different type.');
+    $list = $root->getElementsByTagName('c');
+    $c1 = $list->item(0);
+    $path = get_dom_node_xpath($c1);
+    $this->assertEqual($path, "/*[local-name() = 'root'][1]/*[local-name() = 'a'][1]/*[local-name() = 'c'][1]", 'get_dom_node_xpath: Path to grandchild element with different type than the first two.');
+    $c2 = $list->item(1);
+    $path = get_dom_node_xpath($c2);
+    $this->assertEqual($path, "/*[local-name() = 'root'][1]/*[local-name() = 'c'][1]", 'get_dom_node_xpath: Path to child element with different type than the first two.');
+    $list = $root->getElementsByTagName('b');
+    $b1 = $list->item(0);
+    $this->assertEqual(get_dom_node_xpath($b1), "/*[local-name() = 'root'][1]/*[local-name() = 'a'][1]/*[local-name() = 'b'][1]", 'get_dom_node_xpath: Path to grandchild element with third type.');
+    $b2 = $list->item(1);
+    $this->assertEqual(get_dom_node_xpath($b2), "/*[local-name() = 'root'][1]/*[local-name() = 'a'][2]/*[local-name() = 'b'][1]", 'get_dom_node_xpath: Path to grandchild element with third type but different parent.');
+  }
+
+  public function testGetDomNodeXPathNamespaces() {
+    $xml = <<<EOT
+    <ns:root xmlns:ns="adsfadsf">
+      <ns:a>
+        <ns:b></ns:b>
+        <ns:c></ns:c>
+      </ns:a>
+      <ns:c>
+      </ns:c>
+      <ns:a>
+        <ns:b></ns:b>
+      </ns:a>
+    </ns:root>
+EOT;
+    $doc = new DOMDocument();
+    $doc->loadXML($xml);
+    $root = $doc->documentElement;
+    $path = get_dom_node_xpath($root);
+    $this->assertEqual($path, "/*[local-name() = 'root'][1]", 'get_dom_node_xpath Namespaces: path to root element.');
+    $list = $root->getElementsByTagName('a');
+    $a1 = $list->item(0);
+    $path = get_dom_node_xpath($a1);
+    $this->assertEqual($path, "/*[local-name() = 'root'][1]/*[local-name() = 'a'][1]", 'get_dom_node_xpath Namespaces: Path to first child element.');
+    $a2 = $list->item(1);
+    $path = get_dom_node_xpath($a2);
+    $this->assertEqual($path, "/*[local-name() = 'root'][1]/*[local-name() = 'a'][2]", 'get_dom_node_xpath Namespaces: Path to same type of child element seperated by a different type.');
+    $list = $root->getElementsByTagName('c');
+    $c1 = $list->item(0);
+    $path = get_dom_node_xpath($c1);
+    $this->assertEqual($path, "/*[local-name() = 'root'][1]/*[local-name() = 'a'][1]/*[local-name() = 'c'][1]", 'get_dom_node_xpath Namespaces: Path to grandchild element with different type than the first two.');
+    $c2 = $list->item(1);
+    $path = get_dom_node_xpath($c2);
+    $this->assertEqual($path, "/*[local-name() = 'root'][1]/*[local-name() = 'c'][1]", 'get_dom_node_xpath Namespaces: Path to child element with different type than the first two.');
+    $list = $root->getElementsByTagName('b');
+    $b1 = $list->item(0);
+    $this->assertEqual(get_dom_node_xpath($b1), "/*[local-name() = 'root'][1]/*[local-name() = 'a'][1]/*[local-name() = 'b'][1]", 'get_dom_node_xpath Namespaces: Path to grandchild element with third type.');
+    $b2 = $list->item(1);
+    $this->assertEqual(get_dom_node_xpath($b2), "/*[local-name() = 'root'][1]/*[local-name() = 'a'][2]/*[local-name() = 'b'][1]", 'get_dom_node_xpath Namespaces: Path to grandchild element with third type but different parent.');
+  }
+
+}
+// @codingStandardsIgnoreEnd

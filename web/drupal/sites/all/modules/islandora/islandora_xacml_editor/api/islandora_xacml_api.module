@@ -1,0 +1,345 @@
+<?php
+
+/**
+ * @file
+ * Islandora Xacml module API functions.
+ */
+
+define('ISLANDORA_XACML_API_MANAGEMENT_RULE', 'deny-management-functions');
+define('ISLANDORA_XACML_API_DATASTREAM_RULE', 'deny-dsid-mime');
+define('ISLANDORA_XACML_API_VIEWING_RULE', 'deny-access-functions');
+define('ISLANDORA_XACML_API_PERMIT_RULE', 'allow-everything-else');
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_xacml_api_menu() {
+  $items = array();
+  $items['admin/islandora/tools/xacml'] = array(
+    'title' => 'Islandora XACML',
+    'description' => 'Settings for the Islandora XACML modules.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_xacml_api_settings'),
+    'access arguments' => array('administer islandora_xacml_api'),
+  );
+
+  $items['admin/islandora/tools/xacml/api'] = array(
+    'title' => 'Islandora XACML API',
+    'description' => 'Settings for the Islandora XACML API module.',
+    'access arguments' => array('administer islandora_xacml_api'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 0,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_perm().
+ */
+function islandora_xacml_api_permission() {
+  return array(
+    'administer islandora_xacml_api' => array(
+      'title' => 'Manage XACML API settings.',
+    ),
+  );
+}
+
+/**
+ * Admin settings form.
+ */
+function islandora_xacml_api_settings() {
+  $form['islandora_xacml_api_save_relationships'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Save relationships'),
+    '#description' => t('Causes relationships to be written to the REL-INT/EXT when the policy is saved.'),
+    '#default_value' => variable_get('islandora_xacml_api_save_relationships', TRUE),
+  );
+  $form['islandora_xacml_api_rels_viewable_role'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Solr RELS-EXT ViewableByRole field'),
+    '#default_value' => variable_get('islandora_xacml_api_rels_viewable_role', 'RELS_EXT_isViewableByRole_literal_ms'),
+  );
+  $form['islandora_xacml_api_rels_viewable_user'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Solr RELS-EXT ViewableByUser field'),
+    '#default_value' => variable_get('islandora_xacml_api_rels_viewable_user', 'RELS_EXT_isViewableByUser_literal_ms'),
+  );
+
+  return system_settings_form($form);
+}
+
+/**
+ * Hook to update Solr queries to respect XACML rules.
+ *
+ * @param IslandoraSolrQueryProcessor $islandora_solr_query
+ *   The Solr query processor to apply XACML rules to.
+ */
+function islandora_xacml_api_islandora_solr_query($islandora_solr_query) {
+  global $user;
+
+  if ($user->uid != 0) {
+    $user_name = $user->name;
+  }
+  else {
+    $user_name = 'anonymous';
+  }
+
+  $fq = variable_get('islandora_xacml_api_rels_viewable_user', 'RELS_EXT_isViewableByUser_literal_ms') . ":\"" . $user_name . "\" OR ";
+
+  // Check if any of my roles are allowed.
+  foreach ($user->roles as $role) {
+    $fq .= variable_get('islandora_xacml_api_rels_viewable_role', 'RELS_EXT_isViewableByRole_literal_ms') . ":\"" . $role . "\" OR ";
+  }
+  // Check if the object is open (unrestricted).
+  $fq .= "((*:* -" . variable_get('islandora_xacml_api_rels_viewable_user', 'RELS_EXT_isViewableByUser_literal_ms') . ":[* TO *]) AND (*:* -" . variable_get('islandora_xacml_api_rels_viewable_role', 'RELS_EXT_isViewableByRole_literal_ms') . ":[* TO *]))";
+  $islandora_solr_query->solrParams['fq'][] = $fq;
+}
+
+/**
+ * Implements hook_islandora_datastream_alter().
+ */
+function islandora_xacml_api_islandora_datastream_alter(AbstractObject $object, AbstractDatastream $datastream, array &$context) {
+  if ($context['action'] == 'purge') {
+    $viewable_by_user = 'isViewableByUser';
+    $viewable_by_role = 'isViewableByRole';
+    $manageable_by_user = 'isManageableByUser';
+    $manageable_by_role = 'isManageableByRole';
+    // The XACML POLICY is removed.
+    if ($datastream->id === 'POLICY') {
+      $object->relationships->remove(ISLANDORA_RELS_EXT_URI, $viewable_by_user);
+      $object->relationships->remove(ISLANDORA_RELS_EXT_URI, $viewable_by_role);
+      $object->relationships->remove(ISLANDORA_RELS_EXT_URI, $manageable_by_user);
+      $object->relationships->remove(ISLANDORA_RELS_EXT_URI, $manageable_by_role);
+      foreach ($object as $source_dsid => $value) {
+        $object[$source_dsid]->relationships->remove(ISLANDORA_RELS_INT_URI, $viewable_by_user);
+        $object[$source_dsid]->relationships->remove(ISLANDORA_RELS_INT_URI, $viewable_by_role);
+      }
+    }
+    else {
+      // An individual datastream is removed.
+      if (isset($object['POLICY'])) {
+        $xacml = new IslandoraXacml($object);
+        $ds_rule = $xacml->datastreamRule->getRuleArray();
+        $dsid = $datastream->id;
+        if (array_search($dsid, $ds_rule['dsids']) !== FALSE) {
+          if (count($ds_rule['users']) > 0) {
+            $object[$dsid]->relationships->remove(ISLANDORA_RELS_INT_URI, $viewable_by_user);
+          }
+          if (count($ds_rule['roles']) > 0) {
+            $object[$dsid]->relationships->remove(ISLANDORA_RELS_INT_URI, $viewable_by_role);
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_islandora_datastream_ingested().
+ */
+function islandora_xacml_api_islandora_datastream_ingested(AbstractObject $object, AbstractDatastream $datastream) {
+  if (isset($object['POLICY'])) {
+    $xacml = new IslandoraXacml($object);
+    $ds_rule = $xacml->datastreamRule->getRuleArray();
+    if (array_search($datastream->id, $ds_rule['dsids']) !== FALSE) {
+      $viewable_by_user = 'isViewableByUser';
+      $viewable_by_role = 'isViewableByRole';
+      $manageable_by_user = 'isManageableByUser';
+      $manageable_by_role = 'isManageableByRole';
+      if (count($ds_rule['users']) > 0) {
+        foreach ($ds_rule['users'] as $user) {
+          // The XACML API adds fedoraAdmin to the list of users as to prevent
+          // an object from being completely locked out. As this role is a
+          // Fedora role and has no interaction with Drupal we won't add it for
+          // cleanliness sake.
+          if ($user !== 'fedoraAdmin') {
+            $object[$datastream->id]->relationships->add(ISLANDORA_RELS_INT_URI, $viewable_by_user, $user, TRUE);
+          }
+        }
+      }
+      if (count($ds_rule['roles']) > 0) {
+        foreach ($ds_rule['roles'] as $role) {
+          $object[$datastream->id]->relationships->add(ISLANDORA_RELS_INT_URI, $viewable_by_role, $role, TRUE);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_islandora_basic_collection_query_get_query_optionals().
+ */
+function islandora_xacml_api_islandora_basic_collection_get_query_optionals($type) {
+  switch ($type) {
+    case 'manage':
+      $to_return = array(
+        format_string('?object <!uri!pred> ?role', array(
+          '!uri' => ISLANDORA_RELS_EXT_URI,
+          '!pred' => 'isManagableByRole',
+        )),
+        format_string('?object <!uri!pred> ?user', array(
+          '!uri' => ISLANDORA_RELS_EXT_URI,
+          '!pred' => 'isManagableByUser',
+        )),
+      );
+      return $to_return;
+
+    case 'view':
+    default:
+      $to_return = array(
+        format_string('?object <!uri!pred> ?role', array(
+          '!uri' => ISLANDORA_RELS_EXT_URI,
+          '!pred' => 'isViewableByRole',
+        )),
+        format_string('?object <!uri!pred> ?user', array(
+          '!uri' => ISLANDORA_RELS_EXT_URI,
+          '!pred' => 'isViewableByUser',
+        )),
+      );
+      return $to_return;
+  }
+}
+
+/**
+ * Implements hook_islandora_basic_collection_query_get_query_filters().
+ */
+function islandora_xacml_api_islandora_basic_collection_get_query_filters() {
+  global $user;
+  if ($user->uid === 0) {
+    $user_name = 'anonymous';
+  }
+  else {
+    $user_name = $user->name;
+  }
+
+  $role_matches = array();
+  foreach ($user->roles as $role) {
+    $role_matches[] = "?role='{$role}'";
+  }
+  $role_matcher = implode(' || ', $role_matches);
+
+  return "(!bound(?role) && !bound(?user)) || (bound(?user) && ?user='{$user_name}') || (bound(?role) && ($role_matcher))";
+}
+
+/**
+ * Implements hook_islandora_object_access().
+ */
+function islandora_xacml_api_islandora_object_access($op, $object, $user) {
+  $management_operations = array(
+    ISLANDORA_MANAGE_PROPERTIES,
+    ISLANDORA_METADATA_EDIT,
+    ISLANDORA_ADD_DS,
+    ISLANDORA_PURGE,
+    ISLANDORA_INGEST,
+    ISLANDORA_REVERT_DATASTREAM,
+  );
+
+  // XXX: Is it necessary to address the case when POLICY is not readable?...
+  // ... really, we should never get to this point if the POLICY isn't
+  // readable...
+  if (isset($object['POLICY'])) {
+    if ($user->uid === 0) {
+      $user->name = 'anonymous';
+    }
+
+    $xacml = new IslandoraXacml($object);
+
+    if (ISLANDORA_VIEW_OBJECTS == $op) {
+      return $xacml->viewingRule->hasPermission($user->name, $user->roles);
+    }
+    elseif (in_array($op, $management_operations) && $xacml->managementRule->isPopulated()) {
+      return $xacml->managementRule->hasPermission($user->name, $user->roles);
+    }
+  }
+
+  return NULL;
+}
+
+/**
+ * Implements hook_islandora_datastream_access().
+ */
+function islandora_xacml_api_islandora_datastream_access($op, $datastream, $user) {
+  if (isset($datastream->parent['POLICY'])) {
+    if ($user->uid === 0) {
+      $user->name = 'anonymous';
+    }
+
+    $xacml = new IslandoraXacml($datastream->parent);
+
+    $check_ops = array(
+      ISLANDORA_VIEW_OBJECTS,
+      ISLANDORA_METADATA_EDIT,
+      ISLANDORA_PURGE,
+      ISLANDORA_REVERT_DATASTREAM,
+    );
+    if (in_array($op, $check_ops)) {
+      $object_results = islandora_xacml_api_islandora_object_access(
+          $op, $datastream->parent, $user
+      );
+      $datastream_results = $xacml->datastreamRule->hasPermission(
+          $user->name, $user->roles, $datastream->mimetype, $datastream->id
+      );
+
+      $results = (array) $object_results;
+      $results[] = $datastream_results;
+      return $results;
+    }
+  }
+  return NULL;
+}
+
+/**
+ * Implements hook_islandora_object_alter().
+ */
+function islandora_xacml_api_islandora_object_alter(AbstractObject $object, array &$context) {
+  switch ($context['action']) {
+    case 'ingest':
+      $inherit = $object->relationships->get(ISLANDORA_RELS_EXT_URI, 'inheritXacmlFrom');
+      if (count($inherit) > 0) {
+        $collection_object = islandora_object_load($inherit[0]['object']['value']);
+        if ($collection_object['POLICY']) {
+          $xacml = new IslandoraXacml($object, $collection_object['POLICY']->content);
+          $xacml->writeBackToFedora();
+        }
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_islandora_object_ingested().
+ */
+function islandora_xacml_api_islandora_object_ingested(AbstractObject $object) {
+  $query = <<<EOQ
+SELECT ?object
+FROM <#ri>
+WHERE {
+  ?object <http://islandora.ca/ontology/relsext#inheritXacmlFrom> <info:fedora/{$object->id}> ;
+          <fedora-model:state> <info:fedora/fedora-system:def/model#Active> .
+}
+EOQ;
+  $children = $object->repository->ri->sparqlQuery($query);
+  if (count($children) > 0 && $object['POLICY']) {
+    $query_array = array(
+      'type' => 'sparql',
+      'query' => $query,
+      'description' => t('Applies policy to existing objects.'),
+    );
+    $xml = $object['POLICY']->content;
+    $pid = $object->id;
+    $batch = array(
+      'title' => t('Updating Policies'),
+      'progress_message' => t('Please wait if many objects are being updated this could take a few minutes.'),
+      'operations' => array(
+        array(
+          'islandora_xacml_editor_batch_function',
+          array($xml, $pid, $query_array),
+        ),
+      ),
+      'finished' => 'islandora_xacml_editor_batch_finished',
+      'file' => drupal_get_path('module', 'islandora_xacml_editor') . '/includes/batch.inc',
+    );
+    batch_set($batch);
+  }
+}

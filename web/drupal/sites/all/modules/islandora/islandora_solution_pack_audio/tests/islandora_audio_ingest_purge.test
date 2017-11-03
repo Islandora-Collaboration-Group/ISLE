@@ -1,0 +1,85 @@
+<?php
+
+/**
+ * @file
+ * Attempts to ingest an audio file into a randomly generated audio collection.
+ */
+
+class IslandoraAudioIngestTestCase extends IslandoraCollectionWebTestCase {
+
+  /**
+   * Get test information.
+   *
+   * @see IslandoraWebTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Audio Ingest/Purge',
+      'description' => 'Ingests and purges an audio file from a randomly generated audio collection',
+      'group' => 'Islandora Audio',
+    );
+  }
+
+  /**
+   * Set up the test environment.
+   *
+   * @see IslandoraWebTestCase::setUp()
+   */
+  public function setUp() {
+    $this->lame_url = variable_get('islandora_lame_url', '/usr/bin/lame');
+    parent::setUp(array(
+      'islandora',
+      'islandora_audio',
+      'islandora_basic_collection',
+    ));
+  }
+
+  /**
+   * Creates an administrative user and attempts to ingest a test audio file.
+   */
+  public function testIngestPurgeAudio() {
+
+    $user = $this->drupalCreateUser(array_keys(module_invoke_all('permission')));
+    $this->drupalLogin($user);
+
+    $edit = array(
+      'islandora_lame_url' => $this->lame_url,
+    );
+    $this->drupalPost('admin/islandora/solution_pack_config/audio', $edit, 'Save configuration');
+
+    $label = $this->randomName(16);
+    $suffix = $this->randomName(16);
+    $collectionpid = 'islandora:' . $suffix;
+    $this->createTestCollection($label, 'islandora:sp-audioCModel', $collectionpid);
+
+    // Attempts to create an object.
+    $path = 'islandora/object/' . $collectionpid . '/manage/overview/ingest';
+    $edit = array();
+    $file = drupal_get_path('module', 'islandora_audio') . '/tests/fixtures/test.wav';
+    $edit['files[audio_file]'] = $file;
+    $this->drupalPost($path, $edit, 'Ingest');
+    $this->assertText('New Object', 'Audio object was created', 'Islandora');
+
+    // Determines whether or not the appropriate datastreams were created.
+    $object = $this->getObjectFromPath($this->url);
+    $datastreams = array(
+      'RELS-EXT',
+      'DC',
+      'OBJ',
+      'TN',
+      'PROXY_MP3',
+    );
+    $this->assertDatastreams($object, $datastreams);
+
+    $datastreams = array(
+      array('OBJ', 'wav'),
+      array('TN', 'image'),
+      array('PROXY_MP3', 'mp3'),
+    );
+    $this->validateDatastreams($object, $datastreams);
+
+    // Attempts to delete the object and then collection.
+    $this->deleteObject($object->id);
+    $this->deleteTestCollection($collectionpid);
+  }
+}

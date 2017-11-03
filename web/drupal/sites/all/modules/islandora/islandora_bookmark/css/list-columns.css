@@ -1,0 +1,24 @@
+.islandora-bookmark-list-column {
+  display: inline-block;
+  max-width: 16em;
+  margin: 0.1em;
+  vertical-align: text-top;
+  text-align: center;
+}
+.islandora-bookmark-list-column > div {
+  margin: 0.2em;
+  background-color: #E4E4E4;
+  border-style: solid;
+  border-width: 0.1em;
+}
+.islandora-bookmark-list-column img {
+  max-width: 15em;
+  display: block;
+  /*Center alignment.*/
+  margin-left: auto;
+  margin-right: auto;
+}
+.list-links {
+  float: right;
+  margin: 0.2em;
+}

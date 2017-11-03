@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+<exslt:function xmlns:exslt="http://exslt.org/documentation" 
+               version="2" module="date" status="implemented">
+
+<exslt:name>parse-date</exslt:name>
+
+<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                 xmlns:dc="http://purl.org/dc/elements/1.1/"
+                 ID="date:parse-date">
+   <dc:subject>EXSLT</dc:subject>
+   <dc:subject>parse-date</dc:subject>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="date:parse-date.2">
+         <exslt:version>2</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com/">
+            Jeni Tennison
+         </dc:creator>
+         <dc:date>2001-06-07</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            Removed third (optional date format) argument.
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="date:parse-date.2.1">
+         <exslt:version>2.1</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com/">
+            Jeni Tennison
+         </dc:creator>
+         <dc:date>2001-06-11</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            Added Javascript implementation.
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="date:parse-date.2.2">
+         <exslt:version>2.2</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com/">
+            Jeni Tennison
+         </dc:creator>
+         <dc:date>2001-06-16</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            <ul>
+               <li>Updated Javascript implementation.</li>
+               <li>Added Microsoft-specific stylesheet.</li>
+            </ul>
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+</rdf:Description>
+
+<exslt:doc xmlns:html="http://www.w3.org/1999/xhtml"
+           xmlns="">
+   <html:div xmlns="http://www.w3.org/1999/xhtml">
+      <p>
+         The <code>date:parse-date</code> function parses a string into a date/time string according to a pattern.
+      </p>
+      <p>
+         The first argument to <code>date:parse-date</code> is a string that gives a date/time in a particular format.
+      </p>
+      <p>
+         The second argument is a string that gives the format pattern that has been used to format the date/time given as the first argument.  The format pattern must be in the syntax specified by the JDK 1.1 <a href="http://java.sun.com/products/jdk/1.1/docs/api/java.text.SimpleDateFormat.html" class="offsite">SimpleDateFormat</a> class.  The format pattern string is interpreted as described for the JDK 1.1 <a href="http://java.sun.com/products/jdk/1.1/docs/api/java.text.SimpleDateFormat.html" class="offsite">SimpleDateFormat</a> class.
+      </p>
+      <p>
+         The result of applying the format pattern string to the date/time passed as the first argument is an interpreted date.  This interpreted date is formatted as a right or left-truncated date/time strings in one of the formats defined in [<a href="http://www.w3.org/TR/xmlschema-2/" class="offsite">XML Schema Part 2: Datatypes</a>].  The permitted formats are as follows:
+      </p>
+      <ul>
+         <li>
+            <a href="http://www.w3.org/TR/xmlschema-2/#dateTime" class="offsite"><code>xs:dateTime</code></a> (<code><var>CCYY</var>-<var>MM</var>-<var>DD</var>T<var>hh</var>:<var>mm</var>:<var>ss</var></code>)
+         </li>
+         <li>
+            <a href="http://www.w3.org/TR/xmlschema-2/#date" class="offsite"><code>xs:date</code></a> (<code><var>CCYY</var>-<var>MM</var>-<var>DD</var></code>)
+         </li>
+         <li>
+            <a href="http://www.w3.org/TR/xmlschema-2/#time" class="offsite"><code>xs:time</code></a> (<code><var>hh</var>:<var>mm</var>:<var>ss</var></code>)
+         </li>
+         <li>
+            <a href="http://www.w3.org/TR/xmlschema-2/#gYearMonth" class="offsite"><code>xs:gYearMonth</code></a> (<code><var>CCYY</var>-<var>MM</var></code>)
+         </li>
+         <li>
+            <a href="http://www.w3.org/TR/xmlschema-2/#gYear" class="offsite"><code>xs:gYear</code></a> (<code><var>CCYY</var></code>)
+         </li>
+         <li>
+            <a href="http://www.w3.org/TR/xmlschema-2/#gMonthDay" class="offsite"><code>xs:gMonthDay</code></a> (<code>--<var>MM</var>-<var>DD</var></code>)
+         </li>
+         <li>
+            <a href="http://www.w3.org/TR/xmlschema-2/#gMonth" class="offsite"><code>xs:gMonth</code></a> (<code>--<var>MM</var>--</code>)
+         </li>
+         <li>
+            <a href="http://www.w3.org/TR/xmlschema-2/#gDay" class="offsite"><code>xs:gDay</code></a> (<code>---<var>DD</var></code>)
+         </li>
+      </ul>
+      <p>
+         The interpreted date is formatted to the least specific format of the above as possible, providing that all the components specified for it is are represented within the result.  If the interpreted date includes a year, then the format must be one of <code>xs:dateTime</code>, <code>xs:date</code>, <code>xs:gYearMonth</code> or <code>xs:gYear</code>; if it specifies an hour, then it must be one of <code>xs:dateTime</code> or <code>xs:time</code> and so on.  If the format includes a component that is not specified within the interpreted date, then these components are given default values as follows: year defaults to <code>0001</code>, month and day default to <code>01</code>, hour, minute and second default to <code>00</code>.
+      </p>
+   </html:div>
+</exslt:doc>
+
+<exslt:definition xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <exslt:return type="string" />
+   <exslt:arg name="date-time" type="string" 
+              optional="no" />
+   <exslt:arg name="pattern" type="string" 
+              optional="no" />
+</exslt:definition>
+
+<exslt:implementations>
+   <exslt:implementation src="date.js" language="exslt:javascript" 
+                         version="2">
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="date:parse-date.js">
+         <dc:subject>EXSLT</dc:subject>
+         <dc:subject>date</dc:subject>
+         <dc:subject>parse-date</dc:subject>
+         <dc:subject>Javascript</dc:subject>
+         <exslt:revision>
+            <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                             xmlns:dc="http://purl.org/dc/elements/1.1/"
+                             ID="date:parse-date.js.1">
+               <exslt:version>1</exslt:version>
+               <dc:creator xmlns:vcf="http://www.ietf.org/internet-drafts/draft-dawson-vcard-xml-dtd-03.txt" rdf:parseType="Resource">
+                  <vcf:fn>Chris Bayes</vcf:fn>
+                  <vcf:email>chris@bayes.co.uk</vcf:email>
+                  <vcf:url>http://www.bayes.co.uk</vcf:url>
+               </dc:creator>
+               <dc:date>2001-06-11</dc:date>
+            </rdf:Description>
+         </exslt:revision>
+         <exslt:revision>
+            <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                             xmlns:dc="http://purl.org/dc/elements/1.1/"
+                             ID="date:parse-date.js.2">
+               <exslt:version>2</exslt:version>
+               <dc:creator xmlns:vcf="http://www.ietf.org/internet-drafts/draft-dawson-vcard-xml-dtd-03.txt" rdf:parseType="Resource">
+                  <vcf:fn>Chris Bayes</vcf:fn>
+                  <vcf:email>chris@bayes.co.uk</vcf:email>
+                  <vcf:url>http://www.bayes.co.uk</vcf:url>
+               </dc:creator>
+               <dc:date>2001-06-16</dc:date>
+            </rdf:Description>
+         </exslt:revision>
+      </rdf:Description>
+   </exslt:implementation>
+   <exslt:implementation src="date.msxsl.xsl" language="exslt:msxsl"
+                         version="2">
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="date:parse-date.msxsl">
+         <dc:subject>EXSLT</dc:subject>
+         <dc:subject>date</dc:subject>
+         <dc:subject>parse-date</dc:subject>
+         <dc:subject>MSXML</dc:subject>
+         <exslt:revision>
+            <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                             xmlns:dc="http://purl.org/dc/elements/1.1/"
+                             ID="date:parse-date.msxsl.1">
+               <exslt:version>1</exslt:version>
+               <dc:creator xmlns:vcf="http://www.ietf.org/internet-drafts/draft-dawson-vcard-xml-dtd-03.txt" rdf:parseType="Resource">
+                  <vcf:fn>Chris Bayes</vcf:fn>
+                  <vcf:email>chris@bayes.co.uk</vcf:email>
+                  <vcf:url>http://www.bayes.co.uk</vcf:url>
+               </dc:creator>
+               <dc:date>2001-06-16</dc:date>
+            </rdf:Description>
+         </exslt:revision>
+      </rdf:Description>
+   </exslt:implementation>
+</exslt:implementations>
+
+<exslt:use-cases />
+
+</exslt:function>

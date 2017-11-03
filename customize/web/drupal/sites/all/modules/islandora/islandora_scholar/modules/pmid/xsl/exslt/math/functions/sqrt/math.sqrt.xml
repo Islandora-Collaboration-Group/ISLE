@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<exslt:function xmlns:exslt="http://exslt.org/documentation" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:vcf="http://www.ietf.org/internet-drafts/draft-dawson-vcard-xml-dtd-03.txt" version="1" module="math" status="implemented">
+   <exslt:name>sqrt</exslt:name>
+   <rdf:Description ID="math:sqrt">
+      <dc:subject>EXSLT</dc:subject>
+      <dc:subject>math</dc:subject>
+      <dc:subject>sqrt</dc:subject>
+      <exslt:revision>
+         <rdf:Description ID="math:sqrt.1">
+            <exslt:version>1</exslt:version>
+            <dc:creator rdf:parseType="Resource">
+               <vcf:fn>James Fuller</vcf:fn>
+               <vcf:email>jim.fuller@ruminate.co.uk</vcf:email>
+               <vcf:url>http://www.ruminate.co.uk</vcf:url>
+            </dc:creator>
+            <dc:date>2001-06-16</dc:date>
+            <dc:description>
+               <dc:description>
+                  <html:div>Returns the sqrt value of the passed argument.</html:div>
+               </dc:description>
+            </dc:description>
+         </rdf:Description>
+      </exslt:revision>
+      <exslt:revision>
+         <rdf:Description ID="math:sqrt.1.1">
+            <exslt:version>1.1</exslt:version>
+            <dc:creator rdf:parseType="Resource">
+               <vcf:fn>Jeni Tennison</vcf:fn>
+               <vcf:email>mail@jenitennison.com</vcf:email>
+               <vcf:url>http://www.jenitennison.com</vcf:url>
+            </dc:creator>
+            <dc:date>2001-08-15</dc:date>
+            <dc:description>
+               <dc:description>
+                  Added XSLT template implementation and EXSLT - Functions implementation courtesy of Nate Austin.
+               </dc:description>
+            </dc:description>
+         </rdf:Description>
+      </exslt:revision>
+      <exslt:revision>
+         <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                          xmlns:dc="http://purl.org/dc/elements/1.1/"
+                          ID="math:sqrt.1.2">
+            <exslt:version>1.2</exslt:version>
+            <dc:creator email="craig.stewart@nottingham.ac.uk" 
+                        url="">Craig Stewart</dc:creator>
+            <dc:date>2002-08-21</dc:date>
+            <dc:description xmlns="http://www.w3.org/1999/xhtml">Added 4XSLT and libxslt implementation to the list.</dc:description>
+         </rdf:Description>
+      </exslt:revision>
+      <exslt:revision>
+         <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                          xmlns:dc="http://purl.org/dc/elements/1.1/"
+                          ID="math:sqrt.1.3">
+            <exslt:version>1.3</exslt:version>
+            <dc:creator email="craig.stewart@nottingham.ac.uk" 
+                        url="">Craig Stewart</dc:creator>
+            <dc:date>2002-11-12</dc:date>
+            <dc:description xmlns="http://www.w3.org/1999/xhtml">Updated 4XSLT version to 0.12.0a3.</dc:description>
+         </rdf:Description>
+      </exslt:revision>
+   </rdf:Description>
+   <exslt:doc>
+      <html:div>
+         <html:p>
+            The <html:code>math:sqrt</html:code> function returns the square root of a number.
+         </html:p>
+         <html:p>
+            If the argument is a negative number, the return value is zero.
+         </html:p>
+      </html:div>
+   </exslt:doc>
+   <exslt:definition>
+      <exslt:return type="number">
+         <html:div/>
+      </exslt:return>
+      <exslt:arg name="value" type="number" default="0" optional="no">
+         <html:div/>
+      </exslt:arg>
+   </exslt:definition>
+   <exslt:implementations>
+      <exslt:vendor-implementation
+              version="1"
+              vendor="4XSLT, from 4Suite."
+              vendor-url="http://4Suite.org"
+              vendor-version="0.12.0a3" />
+      <exslt:vendor-implementation
+              version="1"
+              vendor="libxslt from Daniel Veillard et al."
+              vendor-url="http://xmlsoft.org/XSLT/"
+              vendor-version="1.0.19" />
+      <exslt:implementation src="math.sqrt.msxsl.xsl" language="exslt:msxsl" version="1"/>
+      <exslt:implementation src="math.sqrt.js" language="exslt:javascript" version="1"/>
+      <exslt:implementation src="math.sqrt.template.xsl" language="exslt:xslt" version="1">
+         <rdf:Description ID="math:sqrt.template.xsl">
+            <dc:subject>EXSLT</dc:subject>
+            <dc:subject>math</dc:subject>
+            <dc:subject>sqrt</dc:subject>
+            <dc:subject>template</dc:subject>
+            <exslt:revision>
+               <rdf:Description ID="math:sqrt.template.xsl.1">
+                  <exslt:version>1</exslt:version>
+                  <dc:creator rdf:parseType="Resource">
+                     <vcf:fn>Nate Austin</vcf:fn>
+                     <vcf:email>naustin@idsgrp.com</vcf:email>
+                  </dc:creator>
+                  <dc:date>2001-08-15</dc:date>
+               </rdf:Description>
+            </exslt:revision>
+         </rdf:Description>
+      </exslt:implementation>
+      <exslt:implementation src="math.sqrt.function.xsl" language="exslt:exslt" version="1">
+         <rdf:Description ID="math:sqrt.function.xsl">
+            <dc:subject>EXSLT</dc:subject>
+            <dc:subject>math</dc:subject>
+            <dc:subject>sqrt</dc:subject>
+            <dc:subject>function</dc:subject>
+            <exslt:revision>
+               <rdf:Description ID="math:sqrt.function.xsl.1">
+                  <exslt:version>1</exslt:version>
+                  <dc:creator rdf:parseType="Resource">
+                     <vcf:fn>Nate Austin</vcf:fn>
+                     <vcf:email>naustin@idsgrp.com</vcf:email>
+                  </dc:creator>
+                  <dc:date>2001-08-15</dc:date>
+               </rdf:Description>
+            </exslt:revision>
+         </rdf:Description>
+      </exslt:implementation>
+   </exslt:implementations>
+   <exslt:use-cases/>
+</exslt:function>

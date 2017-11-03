@@ -1,0 +1,135 @@
+<?php
+
+/**
+ * @file
+ * Attempts to ingest a PDF into a randomly generated PDF collection
+ */
+
+class IslandoraPdfIngestTestCase extends IslandoraCollectionWebTestCase {
+
+  /**
+   * Get test information.
+   *
+   * @see IslandoraWebTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'PDF Ingest/Purge',
+      'description' => 'Ingests and purges a PDF from a randomly generated PDF collection',
+      'group' => 'Islandora PDF',
+    );
+  }
+
+  /**
+   * Set up the test environment.
+   *
+   * @see IslandoraWebTestCase::setUp()
+   */
+  public function setUp() {
+    $this->imagemagick_convert = variable_get('imagemagick_convert', '/usr/bin/convert');
+    parent::setUp(array(
+      'islandora',
+      'islandora_pdf',
+      'islandora_basic_collection',
+      'imagemagick',
+    ));
+  }
+
+  /**
+   * Creates an administrative user and attempts to ingest a test image.
+   */
+  public function testIngestPurgePdf() {
+
+    $user = $this->drupalCreateUser(array(
+      'view fedora repository objects',
+      'ingest fedora objects',
+      'administer site configuration',
+      'manage object properties',
+      'delete fedora objects and datastreams',
+      'create child collection',
+    ));
+    $this->drupalLogin($user);
+
+    $label = $this->randomName(16);
+    $suffix = $this->randomName(16);
+    $collectionpid = 'islandora:' . $suffix;
+    $this->createTestCollection($label, 'islandora:sp_pdf', $collectionpid);
+    $edit = array(
+      'islandora_pdf_allow_text_upload' => TRUE,
+      'islandora_pdf_create_fulltext' => FALSE,
+    );
+    $this->drupalPost('admin/islandora/solution_pack_config/pdf', $edit, 'Save configuration');
+    $edit = array(
+      'image_toolkit' => 'imagemagick',
+    );
+    $this->drupalPost('admin/config/media/image-toolkit', $edit, 'Save configuration');
+    $edit = array(
+      'imagemagick_convert' => $this->imagemagick_convert,
+    );
+    $this->drupalPost('admin/config/media/image-toolkit', $edit, 'Save configuration');
+
+    // Attempts to create an object.
+    $path = 'islandora/object/' . $collectionpid . '/manage/overview/ingest';
+    $file = drupal_get_path('module', 'islandora_pdf') . '/tests/fixtures/test.pdf';
+    $text = drupal_get_path('module', 'islandora_pdf') . '/tests/fixtures/test.txt';
+    $handle = fopen($file, "r");
+    $contents = fread($handle, filesize($file));
+    fclose($handle);
+    $edit = array(
+      'files[file]' => $file,
+      'islandora_pdf_text_upload' => TRUE,
+      'files[text]' => $text,
+    );
+    $this->drupalPost($path, $edit, t('Ingest'));
+    $this->assertText('New Object', 'PDF was created', 'Islandora');
+    $path = $this->url;
+    $pdfpath = $path . '/datastream/OBJ/view';
+    $this->assertLinkByHref($pdfpath, 0, 'PDF PREVIEW datastream found on view page', 'Islandora');
+    $this->assertRaw('/datastream/OBJ/download', 'PDF download link found on view page', 'Islandora');
+
+    // Determines whether or not the appropriate datastreams were created.
+    $object = $this->getObjectFromPath($this->url);
+    $datastreams = array(
+      'RELS-EXT',
+      'DC',
+      'OBJ',
+      'FULL_TEXT',
+      'TN',
+      'PREVIEW',
+    );
+    $this->assertDatastreams($object, $datastreams);
+
+    // Determines whether or not the image datastreams are valid.
+    $datastreams = array(
+      array('OBJ', 'pdf'),
+      array(
+        'FULL_TEXT',
+        'text',
+        array('Misthallery, Gressenheller, Folsense, Akbadain', 1),
+      ),
+      array('TN', 'image'),
+      array('PREVIEW', 'image'),
+    );
+    $this->validateDatastreams($object, $datastreams);
+
+    // Checks for a fully-black PREVIEW datastream. This is a check for a known
+    // issue (hopefully fixed) with some PDF files where ImageMagick creates
+    // fully-blackthumbnails and previews instead of appropriate images. We find
+    // the scan marker, then find how big the scan header is so we know how much
+    // to offset by, and if the total binary value of the scan data - minus the
+    // last byte - is 0, then the image is completely black.
+    if (isset($object['PREVIEW'])) {
+      $preview = bin2hex($object['PREVIEW']->content);
+      $preview_scanmarker = strpos($preview, 'ffda');
+      $preview_scan_startpos = $preview_scanmarker + hexdec(substr($preview, $preview_scanmarker + 4, 4)) + 8;
+      $preview_scan_data = substr($preview, $preview_scan_startpos, strlen($object['PREVIEW']->content) - $preview_scan_startpos - 6);
+      if (intval($preview_scan_data, 16) === 0) {
+        $this->fail('PREVIEW datastream is a completely black JPEG image', 'Islandora');
+      }
+    }
+
+    // Attempts to delete the object and then collection.
+    $this->deleteObject($object);
+    $this->deleteTestCollection($collectionpid);
+  }
+}

@@ -1,0 +1,90 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for this module.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * @see islandora_paged_content_islandora_required_objects()
+ */
+function islandora_paged_content_install() {
+  variable_set('islandora_paged_content_gs', '/usr/bin/gs');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_paged_content_uninstall() {
+  $variables = array(
+    'islandora_paged_content_gs',
+    'islandora_paged_content_pdfinfo',
+    'islandora_paged_content_pdftotext',
+    'islandora_paged_content_pdftotext_use_raw',
+  );
+  array_walk($variables, 'variable_del');
+}
+
+/**
+ * Implements hook_schema().
+ */
+function islandora_paged_content_schema() {
+  $schema = array();
+  $schema['islandora_paged_content_pdf_ingest'] = array(
+    'description' => 'Tracks PDFs uploaded to be extracted into paged content for deletion after ingest is complete.',
+    'fields' => array(
+      'pid' => array(
+        'description' => 'The PID of the paged content object that has a PDF file associated with it to be deleted.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'fid' => array(
+        'description' => 'The Drupal file identifier of the file to be deleted.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('pid'),
+    'foreign keys' => array(
+      'fid' => array(
+        'table' => 'file_managed',
+        'columns' => array('fid' => 'fid'),
+      ),
+    ),
+  );
+  return $schema;
+}
+
+/**
+ * Adds a database table used to delete managed files on ingest.
+ */
+function islandora_paged_content_update_7001() {
+  db_create_table('islandora_paged_content_pdf_ingest', array(
+    'description' => 'Tracks PDFs uploaded to be extracted into paged content for deletion after ingest is complete.',
+    'fields' => array(
+      'pid' => array(
+        'description' => 'The PID of the paged content object that has a PDF file associated with it to be deleted.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'fid' => array(
+        'description' => 'The Drupal file identifier of the file to be deleted.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('pid'),
+    'foreign keys' => array(
+      'fid' => array(
+        'table' => 'file_managed',
+        'columns' => array('fid' => 'fid'),
+      ),
+    ),
+  ));
+}

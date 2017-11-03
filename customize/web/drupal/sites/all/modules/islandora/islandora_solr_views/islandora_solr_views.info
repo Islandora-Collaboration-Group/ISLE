@@ -1,0 +1,20 @@
+name = Islandora Solr Views
+description = Provides Islandora Solr integration with Views
+package = Islandora Search
+core = "7.x"
+php = 5.2
+version = 7.x-dev
+
+dependencies[] = islandora_solr
+dependencies[] = views
+
+files[] = islandora_solr_views_query.inc
+files[] = handlers/islandora_solr_views_handler_field.inc
+files[] = handlers/islandora_solr_views_handler_field_date.inc
+files[] = handlers/islandora_solr_views_handler_field_manage.inc
+files[] = handlers/islandora_solr_views_handler_sort.inc
+files[] = handlers/islandora_solr_views_handler_argument.inc
+files[] = handlers/islandora_solr_views_handler_filter.inc
+files[] = handlers/islandora_solr_views_handler_filter_query_lucene.inc
+files[] = handlers/islandora_solr_views_handler_filter_query_dismax.inc
+files[] = handlers/islandora_solr_views_handler_collection_count.inc

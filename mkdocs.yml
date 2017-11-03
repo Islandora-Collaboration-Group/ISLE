@@ -31,6 +31,7 @@ pages:
     - '1.3 - Supported SSL': '1_system_process_overview/1_3_system_overview/supported-ssl.md'
     - '1.3 - Release Process': '1_system_process_overview/1_3_system_overview/release-process.md'
   - '1.4 - Testing':
+    - '1.4. -Testing - Alpha Build Guide': '1_system_process_overview/1_4_testing/alpha_build_guide.md'
     - '1.4 - Testing - "Sample Data"': '1_system_process_overview/1_4_testing/sampledata.md'
     - '1.4 - Testing - Travis CI': '1_system_process_overview/1_4_testing/travis-ci.md'
   - '1.5 - Alphas': '1_system_process_overview/alphas.md'

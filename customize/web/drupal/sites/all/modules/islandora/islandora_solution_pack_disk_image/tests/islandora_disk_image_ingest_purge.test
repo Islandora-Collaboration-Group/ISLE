@@ -1,0 +1,101 @@
+<?php
+
+/**
+ * @file
+ * Attempts to ingest a disk image into a randomly generated disk image
+ * collection.
+ */
+
+class IslandoraDiskImageIngestTestCase extends IslandoraCollectionWebTestCase {
+
+  /**
+   * Get test information.
+   *
+   * @see IslandoraWebTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Disk Image Ingest/Purge',
+      'description' => 'Ingests and purges a disk image from a randomly generated disk image collection',
+      'group' => 'Islandora Disk Image',
+    );
+  }
+
+  /**
+   * Set up the test environment.
+   *
+   * @see IslandoraWebTestCase::setUp()
+   */
+  public function setUp() {
+    $this->imagemagick_convert = variable_get('imagemagick_convert', '/usr/bin/convert');
+    parent::setUp(array(
+      'islandora',
+      'islandora_disk_image',
+      'islandora_basic_collection',
+      'imagemagick',
+    ));
+  }
+
+  /**
+   * Creates an administrative user and attempts to ingest a test disk image.
+   */
+  public function testIngestPurgeDiskImage() {
+    $user = $this->drupalCreateUser(array(
+      'view fedora repository objects',
+      'ingest fedora objects',
+      'administer site configuration',
+      'manage object properties',
+      'delete fedora objects and datastreams',
+      'create child collection',
+    ));
+    $this->drupalLogin($user);
+
+    $label = $this->randomName(16);
+    $suffix = $this->randomName(16);
+    $collectionpid = 'islandora:' . $suffix;
+    $this->createTestCollection($label, 'islandora:sp_disk_image', $collectionpid);
+    $edit = array(
+      'image_toolkit' => 'imagemagick',
+    );
+    $this->drupalPost('admin/config/media/image-toolkit', $edit, 'Save configuration');
+    $edit = array(
+      'imagemagick_convert' => $this->imagemagick_convert,
+    );
+    $this->drupalPost('admin/config/media/image-toolkit', $edit, 'Save configuration');
+
+    // Attempts to create an object.
+    $path = 'islandora/object/' . $collectionpid . '/manage/overview/ingest';
+    $file = drupal_get_path('module', 'islandora_disk_image') . '/tests/fixtures/test.dd';
+    $photo = drupal_get_path('module', 'islandora_disk_image') . '/tests/fixtures/test.jpg';
+    $handle = fopen($file, "r");
+    $contents = fread($handle, filesize($file));
+    fclose($handle);
+    $edit = array(
+      'files[disk_image_file]' => $file,
+    );
+    $edit = array(
+      'files[disk_image_file]' => $file,
+      'upload_photo' => TRUE,
+      'files[photo_file]' => $photo,
+    );
+    $this->drupalPost($path, $edit, t('Ingest'));
+    $this->assertText('has been ingested', 'islandora');
+    $object = $this->getObjectFromPath($this->url);
+    $this->assertRaw('/datastream/PHOTO/view', 'PHOTO datastream visible on View page', 'Islandora');
+
+    // Determines whether or not the appropriate datastreams were created.
+    $object = $this->getObjectFromPath($this->url);
+    $datastreams = array(
+      'RELS-EXT',
+      'DC',
+      'OBJ',
+      'PHOTO',
+      'TN',
+      'JPG',
+    );
+    $this->assertDatastreams($object, $datastreams);
+    // Attempts to delete the object and then collection.
+    $this->deleteObject($object);
+    $this->deleteTestCollection($collectionpid);
+  }
+}

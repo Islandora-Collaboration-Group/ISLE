@@ -1,0 +1,61 @@
+<?php
+// @codingStandardsIgnoreStart
+/**
+ * @file
+ * Unit Tests.
+ */
+
+/**
+ * Unit Tests for the FormControl class.
+ */
+class PHPLib_File_TestCase extends DrupalUnitTestCase {
+
+  protected $filename;
+
+  /**
+   * Get Test info.
+   *
+   * @return array
+   *   Properties that are displayed in the test selection form.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'File Unit Tests.',
+      'description' => 'Unit tests for the File class.',
+      'group' => 'PHP Lib',
+    );
+  }
+
+  public function setUp() {
+    parent::setUp('php_lib');
+    module_load_include('inc', 'php_lib', 'File');
+    $this->filename = file_create_filename("temp", file_directory_temp());
+  }
+
+  public function tearDown() {
+    parent::tearDown();
+    unlink($this->filename);
+  }
+
+  private function writeToFile($content) {
+    $handle = fopen($this->filename, 'wb');
+    fwrite($handle, $content);
+    fclose($handle);
+  }
+
+  /**
+   * Test File::seek().
+   */
+  public function test_seek() {
+    $this->writeToFile("a|b\nc\r\nd");
+    $file = new File(fopen($this->filename, 'rb'));
+    $successful = $file->seek(-1);
+    $this->assert(!$successful, t('File::seek() won\'t seek before the start of the file.'));
+    $successful = $file->seek(1, SEEK_END);
+    $this->assert($successful, t('File::seek() will seek past the end of the file by default.'));
+    $successful = $file->seek(1, SEEK_END, FALSE);
+    $this->assert(!$successful, t('File::seek() won\'t seek past the end of the file if directed not to.'));
+  }
+
+}
+// @codingStandardsIgnoreEnd

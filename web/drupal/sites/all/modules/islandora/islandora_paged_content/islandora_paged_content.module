@@ -1,0 +1,265 @@
+<?php
+
+/**
+ * @file
+ * Defines management/helper/display functions for page like content.
+ */
+
+define('ISLANDORA_PAGED_CONTENT_EDIT_OCR', 'Edit existing OCR stream');
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_paged_content_menu() {
+  return array(
+    'admin/islandora/solution_pack_config/paged_content' => array(
+      'title' => 'Paged Content Module',
+      'description' => 'Configuration for the Paged Content solution pack.',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('islandora_paged_content_admin_settings_form'),
+      'access arguments' => array('administer site configuration'),
+      'file' => 'includes/admin.form.inc',
+      'type' => MENU_NORMAL_ITEM,
+    ),
+  );
+}
+
+/**
+ * Implements hook_theme().
+ */
+function islandora_paged_content_theme() {
+  return array(
+    'islandora_paged_content_page_navigator' => array(
+      'file' => 'theme/theme.inc',
+      'variables' => array(
+        'object' => NULL,
+      ),
+    ),
+    'swaptable' => array(
+      'render element' => 'element',
+      'template' => 'theme/swaptable',
+      'file' => 'theme/theme.inc',
+    ),
+  );
+}
+
+/**
+ * Implements hook_element_info().
+ */
+function islandora_paged_content_element_info() {
+  $module_path = drupal_get_path('module', 'islandora_paged_content');
+  return array(
+    'swaptable' => array(
+      '#input' => TRUE,
+      '#tree' => TRUE,
+      '#pager' => array(
+        // Pager ID's you may need to override this value if there are already
+        // several pagers on the page.
+        'element' => array(
+          'left' => 0,
+          'right' => 1,
+        ),
+        'tags' => array('<<', '<', '', '>', '>>'),
+        'limit' => 10,
+        'quantity' => 3,
+      ),
+      '#prefix' => '<div class="swaptable-wrapper">',
+      '#suffix' => '</div>',
+      '#attributes' => array(
+        'class' => array('swaptable'),
+      ),
+      '#process' => array('swaptable_process'),
+      '#theme' => 'swaptable',
+      '#theme_wrappers' => array('form_element'),
+      '#value_callback' => 'swaptable_value',
+      '#attached' => array(
+        'js' => array($module_path . '/js/swaptable.js'),
+        'css' => array($module_path . '/css/islandora_paged_content.swaptable.css'),
+        'library' => array(
+          array('system', 'jquery.cookie'),
+          array('system', 'ui.draggable'),
+          array('system', 'ui.droppable'),
+          array('system', 'ui.sortable'),
+          array('system', 'ui.selectable'),
+        ),
+      ),
+    ),
+  );
+}
+
+/**
+ * Determine whether or not to show this modules manage tab.
+ *
+ * @return bool
+ *   TRUE if they can access, FALSE otherwise.
+ */
+function islandora_paged_content_manage_page_access_callback($object, array $content_models) {
+  $permissions = array(
+    ISLANDORA_ADD_DS,
+    ISLANDORA_METADATA_EDIT,
+    ISLANDORA_PURGE,
+  );
+  return islandora_user_access($object, $permissions, $content_models);
+}
+
+/**
+ * Checks whether the user can access the "manage pages" page.
+ *
+ * @return bool
+ *   TRUE if they can access, FALSE otherwise.
+ */
+function islandora_paged_content_manage_pages_access_callback($object, array $content_models) {
+  $permissions = array(
+    ISLANDORA_ADD_DS,
+    ISLANDORA_METADATA_EDIT,
+    ISLANDORA_PURGE,
+    ISLANDORA_INGEST,
+  );
+  return islandora_user_access($object, $permissions, $content_models);
+}
+
+/**
+ * Implements hook_permission().
+ */
+function islandora_paged_content_permission() {
+  return array(
+    ISLANDORA_PAGED_CONTENT_EDIT_OCR => array(
+      'title' => t('Edit OCR stream'),
+      'description' => t('Allows users to edit existing OCR stream. Note: Fedora XACML security policies may override this permission.'),
+    ),
+  );
+}
+
+/**
+ * Callback to process the swaptable form element.
+ *
+ * Adds a select field that allows the user to select the number of pages to
+ * display in each table.
+ */
+function swaptable_process(array $element, array &$form_state) {
+  // Fetchs the value from the element, supports nested values.
+  $get_default_value = function ($name, $default) use ($element) {
+    $key_exists = NULL;
+    $name = is_array($name) ? $name : array($name);
+    $value = drupal_array_get_nested_value($element['#value'], $name, $key_exists);
+    return $key_exists ? $value : $default;
+  };
+  $options = array(10, 25, 50, 100);
+  $default = isset($element['#value']['display']) ? $element['#value']['display'] : $options[0];
+  // Assumes only one swaptable per form/page.
+  $element['#prefix'] = '<div id="swaptable-ajax-wrapper">';
+  $element['#suffix'] = '</div>';
+  $element['display'] = array(
+    '#type' => 'select',
+    '#title' => t('Display'),
+    '#options' => drupal_map_assoc($options),
+    '#default_value' => $default,
+    '#description' => t('The number of pages to display in each table.'),
+    '#ajax' => array(
+      'callback' => 'swaptable_change_number_of_pages_displayed',
+      'wrapper' => 'swaptable-ajax-wrapper',
+    ),
+  );
+  // The limit for pagers is set by the "Display" select form element.
+  $limited_changed = $element['#pager']['limit'] !== $default;
+  $element['#pager']['limit'] = $default;
+  // Hidden fields are used to contain the current page number for each table
+  // this is used by the javascript to determine the correct index of the
+  // rendered elements and by ajax to identify what should be rendered when
+  // using the pager.
+  $element['page'] = array(
+    'left' => array(
+      '#type' => 'hidden',
+      '#value' => pager_find_page($element['#pager']['element']['left']),
+    ),
+    'right' => array(
+      '#type' => 'hidden',
+      '#value' => pager_find_page($element['#pager']['element']['right']),
+    ),
+  );
+  // Hidden fields are used to store the new order of the table rows, as
+  // well as what rows have been directly modified by the user (not including
+  // the automatic shifting that occurs).
+  $element['order'] = array(
+    '#type' => 'hidden',
+    '#value' => $get_default_value('order', element_children($element['#rows'])),
+  );
+  $element['modified'] = array(
+    '#type' => 'hidden',
+    '#value' => $get_default_value('modified', array()),
+  );
+  // Hidden button will be used to rebuild the form when a use clicks on a pager
+  // link or modifies the ordering of the table.
+  $element['load'] = array(
+    '#type' => 'button',
+    '#attributes' => array('style' => 'display:none;'),
+    '#executes_submit_callback' => FALSE,
+    '#value' => t('load'),
+    '#ajax' => array(
+      'callback' => 'swaptable_change_number_of_pages_displayed',
+      'wrapper' => 'swaptable-ajax-wrapper',
+      'method' => 'replace',
+    ),
+  );
+  return $element;
+}
+
+/**
+ * Ajax callback for changing the number of pages displayed.
+ */
+function swaptable_change_number_of_pages_displayed(array $form, array $form_state) {
+  $find_swaptable = function ($form) use (&$find_swaptable) {
+    if (isset($form['#type']) && $form['#type'] == 'swaptable') {
+      return $form;
+    }
+    foreach (element_children($form) as $child) {
+      $result = $find_swaptable($form[$child]);
+      if ($result !== NULL) {
+        return $result;
+      }
+    }
+    return NULL;
+  };
+  // Assumes only one swaptable per form.
+  return $find_swaptable($form);
+}
+
+/**
+ * Implements hook_value().
+ *
+ * Really Implements form_type_hook_value(), but tell coder that.
+ */
+function swaptable_value($element, $input, array $form_state) {
+  if ($input !== FALSE) {
+    // Deserialize 'order' and 'modified' they are submitted as a sting.
+    $input['order'] = explode(' ', $input['order']);
+    $input['modified'] = empty($input['modified']) ? array() : explode(' ', $input['modified']);
+    return $input;
+  }
+  return array();
+}
+
+/**
+ * Implements hook_islandora_object_ingested().
+ */
+function islandora_paged_content_islandora_object_ingested(AbstractObject $object) {
+  module_load_include('inc', 'islandora_paged_content', 'includes/utilities');
+  // Only do this check on paged content that have PDFs.
+  $applicable_paged_cmodels = islandora_paged_content_retrieve_applicable_cmodels();
+  if (array_intersect(array_keys($applicable_paged_cmodels), $object->models) && isset($object['PDF'])) {
+    module_load_include('inc', 'islandora_paged_content', 'includes/db');
+    islandora_paged_content_cleanup_source_pdf($object->id);
+  }
+}
+
+/**
+ * Implements hook_islandora_solr_query().
+ */
+function islandora_paged_content_islandora_solr_query($islandora_solr_query) {
+  if (variable_get('islandora_paged_content_hide_pages_solr', FALSE)) {
+    $fq = variable_get('islandora_paged_content_solr_fq', '-RELS_EXT_isPageOf_uri_ms:[* TO *]');
+    if (!empty($fq)) {
+      $islandora_solr_query->solrParams['fq'][] = $fq;
+    }
+  }
+}

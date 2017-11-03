@@ -1,0 +1,10 @@
+name = "Islandora Large Image Solution Pack"
+description = "A default Islandora module to handle large images"
+dependencies[] = islandora
+dependencies[] = imagemagick
+package = Islandora Solution Packs
+version = 7.x-dev
+core = 7.x
+configure = admin/islandora/solution_pack_config/large_image
+stylesheets[all][] = css/islandora_large_image.theme.css
+files[] = tests/islandora_large_image_ingest_purge.test

@@ -1,0 +1,282 @@
+/* Admin style sheet for islandora solr */
+
+/* refresh button */
+html.js .refresh-button {
+  display: none;
+}
+
+/* drag handler placeholder cell */
+.islandora-solr-multiple-drag
+{
+  width: 30px;
+}
+
+.islandora-solr-operations
+{
+  width: 60px;
+}
+
+html.js .islandora-solr-operations-hidden
+{
+  width: 1px;
+  padding: 0;
+}
+
+/* autocomplete styling */
+#autocomplete
+{
+  max-height: 300px;
+  overflow: auto;
+}
+
+#autocomplete ul
+{
+
+}
+
+#autocomplete ul li
+{
+  padding: 3px;
+}
+
+#autocomplete ul li:nth-child(even)
+{
+  background-color: #eee;
+}
+
+#autocomplete ul li.selected:nth-child(even)
+{
+  background-color: #0074BD;
+}
+
+
+
+/* result fields js */
+
+html.js .islandora-solr-remove-submit,
+html.js .islandora-solr-configure-submit,
+html.js .islandora-solr-dialog-submit
+{
+  display: none;
+}
+
+.islandora-solr-remove-link,
+.islandora-solr-configure-link
+{
+  display: none;
+}
+
+html.js .islandora-solr-remove-link,
+html.js .islandora-solr-configure-link
+{
+  display: block;
+}
+
+html.js table span.tabledrag-changed
+{
+  position: absolute;
+}
+
+html.js .islandora-solr-fields-table .islandora-solr-solr-field-weight
+{
+  display: none;
+}
+
+html.js .islandora-solr-fields-table .islandora-solr-solr-field-weight.tabledrag-hide
+{
+  display: table-cell;
+}
+
+/* add more controls */
+
+.form-item .add-item-controls div,
+.form-item .add-item-controls input
+{
+  display: inline-block;
+}
+
+.form-item .add-item-controls div.form-item
+{
+  min-width: 400px;
+  margin-right: 10px;
+}
+
+.form-item .islandora-solr-solr-field-header
+{
+  width: 35%;
+}
+
+.form-item .islandora-solr-solr-field-render
+{
+  width: 32%;
+}
+
+.form-item .islandora-solr-solr-field-settings
+{
+  font-size: 0.9em;
+}
+
+.islandora-solr-fields-table
+{
+  margin-bottom: 0px;
+  border-bottom: 0px;
+}
+
+.islandora-solr-table-controls
+{
+  border-top: 0px;
+}
+
+.solr-admin-error
+{
+  color: #ff0000;
+  font-weight: normal;
+}
+
+
+/* admin dialog */
+
+/* @group Modal dialog box */
+
+.islandora-solr-admin-dialog {
+  /* We need this so the button is visible. */
+  overflow: visible;
+  position: fixed;
+  font-size: small;
+  padding: 0;
+}
+
+.islandora-solr-admin-dialog .ui-dialog-titlebar-close {
+  /* based on Seven */
+
+  position: absolute;
+  display: block;
+  right: -27px;
+  top: -1px;
+
+  height: 22px;
+  width: 26px;
+  margin: 0;
+  padding: 0;
+
+  -moz-border-radius: 0 10px 12px 0;
+  -webkit-border-radius: 0 10px 12px 0;
+  border-radius: 0 10px 12px 0;
+  border-style: solid;
+  border-width: 1px 1px 1px 0;
+  border-color: #ccc;
+
+  /* Make sure this is in front of the modal backdrop. */
+  z-index: 1002;
+
+  box-shadow: none;
+
+  background: url("../images/close.png") no-repeat scroll 6px 3px #F3F4EE;
+}
+
+.islandora-solr-admin-dialog .ui-dialog-titlebar
+{
+  padding: 0;
+}
+
+.islandora-solr-admin-dialog .ui-dialog-content
+{
+  padding: 0;
+  overflow: hidden;
+}
+
+.islandora-solr-admin-dialog .ui-dialog-title
+{
+  display: none;
+}
+
+.islandora-solr-admin-dialog .ui-helper-clearfix:after
+{
+  display: none;
+}
+
+.islandora-solr-admin-dialog .ui-dialog-titlebar-close {
+
+}
+
+.islandora-solr-admin-dialog .ui-dialog-titlebar-close span {
+  display: none;
+}
+
+
+.islandora-solr-admin-dialog #islandora-solr-admin-dialog-title
+{
+  padding: 8px 13px;
+  margin: 0;
+  font-size: 15px;
+  background-color: #f3f4ee;
+}
+
+.islandora-solr-admin-dialog .form-buttons
+{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  border-style: solid;
+  border-color: #ccc;
+  border-width: 1px 0 0 0;
+  border-image: none;
+
+  padding: 8px 13px;
+  background-color: #f3f4ee;
+}
+
+.islandora-solr-admin-dialog .form-buttons input
+{
+  margin: 0 1em 0 0;
+}
+
+#islandora-solr-admin-dialog-body
+{
+
+}
+
+.islandora-solr-admin-dialog .scroll
+{
+/*
+  position: absolute;
+  top: 35px;
+  left: 0;
+  right: 0;
+  bottom: 45px;
+*/
+
+/*
+  height: auto;
+  max-height: 402px;
+*/
+
+  padding: 8px 13px;
+  overflow: auto;
+
+  border-style: solid;
+  border-color: #ccc;
+  border-width: 1px 0 0 0;
+  border-image: none;
+
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+}
+
+
+
+/* facet field dialog */
+
+#range-facet-wrapper
+{
+  padding: 1em 0 0 0;
+}
+
+#range-facet-wrapper #edit-wrapper
+{
+/*   display: none; */
+}

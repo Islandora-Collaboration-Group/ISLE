@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<exslt:function xmlns:exslt="http://exslt.org/documentation" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:vcf="http://www.ietf.org/internet-drafts/draft-dawson-vcard-xml-dtd-03.txt" version="1" module="str" status="new">
+   <exslt:name>padding</exslt:name>
+   <rdf:Description ID="str:padding">
+      <dc:subject>EXSLT</dc:subject>
+      <dc:subject>str</dc:subject>
+      <dc:subject>padding</dc:subject>
+      <exslt:revision>
+         <rdf:Description ID="str:padding.1">
+            <exslt:version>1</exslt:version>
+            <dc:creator rdf:parseType="Resource">
+               <vcf:fn>
+         Jeni Tennison
+      </vcf:fn>
+               <vcf:email>mail@jenitennison.com</vcf:email>
+               <vcf:url>http://www.jenitennison.com/</vcf:url>
+            </dc:creator>
+            <dc:date>2001-06-08</dc:date>
+            <dc:description>
+               <dc:description>
+                  <html:div>
+         The <html:code>str:padding</html:code> function creates a padding string of a fixed length.
+      </html:div>
+               </dc:description>
+            </dc:description>
+         </rdf:Description>
+      </exslt:revision>
+      <exslt:revision>
+         <rdf:Description ID="str:padding.1.1">
+            <exslt:version>1.1</exslt:version>
+            <dc:creator rdf:parseType="Resource">
+               <vcf:fn>Jeni Tennison</vcf:fn>
+               <vcf:email>mail@jenitennison.com</vcf:email>
+               <vcf:url>http://www.jenitennison.com/</vcf:url>
+            </dc:creator>
+            <dc:date>2001-06-21</dc:date>
+            <dc:description>
+               <dc:description>
+                  <html:div>
+                     Added Javascript and MSXML implementations.
+                  </html:div>
+               </dc:description>
+            </dc:description>
+         </rdf:Description>
+      </exslt:revision>
+      <exslt:revision>
+         <rdf:Description ID="str:padding.1.2">
+            <exslt:version>1.2</exslt:version>
+            <dc:creator rdf:parseType="Resource">
+               <vcf:fn>Jeni Tennison</vcf:fn>
+               <vcf:email>mail@jenitennison.com</vcf:email>
+               <vcf:url>http://www.jenitennison.com/</vcf:url>
+            </dc:creator>
+            <dc:date>2001-11-18</dc:date>
+            <dc:description>
+               <dc:description>
+                  <html:div>
+                     Added description of what to do if the second argument is an empty string; str:padding() should return an empty string.
+                  </html:div>
+               </dc:description>
+            </dc:description>
+         </rdf:Description>
+      </exslt:revision>
+      <exslt:revision>
+         <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                          xmlns:dc="http://purl.org/dc/elements/1.1/"
+                          ID="str:padding.1.3">
+            <exslt:version>1.3</exslt:version>
+            <dc:creator email="craig.stewart@nottingham.ac.uk" 
+                        url="">Craig Stewart</dc:creator>
+            <dc:date>2002-08-21</dc:date>
+            <dc:description xmlns="http://www.w3.org/1999/xhtml">Added 4XSLT and libxslt implementation to the list.</dc:description>
+         </rdf:Description>
+      </exslt:revision>
+      <exslt:revision>
+         <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                          xmlns:dc="http://purl.org/dc/elements/1.1/"
+                          ID="str:padding.1.4">
+            <exslt:version>1.4</exslt:version>
+            <dc:creator email="craig.stewart@nottingham.ac.uk" 
+                        url="">Craig Stewart</dc:creator>
+            <dc:date>2002-11-12</dc:date>
+            <dc:description xmlns="http://www.w3.org/1999/xhtml">Updated 4XSLT version to 0.12.0a3.</dc:description>
+         </rdf:Description>
+      </exslt:revision>
+   </rdf:Description>
+   <exslt:doc>
+      <html:div>
+         <html:p>
+         The <html:code>str:padding</html:code> function creates a padding string of a certain length.
+      </html:p>
+         <html:p>
+         The first argument gives the length of the padding string to be created.
+      </html:p>
+         <html:p>
+         The second argument gives a string to be used to create the padding.  This string is repeated as many times as is necessary to create a string of the length specified by the first argument; if the string is more than a character long, it may have to be truncated to produce the required length.  If no second argument is specified, it defaults to a space (<html:code>' '</html:code>). If the second argument is an empty string, <html:code>str:padding</html:code> returns an empty string.
+      </html:p>
+      </html:div>
+   </exslt:doc>
+   <exslt:definition>
+      <exslt:return type="string">
+         <html:div/>
+      </exslt:return>
+      <exslt:arg name="length" type="number" default="0" optional="no">
+         <html:div/>
+      </exslt:arg>
+      <exslt:arg name="chars" type="string" default="' '" optional="yes">
+         <html:div/>
+      </exslt:arg>
+   </exslt:definition>
+   <exslt:implementations>
+      <exslt:vendor-implementation
+              version="1"
+              vendor="4XSLT, from 4Suite."
+              vendor-url="http://4Suite.org"
+              vendor-version="0.12.0a3" />
+      <exslt:vendor-implementation
+              version="1"
+              vendor="libxslt from Daniel Veillard et al."
+              vendor-url="http://xmlsoft.org/XSLT/"
+              vendor-version="1.0.19" />
+      <exslt:implementation src="str.padding.function.xsl" language="exslt:exslt" version="1">
+         <rdf:Description ID="str:padding.function.xsl">
+            <dc:subject>EXSLT</dc:subject>
+            <dc:subject>str</dc:subject>
+            <dc:subject>padding</dc:subject>
+            <dc:subject>function</dc:subject>
+            <exslt:revision>
+               <rdf:Description ID="str:padding.function.2">
+                  <exslt:version>2</exslt:version>
+                  <dc:creator rdf:parseType="Resource">
+                     <vcf:fn>Jeni Tennison</vcf:fn>
+                     <vcf:email>mail@jenitennison.com</vcf:email>
+                     <vcf:url>http://www.jenitennison.com</vcf:url>
+                  </dc:creator>
+                  <dc:date>2001-07-18</dc:date>
+                  <dc:description>
+                    <html:div>
+                      Altered implementation following suggestions from <a href="http://www.biglist.com/lists/xsl-list/archives/200107/msg01040.html">suggestions from Dimitre Novatchev on XSL-List</a>. It now creates a longer string using concatenation before recursing rather than during recursion, and also copies the string ten times rather than three to limit the amount of recursion. The tail recursiveness of the template has been retained, however.
+                    </html:div>
+                  </dc:description>
+               </rdf:Description>
+            </exslt:revision>
+         </rdf:Description>
+      </exslt:implementation>
+      <exslt:implementation src="str.padding.template.xsl" language="exslt:xslt" version="1">
+         <rdf:Description ID="str:padding.template.xsl">
+            <dc:subject>EXSLT</dc:subject>
+            <dc:subject>str</dc:subject>
+            <dc:subject>padding</dc:subject>
+            <dc:subject>template</dc:subject>
+            <dc:subject>XSLT</dc:subject>
+            <exslt:revision>
+               <rdf:Description ID="str:padding.template.2">
+                  <exslt:version>2</exslt:version>
+                  <dc:creator rdf:parseType="Resource">
+                     <vcf:fn>Jeni Tennison</vcf:fn>
+                     <vcf:email>mail@jenitennison.com</vcf:email>
+                     <vcf:url>http://www.jenitennison.com</vcf:url>
+                  </dc:creator>
+                  <dc:date>2001-07-18</dc:date>
+                  <dc:description>
+                    <html:div>
+                      Altered implementation following <a href="http://www.biglist.com/lists/xsl-list/archives/200107/msg01040.html">suggestions from Dimitre Novatchev on XSL-List</a>. It now creates a longer string using concatenation before recursing rather than during recursion, and also copies the string ten times rather than three to limit the amount of recursion. The tail recursiveness of the template has been retained, however.
+                    </html:div>
+                  </dc:description>
+               </rdf:Description>
+            </exslt:revision>
+         </rdf:Description>
+      </exslt:implementation>
+      <exslt:implementation src="str.padding.js" language="exslt:javascript" version="1">
+         <rdf:Description ID="str:padding.msxsl">
+            <dc:subject>EXSLT</dc:subject>
+            <dc:subject>str</dc:subject>
+            <dc:subject>padding</dc:subject>
+            <dc:subject>Javascript</dc:subject>
+            <exslt:revision>
+               <rdf:Description ID="str:padding.js.1">
+                  <exslt:version>1</exslt:version>
+                  <dc:creator rdf:parseType="Resource">
+                     <vcf:fn>Chris Bayes</vcf:fn>
+                     <vcf:email>chris@bayes.co.uk</vcf:email>
+                     <vcf:url>http://www.bayes.co.uk</vcf:url>
+                  </dc:creator>
+                  <dc:date>2001-06-21</dc:date>
+               </rdf:Description>
+            </exslt:revision>
+         </rdf:Description>
+      </exslt:implementation>
+      <exslt:implementation src="str.padding.msxsl.xsl" language="exslt:msxsl" version="1">
+         <rdf:Description ID="str:padding.msxsl">
+            <dc:subject>EXSLT</dc:subject>
+            <dc:subject>str</dc:subject>
+            <dc:subject>padding</dc:subject>
+            <dc:subject>MSXML</dc:subject>
+            <exslt:revision>
+               <rdf:Description ID="str:padding.msxsl.1">
+                  <exslt:version>1</exslt:version>
+                  <dc:creator rdf:parseType="Resource">
+                     <vcf:fn>Chris Bayes</vcf:fn>
+                     <vcf:email>chris@bayes.co.uk</vcf:email>
+                     <vcf:url>http://www.bayes.co.uk</vcf:url>
+                  </dc:creator>
+                  <dc:date>2001-06-21</dc:date>
+               </rdf:Description>
+            </exslt:revision>
+         </rdf:Description>
+      </exslt:implementation>
+   </exslt:implementations>
+   <exslt:use-cases>
+      <exslt:use-case type="example" xslt="str.padding.1.xsl" data="str.padding.data.1.xml">
+         <rdf:Description ID="str:padding.use-case">
+            <dc:subject>EXSLT</dc:subject>
+            <dc:subject>str</dc:subject>
+            <dc:subject>padding</dc:subject>
+            <dc:subject>example</dc:subject>
+            <exslt:revision>
+               <rdf:Description ID="str:padding.use-case.1">
+                  <exslt:version/>
+                  <dc:creator rdf:parseType="Resource">
+                     <vcf:fn>Chris Bayes</vcf:fn>
+                     <vcf:email>chris@bayes.co.uk</vcf:email>
+                     <vcf:url>http://www.bayes.co.uk</vcf:url>
+                  </dc:creator>
+                  <dc:date>2001-06-26</dc:date>
+                  <dc:description/>
+               </rdf:Description>
+            </exslt:revision>
+         </rdf:Description>
+      </exslt:use-case>
+   </exslt:use-cases>
+</exslt:function>

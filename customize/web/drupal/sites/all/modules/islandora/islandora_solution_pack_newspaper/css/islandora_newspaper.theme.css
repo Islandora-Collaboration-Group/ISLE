@@ -1,0 +1,103 @@
+.region-content .islandora-newspaper-controls ul {
+  padding: 0;
+}
+
+.islandora-newspaper-content {
+  background-color: #F2F2F2;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 15px;
+}
+
+.islandora-newspaper-content img {
+  margin: 0;
+  display: block;
+}
+
+.islandora-newspaper-metadata {
+  display: block;
+  clear: both;
+}
+
+dl.islandora-newspaper-fields {
+  width: 100%;
+}
+
+.islandora-newspaper-metadata dt {
+  font-weight: normal;
+  text-align: right;
+  font-weight: bold;
+  padding-right: 0;
+}
+
+.islandora-newspaper-metadata dd {
+  padding-left: 40px;
+}
+
+
+.islandora-newspaper-metadata dt,
+.islandora-newspaper-metadata dd {
+  border-top: 1px solid #e5e5e5;
+}
+
+.islandora-newspaper-metadata dt.first,
+.islandora-newspaper-metadata dd.first {
+  border-top: 0;
+}
+
+body.two-sidebars .islandora-newspaper-sidebar {
+    clear: both;
+    width: 100%;
+}
+
+@media all and (min-width: 768px) {
+
+  body.no-sidebars .islandora-newspaper-content {
+    width: 65%;
+    float: left; /* LTR */
+  }
+
+  body.no-sidebars .islandora-newspaper-sidebar {
+    padding-left: 20px;
+  }
+
+  body.no-sidebars .islandora-newspaper-sidebar {
+    float: right; /* LTR */
+    width: 35%;
+    clear: none;
+  }
+  
+}
+
+/* In case the viewer is openseadragon */
+.islandora-newspaper-object .islandora-openseadragon {
+  height: 750px;
+}
+
+/* Make flexible and assure content doesn't go off the page */
+.islandora-newspaper {
+  overflow: hidden;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Round borders on images */
+.islandora-newspaper-object dt img {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+/* Set space between objects */
+.islandora-newspaper-object {
+  margin: 1.5em auto;
+}
+
+/* Set space between dd items */
+.islandora-newspaper-object dd {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+

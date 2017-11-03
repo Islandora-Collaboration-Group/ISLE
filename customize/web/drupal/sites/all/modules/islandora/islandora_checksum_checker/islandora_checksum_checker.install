@@ -1,0 +1,27 @@
+<?php
+/**
+ * @file
+ * Install related hooks.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function islandora_checksum_checker_install() {
+  variable_set('islandora_checksum_checker_last_item_checked', '0');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_checksum_checker_uninstall() {
+  $variables = array(
+    'islandora_checksum_checker_queue_cron_method',
+    'islandora_checksum_checker_items_per_cron',
+    'islandora_checksum_checker_dsids_to_check',
+    'islandora_checksum_checker_email_reports_to',
+    'islandora_checksum_checker_send_complete_message',
+    'islandora_checksum_checker_log_mismatches',
+  );
+  array_walk($variables, 'variable_del');
+}

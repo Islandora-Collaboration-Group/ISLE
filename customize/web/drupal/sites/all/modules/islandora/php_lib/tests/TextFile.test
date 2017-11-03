@@ -1,0 +1,213 @@
+<?php
+// @codingStandardsIgnoreStart
+/**
+ * @file
+ * Unit Tests.
+ */
+
+/**
+ * Unit Tests for the FormControl class.
+ */
+class PHPLib_TextFile_TestCase extends DrupalUnitTestCase {
+
+  protected $filename;
+
+  /**
+   * Get Test info.
+   *
+   * @return array
+   *   Properties that are displayed in the test selection form.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'TextFile Unit Tests.',
+      'description' => 'Unit tests for class TextFile.',
+      'group' => 'PHP Lib',
+    );
+  }
+
+  public function setUp() {
+    parent::setUp('php_lib');
+    module_load_include('inc', 'php_lib', 'File');
+    $this->filename = file_create_filename("temp", file_directory_temp());
+  }
+
+  public function tearDown() {
+    parent::tearDown();
+    unlink($this->filename);
+  }
+
+  private function writeToFile($content) {
+    $handle = fopen($this->filename, 'wb');
+    fwrite($handle, $content);
+    fclose($handle);
+  }
+
+  /**
+   * TextFile::EOL().
+   */
+  public function test_EOL() {
+    $this->writeToFile("a|b\nc\r\nd");
+    // Test UNIX.
+    $file = new TextFile(fopen($this->filename, 'rb'), TextFile::UNIX);
+    $values = array(FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE);
+    // Includes EOF delimiter.
+    $successful = TRUE;
+    foreach ($values as $value) {
+      if ($file->EOL() !== $value) {
+        $successful = FALSE;
+        $this->assert($successful, t('TextFile::EOL() incorrectly identified "%char"', array('%char' => addcslashes($file->peekc(), "\r\n"))));
+        break;
+      }
+      $file->seek(1, SEEK_CUR);
+    }
+    $this->assert($successful, "TextFile::EOL() correctly identified all Unix EOL.");
+    // Test DOS.
+    $file = new TextFile(fopen($this->filename, 'rb'), TextFile::DOS);
+    $values = array(FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, FALSE, FALSE);
+    // Includes EOF delimiter.
+    $successful = TRUE;
+    foreach ($values as $value) {
+      if ($file->EOL() !== $value) {
+        $successful = FALSE;
+        $this->assert($successful, t('TextFile::EOL() incorrectly identified "%char"', array('%char' => addcslashes($file->peekc(), "\r\n"))));
+        break;
+      }
+      $file->seek(1, SEEK_CUR);
+    }
+    $this->assert($successful, "TextFile::EOL() correctly identified all DOS EOL.");
+    // Test MAC.
+    $file = new TextFile(fopen($this->filename, 'rb'), TextFile::MAC);
+    $values = array(FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE);
+    // Includes EOF delimiter.
+    $successful = TRUE;
+    foreach ($values as $value) {
+      if ($file->EOL() !== $value) {
+        $successful = FALSE;
+        $this->assert($successful, t('TextFile::EOL() incorrectly identified "%char"', array('%char' => addcslashes($file->peekc(), "\r\n"))));
+        break;
+      }
+      $file->seek(1, SEEK_CUR);
+    }
+    $this->assert($successful, "TextFile::EOL() correctly identified all MAC EOL.");
+    unset($file);
+    // Destroy the reference to the file.
+  }
+
+  public function test_seekBeforeEOL() {
+    $content = "a|b\nc\r\nd";
+    $this->writeToFile($content);
+    $values = array(0, 1, 2, 2, 4, 5, 5, 7, 7);
+    // Includes EOF delimiter.
+    $file = new TextFile(fopen($this->filename, 'rb'));
+    $successful = TRUE;
+    for ($i = 0; $i < strlen($content); $i++) {
+      $file->seek($i);
+      if ($file->seekBeforeEOL() !== $values[$i]) {
+        $successful = FALSE;
+        $this->assert($successful, t('TextFile::seekBeforeEOL() incorrectly moved to "%actual" (expected: "%expected")', array(
+              '%actual' => $file->pos,
+              '%expected' => $values[$i]))
+        );
+        break;
+      }
+    }
+    $this->assert($successful, "TextFile::seekBeforeEOL() correctly moved pointer to before all EOL.");
+    unset($file);
+    // Destroy the reference to the file.
+  }
+
+  public function test_seekAfterEOL() {
+    $content = "a|b\nc\r\nd";
+    $this->writeToFile($content);
+    $values = array(0, 1, 2, 4, 4, 5, 7, 7, 7);
+    // Includes EOF delimiter.
+    $file = new TextFile(fopen($this->filename, 'rb'));
+    $successful = TRUE;
+    for ($i = 0; $i < strlen($content); $i++) {
+      $file->seek($i);
+      if ($file->seekAfterEOL() !== $values[$i]) {
+        $successful = FALSE;
+        $this->assert($successful, t('TextFile::seekAfterEOL() incorrectly moved to "%actual" (expected: "%expected")', array(
+              '%actual' => $file->pos,
+              '%expected' => $values[$i]))
+        );
+        break;
+      }
+    }
+    $this->assert($successful, "TextFile::seekAfterEOL() Correctly moved pointer to after all EOL.");
+    unset($file);
+    // Destroy the reference to the file.
+  }
+
+  public function test_seekLineStart() {
+    $content = "a|b\nc\r\nd";
+    $this->writeToFile($content);
+    $values = array(0, 0, 0, 0, 4, 4, 4, 7, 7);
+    // Includes EOF delimiter.
+    $file = new TextFile(fopen($this->filename, 'rb'));
+    $successful = TRUE;
+    for ($i = 0; $i < strlen($content); $i++) {
+      $file->seek($i);
+      if ($file->seekLineStart() !== $values[$i]) {
+        $successful = FALSE;
+        $this->assert($successful, t('TextFile::seekLineStart() incorrectly moved to "%actual" (expected: "%expected")', array(
+              '%actual' => $file->pos,
+              '%expected' => $values[$i]))
+        );
+        break;
+      }
+    }
+    $this->assert($successful, "TextFile::seekLineStart() correctly moved pointer to the start of each line.");
+    unset($file);
+    // Destroy the reference to the file.
+  }
+
+  public function test_seekLineEnd() {
+    $content = "a|b\nc\r\nd";
+    $this->writeToFile($content);
+    $values = array(3, 3, 3, 3, 6, 6, 6, 8, 8);
+    // Includes EOF delimiter.
+    $file = new TextFile(fopen($this->filename, 'rb'));
+    $successful = TRUE;
+    for ($i = 0; $i < strlen($content); $i++) {
+      $file->seek($i);
+      if ($file->seekLineEnd() !== $values[$i]) {
+        $successful = FALSE;
+        $this->assert($successful, t('TextFile::seekLineEnd() incorrectly moved to "%actual" (expected: "%expected")', array(
+              '%actual' => $file->pos,
+              '%expected' => $values[$i]))
+        );
+        break;
+      }
+    }
+    $this->assert($successful, "TextFile::seekLineEnd() correctly moved pointer to after all EOL.");
+    unset($file);
+    // Destroy the reference to the file.
+  }
+
+  public function test_seekPrevLineEnd() {
+    $content = "a|b\nc\r\nd";
+    $this->writeToFile($content);
+    $values = array(3, 3, 3, 3, 6, 6, 6, 8, 8);
+    // Includes EOF delimiter.
+    $file = new TextFile(fopen($this->filename, 'rb'));
+    $successful = TRUE;
+    for ($i = 0; $i < strlen($content); $i++) {
+      $file->seek($i);
+      if ($file->seekLineEnd() !== $values[$i]) {
+        $successful = FALSE;
+        $this->assert($successful, t('TextFile::seekLineEnd() incorrectly moved to "%actual" (expected: "%expected")', array(
+              '%actual' => $file->pos,
+              '%expected' => $values[$i]))
+        );
+        break;
+      }
+    }
+    $this->assert($successful, "TextFile::seekLineEnd() correctly moved pointer to after all EOL.");
+    unset($file);
+    // Destroy the reference to the file.
+  }
+
+}
+// @codingStandardsIgnoreStart

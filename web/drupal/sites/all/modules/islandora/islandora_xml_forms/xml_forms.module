@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * @file
+ * XML Forms base module.
+ */
+
+/**
+ * Implements Hook Menu.
+ *
+ * @return array
+ *   Array of menu items.
+ */
+function xml_forms_menu() {
+  $items['schema/%'] = array(
+    'title' => 'schema',
+    'description' => 'schema',
+    'page callback' => 'xml_forms_get_schema',
+    'page arguments' => array(1),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Get the schema if it exists.
+ *
+ * @param string $filename
+ *   XSD to grab the schema from.
+ */
+function xml_forms_get_schema($filename) {
+  $path = drupal_get_path('module', 'xml_forms') . '/schema';
+  $full_filename = "$path/$filename";
+  if (file_exists($full_filename)) {
+    drupal_goto($full_filename);
+  }
+  else {
+    drupal_not_found();
+  }
+}

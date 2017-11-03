@@ -1,0 +1,71 @@
+/**
+ * @file
+ * Defines the base set of css required to view the image annotation tool.
+ */
+#islandora-image-annotation-list .comment-type-title {
+  position: relative;
+  cursor: pointer;
+  padding: 8px 30px 8px 18px;
+  margin: 3px 0 0 0;
+  background: #ccc;
+  color: #555;
+  border: 1px solid #ddd;
+  word-wrap: break-word;
+  -webkit-border-radius: 5px 5px 5px 5px; /* Saf3-4, iOS 1-3.2, Android �1.6 */
+  border-radius: 5px 5px 5px 5px; /* Opera 10.5, IE9, Saf5, Chrome, FF4+, iOS 4, Android 2.1+ */
+}
+
+#islandora-image-annotation-list .comment-title {
+  position: relative;
+  cursor: pointer;
+  padding: 8px 30px 8px 18px;
+  margin: 3px 0 0 0;
+  overflow: auto;
+  background: #eee;
+  color: #555;
+  border: 1px solid #ddd;
+  word-wrap: break-word;
+  -webkit-border-radius: 5px 5px 5px 5px; /* Saf3-4, iOS 1-3.2, Android �1.6 */
+  border-radius: 5px 5px 5px 5px; /* Opera 10.5, IE9, Saf5, Chrome, FF4+, iOS 4, Android 2.1+ */
+}
+
+#islandora-image-annotation-list .comment-title:hover {
+  background: #e3e3e3;
+  color: #212121;
+}
+
+#islandora-image-annotation-list .comment-title.annotation-opened {
+  -webkit-border-radius: 5px 5px 0 0; /* Saf3-4, iOS 1-3.2, Android �1.6 */
+  border-radius: 5px 5px 0 0; /* Opera 10.5, IE9, Saf5, Chrome, FF4+, iOS 4, Android 2.1+ */
+  color: #212121;
+  border-bottom: 0 solid #ddd;
+}
+
+#islandora-image-annotation-list .comment-text {
+  margin: 0 0 0 0;
+  padding: 5px 10px 5px 10px;
+  border: 1px solid #ddd;
+  border-top: 0;
+  background: #f6f6f6;
+  word-wrap: break-word;
+  -webkit-border-radius: 0 0 5px 5px; /* Saf3-4, iOS 1-3.2, Android �1.6 */
+  border-radius: 0 0 5px 5px; /* Opera 10.5, IE9, Saf5, Chrome, FF4+, iOS 4, Android 2.1+ */
+}
+
+#islandora-image-annotation-list .color {
+  float: right;
+  right: 8px;
+  top: 8px;
+  width: 15px;
+  height: 15px;
+  margin-top: 5px;
+  margin-right: 0px;
+  -webkit-border-radius: 8px; /* Saf3-4, iOS 1-3.2, Android �1.6 */
+  border-radius: 8px; /* Opera 10.5, IE9, Saf5, Chrome, FF4+, iOS 4, Android 2.1+ */
+}
+
+#islandora-image-annotation-list .comment-show-hide {
+  top: 8px;
+  left: 8px;
+  padding-right: 0.5em;
+}

@@ -1,0 +1,184 @@
+<?php
+
+/**
+ * @file
+ * Handles the creation and display of web archive objects.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_web_archive_menu() {
+  $items = array();
+  $items['admin/islandora/solution_pack_config/web_archive'] = array(
+    'title' => 'Web ARChives',
+    'description' => 'Configure the Web ARChive Solution Pack.',
+    'page callback' => 'drupal_get_form',
+    'access arguments' => array('administer site configuration'),
+    'page arguments' => array('islandora_web_archive_admin'),
+    'file' => 'includes/admin.form.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ *
+ * We supply a pattern so we can overide templates at the theme level if needed.
+ * We can append a pid to a template and the new template file will be called
+ * (the pid's colon should be replaced with a dash)
+ */
+function islandora_web_archive_theme($existing, $type, $theme, $path) {
+  return array(
+    'islandora_web_archive' => array(
+      'template' => 'theme/islandora-web-archive',
+      'file' => 'theme/theme.inc',
+      'pattern' => 'islandora_web_archive__',
+      'variable' => array('object' => NULL),
+    ),
+  );
+}
+
+/**
+ * Implements hook_islandora_required_objects().
+ */
+function islandora_web_archive_islandora_required_objects(IslandoraTuque $connection) {
+  $module_path = drupal_get_path('module', 'islandora_web_archive');
+  // Web ARChive Content Model.
+  $web_archive_content_model = $connection->repository->constructObject('islandora:sp_web_archive');
+  $web_archive_content_model->owner = 'fedoraAdmin';
+  $web_archive_content_model->label = 'Islandora Web ARChive Content Model';
+  $web_archive_content_model->models = 'fedora-system:ContentModel-3.0';
+  // DS-COMPOSITE-MODEL Datastream.
+  $datastream = $web_archive_content_model->constructDatastream('DS-COMPOSITE-MODEL', 'X');
+  $datastream->label = 'DS-COMPOSITE-MODEL';
+  $datastream->mimetype = 'application/xml';
+  $datastream->setContentFromFile("$module_path/xml/islandora_web_archive_ds_composite_model.xml", FALSE);
+  $web_archive_content_model->ingestDatastream($datastream);
+  // Web ARChive Collection.
+  $web_archive_collection = $connection->repository->constructObject('islandora:sp_web_archive_collection');
+  $web_archive_collection->owner = 'fedoraAdmin';
+  $web_archive_collection->label = 'Web ARChive Collection';
+  $web_archive_collection->models = 'islandora:collectionCModel';
+  $web_archive_collection->relationships->add(FEDORA_RELS_EXT_URI, 'isMemberOfCollection', 'islandora:root');
+  // Collection Policy Datastream.
+  $datastream = $web_archive_collection->constructDatastream('COLLECTION_POLICY', 'X');
+  $datastream->label = 'Collection policy';
+  $datastream->mimetype = 'application/xml';
+  $datastream->setContentFromFile("$module_path/xml/islandora_web_archive_collection_policy.xml", FALSE);
+  $web_archive_collection->ingestDatastream($datastream);
+  // TN Datastream.
+  $datastream = $web_archive_collection->constructDatastream('TN', 'M');
+  $datastream->label = 'Thumbnail';
+  $datastream->mimetype = 'image/png';
+  $datastream->setContentFromFile("$module_path/images/folder.png", FALSE);
+  $web_archive_collection->ingestDatastream($datastream);
+  return array(
+    'islandora_web_archive' => array(
+      'title' => 'Islandora Web ARChive',
+      'objects' => array(
+        $web_archive_content_model,
+        $web_archive_collection,
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_xml_form_builder_forms().
+ */
+function islandora_web_archive_xml_form_builder_forms() {
+  $module_path = drupal_get_path('module', 'islandora_web_archive');
+  return array(
+    'Web ARChive MODS form' => array(
+      'form_file' => "$module_path/xml/islandora_web_archive_form_mods.xml",
+    ),
+  );
+}
+
+/**
+ * Implements hook_xml_form_builder_form_associations().
+ */
+function islandora_web_archive_xml_form_builder_form_associations() {
+  return array(
+    'islandora_web_archive_mods_form' => array(
+      'content_model' => 'islandora:sp_web_archive',
+      'form_name' => 'Web ARChive MODS form',
+      'dsid' => 'MODS',
+      'title_field' => array(
+        'titleInfo', 'title',
+      ),
+      'transform' => 'mods_to_dc.xsl',
+      'self_transform' => 'cleanup_mods.xsl',
+      'template' => FALSE,
+    ),
+  );
+}
+
+/**
+ * Implements hook_CMODEL_PID_islandora_view_object().
+ */
+function islandora_web_archive_islandora_sp_web_archive_islandora_view_object($object, $page_number, $page_size) {
+  $output = theme('islandora_web_archive', array('object' => $object));
+  return array('' => $output);
+}
+
+/**
+ * Implements hook_islandora_ingest_steps().
+ */
+function islandora_web_archive_islandora_sp_web_archive_islandora_ingest_steps() {
+  return array(
+    'islandora_web_archive_upload' => array(
+      'weight' => 10,
+      'type' => 'form',
+      'form_id' => 'islandora_web_archive_upload_form',
+      'module' => 'islandora_web_archive',
+      'file' => 'includes/web_archive_upload.form.inc',
+    ),
+  );
+}
+
+/**
+ * Implements hook_islandora_CMODEL_PID_derivative().
+ */
+function islandora_web_archive_islandora_sp_web_archive_islandora_derivative() {
+  return array(
+    array(
+      'source_dsid' => 'OBJ',
+      'destination_dsid' => 'WARC_CSV',
+      'weight' => '0',
+      'function' => array(
+        'islandora_web_archive_create_warc_csv_derivative',
+      ),
+      'file' => drupal_get_path('module', 'islandora_web_archive') . '/includes/derivatives.inc',
+    ),
+    array(
+      'source_dsid' => 'OBJ',
+      'destination_dsid' => 'WARC_FILTERED',
+      'weight' => '1',
+      'function' => array(
+        'islandora_web_archive_create_warc_filter_derivative',
+      ),
+      'file' => drupal_get_path('module', 'islandora_web_archive') . '/includes/derivatives.inc',
+    ),
+    array(
+      'source_dsid' => 'SCREENSHOT',
+      'destination_dsid' => 'JPG',
+      'weight' => '2',
+      'function' => array(
+        'islandora_web_archive_create_JPG_derivative',
+      ),
+      'file' => drupal_get_path('module', 'islandora_web_archive') . '/includes/derivatives.inc',
+    ),
+    array(
+      'source_dsid' => 'SCREENSHOT',
+      'destination_dsid' => 'TN',
+      'weight' => '3',
+      'function' => array(
+        'islandora_web_archive_create_TN_derivative',
+      ),
+      'file' => drupal_get_path('module', 'islandora_web_archive') . '/includes/derivatives.inc',
+    ),
+  );
+}

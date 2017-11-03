@@ -1,0 +1,81 @@
+<?php
+
+/**
+ * @file
+ * Unit Tests.
+ */
+
+/**
+ * Unit tests for the FormControl class.
+ */
+class SchemaAPIInsertOrderMapTestCase extends DrupalWebTestCase {
+
+  /**
+   * Get Test info.
+   *
+   * @return array
+   *   Properties that are displayed in the test selection form.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'InsertOrderMap Unit Tests.',
+      'description' => 'Unit tests for InsertOrderMap.inc',
+      'group' => 'Islandora XML Forms Schema API',
+    );
+  }
+
+  /**
+   * Performs any pre-requisite tasks that need to happen.
+   */
+  public function setUp() {
+    // Enable any modules required for the test.
+    parent::setUp('xml_schema_api');
+    module_load_include('inc', 'xml_schema_api', 'InsertOrderMap');
+  }
+
+  /**
+   * The actual tests.
+   */
+  public function test() {
+    $data_path = drupal_get_path('module', 'xml_schema_api') . '/tests/data';
+    $schema = new XMLSchema($data_path . '/schemas/fgdc-std-001-1998.xsd');
+    $this->assertNotNull($schema, 'Schema is not null.');
+    $insert_map = new InsertOrderMap($schema);
+    $this->assertNotNull($insert_map, 'Insert map is not null.');
+    // Path to the idinfo element.
+    $path = '/xsd:schema/xsd:element[@name=\'idinfo\']';
+    $map = $insert_map->getInsertOrderMap($path);
+    // Map exists.
+    $this->assertNotNull($map, 'Map is not null.');
+    // Top level doesn't have parent.
+    $this->assertNull($map->parent, 'Top level doesn\'t have parent.');
+    $this->assertEqual($map->min, 1, 'Min value set correctly');
+    $this->assertEqual($map->max, 1, 'Max value set correctly');
+    $this->assertEqual($map instanceof InsertOrderSequence, 'Set top level type correctly');
+    $this->assertEqual(count($map->children[0]), 14, 'Correct Number of children.');
+    $order = $map->getOrder();
+    $this->assertEqual($order, array(), 'getOrder returns an empty array if no constaints were matched.');
+
+    // Open existing document.
+    $doc = new DOMDocument();
+    $doc->load($data_path . '/documents/fgdc.xml');
+    $xpath = new DOMXPath($doc);
+
+    // Simple Sequence insert.
+    $results = $xpath->query('/metadata/idinfo/citation/citeinfo');
+    $parent = $results->item(0);
+    $this->assertNotNull($parent, 'Found parent.');
+    $new = new DOMElement('origin', 'test');
+    // Path to the idinfo element.
+    $path = '/xsd:schema/xsd:element[@name=\'citeinfo\']';
+    $insert_map->insert($path, $parent, $new);
+    $valid = $doc->schemaValidate($data_path . '/schemas/fgdc-std-001-1998.xsd');
+    $this->assertNotNull($new->parentNode, 'New element was added to the document.');
+    $this->assertEqual($new->parentNode, $parent, 'New element has the correct parent.');
+    $this->assertTrue($valid, 'Document remains valid after insert.');
+
+    // @TODO: add a Simple Choice insert test using the path
+    // '/xsd:schema/xsd:element[@name='\cntinfo'\]'.
+  }
+
+}

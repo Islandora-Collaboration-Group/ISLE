@@ -1,0 +1,208 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../../style/function.use-cases.xsl"?>
+<!-- <!DOCTYPE exslt:function SYSTEM 'function.dtd'> -->
+<exslt:function xmlns:exslt="http://exslt.org/documentation" 
+                version="1" module="math" status="stable">
+
+<exslt:name>lowest</exslt:name>
+
+<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                 xmlns:dc="http://purl.org/dc/elements/1.1/"
+                 ID="math:lowest">
+   <dc:subject>EXSLT</dc:subject>
+   <dc:subject>math</dc:subject>
+   <dc:subject>lowest</dc:subject>
+   <dc:subject>minimum</dc:subject>
+   <dc:rights>public domain</dc:rights>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="math:lowest.1">
+         <exslt:version>1</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com">Jeni Tennison</dc:creator>
+         <dc:date>2001-03-28</dc:date>
+         <dc:description>Returns the nodes with the minimum value in a node set.</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="math:lowest.1.1">
+         <exslt:version>1.1</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com">Jeni Tennison</dc:creator>
+         <dc:date>2001-04-28</dc:date>
+         <dc:description>Clarified the wording of the definition, highlighting the fact that a non-numeric value will result in an empty set being returned.</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="math:lowest.1.2">
+         <exslt:version>1.2</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com">Jeni Tennison</dc:creator>
+         <dc:date>2001-05-22</dc:date>
+	      <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            <ul>
+               <li>Added vendor implementations in Saxon and 4XSLT</li>
+               <li>Changed status to stable</li>
+            </ul>
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="math:lowest.1.3">
+         <exslt:version>1.3</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com">Jeni Tennison</dc:creator>
+         <dc:date>2001-06-11</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            Added vendor implementation in jd.xslt.
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="math:lowest.1.4">
+         <exslt:version>1.4</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com">Jeni Tennison</dc:creator>
+         <dc:date>2001-08-23</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            Added vendor implementation in libxslt.
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="math:lowest.1.5">
+         <exslt:version>1.5</exslt:version>
+         <dc:creator email="craig.stewart@nottingham.ac.uk" 
+                     url="">Craig Stewart</dc:creator>
+         <dc:date>2002-08-20</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">Added Xalan-J implementation to the list.</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="math:lowest.1.6">
+         <exslt:version>1.6</exslt:version>
+         <dc:creator email="craig.stewart@nottingham.ac.uk" 
+                     url="">Craig Stewart</dc:creator>
+         <dc:date>2002-11-12</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">Updated 4XSLT version to 0.12.0a3.</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+</rdf:Description>
+
+<exslt:doc xmlns:html="http://www.w3.org/1999/xhtml">
+   <html:div xmlns="http://www.w3.org/1999/xhtml">
+      <p>
+         The <code>math:lowest</code> function returns the nodes in the node set whose value is the minimum value for the node set.  The minimum value for the node set is the same as the value as calculated by <a href="/math/functions/min"><code>math:min</code></a>.  A node has this minimum value if the result of converting its string value to a number as if by the <a href="http://www.w3.org/TR/xpath#number-function"><code>number</code></a> function is equal to the minimum value, where the equality comparison is defined as a numerical comparison using the <a href="http://www.w3.org/TR/xpath#booleans"><code>=</code></a> operator.
+      </p>
+      <p class="note">
+         If any of the nodes in the node set has a non-numeric value, the <a href="/math/functions/min"><code>math:min</code></a> function will return <code>NaN</code>.  The definition numeric comparisons entails that <code>NaN != NaN</code>.  Therefore if any of the nodes in the node set has a non-numeric value, <code>math:lowest</code> will return an empty node set.
+      </p>
+      <p>
+         The <code>math:lowest</code> template returns a result tree fragment consisting of copies of the nodes as returned by the function.
+      </p>
+   </html:div>
+</exslt:doc>
+
+<exslt:definition>
+   <exslt:return type="node-set" />
+   <exslt:arg name="nodes" type="node-set" default="/.." />
+</exslt:definition>
+
+<exslt:implementations>
+   <exslt:vendor-implementation
+           version="1"
+           vendor="4XSLT, from 4Suite."
+           vendor-url="http://4Suite.org"
+           vendor-version="0.12.0a3" />
+   <exslt:vendor-implementation
+           version="1"
+           vendor="SAXON from Michael Kay"
+           vendor-url="http://users.iclway.co.uk/mhkay/saxon/index.html"
+           vendor-version="6.3" />
+   <exslt:vendor-implementation
+           version="1"
+           vendor="jd.xslt from Johannes D&#246;bler"
+           vendor-url="http://www.aztecrider.com/xslt/"
+           vendor-version="1.0.9" />
+   <exslt:vendor-implementation
+           version="1"
+           vendor="libxslt from Daniel Veillard; implementation by Thomas Broyer"
+           vendor-url="http://xmlsoft.org/XSLT/"
+           vendor-version="1.0.19" />
+   <exslt:vendor-implementation
+           version="1"
+           vendor="Xalan-J from Apache"
+           vendor-url="http://xml.apache.org/xalan-j"
+           vendor-version="2.4.D1" />
+   <exslt:implementation src="math.lowest.function.xsl" language="exslt:exslt" 
+                         version="1" />
+   <exslt:implementation src="math.lowest.template.xsl" language="exslt:xslt" 
+                         version="1" />
+</exslt:implementations>
+
+<exslt:use-cases>
+   <exslt:use-case type="example" data="math.lowest.data.1.xml"
+                   xslt="math.lowest.1.xsl" result="math.lowest.result.1.xml" />
+   <exslt:use-case type="example" template="yes" data="math.lowest.data.1.xml"
+                   xslt="math.lowest.2.xsl" result="math.lowest.result.1.xml" />
+   <exslt:use-case type="boundary" data="math.lowest.data.2.xml"
+                   xslt="math.lowest.1.xsl" result="math.lowest.result.2.xml" />
+   <exslt:use-case type="boundary" template="yes" data="math.lowest.data.2.xml"
+                   xslt="math.lowest.2.xsl" result="math.lowest.result.2.xml" />
+   <exslt:use-case type="error" data="math.lowest.data.1.xml"
+                   xslt="math.lowest.3.xsl">
+      <exslt:doc xmlns="">
+         <para>
+            This use case shows an error when the function is passed a 
+            number as the value of the first argument.
+         </para>
+      </exslt:doc>
+   </exslt:use-case>
+   <exslt:use-case type="error" template="yes" data="math.lowest.data.1.xml"
+                   xslt="math.lowest.4.xsl">
+      <exslt:doc>
+         <para>
+            This use case shows an error when the function is passed a 
+            number as the value of the <parameter>nodes</parameter> 
+            parameter.
+         </para>
+      </exslt:doc>
+   </exslt:use-case>
+   <exslt:use-case type="example" data="math.lowest.data.5.xml" 
+                   xslt="math.lowest.5.xsl" 
+                   result="math.lowest.result.5.xml">
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="math:lowest.use-case.5">
+         <dc:subject>EXSLT</dc:subject>
+         <dc:subject>maths</dc:subject>
+         <dc:subject>lowest</dc:subject>
+         <dc:subject>use case</dc:subject>
+         <exslt:revision>
+            <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                             xmlns:dc="http://purl.org/dc/elements/1.1/"
+                             ID="math:lowest.use-case.5.1">
+               <exslt:version>1</exslt:version>
+               <dc:creator email="mhkay@iclway.co.uk">Mike Kay</dc:creator>
+               <dc:date>2001-04-28</dc:date>
+               <dc:description>Tests functionality of math:lowest() and math:highest().</dc:description>
+            </rdf:Description>
+         </exslt:revision>
+      </rdf:Description>
+   </exslt:use-case>
+</exslt:use-cases>
+
+</exslt:function>

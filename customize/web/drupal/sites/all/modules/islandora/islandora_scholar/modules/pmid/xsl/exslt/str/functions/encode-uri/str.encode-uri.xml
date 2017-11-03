@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<exslt:function xmlns:exslt="http://exslt.org/documentation" 
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+			xmlns:dc="http://purl.org/dc/elements/1.1/" 
+			xmlns:html="http://www.w3.org/1999/xhtml" 
+			xmlns:vcf="http://www.ietf.org/internet-drafts/draft-dawson-vcard-xml-dtd-03.txt" 
+			version="2" module="str" status="new">
+
+<exslt:name>encode-uri</exslt:name>
+
+<rdf:Description ID="str:encode-uri">
+   <dc:subject>EXSLT</dc:subject>
+   <dc:subject>str</dc:subject>
+   <dc:subject>encode-uri</dc:subject>
+
+   <exslt:revision>
+	<rdf:Description ID="str:encode-uri.2">
+         <exslt:version>2</exslt:version>
+         <dc:creator email="mike@skew.org">Mike Brown</dc:creator>
+         <dc:date>2002-12-02</dc:date>
+         <dc:description>Updated the function syntax to more closely reflect <code>xf:escape-uri()</code> in [<a href="http://www.w3.org/TR/xquery-operators/">XQFuncs</a>].</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+</rdf:Description>
+
+<exslt:user-doc xmlns="">
+   <html:div>
+      <html:p>
+         The <html:code>str:encode-uri</html:code> function returns an encoded URI. The <html:code>str:encode-uri</html:code> method does not encode the following characters: lower case letters a-z, upper case letters A-Z, digits 0-9, and "-" | "_" | "." | "!" | "~" | "*" | "'" | "(" | ")". 
+      </html:p>
+   </html:div>
+</exslt:user-doc>
+
+<exslt:doc>
+   <html:div>
+      <html:p>
+	   This function applies the URI escaping rules defined in section 2 of [<html:a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396</html:a>], as amended by [<html:a href="http://www.ietf.org/rfc/rfc2732.txt">RFC 2732</html:a>], to the string supplied as the first argument, which typically represents all or part of a URI, URI reference or IRI. The effect of the function is to replace any special character in the string by an escape sequence of the form %xx%yy..., where xxyy... is the hexadecimal representation of the octets used to represent the character in US-ASCII for characters in the ASCII repertoire, and a different character encoding for non-ASCII characters.
+      </html:p>
+      <html:p>
+	   The set of characters that are escaped depends on the setting of the second argument.
+      </html:p>
+      <html:p>
+	   If the second argument is true, all characters are escaped other than lower case letters a-z, upper case letters A-Z, digits 0-9, and the characters referred to in [<html:a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396</html:a>] as "marks": specifically, "-" | "_" | "." | "!" | "~" | "*" | "'" | "(" | ")". The "%" character itself is escaped only if it is not followed by two hexadecimal digits (that is, 0-9, a-f, and A-F).
+      </html:p>
+      <html:p>
+	   If the second argument is false, the behavior differs in that characters referred to in [<html:a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396</html:a>] and [<html:a href="http://www.ietf.org/rfc/rfc2732.txt">RFC 2732</html:a>] as reserved characters are not escaped. These characters are "&#59;" | "&#47;" | "&#63;" | "&#58;" | "&#64;" | "&#38;" | "&#61;" | "&#43;" | "&#36;" | "&#44;" | "&#91;" | "&#93;".
+      </html:p>
+      <html:p>
+	   [<html:a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396</html:a>] does not define whether escaped URIs should use lower case or upper case for hexadecimal digits. To ensure that escaped URIs can be compared using string comparison functions, this function must always use the upper-case letters A-F.
+      </html:p>
+      <html:p>
+	   Generally, the second argument should be set to true when escaping a string that is to form a single part of a URI, URI reference or IRI, and to false when escaping an entire URI, URI reference or IRI.
+      </html:p>
+      <html:p>
+	   The character encoding used as the basis for determining the octets depends on the setting of the optional third argument. If the argument is given, it should be an encoding name listed in [<html:a href="http://www.iana.org/assignments/character-sets">Charsets</html:a>], and may be given case-insensitively. The default encoding, if the argument is not given, is UTF-8. UTF-8 is the only encoding required to be supported by an implementation of this function. If the given encoding is not supported, then the function returns an empty string. If the encoding is supported but a character in the string cannot be represented in that encoding, then the character is escaped as if it were a question mark ("%3F").
+      </html:p>
+      <html:p>
+	   Examples:<html:br/>
+      </html:p>
+      <html:p>
+	   <html:code>str:encode-uri('http://www.example.com/my r&#233;sum&#233;.html',false())</html:code><html:br/>
+	   returns<html:br/>
+	   <html:code>http://www.example.com/my%20r%E9sum%C3%A9.html</html:code>
+      </html:p>
+      <html:p>
+	   <html:code>str:encode-uri('http://www.example.com/my r&#233;sum&#233;.html',true())</html:code><html:br/>
+	   returns<html:br/>
+	   <html:code>http%3A%2F%2Fwww.example.com%2Fmy%20r%C3%A9sum%C3%A9.html</html:code>
+      </html:p>
+      <html:p>
+	   <html:code>str:encode-uri('http://www.example.com/my r&#233;sum&#233;.html',false(),'iso-8859-1')</html:code><html:br/>
+	   returns<html:br/>
+	   <html:code>http://www.example.com/my%20r%E9sum%E9.html</html:code> if the implementation supports iso-8859-1, or an empty string otherwise.
+      </html:p>
+   </html:div>
+</exslt:doc>
+
+<exslt:definition>
+   <exslt:return type="string">
+      <html:div/>
+   </exslt:return>
+   <exslt:arg name="string" type="string" default="''" optional="no">
+      <html:div/>
+   </exslt:arg>
+   <exslt:arg name="boolean" type="string" default="''" optional="no">
+      <html:div/>
+   </exslt:arg>
+   <exslt:arg name="string" type="string" default="''" optional="yes">
+      <html:div/>
+   </exslt:arg>
+</exslt:definition>
+
+<exslt:implementations>
+   <exslt:vendor-implementation
+          version="1"
+          vendor="4XSLT, from 4Suite."
+          vendor-url="http://4Suite.org"
+          vendor-version="0.12.0a3" />
+   <exslt:implementation src="str.encode-uri.msxsl.xsl" language="exslt:msxsl" version="1">
+      <rdf:Description ID="str:encode-uri.exslt:msxsl">
+         <dc:subject>EXSLT</dc:subject>
+         <dc:subject>str</dc:subject>
+         <dc:subject>encode-uri</dc:subject>
+         <dc:subject>exslt:msxsl</dc:subject>
+         <exslt:revision>
+            <rdf:Description ID="str:encode-uri.exslt:msxsl.1">
+               <exslt:version>1</exslt:version>
+               <dc:creator rdf:parseType="Resource">
+                  <vcf:fn>Chris Bayes</vcf:fn>
+                  <vcf:email>chris@bayes.co.uk</vcf:email>
+                  <vcf:url>http://www.bayes.co.uk</vcf:url>
+               </dc:creator>
+               <dc:date>2001-06-26</dc:date>
+            </rdf:Description>
+         </exslt:revision>
+      </rdf:Description>
+   </exslt:implementation>
+   <exslt:implementation src="str.encode-uri.js" language="exslt:javascript" version="1">
+      <rdf:Description ID="str:encode-uri.exslt:javascript">
+         <dc:subject>EXSLT</dc:subject>
+         <dc:subject>str</dc:subject>
+         <dc:subject>encode-uri</dc:subject>
+         <dc:subject>exslt:javascript</dc:subject>
+         <exslt:revision>
+            <rdf:Description ID="str:encode-uri.exslt:javascript.1">
+               <exslt:version>1</exslt:version>
+               <dc:creator rdf:parseType="Resource">
+                  <vcf:fn>Chris Bayes</vcf:fn>
+                  <vcf:email>chris@bayes.co.uk</vcf:email>
+                  <vcf:url>http://www.bayes.co.uk</vcf:url>
+               </dc:creator>
+               <dc:date>2001-06-26</dc:date>
+            </rdf:Description>
+         </exslt:revision>
+      </rdf:Description>
+   </exslt:implementation>
+</exslt:implementations>
+
+<exslt:use-cases/>
+
+</exslt:function>

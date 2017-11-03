@@ -1,0 +1,101 @@
+<?php
+
+/**
+ * @file
+ * Attempts to ingest a book and page into a randomly generated book collection.
+ */
+
+class IslandoraBookPageIngestTestCase extends IslandoraCollectionWebTestCase {
+
+  /**
+   * Get test information.
+   *
+   * @see IslandoraWebTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Book and Page Ingest/Purge',
+      'description' => 'Ingests and purges a book from a randomly generated book collection, and a page from that book.',
+      'group' => 'Islandora Book',
+    );
+  }
+
+  /**
+   * Set up the test environment.
+   *
+   * @see IslandoraWebTestCase::setUp()
+   */
+  public function setUp() {
+    parent::setUp(array(
+      'islandora',
+      'islandora_basic_collection',
+      'islandora_book',
+      'islandora_paged_content',
+    ));
+  }
+
+  /**
+   * Creates an administrative user and attempts to ingest a test book and page.
+   */
+  public function testIngestPurgeBookPage() {
+
+    $user = $this->drupalCreateUser(array(
+      'view fedora repository objects',
+      'ingest fedora objects',
+      'administer site configuration',
+      'manage object properties',
+      'delete fedora objects and datastreams',
+      'create child collection',
+    ));
+    $this->drupalLogin($user);
+
+    $label = $this->randomName(16);
+    $suffix = $this->randomName(16);
+    $collectionpid = 'islandora:' . $suffix;
+    $this->createTestCollection($label, 'islandora:bookCModel', $collectionpid);
+    $edit = array(
+      'islandora_book_ingest_derivatives[pdf]' => FALSE,
+      'islandora_book_ingest_derivatives[image]' => FALSE,
+      'islandora_book_ingest_derivatives[ocr]' => FALSE,
+    );
+    $this->drupalPost('admin/islandora/solution_pack_config/book', $edit, 'Save configuration');
+
+    // Attempts to create the book.
+    $path = 'islandora/object/' . $collectionpid . '/manage/overview/ingest';
+    $this->drupalPost($path, array(), t('Ingest'));
+    $this->assertText('New Object', 'Book was created', 'Islandora');
+
+    // Checks for book datastream creation.
+    $book_object = $this->getObjectFromPath($this->url);
+    $datastreams = array(
+      'RELS-EXT',
+      'DC',
+    );
+    $this->assertDatastreams($book_object, $datastreams);
+
+    // Attempts to add a page to the book.
+    $path = 'islandora/object/' . $book_object . '/manage/book/ingest';
+    $file = drupal_get_path('module', 'islandora_book') . '/tests/fixtures/test.tiff';
+    $edit = array(
+      'files[file]' => $file,
+    );
+    $this->drupalPost($path, $edit, t('Ingest'));
+
+    // Checks for page datastream creation.
+    $page_object = $this->getObjectFromPath($this->url);
+    $datastreams = array(
+      'RELS-EXT',
+      'OBJ',
+      'DC',
+    );
+    $this->assertDatastreams($page_object, $datastreams);
+
+    $this->deleteObject($book_object, 'Delete Book');
+    // XXX: The standard admin user should have $connection, not just
+    // $connection->repository, so that we have access to the cache, api, etc.
+    $connection = islandora_get_tuque_connection($this->admin, $this->configuration['fedora_url']);
+    $connection->cache->resetCache();
+    $this->assertFalse(islandora_object_load($page_object->id), "Book page successfully automatically deleted from book object during book purge.", 'Islandora');
+    $this->deleteTestCollection($collectionpid);
+  }
+}

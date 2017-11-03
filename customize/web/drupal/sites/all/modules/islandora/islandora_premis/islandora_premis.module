@@ -1,0 +1,118 @@
+<?php
+
+/**
+ * @file
+ * Defines all the hooks this module implements.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_premis_menu() {
+  return array(
+    'islandora/object/%islandora_object/manage/premis' => array(
+      'title' => 'PREMIS',
+      'type' => MENU_LOCAL_TASK,
+      'page callback' => 'islandora_premis_view',
+      'page arguments' => array(2),
+      'access callback' => 'islandora_premis_access_callback',
+      'access arguments' => array(2),
+      'file' => 'includes/utilities.inc',
+    ),
+    'islandora/object/%islandora_object/manage/premis/download' => array(
+      'title' => 'Download PREMIS',
+      'type' => MENU_CALLBACK,
+      'page callback' => 'islandora_premis_transform_foxml_to_premis',
+      'page arguments' => array(2),
+      'access callback' => 'islandora_premis_access_callback',
+      'access arguments' => array(2, TRUE),
+      'delivery callback' => '_islandora_premis_xml_download',
+      'file' => 'includes/utilities.inc',
+    ),
+    'admin/islandora/tools/premis' => array(
+      'title' => 'PREMIS',
+      'description' => 'Configure Islandora PREMIS.',
+      'page callback' => 'drupal_get_form',
+      'access arguments' => array('administer site configuration'),
+      'page arguments' => array('islandora_premis_admin_form'),
+      'file' => 'includes/admin.form.inc',
+      'type' => MENU_NORMAL_ITEM,
+    ),
+  );
+}
+
+/**
+ * Implements hook_permission().
+ */
+function islandora_premis_permission() {
+  return array(
+    'download premis metadata' => array(
+      'title' => t('Download PREMIS metadata'),
+      'description' => t('Download PREMIS metadata'),
+    ),
+    'view premis metadata' => array(
+      'title' => t('View PREMIS metadata'),
+      'description' => t('View PREMIS metadata'),
+    ),
+  );
+}
+
+/**
+ * Delivery callback used to download the output as XML.
+ *
+ * Wraps a "download premis metadata" access check around, for the case of any
+ * legacy uses.
+ *
+ * @see _islandora_premis_xml_download()
+ *
+ * @param string $output
+ *   The content to download.
+ */
+function islandora_premis_xml_download($output) {
+  if (user_access('download premis metadata')) {
+    return _islandora_premis_xml_download($output);
+  }
+}
+
+/**
+ * Delivery callback used to download the output as XML.
+ *
+ * @param string $output
+ *   The content to download.
+ */
+function _islandora_premis_xml_download($output) {
+  $object = menu_get_object('islandora_object', 2);
+  if (islandora_object_access('download premis metadata', $object)) {
+    drupal_add_http_header('Content-type', 'text/xml;charset=utf8');
+    drupal_add_http_header('Content-length', strlen($output));
+    drupal_add_http_header('Content-Disposition', 'attachment; filename="premis.xml"');
+    print $output;
+    drupal_page_footer();
+  }
+  else {
+    watchdog('access denied', '!q', array('!q' => check_plain($_GET['q'])), WATCHDOG_WARNING);
+    drupal_add_http_header('Status', '403 Forbidden');
+  }
+}
+
+/**
+ * Access callback.
+ *
+ * Requires that the given object contains a DC datastream (and to be
+ * viewable, as per the stock permissions).
+ *
+ * @param AbstractObject $object
+ *   The object to test, if NULL the given object doesn't exist or is
+ *   inaccessible.
+ * @param bool $download
+ *   A boolean flag. TRUE if we're checking for a download; FALSE for viewing.
+ *
+ * @return bool
+ *   TRUE if the user is allowed to access the premis interface, FALSE
+ *   otherwise.
+ */
+function islandora_premis_access_callback($object, $download = FALSE) {
+  return is_object($object) && isset($object['DC']) && islandora_datastream_access(ISLANDORA_VIEW_OBJECTS, $object['DC'])
+    && !isset($object['COLLECTION_POLICY']) && islandora_object_access($download ? 'download premis metadata' : 'view premis metadata', $object);
+
+}

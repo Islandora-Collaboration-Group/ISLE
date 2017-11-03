@@ -1,0 +1,125 @@
+<?php
+
+
+/**
+ * Implementation of hook_menu().
+ */
+function webform_digest_menu() {
+  $items = array();
+  $items['node/%webform_menu/webform/digest'] = array(
+    'title' => 'Digest',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('webform_digest_form', 1),
+    'access callback' => 'node_access',
+    'access arguments' => array('update', 1),
+    'file' => 'webform_digest.inc',
+    'weight' => 1,
+    'type' => MENU_LOCAL_TASK,
+  );
+  return $items;
+}
+
+
+/**
+ * Implementation of hook_webform_exporters().
+ * Add digest exporters that will override normal exportets.
+ */
+function webform_digest_webform_exporters($return = false) {
+  if ($return) return;
+  $exporters = module_invoke_all('webform_exporters', true);
+  $digest_exporters = array();
+  foreach ($exporters as $key => $value) {
+    $value['title'] .= ' - Digest';
+    $value['handler'] .= '_digest';
+    $digest_exporters[$key . '_digest'] = $value;
+  }
+  return $digest_exporters;
+}
+
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function webform_digest_form_alter(&$form, &$form_state, $form_id) {
+  // Unset digest exportets, which are used for technical reasons.
+  if ($form_id == 'webform_results_download_form' || $form_id == 'webform_digest_form') {
+    if (!strstr($form_state['values']['format'], '_digest')) {
+      foreach ($form['format']['#options'] as $format => $value) {
+        if (strstr($format, '_digest')) {
+          unset($form['format']['#options'][$format]);
+        }
+      }
+    }
+  }
+  // Unset component option from some fields when webform digest is used
+  elseif ($form_id == 'webform_email_edit_form') {
+    $enabled = db_result(db_query("SELECT enabled FROM {webform_digest} WHERE nid=%d", array($form['node']['#value']->nid)));
+    if ($enabled) {
+      $elements = array('subject', 'from_address', 'from_name');
+      foreach ($elements as $element) {
+        unset($form[$element . '_option']['#options']['component']);
+        unset($form[$element . '_component']);
+      }
+      // Leave only mapping and select components for for E-mail to address
+      foreach ($form['email_component']['#options'] as $component => $name) {
+        $component_type = $form['node']['#value']->webform['components'][$component]['type'];
+        if (!($component_type == 'select' || $component_type == 'mapping')) {
+          unset($form['email_component']['#options'][$component]);
+        }
+      }
+    }
+  }
+}
+
+
+/**
+ * Implementation of hook_cron().
+ */
+function webform_digest_cron() {
+  module_load_include('inc', 'webform_digest', 'webform_digest');
+  
+  $res = db_query("SELECT * FROM {webform_digest} WHERE enabled=1");
+  while ($record = db_fetch_array($res)) {
+    $to_send = false;
+    if ($record['period'] == 'day') {
+      if (time() - $record['sent'] > 60 * 60 && date('H') == $record['hourly_granularity']) {
+        $to_send = true;
+      }
+    } elseif ($record['period'] == 'week') {
+      if (time() - $record['sent'] > 24 * 60 * 60 && date('w') == $record['daily_granularity'] && date('H') >= $record['hourly_granularity']) {
+        $to_send = true;
+      }
+    } elseif ($record['period'] == 'month') {
+      if (time() - $record['sent'] > 24 * 60 * 60 && date('w') == $record['daily_granularity'] && date('H') >= $record['hourly_granularity']) {
+        $to_send = true;
+      }
+    }
+    if ($to_send) {
+      _webform_digest_send_digest($record['nid']);
+      $record['sent'] = time();
+      drupal_write_record('webform_digest', $record, 'nid');
+    }
+  }
+}
+
+
+/**
+ * Implementation of hook_nodeapi().
+ * Prevent sending of submitted webform data if digest is enabled.
+ */
+function webform_digest_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
+  if ( $node->type == 'webform' && $op == 'load') {
+
+    // Don't override webform emails addition, when sending digest or editing cron.
+    if (arg(2) == 'webform' && arg(3) == 'emails') return;
+    if ($GLOBALS['webform_digest_send'] == true) return;
+    
+    $enabled = db_result(db_query("SELECT enabled FROM {webform_digest} WHERE nid=%d", array($node->nid)));
+    if ($enabled) {
+      module_load_include('module', 'webform', 'webform');
+      $additions = webform_node_load($node);
+      $additions['webform']['emails'] = array();
+      return $additions;
+    }
+  }
+}

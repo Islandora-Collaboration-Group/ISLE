@@ -1,0 +1,46 @@
+<?php
+// @codingStandardsIgnoreStart
+/**
+ * @file
+ * Unit Tests.
+ */
+
+/**
+ * Unit Tests for the FormControl class.
+ */
+class PHPLib_Array_TestCase extends DrupalUnitTestCase {
+
+  /**
+   * Get Test info.
+   *
+   * @return array
+   *   Properties that are displayed in the test selection form.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Array Unit Tests.',
+      'description' => 'Unit tests for Array.inc.',
+      'group' => 'PHP Lib',
+    );
+  }
+
+  /**
+   * SetUp() performs any pre-requisite tasks that need to happen.
+   */
+  public function setUp() {
+    // Enable any modules required for the test.
+    parent::setUp('php_lib');
+    module_load_include('inc', 'php_lib', 'Array');
+  }
+
+  /**
+   * Test constructing the Form definition.
+   */
+  public function test_array_copy_recursive() {
+    $a = array('a' => 'b', 'c' => array('g' => array('b')));
+    $b = array_copy_recursive($a);
+    $this->assertEqual($a, $b, 'array_copy_recursive() produced an array of equal value.');
+  }
+
+}
+// @codingStandardsIgnoreEnd

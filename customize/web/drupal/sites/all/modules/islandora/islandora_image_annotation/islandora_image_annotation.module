@@ -1,0 +1,351 @@
+<?php
+
+/**
+ * @file
+ * Hooks and callbacks for this module.
+ */
+
+define('ISLANDORA_IMAGE_ANNOTATION_VIEW', 'view image annotations');
+define('ISLANDORA_IMAGE_ANNOTATION_CREATE', 'create image annotations');
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_image_annotation_menu() {
+  return array(
+    'admin/islandora/tools/image_annotation' => array(
+      'title' => 'Image annotation',
+      'description' => 'Configure the image annotation module.',
+      'page callback' => 'drupal_get_form',
+      'access arguments' => array('administer site configuration'),
+      'page arguments' => array('islandora_image_annotation_admin_settings_form'),
+      'file' => 'includes/admin.form.inc',
+      'type' => MENU_NORMAL_ITEM,
+    ),
+    // @deprecated.
+    'islandora/anno/setup' => array(
+      'page callback' => 'islandora_image_annotation_canvas_setup',
+      'type' => MENU_CALLBACK,
+      'access arguments' => array(ISLANDORA_IMAGE_ANNOTATION_VIEW),
+      'file' => 'includes/callbacks.inc',
+    ),
+    // @deprecated.
+    'islandora/anno/add_annotation' => array(
+      'page callback' => 'islandora_image_annotation_add_annotation',
+      'type' => MENU_CALLBACK,
+      'access arguments' => array(ISLANDORA_IMAGE_ANNOTATION_CREATE),
+      'file' => 'includes/callbacks.inc',
+    ),
+    // @deprecated.
+    'islandora/anno/get_urns' => array(
+      'page callback' => 'islandora_image_annotation_shared_get_annotation_pids',
+      'type' => MENU_CALLBACK,
+      'access arguments' => array(ISLANDORA_IMAGE_ANNOTATION_VIEW),
+      'file' => 'includes/callbacks.inc',
+    ),
+    // @deprecated.
+    'islandora/anno/get_annotation' => array(
+      'page callback' => 'islandora_image_annotation_shared_get_annotation',
+      'type' => MENU_CALLBACK,
+      'access arguments' => array(ISLANDORA_IMAGE_ANNOTATION_VIEW),
+      'file' => 'includes/callbacks.inc',
+    ),
+    // @deprecated.
+    'islandora/anno/delete_annotation' => array(
+      'page callback' => 'islandora_delete_annotation',
+      'type' => MENU_CALLBACK,
+      'access arguments' => array(ISLANDORA_IMAGE_ANNOTATION_CREATE),
+      'file' => 'includes/callbacks.inc',
+    ),
+    // @deprecated.
+    'islandora/anno/update_annotation' => array(
+      'page callback' => 'islandora_image_annotation_canvas_update_annotation',
+      'type' => MENU_CALLBACK,
+      'access arguments' => array(ISLANDORA_IMAGE_ANNOTATION_CREATE),
+      'file' => 'includes/callbacks.inc',
+    ),
+    // @deprecated.
+    'islandora/anno/serve' => array(
+      'page callback' => 'islandora_image_annotation_islandora_serve',
+      'type' => MENU_CALLBACK,
+      'access arguments' => array(ISLANDORA_IMAGE_ANNOTATION_VIEW),
+      'file' => 'includes/build_streams.inc',
+    ),
+    // @deprecated.
+    'islandora/anno/solr/title/terms/%' => array(
+      'page callback' => 'islandora_image_annotation_get_title_terms',
+      'page arguments' => array(5),
+      'type' => MENU_CALLBACK,
+      'access arguments' => array(ISLANDORA_IMAGE_ANNOTATION_CREATE),
+      'file' => 'includes/callbacks.inc',
+    ),
+    // @deprecated.
+    'islandora/anno/mads/%' => array(
+      'page callback' => 'islandora_image_annotation_get_mads_as_json',
+      'page arguments' => array(3),
+      'type' => MENU_CALLBACK,
+      'access arguments' => array(ISLANDORA_IMAGE_ANNOTATION_CREATE),
+      'file' => 'includes/callbacks.inc',
+    ),
+    'islandora/annotation/title/%' => array(
+      'page callback' => 'islandora_image_annotation_title_search',
+      'page arguments' => array(3),
+      'type' => MENU_CALLBACK,
+      'access arguments' => array(ISLANDORA_IMAGE_ANNOTATION_CREATE),
+      'file' => 'includes/annotation.inc',
+    ),
+    'islandora/object/%islandora_object/annotation' => array(
+      'title' => 'Image Annotation',
+      'page callback' => 'islandora_image_annotation_view',
+      'page arguments' => array(2),
+      'type' => MENU_LOCAL_TASK,
+      'access callback' => 'islandora_image_annotation_access',
+      'access arguments' => array(ISLANDORA_IMAGE_ANNOTATION_VIEW, 2),
+    ),
+    // Gets the Drupal.settings for all the image annotation widgets, so that it
+    // can be embedded in an AJAX environment, it's not currently used by this
+    // module, but is used by "islandora_cwrc_writer".
+    'islandora/object/%islandora_object/annotation/settings' => array(
+      'page callback' => 'islandora_image_annotation_settings',
+      'page arguments' => array(2),
+      'access callback' => 'islandora_image_annotation_access',
+      'access arguments' => array(ISLANDORA_IMAGE_ANNOTATION_VIEW, 2),
+      'file' => 'includes/annotation.inc',
+      'type' => MENU_CALLBACK,
+    ),
+    'islandora/object/%islandora_object/annotation/get/%islandora_image_annotation_object' => array(
+      'page callback' => 'islandora_image_annotation_get_callback',
+      'page arguments' => array(5),
+      'access callback' => 'islandora_object_access_callback',
+      'access arguments' => array(ISLANDORA_IMAGE_ANNOTATION_VIEW, 2),
+      'file' => 'includes/annotation.inc',
+      'type' => MENU_CALLBACK,
+    ),
+    'islandora/object/%islandora_object/annotation/add' => array(
+      'page callback' => 'islandora_image_annotation_add_callback',
+      'page arguments' => array(2),
+      // It's assumed that the XACML Policy of the Object applies to it's
+      // annotations, so we only check the annotations parent object.
+      'access callback' => 'islandora_object_access_callback',
+      'access arguments' => array(ISLANDORA_IMAGE_ANNOTATION_CREATE, 2),
+      'file' => 'includes/annotation.inc',
+      'type' => MENU_CALLBACK,
+    ),
+    'islandora/object/%islandora_object/annotation/update/%islandora_image_annotation_object' => array(
+      'page callback' => 'islandora_image_annotation_update_callback',
+      'page arguments' => array(5),
+      // It's assumed that the XACML Policy of the Object applies to it's
+      // annotations, so we only check the annotations parent object.
+      'access callback' => 'islandora_object_access_callback',
+      'access arguments' => array(ISLANDORA_IMAGE_ANNOTATION_CREATE, 2),
+      'file' => 'includes/annotation.inc',
+      'type' => MENU_CALLBACK,
+    ),
+    'islandora/object/%islandora_object/annotation/delete/%islandora_image_annotation_object' => array(
+      'page callback' => 'islandora_image_annotation_delete_callback',
+      'page arguments' => array(5),
+      // It's assumed that the XACML Policy of the Object applies to it's
+      // annotations, so we only check the annotations parent object.
+      'access callback' => 'islandora_object_access_callback',
+      'access arguments' => array(ISLANDORA_IMAGE_ANNOTATION_CREATE, 2),
+      'file' => 'includes/annotation.inc',
+      'type' => MENU_CALLBACK,
+    ),
+  );
+}
+
+/**
+ * Implements hook_permission().
+ */
+function islandora_image_annotation_permission() {
+  return array(
+    ISLANDORA_IMAGE_ANNOTATION_VIEW => array(
+      'title' => t('View image annotations'),
+      'description' => t('View image annotations.'),
+    ),
+    ISLANDORA_IMAGE_ANNOTATION_CREATE => array(
+      'title' => t('Create image annotations'),
+      'description' => t('Create image Annotations'),
+    ),
+  );
+}
+
+/**
+ * Determines whether or not to show this modules "Image Annotation" tab.
+ *
+ * @param string $perm
+ *   User permission to test for.
+ * @param AbstractObject $object
+ *   A Object in which to annotate.
+ *
+ * @return bool
+ *   Whether the user has access or not.
+ */
+function islandora_image_annotation_access($perm, AbstractObject $object) {
+  if (!isset($object)) {
+    return FALSE;
+  }
+  $models = variable_get('islandora_image_annotation_mappings', array());
+  foreach ($object->models as $model) {
+    if (isset($models[$model])) {
+      return islandora_object_access($perm, $object);
+    }
+  }
+  return FALSE;
+}
+
+/**
+ * Loads the object from the given UUID if possible.
+ *
+ * Often used to get a connection and return an object for the one specified in
+ * the menu path as '%islandora_image_annotation_object'.
+ *
+ * @param string $id
+ *   A URN that identifies an annotation, otherwise the PID of an object.
+ *
+ * @return AbstractObject
+ *   If the given object id exists in the repository then this returns a
+ *   FedoraObject.
+ *   If no object was found it returns FALSE which triggers
+ *   drupal_page_not_found().
+ *   If the object was inaccessible then NULL is returned, and the
+ *   access callback is expected to catch that case, triggering
+ *   drupal_access_denied().
+ */
+function islandora_image_annotation_object_load($id) {
+  $tuque = islandora_get_tuque_connection();
+  if ($tuque) {
+    try {
+      $object_id = islandora_image_annotation_get_annotation_from_uuid(urldecode($id));
+      // Try the given ID it may be a pid.
+      $object_id = $object_id ? $object_id : $id;
+      return $object_id ? $tuque->repository->getObject($object_id) : FALSE;
+    }
+    catch (Exception $e) {
+      if ($e->getCode() == '404') {
+        return FALSE;
+      }
+      else {
+        return NULL;
+      }
+    }
+  }
+  else {
+    IslandoraTuque::getError();
+  }
+  // Assuming access denied in all other cases for now.
+  return NULL;
+}
+
+/**
+ * Gets the pid of the annotation object identified by the given URN.
+ *
+ * @see http://en.wikipedia.org/wiki/Universally_unique_identifier
+ *
+ * @param string $urn
+ *   A URN expected to be in UUID format.
+ *
+ * @return string
+ *   The pid of the annotation object identified by the given URN.
+ */
+function islandora_image_annotation_get_annotation_from_uuid($urn) {
+  $tuque = islandora_get_tuque_connection();
+  $query = <<<EOT
+    select ?object from <#ri> where
+      ?object <http://islandora.ca/ontology/relsext#hasURN> ?urn and
+      ?urn <mulgara:is> '$urn'
+EOT;
+  $results = $tuque->repository->ri->itqlQuery($query);
+  if (isset($results[0]['object']['value'])) {
+    return $results[0]['object']['value'];
+  }
+  return FALSE;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function islandora_image_annotation_theme($existing, $type, $theme, $path) {
+  return array(
+    'islandora_image_annotation' => array(
+      'template' => 'theme/islandora-image-annotation',
+      'variables' => array('objects' => NULL),
+      'file' => 'theme/theme.inc',
+    ),
+    'islandora_image_annotation_dialog' => array(
+      'template' => 'theme/islandora-image-annotation-dialog',
+      'variables' => array('object' => NULL),
+      'file' => 'theme/theme.inc',
+    ),
+    'islandora_image_annotation_list' => array(
+      'template' => 'theme/islandora-image-annotation-list',
+      'variables' => array('object' => NULL),
+      'file' => 'theme/theme.inc',
+    ),
+    'islandora_image_annotation_canvas' => array(
+      'template' => 'theme/islandora-image-annotation-canvas',
+      'variables' => array('object' => NULL),
+      'file' => 'theme/theme.inc',
+    ),
+    'islandora_image_annotation_shared_canvas_logo' => array(
+      'render element' => 'element',
+      'file' => 'theme/theme.inc',
+    ),
+    // @deprecated theme function.
+    'islandora_image_annotation_view' => array(
+      'template' => 'theme/islandora-image-annotation-view',
+      'variables' => array('islandora_objects' => NULL),
+      'file' => 'theme/theme.inc',
+    ),
+    // @deprecated theme function.
+    'islandora_anno_list_pane' => array(
+      'template' => 'theme/islandora-list-pane',
+    ),
+    // @deprecated theme function.
+    'islandora_anno_image_pane' => array(
+      'template' => 'theme/islandora-img-pane',
+      'variables' => array('islandora_object' => NULL),
+    ),
+  );
+}
+
+/**
+ * The image annotation view.
+ *
+ * @param FedoraObject $object
+ *   A FedoraObject.
+ *
+ * @return string
+ *   The marked up output.
+ */
+function islandora_image_annotation_view($object) {
+  return theme('islandora_image_annotation', array('object' => $object));
+}
+
+/**
+ * Implements hook_islandora_required_objects().
+ */
+function islandora_image_annotation_islandora_required_objects(IslandoraTuque $connection) {
+  $module_path = drupal_get_path('module', 'islandora_image_annotation');
+  // OAC Content Model.
+  $oac_content_model = $connection->repository->constructObject('islandora:OACCModel');
+  $oac_content_model->owner = 'fedoraAdmin';
+  $oac_content_model->label = 'Islandora Annotation CModel';
+  $oac_content_model->models = 'fedora-system:ContentModel-3.0';
+
+  // DS-COMPOSITE-MODEL Datastream.
+  $datastream = $oac_content_model->constructDatastream('DS-COMPOSITE-MODEL', 'X');
+  $datastream->label = 'DS-COMPOSITE-MODEL';
+  $datastream->mimetype = 'application/xml';
+  $datastream->setContentFromFile("$module_path/xml/islandora_image_annotation_ds_composite_model.xml", FALSE);
+  $oac_content_model->ingestDatastream($datastream);
+
+  return array(
+    'islandora_image_annotation' => array(
+      'title' => 'Islandora image annotations',
+      'objects' => array(
+        $oac_content_model,
+      ),
+    ),
+  );
+}

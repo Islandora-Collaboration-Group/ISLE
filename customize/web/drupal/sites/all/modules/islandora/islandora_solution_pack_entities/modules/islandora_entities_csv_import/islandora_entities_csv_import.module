@@ -1,0 +1,43 @@
+<?php
+
+/**
+ * @file
+ * Creates Islandora Entities from CSV.
+ */
+
+// Permissions.
+define('ISLANDORA_ENTITIES_CSV_IMPORT_ISLANDORA_ENTITIES_IMPORT_CSV', 'Import entities from csv');
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_entities_csv_import_menu() {
+  return array(
+    'import_entity_csv' => array(
+      'title' => 'Import Entities from CSV',
+      'type' => MENU_NORMAL_ITEM,
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('islandora_entities_import_form'),
+      'file' => 'includes/islandora_entities_csv_import.form.inc',
+      'access arguments' => array(ISLANDORA_ENTITIES_CSV_IMPORT_ISLANDORA_ENTITIES_IMPORT_CSV),
+    ),
+    'import_entity_csv/autocomplete' => array(
+      'page callback' => 'islandora_entities_get_collection_autocomplete',
+      'access callback' => TRUE,
+      'file' => 'includes/utilities.inc',
+      'type' => MENU_CALLBACK,
+    ),
+  );
+}
+
+/**
+ * Implements hook_permission().
+ */
+function islandora_entities_csv_import_permission() {
+  return array(
+    ISLANDORA_ENTITIES_CSV_IMPORT_ISLANDORA_ENTITIES_IMPORT_CSV => array(
+      'title' => t('Import Islandora Entities from CSV'),
+      'description' => t('Import entities from user-supplied CSV.'),
+    ),
+  );
+}

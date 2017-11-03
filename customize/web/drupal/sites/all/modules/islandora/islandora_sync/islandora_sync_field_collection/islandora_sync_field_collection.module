@@ -1,0 +1,61 @@
+<?php
+
+/**
+ * @file
+ * Integration of field_collection and islandora_sync.
+ */
+
+/**
+ * Implements islandora_sync_node_field_build().
+ */
+function islandora_sync_field_collection_islandora_sync_node_field_build($node, $object, $field, $ds_id) {
+  if ($field->type == 'field_collection') {
+    $child_fields = db_query("SELECT * FROM {islandora_sync_fields} fcef
+      LEFT JOIN {field_config_instance} fci ON fci.field_name = fcef.field
+      LEFT JOIN {field_config} fc ON fc.field_name = fci.bundle
+      WHERE fc.type = 'field_collection'
+      AND fci.bundle = :bundle
+      AND fcef.dsid = :ds_id",
+      array(':bundle' => $field->field, ':ds_id' => $ds_id)
+    )->fetchAllAssoc('field');
+
+    $values = array();
+    foreach ($child_fields as $child_field_name => $child_field_info) {
+      $values[$child_field_name] = islandora_sync_get_field_values($child_field_info, $object, $node->type, array($child_field_info->bundle));
+    }
+
+    $collection_count = 0;
+    foreach ($values as $child_field_name => $child_values) {
+      if (count($child_values) > $collection_count) {
+        $collection_count = count($child_values);
+      }
+    }
+
+    $existing_collection_count = 0;
+    if (isset($node->{$field->field}[$node->language])) {
+      $existing_collection_count = count($node->{$field->field}[$node->language]);
+    }
+
+    for ($i = 0; $i < $existing_collection_count; $i++) {
+      $id = $node->{$field->field}[$node->language][$i]['value'];
+      // @TODO: batch for delete multiple.
+      entity_delete('field_collection_item', $id);
+    }
+    $node->{$field->field} = array();
+
+    if ($collection_count) {
+      for ($i = 0; $i < $collection_count; $i++) {
+        $field_collection_item = entity_create('field_collection_item', array('field_name' => $field->field));
+        $field_collection_item->setHostEntity('node', $node);
+
+        foreach ($values as $k => $v) {
+          if (isset($v[$i]) && $v[$i]) {
+            islandora_sync_save_field($child_fields[$k], $field_collection_item, $v[$i]);
+          }
+        }
+        $field_collection_item->save();
+      }
+    }
+    return TRUE;
+  }
+}

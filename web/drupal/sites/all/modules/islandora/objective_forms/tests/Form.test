@@ -1,0 +1,168 @@
+<?php
+
+/**
+ * @file
+ * Form tests.
+ */
+
+class ObjectiveFormTestCase extends DrupalUnitTestCase {
+
+  /**
+   * Get Test info.
+   *
+   * @return array
+   *   Properties that are displayed in the test selection form.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Form Unit Tests.',
+      'description' => 'Unit tests for Form.inc.',
+      'group' => 'Objective Forms',
+    );
+  }
+
+  /**
+   * Function setup.
+   *
+   * setUp() performs any pre-requisite tasks that need to happen.
+   */
+  public function setUp() {
+    // Enable any modules required for the test.
+    parent::setUp('objective_forms');
+    module_load_include('inc', 'objective_forms', 'Form');
+  }
+
+  /**
+   * Test constructing the Form definition.
+   */
+  public function testCreate() {
+    /* Basic single form element */
+    $form = array();
+    $form_state = array();
+    $form = new Form($form, $form_state);
+    $this->assertNotNull($form->storage, 'FormStorage was created.');
+    $this->assertNotNull($form->registry, 'FormElementRegistry was created.');
+    $this->assertNotNull($form->root, 'The root element was created.');
+    /* Basic Adding properties - Array Access */
+    $form['#attributes'] = array('enctype' => 'multipart/form-data');
+    $this->assertEqual($form['#attributes']['enctype'], 'multipart/form-data', 'Correctly set form property via array access.');
+    /* Basic Adding properties - Get/Set */
+    $form->attributes = array('enctype' => 'overwrote previous value');
+    $this->assertEqual($form->attributes['enctype'], 'overwrote previous value', 'Correctly set form property via get/set.');
+    /* Basic Add Form Element - Array Access */
+    $form_element = new FormElement(NULL, array('#title' => 'first'));
+    $form['first'] = $form_element;
+    $this->assertIdentical($form['first'], $form_element, 'Correctly set form element via array access.');
+    $form_element = new FormElement(NULL, array('#title' => 'second'));
+    $form->first = $form_element;
+    $this->assertIdentical($form->first, $form_element, 'Correctly set form element via get/set.');
+  }
+
+  /**
+   * Function testCreateFromArray.
+   */
+  public function testCreateFromArray() {
+    $form = array(
+      '#attributes' => array(
+        'class' => 'foo',
+      ),
+      'first' => array(
+        '#title' => 'first',
+        'second' => array(
+          '#title' => 'second',
+        ),
+      ),
+      'third' => array(
+        '#title' => 'third',
+      ),
+    );
+    $form_state = array();
+    $form = new Form($form, $form_state);
+    $output = $form->toArray($form_state);
+    $expected_output = array(
+      '#attributes' => array(
+        'class' => 'foo',
+      ),
+      'first' => array(
+        '#title' => 'first',
+        '#hash' => $form->first->hash,
+        'second' => array(
+          '#title' => 'second',
+          '#hash' => $form->first->second->hash,
+        ),
+      ),
+      'third' => array(
+        '#title' => 'third',
+        '#hash' => $form->third->hash,
+      ),
+      '#hash' => $form->root->hash,
+    );
+    $this->assertEqual($output, $expected_output, 'Form::toArray()\'s output matched its expected value after being created from a drupal form definition.');
+  }
+
+  /**
+   * Function testToArray.
+   */
+  public function testToArray() {
+    $form = array();
+    $form_state = array();
+    $form = new Form($form, $form_state);
+    $form['#attributes'] = array('enctype' => 'multipart/form-data');
+    $form->first = new FormElement(NULL, array('#title' => 'first'));
+    $form->first->second = new FormElement(NULL, array('#title' => 'second'));
+    $form->third = new FormElement(NULL, array('#title' => 'third'));
+    $output = $form->toArray($form_state);
+    $expected_output = array(
+      '#attributes' => array(
+        'enctype' => 'multipart/form-data',
+      ),
+      'first' => array(
+        '#title' => 'first',
+        '#hash' => $form->first->hash,
+        'second' => array(
+          '#title' => 'second',
+          '#hash' => $form->first->second->hash,
+        ),
+      ),
+      'third' => array(
+        '#title' => 'third',
+        '#hash' => $form->third->hash,
+      ),
+      '#hash' => $form->root->hash,
+    );
+    $this->assertEqual($output, $expected_output, 'Form::toArray()\'s output matched its expected value.');
+  }
+
+  /**
+   * Function testFind.
+   */
+  public function testFind() {
+    $form = array();
+    $form_state = array();
+    $form = new Form($form, $form_state);
+    $form->first = new FormElement(NULL, array('#title' => 'first'));
+    $form->first->second = new FormElement(NULL, array('#title' => 'second'));
+    $form->third = new FormElement(NULL, array('#title' => 'third'));
+    $hash = $form->first->second->hash;
+    $element = $form->findElement($hash);
+    $this->assertIdentical($element, $form->first->second, 'findElement found the correct element.');
+  }
+
+  /**
+   * Function testCloning.
+   */
+  public function testCloning() {
+    $form = array();
+    $form_state = array();
+    $form = new Form($form, $form_state);
+    $form->first = new FormElement($form->registry, array('#title' => 'first'));
+    $form->first->second = new FormElement($form->registry, array('#title' => 'second'));
+    $form->third = new FormElement($form->registry, array('#title' => 'third'));
+    $clone = $form->duplicate($form->first->second->hash);
+    $this->assertTrue($form->registry->isClone($clone->hash), 'Cloned Form element.');
+    $this->assertIdentical($form->first->second, $form->registry->getAncestor($clone->hash, 0), 'Ancestory is correct for clone at depth one.');
+    $new_clone = $form->duplicateOriginal($clone->hash);
+    $this->assertIdentical($form->first->second, $form->registry->getAncestor($new_clone->hash, 0), 'Ancestory is correct for clone from original.');
+  }
+
+}

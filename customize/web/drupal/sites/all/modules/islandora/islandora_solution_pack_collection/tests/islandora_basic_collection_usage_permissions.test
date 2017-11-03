@@ -1,0 +1,89 @@
+<?php
+
+/**
+ * @file
+ * Attempts to perform basic collection functions as a variety of users with
+ * different permissions.
+ */
+
+class IslandoraBasicCollectionUsagePermissionsTestCase extends IslandoraCollectionWebTestCase {
+
+  /**
+   * Get test information.
+   *
+   * @see DrupalWebTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Islandora Basic Collection Use Permissions',
+      'description' => 'Asserts basic collection functions, performing each as a user with no other rights than those required for that function',
+      'group' => 'Islandora Basic Collection',
+    );
+  }
+
+  /**
+   * Sets up the test environment.
+   *
+   * @see DrupalWebTestCase::setUp()
+   */
+  public function setUp() {
+    parent::setUp(array('islandora_basic_collection'));
+  }
+
+  /**
+   * Runs the actual collection tests.
+   */
+  public function testUseBasicCollectionPermissions() {
+
+    // Edits a collection configuration setting.
+    $user = $this->drupalCreateUser(array('administer site configuration'));
+    $this->drupalLogin($user);
+    $edit = array(
+      'islandora_basic_collection_page_size' => 5,
+    );
+    $this->drupalPost('admin/islandora/solution_pack_config/basic_collection', $edit, 'Save configuration');
+    $this->drupalLogout();
+
+    // Creates a test collection.
+    $user = $this->drupalCreateUser(array(
+      ISLANDORA_VIEW_OBJECTS,
+      ISLANDORA_BASIC_COLLECTION_CREATE_CHILD_COLLECTION,
+      ISLANDORA_MANAGE_PROPERTIES,
+      ISLANDORA_INGEST));
+    $this->drupalLogin($user);
+    $label = $this->randomName(16);
+    $collection_pid = "islandora:" . $this->randomName(16);
+    $this->createTestCollection($label, "islandora:collectionCModel", $collection_pid);
+    $this->drupalLogout();
+
+    // Views the collection.
+    $user = $this->drupalCreateUser(array(ISLANDORA_VIEW_OBJECTS));
+    $this->drupalLogin($user);
+    $this->drupalGet('islandora/object/' . $collection_pid);
+    $this->drupalLogout();
+
+    // Edits a property of the test collection.
+    $user = $this->drupalCreateUser(array(ISLANDORA_MANAGE_PROPERTIES));
+    $this->drupalLogin($user);
+    $edit = array(
+      'object_label' => 'New Label',
+    );
+    $this->drupalPost('islandora/object/' . $collection_pid . '/manage/properties', $edit, 'Update Properties');
+    $this->assertText('Successfully updated label New Label', 'Collection properties updated', 'Islandora');
+    $this->drupalLogout();
+
+    // Deletes the collection.
+    $user = $this->drupalCreateUser(array(
+      ISLANDORA_PURGE,
+      ISLANDORA_MANAGE_PROPERTIES,
+      ISLANDORA_VIEW_OBJECTS));
+    $this->drupalLogin($user);
+    $this->deleteTestCollection($collection_pid);
+
+    // Forces deletion of the collection in case of a permissions error.
+    if (is_object($collection_pid)) {
+      islandora_delete_object($collection_pid);
+      $this->pass(t('Deleted collection %collection by force.', array('%collection' => $collection_pid)));
+    }
+  }
+}

@@ -1,0 +1,10 @@
+<definition version="2">
+    <properties>
+        <root_name>ChangeMe</root_name>
+    </properties>
+    <form>
+      <properties>
+        <type>form</type>
+      </properties>  
+    </form>
+</definition>

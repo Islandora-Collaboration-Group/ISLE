@@ -1,0 +1,49 @@
+/* 
+    Document   : Clear
+    Created on : May 16, 2011, 4:54:08 AM
+    Author     : nbanks
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+/* 
+    Document   : Clear.css
+    Created on : Apr 6, 2011, 1:38:25 PM
+    Author     : nbanks
+    Description:
+        Purpose of the stylesheet follows.
+*/
+#xml-form-builder-editor ol, #xml-form-builder-editor ul {
+    list-style: none;
+}
+#xml-form-builder-editor a:link {
+    padding-bottom: 0px;
+}
+#xml-form-builder-editor table, .adr-clear table, .x-window table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+}
+#xml-form-builder-editor form tbody, #xml-form-builder-editor form tbody th, .x-window th, .x-window td {
+    border: 0;
+}
+#xml-form-builder-editor td, #xml-form-builder-editor th {
+    padding: 0;
+}
+
+#xml-form-builder-editor fieldset {
+    background: none;
+}
+
+.x-boundlist-item {
+  background: none;
+}

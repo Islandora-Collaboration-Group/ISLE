@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Installation and update hook implementations.
+ */
+
+/**
+ * Enable new dependency (which should be present...).
+ */
+function endnotexml_importer_update_7100() {
+  module_enable(array('islandora_endnotexml'));
+}

@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * @file
+ * XML Form API module.
+ */
+
+module_load_include('inc', 'xml_form_api', 'XMLForm');
+
+/**
+ * Register classes for FormProperties.
+ *
+ * @return array
+ *   Array of properties.
+ */
+function xml_form_api_objectify_properties() {
+  $properties['#actions'] = array(
+    'type' => 'inc',
+    'module' => 'xml_form_api',
+    'name' => 'Actions',
+    'class' => 'Actions',
+  );
+  return $properties;
+}
+
+/**
+ * Gets an empty form definition.
+ *
+ * @return DOMDocument
+ *   The Empty form definition.
+ */
+function xml_form_api_get_empty_form_definition() {
+  $filename = drupal_get_path('module', 'xml_form_api') . '/data/definitions/empty.xml';
+  $definition = new DOMDocument();
+  $definition->load($filename);
+  return $definition;
+}

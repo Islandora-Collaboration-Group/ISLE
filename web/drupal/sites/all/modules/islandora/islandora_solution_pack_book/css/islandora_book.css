@@ -1,0 +1,73 @@
+.islandora-book-pages-display-switch {
+  float: right;
+}
+.islandora-book-pages {
+  margin: 0 auto;
+  overflow: hidden;
+  width: 100%;
+}
+.islandora-book-pages-grid dl {
+  display: -moz-inline-stack;
+  display: inline-block;
+  margin: 1.5em 1.84%;
+  min-height: 180px;
+  min-width: 100px;
+  vertical-align: top;
+  width: 20%;
+  zoom: 1;
+}
+.islandora-book-pages-grid dd {
+  margin: 0;
+  padding: 0;
+}
+.islandora-book-page-object dd {
+  padding-bottom: 2px;
+  padding-top: 2px;
+}
+.islandora-book-page-list-item {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 1.5em;
+}
+.islandora-book-page-list-item dl dt {
+  clear: left;
+  float: left;
+  padding: 3px 0 0;
+  text-align: center;
+  width: 100px;
+}
+.islandora-book-page-list-item dl dd {
+  margin: 0 0 0 130px;
+}
+.islandora-book-page-caption {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.islandora-book-metadata {
+display: block;
+clear: both;
+}
+/* This is kept for legacy reasons. */
+dl.islandora-book-fields {
+width:100%;
+}
+dl.islandora-metadata-fields {
+width:100%;
+}
+.islandora-book-metadata dt {
+font-weight: normal;
+text-align: right;
+font-weight: bold;
+padding-right: 0;
+}
+.islandora-book-metadata dd {
+padding-left: 40px;
+}
+.islandora-book-metadata dt,
+.islandora-book-metadata dd {
+border-top:1px solid #e5e5e5;
+}
+.islandora-book-metadata dt.first,
+.islandora-book-metadata dd.first {
+border-top:0;
+}

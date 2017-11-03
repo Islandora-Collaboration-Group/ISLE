@@ -1,0 +1,12 @@
+name = "Islandora Book Solution Pack"
+description = "Provides an interface for book objects."
+package = Islandora Solution Packs
+dependencies[] = islandora
+dependencies[] = file
+dependencies[] = islandora_paged_content
+configure = admin/islandora/solution_pack_config/book
+version = 7.x-dev
+core = 7.x
+files[] = tests/islandora_book_ingest_purge.test
+files[] = tests/islandora_book_derivatives_ingest_purge.test
+

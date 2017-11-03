@@ -1,0 +1,308 @@
+<?php
+
+/**
+ * @file
+ * Implements hooks and callbacks for this module.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_bibliography_menu() {
+  $items = array();
+  $items['admin/islandora/tools/bibliography'] = array(
+    'title' => 'Bibliography Citation Exporter',
+    'description' => 'Configure bibliography citation exporter settings.',
+    'type' => MENU_NORMAL_ITEM,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_bibliography_admin_form'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'includes/admin.form.inc',
+  );
+  $items['islandora/bibliography/preview'] = array(
+    'page callback' => 'islandora_bibliography_preview',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_islandora_bookmark_object_markup().
+ */
+function islandora_bibliography_ir_citationCModel_islandora_bookmark_object_markup(AbstractObject $object) {
+  module_load_include('inc', 'islandora_bibliography', 'includes/utilities');
+  return islandora_bibiliography_get_bookmark_output($object);
+}
+
+/**
+ * Implements hook_islandora_bookmark_object_markup().
+ */
+function islandora_bibliography_ir_thesisCModel_islandora_bookmark_object_markup(AbstractObject $object) {
+  module_load_include('inc', 'islandora_bibliography', 'includes/utilities');
+  return islandora_bibiliography_get_bookmark_output($object);
+}
+
+/**
+ * Implements hook_islandora_bookmark_rss_item().
+ */
+function islandora_bibliography_ir_citationCModel_islandora_bookmark_rss_item(AbstractObject $object) {
+  module_load_include('inc', 'islandora_bibliography', 'includes/utilities');
+  return islandora_bibliography_get_rss($object);
+}
+
+/**
+ * Implements hook_islandora_bookmark_rss_item().
+ */
+function islandora_bibliography_ir_thesisCModel_islandora_bookmark_rss_item(AbstractObject $object) {
+  module_load_include('inc', 'islandora_bibliography', 'includes/utilities');
+  return islandora_bibliography_get_rss($object);
+}
+
+/**
+ * Get the title and author of a given citation.
+ *
+ * @param string $pid
+ *   A citations within the bibliography.
+ *
+ * @return array
+ *   Where the first key is the title and the second is the authors.
+ */
+function islandora_bibilography_get_title_authors($pid) {
+  $title = $pid;
+  $authors = '';
+  $mods = islandora_bibliography_get_mods($pid);
+  if ($mods) {
+    $mods = simplexml_import_dom($mods);
+    $mods->registerXPathNamespace('mods', 'http://www.loc.gov/mods/v3');
+    $title = implode(' ', $mods->xpath('//mods:mods[1]/mods:titleInfo/mods:title'));
+    $authors_xpath = $mods->xpath('//mods:mods[1]/mods:name/mods:role[mods:roleTerm = "author"]/../mods:namePart[@type="family"]');
+    $authors = is_array($authors_xpath) ? implode(' ', $authors_xpath) : NULL;
+  }
+  return array('title' => $title, 'authors' => $authors);
+}
+
+/**
+ * Gets the MODS from an object.
+ *
+ * Helper function for getting the MODS metadata.
+ *
+ * @param string $pid
+ *   The fedora object to get the MODS from.
+ *
+ * @return DOMDocument
+ *   An MODS document if found and non-empty, FALSE otherwise.
+ */
+function islandora_bibliography_get_mods($pid) {
+  $object = islandora_object_load($pid);
+
+  if (isset($object) && isset($object['MODS']) && islandora_datastream_access(ISLANDORA_VIEW_OBJECTS, $object['MODS'])) {
+    $mods_str = trim($object['MODS']->content);
+    $doc = new DOMDocument();
+    $doc->loadXML($mods_str);
+    return $doc;
+  }
+  else {
+    return FALSE;
+  }
+}
+
+/**
+ * Implements islandora_bookmark_export_handler().
+ *
+ * @return array
+ *   The citation export options available from the exporter module.
+ */
+function islandora_bibliography_islandora_bookmark_export_handler() {
+  $formats = islandora_bibliography_get_export_formats();
+  foreach ($formats as $key => $value) {
+    $biblio_export['Bibliography'][$key] = 'citation_exporter_batch_export_' . drupal_strtolower($key);
+  }
+  return $biblio_export;
+}
+
+/**
+ * Implements islandora_bookmark_export_styles().
+ */
+function islandora_bibliography_islandora_bookmark_export_styles($option) {
+  if (array_key_exists($option, islandora_bibliography_get_export_formats()) && $option != 'RIS') {
+    return islandora_bibliography_get_export_styles();
+  }
+}
+
+/**
+ * Grab available styles from CSL for use in exporting.
+ *
+ * @return array
+ *   An array of defined style's names, where both the key and the value are the
+ *   style's name.
+ */
+function islandora_bibliography_get_export_styles() {
+  $styles = CSL::GetNames();
+  return $styles;
+}
+
+/**
+ * Provide the list of export formats available for use with islandora_bookmark.
+ *
+ * @return array
+ *   An associative array where the keys are formats this module recognizes and
+ *   the values are human readable formats.
+ */
+function islandora_bibliography_get_export_formats() {
+  $options = array(
+    'RIS' => 'RIS (Endnote format)',
+    'RTF' => 'RTF (word proccessor format)',
+    'PDF' => 'PDF',
+  );
+  return $options;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Alters the islandora_bookmark_detailed_form such that a preview button is
+ * visible for options that have styles associated with them. Yay #states!
+ */
+function islandora_bibliography_form_islandora_bookmark_detailed_form_alter(array &$form, array &$form_state) {
+  if (array_key_exists('islandora_bookmark_export', $form_state)) {
+    $form['bookmarks']['fieldset']['format_opts']['preview_selected'] = array(
+      '#type' => 'submit',
+      '#value' => t('Preview selected'),
+      '#submit' => array('islandora_bibliography_preview_selected'),
+      '#weight' => 7,
+      '#name' => 'islandora_bibliography_preview',
+      '#states' => array(
+        'visible' => array(
+          ':input[name="bookmarks[fieldset][export_options]"]' => array(
+            array('value' => 'RTF'),
+            array('value' => 'PDF'),
+          ),
+        ),
+      ),
+    );
+    $form['#validate'][] = 'islandora_bibliography_validate_for_number_of_pdf_objects';
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Alters the islandora_bookmark_results_form such that validation is added
+ * to check the number of objects being exported to put a cap on pdf export
+ * for the total number of objects selected.
+ */
+function islandora_bibliography_form_islandora_bookmark_results_form_alter(array &$form, array &$form_state) {
+  $form['#validate'][] = 'islandora_bibliography_validate_for_number_of_pdf_objects';
+}
+
+/**
+ * Validate the number of selected objects when pdf exporting.
+ *
+ * Validates both islandora_bookmark_results_form and
+ * islandora_bookmark_detailed_form for the number of objects being exported if
+ * the export type is PDF.
+ */
+function islandora_bibliography_validate_for_number_of_pdf_objects($form, &$form_state) {
+  // XXX: Current limitations with TCPDF and time limits prevent the creation of
+  // a large PDF. For now to get around this the system will check the count of
+  // objects being exported and allow continue if it's less than the max number
+  // of pids that maintain a working PDF export.
+  $total_exporting = 0;
+  $exporting_type = "";
+  // Validate bookmark export.
+  if ($form_state['values']['form_id'] == 'islandora_bookmark_detailed_form') {
+    $exporting_type = $form_state['values']['bookmarks']['fieldset']['export_options'];
+    if ($exporting_type == 'PDF') {
+      // Check selected object count and All objects.
+      $total_exporting = count(array_filter($form_state['values']['bookmarks']['fieldset']['table']));
+      // Check if all results are being exported and get the total number of
+      // objects that are being exported.
+      if ($form_state['clicked_button']['#value'] == 'Export all bookmarks') {
+        $list_id = arg(2);
+        if ($list_id) {
+          $bookmark = Bookmark::getList($list_id);
+          $total_exporting = $bookmark->getPidCount();
+        }
+      }
+    }
+  }
+  // Validate solr results bookmark export.
+  elseif ($form_state['values']['form_id'] == 'islandora_bookmark_results_form') {
+    $exporting_type = $form_state['values']['export_options'];
+    if ($exporting_type == 'PDF') {
+      // Check selected object count and All objects.
+      $total_exporting = count(array_filter($form_state['values']['islandora_bookmark_table']));
+      // Check if all results are being exported and get the total number of
+      // objects that are being exported.
+      if ($form_state['clicked_button']['#value'] == 'Export all results') {
+        module_load_include('inc', 'islandora_bibliography', 'includes/utilities');
+        $total_exporting = islandora_bibliography_get_count_of_exporting_objects($form_state['islandora_solr_query_processor']);
+      }
+    }
+  }
+  if ($exporting_type == 'PDF' && $total_exporting > variable_get('islandora_bibliography_max_objects_for_pdf_export', 1200)) {
+    form_set_error('export_options', t('The number of selected objects exceeds the allowable PDF export limit.'));
+  }
+}
+
+/**
+ * Modifies the $_SESSION to store values for previewing citation(s).
+ *
+ * @param array $form
+ *   The Drupal form definition.
+ * @param array $form_state
+ *   The Drupal form state.
+ */
+function islandora_bibliography_preview_selected(array $form, array &$form_state) {
+  $pids = array();
+  foreach ($form_state['values']['bookmarks']['fieldset']['table'] as $checkbox => $value) {
+    if ($value !== 0) {
+      // Make sure we can actually access the object.
+      if (islandora_object_load($value)) {
+        $pids[] = $value;
+      }
+    }
+  }
+  if (count($pids)) {
+    $format = $form_state['values']['bookmarks']['fieldset']['export_options'];
+    $_SESSION['islandora_bibliography_preview']['style'] = $form_state['values']['bookmarks']['fieldset']['format_opts']['export_styles'][$format];
+    $_SESSION['islandora_bibliography_preview']['pids'] = serialize($pids);
+    drupal_goto('islandora/bibliography/preview');
+  }
+  else {
+    drupal_set_message(t('No citations were selected!'), 'warning');
+  }
+}
+
+/**
+ * Generates a preview of the citation for viewing in browser.
+ *
+ * @return string
+ *   Rendered citations in HTML format.
+ */
+function islandora_bibliography_preview() {
+  drupal_set_title(t('Export preview'));
+  drupal_add_css(drupal_get_path('module', 'islandora_bibliography') . '/css/islandora_bibliography.css');
+  $preview = isset($_SESSION['islandora_bibliography_preview']) ? $_SESSION['islandora_bibliography_preview'] : NULL;
+  $return_link = l(t('Return to the previous page.'), 'javascript:window.history.back();', array('external' => TRUE));
+  if (!$preview) {
+    return $return_link;
+  }
+  $output = array();
+  $style = citeproc_style($preview['style']);
+  foreach (unserialize($preview['pids']) as $pid) {
+    $mods = islandora_bibliography_get_mods($pid);
+    if ($mods) {
+      $output[] = array(
+        '#prefix' => '<div>',
+        '#markup' => citeproc_bibliography_from_mods($style, $mods),
+        '#suffix' => '</div><br/>',
+      );
+    }
+  }
+  $output[] = array(
+    '#markup' => $return_link,
+  );
+  return drupal_render($output);
+}

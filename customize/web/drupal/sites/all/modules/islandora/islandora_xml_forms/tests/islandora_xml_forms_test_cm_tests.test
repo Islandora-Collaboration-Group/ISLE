@@ -1,0 +1,118 @@
+<?php
+
+/**
+ * @file
+ * Yo dawg, I heard you like XML Form API tests, so I put some test content
+ * model test form tests in your Form API tests so you can test test forms while
+ * you test test forms!
+ *
+ * Great, now "test" doesn't look like it's spelled correctly anymore to me.
+ */
+
+class IslandoraTestContentModelFormTestTestCase extends IslandoraCollectionWebTestCase {
+
+  /**
+   * Test information.
+   *
+   * @see IslandoraWebTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Islandora XML Forms Test Solution Pack Tests',
+      'description' => 'XML form tests using the test solution pack.',
+      'group' => 'Islandora XML Forms',
+    );
+  }
+
+  /**
+   * Set up the test environment.
+   *
+   * @see IslandoraWebTestCase::setUp()
+   */
+  public function setUp() {
+    parent::setUp(array(
+      'islandora_basic_collection',
+      'xml_form_builder',
+      'islandora_test_cm',
+    ));
+    // Create a new user for each test.
+    $user = $this->drupalCreateUser(array_keys(module_invoke_all('permission')));
+    $this->drupalLogin($user);
+  }
+
+  /**
+   * Tests ingesting a test collection and object. This sets up the actual test.
+   */
+  public function testTestContentModelIngest() {
+
+    $this->deleteObjectsOnTeardown = FALSE;
+
+    // We need a test collection.
+    $collection_pid = "islandora:{$this->randomName()}";
+    $this->createTestCollection($this->randomName(), array('islandora:testCModel'), $collection_pid);
+
+    // And we need a test object.
+    $this->title = $this->randomName();
+    $this->abstract = $this->randomName();
+    $this->language = $this->randomName();
+    $this->genre = 'default';
+    $edit = array(
+      'titleInfo[title]' => $this->title,
+      'abstract' => $this->abstract,
+      'language' => $this->language,
+      'genre' => $this->genre,
+    );
+    $this->drupalPost("islandora/object/$collection_pid/manage/overview/ingest", $edit, 'Ingest');
+    $this->object = $this->getObjectFromPath($this->url);
+    $this->assertText("\"$this->title\" (ID: $this->object) has been ingested.");
+  }
+
+  /**
+   * Checks the MODS datastream to see if it was properly formed.
+   */
+  public function testTestContentModelMODS() {
+    // Load the MODS datastream and grab all the expected elements.
+    $mods = $this->curlExec(array(
+      CURLOPT_URL => url("islandora/object/$this->object/datastream/MODS/download", array('absolute' => TRUE)),
+      CURLOPT_NOBODY => FALSE,
+    ));
+    $xml = new DOMDocument();
+    $xml->loadXML($mods);
+    $title_tags = $xml->getElementsByTagName('title');
+    $abstract_tags = $xml->getElementsByTagName('abstract');
+    $language_tags = $xml->getElementsByTagName('languageTerm');
+    $genre_tags = $xml->getElementsByTagName('genre');
+
+    // Check if a result was found, then check that it matches what's expected.
+    // Assert /titleInfo/title.
+    if (is_object($title_tags->item(0))) {
+      $this->assertTrue($title_tags->item(0)->nodeValue == $this->title, "Sub-level element: Ingested title value of $this->title matches XML output value of {$title_tags->item(0)->nodeValue}.", 'Islandora');
+    }
+    else {
+      $this->fail("Sub-level element: Output MODS XML has no title node.", 'Islandora');
+    }
+    // Assert /abstract.
+    if (is_object($abstract_tags->item(0))) {
+      $this->assertTrue($abstract_tags->item(0)->nodeValue == $this->abstract, "Top-level element: Ingested abstract value of $this->abstract matches XML output value of {$abstract_tags->item(0)->nodeValue}.", 'Islandora');
+    }
+    else {
+      $this->fail("Top-level element: Output MODS XML has no abstract node.");
+    }
+    // Assert /language/languageTerm.
+    if (is_object($language_tags->item(0))) {
+      $this->assertTrue($language_tags->item(0)->nodeValue == $this->language, "Element with attributes: Ingested language value of $this->language matches XML output value of {$language_tags->item(0)->nodeValue}.", 'Islandora');
+    }
+    else {
+      $this->fail("Element with attributes: Output MODS XML has no language node.");
+    }
+    // Assert /genre.
+    if (is_object($genre_tags->item(0))) {
+      $this->assertTrue($genre_tags->item(0)->nodeValue == $this->genre, "Select element: Ingested genre value of $this->genre matches XML output value of {$genre_tags->item(0)->nodeValue}.", 'Islandora');
+    }
+    else {
+      $this->fail("Select element: Output MODS XML has no genre node.");
+    }
+
+    $this->deleteObjectsOnTeardown = TRUE;
+  }
+}

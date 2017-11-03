@@ -1,0 +1,7 @@
+name = Islandora XML Form Elements
+description = Defines custom elements to be used in conjunction with XML Forms.
+package = Islandora Dependencies
+dependencies[] = xml_form_api
+version = 7.x-dev
+core = 7.x
+

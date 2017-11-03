@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Installation hooks.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_bibliography_uninstall() {
+  $variables = array(
+    'islandora_bibliography_max_objects_for_pdf_export',
+  );
+  array_walk($variables, 'variable_del');
+}

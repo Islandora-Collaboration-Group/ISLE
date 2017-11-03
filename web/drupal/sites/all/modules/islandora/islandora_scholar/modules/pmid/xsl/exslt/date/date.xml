@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<exslt:module xmlns:exslt="http://exslt.org/documentation"
+              version="1" prefix="date">
+
+<exslt:name>Dates and Times</exslt:name>
+
+<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                 xmlns:dc="http://purl.org/dc/elements/1.1/"
+                 ID="date">
+   <dc:subject>EXSLT</dc:subject>
+   <dc:subject>Dates</dc:subject>
+   <dc:subject>module</dc:subject>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="date.1">
+         <exslt:version>1</exslt:version>
+         <dc:creator>Jeni Tennison</dc:creator>
+         <dc:date>2001-05-12</dc:date>
+         <dc:description>A module of date and time-related functions.</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+</rdf:Description>
+
+<exslt:doc xmlns:html="http://www.w3.org/1999/xhtml">
+   <html:div xmlns="http://www.w3.org/1999/xhtml">
+      <p>
+         EXSLT - Dates and Times covers date and time-related extension elements and functions.
+      </p>
+      <p>
+         Many of the functions in this module use strings in the formats specified by the date and time-related data types defined in [<a href="http://www.w3.org/TR/xmlschema-2/">XML Schema Part 2: Datatypes</a>].
+      </p>
+   </html:div>
+</exslt:doc>
+
+<exslt:functions>
+   <exslt:function name="format-date" version="2" core="no" />
+   <exslt:function name="parse-date" version="2" core="no" />
+
+   <exslt:function name="date-time" version="1" core="yes" />
+   <exslt:function name="date" version="2" core="yes" />
+   <exslt:function name="time" version="2" core="yes" />
+
+   <exslt:function name="year" version="2" core="yes" />
+   <exslt:function name="leap-year" version="1" core="yes" />
+   <exslt:function name="month-in-year" version="2" core="yes" />
+   <exslt:function name="month-name" version="2" core="yes" />
+   <exslt:function name="month-abbreviation" version="2" core="yes" />
+   <exslt:function name="week-in-year" version="2" core="yes" />
+   <exslt:function name="week-in-month" version="3" core="no" />
+   <exslt:function name="day-in-year" version="2" core="yes" />
+   <exslt:function name="day-in-month" version="2" core="yes" />
+   <exslt:function name="day-of-week-in-month" version="2" core="yes" />
+   <exslt:function name="day-in-week" version="2" core="yes" />
+   <exslt:function name="day-name" version="2" core="yes" />
+   <exslt:function name="day-abbreviation" version="2" core="yes" />
+   <exslt:function name="hour-in-day" version="2" core="yes" />
+   <exslt:function name="minute-in-hour" version="2" core="yes" />
+   <exslt:function name="second-in-minute" version="2" core="yes" />
+
+   <exslt:function name="difference" version="1" core="no" />
+   <exslt:function name="add" version="2" core="no" />
+   <exslt:function name="add-duration" version="2" core="no" />
+   <exslt:function name="sum" version="1" core="no" />
+   <exslt:function name="seconds" version="1" core="no" />
+   <exslt:function name="duration" version="1" core="no" />
+</exslt:functions>
+
+<exslt:elements>
+   <exslt:element name="date-format" version="1" core="no" />
+</exslt:elements>
+
+</exslt:module>

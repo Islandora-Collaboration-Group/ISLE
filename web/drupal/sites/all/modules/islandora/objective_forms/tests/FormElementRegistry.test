@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * @file
+ * Objective form element registry test case
+ */
+
+class ObjectiveFormElementRegistryTestCase extends DrupalUnitTestCase {
+
+  /**
+   * Get Test info.
+   *
+   * @return array
+   *   Properties that are displayed in the test selection form.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Form Element Registry Unit Tests.',
+      'description' => 'Unit tests for FormElementRegistry.inc.',
+      'group' => 'Objective Forms',
+    );
+  }
+
+  /**
+   * SetUp() performs any pre-requisite tasks that need to happen.
+   */
+  public function setUp() {
+    // Enable any modules required for the test.
+    parent::setUp('objective_forms');
+    module_load_include('inc', 'objective_forms', 'FormElementRegistry');
+  }
+
+  /**
+   * Test constructing the Form definition.
+   */
+  public function testRegistry() {
+    /* Basic single form element */
+    $registry = new FormElementRegistry();
+    $form_element = new FormElement($registry);
+    $this->assertTrue($registry->isRegistered($form_element->hash), 'Reference was stored.');
+    $this->assertIdentical($form_element, $registry->get($form_element->hash), 'Reference is "identical" to the stored reference.');
+    $this->assertFalse($registry->isClone($form_element->hash), 'Reference is not a clone.');
+    $this->assertEqual($registry->getAncestory($form_element->hash), array(), 'Ancestory array is empty.');
+    /* Clone testing */
+    $clone = clone $form_element;
+    $this->assertTrue($registry->isRegistered($clone->hash), 'Reference to clone was stored.');
+    $this->assertIdentical($clone, $registry->get($clone->hash), 'Reference to clone is "identical" to the stored reference.');
+    $this->assertTrue($registry->isClone($clone->hash), 'Reference is a clone.');
+    $this->assertTrue($registry->hasAncestor($clone->hash, 0), 'Reference does have ancestors.');
+    $this->assertEqual($registry->getAncestor($clone->hash, 0), $form_element, 'First ancestor reference is correct.');
+    $this->assertEqual($registry->getOriginal($clone->hash), $form_element, 'Original ancestor reference is correct.');
+  }
+
+}

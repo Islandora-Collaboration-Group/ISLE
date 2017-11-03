@@ -1,0 +1,70 @@
+a.swaptable-handle-hover .handle {
+  background-position: 6px -11px;
+}
+a.swaptable-handle .handle {
+  background: url(/misc/draggable.png) no-repeat 6px 9px;
+  height: 13px;
+  margin: -0.4em 0.5em;
+  padding: 0.42em 0.5em;
+  width: 13px;
+}
+.draggable a.swaptable-handle {
+  cursor: move;
+  float: left;
+  height: 1.7em;
+  margin-left: -1em;
+  overflow: hidden;
+  text-decoration: none;
+}
+table.swaptable tbody > tr {
+  height: 100px;
+}
+tbody > tr.ui-selecting:not(ui-placeholder) {
+  background: #ccc;
+}
+tbody > tr.ui-selected, .ui-helper {
+  background: #999;
+}
+.swaptable-toggle-original-ordering {
+  font-size: 0.9em;
+}
+.swaptable-toggle-original-ordering-wrapper, .swaptable-display-select {
+  text-align: right;
+}
+tr.ui-modified > td.tn:after {
+  content: url(../images/modified.png);
+  vertical-align: 240%;
+}
+.ui-helper {
+  border: solid 1px;
+}
+.ui-helper > span {
+  margin: 2em;
+}
+/* This nonsensical rule is preventing a bug in Firefox that would prevent the
+  dropping of items being drug when there was intersection with a placeholder.
+  The bug can be examined at 4fd864c2629949ca4c67bbe52e4cf4d740528735*/
+tr.ui-placeholder {
+  display:none;
+}
+/* IE7 doesn't support pseudo elements elements such as :after so we hack it
+   with some inline javascript.
+*/
+tr.ui-modified > td.tn {
+  *zoom: expression(
+    this.runtimeStyle.zoom="1",
+    this.appendChild(document.createElement("span")).className="after"
+  );
+}
+tr.ui-modified > td.tn > span.after {
+  *zoom: expression(
+    this.runtimeStyle.zoom="1",
+    this.innerHTML="&nbsp"
+  );
+}
+span.after {
+  background-image: url(../images/modified.png);
+  width: 16px;
+  height: 16px;
+  vertical-align: 240%;
+}

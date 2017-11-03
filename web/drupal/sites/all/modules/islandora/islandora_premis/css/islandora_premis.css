@@ -1,0 +1,19 @@
+.islandora_premis_table {
+  width: 50em;
+}
+.islandora_premis_table_labels {
+  width: 50%;
+}
+.islandora_premis_table_values {
+  width: 50%;
+}
+
+.islandora_premis_table thead {
+  background-color: #e0e0e0;
+  border-bottom: black;
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+}
+.islandora_premis_table .even {
+  background-color: #e6e6e6;
+}

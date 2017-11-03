@@ -1,0 +1,9 @@
+Webform  AJAX 1.x Changelog
+---------------------------
+
+Drupal 6.x to Drupal 7.x-1.0
+----------------------------
+- Rewrite using new AJAX features in Forms API.
+- Add support of Submit and Save draft buttons.
+- AJAX mode is set on a Webform, via checkbox.
+- Supports "Redirect location" parameters, thanks to CTools dependency.

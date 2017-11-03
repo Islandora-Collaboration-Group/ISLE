@@ -1,0 +1,203 @@
+@import "../../shared-imports/mixins";
+@import "../../shared-imports/vars";
+
+.jw-controlbar {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    background-size: auto;
+    box-shadow: none;
+    max-height: 72px;
+    transition: 250ms @default-timing-function;
+    transition-property: opacity, visibility;
+    transition-delay: 0s;
+
+    .jw-button-image {
+        background: no-repeat 50% 50%;
+        background-size: contain;
+        max-height: 24px;
+    }
+
+    .jw-spacer {
+        flex: 1 1 auto;
+        align-self: stretch;
+    }
+
+    .jw-icon.jw-button-color {
+        &:hover {
+            color: @hover-color;
+        }
+    }
+}
+
+.jw-button-container {
+    display: flex;
+    flex-flow: row nowrap;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0 12px;
+}
+
+.jw-slider-horizontal {
+    background-color: transparent;
+}
+
+.jw-icon-inline {
+    position: relative;
+}
+
+.jw-icon-inline,
+.jw-icon-tooltip {
+    .square(@mobile-touch-target);
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.jw-icon-inline:not(.jw-text),
+.jw-icon-tooltip,
+.jw-slider-horizontal {
+    cursor: pointer;
+}
+
+.jw-text-elapsed,
+.jw-text-duration {
+    justify-content: flex-start;
+    width: fit-content;
+}
+
+.jw-icon-tooltip {
+    position: relative;
+}
+
+.jw-knob,
+.jw-icon-inline,
+.jw-icon-tooltip,
+.jw-icon-display,
+.jw-option:before {
+    &:hover {
+        color: @hover-color;
+    }
+}
+
+.jw-time-tip {
+    pointer-events: none;
+}
+
+.jw-icon-cast {
+    display: none;
+    margin: 0;
+    padding: 0;
+
+    button {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+    }
+}
+
+.jw-icon-inline.jw-icon-volume {
+    display: none;
+}
+
+.jwplayer .jw-text-countdown {
+    display: none;
+}
+
+&.jw-flag-small-player {
+    .jw-display {
+        padding-top: @mobile-touch-target;
+        padding-bottom: (@mobile-touch-target * 1.5);
+    }
+}
+
+.jw-flag-small-player:not(.jw-flag-audio-player):not(.jw-flag-ads) {
+    .jw-controlbar {
+        .jw-button-container {
+            > .jw-icon-rewind,
+            > .jw-icon-next,
+            > .jw-icon-playback {
+                display: none;
+            }
+        }
+    }
+}
+
+.jw-flag-ads-vpaid,
+.jw-flag-autostart,
+.jw-flag-user-inactive.jw-state-playing,
+.jw-flag-user-inactive.jw-state-buffering {
+    &:not(.jw-flag-media-audio):not(.jw-flag-audio-player):not(.jw-flag-ads-vpaid-controls):not(.jw-flag-casting) {
+        .jw-controlbar {
+            visibility: hidden;
+            pointer-events: none;
+            opacity: 0;
+            transition-delay: 0s, 250ms;
+        }
+
+        .jw-controls-backdrop {
+            opacity: 0;
+        }
+    }
+}
+
+.jwplayer&:not(.jw-flag-ads):not(.jw-flag-live) {
+    &.jw-breakpoint-0 {
+        .jw-text-countdown {
+            display: flex;
+        }
+
+        .jw-text-elapsed,
+        .jw-text-duration {
+            display: none;
+        }
+    }
+
+    .jw-icon-live:not(.jw-dvr-live) {
+        .jw-svg-icon-live {
+            display: none;
+        }
+
+        // padding between elapsed time in DVR mode
+        margin-right: 16px;
+    }
+}
+
+.jwplayer.jw-flag-live .jw-icon-live {
+    .jw-svg-icon-dvr {
+        display: none;
+    }
+}
+
+.jwplayer:not(.jw-breakpoint-0) {
+    .jw-text-duration {
+        &:before {
+            content: "/";
+            padding-right: 1ch;
+            padding-left: 1ch;
+        }
+    }
+}
+
+.jwplayer:not(.jw-flag-user-inactive) {
+    .jw-controlbar {
+        will-change: transform;
+
+        .jw-text {
+            transform-style: preserve-3d;
+        }
+    }
+}
+

@@ -1,0 +1,9 @@
+name = "Islandora Audio"
+description = "A default Islandora Repository module to handle audio files"
+dependencies[] = islandora
+package = Islandora Solution Packs
+core = 7.x
+version = 7.x-dev
+configure = admin/islandora/solution_pack_config/audio
+files[] = tests/islandora_audio_ingest_purge.test
+stylesheets[all][] = css/islandora_audio.theme.css

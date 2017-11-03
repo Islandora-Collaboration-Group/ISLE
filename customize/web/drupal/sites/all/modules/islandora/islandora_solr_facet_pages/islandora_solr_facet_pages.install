@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Implementations of installation hooks.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_solr_facet_pages_uninstall() {
+  // Remove variables.
+  $variables = array(
+    'islandora_solr_facet_pages_fields_data',
+    'islandora_solr_facet_pages_lucene_syntax_escape',
+    'islandora_solr_facet_pages_lucene_regex_default',
+    'islandora_solr_facet_pages_limit',
+    'islandora_solr_facet_pages_facet_limit',
+    'islandora_solr_facet_pages_search_form',
+  );
+  foreach ($variables as $variable) {
+    variable_del($variable);
+  }
+}

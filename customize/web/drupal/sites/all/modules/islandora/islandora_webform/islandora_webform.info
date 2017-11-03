@@ -1,0 +1,8 @@
+name = Islandora Webform
+description = Permits webforms to be associated with fedora objects.
+core = 7.x
+version = 7.x-1.4-rc1
+package = Islandora
+dependencies[] = islandora
+dependencies[] = islandora_basic_collection
+dependencies[] = webform

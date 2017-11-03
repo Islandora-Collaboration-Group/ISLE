@@ -1,0 +1,66 @@
+sudo: required
+dist: trusty
+language: php
+
+matrix:
+  include:
+   #5.3.3 Ubuntu Precise exceptions
+    - php: 5.3.3
+      dist: precise
+      env: FEDORA_VERSION="3.5"
+    - php: 5.3.3
+      dist: precise
+      env: FEDORA_VERSION="3.6.2"
+    - php: 5.3.3
+      dist: precise
+      env: FEDORA_VERSION="3.7.0"
+    - php: 5.3.3
+      dist: precise
+      env: FEDORA_VERSION="3.8.1"
+php:
+  - 5.4
+  - 5.5
+  - 5.6
+  - 7.0
+  - 7.1
+env:
+  - FEDORA_VERSION="3.5"
+  - FEDORA_VERSION="3.6.2"
+  - FEDORA_VERSION="3.7.0"
+  - FEDORA_VERSION="3.8.1"
+
+branches:
+  only:
+    - /^7.x/
+before_install:
+  - cd $HOME
+  - git clone -b 7.x git://github.com/Islandora/islandora.git
+  - git clone -b 7.x git://github.com/Islandora/islandora_paged_content.git
+  - git clone -b 7.x git://github.com/Islandora/islandora_solution_pack_collection.git
+  - git clone -b 7.x git://github.com/Islandora/islandora_solution_pack_large_image.git
+  - git clone -b 7.x git://github.com/Islandora/islandora_ocr.git
+  - export ISLANDORA_DIR=$HOME/islandora
+  - $HOME/islandora/tests/scripts/travis_setup.sh
+  - sudo sh $TRAVIS_BUILD_DIR/tests/scripts/adore.sh
+  - sudo sh $TRAVIS_BUILD_DIR/tests/scripts/tesseract.sh
+  - cd $HOME/drupal-*
+  - ln -s $TRAVIS_BUILD_DIR sites/all/modules/islandora_solution_pack_book
+  - ln -s $HOME/islandora_paged_content sites/all/modules/islandora_paged_content
+  - ln -s $HOME/islandora_solution_pack_collection sites/all/modules/islandora_solution_pack_collection
+  - ln -s $HOME/islandora_ocr sites/all/modules/islandora_ocr
+  - ln -s $HOME/islandora_solution_pack_large_image sites/all/modules/islandora_solution_pack_large_image
+  - drush dl imagemagick
+  - drush en --user=1 --yes islandora_ocr islandora_large_image imagemagick islandora_book islandora_basic_collection
+  - drush vset islandora_ocr_tesseract `which tesseract`
+  - drush vset islandora_book_tesseract `which tesseract`
+before_script:
+  # Mysql might time out for long tests, increase the wait timeout.
+  - mysql -e 'SET @@GLOBAL.wait_timeout=1200'
+script:
+  - ant -buildfile sites/all/modules/islandora_solution_pack_book/build.xml lint
+  - $ISLANDORA_DIR/tests/scripts/line_endings.sh sites/all/modules/islandora_solution_pack_book
+  - drush coder-review --reviews=production,security,style,i18n,potx,sniffer islandora_book
+  - phpcpd --names *.module,*.inc,*.test sites/all/modules/islandora_solution_pack_book
+  - php scripts/run-tests.sh --php `phpenv which php` --url http://localhost:8081 --verbose "Islandora Book"
+notifications:
+  irc: "irc.freenode.org#islandora"

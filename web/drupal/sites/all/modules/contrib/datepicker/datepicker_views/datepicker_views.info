@@ -1,0 +1,13 @@
+name = "Date Picker Views"
+description = "Provides views integration for the Datepicker module."
+package = Date/Time
+core = 7.x
+dependencies[] = datepicker
+dependencies[] = date_views
+files[] = datepicker_views_filter_handler.inc
+; Information added by drupal.org packaging script on 2013-06-17
+version = "7.x-1.0"
+core = "7.x"
+project = "datepicker"
+datestamp = "1371448251"
+

@@ -1,0 +1,128 @@
+.jw-svg-icon {
+    .square(24px);
+    fill: currentColor;
+    pointer-events: none;
+}
+
+.jw-icon {
+    .square(44px);
+    background-color: transparent;
+}
+
+.jw-icon-airplay {
+    .jw-svg-icon-airplay-off {
+        display: none;
+
+        .jw-off& {
+            display: block;
+        }
+    }
+
+    .jw-svg-icon-airplay-on {
+        display: block;
+
+        .jw-off& {
+            display: none;
+        }
+    }
+}
+
+.jw-icon-cc {
+    .jw-svg-icon-cc-off {
+        display: none;
+
+        .jw-off& {
+            display: block;
+        }
+    }
+
+    .jw-svg-icon-cc-on {
+        display: block;
+
+        .jw-off& {
+            display: none;
+        }
+    }
+}
+
+.jw-icon-fullscreen {
+    .jw-svg-icon-fullscreen-off {
+        display: none;
+
+        .jw-off& {
+            display: block;
+        }
+    }
+
+    .jw-svg-icon-fullscreen-on {
+        display: block;
+
+        .jw-off& {
+            display: none;
+        }
+    }
+}
+
+.jw-icon-volume {
+    .jw-svg-icon-volume-0 {
+        display: none;
+
+        .jw-off& {
+            display: block;
+        }
+    }
+
+    .jw-svg-icon-volume-100 {
+        display: none;
+
+        .jw-full& {
+            display: block;
+        }
+    }
+
+    .jw-svg-icon-volume-50 {
+        display: block;
+
+        .jw-off&,
+        .jw-full& {
+            display: none;
+        }
+    }
+}
+
+.jw-icon-live {
+    .jw-svg-icon-dvr,
+    .jw-svg-icon-live {
+        width: 44px;
+    }
+
+    &.jw-dvr-live {
+        .jw-svg-icon-dvr {
+            display: none;
+        }
+    }
+}
+
+.jw-settings-menu .jw-icon,
+.jw-icon-settings,
+.jw-icon-volume {
+    &::after {
+        &:extend(._pseudo, ._bottomleft, ._right);
+        .rect(24px, 100%);
+        box-shadow: inset 0 -3px 0 -1px currentColor;
+        margin: auto;
+        opacity: 0;
+        transition: opacity 150ms @default-timing-function;
+    }
+}
+
+// Stylelint doesn't seem to like this list of selectors for no apparent reason https://github.com/stylelint/stylelint/issues/1741
+// stylelint-disable indentation
+.jw-settings-menu .jw-icon[aria-checked="true"],
+.jw-settings-open .jw-icon-settings,
+.jw-icon-volume.jw-open {
+    &::after {
+        opacity: 1;
+    }
+}
+// stylelint-enable indentation

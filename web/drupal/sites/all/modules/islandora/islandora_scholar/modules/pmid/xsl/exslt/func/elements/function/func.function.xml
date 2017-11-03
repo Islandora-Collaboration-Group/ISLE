@@ -1,0 +1,373 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../../style/element.xsl" ?>
+<exslt:element xmlns:exslt="http://exslt.org/documentation" 
+               version="3" module="func" status="stable">
+
+<exslt:name>function</exslt:name>
+
+<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                 xmlns:dc="http://purl.org/dc/elements/1.1/"
+                 ID="func:function">
+   <dc:subject>EXSLT</dc:subject>
+   <dc:subject>func</dc:subject>
+   <dc:subject>function</dc:subject>
+   <dc:rights>public domain</dc:rights>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="func:function.3">
+         <exslt:version>3</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com">Jeni Tennison</dc:creator>
+         <dc:date>2001-03-31</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">Stopped functions from being able to return result tree fragments just be creating nodes within the content as it increased complexity fairly significantly for not a lot of benefit. Function results now have to be set by <a href="../result"><code>func:result</code></a>.</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="func:function.3.1">
+         <exslt:version>3.1</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com">Jeni Tennison</dc:creator>
+         <dc:date>2001-04-28</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            <ul>
+               <li>Made explicit that if there two function definitions with the same name then the one with the highest import precedence is used.</li>
+               <li>Added implicit designation of the EXSLT - Functions namespace as an extension namespace, effective within the subtree rooted at a func:function element.  This to avoid people forgetting to declare the EXSLT - Functions namespace as an extension namespace, and thus having <a href="../result"><code>func:result</code></a> be treated as a literal result element.</li>
+            </ul>
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="func:function.3.2">
+         <exslt:version>3.2</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com">Jeni Tennison</dc:creator>
+         <dc:date>2001-05-22</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            <ul>
+               <li>Added vendor implementations of Saxon and 4XSLT</li>
+               <li>Changed status to stable</li>
+            </ul>
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="func:function.3.3">
+         <exslt:version>3.3</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com">Jeni Tennison</dc:creator>
+         <dc:date>2001-08-15</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            Added vendor implementation in libxslt.
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="func:function.3.4">
+         <exslt:version>3.4</exslt:version>
+         <dc:creator email="craig.stewart@nottingham.ac.uk" 
+                     url="">Craig Stewart</dc:creator>
+         <dc:date>2002-08-20</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">Added Xalan-J implementation to the list.</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="func:function.3.5">
+         <exslt:version>3.5</exslt:version>
+         <dc:creator email="craig.stewart@nottingham.ac.uk" 
+                     url="">Craig Stewart</dc:creator>
+         <dc:date>2002-11-12</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">Updated 4XSLT version to 0.12.0a3.</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+</rdf:Description>
+
+<exslt:doc xmlns:html="http://www.w3.org/1999/xhtml">
+   <html:div xmlns="http://www.w3.org/1999/xhtml">
+      <p>
+         The <code>func:function</code> element can only occur at the top level of the stylesheet.  The <code>func:function</code> element declares an extension function that is visible everywhere: the extension function is added to the function library available to the expressions and patterns used in the XSLT stylesheet.
+      </p>
+      <p>
+         The EXSLT - Functions namespace (<code>http://exslt.org/functions</code>) is designated as an extension namespace within the subtree rooted at a <code>func:function</code> element.  The effect of this is as if the <code>func:function</code> element had a <code>xsl:extension-element-prefixes</code> attribute defined on it, with one of the values within it being the prefix used for the EXSLT - Functions namespace (see [<a href="http://www.w3.org/TR/xslt#extension-element">14.1 Extension Elements</a>] in [<a href="http://www.w3.org/TR/xslt">XSLT</a>]).
+      </p>
+      <p>
+         An <code>func:function</code> element must have a <code>name</code> attribute, indicating the name of the function.  The value of the <code>name</code> attribute is a <a class="offsite" href="http://www.w3.org/TR/REC-xml-names#NT-QName">QName</a>, which is expanded as described in [<a class="offsite" href="http://www.w3.org/TR/xslt#qname">2.4 Qualified Names</a>] in [<a href="http://www.w3.org/TR/xslt">XSLT</a>].  It is an error if the namespace URI of the expanded name of the function is null - extension functions must not be in a null namespace.
+      </p>
+      <p class="note">
+         Note: the rules on resolving qualified names entail that if no prefix is defined, the namespace URI resolves to the null namespace.  Thus, it is an error if the qualified name specified does not have a prefix.
+      </p>
+      <p>
+         If a stylesheet contains more than one <code>func:function</code> element with the same name, then the XSLT processor must use the function definition with the highest import precedence.  It is an error if a stylesheet contains more than one <code>func:function</code> element with the same name and the same import precedence.  An XSLT processor may signal the error; if it does not signal the error, it must recover by using the function definition that occurs last in the stylesheet.
+      </p>
+      <p>
+         When an extension function defined with <code>func:function</code> is called, the content of the <code>func:function</code> is instantiated to give the result of the function (see [<a href="../result"><code>func:result</code></a>]).
+      </p>
+
+      <h3>Defining Function Arguments</h3>
+
+      <p>
+         Arguments for functions are defined with the <a class="offsite" href="http://www.w3.org/TR/xslt#element-param"><code>xsl:param</code></a> element, as specified in [<a class="offsite" href="http://www.w3.org/TR/xslt#variables">11. Variables and Parameters</a>] of [<a href="http://www.w3.org/TR/xslt">XSLT</a>].
+      </p>
+      <p>
+         When an extension function is called, the values passed as arguments are assigned to parameters according to the position of the <a class="offsite" href="http://www.w3.org/TR/xslt#element-param"><code>xsl:param</code></a>.  The first argument is assigned to the first parameter, the second to the second and so on.  The presence of an <a class="offsite" href="http://www.w3.org/TR/xslt#element-param"><code>xsl:param</code></a> indicates that an argument is expected for the function but does not imply that an argument <em>has</em> to be passed to the function.
+      </p>
+      <p>
+         An XSLT processor must not signal an error if an extension function is called with fewer arguments than there are parameters defined for the extension function.  It is an error to call a function with more arguments than there are parameters defined for the extension function.  An XSLT processor may signal the error; if it does not signal the error, then it must recover by ignoring the extra arguments.
+      </p>
+      <p>
+         As an example, take the following function definition:
+      </p>
+      <pre>
+&lt;func:function name="my:func">
+   &lt;xsl:param name="foo" />
+   &lt;xsl:param name="bar" select="false()" />
+   ...
+&lt;/func:function></pre>
+      <p>
+         All the following function calls are legal:
+      </p>
+      <pre>
+my:func()
+my:func('Fred')
+my:func('Fred', true())
+my:func('Fred', 'Barney')</pre>
+      <p>
+         The following function call is illegal:
+      </p>
+      <pre class="error">my:func('Fred', true(), 'Barney')</pre>
+      <p>
+         The value specified by an <a class="offsite" href="http://www.w3.org/TR/xslt#element-param"><code>xsl:param</code></a> indicates the default value for an argument if that argument is not given in a function call, but does not indicate the acceptable value types for the function.
+      </p>
+      <p class="note">
+         The type of the value passed into the function may be tested with the <a href="/exsl/object-type">exsl:object-type</a> function if it is supported.
+      </p>
+
+      <h3>Function Results</h3>
+
+      <p>
+         The content of the <code>func:function</code> element is a template.  When the function is called, the template is instantiated to give the result of the function.  The template is instantiated with the context node from the expression in which the function was called as the current node, and with the context node list from the expression in which the function was called as the current node list. 
+      </p>
+      <p>
+         It is an error if the instantiation of the template results in the generation of result nodes. For example a call to <code>my:func</code> as below is an error.
+      </p>
+      <pre class="error">
+&lt;func:function name="my:func">
+   &lt;foo />
+&lt;/func:function></pre>
+      <p>
+         The instantiation of the content of the <code>func:function</code> element may involve the instantiation of an <a href="../result"><code>func:result</code></a> element to enable functions to return node sets (and booleans).
+      </p>
+      <p>
+         If no <a href="../result"><code>func:result</code></a> element is instantiated, then the result of the function is an empty string.
+      </p>
+   </html:div>
+</exslt:doc>
+
+<exslt:definition xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:sequence>
+      <xs:element ref="xsl:param"
+                  minOccurs="0" maxOccurs="unbounded" />
+      <xs:group ref="xsl:template" />
+   </xs:sequence>
+   <xs:attribute name="name" type="xsl:QName" use="required" />
+</exslt:definition>
+
+<exslt:implementations>
+   <exslt:vendor-implementation
+           version="3"
+           vendor="4XSLT, from 4Suite."
+           vendor-url="http://4Suite.org"
+           vendor-version="0.12.0a3" />
+   <exslt:vendor-implementation
+           version="3"
+           vendor="SAXON 6.3 from Michael Kay"
+           vendor-url="http://users.iclway.co.uk/mhkay/saxon/index.html"
+           vendor-version="6.3" />
+   <exslt:vendor-implementation
+           version="3"
+           vendor="libxslt from Daniel Veillard; implementation by Thomas Broyer"
+           vendor-url="http://xmlsoft.org/XSLT/"
+           vendor-version="1.0.19" />
+   <exslt:vendor-implementation
+           version="3"
+           vendor="Xalan-J from Apache"
+           vendor-url="http://xml.apache.org/xalan-j"
+           vendor-version="2.4.D1" />
+</exslt:implementations>
+
+<exslt:use-cases>
+   <exslt:use-case type="example" data="func.function.data.1.xml" 
+                   xslt="func.function.1.xsl" 
+                   result="func.function.result.1.xml">
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="func:function.use-case.1">
+         <dc:subject>EXSLT</dc:subject>
+         <dc:subject>functions</dc:subject>
+         <dc:subject>function</dc:subject>
+         <dc:subject>use case</dc:subject>
+         <exslt:revision>
+            <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                             xmlns:dc="http://purl.org/dc/elements/1.1/"
+                             ID="func:function.use-case.1.1">
+               <exslt:version>1</exslt:version>
+               <dc:creator email="mhkay@iclway.co.uk">Mike Kay</dc:creator>
+               <dc:date>2001-04-28</dc:date>
+               <dc:description>Tests functionality of func:function.</dc:description>
+            </rdf:Description>
+         </exslt:revision>
+      </rdf:Description>
+      <exslt:doc>
+         <para>
+            This use case tests the result of a function that involves a <literal>func:result</literal> element within a <literal>xsl:for-each</literal> element.
+         </para>
+      </exslt:doc>
+   </exslt:use-case>
+   <exslt:use-case type="example" data="func.function.data.2.xml" 
+                   xslt="func.function.2.xsl" 
+                   result="func.function.result.2.xml">
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="func:function.use-case.2">
+         <dc:subject>EXSLT</dc:subject>
+         <dc:subject>functions</dc:subject>
+         <dc:subject>function</dc:subject>
+         <dc:subject>use case</dc:subject>
+         <exslt:revision>
+            <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                             xmlns:dc="http://purl.org/dc/elements/1.1/"
+                             ID="func:function.use-case.2.1">
+               <exslt:version>1</exslt:version>
+               <dc:creator email="mhkay@iclway.co.uk">Mike Kay</dc:creator>
+               <dc:date>2001-04-28</dc:date>
+               <dc:description>Tests functionality of func:function.</dc:description>
+            </rdf:Description>
+         </exslt:revision>
+      </rdf:Description>
+      <exslt:doc>
+         <para>
+            This use case tests a function definition that uses local variables.
+         </para>
+      </exslt:doc>
+   </exslt:use-case>
+   <exslt:use-case type="example" data="func.function.data.3.xml" 
+                   xslt="func.function.3.xsl" 
+                   result="func.function.result.3.xml">
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="func:function.use-case.3">
+         <dc:subject>EXSLT</dc:subject>
+         <dc:subject>functions</dc:subject>
+         <dc:subject>function</dc:subject>
+         <dc:subject>use case</dc:subject>
+         <exslt:revision>
+            <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                             xmlns:dc="http://purl.org/dc/elements/1.1/"
+                             ID="func:function.use-case.3.1">
+               <exslt:version>1</exslt:version>
+               <dc:creator email="mhkay@iclway.co.uk">Mike Kay</dc:creator>
+               <dc:date>2001-04-28</dc:date>
+               <dc:description>Tests functionality of func:function.</dc:description>
+            </rdf:Description>
+         </exslt:revision>
+      </rdf:Description>
+      <exslt:doc>
+         <para>
+            This use case tests a function definition with an argument.
+         </para>
+      </exslt:doc>
+   </exslt:use-case>
+   <exslt:use-case type="example" data="func.function.data.4.xml" 
+                   xslt="func.function.4.xsl" 
+                   result="func.function.result.4.xml">
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="func:function.use-case.4">
+         <dc:subject>EXSLT</dc:subject>
+         <dc:subject>functions</dc:subject>
+         <dc:subject>function</dc:subject>
+         <dc:subject>use case</dc:subject>
+         <exslt:revision>
+            <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                             xmlns:dc="http://purl.org/dc/elements/1.1/"
+                             ID="func:function.use-case.4.1">
+               <exslt:version>1</exslt:version>
+               <dc:creator email="mhkay@iclway.co.uk">Mike Kay</dc:creator>
+               <dc:date>2001-04-28</dc:date>
+               <dc:description>Tests functionality of func:function.</dc:description>
+            </rdf:Description>
+         </exslt:revision>
+      </rdf:Description>
+      <exslt:doc>
+         <para>
+            This use case tests a recursive function.
+         </para>
+      </exslt:doc>
+   </exslt:use-case>
+   <exslt:use-case type="example" data="func.function.data.5.xml" 
+                   xslt="func.function.5.xsl" 
+                   result="func.function.result.5.xml">
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="func:function.use-case.5">
+         <dc:subject>EXSLT</dc:subject>
+         <dc:subject>functions</dc:subject>
+         <dc:subject>function</dc:subject>
+         <dc:subject>use case</dc:subject>
+         <exslt:revision>
+            <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                             xmlns:dc="http://purl.org/dc/elements/1.1/"
+                             ID="func:function.use-case.5.1">
+               <exslt:version>1</exslt:version>
+               <dc:creator email="mhkay@iclway.co.uk">Mike Kay</dc:creator>
+               <dc:date>2001-04-28</dc:date>
+               <dc:description>Tests functionality of func:function.</dc:description>
+            </rdf:Description>
+         </exslt:revision>
+      </rdf:Description>
+      <exslt:doc>
+         <para>
+            This use case tests a function with defaulted arguments.
+         </para>
+      </exslt:doc>
+   </exslt:use-case>
+   <exslt:use-case type="example" data="func.function.data.6.xml" 
+                   xslt="func.function.6.xsl" 
+                   result="func.function.result.6.xml">
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="func:function.use-case.6">
+         <dc:subject>EXSLT</dc:subject>
+         <dc:subject>functions</dc:subject>
+         <dc:subject>function</dc:subject>
+         <dc:subject>use case</dc:subject>
+         <exslt:revision>
+            <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                             xmlns:dc="http://purl.org/dc/elements/1.1/"
+                             ID="func:function.use-case.6.1">
+               <exslt:version>1</exslt:version>
+               <dc:creator email="mhkay@iclway.co.uk">Mike Kay</dc:creator>
+               <dc:date>2001-04-28</dc:date>
+               <dc:description>Tests functionality of func:function.</dc:description>
+            </rdf:Description>
+         </exslt:revision>
+      </rdf:Description>
+      <exslt:doc>
+         <para>
+            This use case tests the effect of <literal>element-available()</literal> and <literal>function-available()</literal>.
+         </para>
+      </exslt:doc>
+   </exslt:use-case>
+</exslt:use-cases>
+
+</exslt:element>

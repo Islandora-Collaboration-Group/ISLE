@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<exslt:module xmlns:exslt="http://exslt.org/documentation"
+              version="1" prefix="dyn">
+
+<exslt:name>Dynamic</exslt:name>
+
+<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                 xmlns:dc="http://purl.org/dc/elements/1.1/"
+                 ID="exsl">
+   <dc:subject>EXSLT</dc:subject>
+   <dc:subject>Dynamic</dc:subject>
+   <dc:subject>module</dc:subject>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="exsl.1">
+         <exslt:version>1</exslt:version>
+         <dc:creator>Jeni Tennison</dc:creator>
+         <dc:date>2001-11-25</dc:date>
+         <dc:description>A module of functions involving dynamic evaluation of XPath expressions.</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+</rdf:Description>
+
+<exslt:doc xmlns="">
+   <section>
+      <para>
+         EXSLT - Dynamic covers extension elements and functions that deal with the dynamic evaluation of strings containing XPath expressions.
+      </para>
+   </section>
+</exslt:doc>
+
+<exslt:functions>
+   <exslt:function name="evaluate" version="1" core="no" />
+   <exslt:function name="min" version="1" core="no" />
+   <exslt:function name="max" version="1" core="no" />
+   <exslt:function name="sum" version="1" core="no" />
+   <exslt:function name="map" version="1" core="no" />
+   <exslt:function name="closure" version="1" core="no" />
+</exslt:functions>
+
+<exslt:elements />
+
+</exslt:module>

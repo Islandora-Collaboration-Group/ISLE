@@ -1,0 +1,7 @@
+name = "Islandora Test Solution Pack"
+description = "An extremely basic content model that can deployed when testing."
+dependencies[] = islandora
+package = "Islandora"
+core = 7.x
+version = 7.x-dev
+hidden = TRUE

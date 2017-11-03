@@ -1,0 +1,172 @@
+<?php
+
+/**
+ * @file
+ * Module used to respond to OAI requests.
+ */
+
+define('ISLANDORA_OAI_REQUEST_HANDLER_HOOK', 'islandora_oai_identify_request_handler');
+define('ISLANDORA_OAI_ADMINISTER_PERMISSION', 'administer islandora oai');
+
+/**
+ * Implements hook_permission().
+ */
+function islandora_oai_permission() {
+  return array(
+    ISLANDORA_OAI_ADMINISTER_PERMISSION => array(
+      'title' => t('Administer Islandora OAI'),
+      'description' => t('Administer Islandora OAI configuration.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_oai_menu() {
+  $items = array();
+  $items['admin/islandora/tools/islandora-oai'] = array(
+    'title' => 'Islandora OAI',
+    'description' => 'Configure the Islandora OAI module',
+    'file' => 'includes/admin.form.inc',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_oai_admin_form'),
+    'access arguments' => array(ISLANDORA_OAI_ADMINISTER_PERMISSION),
+  );
+  $items['admin/islandora/tools/islandora-oai/handler'] = array(
+    'title' => 'Islandora OAI Request Handler',
+    'description' => 'Configure the Islandora OAI request handler',
+    'file' => 'includes/handler.admin.inc',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_oai_handler_configuration_form'),
+    'access arguments' => array(ISLANDORA_OAI_ADMINISTER_PERMISSION),
+  );
+  $items['admin/islandora/tools/islandora-oai/handler/configure'] = array(
+    'title' => 'Settings',
+    'description' => 'Configure the Islandora OAI request handler',
+    'file' => 'includes/handler.admin.inc',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_oai_handler_configuration_form'),
+    'access arguments' => array(ISLANDORA_OAI_ADMINISTER_PERMISSION),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 0,
+  );
+  $items['admin/islandora/tools/islandora-oai/handler/files'] = array(
+    'title' => 'File Management',
+    'description' => 'Manage the upload files for Islandora OAI',
+    'file' => 'includes/handler.admin.inc',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_oai_file_management_form'),
+    'access arguments' => array(ISLANDORA_OAI_ADMINISTER_PERMISSION),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 1,
+  );
+  $items[variable_get('islandora_oai_path', 'oai2')] = array(
+    'title' => 'OAI2',
+    'page callback' => 'islandora_oai_parse_request',
+    'file' => 'includes/request.inc',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_islandora_oai_get_xsl_files().
+ */
+function islandora_oai_islandora_oai_get_xsl_files() {
+  $files = file_scan_directory(drupal_get_path('module', 'islandora_oai') . '/transforms/', '/.*\.xslt?$/');
+
+  $transform_options = array();
+
+  foreach ($files as $file) {
+    $transform_options[$file->uri] = $file->filename;
+  }
+
+  $oai_uploaded_files = array();
+  $upload_path = 'public://islandora_oai_xsls';
+  $uploaded_files = file_scan_directory($upload_path, '/.*\.xslt?$/');
+
+  foreach ($uploaded_files as $up_file) {
+    $oai_uploaded_files[$up_file->uri] = $up_file->filename;
+  }
+
+  foreach ($oai_uploaded_files as $key => $file) {
+    if (!in_array($file, $transform_options)) {
+      $transform_options[$key] = $file;
+    }
+  }
+  return $transform_options;
+}
+
+
+/**
+ * Implements hook_cron().
+ */
+function islandora_oai_cron() {
+  $expire_seconds = variable_get('islandora_oai_expire_time', '86400');
+  $expire_time = time() - $expire_seconds;
+  db_query("DELETE FROM {islandora_oai_tokens} WHERE timestamp < :expire_time", array(':expire_time' => $expire_time));
+}
+
+/**
+ * Filters the hook down to grab just the function that is being requested.
+ *
+ * @param string $request_type
+ *   The request being requested.
+ *
+ * @return array
+ *   An array describing the requested action.
+ */
+function islandora_oai_filter_function($request_type) {
+  $enabled_handler = variable_get('islandora_oai_request_handler', 'islandora_oai');
+  if (module_exists($enabled_handler)) {
+    $hooks = module_invoke_all(ISLANDORA_OAI_REQUEST_HANDLER_HOOK);
+    if (isset($hooks[$enabled_handler]['requests'][$request_type])) {
+      return $hooks[$enabled_handler]['requests'][$request_type];
+    }
+    // Default back to the generic OAI implementation.
+    else {
+      return $hooks['islandora_oai']['requests'][$request_type];
+    }
+  }
+}
+
+/**
+ * Implements hook_islandora_oai_identify_request_handler().
+ */
+function islandora_oai_islandora_oai_identify_request_handler() {
+  return array(
+    'islandora_oai' => array(
+      'label' => t('Islandora OAI'),
+      'description' => t('Provides a standard OAI implementation for Islandora.'),
+      'configuration' => 'admin/islandora/tools/islandora-oai/handler',
+      'requests' => array(
+        'ListIdentifiers' => array(
+          'file' => drupal_get_path('module', 'islandora_oai') . '/includes/handler.inc',
+          'function' => 'islandora_oai_retrieve_records_or_identifiers',
+        ),
+        'ListRecords' => array(
+          'file' => drupal_get_path('module', 'islandora_oai') . '/includes/handler.inc',
+          'function' => 'islandora_oai_retrieve_records_or_identifiers',
+        ),
+        'ListSets' => array(
+          'file' => drupal_get_path('module', 'islandora_oai') . '/includes/handler.inc',
+          'function' => 'islandora_oai_retrieve_sets',
+        ),
+        'GetRecord' => array(
+          'file' => drupal_get_path('module', 'islandora_oai') . '/includes/handler.inc',
+          'function' => 'islandora_oai_retrieve_record',
+        ),
+        'response_xml' => array(
+          'file' => drupal_get_path('module', 'islandora_oai') . '/includes/handler.inc',
+          'function' => 'islandora_oai_object_response_xml',
+        ),
+        'set_membership' => array(
+          'file' => drupal_get_path('module', 'islandora_oai') . '/includes/handler.inc',
+          'function' => 'islandora_oai_get_membership',
+        ),
+      ),
+    ),
+  );
+}

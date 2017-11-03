@@ -1,0 +1,125 @@
+<?php
+
+/**
+ * @file
+ * Install and uninstall functions for the islandora_bookmark module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function islandora_bookmark_schema() {
+  $schema['islandora_bookmark_list_users'] = array(
+    'description' => 'Stores users and their bookmark lists',
+    'fields' => array(
+      'uid' => array(
+        'description' => 'The User ID.',
+        'type' => 'int',
+        'length' => 11,
+        'not null' => TRUE,
+      ),
+      'listid' => array(
+        'description' => 'The ID of the list',
+        'type' => 'int',
+        'length' => 11,
+        'not null' => TRUE,
+      ),
+    ),
+  );
+
+  $schema['islandora_bookmark_list_pids'] = array(
+    'description' => 'Stores PIDs and the lists they are associated to',
+    'fields' => array(
+      'listid' => array(
+        'description' => 'The ID of the list',
+        'type' => 'int',
+        'length' => 11,
+        'not null' => TRUE,
+      ),
+      'pidid' => array(
+        'description' => 'The PID of the Fedora Object.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+    ),
+  );
+
+  $schema['islandora_bookmark_list_names'] = array(
+    'description' => 'Stores lists and their associated names',
+    'fields' => array(
+      'listid' => array(
+        'description' => 'The ID of the list',
+        'type' => 'serial',
+        'length' => 11,
+        'not null' => TRUE,
+      ),
+      'listname' => array(
+        'description' => 'The name of the list.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'descrip' => array(
+        'description' => 'The supplied description of the list',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+      ),
+      'listowner' => array(
+        'description' => 'The user ID of who owns the list.',
+        'type' => 'int',
+        'length' => 11,
+      ),
+      'type' => array(
+        'description' => 'The type of list which we are adding.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => 'bookmark',
+      ),
+    ),
+    'primary key' => array('listid'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Adds a new field to bookmarks so we can define different types of lists.
+ */
+function islandora_bookmark_update_7100(&$sandbox) {
+  db_add_field('islandora_bookmark_list_names', 'type', array(
+    'description' => 'The type of list which we are adding.',
+    'type' => 'varchar',
+    'length' => 255,
+    'default' => 'bookmark',
+  ));
+}
+
+/**
+ * Adds a description field to bookmarks.
+ */
+function islandora_bookmark_update_7101(&$sandbox) {
+  db_add_field('islandora_bookmark_list_names', 'descrip', array(
+    'description' => 'The supplied description of the list',
+    'type' => 'varchar',
+    'length' => 255,
+    'default' => '',
+  ));
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_bookmark_uninstall() {
+  $variables = array(
+    'islandora_bookmark_default_list_view',
+    'islandora_bookmark_type',
+    'islandora_bookmark_overview_page_elements',
+    'islandora_bookmark_detailed_page_elements',
+    'islandora_bookmark_create_user_default_lists',
+    'islandora_bookmark_default_list_name',
+    'islandora_bookmark_share_default_list',
+  );
+  array_walk($variables, 'variable_del');
+}

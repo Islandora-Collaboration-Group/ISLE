@@ -1,0 +1,39 @@
+@import "../../shared-imports/vars";
+
+.jwplayer.jw-flag-live {
+    .jw-display-icon-rewind {
+        display: none;
+    }
+
+    .jw-controlbar {
+        .jw-text-elapsed,
+        .jw-text-duration,
+        .jw-text-countdown,
+        .jw-slider-time {
+            display: none;
+        }
+
+        .jw-text-alt {
+            display: flex;
+        }
+
+        .jw-overlay:after {
+            display: none;
+        }
+
+        .jw-icon-live {
+            .jw-svg-icon-dvr {
+                display: none;
+            }
+        }
+    }
+
+    .jw-nextup-container {
+        bottom: @mobile-touch-target;
+    }
+
+    .jw-text-elapsed,
+    .jw-text-duration {
+        display: none;
+    }
+}

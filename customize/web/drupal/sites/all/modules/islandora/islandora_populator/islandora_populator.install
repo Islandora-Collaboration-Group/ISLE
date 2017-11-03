@@ -1,0 +1,16 @@
+<?php
+/**
+ * @file
+ * Install/uninstall hooks.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_populator_uninstall() {
+  $variables = array(
+    'islandora_populator_enabled_cmodels',
+    'islandora_populator_enable_cmodel_limiting',
+  );
+  array_walk($variables, 'variable_del');
+}

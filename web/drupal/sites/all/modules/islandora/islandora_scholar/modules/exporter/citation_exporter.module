@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * @file
+ * Implements hooks and callbacks for this module.
+ */
+
+// Hooks.
+define('CITATION_EXPORTER_MODIFY_EXPORTING_CITATION_TEXT_HOOK', 'citation_exporter_modify_exporting_citation_text');
+
+require_once dirname(__FILE__) . '/includes/batch.inc';
+
+/**
+ * Constants
+ */
+define('CITATION_EXPORTER_INDEX_SESSION', 'citation_exporter');
+define('CITATION_EXPORTER_EXPORT_MENU', 'islandora/citation/export');
+
+/**
+ * Implements hook_menu().
+ */
+function citation_exporter_menu() {
+  $items = array();
+  $items[CITATION_EXPORTER_EXPORT_MENU] = array(
+    'page callback' => 'citation_exporter_export',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Export citations and redirect the user to another page.
+ *
+ * Menu callback.
+ */
+function citation_exporter_export() {
+  module_load_include('inc', 'citation_exporter', 'includes/citation.export');
+  CitationExporter::Export();
+}
+
+/**
+ * Implements hook_cron().
+ */
+function citation_exporter_cron() {
+  // Delete sets which have not been touched in a day.
+  $sets = db_select('citation_exporter_sets', 's')
+    ->fields('s', array('id'))
+    ->condition('updated', time() - 86400, '<')
+    ->execute()
+    ->fetchCol();
+  module_load_include('inc', 'citation_exporter', 'includes/db');
+  array_map('citation_exporter_drop_set', $sets);
+}

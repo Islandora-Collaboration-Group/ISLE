@@ -1,0 +1,484 @@
+<?php
+
+/**
+ * @file
+ * The main Islandora Checksum Checker module file.
+ */
+
+/**
+ * Implements hook_cron().
+ */
+function islandora_checksum_checker_cron() {
+  if (variable_get('islandora_checksum_checker_queue_cron_method', 'drupal') == 'drupal') {
+    // Populate the queue with the next $objects_to_check object PIDs.
+    $queue = DrupalQueue::get('validateIslandoraChecksums');
+    $items_still_in_queue = $queue->numberOfItems();
+    $limit = variable_get('islandora_checksum_checker_items_per_cron', '50');
+
+    // Adjust $limit for items left in queue. If $items_still_in_queue
+    // is greater than or equal to $limit, use the configured value for $limit.
+    if ($limit > $items_still_in_queue) {
+      $limit = (int) $limit - (int) $items_still_in_queue;
+    }
+
+    $objects_to_check = islandora_checksum_checker_get_objects($limit);
+
+    foreach ($objects_to_check as $object) {
+      $queue->createItem($object);
+    }
+    islandora_checksum_checker_send_mismatch_notice();
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_checksum_checker_menu() {
+  $items = array();
+  $items['admin/islandora/tools/checksum_checker'] = array(
+    'title' => 'Checksum Checker',
+    'description' => 'Configure the Islandora Checksum Checker.',
+    'page callback' => 'drupal_get_form',
+    'access arguments' => array('administer site configuration'),
+    'page arguments' => array('islandora_checksum_checker_admin_settings'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function islandora_checksum_checker_theme() {
+  return array(
+    'premis_fixity_check' => array(
+      'variables' => array(
+        'ds_location' => NULL,
+        'ds_checksum_type' => NULL,
+        'outcome' => NULL,
+      ),
+      'template' => 'premis-fixity-check',
+    ),
+  );
+}
+
+/**
+ * Admin settings form builder.
+ */
+function islandora_checksum_checker_admin_settings() {
+  $form['islandora_checksum_checker_queue_cron_method'] = array(
+    '#type' => 'select',
+    '#title' => t('Cron method'),
+    '#default_value' => variable_get('islandora_checksum_checker_queue_cron_method', 'drupal'),
+    '#options' => array(
+      'drupal' => t('Drupal cron'),
+      'drush' => t('drush script'),
+    ),
+    '#description' => t("Choose whether the queue is run using Drupal cron or
+      via the drush 'run-islandora-checksum-queue' command in a Linux cron job."),
+  );
+  $form['islandora_checksum_checker_items_per_cron'] = array(
+    '#title' => t('Number of objects to check per cron run'),
+    '#type' => 'textfield',
+    '#size' => 5,
+    '#default_value' => variable_get('islandora_checksum_checker_items_per_cron', '50'),
+    '#description' => t("Decrease this number if you are getting cron timeouts."),
+    '#maxlength' => 5,
+    '#required' => TRUE,
+  );
+  $form['islandora_checksum_checker_dsids_to_check'] = array(
+    '#title' => t('Datastreams to check'),
+    '#type' => 'textfield',
+    '#size' => 60,
+    '#default_value' => variable_get('islandora_checksum_checker_dsids_to_check', 'OBJ'),
+    '#description' => t("A comma-separated list of DSIDs. Leave empty to check all datastreams."),
+    '#maxlength' => 255,
+  );
+  $form['islandora_checksum_checker_email_reports_to'] = array(
+    '#title' => t('Send reports to'),
+    '#type' => 'textfield',
+    '#size' => 60,
+    '#default_value' => variable_get('islandora_checksum_checker_email_reports_to',
+      variable_get('site_mail', 'admin@example.com')),
+    '#description' => t("The email address(es) that reports of checksum mismatches, verification
+      cycle completion, etc. should be sent to. Separate multiple addresses with a comma."),
+    '#maxlength' => 255,
+    '#required' => TRUE,
+  );
+  $form['islandora_checksum_checker_send_complete_message'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Send verification cycle completion notice'),
+    '#default_value' => variable_get('islandora_checksum_checker_send_complete_message', 0),
+    '#description' => t("Check this option if you want to be notified that all objects have
+      had their datastreams' checksums checked."),
+  );
+  $form['islandora_checksum_checker_log_mismatches'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Log checksum mismatches'),
+    '#default_value' => variable_get('islandora_checksum_checker_log_mismatches', 1),
+    '#description' => t("Checksum mismatches are emailed to the address(es) in 'Send
+      report to', above. Check this option if you also want mismatches to be logged
+      (which is advisable in case the email messages fail to get sent)."),
+  );
+
+  return system_settings_form($form);
+}
+
+/**
+ * Implements hook_cron_queue_info().
+ */
+function islandora_checksum_checker_cron_queue_info() {
+  $queues = array();
+  $queues['validateIslandoraChecksums'] = array(
+    'worker callback' => 'islandora_checksum_checker_process_queue_item',
+    'time' => 60,
+  );
+  return $queues;
+}
+
+/**
+ * Queue worker callback. Processes one queue item.
+ */
+function islandora_checksum_checker_process_queue_item() {
+  $queue = DrupalQueue::get('validateIslandoraChecksums');
+  // Get the next queue item.
+  while ($item = $queue->claimItem()) {
+    // $item->data will be an Islandora object's PID.
+    islandora_checksum_checker_validate_checksum($item->data);
+    $queue->deleteItem($item);
+  }
+}
+
+/**
+ * Performs the checksum validation.
+ *
+ * If checksums are not turned on, $connection->api->m->getDatastream()
+ * returns the following array:
+ *
+ *   [dsLabel] => MODS Record
+ *   [dsVersionID] => MODS.14
+ *   [dsCreateDate] => 2013-12-16T16:53:13.250Z
+ *   [dsState] => A
+ *   [dsMIME] => text/xml
+ *   [dsFormatURI] =>
+ *   [dsControlGroup] => M
+ *   [dsSize] => 1692
+ *   [dsVersionable] => true
+ *   [dsInfoType] =>
+ *   [dsLocation] => islandora:1+MODS+MODS.14
+ *   [dsLocationType] => INTERNAL_ID
+ *   [dsChecksumType] => DISABLED
+ *   [dsChecksum] => none
+ *   [dsChecksumValid] => true
+ *
+ * but if they are turned on, it returns
+ *
+ *   [dsLabel] => MODS Record
+ *   [dsVersionID] => MODS.5
+ *   [dsCreateDate] => 2013-12-16T16:58:01.694Z
+ *   [dsState] => A
+ *   [dsMIME] => text/xml
+ *   [dsFormatURI] =>
+ *   [dsControlGroup] => M
+ *   [dsSize] => 1281
+ *   [dsVersionable] => true
+ *   [dsInfoType] =>
+ *   [dsLocation] => islandora:214+MODS+MODS.5
+ *   [dsLocationType] => INTERNAL_ID
+ *   [dsChecksumType] => SHA-1
+ *   [dsChecksum] => 3a1e474b16c669ba4a220b683585edb07c82af18
+ *   [dsChecksumValid] => true
+ *
+ *
+ * @param string $pid
+ *   The PID as retrieved from the queue.
+ *
+ * @return bool
+ *   TRUE if the checksum validates, FALSE if it doesn't.
+ */
+function islandora_checksum_checker_validate_checksum($pid) {
+  $mismatches = variable_get('islandora_checksum_checker_mismatches', array());
+  $exceptions = array();
+  if (strlen(variable_get('islandora_checksum_checker_dsids_to_check', 'OBJ'))) {
+    $datastreams_to_check = explode(',',
+      variable_get('islandora_checksum_checker_dsids_to_check', 'OBJ'));
+  }
+  else {
+    $datastreams_to_check = array();
+  }
+  // Make sure there are no spaces around the DSIDs, so we can get a
+  // match in in_array().
+  foreach ($datastreams_to_check as &$dsid) {
+    $dsid = trim($dsid);
+  }
+
+  // Force the cron to run as user 1 so we don't get locked out of objects.
+  $user = user_load(1);
+
+  drupal_static_reset('islandora_get_tuque_connection');
+  try {
+    if (!$tuque = islandora_get_tuque_connection($user)) {
+      $error = 'Tuque connection failed.';
+      throw new Exception($error);
+    }
+  }
+  catch (Exception $e) {
+    $exceptions[] = $e;
+    // Only invoke the hook on failure.
+    module_invoke_all('islandora_checksum_checker_outcome', $pid, '', array(), '', $exceptions);
+    return FALSE;
+  }
+
+  $islandora_object = islandora_object_load($pid);
+  if (count($islandora_object)) {
+    foreach ($islandora_object as $ds) {
+      if (((count($datastreams_to_check)) === 0) || (in_array($ds->id, $datastreams_to_check))) {
+        try {
+          $ds_info = $tuque->api->m->getDatastream($pid, $ds->id, array('validateChecksum' => TRUE));
+        }
+        catch (RepositoryException $e) {
+          watchdog('islandora_checksum_checker', 'Checksums not verified for !object, !ds_id: !message',
+            array(
+              '!object' => $pid,
+              '!ds_id' => $ds->id,
+              '!message' => $e->getMessage(),
+            ),
+            WATCHDOG_WARNING);
+          $exceptions[] = $e;
+          module_invoke_all('islandora_checksum_checker_outcome', $pid, $ds->id, array(), '', $exceptions);
+          return FALSE;
+        }
+        // Checksums are enabled.
+        if ($ds_info['dsChecksumType'] != 'DISABLED') {
+          if ($ds_info['dsChecksumValid'] == 'true') {
+            // We have a validated checksum.
+            $outcome = 'valid';
+          }
+          else {
+            // We have an invalid checksum.
+            $outcome = 'invalid';
+            $mismatches[] = array(
+              'pid' => $pid, 'ds_id' => $ds->id,
+              'checksum_type' => $ds_info['dsChecksumType'],
+            );
+            if (variable_get('islandora_checksum_checker_log_mismatches', 0)) {
+              watchdog('islandora_checksum_checker', '@type checksum validation attempt on PID
+                @pid datastream @dsid returned false', array(
+                  '@type' => $ds_info['dsChecksumType'],
+                  '@pid' => $pid,
+                  '@dsid' => $ds->id,
+                ), WATCHDOG_WARNING);
+            }
+          }
+        }
+        else {
+          // Checksums are not enabled.
+          $outcome = 'disabled';
+        }
+        // Update the object ($log_message will appear in audit log).
+        $fixity_event_message = theme('premis_fixity_check', array(
+          'ds_location' => $ds_info['dsLocation'],
+          'ds_checksum_type' => $ds_info['dsChecksumType'],
+          'outcome' => $outcome)
+        );
+        $log_message = array('logMessage' => trim($fixity_event_message));
+        try {
+          $tuque->api->m->modifyObject($pid, $log_message);
+        }
+        catch (RepositoryException $e) {
+          watchdog('islandora_checksum_checker', 'Unable to add fixity event message for !object, !ds_id: !message',
+            array(
+              '!object' => $pid,
+              '!ds_id' => $ds->id,
+              '!message' => $e->getMessage(),
+            ),
+            WATCHDOG_WARNING);
+          $exceptions[] = $e;
+          module_invoke_all('islandora_checksum_checker_outcome', $pid, $ds->id, array(), '', $exceptions);
+          return FALSE;
+        }
+
+        module_invoke_all('islandora_checksum_checker_outcome', $pid, $ds->id, $ds_info, $outcome, $exceptions);
+
+      }
+    }
+    variable_set('islandora_checksum_checker_mismatches', $mismatches);
+  }
+  return TRUE;
+}
+
+/**
+ * Query the RI index.
+ *
+ * Gets PIDs of all objects that are not collection objects. Uses the
+ * system variable 'islandora_checksum_checker_last_item_checked' to page
+ * through all the objects in the repo.
+ *
+ * @param int $limit
+ *   The number of items to add to the queue.
+ *
+ * @return array
+ *   An array of PIDs.
+ */
+function islandora_checksum_checker_get_objects($limit) {
+  $offset = variable_get('islandora_checksum_checker_last_item_checked', '0');
+  // We need to add 1 to the offset so we can use it in the RI query, except
+  // the first time this function is invoked
+  // ('islandora_checksum_checker_last_item_checked' is set to 0 in the
+  // .install file) or when we have completed a validation cycle and reset
+  // $offset to 0 below.
+  if ($offset == '0') {
+    $query_offset = '0';
+  }
+  else {
+    $query_offset = (int) $offset + 1;
+  }
+
+  // Query the rindex to get all the objects that have a 'isMemberOfCollection'
+  // relationship but that do not have a 'islandora:collectionCModel' content
+  // model. Sort oldest to newest.
+  $user = user_load(1);
+  drupal_static_reset('islandora_get_tuque_connection');
+  $tuque = islandora_get_tuque_connection($user);
+  $ri_query = <<<EOQ
+SELECT ?object ?created
+FROM <#ri>
+WHERE {
+  ?object <fedora-model:createdDate> ?created .
+  OPTIONAL {
+    ?object <fedora-model:hasModel> <info:fedora/islandora:collectionCModel> ;
+            <fedora-view:lastModifiedDate> ?probe
+  }
+  FILTER(!bound(?probe))
+}
+ORDER BY ?created
+LIMIT $limit
+OFFSET $query_offset
+EOQ;
+  $results = $tuque->repository->ri->sparqlQuery($ri_query, 'unlimited');
+
+  foreach ($results as $member) {
+    $objects_to_check[] = $member['object']['value'];
+  }
+
+  // If the number of results returned is fewer than $limit, assume
+  // that we have gotten all objects from the rindex and reset
+  // $offset to 0.
+  if (count($results) < $limit) {
+    $offset = 0;
+    if (variable_get('islandora_checksum_checker_send_complete_message', 0)) {
+      islandora_checksum_checker_send_check_complete_message();
+      variable_set('islandora_checksum_checker_mismatches', array());
+    }
+  }
+  else {
+    $offset = (int) $offset + (int) $limit;
+  }
+  // Update the offset for use in next cron run.
+  variable_set('islandora_checksum_checker_last_item_checked', $offset);
+
+  return $objects_to_check;
+}
+
+/**
+ * Query the RI index for a count.
+ *
+ * Gets the number of items that the checksum checker will run against.
+ *
+ * @return int
+ *   Count of pids.
+ */
+function islandora_checksum_checker_get_number_objects() {
+  $user = user_load(1);
+  drupal_static_reset('islandora_get_tuque_connection');
+  $tuque = islandora_get_tuque_connection($user);
+
+  // Query the rindex to get all the objects that have a 'isMemberOfCollection'
+  // relationship but that do not have a 'islandora:collectionCModel' content
+  // model. Sort oldest to newest.
+  $ri_query = <<<EOQ
+SELECT ?object ?created
+FROM <#ri>
+WHERE {
+  ?object <fedora-model:createdDate> ?created .
+  OPTIONAL {
+    ?object <fedora-model:hasModel> <info:fedora/islandora:collectionCModel> ;
+            <fedora-view:lastModifiedDate> ?probe
+  }
+  FILTER(!bound(?probe))
+}
+EOQ;
+  return $tuque->repository->ri->countQuery($ri_query, 'sparql');
+}
+
+/**
+ * Assembles the email message sent containing any checksum mismatches.
+ */
+function islandora_checksum_checker_send_mismatch_notice() {
+  $language = language_default();
+  $to = variable_get('islandora_checksum_checker_email_reports_to',
+    variable_get('site_mail', 'admin@example.com'));
+  $from = variable_get('site_mail', 'admin@example.com');
+  $params = array();
+
+  // Mismatch entries are stored in a temporary system variable.
+  $mismatches = variable_get('islandora_checksum_checker_mismatches', array());
+  if (count($mismatches)) {
+    $params['mismatches'] = $mismatches;
+    $result = drupal_mail('islandora_checksum_checker', 'checksum_validation_failure',
+      $to, $language, $params, $from, TRUE);
+    // Reset the list of mismatches so it's empty for the next run.
+    variable_set('islandora_checksum_checker_mismatches', array());
+  }
+  else {
+    // Cancel the message.
+    $result = drupal_mail('islandora_checksum_checker', 'checksum_validation_failure',
+      $to, $language, $params, $from, FALSE);
+  }
+}
+
+/**
+ * Assembles the email message sent when all the objects have been checked.
+ */
+function islandora_checksum_checker_send_check_complete_message() {
+  $language = language_default();
+  $to = variable_get('islandora_checksum_checker_email_reports_to',
+    variable_get('site_mail', 'admin@example.com'));
+  $from = variable_get('site_mail', 'admin@example.com');
+  $params = array();
+  $result = drupal_mail('islandora_checksum_checker', 'all_objects_checked',
+    $to, $language, $params, $from, TRUE);
+}
+
+/**
+ * Implements hook_mail().
+ */
+function islandora_checksum_checker_mail($key, &$message, $params) {
+  $options = array(
+    'langcode' => $message['language']->language,
+  );
+
+  switch ($key) {
+    case 'checksum_validation_failure':
+      $message['subject'] = t('Checksum validation failure from @site-name',
+        array('@site-name' => variable_get('site_name', 'Drupal')), $options);
+      if (isset($params['mismatches']) && count($params['mismatches'])) {
+        foreach ($params['mismatches'] as $mismatch) {
+          $message['body'][] = t('@type checksum validation attempt on PID @pid datastream @dsid returned false',
+            array(
+              '@type' => $mismatch['checksum_type'],
+              '@pid' => $mismatch['pid'],
+              '@dsid' => trim($mismatch['ds_id']),
+            ), $options);
+        }
+      }
+      break;
+
+    case 'all_objects_checked':
+      $message['subject'] = t('Checksum validation complete for @site-name',
+        array('@site-name' => variable_get('site_name', 'Drupal')), $options);
+      $message['body'][] = t("All objects have had their datastream checksums verified.\n\n
+        A new verification cycle will start the next time cron runs.");
+      break;
+  }
+}

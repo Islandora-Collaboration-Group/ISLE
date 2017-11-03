@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<exslt:function xmlns:exslt="http://exslt.org/documentation" 
+                version="2" module="exsl" status="stable">
+
+<exslt:name>object-type</exslt:name>
+
+<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                 xmlns:dc="http://purl.org/dc/elements/1.1/"
+                 ID="exsl:object-type">
+   <dc:subject>EXSLT</dc:subject>
+   <dc:subject>common</dc:subject>
+   <dc:subject>object-type</dc:subject>
+   <dc:rights>public domain</dc:rights>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="exsl:object-type.2">
+         <exslt:version>2</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com">Jeni Tennison</dc:creator>
+         <dc:date>2001-04-24</dc:date>
+         <dc:description>Added <code>'external'</code> as a possible object type.</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="exsl:object-type.2.1">
+         <exslt:version>2.1</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com">Jeni Tennison</dc:creator>
+         <dc:date>2001-04-24</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">
+            <ul>
+               <li>Added vendor implementations of Saxon and 4EXSLT</li>
+               <li>Changed status to stable</li>
+            </ul>
+         </dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="exsl:object-type.2.2">
+         <exslt:version>2.2</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com">Jeni Tennison</dc:creator>
+         <dc:date>2001-06-02</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">Added vendor implementation in jd.xslt</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="exsl:object-type.2.3">
+         <exslt:version>2.3</exslt:version>
+         <dc:creator email="mail@jenitennison.com" 
+                     url="http://www.jenitennison.com">Jeni Tennison</dc:creator>
+         <dc:date>2001-08-15</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">Added vendor implementation in libxslt</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="exsl:object-type.2.4">
+         <exslt:version>2.4</exslt:version>
+         <dc:creator email="craig.stewart@nottingham.ac.uk" 
+                     url="">Craig Stewart</dc:creator>
+         <dc:date>2002-08-20</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">Added Xalan-J implementation to the list.</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="exsl:object-type.2.5">
+         <exslt:version>2.5</exslt:version>
+         <dc:creator email="craig.stewart@nottingham.ac.uk" 
+                     url="">Craig Stewart</dc:creator>
+         <dc:date>2002-11-12</dc:date>
+         <dc:description xmlns="http://www.w3.org/1999/xhtml">Updated 4XSLT version to 0.12.0a3.</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+</rdf:Description>
+
+<exslt:doc xmlns="">
+   <section>
+      <para>
+         The <function>exsl:object-type</function> function returns a string giving the type of the object passed as the argument. The possible object types are: <literal>'string'</literal>, <literal>'number'</literal>, <literal>'boolean'</literal>, <literal>'node-set'</literal>, <literal>'RTF'</literal> or <literal>'external'</literal>.
+      </para>
+      <para>
+         Most XSLT object types can be coerced to each other without error.  However, there are certain coercions that raise errors, most importantly treating anything other than a node set as a node set.  Authors of utilities such as named templates or user-defined extension functions may wish to give some flexibility in the parameter and argument values that are accepted by the utility; the <function>exsl:object-type</function> function enables them to do so.
+      </para>
+   </section>
+</exslt:doc>
+
+<exslt:definition>
+   <exslt:return type="string" />
+   <exslt:arg name="object" type="object" default="''" />
+</exslt:definition>
+
+<exslt:implementations>
+   <exslt:vendor-implementation
+           version="2"
+           vendor="4XSLT, from 4Suite."
+           vendor-url="http://4Suite.org"
+           vendor-version="0.12.0a3" />
+   <exslt:vendor-implementation
+           version="2"
+           vendor="SAXON from Michael Kay"
+           vendor-url="http://users.iclway.co.uk/mhkay/saxon/index.html"
+           vendor-version="6.3" />
+   <exslt:vendor-implementation
+           version="2"
+           vendor="jd.xslt from Johannes D&#246;bler"
+           vendor-url="http://www.aztecrider.com/xslt/"
+           vendor-version="1.0.8" />
+   <exslt:vendor-implementation
+           version="2"
+           vendor="libxslt from Daniel Veillard; implementation by Thomas Broyer"
+           vendor-url="http://xmlsoft.org/XSLT/"
+           vendor-version="1.0.19" />
+   <exslt:vendor-implementation
+           version="2"
+           vendor="Xalan-J from Apache"
+           vendor-url="http://xml.apache.org/xalan-j"
+           vendor-version="2.4.D1" />
+</exslt:implementations>
+
+<exslt:use-cases>
+   <exslt:use-case type="example" data="exsl.object-type.data.1.xml" 
+                   xslt="exsl.object-type.1.xsl" 
+                   result="exsl.object-type.result.1.xml">
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="exsl:object-type.use-case.1">
+         <dc:subject>EXSLT</dc:subject>
+         <dc:subject>common</dc:subject>
+         <dc:subject>object-type</dc:subject>
+         <dc:subject>use case</dc:subject>
+         <exslt:revision>
+            <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                             xmlns:dc="http://purl.org/dc/elements/1.1/"
+                             ID="exsl:object-type.use-case.1.1">
+               <exslt:version>1</exslt:version>
+               <dc:creator email="mhkay@iclway.co.uk">Mike Kay</dc:creator>
+               <dc:date>2001-04-28</dc:date>
+               <dc:description>Tests functionality of exsl:object-type().</dc:description>
+            </rdf:Description>
+         </exslt:revision>
+      </rdf:Description>
+   </exslt:use-case>
+</exslt:use-cases>
+
+</exslt:function>

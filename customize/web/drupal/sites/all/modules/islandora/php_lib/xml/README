@@ -1,0 +1,6 @@
+Provides classes and functions for abstracting meta data concepts. Abstracts classes of meta data based on schema's and file formats.
+
+Classes and Descriptions:
+
+EAC-CPF.inc
+class EACCPF.

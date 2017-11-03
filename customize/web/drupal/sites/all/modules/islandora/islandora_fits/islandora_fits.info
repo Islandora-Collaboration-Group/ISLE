@@ -1,0 +1,9 @@
+name = Islandora FITS
+description = "View and manage FITS datastreams"
+package = Islandora Tools
+version = 7.x-dev
+core = 7.x
+configure = admin/islandora/tools/fits
+php = 5.3
+stylesheets[all][] = css/islandora_fits.css
+dependencies[] = islandora

@@ -1,0 +1,10 @@
+name = RIS Importer
+description = Importer plugin for RIS files, to create citation objects.
+package = Islandora Solution Packs
+dependencies[] = islandora
+dependencies[] = islandora_importer
+dependencies[] = islandora_scholar
+dependencies[] = islandora_ris
+files[] = includes/importer.inc
+version = 7.x-dev
+core = 7.x

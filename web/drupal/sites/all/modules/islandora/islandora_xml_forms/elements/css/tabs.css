@@ -1,0 +1,62 @@
+/*
+    Document   : tabs
+    Created on : May 5, 2011, 3:26:57 PM
+    Author     : nbanks
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/*
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root {
+    display: block;
+}
+
+div.xml-form-elements-tabs.ui-tabs .ui-tabs-nav li.ui-tabs-selected a {
+    color: #555555;
+    background: none;
+    font-weight: normal;
+}
+
+.ui-tabs-panel >.ui-tabpanel-add-button > input.progress-disabled {
+    float: none;
+}
+
+.ui-tabs-panel >.ui-tabpanel-add-button > div.ahah-progress {
+    display: inline-block;
+    float: none;
+    vertical-align: middle;
+    text-align: center;
+    margin-bottom: 5px;
+    /*vertical-align: middle;
+    position: relative;
+    text-align: center;*/
+}
+
+.ui-tabs-panel > .ui-tabpanel-add-button {
+    width: 70px;
+}
+
+.ui-tabs-panel > .ui-tabpanel-add-button > .form-button, .ui-tabs-panel > .ui-tabpanel-add-button > .form-submit {
+    margin: 0;
+}
+
+.ui-tabs .ui-tabs-nav {
+  margin: 0em;
+}
+
+.tool_tip_trigger .tool_tip { display:none; }
+
+.tool_tip {
+    color: #000;
+    background:#cfd0ce;
+    /* display:none; /*--Hides by default--*/
+    padding:10px;
+    position:absolute;    z-index:1000;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}

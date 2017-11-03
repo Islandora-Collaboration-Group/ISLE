@@ -1,0 +1,90 @@
+<?php
+
+/**
+ * @file
+ * Unit tests for tools extracting a PDF's text for use in OCR.
+ */
+
+class PDFToTextTestCase extends DrupalWebTestCase {
+
+  /**
+   * Gets info to display to describe this test.
+   *
+   * @see DrupalUnitTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'PDFToText Unit Tests',
+      'description' => 'Ensure that wrapper functions for pdftotext work correctly.',
+      'group' => 'Islandora Paged Content',
+    );
+  }
+
+  /**
+   * Sets up the requirements for this test.
+   *
+   * @see DrupalUnitTestCase::setUp()
+   */
+  public function setUp() {
+    module_load_include('inc', 'islandora_paged_content', 'includes/utilities');
+    parent::setUp('islandora_paged_content');
+  }
+
+  /**
+   * Test that pdfinfo is available.
+   */
+  public function testPDFToTextExistence() {
+    $pdf_to_text = islandora_paged_content_pdftotext_availability();
+    if (!$pdf_to_text) {
+      $this->fail('Valid version of pdftotext was not found.');
+    }
+    else {
+      $this->pass('Valid version of pdftotext was found.');
+    }
+  }
+
+  /**
+   * Test that PDFs extraction are equal when using layout.
+   */
+  public function testPDFToTextWithLayout() {
+    $test_mcgill_pdf = drupal_get_path('module', 'islandora_paged_content') . '/tests/fixtures/2010.08.25_McGill_Librarians.pdf';
+    $fixture_text_mcgill = drupal_get_path('module', 'islandora_paged_content') . '/tests/fixtures/mcgill_text_layout_page4.txt';
+    $test_mcmaster_pdf = drupal_get_path('module', 'islandora_paged_content') . '/tests/fixtures/arl-carl-statement-supporting-askey-mcmaster-final.pdf';
+    $fixture_text_mcmaster = drupal_get_path('module', 'islandora_paged_content') . '/tests/fixtures/mcmaster_text_layout_page1.txt';
+
+    $test_mcgill_text_uri = islandora_paged_content_extract_text_from_pdf($test_mcgill_pdf, 4);
+    $this->assertEqual(file_get_contents($test_mcgill_text_uri), file_get_contents($fixture_text_mcgill), 'The extracted text matches the contents and layout of the McGill fixture.');
+    file_unmanaged_delete($test_mcgill_text_uri);
+
+    $test_mcmaster_text_uri = islandora_paged_content_extract_text_from_pdf($test_mcmaster_pdf, 1);
+    $this->assertEqual(file_get_contents($test_mcmaster_text_uri), file_get_contents($fixture_text_mcmaster), 'The extracted text matches the contents and layout of the McMaster fixture.');
+    file_unmanaged_delete($test_mcmaster_text_uri);
+  }
+
+  /**
+   * Test that PDF text extraction are equal when not using layout.
+   */
+  public function testPDFToTextWithNoLayout() {
+    $test_mcgill_pdf = drupal_get_path('module', 'islandora_paged_content') . '/tests/fixtures/2010.08.25_McGill_Librarians.pdf';
+    $fixture_text_mcgill = drupal_get_path('module', 'islandora_paged_content') . '/tests/fixtures/mcgill_text_no_layout_page4.txt';
+    $test_mcmaster_pdf = drupal_get_path('module', 'islandora_paged_content') . '/tests/fixtures/arl-carl-statement-supporting-askey-mcmaster-final.pdf';
+    $fixture_text_mcmaster = drupal_get_path('module', 'islandora_paged_content') . '/tests/fixtures/mcmaster_text_no_layout_page1.txt';
+
+    $test_mcgill_text_uri = islandora_paged_content_extract_text_from_pdf($test_mcgill_pdf, 4, FALSE);
+    $this->assertEqual(file_get_contents($test_mcgill_text_uri), file_get_contents($fixture_text_mcgill), 'The extracted text matches the contents of the McGill fixture.');
+    file_unmanaged_delete($test_mcgill_text_uri);
+
+    $test_mcmaster_text_uri = islandora_paged_content_extract_text_from_pdf($test_mcmaster_pdf, 1, FALSE);
+    $this->assertEqual(file_get_contents($test_mcmaster_text_uri), file_get_contents($fixture_text_mcmaster), 'The extracted text matches the contents of the McMaster fixture.');
+    file_unmanaged_delete($test_mcmaster_text_uri);
+  }
+
+  /**
+   * Test that a non-valid URI returns FALSE.
+   */
+  public function testPDFTextNonValidURI() {
+    $test_pdf = "temporary://totally_doesnt_exist.pdf";
+    $full_text_uri = islandora_paged_content_extract_text_from_pdf($test_pdf, 1);
+    $this->assertFalse($full_text_uri, 'No text extraction was returned for a non-existent PDF.');
+  }
+}

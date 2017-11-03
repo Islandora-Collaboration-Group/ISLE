@@ -1,0 +1,166 @@
+<?php
+
+/**
+ * @file
+ * Web of Science badges.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_wos_menu() {
+  return array(
+    'admin/islandora/tools/badges/wos' => array(
+      'title' => 'Web of Science',
+      'description' => 'Configure Web of Science integration.',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('islandora_wos_admin_form'),
+      'access arguments' => array('administer site configuration'),
+      'type' => MENU_LOCAL_TASK,
+      'file' => 'includes/admin.form.inc',
+    ),
+  );
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function islandora_wos_block_info() {
+  return array(
+    'islandora_wos_badge' => array(
+      'visibility' => BLOCK_VISIBILITY_LISTED,
+      'pages' => 'islandora/object/*',
+      'cache' => DRUPAL_CACHE_PER_PAGE,
+      'info' => t('Islandora Web of Science Badge'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function islandora_wos_block_view($delta = '') {
+  module_load_include('inc', 'islandora_badges', 'includes/utilities');
+  $to_render = array();
+
+  if ($delta == 'islandora_wos_badge') {
+    // Get the WoS AMR username and password from the admin config.
+    $wos_username = variable_get('islandora_wos_username', '');
+    $wos_password = variable_get('islandora_wos_password', '');
+    if (!empty($wos_username) && !empty($wos_password)) {
+      $object = menu_get_object('islandora_object', 2);
+      if ($object) {
+        $doi = islandora_badges_get_doi($object);
+        if ($doi) {
+          // Embed Web of Science.
+          // Set API endpoint URL.
+          // @TODO: Add to admin form.
+          $url = "https://ws.isiknowledge.com/cps/xrpc";
+
+          // Store XML Request in string, as I can't send an XML file by POST.
+          $input_xml = <<<EOB
+<?xml version="1.0" encoding="UTF-8" ?>
+<request xmlns="http://www.isinet.com/xrpc42" src="app.id=">
+    <fn name="LinksAMR.retrieve">
+        <list>
+            <!-- WHO IS REQUESTING -->
+            <map>
+                <val name="username">$wos_username</val>
+                <val name="password">$wos_password</val>
+            </map>
+            <!-- WHAT IS REQUESTED -->
+            <map>
+                <list name="WOS">
+                    <val>timesCited</val>
+                    <val>citingArticlesURL</val>
+                </list>
+            </map>
+            <!-- LOOKUP DATA -->
+            <map>  
+                <map name="cite_1">
+                    <val name="doi">$doi</val>
+                </map>
+            </map>
+        </list>
+    </fn>
+</request>
+EOB;
+
+          // Post the request and get results!
+          $result = drupal_http_request($url, array(
+            'headers' => array('Content-Type' => 'text/xml'),
+            'data' => $input_xml,
+            'method' => 'POST',
+            'timeout' => 10,
+          )
+          );
+          if (empty($result->error)) {
+            // Convert the response to an array and remove the CDATA tags.
+            $wos_doc = new DOMDocument();
+            $wos_doc->loadXML($result->data);
+            $xpath = new DOMXPath($wos_doc);
+
+            // Default - citing_articles_url - no citing articles = empty array.
+            $citing_articles_url = array();
+
+            // XPaths based on
+            // http://ipscience-help.thomsonreuters.com/LAMRService/
+            // WebServiceOperationsGroup/responseAPIWoS.html
+            $citations = $xpath->query("/fn/map/map[@name=\"cite_1\"]/map[@name=\"WOS\"]");
+            if ($citations->length > 0) {
+              $context = $citations->item(0);
+              $times_cited_node = $xpath->query("val[@name=\"timesCited\"]", $context);
+              if ($times_cited_node->length > 0) {
+                $times_cited = $times_cited_node->item(0)->textContent;
+              }
+              $citing_articles_url_node = $xpath->query("val[@name=\"citingArticlesURL\"]", $context);
+              if ($citing_articles_url_node->length > 0) {
+                $citing_articles_url = $citing_articles_url_node->item(0)->textContent;
+              }
+            }
+
+            // If there is no error, return data.
+            if (isset($times_cited) && $times_cited > 0) {
+              $badge_type = variable_get('islandora_wos_badgetype');
+              if ($badge_type == 'text') {
+                $to_render = array(
+                  '#type' => 'container',
+                  '#attributes' => array(
+                    'class' => array('wos_badge'),
+                  ),
+                  '#children' => array(
+                    '#type' => 'link',
+                    '#title' => t('Web of Science citations: @cites', array('@cites' => $times_cited)),
+                    '#href' => $citing_articles_url,
+                    '#options' => array(
+                      'target' => '_blank',
+                    ),
+                  ),
+                );
+              }
+              else {
+                $img = array(
+                  '#theme' => 'image',
+                  'path' => format_string(
+                    'https://img.shields.io/badge/Web%20of%20Science%20citations-!times_cited-orange.svg?style=flat',
+                    array('!times_cited' => $times_cited)
+                  ),
+                  'alt' => t('Web of Science citations: @cites', array('@cites' => $times_cited)),
+                );
+                $to_render = array(
+                  '#type' => 'link',
+                  '#title' => drupal_render($img),
+                  '#href' => $citing_articles_url,
+                  '#options' => array(
+                    'target' => '_blank',
+                  ),
+                );
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  return $to_render;
+}

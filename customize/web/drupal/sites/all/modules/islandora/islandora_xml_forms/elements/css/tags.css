@@ -1,0 +1,53 @@
+span.tag-list
+{
+  margin: 4px 0;
+  padding: 0;
+  list-style-image: url('../images/minus_small.png');
+  /* list-style-type: none; */
+}
+
+span.tag-list > span
+{
+  background-image: none;
+  background-color: #efe;
+  background-position: right center;
+  background-repeat: no-repeat;
+  margin: 0 5px;
+  padding: 0 2px;
+  cursor: pointer;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+span.tag-list > span > span.remove-tag
+{
+  display: inline-block;
+  height: 12px;
+  width: 12px;
+  padding-left: 5px;
+  cursor: pointer;
+  background-image: url('../images/minus_small.png');
+  background-repeat: no-repeat;
+  background-position: right center;
+  /*padding: 0 6px 0 6px;
+  margin: 0 5px;
+  cursor: pointer;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;*/
+}
+
+.xml-form-elements-tags input.progress-disabled
+{
+  float: none;
+}
+
+.xml-form-elements-tags div.add-tag > input
+{
+  display: inline;
+  float: none;
+}
+
+span.tag-list > span:hover, span.tag-list > span:hover span
+{
+  background-color: #eee;
+}

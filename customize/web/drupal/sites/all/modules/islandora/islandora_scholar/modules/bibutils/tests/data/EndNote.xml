@@ -1,0 +1,1849 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <records>
+        <record>
+            <database name="cummulative-April2011 Copy Copy.enl"
+                path="C:\Documents and Settings\alynch\Desktop\cummulative-April2011 Copy Copy.enl"
+                >cummulative-April2011 Copy Copy.enl</database>
+            <source-app name="EndNote" version="13.0">EndNote</source-app>
+            <rec-number>4608</rec-number>
+            <foreign-keys>
+                <key app="EN" db-id="tvdsrfez22saafe95sg5dfrrfvv2vrx09dx5">4608</key>
+            </foreign-keys>
+            <ref-type name="Journal Article">17</ref-type>
+            <contributors>
+                <authors>
+                    <author>
+                        <style face="normal" font="default" size="100%">Esworthy, R. S.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Kim, B. W.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Larson, G. P.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Yip, M. L.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Smith, D. D.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Li, M.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Chu, F. F.</style>
+                    </author>
+                </authors>
+            </contributors>
+            <auth-address>
+                <style face="normal" font="default" size="100%">Department of Cancer Biology,
+                    Beckman Research Institute of City of Hope, Duarte, California.</style>
+            </auth-address>
+            <titles>
+                <title>
+                    <style face="normal" font="default" size="100%">Colitis locus on chromosome 2
+                        impacting the severity of early-onset disease in mice deficient in GPX1 and
+                        GPX2</style>
+                </title>
+                <secondary-title>
+                    <style face="normal" font="default" size="100%">Inflammatory Bowel
+                        Diseases</style>
+                </secondary-title>
+                <alt-title>
+                    <style face="normal" font="default" size="100%">Inflammatory bowel
+                        diseases</style>
+                </alt-title>
+            </titles>
+            <periodical>
+                <full-title>
+                    <style face="normal" font="default" size="100%">Inflammatory Bowel
+                        Diseases</style>
+                </full-title>
+                <abbr-1>
+                    <style face="normal" font="default" size="100%">Inflamm. Bowel Dis.</style>
+                </abbr-1>
+                <abbr-2>
+                    <style face="normal" font="default" size="100%">Inflamm Bowel Dis</style>
+                </abbr-2>
+            </periodical>
+            <alt-periodical>
+                <full-title>
+                    <style face="normal" font="default" size="100%">Inflammatory Bowel
+                        Diseases</style>
+                </full-title>
+                <abbr-1>
+                    <style face="normal" font="default" size="100%">Inflamm. Bowel Dis.</style>
+                </abbr-1>
+                <abbr-2>
+                    <style face="normal" font="default" size="100%">Inflamm Bowel Dis</style>
+                </abbr-2>
+            </alt-periodical>
+            <pages>
+                <style face="normal" font="default" size="100%">1373-86</style>
+            </pages>
+            <volume>
+                <style face="normal" font="default" size="100%">17</style>
+            </volume>
+            <number>
+                <style face="normal" font="default" size="100%">6</style>
+            </number>
+            <edition>
+                <style face="normal" font="default" size="100%">2010/09/28</style>
+            </edition>
+            <dates>
+                <year>
+                    <style face="normal" font="default" size="100%">2011</style>
+                </year>
+                <pub-dates>
+                    <date>
+                        <style face="normal" font="default" size="100%">Jun</style>
+                    </date>
+                </pub-dates>
+            </dates>
+            <isbn>
+                <style face="normal" font="default" size="100%">1536-4844 (Electronic)&#xD;1078-0998
+                    (Linking)</style>
+            </isbn>
+            <accession-num>
+                <style face="normal" font="default" size="100%">20872835</style>
+            </accession-num>
+            <abstract>
+                <style face="normal" font="default" size="100%">BACKGROUND: Genetic background has a
+                    profound effect on inflammatory bowel disease. The Gpx1 and Gpx2 double knockout
+                    (GPX1/2-DKO) mice on a mixed C57BL/6 (B6) and 129S1/SvimJ (129) background
+                    exhibit spontaneous ileocolitis. The DKO mice on a B6 background have mild
+                    ileocolitis. We characterized the 129 DKO mice to identify a genetic locus
+                    affecting disease severity. METHODS: We backcrossed B6;129 DKO mice to 129 and
+                    analyzed for ileocolitis penetrance and severity at N5, N7, and N10. By
+                    correlating disease severity with single-nucleotide polymorphism (SNP) markers,
+                    we identified a colitis locus. RESULTS: As early as 9 days of age, 129 DKO N5
+                    and N10 mice showed disease signs and morbidity. The N10 DKO mice had the
+                    severest colitis with nearly complete penetrance and high morbidity compared
+                    with other generations or backgrounds. 129 DKO mice had elevated colonic KC and
+                    SAA3 expression, shorter colon length, and cecal E. coli overgrowth compared to
+                    B6 DKO mice. Analysis of the B6 loci in 129 N5, N7, and N10 cohorts pointed to a
+                    region of chromosome 2: 119 Mbp contributing to mild symptoms. CONCLUSIONS:
+                    GPX1/2-DKO mice on 129 genetic background have the most aggressive colitis
+                    compared to B6;129 and B6 colonies. A B6 locus significantly contributing the
+                    resistance resides on chromosome 2: 119 Mbp. This region coincides with
+                    cytokine-deficiency-induced colitis susceptibility, Cdcs3, identified in the
+                    resistant B6 and sensitive C3H/HeJBir (C3Bir) with IL-10 deficiency. A three-way
+                    SNP analysis between 129, B6, and C3Bir locus points the major candidate genes
+                    to B2m, Dnajc17, Duox2, Pla2g4b, Pla2g4e, Pla2g4f and Slc30a4. (Inflamm Bowel
+                    Dis 2011).</style>
+            </abstract>
+            <notes>
+                <style face="normal" font="default" size="100%">Esworthy, R Steven&#xD;Kim,
+                    Byung-Wook&#xD;Larson, Garrett P&#xD;Yip, M L Richard&#xD;Smith, David D&#xD;Li,
+                    Min&#xD;Chu, Fong-Fong&#xD;United States&#xD;Inflamm Bowel Dis. 2011
+                    Jun;17(6):1373-86. doi: 10.1002/ibd.21479. Epub 2010 Sep 24.</style>
+            </notes>
+            <urls/>
+            <electronic-resource-num>
+                <style face="normal" font="default" size="100%">10.1002/ibd.21479</style>
+            </electronic-resource-num>
+            <remote-database-provider>
+                <style face="normal" font="default" size="100%">NLM</style>
+            </remote-database-provider>
+            <language>
+                <style face="normal" font="default" size="100%">eng</style>
+            </language>
+        </record>
+        <record>
+            <database name="cummulative-April2011 Copy Copy.enl"
+                path="C:\Documents and Settings\alynch\Desktop\cummulative-April2011 Copy Copy.enl"
+                >cummulative-April2011 Copy Copy.enl</database>
+            <source-app name="EndNote" version="13.0">EndNote</source-app>
+            <rec-number>4626</rec-number>
+            <foreign-keys>
+                <key app="EN" db-id="tvdsrfez22saafe95sg5dfrrfvv2vrx09dx5">4626</key>
+            </foreign-keys>
+            <ref-type name="Journal Article">17</ref-type>
+            <contributors>
+                <authors>
+                    <author>
+                        <style face="normal" font="default" size="100%">Baker, K. S.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Armenian, S.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Bhatia, S.</style>
+                    </author>
+                </authors>
+            </contributors>
+            <auth-address>
+                <style face="normal" font="default" size="100%">Fred Hutchinson Cancer Research
+                    Center, Seattle, Washington 98109, USA. ksbaker@fhere.org</style>
+            </auth-address>
+            <titles>
+                <title>
+                    <style face="normal" font="default" size="100%">Long-term consequences of
+                        hematopoietic stem cell transplantation: current state of the
+                        science</style>
+                </title>
+                <secondary-title>
+                    <style face="normal" font="default" size="100%">Biology of Blood and Marrow
+                        Transplantation</style>
+                </secondary-title>
+            </titles>
+            <periodical>
+                <full-title>
+                    <style face="normal" font="default" size="100%">Biology of Blood and Marrow
+                        Transplantation</style>
+                </full-title>
+                <abbr-1>
+                    <style face="normal" font="default" size="100%">Biol. Blood Marrow
+                        Transplant.</style>
+                </abbr-1>
+                <abbr-2>
+                    <style face="normal" font="default" size="100%">Biol Blood Marrow
+                        Transplant</style>
+                </abbr-2>
+            </periodical>
+            <pages>
+                <style face="normal" font="default" size="100%">S90-6</style>
+            </pages>
+            <volume>
+                <style face="normal" font="default" size="100%">16</style>
+            </volume>
+            <number>
+                <style face="normal" font="default" size="100%">1 Suppl</style>
+            </number>
+            <edition>
+                <style face="normal" font="default" size="100%">2009/09/29</style>
+            </edition>
+            <keywords>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Cardiovascular
+                        Diseases/epidemiology/etiology/genetics</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Hematopoietic Stem Cell
+                        Transplantation/*adverse effects/*mortality</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Humans</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Metabolic Syndrome
+                        X/complications/epidemiology/etiology</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Postoperative
+                        Complications/epidemiology/etiology</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Survival Analysis</style>
+                </keyword>
+            </keywords>
+            <dates>
+                <year>
+                    <style face="normal" font="default" size="100%">2010</style>
+                </year>
+                <pub-dates>
+                    <date>
+                        <style face="normal" font="default" size="100%">Jan</style>
+                    </date>
+                </pub-dates>
+            </dates>
+            <isbn>
+                <style face="normal" font="default" size="100%">1523-6536 (Electronic)&#xD;1083-8791
+                    (Linking)</style>
+            </isbn>
+            <accession-num>
+                <style face="normal" font="default" size="100%">19782145</style>
+            </accession-num>
+            <notes>
+                <style face="normal" font="default" size="100%">Baker, K Scott&#xD;Armenian,
+                    Saro&#xD;Bhatia, Smita&#xD;R01 CA 112530-03/CA/NCI NIH HHS/United States&#xD;R01
+                    CA078938/CA/NCI NIH HHS/United States&#xD;R01 CA112530-02/CA/NCI NIH HHS/United
+                    States&#xD;Research Support, N.I.H., Extramural&#xD;Research Support, Non-U.S.
+                    Gov&apos;t&#xD;Review&#xD;United States&#xD;Biology of blood and marrow
+                    transplantation : journal of the American Society for Blood and Marrow
+                    Transplantation&#xD;Biol Blood Marrow Transplant. 2010 Jan;16(1 Suppl):S90-6.
+                    Epub 2009 Sep 24.</style>
+            </notes>
+            <urls>
+                <related-urls>
+                    <url>
+                        <style face="normal" font="default" size="100%"
+                            >http://www.ncbi.nlm.nih.gov/pubmed/19782145</style>
+                    </url>
+                </related-urls>
+            </urls>
+            <custom2>
+                <style face="normal" font="default" size="100%">2832710</style>
+            </custom2>
+            <electronic-resource-num>
+                <style face="normal" font="default" size="100%">S1083-8791(09)00435-2
+                    [pii]&#xD;10.1016/j.bbmt.2009.09.017</style>
+            </electronic-resource-num>
+            <language>
+                <style face="normal" font="default" size="100%">eng</style>
+            </language>
+        </record>
+        <record>
+            <database name="cummulative-April2011 Copy Copy.enl"
+                path="C:\Documents and Settings\alynch\Desktop\cummulative-April2011 Copy Copy.enl"
+                >cummulative-April2011 Copy Copy.enl</database>
+            <source-app name="EndNote" version="13.0">EndNote</source-app>
+            <rec-number>4612</rec-number>
+            <foreign-keys>
+                <key app="EN" db-id="tvdsrfez22saafe95sg5dfrrfvv2vrx09dx5">4612</key>
+            </foreign-keys>
+            <ref-type name="Journal Article">17</ref-type>
+            <contributors>
+                <authors>
+                    <author>
+                        <style face="normal" font="default" size="100%">Altorki, N.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Lane, M. E.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Bauer, T.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Lee, P. C.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Guarino, M. J.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Pass, H.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Felip, E.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Peylan-Ramu, N.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Gurpide, A.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Grannis, F. W.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Mitchell, J. D.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Tachdjian, S.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Swann, R. S.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Huff, A.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Roychowdhury, D. F.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Reeves, A.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Ottesen, L. H.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Yankelevitz, D. F.</style>
+                    </author>
+                </authors>
+            </contributors>
+            <auth-address>
+                <style face="normal" font="default" size="100%">Weill Medical College, Cornell
+                    University, 525 East 68th St, New York, NY 10021, USA.
+                    nkaltork@med.cornell.edu</style>
+            </auth-address>
+            <titles>
+                <title>
+                    <style face="normal" font="default" size="100%">Phase II proof-of-concept study
+                        of pazopanib monotherapy in treatment-naive patients with stage I/II
+                        resectable non-small-cell lung cancer</style>
+                </title>
+                <secondary-title>
+                    <style face="normal" font="default" size="100%">Journal of Clinical
+                        Oncology</style>
+                </secondary-title>
+                <alt-title>
+                    <style face="normal" font="default" size="100%">Journal of clinical oncology :
+                        official journal of the American Society of Clinical Oncology</style>
+                </alt-title>
+            </titles>
+            <periodical>
+                <full-title>
+                    <style face="normal" font="default" size="100%">Journal of Clinical
+                        Oncology</style>
+                </full-title>
+                <abbr-1>
+                    <style face="normal" font="default" size="100%">J. Clin. Oncol.</style>
+                </abbr-1>
+                <abbr-2>
+                    <style face="normal" font="default" size="100%">J Clin Oncol</style>
+                </abbr-2>
+            </periodical>
+            <pages>
+                <style face="normal" font="default" size="100%">3131-7</style>
+            </pages>
+            <volume>
+                <style face="normal" font="default" size="100%">28</style>
+            </volume>
+            <number>
+                <style face="normal" font="default" size="100%">19</style>
+            </number>
+            <edition>
+                <style face="normal" font="default" size="100%">2010/06/03</style>
+            </edition>
+            <keywords>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Administration, Oral</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Aged</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Aged, 80 and over</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Carcinoma, Non-Small-Cell Lung/
+                        drug therapy/genetics</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Diarrhea/chemically
+                        induced</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Drug Administration
+                        Schedule</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Fatigue/chemically
+                        induced</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Female</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Gene Expression
+                        Profiling</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Gene Expression Regulation,
+                        Neoplastic/drug effects</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Humans</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Hypertension/chemically
+                        induced</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Lung Neoplasms/ drug
+                        therapy/genetics</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Male</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Middle Aged</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Neoplasm Staging</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Pyrimidines/administration &amp;
+                        dosage/adverse effects/ therapeutic use</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Sulfonamides/administration
+                        &amp; dosage/adverse effects/ therapeutic use</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Treatment Outcome</style>
+                </keyword>
+            </keywords>
+            <dates>
+                <year>
+                    <style face="normal" font="default" size="100%">2010</style>
+                </year>
+                <pub-dates>
+                    <date>
+                        <style face="normal" font="default" size="100%">Jul 1</style>
+                    </date>
+                </pub-dates>
+            </dates>
+            <isbn>
+                <style face="normal" font="default" size="100%">1527-7755 (Electronic)&#xD;0732-183X
+                    (Linking)</style>
+            </isbn>
+            <accession-num>
+                <style face="normal" font="default" size="100%">20516450</style>
+            </accession-num>
+            <abstract>
+                <style face="normal" font="default" size="100%">PURPOSE: Patients with early-stage,
+                    resectable, non-small-cell lung cancer (NSCLC) are at risk for recurrent
+                    disease, and 5-year survival rates do not exceed 75%. Angiogenesis inhibitors
+                    have shown clinical activity in patients with late-stage NSCLC, raising the
+                    possibility that targeting the vascular endothelial growth factor pathway in
+                    earlier-stage disease may be beneficial. This proof-of-concept study examined
+                    safety and efficacy of short-term, preoperative pazopanib monotherapy in
+                    patients with operable stage I/II NSCLC. PATIENTS AND METHODS: Patients
+                    scheduled for resection received oral pazopanib 800 mg/d for 2 to 6 weeks
+                    preoperatively. Tumor response was measured by high-resolution computed
+                    tomography, permitting estimation of change in tumor volume and diameter.
+                    Gene-expression profiling was performed on 77 pre- and post-treatment lung
+                    samples from 34 patients. RESULTS: Of 35 patients enrolled, 33 (94%) had
+                    clinical stage I NSCLC and two (6%) had clinical stage II NSCLC. Median
+                    treatment duration was 16 days (range, 3 to 29 days). Thirty patients (86%)
+                    achieved tumor-volume reduction after pazopanib treatment. Two patients achieved
+                    tumor-volume reduction &gt; or = 50%, and three patients had partial response
+                    according to Response Evaluation Criteria in Solid Tumors. Pazopanib was
+                    generally well tolerated. The most common adverse events included grade 2
+                    hypertension, diarrhea, and fatigue. One patient developed pulmonary embolism 11
+                    days after surgery. Several pazopanib target genes and other angiogenic factors
+                    were dysregulated post-treatment. CONCLUSION: Short-duration pazopanib was
+                    generally well tolerated and demonstrated single-agent activity in patients with
+                    early-stage NSCLC. Several target genes were dysregulated after pazopanib
+                    treatment, validating target-specific response and indicating a persistent
+                    pazopanib effect on lung cancer tissue. Further clinical evaluation of pazopanib
+                    in NSCLC is planned.</style>
+            </abstract>
+            <notes>
+                <style face="normal" font="default" size="100%">Altorki, Nasser&#xD;Lane, Maureen
+                    E&#xD;Bauer, Thomas&#xD;Lee, Paul C&#xD;Guarino, Michael J&#xD;Pass,
+                    Harvey&#xD;Felip, Enriqueta&#xD;Peylan-Ramu, Nili&#xD;Gurpide,
+                    Alfonso&#xD;Grannis, Frederic W&#xD;Mitchell, John D&#xD;Tachdjian,
+                    Sabrina&#xD;Swann, R Suzanne&#xD;Huff, Anne&#xD;Roychowdhury, Debasish
+                    F&#xD;Reeves, Anthony&#xD;Ottesen, Lone H&#xD;Yankelevitz, David F&#xD;Clinical
+                    Trial, Phase II&#xD;Multicenter Study&#xD;Research Support, Non-U.S.
+                    Gov&apos;t&#xD;United States&#xD;J Clin Oncol. 2010 Jul 1;28(19):3131-7. Epub
+                    2010 Jun 1.</style>
+            </notes>
+            <urls/>
+            <electronic-resource-num>
+                <style face="normal" font="default" size="100%">10.1200/jco.2009.23.9749</style>
+            </electronic-resource-num>
+            <remote-database-provider>
+                <style face="normal" font="default" size="100%">NLM</style>
+            </remote-database-provider>
+            <language>
+                <style face="normal" font="default" size="100%">eng</style>
+            </language>
+        </record>
+        <record>
+            <database name="cummulative-April2011 Copy Copy.enl"
+                path="C:\Documents and Settings\alynch\Desktop\cummulative-April2011 Copy Copy.enl"
+                >cummulative-April2011 Copy Copy.enl</database>
+            <source-app name="EndNote" version="13.0">EndNote</source-app>
+            <rec-number>4610</rec-number>
+            <foreign-keys>
+                <key app="EN" db-id="tvdsrfez22saafe95sg5dfrrfvv2vrx09dx5">4610</key>
+            </foreign-keys>
+            <ref-type name="Journal Article">17</ref-type>
+            <contributors>
+                <authors>
+                    <author>
+                        <style face="normal" font="default" size="100%">Podoloff, D. A.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Ball, D. W.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Ben-Josef, E.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Benson, A. B., 3rd</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Cohen, S. J.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Coleman, R. E.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Delbeke, D.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Ho, M.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Ilson, D. H.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Kalemkerian, G. P.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Lee, R. J.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Loeffler, J. S.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Macapinlac, H. A.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Morgan, R. J., Jr.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Siegel, B. A.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Singhal, S.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Tyler, D. S.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Wong, R. J.</style>
+                    </author>
+                </authors>
+            </contributors>
+            <auth-address>
+                <style face="normal" font="default" size="100%">The University of Texas, M.D.
+                    Anderson Cancer Center, Houston, Texas, USA.</style>
+            </auth-address>
+            <titles>
+                <title>
+                    <style face="normal" font="default" size="100%">NCCN task force: clinical
+                        utility of PET in a variety of tumor types</style>
+                </title>
+                <secondary-title>
+                    <style face="normal" font="default" size="100%">J Natl Compr Canc Netw</style>
+                </secondary-title>
+                <alt-title>
+                    <style face="normal" font="default" size="100%">Journal of the National
+                        Comprehensive Cancer Network : JNCCN</style>
+                </alt-title>
+            </titles>
+            <periodical>
+                <full-title>
+                    <style face="normal" font="default" size="100%">J Natl Compr Canc Netw</style>
+                </full-title>
+            </periodical>
+            <alt-periodical>
+                <full-title>
+                    <style face="normal" font="default" size="100%">Journal of the National
+                        Comprehensive Cancer Network : JNCCN</style>
+                </full-title>
+                <abbr-1>
+                    <style face="normal" font="default" size="100%">J Natl Compr Canc Netw</style>
+                </abbr-1>
+                <abbr-2>
+                    <style face="normal" font="default" size="100%">J Natl Compr Canc Netw</style>
+                </abbr-2>
+            </alt-periodical>
+            <pages>
+                <style face="normal" font="default" size="100%">S1-26</style>
+            </pages>
+            <volume>
+                <style face="normal" font="default" size="100%">7 Suppl 2</style>
+            </volume>
+            <edition>
+                <style face="normal" font="default" size="100%">2009/08/22</style>
+            </edition>
+            <keywords>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Fluorodeoxyglucose F18/
+                        diagnostic use</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Humans</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Neoplasms/classification/
+                        radionuclide imaging/therapy</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Positron-Emission Tomography/
+                        utilization</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Prognosis</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Radiopharmaceuticals/ diagnostic
+                        use</style>
+                </keyword>
+            </keywords>
+            <dates>
+                <year>
+                    <style face="normal" font="default" size="100%">2009</style>
+                </year>
+                <pub-dates>
+                    <date>
+                        <style face="normal" font="default" size="100%">Jun</style>
+                    </date>
+                </pub-dates>
+            </dates>
+            <isbn>
+                <style face="normal" font="default" size="100%">1540-1405 (Print)&#xD;1540-1405
+                    (Linking)</style>
+            </isbn>
+            <accession-num>
+                <style face="normal" font="default" size="100%">19555588</style>
+            </accession-num>
+            <abstract>
+                <style face="normal" font="default" size="100%">Use of PET is widespread and
+                    increasing in the United States, mainly for oncologic applications. In November
+                    2006, the National Comprehensive Cancer Network (NCCN) gathered a panel of
+                    experts to review the literature and develop clinical recommendations for using
+                    PET scans in lymphoma and non-small cell lung, breast, and colorectal cancers.
+                    However, because its use is not restricted to these diseases, and evidence is
+                    accumulating for its application in other types of cancers, NCCN convened a
+                    second meeting in December 2008 to expand on the initial report. A
+                    multidisciplinary panel met to discuss the current data on PET application for
+                    various tumor types, including genitourinary, gynecologic, pancreatic,
+                    hepatobiliary, thyroid, brain, small cell lung, gastric, and esophageal cancers,
+                    and sarcoma and myeloma. This report summarizes the proceedings of this meeting,
+                    including discussions of the background of PET, the role of PET in oncology,
+                    principles of PET use, emerging applications, and possible future
+                    developments.</style>
+            </abstract>
+            <notes>
+                <style face="normal" font="default" size="100%">Podoloff, Donald A&#xD;Ball, Douglas
+                    W&#xD;Ben-Josef, Edgar&#xD;Benson, Al B 3rd&#xD;Cohen, Steven J&#xD;Coleman, R
+                    Edward&#xD;Delbeke, Dominique&#xD;Ho, Maria&#xD;Ilson, David H&#xD;Kalemkerian,
+                    Gregory P&#xD;Lee, Richard J&#xD;Loeffler, Jay S&#xD;Macapinlac, Homer
+                    A&#xD;Morgan, Robert J Jr&#xD;Siegel, Barry Alan&#xD;Singhal, Seema&#xD;Tyler,
+                    Douglas S&#xD;Wong, Richard J&#xD;Research Support, N.I.H.,
+                    Extramural&#xD;Research Support, Non-U.S. Gov&apos;t&#xD;Review&#xD;United
+                    States&#xD;J Natl Compr Canc Netw. 2009 Jun;7 Suppl 2:S1-26.</style>
+            </notes>
+            <urls/>
+            <remote-database-provider>
+                <style face="normal" font="default" size="100%">NLM</style>
+            </remote-database-provider>
+            <language>
+                <style face="normal" font="default" size="100%">eng</style>
+            </language>
+        </record>
+        <record>
+            <database name="cummulative-April2011 Copy Copy.enl"
+                path="C:\Documents and Settings\alynch\Desktop\cummulative-April2011 Copy Copy.enl"
+                >cummulative-April2011 Copy Copy.enl</database>
+            <source-app name="EndNote" version="13.0">EndNote</source-app>
+            <rec-number>4615</rec-number>
+            <foreign-keys>
+                <key app="EN" db-id="tvdsrfez22saafe95sg5dfrrfvv2vrx09dx5">4615</key>
+            </foreign-keys>
+            <ref-type name="Journal Article">17</ref-type>
+            <contributors>
+                <authors>
+                    <author>
+                        <style face="normal" font="default" size="100%">Chen, Yi-Jen</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Kernstine, Kemp H.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Shibata, Stephen</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Dean, Lim</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Smith, David D.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Tang, Martin </style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Liu, An </style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Pezner, Richard D.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Wong, Jeffrey Y. C.</style>
+                    </author>
+                </authors>
+            </contributors>
+            <titles>
+                <title>
+                    <style face="normal" font="default" size="100%">Image-guided Radiotherapy Of
+                        Esophageal Cancer By Helical Tomotherapy: Acute Toxicity And Preliminary
+                        Clinical Outcome</style>
+                </title>
+                <secondary-title>
+                    <style face="normal" font="default" size="100%">J Thorac Dis</style>
+                </secondary-title>
+            </titles>
+            <pages>
+                <style face="normal" font="default" size="100%">11-16</style>
+            </pages>
+            <volume>
+                <style face="normal" font="default" size="100%">1</style>
+            </volume>
+            <number>
+                <style face="normal" font="default" size="100%">1</style>
+            </number>
+            <dates>
+                <year>
+                    <style face="normal" font="default" size="100%">2009</style>
+                </year>
+            </dates>
+            <urls/>
+            <custom1>
+                <style face="normal" font="default" size="100%">Mannual entered -- June 2011</style>
+            </custom1>
+        </record>
+        <record>
+            <database name="cummulative-April2011 Copy Copy.enl"
+                path="C:\Documents and Settings\alynch\Desktop\cummulative-April2011 Copy Copy.enl"
+                >cummulative-April2011 Copy Copy.enl</database>
+            <source-app name="EndNote" version="13.0">EndNote</source-app>
+            <rec-number>1485</rec-number>
+            <foreign-keys>
+                <key app="EN" db-id="tvdsrfez22saafe95sg5dfrrfvv2vrx09dx5">1485</key>
+                <key app="ENWeb" db-id="SpvuHwrtqggAACRgWhA">1629</key>
+            </foreign-keys>
+            <ref-type name="Journal Article">17</ref-type>
+            <contributors>
+                <authors>
+                    <author>
+                        <style face="normal" font="default" size="100%">Thompson, K. J.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Kernstine, K. H.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Grannis, F. W., Jr.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Mojica, P.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Falabella, A.</style>
+                    </author>
+                </authors>
+            </contributors>
+            <auth-address>
+                <style face="normal" font="default" size="100%">City of Hope, Duarte, California
+                    91010, USA.</style>
+            </auth-address>
+            <titles>
+                <title>
+                    <style face="normal" font="default" size="100%">Treatment of chylothorax by
+                        robotic thoracic duct ligation</style>
+                </title>
+                <secondary-title>
+                    <style face="normal" font="default" size="100%">Ann Thorac Surg</style>
+                </secondary-title>
+            </titles>
+            <periodical>
+                <full-title>
+                    <style face="normal" font="default" size="100%">Annals of Thoracic
+                        Surgery</style>
+                </full-title>
+                <abbr-1>
+                    <style face="normal" font="default" size="100%">Ann. Thorac. Surg.</style>
+                </abbr-1>
+                <abbr-2>
+                    <style face="normal" font="default" size="100%">Ann Thorac Surg</style>
+                </abbr-2>
+            </periodical>
+            <pages>
+                <style face="normal" font="default" size="100%">334-6</style>
+            </pages>
+            <volume>
+                <style face="normal" font="default" size="100%">85</style>
+            </volume>
+            <number>
+                <style face="normal" font="default" size="100%">1</style>
+            </number>
+            <keywords>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Adult</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%"
+                        >Chylothorax/etiology/surgery</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Follow-Up Studies</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Humans</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Ligation/instrumentation</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Lung Neoplasms/
+                        secondary/surgery</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Male</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Neoplasms, Germ Cell and
+                        Embryonal/ secondary/therapy</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Orchiectomy/methods</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Pneumonectomy/ adverse
+                        effects/methods</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Risk Assessment</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Robotics</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Severity of Illness
+                        Index</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Testicular
+                        Neoplasms/pathology/therapy</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Thoracic Duct/ surgery</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Treatment Outcome</style>
+                </keyword>
+            </keywords>
+            <dates>
+                <year>
+                    <style face="normal" font="default" size="100%">2008</style>
+                </year>
+                <pub-dates>
+                    <date>
+                        <style face="normal" font="default" size="100%">Jan</style>
+                    </date>
+                </pub-dates>
+            </dates>
+            <isbn>
+                <style face="normal" font="default" size="100%">1552-6259 (Electronic)</style>
+            </isbn>
+            <accession-num>
+                <style face="normal" font="default" size="100%">18154843</style>
+            </accession-num>
+            <abstract>
+                <style face="normal" font="default" size="100%">This is the first report describing
+                    the use of robotic technology for the treatment of chylothorax. We present a
+                    22-year-old with mixed embryonal cell and seminoma germ cell cancer refractory
+                    to medical and surgical treatment. The patient had rising markers and a growing
+                    left lower lung lobe metastasis. After left lower lobectomy, left-sided
+                    chylothorax developed. Conservative management failed, and a robotic right-sided
+                    thoracic duct ligation was performed. Other treatment options are
+                    reviewed.</style>
+            </abstract>
+            <work-type>
+                <style face="normal" font="default" size="100%">Case report</style>
+            </work-type>
+            <urls/>
+            <custom1>
+                <style face="normal" font="default" size="100%">PubMed 2009/04/</style>
+            </custom1>
+            <language>
+                <style face="normal" font="default" size="100%">eng</style>
+            </language>
+        </record>
+        <record>
+            <database name="cummulative-April2011 Copy Copy.enl"
+                path="C:\Documents and Settings\alynch\Desktop\cummulative-April2011 Copy Copy.enl"
+                >cummulative-April2011 Copy Copy.enl</database>
+            <source-app name="EndNote" version="13.0">EndNote</source-app>
+            <rec-number>4631</rec-number>
+            <foreign-keys>
+                <key app="EN" db-id="tvdsrfez22saafe95sg5dfrrfvv2vrx09dx5">4631</key>
+            </foreign-keys>
+            <ref-type name="Journal Article">17</ref-type>
+            <contributors>
+                <authors>
+                    <author>
+                        <style face="normal" font="default" size="100%">Lin, R. J.</style>
+                    </author>
+                </authors>
+            </contributors>
+            <titles>
+                <title>
+                    <style face="normal" font="default" size="100%">RNA -protein interaction
+                        protocols. Preface</style>
+                </title>
+                <secondary-title>
+                    <style face="normal" font="default" size="100%">Methods in Molecular
+                        Biology</style>
+                </secondary-title>
+            </titles>
+            <periodical>
+                <full-title>
+                    <style face="normal" font="default" size="100%">Methods in Molecular
+                        Biology</style>
+                </full-title>
+                <abbr-1>
+                    <style face="normal" font="default" size="100%">Methods Mol. Biol.</style>
+                </abbr-1>
+                <abbr-2>
+                    <style face="normal" font="default" size="100%">Methods Mol Biol</style>
+                </abbr-2>
+            </periodical>
+            <pages>
+                <style face="normal" font="default" size="100%">v-vii</style>
+            </pages>
+            <volume>
+                <style face="normal" font="default" size="100%">488</style>
+            </volume>
+            <edition>
+                <style face="normal" font="default" size="100%">2008/11/07</style>
+            </edition>
+            <keywords>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Protein Binding</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%"
+                        >Proteins/chemistry/*metabolism</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%"
+                        >RNA/chemistry/*metabolism</style>
+                </keyword>
+            </keywords>
+            <dates>
+                <year>
+                    <style face="normal" font="default" size="100%">2008</style>
+                </year>
+            </dates>
+            <isbn>
+                <style face="normal" font="default" size="100%">1064-3745 (Print)&#xD;1064-3745
+                    (Linking)</style>
+            </isbn>
+            <accession-num>
+                <style face="normal" font="default" size="100%">18985949</style>
+            </accession-num>
+            <notes>
+                <style face="normal" font="default" size="100%">Lin,
+                    Ren-Jang&#xD;Introductory&#xD;United States&#xD;Methods in molecular biology
+                    (Clifton, N.J.)&#xD;Methods Mol Biol. 2008;488:v-vii.</style>
+            </notes>
+            <urls>
+                <related-urls>
+                    <url>
+                        <style face="normal" font="default" size="100%"
+                            >http://www.ncbi.nlm.nih.gov/pubmed/18985949</style>
+                    </url>
+                </related-urls>
+            </urls>
+            <custom1>
+                <style face="normal" font="default" size="100%">Missing CCSG pubs -- June
+                    2011</style>
+            </custom1>
+            <language>
+                <style face="normal" font="default" size="100%">eng</style>
+            </language>
+        </record>
+        <record>
+            <database name="cummulative-April2011 Copy Copy.enl"
+                path="C:\Documents and Settings\alynch\Desktop\cummulative-April2011 Copy Copy.enl"
+                >cummulative-April2011 Copy Copy.enl</database>
+            <source-app name="EndNote" version="13.0">EndNote</source-app>
+            <rec-number>1307</rec-number>
+            <foreign-keys>
+                <key app="EN" db-id="tvdsrfez22saafe95sg5dfrrfvv2vrx09dx5">1307</key>
+                <key app="ENWeb" db-id="SpvuHwrtqggAACRgWhA">1945</key>
+            </foreign-keys>
+            <ref-type name="Journal Article">17</ref-type>
+            <contributors>
+                <authors>
+                    <author>
+                        <style face="normal" font="default" size="100%">Armenian, S. H.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Bhatia, S.</style>
+                    </author>
+                </authors>
+            </contributors>
+            <auth-address>
+                <style face="normal" font="default" size="100%">Division of Hematology/Oncology,
+                    Childrens Hospital Los Angeles, Los Angeles, CA, United States&#xD;Division of
+                    Population Sciences, City of Hope National Medical Center, Duarte, CA, United
+                    States</style>
+            </auth-address>
+            <titles>
+                <title>
+                    <style face="normal" font="default" size="100%">Cardiovascular disease after
+                        hematopoietic cell transplantation - Lessons learned</style>
+                </title>
+                <secondary-title>
+                    <style face="normal" font="default" size="100%">Haematologica</style>
+                </secondary-title>
+            </titles>
+            <periodical>
+                <full-title>
+                    <style face="normal" font="default" size="100%">Haematologica</style>
+                </full-title>
+                <abbr-1>
+                    <style face="normal" font="default" size="100%">Haematologica</style>
+                </abbr-1>
+                <abbr-2>
+                    <style face="normal" font="default" size="100%">Haematologica</style>
+                </abbr-2>
+            </periodical>
+            <pages>
+                <style face="normal" font="default" size="100%">1132-1136</style>
+            </pages>
+            <volume>
+                <style face="normal" font="default" size="100%">93</style>
+            </volume>
+            <number>
+                <style face="normal" font="default" size="100%">8</style>
+            </number>
+            <keywords>
+                <keyword>
+                    <style face="normal" font="default" size="100%">dipeptidyl carboxypeptidase
+                        inhibitor</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">artery disease</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">cardiomyopathy</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">cardiovascular disease</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">case control study</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">cerebrovascular disease</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">comorbidity</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">congestive heart failure</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">coronary artery disease</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">counseling</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">diabetes mellitus</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">dyslipidemia</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">echocardiography</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">editorial</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">health education</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">health promotion</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">heart muscle conduction
+                        disturbance</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">hematopoietic stem cell
+                        transplantation</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">human</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">hypertension</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">obesity</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">outcome assessment</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">pericarditis</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">population</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">practice guideline</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">prevalence</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">retrospective study</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">risk</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">risk factor</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">valvular heart disease</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Anthracyclines</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Cardiomyopathies</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Cardiovascular Diseases</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Hematopoietic Stem Cell
+                        Transplantation</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Humans</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Neoplasms</style>
+                </keyword>
+            </keywords>
+            <dates>
+                <year>
+                    <style face="normal" font="default" size="100%">2008</style>
+                </year>
+                <pub-dates>
+                    <date>
+                        <style face="normal" font="default" size="100%">Aug</style>
+                    </date>
+                </pub-dates>
+            </dates>
+            <accession-num>
+                <style face="normal" font="default" size="100%">10.3324/haematol.13514</style>
+            </accession-num>
+            <notes>
+                <style face="normal" font="default" size="100%">03906078 (ISSN)&#xD;Export Date: 25
+                    March 2009&#xD;Source: Scopus&#xD;CODEN: HAEMA&#xD;doi:
+                    10.3324/haematol.13514&#xD;Language of Original Document:
+                    English&#xD;Correspondence Address: Bhatia, S.; Division of Population Sciences;
+                    City of Hope National Medical Center Duarte, CA, United States; email:
+                    sbhatia@coh.org&#xD;Chemicals/CAS: Anthracyclines</style>
+            </notes>
+            <work-type>
+                <style face="normal" font="default" size="100%">Editorial</style>
+            </work-type>
+            <urls>
+                <related-urls>
+                    <url>
+                        <style face="normal" font="default" size="100%"
+                            >http://www.scopus.com/scopus/inward/record.url?eid=2-s2.0-48749088400&amp;partnerID=40
+                        </style>
+                    </url>
+                </related-urls>
+            </urls>
+            <custom1>
+                <style face="normal" font="default" size="100%">Scopus/</style>
+            </custom1>
+            <electronic-resource-num>
+                <style face="normal" font="default" size="100%">10.3324/haematol.13514</style>
+            </electronic-resource-num>
+        </record>
+        <record>
+            <database name="cummulative-April2011 Copy Copy.enl"
+                path="C:\Documents and Settings\alynch\Desktop\cummulative-April2011 Copy Copy.enl"
+                >cummulative-April2011 Copy Copy.enl</database>
+            <source-app name="EndNote" version="13.0">EndNote</source-app>
+            <rec-number>4613</rec-number>
+            <foreign-keys>
+                <key app="EN" db-id="tvdsrfez22saafe95sg5dfrrfvv2vrx09dx5">4613</key>
+            </foreign-keys>
+            <ref-type name="Journal Article">17</ref-type>
+            <contributors>
+                <authors>
+                    <author>
+                        <style face="normal" font="default" size="100%">Wang, J.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Valo, Z.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Smith, D.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Singer-Sam, J.</style>
+                    </author>
+                </authors>
+            </contributors>
+            <auth-address>
+                <style face="normal" font="default" size="100%">Division of Biology, Beckman
+                    Research Institute, City of Hope National Medical Center, Duarte, California,
+                    United States of America.</style>
+            </auth-address>
+            <titles>
+                <title>
+                    <style face="normal" font="default" size="100%">Monoallelic expression of
+                        multiple genes in the CNS</style>
+                </title>
+                <secondary-title>
+                    <style face="normal" font="default" size="100%">PLoS One</style>
+                </secondary-title>
+            </titles>
+            <pages>
+                <style face="normal" font="default" size="100%">e1293</style>
+            </pages>
+            <volume>
+                <style face="normal" font="default" size="100%">2</style>
+            </volume>
+            <number>
+                <style face="normal" font="default" size="100%">12</style>
+            </number>
+            <edition>
+                <style face="normal" font="default" size="100%">2007/12/13</style>
+            </edition>
+            <keywords>
+                <keyword>
+                    <style face="normal" font="default" size="100%">*Alleles</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Animals</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Central Nervous
+                        System/*metabolism</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">*Gene Expression</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Humans</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Male</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Mice</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Mice, Inbred C57BL</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Oligonucleotide Array Sequence
+                        Analysis</style>
+                </keyword>
+            </keywords>
+            <dates>
+                <year>
+                    <style face="normal" font="default" size="100%">2007</style>
+                </year>
+            </dates>
+            <isbn>
+                <style face="normal" font="default" size="100%">1932-6203 (Electronic)&#xD;1932-6203
+                    (Linking)</style>
+            </isbn>
+            <accession-num>
+                <style face="normal" font="default" size="100%">18074017</style>
+            </accession-num>
+            <abstract>
+                <style face="normal" font="default" size="100%">The inheritance pattern of a number
+                    of major genetic disorders suggests the possible involvement of genes that are
+                    expressed from one allele and silent on the other, but such genes are difficult
+                    to detect. Since DNA methylation in regulatory regions is often a mark of gene
+                    silencing, we modified existing microarray-based assays to detect both
+                    methylated and unmethylated DNA sequences in the same sample, a variation we
+                    term the MAUD assay. We probed a 65 Mb region of mouse Chr 7 for gene-associated
+                    sequences that show two distinct DNA methylation patterns in the mouse CNS.
+                    Selected genes were then tested for allele-specific expression in clonal neural
+                    stem cell lines derived from reciprocal F(1) (C57BL/6xJF1) hybrid mice. In
+                    addition, using a separate approach, we directly analyzed allele-specific
+                    expression of a group of genes interspersed within clusters of OlfR genes, since
+                    the latter are subject to allelic exclusion. Altogether, of the 500 known genes
+                    in the chromosomal region surveyed, five show monoallelic expression, four
+                    identified by the MAUD assay (Agc1, p (pink-eyed dilution), P4ha3 and Thrsp),
+                    and one by its proximity to OlfR genes (Trim12). Thrsp (thyroid hormone
+                    responsive SPOT14 homolog) is expressed in hippocampus, but the human protein
+                    homolog, S14, has also been implicated in aggressive breast cancer. Monoallelic
+                    expression of the five genes is not coordinated at a chromosome-wide level, but
+                    rather regulated at individual loci. Taken together, our results suggest that at
+                    least 1% of previously untested genes are subject to allelic exclusion, and
+                    demonstrate a dual approach to expedite their identification.</style>
+            </abstract>
+            <notes>
+                <style face="normal" font="default" size="100%">Wang, Jinhui&#xD;Valo,
+                    Zuzana&#xD;Smith, David&#xD;Singer-Sam, Judith&#xD;R21 MH073754/MH/NIMH NIH
+                    HHS/United States&#xD;Research Support, N.I.H., Extramural&#xD;United
+                    States&#xD;PloS one&#xD;PLoS One. 2007 Dec 12;2(12):e1293.</style>
+            </notes>
+            <urls>
+                <related-urls>
+                    <url>
+                        <style face="normal" font="default" size="100%"
+                            >http://www.ncbi.nlm.nih.gov/pubmed/18074017</style>
+                    </url>
+                </related-urls>
+            </urls>
+            <custom2>
+                <style face="normal" font="default" size="100%">2100171</style>
+            </custom2>
+            <electronic-resource-num>
+                <style face="normal" font="default" size="100%">10.1371/journal.pone.0001293</style>
+            </electronic-resource-num>
+            <language>
+                <style face="normal" font="default" size="100%">eng</style>
+            </language>
+        </record>
+        <record>
+            <database name="cummulative-April2011 Copy Copy.enl"
+                path="C:\Documents and Settings\alynch\Desktop\cummulative-April2011 Copy Copy.enl"
+                >cummulative-April2011 Copy Copy.enl</database>
+            <source-app name="EndNote" version="13.0">EndNote</source-app>
+            <rec-number>4611</rec-number>
+            <foreign-keys>
+                <key app="EN" db-id="tvdsrfez22saafe95sg5dfrrfvv2vrx09dx5">4611</key>
+            </foreign-keys>
+            <ref-type name="Journal Article">17</ref-type>
+            <contributors>
+                <authors>
+                    <author>
+                        <style face="normal" font="default" size="100%">Podoloff, D. A.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Advani, R. H.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Allred, C.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Benson, A. B., 3rd</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Brown, E.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Burstein, H. J.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Carlson, R. W.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Coleman, R. E.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Czuczman, M. S.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Delbeke, D.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Edge, S. B.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Ettinger, D. S.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Grannis, F. W., Jr.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Hillner, B. E.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Hoffman, J. M.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Kiel, K.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Komaki, R.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Larson, S. M.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Mankoff, D. A.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Rosenzweig, K. E.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Skibber, J. M.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Yahalom, J.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Yu, J. M.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Zelenetz, A. D.</style>
+                    </author>
+                </authors>
+            </contributors>
+            <titles>
+                <title>
+                    <style face="normal" font="default" size="100%">NCCN task force report: positron
+                        emission tomography (PET)/computed tomography (CT) scanning in
+                        cancer</style>
+                </title>
+                <secondary-title>
+                    <style face="normal" font="default" size="100%">J Natl Compr Canc Netw</style>
+                </secondary-title>
+                <alt-title>
+                    <style face="normal" font="default" size="100%">Journal of the National
+                        Comprehensive Cancer Network : JNCCN</style>
+                </alt-title>
+            </titles>
+            <periodical>
+                <full-title>
+                    <style face="normal" font="default" size="100%">J Natl Compr Canc Netw</style>
+                </full-title>
+            </periodical>
+            <alt-periodical>
+                <full-title>
+                    <style face="normal" font="default" size="100%">Journal of the National
+                        Comprehensive Cancer Network : JNCCN</style>
+                </full-title>
+                <abbr-1>
+                    <style face="normal" font="default" size="100%">J Natl Compr Canc Netw</style>
+                </abbr-1>
+                <abbr-2>
+                    <style face="normal" font="default" size="100%">J Natl Compr Canc Netw</style>
+                </abbr-2>
+            </alt-periodical>
+            <pages>
+                <style face="normal" font="default" size="100%">S1-S22; quiz S23-2</style>
+            </pages>
+            <volume>
+                <style face="normal" font="default" size="100%">5 Suppl 1</style>
+            </volume>
+            <edition>
+                <style face="normal" font="default" size="100%">2007/05/19</style>
+            </edition>
+            <keywords>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Breast
+                        Neoplasms/diagnosis/therapy</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Carcinoma, Non-Small-Cell
+                        Lung/diagnosis/therapy</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Colorectal
+                        Neoplasms/diagnosis/therapy</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Fluorodeoxyglucose
+                        F18/diagnostic use</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Humans</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%"
+                        >Lymphoma/diagnosis/pathology/therapy</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Neoplasm Staging</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Neoplasms/ diagnosis</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Positron-Emission
+                        Tomography</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Prognosis</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Tomography, X-Ray
+                        Computed</style>
+                </keyword>
+            </keywords>
+            <dates>
+                <year>
+                    <style face="normal" font="default" size="100%">2007</style>
+                </year>
+                <pub-dates>
+                    <date>
+                        <style face="normal" font="default" size="100%">May</style>
+                    </date>
+                </pub-dates>
+            </dates>
+            <isbn>
+                <style face="normal" font="default" size="100%">1540-1405 (Print)&#xD;1540-1405
+                    (Linking)</style>
+            </isbn>
+            <accession-num>
+                <style face="normal" font="default" size="100%">17509259</style>
+            </accession-num>
+            <abstract>
+                <style face="normal" font="default" size="100%">The use of positron emission
+                    tomography (PET) is increasing rapidly in the United States, with the most
+                    common use of PET scanning related to oncology. It is especially useful in the
+                    staging and management of lymphoma, lung cancer, and colorectal cancer,
+                    according to a panel of expert radiologists, surgeons, radiation oncologists,
+                    nuclear medicine physicians, medical oncologists, and general internists
+                    convened in November 2006 by the National Comprehensive Cancer Network. The Task
+                    Force was charged with reviewing existing data and developing clinical
+                    recommendations for the use of PET scans in the evaluation and management of
+                    breast cancer, colon cancer, non-small cell lung cancer, and lymphoma. This
+                    report summarizes the proceedings of this meeting, including discussions of the
+                    background of PET, possible future developments, and the role of PET in
+                    oncology.</style>
+            </abstract>
+            <notes>
+                <style face="normal" font="default" size="100%">Podoloff, Donald A&#xD;Advani,
+                    Ranjana H&#xD;Allred, Craig&#xD;Benson, Al B 3rd&#xD;Brown,
+                    Elizabeth&#xD;Burstein, Harold J&#xD;Carlson, Robert W&#xD;Coleman, R
+                    Edward&#xD;Czuczman, Myron S&#xD;Delbeke, Dominique&#xD;Edge, Stephen
+                    B&#xD;Ettinger, David S&#xD;Grannis, Frederic W Jr&#xD;Hillner, Bruce
+                    E&#xD;Hoffman, John M&#xD;Kiel, Krystyna&#xD;Komaki, Ritsuko&#xD;Larson, Steven
+                    M&#xD;Mankoff, David A&#xD;Rosenzweig, Kenneth E&#xD;Skibber, John
+                    M&#xD;Yahalom, Joachim&#xD;Yu, Jq Michael&#xD;Zelenetz, Andrew D&#xD;United
+                    States&#xD;J Natl Compr Canc Netw. 2007 May;5 Suppl 1:S1-S22; quiz
+                    S23-2.</style>
+            </notes>
+            <urls/>
+            <remote-database-provider>
+                <style face="normal" font="default" size="100%">NLM</style>
+            </remote-database-provider>
+            <language>
+                <style face="normal" font="default" size="100%">eng</style>
+            </language>
+        </record>
+        <record>
+            <database name="cummulative-April2011 Copy Copy.enl"
+                path="C:\Documents and Settings\alynch\Desktop\cummulative-April2011 Copy Copy.enl"
+                >cummulative-April2011 Copy Copy.enl</database>
+            <source-app name="EndNote" version="13.0">EndNote</source-app>
+            <rec-number>4606</rec-number>
+            <foreign-keys>
+                <key app="EN" db-id="tvdsrfez22saafe95sg5dfrrfvv2vrx09dx5">4606</key>
+            </foreign-keys>
+            <ref-type name="Journal Article">17</ref-type>
+            <contributors>
+                <authors>
+                    <author>
+                        <style face="normal" font="default" size="100%">Anderson, C. A.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Hellan, M.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Falebella, A.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Lau, C. S.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Grannis Jr, F. W.</style>
+                    </author>
+                    <author>
+                        <style face="normal" font="default" size="100%">Kernstine, K. H.</style>
+                    </author>
+                </authors>
+            </contributors>
+            <auth-address>
+                <style face="normal" font="default" size="100%">Department of Surgical Oncology,
+                    City of Hope, Duarte, CA, United States&#xD;Department of Anesthesia, City of
+                    Hope, Duarte, CA, United States&#xD;Department of Urologic Oncology, City of
+                    Hope, Duarte, CA, United States&#xD;Department of Thoracic Surgery, City of
+                    Hope, Duarte, CA, United States&#xD;Department of Thoracic Surgery, City of
+                    Hope, Beckman Research Institute, 1500 Duarte Road, Duarte, CA 91010, United
+                    States&#xD;Kernstine, K.H.; Department of Thoracic Surgery, City of Hope,
+                    Beckman Research Institute, 1500 Duarte Road, Duarte, CA 91010, United States;
+                    email: kkernstine@coh.org</style>
+            </auth-address>
+            <titles>
+                <title>
+                    <style face="normal" font="default" size="100%">Robotic-assisted lung resection
+                        for malignant disease</style>
+                </title>
+                <secondary-title>
+                    <style face="normal" font="default" size="100%">Innovations: Technology and
+                        Techniques in Cardiothoracic and Vascular Surgery</style>
+                </secondary-title>
+                <alt-title>
+                    <style face="normal" font="default" size="100%">Innov. Technol. Tech.
+                        Cardiothorac. Vasc. Surg.</style>
+                </alt-title>
+            </titles>
+            <pages>
+                <style face="normal" font="default" size="100%">254-258</style>
+            </pages>
+            <volume>
+                <style face="normal" font="default" size="100%">2</style>
+            </volume>
+            <number>
+                <style face="normal" font="default" size="100%">5</style>
+            </number>
+            <keywords>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Lung cancer</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Minimally invasive lung
+                        resection</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Robotic lobectomy</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">Robotic technology</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">adult</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">aged</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">article</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">bleeding</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">bronchoscopy</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">cancer recurrence</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">cancer surgery</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">clinical article</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">feasibility study</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">female</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">follow up</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">heart atrium
+                        fibrillation</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">human</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">human tissue</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">intensive care unit</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">length of stay</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">lung lobectomy</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">lung non small cell
+                        cancer</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">lung resection</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">lymph node</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">male</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">mediastinoscopy</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">morbidity</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">operation duration</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">pneumonia</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">priority journal</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">retrospective study</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">robotics</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">statistical significance</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">surgical mortality</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">surgical technique</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">tube</style>
+                </keyword>
+                <keyword>
+                    <style face="normal" font="default" size="100%">tumor volume</style>
+                </keyword>
+            </keywords>
+            <dates>
+                <year>
+                    <style face="normal" font="default" size="100%">2007</style>
+                </year>
+            </dates>
+            <isbn>
+                <style face="normal" font="default" size="100%">15569845</style>
+            </isbn>
+            <abstract>
+                <style face="normal" font="default" size="100%">OBJECTIVE: There have been few
+                    reports of the use of robotic surgery to resect lung malignancies. Feasibility
+                    and safety of robotic lung resection for malignant lung lesions will be assessed
+                    by performing a retrospective analysis. METHODS: Between September 2004 and
+                    November 2006, 21 patients (11 male and 10 female patients) underwent robotic
+                    lung resection. Twenty resections were performed for primary nonsmall cell lung
+                    cancer and two for metastatic lesions. One patient had bilateral resections for
+                    two primary tumors. Fourteen lobectomies, five segementectomies, one wedge
+                    resection, and two bilobectomies were performed. Seventy-two percent of
+                    operative procedures included mediastinoscopy and/or bronchoscopy at the time of
+                    resection. RESULTS: Thirty-day mortality and conversion rate was 0%. The median
+                    operating room time and estimated blood loss was 3.6 hours and 100 mL,
+                    respectively. The median intensive care unit and total length of hospital stays
+                    were 2 and 4 days, respectively. Chest tubes were removed after a median of 2.0
+                    days. The complication rate was 27%, which included atrial fibrillation, need
+                    for postoperative bronchoscopy, and pneumonia. The median tumor size and number
+                    of lymph nodes harvested was 2.3 cm and 16, respectively. All resection margins
+                    were negative. Median follow-up time was 9.8 months, with no local recurrences
+                    at this time. CONCLUSION: Robotic lung resection appears safe and feasible and
+                    allows for significant lymph node retrieval, offers short hospital stays and low
+                    morbidity for patients undergoing surgical resection of lung malignancies.
+                    Future studies are needed to define the role of robotic surgery in lung cancer
+                    treatment. © 2007 Lippincott Williams &amp; Wilkins, Inc.</style>
+            </abstract>
+            <notes>
+                <style face="normal" font="default" size="100%">Export Date: 8 June 2011&#xD;Source:
+                    Scopus&#xD;Language of Original Document: English</style>
+            </notes>
+            <urls>
+                <related-urls>
+                    <url>
+                        <style face="normal" font="default" size="100%"
+                            >http://www.scopus.com/inward/record.url?eid=2-s2.0-37349094036&amp;partnerID=40&amp;md5=8c825d41c8c61db81c674a4338909781</style>
+                    </url>
+                </related-urls>
+            </urls>
+            <electronic-resource-num>
+                <style face="normal" font="default" size="100%">10.1097/IMI.0b013e31815e52f1</style>
+            </electronic-resource-num>
+        </record>
+    </records>
+</xml>

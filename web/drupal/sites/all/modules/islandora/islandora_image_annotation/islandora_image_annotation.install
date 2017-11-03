@@ -1,0 +1,82 @@
+<?php
+
+/**
+ * @file
+ * islandora_image_annotation.install
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * @see islandora_image_annotation_islandora_required_objects()
+ */
+function islandora_image_annotation_install() {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  // Install solution pack object(s).
+  islandora_install_solution_pack('islandora_image_annotation');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_image_annotation_uninstall() {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  $variables = array(
+    'islandora_image_annotation_solr_field_genre',
+    'islandora_image_annotation_solr_field_title',
+    'islandora_image_annotation_solr_field_type',
+    'islandora_image_annotation_use_title_vocabulary',
+    'islandora_image_annotation_stroke_width',
+    'islandora_image_annotation_enforce_taxonomy',
+    'islandora_image_annotation_mappings',
+    'islandora_image_annotation_choose_color',
+  );
+  array_walk($variables, 'variable_del');
+  // Uninstall callback.
+  islandora_install_solution_pack('islandora_image_annotation', 'uninstall');
+}
+
+/**
+ * Renamed / fixed variables.
+ */
+function islandora_image_annotation_update_7101() {
+  // Rename and fix the existing variables.
+  $rename_variable = function($old, $new, $default) {
+    variable_set($new, variable_get($old, $default));
+    variable_del($old);
+  };
+  // Old variables.
+  // annotation_genre_field.
+  // annotation_genre_search_field.
+  // annotation_title_search_field.
+  // annotation_type_search_field.
+  // annotation_use_title_vocabulary.
+  // image_annotation_annotation_stroke_width.
+  // islandora_annotation_enforce_taxonomy.
+  // islandora_annotation_mappings.
+  // islandora_annotation_optimized.
+  // islandora_image_annotation_datastreams (Removed).
+  // islandora_image_annotation_use_entity_tagging (Name stays the same).
+  $rename_variable('annotation_genre_search_field', 'islandora_image_annotation_solr_field_genre', 'mods_genre_s');
+  $rename_variable('annotation_title_search_field', 'islandora_image_annotation_solr_field_title', 'mods_titleInfo_title_s');
+  $rename_variable('annotation_type_search_field', 'islandora_image_annotation_solr_field_type', 'RELS_EXT_isAnnotationType_literal_s');
+  $rename_variable('annotation_use_title_vocabulary', 'islandora_image_annotation_use_title_vocabulary', FALSE);
+  $rename_variable('image_annotation_annotation_stroke_width', 'islandora_image_annotation_stroke_width', '.3 .6 .9 1.2 1.5');
+  $rename_variable('islandora_annotation_enforce_taxonomy', 'islandora_image_annotation_enforce_taxonomy', FALSE);
+  $rename_variable('islandora_annotation_mappings', 'islandora_image_annotation_mappings', array());
+  $rename_variable('islandora_annotation_optimized', 'islandora_image_annotation_choose_color', TRUE);
+}
+
+/**
+ * Removing deprecated variables.
+ */
+function islandora_image_annotation_update_7102() {
+  $variables = array(
+    'annotation_genre_field',
+    'islandora_image_annotation_datastreams',
+    'islandora_image_annotation_use_entity_tagging',
+    // Not re-applying the change in case it has already been handled manually.
+    'islandora_annotation_mappings',
+  );
+  array_walk($variables, 'variable_del');
+}

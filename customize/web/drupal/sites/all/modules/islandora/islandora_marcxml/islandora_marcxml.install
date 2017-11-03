@@ -1,0 +1,15 @@
+<?php
+/**
+ * @file
+ * Install and uninstall functions for the islandora_marcxml module.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_marcxml_uninstall() {
+  $variables = array(
+    'islandora_marcxml_allow_editing_of_existing_mods',
+  );
+  array_walk($variables, 'variable_del');
+}

@@ -1,0 +1,46 @@
+/**
+ * @file
+ * Defines the base set of css required to view the image annotation tool.
+ */
+
+.islandora-image-annotation-left-column {
+  float: left;
+  width: 25%;
+  overflow: auto;
+}
+
+.islandora-image-annotation-right-column {
+  width: 75%;
+  float: left;
+  background-color: #F4F4F4;
+  height: 100%;
+}
+
+#islandora-image-annotation-full-window-button,
+#islandora-image-annotation-toggle-annotation-display-button {
+  float: right;
+  margin: 5px 5px 5px 15px;
+}
+
+#islandora-image-annotation-create-annotation-button {
+  float: left;
+  margin: 5px 5px 5px 15px;
+}
+
+.islandora-image-annotation-full-window {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: auto;
+  z-index: 601;
+  background: #fff;
+}
+
+#islandora-image-annotation-exit-full-window-message {
+  padding: 10px;
+  background: #A9A9A9;
+  color: #fff;
+  font-size: 16px;
+}

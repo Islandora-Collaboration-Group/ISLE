@@ -1,0 +1,64 @@
+<?php
+
+/**
+ * @file
+ * @todo include access to the form for all elements so that these hooks can
+ * have the appropriate values.
+ */
+
+/**
+ * Function Menu.
+ *
+ * !TEST CODE -- Needed for some Simple Tests!
+ */
+function objective_forms_menu() {
+  $items['objective/forms/test/%'] = array(
+    'title' => 'Test Form Used By SimpleTest',
+    'description' => 'menu_item_description',
+    'page callback' => 'objective_forms_test',
+    'page arguments' => array(3),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Load a test form.
+ *
+ * @param string $form_name
+ *   The name of the form
+ *
+ * @return html
+ *   Returns the html
+ */
+function objective_forms_test($form_name) {
+  // Load all test files.
+  objective_forms_test_load_files();
+  // TODO  needs to have $form as its first parameter.
+  return drupal_get_form($form_name);
+}
+
+/**
+ * Function test_load_files.
+ *
+ * Include all the test files so we can find the proper function for getting
+ * the file.
+ */
+function objective_forms_test_load_files() {
+  module_load_include('php', 'simpletest', 'drupal_web_test_case');
+  $include_path = drupal_get_path('module', 'objective_forms') . "/tests";
+  $dir = opendir($include_path);
+  if ($dir !== FALSE) {
+    while (($file = readdir($dir)) !== FALSE) {
+      if (preg_match('/\.test$/', $file)) {
+        require_once DRUPAL_ROOT . '/' . "$include_path/$file";
+      }
+    }
+    closedir($dir);
+  }
+}
+
+/**
+ * !END TEST CODE!
+ */

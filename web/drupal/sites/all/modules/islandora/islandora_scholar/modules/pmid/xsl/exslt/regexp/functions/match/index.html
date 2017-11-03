@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "/schema/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:html="http://www.w3.org/1999/xhtml"><head><title>EXSLT - regexp:match</title><link rel="stylesheet" href="base.css"/></head><body><h1 id="#title"><a href="http://www.exslt.org/">EXSLT</a> - <a href="http://www.exslt.org/regexp">regexp</a>:<a href="http://www.exslt.org/regexp/functions/match">match</a></h1><table><tr><td id="menu"><p class="level1"><a href="regexp.match.html">Implementer Page</a></p><p class="level1"><a href="../../../howto.html">How To</a></p><p class="level1"><a href="../../../download.html">Downloads</a></p><p class="level1">Modules</p><p class="level2"><a href="../../../date/index.html">Dates and Times</a></p><p class="level2"><a href="../../../dyn/index.html">Dynamic</a></p><p class="level2"><a href="../../../exsl/index.html">Common</a></p><p class="level2"><a href="../../../func/index.html">Functions</a></p><p class="level2"><a href="../../../math/index.html">Math</a></p><p class="level2"><a href="../../../random/index.html">Random</a></p><p class="level2"><a href="../../../regexp/index.html">Regular Expressions</a></p><p class="level3"><a href="../../functions/match/index.html">regexp:match()</a></p><p class="level3"><a href="../../functions/replace/index.html">regexp:replace()</a></p><p class="level3"><a href="../../functions/test/index.html">regexp:test()</a></p><p class="level2"><a href="../../../set/index.html">Sets</a></p><p class="level2"><a href="../../../str/index.html">Strings</a></p><p class="level1"><a href="../../../submissions/">Submissions</a></p><p class="level1"><a href="../../../list">Mailing List</a></p><p class="level1"><a href="../../../contact.html">Contact</a></p></td><td id="content"><p><b>Implementer Page: </b><a href="regexp.match.html">regexp.match.html</a><br/><b>Function Package: </b><a href="regexp.match.zip">regexp.match.zip</a></p><h4>Function Syntax</h4><pre><var>object</var> <b>regexp:match</b>(<var>string</var>, <var>string</var>, <var>string</var>?)</pre><div><p>
+         The <code>regexp:match</code> function lets you get hold of the substrings of the string passed as the first argument that match the captured parts of the regular expression passed as the second argument.
+      </p><p>
+         The second argument is a regular expression that follows the Javascript regular expression syntax.
+      </p><p>
+         The third argument is a string consisting of character flags to be used by the match.  If a character is present then that flag is true.  The flags are:
+      </p><ul><li><code>g</code>: global match - the submatches from all the matches in the string are returned.  If this character is not present, then only the submatches from the first match in the string are returned.</li><li><code>i</code>: case insensitive - the regular expression is treated as case insensitive.  If this character is not present, then the regular expression is case sensitive.</li></ul><p>
+         The <code>regexp:match</code> function returns a node set of <code>match</code> elements, each of whose string value is equal to a portion of the first argument string that was captured by the regular expression.  If the match is not global, the first match element has a value equal to the portion of the string matched by the entire regular expression.
+      </p><p>
+         The following example illustrates a non-global match:
+      </p><pre>
+&lt;xsl:for-each select="regExp:match('http://www.bayes.co.uk/xml/index.xml?/xml/utils/rechecker.xml', 
+                                   '(\w+):\/\/([^/:]+)(:\d*)?([^# ]*)')"&gt;
+   Part &lt;xsl:value-of select="position()" /&gt; = &lt;xsl:value-of select="." /&gt;
+&lt;/xsl:for-each&gt;
+      </pre><p>
+         Gives the following result:
+      </p><pre>
+Part 1 = http://www.bayes.co.uk/xml/index.xml?/xml/utils/rechecker.xml
+Part 2 = http
+Part 3 = www.bayes.co.uk
+Part 4 =
+Part 5 = /xml/index.xml?/xml/utils/rechecker.xml
+      </pre><p>
+         The following example illustrates a global match:
+      </p><pre>
+&lt;xsl:for-each select="regExp:match('This is a test string', '(\w+)', 'g'"&gt;
+   Part &lt;xsl:value-of select="position()" /&gt; = &lt;xsl:value-of select="." /&gt;
+&lt;/xsl:for-each&gt;
+      </pre><p>
+         Gives the following result:
+      </p><pre>
+Part 1 = This
+Part 2 = is
+Part 3 = a
+Part 4 = test
+Part 5 = string
+      </pre><p>
+         The following example illustrates another global match:
+      </p><pre>
+&lt;xsl:for-each select="regExp:match('This is a test string', '([a-z])+ ', 'g')"&gt;
+   Part &lt;xsl:value-of select="position()" /&gt; = &lt;xsl:value-of select="." /&gt;
+&lt;/xsl:for-each&gt;
+      </pre><p>
+         Gives the following result:
+      </p><pre>
+Part 1 = his
+Part 2 = is
+Part 3 = a
+Part 4 = test
+      </pre><p>
+         The following example illustrates a global, case-insensitive match:
+      </p><pre>
+&lt;xsl:for-each select="regExp:match('This is a test string', '([a-z])+ ', 'gi')"&gt;
+   Part &lt;xsl:value-of select="position()" /&gt; = &lt;xsl:value-of select="." /&gt;
+&lt;/xsl:for-each&gt;
+      </pre><p>
+         Gives the following result:
+      </p><pre>
+Part 1 = This
+Part 2 = is
+Part 3 = a
+Part 4 = test
+      </pre></div><h2>Implementations</h2><p>
+                  The following XSLT processors support <code>regexp:match</code>:
+               </p><ul><li><a href="http://4Suite.org">4XSLT, from 4Suite.</a> (version 0.12.0a3)</li></ul><p>
+                  Implementations of <code>regexp:match</code> are available in the following languages:
+               </p><ul><li><a href="regexp.match.js">Javascript</a> (by <a href="mailto:chris@bayes.co.uk">Chris Bayes</a>)</li><li><a href="regexp.match.msxsl.xsl">Msxsl</a> (by <a href="mailto:chris@bayes.co.uk">Chris Bayes</a>)</li></ul><h2>Examples</h2><h3>Function</h3><p>The following example shows how to use the <code>regexp:match</code> function:</p><h4>Source</h4><pre>&lt;?xml-stylesheet type="text/xsl" href="regexp.match.1.xsl"  ?&gt;
+&lt;a&gt;
+   &lt;c&gt;Is this EXSLT? No. no&lt;/c&gt;
+&lt;/a&gt;</pre><h4>Stylesheet</h4><pre>&lt;xsl:import href="regexp.match.msxsl.xsl" /&gt;
+&lt;xsl:template match="c"&gt;
+   &lt;out&gt;
+      &lt;xsl:value-of select="." /&gt;
+ - 
+               &lt;xsl:for-each select="regexp:match(., 'no', 'gi')"&gt;
+         &lt;xsl:value-of select="." /&gt;
+      &lt;/xsl:for-each&gt;
+   &lt;/out&gt;
+&lt;/xsl:template&gt;</pre><h4>Result</h4><pre>&lt;out&gt;Is this EXSLT? No. no - 
+         Nono&lt;/out&gt;</pre></td></tr></table><div id="colophon"><p><a href="http://www.exslt.org/regexp/functions/match/index.html">http://www.exslt.org/regexp/functions/match/index.html</a> last modified 2002-11-12</p></div></body></html>

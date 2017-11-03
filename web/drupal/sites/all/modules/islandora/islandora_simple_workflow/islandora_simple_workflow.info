@@ -1,0 +1,6 @@
+name = Islandora Simple Workflow
+description = A simple editorial workflow for Islandora. Ingested objects are inactive until approved.
+dependencies[] = islandora
+package = Islandora Tools
+version = 7.x-dev
+core = 7.x

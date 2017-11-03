@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "/schema/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:html="http://www.w3.org/1999/xhtml"><head><title>EXSLT - regexp:replace</title><link rel="stylesheet" href="base.css"/></head><body><h1 id="#title"><a href="http://www.exslt.org/">EXSLT</a> - <a href="http://www.exslt.org/regexp">regexp</a>:<a href="http://www.exslt.org/regexp/functions/replace">replace</a></h1><table><tr><td id="menu"><p class="level1"><a href="regexp.replace.html">Implementer Page</a></p><p class="level1"><a href="../../../howto.html">How To</a></p><p class="level1"><a href="../../../download.html">Downloads</a></p><p class="level1">Modules</p><p class="level2"><a href="../../../date/index.html">Dates and Times</a></p><p class="level2"><a href="../../../dyn/index.html">Dynamic</a></p><p class="level2"><a href="../../../exsl/index.html">Common</a></p><p class="level2"><a href="../../../func/index.html">Functions</a></p><p class="level2"><a href="../../../math/index.html">Math</a></p><p class="level2"><a href="../../../random/index.html">Random</a></p><p class="level2"><a href="../../../regexp/index.html">Regular Expressions</a></p><p class="level3"><a href="../../functions/match/index.html">regexp:match()</a></p><p class="level3"><a href="../../functions/replace/index.html">regexp:replace()</a></p><p class="level3"><a href="../../functions/test/index.html">regexp:test()</a></p><p class="level2"><a href="../../../set/index.html">Sets</a></p><p class="level2"><a href="../../../str/index.html">Strings</a></p><p class="level1"><a href="../../../submissions/">Submissions</a></p><p class="level1"><a href="../../../list">Mailing List</a></p><p class="level1"><a href="../../../contact.html">Contact</a></p></td><td id="content"><p><b>Implementer Page: </b><a href="regexp.replace.html">regexp.replace.html</a><br/><b>Function Package: </b><a href="regexp.replace.zip">regexp.replace.zip</a></p><h4>Function Syntax</h4><pre><var>string</var> <b>regexp:replace</b>(<var>string</var>, <var>string</var>, <var>string</var>, <var>string</var>)</pre><div><p>
+         The <code>regexp:replace</code> function replaces the parts of a string that match a regular expression with another string.
+      </p><p>
+         The first argument is the string to be matched and replaced.  The second argument is a regular expression that follows the Javascript regular expression syntax.  The fourth argument is the string to replace the matched parts of the string.
+      </p><p>
+         The third argument is a string consisting of character flags to be used by the match.  If a character is present then that flag is true.  The flags are:
+      </p><ul><li><code>g</code>: global replace - all occurrences of the regular expression in the string are replaced.  If this character is not present, then only the first occurrence of the regular expression is replaced.</li><li><code>i</code>: case insensitive - the regular expression is treated as case insensitive.  If this character is not present, then the regular expression is case sensitive.</li></ul></div><h2>Implementations</h2><p>
+                  The following XSLT processors support <code>regexp:replace</code>:
+               </p><ul><li><a href="http://4Suite.org">4XSLT, from 4Suite.</a> (version 0.12.0a3)</li></ul><p>
+                  Implementations of <code>regexp:replace</code> are available in the following languages:
+               </p><ul><li><a href="regexp.replace.js">Javascript</a> (by <a href="mailto:chris@bayes.co.uk">Chris Bayes</a>)</li><li><a href="regexp.replace.msxsl.xsl">Msxsl</a> (by <a href="mailto:chris@bayes.co.uk">Chris Bayes</a>)</li></ul><h2>Examples</h2><h3>Function</h3><p>The following example shows how to use the <code>regexp:replace</code> function:</p><h4>Source</h4><pre>&lt;a&gt;
+   &lt;c&gt;Is this EXSLT? No. no&lt;/c&gt;
+&lt;/a&gt;</pre><h4>Stylesheet</h4><pre>&lt;xsl:template match="a"&gt;
+   &lt;xsl:apply-templates /&gt;
+&lt;/xsl:template&gt;
+&lt;xsl:template match="*"&gt;
+   &lt;out&gt;
+      &lt;xsl:value-of select="." /&gt;
+ -
+               &lt;xsl:value-of select="regexp:replace(string(.), 'no', 'g', 'yes!!!')" /&gt;
+      &lt;xsl:value-of select="regexp:replace(string(.), 'no', 'gi', 'yes!!!')" /&gt;
+      &lt;xsl:apply-templates select="*" /&gt;
+   &lt;/out&gt;
+&lt;/xsl:template&gt;</pre><h4>Result</h4><pre>&lt;out&gt;Is this EXSLT? No. no -
+         Is this EXSLT? No. yes!!!Is this EXSLT? yes!!!. yes!!!&lt;/out&gt;</pre></td></tr></table><div id="colophon"><p><a href="http://www.exslt.org/regexp/functions/replace/index.html">http://www.exslt.org/regexp/functions/replace/index.html</a> last modified 2002-11-12</p></div></body></html>

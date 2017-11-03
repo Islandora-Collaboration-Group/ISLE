@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT records (record+)>
+<!ELEMENT record (database?, source-app?, rec-number?, ref-type?, contributors?, auth-address?, auth-affiliaton?, titles?, periodical?, pages?, volume?, number?, issue?, secondary-volume?, secondary-issue?, num-vols?, edition?, section?, reprint-edition?, reprint-status?, keywords?, dates?, pub-location?, publisher?, orig-pub?, isbn?, accession-num?, call-num?, report-id?, coden?, electronic-resource-num?, abstract?, label?, image?, caption?, notes?, research-notes?, work-type?, reviewed-item?, availability?, remote-source?, meeting-place?, work-location?, work-extent?, pack-method?, size?, repro-ratio?, remote-database-name?, remote-database-provider?, language?, urls?, access-date?, modified-date?, custom1?, custom2?, custom3?, custom4?, custom5?, custom6?, custom7?, misc1?, misc2?, misc3?)>
+<!ELEMENT database (#PCDATA)>
+<!ATTLIST database
+	name CDATA #IMPLIED
+	path CDATA #IMPLIED
+>
+<!ELEMENT source-app (#PCDATA)>
+<!ATTLIST source-app
+	name CDATA #IMPLIED
+	version CDATA #IMPLIED
+>
+<!ELEMENT rec-number (#PCDATA)>
+<!ELEMENT ref-type (#PCDATA)>
+<!ATTLIST ref-type
+	name CDATA #REQUIRED
+>
+<!-- Author information -->
+<!ELEMENT contributors (authors?, secondary-authors?, tertiary-authors?, subsidiary-authors?, translated-authors?)>
+<!ELEMENT authors (author+)>
+<!ELEMENT secondary-authors (author+)>
+<!ELEMENT tertiary-authors (author+)>
+<!ELEMENT subsidiary-authors (author+)>
+<!ELEMENT translated-authors (author+)>
+<!ELEMENT author (#PCDATA | style)*>
+<!ATTLIST author
+	corp-name CDATA #IMPLIED
+	first-name CDATA #IMPLIED
+	initials CDATA #IMPLIED
+	last-name CDATA #IMPLIED
+	middle-initial CDATA #IMPLIED
+	role CDATA #IMPLIED
+	salutation CDATA #IMPLIED
+	suffix CDATA #IMPLIED
+	title CDATA #IMPLIED
+>
+<!ELEMENT auth-address (#PCDATA | style)*>
+<!ELEMENT auth-affiliaton (#PCDATA | style)*>
+<!-- Title information -->
+<!ELEMENT titles (title?, secondary-title?, tertiary-title?, alt-title?, short-title?, translated-title?)>
+<!ELEMENT title (#PCDATA | style)*>
+<!ELEMENT secondary-title (#PCDATA | style)*>
+<!ELEMENT tertiary-title (#PCDATA | style)*>
+<!ELEMENT alt-title (#PCDATA | style)*>
+<!ELEMENT short-title (#PCDATA | style)*>
+<!ELEMENT translated-title (#PCDATA | style)*>
+<!-- Periodical information -->
+<!ELEMENT periodical (full-title?, abbr-1?, abbr-2?, abbr-3?)>
+<!ELEMENT full-title (#PCDATA | style)*>
+<!ELEMENT abbr-1 (#PCDATA | style)*>
+<!ELEMENT abbr-2 (#PCDATA | style)*>
+<!ELEMENT abbr-3 (#PCDATA | style)*>
+<!-- Page range information -->
+<!ELEMENT pages (#PCDATA | style)*>
+<!ATTLIST pages
+	end CDATA #IMPLIED
+	start CDATA #IMPLIED
+>
+<!-- Volume, issue, and edition information -->
+<!ELEMENT volume (#PCDATA | style)*>
+<!ELEMENT number (#PCDATA | style)*>
+<!ELEMENT issue (#PCDATA | style)*>
+<!ELEMENT secondary-volume (#PCDATA | style)*>
+<!ELEMENT secondary-issue (#PCDATA | style)*>
+<!ELEMENT num-vols (#PCDATA | style)*>
+<!ELEMENT edition (#PCDATA | style)*>
+<!ELEMENT section (#PCDATA | style)*>
+<!ELEMENT reprint-edition (#PCDATA | style)*>
+<!ELEMENT reprint-status EMPTY>
+<!ATTLIST reprint-status
+	date CDATA #IMPLIED
+	status (in-file | no-file | on-request) #REQUIRED
+>
+<!-- Keywords -->
+<!ELEMENT keywords (keyword+)>
+<!ELEMENT keyword (#PCDATA | style)*>
+<!-- Date information -->
+<!ELEMENT dates (year?, pub-dates?, copyright-dates?)>
+<!ELEMENT year (#PCDATA | style)*>
+<!ATTLIST year
+	day CDATA #IMPLIED
+	julian CDATA #IMPLIED
+	month CDATA #IMPLIED
+	year CDATA #IMPLIED
+>
+<!ELEMENT pub-dates (date+)>
+<!ELEMENT copyright-dates (date+)>
+<!ELEMENT date (#PCDATA | style)*>
+<!ATTLIST date
+	day CDATA #IMPLIED
+	julian CDATA #IMPLIED
+	month CDATA #IMPLIED
+	year CDATA #IMPLIED
+>
+<!-- Publisher information -->
+<!ELEMENT pub-location (#PCDATA | style)*>
+<!ELEMENT publisher (#PCDATA | style)*>
+<!ELEMENT orig-pub (#PCDATA | style)*>
+<!-- Identifying numbers -->
+<!ELEMENT isbn (#PCDATA | style)*>
+<!ELEMENT accession-num (#PCDATA | style)*>
+<!ELEMENT call-num (#PCDATA | style)*>
+<!ELEMENT report-id (#PCDATA | style)*>
+<!ELEMENT coden (#PCDATA | style)*>
+<!ELEMENT electronic-resource-num (#PCDATA | style)*>
+<!-- Abstract, notes, images, etc. -->
+<!ELEMENT abstract (#PCDATA | style)*>
+<!ELEMENT label (#PCDATA | style)*>
+<!ELEMENT image (#PCDATA)>
+<!ATTLIST image
+	file CDATA #IMPLIED
+	name CDATA #IMPLIED
+>
+<!ELEMENT caption (#PCDATA | style)*>
+<!ELEMENT notes (#PCDATA | style)*>
+<!ELEMENT research-notes (#PCDATA | style)*>
+<!-- Other detailed information on item -->
+<!ELEMENT work-type (#PCDATA | style)*>
+<!ELEMENT reviewed-item (#PCDATA | style)*>
+<!ELEMENT availability (#PCDATA | style)*>
+<!ELEMENT remote-source (#PCDATA | style)*>
+<!ELEMENT meeting-place (#PCDATA | style)*>
+<!ELEMENT work-location (#PCDATA | style)*>
+<!ELEMENT work-extent (#PCDATA | style)*>
+<!ELEMENT pack-method (#PCDATA | style)*>
+<!ELEMENT size (#PCDATA | style)*>
+<!ELEMENT repro-ratio (#PCDATA | style)*>
+<!ELEMENT remote-database-name (#PCDATA | style)*>
+<!ELEMENT remote-database-provider (#PCDATA | style)*>
+<!ELEMENT language (#PCDATA | style)*>
+<!-- URL information -->
+<!ELEMENT urls (web-urls?, pdf-urls?, text-urls?, related-urls?, image-urls?)>
+<!ELEMENT web-urls (url+)>
+<!ELEMENT pdf-urls (url+)>
+<!ELEMENT text-urls (url+)>
+<!ELEMENT related-urls (url+)>
+<!ELEMENT image-urls (url+)>
+<!ELEMENT url (#PCDATA | style)*>
+<!ATTLIST url
+	has-ut (yes | no) #IMPLIED
+	ppv-app CDATA #IMPLIED
+	ppv-ref (yes | no) #IMPLIED
+	ppv-ut CDATA #IMPLIED
+>
+<!-- Information about record -->
+<!ELEMENT access-date (#PCDATA | style)*>
+<!ELEMENT modified-date (#PCDATA | style)*>
+<!-- Custom and miscellaneous fields -->
+<!ELEMENT custom1 (#PCDATA | style)*>
+<!ELEMENT custom2 (#PCDATA | style)*>
+<!ELEMENT custom3 (#PCDATA | style)*>
+<!ELEMENT custom4 (#PCDATA | style)*>
+<!ELEMENT custom5 (#PCDATA | style)*>
+<!ELEMENT custom6 (#PCDATA | style)*>
+<!ELEMENT custom7 (#PCDATA | style)*>
+<!ELEMENT misc1 (#PCDATA | style)*>
+<!ELEMENT misc2 (#PCDATA | style)*>
+<!ELEMENT misc3 (#PCDATA | style)*>
+<!-- Styled text handling -->
+<!ELEMENT style (#PCDATA)>
+<!ATTLIST style
+	color CDATA #IMPLIED
+	face CDATA "normal"
+	font CDATA "default"
+	size CDATA #IMPLIED
+>

@@ -1,0 +1,5 @@
+name = Islandora Sync Field Collection
+description = Integrates Field Collections with Islandora Sync
+core = 7.x
+dependencies[] = islandora_sync
+dependencies[] = field_collection

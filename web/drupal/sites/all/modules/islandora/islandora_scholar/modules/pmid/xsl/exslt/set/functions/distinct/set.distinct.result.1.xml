@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?><out xmlns:set="http://exslt.org/sets"><all-countries>:
+    France;
+    Spain;
+    Austria;
+    Spain;
+    Austria;
+    Germany;
+    France;
+    Germany;
+    France;
+    Germany;
+    </all-countries>:
+  <distinct-countries>:  
+    France;
+    Spain;
+    Austria;
+    Germany;
+    </distinct-countries></out>

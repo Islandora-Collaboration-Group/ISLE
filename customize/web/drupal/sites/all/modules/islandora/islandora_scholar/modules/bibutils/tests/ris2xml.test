@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * @file
+ * Unit Tests for converting ris to xml.
+ */
+
+/**
+ * Unit Tests for the FormControl class.
+ */
+class BibutilsRIS2XMLTestCase extends BibutilsBaseTestCase {
+  /**
+   * Get properties to display in the test selection form.
+   *
+   * @see DrupalUnitTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'ris2xml Unit Tests.',
+      'description' => 'Unit tests for bibutils focusing on converting RIS to MODS.',
+      'group' => 'Bibutils',
+    );
+  }
+
+  /**
+   * Test converting a single RIS file to a MODS Document.
+   *
+   * Test the case where all the records exists seperate elements within the
+   * modsCollection element.
+   */
+  public function testConvertingFileToSingleDocument() {
+    $filename = $this->data . 'RIS.txt';
+    $schema = $this->data . 'mods-3-1.xsd';
+    $document = bibutils_ris_file_to_mods_document($filename);
+    $this->assertTrue($document, 'Created single mods document.');
+    $valid = $document->schemaValidate($schema);
+    $this->assertTrue($valid, 'single mods document is valid.');
+  }
+
+  /**
+   * Test converting a single RIS file to many MODS Document.
+   *
+   * Test the case where each record within the modsCollection is its own
+   * document.
+   */
+  public function testConvertingFileToManyDocuments() {
+    $filename = $this->data . 'RIS.xml';
+    $schema = $this->data . 'mods-3-1.xsd';
+    $documents = bibutils_ris_file_to_mods_documents($filename);
+    $this->testCreatedDocuments($documents);
+  }
+}

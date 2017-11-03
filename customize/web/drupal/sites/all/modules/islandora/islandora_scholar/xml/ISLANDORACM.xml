@@ -1,0 +1,59 @@
+
+<content_model xmlns="http://www.islandora.ca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Citation Object" xsi:schemaLocation="http://www.islandora.ca http://localhost/islandoracm.xsd">
+  <mimetypes>
+    <type>application/msaccess</type>
+    <type>application/msexcel</type>
+    <type>application/mspowerpoint</type>
+    <type>application/msword</type>
+    <type>application/octet-stream</type>
+    <type>application/pdf</type>
+    <type>application/rtf</type>
+    <type>application/vnd.ms-excel.sheet.macroEnabled.12</type>
+    <type>application/vnd.ms-excel</type>
+    <type>application/vnd.ms-powerpoint.presentation.macroEnabled.12</type>
+    <type>application/vnd.ms-powerpoint.slideshow.macroEnabled.12</type>
+    <type>application/vnd.ms-powerpoint</type>
+    <type>application/vnd.ms-project</type>
+    <type>application/vnd.ms-word.document.macroEnabled.12</type>
+    <type>application/vnd.openxmlformats-officedocument.wordprocessingml.document</type>
+    <type>application/vnd.openxmlformats-officedocument.presentationml.presentation</type>
+    <type>application/vnd.openxmlformats-officedocument.presentationml.slideshow</type>
+    <type>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</type>
+    <type>application/xml</type>
+    <type>application/x-shockwave-flash</type>
+    <type>application/x-zip</type>
+    <type>application/zip</type>
+    <type>audio/midi</type>
+    <type>audio/mpeg</type>
+    <type>audio/wav</type>
+    <type>audio/x-aiff</type>
+    <type>audio/x-mpeg</type>
+    <type>audio/x-pn-realaudio</type>
+    <type>audio/x-wav</type>
+    <type>image/gif</type>
+    <type>image/jp2</type>
+    <type>image/jpeg</type>
+    <type>image/png</type>
+    <type>image/raw</type>
+    <type>image/tiff</type>
+    <type>image/x-raw</type>
+    <type>text/html</type>
+    <type>text/plain</type>
+    <type>text/rtf</type>
+    <type>text/xml</type>
+    <type>video/mp4</type>
+    <type>video/mpeg</type>
+    <type>video/quicktime</type>
+    <type>video/x-msvideo</type>
+  </mimetypes>
+  <ingest_rules></ingest_rules>
+  <datastreams>
+    <datastream dsid="JPG">
+      <display_method class="IslandoraHook" default="true" file="IslandoraHook.inc" method="render" module="content_model_viewer"></display_method>
+    </datastream>
+  </datastreams>
+  <ingest_form dsid="MODS" hide_file_chooser="true" page="2">
+    <form_builder_method class="CoCCCModsFormBuilder" file="plugins/CoCCCModsFormBuilder.inc" handler="handleModsForm" method="buildQDCForm" module="fedora_repository"></form_builder_method>
+    <form_elements></form_elements>
+  </ingest_form>
+</content_model>

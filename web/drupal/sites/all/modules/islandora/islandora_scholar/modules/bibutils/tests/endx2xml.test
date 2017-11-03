@@ -1,0 +1,60 @@
+<?php
+
+/**
+ * @file
+ * Unit Tests for converting endnote to xml.
+ */
+
+/**
+ * Unit Tests for the FormControl class.
+ */
+class BibutilsENDX2XMLTestCase extends BibutilsBaseTestCase {
+
+  /**
+   * The location of the data directory for the tests.
+   *
+   * @var string
+   */
+  protected $data;
+
+  /**
+   * Get properties to display in the test selection form.
+   *
+   * @see DrupalUnitTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'endx2xml Unit Tests.',
+      'description' => 'Unit tests for bibutils focusing on converting EndNote XML to MODS.',
+      'group' => 'Bibutils',
+    );
+  }
+
+  /**
+   * Test converting a single EndNote XML file to a MODS Document.
+   *
+   * Tests the case where all the records exists as seperate elements within
+   * the modsCollection element.
+   */
+  public function testConvertingFileToSingleDocument() {
+    $filename = $this->data . 'EndNote.xml';
+    $schema = $this->data . 'mods-3-1.xsd';
+    $document = bibutils_endnote_xml_file_to_mods_document($filename);
+    $this->assertTrue($document, 'Created single mods document.');
+    $valid = $document->schemaValidate($schema);
+    $this->assertTrue($valid, 'single mods document is valid.');
+  }
+
+  /**
+   * Test converting a single EndNote XML file to many MODS Documents.
+   *
+   * Tests the case where each record within the modsCollection is its own
+   * document.
+   */
+  public function testConvertingFileToManyDocuments() {
+    $filename = $this->data . 'EndNote.xml';
+    $schema = $this->data . 'mods-3-1.xsd';
+    $documents = bibutils_endnote_xml_file_to_mods_documents($filename);
+    $this->testCreatedDocuments($documents);
+  }
+}

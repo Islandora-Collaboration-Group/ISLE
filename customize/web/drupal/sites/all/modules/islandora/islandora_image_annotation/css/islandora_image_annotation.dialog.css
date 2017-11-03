@@ -1,0 +1,41 @@
+/**
+ * @file
+ * Defines the base set of css required to render the dialog box.
+ */
+
+/**
+ * Container element of the dialog box.
+ */
+.ui-dialog.islandora-image-annotation {
+  /* High enough to show over top of 'Full Window' display. */
+  z-index: 1000 !important;
+}
+.ui-autocomplete.islandora-image-annotation {
+  /* High enough to show over top of 'Full Window' display. */
+  z-index: 1001 !important;
+}
+/* Prevent gap in the display, not sure why this is happening but cant spend
+   any more time on it. */
+.ui-dialog.islandora-image-annotation .ui-dialog-titlebar-close{
+  display: none;
+}
+/**
+ * Icons for rectangular / circle / polygon style annotations.
+ */
+#islandora-image-annotation-shape-rectangle {
+  padding-top: 1px;
+  padding-left: 2px;
+}
+
+#islandora-image-annotation-shape-circle {
+  padding-left: 1px;
+}
+
+#islandora-image-annotation-shape-polygon {
+  padding: 2px;
+}
+.islandora-image-annotation-shape-icon.selected {
+  padding-left: 2px;
+  padding-top: 1px;
+  border: 1px solid black;
+}

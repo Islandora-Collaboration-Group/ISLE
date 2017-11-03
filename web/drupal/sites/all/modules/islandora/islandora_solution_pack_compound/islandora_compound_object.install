@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * @file
+ * islandora_compound_object.install
+ *
+ * Implement install/uninstall hooks.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function islandora_compound_object_install() {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  islandora_install_solution_pack('islandora_compound_object');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_compound_object_uninstall() {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  islandora_install_solution_pack('islandora_compound_object', 'uninstall');
+  $variables = array(
+    'islandora_compound_object_compound_children',
+    'islandora_compound_object_thumbnail_child',
+    'islandora_compound_object_relationship',
+    'islandora_compound_object_hide_child_objects_ri',
+    'islandora_compound_object_hide_child_objects_solr',
+    'islandora_compound_object_solr_fq',
+    'islandora_compound_object_use_jail_view',
+    'islandora_compound_object_query_backend',
+    'islandora_compound_object_tn_deriv_hooks',
+    'islandora_compound_object_redirect_to_first',
+  );
+  array_walk($variables, 'variable_del');
+}

@@ -1,0 +1,133 @@
+<?php
+
+/**
+ * @file
+ * Attempts to create and remove a rels entry between a shared object and two
+ * collections.
+ */
+
+class IslandoraPurgeShareCollectionTestCase extends IslandoraCollectionWebTestCase {
+
+  /**
+   * Get test information.
+   *
+   * @see IslandoraWebTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Basic Collection Shared Object Purge',
+      'description' => 'Creates two collections and two objects, one is shared. Test one remains on purge.',
+      'group' => 'Islandora Basic Collection',
+    );
+  }
+
+  /**
+   * Set up the test environment.
+   *
+   * @see IslandoraWebTestCase::setUp()
+   */
+  public function setUp() {
+    parent::setUp(array(
+      'islandora',
+      'islandora_basic_collection',
+    ));
+  }
+
+  /**
+   * Create two collections, each with one object.
+   *
+   * One of the objects will have an isMemberOfCollection
+   * rels entry for both collections. Test to see it is
+   * removed when the first collection is deleted.
+   */
+  public function testIngestPurgeSharedBasicCollection() {
+    $user = $this->drupalCreateUser(array_keys(module_invoke_all('permission')));
+    $this->drupalLogin($user);
+
+    $label_a = $this->randomName(16);
+    $suffix_a = $this->randomName(16);
+    $collectionpid_a = 'islandora:' . $suffix_a;
+
+    $label_b = $this->randomName(16);
+    $suffix_b = $this->randomName(16);
+    $collectionpid_b = 'islandora:' . $suffix_b;
+
+    // Create our test collections.
+    $this->createTestCollection($label_a, 'islandora:collectionCModel', $collectionpid_a);
+    $this->createTestCollection($label_b, 'islandora:collectionCModel', $collectionpid_b);
+
+    // Construct properties for our first object.
+    $obj_a_pid = 'islandora:' . $this->randomName(16);
+    $properties_obj_a = array(
+      'label' => 'obj_a' . $this->randomName(16),
+      'pid' => $obj_a_pid,
+      'models' => array(),
+      'owner' => '',
+      'parent' => $collectionpid_a,
+    );
+    // Construct properties for our second object.
+    $obj_b_pid = 'islandora:' . $this->randomName(16);
+    $properties_obj_b = array(
+      'label' => 'obj_b' . $this->randomName(16),
+      'pid' => $obj_b_pid,
+      'models' => array(),
+      'owner' => '',
+      'parent' => $collectionpid_b,
+    );
+    // Create our test objects with our previously set properties.
+    $objects = $this->createTestObjects(
+      array(
+        $properties_obj_a,
+        $properties_obj_b,
+      )
+    );
+    // Now we have two collections, each one with one child object.
+    // We now need to add a relationship to one of the test objects,
+    // to ensure it has an isMemberOfCollection relationship with both
+    // collections.
+    $object_w_rels = $objects[1];
+    $object_w_rels->relationships->add(FEDORA_RELS_EXT_URI, 'isMemberOfCollection', $collectionpid_a);
+
+    // Now delete collection_a.
+    $this->deleteTestCollection($collectionpid_a);
+
+    // Test to be sure the second object, with two
+    // 'isMemberOfCollection' rels entries,
+    // is still in the '$collectionpid_b' collection.
+    $obj_b = islandora_object_load($obj_b_pid);
+    $deleted_collection = islandora_object_load($collectionpid_a);
+
+    // Simple NULL checks on validation should be good enough.
+    $obj_a = islandora_object_load($obj_a_pid);
+    $this->assertTrue($obj_a == NULL, "Test object 'a' has been deleted correctly.");
+    $this->assertTrue($deleted_collection == NULL, "First deleted collection does not exist.");
+    $this->assertTrue($obj_b != NULL, "Second Test object still exists.");
+    $obj_b_rels = $obj_b->relationships->get(FEDORA_RELS_EXT_URI, 'isMemberOfCollection');
+
+    // There should be one 'isMemberOfCollection'
+    // entry in the second object's rels.
+    $count = 0;
+    foreach ($obj_b_rels as $key => $value) {
+      if ($obj_b_rels[$key]['predicate']['value'] == 'isMemberOfCollection') {
+        $count++;
+      }
+    }
+    $this->assertTrue($count == 1, "Second Test object does not have an isMemberOfCollection rels entry to deleted collection");
+  }
+
+  /**
+   * Create test objects for this test.
+   *
+   * @param array $properties
+   *   Array of properties to build the object.
+   *
+   * @return array
+   *   An array of built objects.
+   */
+  protected function createTestObjects(array $properties = array()) {
+    foreach ($properties as $key => $value) {
+      $objects[$key] = $this->ingestConstructedObject($value);
+    }
+    return $objects;
+  }
+}

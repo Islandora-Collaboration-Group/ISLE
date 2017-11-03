@@ -1,0 +1,194 @@
+<?php
+/**
+ * @file
+ * Workflow permissions tests.
+ */
+
+class WebformWorkflowPermissionsTestCase extends WebformWorkflowBaseTestCase {
+
+  /**
+   * Overrides parent::getInfo().
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Permissions',
+      'description' => 'Test permisions for workflow states.',
+      'group' => 'Webform Workflow',
+    );
+  }
+
+  /**
+   * Create a number of test roles.
+   */
+  protected function createDummyRoles(array $permissions = array(), $number = 4) {
+    $roles = array();
+    for ($i = 0; $i < $number; $i++) {
+      $name = 'Test role ' . $number;
+      $roles[] = $this->drupalCreateRole($permissions, $name);
+    }
+    return $roles;
+  }
+
+  /**
+   * Test view and edit permissions.
+   */
+  public function testViewEdit() {
+    // Create a webform.
+    $owner = $this->drupalCreateUser(array(
+      'create webform content',
+      'edit own webform content',
+      'access own webform results',
+    ));
+    $node = $this->createDummyWebform(array('uid' => $owner->uid));
+
+    // Add two states to the webform.
+    $state1 = $this->createDummyState();
+    $state2 = $this->createDummyState();
+    $this->addStateToWebform($state1, $node);
+    $this->addStateToWebform($state2, $node);
+
+    // Create two users, submitter 1 and 2. Submitter 1 has permission to access
+    // his/her own webform submissions. Submitter 2 does not have any special
+    // permissions.
+    $submitter1 = $this->drupalCreateUser(array(
+      'access own webform submissions',
+      'edit own webform submissions',
+    ));
+    $submitter2 = $this->drupalCreateUser();
+
+    // Create two webform submissions, by the above submitters.
+    $submission1 = $this->createDummySubmission($node, $submitter1);
+    $submission2 = $this->createDummySubmission($node, $submitter2);
+
+    // Set submission 1 to state 1, and submission 2 to state 2.
+    webform_workflow_transition($submission1, $state1);
+    webform_workflow_transition($submission2, $state2);
+
+    // Test view and edit permissions, which (so far) should have been
+    // unaffected by the Webform Workflow module.
+    $anonymous = drupal_anonymous_user();
+    $ops = array('view', 'edit');
+    foreach ($ops as $op) {
+      $this->assertTrue(webform_submission_access($node, $submission1, $op, $submitter1), "Submitter 1 can $op own submission 1");
+      $this->assertFalse(webform_submission_access($node, $submission2, $op, $submitter2), "Submitter 2 cannot $op own submission 2");
+      $this->assertFalse(webform_submission_access($node, $submission2, $op, $submitter1), "Submitter 1 cannot $op submission 2");
+      $this->assertFalse(webform_submission_access($node, $submission1, $op, $submitter2), "Submitter 2 cannot $op submission 1");
+      $this->assertFalse(webform_submission_access($node, $submission1, $op, $anonymous), "Anonymous cannot $op submission 1");
+      $this->assertFalse(webform_submission_access($node, $submission2, $op, $anonymous), "Anonymous cannot $op submission 2");
+    }
+    $this->assertTrue(webform_submission_access($node, $submission1, 'view', $owner), "Webform owner can view submission 1");
+    $this->assertTrue(webform_submission_access($node, $submission2, 'view', $owner), "Webform owner can view submission 2");
+
+    // Modify state 2 so that it does grant view/edit access to submitter 2.
+    foreach ($ops as $op) {
+      $state2->permissions[$op][WEBFORM_WORKFLOW_ORIGINAL_SUBMITTER] = WEBFORM_WORKFLOW_ORIGINAL_SUBMITTER;
+    }
+    entity_save('webform_workflow_state', $state2);
+
+    // Test the new permissions.
+    foreach ($ops as $op) {
+      $this->assertTrue(webform_submission_access($node, $submission2, $op, $submitter2), "Submitter 2 can now $op own submission 2");
+      $this->assertFalse(webform_submission_access($node, $submission2, $op, $submitter1), "Submitter 1 still cannot $op submission 2");
+    }
+
+    // Modify state 2 so that it also grants view/edit access to submitter 1's
+    // role.
+    $rids = array_keys($submitter1->roles);
+    $rid = end($rids);
+    foreach ($ops as $op) {
+      $state2->permissions[$op][$rid] = $rid;
+    }
+    entity_save('webform_workflow_state', $state2);
+
+    // Test the new permissions.
+    foreach ($ops as $op) {
+      $this->assertTrue(webform_submission_access($node, $submission2, $op, $submitter1), "Submitter 1 can now $op submission 2");
+    }
+  }
+
+  /**
+   * Test permissions for changing a submission's state.
+   */
+  public function testFromTo() {
+    // Create a webform.
+    $owner = $this->drupalCreateUser(array(
+      'create webform content',
+      'edit own webform content',
+      'access own webform results',
+    ));
+    $node = $this->createDummyWebform(array('uid' => $owner->uid));
+
+    // Enable workflow for the webform.
+    $this->enableWorkflow($node);
+
+    // Create a submission.
+    $submitter = $this->drupalCreateUser(array(
+      'access own webform submissions',
+    ));
+    $submission = $this->createDummySubmission($node, $submitter);
+    $submission_path = 'node/' . $node->nid . '/submission/' . $submission->sid;
+
+    // Log in as the webform owner.
+    $this->drupalLogin($owner);
+    $this->drupalGet($submission_path);
+    $this->assertText(t('Current state'), "The webform owner can view the submission's state");
+    $this->assertNoText(t('New state'), "The webform owner cannot change the submission's state");
+
+    // Add two states to the webform.
+    $state1 = $this->createDummyState();
+    $state2 = $this->createDummyState();
+    $this->addStateToWebform($state1, $node);
+    $this->addStateToWebform($state2, $node);
+    $this->drupalGet($submission_path);
+    $this->assertText(t('New state'), "The webform owner can now change the submission's state");
+
+    // Log in as the submitter.
+    $this->drupalLogin($submitter);
+    $this->drupalGet($submission_path);
+    $this->assertNoText(t('Current state'), "The submitter cannot view the submission's state");
+    $this->assertNoText(t('New state'), "The submitter cannot change the submission's state");
+
+    // Set that the submitter should be allowed to view the submission's state.
+    $data = &$node->webform_workflow->data;
+    $data['os_view_state'] = 1;
+    db_update('webform_workflow')
+      ->condition('nid', $node->nid)
+      ->fields(array('data' => serialize($data)))
+      ->execute();
+    $this->drupalGet($submission_path);
+    $this->assertText(t('Current state'), "The submitter can view the submission's state");
+    $this->assertNoText(t('New state'), "The submitter still cannot change the submission's state");
+
+    // Set that the submitter should be allowed to change the submission state
+    // to state 1, but not to state 2.
+    $state1->permissions['to'][WEBFORM_WORKFLOW_ORIGINAL_SUBMITTER] = WEBFORM_WORKFLOW_ORIGINAL_SUBMITTER;
+    entity_save('webform_workflow_state', $state1);
+    $this->drupalGet($submission_path);
+    $this->assertText(t('New state'), "The submitter can now change the submission's state");
+    $this->assertRaw('<option value="' . $state1->wsid . '"', "The submitter can now change the submission's state to state 1");
+    $this->assertNoRaw('<option value="' . $state2->wsid . '"', "The submitter cannot change the submission's state to state 2");
+
+    // Set that the submitter should be allowed to change the submission state
+    // to state2.
+    $state2->permissions['to'][WEBFORM_WORKFLOW_ORIGINAL_SUBMITTER] = WEBFORM_WORKFLOW_ORIGINAL_SUBMITTER;
+    entity_save('webform_workflow_state', $state2);
+    $this->drupalGet($submission_path);
+    $this->assertRaw('<option value="' . $state2->wsid . '"', "The submitter can now change the submission's state to state 2");
+
+    // Set the submission's state to state 1.
+    webform_workflow_transition($submission, $state1);
+
+    // Check that the submitter now cannot change the submission's state.
+    $this->drupalGet($submission_path);
+    $this->assertText(t('Current state'), "The submitter can still view the submission's state");
+    $this->assertNoText(t('New state'), 'The submitter cannot change the submission from state 1');
+
+    // Set that the submitter should be allowed to change the submission from
+    // state 1.
+    $state1->permissions['from'][WEBFORM_WORKFLOW_ORIGINAL_SUBMITTER] = WEBFORM_WORKFLOW_ORIGINAL_SUBMITTER;
+    entity_save('webform_workflow_state', $state1);
+    $this->drupalGet($submission_path);
+    $this->assertText(t('New state'), 'The submitter can now change the submission from state 1');
+  }
+
+}

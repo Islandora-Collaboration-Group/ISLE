@@ -1,0 +1,509 @@
+<?php
+
+/**
+ * @file
+ * Various hook and function implementations.
+ */
+
+/**
+ * Implements hook_init().
+ */
+function islandora_solr_facet_pages_init() {
+  // Include islandora_solr common.inc.
+  module_load_include('inc', 'islandora_solr', 'includes/utilities');
+  // Include islandora solr query_processor.inc
+  module_load_include('inc', 'islandora_solr', 'includes/query_processor');
+}
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_solr_facet_pages_menu() {
+  $items = array();
+
+  // @TODO: create separate permission?
+  $items['browse'] = array(
+    'page callback' => 'islandora_solr_facet_pages_callback',
+    'page arguments' => array(1, 2, 3),
+    'access callback' => 'islandora_solr_facet_pages_access_callback',
+    'access arguments' => array(1),
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/islandora/search/islandora_solr/facet_pages'] = array(
+    'title' => 'Facet Pages',
+    'description' => 'Islandora Solr facet pages settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_solr_facet_pages_admin_settings'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'islandora_solr_facet_pages.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function islandora_solr_facet_pages_theme() {
+  // Set path.
+  $base = array(
+    'path' => drupal_get_path('module', 'islandora_solr_facet_pages') . '/theme',
+    'file' => 'islandora_solr_facet_pages.theme.inc',
+  );
+
+  return array(
+    'islandora_solr_facet_pages_wrapper' => $base + array(
+      'template' => 'islandora-solr-facet-pages-wrapper',
+      'variables' => array(
+        'letterer' => NULL,
+        'results' => NULL,
+        'pager' => NULL,
+        'path' => NULL,
+        'pager_data' => array(),
+      ),
+    ),
+    'islandora_solr_facet_pages_results' => $base + array(
+      'template' => 'islandora-solr-facet-pages-results',
+      'variables' => array(
+        'results' => array(),
+        'solr_field' => NULL,
+        'path' => NULL,
+      ),
+    ),
+    'islandora_solr_facet_pages_letterer' => $base + array(
+      'variables' => array(
+        'facet_queries' => array(),
+        'fq_map' => array(),
+        'prefix' => NULL,
+        'path' => NULL,
+      ),
+    ),
+    'islandora_solr_facet_pages_admin_table' => array(
+      'file' => 'islandora_solr_facet_pages.admin.inc',
+      'render element' => 'form',
+    ),
+  );
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function islandora_solr_facet_pages_block_info() {
+  return array(
+    'islandora-solr-facet-pages' => array(
+      'info' => t('Islandora Solr facet pages'),
+      'cache' => DRUPAL_NO_CACHE,
+    ),
+  );
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function islandora_solr_facet_pages_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    case 'islandora-solr-facet-pages':
+      $block['subject'] = t('Islandora Solr facet pages');
+      $block['content'] = islandora_solr_facet_pages_block_callback();
+      break;
+  }
+
+  return $block;
+}
+
+/**
+ * Performs a solr query to get facets fields for the alphabetical pager.
+ *
+ * It makes use of facet queries.
+ *
+ * @param object $solr
+ *   Apache_Solr_Service object to use for the facet query.
+ * @param string $solr_field
+ *   Solr field to use for the facet query.
+ * @param string $search_term
+ *   Term to search facets with.
+ *
+ * @return array
+ *   Returns array containing facet_queries and a filter query map. Both arrays
+ *   are used to theme the alphabetical pager. The fq_map contains an array
+ *   which maps a filter query to a prefix. eg: solr_field:A* => A.
+ *   Facet_queries are the solr results wich maps the filter query to the bucket
+ *   size, eg: solr_field:A* => 1234
+ */
+function islandora_solr_facet_pages_build_letterer($solr, $solr_field, $search_term = NULL) {
+  $solr_build = new IslandoraSolrQueryProcessor();
+  $fq = array();
+  $fq_map = array();
+  foreach (range('A', 'Z') as $letter) {
+    $value = "$solr_field:($letter* OR " . strtolower($letter) . "*)";
+    $fq_map[$value] = $letter;
+    $fq[] = $value;
+  }
+
+  // Set facet parameters.
+  $params = array(
+    'facet' => 'true',
+    'facet.field' => $solr_field,
+    'facet.sort' => 'index',
+    'facet.mincount' => 1,
+    'facet.limit' => 0,
+    'facet.query' => $fq,
+    'hl' => 'false',
+  );
+  $request_handler = variable_get('islandora_solr_request_handler', FALSE);
+  if ($request_handler) {
+    $params['qt'] = $request_handler;
+  }
+
+  // Set query.
+  $search_term = trim($search_term);
+  if ($search_term) {
+    $query = "$solr_field:($search_term)";
+  }
+  else {
+    $query = "$solr_field:[* TO *]";
+  }
+  $solr_build->buildQuery($query, $params);
+  // Because IslandoraSolrQueryProcessor stomps on our facet params.
+  $solr_build->solrParams = array_replace_recursive($solr_build->solrParams, $params);
+  try {
+    $solr_build->executeQuery();
+    // Facet queries.
+    $facet_queries = $solr_build->islandoraSolrResult['facet_counts']['facet_queries'];
+  }
+  catch (Exception $e) {
+    $facet_queries = new stdClass();
+    drupal_set_message(check_plain(t('Error searching Solr index')) . ' ' . $e->getMessage(), 'error', FALSE);
+  }
+
+  return array(
+    'facet_queries' => $facet_queries,
+    'fq_map' => $fq_map,
+  );
+}
+
+/**
+ * Performs a solr query to return facet_fields to populate the results page.
+ *
+ * @param object $solr
+ *   Apache_Solr_Service object to use for the facet fields query.
+ * @param string $solr_field
+ *   Solr field to use for the facet fields query.
+ * @param string $prefix
+ *   Prefix from the URL to add to add a prefix to the facet query. This will
+ *   limit the returned fields with fields that are prefixed with this value.
+ * @param string $search_term
+ *   Term to search facets with.
+ *
+ * @return array
+ *   Returns an array of all the facet field values and the bucket size: eg:
+ *   solr value => 123
+ */
+function islandora_solr_facet_pages_build_results($solr, $solr_field, $prefix, $search_term = NULL) {
+  $solr_build = new IslandoraSolrQueryProcessor();
+  // Get the actual results.
+  $search_term = trim($search_term);
+  if ($search_term) {
+    $query = "$solr_field:($search_term)";
+  }
+  else {
+    $query = "$solr_field:[* TO *]";
+  }
+
+  // Set facet parameters.
+  $facet_params = array(
+    'facet' => 'true',
+    'facet.field' => $solr_field,
+    'facet.sort' => 'index',
+    'facet.mincount' => 1,
+    'facet.limit' => variable_get('islandora_solr_facet_pages_facet_limit', 100000),
+    'hl' => 'false',
+  );
+
+  $request_handler = variable_get('islandora_solr_request_handler', FALSE);
+  if ($request_handler) {
+    $facet_params['qt'] = $request_handler;
+  }
+
+  // Set the facet prefix.
+  if ($prefix != t('ALL')) {
+    $facet_params['facet.prefix'] = $prefix;
+  }
+  $solr_build->buildQuery($query, $facet_params);
+  $solr_query = ($solr_build->internalSolrQuery) ? $solr_build->internalSolrQuery : $solr_build->solrQuery;
+  // Because the IslandoraSolrQueryProcessor stomps on our facet information.
+  $solr_build->solrParams = array_replace_recursive($solr_build->solrParams, $facet_params);
+  try {
+    $solr_build->executeQuery();
+    $fields = (array) $solr_build->islandoraSolrResult['facet_counts']['facet_fields'][$solr_field];
+  }
+  catch (Exception $e) {
+    $fields = array();
+    drupal_set_message(check_plain(t('Error searching Solr index')) . ' ' . $e->getMessage(), 'error', FALSE);
+  }
+
+  return $fields;
+}
+
+/**
+ * Prepares data to render the pager.
+ *
+ * @param array $result_fields
+ *   An array containing all the results.
+ *
+ * @return array
+ *   Returns an array containing values to configure and render the pager.
+ *   Limit, offset and total.
+ */
+function islandora_solr_facet_pages_pager($result_fields = array()) {
+  // Set variables.
+  $limit = variable_get('islandora_solr_facet_pages_limit', 25);
+  $offset = 0;
+  $total = NULL;
+
+  // Get URL parameters.
+  $params = $_GET;
+  unset($params['q']);
+
+  // Get page limit.
+  if (!empty($limit)) {
+    $total = count($result_fields);
+    $offset = isset($params['page']) ? $params['page'] * $limit : 0;
+    pager_default_initialize($total, $limit);
+  }
+
+  return array(
+    'limit' => $limit,
+    'offset' => $offset,
+    'total' => $total,
+  );
+}
+
+/**
+ * Page callback function.
+ *
+ * @param string $path
+ *   Machine readable name passed in the url to decide what solr field to facet
+ *   on.
+ * @param string $prefix
+ *   Letter of the alphabet to filter on.
+ *
+ * @return string
+ *   Rendered page including letter pager, numerical pager and search results.
+ */
+function islandora_solr_facet_pages_callback($path = NULL, $prefix = NULL, $search_term = NULL) {
+  module_load_include('inc', 'islandora_solr', 'includes/utilities');
+  $search_term = islandora_solr_restore_slashes($search_term);
+
+  // Get available fields from variable.
+  $fields = variable_get('islandora_solr_facet_pages_fields_data', array());
+
+  // Callback validation.
+  foreach ($fields as $key => $value) {
+    if ($path == $value['path']) {
+      // Set variables.
+      $solr_field = $value['solr_field'];
+      drupal_set_title($value['label']);
+    }
+  }
+
+  // Set default prefix.
+  if ($prefix == NULL) {
+    $prefix = t('ALL');
+  }
+
+  // Include base CSS file.
+  $base_css = drupal_get_path('module', 'islandora_solr_facet_pages') . '/css/islandora_solr_facet_pages.base.css';
+  drupal_add_css($base_css);
+
+  // Use Solr faceting to get list of names.
+  $parsed_url = parse_url(variable_get('islandora_solr_url', 'http://localhost:8080/solr'));
+  $solr = new Apache_Solr_Service($parsed_url['host'], $parsed_url['port'], $parsed_url['path']);
+
+  // Create an escaped variable for the facet search term, for use with
+  // the following two functions below:
+  //
+  // islandora_solr_facet_pages_build_letterer()
+  // islandora_solr_facet_pages_build_results()
+  //
+  // We do this to preserve the original value of the search term, so that
+  // subsequent calls to drupal_get_form() are prepopulated with the user
+  // input text, and not the escaped string.
+  $show_form = variable_get('islandora_solr_facet_pages_search_form', TRUE);
+  $escape_lucene = variable_get('islandora_solr_facet_pages_lucene_syntax_escape', FALSE);
+
+  $search_term_escape = ($show_form && $escape_lucene) ?
+    islandora_solr_facet_query_escape($search_term, variable_get('islandora_solr_facet_pages_lucene_regex_default', ISLANDORA_SOLR_QUERY_FACET_LUCENE_ESCAPE_REGEX_DEFAULT)) :
+    islandora_solr_lesser_escape($search_term);
+
+  // Render letters.
+  $letterer_arr = islandora_solr_facet_pages_build_letterer($solr, $solr_field, $search_term_escape);
+  $letterer = theme('islandora_solr_facet_pages_letterer', array(
+    'facet_queries' => $letterer_arr['facet_queries'],
+    'fq_map' => $letterer_arr['fq_map'],
+    'prefix' => $prefix,
+    'path' => $path,
+  ));
+
+  // Collect results.
+  $result_fields = islandora_solr_facet_pages_build_results($solr, $solr_field, $prefix, $search_term_escape);
+  // Collect results with lowercase.
+  $prefix_lower = strtolower($prefix);
+  $result_fields_lower = islandora_solr_facet_pages_build_results($solr, $solr_field, $prefix_lower, $search_term_escape);
+
+  // Merge uppercase with lowercase.
+  $result_fields = $result_fields + $result_fields_lower;
+
+  // Set up pager.
+  $pager_data = islandora_solr_facet_pages_pager($result_fields);
+  $offset = $pager_data['offset'];
+  $limit = $pager_data['limit'];
+
+  // Slice array.
+  $results = array_slice($result_fields, $offset, $limit, TRUE);
+  $results = theme('islandora_solr_facet_pages_results', array(
+    'results' => $results,
+    'solr_field' => $solr_field,
+    'path' => $path,
+  ));
+
+  // Render pager.
+  $pager = theme('pager', array(
+    'element' => 0,
+    'quantity' => 5,
+  ));
+
+  if (variable_get('islandora_solr_facet_pages_search_form', FALSE)) {
+    $form = drupal_get_form('islandora_solr_facet_pages_search_form', array(
+      'path' => $path,
+      'prefix' => $prefix,
+      'search_term' => $search_term,
+    ));
+    $search_form = drupal_render($form);
+  }
+  else {
+    $search_form = '';
+  }
+
+  return theme('islandora_solr_facet_pages_wrapper', array(
+    'search_form' => $search_form,
+    'letterer' => $letterer,
+    'results' => $results,
+    'pager' => $pager,
+    'path' => $path,
+    'pager_data' => $pager_data,
+  ));
+}
+
+/**
+ * Access callback function.
+ *
+ * @param string $path
+ *   Machine readable name passed in the url to decide what solr field to facet
+ *   on.
+ *
+ * @return bool
+ *   A boolean based on user access and valid path.
+ */
+function islandora_solr_facet_pages_access_callback($path = NULL) {
+  // Get available fields from variable.
+  $fields = variable_get('islandora_solr_facet_pages_fields_data', array());
+
+  // Callback validation.
+  foreach ($fields as $key => $value) {
+    // Check for allowed paths.
+    if ($path == $value['path'] && user_access(ISLANDORA_VIEW_OBJECTS)) {
+      return TRUE;
+    }
+  }
+
+  return FALSE;
+}
+
+
+/**
+ * Callback function to populate the facet page block with links.
+ *
+ * @return string
+ *   Returns a rendered bulletted list with links to all configured facet
+ *   pages.
+ */
+function islandora_solr_facet_pages_block_callback() {
+  // Get available fields from variable.
+  $fields = variable_get('islandora_solr_facet_pages_fields_data', array());
+
+  $items = array();
+  foreach ($fields as $key => $value) {
+
+    $items[] = l($value['label'], 'browse/' . $value['path'], array(
+      'attributes' => array(
+        'title' => $value['label'],
+      ),
+    ));
+  }
+
+  if (!empty($items)) {
+    return theme('item_list', array(
+      'items' => $items,
+      'type' => 'ul',
+      'attributes' => array(
+        'class' => 'islandora-solr-facet-pages-list',
+      ),
+    ));
+  }
+  else {
+    return FALSE;
+  }
+}
+
+/**
+ * Defines a facet search form for search facets.
+ *
+ * @param array $form
+ *   The Drupal form.
+ * @param array $form_state
+ *   The Drupal form state.
+ * @param array $vars
+ *   Current facet variables to use in the search form.
+ *
+ * @return array
+ *   The Drupal form definition.
+ */
+function islandora_solr_facet_pages_search_form(array $form, array &$form_state, array $vars = array()) {
+  $form = array();
+  $form_state['storage'] = array(
+    'vars' => $vars,
+  );
+  $form['search_term'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Search'),
+    '#default_value' => (isset($vars['search_term']) ? $vars['search_term'] : ''),
+    '#size' => 60,
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Search'),
+  );
+  return $form;
+}
+
+/**
+ * Submit handler for solr facet page search form.
+ *
+ * @param array $form
+ *   The Drupal form.
+ * @param array $form_state
+ *   The Drupal form state.
+ */
+function islandora_solr_facet_pages_search_form_submit(array $form, array &$form_state) {
+  module_load_include('inc', 'islandora_solr', 'includes/utilities');
+  $form_state['redirect'] = implode('/', array(
+    'browse',
+    $form_state['storage']['vars']['path'],
+    $form_state['storage']['vars']['prefix'],
+    islandora_solr_replace_slashes(trim($form_state['values']['search_term'])),
+  ));
+}

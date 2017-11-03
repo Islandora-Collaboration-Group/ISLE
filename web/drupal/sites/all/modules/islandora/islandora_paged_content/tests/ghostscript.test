@@ -1,0 +1,83 @@
+<?php
+
+/**
+ * @file
+ * Unit tests for tools extracting PDF into paged content and individual pages.
+ */
+
+class GhostscriptTestCase extends DrupalWebTestCase {
+
+  /**
+   * Gets info to display to describe this test.
+   *
+   * @see DrupalUnitTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Ghostscript Unit Tests',
+      'description' => 'Ensure that wrapper functions for Ghostscript work correctly.',
+      'group' => 'Islandora Paged Content',
+    );
+  }
+
+  /**
+   * Sets up the requirements for this test.
+   *
+   * @see DrupalUnitTestCase::setUp()
+   */
+  public function setUp() {
+    module_load_include('inc', 'islandora_paged_content', 'includes/utilities');
+    parent::setUp('islandora_paged_content');
+  }
+
+  /**
+   * Test that pdfinfo is available.
+   */
+  public function testGhostscriptExistence() {
+    $ghostscript = islandora_paged_content_can_combine_pdf();
+    if (!$ghostscript) {
+      $this->fail('Valid version of Ghostscript was not found.');
+    }
+    else {
+      $this->pass('Valid version of Ghostscript was found.');
+    }
+  }
+
+  /**
+   * Test that ghostscript gives us output.
+   */
+  public function testGhostscriptOutputValidity() {
+    $mcgill_pdf = drupal_get_path('module', 'islandora_paged_content') . '/tests/fixtures/2010.08.25_McGill_Librarians.pdf';
+    $output = islandora_paged_content_extract_tiff_from_pdf($mcgill_pdf, 1, 'tiff32nc', '300', 'Ghostscript ran successfully.');
+    if ($output) {
+      if (filesize($output)) {
+        $this->pass('Ghostscript returned valid output for TIF extraction.');
+      }
+      else {
+        $this->fail('Ghostscript created an empty file when attempting to extract a TIF.');
+      }
+      file_unmanaged_delete($output);
+    }
+    else {
+      $this->fail('Ghostscript did not create a file when attempting to extract a TIF.');
+    }
+  }
+
+  /**
+   * Test that ghostscript gives us output.
+   */
+  public function testGhostscriptInvalidParameters() {
+    $mcgill_pdf = drupal_get_path('module', 'islandora_paged_content') . '/tests/fixtures/2010.08.25_McGill_Librarians.pdf';
+    $output = islandora_paged_content_extract_tiff_from_pdf($mcgill_pdf, 1, 'totesdoesnotexist', '300x300', 'Ghostscript ran successfully.');
+    $this->assertFalse($output, 'Ghostscript did not return a file when bad parameters passed.');
+  }
+
+  /**
+   * Test that a non-valid URI returns FALSE.
+   */
+  public function testGhostscriptNonValidURI() {
+    $test_pdf = "temporary://totally_doesnt_exist.pdf";
+    $num_pages = islandora_paged_content_length_of_pdf($test_pdf);
+    $this->assertFalse($num_pages, 'No TIF was attempted to be extracted from a non-existent PDF.');
+  }
+}

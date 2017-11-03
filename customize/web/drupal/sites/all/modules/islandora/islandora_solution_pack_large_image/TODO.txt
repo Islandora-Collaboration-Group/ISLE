@@ -1,0 +1,14 @@
+TODO:
+=====
+
+high
+
+- better error handling. -> imageMagick and kakadu error messages + watchdog.
+- check for code reusablity in derivatives
+- fix DS labels?
+
+medium
+
+- write interface similar to imagemagick in drupal to configure kakadu.
+
+low

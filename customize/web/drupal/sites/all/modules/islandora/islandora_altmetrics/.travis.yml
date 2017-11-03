@@ -1,0 +1,41 @@
+sudo: required
+language: php
+php:
+  - 5.3.3
+  - 5.4
+  - 5.5
+branches:
+  only:
+    - /^7.x/
+env:
+  - FEDORA_VERSION="3.5"
+  - FEDORA_VERSION="3.6.2"
+  - FEDORA_VERSION="3.7.0"
+  - FEDORA_VERSION="3.8.1"
+before_install:
+  - cd $HOME
+  - git clone -b 7.x git://github.com/Islandora/islandora.git
+  - git clone -b 7.x git://github.com/Islandora/islandora_scholar
+  - git clone -b 7.x git://github.com/Islandora/islandora_solr_search.git
+  - git clone git://github.com/Islandora/citeproc-php.git
+  - export ISLANDORA_DIR=$HOME/islandora
+  - $HOME/islandora/tests/scripts/travis_setup.sh
+  - cd $HOME/drupal-*
+  - ln -s $TRAVIS_BUILD_DIR sites/all/modules/islandora_altmetrics
+  - ln -s $HOME/islandora_scholar sites/all/modules/islandora_scholar
+  - ln -s $HOME/citeproc-php sites/all/libraries/citeproc-php
+  - ln -s $HOME/islandora_solr_search sites/all/modules/islandora_solr_search
+  - drush cc all
+  - drush -u 1 en --yes islandora_scholar islandora_altmetrics
+before_script:
+  # Mysql might time out for long tests, increase the wait timeout.
+  - mysql -e 'SET @@GLOBAL.wait_timeout=1200'
+script:
+  - $ISLANDORA_DIR/tests/scripts/line_endings.sh sites/all/modules/islandora_altmetrics
+  - drush coder-review --reviews=production,security,style,i18n,potx,sniffer sites/all/modules/islandora_altmetrics
+  - drush coder-review --reviews=production,security,style,i18n,potx,sniffer --no-empty islandora_badges
+  - drush coder-review --reviews=production,security,style,i18n,potx,sniffer --no-empty islandora_wos
+  - drush coder-review --reviews=production,security,style,i18n,potx,sniffer --no-empty islandora_scopus
+  - drush coder-review --reviews=production,security,style,i18n,potx,sniffer --no-empty islandora_oadoi
+  - drush coder-review --reviews=production,security,style,i18n,potx,sniffer --no-empty islandora_altmetrics
+  - phpcpd --names *.module,*.inc,*.test,*.php sites/all/modules/islandora_altmetrics

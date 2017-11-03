@@ -1,0 +1,158 @@
+<?php
+
+/**
+ * @file
+ * Attempts to ingest a TIFF into a randomly generated large image collection.
+ */
+
+class IslandoraLargeImageIngestTestCase extends IslandoraCollectionWebTestCase {
+
+  /**
+   * Get test information.
+   *
+   * @see IslandoraWebTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Large Image Ingest/Purge',
+      'description' => 'Ingests and purges a TIFF image from a randomly generated large image collection',
+      'group' => 'Islandora Large Image',
+    );
+  }
+
+  /**
+   * Set up the test environment.
+   *
+   * @see IslandoraWebTestCase::setUp()
+   */
+  public function setUp() {
+    $this->imagemagick_convert = variable_get('imagemagick_convert', '/usr/bin/convert');
+    parent::setUp(array(
+     'islandora',
+     'islandora_large_image',
+     'islandora_basic_collection',
+     'imagemagick',
+     ));
+  }
+
+  /**
+   * Creates an administrative user and attempts to ingest a test TIFF.
+   */
+  public function testIngestPurgeLargeImage() {
+
+    $user = $this->drupalCreateUser(array(
+      'view fedora repository objects',
+      'ingest fedora objects',
+      'administer site configuration',
+      'manage object properties',
+      'delete fedora objects and datastreams',
+      'create child collection',
+    ));
+    $this->drupalLogin($user);
+
+    $label = $this->randomName(16);
+    $suffix = $this->randomName(16);
+    $collectionpid = 'islandora:' . $suffix;
+    $this->createTestCollection($label, 'islandora:sp_large_image_cmodel', $collectionpid);
+    variable_set('image_toolkit', 'imagemagick');
+    variable_set('imagemagick_convert', $this->imagemagick_convert);
+
+    // Attempts to create an object.
+    $path = 'islandora/object/' . $collectionpid . '/manage/overview/ingest';
+    $file = drupal_get_path('module', 'islandora_large_image') . '/tests/fixtures/test.tiff';
+    $handle = fopen($file, "r");
+    $contents = fread($handle, filesize($file));
+    fclose($handle);
+    $edit = array(
+      'files[file]' => $file,
+    );
+    $this->drupalPost($path, $edit, t('Ingest'));
+    $this->assertText('New Object', 'Large image object was created', 'Islandora');
+    $object = $this->getObjectFromPath($this->url);
+    $this->assertRaw('/datastream/JPG/view', 'JPG datastream visible on View page', 'Islandora');
+
+    // Determines whether or not the appropriate datastreams were created.
+    $datastreams = array(
+      'RELS-EXT',
+      'DC',
+      'OBJ',
+      'JP2',
+      'JPG',
+      'TN',
+    );
+    $this->assertDatastreams($object, $datastreams);
+
+    $datastreams = array(
+      array('TN', 'image'),
+      array('OBJ', 'tiff'),
+      array('JP2', 'jp2'),
+      array('JPG', 'image'),
+    );
+    $this->validateDatastreams($object, $datastreams);
+
+    // Attempts to delete the object and then collection.
+    $this->deleteObject($object);
+    $this->deleteTestCollection($collectionpid);
+  }
+
+
+  /**
+   * Creates an administrative user and attempts to ingest a test JP2.
+   */
+  public function testIngestPurgeJP2() {
+
+    $user = $this->drupalCreateUser(array(
+      'view fedora repository objects',
+      'ingest fedora objects',
+      'administer site configuration',
+      'manage object properties',
+      'delete fedora objects and datastreams',
+      'create child collection',
+    ));
+    $this->drupalLogin($user);
+
+    $label = $this->randomName(16);
+    $suffix = $this->randomName(16);
+    $collectionpid = 'islandora:' . $suffix;
+    $this->createTestCollection($label, 'islandora:sp_large_image_cmodel', $collectionpid);
+    variable_set('image_toolkit', 'imagemagick');
+    variable_set('imagemagick_convert', $this->imagemagick_convert);
+
+    // Attempts to create an object.
+    $path = 'islandora/object/' . $collectionpid . '/manage/overview/ingest';
+    $file = drupal_get_path('module', 'islandora_large_image') . '/tests/fixtures/test.jp2';
+    $handle = fopen($file, "r");
+    $contents = fread($handle, filesize($file));
+    fclose($handle);
+    $edit = array(
+      'files[file]' => $file,
+    );
+    $this->drupalPost($path, $edit, t('Ingest'));
+    $this->assertText('New Object', 'Large image object was created', 'Islandora');
+    $object = $this->getObjectFromPath($this->url);
+    $this->assertRaw('/datastream/JPG/view', 'JPG datastream visible on View page', 'Islandora');
+
+    // Determines whether or not the appropriate datastreams were created.
+    $datastreams = array(
+      'RELS-EXT',
+      'DC',
+      'OBJ',
+      'JP2',
+      'JPG',
+      'TN',
+    );
+    $this->assertDatastreams($object, $datastreams);
+
+    $datastreams = array(
+      array('TN', 'image'),
+      array('OBJ', 'jp2'),
+      array('JP2', 'jp2'),
+      array('JPG', 'image'),
+    );
+    $this->validateDatastreams($object, $datastreams);
+
+    // Attempts to delete the object and then collection.
+    $this->deleteObject($object);
+    $this->deleteTestCollection($collectionpid);
+  }
+}

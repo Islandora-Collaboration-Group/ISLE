@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eac-cpf xmlns="urn:isbn:1-931666-33-4"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink"
+	xsi:schemaLocation="urn:isbn:1-931666-33-4 http://eac.staatsbibliothek-berlin.de/schema/cpf.xsd">
+	<control>
+		<recordId></recordId>
+		<maintenanceStatus></maintenanceStatus>
+		<maintenanceAgency>
+			<agencyName></agencyName>
+		</maintenanceAgency>
+		<maintenanceHistory>
+		</maintenanceHistory>
+	</control>	
+	<cpfDescription>
+		<identity>
+			<entityId>id</entityId>
+			<entityType>person</entityType>
+			<nameEntry>
+				<part></part>
+			</nameEntry>
+		</identity>
+		<description>
+			<occupation>
+				<term>Title</term>
+				<placeEntry localType="department">department</placeEntry>
+			</occupation>
+			
+			</function>
+		</description>
+	</cpfDescription>
+</eac-cpf>

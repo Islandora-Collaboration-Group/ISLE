@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * islandora_pdf.install
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * @see islandora_pdf_islandora_required_objects()
+ */
+function islandora_pdf_install() {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  islandora_install_solution_pack('islandora_pdf');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_pdf_uninstall() {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  islandora_install_solution_pack('islandora_pdf', 'uninstall');
+}

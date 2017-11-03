@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../style/module.stylesheet.xsl" ?>
+<exslt:module xmlns:exslt="http://exslt.org/documentation"
+              version="1" prefix="random">
+
+<exslt:name>Random</exslt:name>
+
+<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                 xmlns:dc="http://purl.org/dc/elements/1.1/"
+                 ID="random">
+   <dc:subject>EXSLT</dc:subject>
+   <dc:subject>random</dc:subject>
+   <dc:subject>module</dc:subject>
+   <exslt:revision>
+      <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       ID="random.1">
+         <exslt:version>1</exslt:version>
+         <dc:creator>Jim Fuller</dc:creator>
+         <dc:date>2003-10-10</dc:date>
+         <dc:description>A module of functions concerning randomness.</dc:description>
+      </rdf:Description>
+   </exslt:revision>
+</rdf:Description>
+
+<exslt:doc xmlns="">
+   <section>
+      <para>
+         EXSLT - Random covers extension elements and functions that provide facilities to do with randomness.
+      </para>
+   </section>
+</exslt:doc>
+
+<exslt:functions>
+   <exslt:function name="random-sequence" version="1" core="yes" />
+</exslt:functions>
+
+</exslt:module>

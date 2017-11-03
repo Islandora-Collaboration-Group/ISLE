@@ -1,0 +1,7 @@
+name = Islandora MARCXML
+description = "Allow the ingest and export of MARCXML anywhere MODS is supported."
+dependencies[] = islandora
+package = Islandora Tools
+version = 7.x-dev
+core = 7.x
+php = 5.3

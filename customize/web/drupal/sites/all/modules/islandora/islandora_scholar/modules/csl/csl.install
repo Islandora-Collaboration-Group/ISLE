@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * @file
+ * Implements install hooks for this module.
+ */
+
+/**
+ * Implements hook_enable().
+ */
+function csl_enable() {
+  module_load_include('inc', 'csl', 'includes/csl');
+  $data_path = drupal_get_path('module', 'csl') . '/data/';
+  $styles = array(
+    'APA' => 'apa.csl',
+  );
+  foreach ($styles as $style_name => $filename) {
+    if (!CSL::Exists($style_name)) {
+      $definition = new DOMDocument();
+      $definition->load($data_path . $filename);
+      CSL::Create($style_name, $definition);
+    }
+  }
+}
+
+/**
+ * Implements hook_schema().
+ */
+function csl_schema() {
+  $schema['csl'] = array(
+    'description' => 'This table is used to store CSL 1.0 styles.',
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'name' => array(
+        'description' => 'The name of the CSL 1.0 style.',
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+      ),
+      'style' => array(
+        'description' => 'The xml based style definition.',
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => TRUE,
+      ),
+    ),
+    'unique keys' => array('name' => array('name')),
+    'primary key' => array('id'),
+  );
+  return $schema;
+}

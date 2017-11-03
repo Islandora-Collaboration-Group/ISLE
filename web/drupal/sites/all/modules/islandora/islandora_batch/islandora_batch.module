@@ -1,0 +1,334 @@
+<?php
+
+/**
+ * @file
+ * Module for Batch ingests.
+ */
+
+define('ISLANDORA_BATCH_STATE__ERROR', -1);
+define('ISLANDORA_BATCH_STATE__NOT_READY', 0);
+define('ISLANDORA_BATCH_STATE__READY', 1);
+define('ISLANDORA_BATCH_STATE__PENDING_CHILDREN', 2);
+define('ISLANDORA_BATCH_STATE__DONE', 3);
+
+define('ISLANDORA_BATCH_MANAGE_QUEUE_PERMISSION', 'islandora_batch_manage_queue');
+
+// Hooks.
+define('ISLANDORA_BATCH_PROCESS_FINISHED_HOOK', 'islandora_batch_process_finished');
+define('ISLANDORA_BATCH_OBJECT_PROCESSED_HOOK', 'islandora_batch_object_processed');
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_batch_menu() {
+  $items = array();
+
+  $items['admin/islandora/tools/batch'] = array(
+    'title' => 'Islandora Batch Settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_batch_admin_form'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'includes/admin.form.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['islandora_batch/item/%/delete'] = array(
+    'title' => 'Delete "@item" from queue',
+    'title arguments' => array('@item' => 2),
+    'page callback' => 'islandora_batch_delete_item_page_callback',
+    'page arguments' => array(2),
+    'access callback' => 'islandora_batch_item_access',
+    'access arguments' => array(2),
+    'file' => 'includes/menu.inc',
+  );
+
+  $items['islandora_batch/item/%/set_state'] = array(
+    'title' => 'Set "@item" state',
+    'title arguments' => array('@item' => 2),
+    'page callback' => 'islandora_batch_set_item_state_page_callback',
+    'page arguments' => array(2),
+    'access callback' => 'islandora_batch_item_access',
+    'access arguments' => array(2),
+    'file' => 'includes/menu.inc',
+  );
+
+  $delete_set_base = array(
+    'page callback' => 'islandora_batch_delete_set_page_callback',
+    'access callback' => 'islandora_batch_set_access',
+    'file' => 'includes/menu.inc',
+  );
+  $items['islandora_batch/set/%/delete'] = $delete_set_base + array(
+    'title' => 'Delete items in  "@set" from queue',
+    'title arguments' => array('@set' => 2),
+    'page arguments' => array(2),
+    'access arguments' => array(2),
+  );
+  $items['islandora_batch/reports/queue/%islandora_batch_set/delete'] = $delete_set_base + array(
+    'title' => 'Delete set',
+    'page arguments' => array(3, FALSE),
+    'access arguments' => array(3),
+    'type' => MENU_LOCAL_ACTION,
+  );
+  $items['admin/reports/islandora_batch_queue/%islandora_batch_set/delete'] = $delete_set_base + array(
+    'title' => 'Delete set',
+    'page arguments' => array(3, TRUE),
+    'access arguments' => array(3),
+    'type' => MENU_LOCAL_ACTION,
+  );
+
+  $set_set_state_base = array(
+    'page callback' => 'islandora_batch_set_set_items_state_page_callback',
+    'access callback' => 'islandora_batch_set_access',
+    'file' => 'includes/menu.inc',
+  );
+  $items['islandora_batch/set/%/set_state'] = $set_set_state_base + array(
+    'title' => 'Set state on items in "@set" in queue',
+    'title arguments' => array('@set' => 2),
+    'page arguments' => array(2),
+    'access arguments' => array(2),
+  );
+  $items['islandora_batch/reports/queue/%islandora_batch_set/set_state'] = $set_set_state_base + array(
+    'title' => 'Set state of all items',
+    'page arguments' => array(3, FALSE),
+    'access arguments' => array(3),
+    'type' => MENU_LOCAL_ACTION,
+  );
+  $items['admin/reports/islandora_batch_queue/%islandora_batch_set/set_state'] = $set_set_state_base + array(
+    'title' => 'Set state of all items',
+    'page arguments' => array(3, TRUE),
+    'access arguments' => array(3),
+    'type' => MENU_LOCAL_ACTION,
+  );
+
+  $process_set_base = array(
+    'page callback' => 'islandora_batch_set_restart_batch_page_callback',
+    'access callback' => 'islandora_batch_set_restart_batch_access_callback',
+    'file' => 'includes/menu.inc',
+  );
+  $items['islandora_batch/set/%/restart_batch'] = $process_set_base + array(
+    'title' => 'Process items in set "@set"',
+    'title arguments' => array('@set' => 2),
+    'page arguments' => array(2),
+    'access arguments' => array(2),
+  );
+  $items['islandora_batch/reports/queue/%islandora_batch_set/restart_set'] = $process_set_base + array(
+    'title' => 'Process Set',
+    'page arguments' => array(3, FALSE),
+    'access arguments' => array(3),
+    'type' => MENU_LOCAL_ACTION,
+  );
+  $items['admin/reports/islandora_batch_queue/%islandora_batch_set/restart_set'] = $process_set_base + array(
+    'title' => 'Process Set',
+    'page arguments' => array(3, TRUE),
+    'access arguments' => array(3),
+    'type' => MENU_LOCAL_ACTION,
+  );
+
+  $purge_set_object_base = array(
+    'page callback' => 'islandora_batch_purge_set_object_page_callback',
+    'access callback' => 'islandora_batch_set_access',
+    'file' => 'includes/menu.inc',
+    'title' => 'Purge objects',
+  );
+  $items['islandora_batch/set/%/purge_object'] = $purge_set_object_base + array(
+    'page arguments' => array(2),
+    'access arguments' => array(2),
+  );
+  $items['islandora_batch/reports/queue/%islandora_batch_set/purge_object'] = $purge_set_object_base + array(
+    'page arguments' => array(3, FALSE),
+    'access arguments' => array(3),
+    'type' => MENU_LOCAL_ACTION,
+  );
+  $items['admin/reports/islandora_batch_queue/%islandora_batch_set/purge_object'] = $purge_set_object_base + array(
+    'page arguments' => array(3, TRUE),
+    'access arguments' => array(3),
+    'type' => MENU_LOCAL_ACTION,
+  );
+
+  return $items;
+}
+
+/**
+ * Map values.
+ *
+ * Needed to avoid the set being an optional parameter in the queue displays.
+ *
+ * @param string $value
+ *   A value to map to a set.
+ *
+ * @return string|bool
+ *   The input $value if it was set; otherwise, FALSE.
+ */
+function islandora_batch_set_to_arg($value) {
+  return (empty($value) || $value == '%') ? FALSE : $value;
+}
+
+/**
+ * Check permissions for an item.
+ *
+ * Check if the user has the "manage all" permission, or the item belongs to
+ * the current user.
+ *
+ * @param string $id
+ *   A string representing the ID of an item in the queue.
+ *
+ * @return bool
+ *   TRUE if the current user has permission to manage all items, or the item
+ *   is in a set owned by the given user; otherwise, FALSE.
+ */
+function islandora_batch_item_access($id) {
+  global $user;
+  module_load_include('inc', 'islandora_batch', 'includes/utilities');
+  return islandora_batch_item_exists($id) && (user_access(ISLANDORA_BATCH_MANAGE_QUEUE_PERMISSION, $user) || islandora_batch_item_is_owner($id, $user));
+}
+
+/**
+ * Check permissions for an set.
+ *
+ * Check if the user has the "manage all" permission, or the set belongs to
+ * the current user.
+ *
+ * @param string $id
+ *   A string representing the ID of an set in the queue.
+ *
+ * @return bool
+ *   TRUE if the current user has permission to manage all sets, or the set
+ *   is in a set owned by the given user; otherwise, FALSE.
+ */
+function islandora_batch_set_access($id) {
+  global $user;
+  module_load_include('inc', 'islandora_batch', 'includes/utilities');
+  return islandora_batch_set_exists($id) && (user_access(ISLANDORA_BATCH_MANAGE_QUEUE_PERMISSION, $user) || islandora_batch_set_is_owner($id, $user));
+}
+
+/**
+ * Check if a lock exists, and if we have access to mess with the set.
+ *
+ * Checks as per islandora_batch_set_access(), with an additional check for the
+ * existence of a lock.
+ *
+ * @param string $id
+ *   A string representing the ID of an set in the queue.
+ *
+ * @return bool
+ *   TRUE if the set appears to be locked and the current user has permission
+ *   to manage all sets, or the set is in a set owned by the given user;
+ *   otherwise, FALSE.
+ */
+function islandora_batch_set_restart_batch_access_callback($id) {
+  module_load_include('inc', 'islandora_batch', 'includes/ingest.batch');
+  $lock_name = islandora_batch_get_lock_name($id);
+
+  // NULL represents the "global" ingest lock, which we should not be allowed
+  // to break here...  Should fail in the islandora_batch_set_access() bit,
+  // but...  paranoia?
+  return $id && lock_may_be_available($lock_name) && islandora_batch_set_access($id);
+}
+
+/**
+ * Function to handle preprocessing.
+ */
+function islandora_batch_handle_preprocessor(IslandoraBatchPreprocessor $preprocessor) {
+  return $preprocessor->preprocess();
+}
+
+/**
+ * Generate and set the batch operations.
+ *
+ * After calling this, it will be necessary to call one of the functions which
+ * actually execute the batch, such as batch_process(),
+ * drush_backend_batch_process() or background_batch_process_batch().
+ *
+ * Queries the database for preprocessed entries, and attempts to ingest them.
+ */
+function islandora_batch_set_operations(array $parameters) {
+  $batch = array(
+    'title' => t('Islandora Batch Ingest'),
+    'finished' => 'islandora_batch_finished',
+    'init_message' => t('Initializing...'),
+    'file' => drupal_get_path('module', 'islandora_batch') . '/includes/ingest.batch.inc',
+    'operations' => array(),
+    'progress_message' => t('Time elapsed: @elapsed.'),
+  );
+
+  if (isset($parameters['preprocessor'])) {
+    $batch['operations'][] = array('islandora_batch_ingest_preprocess', array($parameters['preprocessor']));
+  }
+  if (isset($parameters['preprocessor']) || isset($parameters['ingest_set'])) {
+    $batch['progress_message'] = t('Time elapsed: @elapsed <br/>Estimated time remaining @estimate.');
+  }
+
+  $batch['operations'][] = array('islandora_batch_ingest_process', array($parameters));
+
+  batch_set($batch);
+}
+
+/**
+ * Dumbly sets the batch operations and calls batch_process().
+ */
+function islandora_batch_ingest(array $parameters) {
+  islandora_batch_set_operations($parameters);
+  batch_process();
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function islandora_batch_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'islandora_batch') . '/views',
+  );
+}
+
+/**
+ * Implements hook_permission().
+ */
+function islandora_batch_permission() {
+  $perms = array();
+
+  $perms[ISLANDORA_BATCH_MANAGE_QUEUE_PERMISSION] = array(
+    'title' => t('Islandora Batch Queue Management'),
+    'description' => t('Allow management of all items and sets in the batch queue.'),
+  );
+
+  return $perms;
+}
+
+/**
+ * Implements hook_islandora_batch_process_finished().
+ *
+ * Delete successfully ingested batch sets.
+ */
+function islandora_batch_islandora_batch_process_finished($sets) {
+  $auto_remove = variable_get('islandora_batch_auto_remove_set', FALSE);
+  if ($auto_remove) {
+    if (!empty($sets)) {
+      module_load_include('inc', 'islandora_batch', 'includes/db');
+      foreach ($sets as $set) {
+        // Delete set and associated queued items.
+        islandora_batch_delete_set($set);
+        // Set a message that the batch set was removed.
+        drupal_set_message(t('The batch set (@set_id) has been processed successfully and has been automatically removed from the queue.', array(
+          '@set_id' => $set,
+        )));
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_islandora_batch_object_processed().
+ *
+ * Delete (temp) files associated with successfully ingested batch objects.
+ */
+function islandora_batch_islandora_batch_object_processed($ingest_object, $state) {
+  $auto_remove = variable_get('islandora_batch_auto_remove_set', FALSE);
+  if ($auto_remove) {
+    module_load_include('inc', 'islandora_batch', 'includes/utilities');
+    if ($state) {
+      // We want to remove the file usages and delete the temp files for any
+      // object which has been successfully ingested.
+      islandora_batch_remove_file_usages($ingest_object->id);
+    }
+  }
+}

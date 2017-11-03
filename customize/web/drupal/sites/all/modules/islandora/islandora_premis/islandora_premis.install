@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * This file contains all install related hooks.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_premis_uninstall() {
+  $variables = array(
+    'islandora_premis_agent_name',
+    'islandora_premis_agent_identifier',
+    'islandora_premis_agent_identifier_type',
+    'islandora_premis_agent_type',
+  );
+  array_walk($variables, 'variable_del');
+}
+
+/**
+ * Remove 'View PREMIS metadata' permission.
+ */
+function islandora_premis_update_7005(&$sandbox) {
+  $roles = user_roles($membersonly = FALSE, $permission = 'view premis metadata');
+  foreach ($roles as $role) {
+    if (isset($role->rid) && !empty($role->rid)) {
+      user_role_revoke_permissions($role->rid, array('view premis metadata'));
+    }
+  }
+  $t = get_t();
+  return $t("Islandora PREMIS database updates complete");
+}

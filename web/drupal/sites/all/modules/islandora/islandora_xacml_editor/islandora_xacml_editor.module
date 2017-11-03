@@ -1,0 +1,434 @@
+<?php
+
+/**
+ * @file
+ * The main module file for the Islandora XACML Editor.
+ */
+
+// Permission.
+define('ISLANDORA_XACML_EDITOR_ADMINISTER_INHERITANCE_PERMISSION', 'administer xacml inheritance');
+
+/**
+ * Implements hook_permission().
+ */
+function islandora_xacml_editor_permission() {
+  return array(
+    'administer islandora_xacml_editor' => array(
+      'title' => 'Edit XACML Policies',
+    ),
+    ISLANDORA_XACML_EDITOR_ADMINISTER_INHERITANCE_PERMISSION => array(
+      'title' => 'Edit XACML Inheritance',
+    ),
+  );
+}
+
+/**
+ * Implements hook_theme().
+ */
+function islandora_xacml_editor_theme($existing, $type, $theme, $path) {
+  return array(
+    'islandora_xacml_editor_policy_management_table' => array(
+      'file' => 'includes/form.inc',
+      'render element' => 'table',
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_xacml_editor_menu() {
+  $items = array();
+  $items['islandora/object/%islandora_object/manage/xacml'] = array(
+    'title' => 'Object Policy',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 0,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_xacml_editor_form', 2),
+    'access callback' => 'islandora_xacml_editor_access',
+    'access arguments' => array(2),
+    'file' => 'includes/form.inc',
+  );
+  $items['admin/islandora/tools/xacml/editor'] = array(
+    'title' => 'Islandora XACML Editor',
+    'description' => 'Settings for the Islandora XACML module.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_xacml_editor_settings'),
+    'access arguments' => array('administer islandora_xacml_editor'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'includes/admin.inc',
+  );
+  // We use %menu_tail to get around some of the issues that can arise with
+  // users entering input for autocomplete. For example slashes would break.
+  // Relevant Drupal thread: http://drupal.org/node/93854#comment-6164592.
+  $items['islandora/xacml/dsidautocomplete/%/%menu_tail'] = array(
+    'page callback' => 'islandora_xacml_editor_dsid_autocomplete',
+    'page arguments' => array(3, 4),
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('administer islandora_xacml_editor'),
+    'load arguments' => array('%map', '%index'),
+    'file' => 'includes/autocomplete.inc',
+  );
+  $items['islandora/xacml/mimeautocomplete/%/%menu_tail'] = array(
+    'page callback' => 'islandora_xacml_editor_mime_autocomplete',
+    'page arguments' => array(3, 4),
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('administer islandora_xacml_editor'),
+    'load arguments' => array('%map', '%index'),
+    'file' => 'includes/autocomplete.inc',
+  );
+  return $items;
+}
+
+/**
+ * Access callback function as to whether display the editor or not.
+ *
+ * @param AbstractObject $object
+ *   A AbstractObject.
+ *
+ * @return bool
+ *   TRUE if to show the tab, FALSE otherwise.
+ */
+function islandora_xacml_editor_access($object) {
+  return islandora_object_access('administer islandora_xacml_editor', $object);
+}
+
+/**
+ * Implements hook_islandora_object_access().
+ */
+function islandora_xacml_editor_islandora_object_access($op, $object, $user) {
+  if ($op == 'administer islandora_xacml_editor') {
+    if (isset($object['POLICY'])) {
+      return islandora_datastream_access(ISLANDORA_METADATA_EDIT, $object['POLICY'], $user);
+    }
+    else {
+      return islandora_object_access(ISLANDORA_ADD_DS, $object, $user);
+    }
+  }
+
+  return NULL;
+}
+
+/**
+ * Implements hook_islandora_xacml_editor_child_query().
+ */
+function islandora_xacml_editor_islandora_collectionCModel_islandora_xacml_editor_child_query(AbstractObject $object) {
+  $collection_query = <<<EOQ
+select ?object from <#ri> WHERE
+{
+    {
+      ?object <fedora-rels-ext:isMemberOfCollection> <info:fedora/{$object->id}>
+    }
+    UNION
+    {
+      ?object <fedora-rels-ext:isMemberOf> <info:fedora/{$object->id}>
+    }
+    ?object <fedora-model:state> <info:fedora/fedora-system:def/model#Active>
+}
+EOQ;
+  $results = $object->repository->ri->sparqlQuery($collection_query);
+
+  if (count($results) > 0) {
+    return array(
+      'all_children' => array(
+        'type' => 'sparql',
+        'query' => $collection_query,
+        'description' => t('All children of this collection and collections within this collection (existing and new).'),
+      ),
+    );
+  }
+}
+
+/**
+ * Implements hook_islandora_ingest_steps().
+ */
+function islandora_xacml_editor_islandora_ingest_steps(array $form_state) {
+  $shared_storage = islandora_ingest_form_get_shared_storage($form_state);
+  if (empty($shared_storage['parent'])) {
+    return;
+  }
+  $parent = $shared_storage['parent'];
+  return array(
+    'islandora_xacml_policy' => array(
+      'type' => 'callback',
+      'weight' => 8,
+      'module' => 'islandora_xacml_editor',
+      'do_function' => array(
+        'function' => 'islandora_xacml_editor_apply_policy',
+        'args' => array($parent),
+      ),
+      'undo_function' => array(
+        'function' => 'islandora_xacml_editor_undo_policy',
+        'args' => array(),
+      ),
+    ),
+  );
+}
+
+/**
+ * Applies the parent's POLICY datastream to the child if it exists.
+ *
+ * @param array $form_state
+ *   The passed through form_state from hook_islandora_ingest_steps().
+ * @param string $parent
+ *   PID of the parent object.
+ */
+function islandora_xacml_editor_apply_policy(&$form_state, $parent) {
+  $parent_object = islandora_object_load($parent);
+  if ((!isset($form_state['input']['xacml']) && $parent_object['POLICY']) ||
+      ($parent_object['POLICY'] && $form_state['input']['xacml'] != 'None')) {
+    foreach ($form_state['islandora']['objects'] as $object) {
+      islandora_xacml_editor_apply_parent_policy($object, $parent_object);
+    }
+  }
+}
+
+/**
+ * Deletes the POLICY datastream and relationships added through the apply.
+ *
+ * @param array $form_state
+ *   The passed through form_state from hook_islandora_ingest_steps().
+ */
+function islandora_xacml_editor_undo_policy(&$form_state) {
+  foreach ($form_state['islandora']['objects'] as $object) {
+    if (isset($object['POLICY'])) {
+      $viewable_by_user = 'isViewableByUser';
+      $viewable_by_role = 'isViewableByRole';
+      $manageable_by_user = 'isManageableByUser';
+      $manageable_by_role = 'isManageableByRole';
+      $object->purgeDatastream('POLICY');
+      $object->relationships->remove(ISLANDORA_RELS_EXT_URI, $viewable_by_user);
+      $object->relationships->remove(ISLANDORA_RELS_EXT_URI, $viewable_by_role);
+      $object->relationships->remove(ISLANDORA_RELS_EXT_URI, $manageable_by_user);
+      $object->relationships->remove(ISLANDORA_RELS_EXT_URI, $manageable_by_role);
+
+      foreach ($object as $dsid => $value) {
+        $object[$dsid]->relationships->remove(ISLANDORA_RELS_INT_URI, $viewable_by_user);
+        $object[$dsid]->relationships->remove(ISLANDORA_RELS_INT_URI, $viewable_by_role);
+        $object[$dsid]->relationships->remove(ISLANDORA_RELS_INT_URI, $manageable_by_user);
+        $object[$dsid]->relationships->remove(ISLANDORA_RELS_INT_URI, $manageable_by_role);
+      }
+    }
+  }
+}
+
+/**
+ * Implements islandora_basic_collection_build_manage_object().
+ *
+ * @param array $form_state
+ *   The current Form State being processed.
+ * @param AbstractObject $object
+ *   The Islandora Object being processed.
+ *
+ * @return array
+ *   The current Form State with manage_xacml element appended.
+ */
+function islandora_xacml_editor_islandora_basic_collection_build_manage_object(array $form_state, AbstractObject $object) {
+  $form_state['manage_collection_object']['manage_xacml'] = array(
+    '#id' => 'manage-xacml',
+    '#group' => 'manage_xacml_object',
+    '#access' => user_access(ISLANDORA_XACML_EDITOR_ADMINISTER_INHERITANCE_PERMISSION),
+    '#type' => 'fieldset',
+    '#title' => t('Manage XACML Inheritance'),
+    'form' => drupal_get_form('islandora_xacml_editor_manage_xacml_form', $object),
+  );
+  $form_state['manage_collection_object']['manage_xacml']['form']['#submit'][] = 'islandora_xacml_editor_manage_xacml_form_submit';
+  return $form_state;
+}
+
+/**
+ * Form alter the child collection form.
+ *
+ * @param array $form
+ *   The form being passed from the hook.
+ * @param array $form_state
+ *   The current Form State being processed.
+ */
+function islandora_xacml_editor_form_islandora_basic_collection_create_child_collection_form_alter(array &$form, array &$form_state) {
+  $parent_object = islandora_object_load($form_state['islandora']['shared_storage']['parent']);
+
+  $xacml_options = array('None' => 'None');
+
+  // If the form has a step_storage value set for this field, use it.
+  $step_storage = &islandora_ingest_form_get_step_storage($form_state, 'islandora_basic_collection');
+  $xacml_selected_option = isset($step_storage['values']['xacml']) ? array($step_storage['values']['xacml'] => $step_storage['values']['xacml']) : array('None' => 'None');
+
+  if ($parent_object) {
+    $xacml_options[$parent_object->id] = $parent_object->label;
+  }
+
+  $form['xacml'] = array(
+    '#type' => 'select',
+    '#title' => t('Inherit XACML policy from'),
+    '#options' => $xacml_options,
+    '#default_value' => $xacml_selected_option,
+  );
+
+  // Using after_build to alter the weight dynamically.
+  $form['#after_build'][] = 'islandora_xacml_editor_after_build';
+}
+
+/**
+ * Dynamically adjust form element weights in after_build.
+ *
+ * @param array $form
+ *   The form that has been rendered.
+ * @param array $form_state
+ *   The active form's form state.
+ *
+ * @return array
+ *   The form after POST processing is complete.
+ */
+function islandora_xacml_editor_after_build($form, &$form_state) {
+  $weight = $form['next']['#weight'] - .001;
+  if (isset($form['prev'])) {
+    $weight = min($weight, $form['prev']['#weight'] - .001);
+  }
+  $form['xacml']['#weight'] = $weight;
+  unset($form['#sorted']);
+  return $form;
+}
+
+/**
+ * Define the xacml management form.
+ *
+ * @param array $form
+ *   The Drupal form definition.
+ * @param array $form_state
+ *   The Drupal form state.
+ * @param AbstractObject $object
+ *   The collection to move child objects from.
+ *
+ * @return array
+ *   The Drupal form definition.
+ */
+function islandora_xacml_editor_manage_xacml_form(array $form, array &$form_state, AbstractObject $object) {
+  if (module_exists('islandora_basic_collection')) {
+    module_load_include('inc', 'islandora', 'includes/utilities');
+    // Hard code the XACML pager element because it needs to be unique.
+    $pager_element = 3;
+    $page = pager_find_page($pager_element);
+    list($count, $results) = islandora_basic_collection_get_member_objects($object, $page, 10, 'manage', 'islandora:collectionCModel');
+    pager_default_initialize($count, 10, $pager_element);
+    $rows = array();
+    $options = array('none' => 'None');
+    // Get the pids of the children for this collection.
+    foreach ($results as $result) {
+      $pid = $result['object']['value'];
+      $child_collection = islandora_object_load($pid);
+      $parent_pids = islandora_basic_collection_get_parent_pids($child_collection);
+      $rels_ext = $child_collection->relationships->get(ISLANDORA_RELS_EXT_URI, 'inheritXacmlFrom');
+      foreach ($parent_pids as $parent_pid) {
+        $parent_object = islandora_object_load($parent_pid);
+        $options[$parent_object->id] = $parent_object->label;
+      }
+      $default_value = (isset($rels_ext[0]) ? $rels_ext[0]['object']['value'] : 'none');
+      $rows[$pid] = array(
+        'selected' => array(
+          '#type' => 'checkbox',
+          '#default_value' => FALSE,
+        ),
+        'title' => array(
+          '#markup' => l(t('@label (@pid)', array('@label' => $child_collection->label, '@pid' => $pid)), "islandora/object/{$pid}"),
+        ),
+        'parents' => array(
+          '#type' => 'select',
+          '#options' => $options,
+          '#default_value' => $default_value,
+        ),
+      );
+    }
+    // Theme pager doesn't support url fragments in D7 so we insert manually.
+    $pager = theme('pager', array('quantity' => 20, 'element' => $pager_element));
+    $pager = islandora_basic_collection_append_fragment_to_pager_url($pager, '#manage-xacml');
+    return array(
+      '#action' => request_uri() . '#manage-xacml',
+      'help' => array(
+        '#type' => 'item',
+        '#markup' => t('XACML Inheritance Policies'),
+      ),
+      'table' => array(
+        '#tree' => TRUE,
+        '#header' => array(
+          array('class' => array('select-all')), t('COLLECTION(PID)'), 'INHERIT FROM',
+        ),
+        '#theme' => 'islandora_xacml_editor_policy_management_table',
+        'rows' => $rows,
+        '#prefix' => $pager,
+        '#suffix' => $pager,
+      ),
+      'submit' => array(
+        '#type' => 'submit',
+        '#value' => t('Update XACML Inheritance'),
+        '#access' => count($rows),
+      ),
+    );
+  }
+  else {
+    return array();
+  }
+}
+
+/**
+ * Submit handler for the manage XACML form.
+ *
+ * @param array $form
+ *   The Drupal form definition.
+ * @param array $form_state
+ *   The Drupal form state.
+ */
+function islandora_xacml_editor_manage_xacml_form_submit(array $form, array &$form_state) {
+  $child_pids = array_keys($form_state['values']['table']['rows']);
+  $count = 0;
+  foreach ($form_state['values']['table']['rows'] as $row) {
+    // Check if selected.
+    if ($row['selected'] > 0) {
+      $parent_object = islandora_object_load($row['parents']);
+      // Are we adding the XACML POLICY or removing it? Just
+      // check for a valid fedora object.
+      if ($parent_object) {
+        $object = islandora_object_load($child_pids[$count]);
+        // Make sure there is a POLICY to inherit.
+        if ($parent_object['POLICY']) {
+          $object->relationships->add(ISLANDORA_RELS_EXT_URI, 'inheritXacmlFrom', $parent_object->id, RELS_TYPE_URI);
+          $xacml = new IslandoraXacml($object, $parent_object['POLICY']->content);
+          $xacml->writeBackToFedora();
+          drupal_set_message(t('@child now inherits XACML from @parent.', array(
+            '@child' => $object->id,
+            '@parent' => $parent_object->id)), 'status');
+        }
+        else {
+          drupal_set_message(t('@parent does not have an XACML policy.', array(
+            '@parent' => $parent_object->id)), 'status');
+        }
+      }
+      else {
+        // 'None' is currently selected for this row, so if it is selected,
+        // we must remove the current XACML policy if it exists.
+        $object = islandora_object_load($child_pids[$count]);
+        if (isset($object['POLICY'])) {
+          $object->relationships->remove(ISLANDORA_RELS_EXT_URI, 'inheritXacmlFrom');
+          $object->purgeDatastream('POLICY');
+          drupal_set_message(t('@child no longer inherits XACML.', array('@child' => $object->id)), 'status');
+        }
+      }
+    }
+    $count++;
+  }
+}
+
+/**
+ * Applies the parent's POLICY datastream to the child if it exists.
+ *
+ * @param AbstractObject $child
+ *   The object to add the POLICY to.
+ * @param AbstractObject $parent
+ *   The object to take the POLICY from.
+ */
+function islandora_xacml_editor_apply_parent_policy(AbstractObject $child, AbstractObject $parent) {
+  if (isset($parent['POLICY'])) {
+    // Need to update the RELS-EXT to indicate which parent this policy is
+    // inherited from.
+    $child->relationships->add(ISLANDORA_RELS_EXT_URI, 'inheritXacmlFrom', $parent->id, RELS_TYPE_URI);
+  }
+}

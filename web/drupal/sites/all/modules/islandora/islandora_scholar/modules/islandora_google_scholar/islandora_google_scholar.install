@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for this module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function islandora_google_scholar_uninstall() {
+  $variables = array(
+    'islandora_scholar_google_scholar_search_enabled',
+    'islandora_scholar_google_scholar_primary_search_xpath',
+    'islandora_scholar_google_scholar_default_search_xpath',
+  );
+  array_walk($variables, 'variable_del');
+}

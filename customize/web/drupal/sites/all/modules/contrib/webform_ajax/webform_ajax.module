@@ -1,0 +1,268 @@
+<?php
+/**
+ * @file
+ * Webform AJAX module file.
+ *
+ * Implements Drupal hooks to provide AJAX submission and page change to Webforms.
+ */
+
+define('WEBFORM_AJAX_NO_AJAX', 0);
+define('WEBFORM_AJAX_CONFIRM', 1);
+define('WEBFORM_AJAX_NO_CONFIRM', -1);
+
+/**
+ * Implements hook_menu().
+ */
+function webform_ajax_menu() {
+  $items = array();
+
+  $items['webform_ajax/return_webform/%node/%'] = array(
+    'title' => 'Webform AJAX callback',
+    'page callback' => 'webform_ajax_confirm_return_ajax_callback',
+    'page arguments' => array(2, 3),
+    'delivery callback' => 'ajax_deliver',
+    'access callback' => 'node_access',
+    'access arguments' => array('view', 2),
+    'theme callback' => 'ajax_base_page_theme',
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * With FORM_ID = webform_configure_form.
+ * Add AJAX option to Webform configure form.
+ */
+function webform_ajax_form_webform_configure_form_alter(&$form, &$form_state) {
+  $node = $form_state['build_info']['args'][0];
+
+  $form['webform_ajax_fieldset'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('AJAX'),
+    '#collapsible' => TRUE,
+    '#collapsed' => $node->webform['webform_ajax'] == WEBFORM_AJAX_NO_AJAX,
+  );
+
+  $form['webform_ajax_fieldset']['webform_ajax'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('AJAX mode'),
+    '#description' => t('When set, all page changes (from pagebreak component), and webform submission will be achieved in AJAX.'),
+    '#default_value' => $node->webform['webform_ajax'] != WEBFORM_AJAX_NO_AJAX,
+  );
+
+  $form['webform_ajax_fieldset']['webform_ajax_confirmation'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show confirmation screen'),
+    '#description' => t('Choose wether to retrieve in AJAX, after webform submit, the confirmation screen, or the webform itself. Available only when redirection is set to "No redirect".'),
+    '#default_value' => $node->webform['webform_ajax'] == WEBFORM_AJAX_NO_CONFIRM ? FALSE : TRUE,
+    '#states' => array(
+      'visible' => array(
+        ':input[name="redirect"]' => array('value' => 'none'),
+        '#edit-webform-ajax' => array('checked' => TRUE),
+      )
+    )
+  );
+  array_unshift($form['#submit'], 'webform_ajax_webform_configure_form_submit');
+}
+
+/**
+ * Additional submit callback for form webform_configure_form.
+ */
+function webform_ajax_webform_configure_form_submit(&$form, &$form_state) {
+  if ($form_state['values']['webform_ajax'] == WEBFORM_AJAX_NO_AJAX) {
+    $webform_ajax = WEBFORM_AJAX_NO_AJAX;
+  }
+  else {
+    $webform_ajax = $form_state['values']['webform_ajax_confirmation'] ? WEBFORM_AJAX_CONFIRM : WEBFORM_AJAX_NO_CONFIRM;
+  }
+  $form['#node']->webform['webform_ajax'] = $webform_ajax;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * With FORM_ID = webform_client_form.
+ * Add AJAX logic to Webform form.
+ */
+function webform_ajax_form_webform_client_form_alter(&$form, $form_state, $form_id) {
+  $webform = $form['#node']->webform;
+  if ($webform['webform_ajax'] != WEBFORM_AJAX_NO_AJAX) {
+
+    // The wrapper ID will have to follow the webform all the time, to be unique,
+    // and allow AJAX commands to perform correctly.
+    // We have many ways to get it back depending on the situation.
+    $form['webform_ajax_wrapper_id'] = array(
+      '#type' => 'hidden',
+    );
+    if (isset($form_state['values']['webform_ajax_wrapper_id'])) {
+      $form['webform_ajax_wrapper_id']['#value'] = $form_state['values']['webform_ajax_wrapper_id'];
+    }
+    elseif (isset($form['#node']->webform['webform_ajax_wrapper_id'])) {
+      $form['webform_ajax_wrapper_id']['#value'] = $form['#node']->webform['webform_ajax_wrapper_id'];
+    }
+    else {
+      // At last, generate a unique ID.
+      $form['webform_ajax_wrapper_id']['#value'] = drupal_html_id('webform-ajax-wrapper-' . $form['#node']->nid);
+    }
+
+    $form['#prefix'] = '<div id="' . $form['webform_ajax_wrapper_id']['#value'] . '">' . (isset($form['#prefix']) ? $form['#prefix'] : '');
+    $form['#suffix'] = (isset($form['#suffix']) ? $form['#suffix'] : '') . '</div>';
+
+    foreach (array('previous', 'next', 'submit', 'draft') as $button) {
+      if (isset($form['actions'][$button])) {
+        $form['actions'][$button]['#ajax'] = array(
+          'callback' => 'webform_ajax_callback',
+          'wrapper' => $form['webform_ajax_wrapper_id']['#value'],
+          'progress' => array(
+            'message' => '',
+            'type' => 'throbber',
+          ),
+        );
+        if (in_array($button, array('next', 'submit'))) {
+          $form['actions'][$button]['#ajax']['event'] = 'click';
+        }
+        // Workaround for Drupal core bug http://drupal.org/node/1548976.
+        // As long as buttons HTML id are causing problems, and it has bad
+        // consequences on pages where Webform AJAX is active, we'll force
+        // custom ids on AJAXed Webform's buttons.
+        $form['actions'][$button]['#id'] = drupal_html_id('edit-webform-ajax-' . $button . '-' .$form['#node']->nid);
+      }
+    }
+  }
+}
+
+/**
+ * AJAX callback for Webform Prev/Next page and Submit buttons.
+ *
+ * Returns the new computed webform, unless it has been completed.
+ */
+function webform_ajax_callback($form, &$form_state) {
+  $output = array();
+  // If user completed his submission, determine what to do.
+  if (!empty($form_state['webform_completed']) && empty($form_state['save_draft'])) {
+    $output = _webform_ajax_callback_completed($form, $form_state);
+  }
+  // Else, we're just switching page, or saving draft.
+  else {
+    $output = $form;
+  }
+  return $output;
+}
+
+/**
+ * AJAX callback helper for a completed webform.
+ *
+ * Generates a redirect if needed, or displays the appropriate content.
+ */
+function _webform_ajax_callback_completed($form, $form_state) {
+  $output = '';
+  if (isset($form_state['redirect'])) {
+    // If a redirect is set, then use it to send a redirect instruction via AJAX.
+    ctools_include('ajax');
+    ctools_add_js('ajax-responder');
+    $redirect = is_array($form_state['redirect']) ? $form_state['redirect'] : array($form_state['redirect'], array());
+    // Send two AJAX commands:
+    // The first disables the form's buttons, to avoid extra click while waiting for redirect.
+    // The second is a redirect command, giving the browser the URL where to go next.
+    $output = array(
+      '#type' => 'ajax',
+      '#commands' => array(
+        ajax_command_invoke('#' . $form_state['values']['webform_ajax_wrapper_id'] . ' input.form-submit', 'attr', array('disabled', 'disabled')),
+        ctools_ajax_command_redirect($redirect[0], 0, $redirect[1]),
+      ),
+    );
+  }
+  elseif ($form['#node']->webform['webform_ajax'] == WEBFORM_AJAX_CONFIRM) {
+    // Display webform confirmation.
+    $output = array(
+      '#type' => 'markup',
+      '#markup' => theme(array('webform_confirmation_' . $form['#node']->nid, 'webform_confirmation'), array('node' => $form['#node'], 'sid' => $form_state['values']['details']['sid'])),
+      '#prefix' => '<div id="' . $form_state['values']['webform_ajax_wrapper_id'] . '">',
+      '#suffix' => '</div>',
+    );
+
+    // Unset confirmation message previously set with drupal_set_message()
+    // by Webform module, as we displayed it themed.
+    // Get messages without clearing queue.
+    $status_messages = drupal_get_messages('status', FALSE);
+    // If there are status messages, we may want to clear one.
+    if (isset($status_messages['status'])) {
+      // This is the message we want to erase.
+      $confirmation = check_markup($form['#node']->webform['confirmation'], $form['#node']->webform['confirmation_format'], '', TRUE);
+      $index = array_search($confirmation, $status_messages['status']);
+      // If message found, then remove it from the list, clear the messages queue,
+      // then reset all messages (except the one we removed).
+      if ($index !== FALSE) {
+        unset($status_messages['status'][$index]);
+        drupal_get_messages('status');
+        foreach ($status_messages['status'] as $message) {
+          drupal_set_message($message);
+        }
+      }
+    }
+
+    // Add Javascript which will AJAXify "Return to form" link in webform_confirmation.
+    $ajax_setting = array('webform_ajax' => array('wrappers' => array(
+      $form_state['values']['webform_ajax_wrapper_id'] => array(
+        'wrapper_id' => $form_state['values']['webform_ajax_wrapper_id'],
+        'nid' => $form['#node']->nid,
+        'sid' => $form_state['values']['details']['sid'],
+      ),
+    )));
+    $ajax_setting['webform_ajax']['url'] = url('webform_ajax/return_webform');
+    drupal_add_js($ajax_setting, 'setting');
+    drupal_add_js(drupal_get_path('module', 'webform_ajax') . '/js/webform_ajax.js', 'file');
+  }
+  elseif ($form['#node']->webform['webform_ajax'] == WEBFORM_AJAX_NO_CONFIRM) {
+    // We can't build a new form on the same request that submitted it (don't know why).
+    // So, as we need to rebuild the Webform, as AJAX response, tell the client to
+    // build another AJAX response to another URL (webform_ajax.js).
+    $ajax_setting = array('webform_ajax' => array('reload' => array(
+      'wrapper_id' => $form_state['values']['webform_ajax_wrapper_id'],
+      'nid' => $form['#node']->nid,
+      'sid' => $form_state['values']['details']['sid'],
+      'button_id' => $form['actions']['submit']['#id'],
+    )));
+    $ajax_setting['webform_ajax']['url'] = url('webform_ajax/return_webform');
+    drupal_add_js($ajax_setting, 'setting');
+    drupal_add_js(drupal_get_path('module', 'webform_ajax') . '/js/webform_ajax.js', 'file');
+
+    // This output does not alter the page, and ensures Drupal messages are kept for the next request.
+    $output = array(
+      '#type' => 'ajax',
+    );
+  }
+  return $output;
+}
+
+/**
+ * "Return to form" link AJAX callback.
+ */
+function webform_ajax_confirm_return_ajax_callback($node, $wrapper_id) {
+  // Fake full page mode to force webform messages output.
+  drupal_static_reset('arg');
+  $real_get_q = $_GET['q'];
+  $_GET['q'] = 'node/' . $node->nid;
+
+  $node->webform['webform_ajax_wrapper_id'] = $wrapper_id;
+  webform_node_view($node, 'full');
+
+  // Restore real $_GET['q'].
+  $_GET['q'] = $real_get_q;
+  drupal_static_reset('arg');
+
+  // Display the webform only if it is enabled. Otherwise, show messages.
+  if ($node->content['webform']['#enabled']) {
+    $output = $node->content['webform'];
+  }
+  else {
+    $output = array(
+      '#type' => 'markup',
+      '#markup' => t('The webform cannot be displayed.'),
+    );
+  }
+  return $output;
+}

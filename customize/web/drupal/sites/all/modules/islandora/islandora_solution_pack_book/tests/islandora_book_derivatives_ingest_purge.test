@@ -1,0 +1,134 @@
+<?php
+
+/**
+ * @file
+ * Attempts to ingest a book and page into a randomly generated book collection.
+ * Includes derivatives created via ImageMagick, Tesseract and Large Image
+ */
+
+class IslandoraBookPageDerivativesIngestTestCase extends IslandoraCollectionWebTestCase {
+
+  /**
+   * Get test information.
+   *
+   * @see IslandoraWebTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Book and Page Ingest/Purge (With Derivatives)',
+      'description' => 'Ingests and purges a book from a randomly generated book collection, and a page (with derivatives) from that book. Requires Islandora OCR, ImageMagick, and Islandora Large Image Solution Pack modules.',
+      'group' => 'Islandora Book',
+    );
+  }
+
+  /**
+   * Set up the test environment.
+   *
+   * @see IslandoraWebTestCase::setUp()
+   */
+  public function setUp() {
+    $this->imagemagick_convert = variable_get('imagemagick_convert', '/usr/bin/convert');
+    $this->islandora_ocr_tesseract = variable_get('islandora_ocr_tesseract', '/usr/local/bin/tesseract');
+    parent::setUp(array(
+      'islandora',
+      'islandora_basic_collection',
+      'islandora_book',
+      'islandora_paged_content',
+      'islandora_ocr',
+      'imagemagick',
+      'islandora_large_image',
+    ));
+  }
+
+  /**
+   * Creates an administrative user and attempts to ingest a test book and page.
+   */
+  public function testIngestPurgeBookPageDerivatives() {
+
+    $user = $this->drupalCreateUser(array(
+      'view fedora repository objects',
+      'ingest fedora objects',
+      'administer site configuration',
+      'manage object properties',
+      'delete fedora objects and datastreams',
+      'create child collection',
+    ));
+    $this->drupalLogin($user);
+
+    $label = $this->randomName(16);
+    $suffix = $this->randomName(16);
+    $collectionpid = 'islandora:' . $suffix;
+    $model = 'islandora:bookCModel';
+    $this->createTestCollection($label, $model, $collectionpid);
+    variable_set('image_toolkit', 'imagemagick');
+    variable_set('imagemagick_convert', $this->imagemagick_convert);
+    variable_set('islandora_book_ingest_derivatives', array(
+      'pdf' => 'pdf',
+      'image' => 'image',
+      'ocr' => 'ocr',
+    ));
+    variable_set('islandora_ocr_tesseract', $this->islandora_ocr_tesseract);
+    variable_set('islandora_ocr_tesseract_enabled_languages', array('eng' => 'eng'));
+
+    // Attempts to create the book.
+    module_load_include('inc', 'islandora_paged_content', 'includes/utilities');
+    $path = 'islandora/object/' . $collectionpid . '/manage/overview/ingest';
+    $edit = array();
+    if (!islandora_paged_content_can_extract_from_pdf()) {
+      $edit['models'] = $model;
+    }
+    $this->drupalPost($path, $edit, t('Ingest'));
+    $this->assertText('New Object', 'Book was created', 'Islandora');
+
+    // Checks for book datastream creation.
+    $book_object = $this->getObjectFromPath($this->url);
+    $datastreams = array(
+      'RELS-EXT',
+      'DC',
+    );
+    $this->assertDatastreams($book_object, $datastreams);
+
+    // Attempts to add a page to the book.
+    $path = 'islandora/object/' . $book_object . '/manage/book/ingest';
+    $file = drupal_get_path('module', 'islandora_book') . '/tests/fixtures/test.tiff';
+    $handle = fopen($file, "r");
+    $contents = fread($handle, filesize($file));
+    fclose($handle);
+    $edit = array(
+      'files[file]' => $file,
+      'language' => 'eng',
+    );
+    $this->drupalPost($path, $edit, t('Ingest'));
+
+    // Checks for page datastream creation.
+    $page_object = $this->getObjectFromPath($this->url);
+    $datastreams = array(
+      'RELS-EXT',
+      'OBJ',
+      'DC',
+      'PDF',
+      'JP2',
+      'JPG',
+      'TN',
+      'RELS-INT',
+      'OCR',
+      'HOCR',
+    );
+    $this->assertDatastreams($page_object, $datastreams);
+
+    $datastreams = array(
+      array('OBJ', 'tiff'),
+      array('PDF', 'pdf'),
+      array('JP2', 'jp2'),
+      array('JPG', 'image'),
+      array('TN', 'image'),
+      array('OCR', 'text', array('HAPPY DOG', 3)),
+      array('HOCR', 'text', array('HAPPY', 6)),
+      array('HOCR', 'text', array('CAT', 3)),
+    );
+    $this->validateDatastreams($page_object, $datastreams);
+
+    $this->deleteObject($book_object, 'Delete Book');
+    $this->deleteTestCollection($collectionpid);
+  }
+}

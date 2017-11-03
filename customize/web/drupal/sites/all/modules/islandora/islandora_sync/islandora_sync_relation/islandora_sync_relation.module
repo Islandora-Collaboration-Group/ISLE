@@ -1,0 +1,66 @@
+<?php
+
+/**
+ * @file
+ * Integration of relation and islandora_sync.
+ */
+
+/**
+ * Implements islandora_sync_node_field_build().
+ */
+function islandora_sync_relation_islandora_sync_node_field_build($node, $object, $field) {
+  if ($field->type == 'relation_select') {
+    // Remove existing values.
+    if (!empty($node->{$field->field}{$node->language})) {
+      $existing = array();
+      foreach ($node->{$field->field}{$node->language} as $existing_rid) {
+        if (isset($existing_rid['relation_id'])) {
+          $existing[] = $existing_rid['relation_id'];
+        }
+      }
+      if (!empty($existing)) {
+        relation_delete_multiple($existing);
+      }
+    }
+
+    $values = islandora_sync_get_field_values($field, $object, $node->type);
+    $node->{$field->field} = array();
+    foreach ($values as $value) {
+      islandora_sync_relation_save_field($field, $node, $value);
+    }
+  }
+}
+
+/**
+ * Save relation fields.
+ *
+ * @param stdObject $field_info
+ *   Field object record as stored in islandora_sync_fields table.
+ * @param stdObect $entity
+ *   The entity that contains the field.
+ * @param string $value
+ *   The field value.
+ */
+function islandora_sync_relation_save_field($field_info, &$entity, $value) {
+  $rel_id = db_query("SELECT * FROM {islandora_sync_map}
+    WHERE pid = :pid",
+    array(':pid' => $value)
+  )->fetchObject();
+  if ($rel_id) {
+    $endpoints = array(
+      array('entity_type' => 'node', 'entity_id' => $rel_id->entity_id),
+      array('entity_type' => 'node', 'entity_id' => $entity->nid),
+    );
+    $field_data = db_query("SELECT data FROM {field_config_instance} WHERE field_name = :field_name AND bundle = :bundle",
+      array(':field_name' => $field_info->field, ':bundle' => $field_info->bundle)
+    )->fetchObject();
+    $field_data = unserialize($field_data->data);
+    $rel_type = $field_data['settings']['relation_type'];
+    // Check if relation exists.
+    if (relation_relation_exists($endpoints, $rel_type)) {
+      return;
+    }
+    $relation = relation_create($rel_type, $endpoints);
+    relation_save($relation);
+  }
+}

@@ -1,0 +1,102 @@
+<?php
+/**
+ * @file
+ * Holds the general module things for the compound object ZIP importer.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_compound_object_zip_importer_menu() {
+  $items = array();
+  $items['islandora/object/%islandora_object/manage/compound/import'] = array(
+    'title' => 'Import objects',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_compound_object_zip_importer_import_form', 2),
+    'type' => MENU_LOCAL_ACTION,
+    'access callback' => 'islandora_compound_object_zip_importer_import_access',
+    'access arguments' => array(2),
+  );
+  return $items;
+}
+
+/**
+ * Access callback for the importer.
+ *
+ * @param AbstractObject $object
+ *   An AbstractObject representing an object within Fedora.
+ *
+ * @return bool
+ *   TRUE if the user has access or FALSE otherwise.
+ */
+function islandora_compound_object_zip_importer_import_access(AbstractObject $object) {
+  return islandora_object_access(ISLANDORA_INGEST, $object) && in_array('islandora:compoundCModel', $object->models);
+}
+
+/**
+ * Form callback for importing objects.
+ *
+ * @param array $form
+ *   An array representing a form within Drupal.
+ * @param array $form_state
+ *   An array containing the Drupal form state.
+ * @param AbstractObject $object
+ *   An AbstractObject representing an object within Fedora.
+ *
+ * @return array
+ *   An array representing a form within Drupal to be rendered.
+ */
+function islandora_compound_object_zip_importer_import_form($form, &$form_state, AbstractObject $object) {
+  // Spoof some form_state so we can use the parent importer form functionality.
+  $form_state['storage']['importer'] = array(
+    'title' => t('Islandora Compound Object ZIP File Importer'),
+    'class' => 'IslandoraCompoundObjectZipBatchImporter',
+  );
+  $form_state['storage']['parent_pid'] = $object->id;
+  return islandora_importer_form($form, $form_state, $object);
+}
+
+/**
+ * Validation for the importer form which cribs its parent's.
+ *
+ * @param array $form
+ *   An array representing a form within Drupal.
+ * @param array $form_state
+ *   An array containing the Drupal form state.
+ */
+function islandora_compound_object_zip_importer_import_form_validate($form, $form_state) {
+  islandora_importer_form_validate($form, $form_state);
+}
+
+/**
+ * Submit handler for the import form which cribs its parent's.
+ *
+ * @param array $form
+ *   An array representing a form within Drupal.
+ * @param array $form_state
+ *   An array containing the Drupal form state.
+ */
+function islandora_compound_object_zip_importer_import_form_submit($form, $form_state) {
+  islandora_importer_form_submit($form, $form_state);
+
+  if (variable_get('islandora_compound_object_thumbnail_child', TRUE)) {
+    $batch = array();
+    $batch['operations'][] = array('islandora_compound_object_zip_importer_set_thumbnail', array($form_state['storage']['parent_pid']));
+    $batch['title'] = t('Setting parent thumbnail');
+    batch_set($batch);
+  }
+}
+
+/**
+ * A batch callback function to set the parent thumbnail if requested.
+ *
+ * @param string $pid
+ *   The PID of the parent.
+ * @param array $context
+ *   The batch context.
+ */
+function islandora_compound_object_zip_importer_set_thumbnail($pid, &$context) {
+  islandora_compound_object_update_parent_thumbnail(islandora_object_load($pid));
+  $context['finished'] = 1;
+}
+

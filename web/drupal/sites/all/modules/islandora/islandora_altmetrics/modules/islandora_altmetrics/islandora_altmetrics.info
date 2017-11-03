@@ -1,0 +1,5 @@
+name = Islandora Altmetrics Badge
+core = 7.x
+description = Islandora Altmetrics integration.
+dependencies[] = islandora_badges
+package = Islandora Tools

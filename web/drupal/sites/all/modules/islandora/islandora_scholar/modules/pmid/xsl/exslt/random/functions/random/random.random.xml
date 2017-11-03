@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<exslt:function xmlns:exslt="http://exslt.org/documentation" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:vcf="http://www.ietf.org/internet-drafts/draft-dawson-vcard-xml-dtd-03.txt" version="1" module="random" status="implemented">
+   <exslt:name>random</exslt:name>
+   <rdf:Description ID="random:random">
+      <dc:subject>EXSLT</dc:subject>
+      <dc:subject>random</dc:subject>
+      <exslt:revision>
+         <rdf:Description ID="random:random.1">
+            <exslt:version>1</exslt:version>
+            <dc:creator rdf:parseType="Resource">
+               <vcf:fn>James Fuller</vcf:fn>
+               <vcf:email>jim.fuller@ruminate.co.uk</vcf:email>
+               <vcf:url>http://www.ruminate.co.uk</vcf:url>
+            </dc:creator>
+            <dc:date>2001-06-16</dc:date>
+            <dc:description>
+               <dc:description>
+                  <html:div>Returns a random value.</html:div>
+               </dc:description>
+            </dc:description>
+         </rdf:Description>
+      </exslt:revision>
+   </rdf:Description>
+   <exslt:doc>
+      <html:div>
+         <html:p>
+            The <html:code>random:random</html:code> function returns a random number from 0 to 1.
+         </html:p>
+      </html:div>
+   </exslt:doc>
+   <exslt:definition>
+      <exslt:return type="number">
+         <html:div/>
+      </exslt:return>
+   </exslt:definition>
+   <exslt:implementations>
+      <exslt:vendor-implementation
+              version="1"
+              vendor="4XSLT, from 4Suite."
+              vendor-url="http://4Suite.org"
+              vendor-version="0.12.0a3" />
+   </exslt:implementations>
+   <exslt:use-cases/>
+</exslt:function>

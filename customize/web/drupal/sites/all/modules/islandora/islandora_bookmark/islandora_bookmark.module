@@ -1,0 +1,1211 @@
+<?php
+/**
+ * @file
+ * Module used to track and manage user defined lists of pids.
+ */
+
+define('ISLANDORA_BOOKMARK_DATABASE_LIST_CREATION_HOOK', 'islandora_bookmark_database_list_creation');
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_bookmark_menu() {
+  $items['islandora-bookmark'] = array(
+    'title' => 'My bookmarks',
+    'description' => 'Track and manage bookmarks',
+    'type' => MENU_NORMAL_ITEM,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_bookmark_overview_form'),
+    'access arguments' => array('access content'),
+  );
+  $items['islandora-bookmark/lists'] = array(
+    'title' => 'Overview',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_bookmark_overview_form'),
+    'access arguments' => array('access content'),
+    'weight' => 0,
+  );
+  $items['islandora-bookmark/listid/%'] = array(
+    'title callback' => 'islandora_bookmark_list_title',
+    'title arguments' => array(2),
+    'page callback' => 'islandora_bookmark_display_list',
+    'page arguments' => array(2),
+    'access callback' => 'islandora_bookmark_access',
+    'access arguments' => array(2),
+  );
+  $items['islandora-bookmark/listid/%/manage'] = array(
+    'title callback' => 'islandora_bookmark_list_title',
+    'title arguments' => array(2),
+    'page callback' => 'islandora_bookmark_detailed_forms',
+    'page arguments' => array(2),
+    'access callback' => 'islandora_bookmark_access',
+    'access arguments' => array(2),
+  );
+  $items['islandora-bookmark/listid/%/view'] = array(
+    'title callback' => 'islandora_bookmark_list_title',
+    'title arguments' => array(2),
+    'page callback' => 'islandora_bookmark_view_bookmark',
+    'page arguments' => array(2),
+    'access callback' => 'islandora_bookmark_access',
+    'access arguments' => array(2),
+    'file' => 'theme/theme.inc',
+  );
+  $items['islandora-bookmark/listid/%/rss'] = array(
+    'title' => 'RSS Feed',
+    'type' => MENU_CALLBACK,
+    'page callback' => 'islandora_bookmark_rss',
+    'page arguments' => array(2),
+    'access callback' => 'islandora_bookmark_access',
+    'access arguments' => array(2),
+    'file' => 'includes/bookmark_rss.inc',
+  );
+  $items['islandora-bookmark/add'] = array(
+    'title' => 'Add',
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_bookmark_add_form'),
+    'access arguments' => array('use islandora_bookmark'),
+    'weight' => 1,
+  );
+  $items['islandora-bookmark/delete-bookmark/%'] = array(
+    'title' => 'Delete list',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_bookmark_delete_bookmark_confirm', 2),
+    'access callback' => 'islandora_bookmark_delete_bookmark_access',
+    'access arguments' => array(2),
+    'type' => MENU_CALLBACK,
+  );
+  $items['islandora-bookmark/remove-self/%'] = array(
+    'title' => 'Remove self',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_bookmark_remove_self_confirm', 2),
+    'access callback' => 'islandora_bookmark_access',
+    'access arguments' => array(2),
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/islandora/tools/islandora-bookmark'] = array(
+    'title' => 'Bookmark',
+    'description' => 'Configure settings for the Bookmark module.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_bookmark_admin_settings'),
+    'access arguments' => array('administer islandora_bookmark'),
+    'file' => 'includes/admin.form.inc',
+  );
+  $items['admin/islandora/tools/islandora-bookmark/configure'] = array(
+    'title' => 'Bookmark',
+    'description' => 'Configure settings for the Bookmark module.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_bookmark_admin_settings'),
+    'access arguments' => array('administer islandora_bookmark'),
+    'file' => 'includes/admin.form.inc',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 0,
+  );
+  return $items;
+}
+
+
+/**
+ * Used to determine whether a current user can access the menu path.
+ *
+ * @global object $user
+ *
+ * @param int $list_id
+ *   The ID of the list to access.
+ *
+ * @return bool
+ *   TRUE if the current user can access the given list, FALSE otherwise.
+ */
+function islandora_bookmark_access($list_id) {
+  global $user;
+
+  $bookmark_object = Bookmark::getList($list_id);
+  // We explicitly check anonymous (uid 0) as bookmarks shared with that user
+  // are determined to be accessible to everyone.
+  return $bookmark_object && ($bookmark_object->bookmarkOwner === $user->uid || in_array($user->uid, $bookmark_object->getUsers()) || in_array('0', $bookmark_object->getUsers()));
+}
+
+/**
+ * Used to determine whether a current user can access the menu path.
+ *
+ * @global object $user
+ *
+ * @param int $list_id
+ *   The ID of the list to potentially delete.
+ *
+ * @return bool
+ *   TRUE if the current user can delete the given list, FALSE otherwise.
+ */
+function islandora_bookmark_delete_bookmark_access($list_id) {
+  global $user;
+
+  preg_match('/session_/', $list_id, $match);
+
+  if ($match) {
+    $bookmark_access = TRUE;
+  }
+  else {
+    module_load_include('inc', 'islandora_bookmark', 'includes/api');
+    $default_list = islandora_bookmark_get_default_list();
+    if ($default_list == $list_id) {
+      return FALSE;
+    }
+    $bookmark_access = FALSE;
+    $owner_query = db_query('SELECT listowner FROM {islandora_bookmark_list_names} WHERE listid = :listid ORDER BY listid', array(':listid' => $list_id))->fetchObject();
+
+    if ($owner_query && $owner_query->listowner === $user->uid) {
+      $bookmark_access = TRUE;
+    }
+    else {
+      return FALSE;
+    }
+  }
+  return $bookmark_access;
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function islandora_bookmark_block_info() {
+  $blocks['islandora_bookmark'] = array(
+    'info' => t('Islandora Bookmark'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  $blocks['islandora_bookmark_list_info'] = array(
+    'info' => t('Islandora Bookmark List Info'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function islandora_bookmark_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    case 'islandora_bookmark':
+      // Make sure we're on the islandora/object route.
+      if (arg(0) == 'islandora' AND arg(1) == 'object') {
+        // Don't do anything if we're beyond islandora/object/PID.
+        // That is, only show the bookmark block if we're on the standard view.
+        if (arg(3)) {
+          break;
+        }
+
+        // Snag the PID and hook up the block.
+        if (arg(2)) {
+          $pid = arg(2);
+        }
+        else {
+          $pid = variable_get('islandora_repository_pid', 'islandora:root');
+        }
+        $block['subject'] = t('Islandora Bookmark');
+        $block['content'] = islandora_bookmark_get_object_form($pid);
+        $block['pid'] = $pid;
+      }
+      break;
+
+    case 'islandora_bookmark_list_info':
+      // Block intended for use on the list view page.
+      // EX: 'islandora-bookmark/listid/1'.
+      if (arg(0) == 'islandora-bookmark') {
+        $list_id = arg(2);
+        if ($list_id) {
+          $bookmark = Bookmark::getList($list_id);
+          $block['content'] = array(
+            '#theme' => 'islandora_bookmark_list_info',
+            '#bookmark' => $bookmark,
+          );
+        }
+      }
+      break;
+
+  }
+  return $block;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function islandora_bookmark_permission() {
+  return array(
+    'administer islandora_bookmark' => array(
+      'title' => t('Administer Islandora Bookmark'),
+      'description' => t('Perform administration tasks for Islandora Bookmark.'),
+    ),
+    'use islandora_bookmark' => array(
+      'title' => t('Use Islandora Bookmark'),
+      'description' => t('Create, manage and add new bookmarks to bookmark lists.'),
+    ),
+    'share islandora bookmarks' => array(
+      'title' => t('Share bookmarks'),
+      'description' => t('Share created bookmarks with other users.'),
+    ),
+    'export islandora bookmarks' => array(
+      'title' => t('Export bookmarks'),
+      'description' => t('Export bookmark lists.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_theme().
+ */
+function islandora_bookmark_theme() {
+  return array(
+    'islandora_bookmark_object_display' => array(
+      'template' => 'theme/islandora-bookmark-object-display',
+      'variables' => array('object_url_info' => NULL),
+    ),
+    'islandora_bookmark_list_columns' => array(
+      'template' => 'theme/islandora-bookmark-list-columns',
+      'variables' => array('bookmark_id' => NULL),
+      'file' => 'theme/theme.inc',
+    ),
+    'islandora_bookmark_list_links' => array(
+      'variables' => array('bookmark_id' => NULL, 'current' => NULL),
+      'file' => 'theme/theme.inc',
+    ),
+    'islandora_bookmark_list_info' => array(
+      'variables' => array(
+        'bookmark' => NULL,
+        'name' => '',
+        'user' => '',
+        'description' => '',
+        'link' => '',
+      ),
+      'template' => 'theme/islandora-bookmark-list-info',
+    ),
+  );
+}
+
+/**
+ * Implements hook_user_login().
+ *
+ * Checks to see if the user was anonymous and created Bookmark objects before
+ * they logged in. Iterates through the session and adds these records to the
+ * database.
+ */
+function islandora_bookmark_user_login(&$edit, $account) {
+  if (isset($_GET['destination'])) {
+    $destination = $_GET['destination'];
+
+    if (strpos($destination, 'islandora-bookmark/listid') === 0) {
+      $potential_list = substr($destination, strrpos($destination, '/') + 1, strlen($destination));
+    }
+  }
+  if (!empty($_SESSION['islandora_bookmark'])) {
+    foreach ($_SESSION['islandora_bookmark'] as $bookmark_session) {
+      // If the list is deletable we can proceed as normal as it's not a
+      // default list.
+      if ($bookmark_session->getIsDeletable()) {
+        $persistent_bookmark = BookmarkDatabase::createNewList($bookmark_session->bookmarkName, 'bookmark', $account);
+      }
+      else {
+        module_load_include('inc', 'islandora_bookmark', 'includes/api');
+        $default_list = islandora_bookmark_get_default_list($account);
+        // A BookmarkDatabaseDefaultList already exists for this user, we will
+        // attempt to append on the PIDs.
+        if ($default_list) {
+          $persistent_bookmark = Bookmark::getList($default_list);
+        }
+        else {
+          $default_list_name = variable_get('islandora_bookmark_default_list_name', "@username's Default List");
+          $default_list_name = format_string($default_list_name, array('@username' => $account->name));
+          $persistent_bookmark = BookmarkDefaultDatabaseList::createNewList($default_list_name, 'bookmark_default', $account);
+          if (variable_get('islandora_bookmark_share_default_list', FALSE)) {
+            // The anonymous user (uid 0) is set in the admin form.
+            $persistent_bookmark->addUser('0');
+          }
+        }
+      }
+      $persistent_bookmark->addPids($bookmark_session->getPids());
+      if (isset($potential_list) && $bookmark_session->getId() == $potential_list) {
+        $_GET['destination'] = "islandora-bookmark/listid/{$persistent_bookmark->getId()}";
+      }
+    }
+    unset($_SESSION['islandora_bookmark']);
+  }
+  if (variable_get('islandora_bookmark_create_user_default_lists', FALSE)) {
+    // Check if the user already has a default list made. If not create them
+    // one.
+    module_load_include('inc', 'islandora_bookmark', 'includes/api');
+    $default_list_exists = islandora_bookmark_get_default_list();
+    if (!$default_list_exists) {
+      $default_list_name = variable_get('islandora_bookmark_default_list_name', "@username's Default List");
+      $default_list_name = format_string($default_list_name, array('@username' => $account->name));
+      $created_default_list = BookmarkDefaultDatabaseList::createNewList($default_list_name, 'bookmark_default', $account);
+      if (variable_get('islandora_bookmark_share_default_list', FALSE)) {
+        // The anonymous user (uid 0) is set in the admin form.
+        $created_default_list->addUser('0');
+      }
+    }
+  }
+}
+
+/**
+ * Callback function for removing a Bookmark confirm form.
+ */
+function islandora_bookmark_delete_bookmark(array $form, array &$form_state) {
+  drupal_goto('islandora-bookmark/delete-bookmark/' . $form_state['bookmark_object']->getId());
+}
+
+/**
+ * Confirm form function for deleting a Bookmark.
+ *
+ * @param array $form
+ *   The Drupal form definition.
+ * @param array $form_state
+ *   The Drupal form state.
+ * @param string $list_id
+ *   The list id of the Bookmark object we are going to delete.
+ *
+ * @return array
+ *   The Drupal form definition.
+ */
+function islandora_bookmark_delete_bookmark_confirm(array $form, array &$form_state, $list_id) {
+  module_load_include('inc', 'islandora_bookmark', 'includes/api');
+  $bookmark_object = islandora_bookmark_get_bookmark_by_number($list_id);
+  $form_state['bookmark_object'] = $bookmark_object;
+  return confirm_form($form, t('Are you sure you want to delete the @type list %bookmark_name?', array(
+    '%bookmark_name' => $bookmark_object->bookmarkName,
+    '@type' => variable_get('islandora_bookmark_type', 'bookmark'))), 'islandora-bookmark/listid/' . $list_id, t('This action cannot be undone.'), t('Delete'), t('Cancel'));
+}
+
+/**
+ * Submit handler for deleting a Bookmark.
+ *
+ * @param array $form
+ *   The Drupal form definition.
+ * @param array $form_state
+ *   The Drupal form state.
+ *
+ * @return array
+ *   The Drupal form definition.
+ */
+function islandora_bookmark_delete_bookmark_confirm_submit(array $form, array &$form_state) {
+  module_load_include('inc', 'islandora_bookmark', 'includes/api');
+
+  $bookmark_object = $form_state['bookmark_object'];
+
+  drupal_set_message(t('The list %listname has been deleted.',
+      array(
+        '%listname' => $bookmark_object->bookmarkName,
+      )
+    ));
+  $bookmark_object->removeList();
+  drupal_goto('islandora-bookmark');
+}
+
+/**
+ * Callback function for removing self confirm form.
+ */
+function islandora_bookmark_remove_self(array $form, array &$form_state) {
+  drupal_goto('islandora-bookmark/remove-self/' . $form_state['build_info']['args'][0]);
+}
+
+/**
+ * Confirm form function for removing the current user from a shared Bookmark.
+ *
+ * @param array $form
+ *   The Drupal form definition.
+ * @param array $form_state
+ *   The Drupal form state.
+ * @param string $list_id
+ *   The list id of the Bookmark object we are removing from.
+ *
+ * @return array
+ *   The Drupal form definition.
+ */
+function islandora_bookmark_remove_self_confirm(array $form, array &$form_state, $list_id) {
+  module_load_include('inc', 'islandora_bookmark', 'includes/api');
+
+  $bookmark_object = islandora_bookmark_get_bookmark_by_number($list_id);
+  $form_state['bookmark_object'] = $bookmark_object;
+  return confirm_form($form, t('Are you sure you want to remove yourself from the @type %bookmark_name ?', array(
+    '%bookmark_name' => $bookmark_object->bookmarkName,
+    '@type' => variable_get('islandora_bookmark_type', 'bookmark'))), 'islandora-bookmark/listid/' . $list_id, t('This action cannot be undone.'),
+    t('Delete'),
+    t('Cancel'));
+}
+
+/**
+ * Submit handler for removing self from a Bookmark.
+ *
+ * @global stdClass $user
+ *
+ * @param array $form
+ *   The Drupal form definition.
+ * @param array $form_state
+ *   The Drupal form state.
+ */
+function islandora_bookmark_remove_self_confirm_submit(array $form, array &$form_state) {
+  module_load_include('inc', 'islandora_bookmark', 'includes/api');
+  global $user;
+
+  $bookmark_object = $form_state['bookmark_object'];
+
+  drupal_set_message(t('You have removed yourself from the list %listname',
+      array(
+        '%listname' => $bookmark_object->bookmarkName,
+      )
+    ));
+
+  $bookmark_object->removeUsers(array($user->uid));
+  drupal_goto('islandora-bookmark');
+}
+
+/**
+ * Callback function for updating list settings.
+ *
+ * @param array $form
+ *   The Drupal form definition.
+ * @param array $form_state
+ *   The Drupal form state.
+ */
+function islandora_bookmark_update_bookmark(array $form, array &$form_state) {
+  module_load_include('inc', 'islandora_bookmark', 'includes/api');
+
+  $bookmark_object = $form_state['bookmark_object'];
+  $newlist_name = $form_state['input']['bookmarks']['management']['listname'];
+  $newlist_description = $form_state['input']['bookmarks']['management']['description'];
+  $bookmark_object->changeListName(trim($newlist_name));
+  $bookmark_object->changeDescription(trim($newlist_description));
+  drupal_set_message(t('List settings updated.'));
+}
+
+/**
+ * Invokes the islandora_bookmark_object_markup hook.
+ *
+ * Grabs default markup if no modules invoke the hook.
+ *
+ * @param string $pid
+ *   The PID of the object to create markup for.
+ * @param array $object_url_info
+ *   An associative array contains information to build an anchor tag.
+ *   - path: A string containing the path/
+ *   - params: An array of paramaters to be passed.
+ *   - markup: A string containing the label for the anchor tag.
+ *
+ * @return string
+ *   The markup for the Fedora object in the table.
+ */
+function islandora_bookmark_generate_markup($pid, $object_url_info = NULL) {
+  module_load_include('inc', 'islandora', 'includes/utilities');
+  $fedora_object = islandora_object_load($pid);
+
+  if ($fedora_object) {
+    // Set URL info if non provided.
+    if (is_null($object_url_info)) {
+      $object_url_info = array(
+        'path' => "islandora/object/$pid",
+        'params' => array(),
+        'markup' => $fedora_object->label ? $fedora_object->label : $fedora_object->id,
+      );
+    }
+    // Accumulate the output.
+    $output = array();
+
+    // Call CModel oriented variants first.
+    foreach (islandora_build_hook_list('islandora_bookmark_object_markup', $fedora_object->models) as $hook) {
+      $temp = module_invoke_all($hook, $fedora_object, $object_url_info);
+      if (!empty($temp)) {
+        $output = array_merge_recursive($output, $temp);
+      }
+    }
+    drupal_alter('islandora_bookmark_object_markup', $fedora_object, $output);
+    // Add in the default, if we did not get any results.
+    if (empty($output)) {
+      $output = islandora_bookmark_object_display($object_url_info);
+    }
+
+    arsort($output);
+    $output = implode('', $output);
+  }
+  else {
+    // Handle when we can't access a Fedora object.
+    watchdog('islandora_bookmark', "Tried to render markup for @pid, but was unable to load it.", array("@pid" => $pid));
+    $output = '<div class="islandora-bookmark-error-message">' . t('Unable to load object @pid.',
+              array('@pid' => $pid)) . '</div>';
+  }
+
+  return $output;
+}
+
+
+/**
+ * Themes a Fedora object.
+ *
+ * @param array $object_url_info
+ *   An associative array contains information to build an anchor tag.
+ *   - path: A string containing the path/
+ *   - params: An array of paramaters to be passed.
+ *   - markup: A string containing the label for the anchor tag.
+ *
+ * @return array
+ *   an associative array containing the output from theme
+ *   islandora-bookmark_object_display
+ */
+function islandora_bookmark_object_display($object_url_info) {
+  $output = theme('islandora_bookmark_object_display', array('object_url_info' => $object_url_info));
+
+  return array('Default output' => $output);
+}
+
+/**
+ * Callback function for the detailed list view.
+ *
+ * Returns forms for display and management.
+ *
+ * @param string $list_id
+ *   ID of the bookmark list to be rendered.
+ */
+function islandora_bookmark_detailed_forms($list_id) {
+  return array(
+    'detailed_form' => drupal_get_form('islandora_bookmark_detailed_form', $list_id),
+    'manage' => drupal_get_form('islandora_bookmark_detailed_form_manage', $list_id),
+  );
+}
+
+/**
+ * Menu callback for backwards compatibility and configuration of list display.
+ *
+ * @param string $list_id
+ *   ID of the bookmark list to be rendered.
+ */
+function islandora_bookmark_display_list($list_id) {
+  $display = variable_get('islandora_bookmark_default_list_view', 'manage');
+  if ($display == 'manage') {
+    return islandora_bookmark_detailed_forms($list_id);
+  }
+  else {
+    return theme($display, array('bookmark_id' => $list_id));
+  }
+}
+
+/**
+ * Creates the detailed Bookmark form.
+ *
+ * Shows bookmarks, remove buttons, export and share functionality.
+ *
+ * @global object $user
+ *
+ * @param array $form
+ *   The Drupal form definition.
+ * @param array $form_state
+ *   The Drupal form state.
+ * @param mixed $list_id
+ *   The identifier for the current list.
+ *
+ * @return array
+ *   The Drupal form definition.
+ */
+function islandora_bookmark_detailed_form(array $form, array &$form_state, $list_id) {
+  $bookmark = Bookmark::getList($list_id);
+  return $bookmark->formGet($form, $form_state);
+}
+
+/**
+ * Form validation handler.
+ */
+function islandora_bookmark_detailed_form_validate(&$form, &$form_state) {
+  $bookmark = Bookmark::getList($form_state['build_info']['args'][0]);
+  $bookmark->formValidate($form, $form_state);
+}
+
+/**
+ * Submit handler for the detailed view of a Bookmark.
+ *
+ * Handles logic for which button is pressed, as well as redirecting to the
+ * correct page of the tableselect when an action takes place.
+ *
+ * @param array $form
+ *   The Drupal form definition.
+ * @param array $form_state
+ *   The Drupal form state.
+ */
+function islandora_bookmark_detailed_form_submit(array $form, array &$form_state) {
+  $form_state['redirect'] = array(
+    request_path(),
+    array(
+      'query' => drupal_get_query_parameters(),
+    ),
+  );
+
+  $bookmark = Bookmark::getList($form_state['build_info']['args'][0]);
+  $bookmark->formSubmit($form, $form_state);
+}
+
+/**
+ * Manage form for detailed bookmark list.
+ *
+ * @param array $form
+ *   The Drupal form definition.
+ * @param array $form_state
+ *   The Drupal form state.
+ * @param string $list_id
+ *   ID of the bookmark list manage form to be rendered.
+ *
+ * @return array
+ *   The Drupal form definition.
+ */
+function islandora_bookmark_detailed_form_manage(array $form, array &$form_state, $list_id) {
+  global $user;
+  module_load_include('inc', 'islandora_bookmark', 'includes/api');
+  module_load_include('inc', 'islandora', 'includes/utilities');
+  drupal_add_css(drupal_get_path('module', 'islandora_bookmark') . '/css/islandora_bookmark.css');
+
+  $form = array('#tree' => TRUE);
+  $bookmark = Bookmark::getList($list_id);
+
+  // Manage.
+  if ($bookmark->bookmarkOwner === $user->uid) {
+    // Management.
+    $form['bookmarks']['management'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Manage'),
+      '#collapsed' => isset($form_state['islandora_bookmark_collapsed']) ? $form_state['islandora_bookmark_collapsed'] : TRUE,
+      '#collapsible' => TRUE,
+    );
+    $form['bookmarks']['management']['listname'] = array(
+      '#type' => 'textfield',
+      '#title' => t('List name'),
+      '#required' => TRUE,
+      '#description' => t('A descriptive label for the @type list.', array('@type' => variable_get('islandora_bookmark_type', 'bookmark'))),
+      '#size' => 30,
+      '#default_value' => $bookmark->bookmarkName,
+    );
+    $form['bookmarks']['management']['description'] = array(
+      '#type' => 'textarea',
+      '#title' => t('Description'),
+      '#default_value' => $bookmark->bookmarkDescription,
+    );
+    $form['bookmarks']['management']['update'] = array(
+      '#type' => 'submit',
+      '#value' => t('Save'),
+      '#submit' => array('islandora_bookmark_update_bookmark'),
+    );
+    if ($bookmark->getIsDeletable()) {
+      $form['bookmarks']['management']['remove'] = array(
+        '#type' => 'submit',
+        '#value' => t('Delete list'),
+        '#submit' => array('islandora_bookmark_delete_bookmark'),
+      );
+    }
+    $form['bookmarks']['management']['list-id'] = array(
+      '#type' => 'value',
+      '#value' => $bookmark->getId(),
+    );
+  }
+  $form_state['bookmark_object'] = $bookmark;
+  return $form;
+}
+
+/**
+ * Get form to render in the bookmark block.
+ *
+ * @param string $pid
+ *   PID to pass to the form. PID is gathered from url.
+ *
+ * @return string|NULL
+ *   The markup of the object form or NULL otherwise.
+ */
+function islandora_bookmark_get_object_form($pid = NULL) {
+  $object_form = drupal_get_form('islandora_bookmark_fedora_repository_object_form', $pid);
+  if (isset($object_form['islandora_bookmark'])) {
+    $content = drupal_render($object_form);
+  }
+  else {
+    $content = NULL;
+  }
+  return $content;
+}
+
+/**
+ * Creates a form to display which Bookmarks a Fedora object belongs to.
+ *
+ * Also, gives the ability to add the object to a Bookmark.
+ *
+ * @param array $form
+ *   The Drupal form definition.
+ * @param array $form_state
+ *   The Drupal form state.
+ * @param string $pid
+ *   The pid of the object which we are currently viewing.
+ *
+ * @return array
+ *   The Drupal form definition.
+ */
+function islandora_bookmark_fedora_repository_object_form(array $form, array &$form_state, $pid) {
+  global $user;
+  module_load_include('inc', 'islandora_bookmark', 'includes/api');
+
+  $containing_lists = islandora_bookmark_get_bookmarks_visible_to_user($pid, $user->uid);
+
+  $form = array(
+    '#prefix' => '<div id="islandora-bookmark">',
+    '#suffix' => '</div>',
+  );
+
+  if (count($containing_lists) > 0) {
+    $links = array();
+    foreach ($containing_lists as $key => $value) {
+      $bookmark_object = islandora_bookmark_get_bookmark_by_number($value);
+      $links[] = l($bookmark_object->bookmarkName, 'islandora-bookmark/listid/' . $bookmark_object->getId());
+    }
+
+    $form['islandora_bookmark']['lists'] = array(
+      '#type' => 'item',
+      '#prefix' => '<h3>' . t('Bookmarked in') . ':</h3>',
+      '#markup' => theme('item_list', array('items' => $links)),
+    );
+  }
+
+  $lists = islandora_bookmark_get_user_owned_bookmarks();
+  $owned_lists = array();
+  foreach ($lists as $list) {
+    $owned_lists[$list->getId()] = $list->bookmarkName;
+  }
+
+  if (count($owned_lists)) {
+    $temp_options = array_diff_key($owned_lists, $containing_lists);
+    if (count($temp_options)) {
+      $options['default'] = t('- Select @type list -', array('@type' => variable_get('islandora_bookmark_type', 'bookmark')));
+      foreach ($temp_options as $key => $value) {
+        $options[$key] = $value;
+      }
+      if (user_access('use islandora_bookmark')) {
+        if (!count($containing_lists)) {
+          $form['islandora_bookmark']['title'] = array(
+            '#markup' => '<h3>' . t('@type', array('@type' => ucwords(variable_get('islandora_bookmark_type', 'bookmark')))) . 's:</h3>',
+          );
+        }
+        $form['islandora_bookmark']['add_bookmarks'] = array(
+          '#type' => 'select',
+          '#options' => $options,
+        );
+        $form['islandora_bookmark']['add_button'] = array(
+          '#type' => 'submit',
+          '#value' => t('Add to @type', array('@type' => variable_get('islandora_bookmark_type', 'bookmark'))),
+          '#ajax' => array(
+            'event' => 'click',
+            'callback' => 'islandora_bookmark_add_pid',
+            'wrapper' => 'islandora-bookmark',
+            'method' => 'replace',
+          ),
+        );
+      }
+    }
+  }
+  $form_state['islandora_bookmark_pid'] = $pid;
+
+  return $form;
+}
+
+/**
+ * Form validation callback.
+ */
+function islandora_bookmark_fedora_repository_object_form_validate(&$form, &$form_state) {
+  $key = $form_state['values']['add_bookmarks'];
+  if ($key == 'default') {
+    $pid = $form_state['islandora_bookmark_pid'];
+    $object = islandora_object_load($pid);
+    form_set_error('islandora_bookmark][add_bookmarks', t('Please select a list to bookmark @label.', array(
+      '@label' => $object->label,
+    )));
+  }
+}
+
+/**
+ * Invokes islandora_bookmark_export_formats().
+ *
+ * @param string $option
+ *   The option that is currently selected in our first dropdown.
+ *
+ * @return array
+ *   The array of options to populate our second dependant dropdown.
+ */
+function islandora_bookmark_get_export_format_options($option) {
+  $output = module_invoke_all('islandora_bookmark_export_styles', $option);
+  return $output;
+}
+
+/**
+ * Invokes islandora_bookmark_export_handler().
+ *
+ * @return array
+ *   The results of the invoke all.
+ */
+function islandora_bookmark_get_export_options() {
+  $output = module_invoke_all('islandora_bookmark_export_handler');
+  drupal_alter('islandora_bookmark_export_handler', $output);
+  return $output;
+}
+
+/**
+ * Implements hook_islandora_bookmark_export_handler().
+ */
+function islandora_bookmark_islandora_bookmark_export_handler() {
+  return array(
+    t('Bookmark') => array(
+      'CSV' => 'islandora_bookmark_export_pids_as_csv',
+    ),
+  );
+}
+
+/**
+ * Creates a csv file for download given an input array of pids.
+ */
+function islandora_bookmark_export_pids_as_csv($pids) {
+  // Send response headers to the browser.
+  $csv_array = array();
+  foreach ($pids as $key => $value) {
+    $temp_object = islandora_object_load($value);
+    $csv_array[$value] = array($temp_object->label, $temp_object->id);
+  }
+  drupal_add_http_header('Content-Type', 'text/csv');
+  drupal_add_http_header('Content-Disposition', 'attachment;filename=islandora_bookmark_export.csv');
+
+  $fp = fopen('php://output', 'w');
+  fputcsv($fp, array('Title', 'PID'));
+  foreach ($csv_array as $line) {
+    fputcsv($fp, $line);
+  }
+  fclose($fp);
+  drupal_exit();
+}
+
+/**
+ * Form constructor for the Bookmark overview form.
+ *
+ * @global stdClass $user
+ *
+ * @param array $form
+ *   The Drupal form definition.
+ * @param array $form_state
+ *   The Drupal form state.
+ *
+ * @return array
+ *   The Drupal form definition.
+ */
+function islandora_bookmark_overview_form(array $form, array &$form_state) {
+  drupal_add_css(drupal_get_path('module', 'islandora_bookmark') . '/css/islandora_bookmark.css');
+  module_load_include('inc', 'islandora_bookmark', 'includes/api');
+
+  $form = array(
+    '#tree' => TRUE,
+    '#prefix' => '<div id="islandora-bookmark-overview">',
+    '#suffix' => '</div>',
+  );
+
+  // Do pager calcuations to limit the number of objects displayed per page.
+  $num_eles = variable_get('islandora_bookmark_overview_page_elements', 10);
+  $owned_page = 0;
+  $shared_page = 0;
+  if (!empty($_GET['page'])) {
+    // Explode on the , to track both pagers on the one page.
+    $pagers = explode(',', $_GET['page']);
+    $owned_page = $pagers[0];
+
+    // If the pager for the shared table has been set we grab the values
+    // for both the owner and shared pagers.
+    if (isset($pagers[1])) {
+      $shared_page = $pagers[1];
+      $owned_page = $pagers[0];
+    }
+    // Only the first pager has been currently set.
+    else {
+      $offset_owned = $_GET['page'];
+    }
+  }
+
+  if (user_access('use islandora_bookmark')) {
+    $offset_owned = $owned_page * $num_eles;
+    $owned_bookmarks = islandora_bookmark_get_user_owned_bookmarks();
+    $paged_owned_bookmarks = array_slice($owned_bookmarks, $offset_owned, $num_eles);
+
+    pager_default_initialize(count($owned_bookmarks), $num_eles, $element = 0);
+    $form['owned_bookmarks'] = array(
+      'fieldset' => array(
+        '#type' => 'fieldset',
+        '#title' => t('@type', array('@type' => ucwords(variable_get('islandora_bookmark_type', 'bookmark')) . ' lists owned')),
+        'pager' => array(
+          '#markup' => theme('pager', array('element' => 0)),
+          '#weight' => 5,
+        ),
+      ),
+    );
+
+    if (count($owned_bookmarks) > 0) {
+      $form['owned_bookmarks']['fieldset']['table'] = islandora_bookmark_form_overview_table($paged_owned_bookmarks);
+    }
+    else {
+      $form['owned_bookmarks']['fieldset']['empty'] = array(
+        '#type' => 'item',
+        '#markup' => t('You have no @type lists.', array('@type' => variable_get('islandora_bookmark_type', 'bookmark'))),
+      );
+    }
+  }
+
+  $offset_shared = $shared_page * $num_eles;
+  $shared_bookmarks = islandora_bookmark_get_user_shared_bookmarks();
+  $paged_shared_bookmarks = array_slice($shared_bookmarks, $offset_shared, $num_eles);
+  pager_default_initialize(count($shared_bookmarks), $num_eles, $element = 1);
+  $form['shared_bookmarks'] = array(
+    'fieldset' => array(
+      '#type' => 'fieldset',
+      '#title' => t('@type shared with me', array('@type' => ucwords(variable_get('islandora_bookmark_type', 'bookmark')) . ' lists')),
+      'pager' => array(
+        '#markup' => theme('pager', array('element' => 1)),
+        '#weight' => 5,
+      ),
+    ),
+  );
+
+  if (count($shared_bookmarks) > 0) {
+    $form['shared_bookmarks']['fieldset']['table'] = islandora_bookmark_form_overview_table($paged_shared_bookmarks);
+  }
+  else {
+    $form['shared_bookmarks']['fieldset']['empty'] = array(
+      '#type' => 'item',
+      '#markup' => t('No @type lists are currently being shared with you.', array('@type' => variable_get('islandora_bookmark_type', 'bookmark'))),
+    );
+  }
+
+  return $form;
+}
+
+/**
+ * Creates a table for the Bookmark overview page.
+ */
+function islandora_bookmark_form_overview_table(array $bookmark_objs) {
+  $headers = array(
+    'bookmark_name' => t('List name'),
+    'bookmark_owner' => t('Owner'),
+    'bookmark_desc' => t('Description'),
+  );
+  $rows = array();
+  foreach ($bookmark_objs as $bookmark) {
+    $owner = user_load($bookmark->bookmarkOwner);
+    if ($bookmark->bookmarkOwner == 0) {
+      $owner_output = variable_get('islandora_bookmark_owner', 'Everyone');
+    }
+    else {
+      $owner_output = $owner->name;
+    }
+
+    $id = $bookmark->getId();
+    $rows[$id] = array(
+      'bookmark_name' => l($bookmark->bookmarkName, "islandora-bookmark/listid/$id"),
+      'bookmark_owner' => $owner_output,
+      'bookmark_desc' => $bookmark->bookmarkDescription,
+    );
+  }
+
+  $table = array(
+    '#theme' => 'table',
+    '#header' => $headers,
+    '#rows' => $rows,
+  );
+  return $table;
+}
+
+/**
+ * Form constructor for the add Bookmark form.
+ *
+ * @global stdClass $user
+ *
+ * @param array $form
+ *   The Drupal form definition.
+ * @param array $form_state
+ *   The Drupal form state.
+ *
+ * @return array
+ *   The Drupal form definition.
+ */
+function islandora_bookmark_add_form(array $form, array &$form_state) {
+  $form = array(
+    '#tree' => TRUE,
+  );
+  $form['listname'] = array(
+    '#title' => t('List name'),
+    '#required' => TRUE,
+    '#description' => t('A descriptive label for the @type list.', array('@type' => variable_get('islandora_bookmark_type', 'bookmark'))),
+    '#type' => 'textfield',
+    '#size' => 30,
+  );
+
+  $form['listdesc'] = array(
+    '#title' => t('List description'),
+    '#required' => FALSE,
+    '#description' => t('Descriptive text for the @type list.', array('@type' => variable_get('islandora_bookmark_type', 'bookmark'))),
+    '#type' => 'textfield',
+    '#size' => 30,
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#name' => 'islandora_bookmark_add_form_submit',
+    '#value' => t('Add list'),
+  );
+
+  return $form;
+}
+
+/**
+ * Form submission handler for the islandora_bookmark_add_form().
+ *
+ * @global stdClass $user
+ *
+ * @param array $form
+ *   The Drupal form definition.
+ * @param array $form_state
+ *   The Drupal form state.
+ */
+function islandora_bookmark_add_form_submit(array $form, array &$form_state) {
+  global $user;
+
+  $bookmark_name = $form_state['values']['listname'];
+  $bookmark_description = $form_state['values']['listdesc'];
+  $temp_list = Bookmark::createNewList($bookmark_name, $bookmark_description);
+  $saved_list = NULL;
+  if ($user->uid == 0) {
+    $saved_list = 'Log into an account to save ' . variable_get('islandora_bookmark_type', 'bookmark') . ' lists; lists created anonymously will not be saved.';
+  }
+  drupal_set_message(t('The new list @listname was created. @saved',
+      array(
+        '@listname' => $bookmark_name,
+        '@saved' => $saved_list,
+      )
+    ));
+  drupal_goto('islandora-bookmark');
+
+}
+
+/**
+ * Callback for adding a pid to a Bookmark.
+ *
+ * @param array $form
+ *   The Drupal form definition.
+ * @param array $form_state
+ *   The Drupal form state.
+ *
+ * @return array
+ *   The Drupal form definition.
+ */
+function islandora_bookmark_add_pid(array $form, array &$form_state) {
+  $errors = form_get_errors();
+
+  if (count($errors) === 0) {
+    module_load_include('inc', 'islandora_bookmark', 'includes/api');
+    $key = $form_state['values']['add_bookmarks'];
+    $pid = $form_state['islandora_bookmark_pid'];
+    $object = islandora_object_load($pid);
+
+    $bookmark_object = islandora_bookmark_get_bookmark_by_number($key);
+
+    try {
+      $bookmark_object->addPids(array($pid));
+      drupal_set_message(t('The object @label has been bookmarked in @listname.',
+          array(
+            '@listname' => $bookmark_object->bookmarkName,
+            '@label' => $object->label,
+          )
+        ));
+    }
+    catch (Exception $e) {
+      drupal_set_message($e->getMessage(), 'error');
+    }
+
+    return drupal_rebuild_form('islandora_bookmark_fedora_repository_object_form', $form_state, $form);
+  }
+  else {
+    return $form;
+  }
+}
+
+/**
+ * Callback for removing a user from a Bookmark.
+ *
+ * @param array $form
+ *   The Drupal form definition.
+ * @param array $form_state
+ *   The Drupal form state.
+ *
+ * @return array
+ *   The Drupal form definition.
+ */
+function islandora_bookmark_remove_user(array $form, array &$form_state) {
+  return $form['bookmarks']['users'];
+}
+
+/**
+ * Callback for adding a user to a Bookmark.
+ *
+ * @param array $form
+ *   The Drupal form definition.
+ * @param array $form_state
+ *   The Drupal form state.
+ *
+ * @return array
+ *   The Drupal form definition.
+ */
+function islandora_bookmark_add_user(array $form, array &$form_state) {
+  return $form['bookmarks']['users'];
+}
+
+/**
+ * Implements hook_islandora_solr_primary_display().
+ */
+function islandora_bookmark_islandora_solr_primary_display() {
+  return array(
+    'bookmark' => array(
+      'name' => t('Bookmark'),
+      'module' => 'islandora_bookmark',
+      'file' => 'includes/solr_results.inc',
+      'class' => 'IslandoraSolrResultsBookmark',
+      'function' => 'displayResults',
+      'description' => t('Search results as Bookmark output'),
+    ),
+  );
+}
+
+/**
+ * Title callback for bookmark list.
+ *
+ * Changes the drupal title to be the bookmarks title.
+ *
+ * @param string $list_id
+ *   The bookmark list id.
+ *
+ * @return string
+ *   The the bookmark name.
+ */
+function islandora_bookmark_list_title($list_id) {
+  module_load_include('inc', 'islandora_bookmark', 'includes/api');
+
+  $bookmark = islandora_bookmark_get_bookmark_by_number($list_id);
+  return filter_xss($bookmark->bookmarkName);
+}
+
+/**
+ * Implements hook_islandora_object_purged().
+ */
+function islandora_bookmark_islandora_object_purged($pid) {
+  db_delete('islandora_bookmark_list_pids')
+    ->condition('pidid', $pid)
+    ->execute();
+}
+
+/**
+ * Implements hook_islandora_bookmark_database_types().
+ */
+function islandora_bookmark_islandora_bookmark_database_types() {
+  return array(
+    'bookmark' => 'BookmarkDatabase',
+    'bookmark_default' => 'BookmarkDefaultDatabaseList',
+  );
+}

@@ -1,0 +1,132 @@
+<?php
+
+/**
+ * @file
+ * Tests to see if the hooks get called when appropriate.
+ *
+ * In the test module 'islandora_hooked_access_test' there are implementations
+ * of hooks being tested. These implementations modifies the session, and
+ * that's how we test if the hook gets called.
+ *
+ * To make sense of these tests reference islandora_hooked_access_test.module.
+ */
+
+class IslandoraBasicCollectionHookedAccessTestCase extends IslandoraWebTestCase {
+
+  /**
+   * Gets info to display to describe this test.
+   *
+   * @see IslandoraWebTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Islandora Collection Solution Pack Hooked Access Hook Implementation',
+      'description' => 'Ensure that the hooked access callback returns appropriate results.',
+      'group' => 'Islandora Basic Collection',
+    );
+  }
+
+  /**
+   * Creates an admin user and a connection to a fedora repository.
+   *
+   * @see IslandoraWebTestCase::setUp()
+   */
+  public function setUp() {
+    parent::setUp('islandora_basic_collection');
+    $this->repository = $this->admin->repository;
+    $this->objects = array(
+      'test:testAccessHook',
+    );
+    $this->management_ops = array(
+      ISLANDORA_BASIC_COLLECTION_MIGRATE_COLLECTION_MEMBERS => array(
+        ISLANDORA_BASIC_COLLECTION_MIGRATE_COLLECTION_MEMBERS,
+        ISLANDORA_METADATA_EDIT,
+      ),
+      ISLANDORA_BASIC_COLLECTION_MANAGE_COLLECTION_POLICY => array(
+        ISLANDORA_BASIC_COLLECTION_MANAGE_COLLECTION_POLICY,
+        ISLANDORA_METADATA_EDIT,
+      ),
+      ISLANDORA_BASIC_COLLECTION_CREATE_CHILD_COLLECTION => array(
+        ISLANDORA_BASIC_COLLECTION_CREATE_CHILD_COLLECTION,
+        ISLANDORA_INGEST,
+        ISLANDORA_VIEW_OBJECTS,
+      ),
+    );
+    $this->purgeTestObjects();
+    $this->dsid = 'asdf';
+    $this->createTestObjects();
+    $this->object = $this->repository->getObject('test:testAccessHook');
+  }
+
+  /**
+   * Free any objects/resources created for this test.
+   *
+   * @see IslandoraWebTestCase::tearDown()
+   */
+  public function tearDown() {
+    $this->purgeTestObjects();
+    unset($this->repository);
+    parent::tearDown();
+  }
+
+  /**
+   * Create test object(s).
+   */
+  public function createTestObjects() {
+    foreach ($this->objects as $object_id) {
+      $object = $this->repository->constructObject($object_id);
+      $object->label = $object_id;
+      $object->models = 'islandora:collectionCModel';
+
+      $datastream = $object->constructDatastream($this->dsid, 'M');
+      $datastream->label = 'fdsa';
+      $datastream->mimetype = 'text/plain';
+      $datastream->content = 'Some kinda awesome content stuffs...';
+
+      $cp = $object->constructDatastream('COLLECTION_POLICY', 'M');
+      $cp->label = 'Collection policy shenanigans';
+      $cp->mimetype = 'application/xml';
+      $c = CollectionPolicy::emptyPolicy();
+      $c->addContentModel('islandora:collectionCModel', "Collection content model", 'test');
+      $cp->content = $c->getXML();
+
+      $object->ingestDatastream($datastream);
+      $object->ingestDatastream($cp);
+
+      $object = $this->repository->ingestObject($object);
+    }
+  }
+
+  /**
+   * Purge any objects created by the test's in this class.
+   */
+  public function purgeTestObjects() {
+    foreach ($this->objects as $object) {
+      try {
+        $object = $this->repository->getObject($object);
+        $this->repository->purgeObject($object->id);
+      }
+      catch (Exception $e) {
+        // Meh... Either it didn't exist or the purge failed.
+      }
+    }
+  }
+
+  /**
+   * Test all operations on object.
+   */
+  public function testAllAccess() {
+    variable_set('islandora_strict_user_access_enforcement', FALSE);
+
+    foreach ($this->management_ops as $op => $permissions) {
+      $this->assertTrue(islandora_object_access($op, $this->object, $this->drupalCreateUser($permissions)), "Allow object access: $op");
+      foreach ($permissions as $p) {
+        if ($p == $op) {
+          continue;
+        }
+        $perms = array_diff($permissions, array($p));
+        $this->assertFalse(islandora_object_access($op, $this->object, $this->drupalCreateUser($perms)), "Deny object access for $op without $p");
+      }
+    }
+  }
+}

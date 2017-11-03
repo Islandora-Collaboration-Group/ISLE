@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "/schema/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:html="http://www.w3.org/1999/xhtml"><head><title>EXSLT - math:lowest</title><link rel="stylesheet" href="base.css"/></head><body><h1 id="#title"><a href="http://www.exslt.org/">EXSLT</a> - <a href="http://www.exslt.org/math">math</a>:<a href="http://www.exslt.org/math/functions/lowest">lowest</a></h1><table><tr><td id="menu"><p class="level1"><a href="math.lowest.html">Implementer Page</a></p><p class="level1"><a href="../../../howto.html">How To</a></p><p class="level1"><a href="../../../download.html">Downloads</a></p><p class="level1">Modules</p><p class="level2"><a href="../../../date/index.html">Dates and Times</a></p><p class="level2"><a href="../../../dyn/index.html">Dynamic</a></p><p class="level2"><a href="../../../exsl/index.html">Common</a></p><p class="level2"><a href="../../../func/index.html">Functions</a></p><p class="level2"><a href="../../../math/index.html">Math</a></p><p class="level3"><a href="../../functions/abs/index.html">math:abs()</a></p><p class="level3"><a href="../../functions/acos/index.html">math:acos()</a></p><p class="level3"><a href="../../functions/asin/index.html">math:asin()</a></p><p class="level3"><a href="../../functions/atan/index.html">math:atan()</a></p><p class="level3"><a href="../../functions/atan2/index.html">math:atan2()</a></p><p class="level3"><a href="../../functions/constant/index.html">math:constant()</a></p><p class="level3"><a href="../../functions/cos/index.html">math:cos()</a></p><p class="level3"><a href="../../functions/exp/index.html">math:exp()</a></p><p class="level3"><a href="../../functions/highest/index.html">math:highest()</a></p><p class="level3"><a href="../../functions/log/index.html">math:log()</a></p><p class="level3"><a href="../../functions/lowest/index.html">math:lowest()</a></p><p class="level3"><a href="../../functions/max/index.html">math:max()</a></p><p class="level3"><a href="../../functions/min/index.html">math:min()</a></p><p class="level3"><a href="../../functions/power/index.html">math:power()</a></p><p class="level3"><a href="../../functions/random/index.html">math:random()</a></p><p class="level3"><a href="../../functions/sin/index.html">math:sin()</a></p><p class="level3"><a href="../../functions/sqrt/index.html">math:sqrt()</a></p><p class="level3"><a href="../../functions/tan/index.html">math:tan()</a></p><p class="level2"><a href="../../../random/index.html">Random</a></p><p class="level2"><a href="../../../regexp/index.html">Regular Expressions</a></p><p class="level2"><a href="../../../set/index.html">Sets</a></p><p class="level2"><a href="../../../str/index.html">Strings</a></p><p class="level1"><a href="../../../submissions/">Submissions</a></p><p class="level1"><a href="../../../list">Mailing List</a></p><p class="level1"><a href="../../../contact.html">Contact</a></p></td><td id="content"><p><b>Implementer Page: </b><a href="math.lowest.html">math.lowest.html</a><br/><b>Function Package: </b><a href="math.lowest.zip">math.lowest.zip</a></p><h4>Function Syntax</h4><pre><var>node-set</var> <b>math:lowest</b>(<var>node-set</var>)</pre><h4>Template Syntax</h4><pre>&lt;xsl:call-template name="<b>math:lowest</b>"&gt;
+   &lt;xsl:with-param name="nodes" select="<var>node-set</var>" /&gt;
+&lt;/xsl:call-template&gt;</pre><div><p>
+         The <code>math:lowest</code> function returns the nodes in the node set whose value is the minimum value for the node set.  The minimum value for the node set is the same as the value as calculated by <a href="/math/functions/min"><code>math:min</code></a>.  A node has this minimum value if the result of converting its string value to a number as if by the <a href="http://www.w3.org/TR/xpath#number-function"><code>number</code></a> function is equal to the minimum value, where the equality comparison is defined as a numerical comparison using the <a href="http://www.w3.org/TR/xpath#booleans"><code>=</code></a> operator.
+      </p><p class="note">
+         If any of the nodes in the node set has a non-numeric value, the <a href="/math/functions/min"><code>math:min</code></a> function will return <code>NaN</code>.  The definition numeric comparisons entails that <code>NaN != NaN</code>.  Therefore if any of the nodes in the node set has a non-numeric value, <code>math:lowest</code> will return an empty node set.
+      </p><p>
+         The <code>math:lowest</code> template returns a result tree fragment consisting of copies of the nodes as returned by the function.
+      </p></div><h2>Implementations</h2><p>
+                  The following XSLT processors support <code>math:lowest</code>:
+               </p><ul><li><a href="http://4Suite.org">4XSLT, from 4Suite.</a> (version 0.12.0a3)</li><li><a href="http://users.iclway.co.uk/mhkay/saxon/index.html">SAXON from Michael Kay</a> (version 6.3)</li><li><a href="http://www.aztecrider.com/xslt/">jd.xslt from Johannes Döbler</a> (version 1.0.9)</li><li><a href="http://xmlsoft.org/XSLT/">libxslt from Daniel Veillard; implementation by Thomas Broyer</a> (version 1.0.19)</li><li><a href="http://xml.apache.org/xalan-j">Xalan-J from Apache</a> (version 2.4.D1)</li></ul><p>
+                  Implementations of <code>math:lowest</code> are available in the following languages:
+               </p><ul><li><a href="math.lowest.function.xsl">EXSLT Function</a> (by <a href="mailto:mail@jenitennison.com">Jeni Tennison</a>)</li><li><a href="math.lowest.template.xsl">XSLT Template</a> (by <a href="mailto:mail@jenitennison.com">Jeni Tennison</a>)</li></ul><h2>Examples</h2><h3>Function</h3><p>The following example shows how to use the <code>math:lowest</code> function:</p><h4>Source</h4><pre>&lt;values&gt;
+   &lt;value id="one"&gt;7&lt;/value&gt;
+   &lt;value id="two"&gt;11&lt;/value&gt;
+   &lt;value id="three"&gt;8&lt;/value&gt;
+   &lt;value id="four"&gt;4&lt;/value&gt;
+&lt;/values&gt;</pre><h4>Stylesheet</h4><pre>&lt;xsl:template match="values"&gt;
+   &lt;result&gt;
+      &lt;xsl:text&gt;Lowest: &lt;/xsl:text&gt;
+      &lt;xsl:value-of select="math:lowest(value)/@id" /&gt;
+   &lt;/result&gt;
+&lt;/xsl:template&gt;</pre><h4>Result</h4><pre>&lt;result&gt;Lowest: four&lt;/result&gt;</pre><h3>Template</h3><p>The following example shows how to use the <code>math:lowest</code> template:</p><h4>Source</h4><pre>&lt;values&gt;
+   &lt;value id="one"&gt;7&lt;/value&gt;
+   &lt;value id="two"&gt;11&lt;/value&gt;
+   &lt;value id="three"&gt;8&lt;/value&gt;
+   &lt;value id="four"&gt;4&lt;/value&gt;
+&lt;/values&gt;</pre><h4>Stylesheet</h4><pre>&lt;xsl:template match="values"&gt;
+   &lt;result&gt;
+      &lt;xsl:text&gt;Lowest: &lt;/xsl:text&gt;
+      &lt;xsl:call-template name="math:lowest"&gt;
+         &lt;xsl:with-param name="nodes"
+                         select="value" /&gt;
+      &lt;/xsl:call-template&gt;
+   &lt;/result&gt;
+&lt;/xsl:template&gt;</pre><h4>Result</h4><pre>&lt;result&gt;Lowest: four&lt;/result&gt;</pre></td></tr></table><div id="colophon"><p><a href="http://www.exslt.org/math/functions/lowest/index.html">http://www.exslt.org/math/functions/lowest/index.html</a> last modified 2002-11-12</p></div></body></html>

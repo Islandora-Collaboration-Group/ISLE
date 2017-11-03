@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Installation hooks for Web of Science badges.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_wos_uninstall() {
+  $vars = array(
+    'islandora_wos_username',
+    'islandora_wos_password',
+    'islandora_wos_badgetype',
+  );
+  array_walk($vars, 'variable_del');
+}

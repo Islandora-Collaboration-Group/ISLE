@@ -1,0 +1,485 @@
+<?php
+
+/**
+ * @file
+ * A sundry collection of error-handling tests.
+ */
+
+class IslandoraOAIErrorHandlingTestCase extends IslandoraOAIWebTestCase {
+
+  /**
+   * Get test information.
+   *
+   * @see IslandoraWebTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Error Handling',
+      'description' => 'Tests various Islandora OAI error responses.',
+      'group' => 'Islandora OAI',
+    );
+  }
+
+  /**
+   * Set up the test environment.
+   *
+   * @see IslandoraWebTestCase::setUp()
+   */
+  public function setUp() {
+    parent::setUp(array(
+      'islandora_oai',
+    ));
+  }
+
+  /**
+   * Makes a series of faulty requests, then checks the errors provided.
+   */
+  public function testOAIErrorHandling() {
+    module_load_include('inc', 'islandora_oai', 'tests/utilities');
+    variable_set('islandora_oai_max_size', '1');
+    variable_set('islandora_oai_expire_time', '3');
+    variable_set('islandora_oai_date_field', 'timestamp');
+
+    $user = $this->drupalCreateUser(array_keys(module_invoke_all('permission')));
+    $this->drupalLogin($user);
+
+    // Before anything else, we're going to need a collection in there so that
+    // there's more than one object in there for us to 'resume' from when we
+    // require resumptionTokens.
+    $policy = <<<XML
+    <collection_policy xmlns="http://www.islandora.ca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="" xsi:schemaLocation="http://www.islandora.ca http://syn.lib.umanitoba.ca/collection_policy.xsd">
+      <content_models>
+        <content_model dsid="ISLANDORACM" name="Collection" namespace="islandora:collection" pid="islandora:collectionCModel"/>
+      </content_models>
+      <relationship>isMemberOfCollection</relationship>
+    </collection_policy>
+XML;
+    $filename = "temporary://" . $this->randomName() . ".xml";
+    file_put_contents($filename, $policy);
+    $pid = "islandora:" . $this->randomName();
+    $properties = array(
+      'models' => array(
+        'islandora:collectionCModel',
+      ),
+      'pid' => $pid,
+    );
+    $datastreams = array(
+      array(
+        'dsid' => 'COLLECTION_POLICY',
+        'path' => $filename,
+        'control_group' => 'X',
+        'mimetype' => 'text/xml',
+      ),
+    );
+    $this->ingestConstructedObject($properties, $datastreams);
+
+    // Aight, let's produce some errors! These are sorted in the order they
+    // appear in the OAI protocol documentation, section 4, which you can read
+    // at www.openarchives.org/OAI/openarchivesprotocol.html#ProtocolMessages.
+    $this->pass("If you'd like to follow along with the results at home, the error protocol documentation can be found at http://www.openarchives.org/OAI/openarchivesprotocol.html#ProtocolMessages", "Notices");
+
+    // 4.1 GetRecord - badArgument using no argument.
+    $xpath = '/oai:OAI-PMH/oai:error[@code="badArgument"]';
+    $request = 'verb=GetRecord';
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "The required argument 'identifier' is missing in the request.", "4.1 GetRecord - badArgument: Triggered error using no arguments.", "Islandora");
+    }
+    else {
+      $this->fail("4.1 GetRecord - badArgument using no argument: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // 4.1 GetRecord - badArgument using faulty argument.
+    $xpath = '/oai:OAI-PMH/oai:error[@code="badArgument"]';
+    $request = 'verb=GetRecord&fakeArgument=stupid';
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "The argument 'fakeArgument' (value=stupid) included in the request is not valid.", "4.1 GetRecord badArgument: Triggered error using a non-existent argument.", "Islandora");
+    }
+    else {
+      $this->fail("4.1 GetRecord - badArgument using faulty argument: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // 4.1 GetRecord - cannotDisseminateFormat.
+    $xpath = '/oai:OAI-PMH/oai:error[@code="cannotDisseminateFormat"]';
+    $request = 'verb=GetRecord&metadataPrefix=stupid';
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "The metadata format 'stupid' given by metadataPrefix is not supported by this repository.", "4.1 GetRecord cannotDisseminateFormat: Triggered error using a non-existent prefix.", "Islandora");
+    }
+    else {
+      $this->fail("4.1 GetRecord - cannotDisseminateFormat: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // 4.1 GetRecord - idDoesNotExist.
+    $id = $this->randomName();
+    $xpath = '/oai:OAI-PMH/oai:error[@code="idDoesNotExist"]';
+    $request = "verb=GetRecord&metadataPrefix=oai_dc&identifier=$id";
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "The value '$id' of the identifier is illegal for this repository.", "4.1 GetRecord idDoesNotExist: Triggered error using a non-existent ID.", "Islandora");
+    }
+    else {
+      $this->fail("4.1 GetRecord - idDoesNotExist: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // 4.2 Identify - badArgument.
+    $xpath = '/oai:OAI-PMH/oai:error[@code="badArgument"]';
+    $request = "verb=Identify&argument=thereisone";
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "The argument 'argument' (value=thereisone) included in the request is not valid.", "4.2 Identify badArgument: Triggered error by adding an argument.", "Islandora");
+    }
+    else {
+      $this->fail("4.2 Identify - badArgument: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // 4.3 ListIdentifiers - badArgument using no arguments.
+    $xpath = '/oai:OAI-PMH/oai:error[@code="badArgument"]';
+    $request = "verb=ListIdentifiers";
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "The required argument 'metadataPrefix' is missing in the request.", "4.3 ListIdentifiers badArgument: Triggered error by using no arguments.", "Islandora");
+    }
+    else {
+      $this->fail("4.3 ListIdentifiers - badArgument using no arguments: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // 4.3 ListIdentifiers - badArgument using faulty argument.
+    $xpath = '/oai:OAI-PMH/oai:error[@code="badArgument"]';
+    $request = 'verb=ListIdentifiers&fakeArgument=stupid';
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "The argument 'fakeArgument' (value=stupid) included in the request is not valid.", "4.3 ListIdentifiers badArgument: Triggered error using a non-existent argument.", "Islandora");
+    }
+    else {
+      $this->fail("4.3 ListIdentifiers - badArgument using faulty argument: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // 4.3 ListIdentifiers - badArgument, resumptionToken with other arguments.
+    $first_xpath = '/oai:OAI-PMH/oai:ListIdentifiers/oai:resumptionToken';
+    $first_request = "verb=ListIdentifiers&metadataPrefix=oai_dc";
+    $first_results = $this->getXpathFromOAIRequest($first_request, $first_xpath);
+    if (isset($first_results[$first_xpath][0])) {
+      $token = (string) $first_results[$first_xpath][0];
+      $xpath = '/oai:OAI-PMH/oai:error[@code="badArgument"]';
+      $request = "verb=ListIdentifiers&metadataPrefix=oai_dc&resumptionToken=$token";
+      $results = $this->getXpathFromOAIRequest($request, $xpath);
+      if (isset($results[$xpath][0])) {
+        $this->assertEqual((string) $results[$xpath][0], "The usage of resumptionToken as an argument allows no other arguments.", "4.3 ListIdentifiers badResumptionToken: Triggered error using a resumptionToken in conjunction with other arguments.", "Islandora");
+      }
+      else {
+        $this->fail("4.3 ListIdentifiers - badArgument using a resumptionToken with other arguments: no results found for Xpath query $xpath using GET request $request", "Islandora");
+      }
+    }
+    else {
+      $this->fail("4.3 ListIdentifiers - badArgument using a resumptionToken with other arguments: no resumptionToken was found for Xpath query $first_xpath using GET request $first_request", "Islandora");
+    }
+
+    // 4.3 ListIdentifiers - badResumptionToken with invalid token.
+    $token = $this->randomName();
+    $xpath = '/oai:OAI-PMH/oai:error[@code="badResumptionToken"]';
+    $request = "verb=ListIdentifiers&resumptionToken=$token";
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "The resumptionToken '$token' does not exist or has already expired.", "4.3 ListIdentifiers badResumptionToken: Triggered error using a random resumptionToken.", "Islandora");
+    }
+    else {
+      $this->fail("4.3 ListIdentifiers - badResumptionToken with invalid token: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // 4.3 ListIdentifiers - badResumptionToken with expired token.
+    $first_xpath = '/oai:OAI-PMH/oai:ListIdentifiers/oai:resumptionToken';
+    $first_request = "verb=ListIdentifiers&metadataPrefix=oai_dc";
+    $first_results = $this->getXpathFromOAIRequest($first_request, $first_xpath);
+    if (isset($first_results[$first_xpath][0])) {
+      sleep(5);
+      $this->cronRun();
+      $token = (string) $first_results[$first_xpath][0];
+      $xpath = '/oai:OAI-PMH/oai:error[@code="badResumptionToken"]';
+      $request = "verb=ListIdentifiers&resumptionToken=$token";
+      $results = $this->getXpathFromOAIRequest($request, $xpath);
+      if (isset($results[$xpath][0])) {
+        $this->assertEqual((string) $results[$xpath][0], "The resumptionToken '$token' does not exist or has already expired.", "4.3 ListIdentifiers badResumptionToken: Triggered error using an expired resumptionToken.", "Islandora");
+      }
+      else {
+        $this->fail("4.3 ListIdentifiers - badResumptionToken with expired token: no results found for Xpath query $xpath using GET request $request", "Islandora");
+      }
+    }
+    else {
+      $this->fail("4.3 ListIdentifiers - badResumptionToken with expired token: no resumptionToken was found for Xpath query $first_xpath using GET request $first_request", "Islandora");
+    }
+
+    // 4.3 ListIdentifiers - cannotDisseminateFormat.
+    $xpath = '/oai:OAI-PMH/oai:error[@code="cannotDisseminateFormat"]';
+    $request = 'verb=ListIdentifiers&metadataPrefix=stupid';
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "The metadata format 'stupid' given by metadataPrefix is not supported by this repository.", "4.3 ListIdentifiers cannotDisseminateFormat: Triggered error using a non-existent prefix.", "Islandora");
+    }
+    else {
+      $this->fail("4.3 ListIdentifiers - cannotDisseminateFormat: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // 4.3 ListIdentifiers - noRecordsMatch.
+    $set = $this->randomName();
+    $xpath = '/oai:OAI-PMH/oai:error[@code="noRecordsMatch"]';
+    $request = "verb=ListIdentifiers&metadataPrefix=oai_dc&set=$set";
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "The combination of the given values results in an empty list.", "4.3 ListIdentifiers noRecordsMatch: Triggered error using a random set.", "Islandora");
+    }
+    else {
+      $this->fail("4.3 ListIdentifiers - noRecordsMatch: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // 4.4 ListMetadataFormats - badArgument using faulty argument.
+    $xpath = '/oai:OAI-PMH/oai:error[@code="badArgument"]';
+    $request = "verb=ListMetadataFormats&fakeArgument=stupid";
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "The argument 'fakeArgument' (value=stupid) included in the request is not valid.", "4.4 ListMetadataFormats badArgument: Triggered error by using a faulty argument.", "Islandora");
+    }
+    else {
+      $this->fail("4.4 ListMetadataFormats - badArgument using faulty argument: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // 4.4 ListMetadataFormats - idDoesNotExist.
+    $id = $this->randomName();
+    $xpath = '/oai:OAI-PMH/oai:error[@code="idDoesNotExist"]';
+    $request = "verb=ListMetadataFormats&identifier=$id";
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "The value '$id' of the identifier is illegal for this repository.", "4.4 ListMetadataFormats idDoesNotExist: Triggered error by using a non-existent ID.", "Islandora");
+    }
+    else {
+      $this->fail("4.4 ListMetadataFormats - idDoesNotExist: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // 4.5 ListRecords - badArgument using no arguments.
+    $xpath = '/oai:OAI-PMH/oai:error[@code="badArgument"]';
+    $request = "verb=ListRecords";
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "The required argument 'metadataPrefix' is missing in the request.", "4.5 ListRecords badArgument: Triggered error by using no arguments.", "Islandora");
+    }
+    else {
+      $this->fail("4.5 ListRecords - badArgument using no arguments: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // 4.5 ListRecords - badArgument using faulty argument.
+    $xpath = '/oai:OAI-PMH/oai:error[@code="badArgument"]';
+    $request = 'verb=ListRecords&fakeArgument=stupid';
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "The argument 'fakeArgument' (value=stupid) included in the request is not valid.", "4.5 ListRecords badArgument: Triggered error using a non-existent argument.", "Islandora");
+    }
+    else {
+      $this->fail("4.5 ListRecords - badArgument using faulty argument: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // 4.5 ListRecords - badArgument, resumptionToken with other arguments.
+    $xpath = '/oai:OAI-PMH/oai:error[@code="badArgument"]';
+    $request = "verb=ListRecords&metadataPrefix=oai_dc&resumptionToken=whatever";
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "The usage of resumptionToken as an argument allows no other arguments.", "4.5 ListRecords badArgument: Triggered error using a resumptionToken in conjunction with other arguments.", "Islandora");
+    }
+    else {
+      $this->fail("4.5 ListRecords - badArgument using a resumptionToken with other arguments: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // 4.5 ListRecords - badArgument using invalid 'from' value.
+    $xpath = '/oai:OAI-PMH/oai:error[@code="badArgument"]';
+    $request = "verb=ListRecords&metadataPrefix=oai_dc&from=notevenreal";
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "The value 'notevenreal' of the argument 'from' is not valid.", "4.5 ListRecords badArgument: Triggered an error applying a non-date to 'from'.", 'Islandora');
+    }
+    else {
+      $this->fail("4.5 ListRecords - badArgument using an invalid 'from' value: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // 4.5 ListRecords - badArgument using invalid 'until'.
+    $xpath = '/oai:OAI-PMH/oai:error[@code="badArgument"]';
+    $request = "verb=ListRecords&metadataPrefix=oai_dc&until=superfake";
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "The value 'superfake' of the argument 'until' is not valid.", "4.5 ListRecords badArgument: Triggered an error applying a non-date to 'until'.", 'Islandora');
+    }
+    else {
+      $this->fail("4.5 ListRecords - badArgument using an invalid 'until' value: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // 4.5 ListRecords - badResumptionToken with invalid token.
+    $token = $this->randomName();
+    $xpath = '/oai:OAI-PMH/oai:error[@code="badResumptionToken"]';
+    $request = "verb=ListRecords&resumptionToken=$token";
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "The resumptionToken '$token' does not exist or has already expired.", "4.5 ListRecords badResumptionToken: Triggered error using a random resumptionToken.", "Islandora");
+    }
+    else {
+      $this->fail("4.5 ListRecords - badResumptionToken with invalid token: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // 4.5 ListRecords - badResumptionToken with expired token.
+    $first_xpath = '/oai:OAI-PMH/oai:ListRecords/oai:resumptionToken';
+    $first_request = "verb=ListRecords&metadataPrefix=oai_dc";
+    $first_results = $this->getXpathFromOAIRequest($first_request, $first_xpath);
+    if (isset($first_results[$first_xpath][0])) {
+      sleep(5);
+      $this->cronRun();
+      $token = (string) $first_results[$first_xpath][0];
+      $xpath = '/oai:OAI-PMH/oai:error[@code="badResumptionToken"]';
+      $request = "verb=ListRecords&resumptionToken=$token";
+      $results = $this->getXpathFromOAIRequest($request, $xpath);
+      if (isset($results[$xpath][0])) {
+        $this->assertEqual((string) $results[$xpath][0], "The resumptionToken '$token' does not exist or has already expired.", "4.5 ListRecords badResumptionToken: Triggered error using an expired resumptionToken.", "Islandora");
+      }
+      else {
+        $this->fail("4.5 ListRecords - badResumptionToken with expired token: no results found for Xpath query $xpath using GET request $request", "Islandora");
+      }
+    }
+    else {
+      $this->fail("4.5 ListRecords - badResumptionToken with expired token: no resumptionToken was found for Xpath query $first_xpath using GET request $first_request", "Islandora");
+    }
+
+    // 4.5 ListRecords - cannotDisseminateFormat.
+    $xpath = '/oai:OAI-PMH/oai:error[@code="cannotDisseminateFormat"]';
+    $request = 'verb=ListRecords&metadataPrefix=stupid';
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "The metadata format 'stupid' given by metadataPrefix is not supported by this repository.", "4.5 ListRecords cannotDisseminateFormat: Triggered error using a non-existent prefix.", "Islandora");
+    }
+    else {
+      $this->fail("4.5 ListRecords - cannotDisseminateFormat: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // 4.5 ListRecords - noRecordsMatch with invalid set.
+    $set = $this->randomName();
+    $xpath = '/oai:OAI-PMH/oai:error[@code="noRecordsMatch"]';
+    $request = "verb=ListRecords&metadataPrefix=oai_dc&set=$set";
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "The combination of the given values results in an empty list.", "4.5 ListRecords noRecordsMatch: Triggered error using a random set.", "Islandora");
+    }
+    else {
+      $this->fail("4.5 ListRecords - noRecordsMatch: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // 4.5 ListRecords - noRecordsMatch using out-of-range 'from' and 'until'.
+    $xpath = '/oai:OAI-PMH/oai:error[@code="noRecordsMatch"]';
+    $request = "verb=ListRecords&metadataPrefix=oai_dc&from=1000-01-01T00:00:00Z&until=1001-01-01T00:00:00Z";
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "The combination of the given values results in an empty list.", "4.5 ListRecords noRecordsMatch: Triggered an error using an out-of-range date.", 'Islandora');
+    }
+    else {
+      $this->fail("4.5 ListRecords - noRecordsMatch using an out-of-range 'from' and 'until': no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // 4.6 ListSets - badArgument.
+    $xpath = '/oai:OAI-PMH/oai:error[@code="badArgument"]';
+    $request = 'verb=ListSets&fakeArgument=stupid';
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "The argument 'fakeArgument' (value=stupid) included in the request is not valid.", "4.6 ListSets badArgument: Triggered error using a faulty argument.", "Islandora");
+    }
+    else {
+      $this->fail("4.6 ListSets - badArgument: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // 4.6 ListSets - badResumptionToken with invalid token.
+    $token = $this->randomName();
+    $xpath = '/oai:OAI-PMH/oai:error[@code="badResumptionToken"]';
+    $request = "verb=ListSets&resumptionToken=$token";
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "The resumptionToken '$token' does not exist or has already expired.", "4.6 ListSets badResumptionToken: Triggered error using a random resumptionToken.", "Islandora");
+    }
+    else {
+      $this->fail("4.6 ListSets - badResumptionToken with invalid token: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // 4.6 ListSets - badResumptionToken with expired token.
+    $first_xpath = '/oai:OAI-PMH/oai:ListSets/oai:resumptionToken';
+    $first_request = "verb=ListSets";
+    $first_results = $this->getXpathFromOAIRequest($first_request, $first_xpath);
+    if (isset($first_results[$first_xpath][0])) {
+      sleep(5);
+      $this->cronRun();
+      $token = (string) $first_results[$first_xpath][0];
+      $xpath = '/oai:OAI-PMH/oai:error[@code="badResumptionToken"]';
+      $request = "verb=ListSets&resumptionToken=$token";
+      $results = $this->getXpathFromOAIRequest($request, $xpath);
+      if (isset($results[$xpath][0])) {
+        $this->assertEqual((string) $results[$xpath][0], "The resumptionToken '$token' does not exist or has already expired.", "4.6 ListSets badResumptionToken: Triggered error using an expired resumptionToken.", "Islandora");
+      }
+      else {
+        $this->fail("4.6 ListSets - badResumptionToken with expired token: no results found for Xpath query $xpath using GET request $request", "Islandora");
+      }
+    }
+    else {
+      $this->fail("4.6 ListSets - badResumptionToken with expired token: no resumptionToken was found for Xpath query $first_xpath using GET request $first_request", "Islandora");
+    }
+
+    // Bonus - badArgument from repeated argument with same parameters.
+    $xpath = '/oai:OAI-PMH/oai:error[@code="badArgument"]';
+    $request = "verb=ListRecords&metadataPrefix=oai_dc&metadataPrefix=oai_dc";
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset ($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "Do not use the same argument more than once.", "Bonus - badArgument from repeated argument with same parameters: Triggered error by setting metadataPrefix to oai_dc twice.", "Islandora");
+    }
+    else {
+      $this->fail("Bonus - badArgument from repeated argument with same parameters: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // Bonus - badArgument from repeated metadataPrefix with different prefixes.
+    $xpath = '/oai:OAI-PMH/oai:error[@code="badArgument"]';
+    $request = "verb=ListRecords&metadataPrefix=oai_dc&metadataPrefix=oai_mods";
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset ($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "Do not use the same argument more than once.", "Bonus - badArgument from repeated metadataPrefix with different prefixes: Triggered error by setting metadataPrefix to oai_dc and oai_mods.", "Islandora");
+    }
+    else {
+      $this->fail("Bonus - badArgument from repeated metadataPrefix with different prefixes: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // Bonus - badVerb using a fake verb.
+    $xpath = '/oai:OAI-PMH/oai:error[@code="badVerb"]';
+    $request = "verb=Embiggen&verbLexicographicalStatus=PerfectlyCromulent";
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset ($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "The verb 'Embiggen' provided in the request is illegal.", "Bonus - badVerb using a fake verb: Triggered error by using an illegal verb.", "Islandora");
+    }
+    else {
+      $this->fail("Bonus - badVerb using a fake verb: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // Bonus - badVerb using no verb.
+    $xpath = '/oai:OAI-PMH/oai:error[@code="badVerb"]';
+    $request = "";
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset ($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "The request does not provide any verb.", "Bonus - badVerb using no verb: Triggered error by omitting a verb argument.", "Islandora");
+    }
+    else {
+      $this->fail("Bonus - badVerb using no verb: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // Bonus - badVerb using two verbs.
+    $xpath = '/oai:OAI-PMH/oai:error[@code="badVerb"]';
+    $request = "verb=Identify&verb=GetRecord";
+    $results = $this->getXpathFromOAIRequest($request, $xpath);
+    if (isset ($results[$xpath][0])) {
+      $this->assertEqual((string) $results[$xpath][0], "Cannot have more than one verb in the same request.", "Bonus - badVerb using two verbs: Triggered error by using two verbs.", "Islandora");
+    }
+    else {
+      $this->fail("Bonus - badVerb using two verbs: no results found for Xpath query $xpath using GET request $request", "Islandora");
+    }
+
+    // Let's get rid of that collection from before.
+    $this->deleteObject($pid);
+  }
+}

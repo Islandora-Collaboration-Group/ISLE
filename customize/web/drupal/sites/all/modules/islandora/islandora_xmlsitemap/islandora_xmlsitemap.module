@@ -1,0 +1,122 @@
+<?php
+/**
+ * @file
+ * Main file for the islandora_xmlsitemap module.
+ */
+
+define('ISLANDORA_XMLSITEMAP_PATH_PREFIX', 'islandora/object/');
+/**
+ * Implements hook_cron().
+ */
+function islandora_xmlsitemap_cron() {
+  module_load_include('inc', 'islandora_xmlsitemap', 'includes/batch');
+  xmlsitemap_run_unprogressive_batch('islandora_xmlsitemap_get_batch');
+}
+
+/**
+ * Implements hook_islandora_object_purged().
+ *
+ * When an islandora object is purged we will attempt to remove it from the
+ * xmlsitemap database.
+ */
+function islandora_xmlsitemap_islandora_object_purged($pid) {
+  module_load_include('inc', 'islandora_xmlsitemap', 'includes/utilities');
+  module_load_include('inc', 'islandora_xmlsitemap', 'includes/db');
+
+  $q = <<<EOQ
+SELECT id
+FROM {xmlsitemap}
+WHERE type = 'custom' AND (
+  subtype = :sub_type OR loc = :loc
+)
+EOQ;
+  $ids = db_query($q, array(
+    ':sub_type' => islandora_xmlsitemap_get_subtype_id($pid),
+    ':loc' => islandora_xmlsitemap_get_link_url($pid),
+  ))->fetchCol();
+
+  foreach ($ids as $id) {
+    $link = xmlsitemap_custom_load($id);
+    $value = xmlsitemap_link_delete('custom', array('id' => $id));
+    if ($value > 0) {
+      watchdog('islandora_xmlsitemap', 'Removed link %id with a path of %path from the xmlsitemap', array(
+        '%id' => $id,
+        '%path' => $link['loc'],
+      ));
+    }
+  }
+  islandora_xmlsitemap_delete_increment_record($pid);
+}
+
+/**
+ * Implements hook_islandora_object_ingested().
+ *
+ * When an islandora object is ingested we will attempt to add a link to the
+ * xmlsitemap database.
+ */
+function islandora_xmlsitemap_islandora_object_ingested($object) {
+  module_load_include('inc', 'islandora_xmlsitemap', 'includes/utilities');
+  islandora_xmlsitemap_add_or_update_link($object->id);
+}
+
+/**
+ * Implements hook_islandora_object_modified().
+ *
+ * When an Islandora object is modified we will attempt to add a link to the
+ * xmlsitemap database.
+ */
+function islandora_xmlsitemap_islandora_object_modified($object) {
+  module_load_include('inc', 'islandora_xmlsitemap', 'includes/utilities');
+  drupal_static_reset('islandora_object_access');
+  islandora_xmlsitemap_add_or_update_link($object->id);
+}
+
+/**
+ * Implements hook_islandora_datastream_purged().
+ */
+function islandora_xmlsitemap_islandora_datastream_purged($object, $dsid) {
+  module_load_include('inc', 'islandora_xmlsitemap', 'includes/utilities');
+  drupal_static_reset('islandora_object_access');
+  islandora_xmlsitemap_add_or_update_link($object->id);
+}
+
+/**
+ * Implements hook_islandora_datastream_ingested().
+ *
+ * When an Islandora datastream is ingested we will attempt to add a link to the
+ * xmlsitemap database (to update).
+ */
+function islandora_xmlsitemap_islandora_datastream_ingested($object, $datastrean) {
+  module_load_include('inc', 'islandora_xmlsitemap', 'includes/utilities');
+  drupal_static_reset('islandora_object_access');
+  islandora_xmlsitemap_add_or_update_link($object->id);
+}
+
+/**
+ * Implements hook_islandora_datastream_modified().
+ *
+ * When an Islandora datastream is modified we will attempt to add a link to the
+ * xmlsitemap database.
+ */
+function islandora_xmlsitemap_islandora_datastream_modified($object, $datastream) {
+  module_load_include('inc', 'islandora_xmlsitemap', 'includes/utilities');
+  drupal_static_reset('islandora_object_access');
+  islandora_xmlsitemap_add_or_update_link($object->id);
+}
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_xmlsitemap_menu() {
+  $items = array();
+
+  $items['admin/islandora/xmlsitemap'] = array(
+    'title' => 'XML Sitemap Integration',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_xmlsitemap_admin_form'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'includes/admin.form.inc',
+  );
+
+  return $items;
+}

@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * @file
+ * Defines all the hooks this module implements.
+ */
+
+/**
+ * Implements hook_islandora_populator().
+ */
+function pmid_populator_islandora_populator() {
+  $items = array();
+
+  $items['pmid_populator'] = array(
+    'title' => t('PMID Populator'),
+    'description' => t('Performs a look-up on PubMed to populate metadata.'),
+    'type' => 'inline',
+    'form' => array(
+      'pmid' => array(
+        '#type' => 'textfield',
+        '#title' => t('PubMed Identifier'),
+        '#description' => t('Enter an identifier for which to attempt to acquire metadata.'),
+        '#element_validate' => array(
+          'element_validate_integer_positive',
+          'pmid_populator_validate_id',
+        ),
+      ),
+    ),
+    'output' => array(
+      'MODS' => array(
+        'callback' => 'pmid_populator_generate_mods',
+      ),
+    ),
+    'files' => array(
+      array('inc', 'pmid_populator', 'includes/populate'),
+    ),
+  );
+
+  return $items;
+}

@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="2">
+  <xs:element name="definition">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="properties">
+          <xs:complexType>
+            <xs:all>
+              <xs:element name="root_name" type="xs:Name"/>
+              <xs:element minOccurs="0" name="schema_uri" type="xs:anyURI"/>
+              <xs:element minOccurs="0" name="namespaces">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="namespace" type="namespaceType" minOccurs="0"> </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="default" type="xs:anyURI"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="form" minOccurs="1" type="elementType"/>
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:nonNegativeInteger" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="elementsDefinition">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="element" type="elementDefinition"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="elementDefinition">
+    <xs:all>
+      <xs:element minOccurs="0" name="access" type="boolean"/>
+      <xs:element minOccurs="0" name="action" type="string"/>
+      <xs:element minOccurs="0" name="after_build" type="array"> </xs:element>
+      <xs:element minOccurs="0" name="ahah" type="array"/>
+      <xs:element minOccurs="0" name="attributes" type="array"/>
+      <xs:element minOccurs="0" name="autocomplete_path" type="string"/>
+      <xs:element minOccurs="0" name="button_type" type="string"/>
+      <xs:element minOccurs="0" name="children" type="elementsDefinition"/>
+      <xs:element minOccurs="0" name="collapsed" type="boolean"/>
+      <xs:element minOccurs="0" name="collapsible" type="boolean"/>
+      <xs:element minOccurs="0" name="cols" type="integer"/>
+      <xs:element minOccurs="0" name="default_value" type="mixed"/>
+      <xs:element minOccurs="0" name="delta" type="integer"/>
+      <xs:element minOccurs="0" name="description" type="string"/>
+      <xs:element minOccurs="0" name="disabled" type="boolean"/>
+      <xs:element minOccurs="0" name="element_validate" type="array"/>
+      <xs:element minOccurs="0" name="executes_submit_callback" type="boolean"/>
+      <xs:element minOccurs="0" name="field_prefix" type="string"/>
+      <xs:element minOccurs="0" name="field_suffix" type="string"/>
+      <xs:element minOccurs="0" name="maxlength" type="integer"/>
+      <xs:element minOccurs="0" name="method" type="string"> </xs:element>
+      <xs:element minOccurs="0" name="multiple" type="boolean"/>
+      <xs:element minOccurs="0" name="name" type="string"/>
+      <xs:element minOccurs="0" name="options" type="array"/>
+      <xs:element minOccurs="0" name="post_render" type="array"> </xs:element>
+      <xs:element minOccurs="0" name="prefix" type="string"/>
+      <xs:element minOccurs="0" name="pre_render" type="array"> </xs:element>
+      <xs:element minOccurs="0" name="process" type="array"> </xs:element>
+      <xs:element minOccurs="0" name="redirect" type="mixed"/>
+      <xs:element minOccurs="0" name="required" type="boolean"/>
+      <xs:element minOccurs="0" name="resizable" type="boolean"/>
+      <xs:element minOccurs="0" name="return_value" type="string"/>
+      <xs:element minOccurs="0" name="rows" type="integer"/>
+      <xs:element minOccurs="0" name="size" type="integer"/>
+      <xs:element minOccurs="0" name="src" type="string"/>
+      <xs:element minOccurs="0" name="submit" type="array"/>
+      <xs:element minOccurs="0" name="suffix" type="string"/>
+      <xs:element minOccurs="0" name="theme" type="string"/>
+      <xs:element minOccurs="0" name="title" type="string"/>
+      <xs:element minOccurs="0" name="tree" type="boolean"/>
+      <xs:element minOccurs="0" name="type" type="string"/>
+      <xs:element minOccurs="0" name="validate" type="array"/>
+      <xs:element minOccurs="0" name="value" type="string"/>
+      <xs:element minOccurs="0" name="weight" type="float"/>
+      <xs:element minOccurs="0" name="actions" type="actionsType"/>
+      <xs:element minOccurs="0" name="user_data" type="array"> </xs:element>
+      <xs:element name="property">
+        <xs:complexType mixed="true">
+          <xs:complexContent>
+            <xs:extension base="xs:anyType">
+              <xs:attribute name="name" type="xs:string"/>
+              <xs:attribute name="type">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:enumeration value="string"/>
+                    <xs:enumeration value="number"/>
+                    <xs:enumeration value="boolean"/>
+                    <xs:enumeration value="array"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:attribute>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="key" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="array">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="1" name="key" type="arrayKey"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="arrayKey">
+    <xs:choice>
+      <xs:element name="value">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="string">
+              <xs:attribute name="type" use="required">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:enumeration value="string"/>
+                    <xs:enumeration value="integer"/>
+                    <xs:enumeration value="boolean"/>
+                    <xs:enumeration value="float"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:attribute>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="key" type="arrayKey" maxOccurs="unbounded"/>
+    </xs:choice>
+    <xs:attribute name="name"/>
+  </xs:complexType>
+  <xs:complexType name="ahahFormControl">
+    <xs:all>
+      <xs:element minOccurs="0" name="effect" type="xs:normalizedString"/>
+      <xs:element minOccurs="0" name="event" type="xs:normalizedString"/>
+      <xs:element minOccurs="0" name="keypress" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="method">
+        <xs:simpleType>
+          <xs:restriction base="xs:normalizedString">
+            <xs:enumeration value="replace"/>
+            <xs:enumeration value="after"/>
+            <xs:enumeration value="before"/>
+            <xs:enumeration value="prepend"/>
+            <xs:enumeration value="append"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="path" type="xs:normalizedString"/>
+      <xs:element minOccurs="0" name="progress">
+        <xs:complexType>
+          <xs:all>
+            <xs:element minOccurs="0" name="type">
+              <xs:simpleType>
+                <xs:restriction base="xs:normalizedString">
+                  <xs:enumeration value="throbber"/>
+                  <xs:enumeration value="bar"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+            <xs:element minOccurs="0" name="message" type="xs:normalizedString"/>
+            <xs:element minOccurs="0" name="url" type="xs:string"/>
+            <xs:element minOccurs="0" name="interval" type="xs:string"/>
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="wrapper" type="xs:normalizedString"/>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="actionsType">
+    <xs:all>
+      <xs:element minOccurs="0" name="create">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="path" type="pathType"/>
+            <xs:element name="schema_path" minOccurs="0" type="schemaPathType"> </xs:element>
+            <xs:choice>
+              <xs:element name="element">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:NCName">
+                      <xs:attribute name="prefix" type="xs:NCName"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="attribute">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:NCName">
+                      <xs:attribute name="prefix" type="xs:NCName"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="xml" type="xs:string"/>
+            </xs:choice>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="read">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="path" type="pathType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="update">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="path" type="pathType"/>
+            <xs:element name="schema_path" minOccurs="0" type="schemaPathType"> </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="delete">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="path" type="pathType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:simpleType name="string">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:simpleType name="boolean">
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+  <xs:simpleType name="integer">
+    <xs:restriction base="xs:int"/>
+  </xs:simpleType>
+  <xs:simpleType name="float">
+    <xs:restriction base="xs:float"/>
+  </xs:simpleType>
+  <xs:complexType mixed="true" name="mixed">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="array" type="array"/>
+    </xs:sequence>
+    <xs:attribute name="type" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="string"/>
+          <xs:enumeration value="integer"/>
+          <xs:enumeration value="float"/>
+          <xs:enumeration value="boolean"/>
+          <xs:enumeration value="array"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="pathType">
+    <xs:simpleContent>
+      <xs:extension base="string">
+        <xs:attribute name="context" use="required">
+          <xs:simpleType>
+            <xs:restriction base="string">
+              <xs:enumeration value="document"/>
+              <xs:enumeration value="parent"/>
+              <xs:enumeration value="self"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="schemaType">
+    <xs:simpleContent>
+      <xs:extension base="xs:anyURI">
+        <xs:attribute name="name" type="xs:NCName"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="schemaPathType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="name" type="xs:NCName"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="namespaceType">
+    <xs:simpleContent>
+      <xs:extension base="xs:anyURI">
+        <xs:attribute name="prefix" use="required">
+          <xs:simpleType>
+            <xs:restriction base="xs:NCName">
+              <xs:whiteSpace value="collapse"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="propertyType">
+    <xs:complexContent>
+      <xs:extension base="xs:anyType">
+        <xs:attribute name="name" use="required">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="#\c*"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="itemType">
+    <xs:complexContent>
+      <xs:extension base="xs:anyType">
+        <xs:attribute name="name" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="elementType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="properties">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:any maxOccurs="unbounded" minOccurs="0" processContents="lax"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="children">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="element">
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="elementType">
+                    <xs:attribute name="name">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:pattern value="[^!&quot;#$%&amp;'()*+,.\\/:;&lt;=>?@\[\]^`{|}~]+"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:attribute>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

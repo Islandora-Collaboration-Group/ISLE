@@ -1,0 +1,10 @@
+<?php
+
+/**
+ * @file
+ * A divers assortment of GET response tests.
+ */
+
+class IslandoraOAIGETResponseTestCase extends IslandoraOAIWebTestCase {
+  // @TODO: Literally anything.
+}

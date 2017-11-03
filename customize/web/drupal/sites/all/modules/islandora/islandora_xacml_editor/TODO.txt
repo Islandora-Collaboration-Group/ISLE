@@ -1,0 +1,12 @@
+TODO:
+=====
+
+High priority
+-------------
+
+- Child query hook implementation for newspaper and book. Implications that fall under implementing these as well.
+
+- POLICY addition to children on batching.
+
+- Update DS-COMPOSITE-MODELS of content models so that MIME Type completion is more accurate.
+

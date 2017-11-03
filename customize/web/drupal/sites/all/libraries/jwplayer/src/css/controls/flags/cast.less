@@ -1,0 +1,35 @@
+@import "../../shared-imports/vars";
+
+.jwplayer.jw-flag-casting {
+    &:not(.jw-flag-audio-player) .jw-cast {
+        display: block;
+    }
+
+    &.jw-flag-airplay-casting .jw-display-icon-container {
+        display: none;
+    }
+
+    .jw-icon-hd,
+    .jw-captions,
+    .jw-icon-fullscreen,
+    .jw-icon-audio-tracks {
+        display: none;
+    }
+
+    &.jw-flag-airplay-casting {
+        .jw-icon-volume {
+            display: none;
+        }
+
+        .jw-icon-airplay {
+            color: @active-color;
+        }
+    }
+}
+
+.jw-state-playing,
+.jw-state-paused {
+    &.jw-flag-casting:not(.jw-flag-audio-player) .jw-display {
+        display: table;
+    }
+}

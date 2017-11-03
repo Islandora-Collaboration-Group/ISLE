@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Test content model installer.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * @see islandora_test_cm_islandora_required_objects()
+ */
+function islandora_test_cm_install() {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  islandora_install_solution_pack('islandora_test_cm');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_test_cm_uninstall() {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  islandora_install_solution_pack('islandora_test_cm', 'uninstall');
+}

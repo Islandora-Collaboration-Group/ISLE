@@ -1,0 +1,259 @@
+<?php
+
+/**
+ * @file
+ * Handles the creation and display of basic image objects.
+ */
+
+/**
+ * Implements hook_islandora_view_print_object().
+ */
+function islandora_basic_image_islandora_view_print_object($object) {
+  $output = array();
+  if (in_array('islandora:sp_basic_image', $object->models)) {
+    $resource_url = url("islandora/object/{$object->id}/datastream/OBJ/view");
+    $params = array(
+      'title' => $object->label,
+      'path' => $resource_url,
+    );
+
+    // Theme the image seperatly.
+    $variables['islandora_img'] = theme('image', $params);
+    $output = theme('islandora_basic_image_print', array(
+    'islandora_content' => $variables['islandora_img']));
+  }
+
+  return $output;
+}
+
+/**
+ * Implements hook_theme().
+ *
+ * We supply a pattern so we can overide templates at the theme level if needed.
+ * we can append a pid to a template and the new template file will be called
+ * (the pids colon should be replaced with a dash).
+ */
+function islandora_basic_image_theme($existing, $type, $theme, $path) {
+  return array(
+    'islandora_basic_image' => array(
+      'template' => 'theme/islandora-basic-image',
+      // We can add PIDs to the end of this pattern in our preprocess function
+      // and templates will be able to have have a pid appended to the
+      // template name to overide a template on a per object basis.
+      // An example template might be named:
+      // "islandora-basic-image--islandora-27.tpl.php".
+      'pattern' => 'islandora_basic_image__',
+      'variables' => array('islandora_object' => NULL),
+    ),
+    'islandora_basic_image_print' => array(
+      'template' => 'theme/islandora-basic-image-print',
+      'variables' => array('islandora_content' => NULL),
+    ),
+  );
+}
+
+/**
+ * Implements hook_islandora_required_objects().
+ */
+function islandora_basic_image_islandora_required_objects(IslandoraTuque $connection) {
+  $module_path = drupal_get_path('module', 'islandora_basic_image');
+  // Image Content Model.
+  $image_content_model = $connection->repository->constructObject('islandora:sp_basic_image');
+  $image_content_model->owner = 'fedoraAdmin';
+  $image_content_model->label = 'Islandora Basic Image Content Model';
+  $image_content_model->models = 'fedora-system:ContentModel-3.0';
+  // DS-COMPOSITE-MODEL Datastream.
+  $datastream = $image_content_model->constructDatastream('DS-COMPOSITE-MODEL', 'X');
+  $datastream->label = 'DS-COMPOSITE-MODEL';
+  $datastream->mimetype = 'application/xml';
+  $datastream->setContentFromFile("$module_path/xml/islandora_basic_image_ds_composite_model.xml", FALSE);
+  $image_content_model->ingestDatastream($datastream);
+  // Image Collection.
+  $image_collection = $connection->repository->constructObject('islandora:sp_basic_image_collection');
+  $image_collection->owner = 'fedoraAdmin';
+  $image_collection->label = 'Basic Image Collection';
+  $image_collection->models = 'islandora:collectionCModel';
+  $image_collection->relationships->add(FEDORA_RELS_EXT_URI, 'isMemberOfCollection', 'islandora:root');
+  // Collection Policy Datastream.
+  $datastream = $image_collection->constructDatastream('COLLECTION_POLICY', 'X');
+  $datastream->label = 'Collection policy';
+  $datastream->mimetype = 'application/xml';
+  $datastream->setContentFromFile("$module_path/xml/islandora_basic_image_collection_policy.xml", FALSE);
+  $image_collection->ingestDatastream($datastream);
+  // TN Datastream.
+  $datastream = $image_collection->constructDatastream('TN', 'M');
+  $datastream->label = 'Thumbnail';
+  $datastream->mimetype = 'image/png';
+  $datastream->setContentFromFile("$module_path/images/folder.png", FALSE);
+  $image_collection->ingestDatastream($datastream);
+  return array(
+    'islandora_basic_image' => array(
+      'title' => 'Islandora basic image',
+      'objects' => array(
+        $image_content_model,
+        $image_collection,
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_CMODEL_PID_islandora_view_object().
+ */
+function islandora_basic_image_islandora_sp_basic_image_islandora_view_object($object, $page_number, $page_size) {
+  $output = theme('islandora_basic_image', array('islandora_object' => $object));
+  return array('' => $output);
+}
+
+/**
+ * Implements hook_preprocess_theme().
+ */
+function template_preprocess_islandora_basic_image(array &$variables) {
+  drupal_add_js('misc/form.js');
+  drupal_add_js('misc/collapse.js');
+  $islandora_object = $variables['islandora_object'];
+  $repository = $islandora_object->repository;
+  module_load_include('inc', 'islandora', 'includes/datastream');
+  module_load_include('inc', 'islandora', 'includes/utilities');
+  module_load_include('inc', 'islandora', 'includes/metadata');
+
+  // We should eventually remove the DC object and dc_array code as it only
+  // exists to not break legacy implementations.
+  if (islandora_datastream_access(ISLANDORA_VIEW_OBJECTS, $islandora_object['DC'])) {
+    try {
+      $dc = $islandora_object['DC']->content;
+      $dc_object = DublinCore::importFromXMLString($dc);
+    }
+    catch (Exception $e) {
+      drupal_set_message(t('Error retrieving object %s %t', array('%s' => $islandora_object->id, '%t' => $e->getMessage())), 'error', FALSE);
+    }
+  }
+  $variables['islandora_dublin_core'] = isset($dc_object) ? $dc_object : NULL;
+  $variables['dc_array'] = isset($dc_object) ? $dc_object->asArray() : array();
+  $variables['islandora_object_label'] = $islandora_object->label;
+  $variables['theme_hook_suggestions'][] = 'islandora_basic_image__' . str_replace(':', '_', $islandora_object->id);
+  $variables['parent_collections'] = islandora_get_parents_from_rels_ext($islandora_object);
+  $variables['metadata'] = islandora_retrieve_metadata_markup($islandora_object);
+  $variables['description'] = islandora_retrieve_description_markup($islandora_object);
+
+  // Original.
+  if (isset($islandora_object['OBJ']) && islandora_datastream_access(ISLANDORA_VIEW_OBJECTS, $islandora_object['OBJ'])) {
+    $full_size_url = url("islandora/object/{$islandora_object->id}/datastream/OBJ/view", array('absolute' => TRUE));
+    $variables['islandora_full_url'] = $full_size_url;
+    $params = array(
+      'title' => $islandora_object->label,
+      'path' => $full_size_url,
+    );
+    $variables['islandora_full_img'] = theme('image', $params);
+  }
+  // Thumbnail.
+  if (isset($islandora_object['TN']) && islandora_datastream_access(ISLANDORA_VIEW_OBJECTS, $islandora_object['TN'])) {
+    $thumbnail_size_url = url("islandora/object/{$islandora_object->id}/datastream/TN/view");
+    $params = array(
+      'title' => $islandora_object->label,
+      'path' => $thumbnail_size_url,
+    );
+    $variables['islandora_thumbnail_img'] = theme('image', $params);
+  }
+  // Medium size.
+  if (isset($islandora_object['MEDIUM_SIZE']) && islandora_datastream_access(ISLANDORA_VIEW_OBJECTS, $islandora_object['MEDIUM_SIZE'])) {
+    $medium_size_url = url("islandora/object/{$islandora_object->id}/datastream/MEDIUM_SIZE/view");
+    $params = array(
+      'title' => $islandora_object->label,
+      'path' => $medium_size_url,
+    );
+    $variables['islandora_medium_img'] = theme('image', $params);
+    if (isset($full_size_url)) {
+      $variables['islandora_content'] = l($variables['islandora_medium_img'], $full_size_url, array('html' => TRUE));
+    }
+    else {
+      $variables['islandora_content'] = $variables['islandora_medium_img'];
+    }
+  }
+}
+
+/**
+ * Implements hook_xml_form_builder_form_associations().
+ */
+function islandora_basic_image_xml_form_builder_form_associations() {
+  return array(
+    'islandora_basic_image_mods_form' => array(
+      'content_model' => 'islandora:sp_basic_image',
+      'form_name' => 'Basic image MODS form',
+      'dsid' => 'MODS',
+      'title_field' => array('titleInfo', 'title'),
+      'transform' => 'mods_to_dc.xsl',
+      'template' => FALSE,
+    ),
+  );
+}
+
+/**
+ * Implements hook_xml_form_builder_forms().
+ */
+function islandora_basic_image_xml_form_builder_forms() {
+  $module_path = drupal_get_path('module', 'islandora_basic_image');
+  return array(
+    'Basic image MODS form' => array(
+      'form_file' => "$module_path/xml/islandora_basic_image_form_mods.xml",
+    ),
+  );
+}
+
+/**
+ * Implements hook_islandora_ingest_steps().
+ */
+function islandora_basic_image_islandora_sp_basic_image_islandora_ingest_steps() {
+  return array(
+    'islandora_basic_image' => array(
+      'weight' => 10,
+      'type' => 'form',
+      'form_id' => 'islandora_basic_image_image_upload_form',
+      'module' => 'islandora_basic_image',
+      'file' => 'includes/image_upload.form.inc',
+    ),
+  );
+}
+
+/**
+ * Implements hook_islandora_CMODEL_PID_derivative().
+ */
+function islandora_basic_image_islandora_sp_basic_image_islandora_derivative() {
+  return array(
+    array(
+      'source_dsid' => 'OBJ',
+      'destination_dsid' => 'TN',
+      'weight' => '0',
+      'function' => array(
+        'islandora_basic_image_create_thumbnail',
+      ),
+      'file' => drupal_get_path('module', 'islandora_basic_image') . '/includes/derivatives.inc',
+    ),
+    array(
+      'source_dsid' => 'OBJ',
+      'destination_dsid' => 'MEDIUM_SIZE',
+      'weight' => '1',
+      'function' => array(
+        'islandora_basic_image_create_medium_size',
+      ),
+      'file' => drupal_get_path('module', 'islandora_basic_image') . '/includes/derivatives.inc',
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_basic_image_menu() {
+  $items = array();
+  $items['admin/islandora/solution_pack_config/basic_image'] = array(
+    'title' => 'Basic Image Solution Pack',
+    'description' => 'Define ingest behavior and configuration.',
+    'page callback' => 'drupal_get_form',
+    'access arguments' => array('administer site configuration'),
+    'page arguments' => array('islandora_basic_image_admin'),
+    'file' => 'includes/admin.form.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  return $items;
+}

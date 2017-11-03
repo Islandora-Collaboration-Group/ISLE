@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "/schema/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:html="http://www.w3.org/1999/xhtml"><head><title>EXSLT - set:distinct</title><link rel="stylesheet" href="base.css"/></head><body><h1 id="#title"><a href="http://www.exslt.org/">EXSLT</a> - <a href="http://www.exslt.org/set">set</a>:<a href="http://www.exslt.org/set/functions/distinct">distinct</a></h1><table><tr><td id="menu"><p class="level1"><a href="set.distinct.html">Implementer Page</a></p><p class="level1"><a href="../../../howto.html">How To</a></p><p class="level1"><a href="../../../download.html">Downloads</a></p><p class="level1">Modules</p><p class="level2"><a href="../../../date/index.html">Dates and Times</a></p><p class="level2"><a href="../../../dyn/index.html">Dynamic</a></p><p class="level2"><a href="../../../exsl/index.html">Common</a></p><p class="level2"><a href="../../../func/index.html">Functions</a></p><p class="level2"><a href="../../../math/index.html">Math</a></p><p class="level2"><a href="../../../random/index.html">Random</a></p><p class="level2"><a href="../../../regexp/index.html">Regular Expressions</a></p><p class="level2"><a href="../../../set/index.html">Sets</a></p><p class="level3"><a href="../../functions/difference/index.html">set:difference()</a></p><p class="level3"><a href="../../functions/distinct/index.html">set:distinct()</a></p><p class="level3"><a href="../../functions/has-same-node/index.html">set:has-same-node()</a></p><p class="level3"><a href="../../functions/intersection/index.html">set:intersection()</a></p><p class="level3"><a href="../../functions/leading/index.html">set:leading()</a></p><p class="level3"><a href="../../functions/trailing/index.html">set:trailing()</a></p><p class="level2"><a href="../../../str/index.html">Strings</a></p><p class="level1"><a href="../../../submissions/">Submissions</a></p><p class="level1"><a href="../../../list">Mailing List</a></p><p class="level1"><a href="../../../contact.html">Contact</a></p></td><td id="content"><p><b>Implementer Page: </b><a href="set.distinct.html">set.distinct.html</a><br/><b>Function Package: </b><a href="set.distinct.zip">set.distinct.zip</a></p><h4>Function Syntax</h4><pre><var>node-set</var> <b>set:distinct</b>(<var>node-set</var>)</pre><h4>Template Syntax</h4><pre>&lt;xsl:call-template name="<b>set:distinct</b>"&gt;
+   &lt;xsl:with-param name="nodes" select="<var>node-set</var>" /&gt;
+&lt;/xsl:call-template&gt;</pre><p>
+         The <code>set:distinct</code> function returns a subset of the nodes contained in the node-set NS passed as the first argument. Specifically, it selects a node N if there is no node in NS that has the same string value as N, and that precedes N in document order.
+      </p><p>
+         The <code>set:distinct</code> template applies templates to these nodes in <code>set:distinct</code> mode.  By default, the nodes are copied by this template, so that a result tree fragment consisting of the nodes is returned.
+      </p><h2>Implementations</h2><p>
+                  The following XSLT processors support <code>set:distinct</code>:
+               </p><ul><li><a href="http://4Suite.org">4XSLT, from 4Suite.</a> (version 0.12.0a3)</li><li><a href="http://users.iclway.co.uk/mhkay/saxon/index.html">SAXON from Michael Kay</a> (version 6.3)</li><li><a href="http://www.aztecrider.com/xslt/">jd.xslt from Johannes Döbler</a> (version 1.0.9)</li><li><a href="http://xml.apache.org/xalan-j">Xalan-J from Apache</a> (version 2.4.D1)</li></ul><p>
+                  Implementations of <code>set:distinct</code> are available in the following languages:
+               </p><ul><li><a href="set.distinct.template.xsl">XSLT Template</a> (by <a href="mailto:mail@jenitennison.com">Jeni Tennison</a>)</li><li><a href="set.distinct.function.xsl">EXSLT Function</a> (by <a href="mailto:mail@jenitennison.com">Jeni Tennison</a>)</li></ul><h2>Examples</h2><h3>Function</h3><p>The following example shows how to use the <code>set:distinct</code> function:</p><h4>Source</h4><pre>&lt;doc&gt;
+   &lt;city name="Paris"
+         country="France" /&gt;
+   &lt;city name="Madrid"
+         country="Spain" /&gt;
+   &lt;city name="Vienna"
+         country="Austria" /&gt;
+   &lt;city name="Barcelona"
+         country="Spain" /&gt;
+   &lt;city name="Salzburg"
+         country="Austria" /&gt;
+   &lt;city name="Bonn"
+         country="Germany" /&gt;
+   &lt;city name="Lyon"
+         country="France" /&gt;
+   &lt;city name="Hannover"
+         country="Germany" /&gt;
+   &lt;city name="Calais"
+         country="France" /&gt;
+   &lt;city name="Berlin"
+         country="Germany" /&gt;
+&lt;/doc&gt;</pre><h4>Stylesheet</h4><pre>&lt;!--  Test exslt:distinct  --&gt;
+&lt;xsl:template match="/"&gt;
+   &lt;out&gt;
+      &lt;all-countries&gt;
+:
+             &lt;xsl:for-each select="//@country"&gt;
+            &lt;xsl:value-of select="." /&gt;
+;
+    
+         &lt;/xsl:for-each&gt;
+      &lt;/all-countries&gt;
+:
+        &lt;distinct-countries&gt;
+:  
+             &lt;xsl:for-each select="set:distinct(//@country)"&gt;
+            &lt;xsl:value-of select="." /&gt;
+;
+    
+         &lt;/xsl:for-each&gt;
+      &lt;/distinct-countries&gt;
+   &lt;/out&gt;
+&lt;/xsl:template&gt;</pre><h4>Result</h4><pre>&lt;out xmlns:set="http://exslt.org/sets"&gt;
+   &lt;all-countries&gt;:
+    France;
+    Spain;
+    Austria;
+    Spain;
+    Austria;
+    Germany;
+    France;
+    Germany;
+    France;
+    Germany;
+    &lt;/all-countries&gt;
+:
+     &lt;distinct-countries&gt;:  
+    France;
+    Spain;
+    Austria;
+    Germany;
+    &lt;/distinct-countries&gt;
+&lt;/out&gt;</pre></td></tr></table><div id="colophon"><p><a href="http://www.exslt.org/set/functions/distinct/index.html">http://www.exslt.org/set/functions/distinct/index.html</a> last modified 2002-11-12</p></div></body></html>

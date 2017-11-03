@@ -1,0 +1,8 @@
+## ignore rules
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
+js/islandora_loader.js
+*.komodoproject

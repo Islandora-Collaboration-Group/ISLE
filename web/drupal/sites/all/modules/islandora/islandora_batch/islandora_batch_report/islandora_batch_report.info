@@ -1,0 +1,8 @@
+name = "Islandora Batch Report"
+description = "Track batch set and objects ingested and reports daily ingest information using default rule and a cron hook."
+package = Islandora Tools
+dependencies[] = islandora
+dependencies[] = islandora_batch
+dependencies[] = rules
+version = 7.x-dev
+core = 7.x

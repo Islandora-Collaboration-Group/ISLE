@@ -1,0 +1,216 @@
+<?php
+
+/**
+ * @file
+ * Unit Tests.
+ */
+
+/**
+ * Unit Tests for the FormControl class.
+ */
+class ObjectiveFormElementTestCase extends DrupalUnitTestCase {
+
+  /**
+   * Get Test info.
+   *
+   * @return array
+   *   Properties that are displayed in the test selection form.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Form Element Unit Tests.',
+      'description' => 'Unit tests for FormElement.inc.',
+      'group' => 'Objective Forms',
+    );
+  }
+
+  /**
+   * SetUp() performs any pre-requisite tasks that need to happen.
+   */
+  public function setUp() {
+    // Enable any modules required for the test.
+    parent::setUp('objective_forms');
+    module_load_include('inc', 'objective_forms', 'FormElement');
+  }
+
+  /**
+   * Test constructing the Form definition.
+   */
+  public function testCreate() {
+    /* Basic - Empty FormElement */
+    $form_element = new FormElement(NULL);
+    $this->assertNotNull($form_element, 'Created basic FormElement.');
+    $this->assertNotNull($form_element->controls, 'The FormElement\'s  FormControl\'s are accessible.');
+    $this->assertNotNull($form_element->children, 'The FormElement\'s  Child FormElement\'s are accessible.');
+    $this->assertEqual(count($form_element->controls), 0, 'Empty Set of Controls created.');
+    $this->assertEqual(count($form_element->controls), 0, 'Empty Set of Children created.');
+    $this->assertNull($form_element->parent, 'FormElement\'s parent FormElement is undefined.');
+    /* Basic - Adding children aka Adopting */
+    $child_1 = new FormElement(NULL);
+    // Use __set.
+    $form_element->child_1 = $child_1;
+    $this->assertEqual($form_element->child_1, $child_1, 'Child element set/get via __get/__set methods.');
+    $this->assertEqual($form_element['child_1'], $child_1, 'Child element set via __set and got via array access interface.');
+    $child_2 = new FormElement(NULL);
+    // Use Array interface.
+    $form_element['child_2'] = $child_2;
+    $this->assertEqual($form_element['child_2'], $child_2, 'Child element set via array interface and got via array interface.');
+    $this->assertEqual($form_element->child_2, $child_2, 'Child element set via array interface and got via __get.');
+    /* Basic - Parents set correctly */
+    $this->assertIdentical($form_element, $child_1->parent, 'Child element\'s parent set correctly from __set.');
+    $this->assertIdentical($form_element, $child_2->parent, 'Child element\'s parent set correctly from array interface.');
+    /* Basic - Orphaning Children */
+    $child_1->orphan();
+    $this->assertNull($child_1->parent, 'Child no longer references parent after being orphaned.');
+    $this->assertNull($form_element->child_1, 'Parent no longer references orphaned child.');
+    /* Basic - Adding controls */
+    $form_element->type = 'textfield';
+    $this->assertEqual($form_element->type, 'textfield', 'Control set/get via __get/__set methods.');
+    $this->assertEqual($form_element['#type'], 'textfield', 'Control set via __set and got via array access interface.');
+    // Use Array interface.
+    $form_element['#title'] = 'test title';
+    $this->assertEqual($form_element['#title'], 'test title', 'Control set via array interface and got via array interface.');
+    $this->assertEqual($form_element->title, 'test title', 'Control set via array interface and got via __get.');
+    /* Basic - Copying (Expected to do deep copies) */
+    // Adopt
+    $form_element->child_1 = $child_1;
+    $clone = clone $child_1;
+    $this->assertNotEqual($child_1->hash, $clone->hash, 'Cloned Form Element has different hash.');
+    $this->assertNotNULL($child_1->parent, 'Original element still has a parent.');
+    $this->assertNull($clone->parent, 'Cloned element, has no parent.');
+  }
+
+  /**
+   * Test setting the properites of form elements.
+   */
+  public function testSetProperties() {
+    $form = array(
+      '#type' => 'textfield',
+      '#access' => TRUE,
+      '#after_build' => array('fake_function'),
+      '#ahah' => array(
+        'path' => 'poll/js',
+        'wrapper' => 'poll-choices',
+        'method' => 'replace',
+        'effect' => 'fade',
+      ),
+      '#attributes' => array('class' => 'ui-form'),
+      '#autocomplete_path' => '/xml/forms',
+      '#collapsed' => TRUE,
+      '#collapsible' => FALSE,
+      '#cols' => 10,
+      '#default_value' => 'testing',
+      '#delta' => 10,
+      '#description' => 'fake description',
+      '#disabled' => FALSE,
+      '#element_validate' => array('fake_function'),
+      '#field_prefix' => '<div>',
+      '#field_suffix' => '</div>',
+      '#maxlength' => 20,
+      '#multiple' => TRUE,
+      '#options' => array('opt' => 'opt'),
+      '#post_render' => array('fake_function'),
+      '#prefix' => '<div>',
+      '#pre_render' => array('fake_function'),
+      '#process' => array('fake_function'),
+      '#required' => TRUE,
+      '#resizable' => FALSE,
+      '#return_value' => 30,
+      '#rows' => 10,
+      '#size' => 11,
+      '#suffix' => '</div>',
+      '#theme' => 'theme_function',
+      '#title' => 'Fake Title',
+      '#tree' => TRUE,
+      '#weight' => 100,
+    );
+    $form_element = new FormElement(NULL, $form);
+
+    foreach ($form as $key => $value) {
+      $_key = trim($key, '#');
+      $this->assertEqual($form_element[$key], $value, "Accessed $key via Array");
+      $this->assertEqual($form_element->$_key, $value, "Accessed $key via Get");
+    }
+    $output = $form_element->toArray();
+    foreach ($form as $key => $value) {
+      $this->assertEqual($output[$key], $value, "toArray() output matched for $key.");
+    }
+  }
+
+  /**
+   * Test creating drupal forms.
+   */
+  public function testCreateFromDrupalForm() {
+    $form = array(
+      '#attributes' => array('class' => 'foobar'),
+      'first' => array(
+        '#title' => 'first',
+        'second' => array(
+          '#title' => 'second',
+        ),
+      ),
+    );
+    $form_element = new FormElement(NULL, $form);
+    $this->assertNotNull($form_element, 'Created FormElement from drupal definition.');
+    $this->assertNotNull($form_element->first, 'Created FormElement child.');
+    $this->assertNotNull($form_element->first->second, 'Created FormElement grand child.');
+    $this->assertIdentical($form_element->first->parent, $form_element, 'Set Parent correctly.');
+  }
+
+  /**
+   * Function testEachChild.
+   */
+  public function testEachChild() {
+    $form = array(
+      '#attributes' => array('class' => 'foobar'),
+      'first' => array(
+        '#title' => 'first',
+      ),
+      'second' => array(
+        '#title' => 'second',
+      ),
+    );
+    $form_element = new FormElement(NULL, $form);
+    $form_element->eachChild(array($this, '_testEachChild'), '#test', 'test');
+    $this->assertEqual($form_element->first->test, 'test', 'Set a property on the first child via eachChild()');
+    $this->assertEqual($form_element->second->test, 'test', 'Set a property on the second child via eachChild()');
+  }
+
+  /**
+   * Function teatEachDecendant.
+   */
+  public function testEachDecendant() {
+    $form = array(
+      '#attributes' => array('class' => 'foobar'),
+      'first' => array(
+        '#title' => 'first',
+        'second' => array(
+          '#title' => 'second',
+          'third' => array(
+            '#title' => 'third',
+          ),
+        ),
+      ),
+      'fourth' => array(
+        '#title' => 'fourth',
+      ),
+    );
+    $form_element = new FormElement(NULL, $form);
+    $form_element->eachDecendant(array($this, '_testEachChild'), '#test', 'test');
+    $this->assertEqual($form_element->first->test, 'test', 'Set a property on the first child via eachDecendant()');
+    $this->assertEqual($form_element->first->second->test, 'test', 'Set a property on the second child via eachDecendant()');
+    $this->assertEqual($form_element->first->second->third->test, 'test', 'Set a property on the third child via eachDecendant()');
+    $this->assertEqual($form_element->fourth->test, 'test', 'Set a property on the fourth child via eachDecendant()');
+  }
+
+  /**
+   * Function _testEachChild.
+   */
+  // @codingStandardsIgnoreStart
+  // don't know if this functin is being call all over the place
+  public function _testEachChild(FormElement $child, $property_name, $property_value) {
+    $child[$property_name] = $property_value;
+  }
+  // @codingStandardsIgnoreEnd
+
+}

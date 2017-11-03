@@ -1,0 +1,15 @@
+/**
+ * @file
+ * Defines the styles required to embed the Islandora Image Annotation Canvas.
+ */
+#islandora-image-annotation-shared-canvas-logo {
+  font-size: 8pt;
+}
+#islandora-image-annotation-shared-canvas-logo img {
+  border: 0;
+  border-top: 2px;
+  padding: 0;
+  margin: 0;
+  width: 25px;
+  height: 30px;
+}

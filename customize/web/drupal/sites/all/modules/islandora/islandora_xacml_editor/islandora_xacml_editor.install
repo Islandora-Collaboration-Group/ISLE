@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * This file contains all install related hooks.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_xacml_editor_uninstall() {
+  $variables = array(
+    'islandora_xacml_editor_restricted_dsids',
+    'islandora_xacml_editor_restricted_mimes',
+    'islandora_xacml_editor_show_dsidregex',
+    'islandora_xacml_editor_show_mimeregex',
+    'islandora_xacml_editor_default_users',
+    'islandora_xacml_editor_default_roles',
+  );
+  array_walk($variables, 'variable_del');
+}

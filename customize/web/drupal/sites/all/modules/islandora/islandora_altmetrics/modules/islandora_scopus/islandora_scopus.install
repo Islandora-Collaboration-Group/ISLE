@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Installation hooks for Islandora Scopus.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_scopus_uninstall() {
+  $vars = array(
+    'islandora_scopus_api_key',
+  );
+  array_walk($vars, 'variable_del');
+}

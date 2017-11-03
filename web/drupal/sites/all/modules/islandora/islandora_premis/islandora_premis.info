@@ -1,0 +1,9 @@
+name = Islandora PREMIS
+description = "Provide a PREMIS upon request."
+dependencies[] = islandora
+package = Islandora Tools
+version = 7.x-dev
+core = 7.x
+php = 5.3
+configure = admin/islandora/tools/premis
+stylesheets[all][] = css/islandora_premis.css

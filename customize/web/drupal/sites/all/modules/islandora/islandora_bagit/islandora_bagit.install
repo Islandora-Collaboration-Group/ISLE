@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * @file
+ * This file contains all install related hooks.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_bagit_uninstall() {
+  $variables = array(
+    'islandora_bagit_library_dir',
+    'islandora_bagit_bag_tmp_dir',
+    'islandora_bagit_delete_unserialized_bag',
+    'islandora_bagit_bag_output_dir',
+    'islandora_bagit_create_on_ingest',
+    'islandora_bagit_create_on_modify',
+    'islandora_bagit_provide_download_link',
+    'islandora_bagit_multiple_bag_type',
+    'islandora_bagit_serialize_collection_bags',
+    'islandora_bagit_bag_name',
+    'islandora_bagit_show_messages',
+    'islandora_bagit_log_bag_creation',
+    'islandora_bagit_compression_type',
+    'islandora_bagit_object_plugins',
+    'islandora_bagit_collection_plugin',
+    'islandora_bagit_transferring_organization',
+    'islandora_bagit_transferring_organization_address',
+    'islandora_bagit_contact_name',
+    'islandora_bagit_contact_phone',
+    'islandora_bagit_contact_email',
+    'islandora_bagit_profile_uri',
+    'islandora_bagit_bagging_date',
+    'islandora_bagit_payload_octetstream_sum',
+  );
+  array_walk($variables, 'variable_del');
+}

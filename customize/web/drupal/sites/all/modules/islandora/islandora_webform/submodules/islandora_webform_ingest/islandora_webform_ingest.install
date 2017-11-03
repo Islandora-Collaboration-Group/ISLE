@@ -1,0 +1,177 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+function islandora_webform_ingest_schema() {
+
+  $schema['islandora_webform_ingestions'] = array(
+    'description' => 'Tracks information about webform ingests to islandora objects',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Unique row ID',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => 'Webform node id',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'sid' => array(
+        'description' => 'Submission id',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'pid' => array(
+        'description' => 'Fedora object ID',
+        'type' => 'varchar',
+        'length' => 500,
+        'default' => '',
+      ),
+      'date' => array(
+        'description' => 'The Unix timestamp when the ingestion was run.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'data' => array(
+        'description' => 'Serialized transaction data',
+        'type' => 'text',
+      ),
+    ),
+    'indexes' => array(
+      'nid' => array('nid'),
+      'sid' => array('sid'),
+      // Restrict index to 255 characters to prevent index limit errors.
+      'pid' => array(array('pid', 255)),
+    ),
+    'primary key' => array('id'),
+  );
+
+  $schema['islandora_webform_ingest_map'] = array(
+    'description' => 'Tracks islandora webform ingest mappings',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Unique row ID',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => 'Webform node id',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'cid' => array(
+        'description' => 'Component id',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'data' => array(
+        'description' => 'Serialized settings data (mode, datastream, field)',
+        'type' => 'text',
+      ),
+    ),
+    'indexes' => array(
+      'nid' => array('nid'),
+      'cid' => array('cid'),
+    ),
+    'primary key' => array('id'),
+  );
+
+  $schema['islandora_webform_ingest_webforms'] = array(
+    'description' => 'Holds webform configuration for use with islandora_webform_ingest functionality',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Unique row ID',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => 'Webform node id',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'ingest_enabled' => array(
+        'description' => 'Ingestion enabled',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'cmodel' => array(
+        'description' => 'If empty, ingestion is to current object; if defined, ingestion is to new object of this cmodel',
+        'type' => 'varchar',
+        'length' => 500,
+      ),
+      'namespace' => array(
+        'description' => 'If cmodel is defined, this defines the namespace of the new object.',
+        'type' => 'varchar',
+        'length' => 500,
+      ),
+      'relation' => array(
+        'description' => 'If cmodel is defined, this defines the relation of the new object relative to the original object (child or sibling)',
+        'type' => 'varchar',
+        'length' => 500,
+      ),
+    ),
+    'indexes' => array(
+      'nid' => array('nid'),
+      'ingest_enabled' => array('ingest_enabled'),
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+
+}
+
+/**
+ * Update hooks.................................................................
+ */
+
+/**
+ * Add islandora_webform_ingest_map database table.
+ */
+function islandora_webform_ingest_update_7001() {
+  $schema = drupal_get_schema('islandora_webform_ingest_map', TRUE);
+  db_create_table('islandora_webform_ingest_map', $schema);
+}
+
+/**
+ * No need for cid in recorded islandora webform ingestions.
+ */
+function islandora_webform_ingest_update_7002() {
+  db_drop_unique_key('islandora_webform_ingestions', 'cid');
+  db_drop_field('islandora_webform_ingestions', 'cid');
+}
+
+/**
+ * Add islandora_webform_ingest_webforms database table.
+ */
+function islandora_webform_ingest_update_7003() {
+  $schema = drupal_get_schema('islandora_webform_ingest_webforms', TRUE);
+  db_create_table('islandora_webform_ingest_webforms', $schema);
+}
+
+/**
+ * Add namespace field to islandora_webform_ingest_webforms table
+ */
+function islandora_webform_ingest_update_7004() {
+  $schema = drupal_get_schema('islandora_webform_ingest_webforms', TRUE);
+  db_add_field('islandora_webform_ingest_webforms', 'namespace', $schema['fields']['namespace']);
+}
+

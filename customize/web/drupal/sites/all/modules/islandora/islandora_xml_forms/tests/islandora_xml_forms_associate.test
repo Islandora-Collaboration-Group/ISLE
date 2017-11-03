@@ -1,0 +1,267 @@
+<?php
+/**
+ * @file
+ * Tests for XML Form association functionality.
+ */
+
+class IslandoraXMLFormAssociationTestCase extends IslandoraCollectionWebTestCase {
+
+  /**
+   * Test information.
+   *
+   * @see IslandoraWebTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Islandora XML Form Association',
+      'description' => 'Tests Islandora XML form association functionality.',
+      'group' => 'Islandora XML Forms',
+    );
+  }
+
+  /**
+   * Set up the test environment.
+   *
+   * @see IslandoraWebTestCase::setUp()
+   */
+  public function setUp() {
+    // By default, we want to keep ingested objects between tests here.
+    $this->deleteObjectsOnTeardown = FALSE;
+    parent::setUp(array(
+      'islandora_basic_collection',
+      'xml_form_builder',
+      'islandora_test_cm',
+    ));
+    // Create a new user for each test.
+    $user = $this->drupalCreateUser(array_keys(module_invoke_all('permission')));
+    $this->drupalLogin($user);
+  }
+
+  /**
+   * Helper function to associate a form, since this gets done twice.
+   */
+  public function createFormAssociation() {
+    $edit = array(
+      'content_model' => 'islandora:testCModel',
+      'dsid' => $this->dsid,
+      'title_field' => "a:2:{i:0;s:9:\"titleInfo\";i:1;s:5:\"title\";}",
+      'transform' => "$this->custom_transform_filename",
+      'self_transform' => "$this->self_transform_filename",
+      'files[file]' => drupal_get_path('module', 'xml_forms') . "/tests/islandora_solution_pack_test/tests/fixtures/template.xml",
+    );
+    $this->drupalPost('admin/islandora/xmlform/forms/Test Solution Pack MODS Form/associations', $edit, 'Add Association');
+    $this->assertText("Successfully added association.", "Successfully added association to Test Solution Pack MODS Form.", 'Islandora');
+  }
+
+  /**
+   * Test form association disabling and enabling.
+   *
+   * I'd break this out into two functions, but the database gets wiped between
+   * tests, so the disabling would have to be repeated anyhow.
+   */
+  public function testFormAssociationDisableEnable() {
+    // First, we need a collection.
+    $this->collection_pid = "islandora:{$this->randomName()}";
+    $this->createTestCollection($this->randomName(), array('islandora:testCModel'), $this->collection_pid);
+    $this->drupalGet('admin/islandora/xmlform/forms/Test Solution Pack MODS Form/associations');
+
+    // Before we get going, let's make sure we're looking at a fresh Test
+    // Solution Pack MODS Form association page.
+    if (!$this->assertLink('Disable')) {
+      $this->fail("There are no 'Disable' links on the Test Solution Pack MODS form association page.");
+    }
+    $disable_links = $this->xpath('//a[normalize-space(text())=Disable]');
+    if (isset($disable_links[1])) {
+      $this->fail("There are multiple 'Disable' links on the Test Solution Pack MODS form association page.");
+    }
+    $this->clickLink("Disable");
+    $this->drupalPost("islandora/object/$this->collection_pid/manage/overview/ingest", array(), 'Ingest');
+    // Assert that ingest still functions despite no form association.
+    $this->assertText("New Object", "Collection with no form associations skips form ingest step.", 'Islandora');
+    // Test form association re-enabling.
+    $this->drupalGet('admin/islandora/xmlform/forms/Test Solution Pack MODS Form/associations');
+    $this->clickLink('Enable');
+    $this->drupalGet("islandora/object/{$this->collection_pid}/manage/overview/ingest");
+    $this->assertField('abstract', "Collection with replaced form association loads form during ingest.", 'Islandora');
+  }
+
+  /**
+   * Create a new form association with several controlled customizations.
+   */
+  public function testFormAssociationCreate() {
+    $module_path = drupal_get_path('module', 'xml_forms');
+
+    // Prep for this test by copying the test xslt transformations and pasting
+    // them into their respective XML Form Builder transform folders.
+    $this->custom_transform_filename = "{$this->randomName()}.xsl";
+    $this->self_transform_filename = "{$this->randomName()}.xsl";
+    file_unmanaged_copy($module_path . "/tests/islandora_solution_pack_test/xsl/mods_to_dc_custom.xsl", $module_path . "/builder/transforms/$this->custom_transform_filename");
+    file_unmanaged_copy($module_path . "/tests/islandora_solution_pack_test/xsl/self_transform.xsl", $module_path . "/builder/self_transforms/$this->self_transform_filename");
+
+    // Attempt to fill out and submit the form association form.
+    $this->dsid = $this->randomName();
+    $this->createFormAssociation();
+  }
+
+  /**
+   * Check that the template is applied during ingest steps, then ingest.
+   */
+  public function testIngestWithAssociatedForm() {
+    // First, we need to recreate that form association that just got dumped out
+    // of the previous SimpleTest database.
+    $this->createFormAssociation();
+    // Then, we need to disable the other association so it doesn't bother us.
+    $this->drupalGet('admin/islandora/xmlform/forms/Test Solution Pack MODS Form/associations');
+    $this->clickLink('Disable');
+    // Load up the form, and see if the template fields are filled in properly.
+    $this->drupalGet("islandora/object/$this->collection_pid/manage/overview/ingest");
+    $this->assertFieldById('edit-titleinfo-title', 'Title', "Title from template is filled in.", 'Islandora');
+    $this->assertFieldById('edit-abstract', 'Abstract', "Abstract from template is filled in.", 'Islandora');
+    $this->assertFieldById('edit-language', 'Language', "Language from template is filled in.", 'Islandora');
+    $this->assertFieldById('edit-genre', 'alternate', "Genre from template is selected.", 'Islandora');
+    $this->drupalPost("islandora/object/$this->collection_pid/manage/overview/ingest", array(), 'Ingest');
+    // Submit the form and see if it ingests.
+    $page_title = $this->xpath('//h1[@id="page-title"]');
+    if (isset($page_title[0]) && $page_title[0]) {
+      $page_title = trim($page_title[0]);
+      $this->assertTrue($page_title === "Title", "Page title '$page_title' correctly pulled from MODS DSID's titleInfo/title field.", 'Islandora');
+    }
+    else {
+      $this->fail('No page title found on ingested object page.', 'Islandora');
+    }
+    $this->object_pid = $this->getObjectFromPath($this->url);
+    // Assert that both the MODS and DC datastreams were ingested.
+    if (!$this->assertDatastreams($this->object_pid, array($this->dsid, 'DC'))) {
+      $this->fail("Object $this->object_pid was not created with appropriate datastreams of $this->dsid and/or DC.", 'Islandora');
+    }
+  }
+
+  /**
+   * Verify that MODS metadata was created correctly.
+   */
+  public function testMODSMetadata() {
+    // Load the MODS XML and grab the first result for each expected element.
+    $object_xml = $this->curlExec(array(
+      CURLOPT_URL => url("islandora/object/$this->object_pid/datastream/$this->dsid/download", array('absolute' => TRUE)),
+      CURLOPT_NOBODY => FALSE,
+    ));
+    $mods_xml = new DOMDocument();
+    $mods_xml->loadXML($object_xml);
+    $title = $mods_xml->getElementsByTagName('title')->item(0);
+    $note = $mods_xml->getElementsByTagName('note')->item(0);
+    $type_of_resource = $mods_xml->getElementsByTagName('typeOfResource')->item(0);
+    $language = $mods_xml->getElementsByTagName('languageTerm')->item(0);
+    $genre = $mods_xml->getElementsByTagName('genre')->item(0);
+
+    // For each of these, we're checking if any result was found, then if the
+    // result was what we expected. We'll do the same for DC in a bit.
+    // Assert /titleInfo/title.
+    if (is_object($title)) {
+      $this->assertTrue($title->nodeValue == 'Title', "MODS 'titleInfo/title' field matches template title.", 'Islandora');
+    }
+    else {
+      $this->fail("No MODS 'title' field entries found.", 'Islandora');
+    }
+    // Assert /note.
+    if (is_object($note)) {
+      $this->assertTrue($note->nodeValue == 'Abstract', "MODS 'note' field matches template abstract carried over via XSLT self-transformation.", 'Islandora');
+    }
+    else {
+      $this->fail("No MODS 'note' field entries found.", 'Islandora');
+    }
+    // Assert /typeOfResource.
+    if (is_object($type_of_resource)) {
+      $this->assertTrue(trim($type_of_resource->nodeValue) == 'Resource', "MODS 'typeOfResource' field added correctly via XSLT self-transformation.", 'Islandora');
+    }
+    else {
+      $this->fail("No MODS 'typeOfResource' field entries found.", 'Islandora');
+    }
+    // Assert /language/languageTerm.
+    if (is_object($language)) {
+      $this->assertTrue($language->nodeValue == 'Language', "MODS 'language/languageTerm' field matches template language.", 'Islandora');
+    }
+    else {
+      $this->fail("No MODS 'languageTerm' field entries found.", 'Islandora');
+    }
+    // Assert /genre.
+    if (is_object($genre)) {
+      $this->assertTrue($genre->nodeValue == 'alternate', "MODS 'genre' field matches template genre.", 'Islandora');
+    }
+    else {
+      $this->fail("No MODS 'genre' field entries found.", 'Islandora');
+    }
+  }
+
+  /**
+   * Verify that DC metadata was created correctly.
+   */
+  public function testDCMetadata() {
+    // Load the DC XML and grab the result for each expected element. 'type' and
+    // 'genre' both fit into dc:type; otherwise, this is functionally identical
+    // to testMODSMetadata().
+    $object_xml = $this->curlExec(array(
+      CURLOPT_URL => url("islandora/object/$this->object_pid/datastream/DC/download", array('absolute' => TRUE)),
+      CURLOPT_NOBODY => FALSE,
+    ));
+    $dc_xml = new DOMDocument();
+    $dc_xml->loadXML($object_xml);
+    $description = $dc_xml->getElementsByTagNameNS("http://purl.org/dc/elements/1.1/", 'description')->item(0);
+    $type = $dc_xml->getElementsByTagNameNS("http://purl.org/dc/elements/1.1/", 'type')->item(0);
+    $genre = $dc_xml->getElementsByTagNameNS("http://purl.org/dc/elements/1.1/", 'type')->item(1);
+    $language = $dc_xml->getElementsByTagNameNS("http://purl.org/dc/elements/1.1/", 'language')->item(0);
+    $identifier = $dc_xml->getElementsByTagNameNS("http://purl.org/dc/elements/1.1/", 'identifier')->item(0);
+
+    // Assert dc:description.
+    if (is_object($description)) {
+      $this->assertTrue($description->nodeValue == 'Transformed Note', "DC 'description' field was correctly transformed using custom XSLT.", 'Islandora');
+    }
+    else {
+      $this->fail("No DC 'description' field entries found.", 'Islandora');
+    }
+    // Assert dc:type pulled from MODS /typeOfResource.
+    if (is_object($type)) {
+      $this->assertTrue($type->nodeValue == 'Transformed Resource', "First DC 'type' field (MODS typeOfResource) was correctly transformed using custom XSLT.", 'Islandora');
+    }
+    else {
+      $this->fail("No first DC 'type' field entries found.", 'Islandora');
+    }
+    // Assert dc:language.
+    if (is_object($language)) {
+      $this->assertTrue($language->nodeValue == 'Transformed Language', "DC 'language' field was correctly transformed using custom XSLT.", 'Islandora');
+    }
+    else {
+      $this->fail("No DC 'language' field entries found.", 'Islandora');
+    }
+    // Assert dc:type pulled from MODS /genre.
+    if (is_object($genre)) {
+      $this->assertTrue($genre->nodeValue == 'Transformed Genre', "Second DC 'type' field (MODS 'genre') was correctly transformed using custom XSLT.", 'Islandora');
+    }
+    else {
+      $this->fail("No second DC 'type' field entries found.", 'Islandora');
+    }
+    // Assert dc:identifier.
+    if (is_object($identifier)) {
+      $this->assertTrue($identifier->nodeValue == $this->object_pid, "DC 'identifier' field was correctly set to the object PID using custom XSLT.", 'Islandora');
+    }
+    else {
+      $this->fail("No DC 'identifier' field entries found.", 'Islandora');
+    }
+  }
+
+  /**
+   * Remove some of the stuff we set up after the final test.
+   */
+  public function testDeconstruct() {
+    // Get rid of those custom XSLT files.
+    if (file_exists(DRUPAL_ROOT . "/sites/all/modules/islandora_xml_forms/builder/transforms/{$this->custom_transform_filename}")) {
+      file_unmanaged_delete("sites/all/modules/islandora_xml_forms/builder/transforms/{$this->custom_transform_filename}");
+      $this->pass("Deleted test custom transform {$this->custom_transform_filename}.", 'Islandora');
+    }
+    if (file_exists(DRUPAL_ROOT . "/sites/all/modules/islandora_xml_forms/builder/self_transforms/{$this->self_transform_filename}")) {
+      file_unmanaged_delete("sites/all/modules/islandora_xml_forms/builder/self_transforms/{$this->self_transform_filename}");
+      $this->pass("Deleted test custom self transform {$this->self_transform_filename}.", 'Islandora');
+    }
+    // Switch auto-deletion back on.
+    $this->deleteObjectsOnTeardown = TRUE;
+  }
+}

@@ -1,0 +1,316 @@
+@import "vars";
+@import (reference) "mixins/rect";
+@import (reference) "mixins/position";
+@import (reference) "mixins/pseudo";
+
+.inset-controlbar() {
+    &:not(.jw-flag-audio-player) {
+        &,
+        .jw-flag-ads.jw-flag-touch:not(.jw-flag-ads-vpaid)&,
+        .jw-flag-ads.jw-flag-touch.jw-flag-autostart:not(.jw-flag-ads-vpaid)& {
+            .jw-controlbar {
+                display: inline-block;
+            }
+        }
+    }
+
+    &:not(.jw-flag-audio-player):not(.jw-breakpoint-0) {
+        .jw-controlbar {
+            bottom: 0.7em;
+            max-width: @min-breakpoint-5-width;
+            margin: 0 auto;
+            left: 2%;
+            right: 2%;
+            width: 96%; /* width assignment is required for IE11 to center correctly */
+        }
+
+        &.jw-flag-ads-googleima .jw-controlbar {
+            bottom: 0;
+        }
+
+        .jw-captions {
+            max-height: calc(100% - 46px);
+        }
+
+        .jwplayer& {
+            /* captions styles code specific to native text track rendering */
+            video::-webkit-media-text-track-container {
+                max-height: calc(100% - 46px);
+            }
+        }
+    }
+
+    .jw-nextup-container {
+        bottom: (@controlbar-height + 0.7em);
+        padding-left: 0;
+        padding-right: 0;
+        max-width: @min-breakpoint-5-width;
+    }
+
+    &.jw-breakpoint-2,
+    &.jw-breakpoint-3,
+    &.jw-breakpoint-4 {
+        .jw-nextup-container {
+            padding-left: 2%;
+            padding-right: 2%;
+        }
+    }
+}
+
+.vertically-centered-rail-element(@rail-height, @element-height) {
+    top: ((@rail-height - @element-height) / 2);
+}
+
+.horizontally-centered-rail-element(@rail-width, @element-width) {
+    left: ((@rail-width - @element-width) / 2);
+}
+
+.skin-element-padding() {
+    .jw-icon-inline,
+    .jw-icon-tooltip,
+    .jw-text-elapsed,
+    .jw-text-countdown,
+    .jw-text-duration {
+        padding: 0 @ui-padding;
+    }
+}
+
+/* Less requires namespaced variables/mixins to overwrite globals - https://github.com/less/less.js/issues/1316 */
+
+/* Mixin for common skin styles with variable colors */
+/* stylelint-disable selector-max-id */
+#namespace() {
+    @import "vars";
+    .basic-skin-styles() {
+        .jw-background-color {
+            background: @controlbar-background;
+        }
+
+        .jw-text {
+            color: @inactive-color;
+        }
+
+        .jw-knob {
+            color: @inactive-color;
+            background-color: @active-color;
+        }
+
+        .jw-button-color {
+            color: @inactive-color;
+        }
+
+        &:not(.jw-flag-touch) .jw-button-color:not(.jw-logo-button) {
+            &:focus,
+            &:hover {
+                outline: none;
+                color: @hover-color;
+            }
+        }
+
+        .jw-toggle {
+            color: @hover-color;
+
+            &.jw-off {
+                color: @inactive-color;
+
+                &:focus {
+                    color: @hover-color;
+                }
+            }
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        &:not(.jw-flag-touch) .jw-toggle.jw-off:hover {
+            color: @hover-color;
+        }
+
+        /* Slider colors */
+        .jw-rail {
+            background: @rail-color;
+        }
+
+        .jw-buffer {
+            background: @buffer-color;
+        }
+
+        .jw-progress {
+            background: @progress-color;
+        }
+
+        /* Styles for menu elements, volume, slider thumbnail */
+        .jw-time-tip,
+        .jw-volume-tip {
+            border: @volume-border;
+        }
+
+        .jw-slider-volume.jw-volume-tip.jw-background-color.jw-slider-vertical {
+            background: none;
+        }
+
+        .jw-skip {
+            padding: @ui-padding;
+            outline: none;
+
+            .jw-skiptext,
+            .jw-skip-icon {
+                color: @inactive-color;
+            }
+
+            &.jw-skippable:hover,
+            &.jw-skippable:focus {
+                .jw-skip-icon {
+                    color: @active-color;
+                }
+            }
+        }
+
+        /*
+        Chromecast
+        */
+
+        .jw-icon-cast {
+            button {
+                --connected-color: @active-color;
+                --disconnected-color: @inactive-color;
+
+                &:focus {
+                    outline: none;
+                }
+
+                &.jw-off {
+                    --connected-color: @inactive-color;
+                }
+            }
+
+            &:focus button {
+                --connected-color: @active-color;
+                --disconnected-color: @hover-color;
+            }
+
+            &:hover button {
+                --connected-color: @hover-color;
+                --disconnected-color: @hover-color;
+            }
+        }
+
+        /* Next up display */
+        .jw-nextup-container {
+            bottom: @controlbar-height;
+            padding: 5px @ui-padding;
+        }
+
+        .jw-nextup {
+            border-radius: @nextup-border-radius;
+        }
+    }
+
+    .custom-skin-styles() {
+        .jw-display-icon-container {
+            border-radius: @ui-corner-round;
+        }
+
+        &:not(.jw-ie) {
+            .jw-controlbar .jw-text-alt {
+                top: 50%;
+                transform: translateY(-50%);
+                margin: auto;
+                bottom: auto;
+            }
+        }
+
+        &.jw-flag-ads-googleima {
+            .jw-controlbar {
+                height: @controlbar-height;
+
+                .jw-overlay {
+                    bottom: @controlbar-height;
+                }
+            }
+
+            .jw-icon-inline,
+            .jw-icon-tooltip,
+            .jw-text-elapsed,
+            .jw-text-duration,
+            .jw-text-countdown {
+                height: @controlbar-height;
+            }
+        }
+
+        &.jw-flag-ads.jw-ie .jw-text-alt,
+        &.jw-flag-live.jw-ie .jw-text-alt {
+            top: 1px;
+            margin: 0;
+        }
+
+        &:not(.jw-flag-small-player) {
+            .jw-time-tip {
+                bottom: (@controlbar-height / 2);
+            }
+
+            .jw-captions {
+                max-height: calc(100% - 38px);
+            }
+
+            .jwplayer& {
+                /* captions styles code specific to native text track rendering */
+                video::-webkit-media-text-track-container {
+                    max-height: calc(100% - 38px);
+                }
+            }
+
+            .jw-icon-inline,
+            .jw-icon-tooltip {
+                min-width: (@controlbar-height * 5 / 8);
+            }
+        }
+    }
+
+    // Set color classes in the skin so they can be reused in other parts of the player (i.e. the related overlay)
+    .set-global-color-classes() {
+        .jw-color-active {
+            color: @active-color;
+            stroke: @active-color;
+            border-color: @active-color;
+        }
+
+        &:not(.jw-flag-touch) .jw-color-active-hover {
+            &:hover {
+                color: @active-color;
+                stroke: @active-color;
+                border-color: @active-color;
+            }
+        }
+
+        .jw-color-inactive {
+            color: @inactive-color;
+            stroke: @inactive-color;
+            border-color: @inactive-color;
+        }
+
+        &:not(.jw-flag-touch) .jw-color-inactive-hover {
+            &:hover {
+                color: @inactive-color;
+                stroke: @inactive-color;
+                border-color: @inactive-color;
+            }
+        }
+        /* Color for list item text in menu lists */
+        .jw-option {
+            color: @option-inactive-color;
+
+            &.jw-active-option {
+                color: @option-active-color;
+                background-color: @option-active-bg-color;
+            }
+        }
+
+        &:not(.jw-flag-touch) .jw-option:hover {
+            color: @hover-color;
+        }
+    }
+}
+/* stylelint-enable selector-max-id */
+

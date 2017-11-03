@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "/schema/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:html="http://www.w3.org/1999/xhtml"><head><title>How to Use EXSLT</title><link rel="stylesheet" href="base.css"/></head><body><h1 id="#title">How to Use <a href="http://www.exslt.org/">EXSLT</a></h1><table><tr><td id="menu"><p class="level1"><a href="howto.html">How To</a></p><p class="level1"><a href="download.html">Downloads</a></p><p class="level1">Modules</p><p class="level2"><a href="date/index.html">Dates and Times</a></p><p class="level2"><a href="dyn/index.html">Dynamic</a></p><p class="level2"><a href="exsl/index.html">Common</a></p><p class="level2"><a href="func/index.html">Functions</a></p><p class="level2"><a href="math/index.html">Math</a></p><p class="level2"><a href="random/index.html">Random</a></p><p class="level2"><a href="regexp/index.html">Regular Expressions</a></p><p class="level2"><a href="set/index.html">Sets</a></p><p class="level2"><a href="str/index.html">Strings</a></p><p class="level1"><a href="submissions/">Submissions</a></p><p class="level1"><a href="list">Mailing List</a></p><p class="level1"><a href="contact.html">Contact</a></p></td><td id="content"><div><p>
+      This page describes how to use the extensions that are available within <a href="http://exslt.org">EXSLT</a>.
+   </p><h3>Contents</h3><ul><li><a href="#namespaces">Defining Extension Namespaces</a></li><li><a href="#templates">Using Named Templates</a></li><li><a href="#functions">Using Extension Functions</a><ul><li><a href="#implementations">Using Particular Implementations</a><ul><li><a href="#exslt-implementations">Using implementations defined with EXSLT - Functions</a></li><li><a href="#other-implementations">Using implementations defined in other languages</a></li></ul></li><li><a href="#function-level">Using the Function-Level Packages</a></li><li><a href="#module-level">Using the Module-Level Packages</a></li><li><a href="#function-portability">Ensuring Portability with Extension Functions</a></li></ul></li><li><a href="#elements">Using Extension Elements</a></li></ul><h2 id="namespaces">Defining Extension Namespaces</h2><p>
+      The first step to using the extensions described in EXSLT is to define the relevant namespace for the EXSLT module.  You should declare the namespace on the <a href="http://www.w3.org/TR/xslt#element-stylesheet"><code>xsl:stylesheet</code></a> element in your stylesheet.
+   </p><p>
+      You can find the namespace that you need to define on the page describing the module for the functions that you want to use.  Generally, the namespaces are named in a standard way, though:
+   </p><pre>http://exslt.org/<var>module-name</var></pre><p>
+      For example, you can define the namespace for the <a href="http://exslt.org/math">Math module</a> with:
+   </p><pre>
+&lt;xsl:stylesheet version="1.0"
+          xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+          <b>xmlns:math="http://exslt.org/math"</b>&gt;
+...
+&lt;/xsl:stylesheet&gt;</pre><p>
+      You can use the <a href="http://www.w3.org/TR/xslt#element-stylesheet" class="offsite"><code>extension-element-prefixes</code></a> attribute to prevent the extension namespaces from being output in the result tree:
+   </p><pre>
+&lt;xsl:stylesheet version="1.0"
+          xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+          xmlns:math="http://exslt.org/math"
+          <b>extension-element-prefixes="math"</b>&gt;
+...
+&lt;/xsl:stylesheet&gt;</pre><h2 id="templates">Using Named Templates</h2><p>
+      When it comes down to it, nothing beats a named template for portability.  Named templates are pure <a href="http://www.w3.org/TR/xslt" class="offsite">XSLT 1.0</a>.  You don't have to worry about which XSLT processor you're using or what it supports to know that you can use named templates.
+   </p><p>
+      Within <a href="http://www.exslt.org">EXSLT</a>, we try to provide a named template with as near to the equivalent functionality of each extension function as you can get.  For example, the <a href="http://exslt.org/math/min" class="function">math:min</a> function has a pure <a href="http://www.w3.org/TR/xslt" class="offsite">XSLT 1.0</a> named template available in <a href="http://exslt.org/math/min/math.min.template.xsl"><code>math.min.template.xsl</code></a>.  If you are only interested in this template, then you can simply import this stylesheet:
+   </p><pre>
+&lt;xsl:stylesheet version="1.0"
+          xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+          xmlns:math="http://exslt.org/math"
+          extension-element-prefixes="math"&gt;
+<b>&lt;xsl:import href="math.min.template.xsl" /&gt;</b>
+...
+&lt;/xsl:stylesheet&gt;</pre><p>
+      You can then call the named template with <a href="http://www.w3.org/TR/xslt#element-call-template" class="offsite"><code>xsl:call-template</code></a>:
+   </p><pre>
+&lt;xsl:call-template name="math:min"&gt;
+...
+&lt;/xsl:call-template&gt;</pre><p>
+      The names of the parameters that should be passed to the template, the effect they have and the default value that's used if you don't supply one are all described alongside the description of the equivalent function.
+   </p><h2 id="functions">Using Extension Functions</h2><p>
+      Extension functions give added functionality to XPath.  Some extension functions are built into particular XSLT processors, so if you're using the processor then you can use the function.  In other cases, you need to point the processor at an implementation of the function that it can use.
+   </p><h3 id="implementations">Using Particular Implementations</h3><p>
+      There are two broad categories of the implementations of extension functions that are available on this site:
+   </p><ul><li>implementations using <a href="http://exslt.org/func">EXSLT - Functions</a></li><li>implementations using other languages</li></ul><h4 id="exslt-implementations">Using implementations defined with <a href="http://exslt.org/func">EXSLT - Functions</a></h4><p>
+      The first way to define an implementation of a function is using <a href="http://exslt.org/func/elements/function"><code>exsl:function</code></a> at the top level of your stylesheet.  These implementations will only work if the XSLT processor that you use supports <a href="http://exslt.org/func">EXSLT - Functions</a>.
+   </p><p>
+      If you're using one of these processors, all you need to do is to import the <a href="http://exslt.org/func">EXSLT - Functions</a> stylesheet into your stylesheet.  For example, to use the <a href="http://exslt.org/func">EXSLT - Functions</a> implementation of <a href="http://exslt.org/math/functions/min" class="function">math:min</a>, copy it to the same directory as your stylesheet and use:
+   </p><pre>
+&lt;xsl:stylesheet version="1.0"
+          xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+          xmlns:math="http://exslt.org/math"
+          extension-element-prefixes="math"&gt;
+<b>&lt;xsl:import href="math.min.function.xsl" /&gt;</b>
+...
+&lt;/xsl:stylesheet&gt;</pre><h4 id="other-implementations">Using implementations defined in other languages</h4><p>
+      The second type of implementations are those defined in other languages.  With these, you need to use <a href="http://exslt.org/func/elements/script"><code>func:script</code></a> from <a href="http://exslt.org/func/elements/script">XSLT 1.1</a>.      These implementations will only work if the XSLT processor that you use supports both <a href="http://exslt.org/func">EXSLT - Functions</a> and the language that you use to implement the function.
+   </p><p>
+      If you're using one of these processors, you need a <a href="http://exslt.org/func/elements/script"><code>xsl:script</code></a> element with the following attributes:
+   </p><ul><li><code>implements-prefix</code> - the prefix of the module</li><li><code>language</code> - the language of the implementation</li><li><code>src</code> - the location of the implementation file</li></ul><p>
+      For example, to use the JavaScript implementation of <a href="http://exslt.org/math/functions/min" class="function">math:min</a>, copy it to the same directory as your stylesheet and use:
+   </p><pre>
+&lt;xsl:stylesheet version="1.1"
+          xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+          xmlns:math="http://exslt.org/math"
+          xmlns:func="http://exslt.org/functions"
+          extension-element-prefixes="math func"&gt;
+<b>&lt;func:script implements-prefix="math" 
+      language="exslt:javascript" 
+      src="math.min.js" /&gt;</b>
+...
+&lt;/xsl:stylesheet&gt;</pre><p>
+      You can use multiple <a href="http://exslt.org/func/elements/script"><code>func:script</code></a> elements to define multiple implementations of the same function in different languages.  However, you cannot use multiple <a href="http://exslt.org/func/elements/script"><code>func:script</code></a> elements to define implementations in the same language of different functions in the same module - it is an error to have multiple <a href="http://exslt.org/func/elements/script"><code>func:script</code></a> elements with the same value for <code>implements-prefix</code> and <code>language</code> in the same stylesheet.  If you want to use lots of functions from the same module, you need to merge the files and reference the result with the <code>src</code> attribute.
+   </p><h3 id="function-level">Using the Function-Level Packages</h3><p>
+      If you want to use only one particular function, but want to provide a portable stylesheet that can be used with lots of different processors, then you should use the function-level packages that we provide on the site.  Each of these packages contains all the implementations that are available for the particular function, plus a stylesheet that draws them all in and makes them available for use.
+   </p><p>
+      Making the function available in your stylesheet involves downloading the function-level package, unzipping it and then importing the stylesheet from the package.  For example, to make the <a href="http://exslt.org/math/functions/min" class="function">math:min</a> function available for use in your stylesheet, you should download <a href="http://exslt.org/math/functions/min/math.min.zip"><code>math.min.zip</code></a>, unzip it and import <code>math.min.xsl</code> into your stylesheet:
+   </p><pre>
+&lt;xsl:stylesheet version="1.0"
+          xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+          xmlns:math="http://exslt.org/math"
+          extension-element-prefixes="math"&gt;
+<b>&lt;xsl:import href="math.min.xsl" /&gt;</b>
+...
+&lt;/xsl:stylesheet&gt;</pre><p class="note">
+      This also makes any template implementation of the function available for your use.
+   </p><h3 id="module-level">Using the Module-Level Packages</h3><p>
+      If you need to use several functions from a module, then you should use the relevant module-level packages that we provide on the site.  Each of these packages contains all the implementations that are available for all the functions in a particular module, plus a stylesheet that draws them all in and makes them available for use.
+   </p><p>
+      Making the functions available in your stylesheet involves downloading the module-level package, unzipping it and then importing the stylesheet from the package.  For example, to make the <a href="http://exslt.org/math">EXSLT - Math</a> module available for use in your stylesheet, you should download <a href="http://exslt.org/math/math.zip"><code>math.zip</code></a>, unzip it and import <code>math.xsl</code> into your stylesheet:
+   </p><pre>
+&lt;xsl:stylesheet version="1.0"
+          xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+          xmlns:math="http://exslt.org/math"
+          extension-element-prefixes="math"&gt;
+<b>&lt;xsl:import href="math.xsl" /&gt;</b>
+...
+&lt;/xsl:stylesheet&gt;</pre><h3 id="function-portability">Ensuring Portability with Extension Functions</h3><p>
+      Whether the extension function you use is built into your processor or is a user-defined extension function, it's good practice to test that the function is supported before you use it.  You can test whether a function is available using the <a href="http://www.w3.org/TR/xslt#function-function-available" class="offsite function">function-available</a> function.  For example, to test whether <a href="http://exslt.org/math/functions/min" class="function">math:min</a> is available, you can use the test:
+   </p><pre>function-available('math:min')</pre><p>
+      The function-level and module-level packages that we supply here usually include a definition of a named template that has equivalent functionality to the function, so even if a processor doesn't support any of the implementation languages, you can still fall back on the named template to get the functionality you're after.  For example, for maximum portability in printing out the minimum of a set of values, I should use:
+   </p><pre>
+&lt;xsl:choose&gt;
+   &lt;xsl:when test="function-available('math:min')"&gt;
+      &lt;xsl:value-of select="math:min($values)" /&gt;
+   &lt;/xsl:when&gt;
+   &lt;xsl:otherwise&gt;
+      &lt;xsl:call-template name="math:min"&gt;
+         &lt;xsl:with-param name="nodes" select="$values" /&gt;
+      &lt;/xsl:call-template&gt;
+   &lt;/xsl:otherwise&gt;
+&lt;/xsl:choose&gt;</pre><h2>Using Extension Elements</h2><p>
+      Extension elements give added functionality to XSLT.  There is no standard way at the moment to point a processor at an implementation of an extension element so that it can use it.  Instead, the processor you use must have built-in support of the extension element.
+   </p><p>
+      There are two ways that you can make sure that your stylesheet doesn't break when you use an extension element.  First, you can test whether the element is available with the <a href="http://www.w3.org/TR/xslt#function-element-available" class="offsite">element-available</a> function.  For example, to test whether the <code>grp:group</code> element is available, you can use:
+   </p><pre>
+&lt;xsl:choose&gt;
+   &lt;xsl:when test="element-available('grp:group')"&gt;
+      &lt;grp:group ...&gt;
+         ...
+      &lt;/grp:group&gt;
+   &lt;/xsl:when&gt;
+   &lt;xsl:otherwise&gt;
+      &lt;xsl:message terminate="yes"&gt;
+         ERROR: Your processor does not support grp:group
+      &lt;/xsl:message&gt;
+   &lt;/xsl:otherwise&gt;
+&lt;/xsl:choose&gt;</pre><p class="note">
+      In some processors (in particular Saxon), this only works if the element has been categorised as an instruction; it does not work for top-level elements.
+   </p><p>
+      The second way of making sure that the stylesheet doesn't break when you use an extension element is to use the <a href="http://www.w3.org/TR/xslt#element-fallback" class="offsite"><code>xsl:fallback</code></a> element.  If you've declared that an element is an extension element by giving its namespace through one of the prefixes in the <code>extension-element-prefixes</code> attribute on <a href="http://www.w3.org/TR/xslt#element-stylesheet" class="offsite"><code>xsl:stylesheet</code></a>, and the processor comes across it in a template but doesn't have a built-in implementation of it then the processor will perform fallback.  Fallback involves looking for an <a href="http://www.w3.org/TR/xslt#element-fallback" class="offsite"><code>xsl:fallback</code></a> element in the content of the extension element, and instantiating its content.  For example, the following tries to use the extension element <code>grp:group</code> and supplies an error message if the extension element is not there.
+   </p><pre>
+&lt;grp:group ...&gt;
+   ...
+   &lt;xsl:fallback&gt;
+      &lt;xsl:message terminate="yes"&gt;
+         ERROR: Your processor does not support grp:group
+      &lt;/xsl:message&gt;
+   &lt;/xsl:fallback&gt;
+&lt;/grp:group&gt;</pre><p class="note">
+      This will only work with extension elements used within templates.
+   </p></div></td></tr></table><div id="colophon"><p><a href="http://www.exslt.org/howto.html">http://www.exslt.org/howto.html</a></p></div></body></html>

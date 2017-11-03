@@ -1,0 +1,7 @@
+name = Islandora Checksum Checker
+description = "Periodically confirms checksum on object datastreams."
+package = Islandora Tools
+version = 7.x-dev
+core = 7.x
+configure = admin/islandora/tools/checksum_checker
+dependencies[] = islandora

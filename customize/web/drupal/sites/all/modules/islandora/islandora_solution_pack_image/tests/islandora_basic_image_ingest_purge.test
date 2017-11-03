@@ -1,0 +1,88 @@
+<?php
+
+/**
+ * @file
+ * Attempts to ingest an image into a randomly generated image collection
+ */
+
+class IslandoraBasicImageIngestTestCase extends IslandoraCollectionWebTestCase {
+
+  /**
+   * Get test information.
+   *
+   * @see IslandoraWebTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Basic Image Ingest/Purge',
+      'description' => 'Ingests and purges an image from a randomly generated image collection',
+      'group' => 'Islandora Basic Image',
+    );
+  }
+
+  /**
+   * Set up the test environment.
+   *
+   * @see IslandoraWebTestCase::setUp()
+   */
+  public function setUp() {
+    parent::setUp(array(
+      'islandora',
+      'islandora_basic_image',
+      'islandora_basic_collection',
+    ));
+  }
+
+  /**
+   * Creates an administrative user and attempts to ingest a test image.
+   */
+  public function testIngestPurgeBasicImage() {
+    $user = $this->drupalCreateUser(array(
+      'view fedora repository objects',
+      'ingest fedora objects',
+      'administer site configuration',
+      'manage object properties',
+      'delete fedora objects and datastreams',
+      'create child collection',
+    ));
+    $this->drupalLogin($user);
+
+    $label = $this->randomName(16);
+    $suffix = $this->randomName(16);
+    $collectionpid = 'islandora:' . $suffix;
+    $this->createTestCollection($label, 'islandora:sp_basic_image', $collectionpid);
+
+    // Attempts to create an object.
+    $path = 'islandora/object/' . $collectionpid . '/manage/overview/ingest';
+    $edit = array();
+    $file = drupal_get_path('module', 'islandora_basic_image') . '/tests/fixtures/test.jpg';
+    $edit['files[file]'] = $file;
+    $this->drupalPost($path, $edit, t('Ingest'));
+    $this->assertText('New Object', 'Image object was created', 'Islandora');
+    $path = $this->url;
+    $imagepath = $path . '/datastream/OBJ/view';
+    $this->assertLinkByHref($imagepath, 0, t('Ingested image found on view page'), t('Islandora'));
+
+    // Determines whether or not the appropriate datastreams were created.
+    $object = $this->getObjectFromPath($this->url);
+    $datastreams = array(
+      'RELS-EXT',
+      'DC',
+      'OBJ',
+      'TN',
+      'MEDIUM_SIZE',
+    );
+    $this->assertDatastreams($object, $datastreams);
+
+    $datastreams = array(
+      array('OBJ', 'image'),
+      array('TN', 'image'),
+      array('MEDIUM_SIZE', 'image'),
+    );
+    $this->validateDatastreams($object, $datastreams);
+
+    // Attempts to delete the object and then collection.
+    $this->deleteObject($object->id);
+    $this->deleteTestCollection($collectionpid);
+  }
+}

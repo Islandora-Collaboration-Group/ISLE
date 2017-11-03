@@ -1,0 +1,100 @@
+<?php
+
+/**
+ * @file
+ * This file contains all install related hooks.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_xmlsitemap_uninstall() {
+  $variables = array(
+    'islandora_xmlsitemap_number_of_pids_to_process',
+    'islandora_xmlsitemap_last_modified_value',
+    'islandora_xmlsitemap_last_modified_field',
+  );
+  array_walk($variables, 'variable_del');
+}
+
+/**
+ * Implements hook_install().
+ */
+function islandora_xmlsitemap_install() {
+  // XXX: Taking advantage of the update hook's batch functionality to run the
+  // same batch on install as one would have to in the update hook.
+  islandora_xmlsitemap_update_7000();
+}
+
+/**
+ * Implements hook_schema().
+ */
+function islandora_xmlsitemap_schema() {
+  return array(
+    // This table satisfies a race condition where we cannot guarantee unique
+    // IDs in the xmlsitemap table when ingesting concurrently, so we generate
+    // them here instead. See https://jira.duraspace.org/browse/ISLANDORA-1784
+    // for more details.
+    'islandora_xmlsitemap_entry_ids' => array(
+      'description' => 'Autoincrementing table to store IDs we can use for xmlsitemap table entries.',
+      'fields' => array(
+        'id' => array(
+          'description' => 'Current ID number',
+          'type' => 'serial',
+          'not null' => TRUE,
+        ),
+        'pid' => array(
+          'description' => 'The PID relating to this ID.',
+          'type' => 'varchar',
+          'length' => 64,
+        ),
+      ),
+      'primary key' => array('id'),
+      'unique keys' => array('pid' => array('pid')),
+    ),
+  );
+}
+
+/**
+ * Add the ID table schema in, and set the initial ID.
+ */
+function islandora_xmlsitemap_update_7000(&$sandbox = array()) {
+  module_load_include('inc', 'islandora_xmlsitemap', 'includes/db');
+  if (empty($sandbox)) {
+    // Create our table, if it doesn't exist.
+    if (!db_table_exists('islandora_xmlsitemap_entry_ids')) {
+      $schema = islandora_xmlsitemap_schema();
+      db_create_table('islandora_xmlsitemap_entry_ids', $schema['islandora_xmlsitemap_entry_ids']);
+    }
+    // Get the total of 'custom' records.
+    $sandbox['total'] = db_select('xmlsitemap', 'x')
+      ->condition('type', 'custom', '=')
+      ->countQuery()
+      ->execute()
+      ->fetchField();
+    $sandbox['current'] = 0;
+  }
+
+  // Could be empty.
+  if ($sandbox['total'] == 0) {
+    $context['#finished'] = 1;
+    return;
+  }
+
+  // Insert any existing records, 1000 at a time.
+  $records = db_select('xmlsitemap', 'x')
+    ->fields('x', array('id', 'subtype'))
+    ->condition('type', 'custom', '=')
+    ->orderBy('id', 'ASC')
+    ->range($sandbox['current'], 1000)
+    ->execute()
+    ->fetchAllAssoc('id');
+  foreach ($records as $record) {
+    $pid = str_replace('info:fedora/', '', $record->subtype);
+    islandora_xmlsitemap_insert_increment_record($pid);
+    $sandbox['current']++;
+  }
+
+  // Are we done?
+  $context['#finished'] = $sandbox['current'] / $sandbox['total'];
+}
