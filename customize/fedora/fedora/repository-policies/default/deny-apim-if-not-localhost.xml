@@ -33,6 +33,7 @@
             <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">fedora</AttributeValue>
             <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">web</AttributeValue>
             <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">db</AttributeValue>
+            <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">solr</AttributeValue>
           </Apply>
         </Apply>
         <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:regexp-string-match">
