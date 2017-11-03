@@ -12,6 +12,7 @@ services:
       - "3306:3306"
     volumes:
       - ./mysql/initscripts:/docker-entrypoint-initdb.d
+      - ./customize/mysql/my.cnf:/etc/alternatives/my.cnf
       - ./data/mysql:/var/lib/mysql
       - ./data/mysql/log:/var/log/mysql
     container_name: isle-db
@@ -26,12 +27,9 @@ services:
     depends_on:
       - db
     volumes:
-    #  - ./data/fedora:/usr/local/fedora (this mount method doesn't work anymore)
     - ./customize/fedora/tomcat/server.xml:/var/lib/tomcat7/conf/server.xml
     - ./customize/fedora/tomcat/web.xml:/var/lib/tomcat7/conf/web.xml
     - ./customize/fedora/tomcat/tomcat-users.xml:/var/lib/tomcat7/conf/tomcat-users.xml
-    #- ./customize/fedora/tomcat/tomcat7:/etc/init.d/tomcat7 (doesn't mount properly needs . mounts as a directory and then tomcat can't start)
-    #- ./customize/fedora/tomcat/setenv.sh:/usr/share/tomcat7/bin/setenv.sh
     - ./customize/fedora/tomcat/logging.properties:/usr/share/tomcat7/conf/logging.properties
     - ./customize/fedora/fedora/repository-policies/default:/usr/local/fedora/data/fedora-xacml-policies/repository-policies/default
     - ./customize/fedora/fedora/repository-policies/islandora:/usr/local/fedora/data/fedora-xacml-policies/repository-policies/islandora
@@ -46,7 +44,6 @@ services:
     - ./data/fedora/log/fedora:/usr/local/fedora/server/logs
     - ./data/fedora/log/apache:/var/log/apache2
     - ./data/fedora/log/tomcat:/var/log/tomcat7
-    #- ./data/solr:/usr/local/solr/collection1/data
     container_name: isle-fedora
 
   solr:
@@ -69,3 +66,19 @@ services:
     - ./customize/solr/solr/stopwords.txt:/usr/local/solr/collection1/conf/stopwords.txt
     - ./data/solr:/usr/local/solr/collection1/data
     container_name: isle-solr
+
+  web:
+    build: ./web
+    image: isle-web:latest
+    ports:
+      - "8888:80"
+    tty: true
+    depends_on:
+      - db
+      - fedora
+    volumes:
+      - ./customize/web/apache/site.conf:/etc/apache2/sites-available/site.conf
+      - ./customize/web/drupal:/var/www/html
+      - ./customize/web/php/php.ini:/etc/php5/apache2/php.ini
+      - ./data/web/log/apache:/var/log/apache2
+    container_name: isle-web
