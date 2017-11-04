@@ -178,9 +178,8 @@ RUN mkdir -p /tmp/build \
 # Djatoka
 #
 
-COPY djatoka/adore-djatoka-1.1.tar.gz /opt/adore-djatoka-1.1.tar.gz
-
 RUN cd /opt \
+    && wget "http://downloads.sourceforge.net/project/djatoka/djatoka/1.1/adore-djatoka-1.1.tar.gz" \
     && tar -xzf adore-djatoka-1.1.tar.gz \
     && rm adore-djatoka-1.1.tar.gz
 
