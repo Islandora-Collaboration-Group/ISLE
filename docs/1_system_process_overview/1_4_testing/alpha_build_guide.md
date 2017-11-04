@@ -1,19 +1,29 @@
 ### Alpha Build Pre-Requisites
 
-
 * This current alpha has been build and tested on **Docker For Mac** only. (11/2017)
-     * Please install the [latest version](https://download.docker.com/mac/stable/Docker.dmg) from the [Docker store](https://store.docker.com/editions/community/docker-ce-desktop-mac)  
+     * Please install the [latest version](https://download.docker.com/mac/stable/Docker.dmg) from the [Docker store](https://store.docker.com/editions/community/docker-ce-desktop-mac)
 
+* Git will need to be installed prior as well.
+     * Open a terminal and enter: `git --version`
+     * This will trigger the `Install Command Line Developer Tools` prompt, click on the blue `Accept / Yes` button for the license agreement
+     * The package will take 1-2 minutes to download. Click the `Done` button once finished.
+
+* Git LFS will also need to be installed due to issue with large binary files
+   * Install following instructions [here](https://git-lfs.github.com/)
+   * `brew install git-lfs` (if you have [homebrew](https://brew.sh/) installed) or download the .tar.gz file from the website above
+   * Once installed, open a terminal and enter `git lfs install`
+   * This should allow one to download the full binary files
 
 * This alpha build uses `islandora-docker.com` as the test domain along with the Docker Compose service names e.g. `db, fedora, web` etc.
      * To ensure this domain resolves properly, one will need to edit their local `/etc/hosts` file.
-     * Open up a terminal and enter: `vi /etc/hosts`
+     * Open up a terminal and enter: `sudo vi /etc/hosts`
      * Add the following:
       >127.0.0.1       localhost islandora-docker.com fedora web fedora.islandora-docker.com web.islandora-docker.com
 
 * Clone the ISLE repository
      * Open a terminal and enter: `git clone https://github.com/Islandora-Collaboration-Group/ISLE`
-     * `cd /yourpathto/ISLE` 
+     * `cd /yourpathto/ISLE`
+     * This process will take 3 - 5 minutes depending on internet bandwidth
 
 ---
 
