@@ -66,7 +66,7 @@ The following manual steps will be folded into the web build process.
       * `chmod 777 drush.sh`
       * `./drush.sh`
 
-* Fix open-seadragon issue
+* Fix open-seadragon issue (MIGHT NOT BE NECESSARY. TBD)
     * `cd /var/www/html/sites/all/libraries`
     * `wget https://github.com/openseadragon/openseadragon/releases/download/v2.2.1/openseadragon-bin-2.2.1.zip`
     * `unzip https://github.com/openseadragon/openseadragon/releases/download/v2.2.1/openseadragon-bin-2.2.1.zip`
