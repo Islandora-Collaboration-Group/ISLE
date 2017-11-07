@@ -31,7 +31,7 @@ RUN apt-get install -y software-properties-common \
     && rm -rf /var/lib/apt/lists/*
 
 ###
-# Make sure ports 8080 are available
+# Make sure ports 8080 & 8993 are available
 EXPOSE 8080 8983
 
 
@@ -134,37 +134,33 @@ RUN chown tomcat7:tomcat7 /var/lib/tomcat7/conf/tomcat-users.xml \
 #
 
 COPY solr/solr.xml /var/lib/tomcat7/conf/Catalina/localhost/solr.xml
-COPY solr/solr-4.10.4/example/solr /usr/local/solr
-COPY solr/solr-4.10.4/dist/solr-4.10.4.war /var/lib/tomcat7/webapps/solr.war
 
 
-RUN chown tomcat7:tomcat7 /var/lib/tomcat7/conf/Catalina/localhost/solr.xml \
+RUN cd /tmp \
+    && wget "http://archive.apache.org/dist/lucene/solr/4.10.4/solr-4.10.4.tgz" \
+    && tar -xvzf /tmp/solr-4.10.4.tgz \
+    && cp -v /tmp/solr-4.10.4/dist/solr-4.10.4.war /var/lib/tomcat7/webapps/solr.war \
+    && chown tomcat7:tomcat7 /var/lib/tomcat7/conf/Catalina/localhost/solr.xml \
     && chmod 644 /var/lib/tomcat7/conf/Catalina/localhost/solr.xml \
     && chown tomcat7:tomcat7 /usr/local/solr \
     && chmod 755 /usr/local/solr \
     && /usr/bin/unzip -o /var/lib/tomcat7/webapps/solr.war -d /var/lib/tomcat7/webapps/solr/ \
+    && cp -rv /tmp/solr-4.10.4/example/solr/. /usr/local/solr/ \
+    && cp -rv /tmp/solr-4.10.4/example/lib/ext/. /var/lib/tomcat7/webapps/solr/WEB-INF/lib/ \
+    && cp -v /tmp/solr-4.10.4/contrib/analysis-extras/lib/icu4j-53.1.jar /var/lib/tomcat7/webapps/solr/WEB-INF/lib/ \
+    && cp -v /tmp/solr-4.10.4/contrib/analysis-extras/lucene-libs/lucene-analyzers-icu-4.10.4.jar /var/lib/tomcat7/webapps/solr/WEB-INF/lib/ \
+    && wget "https://www.slf4j.org/dist/slf4j-1.6.6.tar.gz" \
+    && cp -v /tmp/slf4j-1.6.6/slf4j-jdk14-1.6.6.jar /usr/share/tomcat7/lib/slf4j-jdk14-1.6.6.jar \
+    && cp -v /tmp/slf4j-1.6.6/log4j-over-slf4j-1.6.6.jar /usr/share/tomcat7/lib/log4j-over-slf4j-1.6.6.jar \
     && chown tomcat7:tomcat7 /var/lib/tomcat7/webapps/solr.war \
     && chmod 644 /var/lib/tomcat7/webapps/solr.war \
     && chown -R tomcat7:tomcat7 /var/lib/tomcat7/webapps/solr
-
-COPY solr/solr-4.10.4/example/lib/ext/* /var/lib/tomcat7/webapps/solr/WEB-INF/lib/
-COPY solr/solr-4.10.4/contrib/analysis-extras/lib/icu4j-53.1.jar /var/lib/tomcat7/webapps/solr/WEB-INF/lib/
-COPY solr/solr-4.10.4/contrib/analysis-extras/lucene-libs/lucene-analyzers-icu-4.10.4.jar /var/lib/tomcat7/webapps/solr/WEB-INF/lib/
-
-RUN chown -R tomcat7:tomcat7 /var/lib/tomcat7/webapps/solr \
     && mkdir -p /var/lib/tomcat7/webapps/solr/WEB-INF/classes \
     && chown -R tomcat7:tomcat7 /var/lib/tomcat7/webapps/solr/WEB-INF \
     && chmod -R 755 /var/lib/tomcat7/webapps/solr/WEB-INF/classes \
-    && /bin/chown -R tomcat7:tomcat7 /usr/share/tomcat7/lib/. \
-    && sudo -s -u tomcat7 /usr/share/tomcat7/bin/startup.sh \
-    && sleep 70 \
-    && sudo -s -u tomcat7 /usr/share/tomcat7/bin/shutdown.sh \
-    && sleep 70
-
+    && /bin/chown -R tomcat7:tomcat7 /usr/share/tomcat7/lib/.
 
 COPY solr/log4j.properties /var/lib/tomcat7/webapps/solr/WEB-INF/classes/log4j.properties
-COPY solr/slf4j-jdk14-1.6.6.jar /usr/share/tomcat7/lib/slf4j-jdk14-1.6.6.jar
-COPY solr/log4j-over-slf4j-1.6.6.jar /usr/share/tomcat7/lib/log4j-over-slf4j-1.6.6.jar
 COPY solr/solrconfig.xml /usr/local/solr/collection1/conf/solrconfig.xml
 COPY solr/schema.xml /usr/local/solr/collection1/conf/schema.xml
 COPY solr/stopwords.txt /usr/local/solr/collection1/conf/stopwords.txt
