@@ -1,7 +1,0 @@
-name = Islandora Populator
-description = "Mini framework to allow XML to be populated in ingest steps."
-package = Islandora
-dependencies[] = islandora
-version = 7.x-dev
-core = 7.x
-configure = admin/islandora/populator

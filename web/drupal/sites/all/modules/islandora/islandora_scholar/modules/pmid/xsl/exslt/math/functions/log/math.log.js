@@ -1,1 +1,0 @@
-function log(arg){ return Math.log(arg);}

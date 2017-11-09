@@ -1,1 +1,0 @@
-Everything in this folder is @deprecated.

@@ -1,9 +1,0 @@
-.idea
-.settings
-.project
-node_modules
-*.iml
-bin-debug
-bin-release
-built
-reports

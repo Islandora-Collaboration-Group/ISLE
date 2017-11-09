@@ -1,7 +1,0 @@
-name = Islandora compound object
-description = An object type and related tools for compound objects.
-dependencies[] = islandora
-package = Islandora Solution Packs
-configure = admin/islandora/solution_pack_config/compound_object
-core = 7.x
-version = 7.x-dev

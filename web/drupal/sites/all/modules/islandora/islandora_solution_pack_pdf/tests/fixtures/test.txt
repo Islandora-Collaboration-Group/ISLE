@@ -1,5 +1,0 @@
-This is a placeholder text file containing the following unique words:
-
-Misthallery, Gressenheller, Folsense, Akbadain
-
-These words will be searched for by the test to ensure proper text datastream creation.

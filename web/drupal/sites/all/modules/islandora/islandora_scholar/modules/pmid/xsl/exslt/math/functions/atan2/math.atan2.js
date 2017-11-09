@@ -1,1 +1,0 @@
-function atan2(arg1, arg2){ return Math.atan2(arg1, arg2);}
