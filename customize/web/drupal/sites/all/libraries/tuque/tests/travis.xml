@@ -1,9 +1,0 @@
-<phpunit>
-  <php>
-    <const name="FEDORAURL" value="http://localhost:8080/fedora"/>
-    <const name="FEDORAUSER" value="fedoraAdmin"/>
-    <const name="FEDORAPASS" value="fedoraAdmin"/>
-    <const name="TEST_PNG_URL" value="http://islandora.ca/testfiles/tuque/test.png"/>
-    <const name="TEST_XML_URL" value="http://islandora.ca/testfiles/tuque/woo.xml"/>
-  </php>
-</phpunit>

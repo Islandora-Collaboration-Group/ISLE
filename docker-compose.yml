@@ -22,7 +22,7 @@ services:
     image: isle-fedora:latest
     ports:
       - "8080:8080"
-      - "8777:80"
+      #- "8777:80"
     tty: true
     depends_on:
       - db
@@ -71,7 +71,7 @@ services:
     build: ./web
     image: isle-web:latest
     ports:
-      - "8888:80"
+      - "80:80"
     tty: true
     depends_on:
       - db

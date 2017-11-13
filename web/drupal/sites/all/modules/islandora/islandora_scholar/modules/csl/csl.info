@@ -1,9 +1,0 @@
-name = CSL
-description = Allow for the storage/retrieval/validation of CSL 1.0.1 styles.
-package = Islandora Tools
-dependencies[] = islandora
-dependencies[] = islandora_scholar
-files[] = includes/csl.inc
-configure = admin/islandora/tools/csl
-version = 7.x-dev
-core = 7.x

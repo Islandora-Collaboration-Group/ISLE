@@ -1,9 +1,0 @@
-name = Islandora XACML Editor
-dependencies[] = islandora
-dependencies[] = islandora_xacml_api
-description = Visually edit XACML policies for objects.
-configure = admin/islandora/tools/xacml/editor
-package = Islandora Tools
-version = 7.x-dev
-core = 7.x
-files[] = tests/hooked_access.test

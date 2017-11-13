@@ -1,1 +1,0 @@
-function abs(arg){ return Math.abs(arg);}

@@ -1,1 +1,0 @@
-function power(base, power){ return Math.pow(base, power);}

@@ -1,9 +1,0 @@
-name = Compound Object Zip File Importer
-description = Importer plugin for creating compound objects from a ZIP file, with selectable content models.
-package = Islandora
-dependencies[] = zip_importer
-dependencies[] = islandora_compound_object
-dependencies[] = islandora_basic_collection
-version = 7.x-dev
-files[] = includes/importer.inc
-core = 7.x

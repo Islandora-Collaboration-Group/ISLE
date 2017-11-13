@@ -1,6 +1,0 @@
-name = Islandora video.js
-description = "A plugin allowing video.js to play Islandora content. Requires the video.js library."
-dependencies[] = libraries
-core = 7.x
-version = 7.x-dev
-package = Islandora Viewers

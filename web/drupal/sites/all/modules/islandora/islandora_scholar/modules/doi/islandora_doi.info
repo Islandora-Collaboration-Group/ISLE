@@ -1,7 +1,0 @@
-name = Islandora DOI
-description = Support code for Digital Object Identifiers, to create citation objects.
-package = Islandora Solution Packs
-dependencies[] = islandora
-dependencies[] = islandora_scholar
-version = 7.x-dev
-core = 7.x
