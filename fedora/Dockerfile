@@ -176,10 +176,11 @@ RUN chown tomcat7:tomcat7 /var/lib/tomcat7/conf/tomcat-users.xml \
 # Fedora Installation
 
 COPY fedora/install.properties /usr/local/install.properties
-COPY fedora/fcrepo-installer-3.8.1.jar /usr/local/fcrepo-installer-3.8.1.jar
 
 
-RUN /usr/bin/java -jar /usr/local/fcrepo-installer-3.8.1.jar /usr/local/install.properties \
+RUN cd /usr/local/ \
+    && wget "https://github.com/fcrepo3/fcrepo/releases/download/v3.8.1/fcrepo-installer-3.8.1.jar" \
+    && /usr/bin/java -jar /usr/local/fcrepo-installer-3.8.1.jar /usr/local/install.properties \
     && chown -R tomcat7:tomcat7 /usr/local/fedora \
     && sudo -s -u tomcat7 /usr/share/tomcat7/bin/startup.sh \
     && sleep 70
@@ -220,12 +221,13 @@ RUN chown -R tomcat7:tomcat7 /usr/local/fedora/data/fedora-xacml-policies/reposi
 # Drupalfilter
 #
 
-COPY drupalfilter/fcrepo-drupalauthfilter-3.8.1.jar /var/lib/tomcat7/webapps/fedora/WEB-INF/lib/fcrepo-drupalauthfilter-3.8.1.jar
 COPY drupalfilter/filter-drupal.xml /usr/local/fedora/server/config/filter-drupal.xml
 COPY drupalfilter/jaas.conf /usr/local/fedora/server/config/jaas.conf
 
 
-RUN chown -R tomcat7:tomcat7 var/lib/tomcat7/webapps/fedora/WEB-INF/lib \
+RUN cd /var/lib/tomcat7/webapps/fedora/WEB-INF/lib/  \
+    && wget "https://github.com/Islandora/islandora_drupal_filter/releases/download/v7.1.9/fcrepo-drupalauthfilter-3.8.1.jar" \
+    && chown -R tomcat7:tomcat7 var/lib/tomcat7/webapps/fedora/WEB-INF/lib \
     && /bin/chown -R tomcat7:tomcat7 /usr/local/fedora/server/config
 
 
@@ -276,14 +278,18 @@ COPY djatoka/log4j.properties var/lib/tomcat7/webapps/adore-djatoka/WEB-INF/clas
 # Gsearch
 #
 
-COPY gsearch/fedoragsearch-2.8.1.zip /tmp/fedoragsearch-2.8.1.zip
-
-RUN  /usr/bin/unzip -o /tmp/fedoragsearch-2.8.1.zip -d /tmp \
+RUN git clone https://github.com/discoverygarden/gsearch.git /tmp/gsearch \
+    && cd gsearch/FedoraGenericSearch \
+    && ant release \
+    && /usr/bin/unzip -o /tmp/gsearch/FgsBuild/release/fedoragsearch-2.8.1.zip -d /tmp \
     && /bin/cp -v /tmp/fedoragsearch-2.8.1/fedoragsearch.war /var/lib/tomcat7/webapps/ \
     && chown -R tomcat7:tomcat7 /var/lib/tomcat7/webapps \
     && chmod 0644 /var/lib/tomcat7/webapps/fedoragsearch.war \
     && /usr/bin/unzip -o /var/lib/tomcat7/webapps/fedoragsearch.war -d /var/lib/tomcat7/webapps/fedoragsearch/ \
-    && chown -R tomcat7:tomcat7 /var/lib/tomcat7/webapps
+    && chown -R tomcat7:tomcat7 /var/lib/tomcat7/ \
+    && rm -rf /tmp/gsearch \
+    && rm -rf /tmp/fedoragsearch-2.8.1
+
 
 COPY gsearch/fgsconfig-basic-for-islandora.properties /var/lib/tomcat7/webapps/fedoragsearch/FgsConfig/fgsconfig-basic-for-islandora.properties
 COPY gsearch/fgsconfig-basic.xml /var/lib/tomcat7/webapps/fedoragsearch/FgsConfig/fgsconfig-basic.xml
@@ -314,6 +320,8 @@ RUN chown -R tomcat7:tomcat7 /var/lib/tomcat7/webapps/fedoragsearch/ \
     && chown -R tomcat7:tomcat7 /var/lib/tomcat7/webapps/fedoragsearch \
     && chown tomcat7:tomcat7 /var/lib/tomcat7/webapps/fedoragsearch.war \
     && chown -R tomcat7:tomcat7 /var/lib/tomcat7/ \
+    && rm -rf /tmp/dgi_gsearch_extensions \
+    && rm -rf /tmp/islandora_transforms \
     && sudo -s -u tomcat7 /usr/share/tomcat7/bin/startup.sh \
     && sleep 70
 
