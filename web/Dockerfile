@@ -189,6 +189,7 @@ RUN cd /etc/ \
     libtiff-dev \
     imagemagick \
     php5-imagick \
+    poppler-utils \
     bibutils \
     libimage-exiftool-perl \
     xpdf \
