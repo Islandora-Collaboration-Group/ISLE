@@ -22,28 +22,28 @@ services:
     image: isle-fedora:latest
     ports:
       - "8080:8080"
-      #- "8777:80"
+      - "8777:80"
     tty: true
     depends_on:
       - db
     volumes:
-    - ./customize/fedora/tomcat/server.xml:/var/lib/tomcat7/conf/server.xml
-    - ./customize/fedora/tomcat/web.xml:/var/lib/tomcat7/conf/web.xml
-    - ./customize/fedora/tomcat/tomcat-users.xml:/var/lib/tomcat7/conf/tomcat-users.xml
-    - ./customize/fedora/tomcat/logging.properties:/usr/share/tomcat7/conf/logging.properties
+    - ./customize/fedora/tomcat/server.xml:/usr/local/tomcat/conf/server.xml
+    - ./customize/fedora/tomcat/web.xml:/usr/local/tomcat/conf/web.xml
+    - ./customize/fedora/tomcat/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
+    - ./customize/fedora/tomcat/logging.properties:/usr/local/tomcat/conf/logging.properties
     - ./customize/fedora/fedora/repository-policies/default:/usr/local/fedora/data/fedora-xacml-policies/repository-policies/default
     - ./customize/fedora/fedora/repository-policies/islandora:/usr/local/fedora/data/fedora-xacml-policies/repository-policies/islandora
     - ./customize/fedora/fedora/fedora-users.xml:/usr/local/fedora/server/config/fedora-users.xml
     - ./customize/fedora/fedora/logback.xml:/usr/local/fedora/server/config/logback.xml
     - ./customize/fedora/drupalfilter/filter-drupal.xml:/usr/local/fedora/server/config/filter-drupal.xml
-    - ./customize/fedora/adore-djatoka/index.html:/var/lib/tomcat7/webapps/adore-djatoka/index.html
-    - ./customize/fedora/adore-djatoka/log4j.properties:/var/lib/tomcat7/webapps/adore-djatoka/WEB-INF/classes/log4j.properties
+    - ./customize/fedora/adore-djatoka/index.html:/usr/local/tomcat/webapps/adore-djatoka/index.html
+    - ./customize/fedora/adore-djatoka/log4j.properties:/usr/local/tomcat/webapps/adore-djatoka/WEB-INF/classes/log4j.properties
     - ./customize/fedora/apache/site.conf:/etc/apache2/sites-available/site.conf
-    - ./customize/fedora/gsearch/index.properties:/var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/index.properties
+    - ./customize/fedora/gsearch/index.properties:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/index.properties
     - ./data/fedora/data:/usr/local/fedora/data
     - ./data/fedora/log/fedora:/usr/local/fedora/server/logs
     - ./data/fedora/log/apache:/var/log/apache2
-    - ./data/fedora/log/tomcat:/var/log/tomcat7
+    - ./data/fedora/log/tomcat:/usr/local/tomcat/logs
     container_name: isle-fedora
 
   solr:
@@ -54,15 +54,15 @@ services:
       - "8993:8993"
     tty: true
     volumes:
-    - ./customize/solr/tomcat/server.xml:/var/lib/tomcat7/conf/server.xml
-    - ./customize/solr/tomcat/web.xml:/var/lib/tomcat7/conf/web.xml
-    - ./customize/solr/tomcat/tomcat-users.xml:/var/lib/tomcat7/conf/tomcat-users.xml
-    - ./customize/solr/tomcat/logging.properties:/usr/share/tomcat7/conf/logging.properties
-    - ./data/solr/log/:/var/log/tomcat7
-    - ./customize/solr/solr/solr.xml:/var/lib/tomcat7/conf/Catalina/localhost/solr.xml
+    - ./customize/solr/tomcat/server.xml:/usr/local/tomcat/conf/server.xml
+    - ./customize/solr/tomcat/web.xml:/usr/local/tomcat/conf/web.xml
+    - ./customize/solr/tomcat/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
+    - ./customize/solr/tomcat/logging.properties:/usr/local/tomcat/conf/logging.properties
+    - ./data/solr/logs:/usr/local/tomcat/logs
+    - ./customize/solr/solr/solr.xml:/usr/local/tomcat/conf/Catalina/localhost/solr.xml
     - ./customize/solr/solr/solrconfig.xml:/usr/local/solr/collection1/conf/solrconfig.xml
     - ./customize/solr/solr/schema.xml:/usr/local/solr/collection1/conf/schema.xml
-    - ./customize/solr/solr/log4j.properties:/var/lib/tomcat7/webapps/solr/WEB-INF/classes/log4j.properties
+    - ./customize/solr/solr/log4j.properties:/usr/local/tomcat/webapps/solr/WEB-INF/classes/log4j.properties
     - ./customize/solr/solr/stopwords.txt:/usr/local/solr/collection1/conf/stopwords.txt
     - ./data/solr:/usr/local/solr/collection1/data
     container_name: isle-solr
@@ -78,7 +78,8 @@ services:
       - fedora
     volumes:
       - ./customize/web/apache/site.conf:/etc/apache2/sites-available/site.conf
-      - ./customize/web/drupal:/var/www/html
+      - ./customize/web/site:/home/islandora/site
       - ./customize/web/php/php.ini:/etc/php5/apache2/php.ini
+      - ./data/web/drupal:/var/www/html
       - ./data/web/log/apache:/var/log/apache2
     container_name: isle-web
