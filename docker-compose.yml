@@ -78,6 +78,7 @@ services:
       - fedora
     volumes:
       - ./customize/web/apache/site.conf:/etc/apache2/sites-available/site.conf
+      - ./customize/web/apache/settings.php:/var/www/html/sites/default/settings.php
       - ./customize/web/site:/home/islandora/site
       - ./customize/web/php/php.ini:/etc/php5/apache2/php.ini
       - ./data/web/drupal:/var/www/html
