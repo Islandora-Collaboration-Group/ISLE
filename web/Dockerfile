@@ -235,6 +235,10 @@ COPY apache/site.conf /etc/apache2/sites-available/site.conf
 COPY apache/servername.conf /etc/apache2/conf-available/servername.conf
 COPY site/fix-permissions.sh /tmp/fix-permissions.sh
 COPY site/drush.sh /tmp/drush.sh
+COPY site/drupal.drush.make /tmp/drupal.drush.make
+COPY site/islandora.drush.make /tmp/islandora.drush.make
+COPY site/install_site.sh /tmp/install_site.sh
+COPY site/make_site.sh /tmp/make_site.sh
 COPY site/settings.php /var/www/html/sites/default/settings.php
 
 
