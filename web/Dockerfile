@@ -77,7 +77,7 @@ RUN add-apt-repository -y "deb http://us.archive.ubuntu.com/ubuntu trusty main m
     libfdk-aac1 \
     fdkaac-encoder \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/ \
+    && rm -rf /var/lib/apt/lists/* \
     && cd /tmp \
     && wget http://ffmpeg.org/releases/ffmpeg-3.2.2.tar.bz2 \
     && tar xfj ffmpeg-3.2.2.tar.bz2 \
@@ -219,7 +219,7 @@ RUN cd /etc/ \
     leptonica-progs \
     libleptonica-dev \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/ \
+    && rm -rf /var/lib/apt/lists/* \
     && cd /opt \
     && wget "http://downloads.sourceforge.net/project/djatoka/djatoka/1.1/adore-djatoka-1.1.tar.gz" \
     && tar -xzf adore-djatoka-1.1.tar.gz \
