@@ -35,6 +35,7 @@ RUN add-apt-repository -y "deb http://us.archive.ubuntu.com/ubuntu trusty main m
     bzip2 \
     perl \
     man \
+    nano \
     vim \
     apt-utils \
     default-jdk \
