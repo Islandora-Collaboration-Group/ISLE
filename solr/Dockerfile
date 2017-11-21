@@ -38,7 +38,7 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
     && cp -rv /tmp/solr-4.10.4/example/lib/ext/. /usr/local/tomcat/webapps/solr/WEB-INF/lib/ \
     && cp -v /tmp/solr-4.10.4/contrib/analysis-extras/lib/icu4j-53.1.jar /usr/local/tomcat/webapps/solr/WEB-INF/lib/ \
     && cp -v /tmp/solr-4.10.4/contrib/analysis-extras/lucene-libs/lucene-analyzers-icu-4.10.4.jar /usr/local/tomcat/webapps/solr/WEB-INF/lib/ \
-    && rm -rf /tmp/
+    && rm -rf /tmp/solr-4.10.4
 
 COPY solr/solr.xml /usr/local/tomcat/conf/Catalina/localhost/solr.xml
 COPY solr/log4j.properties /usr/local/tomcat/webapps/solr/WEB-INF/classes/log4j.properties
