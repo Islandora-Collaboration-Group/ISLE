@@ -36,7 +36,7 @@ RUN add-apt-repository -y "deb http://us.archive.ubuntu.com/ubuntu trusty main m
     perl \
     man \
     nano \
-    emacs24-nox \ 
+    emacs24-nox \
     vim \
     apt-utils \
     default-jdk \
@@ -287,7 +287,7 @@ RUN . /etc/profile.d/composer_env.sh \
     && chmod 775 fits-env.sh \
     && chmod 775 fits-ngserver.sh \
     && chmod 775 fits.sh \
-    && rm /home/islandora/fits-1.0.4.zip \
+    && rm /home/islandora/fits-1.2.0.zip \
     && chmod 0644 /etc/cron.d/tmpreaper-cron \
     && touch /var/log/cron.log \
     && pecl install uploadprogress \
