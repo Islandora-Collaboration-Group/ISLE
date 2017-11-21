@@ -13,9 +13,6 @@ echo "Using Islandora makefile for Islandora Modules for sample Drupal site with
 echo "Copy /tmp/drupal_install contents to /var/www/html"
 cp -rv /tmp/drupal_install/. /var/www/html/
 
-echo "Copy settings.php file for sample Site to work"
-cp -v /tmp/settings.php /var/www/html/sites/default/
-
 echo "Fix Openseadragon & Change directory to /var/www/html/sites/all/libraries"
 cd /var/www/html/sites/all/libraries || exit
 
