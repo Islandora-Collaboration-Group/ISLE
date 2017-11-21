@@ -277,9 +277,9 @@ RUN . /etc/profile.d/composer_env.sh \
     && chown -h islandora:www-data /usr/local/lib/libkdu_v60R.so \
     && /sbin/ldconfig \
     && cd /home/islandora \
-    && wget http://projects.iq.harvard.edu/files/fits/files/fits-1.0.4.zip \
-    && unzip fits-1.0.4.zip \
-    && mv /home/islandora/fits-1.0.4 /usr/local/fits \
+    && wget https://projects.iq.harvard.edu/files/fits/files/fits-1.2.0.zip \
+    && unzip fits-1.2.0.zip \
+    && mv /home/islandora/fits-1.2.0 /usr/local/fits \
     && chown -R islandora:www-data /usr/local/fits \
     && chmod -R g+rwx /usr/local/fits \
     && cd /usr/local/fits/ \
