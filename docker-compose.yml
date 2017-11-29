@@ -1,8 +1,8 @@
 version: '2'
 services:
-  db:
+  mysql:
     build: ./mysql
-    image: isle-db:latest
+    image: islandoracollabgroup/isle-mysql:latest
     environment:
       - MYSQL_ROOT_PASSWORD=islemysqlrootpw2017
       - MYSQL_DATABASE=fedora3
@@ -15,17 +15,17 @@ services:
       - ./customize/mysql/my.cnf:/etc/alternatives/my.cnf
       - ./data/mysql:/var/lib/mysql
       - ./data/mysql/log:/var/log/mysql
-    container_name: isle-db
+    container_name: isle-mysql
 
   fedora:
     build: ./fedora
-    image: isle-fedora:latest
+    image: islandoracollabgroup/isle-fedora:latest
     ports:
       - "8080:8080"
       - "8777:80"
     tty: true
     depends_on:
-      - db
+      - mysql
     volumes:
     - ./customize/fedora/tomcat/server.xml:/usr/local/tomcat/conf/server.xml
     - ./customize/fedora/tomcat/web.xml:/usr/local/tomcat/conf/web.xml
@@ -48,7 +48,7 @@ services:
 
   solr:
     build: ./solr
-    image: isle-solr:latest
+    image: islandoracollabgroup/isle-solr:latest
     ports:
       - "8091:8080"
       - "8993:8993"
@@ -67,21 +67,21 @@ services:
     - ./data/solr:/usr/local/solr/collection1/data
     container_name: isle-solr
 
-  web:
-    build: ./web
-    image: isle-web:latest
+  apache:
+    build: ./apache
+    image: islandoracollabgroup/isle-apache:latest
     ports:
       - "80:80"
     tty: true
     depends_on:
-      - db
+      - mysql
       - fedora
     volumes:
-      - ./customize/web/apache/site.conf:/etc/apache2/sites-available/site.conf
-      - ./customize/web/site/linux_settings.php:/var/www/html/sites/default/settings.php
-      #- ./customize/web/site/macosx_settings.php:/var/www/html/sites/default/settings.php
-      - ./customize/web/site:/home/islandora/site
-      - ./customize/web/php/php.ini:/etc/php5/apache2/php.ini
-      - ./data/web/drupal:/var/www/html
-      - ./data/web/log/apache:/var/log/apache2
-    container_name: isle-web
+      - ./customize/apache/apache/site.conf:/etc/apache2/sites-available/site.conf
+      #- ./customize/apache/site/linux_settings.php:/var/www/html/sites/default/settings.php
+      - ./customize/apache/site/macosx_settings.php:/var/www/html/sites/default/settings.php
+      - ./customize/apache/site:/home/islandora/site
+      - ./customize/apache/php/php.ini:/etc/php5/apache2/php.ini
+      - ./data/apache/drupal:/var/www/html
+      - ./data/apache/log/apache:/var/log/apache2
+    container_name: isle-apache

@@ -1,6 +1,6 @@
 FROM ubuntu:14.04 AS ffmpeg_base
 MAINTAINER "Gavin Morris <gavin@born-digital.com>"
-### ISLE MVP 11/2017 Web
+### ISLE MVP 11/2017 Apache
 
 ###
 # https://github.com/phusion/baseimage-docker/issues/58
@@ -323,5 +323,5 @@ EXPOSE 80
 
 
 ###
-# Run the web server
+# Run the Apache web server
 ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
