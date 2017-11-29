@@ -35,9 +35,6 @@ RUN add-apt-repository -y "deb http://us.archive.ubuntu.com/ubuntu trusty main m
     bzip2 \
     perl \
     man \
-    nano \
-    emacs24-nox \
-    vim \
     apt-utils \
     default-jdk \
     openssl \
@@ -148,6 +145,10 @@ RUN cd /etc/ \
     && apt-mark hold ghostscript \
     && apt-get install --no-install-recommends -y \
     curl \
+    nano \
+    emacs24-nox \
+    vim \
+    rsync \
     dnsutils \
     oracle-java8-installer \
     oracle-java8-set-default \
