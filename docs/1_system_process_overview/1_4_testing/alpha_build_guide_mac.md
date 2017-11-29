@@ -8,11 +8,11 @@
      * This will trigger the `Install Command Line Developer Tools` prompt, click on the blue `Install` button for the license agreement; then click the white `Agree` button.
      * The package will take 1-2 minutes to download. Click the `Done` button once finished.
 
-* This alpha build uses `islandora-docker.com` as the test domain along with the Docker Compose service names e.g. `db, fedora, web` etc.
+* This alpha build uses `islandora-docker.com` as the test domain along with the Docker Compose service names e.g. `mysql, fedora, apache` etc.
      * To ensure this domain resolves properly, one will need to edit their local `/etc/hosts` file.
      * Open up a terminal and enter: `sudo vi /etc/hosts`
      * Add the following:
-      >127.0.0.1       localhost islandora-docker.com fedora web fedora.islandora-docker.com web.islandora-docker.com
+      >127.0.0.1       localhost islandora-docker.com fedora apache fedora.islandora-docker.com apache.islandora-docker.com
 
 * Clone the ISLE repository
      * Open a terminal and enter: `git clone https://github.com/Islandora-Collaboration-Group/ISLE`
@@ -23,48 +23,48 @@
 
 ### Build process
 
-**Please note:** *The first container (MySQL, isle-db, db) has to be built and running PRIOR to all others (including Fedora & web) due to a race condition (fedora starts prior to mysql being ready to accept connections). This improper state will be fixed at a later point in the project.*  
+**Please note:** *The first container (MySQL, isle-mysql, mysql) has to be built and running PRIOR to all others (including fedora & apache) due to a race condition (fedora starts prior to mysql being ready to accept connections). This improper state will be fixed at a later point in the project.*  
 
 * **DO NOT RUN** `docker-compose up -d` during the initial build process as this will build and run all containers at the same time which will trigger the above mentioned race condition and subsequent chain of service failures.
 
-#### 1. MySQL container (10-15 mins)
+#### 1. MySQL image build & container launch (10-15 mins)
 
-* `docker-compose build db`  
-* `docker-compose up -d db`  
+* `docker-compose build mysql`  
+* `docker-compose up -d mysql`  
 
-#### 2. Fedora container (30 - 45 mins)  
+#### 2. Fedora image build & container launch (30 - 45 mins)  
 
 * `docker-compose build fedora`  
 * `docker-compose up -d fedora`  
 
-#### 3. Solr container (20 - 40 mins)  
+#### 3. Solr image build & container launch (20 - 40 mins)  
 
 * `docker-compose build solr`  
 * `docker-compose up -d solr`  
 
-#### 4. Web container (45 - 60 mins)
+#### 4. Apache image build & container launch (45 - 60 mins)
 
-* `docker-compose build web`
+* `docker-compose build apache`
 
 * Edit the `docker-compose.yml` file to ensure the following lines look like this:   
-    > # - ./customize/web/site/linux_settings.php:/var/www/html/sites/default/settings.php
-      - ./customize/web/site/macosx_settings.php:/var/www/html/sites/default/settings.php  
+    > # - ./customize/apache/site/linux_settings.php:/var/www/html/sites/default/settings.php
+      - ./customize/apache/site/macosx_settings.php:/var/www/html/sites/default/settings.php  
 
-* `docker-compose up -d web`  
+* `docker-compose up -d apache`  
     * **Please note:** *This container on occasion has failed to start initially for as of yet unlogged and unknown reasons.*
         * One can check if the container is running: `docker ps` (shows only running containers)  
         * One can check if the container stopped running or "exited": `docker ps -a` (shows all containers running or not)  
 
-#### 5. Install script on Web container (45 - 60 mins)
+#### 5. Install script on Apache container (45 - 60 mins)
 
-* Run the following shell scripts manually on the web container  
-      * `docker exec -it isle-web bash`
+* Run the following shell scripts manually on the apache container  
+      * `docker exec -it isle-apache bash`
       * `cd /tmp`
       * `chmod 777 *.sh`
       * `./make_site.sh`
       * `./install_site.sh`
 
-* Once finished `cntrl-D` or type `exit` to get out of the web container & QC the resulting setup
+* Once finished `cntrl-D` or type `exit` to get out of the apache container & QC the resulting setup
 
 **Please note:** The cronjob setting in the `install_site.sh` script is commented out as this will need to be flowed into the Docker build process prior. Issue with default Docker root user vs using islandora user. Drupal cron can run properly.
 
@@ -78,7 +78,7 @@ ___
 #### 1. MySQL container
 | Compose Service Name | Container Name  | Software      | Ports         |
 | :-------------:      | :-------------: | ------------- | ------------- |      
-| db                   | isle-db         | MySQL 5.6     | 3306          |
+| mysql                   | isle-mysql         | MySQL 5.6     | 3306          |
 
 
 | Account        | Password              | Database         | Perms                         |
@@ -143,11 +143,11 @@ ___
 
 ___
 
-#### 4. Web container
+#### 4. Apache container
 
 | Compose Service Name | Container Name  | Software      | Ports                                      |
 | :-------------:      | :-------------: | ------------- | -------------                              |      
-| web                  | isle-web        | see below     | 80 (on container) mapped to 8888 (on host) |
+| apache                  | isle-apache        | see below     | 80                                   |
 
 
 | Software      | Version       |
@@ -161,4 +161,4 @@ ___
 
 | Account                | Password                      | Service               | URL                                          |
 | -------------          | -------------                 | -------------         | -------------                                |
-| islandora_docker_admin | islandoradockeradminpw2017    | Drupal site admin     | http://islandora-docker.com:8888             |
+| islandora_docker_admin | islandoradockeradminpw2017    | Drupal site admin     | http://islandora-docker.com                  |
