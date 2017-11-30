@@ -115,6 +115,9 @@ drush openseadragon-plugin
 drush videojs-plugin
 drush pdfjs-plugin
 drush iabookreader-plugin
+# Due to Islandora Paged Content Module install hook, the islandora_paged_content_gs variable is overwritten by the install / enabling of the module back to /usr/bin/gs
+# Rerunning drush vset to ensure that Ghostscript works for the PDF DERIVATIVE SETTINGS
+/usr/local/bin/drush -u 1 -y vset islandora_paged_content_gs "/usr/local/bin/gs"
 echo "Enable module script finished!"
 
 ## Cron job setup
