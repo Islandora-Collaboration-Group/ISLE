@@ -130,15 +130,16 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 # Update apt
 RUN apt-get update \
     && apt-get install --no-install-recommends -y software-properties-common \
-    python-software-properties
+    python-software-properties \
+    language-pack-en-base
 
 RUN cd /etc/ \
     && sudo ldconfig \
     && useradd -ms /bin/bash islandora \
     && add-apt-repository -y "deb http://us.archive.ubuntu.com/ubuntu trusty main multiverse" \
     && add-apt-repository -y "deb http://us.archive.ubuntu.com/ubuntu trusty-updates main multiverse" \
-    && add-apt-repository -y ppa:ondrej/php \
-    && add-apt-repository -y ppa:ondrej/apache2 \
+    && LC_ALL=en_US.UTF-8 add-apt-repository -y ppa:ondrej/php \
+    && LC_ALL=en_US.UTF-8 add-apt-repository -y ppa:ondrej/apache2 \
     && echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee -a /etc/apt/sources.list \
     && echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee -a /etc/apt/sources.list \
     && echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections \
