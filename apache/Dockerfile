@@ -193,6 +193,7 @@ RUN cd /etc/ \
     php5.6-mysql \
     php5.6-soap \
     php5.6-xsl \
+    php5.6-zip \
     libpng-dev \
     libjpeg-dev \
     libtiff-dev \
