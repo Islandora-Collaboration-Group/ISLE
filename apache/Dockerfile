@@ -137,10 +137,8 @@ RUN cd /etc/ \
     && useradd -ms /bin/bash islandora \
     && add-apt-repository -y "deb http://us.archive.ubuntu.com/ubuntu trusty main multiverse" \
     && add-apt-repository -y "deb http://us.archive.ubuntu.com/ubuntu trusty-updates main multiverse" \
-    && add-apt-repository -y "deb http://ppa.launchpad.net/ondrej/php/ubuntu trusty main" \
-    && add-apt-repository -y "deb-src http://ppa.launchpad.net/ondrej/php/ubuntu trusty main" \
-    && add-apt-repository -y "deb http://ppa.launchpad.net/ondrej/apache2/ubuntu trusty main" \
-    && add-apt-repository -y "deb-src http://ppa.launchpad.net/ondrej/apache2/ubuntu trusty main" \
+    && add-apt-repository -y ppa:ondrej/php \
+    && add-apt-repository -y ppa:ondrej/apache2 \
     && echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee -a /etc/apt/sources.list \
     && echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee -a /etc/apt/sources.list \
     && echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections \
