@@ -137,6 +137,10 @@ RUN cd /etc/ \
     && useradd -ms /bin/bash islandora \
     && add-apt-repository -y "deb http://us.archive.ubuntu.com/ubuntu trusty main multiverse" \
     && add-apt-repository -y "deb http://us.archive.ubuntu.com/ubuntu trusty-updates main multiverse" \
+    && add-apt-repository -y "deb http://ppa.launchpad.net/ondrej/php/ubuntu trusty main" \
+    && add-apt-repository -y "deb-src http://ppa.launchpad.net/ondrej/php/ubuntu trusty main" \
+    && add-apt-repository -y "deb http://ppa.launchpad.net/ondrej/apache2/ubuntu trusty main" \
+    && add-apt-repository -y "deb-src http://ppa.launchpad.net/ondrej/apache2/ubuntu trusty main" \
     && echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee -a /etc/apt/sources.list \
     && echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee -a /etc/apt/sources.list \
     && echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections \
@@ -171,27 +175,30 @@ RUN cd /etc/ \
     openssl \
     libapache2-mod-proxy-html \
     libxml2-dev \
-    php5 \
-    libapache2-mod-php5 \
+    php5.6  \
+    libapache2-mod-php5.6 \
     libcurl3-openssl-dev \
-    php5-cli \
-    php5-json \
-    php5-common \
-    php5-readline \
+    php5.6-cli \
+    php5.6-json \
+    php5.6-common \
+    php5.6-readline \
     php-pear \
-    php5-curl \
-    php5-dev \
-    php5-gd \
-    php5-ldap \
-    php5-mcrypt \
-    php5-mysql \
-    php5-xsl \
-    php-soap \
+    php5.6-curl \
+    php5.6-mbstring \
+    php5.6-xmlrpc \
+    php5.6-dev \
+    php5.6-gd \
+    php5.6-ldap \
+    php5.6-xml \
+    php5.6-mcrypt \
+    php5.6-mysql \
+    php5.6-soap \
+    php5.6-xsl \
     libpng-dev \
     libjpeg-dev \
     libtiff-dev \
     imagemagick \
-    php5-imagick \
+    php5.6-imagick \
     poppler-utils \
     bibutils \
     libimage-exiftool-perl \
@@ -292,12 +299,12 @@ RUN . /etc/profile.d/composer_env.sh \
     && chmod 0644 /etc/cron.d/tmpreaper-cron \
     && touch /var/log/cron.log \
     && pecl install uploadprogress \
-    && echo 'extension=uploadprogress.so' >> /etc/php5/apache2/php.ini \
-    && sed -i 's/memory_limit = .*/memory_limit = '256M'/' /etc/php5/apache2/php.ini \
-    && sed -i 's/upload_max_filesize = .*/upload_max_filesize = '2000M'/' /etc/php5/apache2/php.ini \
-    && sed -i 's/post_max_size = .*/post_max_size = '2000M'/' /etc/php5/apache2/php.ini \
-    && sed -i 's/max_input_time = .*/max_input_time = '-1'/' /etc/php5/apache2/php.ini \
-    && sed -i 's/max_execution_time = .*/max_execution_time = '0'/' /etc/php5/apache2/php.ini \
+    && echo 'extension=uploadprogress.so' >> /etc/php/5.6/apache2/php.ini \
+    && sed -i 's/memory_limit = .*/memory_limit = '256M'/' /etc/php/5.6/apache2/php.ini \
+    && sed -i 's/upload_max_filesize = .*/upload_max_filesize = '2000M'/' /etc/php/5.6/apache2/php.ini \
+    && sed -i 's/post_max_size = .*/post_max_size = '2000M'/' /etc/php/5.6/apache2/php.ini \
+    && sed -i 's/max_input_time = .*/max_input_time = '-1'/' /etc/php/5.6/apache2/php.ini \
+    && sed -i 's/max_execution_time = .*/max_execution_time = '0'/' /etc/php/5.6/apache2/php.ini \
     && a2enconf servername \
     && mkdir -p /var/www/html \
     && chown islandora:www-data /var/www/html \
