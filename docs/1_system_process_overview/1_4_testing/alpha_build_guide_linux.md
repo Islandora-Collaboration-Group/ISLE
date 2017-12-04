@@ -64,6 +64,10 @@
 
 
 #### Clone ISLE repository
+* Please note in some Linux Distributions, one might need to create the `/opt` directory (optional)  
+    * One can `ls -lha /` to see if an `/opt` directory exists  
+        * If missing, `sudo mkdir /opt`  
+        * If not missing, proceed to next step.  
 * `cd opt`
 * `sudo git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
    * This process will take 1 - 3 minutes depending on internet bandwidth
@@ -132,6 +136,10 @@
 
 
 #### Clone ISLE repository
+* Please note in some Linux Distributions, one might need to create the `/opt` directory (optional)  
+    * One can `ls -lha /` to see if an `/opt` directory exists  
+        * If missing, `sudo mkdir /opt`  
+        * If not missing, proceed to next step.  
 * `cd opt`
 * `sudo git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
    * This process will take 1 - 3 minutes depending on internet bandwidth
