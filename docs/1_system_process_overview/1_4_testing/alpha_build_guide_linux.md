@@ -72,6 +72,7 @@
 * `sudo git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
    * This process will take 1 - 3 minutes depending on internet bandwidth
 * `sudo chown -Rv islandora:islandora ISLE`
+* `cd /opt/ISLE`
 
 ---
 
@@ -144,6 +145,7 @@
 * `sudo git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
    * This process will take 1 - 3 minutes depending on internet bandwidth
 * `sudo chown -Rv islandora:islandora ISLE`
+* `cd /opt/ISLE`
 
 ---
 
