@@ -15,10 +15,10 @@ We successfully exceeded our funding goal of $84,000 with pledges totaling $89,4
 - 09/2016 - [Completed] ISLE presented at ICG Hack/Doc @ Wesleyan University
 - 05/2017 - [Completed] ISLE presented at Islandoracon annual conference (Hamilton, Ontario)
 - 09/2017 - [Completed] Fundraising, green-lighted ISLE MVP, opened 3-week Public Comment Period
-- 12/2017 - Public prototype demonstration
+- 12/2017 - [Completed] Public prototype demonstration: [view 5-minute video](https://vimeo.com/245777329)
 - 12/2017 - First of 3 institutional alpha tests (Grinnell, Williams, RPI)
 - 01/2018 - First of 3 institutional community alpha tests (University of Pittsburgh, Hamilton College, Barnard)
-- 02/2018 - Stable release of ISLE (for current Islandora 7x) as open-source and available for public use
+- 02/2018 - Stable release of ISLE (for current Islandora 7x) and documentation as open-source for public use
 
 ## What is Islandora Enterprise (ISLE)?
 ISLE is a new project in development -- funded by 17 higher-ed institutions and Born-Digital -- that will address one of the most significant pain-points in Islandora: installation and maintenance. ISLE separates an institution’s customizations from core code, and moves that core code into Docker containers that are easily updated, simplifying and largely automating the process of installation and updates/maintenance of Islandora. ISLE also bundles together the best shared modules into a common, production-ready and security-hardened platform.
