@@ -28,7 +28,8 @@
 
 #### Docker setup for Ubuntu 16.04 LTS
 
-* Open a terminal, ssh to the Ubuntu server as root and install the following:  
+* Open a terminal, ssh to the Ubuntu server as root and install the following:
+     * If you are not root, `sudo -s`
      * `apt-get update`  
      * `apt-get install openssl git htop ntp`  
 
@@ -38,20 +39,26 @@
 * `apt-get update`  
 * `apt-get install -y docker-ce`  
 * Check if running `systemctl status docker`  
+     * You may need to PRESS Shift-Z twice to exit out.
 
 #### Create islandora user (as root)  
 * `adduser islandora` (with password isle2017)  
 * `visudo`  
-* Add the following `islandora    ALL=(ALL:ALL) NOPASSWD:ALL`  
+    * Opens a text editor to edit the security file that allows a user to be a “root” user
+* In the “User privilege specification” section:
+    * Under:   `root ALL=(ALL:ALL) ALL`
+    * Add the following `islandora    ALL=(ALL:ALL) NOPASSWD:ALL`  
     * Under this section `root    ALL=(ALL:ALL) ALL`  
-    * Hit `Cntrl-O` to write and save out file  
-    * Hit `Cntrl-X` to exit file  
+    * Hit `Cntrl-O` (Letter o for “out” - not Zero) to write and save out file
+    * Hit `Cntrl-X` to exit the text editing of the file  
 * Create Docker group `groupadd docker`  
 * Add islandora user to docker group `usermod -aG docker islandora`  
-* Exit out of the ssh session as the root user.
+* Exit out of the session as the root user.
+    * `exit`
+    * `su islandora`  
 
 #### Install Docker-Compose (version 1.17.1 as of 11/16/2017) as islandora-user on Ubuntu 16.04 LTS
-* Open a terminal and ssh back into the Ubuntu Host Server/VM as the `islandora` user and perform the following:  
+* `cd /home/islandora`
 * ``sudo curl -L https://github.com/docker/compose/releases/download/1.17.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose``
 * `sudo chmod +x /usr/local/bin/docker-compose`  
 
@@ -93,10 +100,13 @@
 #### Create islandora user (as root)  
 * `adduser islandora` (with password isle2017)  
 * `visudo`  
-* Add the following `islandora    ALL=(ALL:ALL) NOPASSWD:ALL`  
+     * Opens a text editor to edit the security file that allows a user to be a “root” user
+* In the “User privilege specification” section:
+     * Under:   `root ALL=(ALL:ALL) ALL`
+     * Add the following `islandora    ALL=(ALL:ALL) NOPASSWD:ALL`  
      * Under this section `root    ALL=(ALL:ALL) ALL`  
-     * Hit `Cntrl-O` to write and save out file  
-     * Hit `Cntrl-X` to exit file  
+     * Hit `Cntrl-O` (Letter o for “out” - not Zero) to write and save out file
+     * Hit `Cntrl-X` to exit the text editing of the file   
 * Create Docker group `groupadd docker`  
 * Add islandora user to docker group `usermod -aG docker islandora`  
 * Add islandora user to wheel grop `sudo usermod -aG wheel islandora`
