@@ -52,7 +52,7 @@
 
 #### Install Docker-Compose (version 1.17.1 as of 11/16/2017) as islandora-user on Ubuntu 16.04 LTS
 * Open a terminal and ssh back into the Ubuntu Host Server/VM as the `islandora` user and perform the following:  
-* `sudo curl -L https://github.com/docker/compose/releases/download/1.17.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose`  
+* ``sudo curl -L https://github.com/docker/compose/releases/download/1.17.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose``
 * `sudo chmod +x /usr/local/bin/docker-compose`  
 
 
