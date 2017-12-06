@@ -1,21 +1,23 @@
 version: '2'
+
+volumes:
+  isle-mysql:
+
 services:
   mysql:
-    build: ./mysql
-    image: islandoracollabgroup/isle-mysql:latest
+    build: ./isle-mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=islemysqlrootpw2017
-      - MYSQL_DATABASE=fedora3
-      - MYSQL_USER=fedora_admin
-      - MYSQL_PASSWORD=dockerfeddb2017
+      # - MYSQL_ROOT_PASSWORD=islemysqlrootpw2017
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes # If you need the ROOT password find it in the logs! (`docker logs ...`)
+    volumes: 
+      - ./config:/etc/mysql/conf.d
+      - isle-mysql:/var/lib/mysql
+    # restart: always
+    container_name: isle-mysql  # Docker container name.
+    hostname: my  # DNS Host part.
+    domainname: isle.islandoradocker.com  # DNS Domain part. (in this example fqdn = my.isle.islandoradocker.com)
     ports:
       - "3306:3306"
-    volumes:
-      - ./mysql/initscripts:/docker-entrypoint-initdb.d
-      - ./customize/mysql/my.cnf:/etc/alternatives/my.cnf
-      - ./data/mysql:/var/lib/mysql
-      - ./data/mysql/log:/var/log/mysql
-    container_name: isle-mysql
 
   fedora:
     build: ./fedora
