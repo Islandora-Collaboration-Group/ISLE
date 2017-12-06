@@ -157,7 +157,6 @@
 
 #### 1. MySQL image build & container launch (10-15 mins)
 
-* `docker-compose build mysql`  
 * `docker-compose up -d mysql`  
 
 #### 2. Fedora image build & container launch (20 - 30 mins)  
