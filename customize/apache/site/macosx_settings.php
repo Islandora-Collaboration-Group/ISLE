@@ -308,7 +308,7 @@ $drupal_hash_salt = 'YO9ST25G4zaVnJT7w05PEH3r39pxhQQUf0LMo6NztY9al';
  * for you.
  */
  #$base_url = 'http://127.0.0.1';  // NO trailing slash!
- $base_url = 'http://web';  // NO trailing slash!
+ $base_url = 'http://apache';  // NO trailing slash!
 
 /**
  * PHP settings:
