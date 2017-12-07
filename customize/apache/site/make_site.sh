@@ -10,6 +10,9 @@ echo "Using Drush makefile to create sample Drupal site within /tmp/drupal_insta
 echo "Using Islandora makefile for Islandora Modules for sample Drupal site within /tmp/drupal_install"
 /usr/local/bin/drush make --no-core /tmp/islandora.drush.make /tmp/drupal_install
 
+echo "Remove blank settings.php from /tmp/drupal_install"
+rm -f /tmp/drupal_install/sites/default/settings.php
+
 echo "Copy /tmp/drupal_install contents to /var/www/html"
 cp -rv /tmp/drupal_install/. /var/www/html/
 

@@ -1,5 +1,5 @@
 FROM ubuntu:14.04 AS ffmpeg_base
-MAINTAINER "Gavin Morris <gavin@born-digital.com>"
+LABEL maintainer="Gavin Morris <gavin@born-digital.com>"
 ### ISLE MVP 11/2017 Apache
 
 ###
