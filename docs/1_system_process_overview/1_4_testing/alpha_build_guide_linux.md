@@ -43,14 +43,7 @@
 
 #### Create islandora user (as root)  
 * `adduser islandora` (with password isle2017)  
-* `visudo`  
-    * Opens a text editor to edit the security file that allows a user to be a “root” user
-* In the “User privilege specification” section:
-    * Under:   `root ALL=(ALL:ALL) ALL`
-    * Add the following `islandora    ALL=(ALL:ALL) NOPASSWD:ALL`  
-    * Under this section `root    ALL=(ALL:ALL) ALL`  
-    * Hit `Cntrl-O` (Letter o for “out” - not Zero) to write and save out file
-    * Hit `Cntrl-X` to exit the text editing of the file  
+* `echo "islandora ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/islandora`
 * Create Docker group `groupadd docker`  
 * Add islandora user to docker group `usermod -aG docker islandora`  
 * Exit out of the session as the root user.
@@ -104,14 +97,7 @@
 
 #### Create islandora user (as root)  
 * `adduser islandora` (with password isle2017)  
-* `visudo`  
-     * Opens a text editor to edit the security file that allows a user to be a “root” user
-* In the “User privilege specification” section:
-     * Under:   `root ALL=(ALL:ALL) ALL`
-     * Add the following `islandora    ALL=(ALL:ALL) NOPASSWD:ALL`  
-     * Under this section `root    ALL=(ALL:ALL) ALL`  
-     * Hit `Cntrl-O` (Letter o for “out” - not Zero) to write and save out file
-     * Hit `Cntrl-X` to exit the text editing of the file   
+* `echo "islandora ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/islandora`
 * Create Docker group `groupadd docker`  
 * Add islandora user to docker group `usermod -aG docker islandora`  
 * Add islandora user to wheel grop `sudo usermod -aG wheel islandora`

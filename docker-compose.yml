@@ -38,7 +38,7 @@ services:
     - ./customize/fedora/drupalfilter/filter-drupal.xml:/usr/local/fedora/server/config/filter-drupal.xml
     - ./customize/fedora/adore-djatoka/index.html:/usr/local/tomcat/webapps/adore-djatoka/index.html
     - ./customize/fedora/adore-djatoka/log4j.properties:/usr/local/tomcat/webapps/adore-djatoka/WEB-INF/classes/log4j.properties
-    - ./customize/fedora/apache/site.conf:/etc/apache2/sites-available/site.conf
+      - ./customize/fedora/apache/site.conf:/etc/apache2/sites-available/site.conf
     - ./customize/fedora/gsearch/index.properties:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/index.properties
     - ./data/fedora/data:/usr/local/fedora/data
     - ./data/fedora/log/fedora:/usr/local/fedora/server/logs
@@ -78,8 +78,8 @@ services:
       - fedora
     volumes:
       - ./customize/apache/apache/site.conf:/etc/apache2/sites-available/site.conf
-      #- ./customize/apache/site/linux_settings.php:/var/www/html/sites/default/settings.php
-      - ./customize/apache/site/macosx_settings.php:/var/www/html/sites/default/settings.php
+      - ./customize/apache/site/linux_settings.php:/var/www/html/sites/default/settings.php
+      #- ./customize/apache/site/macosx_settings.php:/var/www/html/sites/default/settings.php
       - ./customize/apache/site:/home/islandora/site
       - ./customize/apache/php/php.ini:/etc/php5/apache2/php.ini
       - ./data/apache/drupal:/var/www/html

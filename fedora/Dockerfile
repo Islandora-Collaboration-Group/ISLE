@@ -1,5 +1,5 @@
 FROM tomcat:8.0-jre8
-MAINTAINER "Gavin Morris <gavin@born-digital.com>"
+LABEL maintainer="Gavin Morris <gavin@born-digital.com>"
 ### - ISLE MVP 11/2017 Fedora
 
 ###
