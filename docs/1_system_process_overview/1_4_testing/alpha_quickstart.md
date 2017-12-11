@@ -1,78 +1,91 @@
-### Alpha Manual Build
-Please note this an alternative method of building the Docker images and the slower of the two processes.
+### Alpha Quickstart Guide Notes
 
-Please refer to the Alpha Quickstart [Guide](alpha_quickstart.md) for the **faster** version.
+This Alpha Quickstart guide is intended to be the **fastest** method of installation i.e. downloading ISLE Docker images from Dockerhub.
 
-### Alpha Manual Build Pre-Requisites
+Previous guides used a manual "build" process which is still possible but not necessary for most endusers due to complexity and process length.
 
-* The Host Server has already been setup and is running. If one has not setup the Host server please follow one of the following links below and then return to this document please.
+Current documentation will now refer to an "install" process using Dockerhub images instead of a "build" process where the enduser manually built these images.
 
-  * Host Server setup for [**CentOS 7**](host_server_setup_centos.md)
+If one would like to manually build the images please refer to one of the following Alpha Build guides:
 
-  * Host Server setup for [**Ubuntu 16.04 LTS**](host_server_setup_ubuntu.md)
+* For [Linux Host Servers](alpha_build_guide_linux.md)
 
-  * Host Server setup for [**Mac OS**](host_server_setup_macos.md)
+* For [MacOS Host Servers](alpha_build_guide_mac.md)
+
+### Dockerhub images
+Four Dockerhub images have already been "built" and are stored in a repository thus saving the endusers hours of build time.  
+
+* isle-apache [https://hub.docker.com/r/islandoracollabgroup/isle-apache/](https://hub.docker.com/r/islandoracollabgroup/isle-apache/)  
+
+* isle-fedora [https://hub.docker.com/r/islandoracollabgroup/isle-fedora/](https://hub.docker.com/r/islandoracollabgroup/isle-fedora/)  
+
+* isle-mysql [https://hub.docker.com/r/islandoracollabgroup/isle-mysql/](https://hub.docker.com/r/islandoracollabgroup/isle-mysql/)  
+
+* isle-solr  [https://hub.docker.com/r/islandoracollabgroup/isle-solr/](https://hub.docker.com/r/islandoracollabgroup/isle-solr/)  
+
+### Document Assumptions / Prerequisites:  
+
+* The Host Server has already been setup and is running. If one has not setup the Host server please follow one of the following links below and then return to this document please.  
+
+    * Host Server setup for [**CentOS 7**](host_server_setup_centos.md)  
+
+    * Host Server setup for [**Ubuntu 16.04 LTS**](host_server_setup_ubuntu.md)  
+
+    * Host Server setup for [**Mac OS**](host_server_setup_macos.md)  
 
 * By default the `Docker-Compose.yml` file is configured for Linux Host Servers.
 
-    * If one is using a **Mac OS** Host server, then edit the `docker-compose.yml` file to ensure the following lines look like this:   
+    * If one is using a **Mac OS** Host server, then edit the `docker-compose.yml` file to ensure the following lines look like this:  
 ```
     # - ./customize/apache/site/linux_settings.php:/var/www/html/sites/default/settings.php  
-      - ./customize/apache/site/macosx_settings.php:/var/www/html/sites/default/settings.php  
+    - ./customize/apache/site/macosx_settings.php:/var/www/html/sites/default/settings.php  
 ```
 
-### Manual Build process (same for Ubuntu 16.04 or CentOS 7)
+### Alpha install process (same for all host server types)
 
-**Please note:** *The first container (MySQL, isle-mysql, mysql) has to be built and running PRIOR to all others (including fedora & apache) due to a race condition (fedora starts prior to mysql being ready to accept connections). This improper state will be fixed at a later point in the project.*  
+**Please note:** *The first container (MySQL, isle-mysql, mysql) has to be running PRIOR to all others (including fedora & apache) due to a race condition (fedora starts prior to mysql being ready to accept connections). This improper state will be fixed at a later point in the project.*  
 
-* **DO NOT RUN** `docker-compose up -d` during the initial build process as this will build and run all containers at the same time which will trigger the above mentioned race condition and subsequent chain of service failures.
+* **DO NOT RUN** `docker-compose up -d` during the initial install process as this will download all images and then run all containers at the same time which will trigger the above mentioned race condition and subsequent chain of service failures.
 
-#### 1. MySQL image build & container launch (10-15 mins)
+#### 1. MySQL image pull & container launch (10-15 mins)
 
-* `docker-compose build mysql`  
+* `docker pull islandoracollabgroup/isle-mysql`  
 * `docker-compose up -d mysql`  
 
-#### 2. Fedora image build & container launch (20 - 30 mins)  
+#### 2. Fedora image pull & container launch (20 - 30 mins)  
 
-* `docker-compose build fedora`  
+* `docker pull islandoracollabgroup/isle-fedora`  
 * `docker-compose up -d fedora`  
 
-#### 3. Solr image build & container launch (10 - 20 mins)  
+#### 3. Solr image pull & container launch (10 - 20 mins)  
 
-* `docker-compose build solr`  
+* `docker pull islandoracollabgroup/isle-solr`  
 * `docker-compose up -d solr`  
 
-#### 4. Apache image build & container launch (30 - 45 mins)
+#### 4. Apache image pull & container launch (30 - 45 mins)
 
-* `docker-compose build apache`  
-
-* Edit the `docker-compose.yml` file to ensure the following lines look like this:   
-
-```
-    - ./customize/apache/site/linux_settings.php:/var/www/html/sites/default/settings.php
-    # - ./customize/apache/site/macosx_settings.php:/var/www/html/sites/default/settings.php  
-```
-
+* `docker pull islandoracollabgroup/isle-apache`  
 
 * `docker-compose up -d apache`  
-    * **Please note:** *This container on occasion has failed to start initially for as of yet unlogged and unknown reasons.*
-        * One can check if the container is running: `docker ps` (shows only running containers)  
-        * One can check if the container stopped running or "exited": `docker ps -a` (shows all containers running or not)  
+
+* **Please note:** *This container on occasion has failed to start initially for as of yet unlogged and unknown reasons.*  
+    * One can check if the container is running: `docker ps` (shows only running containers)  
+    * One can check if the container stopped running or "exited": `docker ps -a` (shows all containers running or not)  
 
 #### 5. Install script on Apache container (20 - 40 mins)
 
 * Run the following shell scripts manually on the apache container  
-      * `docker exec -it isle-apache bash`
-      * `cd /tmp`
-      * `chmod 777 *.sh`
-      * `./make_site.sh`
-      * `./install_site.sh`
+    * `docker exec -it isle-apache bash`
+    * `cd /tmp`
+    * `chmod 777 *.sh`
+    * `./make_site.sh`
+    * `./install_site.sh`
 
 * Once finished `cntrl-D` or type `exit` to get out of the apache container & QC the resulting setup
 
-**Please note:** The cronjob setting in the `install_site.sh` script is commented out as this will need to be flowed into the Docker build process prior. Issue with default Docker root user vs using islandora user. Drupal cron can run properly manually.
+**Please note:** The cronjob setting in the `install_site.sh` script is commented out as this will need to be flowed into the Docker build process prior. Issue with default Docker root user vs using islandora user. Drupal cron can run properly.
 
-#### Total build process takes 1.5 -2.5 hours (depending on system and internet speeds)
+#### Total build process takes 45 - 75 minutes (depending on system and internet speeds)
 
 ___
 
@@ -92,7 +105,7 @@ ___
 | fedora_admin   | dockerfeddb2017       | fedora3          | **All** except `Grant` option |
 | islandora_user | islandoradockerdb2017 | islandora_docker | **All** except `Grant` option |
 
----
+  ---
 
 #### 2. Fedora container
 | Compose Service Name | Container Name  | Software      | Ports                                            |
