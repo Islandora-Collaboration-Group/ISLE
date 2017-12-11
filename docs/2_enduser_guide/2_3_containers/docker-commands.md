@@ -38,7 +38,7 @@ Output should display like:
 To shell into a container properly without shutting it down:
 
 **Example:**  
-`docker exec -it isle-islandora-web bash`
+`docker exec -it isle-apache bash`
 
 In some cases, one may need to use `Cntrl-D` to exit the container without shutting it down.
 

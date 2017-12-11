@@ -1,27 +1,29 @@
-### Alpha Build Pre-Requisites
+### Alpha Manual Build - MacOS
+Please note this an alternative method of building the Docker images and the slower of the two processes.
 
-* This current alpha has been build and tested on **Docker For Mac** only. (11/2017)
-     * Please install the [latest version](https://download.docker.com/mac/stable/Docker.dmg) from the [Docker store](https://store.docker.com/editions/community/docker-ce-desktop-mac)
+Please refer to the Alpha Quickstart [Guide](alpha_quickstart.md) for the **faster** version.
 
-* Git will need to be installed prior as well.
-     * Open a terminal and enter: `git --version`
-     * This will trigger the `Install Command Line Developer Tools` prompt, click on the blue `Install` button for the license agreement; then click the white `Agree` button.
-     * The package will take 1-2 minutes to download. Click the `Done` button once finished.
+### Alpha Manual Build Pre-Requisites
 
-* This alpha build uses `islandora-docker.com` as the test domain along with the Docker Compose service names e.g. `mysql, fedora, apache` etc.
-     * To ensure this domain resolves properly, one will need to edit their local `/etc/hosts` file.
-     * Open up a terminal and enter: `sudo vi /etc/hosts`
-     * Add the following:
-      >127.0.0.1       localhost islandora-docker.com fedora apache fedora.islandora-docker.com apache.islandora-docker.com
+* The Host Server has already been setup and is running. If one has not setup the Host server please follow one of the following links below and then return to this document please.
 
-* Clone the ISLE repository
-     * Open a terminal and enter: `git clone https://github.com/Islandora-Collaboration-Group/ISLE`
-     * `cd /yourpathto/ISLE`
-     * This process will take 3 - 5 minutes depending on internet bandwidth
+    * Host Server setup for [**CentOS 7**](host_server_setup_centos.md)
+
+    * Host Server setup for [**Ubuntu 16.04 LTS**](host_server_setup_ubuntu.md)
+
+    * Host Server setup for [**Mac OS**](host_server_setup_macos.md)
+
+* By default the `Docker-Compose.yml` file is configured for Linux Host Servers.
+
+    * If one is using a **Mac OS** Host server, then edit the `docker-compose.yml` file to ensure the following lines look like this:   
+```
+    # - ./customize/apache/site/linux_settings.php:/var/www/html/sites/default/settings.php
+      - ./customize/apache/site/macosx_settings.php:/var/www/html/sites/default/settings.php  
+```
 
 ---
 
-### Build process
+### Alpha Manual Build MacOS
 
 **Please note:** *The first container (MySQL, isle-mysql, mysql) has to be built and running PRIOR to all others (including fedora & apache) due to a race condition (fedora starts prior to mysql being ready to accept connections). This improper state will be fixed at a later point in the project.*  
 
@@ -47,8 +49,10 @@
 * `docker-compose build apache`
 
 * Edit the `docker-compose.yml` file to ensure the following lines look like this:   
-    > # - ./customize/apache/site/linux_settings.php:/var/www/html/sites/default/settings.php
-      - ./customize/apache/site/macosx_settings.php:/var/www/html/sites/default/settings.php  
+```
+    # - ./customize/apache/site/linux_settings.php:/var/www/html/sites/default/settings.php
+    - ./customize/apache/site/macosx_settings.php:/var/www/html/sites/default/settings.php  
+```
 
 * `docker-compose up -d apache`  
     * **Please note:** *This container on occasion has failed to start initially for as of yet unlogged and unknown reasons.*
@@ -66,7 +70,7 @@
 
 * Once finished `cntrl-D` or type `exit` to get out of the apache container & QC the resulting setup
 
-**Please note:** The cronjob setting in the `install_site.sh` script is commented out as this will need to be flowed into the Docker build process prior. Issue with default Docker root user vs using islandora user. Drupal cron can run properly.
+**Please note:** The cronjob setting in the `install_site.sh` script is commented out as this will need to be flowed into the Docker build process prior. Issue with default Docker root user vs using islandora user. Drupal cron can run properly manually.
 
 
 #### Total build process takes 2.5 - 4 hours (depending on system and internet speeds)
