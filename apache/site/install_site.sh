@@ -9,7 +9,7 @@ echo "Installing Drupal Site"
 
 ## Drush vset of all settings
 echo "Drush vset of Drupal Site configurations"
-/usr/local/bin/drush -u 1 -y vset islandora_paged_content_djatoka_url "http://apache/adore-djatoka/"
+/usr/local/bin/drush -u 1 -y vset islandora_paged_content_djatoka_url "http://islandora-docker.com/adore-djatoka/"
 /usr/local/bin/drush -u 1 -y vset islandora_base_url "http://fedora:8080/fedora"
 /usr/local/bin/drush -u 1 -y vset islandora_solr_url "solr:8080/solr"
 /usr/local/bin/drush -u 1 -y vset imagemagick_convert "/usr/bin/convert"
