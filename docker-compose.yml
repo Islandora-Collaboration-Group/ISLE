@@ -76,22 +76,22 @@ volumes:
   ild_mysql_logs:
         external: true
 
-   ild_fedora_data:
+  ild_fedora_data:
         external: true
 
-   ild_fedora_logs:
+  ild_fedora_logs:
         external: true
 
-   ild_fedora_apache_logs:
+  ild_fedora_apache_logs:
         external: true
 
-   ild_fedora_tomcat_logs:
+  ild_fedora_tomcat_logs:
         external: true
 
-   ild_solr_data:
+  ild_solr_data:
         external: true
 
-   ild_solr_logs:
+  ild_solr_logs:
         external: true
 
    ild_apache_data:
