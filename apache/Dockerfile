@@ -1,6 +1,11 @@
 FROM ubuntu:14.04 AS ffmpeg_base
-LABEL maintainer="Gavin Morris <gavin@born-digital.com>"
-### ISLE MVP 11/2017 Apache
+
+LABEL org.label-schema.name = "isle-apache" \
+      org.label-schema.description: "ISLE Base Image with sample site isle.localdomain apache Dockerfile for non-production usage."
+      org.label-schema.license": "Apache-2.0" \
+      org.label-schema.vcs-url: "git@github.com:Islandora-Collaboration-Group/ISLE.git" \
+      org.label-schema.vendor": "Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com" \
+      org.label-schema.schema-version = "1.0"
 
 ###
 # https://github.com/phusion/baseimage-docker/issues/58
@@ -107,20 +112,13 @@ RUN add-apt-repository -y "deb http://us.archive.ubuntu.com/ubuntu trusty main m
     && cd / \
     && rm -rf /tmp/build
 
-### Next Build
-
 FROM ubuntu:14.04
-
 
 COPY --from=ffmpeg_base /usr/bin/ffmpeg2theora /usr/bin/ffmpeg2theora
 COPY --from=ffmpeg_base /usr/local/lib /usr/local/lib
 COPY --from=ffmpeg_base /usr/local/bin /usr/local/bin
 COPY --from=ffmpeg_base /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu
 COPY --from=ffmpeg_base /usr/bin/x264 /usr/bin/x264
-
-# COPY --from=ffmpeg_base /usr/bin/xtractprotos  /usr/bin/xtractprotos
-# COPY --from=ffmpeg_base /usr/share/ghostscript /usr/share/ghostscript
-# COPY --from=ffmpeg_base /usr/share/ffmpeg /usr/share/ffmpeg
 
 ###
 # https://github.com/phusion/baseimage-docker/issues/58
@@ -233,26 +231,31 @@ RUN cd /etc/ \
     && cd /opt \
     && wget "http://downloads.sourceforge.net/project/djatoka/djatoka/1.1/adore-djatoka-1.1.tar.gz" \
     && tar -xzf adore-djatoka-1.1.tar.gz \
-    && rm adore-djatoka-1.1.tar.gz
+    && rm adore-djatoka-1.1.tar.gz \
+    && sed -i 's/DJATOKA_HOME=`pwd`/DJATOKA_HOME=\/opt\/adore-djatoka-1.1/g' /opt/adore-djatoka-1.1/bin/env.sh \
+    && sed -i 's|`uname -p` = "x86_64"|`uname -m` = "x86_64"|' /opt/adore-djatoka-1.1/bin/env.sh \
+    && touch /etc/ld.so.conf.d/kdu_libs.conf \
+    && echo "/opt/adore-djatoka-1.1/lib/Linux-x86-64" > /etc/ld.so.conf.d/kdu_libs.conf \
+    && chmod 444 /etc/ld.so.conf.d/kdu_libs.conf \
+    && chown root:root /etc/ld.so.conf.d/kdu_libs.conf \
+    && echo 'ServerName localhost' > /etc/apache2/conf-available/server-name.conf \
+    && touch /etc/cron.d/tmpreaper-cron \
+    && echo "0 */12 * * * root /usr/sbin/tmpreaper -am 4d /tmp >> /var/log/cron.log 2>&1" /etc/cron.d/tmpreaper-cron \
+    && chmod 0644 /etc/cron.d/tmpreaper-cron
 
-
-COPY djatoka/env.sh /opt/adore-djatoka-1.1/bin/env.sh
-COPY djatoka/envinit.sh /opt/adore-djatoka-1.1/bin/envinit.sh
-COPY djatoka/kdu_libs.conf /etc/ld.so.conf.d/kdu_libs.conf
-COPY composer/composer_env.sh /etc/profile.d/composer_env.sh
-COPY tmpreaper/cron /etc/cron.d/tmpreaper-cron
+COPY apache/envinit.sh /opt/adore-djatoka-1.1/bin/envinit.sh
 COPY apache/site.conf /etc/apache2/sites-available/site.conf
-COPY apache/servername.conf /etc/apache2/conf-available/servername.conf
-COPY site/drupal.drush.make /tmp/drupal.drush.make
-COPY site/fix-permissions.sh /tmp/fix-permissions.sh
-COPY site/install_site.sh /tmp/install_site.sh
-COPY site/islandora.drush.make /tmp/islandora.drush.make
-COPY site/make_site.sh /tmp/make_site.sh
-COPY site/settings.php /var/www/html/sites/default/settings.php
 
+###
+# Set up environmental variables for tomcat & dependencies installation
 
-RUN . /etc/profile.d/composer_env.sh \
-    && mkdir -p /tmp/build \
+ENV JAVA_HOME=/usr/lib/jvm/java-8-oracle \
+    JRE_HOME=/usr/lib/jvm/java-8-oracle/jre \
+    PATH=$PATH:$HOME/.composer/vendor/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/jre/bin \
+    KAKADU_LIBRARY_PATH=/opt/adore-djatoka-1.1/lib/Linux-x86-64 \
+    KAKADU_HOME=/opt/adore-djatoka-1.1/lib/Linux-x86-64
+
+RUN mkdir -p /tmp/build \
     && cd /tmp/build \
     && wget -O composer-setup.php https://raw.githubusercontent.com/composer/getcomposer.org/2091762d2ebef14c02301f3039c41d08468fb49e/web/installer \
     && php composer-setup.php --filename=composer --install-dir=/usr/local/bin \
@@ -296,7 +299,6 @@ RUN . /etc/profile.d/composer_env.sh \
     && chmod 775 fits-ngserver.sh \
     && chmod 775 fits.sh \
     && rm /home/islandora/fits-1.2.0.zip \
-    && chmod 0644 /etc/cron.d/tmpreaper-cron \
     && touch /var/log/cron.log \
     && pecl install uploadprogress \
     && echo 'extension=uploadprogress.so' >> /etc/php/5.6/apache2/php.ini \
@@ -321,7 +323,136 @@ RUN . /etc/profile.d/composer_env.sh \
     && chown islandora:www-data /usr/local/bin/qt-faststart \
     && chown islandora:www-data /usr/bin/lame \
     && chown islandora:www-data /usr/bin/x264 \
-    && chown islandora:www-data /usr/bin/xtractprotos
+    && chown islandora:www-data /usr/bin/xtractprotos \
+    && mkdir -p /tmp/isle_drupal_build_tools
+
+### Alpha 2 - new apache drupal site code JAN 5th GDM
+
+COPY apache/isle_drupal_build_tools/drupal.drush.make /tmp/isle_drupal_build_tools/drupal.drush.make
+COPY apache/isle_drupal_build_tools/islandora.drush.make /tmp/isle_drupal_build_tools/islandora.drush.make
+COPY apache/isle_drupal_build_tools/fix-permissions.sh /tmp/isle_drupal_build_tools/fix-permissions.sh
+COPY apache/linux_settings.php /tmp/settings.php
+
+RUN cd /tmp/isle_drupal_build_tools \
+    && /usr/local/bin/drush make --prepare-install /tmp/isle_drupal_build_tools/drupal.drush.make /tmp/drupal_install \
+    && /usr/local/bin/drush make --no-core /tmp/isle_drupal_build_tools/islandora.drush.make /tmp/drupal_install \
+    && rm -f /tmp/drupal_install/sites/default/settings.php \
+    && cp -rv /tmp/drupal_install/. /var/www/html/ \
+    && mv /tmp/settings.php /var/www/html/sites/default/settings.php \
+    && cd /var/www/html/sites/all/libraries \
+    && rm -rf /var/www/html/sites/all/libraries/openseadragon \
+    && wget https://github.com/openseadragon/openseadragon/releases/download/v2.2.1/openseadragon-bin-2.2.1.zip \
+    && unzip /var/www/html/sites/all/libraries/openseadragon-bin-2.2.1.zip \
+    && mv /var/www/html/sites/all/libraries/openseadragon-bin-2.2.1 /var/www/html/sites/all/libraries/openseadragon \
+    && rm /var/www/html/sites/all/libraries/openseadragon-bin-2.2.1.zip \
+    && cd /var/www/html/sites/all/modules \
+    && /usr/local/bin/drush site-install -y --account-name=isld_admin --account-pass=isld_admin2018 --account-mail=admin@isle.localdomain --site-name="ISLE" \
+    && /usr/local/bin/drush -u 1 -y vset islandora_paged_content_djatoka_url "http://isle.localdomain/adore-djatoka/" \
+    && /usr/local/bin/drush -u 1 -y vset islandora_base_url "http://fedora:8080/fedora" \
+    && /usr/local/bin/drush -u 1 -y vset islandora_solr_url "solr:8080/solr" \
+    && /usr/local/bin/drush -u 1 -y vset imagemagick_convert "/usr/bin/convert" \
+    && /usr/local/bin/drush -u 1 -y vset image_toolkit "imagemagick" \
+    && /usr/local/bin/drush -u 1 -y vset islandora_ocr_tesseract "/usr/bin/tesseract" \
+    && /usr/local/bin/drush -u 1 -y vset islandora_checksum_checksum_type "SHA-1" \
+    && /usr/local/bin/drush -u 1 -y vset islandora_checksum_enable_checksum "TRUE" \
+    && /usr/local/bin/drush -u 1 -y vset islandora_pdf_create_fulltext "1" \
+    && /usr/local/bin/drush -u 1 -y vset islandora_batch_java "/usr/bin/java" \
+    && /usr/local/bin/drush -u 1 -y vset islandora_lame_url "/usr/bin/lame" \
+    && /usr/local/bin/drush -u 1 -y vset islandora_paged_content_gs "/usr/local/bin/gs" \
+    && /usr/local/bin/drush -u 1 -y vset islandora_video_ffmpeg_path "/usr/local/bin/ffmpeg" \
+    && /usr/local/bin/drush -u 1 -y vset islandora_video_ffmpeg2theora_path "/usr/bin/ffmpeg2theora" \
+    && /usr/local/bin/drush -u 1 -y vset islandora_use_kakadu "TRUE" \
+    && /usr/local/bin/drush -u 1 -y vset islandora_kakadu_url "/usr/local/bin/kdu_compress" \
+    && /usr/local/bin/drush -u 1 -y vset islandora_pdf_path_to_pdftotext "/usr/bin/pdftotext" \
+    && /usr/local/bin/drush -u 1 -y vset islandora_fits_executable_path "/usr/local/fits/fits.sh" \
+    && /usr/local/bin/drush -u 1 -y vset --format=json islandora_openseadragon_settings '{"debugMode":0,"djatokaServerBaseURL":"http:\/\/apache\/adore-djatoka\/resolver","animationTime":"1.5","blendTime":"0.1","alwaysBlend":0,"autoHideControls":1,"immediateRender":0,"wrapHorizontal":0,"wrapVertical":0,"wrapOverlays":0,"panHorizontal":1,"panVertical":1,"showNavigator":1,"minZoomImageRatio":"0.8","maxZoomPixelRatio":"2","visibilityRatio":"0.5","springStiffness":"5.0","imageLoaderLimit":"5","clickTimeThreshold":"300","clickDistThreshold":"5","zoomPerClick":"2.0","zoomPerScroll":"1.2","zoomPerSecond":"2.0"}' \
+    && /usr/local/bin/drush -u 1 -y vset --format=json islandora_audio_viewers '{"name":{"none":"none","islandora_videojs":"islandora_videojs"},"default":"islandora_videojs"}' \
+    && /usr/local/bin/drush -u 1 -y vset --format=json islandora_video_viewers '{"name":{"none":"none","islandora_videojs":"islandora_videojs"},"default":"islandora_videojs"}' \
+    && /usr/local/bin/drush -u 1 -y vset --format=json islandora_book_viewers '{"name":{"none":"none","islandora_internet_archive_bookreader":"islandora_internet_archive_bookreader"},"default":"islandora_internet_archive_bookreader"}' \
+    && /usr/local/bin/drush -u 1 -y vset --format=json islandora_book_page_viewers '{"name":{"none":"none","islandora_openseadragon":"islandora_openseadragon"},"default":"islandora_openseadragon"}' \
+    && /usr/local/bin/drush -u 1 -y vset --format=json islandora_large_image_viewers '{"name":{"none":"none","islandora_openseadragon":"islandora_openseadragon"},"default":"islandora_openseadragon"}' \
+    && /usr/local/bin/drush -u 1 -y vset --format=json islandora_newspaper_issue_viewers '{"name":{"none":"none","islandora_internet_archive_bookreader":"islandora_internet_archive_bookreader"},"default":"islandora_internet_archive_bookreader"}' \
+    && /usr/local/bin/drush -u 1 -y vset --format=json islandora_newspaper_page_viewers '{"name":{"none":"none","islandora_openseadragon":"islandora_openseadragon"},"default":"islandora_openseadragon"}' \
+    && drush -y -u 1 en php_lib \
+    && drush -y -u 1 en islandora \
+    && sleep 10s \
+    && drush -y -u 1 en islandora_basic_collection \
+    && sleep 10s \
+    && drush -y -u 1 en objective_forms \
+    && drush -y -u 1 en islandora_solr \
+    && drush -y -u 1 en islandora_solr_metadata \
+    && drush -y -u 1 en islandora_solr_facet_pages \
+    && drush -y -u 1 en islandora_solr_views \
+    && drush -y -u 1 en islandora_pdf \
+    && drush -y -u 1 en islandora_audio \
+    && drush -y -u 1 en islandora_book \
+    && drush -y -u 1 en islandora_compound_object \
+    && drush -y -u 1 en islandora_disk_image \
+    && drush -y -u 1 en islandora_entities \
+    && drush -y -u 1 en islandora_entities_csv_import \
+    && drush -y -u 1 en islandora_basic_image \
+    && drush -y -u 1 en islandora_large_image \
+    && drush -y -u 1 en islandora_newspaper \
+    && drush -y -u 1 en islandora_video \
+    && drush -y -u 1 en islandora_web_archive \
+    && drush -y -u 1 en islandora_premis \
+    && drush -y -u 1 en islandora_checksum \
+    && drush -y -u 1 en islandora_checksum_checker \
+    && drush -y -u 1 en islandora_book_batch \
+    && drush -y -u 1 en islandora_pathauto \
+    && drush -y -u 1 en islandora_pdfjs \
+    && drush -y -u 1 en islandora_videojs \
+    && drush -y -u 1 en islandora_jwplayer \
+    && drush -y -u 1 en xml_forms \
+    && drush -y -u 1 en xml_form_builder \
+    && drush -y -u 1 en xml_schema_api \
+    && drush -y -u 1 en xml_form_elements \
+    && drush -y -u 1 en xml_form_api \
+    && drush -y -u 1 en jquery_update \
+    && drush -y -u 1 en zip_importer \
+    && drush -y -u 1 en islandora_basic_image \
+    && drush -y -u 1 en islandora_bibliography \
+    && drush -y -u 1 en islandora_compound_object \
+    && drush -y -u 1 en islandora_google_scholar \
+    && drush -y -u 1 en islandora_scholar_embargo \
+    && drush -y -u 1 en islandora_solr_config \
+    && drush -y -u 1 en citation_exporter \
+    && drush -y -u 1 en doi_importer \
+    && drush -y -u 1 en endnotexml_importer \
+    && drush -y -u 1 en pmid_importer \
+    && drush -y -u 1 en ris_importer \
+    && drush -y -u 1 en islandora_fits \
+    && drush -y -u 1 en islandora_ocr \
+    && drush -y -u 1 en islandora_oai \
+    && drush -y -u 1 en islandora_marcxml \
+    && drush -y -u 1 en islandora_simple_workflow \
+    && drush -y -u 1 en islandora_xacml_api \
+    && drush -y -u 1 en islandora_xacml_editor \
+    && drush -y -u 1 en xmlsitemap xmlsitemap_custom \
+    && drush -y -u 1 en islandora_xmlsitemap \
+    && drush -y -u 1 en colorbox \
+    && drush -y -u 1 en islandora_internet_archive_bookreader \
+    && drush -y -u 1 en islandora_bagit \
+    && drush -y -u 1 en islandora_batch_report \
+    && drush -y -u 1 en islandora_usage_stats \
+    && drush -y -u 1 en islandora_form_fieldpanel \
+    && drush -y -u 1 en islandora_altmetrics \
+    && drush -y -u 1 en islandora_populator \
+    && drush -y -u 1 en islandora_newspaper_batch \
+    && drush -y -u 1 en islandora_openseadragon \
+    && drush -y -u 1 en webform \
+    && drush -y -u 1 en webform_ajax \
+    && drush -y -u 1 en webform_bonus \
+    && drush -y -u 1 en islandora_webform \
+    && drush -y -u 1 en islandora_webform_ingest \
+    && drush openseadragon-plugin \
+    && drush videojs-plugin \
+    && drush pdfjs-plugin \
+    && drush iabookreader-plugin \
+    && /usr/local/bin/drush -u 1 -y vset islandora_paged_content_gs "/usr/local/bin/gs" \
+    && /bin/bash /tmp/fix-permissions.sh --drupal_path=/var/www/html --drupal_user=islandora --httpd_group=www-data \
+    && rm -rf /tmp/isle_drupal_build_tools \
+    && rm -rf /tmp/drupal_install
 
 
 ###

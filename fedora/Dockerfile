@@ -1,12 +1,19 @@
 FROM tomcat:8.0-jre8
-LABEL maintainer="Gavin Morris <gavin@born-digital.com>"
-### - ISLE MVP 11/2017 Fedora
+LABEL org.label-schema.name = "isle-fedora" \
+      org.label-schema.description: "ISLE Base Image with sample site isle.localdomain fedora Dockerfile for non-production usage."
+      org.label-schema.license": "Apache-2.0" \
+      org.label-schema.vcs-url: "git@github.com:Islandora-Collaboration-Group/ISLE.git" \
+      org.label-schema.vendor": "Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com" \
+      org.label-schema.schema-version = "1.0"
 
 ###
 # COPY over tomcat config files
-COPY tomcat/tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
-COPY tomcat/server.xml /usr/local/tomcat/conf/server.xml
-COPY tomcat/web.xml /usr/local/tomcat/conf/web.xml
+COPY fedora/tomcat/server.xml /usr/local/tomcat/conf/server.xml
+COPY fedora/tomcat/web.xml /usr/local/tomcat/conf/web.xml
+COPY fedora/tomcat/tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
+COPY fedora/tomcat/runservices.sh /usr/local/tomcat/bin/runservices.sh
+
+RUN chmod 755 /usr/local/tomcat/bin/runservices.sh
 
 ###
 # Set up environmental variables for tomcat & dependencies installation
@@ -54,23 +61,25 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
     oracle-java8-installer \
     oracle-java8-set-default \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && touch /etc/cron.d/tmpreaper-cron \
+    && echo "0 */12 * * * root /usr/sbin/tmpreaper -am 4d /tmp >> /var/log/cron.log 2>&1" /etc/cron.d/tmpreaper-cron \
+    && chmod 0644 /etc/cron.d/tmpreaper-cron \
+    && touch /var/log/cron.log
 
 
-# Configure apache & tmpreaper
-COPY apache/site.conf /etc/apache2/sites-available/site.conf
-COPY apache/servername.conf /etc/apache2/conf-available/servername.conf
-COPY tmpreaper/cron /etc/cron.d/tmpreaper-cron
+# Configure apache
+COPY fedora/apache/site.conf /etc/apache2/sites-available/site.conf
 
-RUN a2enconf servername \
+RUN echo 'ServerName localhost' > /etc/apache2/conf-available/server-name.conf \
+    && a2enconf servername \
     && mkdir -p /var/www/html \
     && chmod 0644 /etc/apache2/sites-available/site.conf \
     && a2ensite site.conf \
     && a2enmod rewrite deflate headers expires proxy proxy_http proxy_html proxy_connect xml2enc \
     && a2dissite 000-default \
-    && a2dissite default-ssl \
-    && chmod 0644 /etc/cron.d/tmpreaper-cron \
-    && touch /var/log/cron.log
+    && a2dissite default-ssl
+
 
 ###
 # Djatoka
@@ -87,18 +96,23 @@ RUN cd /opt \
     && /sbin/ldconfig \
     && /bin/cp /opt/adore-djatoka-1.1/dist/adore-djatoka.war /usr/local/tomcat/webapps/adore-djatoka.war \
     && /usr/bin/unzip -o /usr/local/tomcat/webapps/adore-djatoka.war -d /usr/local/tomcat/webapps/adore-djatoka/ \
-    && rm adore-djatoka-1.1.tar.gz
+    && rm adore-djatoka-1.1.tar.gz \
+    && sed -i 's/DJATOKA_HOME=`pwd`/DJATOKA_HOME=\/opt\/adore-djatoka-1.1/g' /opt/adore-djatoka-1.1/bin/env.sh \
+    && sed -i 's|`uname -p` = "x86_64"|`uname -m` = "x86_64"|' /opt/adore-djatoka-1.1/bin/env.sh \
+    && touch /etc/ld.so.conf.d/kdu_libs.conf \
+    && echo "/opt/adore-djatoka-1.1/lib/Linux-x86-64" > /etc/ld.so.conf.d/kdu_libs.conf \
+    && chmod 444 /etc/ld.so.conf.d/kdu_libs.conf \
+    && chown root:root /etc/ld.so.conf.d/kdu_libs.conf \
+    && echo 'ServerName localhost' > /etc/apache2/conf-available/server-name.conf \
+    && sed -i 's/localhost/fedora/g' /opt/adore-djatoka-1.1/index.html
 
-COPY djatoka/env.sh /opt/adore-djatoka-1.1/bin/env.sh
-COPY djatoka/envinit.sh /opt/adore-djatoka-1.1/bin/envinit.sh
-COPY djatoka/kdu_libs.conf /etc/ld.so.conf.d/kdu_libs.conf
-COPY djatoka/index.html /usr/local/tomcat/webapps/adore-djatoka/index.html
-COPY djatoka/log4j.properties /usr/local/tomcat/webapps/adore-djatoka/WEB-INF/classes/log4j.properties
+COPY fedora/adore-djatoka/envinit.sh /opt/adore-djatoka-1.1/bin/envinit.sh
+COPY fedora/adore-djatoka/log4j.properties /usr/local/tomcat/webapps/adore-djatoka/WEB-INF/classes/log4j.properties
 
 ###
 # Fedora Installation with Drupalfilter
 
-COPY fedora/install.properties /usr/local/install.properties
+COPY fedora/fedora/install.properties /usr/local/install.properties
 
 RUN cd /usr/local/ \
     && wget "https://github.com/fcrepo3/fcrepo/releases/download/v3.8.1/fcrepo-installer-3.8.1.jar" \
@@ -106,7 +120,7 @@ RUN cd /usr/local/ \
     && /usr/local/tomcat/bin/startup.sh \
     && sleep 70
 
-COPY fedora/deny-apim-if-not-localhost.xml /usr/local/fedora/data/fedora-xacml-policies/repository-policies/default/deny-apim-if-not-localhost.xml
+COPY fedora/fedora/deny-apim-if-not-localhost.xml /usr/local/fedora/data/fedora-xacml-policies/repository-policies/default/deny-apim-if-not-localhost.xml
 
 RUN mkdir /usr/local/fedora/data/fedora-xacml-policies/repository-policies/islandora \
     && rm /usr/local/fedora/data/fedora-xacml-policies/repository-policies/default/deny-policy-management-if-not-administrator.xml \
@@ -117,33 +131,32 @@ RUN mkdir /usr/local/fedora/data/fedora-xacml-policies/repository-policies/islan
     && cd /usr/local/tomcat/webapps/fedora/WEB-INF/lib/ \
     && wget "https://github.com/Islandora/islandora_drupal_filter/releases/download/v7.1.9/fcrepo-drupalauthfilter-3.8.1.jar"
 
-COPY fedora/permit-apim-to-authenticated-user.xml /usr/local/fedora/data/fedora-xacml-policies/repository-policies/islandora/permit-apim-to-authenticated-user.xml
-COPY fedora/permit-getDatastream-unrestricted.xml /usr/local/fedora/data/fedora-xacml-policies/repository-policies/islandora/
-COPY fedora/permit-getDatastreamHistory-unrestricted.xml /usr/local/fedora/data/fedora-xacml-policies/repository-policies/islandora/
-COPY fedora/permit-upload-to-authenticated-user.xml /usr/local/fedora/data/fedora-xacml-policies/repository-policies/islandora/
-COPY fedora/fedora-users.xml /usr/local/fedora/server/config/fedora-users.xml
-COPY fedora/logback.xml /usr/local/fedora/server/config/logback.xml
-COPY drupalfilter/filter-drupal.xml /usr/local/fedora/server/config/filter-drupal.xml
-COPY drupalfilter/jaas.conf /usr/local/fedora/server/config/jaas.conf
+COPY fedora/fedora/permit-apim-to-authenticated-user.xml /usr/local/fedora/data/fedora-xacml-policies/repository-policies/islandora/permit-apim-to-authenticated-user.xml
+COPY fedora/fedora/permit-getDatastream-unrestricted.xml /usr/local/fedora/data/fedora-xacml-policies/repository-policies/islandora/permit-getDatastream-unrestricted.xml
+COPY fedora/fedora/permit-getDatastreamHistory-unrestricted.xml /usr/local/fedora/data/fedora-xacml-policies/repository-policies/islandora/permit-getDatastreamHistory-unrestricted.xml
+COPY fedora/fedora/permit-upload-to-authenticated-user.xml /usr/local/fedora/data/fedora-xacml-policies/repository-policies/islandora/permit-upload-to-authenticated-user.xml
+COPY fedora/fedora/fedora-users.xml /usr/local/fedora/server/config/fedora-users.xml
+COPY fedora/fedora/logback.xml /usr/local/fedora/server/config/logback.xml
+COPY fedora/fedora/filter-drupal.xml /usr/local/fedora/server/config/filter-drupal.xml
+COPY fedora/fedora/jaas.conf /usr/local/fedora/server/config/jaas.conf
 
 
 ###
 # Gsearch
 #
 
-RUN git clone https://github.com/discoverygarden/gsearch.git /tmp/gsearch \
-    && cd /tmp/gsearch/FedoraGenericSearch \
-    && ant release \
-    && /usr/bin/unzip -o /tmp/gsearch/FgsBuild/release/fedoragsearch-2.8.1.zip -d /tmp \
+
+RUN wget -O /tmp/fedoragsearch-2.8.1.zip https://github.com/discoverygarden/gsearch/releases/download/v2.8.1/fedoragsearch-2.8.1.zip \
+    && /usr/bin/unzip -o /tmp/fedoragsearch-2.8.1.zip -d /tmp \
     && /bin/cp -v /tmp/fedoragsearch-2.8.1/fedoragsearch.war /usr/local/tomcat/webapps/ \
     && /usr/bin/unzip -o /usr/local/tomcat/webapps/fedoragsearch.war -d /usr/local/tomcat/webapps/fedoragsearch/ \
     && rm -rf /tmp/gsearch \
     && rm -rf /tmp/fedoragsearch-2.8.1
 
 
-COPY gsearch/fgsconfig-basic-for-islandora.properties /usr/local/tomcat/webapps/fedoragsearch/FgsConfig/fgsconfig-basic-for-islandora.properties
-COPY gsearch/fgsconfig-basic.xml /usr/local/tomcat/webapps/fedoragsearch/FgsConfig/fgsconfig-basic.xml
-COPY gsearch/log4j.xml /usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/log4j.xml
+COPY fedora/gsearch/fgsconfig-basic-for-islandora.properties /usr/local/tomcat/webapps/fedoragsearch/FgsConfig/fgsconfig-basic-for-islandora.properties
+COPY fedora/gsearch/fgsconfig-basic.xml /usr/local/tomcat/webapps/fedoragsearch/FgsConfig/fgsconfig-basic.xml
+COPY fedora/gsearch/log4j.xml /usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/log4j.xml
 
 
 RUN /usr/bin/ant -f /usr/local/tomcat/webapps/fedoragsearch/FgsConfig/fgsconfig-basic.xml \
@@ -159,13 +172,8 @@ RUN /usr/bin/ant -f /usr/local/tomcat/webapps/fedoragsearch/FgsConfig/fgsconfig-
     && rm -rf /tmp/islandora_transforms
 
 
-COPY gsearch/foxmlToSolr.xslt /usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/foxmlToSolr.xslt
-COPY gsearch/index.properties /usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/index.properties
-
-
-COPY tomcat/runservices.sh /usr/local/tomcat/bin/runservices.sh
-
-RUN chmod 755 /usr/local/tomcat/bin/runservices.sh
+COPY fedora/gsearch/foxmlToSolr.xslt /usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/foxmlToSolr.xslt
+COPY fedora/gsearch/index.properties /usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/index.properties
 
 EXPOSE 80 8080
 CMD ["/usr/local/tomcat/bin/runservices.sh", "run"]
