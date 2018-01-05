@@ -1,12 +1,17 @@
 FROM tomcat:8.0-jre8
-LABEL maintainer="Gavin Morris <gavin@born-digital.com>"
-### - ISLE MVP 11/2017 Solr (official)
+
+LABEL org.label-schema.name = "isle-apache" \
+      org.label-schema.description: "ISLE Base Image with sample site isle.localdomain solr Dockerfile for non-production usage."
+      org.label-schema.license": "Apache-2.0" \
+      org.label-schema.vcs-url: "git@github.com:Islandora-Collaboration-Group/ISLE.git" \
+      org.label-schema.vendor": "Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com" \
+      org.label-schema.schema-version = "1.0"
 
 ###
 # Copy over tomcat files for configuration
-COPY tomcat/tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
-COPY tomcat/server.xml /usr/local/tomcat/conf/server.xml
-COPY tomcat/web.xml /usr/local/tomcat/conf/web.xml
+COPY solr/tomcat/tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
+COPY solr/tomcat/server.xml /usr/local/tomcat/conf/server.xml
+COPY solr/tomcat/web.xml /usr/local/tomcat/conf/web.xml
 
 ###
 # Solr Installation
@@ -40,11 +45,11 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
     && cp -v /tmp/solr-4.10.4/contrib/analysis-extras/lucene-libs/lucene-analyzers-icu-4.10.4.jar /usr/local/tomcat/webapps/solr/WEB-INF/lib/ \
     && rm -rf /tmp/solr-4.10.4
 
-COPY solr/solr.xml /usr/local/tomcat/conf/Catalina/localhost/solr.xml
-COPY solr/log4j.properties /usr/local/tomcat/webapps/solr/WEB-INF/classes/log4j.properties
-COPY solr/solrconfig.xml /usr/local/solr/collection1/conf/solrconfig.xml
-COPY solr/schema.xml /usr/local/solr/collection1/conf/schema.xml
-COPY solr/stopwords.txt /usr/local/solr/collection1/conf/stopwords.txt
+COPY solr/solr/solr.xml /usr/local/tomcat/conf/Catalina/localhost/solr.xml
+COPY solr/solr/log4j.properties /usr/local/tomcat/webapps/solr/WEB-INF/classes/log4j.properties
+COPY solr/solr/solrconfig.xml /usr/local/solr/collection1/conf/solrconfig.xml
+COPY solr/solr/schema.xml /usr/local/solr/collection1/conf/schema.xml
+COPY solr/solr/stopwords.txt /usr/local/solr/collection1/conf/stopwords.txt
 
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
