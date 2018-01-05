@@ -71,31 +71,31 @@ services:
 
 volumes:
   ild_mysql_data:
-        external: true
+     external: true
 
   ild_mysql_logs:
-        external: true
+     external: true
 
   ild_fedora_data:
-        external: true
+     external: true
 
   ild_fedora_logs:
-        external: true
+     external: true
 
   ild_fedora_apache_logs:
-        external: true
+     external: true
 
   ild_fedora_tomcat_logs:
-        external: true
+     external: true
 
   ild_solr_data:
-        external: true
+     external: true
 
   ild_solr_logs:
-        external: true
+     external: true
 
    ild_apache_data:
-        external: true
+     external: true
 
    ild_apache_logs:
-        external: true
+     external: true
