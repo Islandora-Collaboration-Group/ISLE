@@ -71,8 +71,8 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 # Configure apache
 COPY apache/site.conf /etc/apache2/sites-available/site.conf
 
-RUN touch /etc/apache2/conf-available/server-name.conf \
-    && echo 'ServerName localhost' > /etc/apache2/conf-available/server-name.conf \
+RUN touch /etc/apache2/conf-available/servername.conf \
+    && echo 'ServerName localhost' > /etc/apache2/conf-available/servername.conf \
     && a2enconf servername \
     && mkdir -p /var/www/html \
     && chmod 0644 /etc/apache2/sites-available/site.conf \
@@ -104,7 +104,6 @@ RUN cd /opt \
     && echo "/opt/adore-djatoka-1.1/lib/Linux-x86-64" > /etc/ld.so.conf.d/kdu_libs.conf \
     && chmod 444 /etc/ld.so.conf.d/kdu_libs.conf \
     && chown root:root /etc/ld.so.conf.d/kdu_libs.conf \
-    && echo 'ServerName localhost' > /etc/apache2/conf-available/server-name.conf \
     && sed -i 's/localhost/fedora/g' /opt/adore-djatoka-1.1/index.html
 
 COPY adore-djatoka/envinit.sh /opt/adore-djatoka-1.1/bin/envinit.sh

@@ -238,8 +238,8 @@ RUN cd /etc/ \
     && echo "/opt/adore-djatoka-1.1/lib/Linux-x86-64" > /etc/ld.so.conf.d/kdu_libs.conf \
     && chmod 444 /etc/ld.so.conf.d/kdu_libs.conf \
     && chown root:root /etc/ld.so.conf.d/kdu_libs.conf \
-    && touch /etc/apache2/conf-available/server-name.conf \
-    && echo 'ServerName localhost' > /etc/apache2/conf-available/server-name.conf \
+    && touch /etc/apache2/conf-available/servername.conf \
+    && echo 'ServerName localhost' > /etc/apache2/conf-available/servername.conf \
     && touch /etc/cron.d/tmpreaper-cron \
     && echo "0 */12 * * * root /usr/sbin/tmpreaper -am 4d /tmp >> /var/log/cron.log 2>&1" /etc/cron.d/tmpreaper-cron \
     && chmod 0644 /etc/cron.d/tmpreaper-cron
