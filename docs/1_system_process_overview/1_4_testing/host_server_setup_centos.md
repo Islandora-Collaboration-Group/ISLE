@@ -1,6 +1,7 @@
 #### **CentOS 7** Host Server Setup
 
 * This alpha build uses `islandora-docker.com` as the test domain along with the Docker Compose service names e.g. `mysql, fedora, apache` etc.
+     * If your institution's server uses real DNS, then skip the next step. If not, please proceed with the following:
      * To ensure this domain resolves properly, one will need to edit the servers and/or their own local `/etc/hosts` file.
          * Open up a terminal and enter: `sudo vi /etc/hosts`
               * Add one or more of the following: (**Examples ONLY**)
@@ -32,12 +33,15 @@
 * `wget -qO- https://get.docker.com/ | sh`
 
 #### Create islandora user (as root)  
-* `adduser islandora` (with password isle2017)  
+* `adduser islandora`
+* `passwd islandora`
+* `isle2017`
 * `echo "islandora ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/islandora`
 * Create Docker group `groupadd docker`  
 * Add islandora user to docker group `usermod -aG docker islandora`  
-* Add islandora user to wheel grop `sudo usermod -aG wheel islandora`
-* Exit out of the ssh session from the host server as the root user and shell back in as `islandora`
+* Add islandora user to wheel group `sudo usermod -aG wheel islandora`
+* Exit out of the ssh session from the host server as the root user `exit`
+* ssh back in as `islandora`
 * Enable the Docker service to start on host server boot
     * `sudo systemctl enable docker.service`
 * Start the Docker service
@@ -69,4 +73,7 @@
 * `sudo chown -Rv islandora:islandora ISLE`
 * `cd /opt/ISLE`
 
+
+#### Return to Quickstart Guide
+* Continue with next steps on [1.4. -Testing - Alpha Quickstart Guide](alpha_quickstart.md)
 ---
