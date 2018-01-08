@@ -11,7 +11,7 @@
         <value>fedoraInternalCall-2</value>
       </attribute>
     </user>
-    <user name="fgsAdmin" password="ild_fgs_Admin_1018">
+    <user name="fgsAdmin" password="ild_fgs_admin_2018">
       <attribute name="fedoraRole">
       <value>administrator</value>
     </attribute>

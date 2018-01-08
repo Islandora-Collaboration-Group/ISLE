@@ -1,11 +1,11 @@
 version: '2'
-labels:
-  org.label-schema.version: "ISLE Alpha 2.0"
-  org.label-schema.description: "ISLE Base Image with sample site isle.localdomain docker-compose.yml for non-production usage."
-  org.label-schema.license: "Apache-2.0"
-  org.label-schema.vcs-url: "git@github.com:Islandora-Collaboration-Group/ISLE.git"
-  org.label-schema.vendor: "Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com"
-  org.label-schema.schema-version: "1.0"
+#labels:
+#  org.label-schema.version: "ISLE Alpha 2.0"
+#  org.label-schema.description: "ISLE Base Image with sample site isle.localdomain docker-compose.yml for non-production usage."
+#  org.label-schema.license: "Apache-2.0"
+#  org.label-schema.vcs-url: "git@github.com:Islandora-Collaboration-Group/ISLE.git"
+#  org.label-schema.vendor: "Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com"
+#  org.label-schema.schema-version: "1.0"
 
 services:
   mysql:
@@ -64,38 +64,38 @@ services:
       - mysql
       - fedora
     volumes:
-      - isld_apache_data:/var/www/html
-      - isld_apache_logs:/var/log/apache2
+      - ild_apache_data:/var/www/html
+      - ild_apache_logs:/var/log/apache2
       #- ./isle_localdomain/macosx_settings.php:/var/www/html/sites/default/settings.php
     container_name: isle-apache
 
 volumes:
   ild_mysql_data:
-     external: true
+    external: true
 
   ild_mysql_logs:
-     external: true
+    external: true
 
   ild_fedora_data:
-     external: true
+    external: true
 
   ild_fedora_logs:
-     external: true
+    external: true
 
   ild_fedora_apache_logs:
-     external: true
+    external: true
 
   ild_fedora_tomcat_logs:
-     external: true
+    external: true
 
   ild_solr_data:
-     external: true
+    external: true
 
   ild_solr_logs:
-     external: true
+    external: true
 
-   ild_apache_data:
-     external: true
+  ild_apache_data:
+    external: true
 
-   ild_apache_logs:
-     external: true
+  ild_apache_logs:
+    external: true
