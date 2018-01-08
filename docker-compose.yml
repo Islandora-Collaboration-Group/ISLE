@@ -16,8 +16,10 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ild_mysql_data:/var/lib/mysql
-      - ild_mysql_logs:/var/log/mysql
+      #- ild_mysql_data:/var/lib/mysql
+      #- ild_mysql_logs:/var/log/mysql
+      - ./data/mysql:/var/lib/mysql
+      - ./data/mysql/log:/var/log/mysql
     container_name: isle-mysql
 
   fedora:
@@ -30,10 +32,14 @@ services:
     depends_on:
       - mysql
     volumes:
-    - ild_fedora_data:/usr/local/fedora/data
-    - ild_fedora_logs:/usr/local/fedora/server/logs
-    - ild_fedora_apache_logs:/var/log/apache2
-    - ild_fedora_tomcat_logs:/usr/local/tomcat/logs
+#    - ild_fedora_data:/usr/local/fedora/data
+#    - ild_fedora_logs:/usr/local/fedora/server/logs
+#    - ild_fedora_apache_logs:/var/log/apache2
+#    - ild_fedora_tomcat_logs:/usr/local/tomcat/logs
+    - ./data/fedora/data:/usr/local/fedora/data
+    - ./data/fedora/log/fedora:/usr/local/fedora/server/logs
+    - ./data/fedora/log/apache:/var/log/apache2
+    - ./data/fedora/log/tomcat:/usr/local/tomcat/logs
     container_name: isle-fedora
 
   solr:
@@ -44,8 +50,10 @@ services:
       - "8983:8983"
     tty: true
     volumes:
-    - ild_solr_data:/usr/local/solr/collection1/data
-    - ild_solr_logs:/usr/local/tomcat/logs
+    # - ild_solr_data:/usr/local/solr/collection1/data
+    # - ild_solr_logs:/usr/local/tomcat/logs
+    - ./data/solr/logs:/usr/local/tomcat/logs
+    - ./data/solr:/usr/local/solr/collection1/data
     container_name: isle-solr
 
   apache:
@@ -64,38 +72,40 @@ services:
       - mysql
       - fedora
     volumes:
-      - ild_apache_data:/var/www/html
-      - ild_apache_logs:/var/log/apache2
+      #- ild_apache_data:/var/www/html
+      #- ild_apache_logs:/var/log/apache2
       #- ./isle_localdomain/macosx_settings.php:/var/www/html/sites/default/settings.php
+      - ./data/apache/html:/var/www/html
+      - ./data/apache/log/apache:/var/log/apache2
     container_name: isle-apache
 
-volumes:
-  ild_mysql_data:
-    external: true
+#volumes:
+#  ild_mysql_data:
+#    external: true
 
-  ild_mysql_logs:
-    external: true
+#  ild_mysql_logs:
+#    external: true
 
-  ild_fedora_data:
-    external: true
+#  ild_fedora_data:
+#    external: true
 
-  ild_fedora_logs:
-    external: true
+#  ild_fedora_logs:
+#    external: true
 
-  ild_fedora_apache_logs:
-    external: true
+#  ild_fedora_apache_logs:
+#    external: true
 
-  ild_fedora_tomcat_logs:
-    external: true
+#  ild_fedora_tomcat_logs:
+#    external: true
 
-  ild_solr_data:
-    external: true
+#  ild_solr_data:
+#    external: true
 
-  ild_solr_logs:
-    external: true
+#  ild_solr_logs:
+#    external: true
 
-  ild_apache_data:
-    external: true
+#  ild_apache_data:
+#    external: true
 
-  ild_apache_logs:
-    external: true
+#  ild_apache_logs:
+#    external: true
