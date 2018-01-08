@@ -6,8 +6,8 @@ LABEL org.label-schema.name = "isle-mysql" \
       org.label-schema.vendor": "Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com" \
       org.label-schema.schema-version = "1.0"
 
-COPY mysql/my.cnf /etc/alternatives/my.cnf
-COPY mysql/init_dbs/ /docker-entrypoint-initdb.d/
+COPY my.cnf /etc/alternatives/
+COPY init_dbs/ /docker-entrypoint-initdb.d/
 
 EXPOSE 3306
 CMD ["mysqld"]

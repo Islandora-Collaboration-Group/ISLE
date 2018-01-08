@@ -9,9 +9,9 @@ LABEL org.label-schema.name = "isle-apache" \
 
 ###
 # Copy over tomcat files for configuration
-COPY solr/tomcat/tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
-COPY solr/tomcat/server.xml /usr/local/tomcat/conf/server.xml
-COPY solr/tomcat/web.xml /usr/local/tomcat/conf/web.xml
+COPY tomcat/tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
+COPY tomcat/server.xml /usr/local/tomcat/conf/server.xml
+COPY tomcat/web.xml /usr/local/tomcat/conf/web.xml
 
 ###
 # Solr Installation
@@ -45,11 +45,11 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
     && cp -v /tmp/solr-4.10.4/contrib/analysis-extras/lucene-libs/lucene-analyzers-icu-4.10.4.jar /usr/local/tomcat/webapps/solr/WEB-INF/lib/ \
     && rm -rf /tmp/solr-4.10.4
 
-COPY solr/solr/solr.xml /usr/local/tomcat/conf/Catalina/localhost/solr.xml
-COPY solr/solr/log4j.properties /usr/local/tomcat/webapps/solr/WEB-INF/classes/log4j.properties
-COPY solr/solr/solrconfig.xml /usr/local/solr/collection1/conf/solrconfig.xml
-COPY solr/solr/schema.xml /usr/local/solr/collection1/conf/schema.xml
-COPY solr/solr/stopwords.txt /usr/local/solr/collection1/conf/stopwords.txt
+COPY solr/solr.xml /usr/local/tomcat/conf/Catalina/localhost/solr.xml
+COPY solr/log4j.properties /usr/local/tomcat/webapps/solr/WEB-INF/classes/log4j.properties
+COPY solr/solrconfig.xml /usr/local/solr/collection1/conf/solrconfig.xml
+COPY solr/schema.xml /usr/local/solr/collection1/conf/schema.xml
+COPY solr/stopwords.txt /usr/local/solr/collection1/conf/stopwords.txt
 
 EXPOSE 8080
 CMD ["catalina.sh", "run"]

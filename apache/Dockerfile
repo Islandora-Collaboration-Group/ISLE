@@ -243,8 +243,8 @@ RUN cd /etc/ \
     && echo "0 */12 * * * root /usr/sbin/tmpreaper -am 4d /tmp >> /var/log/cron.log 2>&1" /etc/cron.d/tmpreaper-cron \
     && chmod 0644 /etc/cron.d/tmpreaper-cron
 
-COPY apache/envinit.sh /opt/adore-djatoka-1.1/bin/envinit.sh
-COPY apache/site.conf /etc/apache2/sites-available/site.conf
+COPY envinit.sh /opt/adore-djatoka-1.1/bin/envinit.sh
+COPY site.conf /etc/apache2/sites-available/site.conf
 
 ###
 # Set up environmental variables for tomcat & dependencies installation
@@ -328,10 +328,10 @@ RUN mkdir -p /tmp/build \
 
 ### Alpha 2 - new apache drupal site code JAN 5th GDM
 
-COPY apache/isle_drupal_build_tools/drupal.drush.make /tmp/isle_drupal_build_tools/drupal.drush.make
-COPY apache/isle_drupal_build_tools/islandora.drush.make /tmp/isle_drupal_build_tools/islandora.drush.make
-COPY apache/isle_drupal_build_tools/fix-permissions.sh /tmp/isle_drupal_build_tools/fix-permissions.sh
-COPY apache/linux_settings.php /tmp/settings.php
+COPY isle_drupal_build_tools/drupal.drush.make /tmp/isle_drupal_build_tools/drupal.drush.make
+COPY isle_drupal_build_tools/islandora.drush.make /tmp/isle_drupal_build_tools/islandora.drush.make
+COPY isle_drupal_build_tools/fix-permissions.sh /tmp/isle_drupal_build_tools/fix-permissions.sh
+COPY linux_settings.php /tmp/settings.php
 
 RUN cd /tmp/isle_drupal_build_tools \
     && /usr/local/bin/drush make --prepare-install /tmp/isle_drupal_build_tools/drupal.drush.make /tmp/drupal_install \
