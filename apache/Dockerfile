@@ -347,7 +347,7 @@ RUN cd /tmp/isle_drupal_build_tools \
     && mv /var/www/html/sites/all/libraries/openseadragon-bin-2.2.1 /var/www/html/sites/all/libraries/openseadragon \
     && rm /var/www/html/sites/all/libraries/openseadragon-bin-2.2.1.zip
 
-COPY linux_settings.php /tmp/settings.php
+COPY linux_settings.php /var/www/html/sites/default/settings.php
 
 RUN cd /var/www/html/sites/all/modules \
     && drush st \
