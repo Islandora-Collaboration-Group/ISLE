@@ -346,10 +346,14 @@ RUN cd /tmp/isle_drupal_build_tools \
     && unzip /var/www/html/sites/all/libraries/openseadragon-bin-2.2.1.zip \
     && mv /var/www/html/sites/all/libraries/openseadragon-bin-2.2.1 /var/www/html/sites/all/libraries/openseadragon \
     && rm /var/www/html/sites/all/libraries/openseadragon-bin-2.2.1.zip \
-    && cd /var/www/html/sites/all/modules \
+
+COPY linux_settings.php /tmp/settings.php
+
+RUN cd /var/www/html/sites/all/modules \
     && drush st \
-    && /usr/local/bin/drush site-install -y --account-name=isld_admin --account-pass=isld_admin2018 --account-mail=admin@isle.localdomain --site-name="ISLE" \
-    && /usr/local/bin/drush -u 1 -y vset islandora_paged_content_djatoka_url "http://isle.localdomain/adore-djatoka/" \
+    && /usr/local/bin/drush site-install -y --account-name=isld_admin --account-pass=isld_admin2018 --account-mail=admin@isle.localdomain --site-name="ISLE"
+
+RUN /usr/local/bin/drush -u 1 -y vset islandora_paged_content_djatoka_url "http://isle.localdomain/adore-djatoka/" \
     && /usr/local/bin/drush -u 1 -y vset islandora_base_url "http://fedora:8080/fedora" \
     && /usr/local/bin/drush -u 1 -y vset islandora_solr_url "solr:8080/solr" \
     && /usr/local/bin/drush -u 1 -y vset imagemagick_convert "/usr/bin/convert" \
