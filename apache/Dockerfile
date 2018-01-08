@@ -345,7 +345,7 @@ RUN cd /tmp/isle_drupal_build_tools \
     && wget https://github.com/openseadragon/openseadragon/releases/download/v2.2.1/openseadragon-bin-2.2.1.zip \
     && unzip /var/www/html/sites/all/libraries/openseadragon-bin-2.2.1.zip \
     && mv /var/www/html/sites/all/libraries/openseadragon-bin-2.2.1 /var/www/html/sites/all/libraries/openseadragon \
-    && rm /var/www/html/sites/all/libraries/openseadragon-bin-2.2.1.zip \
+    && rm /var/www/html/sites/all/libraries/openseadragon-bin-2.2.1.zip
 
 COPY linux_settings.php /tmp/settings.php
 
