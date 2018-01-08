@@ -104,7 +104,7 @@ RUN cd /opt \
     && echo "/opt/adore-djatoka-1.1/lib/Linux-x86-64" > /etc/ld.so.conf.d/kdu_libs.conf \
     && chmod 444 /etc/ld.so.conf.d/kdu_libs.conf \
     && chown root:root /etc/ld.so.conf.d/kdu_libs.conf \
-    && sed -i 's/localhost/fedora/g' /opt/adore-djatoka-1.1/index.html
+    && sed -i 's/localhost/fedora/g' /usr/local/tomcat/webapps/adore-djatoka/index.html
 
 COPY adore-djatoka/envinit.sh /opt/adore-djatoka-1.1/bin/envinit.sh
 COPY adore-djatoka/log4j.properties /usr/local/tomcat/webapps/adore-djatoka/WEB-INF/classes/log4j.properties
