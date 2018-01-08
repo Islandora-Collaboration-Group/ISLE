@@ -71,7 +71,8 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 # Configure apache
 COPY apache/site.conf /etc/apache2/sites-available/site.conf
 
-RUN echo 'ServerName localhost' > /etc/apache2/conf-available/server-name.conf \
+RUN touch /etc/apache2/conf-available/server-name.conf \
+    && echo 'ServerName localhost' > /etc/apache2/conf-available/server-name.conf \
     && a2enconf servername \
     && mkdir -p /var/www/html \
     && chmod 0644 /etc/apache2/sites-available/site.conf \
