@@ -349,11 +349,13 @@ RUN cd /tmp/isle_drupal_build_tools \
 
 COPY linux_settings.php /var/www/html/sites/default/settings.php
 
-RUN cd /var/www/html/sites/all/modules \
+RUN cd /var/www/html/sites/default/ \
     && drush st \
     && /usr/local/bin/drush site-install -y --account-name=isld_admin --account-pass=isld_admin2018 --account-mail=admin@isle.localdomain --site-name="ISLE"
 
-RUN /usr/local/bin/drush -u 1 -y vset islandora_paged_content_djatoka_url "http://isle.localdomain/adore-djatoka/" \
+
+RUN cd /var/www/html/sites/all/modules \
+    && /usr/local/bin/drush -u 1 -y vset islandora_paged_content_djatoka_url "http://isle.localdomain/adore-djatoka/" \
     && /usr/local/bin/drush -u 1 -y vset islandora_base_url "http://fedora:8080/fedora" \
     && /usr/local/bin/drush -u 1 -y vset islandora_solr_url "solr:8080/solr" \
     && /usr/local/bin/drush -u 1 -y vset imagemagick_convert "/usr/bin/convert" \
