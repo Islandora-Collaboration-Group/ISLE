@@ -22,3 +22,8 @@
      * Open a terminal and enter: `git clone https://github.com/Islandora-Collaboration-Group/ISLE`
      * `cd /yourpathto/ISLE`
      * This process will take 3 - 5 minutes depending on internet bandwidth
+
+#### Return to Quickstart Guide
+* Continue with next steps on [1.4. -Testing - Alpha Quickstart Guide](alpha_quickstart.md)
+
+---
