@@ -332,7 +332,7 @@ RUN mkdir -p /tmp/build \
 COPY isle_drupal_build_tools/drupal.drush.make /tmp/isle_drupal_build_tools/drupal.drush.make
 COPY isle_drupal_build_tools/islandora.drush.make /tmp/isle_drupal_build_tools/islandora.drush.make
 COPY isle_drupal_build_tools/fix-permissions.sh /tmp/isle_drupal_build_tools/fix-permissions.sh
-COPY linux_settings.php /tmp/settings.php
+COPY settings.php /tmp/settings.php
 
 RUN cd /tmp/isle_drupal_build_tools \
     && /usr/local/bin/drush make --prepare-install /tmp/isle_drupal_build_tools/drupal.drush.make /tmp/drupal_install \
@@ -347,7 +347,7 @@ RUN cd /tmp/isle_drupal_build_tools \
     && mv /var/www/html/sites/all/libraries/openseadragon-bin-2.2.1 /var/www/html/sites/all/libraries/openseadragon \
     && rm /var/www/html/sites/all/libraries/openseadragon-bin-2.2.1.zip
 
-COPY linux_settings.php /var/www/html/sites/default/settings.php
+COPY settings.php /var/www/html/sites/default/
 
 RUN cd /var/www/html/sites/default/ \
     && drush st \
