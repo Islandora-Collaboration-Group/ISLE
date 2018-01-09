@@ -324,7 +324,14 @@ RUN mkdir -p /tmp/build \
     && chown islandora:www-data /usr/local/bin/qt-faststart \
     && chown islandora:www-data /usr/bin/lame \
     && chown islandora:www-data /usr/bin/x264 \
-    && chown islandora:www-data /usr/bin/xtractprotos
+    && chown islandora:www-data /usr/bin/xtractprotos \
+    && mkdir -p /tmp/isle_drupal_build_tools
+
+COPY isle_drupal_build_tools/drupal.drush.make /tmp/isle_drupal_build_tools/drupal.drush.make
+COPY isle_drupal_build_tools/islandora.drush.make /tmp/isle_drupal_build_tools/islandora.drush.make
+COPY isle_drupal_build_tools/apache_provision.sh /tmp/isle_drupal_build_tools/apache_provision.sh
+COPY isle_drupal_build_tools/fix-permissions.sh /tmp/isle_drupal_build_tools/fix-permissions.sh
+COPY settings.php /tmp/settings.php
 
 
 ###

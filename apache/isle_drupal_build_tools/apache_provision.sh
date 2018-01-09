@@ -1,8 +1,5 @@
 #!/bin/bash
 
-echo "Make tmp/isle_drupal_build_tools Directory"
-mkdir -p /tmp/isle_drupal_build_tools
-
 echo "Changing directory to tmp/isle_drupal_build_tools"
 cd /tmp/isle_drupal_build_tools || exit
 
@@ -14,6 +11,9 @@ echo "Using Islandora makefile for Islandora Modules for sample Drupal site with
 
 echo "Remove blank settings.php from /tmp/drupal_install"
 rm -f /tmp/drupal_install/sites/default/settings.php
+
+echo "Move /tmp/settings.php to /var/www/html/sites/default/settings.php"
+mv /tmp/settings.php /var/www/html/sites/default/settings.php
 
 echo "Copy /tmp/drupal_install contents to /var/www/html"
 cp -rv /tmp/drupal_install/. /var/www/html/
@@ -35,8 +35,6 @@ mv /var/www/html/sites/all/libraries/openseadragon-bin-2.2.1 /var/www/html/sites
 
 echo "Delete Openseadragon zipfile"
 rm /var/www/html/sites/all/libraries/openseadragon-bin-2.2.1.zip
-
-#!/bin/bash
 
 echo "Installing all Islandora modules"
 cd /var/www/html/sites/all/modules || exit
