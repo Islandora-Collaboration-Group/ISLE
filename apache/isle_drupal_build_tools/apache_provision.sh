@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "Make tmp/isle_drupal_build_tools Directory"
+mkdir -p /tmp/isle_drupal_build_tools
+
 echo "Changing directory to tmp/isle_drupal_build_tools"
 cd /tmp/isle_drupal_build_tools || exit
 
