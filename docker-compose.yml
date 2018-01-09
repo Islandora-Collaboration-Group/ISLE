@@ -10,21 +10,20 @@ version: '2'
 services:
   mysql:
     build: ./mysql
-    image: islandoracollabgroup/isle-mysql:latest
+    image: islandoracollabgroup/isle-mysql:alpha2
+    container_name: isle-mysql
     environment:
       - MYSQL_ROOT_PASSWORD=ild_mysqlrt_2018
     ports:
       - "3306:3306"
     volumes:
-      #- ild_mysql_data:/var/lib/mysql
-      #- ild_mysql_logs:/var/log/mysql
-      - ./data/mysql:/var/lib/mysql
+      - db-data:/var/lib/mysql
       - ./data/mysql/log:/var/log/mysql
-    container_name: isle-mysql
 
   fedora:
     build: ./fedora
-    image: islandoracollabgroup/isle-fedora:latest
+    image: islandoracollabgroup/isle-fedora:alpha2
+    container_name: isle-fedora
     ports:
       - "8080:8080"
       - "8777:80"
@@ -32,33 +31,27 @@ services:
     depends_on:
       - mysql
     volumes:
-#    - ild_fedora_data:/usr/local/fedora/data
-#    - ild_fedora_logs:/usr/local/fedora/server/logs
-#    - ild_fedora_apache_logs:/var/log/apache2
-#    - ild_fedora_tomcat_logs:/usr/local/tomcat/logs
-    - ./data/fedora/data:/usr/local/fedora/data
+    - fed-data:/usr/local/fedora/data
     - ./data/fedora/log/fedora:/usr/local/fedora/server/logs
     - ./data/fedora/log/apache:/var/log/apache2
     - ./data/fedora/log/tomcat:/usr/local/tomcat/logs
-    container_name: isle-fedora
 
   solr:
     build: ./solr
-    image: islandoracollabgroup/isle-solr:latest
+    image: islandoracollabgroup/isle-solr:alpha2
+    container_name: isle-solr
     ports:
       - "8091:8080"
       - "8983:8983"
     tty: true
     volumes:
-    # - ild_solr_data:/usr/local/solr/collection1/data
-    # - ild_solr_logs:/usr/local/tomcat/logs
+    - solr-data:/usr/local/solr/collection1/data
     - ./data/solr/logs:/usr/local/tomcat/logs
-    - ./data/solr:/usr/local/solr/collection1/data
-    container_name: isle-solr
 
   apache:
     build: ./apache
-    image: islandoracollabgroup/isle-apache:latest
+    image: islandoracollabgroup/isle-apache:alpha2
+    container_name: isle-apache
     environment:
       - JAVA_HOME=/usr/lib/jvm/java-8-oracle/
       - JRE_HOME=/usr/lib/jvm/java-8-oracle/jre
@@ -72,40 +65,12 @@ services:
       - mysql
       - fedora
     volumes:
-      #- ild_apache_data:/var/www/html
-      #- ild_apache_logs:/var/log/apache2
-      #- ./isle_localdomain/macosx_settings.php:/var/www/html/sites/default/settings.php
-      - ./data/apache/html:/var/www/html
+      - apache-data:/var/www/html
       - ./data/apache/log/apache:/var/log/apache2
-    container_name: isle-apache
+      #- ./isle_localdomain/macosx_settings.php:/var/www/html/sites/default/settings.php
 
-#volumes:
-#  ild_mysql_data:
-#    external: true
-
-#  ild_mysql_logs:
-#    external: true
-
-#  ild_fedora_data:
-#    external: true
-
-#  ild_fedora_logs:
-#    external: true
-
-#  ild_fedora_apache_logs:
-#    external: true
-
-#  ild_fedora_tomcat_logs:
-#    external: true
-
-#  ild_solr_data:
-#    external: true
-
-#  ild_solr_logs:
-#    external: true
-
-#  ild_apache_data:
-#    external: true
-
-#  ild_apache_logs:
-#    external: true
+volumes:
+  db-data:
+  fed-data:
+  solr-data:
+  apache-data:
