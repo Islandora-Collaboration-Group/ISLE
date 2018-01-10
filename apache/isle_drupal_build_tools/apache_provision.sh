@@ -169,7 +169,7 @@ echo "Enable module script finished!"
 
 # Fix site directory permissions
 echo "Running fix-permissions script"
-/bin/bash /tmp/fix-permissions.sh --drupal_path=/var/www/html --drupal_user=islandora --httpd_group=www-data
+/bin/bash /tmp/isle_drupal_build_tools/fix-permissions.sh --drupal_path=/var/www/html --drupal_user=islandora --httpd_group=www-data
 
 echo "Drush script finished! ...exiting"
 exit
