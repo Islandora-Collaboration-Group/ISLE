@@ -12,11 +12,14 @@ echo "Using Islandora makefile for Islandora Modules for sample Drupal site with
 echo "Remove blank settings.php from /tmp/drupal_install"
 rm -f /tmp/drupal_install/sites/default/settings.php
 
-echo "Move /tmp/settings.php to /var/www/html/sites/default/settings.php"
-mv /tmp/settings.php /var/www/html/sites/default/settings.php
+echo "Remove basic ubuntu index.html page"
+rm -f /var/www/html/index.html
 
 echo "Copy /tmp/drupal_install contents to /var/www/html"
 cp -rv /tmp/drupal_install/. /var/www/html/
+
+echo "Copy /tmp/settings.php to /var/www/html/sites/default/settings.php"
+cp -v /tmp/settings.php /var/www/html/sites/default/
 
 echo "Fix Openseadragon & Change directory to /var/www/html/sites/all/libraries"
 cd /var/www/html/sites/all/libraries || exit
