@@ -31,10 +31,12 @@ services:
     depends_on:
       - mysql
     volumes:
-    - fed-data:/usr/local/fedora/data
-    - ./data/fedora/log/fedora:/usr/local/fedora/server/logs
-    - ./data/fedora/log/apache:/var/log/apache2
-    - ./data/fedora/log/tomcat:/usr/local/tomcat/logs
+      - fed-data:/usr/local/fedora/data
+      - ./data/fedora/log/fedora:/usr/local/fedora/server/logs
+      - ./data/fedora/log/apache:/var/log/apache2
+      - ./data/fedora/log/tomcat:/usr/local/tomcat/logs
+    extra_hosts:
+      - "isle.localdomain:"
 
   solr:
     build: ./solr
@@ -45,8 +47,8 @@ services:
       - "8983:8983"
     tty: true
     volumes:
-    - solr-data:/usr/local/solr/collection1/data
-    - ./data/solr/logs:/usr/local/tomcat/logs
+      - solr-data:/usr/local/solr/collection1/data
+      - ./data/solr/logs:/usr/local/tomcat/logs
 
   apache:
     build: ./apache
@@ -62,6 +64,8 @@ services:
       - apache-data:/var/www/html
       - ./data/apache/log/apache:/var/log/apache2
       #- ./isle_localdomain/macosx_settings.php:/var/www/html/sites/default/settings.php
+    extra_hosts:
+      - "isle.localdomain:"
 
 volumes:
   db-data:
