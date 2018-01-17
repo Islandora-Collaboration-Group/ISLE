@@ -57,3 +57,9 @@ ehthumbs.db
 Thumbs.db
 .AppleDouble
 .LSOverride
+
+#===================
+# ISLE specific
+data
+site
+passwords.md
