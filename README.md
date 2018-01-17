@@ -2,13 +2,25 @@
 
 ## ISLE Documents
 * [ISLE Executive Summary](https://docs.google.com/document/d/17tAFxR6_b7sxXkE1teNDQZv0UZ0LLSkX8K05-U6A6nw/edit?usp=sharing) (a concise overview in plain English)
-* [ISLE Specifications](https://docs.google.com/document/d/1iTXYbBMtQ3TaujPXon01Hp6hVwnxYvsVXYa2G79SuWc/edit#) (based on the older, now closed, [ISLE MVP](https://docs.google.com/document/d/1s_qWkRgHlRAH6SWuXid6dOYzBjcbqU6PV_gZ1sUu2iY/edit?usp=sharing) doc)
+* [ISLE Specifications](https://docs.google.com/document/d/1iTXYbBMtQ3TaujPXon01Hp6hVwnxYvsVXYa2G79SuWc/edit#) (technical specifications)
 * [ISLE Supporters](https://docs.google.com/document/d/1ycx5ATbeWpUWvpZ6bwXws490CMgi0dyB9SBfPYUDEjk/edit?usp=sharing) (list of institutions)
 
-## Phase 1 Funding Successful - We've raised $89,400!!
-We have successfully met our funding goal! In fact, we exceeded the goal, and have pledges totaling $89,400 from 17 institutions of higher-education plus Born-Digital, when our goal was only $84,000.
+## Funding successful - We've raised $89,400!!
+We successfully exceeded our funding goal of $84,000 with pledges totaling $89,400 from 17 higher-ed institutions and Born-Digital (BD contributed $24,000 as pro-bono expert labor).
 
-We have green-lighted the ISLE project! More than 20 institutions have expressed interest in using ISLE to update their Islandora servers.
+## Timeline
+- 08/2016 - [Completed] ISLE conceived and brought to the ICG and Common Media/Born-Digital
+- 09/2016 - [Completed] ISLE presented at ICG Hack/Doc @ Wesleyan University
+- 05/2017 - [Completed] ISLE presented at Islandoracon annual conference (Hamilton, Ontario)
+- 09/2017 - [Completed] Fundraising, green-lighted ISLE MVP, opened 3-week Public Comment Period
+- 12/2017 - [Completed] Public prototype demonstration: [view 5-minute video](https://vimeo.com/245777329)
+- 12/2017 - Alpha Test #1: Grinnell College (lead: Mark McFate)
+- 01/2018 - Alpha Test #2: Williams College (lead: David Keiser-Clark)
+- 01/2018 - Alpha Test #3: Rensselaer Polytechnic Institute (lead: Andrea Byrne)
+- 01/2018 - Community Alpha Test #1: University of Pittsburgh (lead: Clinton Graham)
+- 02/2018 - Community Alpha Test #2: Hamilton College (lead: Steve Young)
+- 02/2018 - Community Alpha Test #3: Barnard College (lead: Ben Rosner)
+- 02/2018 - Stable release of ISLE (for current Islandora 7x) and documentation as open-source for public use
 
 ## Timeline and Next Steps
 - 08/2016 - ISLE conceived and brought to the ICG and Common Media/Born-Digital
