@@ -145,6 +145,7 @@ drush -y -u 1 en islandora_altmetrics
 drush -y -u 1 en islandora_populator
 drush -y -u 1 en islandora_newspaper_batch
 drush -y -u 1 en islandora_openseadragon
+drush -y -u 1 en views_ui
 drush -y -u 1 en webform
 drush -y -u 1 en webform_ajax
 drush -y -u 1 en webform_bonus
