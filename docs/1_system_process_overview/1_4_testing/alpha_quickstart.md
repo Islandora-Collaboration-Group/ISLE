@@ -57,6 +57,19 @@ Four Dockerhub images have already been "built" and are stored in a repository t
 * `docker pull islandoracollabgroup/isle-fedora`  
 * `docker-compose up -d fedora`  
 
+* **(Optional but recommended)**
+  * After spinning up fedora container, check if the Fedora service is running prior to advancing.
+  * Navigate to http://fedora:8080/manager/html a popup login prompt should appear.
+    * using the supplied username and password at the bottom of this page, enter the appropriate values
+      * section #### 2. Fedora container, service Tomcat, user is admin
+    * upon login a large display of running Tomcat applications should display, scroll down to `fedora`
+  * The application state / status should be `true`
+  * If `false` appears instead, attempt to restart the fedora service manually.
+    * Select the `restart` button to the right of the status area. 
+  * If it still fails, review the mounted fedora logs. The `docker-compose.yml` file will indicate where the logs are located.
+  * using a command like `tail -n 300 <path to fedora logs>/fedora.log` should display enough information to troubleshoot.
+
+
 #### 3. Solr image pull & container launch (10 - 20 mins)  
 
 * `docker pull islandoracollabgroup/isle-solr`  
