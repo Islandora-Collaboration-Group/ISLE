@@ -43,9 +43,9 @@ Four Dockerhub images have already been "built" and are stored in a repository t
 
 ### Alpha install process (same for all host server types)
 
-**Please note:** *The first container (MySQL, isle-mysql, mysql) has to be running PRIOR to all others (including fedora & apache) due to a race condition (fedora starts prior to mysql being ready to accept connections). This improper state will be fixed at a later point in the project.*  
+**Please note:** *The first container (MySQL, isle-mysql, mysql) has to be running PRIOR to all others (including fedora & apache) due to a race condition (fedora starts prior to mysql being ready to accept connections). This improper state will be fixed at a later point in the project.*  **DO NOT RUN** `docker-compose up -d` during the initial install process as this will download all images and then run all containers at the same time which will trigger this race condition and subsequent chain of service failures.
 
-* **DO NOT RUN** `docker-compose up -d` during the initial install process as this will download all images and then run all containers at the same time which will trigger the above mentioned race condition and subsequent chain of service failures.
+* **During the initial install process** do the following steps to individually download each image and run each container.
 
 #### 1. MySQL image pull & container launch (10-15 mins)
 
@@ -81,7 +81,8 @@ Four Dockerhub images have already been "built" and are stored in a repository t
     * `./make_site.sh`
     * `./install_site.sh`
 
-* Once finished `cntrl-D` or type `exit` to get out of the apache container & QC the resulting setup
+* Once finished `cntrl-D` or type `exit` to get out of the apache container
+* Test (QC) the resulting setup by opening a web browser to the URL of your new Islandora Docker server (i.e. http://myname.institution.edu)
 
 **Please note:** The cronjob setting in the `install_site.sh` script is commented out as this will need to be flowed into the Docker build process prior. Issue with default Docker root user vs using islandora user. Drupal cron can run properly.
 
