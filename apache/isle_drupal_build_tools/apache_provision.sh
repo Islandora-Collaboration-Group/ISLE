@@ -160,6 +160,9 @@ drush iabookreader-plugin
 /usr/local/bin/drush -u 1 -y vset islandora_paged_content_gs "/usr/local/bin/gs"
 echo "Enable module script finished!"
 
+echo "Re-running the islandora_video_mp4_audio_codec vset!"
+/usr/local/bin/drush @sites -u 1 -y vset islandora_video_mp4_audio_codec "aac"
+
 ## Cron job setup
 #echo "Cron job setup every 3 hours"
 #crontab -l > crondrupal
