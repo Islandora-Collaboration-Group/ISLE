@@ -1,0 +1,9 @@
+---
+- name: create user with groups
+  action: user
+    name="{{ user_name }}"
+    group="{{ user_name }}"
+    shell="{{ user_shell }}"
+    createhome=yes
+    generate_ssh_key=yes
+    password="{{ user_password }}"

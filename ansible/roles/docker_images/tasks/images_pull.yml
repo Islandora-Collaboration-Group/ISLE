@@ -1,0 +1,9 @@
+---
+
+- name: Pull all four of the ISLE images
+  shell: docker pull "{{ item }}"
+  with_items:
+    - "{{ isle_docker_image_mysql }}"
+    - "{{ isle_docker_image_fedora }}"
+    - "{{ isle_docker_image_solr }}"
+    - "{{ isle_docker_image_apache }}"
