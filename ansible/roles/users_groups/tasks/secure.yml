@@ -1,0 +1,9 @@
+---
+- name: disallow root SSH access
+  lineinfile: dest=/etc/ssh/sshd_config regexp="^PermitRootLogin" line="PermitRootLogin no"
+
+- name: disallow password authentication
+  lineinfile: dest=/etc/ssh/sshd_config regexp="^PasswordAuthentication" line="PasswordAuthentication no"
+
+- name: Allow islandora user to sudo without password
+  copy: src=islandora dest=/etc/sudoers.d/islandora owner=root group=root mode=0440

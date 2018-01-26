@@ -1,0 +1,51 @@
+---
+
+- name: Set selinux to permissive
+  selinux: policy=targeted state=permissive
+
+- name: turn off iptables ip4
+  command: /sbin/chkconfig iptables off
+
+- name: turn off iptables ip6
+  command: /sbin/chkconfig ip6tables off
+
+- name: turn off iptables service now
+  service: name=iptables state=stopped
+
+- name: Ensure that all host dependencies are installed
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - libselinux-python
+    - libsemanage-python
+    - yum-utils
+    - ntp
+    - openssh-clients
+    - rsync
+    - curl
+    - wget
+    - git
+    - zip
+    - unzip
+    - vim
+    - nano
+    - emacs-nox
+    - htop
+
+
+- name: be sure ntpd is running and enabled
+  service: name=ntpd state=running enabled=yes
+
+- name: Add Docker GPG key for CENTOS
+  rpm_key:
+    key: https://download.docker.com/linux/centos/gpg
+    state: present
+
+- name: Add the Docker repository for RHEL / CENTOS
+  get_url:
+    url: "{{ docker_yum_repo }}"
+    dest: "/etc/yum.repos.d/docker-{{ docker_version }}.repo"
+    owner: root
+    group: root
+    mode: 0644

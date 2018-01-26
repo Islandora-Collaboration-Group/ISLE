@@ -1,0 +1,4 @@
+---
+
+- name: create group
+  group: name={{ user_name }} state=present

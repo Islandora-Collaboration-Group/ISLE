@@ -14,7 +14,7 @@ This Alpha Migration guide is intended the process for endusers to migrate an ex
      * [Ansible install](host_server_setup_ansible.md) setup for (Ubuntu / Centos) includes ISLE repo clone steps
 
 ```
-**TO DO:**  
+**TO DO:**  Separate page please
       add section to Manual pages for generating a ssh key for the `islandora` user.  
        Ansible handles this but missing from the three manual pages above.  
        * open up a terminal / cli prompt on the ISLE host server and enter the commands  
@@ -47,6 +47,16 @@ This Alpha Migration guide is intended the process for endusers to migrate an ex
 ```
 **TO DO:** Review Ben's outlines from https://github.com/Islandora-Collaboration-Group/ISLE/issues/80
 ```
+
+### Migration Process Explained
+
+* Here's what's going to happen / why?
+* Copying from prod location to prod location on ISLE host Server
+* Blah blah about mering into config diff solr etc
+
+* repeat entire process (if necessary) for additional ISLE platform e.g. production, staging and development
+
+
 
 ### Production Copy / Export Checklist
 Checklist of materials to **COPY** from the current running institutional Islandora Production server's to the appropriate storage location / directory on the new ISLE Host Server.
@@ -120,6 +130,8 @@ Checklist of materials to **COPY** from the current running institutional Island
 
 
 ### Step 1: Create appropriate Islandora Production data storage structure on new ISLE host server
+
+_Friendly note to user: this may seem redudnadt . Trust me_ saves time and workflow plus if data is alreted. Allowes
 
 * In an appropriate area / path on one's intended ISLE host server e.g. `/opt/` or `/mnt/`, create a directory e.g. `islandora_production_data_storage` with the following sub-directories:
 
@@ -247,6 +259,10 @@ Copy the following below to `/pathto/islandora_production_data_storage/apache`
 
 ### Step 4: Setup Git repo for institutional Docker configuration
 
+_Please Note_ Because  config folder defines the entire platform setup eseentially keeping the sample
+
+This process is necessary for running multiple versions of ISLE e.g. production, staging and development / sandbox. The config folder
+
 * Create a private Git repository (Github.com, Bitbucket.com, Gitlab.com or private institutional Git repository)
 
 * Navigate to the ISLE directory `/opt/ISLE/config/``
@@ -257,6 +273,8 @@ Copy the following below to `/pathto/islandora_production_data_storage/apache`
   * Directions for this process
     * [https://help.github.com/articles/set-up-git/](https://help.github.com/articles/set-up-git/)
     * [https://help.github.com/articles/create-a-repo/](https://help.github.com/articles/create-a-repo/)
+
+
 ```
 **TO DO**: Add more git URLs non github.com
 ```
@@ -352,11 +370,11 @@ services:
   mysql:
 ```
 
-* In the `image` section,the image names to the appropriate images needed
+* In the `image:` section,the image names to the appropriate images needed
     * _As of Jan 25, 2018 please use the alpha2 tag (this documentation will change)_
 
 
-* In the `environment` section, change the MYSQL_ROOT_PASSWORD
+* In the `environment:` section, change the MYSQL_ROOT_PASSWORD
 
 * In the `volumes:` section, change the following:
       - /pathto/isle_production_data_storage/data/mysql:/var/lib/mysql
@@ -387,7 +405,9 @@ TO DO : apache service edits
 
 ```
 
-### Step 7: Pull down images
+### Step 7: Review or Pull down ISLE Docker images
+
+_Please Note: You may have already done this in setting up the host server manually and / or with Ansible. However it is always a good idea to review and check using the first command below._
 
 * Check if all ISLE images have been downloaded
   * `docker image ls`
