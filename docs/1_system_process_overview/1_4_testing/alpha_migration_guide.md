@@ -31,7 +31,7 @@ This Alpha Migration guide is intended the process for endusers to migrate an ex
 
 * The enduser has the expected fully qualified domain name (fqdn) of the new first Islandora / Drupal website documented and assigned to the appropriate IP in DNS.
 
-    * _Please note: this IP address and fqdn are NOT the of current running Production Islandora site!_
+    * _Please Note: this IP address and fqdn are NOT the of current running Production Islandora site!_
 
 
 * The enduser has ssh access to ISLE host server
@@ -291,75 +291,66 @@ This process is necessary for running multiple versions of ISLE e.g. production,
 
 * **Resulting example structure**: `/opt/ISLE/config/isle-prod-project.institution`
 ```
-isle-prod-project.institution  
-├── README.md  
-│  
-├── ansible  
-│   ├── docker_install.yml  
-│   ├── host_vars  
-│   │   └── isle-server.institution.edu.yml  
-│   ├── inventory  
-│   └── roles  
-│  
-├── apache  
-│   ├── isle_build_tools  
-│   │   ├── README.md  
-│   │   ├── apache_provision.sh  
-│   │   ├── drupal.drush.make  
-│   │   ├── fix-permissions.sh  
-│   │   ├── install_site.sh  
-│   │   ├── islandora.drush.make  
-│   │   └── make_site.sh  
+isle-prod-project.institution/
+├── apache
 │   ├── php.ini
-│   ├── settings.php  
-│   ├── site.conf  
-│   └── tmpreaper  
-│       └── cron  
-│  
-├── docker-compose.yml  
-│  
-├── fedora  
-│   ├── apache  
-│   │   └── site.conf  
-│   ├── fedora  
-│   │   ├── fedora-users.xml  
-│   │   ├── fedora.fcfg  
-│   │   ├── filter-drupal.xml  
-│   │   ├── log4j.properties  
-│   │   ├── logback.xml  
-│   │   └── repository-policies  
-│   │       ├── default  
-│   │       └── islandora  
-│   ├── gsearch  
-│   │   ├── fedoragsearch.properties  
-│   │   ├── fgsconfig-basic-configForIslandora.properties  
-│   │   ├── fgsconfigObjects.properties  
-│   │   └── repository.properties  
-│   ├── tmpreaper  
-│   │   └── cron  
-│   └── tomcat  
-│       ├── server.xml  
-│       ├── tomcat-users.xml  
-│       └── web.xml  
-│  
-├── mysql  
-│   ├── initscripts  
-│   │   ├── create_drupal_user.sql  
-│   │   ├── create_fedora_user.sql  
-│   │   ├── drupal_site.sql  
-│   │   └── fedora3.sql  
-│   └── my.cnf  
-│   
-└── solr  
-      ├── log4j.properties  
-      ├── schema.xml  
-      ├── solr.xml  
-      ├── solrconfig.xml  
-      ├── stopwords.txt  
-      └── tomcat  
-          ├── server.xml  
-          ├── tomcat-users.xml  
-          └── web.xml  
+│   ├── settings.php
+│   ├── site.conf
+│   └── tmpreaper
+│       └── cron
+├── docker-compose.yml
+├── fedora
+│   ├── apache
+│   │   └── site.conf
+│   ├── fedora
+│   │   ├── fedora-users.xml
+│   │   ├── fedora.fcfg
+│   │   ├── filter-drupal.xml
+│   │   ├── log4j.properties
+│   │   ├── logback.xml
+│   │   └── repository-policies
+│   │       ├── default
+│   │       │   ├── deny-apim-if-not-localhost.xml
+│   │       │   ├── deny-inactive-or-deleted-objects-or-datastreams-if-not-administrator.xml
+│   │       │   ├── deny-reloadPolicies-if-not-localhost.xml
+│   │       │   ├── deny-unallowed-file-resolution.xml
+│   │       │   ├── permit-anything-to-administrator.xml
+│   │       │   ├── permit-apia-unrestricted.xml
+│   │       │   ├── permit-dsstate-check-unrestricted.xml
+│   │       │   ├── permit-oai-unrestricted.xml
+│   │       │   ├── permit-serverStatus-unrestricted.xml
+│   │       │   └── readme.txt
+│   │       └── islandora
+│   │           ├── permit-apim-to-authenticated-user.xml
+│   │           ├── permit-getDatastream-unrestricted.xml
+│   │           ├── permit-getDatastreamHistory-unrestricted.xml
+│   │           └── permit-upload-to-authenticated-user.xml
+│   ├── gsearch
+│   │   ├── fedoragsearch.properties
+│   │   ├── fgsconfig-basic-configForIslandora.properties
+│   │   ├── fgsconfigObjects.properties
+│   │   └── repository.properties
+│   ├── tmpreaper
+│   │   └── cron
+│   └── tomcat
+│       ├── server.xml
+│       ├── tomcat-users.xml
+│       └── web.xml
+├── mysql
+│   ├── create_drupal_user.sql
+│   ├── create_fedora_user.sql
+│   ├── my.cnf
+│   └── production_site_db.sql
+└── solr
+    ├── solr
+    │   ├── schema.xml
+    │   ├── solr.xml
+    │   ├── solrconfig.xml
+    │   └── stopwords.txt
+    └── tomcat
+        ├── server.xml
+        ├── tomcat-users.xml
+        └── web.xml
 ```
 
 ### Step 6: Edit the `docker-compose.yml` file
@@ -380,7 +371,7 @@ services:
       - /pathto/isle_production_data_storage/data/mysql:/var/lib/mysql
       - /pathto/isle_production_data_storage/data/mysql/log:/var/log/mysql
 
-    * **Please note:** _The docker bind-mount process will automatically create the `/data/mysql` directories_
+    * **Please Note:** _The docker bind-mount process will automatically create the `/data/mysql` directories_
 
 * In the `container_name:` section, change to `isle-mysql-institution` or `isle-mysql-v1`
 

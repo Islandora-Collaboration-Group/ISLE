@@ -6,10 +6,8 @@
 ###
 
 ansible_connection: ssh
-ansible_ssh_host:   # edit here for IP address
+ansible_ssh_host:   # edit here for IP address of ISLE Host Server
 ansible_ssh_user:   # edit here for deploy user
-
-server_type: vm #vagrant, baremetal ?
 
 user_name: islandora
 pub_locale: # edit here for local id_rsa.pub path
