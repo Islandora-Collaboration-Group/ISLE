@@ -267,7 +267,7 @@ This process is necessary for running multiple versions of ISLE e.g. production,
 
 * Navigate to the ISLE directory `/opt/ISLE/config/``
 
-* Create a directory on the ISLE server directory e.g. `/opt/ISLE/config/isle-prod-project.institution.edu`
+* Create a directory on the ISLE server directory e.g. `/opt/ISLE/config/isle-prod-project.institution`
 
 * Instantiate this directory as a git repository
   * Directions for this process
@@ -279,7 +279,7 @@ This process is necessary for running multiple versions of ISLE e.g. production,
 **TO DO**: Add more git URLs non github.com
 ```
 
-* Copy the contents of the `/opt/ISLE/config/production_template/` to this new directory e.g. `/opt/ISLE/config/isle-prod-project.institution.edu`
+* Copy the contents of the `/opt/ISLE/config/production_template/` to this new directory e.g. `/opt/ISLE/config/isle-prod-project.institution`
 
 * The enduser will need to add the `/home/islandora/.ssh/id_rsa.pub` as a git ssh deploy key to be able to push pull from the server.
 
@@ -287,11 +287,11 @@ This process is necessary for running multiple versions of ISLE e.g. production,
 
 ### Step 5: Copy in production files on the Isle Host Server to the new institutional Docker config directory within the ISLE project directory
 
-* Copy in the `highlighted` files from their locations `/pathto/islandora_production_data_storage/` to the appropriate directories of `/opt/ISLE/config/isle-prod-project.institution.edu`
+* Copy in the `highlighted` files from their locations `/pathto/islandora_production_data_storage/` to the appropriate directories of `/opt/ISLE/config/isle-prod-project.institution`
 
-* **Resulting example structure**: `/opt/ISLE/config/isle-prod-project.institution.edu`
+* **Resulting example structure**: `/opt/ISLE/config/isle-prod-project.institution`
 ```
-isle-prod-project.institution.edu  
+isle-prod-project.institution  
 ├── README.md  
 │  
 ├── ansible  
@@ -426,7 +426,7 @@ _Please Note: You may have already done this in setting up the host server manua
 
 ### Step 8: Spin up mysql container and import production databases
 
-* `cd /opt/ISLE/config/isle-prod-project.institution.edu`
+* `cd /opt/ISLE/config/isle-prod-project.institution`
 * `docker-compose up -d mysql`
 
 ```
@@ -438,9 +438,9 @@ _Please Note: You may have already done this in setting up the host server manua
 ### Step 9: Spin up fedora container and run reindex processes
 ```
 **TO DO:**  refine this
-* Staying within `/opt/ISLE/config/isle-prod-project.institution.edu`
+* Staying within `/opt/ISLE/config/isle-prod-project.institution`
 * `docker-compose up -d fedora`
-* check if fedora is running properly e.g. `http://isle-prod-project.institution.edu:8080/manager/html`
+* check if fedora is running properly e.g. `http://isle-prod-project.institution:8080/manager/html`
 * `docker exec -it isle-fedora-institution bash`
 * turn off tomcat `service tomcat stop`
 * reindex Fedora RI `process steps here`
@@ -451,9 +451,9 @@ _Please Note: You may have already done this in setting up the host server manua
 ### Step 10: Spin up solr container and rerun index processes
 ```
 **TO DO:**  refine this
-* Staying within `/opt/ISLE/config/isle-prod-project.institution.edu`
+* Staying within `/opt/ISLE/config/isle-prod-project.institution`
 * `docker-compose up -d solr`
-* check if solr is running properly e.g. `http://isle-prod-project.institution.edu:8777/manager/html`
+* check if solr is running properly e.g. `http://isle-prod-project.institution:8777/manager/html`
 * `docker exec -it isle-fedora-institution bash` NOTE FEDORA NOT SOLR
 * reindex SOLR `process steps here` Use screen
 * TAKES HOURS DEPENDING ON DATA SIZE
@@ -462,9 +462,9 @@ _Please Note: You may have already done this in setting up the host server manua
 ### Step 11: Spin up apache container and run provision script
 ```
 **TO DO:**  refine this
-* Staying within `/opt/ISLE/config/isle-prod-project.institution.edu`
+* Staying within `/opt/ISLE/config/isle-prod-project.institution`
 * `docker-compose up -d apache`
-* check if apache is running properly e.g. `http://isle-prod-project.institution.edu`
+* check if apache is running properly e.g. `http://isle-prod-project.institution`
 * `docker exec -it isle-apache-institution bash`
 * cd /tmp location
 * `/tmp/isle-build-tools/apache-provision.sh` (check if this is appropriate)
