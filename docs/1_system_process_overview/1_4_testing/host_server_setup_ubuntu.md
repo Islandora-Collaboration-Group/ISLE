@@ -26,44 +26,89 @@
 #### Docker setup for Ubuntu 16.04 LTS
 
 * Open a terminal, ssh to the Ubuntu server as root and install the following:
+
      * If you are not root, `sudo -s`
+
      * `apt-get update`  
+
      * `apt-get install openssl git htop ntp curl`  
 
 #### Install Docker on Ubuntu 16.04 LTS
 * `curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -`  
+
 * `add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"`  
+
 * `apt-get update`  
+
 * `apt-get install -y docker-ce`  
+
 * Check if running `systemctl status docker`  
      * You may need to PRESS Shift-Z twice to exit out.
 
 #### Create islandora user (as root)  
 * `adduser islandora`
+
 * `passwd islandora`
+
 * `isle2017`
+
 * `echo "islandora ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/islandora`
+
 * Create Docker group `groupadd docker`  
+
 * Add islandora user to docker group `usermod -aG docker islandora`  
+
+* Create a ssh key for the islandora user
+   * `mkdir /home/islandora/.ssh`  
+
+   * `chmod -Rv 700 /home/islandora/.ssh`  
+
+   * `cd /home/islandora/.ssh`  
+
+   * `ssh-keygen`  
+      * Follow the prompts to save these files to `/home/islandora/.ssh`
+
+* Create an `authorized_keys` file in `/home/islandora/.ssh`using one of the following tools: `nano`, `pico`, `vi` or `emacs`
+
+   * Example:
+     ```
+     vi /home/islandora/.ssh/authorized_keys
+    ```
+
+* Copy in the existing ssh key from the enduser's laptop /workstation. This will allow key based ssh access for the enduser.
+
+      * `cat /Users/endusername/.ssh/id_rsa.pub`
+
+      * Copy and paste this value exactly into the `/home/islandora/.ssh/authorized_keys` file.
+
 * Exit out of the session as the root user.
     * `exit`
     * `su islandora`  
 
 #### Install Docker-Compose (version 1.17.1 as of 11/16/2017) as islandora-user on Ubuntu 16.04 LTS
 * `cd /home/islandora`
+
 * ``sudo curl -L https://github.com/docker/compose/releases/download/1.17.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose``
+
 * `sudo chmod +x /usr/local/bin/docker-compose`  
 
 
 #### Clone ISLE repository
 * Please note in some Linux Distributions, one might need to create the `/opt` directory (optional)  
     * One can `ls -lha /` to see if an `/opt` directory exists  
+
         * If missing, `sudo mkdir /opt`  
+
         * If not missing, proceed to next step.  
+
 * `cd /opt`
+
 * `sudo git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
+
    * This process will take 1 - 3 minutes depending on internet bandwidth
+
 * `sudo chown -Rv islandora:islandora ISLE`
+
 * `cd /opt/ISLE`
 
 

@@ -1,10 +1,11 @@
 ### ISLE Alpha Migration Guide (draft 01.25.2018 v1)
 
-This Alpha Migration guide is intended the process for endusers to migrate an existing production Islandora environment to their respective Islandora containers and volumes.
+This Alpha Migration guide is the intended process for endusers to migrate their existing production Islandora environment to their respective ISLE Islandora containers and volumes.
 
 
 ### Assumptions / Prerequisites
 * ISLE Host server setup has been completed
+
   * If one has not setup the ISLE host server please refer to here:
 
      * Manual Host Server setup for [**CentOS 7**](host_server_setup_centos.md) w/ ISLE repo clone steps
@@ -12,18 +13,6 @@ This Alpha Migration guide is intended the process for endusers to migrate an ex
      * Manual Host Server setup for [**Ubuntu 16.04 LTS**](host_server_setup_ubuntu.md) w/ ISLE repo clone steps   
 
      * [Ansible install](host_server_setup_ansible.md) setup for (Ubuntu / Centos) includes ISLE repo clone steps
-
-```
-**TO DO:**  Separate page please
-      add section to Manual pages for generating a ssh key for the `islandora` user.  
-       Ansible handles this but missing from the three manual pages above.  
-       * open up a terminal / cli prompt on the ISLE host server and enter the commands  
-       * `mkdir /home/islandora/.ssh`  
-       * `chmod -Rv 700 /home/islandora/.ssh`  
-       * `cd /home/islandora/.ssh`  
-       * `ssh-keygen`  
-       * Follow the prompts **TO DO:**  what are the prompts?  
-```
 
 * The fully qualified domain name of their ISLE host server that will run all of the containers has been created and resolves properly in DNS.
 
@@ -42,96 +31,26 @@ This Alpha Migration guide is intended the process for endusers to migrate an ex
 
 * Production data, configuration files etc. have been **copied** from the currently running Islandora production server to the new ISLE host server following the checklist below of required data, configuration files etc.
 
-  * See section **Production Copy / Export Checklist** below
+### Migration to ISLE Process Overview
 
 ```
 **TO DO:** Review Ben's outlines from https://github.com/Islandora-Collaboration-Group/ISLE/issues/80
 ```
 
-### Migration Process Explained
-
 * Here's what's going to happen / why?
 * Copying from prod location to prod location on ISLE host Server
 * Blah blah about mering into config diff solr etc
 
+_Friendly note to endusers: While the following process may seem overly cautious or redundant, it saves time and establishes a safer conditions for endusers to work with valuable data._
+
 * repeat entire process (if necessary) for additional ISLE platform e.g. production, staging and development
-
-
-
-### Production Copy / Export Checklist
-Checklist of materials to **COPY** from the current running institutional Islandora Production server's to the appropriate storage location / directory on the new ISLE Host Server.
-
-**Please Note:** _Ubuntu / Debian style paths are used for for all example file locations, endusers might have different locations for these files HOWEVER the names etc should be roughly the same._
-
-```
-**QUESTION:** IS THIS STEP 2? (this feels like a separate page)
-```
-
-**Apache**
-
-* `html` (_Entire directory unless size prohibits_)
-
-* `settings.php` (_if running multi-sites separate or rename appropriately e.g. multisite2_name_settings.php, multisite3_name_settings.php and so on..._)
-
-* `php.ini`
-
-* `yoursite_apache_vhost.conf` (_file will have different name_)
-
-**Fedora**
-
-* `yoursite_fedora_apache_vhost.conf` (_if you use Adore-Djatoka with a reverse proxy otherwise it is possible this file is not necessary_)
-
-* the entire `data` directory from the `/usr/local/fedora`
-
-* `fedora.fcfg`
-
-* `fedora-users.xml`
-
-* `filter-drupal.xml`
-
-
-**Gsearch**
-* `fedoragsearch.properties`
-
-* `fgsconfig-basic-configForIslandora.properties`
-
-* `fgsconfigObjects.properties`
-
-* `repository.properties`
-
-* Entire `islandora_transforms` directory and contents
-
-* `foxmlToSolr.xslt`
-
-
-**MySQL**
-
-* All production databases exported e.g. `drupal_site_2018.sql.gz`
-
-* `my.cnf`
-
-**Tomcat**
-
-* Copy from the following locations below on the current running Islandora Production server(s) to the ISLE Host server `/pathto/islandora_production_data_storage/tomcat`
-
-  * /var/lib/tomcat7/conf/`server.xml`
-
-  * /var/lib/tomcat7/conf/`tomcat-users.xml`
-
-**Solr**
-
-* Copy from the following locations below on the current running Islandora Production server(s) to the ISLE Host server `/pathto/islandora_production_data_storage/solr`
-
-  * /var/lib/tomcat7/webapps/solr/collection1/conf/`schema.xml`
-
-  * /var/lib/tomcat7/webapps/solr/collection1/conf/`solrconfig.xml`
-
-  * /var/lib/tomcat7/webapps/solr/collection1/conf/`stopwords.txt`
 
 
 ### Step 1: Create appropriate Islandora Production data storage structure on new ISLE host server
 
-_Friendly note to user: this may seem redudnadt . Trust me_ saves time and workflow plus if data is alreted. Allowes
+It is recommended that endusers use a large volume or attached drive that can store a copy of the entire production storage.
+
+**Please note:** this storage is in addition to any data storage required by ISLE.
 
 * In an appropriate area / path on one's intended ISLE host server e.g. `/opt/` or `/mnt/`, create a directory e.g. `islandora_production_data_storage` with the following sub-directories:
 
@@ -154,110 +73,16 @@ _Friendly note to user: this may seem redudnadt . Trust me_ saves time and workf
 
 * Once the migration process is confirmed as completed and successful, the enduser can decide if this data is still worth keeping or backed up.
 
-### Step 2: Create appropriate ISLE Production data storage structure on new ISLE host server
+---
 
-* In an appropriate area / path on one's intended ISLE host server e.g. `/opt/` or `/mnt/`, create a directory e.g. `isle_production_data_storage` with no additional sub-directories:
+### Step 2: **COPY** in all of the directories or files found on the **Migration Export Checklist** to the appropriate sub-directory on the ISLE host server as outlined above.  
+
+Please review the **Migration Export Checklist** [page](alpha_migration_export_checklist.md) and ensure all production data detailed within has been **COPIED** over to the ISLE Host Server PRIOR to proceeding with this guide.
+
 
 ---
 
-### Step 3: **COPY** in all of the following `highlighted` directories or files from the appropriate Islandora Production server(s) to the appropriate sub-directory on the ISLE host server as outlined above.  
-
-```
-**QUESTION**: IS THIS THE CHECKLIST? (this feels like a separate page)
-```
-
-**Apache**
-
-Copy the following below to `/pathto/islandora_production_data_storage/apache`
-
-  * /var/www/`html` (_Entire contents unless size prohibits_)
-    * (_If `html` is not used, then substitute with the appropriate directory for the Islandora / Drupal site_)
-
-
-  * /var/www/html/sites/default/`settings.php` (_if running multi-sites separate or rename appropriately e.g. multisite2_name_settings.php, multisite3_name_settings.php and so on..._)
-
-  * /etc/`php.ini`
-
-  * /etc/apache2/sites-available/`yoursite.conf`
-
-**Fedora**
-
-* Copy from the following locations below on the current running Islandora Production server(s) to the ISLE Host server `/pathto/islandora_production_data_storage/fedora/apache`
-
-  * /etc/apache2/sites-available/`yourfedorasite.conf` (_if you use Adore-Djatoka with a reverse proxy otherwise it is possible this file is not necessary_)
-
-
-* Copy from the following locations below on the current running Islandora Production server(s) to the ISLE Host server `/pathto/islandora_production_data_storage/fedora/fedora`
-
-  * /usr/local/fedora/server/config/`fedora.fcfg`
-
-  * /usr/local/fedora/data/fedora-xacml-policies/`repository-policies`
-
-  * /usr/local/fedora/server/config/`fedora-users.xml`
-
-  * /usr/local/fedora/server/config/`filter-drupal.xml`
-
-
-**Gsearch**  
-
-* Copy from the following locations below on the current running Islandora Production server(s) to the ISLE Host server `/pathto/islandora_production_data_storage/fedora/gsearch`
-
-    * /var/lib/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/`fedoragsearch.properties`
-
-    * /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/`fgsconfig-basic-configForIslandora.properties`
-
-    * /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/`fgsconfigObjects.properties`
-
-    * /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/repository/FgsRepos/`repository.properties`
-
-    * /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/`islandora_transforms`
-
-    * /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/`foxmlToSolr.xslt`
-
-
-**MySQL**
-
-* Copy from the following locations below on the current running Islandora Production server(s) to the ISLE Host server `/pathto/islandora_production_data_storage/mysql`
-
-  * copies of all production databases exported in a similar format to this `drupal_site_2018-01-23.sql.gz`
-
-    * **RECOMMENDATION**
-      * Run `drush cc all` on the production sites PRIOR to db export(s)
-
-        * Otherwise issues can occur on import due to all cache tables being larger than `innodb_log_file_size` allows  
-
-        * _Alternative longer method_
-          * one can skip running the drush command on the production apache webserver
-          * export the databases as usual from the production mysql server
-          * import databases into the isle-mysql container (_with errors being ignored_)
-          * truncate all tables that start with `cache` on the isle-mysql container
-          * export this new database to the `mysql` directory on the isle host server
-          * delete all tables (_not the database itself_) on the isle-mysql container
-          * Reimport the new lighter database to the isle-mysql container
-
-  * /etc/`my.cnf`
-
-**Tomcat**
-
-* Copy from the following locations below on the current running Islandora Production server(s) to the ISLE Host server `/pathto/islandora_production_data_storage/tomcat`
-
-  * /var/lib/tomcat7/conf/`server.xml`
-
-  * /var/lib/tomcat7/conf/`tomcat-users.xml`
-
-**Solr**
-
-* Copy from the following locations below on the current running Islandora Production server(s) to the ISLE Host server `/pathto/islandora_production_data_storage/solr`
-
-    * /var/lib/tomcat7/webapps/solr/collection1/conf/`schema.xml`
-
-    * /var/lib/tomcat7/webapps/solr/collection1/conf/`solrconfig.xml`
-
-    * /var/lib/tomcat7/webapps/solr/collection1/conf/`stopwords.txt`
-
----
-
-### Step 4: Setup Git repo for institutional Docker configuration
+### Step 3: Setup Git repo for institutional Docker configuration
 
 _Please Note_ Because  config folder defines the entire platform setup eseentially keeping the sample
 
@@ -285,7 +110,7 @@ This process is necessary for running multiple versions of ISLE e.g. production,
 
 ---
 
-### Step 5: Copy in production files on the Isle Host Server to the new institutional Docker config directory within the ISLE project directory
+### Step 4: Copy in production files on the Isle Host Server to the new institutional Docker config directory within the ISLE project directory
 
 * Copy in the `highlighted` files from their locations `/pathto/islandora_production_data_storage/` to the appropriate directories of `/opt/ISLE/config/isle-prod-project.institution`
 
@@ -353,7 +178,7 @@ isle-prod-project.institution/
         └── web.xml
 ```
 
-### Step 6: Edit the `docker-compose.yml` file
+### Step 5: Edit the `docker-compose.yml` file
 
 **Mysql Service section**
 ```
@@ -424,6 +249,17 @@ _Please Note: You may have already done this in setting up the host server manua
 **TO DO:**  steps and scripts for mysql cli import
        use GUI and recommended clients e.g. Sequel pro, Navicat etc.
        if encountering errors use _Alternative longer method_ from above
+
+       * _Alternative longer method_
+         * one can skip running the drush command on the production apache webserver
+         * export the databases as usual from the production mysql server
+         * import databases into the isle-mysql container (_with errors being ignored_)
+         * truncate all tables that start with `cache` on the isle-mysql container
+         * export this new database to the `mysql` directory on the isle host server
+         * delete all tables (_not the database itself_) on the isle-mysql container
+         * Reimport the new lighter database to the isle-mysql container
+
+
 ```
 
 ### Step 9: Spin up fedora container and run reindex processes
