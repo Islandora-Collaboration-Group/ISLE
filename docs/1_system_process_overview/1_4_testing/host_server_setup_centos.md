@@ -34,43 +34,94 @@
 
 #### Create islandora user (as root)  
 * `adduser islandora`
+
 * `passwd islandora`
+
 * `isle2017`
+
 * `echo "islandora ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/islandora`
+
 * Create Docker group `groupadd docker`  
+
 * Add islandora user to docker group `usermod -aG docker islandora`  
+
 * Add islandora user to wheel group `sudo usermod -aG wheel islandora`
+
+* Create a ssh key for the islandora user
+   * `mkdir /home/islandora/.ssh`  
+
+   * `chmod -Rv 700 /home/islandora/.ssh`  
+
+   * `cd /home/islandora/.ssh`  
+
+   * `ssh-keygen`  
+      * Follow the prompts to save these files to `/home/islandora/.ssh`
+
+* Create an `authorized_keys` file in `/home/islandora/.ssh`using one of the following tools: `nano`, `pico`, `vi` or `emacs`
+
+   * Example:
+     ```
+     vi /home/islandora/.ssh/authorized_keys
+    ```
+
+* Copy in the existing ssh key from the enduser's laptop /workstation. This will allow key based ssh access for the enduser.
+
+      * `cat /Users/endusername/.ssh/id_rsa.pub`
+
+      * Copy and paste this value exactly into the `/home/islandora/.ssh/authorized_keys` file.
+
 * Exit out of the ssh session from the host server as the root user `exit`
+
 * ssh back in as `islandora`
+
 * Enable the Docker service to start on host server boot
     * `sudo systemctl enable docker.service`
+
 * Start the Docker service
     * `sudo systemctl start docker.service`
 
 
 #### Install Docker-Compose (version 1.17.1 as of 11/16/2017) as islandora-user on CentOS 7
 * Open a terminal and ssh back into the CentOS Host Server/VM as the `islandora` user and perform the following:
+
 * Add the RHEL/CENTOS epel-release package repository
+
     * `sudo yum install epel-release`
+
 * Install Python Pip (package manager for Python Scripting Language)
+
     * `sudo yum install -y python-pip`
+
 * Upgrade Python to latest version
+
     * `sudo yum upgrade python*`
+
 * Upgrade Python Pip
+
     * `sudo pip install --upgrade pip`
+
 * Install Docker compose
+
     * `sudo pip install docker-compose`
 
 
 #### Clone ISLE repository
 * Please note in some Linux Distributions, one might need to create the `/opt` directory (optional)  
+
     * One can `ls -lha /` to see if an `/opt` directory exists  
+
         * If missing, `sudo mkdir /opt`  
+
         * If not missing, proceed to next step.  
+
 * `cd /opt`
+
 * `sudo git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
+
    * This process will take 1 - 3 minutes depending on internet bandwidth
+
 * `sudo chown -Rv islandora:islandora ISLE`
+
 * `cd /opt/ISLE`
 
 
