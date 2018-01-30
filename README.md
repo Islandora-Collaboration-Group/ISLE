@@ -1,4 +1,4 @@
-# Islandora Enterprise (ISLE)
+# ISLE: Islandora Enterprise
 
 ## ISLE Documents
 * [ISLE Executive Summary](https://docs.google.com/document/d/17tAFxR6_b7sxXkE1teNDQZv0UZ0LLSkX8K05-U6A6nw/edit?usp=sharing) (a concise overview in plain English)
@@ -24,8 +24,8 @@ We successfully exceeded our funding goal of $84,000 with pledges totaling $89,4
 - 02/2018 - Community Alpha Test #3: Barnard College (lead: Ben Rosner)
 - 02/2018 - Stable release of ISLE (for current Islandora 7x) and documentation as open-source for public use
 
-## What is Islandora Enterprise (ISLE)?
-ISLE is a new project in development -- funded by 17 higher-ed institutions and Born-Digital -- that will address one of the most significant pain-points in Islandora: installation and maintenance. ISLE separates an institution’s customizations from core code, and moves that core code into Docker containers that are easily updated, simplifying and largely automating the process of installation and updates/maintenance of Islandora. ISLE also bundles together the best shared modules into a common, production-ready and security-hardened platform.
+## What is ISLE?
+ISLE is a new project in development -- funded by 17 institutions of higher-education and Born-Digital -- that will address one of the most significant pain-points in Islandora: installation and maintenance. ISLE separates an institution’s customizations from core code, and moves that core code into Docker containers that are easily updated, simplifying and largely automating the process of installation and updates/maintenance of Islandora. ISLE also bundles together the best shared modules into a common, production-ready and security-hardened platform.
 
 ## Why is it needed?
 Islandora is a powerful digital repository comprised of over 80 different, best-of-breed open-source software libraries. Islandora’s strength is that it integrates these packages into one easy to manage system. However, this ecosystem has traditionally been complex enough as to require staff with technical expertise to install and maintain.
