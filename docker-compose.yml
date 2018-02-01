@@ -36,7 +36,7 @@ services:
       - ./data/fedora/log/apache:/var/log/apache2
       - ./data/fedora/log/tomcat:/usr/local/tomcat/logs
     extra_hosts:
-      - "isle.localdomain:"
+      - "isle.localdomain:" # enter ip here of host server or vm etc
 
   solr:
     build: ./solr
@@ -63,9 +63,9 @@ services:
     volumes:
       - apache-data:/var/www/html
       - ./data/apache/log/apache:/var/log/apache2
-      #- ./isle_localdomain/macosx_settings.php:/var/www/html/sites/default/settings.php
+      #- ./config/isle_localdomain/apache/macosx_settings.php:/var/www/html/sites/default/settings.php
     extra_hosts:
-      - "isle.localdomain:"
+      - "isle.localdomain:" # enter ip here of host server or vm etc
 
 volumes:
   db-data:

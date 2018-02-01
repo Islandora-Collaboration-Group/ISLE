@@ -1,6 +1,8 @@
-### Alpha Quickstart Guide Notes
+### Alpha isle.localdomain Quickstart Guide Notes
 
-This Alpha Quickstart guide is intended to be the **fastest** method of installation i.e. downloading ISLE Docker images from Dockerhub.
+This Alpha Quickstart guide is intended to be the **fastest** method of using ISLE to test.
+
+This guide enables an enduser to spin up and install the "baked in" sample site, `isle-localdomain` for review and testing.
 
 Previous guides used a manual "build" process which is still possible but not necessary for most endusers due to complexity and process length.
 
@@ -13,7 +15,7 @@ If one would like to manually build the images please refer to one of the follow
 * For [MacOS Host Servers](alpha_build_guide_mac.md)
 
 ### Dockerhub images
-Four Dockerhub images have already been "built" and are stored in a repository thus saving the endusers hours of build time.  
+Four Dockerhub images have already been "built" and are stored in a repository thus saving the endusers hours of build time.  Use the images tagged with `alpha2`.
 
 * isle-apache [https://hub.docker.com/r/islandoracollabgroup/isle-apache/](https://hub.docker.com/r/islandoracollabgroup/isle-apache/)  
 
@@ -33,51 +35,66 @@ Four Dockerhub images have already been "built" and are stored in a repository t
 
     * Host Server setup for [**Mac OS**](host_server_setup_macos.md)  
 
-* By default the `Docker-Compose.yml` file is configured for Linux Host Servers.
+* By default the `isle.localdomain` `docker-compose.yml` file is configured for Linux Host Servers. (found at the root of the ISLE Project directory)
 
     * If one is using a **Mac OS** Host server, then edit the `docker-compose.yml` file to ensure the following lines look like this:  
 ```
-    # - ./customize/apache/site/linux_settings.php:/var/www/html/sites/default/settings.php  
-    - ./customize/apache/site/macosx_settings.php:/var/www/html/sites/default/settings.php  
+    - ./config/isle_localdomain/apache/macosx_settings.php:/var/www/html/sites/default/settings.php  
 ```
 
-### Alpha install process (same for all host server types)
+### isle_localdomain install process (same for all host server types)
 
 **Please note:** *The first container (MySQL, isle-mysql, mysql) has to be running PRIOR to all others (including fedora & apache) due to a race condition (fedora starts prior to mysql being ready to accept connections). This improper state will be fixed at a later point in the project.*  **DO NOT RUN** `docker-compose up -d` during the initial install process as this will download all images and then run all containers at the same time which will trigger this race condition and subsequent chain of service failures.
 
 * **During the initial install process** do the following steps to individually download each image and run each container.
 
+#### 0. Add the ISLE Host server IP to the `docker-compose.yml` file
+
+* Lines 39 & 68 both require the same value of the Host server IP address for the `extra_hosts` setting.
+
+   **Example:**
+
+```
+   extra_hosts:
+     - "isle.localdomain:192.168.1.1"
+```
+* Open a text editor, add this same IP to both lines and save the file.
+
+* **Please note:**
+    * This IP can be from a VM run on a local laptop or workstation.
+    * If using Docker for Mac, then comment out these `extra_hosts` sections and add the following value of `127.0.0.1 isle.localdomain` to the laptop / workstation's `/etc/hosts` file.     
+
 #### 1. MySQL image pull & container launch (10-15 mins)
 
-* `docker pull islandoracollabgroup/isle-mysql`  
+* `docker pull islandoracollabgroup/isle-mysql:alpha2`  
 * `docker-compose up -d mysql`  
 
 #### 2. Fedora image pull & container launch (20 - 30 mins)  
 
-* `docker pull islandoracollabgroup/isle-fedora`  
+* `docker pull islandoracollabgroup/isle-fedora:alpha2`  
 * `docker-compose up -d fedora`  
 
 * **(Optional but recommended)**
   * After spinning up fedora container, check if the Fedora service is running prior to advancing.
   * Navigate to http://fedora:8080/manager/html a popup login prompt should appear.
-    * using the supplied username and password at the bottom of this page, enter the appropriate values
-      * section #### 2. Fedora container, service Tomcat, user is admin
+    * using the supplied username and password at the bottom of this page, enter the appropriate values from the **Fast facts** section at the bottom of the page.
+      * see 2. Fedora container - service Tomcat, user is admin
     * upon login a large display of running Tomcat applications should display, scroll down to `fedora`
   * The application state / status should be `true`
   * If `false` appears instead, attempt to restart the fedora service manually.
-    * Select the `restart` button to the right of the status area. 
+    * Select the `restart` button to the right of the status area.
   * If it still fails, review the mounted fedora logs. The `docker-compose.yml` file will indicate where the logs are located.
   * using a command like `tail -n 300 <path to fedora logs>/fedora.log` should display enough information to troubleshoot.
 
 
 #### 3. Solr image pull & container launch (10 - 20 mins)  
 
-* `docker pull islandoracollabgroup/isle-solr`  
+* `docker pull islandoracollabgroup/isle-solr:alpha2`  
 * `docker-compose up -d solr`  
 
 #### 4. Apache image pull & container launch (30 - 45 mins)
 
-* `docker pull islandoracollabgroup/isle-apache`  
+* `docker pull islandoracollabgroup/isle-apache:alpha2`  
 
 * `docker-compose up -d apache`  
 
@@ -89,17 +106,16 @@ Four Dockerhub images have already been "built" and are stored in a repository t
 
 * Run the following shell scripts manually on the apache container  
     * `docker exec -it isle-apache bash`
-    * `cd /tmp`
+    * `cd /tmp/isle_drupal_build_tools/`
     * `chmod 777 *.sh`
-    * `./make_site.sh`
-    * `./install_site.sh`
+    * `./apache_provision.sh`
 
 * Once finished `cntrl-D` or type `exit` to get out of the apache container
-* Test (QC) the resulting setup by opening a web browser to the URL of your new Islandora Docker server (i.e. http://myname.institution.edu)
+* Test (QC) the resulting setup by opening a web browser to the `isle.localdomain` URL of the new ISLE sample site (i.e. http://isle.localdomain)
 
-**Please note:** The cronjob setting in the `install_site.sh` script is commented out as this will need to be flowed into the Docker build process prior. Issue with default Docker root user vs using islandora user. Drupal cron can run properly.
+**Please note:** The cronjob setting in the `apache_provision.sh` script is still commented out as this will need to be flowed into the Docker build process prior. Issue with default Docker root user vs using islandora user. Drupal cron can run properly.
 
-#### Total build process takes 45 - 75 minutes (depending on system and internet speeds)
+**Total build process** takes 15 - 35 minutes (_depending on system and internet speeds_)
 
 ___
 
