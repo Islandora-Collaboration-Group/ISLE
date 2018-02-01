@@ -387,6 +387,6 @@ Once this script has finished one can:
 
   * Add the `/home/islandora/.ssh/id_rsa.pub` key to any git repository contained within the Migration Guide. (Additional instructions appear in that guide if this process is unfamiliar.)
 
-  * Continue next steps with the [1.4. -Testing - Alpha Quickstart Guide](alpha_quickstart.md)
+  * Continue next steps with the [1.4. -Testing - isle.localdomain Quickstart Guide](alpha_isle_localdomain_quickstart.md)
 
   * Continue next steps with [1.4. -Testing - Migration Guide](alpha_migration_guide.md)

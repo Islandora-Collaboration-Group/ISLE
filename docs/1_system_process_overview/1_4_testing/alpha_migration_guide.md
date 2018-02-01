@@ -301,5 +301,3 @@ _Please Note: You may have already done this in setting up the host server manua
 * `/tmp/isle-build-tools/apache-provision.sh` (check if this is appropriate)
 * Check site and outline qC process
 ```
-
-DONE

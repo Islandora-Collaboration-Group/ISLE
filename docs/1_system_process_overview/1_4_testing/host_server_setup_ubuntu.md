@@ -112,7 +112,11 @@
 * `cd /opt/ISLE`
 
 
-#### Return to Quickstart Guide
-* Continue with next steps on [1.4. -Testing - Alpha Quickstart Guide](alpha_quickstart.md)
+#### Next steps
+Once this process has finished one chose to do one of the following:
+
+* Continue next steps with the [1.4. -Testing - isle.localdomain Quickstart Guide](alpha_isle_localdomain_quickstart.md)
+
+* Continue next steps with [1.4. -Testing - Migration Guide](alpha_migration_guide.md)
 
 ---
