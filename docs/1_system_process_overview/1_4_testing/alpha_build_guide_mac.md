@@ -1,7 +1,9 @@
 ### Alpha Manual Build - MacOS
-Please note this an alternative method of building the Docker images and the slower of the two processes.
+Please note this an alternative method of building the `isle.localdomain` Docker images and the slower of the two processes.
 
-Please refer to the Alpha Quickstart [Guide](alpha_quickstart.md) for the **faster** version.
+Please refer to the [1.4. -Testing - isle.localdomain Quickstart Guide](alpha_isle_localdomain_quickstart.md) for the **faster** version.
+
+Or use the [1.4. -Testing - Migration Guide](alpha_migration_guide.md) after completing this process, if the enduser is going to edit the Dockerfile to make changes prior to the build.
 
 ### Alpha Manual Build Pre-Requisites
 
