@@ -33,24 +33,30 @@ This Alpha Migration guide is the intended process for endusers to migrate their
 
 ### Migration to ISLE Process Overview
 
-```
-**TO DO:** Review Ben's outlines from https://github.com/Islandora-Collaboration-Group/ISLE/issues/80
-```
+As this is a large guide, here's a quick not very detailed overview of what's going to happen in the next steps:
 
-* Here's what's going to happen / why?
-* Copying from prod location to prod location on ISLE host Server
-* Blah blah about mering into config diff solr etc
-
-_Friendly note to endusers: While the following process may seem overly cautious or redundant, it saves time and establishes a safer conditions for endusers to work with valuable data._
-
-* repeat entire process (if necessary) for additional ISLE platform e.g. production, staging and development
+* Ensure that the destination ISLE host server has the same (or more) amount of storage as the production server.
+* Create appropriate Islandora Production data storage structure on new ISLE host server
+* Copy current production data and config files as directed by the [export checklist](alpha_migration_export_checklist) to an appropriate location on the new ISLE host Server.
+* Create the required new config directory by copying the template `/opt/ISLE/config/isle-prod-project.institution` to a renamed directory within `/opt/ISLE/config`
+* Compare the template settings within the new renamed directory of `/opt/ISLE/config/enduser-renamed-directory.institution` to the current production config files. Merge or edit as necessary in the new isle config directory for use with ISLE.
+   * There may be some additional work to compare and merge in previous enduser customizations of the Solr `schema.xml` to the new ISLE config.
+   * There may be some additional work to compare and merge in previous enduser customizations of the Solr `solrconfig.xml` to the new ISLE config.
+   * There may be some additional work to compare and merge in previous enduser customizations of the Solr `stopwords` to the new ISLE config.
+   * There may be some additional work to compare and merge in previous enduser customizations of the Islandora Transform (XSLTs) files to the new ISLE versions.        
+* Based on new paths, edit the `docker-compose.yml` file to
+   * Point to the new associated `islandora_production_data_storage` structure.
+   * Point to the new directories and config settings in `/opt/ISLE/config/enduser-renamed-directory.institution`
+* Spin up new containers one at a time with the new config settings
+* Check that all services are running properly
+* Repeat entire process (_if necessary_) for additional ISLE platforms e.g. _production, staging and development_
 
 
 ### Step 1: Create appropriate Islandora Production data storage structure on new ISLE host server
 
-It is recommended that endusers use a large volume or attached drive that can store a copy of the entire production storage.
+_Friendly note to endusers: While the following process may seem overly cautious or redundant, it saves time and establishes a safer conditions for endusers to work with valuable data._
 
-**Please note:** this storage is in addition to any data storage required by ISLE.
+It is recommended that endusers use a large volume or network attached drive that can store a backup copy of the entire production storage, an merged copy of the production storage and associated config files as outlined in the **Migration Export Checklist** [page](alpha_migration_export_checklist.md) and additional datastores.
 
 * In an appropriate area / path on one's intended ISLE host server e.g. `/opt/` or `/mnt/`, create a directory e.g. `islandora_production_data_storage` with the following sub-directories:
 
@@ -84,8 +90,6 @@ Please review the **Migration Export Checklist** [page](alpha_migration_export_c
 
 ### Step 3: Setup Git repo for institutional Docker configuration
 
-_Please Note_ Because  config folder defines the entire platform setup eseentially keeping the sample
-
 This process is necessary for running multiple versions of ISLE e.g. production, staging and development / sandbox. The config folder
 
 * Create a private Git repository (Github.com, Bitbucket.com, Gitlab.com or private institutional Git repository)
@@ -104,7 +108,7 @@ This process is necessary for running multiple versions of ISLE e.g. production,
 **TO DO**: Add more git URLs non github.com
 ```
 
-* Copy the contents of the `/opt/ISLE/config/production_template/` to this new directory e.g. `/opt/ISLE/config/isle-prod-project.institution`
+* Copy the contents of the `/opt/ISLE/config/isle-prod-project.institution` to this new directory e.g. `/opt/ISLE/config/isle-prod-project.institution`
 
 * The enduser will need to add the `/home/islandora/.ssh/id_rsa.pub` as a git ssh deploy key to be able to push pull from the server.
 
