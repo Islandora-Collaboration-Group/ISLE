@@ -3,14 +3,14 @@
 - name: Set selinux to permissive
   selinux: policy=targeted state=permissive
 
-- name: turn off iptables ip4
-  command: /sbin/chkconfig iptables off
+- name: systemctl stop firewalld.service
+  systemd: state=stopped name=firewalld enabled=no
 
-- name: turn off iptables ip6
-  command: /sbin/chkconfig ip6tables off
+- name: systemctl stop iptables
+  systemd: state=stopped name=iptables enabled=yes
 
-- name: turn off iptables service now
-  service: name=iptables state=stopped
+- name: systemctl stop ip6tables
+  systemd: state=stopped name=ip6tables enabled=yes
 
 - name: Ensure that all host dependencies are installed
   yum:

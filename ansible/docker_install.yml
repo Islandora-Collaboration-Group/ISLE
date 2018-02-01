@@ -1,8 +1,7 @@
 ---
 
 - hosts:  isle-prod-project.institution # change this to real host name
-  become_user: root
-  become_method: sudo
+  become: yes
 
   roles:
     - dependencies
