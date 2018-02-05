@@ -49,7 +49,7 @@ This data will be used in conjunction with an Apache container.
 
     * The filename can stay the same or can be changed. Please note that Line 85 of the associated `docker-compose.yml` will need to be updated if the file is renamed
 
-    * Lines 2, 3, 6, 7, 34 - 37, 39, 40, 44 & 45 Edit as directed by the (# enduser please edit this and then remove this comment) instructions.
+    * Lines 2, 3, 6, 7, 34 - 37, 39, 40, 44 & 45:  endusers will edit this file as directed in the (# enduser please edit this and then remove this comment) instructions.
 
        * Do remove (# enduser please edit this and then remove this comment) after editing or adding the appropriate values.
 
@@ -99,10 +99,43 @@ Compare, edit, merge or copy the following from the suggested directory `/path_t
 
     * Line: 598 (necessary) to enter the `fedora_admin` user password for the `fedora3` database
 
-* `fedora-users.xml` - endusers will want to edit
+* `fedora-users.xml` - endusers will want to edit the following:
+
+    * Lines 3, 8, 14 and 19: Add the appropriate passwords or users as needed.  
 
 * `filter-drupal.xml` - endusers will want to edit
+
+    * Line 3: Add the appropriate Drupal site database name, Drupal site database user and Drupal site database user password in between all `""`
+
+    * **Please note:** For endusers using Drupal multi-sites, please add additional sites as guided in the example below
+
+    **Example**
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<FilterDrupal_Connection>
+
+    <connection server="mysql" port="3306" dbname="drupalsite1" user="drupalsite1_user" password="drupalsite1_user_pw">
+    <sql>
+       SELECT DISTINCT u.uid AS userid, u.name AS Name, u.pass AS Pass,r.name AS Role FROM (users u LEFT JOIN users_roles ON u.uid=users_roles.uid) LEFT JOIN role r ON r.rid=users_roles.rid WHERE u.name=? AND u.pass=?;
+    </sql>
+    </connection>
+
+    <connection server="mysql" port="3306" dbname="drupalsite2" user="drupalsite2_user" password="drupalsite2_user_pw">
+    <sql>
+       SELECT DISTINCT u.uid AS userid, u.name AS Name, u.pass AS Pass,r.name AS Role FROM (users u LEFT JOIN users_roles ON u.uid=users_roles.uid) LEFT JOIN role r ON r.rid=users_roles.rid WHERE u.name=? AND u.pass=?;
+    </sql>
+    </connection>
+
+</FilterDrupal_Connection>
+```
+
 
 * `fedora/repository-policies` - endusers can edit the files contained within for more granular or customized Fedora user permissions or repository access.
 
 * `site.conf` - endusers will want to edit this Apache vhost for the fedora proxy site name (if using Djatoka)
+
+    * The filename can stay the same or can be changed. Please note that Line 37 of the associated `docker-compose.yml` will need to be updated if the file is renamed
+
+    * Lines 2, 3, 6, 7, 34 - 37, 39, 40, 44 & 45:  endusers will edit this file as directed in the (# enduser please edit this and then remove this comment) instructions.
+
+       * Do remove (# enduser please edit this and then remove this comment) after editing or adding the appropriate values.
