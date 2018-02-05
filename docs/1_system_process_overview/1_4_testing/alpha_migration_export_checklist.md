@@ -8,40 +8,49 @@ Ensure adequate backups of any production system(s) are made prior to any attemp
 
 ISLE assumes no responsibility or liability in this matter.
 
+### Assumptions / Prerequisites
+* The enduser has completed Steps 1 & 2 of the [1.4. -Testing - Migration Guide](alpha_migration_guide.md).
+* The enduser is currently on Step 3 of the [1.4. -Testing - Migration Guide](alpha_migration_guide.md)
+
 ---
 
 #### Apache
 
-Copy the following below to the suggested directory `/path_to/islandora_production_data_storage/apache/` on the ISLE Host server.
+Copy the following below from the Islandora Production Server(s) to the suggested directory `/path_to/islandora_production_data_storage/apache/` on the ISLE Host server.
 
-This data will be used in conjunction with the Apache container (`isle-apache`).
+This data will be used in conjunction with an Apache container.
 
 | Data          | Description                 | Possible Location             | Suggested ISLE Path Destination            | Notes         |
 | ------------- | -------------               | -------------                 | -------------                              | ------------- |
-| html          | Islandora/Drupal Website    | /var/www/                     | /islandora_production_data_storage/apache/ | --            |
+| html          | Islandora/Drupal Website    | /var/www/                     | /islandora_production_data_storage/apache/ | _see below_   |
 | settings.php  | Drupal settings.php file    | /var/www/html/sites/default/  | /islandora_production_data_storage/apache/ | _see below_   |
-| php.ini       | PHP configuration file      | /etc/                         | /islandora_production_data_storage/apache/ | _see below_   |
+| php.ini       | PHP configuration file      | /etc/                         | /islandora_production_data_storage/apache/ | --            |
 | yoursite.conf | Apache webserver vhost file | /etc/apache2/sites-available/ | /islandora_production_data_storage/apache/ | _see below_   |
 
 
 **Apache Notes**:
 
-* /var/www/`html` (_Entire contents unless size prohibits_)
+* /var/www/`html`
 
-  * (_If `html` is not used, then substitute with the appropriate directory for the Islandora / Drupal site_)
+    * _Entire contents unless size prohibits_
 
+    * _If `html` is not used, then substitute with the appropriate directory for the Islandora / Drupal site_
 
-* `settings.php` (_if running multi-sites separate or rename appropriately e.g. multisite2_name_settings.php, multisite3_name_settings.php and so on..._)
+* `settings.php`
 
-* `yoursite.conf` (_file will have different name_)
+    * _If running multi-sites separate or rename appropriately e.g. multisite2_name_settings.php, multisite3_name_settings.php and so on..._
+
+* `yoursite.conf`
+
+   * _File will have different name_
 
 ---
 
 #### Fedora
 
-Copy the following below to the suggested directory `/path_to/islandora_production_data_storage/fedora/` on the ISLE Host server.
+Copy the following below from the Islandora Production Server(s) to the suggested directory `/path_to/islandora_production_data_storage/fedora/` on the ISLE Host server.
 
-This data will be used in conjunction with the Apache container (`isle-fedora`).  
+This data will be used in conjunction with a Fedora container.  
 
 | Data              | Description                   | Possible Location                | Suggested ISLE Path Destination            | Notes         |
 | -------------     | -------------                 | -------------                    | -------------                              | ------------- |
@@ -59,25 +68,25 @@ This data will be used in conjunction with the Apache container (`isle-fedora`).
 
 #### Gsearch
 
-Copy the following below to the suggested directory `/path_to/islandora_production_data_storage/gsearch/` on the ISLE Host server.
+Copy the following below from the Islandora Production Server(s) to the suggested directory `/path_to/islandora_production_data_storage/gsearch/` on the ISLE Host server.
 
-This data will be used in conjunction with the Apache container (`isle-fedora`).
+This data will be used in conjunction with a Fedora container.
 
-| Data                                          | Description                       | Possible Location                                                                          | Suggested ISLE Path Destination             | Notes         |
-| -------------                                 | -------------                     | -------------                                                                              | -------------                               | ------------- |
-| fedoragsearch.properties                      | Gsearch config file               | /var/lib/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/                      | /islandora_production_data_storage/gsearch/ | --            |
-| fgsconfig-basic-configForIslandora.properties | Gsearch config file               | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/                     | /islandora_production_data_storage/gsearch/ | --            |
-| fgsconfigObjects.properties                   | Gsearch config file               | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/                     | /islandora_production_data_storage/gsearch/ | --            |
-| repository.properties                         | Gsearch config file               | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/repository/FgsRepos/ | /islandora_production_data_storage/gsearch/ | --            |
-| islandora_transforms                          | Transformation XSLTs directory    | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/      | /islandora_production_data_storage/gsearch/ | --            |
-| foxmlToSolr.xslt                              | "top-level" transformational XSLT | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/      | /islandora_production_data_storage/gsearch/ | --            |
+| Data                                          | Description         | Possible Location                                 | Suggested ISLE Path Destination             | Notes         |
+| -------------                                 | -------------       | -------------                                     | -------------                               | ------------- |
+| fedoragsearch.properties                      | Gsearch config file | /var/lib/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/ | /islandora_production_data_storage/gsearch/ | --  |
+| fgsconfig-basic-configForIslandora.properties | Gsearch config file | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/ | /islandora_production_data_storage/gsearch/| -- |
+| fgsconfigObjects.properties                   | Gsearch config file | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/ | /islandora_production_data_storage/gsearch/| -- |
+| repository.properties                         | Gsearch config file               | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/repository/FgsRepos/ | /islandora_production_data_storage/gsearch/ | -- |
+| islandora_transforms                          | Transformation XSLTs directory    | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/      | /islandora_production_data_storage/gsearch/ | -- |
+| foxmlToSolr.xslt                              | "top-level" transformational XSLT | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/      | /islandora_production_data_storage/gsearch/ | -- |
 
 
 #### MySQL
 
-Copy the following below to the suggested directory `/path_to/islandora_production_data_storage/mysql/` on the ISLE Host server.
+Copy the following below from the Islandora Production Server(s) to the suggested directory `/path_to/islandora_production_data_storage/mysql/` on the ISLE Host server.
 
-This data will be used in conjunction with the Apache container (`isle-mysql`).
+This data will be used in conjunction with a MySQL container.
 
 | Data          | Description              | Possible Location  | Suggested COPY Method                   | Suggested ISLE Path Destination           | Notes         |
 | ------------- | -------------            | -------------      | -------------                           | -------------                             | ------------- |
@@ -109,9 +118,9 @@ This data will be used in conjunction with the Apache container (`isle-mysql`).
 
 **Tomcat**
 
-* Copy from the following locations below on the current running Islandora Production server(s) to the ISLE Host server `/pathto/islandora_production_data_storage/tomcat`
+Copy the following below from the Islandora Production Server(s) to the suggested directory to the ISLE Host server `/pathto/islandora_production_data_storage/tomcat`
 
-This data will be used in conjunction with the Apache containers (`isle-fedora` & `isle-solr`).
+This data will be used in conjunction with the Tomcat service found on a Fedora or SOLR container.
 
 | Data             | Description               | Possible Location                      | Suggested ISLE Path Destination            | Notes         |
 | -------------    | -------------             | -------------                          | -------------                              | ------------- |
@@ -121,9 +130,9 @@ This data will be used in conjunction with the Apache containers (`isle-fedora` 
 
 **Solr**
 
-* Copy from the following locations below on the current running Islandora Production server(s) to the ISLE Host server `/pathto/islandora_production_data_storage/solr`
+Copy the following below from the Islandora Production Server(s) to the suggested directory to the ISLE Host server `/pathto/islandora_production_data_storage/solr`
 
-This data will be used in conjunction with the Apache containers (`isle-solr`).
+This data will be used in conjunction with a SOLR container.
 
 | Data           | Description                              | Possible Location                                             | Suggested ISLE Path Destination         | Notes         |
 | -------------  | -------------                            | -------------                                                 | -------------                           | ------------- |

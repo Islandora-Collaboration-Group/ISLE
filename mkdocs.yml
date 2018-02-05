@@ -35,6 +35,7 @@ pages:
     - '1.4. -Testing - Alpha Quickstart Guide': '1_system_process_overview/1_4_testing/alpha_isle_localdomain_quickstart.md'
     - '1.4. -Testing - Alpha Migration Guide': '1_system_process_overview/1_4_testing/alpha_migration_guide.md'
     - '1.4. -Testing - Alpha Migration Export Checklist': '1_system_process_overview/1_4_testing/alpha_migration_export_checklist.md'
+    - '1.4. -Testing - Alpha Migration Merge Checklist': '1_system_process_overview/1_4_testing/alpha_migration_merge_checklist.md'
     - '1.4. -Testing - Host Server Build - Centos': '1_system_process_overview/1_4_testing/host_server_setup_centos.md'
     - '1.4. -Testing - Host Server Build - Ubuntu': '1_system_process_overview/1_4_testing/host_server_setup_ubuntu.md'
     - '1.4. -Testing - Host Server Build - MacOS': '1_system_process_overview/1_4_testing/host_server_setup_macos.md'

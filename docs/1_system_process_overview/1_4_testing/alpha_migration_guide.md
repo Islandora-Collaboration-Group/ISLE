@@ -1,27 +1,24 @@
-### ISLE Alpha Migration Guide (draft 01.25.2018 v1)
+### ISLE Alpha Migration Guide (draft 02.5.2018)
 
 This Alpha Migration guide is the intended process for endusers to migrate their existing production Islandora environment to their respective ISLE Islandora containers and volumes.
 
 
 ### Assumptions / Prerequisites
-* ISLE Host server setup has been completed
+* ISLE Host server setup has been completed.
 
-  * If one has not setup the ISLE host server please refer to here:
+     * _If one has not setup the ISLE host server please refer to the appropriate resource below:_
 
-     * Manual Host Server setup for [**CentOS 7**](host_server_setup_centos.md) w/ ISLE repo clone steps
+        * Manual Host Server setup for [**CentOS 7**](host_server_setup_centos.md) w/ ISLE repo clone steps
 
-     * Manual Host Server setup for [**Ubuntu 16.04 LTS**](host_server_setup_ubuntu.md) w/ ISLE repo clone steps   
+        * Manual Host Server setup for [**Ubuntu 16.04 LTS**](host_server_setup_ubuntu.md) w/ ISLE repo clone steps   
 
-     * [Ansible install](host_server_setup_ansible.md) setup for (Ubuntu / Centos) includes ISLE repo clone steps
+        * [Ansible install](host_server_setup_ansible.md) setup for (Ubuntu / Centos) includes ISLE repo clone steps
 
 * The fully qualified domain name of their ISLE host server that will run all of the containers has been created and resolves properly in DNS.
 
 * The enduser has the IP address of their ISLE host server documented
 
 * The enduser has the expected fully qualified domain name (fqdn) of the new first Islandora / Drupal website documented and assigned to the appropriate IP in DNS.
-
-    * _Please Note: this IP address and fqdn are NOT the of current running Production Islandora site!_
-
 
 * The enduser has ssh access to ISLE host server
 
@@ -31,13 +28,15 @@ This Alpha Migration guide is the intended process for endusers to migrate their
 
 * Production data, configuration files etc. have been **copied** from the currently running Islandora production server to the new ISLE host server following the checklist below of required data, configuration files etc.
 
+---
+
 ### Migration to ISLE Process Overview
 
 As this is a large guide, here's a quick not very detailed overview of what's going to happen in the next steps:
 
 * Ensure that the destination ISLE host server has the same (or more) amount of storage as the production server.
 * Create appropriate Islandora Production data storage structure on new ISLE host server
-* Copy current production data and config files as directed by the [export checklist](alpha_migration_export_checklist) to an appropriate location on the new ISLE host Server.
+* Copy current production data and config files as directed by the [export checklist](alpha_migration_export_checklist.md) to an appropriate location on the new ISLE host Server.
 * Create the required new config directory by copying the template `/opt/ISLE/config/isle-prod-project.institution` to a renamed directory within `/opt/ISLE/config`
 * Compare the template settings within the new renamed directory of `/opt/ISLE/config/enduser-renamed-directory.institution` to the current production config files. Merge or edit as necessary in the new isle config directory for use with ISLE.
    * There may be some additional work to compare and merge in previous enduser customizations of the Solr `schema.xml` to the new ISLE config.
@@ -49,14 +48,15 @@ As this is a large guide, here's a quick not very detailed overview of what's go
    * Point to the new directories and config settings in `/opt/ISLE/config/enduser-renamed-directory.institution`
 * Spin up new containers one at a time with the new config settings
 * Check that all services are running properly
-* Repeat entire process (_if necessary_) for additional ISLE platforms e.g. _production, staging and development_
+* Repeat entire process (_if necessary_) for additional ISLE environments e.g. _production, staging and development_
 
+---
 
 ### Step 1: Create appropriate Islandora Production data storage structure on new ISLE host server
 
 _Friendly note to endusers: While the following process may seem overly cautious or redundant, it saves time and establishes a safer conditions for endusers to work with valuable data._
 
-It is recommended that endusers use a large volume or network attached drive that can store a backup copy of the entire production storage, an merged copy of the production storage and associated config files as outlined in the **Migration Export Checklist** [page](alpha_migration_export_checklist.md) and additional datastores.
+It is recommended that endusers use a large volume or network attached drive that can store a backup copy of the entire Islandora production storage, an merged copy of the ISLE production storage and associated config files as outlined in the [Migration Export Checklist](alpha_migration_export_checklist.md) and additional datastores.
 
 * In an appropriate area / path on one's intended ISLE host server e.g. `/opt/` or `/mnt/`, create a directory e.g. `islandora_production_data_storage` with the following sub-directories:
 
@@ -81,151 +81,114 @@ It is recommended that endusers use a large volume or network attached drive tha
 
 ---
 
-### Step 2: **COPY** in all of the directories or files found on the **Migration Export Checklist** to the appropriate sub-directory on the ISLE host server as outlined above.  
+#### Step 2: Create appropriate ISLE Production data storage structure on new ISLE host server
 
-Please review the **Migration Export Checklist** [page](alpha_migration_export_checklist.md) and ensure all production data detailed within has been **COPIED** over to the ISLE Host Server PRIOR to proceeding with this guide.
+_Friendly note to endusers: While the following process may seem overly cautious or redundant, it saves time and establishes a safer conditions for endusers to continue to work with valuable data._
 
+In the previous step the `islandora_production_data_storage` directory was setup as a source of materials to continue to **COPY** from i.e. **Islandora Production Data**.
+
+This step is to now create the working directory for **ISLE Production Data**.
+
+It is recommended that endusers again use a large volume or network attached drive that can store the entire ISLE production storage (which is the merged copy of the Islandora production storage and associated config files as outlined in the [Migration Export Checklist](alpha_migration_export_checklist.md) and additional datastores.)
+
+* In an appropriate area / path on one's intended ISLE host server e.g. `/opt/` or `/mnt/`, create a parent directory e.g. `isle_production_data_storage` with the appropriate institutional ISLE environment as a sub-directory. Create as many as required. For this guide only the production environment will be created e.g. `enduser-renamed-directory-prod.institution`
+
+  * **Example guide directory structure**:
+```
+    /path_to/isle_production_data_storage/
+             └── enduser-renamed-directory-prod.institution
+                 ├── apache  
+                 ├── fedora   
+                 ├── mysql  
+                 └── solr  
+```
+
+* While the `/path_to/isle_production_data_storage/` directory will serve as the storage for all ISLE production data, it is highly important to further differentiate future ISLE production data by environment e.g. hence the use of `enduser-renamed-directory-prod.institution`.
+
+This structure ensures no accidental data overwrites between ISLE environments and proper functioning.
+
+* **Example future directory structure**:
+```
+  /path_to/isle_production_data_storage/
+           |
+           ├──enduser-renamed-directory-dev.institution
+           |  ├── apache  
+           |  ├── fedora   
+           |  ├── mysql  
+           |  └── solr  
+           |
+           ├──enduser-renamed-directory-prod.institution
+           |  ├── apache  
+           |  ├── fedora   
+           |  ├── mysql  
+           |  └── solr  
+           |
+           ├──enduser-renamed-directory-stage.institution
+           |  ├── apache  
+           |  ├── fedora   
+           |  ├── mysql  
+           |  └── solr     
+           |
+```
+
+* Later steps outlined in this guide will have the enduser copy data to these directories.
+
+* The `docker-compose.yml` file found within `/opt/ISLE/config/enduser-renamed-directory-prod.institution` is ready for editing to "point" to these data directories. This process will be explained in further detail in Step 6 of this guide.
+
+* Once the migration process is confirmed as completed and successful, the enduser will continue to backup up this data.
+
+### Step 3: Copy Production Data to ISLE Host server
+
+Please review and follow the [Migration Export Checklist](alpha_migration_export_checklist.md) to ensure all production data detailed within has been **COPIED** over to the ISLE Host Server **PRIOR** to proceeding further with this Migration guide.
+
+Once all steps have been followed, continue on to Step 4.
 
 ---
 
-### Step 3: Setup Git repo for institutional Docker configuration
+### Step 4: Setup config directory within ISLE Git repo for institutional Docker configuration
 
-This process is necessary for running multiple versions of ISLE e.g. production, staging and development / sandbox. The config folder
+This process is necessary for running multiple versions of ISLE e.g. production, staging and development / sandbox. The config folder is the location for creating multiple versions of ISLE environments such as the example provided below.
 
-* Create a private Git repository (Github.com, Bitbucket.com, Gitlab.com or private institutional Git repository)
+This example below displays, along with the baked in ISLE sample dev site, an institution running a development, staging and production environment all on one ISLE host server. This would be a recommended "typical" setup for long term usage.
+```
+ISLE/config/  
+├──enduser-renamed-directory-dev.institution      
+├──enduser-renamed-directory-prod.institution    (this guide uses this as an example only)
+├──enduser-renamed-directory-stage.institution
+├──isle_localdomain                              (ISLE sample site)   
+└──isle-prod-project.institution                 (only copy this template / never delete or modify)
+```
+
+For a more detailed explanation please refer to section `2.7 Managing Multiple Environments.`
+
+**Please note:** While one over time can maintain and update profiles in the `config` directory manually, it is highly recommended that this new directory be kept in a private git repository for ease of use in making and preserving changes. For more information on how to use git in an ISLE multi environment setup, please refer to section [2.7 Environments Git Structure](../../2_enduser_guide/2_7_managing_multiple_environments/env-git-structure.md)
+
+**Setup process**  
+
+* Create a private Git repository on their associated Git server (`private institutional Git repository`) or git hosting service (`Github.com, Bitbucket.com, Gitlab.com`)  
+   * The enduser may need to add the `/home/islandora/.ssh/id_rsa.pub` to the appropriate git repository as a git ssh deploy key to be able to push pull from the server.
 
 * Navigate to the ISLE directory `/opt/ISLE/config/``
 
-* Create a directory on the ISLE server directory e.g. `/opt/ISLE/config/isle-prod-project.institution`
+* Create a directory on the ISLE server directory e.g. `/opt/ISLE/config/enduser-renamed-directory-prod.institution`
 
-* Instantiate this directory as a git repository
-  * Directions for this process
-    * [https://help.github.com/articles/set-up-git/](https://help.github.com/articles/set-up-git/)
-    * [https://help.github.com/articles/create-a-repo/](https://help.github.com/articles/create-a-repo/)
-
-
-```
-**TO DO**: Add more git URLs non github.com
-```
-
-* Copy the contents of the `/opt/ISLE/config/isle-prod-project.institution` to this new directory e.g. `/opt/ISLE/config/isle-prod-project.institution`
-
-* The enduser will need to add the `/home/islandora/.ssh/id_rsa.pub` as a git ssh deploy key to be able to push pull from the server.
+* Copy the contents of the `/opt/ISLE/config/isle-prod-project.institution` to this new directory e.g. `/opt/ISLE/config/enduser-renamed-directory-prod.institution`
 
 ---
 
-### Step 4: Copy in production files on the Isle Host Server to the new institutional Docker config directory within the ISLE project directory
+### Step 5: Edit, merge or copy in Islandora production files or data to the new ISLE Production config or data directories
 
-* Copy in the `highlighted` files from their locations `/pathto/islandora_production_data_storage/` to the appropriate directories of `/opt/ISLE/config/isle-prod-project.institution`
+* Compare the data and settings of the files found within `islandora_production_data_storage`, and then merge, edit or copy as necessary with the templated settings found within the newly renamed directory of `/opt/ISLE/config/enduser-renamed-directory-prod.institution` as guided in the [Migration Merge Checklist](alpha_migration_merge_checklist.md).
 
-* **Resulting example structure**: `/opt/ISLE/config/isle-prod-project.institution`
-```
-isle-prod-project.institution/
-├── apache
-│   ├── php.ini
-│   ├── settings.php
-│   ├── site.conf
-│   └── tmpreaper
-│       └── cron
-├── docker-compose.yml
-├── fedora
-│   ├── apache
-│   │   └── site.conf
-│   ├── fedora
-│   │   ├── fedora-users.xml
-│   │   ├── fedora.fcfg
-│   │   ├── filter-drupal.xml
-│   │   ├── log4j.properties
-│   │   ├── logback.xml
-│   │   └── repository-policies
-│   │       ├── default
-│   │       │   ├── deny-apim-if-not-localhost.xml
-│   │       │   ├── deny-inactive-or-deleted-objects-or-datastreams-if-not-administrator.xml
-│   │       │   ├── deny-reloadPolicies-if-not-localhost.xml
-│   │       │   ├── deny-unallowed-file-resolution.xml
-│   │       │   ├── permit-anything-to-administrator.xml
-│   │       │   ├── permit-apia-unrestricted.xml
-│   │       │   ├── permit-dsstate-check-unrestricted.xml
-│   │       │   ├── permit-oai-unrestricted.xml
-│   │       │   ├── permit-serverStatus-unrestricted.xml
-│   │       │   └── readme.txt
-│   │       └── islandora
-│   │           ├── permit-apim-to-authenticated-user.xml
-│   │           ├── permit-getDatastream-unrestricted.xml
-│   │           ├── permit-getDatastreamHistory-unrestricted.xml
-│   │           └── permit-upload-to-authenticated-user.xml
-│   ├── gsearch
-│   │   ├── fedoragsearch.properties
-│   │   ├── fgsconfig-basic-configForIslandora.properties
-│   │   ├── fgsconfigObjects.properties
-│   │   └── repository.properties
-│   ├── tmpreaper
-│   │   └── cron
-│   └── tomcat
-│       ├── server.xml
-│       ├── tomcat-users.xml
-│       └── web.xml
-├── mysql
-│   ├── create_drupal_user.sql
-│   ├── create_fedora_user.sql
-│   ├── my.cnf
-│   └── production_site_db.sql
-└── solr
-    ├── solr
-    │   ├── schema.xml
-    │   ├── solr.xml
-    │   ├── solrconfig.xml
-    │   └── stopwords.txt
-    └── tomcat
-        ├── server.xml
-        ├── tomcat-users.xml
-        └── web.xml
-```
+---
 
-### Step 5: Edit the `docker-compose.yml` file
+### Step 6: Edit the `docker-compose.yml` file
 
-**Mysql Service section**
-```
-services:
-  mysql:
-```
+Edit the `docker-compose.yml` found within the `/opt/ISLE/config/enduser-renamed-directory-prod.institution` directory as suggested in the [Migration Docker Compose Edit Guidelines](alpha_migration_docker_compose.md).
 
-* In the `image:` section,the image names to the appropriate images needed
-    * _As of Jan 25, 2018 please use the alpha2 tag (this documentation will change)_
+---
 
-
-* In the `environment:` section, change the MYSQL_ROOT_PASSWORD
-
-* In the `volumes:` section, change the following:
-      - /pathto/isle_production_data_storage/data/mysql:/var/lib/mysql
-      - /pathto/isle_production_data_storage/data/mysql/log:/var/log/mysql
-
-    * **Please Note:** _The docker bind-mount process will automatically create the `/data/mysql` directories_
-
-* In the `container_name:` section, change to `isle-mysql-institution` or `isle-mysql-v1`
-
-* In the `extra_hosts:` section, change: (**this is NOT to be literally copied, example only**)
-      - "isle.institution.edu:isle_host_server_IP"  to "yourislesite.institution.edu:10.10.10.10"
-
-**Fedora Service section**
-```
-fedora:
-```
-
-```
-**TO DO:**  remaining edits for fedora
-
-**TO DO:**  solr service edits
-
-TO DO : apache service edits
-
-**TO DO:**  git commit changes & push to repo
-
-**TO DO:**  git clone from the institutional git repo e.g. `ISLE-config` to the /opt/ISLE/config/ (on ISLE host server using terminal)
-
-```
-
-### Step 7: Review or Pull down ISLE Docker images
+### Step 7: Review or pull down ISLE Docker images
 
 _Please Note: You may have already done this in setting up the host server manually and / or with Ansible. However it is always a good idea to review and check using the first command below._
 
@@ -236,7 +199,7 @@ _Please Note: You may have already done this in setting up the host server manua
   * **TO DO:**  show sample output here
 ```
 
-  * If yes, then proceed to Step 8
+  * If yes, then proceed to Step 7
 
   * If no, the perform the following:
     * `docker pull islandoracollabgroup/isle-mysql:alpha2`
@@ -244,9 +207,11 @@ _Please Note: You may have already done this in setting up the host server manua
     * `docker pull islandoracollabgroup/isle-solr:alpha2`
     * `docker pull islandoracollabgroup/isle-apache:alpha2`
 
+---
+
 ### Step 8: Spin up mysql container and import production databases
 
-* `cd /opt/ISLE/config/isle-prod-project.institution`
+* `cd /opt/ISLE/config/enduser-renamed-directory-prod.institution`
 * `docker-compose up -d mysql`
 
 ```
@@ -266,10 +231,12 @@ _Please Note: You may have already done this in setting up the host server manua
 
 ```
 
+---
+
 ### Step 9: Spin up fedora container and run reindex processes
 ```
 **TO DO:**  refine this
-* Staying within `/opt/ISLE/config/isle-prod-project.institution`
+* Staying within `/opt/ISLE/config/enduser-renamed-directory-prod.institution`
 * `docker-compose up -d fedora`
 * check if fedora is running properly e.g. `http://isle-prod-project.institution:8080/manager/html`
 * `docker exec -it isle-fedora-institution bash`
@@ -279,10 +246,12 @@ _Please Note: You may have already done this in setting up the host server manua
 * confirm PID contents in SQL table `QC process here`
 ```
 
+---
+
 ### Step 10: Spin up solr container and rerun index processes
 ```
 **TO DO:**  refine this
-* Staying within `/opt/ISLE/config/isle-prod-project.institution`
+* Staying within `/opt/ISLE/config/enduser-renamed-directory-prod.institution`
 * `docker-compose up -d solr`
 * check if solr is running properly e.g. `http://isle-prod-project.institution:8777/manager/html`
 * `docker exec -it isle-fedora-institution bash` NOTE FEDORA NOT SOLR
@@ -290,14 +259,16 @@ _Please Note: You may have already done this in setting up the host server manua
 * TAKES HOURS DEPENDING ON DATA SIZE
 ```
 
+---
+
 ### Step 11: Spin up apache container and run provision script
 ```
 **TO DO:**  refine this
-* Staying within `/opt/ISLE/config/isle-prod-project.institution`
+* Staying within `/opt/ISLE/config/enduser-renamed-directory-prod.institution`
 * `docker-compose up -d apache`
 * check if apache is running properly e.g. `http://isle-prod-project.institution`
 * `docker exec -it isle-apache-institution bash`
 * cd /tmp location
 * `/tmp/isle-build-tools/apache-provision.sh` (check if this is appropriate)
-* Check site and outline qC process
+* Check site and outline QC process
 ```
