@@ -13,10 +13,10 @@ While this checklist will attempt to point out most of the merge challenges or p
 * In most cases, many of the configuration files (copied from `isle-prod-project.institution` to `enduser-renamed-directory.institution`) will have fake or empty settings in them. Please remove, edit or enter new values as advised.
 
 ### Assumptions / Prerequisites
-* The enduser has completed Steps 1 -4 of the [1.4. -Testing - Migration Guide](alpha_migration_guide.md).
-    * Includes the steps outlined within the [Migration Export Checklist](alpha_migration_export_checklist.md) to copy over production data and configuration files.
+* The enduser has completed Steps 1 -4 of the [Migration Guide](migration_guide.md).
+    * Includes the steps outlined within the [Migration Export Checklist](migration_export_checklist.md) to copy over production data and configuration files.
 
-* The enduser is currently on Step 5 of the [1.4. -Testing - Migration Guide](alpha_migration_guide.md)
+* The enduser is currently on Step 5 of the [Migration Guide](migration_guide.md)
 
 ---
 #### Apache

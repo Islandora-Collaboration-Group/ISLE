@@ -1,19 +1,19 @@
 ### Alpha Manual Build
 Please note this an alternative method of building the `isle.localdomain` Docker images and the slower of the two processes.
 
-Please refer to the [1.4. -Testing - isle.localdomain Quickstart Guide](alpha_isle_localdomain_quickstart.md) for the **faster** version.
+Please refer to the [Test Site Guide - isle.localdomain](testsite_guide.md) for the **faster** version.
 
-Or use the [1.4. -Testing - Migration Guide](alpha_migration_guide.md) after completing this process, if the enduser is going to edit the Dockerfile to make changes prior to the build.
+Or use the [Migration Guide](migration_guide.md) after completing this process, if the enduser is going to edit the Dockerfile to make changes prior to the build.
 
 ### Alpha Manual Build Pre-Requisites
 
 * The Host Server has already been setup and is running. If one has not setup the Host server please follow one of the following links below and then return to this document please.
 
-  * Host Server setup for [**CentOS 7**](host_server_setup_centos.md)
+  * Host Server setup for [**CentOS 7**](host_remote_setup_centos.md)
 
-  * Host Server setup for [**Ubuntu 16.04 LTS**](host_server_setup_ubuntu.md)
+  * Host Server setup for [**Ubuntu 16.04 LTS**](host_remote_setup_ubuntu.md)
 
-  * Host Server setup for [**Mac OS**](host_server_setup_macos.md)
+  * Host Server setup for [**Mac OS**](host_local_setup_macos.md)
 
 * By default the `Docker-Compose.yml` file is configured for Linux Host Servers.
 
@@ -168,4 +168,4 @@ ___
 
 | Account                | Password                      | Service               | URL                                          |
 | -------------          | -------------                 | -------------         | -------------                                |
-| islandora_docker_admin | islandoradockeradminpw2017    | Drupal site admin     | http://islandora-docker.com             |
+| islandora_docker_admin | islandoradockeradminpw2017    | Drupal site admin     | http://isle.localdomain             |
