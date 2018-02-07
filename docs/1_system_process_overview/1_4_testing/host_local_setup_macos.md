@@ -97,7 +97,7 @@ The built-in terminal for MacOs can be found in `~/Applications/Utilities/Termin
 #### Next steps
 Once this process has finished one chose to do one of the following:
 
-* Continue next steps with the [Testsite Guide](testsite_guide.md)
+* Continue next steps with the [Testsite Guide](testsite_guide.md) (isle.localdomain)
 
 * Continue next steps with the [Newsite Guide](newsite_guide.md)
 
