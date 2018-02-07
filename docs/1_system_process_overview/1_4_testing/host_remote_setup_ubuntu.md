@@ -1,6 +1,13 @@
-#### **Ubuntu 16.04 LTS** Host Server Setup
+### Host Remote Setup Guide - Ubuntu
 
-* This alpha build uses `islandora-docker.com` as the test domain along with the Docker Compose service names e.g. `mysql, fedora, apache` etc.
+```
+TO DO
+
+Modify for Remote settings Please
+
+```
+
+* This alpha build uses `isle.localdomain` as the test domain along with the Docker Compose service names e.g. `mysql, fedora, apache` etc.
      * If your institution's server uses real DNS, then skip the next step. If not, please proceed with the following:
      * To ensure this domain resolves properly, one will need to edit the servers and/or their own local `/etc/hosts` file.
        * Open up a terminal and enter: `sudo vi /etc/hosts`
@@ -8,13 +15,13 @@
 
          * Ubuntu 16.04 LTS Host Server (or VM)  
          ```
-         127.0.0.1       localhost islandora-docker.com fedora apache fedora.islandora-docker.com apache.islandora-docker.com
+         127.0.0.1       localhost isle.localdomain fedora apache fedora.isle.localdomain apache.isle.localdomain
          ```
 
          * Enduser local laptop
          ```
          127.0.0.1 localhost   
-         192.156.123.26       islandora-docker.com fedora apache fedora.islandora-docker.com apache.islandora-docker.com
+         192.156.123.26       isle.localdomain fedora apache fedora.isle.localdomain apache.isle.localdomain
          ```
 
 #### Install / run on Ubuntu 16.04 LTS server  
@@ -115,8 +122,8 @@
 #### Next steps
 Once this process has finished one chose to do one of the following:
 
-* Continue next steps with the [1.4. -Testing - isle.localdomain Quickstart Guide](alpha_isle_localdomain_quickstart.md)
+* Continue next steps with the [Test Site Guide - isle.localdomain](testsite_guide.md)
 
-* Continue next steps with [1.4. -Testing - Migration Guide](alpha_migration_guide.md)
+* Continue next steps with [Migration Guide](migration_guide.md)
 
 ---

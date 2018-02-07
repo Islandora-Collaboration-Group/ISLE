@@ -1,4 +1,12 @@
-## Ansible Host Server Setup
+### Host Remote Setup Guide - Ansible
+
+```
+TO DO
+
+Modify for Remote settings Please
+
+```
+
 
 Endusers now have the choice of using Ansible to deploy their Docker Host server instead of performing manual commands. The Ansible script and configuration files can be found in the root folder of the ISLE git repo in a directory named `ansible`.
 
@@ -23,8 +31,8 @@ If you are not familiar with the Ansible, it is recommended to start with their 
 
 
 * A previously created ISLE Host Server running either of these operating systems:
-  * Ubuntu 16.04 LTS / Debian Stretch
-  * CentOS 7 / RHEL equivalent  
+  * Ubuntu 16.04 LTS
+  * CentOS 7   
 
 
 * An account with ssh access to the ISLE Host Server
@@ -387,6 +395,6 @@ Once this script has finished one can:
 
   * Add the `/home/islandora/.ssh/id_rsa.pub` key to any git repository contained within the Migration Guide. (Additional instructions appear in that guide if this process is unfamiliar.)
 
-  * Continue next steps with the [1.4. -Testing - isle.localdomain Quickstart Guide](alpha_isle_localdomain_quickstart.md)
+  * Continue next steps with the [Test Site Guide - isle.localdomain](testsite_guide.md)
 
-  * Continue next steps with [1.4. -Testing - Migration Guide](alpha_migration_guide.md)
+  * Continue next steps with [Migration Guide](migration_guide.md)

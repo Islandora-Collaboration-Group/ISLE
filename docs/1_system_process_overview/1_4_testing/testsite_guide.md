@@ -1,0 +1,277 @@
+## Test Site Guide - isle.localdomain
+
+This guide enables an enduser to spin up and install the "baked in" sample ISLE / Islandora environment, `isle-localdomain` for review and testing.
+
+This test ISLE / Islandora environment (`isle.localdomain`) includes an un-themed Drupal website and empty Fedora repository for endusers to develop code, test ingests, test metadata, update fields in SOLR indexing and otherwise "kick the tires" on ISLE prior for further usages e.g. creating a new ISLE production site or migrating a current Islandora production site to ISLE.
+
+While this checklist will attempt to point out most of the usage challenges or pitfalls, ISLE assumes no responsibility or liability in this matter should an enduser have customizations beyond what this guide outlines.
+
+**Notes**
+
+* The first container (MySQL, isle-mysql, mysql) **has to be running PRIOR** to all others (including fedora & apache) due to a race condition (fedora starts prior to mysql being ready to accept connections). This improper state will be fixed at a later point in the project.  
+
+* **DO NOT RUN** `docker-compose up -d` during the initial build process as this will build and run all containers at the same time which will trigger the above mentioned race condition and subsequent chain of service failures.
+
+### Assumptions / Prerequisites
+
+* Enduser has a local laptop / workstation that conforms to the specifications outlined in the [ISLE MVP Host Specifications Guide](../mvpspecs.md)
+
+* Enduser has Docker installed and running as directed by one of the following guides:
+
+  * [Host Local - Ansible Setup Guide](host_local_setup_ansible.md)
+  * [Host Local - CentOS Setup Guide](host_local_setup_centos.md)
+  * [Host Local -  MacOS Setup Guide](host_local_setup_macos.md)
+  * [Host Local - Ubuntu Setup Guide](host_local_setup_ubuntu.md)
+
+* The four ISLE images that already been "built" and are stored in a cloud repository (Dockerhub) which save the enduser hours of build time are currently tagged with `alpha2`. Please only use these images at this time. This tag will change shortly and will be updated here accordingly.
+
+  * isle-apache [https://hub.docker.com/r/islandoracollabgroup/isle-apache/](https://hub.docker.com/r/islandoracollabgroup/isle-apache/)  
+
+  * isle-fedora [https://hub.docker.com/r/islandoracollabgroup/isle-fedora/](https://hub.docker.com/r/islandoracollabgroup/isle-fedora/)  
+
+  * isle-mysql [https://hub.docker.com/r/islandoracollabgroup/isle-mysql/](https://hub.docker.com/r/islandoracollabgroup/isle-mysql/)  
+
+  * isle-solr  [https://hub.docker.com/r/islandoracollabgroup/isle-solr/](https://hub.docker.com/r/islandoracollabgroup/isle-solr/)  
+
+
+---
+
+### Step 0. docker-compose.yml file edits based on Host Operating System
+
+#### MacOS Host users ONLY
+
+**Edit 1**  
+By default the `docker-compose.yml` file used to manage and launch the test site `isle.localdomain` is configured for Hosts with Linux operating systems e.g. CentOS & Ubuntu.
+
+Prior to launching ISLE containers on a **Mac OS** Host, please edit the `docker-compose.yml` file at the root of the ISLE project directory by removing the (#) character at the start of the line 66.
+
+The line should now look like this.
+
+```
+- ./config/isle_localdomain/apache/macosx_settings.php:/var/www/html/sites/default/settings.php  
+```
+
+**Edit 2**
+* Comment out the `extra_hosts` sections on Lines 39 & 68
+
+* Add the following value of `127.0.0.1 isle.localdomain` to the laptop / workstation's `/etc/hosts` file.   
+
+  * Open a terminal
+
+  * Enter: `sudo nano /etc/hosts`
+    * _For endusers familiar with this process, vim, emacs or alternative tools can be used in lieu of nano_
+
+  * Enter the laptop enduser password
+
+  * Add `isle.localdomain` to the right of `127.0.0.1` or `127.0.0.1 localhost` (depending) with a space in between the entries.  
+
+  **Example**
+
+```
+# Host Database
+#
+# localhost is used to configure the loopback interface
+# when the system is booting.  Do not change this entry.
+##
+127.0.0.1 localhost isle.localdomain
+255.255.255.255 broadcasthost
+
+::1             localhost
+fe80::1%lo0     localhost
+```
+  * Once finished, press the `Cntrl` and the letter `o` keys together.
+
+  * The prompt at the bottom will read `File Name to Write: /etc/hosts`, press the `return` or `enter` key.
+
+  * The prompt will change and may give output like `[ Wrote 19 lines ]`, press the `Cntrl` and the letter `x` keys together to exit the file.
+
+---
+#### CentOS / Ubuntu VM users ONLY
+
+**Edit 1**  
+Add the ISLE Host IP to the `docker-compose.yml` file which will be the Virtual Machine IP as provided by Virtualbox, Vmware etc.
+
+* Lines 39 & 68 both require the same value of the Host server IP address for the `extra_hosts` setting.
+
+   **Example:**
+
+```
+   extra_hosts:
+     - "isle.localdomain:192.168.1.1"
+```
+* Open a text editor, add this same IP to both lines and save the file.
+
+* **Please note:**
+    * This IP can be from a VM run on a local laptop or workstation.
+    * If using Docker for Mac, then comment out these `extra_hosts` sections and add the following value of `127.0.0.1 isle.localdomain` to the laptop / workstation's `/etc/hosts` file.   
+
+
+---
+
+### Test site install process (same for all operating systems)
+
+* **Please note:** *The first container (MySQL, isle-mysql, mysql) has to be running PRIOR to all others (including fedora & apache) due to a race condition (fedora starts prior to mysql being ready to accept connections). This improper state will be fixed at a later point in the project.*  
+
+* **DO NOT RUN** `docker-compose up -d` during the initial install process as this will download all images and then run all containers at the same time which will trigger this race condition and subsequent chain of service failures.
+
+* **During the initial install process** do the following steps to individually download each image and run each container.
+
+* The install times stated below for each container are highly dependent on the enduser's available Internet bandwidth and could take more or less time accordingly.
+
+
+#### 1. MySQL image pull & container launch (10 - 20 mins)
+
+* `docker pull islandoracollabgroup/isle-mysql:alpha2`  
+* `docker-compose up -d mysql`  
+
+#### 2. Fedora image pull & container launch (10 - 30 mins)  
+
+* `docker pull islandoracollabgroup/isle-fedora:alpha2`  
+* `docker-compose up -d fedora`  
+
+* **(Optional but recommended)**
+  * After spinning up fedora container, check if the Fedora service is running prior to advancing.
+  * Navigate to http://fedora:8080/manager/html a popup login prompt should appear.
+    * Enter the supplied username and password found at the bottom of this page in the **Fast Facts** section.
+      * see `2. Fedora container - service Tomcat` user is `admin`
+    * Upon login a large display of running Tomcat applications should display, scroll down to `fedora`
+  * The application state / status should be `true`
+  * If `false` appears instead, attempt to restart the fedora service manually.
+    * Select the `restart` button to the right of the status area.
+  * If it still fails, review the mounted fedora logs. The `docker-compose.yml` file will indicate where the logs are located.
+  * Using terminal and then entering a command like `tail -n 300 - <path to ISLE project/data/fedora/log/tomcat:/usr/local/tomcat/logs/fedora.log` should display enough information to troubleshoot.
+
+
+#### 3. Solr image pull & container launch (10 - 20 mins)  
+
+* `docker pull islandoracollabgroup/isle-solr:alpha2`  
+* `docker-compose up -d solr`  
+
+#### 4. Apache image pull & container launch (10 - 30 mins)
+
+* `docker pull islandoracollabgroup/isle-apache:alpha2`  
+
+* `docker-compose up -d apache`  
+
+* **Please note:** *This container on occasion during project testing has failed to start initially for as of yet obvious and fully repeatable reasons.*  
+    * One can check if the container is running: `docker ps` (shows only running containers)  
+    * One can check if the container stopped running or "exited": `docker ps -a` (shows all containers running or not)  
+
+#### 5. Install script on Apache container (10 - 20 mins)
+
+* Run the following shell scripts manually on the apache container  
+    * `docker exec -it isle-apache bash`
+    * `cd /tmp/isle_drupal_build_tools/`
+    * `chmod 777 *.sh`
+    * `./apache_provision.sh`
+
+* Once finished press the `Cntrl` and `d` keys or type `exit` to get out of the apache container
+* Test (QC) the resulting setup by opening a web browser to the `isle.localdomain` URL of the new ISLE sample site (i.e. http://isle.localdomain)
+
+**Please note:** The cronjob setting in the `apache_provision.sh` script is still commented out as this will need to be flowed into the Docker build process prior. Issue with default Docker root user vs using islandora user. Drupal cron can run properly.
+
+**Total build process** takes 50 - 120 minutes (_depending on system and internet speeds_)
+
+___
+
+### Fast Facts
+
+`islandora` user on host server uses `isle2017` as password
+
+**Please note:**
+
+Whenever the value `http://hostip` used for accessing other ISLE services (not the main Islandora site) appears below, replace `hostip` with either:
+
+* `127.0.0.1` e.g `http://127.0.0.1` (usually for MacOS users)
+
+* the IP of the Host VM (CentOS or Ubuntu) e.g. `http://192.168.1.1`
+
+---
+
+#### 1. MySQL container
+| Compose Service Name | Container Name  | Software      | Ports         |
+| :-------------:      | :-------------: | ------------- | ------------- |      
+| mysql                | isle-mysql      | MySQL 5.6     | 3306          |
+
+
+| Account        | Password              | Database         | Perms                         |
+| -------------  | -------------         | -------------    | -------------                 |      
+| root           | ild_mysqlrt_2018      | **ALL**          | **ALL**                       |
+| fedora_admin   | ild_feddb_2018        | fedora3          | **All** except `Grant` option |
+| isle_ld_user   | isle_ld_db2018        | isle_ld          | **All** except `Grant` option |
+
+  ---
+
+#### 2. Fedora container
+| Compose Service Name | Container Name  | Software      | Ports                                            |
+| :-------------:      | :-------------: | ------------- | -------------                                    |      
+| fedora               | isle-fedora     | see below     | 8080, 80 (on container) mapped to 8777 (on host) |
+
+
+| Software                         | Version           |
+| -------------                    | -------------     |
+| Fedora                           | 3.8.1             |
+| Apache                           | 2.4.7             |
+| Drupalfilter                     | 3.8.1             |
+| Gsearch (w/remote SOLR plugin)   | 2.8+ (DG patched) |
+| (DG) GSearch Extensions          | 0.13              |
+| (DG) Islandora Transforms (XSLTs)| as of 1/2018      |
+| Tomcat                           | 7.x               |  
+| Oracle JDK                       | 8.x               |
+| Djatoka                          | 1.1               |
+
+| Account           | Password                      | Service       | URL           |
+| -------------     | -------------                 | ------------- | ------------- |      
+| fedoraAdmin       | ild_fed_admin_2018            | Fedora        | http://hostip:8080/fedora/describe                          |
+| fedoraIntCallUser | ild_fed_IntCallUser_2018      | Fedora        | http://hostip:8080/fedora/objects                           |
+| anonymous         | anonymous                     | Fedora        | ---                                                            |
+| fgsAdmin          | ild_fgs_admin_2018            | Gsearch       | http://hostip:8080/fedoragsearch/rest?operation=updateIndex |
+| admin             | ild_tc_adm_2018               | Tomcat        | http://hostip:8080/manager/html                             |
+| manager           | ild_tc_man_2018               | Tomcat        | http://hostip:8080/manager/html                             |
+| --                | --                            | Djatoka       | http://hostip:8080/adore-djatoka/                           |
+| --                | --                            | Apache        | http://hostip:8777                                          |
+
+___
+
+#### 3. Solr container
+
+| Compose Service Name | Container Name  | Software      | Ports                                              |
+| :-------------:      | :-------------: | ------------- | -------------                                      |      
+| solr                 | isle-solr       | see below     | 8993, 8080 (on container) mapped to 8091 (on host) |
+
+
+| Software               | Version       |
+| -------------          | ------------- |
+| Solr                   | 4.10.4        |
+| Tomcat                 | 7.x           |  
+| Oracle JDK             | 8.x           |
+| (DG) Basic Solr Config | 4.10.x branch |
+
+| Account           | Password        | Service       | URL                                |
+| -------------     | -------------   | ------------- | -------------                      |
+| admin             | ild_tc_adm_2018 | Tomcat        | http://hostip:8091/manager/html |
+| manager           | ild_tc_man_2018 | Tomcat        | http://hostip:8091/manager/html |
+| --                | --              | Solr          | http://hostip:8091/solr/        |
+
+
+___
+
+#### 4. Apache container
+
+| Compose Service Name | Container Name  | Software      | Ports         |
+| :-------------:      | :-------------: | ------------- | ------------- |      
+| apache               | isle-apache        | see below  | 80            |
+
+
+| Software      | Version       |
+| ------------- | ------------- |
+| Apache        | 2.4.7         |
+| Oracle JDK    | 8.x           |
+| Djatoka       | 1.1           |
+| Drupal        | 7.56          |
+| PHP           | 5.6           |
+| Islandora     | 7.x           |
+
+| Account                | Password                      | Service               | URL                     |
+| -------------          | -------------                 | -------------         | -------------           |
+| isle_localdomain_admin | isle_localdomain_adminpw2018  | Drupal site admin     | http://isle.localdomain |

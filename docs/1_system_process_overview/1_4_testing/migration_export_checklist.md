@@ -9,8 +9,8 @@ Ensure adequate backups of any production system(s) are made prior to any attemp
 ISLE assumes no responsibility or liability in this matter.
 
 ### Assumptions / Prerequisites
-* The enduser has completed Steps 1 & 2 of the [1.4. -Testing - Migration Guide](alpha_migration_guide.md).
-* The enduser is currently on Step 3 of the [1.4. -Testing - Migration Guide](alpha_migration_guide.md)
+* The enduser has completed Steps 1 & 2 of the [Migration Guide](migration_guide.md).
+* The enduser is currently on Step 3 of the [Migration Guide](migration_guide.md)
 
 ---
 

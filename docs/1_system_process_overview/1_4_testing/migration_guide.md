@@ -1,6 +1,6 @@
-### ISLE Alpha Migration Guide (draft 02.5.2018)
+### ISLE Migration Guide (draft 02.5.2018)
 
-This Alpha Migration guide is the intended process for endusers to migrate their existing production Islandora environment to their respective ISLE Islandora containers and volumes.
+This Migration guide is the intended process for endusers to migrate their existing production Islandora environment to their respective ISLE Islandora containers and volumes.
 
 
 ### Assumptions / Prerequisites
@@ -8,17 +8,17 @@ This Alpha Migration guide is the intended process for endusers to migrate their
 
      * _If one has not setup the ISLE host server please refer to the appropriate resource below:_
 
-        * Manual Host Server setup for [**CentOS 7**](host_server_setup_centos.md) w/ ISLE repo clone steps
+        * [Host Remote Setup Guide - CentOS](host_remote_setup_centos.md)
 
-        * Manual Host Server setup for [**Ubuntu 16.04 LTS**](host_server_setup_ubuntu.md) w/ ISLE repo clone steps   
+        * [Host Remote Setup Guide - Ubuntu](host_remote_setup_ubuntu.md)
 
-        * [Ansible install](host_server_setup_ansible.md) setup for (Ubuntu / Centos) includes ISLE repo clone steps
+        * [Host Remote Setup Guide - Ansible](host_remote_setup_ansible.md) (setup for both Ubuntu & Centos)
 
 * The fully qualified domain name of their ISLE host server that will run all of the containers has been created and resolves properly in DNS.
 
 * The enduser has the IP address of their ISLE host server documented
 
-* The enduser has the expected fully qualified domain name (fqdn) of the new first Islandora / Drupal website documented and assigned to the appropriate IP in DNS.
+* The enduser has the expected fully qualified domain name(s) (fqdn) of the Islandora / Drupal website(s) documented and assigned to the appropriate IP(s) in DNS.
 
 * The enduser has ssh access to ISLE host server
 
@@ -36,7 +36,7 @@ As this is a large guide, here's a quick not very detailed overview of what's go
 
 * Ensure that the destination ISLE host server has the same (or more) amount of storage as the production server.
 * Create appropriate Islandora Production data storage structure on new ISLE host server
-* Copy current production data and config files as directed by the [export checklist](alpha_migration_export_checklist.md) to an appropriate location on the new ISLE host Server.
+* Copy current production data and config files as directed by the [export checklist](migration_export_checklist.md) to an appropriate location on the new ISLE host Server.
 * Create the required new config directory by copying the template `/opt/ISLE/config/isle-prod-project.institution` to a renamed directory within `/opt/ISLE/config`
 * Compare the template settings within the new renamed directory of `/opt/ISLE/config/enduser-renamed-directory.institution` to the current production config files. Merge or edit as necessary in the new isle config directory for use with ISLE.
    * There may be some additional work to compare and merge in previous enduser customizations of the Solr `schema.xml` to the new ISLE config.
@@ -56,7 +56,7 @@ As this is a large guide, here's a quick not very detailed overview of what's go
 
 _Friendly note to endusers: While the following process may seem overly cautious or redundant, it saves time and establishes a safer conditions for endusers to work with valuable data._
 
-It is recommended that endusers use a large volume or network attached drive that can store a backup copy of the entire Islandora production storage, an merged copy of the ISLE production storage and associated config files as outlined in the [Migration Export Checklist](alpha_migration_export_checklist.md) and additional datastores.
+It is recommended that endusers use a large volume or network attached drive that can store a backup copy of the entire Islandora production storage, an merged copy of the ISLE production storage and associated config files as outlined in the [Migration Export Checklist](migration_export_checklist.md) and additional datastores.
 
 * In an appropriate area / path on one's intended ISLE host server e.g. `/opt/` or `/mnt/`, create a directory e.g. `islandora_production_data_storage` with the following sub-directories:
 
@@ -89,7 +89,7 @@ In the previous step the `islandora_production_data_storage` directory was setup
 
 This step is to now create the working directory for **ISLE Production Data**.
 
-It is recommended that endusers again use a large volume or network attached drive that can store the entire ISLE production storage (which is the merged copy of the Islandora production storage and associated config files as outlined in the [Migration Export Checklist](alpha_migration_export_checklist.md) and additional datastores.)
+It is recommended that endusers again use a large volume or network attached drive that can store the entire ISLE production storage (which is the merged copy of the Islandora production storage and associated config files as outlined in the [Migration Export Checklist](migration_export_checklist.md) and additional datastores.)
 
 * In an appropriate area / path on one's intended ISLE host server e.g. `/opt/` or `/mnt/`, create a parent directory e.g. `isle_production_data_storage` with the appropriate institutional ISLE environment as a sub-directory. Create as many as required. For this guide only the production environment will be created e.g. `enduser-renamed-directory-prod.institution`
 
@@ -139,7 +139,7 @@ This structure ensures no accidental data overwrites between ISLE environments a
 
 ### Step 3: Copy Production Data to ISLE Host server
 
-Please review and follow the [Migration Export Checklist](alpha_migration_export_checklist.md) to ensure all production data detailed within has been **COPIED** over to the ISLE Host Server **PRIOR** to proceeding further with this Migration guide.
+Please review and follow the [Migration Export Checklist](migration_export_checklist.md) to ensure all production data detailed within has been **COPIED** over to the ISLE Host Server **PRIOR** to proceeding further with this Migration guide.
 
 Once all steps have been followed, continue on to Step 4.
 
@@ -178,13 +178,13 @@ For a more detailed explanation please refer to section `2.7 Managing Multiple E
 
 ### Step 5: Edit, merge or copy in Islandora production files or data to the new ISLE Production config or data directories
 
-* Compare the data and settings of the files found within `islandora_production_data_storage`, and then merge, edit or copy as necessary with the templated settings found within the newly renamed directory of `/opt/ISLE/config/enduser-renamed-directory-prod.institution` as guided in the [Migration Merge Checklist](alpha_migration_merge_checklist.md).
+* Compare the data and settings of the files found within `islandora_production_data_storage`, and then merge, edit or copy as necessary with the templated settings found within the newly renamed directory of `/opt/ISLE/config/enduser-renamed-directory-prod.institution` as guided in the [Migration Merge Checklist](migration_merge_checklist.md).
 
 ---
 
 ### Step 6: Edit the `docker-compose.yml` file
 
-Edit the `docker-compose.yml` found within the `/opt/ISLE/config/enduser-renamed-directory-prod.institution` directory as suggested in the [Migration Docker Compose Edit Guidelines](alpha_migration_docker_compose.md).
+Edit the `docker-compose.yml` found within the `/opt/ISLE/config/enduser-renamed-directory-prod.institution` directory as suggested in the [Migration Docker Compose Edit Guidelines](migration_docker_compose.md).
 
 ---
 
