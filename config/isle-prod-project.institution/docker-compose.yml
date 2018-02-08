@@ -21,7 +21,7 @@ services:
       - ./isle_production_data_storage/mysql/log:/var/log/mysql # edit here and remove comment
     container_name: isle-mysql-prodname # rename container to indicate type e.g. prod, stage, dev or version here and remove comment
     extra_hosts:
-      - "isle-prod-site.institution:IP address of Dockerhost server" # edit here and remove comment
+      - "isle-prod-site.institution:IP address of Dockerhost server" # enter the ip of host server or vm after the : and between the double quotes e.g. - "isle-prod-site.institution:10.10.10.130" and then remove comment
 
   fedora:
     image: islandoracollabgroup/isle-fedora:alpha2
@@ -34,8 +34,10 @@ services:
     depends_on:
       - mysql
     volumes:
+    - ./fedora/adore-djatoka/index.html:/usr/local/tomcat/webapps/adore-djatoka/index.html # added s to http no other edits required
     - ./fedora/apache/site.conf:/etc/apache2/sites-available/site.conf # make edits as necessary
     - ./fedora/fedora/fedora.fcfg:/usr/local/fedora/server/config/fedora.fcfg # edit lines: 562 to change fedora_admin db username (if necessary) & 598 (necessary) for fedora_admin db password
+    - ./fedora/fedora/web.properties:/usr/local/fedora/server/config/spring/web/web.properties # required to secure fedora with https / 8443
     - ./fedora/fedora/repository-policies/default:/usr/local/fedora/data/fedora-xacml-policies/repository-policies/default # may need to add Docker Host Server IP(s) to default/deny-apim-if-not-localhost.xml
     - ./fedora/fedora/repository-policies/islandora:/usr/local/fedora/data/fedora-xacml-policies/repository-policies/islandora
     - ./fedora/fedora/fedora-users.xml:/usr/local/fedora/server/config/fedora-users.xml # edit to add appropriate users and passwords
@@ -52,7 +54,7 @@ services:
     - ./isle_production_data_storage/fedora/log/apache:/var/log/apache2
     container_name: isle-fedora-prodname # rename container to indicate type e.g. prod, stage, dev or version here and remove comment
     extra_hosts:
-      - "isle-prod-site.institution:IP address of Dockerhost server" # edit here and remove comment
+      - "isle-prod-site.institution:IP address of Dockerhost server" # enter the ip of host server or vm after the : and between the double quotes e.g. - "isle-prod-site.institution:10.10.10.130" and then remove comment
 
 
   solr:
@@ -88,4 +90,4 @@ services:
       - ./isle_production_data_storage/apache/log:/var/log/apache2
     container_name: isle-apache-prodname # rename container to indicate type e.g. prod, stage, dev or version here and remove comment
     extra_hosts:
-      - "isle-prod-site.institution:IP address of Dockerhost server" # edit here and remove comment
+      - "isle-prod-site.institution:IP address of Dockerhost server" # enter the ip of host server or vm after the : and between the double quotes e.g. - "isle-prod-site.institution:10.10.10.130" and then remove comment

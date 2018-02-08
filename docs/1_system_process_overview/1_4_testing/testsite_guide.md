@@ -33,79 +33,61 @@ While this checklist will attempt to point out most of the usage challenges or p
 
   * isle-solr  [https://hub.docker.com/r/islandoracollabgroup/isle-solr/](https://hub.docker.com/r/islandoracollabgroup/isle-solr/)  
 
-* The enduser has sshed (shelled in) to their local Host VM or server using a terminal on their laptop or workstation. 
+* The enduser has sshed (shelled in) to their local Host VM or server using a terminal on their laptop or workstation.
 
 ---
 
-### Step 0. docker-compose.yml file edits based on Host Operating System
+### 0. docker-compose.yml file edits
 
-#### MacOS Host users ONLY
+**Edit 1 (conditional)**
 
-**Edit 1**  
-By default the `docker-compose.yml` file used to manage and launch the test site `isle.localdomain` is configured for Hosts with Linux operating systems e.g. CentOS & Ubuntu.
+If the enduser is using Vagrant move on to **Edit 2** in this section as this process is handled automatically.
 
-Prior to launching ISLE containers on a **Mac OS** Host, please edit the `docker-compose.yml` file at the root of the ISLE project directory by removing the (#) character at the start of the line 66.
+If and only if the enduser is **NOT using Vagrant** on their local laptop and is setting up Virtualbox manually, then please do the following below first on the local laptop.
 
-The line should now look like this.
+* Add the following values of `127.0.0.1 isle.localdomain apache solr mysql fedora` to the laptop / workstation's `/etc/hosts` file.   
 
-```
-- ./config/isle_localdomain/apache/macosx_settings.php:/var/www/html/sites/default/settings.php  
-```
-
-**Edit 2**
-* Comment out the `extra_hosts` sections on Lines 39 & 68
-
-* Add the following value of `127.0.0.1 isle.localdomain` to the laptop / workstation's `/etc/hosts` file.   
-
-  * Open a terminal
+  * Open a terminal on the local laptop
 
   * Enter: `sudo nano /etc/hosts`
     * _For endusers familiar with this process, vim, emacs or alternative tools can be used in lieu of nano_
 
   * Enter the laptop enduser password
 
-  * Add `isle.localdomain` to the right of `127.0.0.1` or `127.0.0.1 localhost` (depending) with a space in between the entries.  
+  * Add the values below to the right of `127.0.0.1` or `127.0.0.1 localhost`
+
+    * `isle.localdomain apache solr mysql fedora` with a space in between the entries.  
 
   **Example**
+  `127.0.0.1 isle.localdomain apache solr mysql fedora`
+  `127.0.0.1 localhost isle.localdomain apache solr mysql fedora`
 
-```
-# Host Database
-#
-# localhost is used to configure the loopback interface
-# when the system is booting.  Do not change this entry.
-##
-127.0.0.1 localhost isle.localdomain
-255.255.255.255 broadcasthost
+  * Enter `Cntrl` and the letter `o` together to write the changes to the file.
 
-::1             localhost
-fe80::1%lo0     localhost
-```
-  * Once finished, press the `Cntrl` and the letter `o` keys together.
+  * Enter `Cntrl` and the letter `x` together to exit the file.
 
-  * The prompt at the bottom will read `File Name to Write: /etc/hosts`, press the `return` or `enter` key.
 
-  * The prompt will change and may give output like `[ Wrote 19 lines ]`, press the `Cntrl` and the letter `x` keys together to exit the file.
+**Edit 2**  
 
----
-#### CentOS / Ubuntu VM users ONLY
+This edit should be made regardless of using Vagrant etc. (same for all operating systems)
 
-**Edit 1**  
-Add the ISLE Host IP to the `docker-compose.yml` file which will be the Virtual Machine IP as provided by Virtualbox, Vmware etc.
+* Open up a terminal and ssh into the running ISLE Host VM
 
-* Lines 39 & 68 both require the same value of the Host server IP address for the `extra_hosts` setting.
+* `cd /opt/ISLE` _or wherever the enduser cloned the ISLE Project to on the ISLE Host VM_
 
-   **Example:**
+*  Enter: `sudo nano /opt/ISLE/docker-compose.yml`
+    * _For endusers familiar with this process, vim, emacs or alternative tools can be used in lieu of nano_
+
+* Add the ISLE Host VM IP to the `extra_hosts` sections on Lines 39 & 68 in the `docker-compose.yml` file at the root of the ISLE project directory.
+
+* Lines 39 & 68 both require the same value of the Host server IP address for the `extra_hosts` setting after the `isle.localdomain:` and before the double quotes.
+
+**Example:**
 
 ```
    extra_hosts:
-     - "isle.localdomain:192.168.1.1"
+     - "isle.localdomain:10.10.10.130"
 ```
-* Open a text editor, add this same IP to both lines and save the file.
-
-* **Please note:**
-    * This IP can be from a VM run on a local laptop or workstation.
-    * If using Docker for Mac, then comment out these `extra_hosts` sections and add the following value of `127.0.0.1 isle.localdomain` to the laptop / workstation's `/etc/hosts` file.   
-
 
 ---
 
@@ -119,6 +101,7 @@ Add the ISLE Host IP to the `docker-compose.yml` file which will be the Virtual 
 
 * The install times stated below for each container are highly dependent on the enduser's available Internet bandwidth and could take more or less time accordingly.
 
+* The steps below assume the enduser is still shelled in (sshed) into the ISLE Host VM via a terminal on their local laptop.
 
 #### 1. MySQL image pull & container launch (10 - 20 mins)
 
@@ -177,7 +160,7 @@ ___
 
 ### Fast Facts
 
-`islandora` user on host server uses `isle2017` as password
+`islandora` user on the ISLE host server uses `islandora` as the password.
 
 **Please note:**
 
@@ -185,7 +168,7 @@ Whenever the value `http://hostip` used for accessing other ISLE services (not t
 
 * `127.0.0.1` e.g `http://127.0.0.1` (usually for MacOS users)
 
-* the IP of the Host VM (CentOS or Ubuntu) e.g. `http://192.168.1.1`
+* the IP of the Host VM (CentOS or Ubuntu) e.g. `http://10.10.10.130`
 
 ---
 
