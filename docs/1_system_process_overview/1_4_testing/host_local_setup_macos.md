@@ -1,19 +1,26 @@
-### Host Local Setup Guide - MacOS (Docker For Mac)
+### Host Local Setup Guide - MacOS (Vagrant / Virtualbox)
 
 This is a guide to setup and install all ISLE pre-requisites on a MacOS local laptop or workstation.
 
-**Please note:** This guide is for using the `Docker For Mac` software only.
+**Please note:** This guide is for using `Vagrant / Virtualbox` software only.
 
-If an enduser would prefer not to use `Docker For Mac` and instead use a local VirtualMachine (aka Virtualbox) please refer to one of the following guides:
-
-* [Host Local - Ansible Setup Guide](host_local_setup_ansible.md)
-* [Host Local - CentOS Setup Guide](host_local_setup_centos.md)
-* [Host Local - Ubuntu Setup Guide](host_local_setup_ubuntu.md)
+**2/7/2018** There appears to be a networking bug found in `Docker For Mac` software that stops Fedoragsearch from properly starting in Tomcat.
 
 ### Assumptions / Pre-Requisites
 
 * Enduser has a local laptop / workstation that conforms to the specifications outlined in the [ISLE MVP Host Specifications Guide](../mvpspecs.md)
 
+### Install process overview
+
+* Install git
+* Install VirtualBox
+* Install VirtualBox Extensions
+* Install Vagrant
+* Install Vagrant plugin
+* Clone the ISLE project repository
+* Start the ISLE Host VM (using vagrant)
+* Install the ISLE project and software dependencies using the Ubuntu (manual) or Ansible (scripted) guides
+* Install and run the ISLE project on the ISLE Host VM using the Testsite Guide
 
 ### Step 1: Git Installation
 In order to get a copy (clone) of the current ISLE project, git will need to be installed. [Git](https://git-scm.com) is a software version control system for tracking changes in computer files and coordinating work on those files among multiple people.
@@ -37,46 +44,96 @@ git version 2.15.1
 
 If git is already installed, then please proceed to the next section.
 
-### Step 2: Docker Installation
+### Step 2: VirtualBox Installation
 
-* Click this [link](https://download.docker.com/mac/stable/Docker.dmg) to download the latest version (`Docker.dmg`)
-  * _This .dmg file will include Docker & Docker Compose in one package._
+VirtualBox is a general-purpose full virtualizer for x86 hardware, targeted at server, desktop and embedded use.
 
-  * To read more about this version of Docker, please visit the [Docker store](https://store.docker.com/editions/community/docker-ce-desktop-mac)
+* In a web browser, navigate to https://www.virtualbox.org/wiki/Downloads to download the latest version. Click on the `OS X hosts` link to start.
 
-* The `Docker.dmg` file download process will start and depending on the enduser's Internet connection will take between 5 - 15 mins. This file once downloaded will be found in the endusers `Downloads` folder.
+* The `VirtualBox-x.x.xxx.dmg` file download process will start and depending on the enduser's Internet connection will take between 5 - 15 mins. This file once downloaded will be found in the endusers `Downloads` folder.
 
-* Double-click the `Docker.dmg` file in the `Downloads` folder.
+* Double-click the `VirtualBox-x.x.xxx.dmg` file in the `Downloads` folder.
 
-* A `Docker` install prompt will appear. Within the prompt, simply drag and drop the `Docker` (whale) icon to the Applications folder.
+* A `VirtualBox` install prompt will appear. Within the prompt, Double click on the `VirtualBox.pkg` icon as also instructed in the prompt.
 
-* A `Copying to Applications` prompt will appear and depending on the enduser's harddisk speed may take between 1 - 5 mins.
+* A `Install Oracle VM VirtualBox` prompt will appear click on the `Continue` button.
 
-* Open a new `Finder` window and click on the `^` symbol to eject the `Docker` install mount. This will close the previous `Docker` install prompt.
+* The `Standard Install on...` window appears, click on the `Install` button at the lower right hand corner.
 
-* To start `Docker for Mac`, navigate to the `Applications` directory and double click on the `Docker` whale icon.
+* The `Installer is trying to install new software` prompt appears. The enduser's User Name should already be filled out in the top field. Enter the associated password in the second field and then click the `Install Software Button`.
 
-* The enduser may get a prompt like this:
+* A `The installation was successful` window should now appear. Click the `Close` button.
+
+* A final prompt may appear asking the enduser if they want to move the `Oracle VM VirtualBox Installer to the Trash`. Click the `Move to Trash` button.
+
+* Open a new `Finder` window and click on the `^` symbol to eject the `VirtualBox` install mount. This will close the previous `VirtualBox` install prompt.
+
+### Step 3: VirtualBox Extensions for VirtualBox Installation
+
+* In a web browser, navigate to https://www.virtualbox.org/wiki/Downloads to download the latest version. Click on the Oracle VM VirtualBox Extension Pack `All supported platforms` link to start.
+
+* The `Oracle_VM_VirtualBox_Extension_Pack-x.x.xxx.vbox-extpack` file download process will start and depending on the enduser's Internet connection will take between 5 - 15 mins. This file once downloaded will be found in the endusers `Downloads` folder.
+
+* Double-click the `Oracle_VM_VirtualBox_Extension_Pack-x.x.xxx.vbox-extpack` file in the `Downloads` folder.
+
+* This should automatically start VirtualBox and a dropdown window will appear directing the enduser to either install or upgrade the Extension pack. Click on the appropriate install or upgrade button. Either will have the same effect.
+
+* A VirtualBox license agreement prompt should appear. Using the scrollbar on the right hand side of the prompt, scroll to the bottom (after reading of course ;) ) and click the `I agree` button.
+
+*  The enduser will be asked for their user name and password in a new prompt. Enter accordingly.
+
+* The extension pack should now install (<10 seconds) and a new prompt with `The extension pack Oracle VM VirtualBox Extension Pack was installed successfully.` should appear. Click the `OK` button to close. The enduser can also now close the VirtualBox window / application.
+
+### Step 4: Vagrant Installation
+
+Vagrant is a tool for building and managing virtual machine environments in a single workflow. Endusers can read more [here](https://www.vagrantup.com/intro/index.html)
+
+* In a web browser, navigate to https://www.vagrantup.com/downloads.html to download the latest version. Click on the `64-bit` link in the Mac OS X section.
+
+* The `vagrant_x.x.x_x86_64.dmg` file download process will start and depending on the enduser's Internet connection will take between 5 - 15 mins. This file once downloaded will be found in the endusers `Downloads` folder.
+
+* Double-click the `vagrant_x.x.x_x86_64.dmg` file in the `Downloads` folder.
+
+* A `Vagrant` install prompt will appear. Within the prompt, Double click on the `vagrant.pkg` icon.
+
+* A `Install Vagrant` prompt will appear, click on the `Continue` button.
+
+* The `Standard Install on...` window appears, click on the `Install` button at the lower right hand corner.
+
+* The `Installer is trying to install new software` prompt appears. The enduser's User Name should already be filled out in the top field. Enter the associated password in the second field and then click the `Install Software Button`.
+
+* A `The installation was successful` window should now appear. Click the `Close` button.
+
+* A final prompt may appear asking the enduser if they want to move the `Vagrant Installer to the Trash`. Click the `Move to Trash` button.
+
+* Open a new `Finder` window and click on the `^` symbol to eject the `Vagrant` install mount. This will close the previous `Vagrant` install prompt.
+
+
+### Step 5: Vagrant Plugin Installation
+
+* Open a terminal and enter the following:
+
+   * `vagrant plugin install vagrant-hostsupdater`
+
+   * This process should take 10 - 30 seconds depending on Internet speed
+
+   **Example**
 
 ```
-"Docker” is an application downloaded from the Internet.
-Are you sure you want to open it?
 
-Chrome downloaded this file today at 3:43 PM from download.docker.com.
-```
-* Click the `Open` button on the prompt.
+vagrant plugin install vagrant-hostsupdater
 
-* The `Docker for Mac` application should now start up.
-   * One can check on the process by looking at the top of the screen, there should be a tiny whale icon with tiny cargo containers bouncing about. If one clicks on the dropdown menu, the orange circle status of `Docker is starting...` should turn to a green circle status of `Docker is running` if installed properly.
+Installing the 'vagrant-hostsupdater' plugin. This can take a few minutes...
 
-* To stop `Docker for Mac`, simply click again on the whale icon at the top of the screen and choose `Quit Docker` or use the ⌘ key and Q.
+Installed the plugin 'vagrant-hostsupdater (1.0.2)'!
+```   
 
 
-### Step 3: Clone the ISLE repository
+### Step 6: Clone the ISLE repository
 
 In this section, the enduser will need to decide on an appropriate area on their laptop to clone the current ISLE project software to.
 
-Some endusers create a new directory e.g. `Projects` or `Code` within their `Documents` directory. It is entirely up to the enduser to decide.
+Some endusers create a new directory e.g. `Projects` or `Code` within their `Documents` directory. It is entirely up to the enduser to decide. The steps below are an example.
 
 The built-in terminal for MacOs can be found in `~/Applications/Utilities/Terminal`
 
@@ -94,7 +151,35 @@ The built-in terminal for MacOs can be found in `~/Applications/Utilities/Termin
 
   * Or within the same terminal, enter `ls -lha`
 
-#### Next steps
+### Step 7: Start the ISLE Host Vagrant Ubuntu VM
+
+* Open a terminal and enter the following:
+
+   * `cd ~/path_to/ISLE/vagrant/`
+   * `vagrant up`
+
+This process should start the ISLE Host Vagrant Ubuntu VM and should take anywhere from 10 - 20 minutes for the software to download and start.
+
+### Step 8: Install Docker, Docker Compose and ISLE on the ISLE Host Vagrant Ubuntu VM
+
+Once this process finishes and the ISLE Host Vagrant Ubuntu VM is running.
+
+* The enduser should enter in the terminal:
+
+    * `vagrant ssh`
+
+This command shells in the vagrant user to the ISLE Host.
+
+The enduser now has a choice to follow these one of these two guides to install the dependencies.
+
+* **Choice 1:** [Host Local - Ubuntu Setup Guide](host_local_setup_ubuntu.md)
+  * start on **Line 34 - #### Docker setup for Ubuntu 16.04 LTS** to perform this process manually on the ISLE Host Vagrant Ubuntu VM
+
+* **Choice 2** [Host Local - Ansible Setup Guide](host_local_setup_ansible.md)
+  * start on **Line 392 - ### Host Local Setup - Ansible MacOS ONLY** to setup Ansible, use the supplied Ansible script and automatically install Docker, Docker-Compose on the ISLE Host Vagrant Ubuntu VM.
+
+
+### Step 9: Next steps
 Once this process has finished one chose to do one of the following:
 
 * Continue next steps with the [Testsite Guide](testsite_guide.md) (isle.localdomain)
