@@ -1,12 +1,5 @@
 ### Host Local Setup Guide - Ansible
 
-```
-TO DO
-
-Modify for Local Virtualbox settings Please
-
-```
-
 Endusers now have the choice of using Ansible to deploy their Docker Host server instead of performing manual commands. The Ansible script and configuration files can be found in the root folder of the ISLE git repo in a directory named `ansible`.
 
 Ansible is an free open source automation platform / tool which runs on Linux, Mac or BSD, doesn’t use local or remote agents and is relatively easy to setup. Ansible can help with server configuration management, application deployment, task automation and IT orchestration (_running tasks in sequence on several different servers or devices_).
@@ -16,6 +9,9 @@ If you are not familiar with the Ansible, it is recommended to start with their 
 * [Ansible website](https://www.ansible.com/)
 * [What is Ansible?](https://www.ansible.com/overview/how-ansible-works)
 * [Ansible Documentation](http://docs.ansible.com/ansible/latest/intro.html)
+
+**Please note:** For MacOS users using a local ISLE Host VM on their laptop or workstation, please scroll down to **Line 395** the section called `### Host Local Setup - Ansible MacOS ONLY`
+
 
 ### Prerequisites / Assumptions
 
@@ -118,6 +114,7 @@ The Ansible script will deploy the following to the ISLE Host server:
 ansible
 ├── docker_install.yml
 ├── host_vars
+│   ├── host_local_macos_isle_localdomain.yml
 │   └── isle-prod-project.institution.yml
 ├── inventory
 └── roles
@@ -385,15 +382,73 @@ drwxr-xr-x. 3 islandora islandora   54 Jan 17 09:17 mysql
 drwxr-xr-x. 4 islandora islandora   50 Jan 17 09:17 solr
 ```
 
----
-
-### Post Server Deploy or next steps
 Once this script has finished one can:
 
   * Add any appropriate public ssh keys to `/home/islandora/.ssh/authorized_keys` prior to attempting to ssh to the Islandora Host server as the `islandora` user.
 
   * Add the `/home/islandora/.ssh/id_rsa.pub` key to any git repository contained within the Migration Guide. (Additional instructions appear in that guide if this process is unfamiliar.)
 
-  * Continue next steps with the [Test Site Guide - isle.localdomain](testsite_guide.md)
+Proceed to bottom of this page for next steps.
 
-  * Continue next steps with [Migration Guide](migration_guide.md)
+---
+
+### Host Local Setup - Ansible MacOS ONLY
+
+* To install `Ansible` on the enduser's MacOS laptop / workstation.
+
+  * Install Ansible via Python pip
+    * Follow here http://docs.ansible.com/ansible/latest/intro_installation.html#latest-releases-via-pip
+
+  * Or install Ansible via Homebrew (better)
+     * `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+     * `brew install ansible`
+
+* There is a ready made Ansible script for the MacOS hosted isle.localdomain called `ansible/host_vars/host_local_macos_isle_localdomain.yml`
+
+  * Use `vagrant` for the `ansible_ssh_user=` value in the `ansible/inventory` file
+
+  * Use `~/Users/enduser/.vagrant.d/insecure_private_key` for the `ansible_ssh_private_key_file` value in the `ansible/inventory` file
+
+  **Example**
+```    
+[host_local_macos_isle_localdomain]
+host_local_macos_isle_localdomain ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_private_key_file=/Users/enduser/.vagrant.d/insecure_private_key
+```
+
+  * **Line 13** in the `ansible/host_vars/host_local_macos_isle_localdomain.yml` file will need to be edited with the correct path to the enduser's id_rsa.pub  file. Change the `enduser` value to the real username. (_assumes the_ `id_rsa.pub` _file exists!_)
+
+  * **Line 3** in the `ansible/docker_install.yml` file will need to be edited, change the value of `isle-prod-project.institution` to `host_local_macos_isle_localdomain`
+
+* Once these files have been edited, open a terminal and enter:
+
+  *  `cd path_to/ISLE/ansible/`
+
+  * Test the connection to the ISLE Host Vagrant Ubuntu VM
+
+    * `ansible -i inventory host_local_macos_isle_localdomain -m ping`
+
+    * **Example** output of above command (_IGNORE THE WARNING_)
+
+
+```
+[WARNING]: Found both group and host with same name: host_local_macos_isle_localdomain   
+host_local_macos_isle_localdomain | SUCCESS => {
+   "changed": false,
+   "ping": "pong"
+ }
+```
+**Please Note:** _If SUCCESS doesn't appear as a value or if the wording of the prompt is in RED with "host doesn't exist ...", review all steps above and check the settings. Do not advance until the **Example** output above matches._  
+
+* To deploy to the ISLE Host Server, run this command.
+
+   `ansible-playbook -i inventory docker_install.yml`
+
+Ansible will start displaying output within the terminal. If any turn red and the script terminates, please review the above settings and connectivity to the server. Attempt to rerun the script.
+
+---
+
+### Post Server Deploy or next steps
+
+* Continue next steps with the [Test Site Guide - isle.localdomain](testsite_guide.md)
+
+* Continue next steps with [Migration Guide](migration_guide.md)

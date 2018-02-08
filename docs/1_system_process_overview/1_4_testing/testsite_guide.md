@@ -33,6 +33,7 @@ While this checklist will attempt to point out most of the usage challenges or p
 
   * isle-solr  [https://hub.docker.com/r/islandoracollabgroup/isle-solr/](https://hub.docker.com/r/islandoracollabgroup/isle-solr/)  
 
+* The enduser has sshed (shelled in) to their local Host VM or server using a terminal on their laptop or workstation. 
 
 ---
 

@@ -6,3 +6,6 @@
 
 [isle-prod-project.institution]
 isle-prod-project.institution ansible_connection=ssh ansible_ssh_user= ansible_ssh_private_key_file=
+
+[host_local_macos_isle_localdomain]
+host_local_macos_isle_localdomain ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_private_key_file=
