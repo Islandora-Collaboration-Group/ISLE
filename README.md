@@ -1,14 +1,14 @@
-# Islandora Enterprise (ISLE)
+# ISLE: Islandora Enterprise
 
 ## ISLE Documents
 * [ISLE Executive Summary](https://docs.google.com/document/d/17tAFxR6_b7sxXkE1teNDQZv0UZ0LLSkX8K05-U6A6nw/edit?usp=sharing) (a concise overview in plain English)
-* [ISLE Specifications](https://docs.google.com/document/d/1iTXYbBMtQ3TaujPXon01Hp6hVwnxYvsVXYa2G79SuWc/edit#) (based on the older, now closed, [ISLE MVP](https://docs.google.com/document/d/1s_qWkRgHlRAH6SWuXid6dOYzBjcbqU6PV_gZ1sUu2iY/edit?usp=sharing) doc)
+* [ISLE Specifications](https://docs.google.com/document/d/1iTXYbBMtQ3TaujPXon01Hp6hVwnxYvsVXYa2G79SuWc/edit#) (technical specifications)
 * [ISLE Supporters](https://docs.google.com/document/d/1ycx5ATbeWpUWvpZ6bwXws490CMgi0dyB9SBfPYUDEjk/edit?usp=sharing) (list of institutions)
 * [Public ISLE Updates ](https://docs.google.com/document/d/1GciJWXOgYXJz4U9SobVjbTa5sgbYJwN2KsLCp8zNwwU/edit#) (agenda and notes)
 * Participate in the [ISLE Updates google group](https://groups.google.com/forum/#!forum/isle-updates)
 
 ## Funding successful - We've raised $89,400!!
-We successfully exceeded our funding goal of $84,000 with pledges totaling $89,400 from 17 higher-ed institutions and Born-Digital (which contributed $24,000 as pro-bono expert labor).
+We successfully exceeded our funding goal of $84,000 with pledges totaling $89,400 from 17 higher-ed institutions and Born-Digital (BD contributed $24,000 as pro-bono expert labor).
 
 ## Timeline
 - 08/2016 - [Completed] ISLE conceived and brought to the ICG and Common Media/Born-Digital
@@ -16,12 +16,16 @@ We successfully exceeded our funding goal of $84,000 with pledges totaling $89,4
 - 05/2017 - [Completed] ISLE presented at Islandoracon annual conference (Hamilton, Ontario)
 - 09/2017 - [Completed] Fundraising, green-lighted ISLE MVP, opened 3-week Public Comment Period
 - 12/2017 - [Completed] Public prototype demonstration: [view 5-minute video](https://vimeo.com/245777329)
-- 12/2017 - First of 3 institutional alpha tests (Grinnell, Williams, RPI)
-- 01/2018 - First of 3 institutional community alpha tests (University of Pittsburgh, Hamilton College, Barnard)
+- 12/2017 - [Completed] Alpha Test #1: Grinnell College (lead: Mark McFate)
+- 01/2018 - [In Process] Alpha Test #2: Williams College (lead: David Keiser-Clark)
+- 01/2018 - [In Process] Alpha Test #3: Rensselaer Polytechnic Institute (lead: Andrea Byrne)
+- 01/2018 - [In Process] Community Alpha Test #1: University of Pittsburgh (lead: Clinton Graham)
+- 02/2018 - [In Process] Community Alpha Test #2: Hamilton College (lead: Steve Young)
+- 02/2018 - [In Process] Community Alpha Test #3: Barnard College (lead: Ben Rosner)
 - 02/2018 - Stable release of ISLE (for current Islandora 7x) and documentation as open-source for public use
 
-## What is Islandora Enterprise (ISLE)?
-ISLE is a new project in development -- funded by 17 higher-ed institutions and Born-Digital -- that will address one of the most significant pain-points in Islandora: installation and maintenance. ISLE separates an institution’s customizations from core code, and moves that core code into Docker containers that are easily updated, simplifying and largely automating the process of installation and updates/maintenance of Islandora. ISLE also bundles together the best shared modules into a common, production-ready and security-hardened platform.
+## What is ISLE?
+ISLE is a new project in development -- funded by 17 institutions of higher-education and Born-Digital -- that will address one of the most significant pain-points in Islandora: installation and maintenance. ISLE separates an institution’s customizations from core code, and moves that core code into Docker containers that are easily updated, simplifying and largely automating the process of installation and updates/maintenance of Islandora. ISLE also bundles together the best shared modules into a common, production-ready and security-hardened platform.
 
 ## Why is it needed?
 Islandora is a powerful digital repository comprised of over 80 different, best-of-breed open-source software libraries. Islandora’s strength is that it integrates these packages into one easy to manage system. However, this ecosystem has traditionally been complex enough as to require staff with technical expertise to install and maintain.

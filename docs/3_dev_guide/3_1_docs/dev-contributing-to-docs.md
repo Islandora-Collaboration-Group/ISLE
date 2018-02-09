@@ -32,8 +32,8 @@ There are two different ways one can edit or create documentation for the ISLE p
 
 #### Method 2: Edit page via local Mkdocs workflow
 
-1. Please follow the [Documentation Requirements](dev-mkdocs-requirements) page to install Mkdocs and the appropriate `material` theme
-2. Open up a terminal and navigate to the ILSE project directory e.g. `cd ~/ISLE`
+1. Please follow the [Documentation Requirements](dev-mkdocs-requirements.md) page to install Mkdocs and the appropriate `material` theme
+2. Open up a terminal and navigate to the ISLE project directory e.g. `cd ~/ISLE`
 3. To start Mkdocs: `mkdocs serve`
 4. One can view the static pages by opening a browser and navigating to `http://127.0.0.1:8000`
 5. Checkout a new branch in git e.g. `git checkout -b new_branch`
