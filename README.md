@@ -16,12 +16,12 @@ We successfully exceeded our funding goal of $84,000 with pledges totaling $89,4
 - 05/2017 - [Completed] ISLE presented at Islandoracon annual conference (Hamilton, Ontario)
 - 09/2017 - [Completed] Fundraising, green-lighted ISLE MVP, opened 3-week Public Comment Period
 - 12/2017 - [Completed] Public prototype demonstration: [view 5-minute video](https://vimeo.com/245777329)
-- 12/2017 - Alpha Test #1: Grinnell College (lead: Mark McFate)
-- 01/2018 - Alpha Test #2: Williams College (lead: David Keiser-Clark)
-- 01/2018 - Alpha Test #3: Rensselaer Polytechnic Institute (lead: Andrea Byrne)
-- 01/2018 - Community Alpha Test #1: University of Pittsburgh (lead: Clinton Graham)
-- 02/2018 - Community Alpha Test #2: Hamilton College (lead: Steve Young)
-- 02/2018 - Community Alpha Test #3: Barnard College (lead: Ben Rosner)
+- 12/2017 - [Completed] Alpha Test #1: Grinnell College (lead: Mark McFate)
+- 01/2018 - [In Process] Alpha Test #2: Williams College (lead: David Keiser-Clark)
+- 01/2018 - [In Process] Alpha Test #3: Rensselaer Polytechnic Institute (lead: Andrea Byrne)
+- 01/2018 - [In Process] Community Alpha Test #1: University of Pittsburgh (lead: Clinton Graham)
+- 02/2018 - [In Process] Community Alpha Test #2: Hamilton College (lead: Steve Young)
+- 02/2018 - [In Process] Community Alpha Test #3: Barnard College (lead: Ben Rosner)
 - 02/2018 - Stable release of ISLE (for current Islandora 7x) and documentation as open-source for public use
 
 ## What is ISLE?
