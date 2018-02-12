@@ -177,13 +177,16 @@ Once this process finishes and the ISLE Host Vagrant CentOS VM is running.
     * `vagrant ssh`
 
 This command shells in the vagrant user to the ISLE Host. Install the following:
-     * `yum install openssl git htop ntp wget curl`
+     * `sudo yum install openssl git htop ntp wget curl`
 
 #### Install Docker on CentOS 7 (as root user)
 
 * `wget -qO- https://get.docker.com/ | sh`
 
 #### Create islandora user (as root)
+
+* `sudo su`
+
 * `adduser islandora`
 
 * `passwd islandora`
