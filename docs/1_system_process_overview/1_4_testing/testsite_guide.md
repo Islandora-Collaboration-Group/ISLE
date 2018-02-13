@@ -20,14 +20,14 @@ While this checklist will attempt to point out most of the usage challenges or p
    * using the supplied Vagrant setup found in the `vagrant` directory at the root of the ISLE project (_Vagrant with Virtualbox_)
    * a manually setup CentOS Virtualbox VM (_no Vagrant_)
 
-* Enduser has Docker installed and running as directed by one of the following guides:
+* Enduser has Docker installed and running on the CentOS VM as directed by one of the following guides:
 
   * [Host Local - Ansible Setup Guide](host_local_setup_ansible.md)
   * [Host Local - CentOS Setup Guide](host_local_setup_centos.md)
   * [Host Local -  MacOS Setup Guide](host_local_setup_macos.md)
   * [Host Local - Ubuntu Setup Guide](host_local_setup_ubuntu.md)
 
-* The four ISLE images that already been "built" and are stored in a cloud repository (Dockerhub) which save the enduser hours of build time are currently tagged with `alpha2`. Please only use these images at this time. This tag will change shortly and will be updated here accordingly.
+* The four ISLE images that already been "built" and are stored in a cloud repository (Dockerhub) which save the enduser hours of build time are currently tagged with `alpha2`. Please only use these images at this time. This tag will change shortly and will be updated here accordingly. These images are to be downloaded onto the CentOS VM once Docker has been installed and is running.
 
   * isle-apache [https://hub.docker.com/r/islandoracollabgroup/isle-apache/](https://hub.docker.com/r/islandoracollabgroup/isle-apache/)  
 
@@ -43,7 +43,7 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 ### 0. docker-compose.yml file edits
 
-If the enduser is using Vagrant move on to **Edit 2** in this section as this process is handled automatically.
+If the enduser is using Vagrant on their laptop move on to **Edit 2** in this section as this process is handled automatically.
 
 If and only if the enduser is **NOT using Vagrant** on their local laptop and is setting up Virtualbox manually, then please do the following below first on the local laptop.
 
@@ -62,7 +62,7 @@ If the enduser is not using Vagrant to create their CentOS VM, then during the m
 
   * Enter the laptop enduser password
 
-  * Add the values below the `127.0.0.1` entry
+  * Add the values below the `127.0.0.1` entry in the `/etc/hosts` file.
 
     * `<CentosVM IP here> isle.localdomain apache solr mysql fedora` with a space in between the entries.  
 
@@ -183,7 +183,7 @@ Please note the Tomcat service requires about 1 -3 minutes to startup and as suc
 
 ___
 
-### Fast Facts
+### Fast Facts and Passwords
 
 `islandora` user on the ISLE host server uses `islandora` as the password.
 
