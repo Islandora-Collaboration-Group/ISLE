@@ -135,21 +135,25 @@ The steps below are for both Vagrant and non Vagrant users alike.
 * `docker-compose up -d fedora`  
 
 * **(Optional but recommended)**
+
+Please note the Tomcat service requires about 1 -3 minutes to startup and as such if the enduser rushes to the URL supplied below, the service page maytime out or be reported as unreachable. Give it a little time.
+
   * After spinning up fedora container, check if the Fedora service is running prior to advancing.
   * Navigate to http://fedora:8080/manager/html a popup login prompt should appear.
-    * Enter the supplied username and password found at the bottom of this page in the **Fast Facts** section.
-      * see `2. Fedora container - service Tomcat` user is `admin`
-    * Upon login a large display of running Tomcat applications should display, scroll down to `fedora`
+    * Enter the user name of `admin` and the password of `ild_tc_adm_2018`
+      * Also found at the bottom of this page in the **Fast Facts** section, see `2. Fedora container - service Tomcat`
+  * Upon login a large display of running Tomcat applications should display, scroll down to `fedora`
   * The application state / status should be `true`
   * If `false` appears instead, attempt to restart the fedora service manually.
     * Select the `restart` button to the right of the status area.
   * If it still fails, review the mounted fedora logs. The `docker-compose.yml` file will indicate where the logs are located.
-  * Using terminal and then entering a command like `tail -n 300 - <path to ISLE project/data/fedora/log/tomcat:/usr/local/tomcat/logs/fedora.log` should display enough information to troubleshoot.
+    * Using terminal and then entering a command like `tail -n 300 - <path to ISLE project/data/fedora/log/tomcat:/usr/local/tomcat/logs/fedora.log` should display enough information to troubleshoot or restart the entire startup process.
 
 
 #### 3. Solr image pull & container launch (10 - 20 mins)  
 
 * `docker pull islandoracollabgroup/isle-solr:alpha2`  
+
 * `docker-compose up -d solr`  
 
 #### 4. Apache image pull & container launch (10 - 30 mins)
