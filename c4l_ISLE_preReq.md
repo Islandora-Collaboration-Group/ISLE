@@ -203,6 +203,8 @@ This command shells in the vagrant user to the ISLE Host. Install the following:
 
    * `chmod -Rv 700 /home/islandora/.ssh`
 
+   * `chown -Rv islandora:islandora /home/islandora/.ssh`
+
    * `cd /home/islandora/.ssh`
 
    * `su islandora`
