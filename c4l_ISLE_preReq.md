@@ -284,7 +284,7 @@ ssh islandora@10.10.10.130
 
 **Please note:**
 
-Should the enduser have difficulty adding the .ssh key for the islandora user, that step above can be avoided.
+Should the enduser have difficulty adding the .ssh key for the islandora user or if the enduser doesn't even have a local id_rsa.pub file, that step above can be avoided.
 
 Simply continue to access the ISLE Host VM via opening a terminal on the enduser laptop or workstation.
 
