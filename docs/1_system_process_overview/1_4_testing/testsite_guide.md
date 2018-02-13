@@ -16,6 +16,10 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 * Enduser has a local laptop / workstation that conforms to the specifications outlined in the [ISLE MVP Host Specifications Guide](../mvpspecs.md)
 
+* This testsite guide is designed for a local laptop / workstation running one of the following:
+   * using the supplied Vagrant setup found in the `vagrant` directory at the root of the ISLE project (_Vagrant with Virtualbox_)
+   * a manually setup CentOS Virtualbox VM (_no Vagrant_)
+
 * Enduser has Docker installed and running as directed by one of the following guides:
 
   * [Host Local - Ansible Setup Guide](host_local_setup_ansible.md)
@@ -39,33 +43,41 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 ### 0. docker-compose.yml file edits
 
-**Edit 1 (conditional)**
-
 If the enduser is using Vagrant move on to **Edit 2** in this section as this process is handled automatically.
 
 If and only if the enduser is **NOT using Vagrant** on their local laptop and is setting up Virtualbox manually, then please do the following below first on the local laptop.
 
-* Add the following values of `127.0.0.1 isle.localdomain apache solr mysql fedora` to the laptop / workstation's `/etc/hosts` file.   
+**Please note:** By default the example tool given below of `nano` is not installed on CentOS. If the enduser hasn't installed it before on the CentOS VM, then please run `sudo yum install nano`.
+
+**Edit 1 (conditional)**
+
+If the enduser is not using Vagrant to create their CentOS VM, then during the manual process of installing CentOS (not given as a guide in ISLE documentation) they will need to figure out what the IP is of the VM in order to do the following:
+
+* Add the values of `<CentosVM IP here> isle.localdomain apache solr mysql fedora` to the laptop / workstation's `/etc/hosts` file.   
 
   * Open a terminal on the local laptop
 
   * Enter: `sudo nano /etc/hosts`
-    * _For endusers familiar with this process, vim, emacs or alternative tools can be used in lieu of nano_
+    * _For endusers familiar with editing files on the command line, vim or alternative tools can be used in lieu of nano_
 
   * Enter the laptop enduser password
 
-  * Add the values below to the right of `127.0.0.1` or `127.0.0.1 localhost`
+  * Add the values below the `127.0.0.1` entry
 
-    * `isle.localdomain apache solr mysql fedora` with a space in between the entries.  
+    * `<CentosVM IP here> isle.localdomain apache solr mysql fedora` with a space in between the entries.  
 
-  **Example**
-  `127.0.0.1 isle.localdomain apache solr mysql fedora`
-  `127.0.0.1 localhost isle.localdomain apache solr mysql fedora`
+  **Example** (_Please do not literally use the IP given below, it may be different after the manual CentOS VM creation_)
+
+```
+127.0.0.1 localhost
+192.168.10.10 isle.localdomain apache solr mysql fedora`
+```
 
   * Enter `Cntrl` and the letter `o` together to write the changes to the file.
 
   * Enter `Cntrl` and the letter `x` together to exit the file.
 
+---
 
 **Edit 2**  
 
@@ -76,22 +88,31 @@ This edit should be made regardless of using Vagrant etc. (same for all operatin
 * `cd /opt/ISLE` _or wherever the enduser cloned the ISLE Project to on the ISLE Host VM_
 
 *  Enter: `sudo nano /opt/ISLE/docker-compose.yml`
-    * _For endusers familiar with this process, vim, emacs or alternative tools can be used in lieu of nano_
+    * _For endusers familiar with editing files on the command line, vim or alternative tools can be used in lieu of nano_
 
 * Add the ISLE Host VM IP to the `extra_hosts` sections on Lines 39 & 68 in the `docker-compose.yml` file at the root of the ISLE project directory.
 
 * Lines 39 & 68 both require the same value of the Host server IP address for the `extra_hosts` setting after the `isle.localdomain:` and before the double quotes.
 
-**Example:**
+**Example for Vagrant users:**
 
 ```
    extra_hosts:
      - "isle.localdomain:10.10.10.130"
 ```
 
+**Example for Non-Vagrant users:**
+
+```
+   extra_hosts:
+     - "isle.localdomain:<CentosVM IP here>"
+```
+
 ---
 
 ### Test site install process (same for all operating systems)
+
+The steps below are for both Vagrant and non Vagrant users alike.
 
 * **Please note:** *The first container (MySQL, isle-mysql, mysql) has to be running PRIOR to all others (including fedora & apache) due to a race condition (fedora starts prior to mysql being ready to accept connections). This improper state will be fixed at a later point in the project.*  
 
@@ -164,11 +185,15 @@ ___
 
 **Please note:**
 
-Whenever the value `http://hostip` used for accessing other ISLE services (not the main Islandora site) appears below, replace `hostip` with either:
+Whenever the value `http://hostip` used for accessing other ISLE services (not the main Islandora site) appears below, the enduser can replace `hostip` with one of the following:
 
-* `127.0.0.1` e.g `http://127.0.0.1` (usually for MacOS users)
+When in doubt use the first!
 
-* the IP of the Host VM (CentOS or Ubuntu) e.g. `http://10.10.10.130`
+1. `isle.localdomain` e.g `http://isle.localdomain.`
+
+2. the IP of the Vagrant Host VM (CentOS) e.g. `http://10.10.10.130`
+
+3. the IP of the Non-Vagrant Host VM (CentOS) e.g. `http://<CentosVM IP here>`
 
 ---
 
