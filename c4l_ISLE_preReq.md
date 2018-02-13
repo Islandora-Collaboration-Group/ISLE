@@ -177,21 +177,18 @@ Once this process finishes and the ISLE Host Vagrant CentOS VM is running.
     * `vagrant ssh`
 
 This command shells in the vagrant user to the ISLE Host. Install the following:
-     * `sudo yum install openssl git htop ntp wget curl`
+     * `sudo yum install openssl git htop ntp wget curl nano`
 
 #### Install Docker on CentOS 7 (as root user)
 
 * `wget -qO- https://get.docker.com/ | sh`
 
 #### Create islandora user (as root)
-
-* `sudo su`
-
 * `adduser islandora`
 
 * `passwd islandora`
 
-* `isle2017`
+* `islandora`
 
 * `echo "islandora ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/islandora`
 
@@ -208,25 +205,102 @@ This command shells in the vagrant user to the ISLE Host. Install the following:
 
    * `cd /home/islandora/.ssh`
 
-   * `ssh-keygen`
-      * Follow the prompts to save these files to `/home/islandora/.ssh`
+   * `su islandora`
 
-* Create an `authorized_keys` file in `/home/islandora/.ssh`using one of the following tools: `nano`, `pico`, `vi` or `emacs`
+   * `ssh-keygen`
+
+      * Hit the `Enter / Return` key at all of the prompts.
+        * No need to enter a file name.
+        * Do not enter a passphrase when asked twice, simply hit the `Enter / Return` key and move on.
+
+        * **Example Output**
+
+```
+$ ssh-keygen
+
+Generating public/private rsa key pair.
+
+Enter file in which to save the key (/islandora/.ssh/id_rsa):
+
+Created directory '/islandora/.ssh'.
+
+Enter passphrase (empty for no passphrase):
+
+Enter same passphrase again:
+
+Your identification has been saved in /islandora/.ssh/id_rsa.
+
+Your public key has been saved in /islandora/.ssh/id_rsa.pub.
+
+The key fingerprint is:
+SHA256:rTCG6wCablwrIkQTGcrcaChmTZEYAwNrNBLNxLIds+I islandora@isle-host-macos
+The key's randomart image is:
++---[RSA 2048]----+
+|O%*oo            |
+|O*&.             |
+|=%.*             |
+|Ooo  .   .       |
+|+.. . + S .      |
+|.E . o o .       |
+|= o o   .        |
+|++ +             |
+|+.. .            |
++----[SHA256]-----+
+```
+
+* Create an `authorized_keys` file in `/home/islandora/.ssh` using the `touch` command.
 
    * Example:
-     ```
-     vi /home/islandora/.ssh/authorized_keys
-    ```
 
-* Copy in the existing ssh key from the enduser's laptop /workstation. This will allow key based ssh access for the enduser.
+```
+touch /home/islandora/.ssh/authorized_keys
+```
 
-      * `cat /Users/endusername/.ssh/id_rsa.pub`
 
-      * Copy and paste this value exactly into the `/home/islandora/.ssh/authorized_keys` file.
+* Copy in the existing ssh key from the enduser's laptop or workstation. This will allow key based ssh access for the enduser.
+
+   * `cat /Users/endusername/.ssh/id_rsa.pub` (_On the enduser laptop not the VM_)
+
+   * Using the `nano` tool on the CentOS VM, copy and paste this value exactly into the `/home/islandora/.ssh/authorized_keys` file (_On the CentOS VM not the enduser laptop_)
+     * `nano /home/islandora/.ssh/authorized_keys`
+     * Hit the `Cntrl` key and then the `o` key to write to the file.
+     * Hi the `Cntrl` key and then the `x` key to exit the file.
 
 * Exit out of the ssh session from the host server as the root user `exit`
 
-* ssh back in as `islandora`
+* ssh back in as `islandora` to test if that process worked.
+
+  * **Example**
+
+```
+ssh islandora@isle-host-macos
+
+-or-
+
+ssh islandora@10.10.10.130
+```
+
+---
+
+**Please note:**
+
+Should the enduser have difficulty adding the .ssh key for the islandora user, that step above can be avoided.
+
+Simply continue to access the ISLE Host VM via opening a terminal on the enduser laptop or workstation.
+
+* `cd /pathto/ISLE/vagrant/`
+
+* `vagrant ssh`
+
+* `sudo su`
+
+* `su islandora`
+
+This process will switch one to islandora with out having to use a password.
+
+---
+
+#### Enable the Docker service to start upon reboot of VM.
 
 * Enable the Docker service to start on host server boot
     * `sudo systemctl enable docker.service`
@@ -234,6 +308,7 @@ This command shells in the vagrant user to the ISLE Host. Install the following:
 * Start the Docker service
     * `sudo systemctl start docker.service`
 
+---
 
 #### Install Docker-Compose (version 1.17.1 as of 11/16/2017) as islandora-user on CentOS 7
 * Open a terminal and ssh back into the CentOS Host Server/VM as the `islandora` user and perform the following:
@@ -241,6 +316,7 @@ This command shells in the vagrant user to the ISLE Host. Install the following:
 * Add the RHEL/CENTOS epel-release package repository
 
     * `sudo yum install epel-release`
+
 
 * Install Python Pip (package manager for Python Scripting Language)
 
