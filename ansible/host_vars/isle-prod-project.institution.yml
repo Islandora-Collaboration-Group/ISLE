@@ -1,0 +1,49 @@
+---
+###
+#
+# Ansible Connection & General Configuration Section
+#
+###
+
+ansible_connection: ssh
+ansible_ssh_host:   # edit here for IP address of ISLE Host Server
+ansible_ssh_user:   # edit here for deploy user
+
+user_name: islandora
+pub_locale: # edit here for local id_rsa.pub path
+user_password:  islandora
+user_shell: /bin/bash
+
+isle_repo: https://github.com/Islandora-Collaboration-Group/ISLE.git
+isle_repo_path: /opt/ISLE
+
+### Docker
+
+docker_version: 'ce'
+docker_package: "docker-{{ docker_version }}"
+
+docker_user: islandora
+
+### Docker-Compose
+
+docker_compose_version: "1.17.1"
+docker_compose_url: "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64"
+docker_compose_path: /usr/local/bin/docker-compose
+
+### ISLE Images
+
+isle_docker_image_mysql: islandoracollabgroup/isle-mysql:{{ isle_docker_image_tag }}
+isle_docker_image_fedora: islandoracollabgroup/isle-fedora:{{ isle_docker_image_tag }}
+isle_docker_image_solr: islandoracollabgroup/isle-solr:{{ isle_docker_image_tag }}
+isle_docker_image_apache: islandoracollabgroup/isle-apache:{{ isle_docker_image_tag }}
+
+isle_docker_image_tag: alpha2
+
+
+### For Debian / Ubuntu Hosts
+docker_apt_repo: "deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution|lower }} {{ ansible_distribution_release }} {{ docker_apt_release_type }}"
+docker_apt_release_type: stable
+
+### For RHEL / CentOS Hosts
+
+docker_yum_repo: https://download.docker.com/linux/centos/docker-{{ docker_version }}.repo

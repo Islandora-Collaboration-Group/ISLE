@@ -1,25 +1,29 @@
 version: '2'
+#labels:
+#  org.label-schema.version: "ISLE Alpha 2.0"
+#  org.label-schema.description: "ISLE Base Image with sample site isle.localdomain docker-compose.yml for non-production usage."
+#  org.label-schema.license: "Apache-2.0"
+#  org.label-schema.vcs-url: "git@github.com:Islandora-Collaboration-Group/ISLE.git"
+#  org.label-schema.vendor: "Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com"
+#  org.label-schema.schema-version: "1.0"
+
 services:
   mysql:
     build: ./mysql
-    image: islandoracollabgroup/isle-mysql:latest
+    image: islandoracollabgroup/isle-mysql:alpha2
+    container_name: isle-mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=islemysqlrootpw2017
-      - MYSQL_DATABASE=fedora3
-      - MYSQL_USER=fedora_admin
-      - MYSQL_PASSWORD=dockerfeddb2017
+      - MYSQL_ROOT_PASSWORD=ild_mysqlrt_2018
     ports:
       - "3306:3306"
     volumes:
-      - ./mysql/initscripts:/docker-entrypoint-initdb.d
-      - ./customize/mysql/my.cnf:/etc/alternatives/my.cnf
-      - ./data/mysql:/var/lib/mysql
+      - db-data:/var/lib/mysql
       - ./data/mysql/log:/var/log/mysql
-    container_name: isle-mysql
 
   fedora:
     build: ./fedora
-    image: islandoracollabgroup/isle-fedora:latest
+    image: islandoracollabgroup/isle-fedora:alpha2
+    container_name: isle-fedora
     ports:
       - "8080:8080"
       - "8777:80"
@@ -27,49 +31,29 @@ services:
     depends_on:
       - mysql
     volumes:
-    - ./customize/fedora/tomcat/server.xml:/usr/local/tomcat/conf/server.xml
-    - ./customize/fedora/tomcat/web.xml:/usr/local/tomcat/conf/web.xml
-    - ./customize/fedora/tomcat/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
-    - ./customize/fedora/tomcat/logging.properties:/usr/local/tomcat/conf/logging.properties
-    - ./customize/fedora/fedora/repository-policies/default:/usr/local/fedora/data/fedora-xacml-policies/repository-policies/default
-    - ./customize/fedora/fedora/repository-policies/islandora:/usr/local/fedora/data/fedora-xacml-policies/repository-policies/islandora
-    - ./customize/fedora/fedora/fedora-users.xml:/usr/local/fedora/server/config/fedora-users.xml
-    - ./customize/fedora/fedora/logback.xml:/usr/local/fedora/server/config/logback.xml
-    - ./customize/fedora/drupalfilter/filter-drupal.xml:/usr/local/fedora/server/config/filter-drupal.xml
-    - ./customize/fedora/adore-djatoka/index.html:/usr/local/tomcat/webapps/adore-djatoka/index.html
-    - ./customize/fedora/adore-djatoka/log4j.properties:/usr/local/tomcat/webapps/adore-djatoka/WEB-INF/classes/log4j.properties
-    - ./customize/fedora/apache/site.conf:/etc/apache2/sites-available/site.conf
-    - ./customize/fedora/gsearch/index.properties:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/index.properties
-    - ./data/fedora/data:/usr/local/fedora/data
-    - ./data/fedora/log/fedora:/usr/local/fedora/server/logs
-    - ./data/fedora/log/apache:/var/log/apache2
-    - ./data/fedora/log/tomcat:/usr/local/tomcat/logs
-    container_name: isle-fedora
+      - fed-data:/usr/local/fedora/data
+      - ./data/fedora/log/fedora:/usr/local/fedora/server/logs
+      - ./data/fedora/log/apache:/var/log/apache2
+      - ./data/fedora/log/tomcat:/usr/local/tomcat/logs
+    extra_hosts:
+      - "isle.localdomain:" # enter the ip of host server or vm after the : and between the double quotes e.g. - "isle.localdomain:10.10.10.130" and then remove this comment
 
   solr:
     build: ./solr
-    image: islandoracollabgroup/isle-solr:latest
+    image: islandoracollabgroup/isle-solr:alpha2
+    container_name: isle-solr
     ports:
       - "8091:8080"
       - "8983:8983"
     tty: true
     volumes:
-    - ./customize/solr/tomcat/server.xml:/usr/local/tomcat/conf/server.xml
-    - ./customize/solr/tomcat/web.xml:/usr/local/tomcat/conf/web.xml
-    - ./customize/solr/tomcat/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
-    - ./customize/solr/tomcat/logging.properties:/usr/local/tomcat/conf/logging.properties
-    - ./data/solr/logs:/usr/local/tomcat/logs
-    - ./customize/solr/solr/solr.xml:/usr/local/tomcat/conf/Catalina/localhost/solr.xml
-    - ./customize/solr/solr/solrconfig.xml:/usr/local/solr/collection1/conf/solrconfig.xml
-    - ./customize/solr/solr/schema.xml:/usr/local/solr/collection1/conf/schema.xml
-    - ./customize/solr/solr/log4j.properties:/usr/local/tomcat/webapps/solr/WEB-INF/classes/log4j.properties
-    - ./customize/solr/solr/stopwords.txt:/usr/local/solr/collection1/conf/stopwords.txt
-    - ./data/solr:/usr/local/solr/collection1/data
-    container_name: isle-solr
+      - solr-data:/usr/local/solr/collection1/data
+      - ./data/solr/logs:/usr/local/tomcat/logs
 
   apache:
     build: ./apache
-    image: islandoracollabgroup/isle-apache:latest
+    image: islandoracollabgroup/isle-apache:alpha2
+    container_name: isle-apache
     ports:
       - "80:80"
     tty: true
@@ -77,11 +61,13 @@ services:
       - mysql
       - fedora
     volumes:
-      - ./customize/apache/apache/site.conf:/etc/apache2/sites-available/site.conf
-      - ./customize/apache/site/linux_settings.php:/var/www/html/sites/default/settings.php
-      #- ./customize/apache/site/macosx_settings.php:/var/www/html/sites/default/settings.php
-      - ./customize/apache/site:/home/islandora/site
-      - ./customize/apache/php/php.ini:/etc/php5/apache2/php.ini
-      - ./data/apache/drupal:/var/www/html
+      - apache-data:/var/www/html
       - ./data/apache/log/apache:/var/log/apache2
-    container_name: isle-apache
+    extra_hosts:
+      - "isle.localdomain:" # enter the ip of host server or vm after the : and between the double quotes e.g. - "isle.localdomain:10.10.10.130" and then remove this comment
+
+volumes:
+  db-data:
+  fed-data:
+  solr-data:
+  apache-data:

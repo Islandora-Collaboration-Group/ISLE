@@ -1,0 +1,24 @@
+<?xml version='1.0' ?>
+  <users>
+    <user name="fedoraAdmin" password="">
+      <attribute name="fedoraRole">
+        <value>administrator</value>
+      </attribute>
+    </user>
+    <user name="fedoraIntCallUser" password="">
+      <attribute name="fedoraRole">
+        <value>fedoraInternalCall-1</value>
+        <value>fedoraInternalCall-2</value>
+      </attribute>
+    </user>
+    <user name="fgsAdmin" password="">
+      <attribute name="fedoraRole">
+      <value>administrator</value>
+    </attribute>
+    </user>
+    <user name="anonymous" password="">
+    	<attribute name="fedoraRole">
+      	<value>fedoraUser</value>
+    </attribute>
+  </user>
+</users>
