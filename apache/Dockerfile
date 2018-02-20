@@ -1,6 +1,11 @@
 FROM ubuntu:14.04 AS ffmpeg_base
-LABEL maintainer="Gavin Morris <gavin@born-digital.com>"
-### ISLE MVP 11/2017 Apache
+
+LABEL org.label-schema.name = "isle-apache" \
+      org.label-schema.description: "ISLE Base Image with sample site isle.localdomain apache Dockerfile for non-production usage." \
+      org.label-schema.license": "Apache-2.0" \
+      org.label-schema.vcs-url: "git@github.com:Islandora-Collaboration-Group/ISLE.git" \
+      org.label-schema.vendor": "Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com" \
+      org.label-schema.schema-version = "1.0"
 
 ###
 # https://github.com/phusion/baseimage-docker/issues/58
@@ -107,20 +112,13 @@ RUN add-apt-repository -y "deb http://us.archive.ubuntu.com/ubuntu trusty main m
     && cd / \
     && rm -rf /tmp/build
 
-### Next Build
-
 FROM ubuntu:14.04
-
 
 COPY --from=ffmpeg_base /usr/bin/ffmpeg2theora /usr/bin/ffmpeg2theora
 COPY --from=ffmpeg_base /usr/local/lib /usr/local/lib
 COPY --from=ffmpeg_base /usr/local/bin /usr/local/bin
 COPY --from=ffmpeg_base /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu
 COPY --from=ffmpeg_base /usr/bin/x264 /usr/bin/x264
-
-# COPY --from=ffmpeg_base /usr/bin/xtractprotos  /usr/bin/xtractprotos
-# COPY --from=ffmpeg_base /usr/share/ghostscript /usr/share/ghostscript
-# COPY --from=ffmpeg_base /usr/share/ffmpeg /usr/share/ffmpeg
 
 ###
 # https://github.com/phusion/baseimage-docker/issues/58
@@ -233,26 +231,32 @@ RUN cd /etc/ \
     && cd /opt \
     && wget "http://downloads.sourceforge.net/project/djatoka/djatoka/1.1/adore-djatoka-1.1.tar.gz" \
     && tar -xzf adore-djatoka-1.1.tar.gz \
-    && rm adore-djatoka-1.1.tar.gz
+    && rm adore-djatoka-1.1.tar.gz \
+    && sed -i 's/DJATOKA_HOME=`pwd`/DJATOKA_HOME=\/opt\/adore-djatoka-1.1/g' /opt/adore-djatoka-1.1/bin/env.sh \
+    && sed -i 's|`uname -p` = "x86_64"|`uname -m` = "x86_64"|' /opt/adore-djatoka-1.1/bin/env.sh \
+    && touch /etc/ld.so.conf.d/kdu_libs.conf \
+    && echo "/opt/adore-djatoka-1.1/lib/Linux-x86-64" > /etc/ld.so.conf.d/kdu_libs.conf \
+    && chmod 444 /etc/ld.so.conf.d/kdu_libs.conf \
+    && chown root:root /etc/ld.so.conf.d/kdu_libs.conf \
+    && touch /etc/apache2/conf-available/servername.conf \
+    && echo 'ServerName localhost' > /etc/apache2/conf-available/servername.conf \
+    && touch /etc/cron.d/tmpreaper-cron \
+    && echo "0 */12 * * * root /usr/sbin/tmpreaper -am 4d /tmp >> /var/log/cron.log 2>&1" /etc/cron.d/tmpreaper-cron \
+    && chmod 0644 /etc/cron.d/tmpreaper-cron
 
+COPY envinit.sh /opt/adore-djatoka-1.1/bin/envinit.sh
+COPY site.conf /etc/apache2/sites-available/site.conf
 
-COPY djatoka/env.sh /opt/adore-djatoka-1.1/bin/env.sh
-COPY djatoka/envinit.sh /opt/adore-djatoka-1.1/bin/envinit.sh
-COPY djatoka/kdu_libs.conf /etc/ld.so.conf.d/kdu_libs.conf
-COPY composer/composer_env.sh /etc/profile.d/composer_env.sh
-COPY tmpreaper/cron /etc/cron.d/tmpreaper-cron
-COPY apache/site.conf /etc/apache2/sites-available/site.conf
-COPY apache/servername.conf /etc/apache2/conf-available/servername.conf
-COPY site/drupal.drush.make /tmp/drupal.drush.make
-COPY site/fix-permissions.sh /tmp/fix-permissions.sh
-COPY site/install_site.sh /tmp/install_site.sh
-COPY site/islandora.drush.make /tmp/islandora.drush.make
-COPY site/make_site.sh /tmp/make_site.sh
-COPY site/settings.php /var/www/html/sites/default/settings.php
+###
+# Set up environmental variables for tomcat & dependencies installation
 
+ENV JAVA_HOME=/usr/lib/jvm/java-8-oracle \
+    JRE_HOME=/usr/lib/jvm/java-8-oracle/jre \
+    PATH=$PATH:$HOME/.composer/vendor/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/jre/bin \
+    KAKADU_LIBRARY_PATH=/opt/adore-djatoka-1.1/lib/Linux-x86-64 \
+    KAKADU_HOME=/opt/adore-djatoka-1.1/lib/Linux-x86-64
 
-RUN . /etc/profile.d/composer_env.sh \
-    && mkdir -p /tmp/build \
+RUN mkdir -p /tmp/build \
     && cd /tmp/build \
     && wget -O composer-setup.php https://raw.githubusercontent.com/composer/getcomposer.org/2091762d2ebef14c02301f3039c41d08468fb49e/web/installer \
     && php composer-setup.php --filename=composer --install-dir=/usr/local/bin \
@@ -296,7 +300,6 @@ RUN . /etc/profile.d/composer_env.sh \
     && chmod 775 fits-ngserver.sh \
     && chmod 775 fits.sh \
     && rm /home/islandora/fits-1.2.0.zip \
-    && chmod 0644 /etc/cron.d/tmpreaper-cron \
     && touch /var/log/cron.log \
     && pecl install uploadprogress \
     && echo 'extension=uploadprogress.so' >> /etc/php/5.6/apache2/php.ini \
@@ -321,7 +324,14 @@ RUN . /etc/profile.d/composer_env.sh \
     && chown islandora:www-data /usr/local/bin/qt-faststart \
     && chown islandora:www-data /usr/bin/lame \
     && chown islandora:www-data /usr/bin/x264 \
-    && chown islandora:www-data /usr/bin/xtractprotos
+    && chown islandora:www-data /usr/bin/xtractprotos \
+    && mkdir -p /tmp/isle_drupal_build_tools
+
+COPY isle_drupal_build_tools/drupal.drush.make /tmp/isle_drupal_build_tools/drupal.drush.make
+COPY isle_drupal_build_tools/islandora.drush.make /tmp/isle_drupal_build_tools/islandora.drush.make
+COPY isle_drupal_build_tools/apache_provision.sh /tmp/isle_drupal_build_tools/apache_provision.sh
+COPY isle_drupal_build_tools/fix-permissions.sh /tmp/isle_drupal_build_tools/fix-permissions.sh
+COPY settings.php /tmp/settings.php
 
 
 ###

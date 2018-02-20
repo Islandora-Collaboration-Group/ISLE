@@ -1,0 +1,12 @@
+---
+
+- hosts:  isle-prod-project.institution # change this to real host name
+  become: yes
+
+  roles:
+    - dependencies
+    - users_groups
+    - docker
+    - docker_compose
+    - git_clone
+    - docker_images

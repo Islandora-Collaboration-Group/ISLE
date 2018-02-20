@@ -42,9 +42,9 @@
                 <user username="role1" password="<must-be-changed>" roles="role1"/>
               -->
 <!-- user manager can access only manager section -->
-    <user username="manager" password="dockertcmanpw2017" roles="manager-gui" />
+    <user username="manager" password="ild_tc_man_2018" roles="manager-gui" />
 
 <!-- user admin can access manager and admin section both -->
-    <user username="admin" password="dockertcadminpw2017" roles="manager-gui,admin-gui" />
-    
+    <user username="admin" password="ild_tc_adm_2018" roles="manager-gui,admin-gui" />
+
 </tomcat-users>
