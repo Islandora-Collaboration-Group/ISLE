@@ -1,11 +1,11 @@
 ---
 
-- include: debian_ubuntu.yml
+- include: ubuntu.yml
   when: ansible_os_family == 'Debian'
   tags:
     - dependencies
 
-- include: rhel_centos.yml
+- include: centos.yml
   when: ansible_os_family == 'RedHat'
   tags:
     - dependencies

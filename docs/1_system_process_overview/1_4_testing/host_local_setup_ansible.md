@@ -56,7 +56,7 @@ Within the `docker_install.yml` Ansible playbook, there are the following roles 
 
 The Ansible script will deploy the following to the ISLE Host server:
 
-| Ubuntu / Debian             | CentOS / RHEL     |
+| Ubuntu / Debian             | CentOS            |
 | -------------               | -------------     |
 | software-properties-common  | libselinux-python |
 | python-software-properties  | libsemanage-python|
@@ -81,7 +81,7 @@ The Ansible script will deploy the following to the ISLE Host server:
 
 **Please Note:** _Any of these services can be re-enabled post installation see appropriate documentation for opening ports on firewalls etc._
 
-| Ubuntu / Debian             | CentOS / RHEL                 |
+| Ubuntu / Debian             | CentOS                        |
 | -------------               | -------------                 |
 | _enables ntp service_       | _enables ntp service_         |
 | _disables ufw_              | _disables iptables_           |
@@ -120,9 +120,9 @@ ansible
 └── roles
     ├── dependencies
     │   └── tasks
-    │       ├── debian_ubuntu.yml
+    │       ├── ubuntu.yml
     │       ├── main.yml
-    │       └── rhel_centos.yml
+    │       └── centos.yml
     ├── docker
     │   └── tasks
     │       ├── install.yml

@@ -62,4 +62,6 @@ Thumbs.db
 # ISLE specific
 data
 site
+new_structure.md
 passwords.md
+.vagrant
