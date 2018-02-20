@@ -1,5 +1,8 @@
 ---
 
+- name: Add the epel repo
+  command: yum -y install epel-release
+
 - name: Set selinux to permissive
   selinux: policy=targeted state=permissive
 

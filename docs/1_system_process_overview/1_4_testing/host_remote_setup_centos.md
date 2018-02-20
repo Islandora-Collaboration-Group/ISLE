@@ -91,7 +91,7 @@ Modify for Remote settings Please
 #### Install Docker-Compose (version 1.17.1 as of 11/16/2017) as islandora-user on CentOS 7
 * Open a terminal and ssh back into the CentOS Host Server/VM as the `islandora` user and perform the following:
 
-* Add the RHEL/CENTOS epel-release package repository
+* Add the CENTOS epel-release package repository
 
     * `sudo yum install epel-release`
 
