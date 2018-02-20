@@ -1,4 +1,4 @@
-# Islandora Enterprise (ISLE)
+# ISLE: Islandora Enterprise
 
 ## ISLE Documents
 * [ISLE Executive Summary](https://docs.google.com/document/d/17tAFxR6_b7sxXkE1teNDQZv0UZ0LLSkX8K05-U6A6nw/edit?usp=sharing) (a concise overview in plain English)
@@ -16,16 +16,16 @@ We successfully exceeded our funding goal of $84,000 with pledges totaling $89,4
 - 05/2017 - [Completed] ISLE presented at Islandoracon annual conference (Hamilton, Ontario)
 - 09/2017 - [Completed] Fundraising, green-lighted ISLE MVP, opened 3-week Public Comment Period
 - 12/2017 - [Completed] Public prototype demonstration: [view 5-minute video](https://vimeo.com/245777329)
-- 12/2017 - Alpha Test #1: Grinnell College (lead: Mark McFate)
-- 01/2018 - Alpha Test #2: Williams College (lead: David Keiser-Clark)
-- 01/2018 - Alpha Test #3: Rensselaer Polytechnic Institute (lead: Andrea Byrne)
-- 01/2018 - Community Alpha Test #1: University of Pittsburgh (lead: Clinton Graham)
-- 02/2018 - Community Alpha Test #2: Hamilton College (lead: Steve Young)
-- 02/2018 - Community Alpha Test #3: Barnard College (lead: Ben Rosner)
+- 12/2017 - [Completed] Alpha Test #1: Grinnell College (lead: Mark McFate)
+- 01/2018 - [In Process] Alpha Test #2: Williams College (lead: David Keiser-Clark)
+- 01/2018 - [In Process] Alpha Test #3: Rensselaer Polytechnic Institute (lead: Andrea Byrne)
+- 01/2018 - [In Process] Community Alpha Test #1: University of Pittsburgh (lead: Clinton Graham)
+- 02/2018 - [In Process] Community Alpha Test #2: Hamilton College (lead: Steve Young)
+- 02/2018 - [In Process] Community Alpha Test #3: Barnard College (lead: Ben Rosner)
 - 02/2018 - Stable release of ISLE (for current Islandora 7x) and documentation as open-source for public use
 
-## What is Islandora Enterprise (ISLE)?
-ISLE is a new project in development -- funded by 17 higher-ed institutions and Born-Digital -- that will address one of the most significant pain-points in Islandora: installation and maintenance. ISLE separates an institution’s customizations from core code, and moves that core code into Docker containers that are easily updated, simplifying and largely automating the process of installation and updates/maintenance of Islandora. ISLE also bundles together the best shared modules into a common, production-ready and security-hardened platform.
+## What is ISLE?
+ISLE is a new project in development -- funded by 17 institutions of higher-education and Born-Digital -- that will address one of the most significant pain-points in Islandora: installation and maintenance. ISLE separates an institution’s customizations from core code, and moves that core code into Docker containers that are easily updated, simplifying and largely automating the process of installation and updates/maintenance of Islandora. ISLE also bundles together the best shared modules into a common, production-ready and security-hardened platform.
 
 ## Why is it needed?
 Islandora is a powerful digital repository comprised of over 80 different, best-of-breed open-source software libraries. Islandora’s strength is that it integrates these packages into one easy to manage system. However, this ecosystem has traditionally been complex enough as to require staff with technical expertise to install and maintain.
