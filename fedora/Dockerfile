@@ -13,6 +13,8 @@ COPY tomcat/web.xml /usr/local/tomcat/conf/web.xml
 COPY tomcat/tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
 COPY tomcat/runservices.sh /usr/local/tomcat/bin/runservices.sh
 
+# Add removal command of log4j-over-slf4j-1.5.10.jar
+ 
 RUN chmod 755 /usr/local/tomcat/bin/runservices.sh
 
 ###
