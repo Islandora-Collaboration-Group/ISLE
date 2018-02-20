@@ -1,0 +1,17 @@
+---
+
+- include: groups.yml
+  tags:
+    - users_groups
+
+- include: users.yml
+  tags:
+    - users_groups
+
+- include: ssh.yml
+  tags:
+    - users_groups
+
+- include: secure.yml
+  tags:
+    - users_groups

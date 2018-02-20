@@ -57,3 +57,11 @@ ehthumbs.db
 Thumbs.db
 .AppleDouble
 .LSOverride
+
+#===================
+# ISLE specific
+data
+site
+new_structure.md
+passwords.md
+.vagrant
