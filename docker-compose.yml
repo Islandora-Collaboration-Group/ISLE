@@ -9,7 +9,6 @@ version: '2'
 
 services:
   mysql:
-    build: ./mysql
     image: islandoracollabgroup/isle-mysql:latest
     container_name: isle-mysql
     environment:
@@ -34,11 +33,10 @@ services:
       - ./data/fedora/log/fedora:/usr/local/fedora/server/logs
       - ./data/fedora/log/apache:/var/log/apache2
       - ./data/fedora/log/tomcat:/usr/local/tomcat/logs
-    #extra_hosts:
-    #  - "isle.localdomain:" # enter the ip of host server or vm after the : and between the double quotes e.g. - "isle.localdomain:10.10.10.130" and then remove this comment
+    extra_hosts:
+      - "isle.localdomain:" # enter the ip of host server or vm after the : and between the double quotes e.g. - "isle.localdomain:10.10.10.130" and then remove this comment
 
   solr:
-    build: ./solr
     image: islandoracollabgroup/isle-solr:latest
     container_name: isle-solr
     ports:
@@ -50,7 +48,6 @@ services:
       - ./data/solr/logs:/usr/local/tomcat/logs
 
   apache:
-    build: ./apache    
     image: islandoracollabgroup/isle-apache:latest
     container_name: isle-apache
     ports:
