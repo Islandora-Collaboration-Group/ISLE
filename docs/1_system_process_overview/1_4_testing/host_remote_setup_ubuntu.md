@@ -110,7 +110,7 @@ Modify for Remote settings Please
 
 * `cd /opt`
 
-* `sudo git clone -b new-dev2 https://github.com/Islandora-Collaboration-Group/ISLE.git`
+* `sudo git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
 
    * This process will take 1 - 3 minutes depending on internet bandwidth
 

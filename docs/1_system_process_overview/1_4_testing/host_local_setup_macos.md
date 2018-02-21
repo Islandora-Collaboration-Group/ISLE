@@ -141,7 +141,7 @@ The built-in terminal for MacOs can be found in `~/Applications/Utilities/Termin
 
 * `cd ~/Documents`
 
-* `git clone -b new-dev2 https://github.com/Islandora-Collaboration-Group/ISLE`
+* `git clone https://github.com/Islandora-Collaboration-Group/ISLE`
 
    * _This process will take 3 - 5 minutes depending on internet bandwidth_
 

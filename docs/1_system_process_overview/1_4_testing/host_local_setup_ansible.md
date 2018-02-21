@@ -322,10 +322,10 @@ Main PID: 23066 (dockerd)
 
 ```
 REPOSITORY                         TAG                 IMAGE ID            CREATED             SIZE
-islandoracollabgroup/isle-fedora   alpha2              6e2749ca2c2f        2 weeks ago         2.43GB
-islandoracollabgroup/isle-apache   alpha2              82fe4ae16932        2 weeks ago         2.18GB
-islandoracollabgroup/isle-solr     alpha2              7fba26c10433        2 weeks ago         784MB
-islandoracollabgroup/isle-mysql    alpha2              f34162f1e0f8        2 weeks ago         299MB
+islandoracollabgroup/isle-fedora   latest              6e2749ca2c2f        2 weeks ago         2.43GB
+islandoracollabgroup/isle-apache   latest              82fe4ae16932        2 weeks ago         2.18GB
+islandoracollabgroup/isle-solr     latest              7fba26c10433        2 weeks ago         784MB
+islandoracollabgroup/isle-mysql    latest              f34162f1e0f8        2 weeks ago         299MB
 ```
 
 
