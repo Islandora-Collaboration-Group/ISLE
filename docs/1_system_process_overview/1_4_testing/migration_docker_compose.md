@@ -6,9 +6,7 @@ services:
   mysql:
 ```
 
-* In the `image:` section,the image names to the appropriate images needed
-    * _As of Jan 25, 2018 please use the alpha2 tag (this documentation will change)_
-
+* In the `image:` section, change to appropriate image name if needed otherwise leave as `latest`.
 
 * In the `environment:` section, change the MYSQL_ROOT_PASSWORD
 

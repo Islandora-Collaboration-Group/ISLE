@@ -9,7 +9,7 @@ labels:
 
 services:
   mysql:
-    image: islandoracollabgroup/isle-mysql:alpha2
+    image: islandoracollabgroup/isle-mysql:latest
     environment:
       - MYSQL_ROOT_PASSWORD= # edit here and remove comment
     ports:
@@ -24,7 +24,7 @@ services:
       - "isle-prod-site.institution:IP address of Dockerhost server" # enter the ip of host server or vm after the : and between the double quotes e.g. - "isle-prod-site.institution:10.10.10.130" and then remove comment
 
   fedora:
-    image: islandoracollabgroup/isle-fedora:alpha2
+    image: islandoracollabgroup/isle-fedora:latest
     ports:
       - "8080:8080"
       - "8443:8443"
@@ -58,7 +58,7 @@ services:
 
 
   solr:
-    image: islandoracollabgroup/isle-solr:alpha2
+    image: islandoracollabgroup/isle-solr:latest
     ports:
       - "8091:8080"
       - "8983:8983"
@@ -75,7 +75,7 @@ services:
     container_name: isle-solr-prodname # rename container to indicate type e.g. prod, stage, dev or version here and remove comment
 
   apache:
-    image: islandoracollabgroup/isle-apache:alpha2
+    image: islandoracollabgroup/isle-apache:latest
     ports:
       - "80:80"
       - "443:443"

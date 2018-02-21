@@ -5,14 +5,7 @@ This is a guide to setup and install all ISLE workshop pre-requisites on a MacOS
 **Please note:** This guide is for using `Vagrant / Virtualbox` software only.
 
 ---
-**2/7/2018** There appears to be a networking bug found in either:
-
-* `Docker For Mac`
-* Vagrant boxes e.g. `bento/ubuntu-16.04` or Ubuntu based VMs. \
-
-which that stops the Fedoragsearch app from properly starting in Tomcat on the `isle-fedora` container.
-
-Please only use Centos based VMs e.g. `bento/centos-7.4`. as notated in this guide.
+**2/21/2018** Networking bug has been fixed for Ubuntu and Docker For Mac.
 
 ---
 
@@ -149,7 +142,7 @@ The built-in terminal for MacOs can be found in `~/Applications/Utilities/Termin
 
 * `cd ~/Documents`
 
-* `git clone -b new-dev2 https://github.com/Islandora-Collaboration-Group/ISLE`
+* `git clone https://github.com/Islandora-Collaboration-Group/ISLE`
 
    * _This process will take 3 - 5 minutes depending on internet bandwidth_
 
@@ -348,7 +341,7 @@ This process will switch one to islandora with out having to use a password.
 
 * `cd /opt`
 
-* `sudo git clone -b new-dev2 https://github.com/Islandora-Collaboration-Group/ISLE.git`
+* `sudo git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
 
    * This process will take 1 - 3 minutes depending on internet bandwidth
 
