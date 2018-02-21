@@ -68,18 +68,18 @@ This data will be used in conjunction with a Fedora container.
 
 #### Gsearch
 
-Copy the following below from the Islandora Production Server(s) to the suggested directory `/path_to/islandora_production_data_storage/gsearch/` on the ISLE Host server.
+Copy the following below from the Islandora Production Server(s) to the suggested directory `/path_to/islandora_production_data_storage/fedora/gsearch/` on the ISLE Host server.
 
 This data will be used in conjunction with a Fedora container.
 
 | Data                                          | Description         | Possible Location                                 | Suggested ISLE Path Destination             | Notes         |
 | -------------                                 | -------------       | -------------                                     | -------------                               | ------------- |
-| fedoragsearch.properties                      | Gsearch config file | /var/lib/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/ | /islandora_production_data_storage/gsearch/ | --  |
-| fgsconfig-basic-configForIslandora.properties | Gsearch config file | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/ | /islandora_production_data_storage/gsearch/| -- |
-| fgsconfigObjects.properties                   | Gsearch config file | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/ | /islandora_production_data_storage/gsearch/| -- |
-| repository.properties                         | Gsearch config file               | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/repository/FgsRepos/ | /islandora_production_data_storage/gsearch/ | -- |
-| islandora_transforms                          | Transformation XSLTs directory    | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/      | /islandora_production_data_storage/gsearch/ | -- |
-| foxmlToSolr.xslt                              | "top-level" transformational XSLT | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/      | /islandora_production_data_storage/gsearch/ | -- |
+| fedoragsearch.properties                      | Gsearch config file | /var/lib/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/ | /islandora_production_data_storage/fedora/gsearch/ | --  |
+| fgsconfig-basic-configForIslandora.properties | Gsearch config file | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/ | /islandora_production_data_storage/fedora/gsearch/| -- |
+| fgsconfigObjects.properties                   | Gsearch config file | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/ | /islandora_production_data_storage/fedora/gsearch/| -- |
+| repository.properties                         | Gsearch config file               | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/repository/FgsRepos/ | /islandora_production_data_storage/fedora/gsearch/ | -- |
+| islandora_transforms                          | Transformation XSLTs directory    | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/      | /islandora_production_data_storage/fedora/gsearch/ | -- |
+| foxmlToSolr.xslt                              | "top-level" transformational XSLT | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/      | /islandora_production_data_storage/fedora/gsearch/ | -- |
 
 
 #### MySQL
