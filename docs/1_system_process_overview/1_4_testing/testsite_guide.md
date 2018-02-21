@@ -27,7 +27,7 @@ While this checklist will attempt to point out most of the usage challenges or p
   * [Host Local -  MacOS Setup Guide](host_local_setup_macos.md)
   * [Host Local - Ubuntu Setup Guide](host_local_setup_ubuntu.md)
 
-* The four ISLE images that already been "built" and are stored in a cloud repository (Dockerhub) which save the enduser hours of build time are currently tagged with `alpha2`. Please only use these images at this time. This tag will change shortly and will be updated here accordingly. These images are to be downloaded onto the CentOS VM once Docker has been installed and is running.
+* The four ISLE images that already been "built" and are stored in a cloud repository (Dockerhub) which save the enduser hours of build time are currently tagged with `latest`.
 
   * isle-apache [https://hub.docker.com/r/islandoracollabgroup/isle-apache/](https://hub.docker.com/r/islandoracollabgroup/isle-apache/)  
 
@@ -126,12 +126,12 @@ The steps below are for both Vagrant and non Vagrant users alike.
 
 #### 1. MySQL image pull & container launch (10 - 20 mins)
 
-* `docker pull islandoracollabgroup/isle-mysql:alpha2`  
+* `docker pull islandoracollabgroup/isle-mysql:latest`  
 * `docker-compose up -d mysql`  
 
 #### 2. Fedora image pull & container launch (10 - 30 mins)  
 
-* `docker pull islandoracollabgroup/isle-fedora:alpha2`  
+* `docker pull islandoracollabgroup/isle-fedora:latest`  
 * `docker-compose up -d fedora`  
 
 * **(Optional but recommended)**
@@ -152,13 +152,13 @@ Please note the Tomcat service requires about 1 -3 minutes to startup and as suc
 
 #### 3. Solr image pull & container launch (10 - 20 mins)  
 
-* `docker pull islandoracollabgroup/isle-solr:alpha2`  
+* `docker pull islandoracollabgroup/isle-solr:latest`  
 
 * `docker-compose up -d solr`  
 
 #### 4. Apache image pull & container launch (10 - 30 mins)
 
-* `docker pull islandoracollabgroup/isle-apache:alpha2`  
+* `docker pull islandoracollabgroup/isle-apache:latest`  
 
 * `docker-compose up -d apache`  
 

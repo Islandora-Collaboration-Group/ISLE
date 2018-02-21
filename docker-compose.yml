@@ -10,7 +10,7 @@ version: '2'
 services:
   mysql:
     build: ./mysql
-    image: islandoracollabgroup/isle-mysql:alpha2
+    image: islandoracollabgroup/isle-mysql:latest
     container_name: isle-mysql
     environment:
       - MYSQL_ROOT_PASSWORD=ild_mysqlrt_2018
@@ -21,8 +21,7 @@ services:
       - ./data/mysql/log:/var/log/mysql
 
   fedora:
-    build: ./fedora
-    image: islandoracollabgroup/isle-fedora:alpha2
+    image: islandoracollabgroup/isle-fedora:latest
     container_name: isle-fedora
     ports:
       - "8080:8080"
@@ -35,12 +34,12 @@ services:
       - ./data/fedora/log/fedora:/usr/local/fedora/server/logs
       - ./data/fedora/log/apache:/var/log/apache2
       - ./data/fedora/log/tomcat:/usr/local/tomcat/logs
-    extra_hosts:
-      - "isle.localdomain:" # enter the ip of host server or vm after the : and between the double quotes e.g. - "isle.localdomain:10.10.10.130" and then remove this comment
+    #extra_hosts:
+    #  - "isle.localdomain:" # enter the ip of host server or vm after the : and between the double quotes e.g. - "isle.localdomain:10.10.10.130" and then remove this comment
 
   solr:
     build: ./solr
-    image: islandoracollabgroup/isle-solr:alpha2
+    image: islandoracollabgroup/isle-solr:latest
     container_name: isle-solr
     ports:
       - "8091:8080"
@@ -51,8 +50,8 @@ services:
       - ./data/solr/logs:/usr/local/tomcat/logs
 
   apache:
-    build: ./apache
-    image: islandoracollabgroup/isle-apache:alpha2
+    build: ./apache    
+    image: islandoracollabgroup/isle-apache:latest
     container_name: isle-apache
     ports:
       - "80:80"
