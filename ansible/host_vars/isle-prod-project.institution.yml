@@ -37,7 +37,7 @@ isle_docker_image_fedora: islandoracollabgroup/isle-fedora:{{ isle_docker_image_
 isle_docker_image_solr: islandoracollabgroup/isle-solr:{{ isle_docker_image_tag }}
 isle_docker_image_apache: islandoracollabgroup/isle-apache:{{ isle_docker_image_tag }}
 
-isle_docker_image_tag: alpha2
+isle_docker_image_tag: latest
 
 
 ### For Debian / Ubuntu Hosts

@@ -4,7 +4,7 @@
   git:
     repo: '{{ isle_repo }}'
     dest: "{{ isle_repo_path }}"
-    version: new-dev2
+    version: master
 
 - name: Change perms to islandora:islandora
   file:
