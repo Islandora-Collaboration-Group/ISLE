@@ -13,9 +13,9 @@ COPY tomcat/web.xml /usr/local/tomcat/conf/web.xml
 COPY tomcat/tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
 COPY tomcat/runservices.sh /usr/local/tomcat/bin/runservices.sh
 
-# Add removal command of log4j-over-slf4j-1.5.10.jar
- 
+
 RUN chmod 755 /usr/local/tomcat/bin/runservices.sh
+
 
 ###
 # Set up environmental variables for tomcat & dependencies installation
@@ -146,12 +146,15 @@ COPY fedora/jaas.conf /usr/local/fedora/server/config/jaas.conf
 ###
 # Gsearch
 #
-
+# Removing log4j-over-slf4j-1.5.10.jar allows gsearch to startup properly.
+#
+###
 
 RUN wget -O /tmp/fedoragsearch-2.8.1.zip https://github.com/discoverygarden/gsearch/releases/download/v2.8.1/fedoragsearch-2.8.1.zip \
     && /usr/bin/unzip -o /tmp/fedoragsearch-2.8.1.zip -d /tmp \
     && /bin/cp -v /tmp/fedoragsearch-2.8.1/fedoragsearch.war /usr/local/tomcat/webapps/ \
     && /usr/bin/unzip -o /usr/local/tomcat/webapps/fedoragsearch.war -d /usr/local/tomcat/webapps/fedoragsearch/ \
+    && rm -f /usr/local/tomcat/webapps/fedoragsearch/WEB-INF/lib/log4j-over-slf4j-1.5.10.jar \
     && rm -rf /tmp/gsearch \
     && rm -rf /tmp/fedoragsearch-2.8.1
 
