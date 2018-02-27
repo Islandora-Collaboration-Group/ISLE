@@ -95,7 +95,7 @@ networks:
     external: true
 
 volumes:
-  db-data:
-  fed-data:
-  solr-data:
-  apache-data:
+  db-data-ld:
+  fed-data-ld:
+  solr-data-ld:
+  apache-data-ld:
