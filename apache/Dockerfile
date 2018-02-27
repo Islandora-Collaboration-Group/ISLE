@@ -246,7 +246,8 @@ RUN cd /etc/ \
 
 COPY envinit.sh /opt/adore-djatoka-1.1/bin/envinit.sh
 # COPY site.conf /etc/apache2/sites-available/site.conf
-COPY sites-enabled /etc/apache2/sites-enabled
+COPY sites-available/isle_localdomain_ssl.conf /etc/apache2/sites-available/isle_localdomain_ssl.conf
+COPY sites-available/isle_localdomain.conf /etc/apache2/sites-available/isle_localdomain.conf
 COPY ssl-certs /certs
 
 ###
@@ -313,8 +314,8 @@ RUN mkdir -p /tmp/build \
     && a2enconf servername \
     && mkdir -p /var/www/html \
     && chown islandora:www-data /var/www/html \
-    && chmod 0644 /etc/apache2/sites-enabled/isle_localdomain_ssl.conf \
-    && chmod 0644 /etc/apache2/sites-enabled/isle_localdomain.conf \
+    && chmod 0644 /etc/apache2/sites-available/isle_localdomain_ssl.conf \
+    && chmod 0644 /etc/apache2/sites-available/isle_localdomain.conf \
     && a2ensite isle_localdomain_ssl.conf \
     && a2ensite isle_localdomain.conf \
     && a2enmod ssl rewrite deflate headers expires proxy proxy_http proxy_html proxy_connect xml2enc \
