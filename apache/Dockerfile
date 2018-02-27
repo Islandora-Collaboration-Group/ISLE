@@ -245,7 +245,9 @@ RUN cd /etc/ \
     && chmod 0644 /etc/cron.d/tmpreaper-cron
 
 COPY envinit.sh /opt/adore-djatoka-1.1/bin/envinit.sh
-COPY site.conf /etc/apache2/sites-available/site.conf
+# COPY site.conf /etc/apache2/sites-available/site.conf
+COPY sites-enabled /etc/apache2/sites-enabled
+COPY ssl-certs /certs
 
 ###
 # Set up environmental variables for tomcat & dependencies installation
@@ -311,8 +313,10 @@ RUN mkdir -p /tmp/build \
     && a2enconf servername \
     && mkdir -p /var/www/html \
     && chown islandora:www-data /var/www/html \
-    && chmod 0644 /etc/apache2/sites-available/site.conf \
-    && a2ensite site.conf \
+    && chmod 0644 /etc/apache2/sites-enabled/isle_localdomain_ssl.conf \
+    && chmod 0644 /etc/apache2/sites-enabled/isle_localdomain.conf \
+    && a2ensite isle_localdomain_ssl.conf \
+    && a2ensite isle_localdomain.conf \
     && a2enmod ssl rewrite deflate headers expires proxy proxy_http proxy_html proxy_connect xml2enc \
     && a2dissite 000-default \
     && a2dissite default-ssl \
@@ -335,8 +339,9 @@ COPY settings.php /tmp/settings.php
 
 
 ###
-# Make sure port 80 are available
+# Make sure ports 80 and 443 are available
 EXPOSE 80
+EXPOSE 443
 
 
 ###

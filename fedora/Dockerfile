@@ -11,7 +11,6 @@ LABEL org.label-schema.name = "isle-fedora" \
 COPY tomcat/server.xml /usr/local/tomcat/conf/server.xml
 COPY tomcat/web.xml /usr/local/tomcat/conf/web.xml
 COPY tomcat/tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
-COPY tomcat/runservices.sh /usr/local/tomcat/bin/runservices.sh
 
 
 RUN chmod 755 /usr/local/tomcat/bin/runservices.sh
@@ -57,7 +56,6 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
     dnsutils \
     ca-certificates \
     apt-transport-https \
-    apache2 \
     openssl \
     libxml2-dev \
     oracle-java8-installer \
@@ -68,20 +66,6 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
     && echo "0 */12 * * * root /usr/sbin/tmpreaper -am 4d /tmp >> /var/log/cron.log 2>&1" /etc/cron.d/tmpreaper-cron \
     && chmod 0644 /etc/cron.d/tmpreaper-cron \
     && touch /var/log/cron.log
-
-
-# Configure apache
-COPY apache/site.conf /etc/apache2/sites-available/site.conf
-
-RUN touch /etc/apache2/conf-available/servername.conf \
-    && echo 'ServerName localhost' > /etc/apache2/conf-available/servername.conf \
-    && a2enconf servername \
-    && mkdir -p /var/www/html \
-    && chmod 0644 /etc/apache2/sites-available/site.conf \
-    && a2ensite site.conf \
-    && a2enmod rewrite deflate headers expires proxy proxy_http proxy_html proxy_connect xml2enc \
-    && a2dissite 000-default \
-    && a2dissite default-ssl
 
 
 ###
@@ -180,5 +164,5 @@ RUN /usr/bin/ant -f /usr/local/tomcat/webapps/fedoragsearch/FgsConfig/fgsconfig-
 COPY gsearch/foxmlToSolr.xslt /usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/foxmlToSolr.xslt
 COPY gsearch/index.properties /usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/index.properties
 
-EXPOSE 80 8080
-CMD ["/usr/local/tomcat/bin/runservices.sh", "run"]
+EXPOSE 8080
+CMD ["catalina.sh", "run"]

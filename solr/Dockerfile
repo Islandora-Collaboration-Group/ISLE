@@ -1,6 +1,6 @@
 FROM tomcat:8.0-jre8
 
-LABEL org.label-schema.name = "isle-apache" \
+LABEL org.label-schema.name = "isle-solr" \
       org.label-schema.description: "ISLE Base Image with sample site isle.localdomain solr Dockerfile for non-production usage." \
       org.label-schema.license": "Apache-2.0" \
       org.label-schema.vcs-url: "git@github.com:Islandora-Collaboration-Group/ISLE.git" \
