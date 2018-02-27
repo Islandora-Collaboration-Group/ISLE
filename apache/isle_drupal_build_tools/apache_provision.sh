@@ -48,7 +48,7 @@ echo "Installing Drupal Site"
 
 ## Drush vset of all settings
 echo "Drush vset of Drupal Site configurations"
-/usr/local/bin/drush -u 1 -y vset islandora_paged_content_djatoka_url "http://isle.localdomain/adore-djatoka/"
+/usr/local/bin/drush -u 1 -y vset islandora_paged_content_djatoka_url "http://fedora:8080/adore-djatoka/"
 /usr/local/bin/drush -u 1 -y vset islandora_base_url "http://fedora:8080/fedora"
 /usr/local/bin/drush -u 1 -y vset islandora_solr_url "solr:8080/solr"
 /usr/local/bin/drush -u 1 -y vset imagemagick_convert "/usr/bin/convert"
@@ -66,7 +66,7 @@ echo "Drush vset of Drupal Site configurations"
 /usr/local/bin/drush -u 1 -y vset islandora_kakadu_url "/usr/local/bin/kdu_compress"
 /usr/local/bin/drush -u 1 -y vset islandora_pdf_path_to_pdftotext "/usr/bin/pdftotext"
 /usr/local/bin/drush -u 1 -y vset islandora_fits_executable_path "/usr/local/fits/fits.sh"
-/usr/local/bin/drush -u 1 -y vset --format=json islandora_openseadragon_settings '{"debugMode":0,"djatokaServerBaseURL":"http:\/\/apache\/adore-djatoka\/resolver","animationTime":"1.5","blendTime":"0.1","alwaysBlend":0,"autoHideControls":1,"immediateRender":0,"wrapHorizontal":0,"wrapVertical":0,"wrapOverlays":0,"panHorizontal":1,"panVertical":1,"showNavigator":1,"minZoomImageRatio":"0.8","maxZoomPixelRatio":"2","visibilityRatio":"0.5","springStiffness":"5.0","imageLoaderLimit":"5","clickTimeThreshold":"300","clickDistThreshold":"5","zoomPerClick":"2.0","zoomPerScroll":"1.2","zoomPerSecond":"2.0"}'
+/usr/local/bin/drush -u 1 -y vset --format=json islandora_openseadragon_settings '{"debugMode":0,"djatokaServerBaseURL":"\/adore-djatoka\/resolver","animationTime":"1.5","blendTime":"0.1","alwaysBlend":0,"autoHideControls":1,"immediateRender":0,"wrapHorizontal":0,"wrapVertical":0,"wrapOverlays":0,"panHorizontal":1,"panVertical":1,"showNavigator":1,"minZoomImageRatio":"0.8","maxZoomPixelRatio":"2","visibilityRatio":"0.5","springStiffness":"5.0","imageLoaderLimit":"5","clickTimeThreshold":"300","clickDistThreshold":"5","zoomPerClick":"2.0","zoomPerScroll":"1.2","zoomPerSecond":"2.0"}'
 /usr/local/bin/drush -u 1 -y vset --format=json islandora_audio_viewers '{"name":{"none":"none","islandora_videojs":"islandora_videojs"},"default":"islandora_videojs"}'
 /usr/local/bin/drush -u 1 -y vset --format=json islandora_video_viewers '{"name":{"none":"none","islandora_videojs":"islandora_videojs"},"default":"islandora_videojs"}'
 /usr/local/bin/drush -u 1 -y vset --format=json islandora_book_viewers '{"name":{"none":"none","islandora_internet_archive_bookreader":"islandora_internet_archive_bookreader"},"default":"islandora_internet_archive_bookreader"}'
