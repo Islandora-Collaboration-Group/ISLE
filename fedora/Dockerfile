@@ -12,10 +12,6 @@ COPY tomcat/server.xml /usr/local/tomcat/conf/server.xml
 COPY tomcat/web.xml /usr/local/tomcat/conf/web.xml
 COPY tomcat/tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
 
-
-RUN chmod 755 /usr/local/tomcat/bin/runservices.sh
-
-
 ###
 # Set up environmental variables for tomcat & dependencies installation
 
