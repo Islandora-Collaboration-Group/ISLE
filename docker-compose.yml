@@ -1,6 +1,6 @@
 version: '2'
 #labels:
-#  org.label-schema.version: "ISLE Alpha 2.0"
+#  org.label-schema.version: "ISLE Proxy v3.0"
 #  org.label-schema.description: "ISLE Base Image with sample site isle.localdomain docker-compose.yml for non-production usage."
 #  org.label-schema.license: "Apache-2.0"
 #  org.label-schema.vcs-url: "git@github.com:Islandora-Collaboration-Group/ISLE.git"
@@ -10,57 +10,89 @@ version: '2'
 services:
   mysql:
     image: islandoracollabgroup/isle-mysql:latest
-    container_name: isle-mysql
+    container_name: isle-mysql-ld
+    hostname: mysql
     environment:
       - MYSQL_ROOT_PASSWORD=ild_mysqlrt_2018
+    networks:
+      - isle-internal
     ports:
       - "3306:3306"
     volumes:
-      - db-data:/var/lib/mysql
+      - db-data-ld:/var/lib/mysql
       - ./data/mysql/log:/var/log/mysql
 
   fedora:
     image: islandoracollabgroup/isle-fedora:latest
-    container_name: isle-fedora
+    container_name: isle-fedora-ld
+    hostname: fedora
+    networks:
+      - isle-internal
     ports:
       - "8080:8080"
-      - "8777:80"
     tty: true
     depends_on:
       - mysql
+      - solr
     volumes:
-      - fed-data:/usr/local/fedora/data
+      - fed-data-ld:/usr/local/fedora/data
       - ./data/fedora/log/fedora:/usr/local/fedora/server/logs
-      - ./data/fedora/log/apache:/var/log/apache2
       - ./data/fedora/log/tomcat:/usr/local/tomcat/logs
-    extra_hosts:
-      - "isle.localdomain:" # enter the ip of host server or vm after the : and between the double quotes e.g. - "isle.localdomain:10.10.10.130" and then remove this comment
 
   solr:
     image: islandoracollabgroup/isle-solr:latest
-    container_name: isle-solr
+    container_name: isle-solr-ld
+    hostname: solr
+    networks:
+      - isle-internal
     ports:
       - "8091:8080"
       - "8983:8983"
     tty: true
+    depends_on:
+      - mysql
     volumes:
-      - solr-data:/usr/local/solr/collection1/data
+      - solr-data-ld:/usr/local/solr/collection1/data
       - ./data/solr/logs:/usr/local/tomcat/logs
 
   apache:
     image: islandoracollabgroup/isle-apache:latest
-    container_name: isle-apache
-    ports:
-      - "80:80"
+    container_name: isle-apache-ld
+    networks:
+      - isle-internal
     tty: true
     depends_on:
       - mysql
       - fedora
+      - solr
     volumes:
-      - apache-data:/var/www/html
+      - apache-data-ld:/var/www/html
       - ./data/apache/log/apache:/var/log/apache2
-    extra_hosts:
-      - "isle.localdomain:" # enter the ip of host server or vm after the : and between the double quotes e.g. - "isle.localdomain:10.10.10.130" and then remove this comment
+
+  proxy:
+    image: islandoracollabgroup/isle-proxy:latest
+    container_name: isle-proxy
+    networks:
+      isle-internal:
+        aliases:
+          - isle.localdomain
+      isle-external:
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - mysql
+      - fedora
+      - solr
+      - apache
+    # command: [nginx-debug, '-g', 'daemon off;']
+
+
+# Defined networks
+networks:
+  isle-internal:
+  isle-external:
+    external: true
 
 volumes:
   db-data:
