@@ -341,6 +341,8 @@ COPY isle_drupal_build_tools/apache_provision.sh /tmp/isle_drupal_build_tools/ap
 COPY isle_drupal_build_tools/fix-permissions.sh /tmp/isle_drupal_build_tools/fix-permissions.sh
 COPY settings.php /tmp/settings.php
 
+VOLUME /var/www/html
+
 # Make sure ports 80 and 443 are available to the internal network.
 EXPOSE 80 443
 
