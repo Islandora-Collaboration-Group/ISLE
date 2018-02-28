@@ -1,9 +1,8 @@
 version: '2'
 
 ## DEVELOPERS DOCKER COMPOSE NOT FOR THE END-USER ##
-## Build order:
-## Depends:
-## ...
+## Build order: `docker-compose build`
+## Run order: `docker-compose up proxy` (this remains attached to proxy for testing.)
 
 
 services:
@@ -70,7 +69,7 @@ services:
       - fedora
       - solr
     volumes:
-      - apache-data-ld:/var/www/html
+      # - apache-data-ld:/var/www/html
       - ./data/apache/log/apache:/var/log/apache2
 
   proxy:

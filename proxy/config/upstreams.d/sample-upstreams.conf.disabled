@@ -11,7 +11,7 @@ upstream fedora-internal-devel {
     server fedora:8080 fail_timeout=0;
 }
 
-upstream fedora-internal-devel {
+upstream solr-internal-devel {
     server solr:8080 fail_timeout=0;
 }
 
