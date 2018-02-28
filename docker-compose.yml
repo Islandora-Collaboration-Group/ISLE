@@ -63,7 +63,9 @@ services:
     image: islandoracollabgroup/isle-apache:latest
     container_name: isle-apache-ld
     networks:
-      - isle-internal
+      isle-internal:
+        aliases:
+          - isle.localdomain
     tty: true
     depends_on:
       - mysql
@@ -80,8 +82,6 @@ services:
     container_name: isle-proxy
     networks:
       isle-internal:
-        aliases:
-          - isle.localdomain
       isle-external:
     ports:
       - "80:80"
