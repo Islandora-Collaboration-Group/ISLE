@@ -1,8 +1,10 @@
 version: '2'
 
 ## DEVELOPERS DOCKER COMPOSE NOT FOR THE END-USER ##
-## Build order: `docker-compose build`
-## Run order: `docker-compose up proxy` (this remains attached to proxy for testing.)
+## Build order: `docker-compose build` (does not matter)
+## Run order: `docker-compose up -d proxy` (if you want to watch proxy, remove -d this remains attached to proxy for testing - you will see ALL logs as stdin/stderr.)
+## BUILD ISLE.LOCALDOMAIN SITE: `docker exec -it isle-apache bash` `cd temp` `./make_site.sh` `./install_site.sh`
+
 
 
 services:
@@ -68,7 +70,7 @@ services:
       - fedora
       - solr
     volumes:
-      # - apache-data-ld:/var/www/html
+      - apache-data-ld:/var/www/html
       - ./data/apache/log/apache:/var/log/apache2
 
   proxy:
