@@ -1,10 +1,12 @@
 FROM tomcat:8.0-jre8
-LABEL org.label-schema.name = "isle-fedora" \
-      org.label-schema.description: "ISLE Base Image with sample site isle.localdomain fedora Dockerfile for non-production usage." \
-      org.label-schema.license": "Apache-2.0" \
-      org.label-schema.vcs-url: "git@github.com:Islandora-Collaboration-Group/ISLE.git" \
-      org.label-schema.vendor": "Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com" \
-      org.label-schema.schema-version = "1.0"
+## 
+LABEL "io.github.islandora-collaboration-group.name"="isle-fedora" 
+LABEL "io.github.islandora-collaboration-group.description"="ISLE Fedora container, responsible for storing and serving archival repository data."
+LABEL "io.github.islandora-collaboration-group.license"="Apache-2.0" 
+LABEL "io.github.islandora-collaboration-group.vcs-url"="git@github.com:Islandora-Collaboration-Group/ISLE.git" 
+LABEL "io.github.islandora-collaboration-group.vendor"="Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com"
+LABEL "io.github.islandora-collaboration-group.maintainer"="Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com" 
+##
 
 ###
 # COPY over tomcat config files
@@ -159,6 +161,9 @@ RUN /usr/bin/ant -f /usr/local/tomcat/webapps/fedoragsearch/FgsConfig/fgsconfig-
 
 COPY gsearch/foxmlToSolr.xslt /usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/foxmlToSolr.xslt
 COPY gsearch/index.properties /usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/index.properties
+
+# Docker volume this, please.
+VOLUME /usr/local/fedora/data
 
 EXPOSE 8080
 CMD ["catalina.sh", "run"]

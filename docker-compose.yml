@@ -1,17 +1,17 @@
 version: '2'
-#labels:
-#  org.label-schema.version: "ISLE Proxy v3.0"
-#  org.label-schema.description: "ISLE Base Image with sample site isle.localdomain docker-compose.yml for non-production usage."
-#  org.label-schema.license: "Apache-2.0"
-#  org.label-schema.vcs-url: "git@github.com:Islandora-Collaboration-Group/ISLE.git"
-#  org.label-schema.vendor: "Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com"
-#  org.label-schema.schema-version: "1.0"
+
+## DEVELOPERS DOCKER COMPOSE NOT FOR THE END-USER ##
+## Build order:
+## Depends:
+## ...
+
 
 services:
   mysql:
+    build:
+      context: ./mysql
     image: islandoracollabgroup/isle-mysql:latest
     container_name: isle-mysql-ld
-    hostname: mysql
     environment:
       - MYSQL_ROOT_PASSWORD=ild_mysqlrt_2018
     networks:
@@ -23,9 +23,10 @@ services:
       - ./data/mysql/log:/var/log/mysql
 
   fedora:
+    build:
+      context: ./fedora
     image: islandoracollabgroup/isle-fedora:latest
     container_name: isle-fedora-ld
-    hostname: fedora
     networks:
       - isle-internal
     ports:
@@ -40,14 +41,15 @@ services:
       - ./data/fedora/log/tomcat:/usr/local/tomcat/logs
 
   solr:
+    build:
+      context: ./solr
     image: islandoracollabgroup/isle-solr:latest
     container_name: isle-solr-ld
-    hostname: solr
     networks:
       - isle-internal
     ports:
       - "8091:8080"
-      - "8983:8983"
+      - "8983:8983" # if this port only needs to be exposed to the host and isle-internal please remove this port map.
     tty: true
     depends_on:
       - mysql
@@ -56,6 +58,8 @@ services:
       - ./data/solr/logs:/usr/local/tomcat/logs
 
   apache:
+    build:
+      context: ./apache    
     image: islandoracollabgroup/isle-apache:latest
     container_name: isle-apache-ld
     networks:
@@ -70,6 +74,8 @@ services:
       - ./data/apache/log/apache:/var/log/apache2
 
   proxy:
+    build:
+      context: ./proxy    
     image: islandoracollabgroup/isle-proxy:latest
     container_name: isle-proxy
     networks:
@@ -85,14 +91,13 @@ services:
       - fedora
       - solr
       - apache
-    # command: [nginx-debug, '-g', 'daemon off;']
+    command: [nginx-debug, '-g', 'daemon off;']
 
 
 # Defined networks
 networks:
   isle-internal:
   isle-external:
-    external: true
 
 volumes:
   db-data-ld:

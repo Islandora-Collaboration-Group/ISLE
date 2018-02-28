@@ -1,11 +1,14 @@
 FROM ubuntu:14.04 AS ffmpeg_base
 
-LABEL org.label-schema.name = "isle-apache" \
-      org.label-schema.description: "ISLE Base Image with sample site isle.localdomain apache Dockerfile for non-production usage." \
-      org.label-schema.license": "Apache-2.0" \
-      org.label-schema.vcs-url: "git@github.com:Islandora-Collaboration-Group/ISLE.git" \
-      org.label-schema.vendor": "Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com" \
-      org.label-schema.schema-version = "1.0"
+## 
+LABEL "io.github.islandora-collaboration-group.name"="isle-apache" 
+LABEL "io.github.islandora-collaboration-group.description"="ISLE Apache container, responsible for serving Drupal and Islandora's presentation layer!\
+A default site called isle.localdomain is prepared for those looking to explore Islandora for the first time!"
+LABEL "io.github.islandora-collaboration-group.license"="Apache-2.0" 
+LABEL "io.github.islandora-collaboration-group.vcs-url"="git@github.com:Islandora-Collaboration-Group/ISLE.git" 
+LABEL "io.github.islandora-collaboration-group.vendor"="Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com"
+LABEL "io.github.islandora-collaboration-group.maintainer"="Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com" 
+##
 
 ###
 # https://github.com/phusion/baseimage-docker/issues/58
@@ -338,12 +341,10 @@ COPY isle_drupal_build_tools/apache_provision.sh /tmp/isle_drupal_build_tools/ap
 COPY isle_drupal_build_tools/fix-permissions.sh /tmp/isle_drupal_build_tools/fix-permissions.sh
 COPY settings.php /tmp/settings.php
 
+# Make sure ports 80 and 443 are available to the internal network.
+EXPOSE 80 443
 
-###
-# Make sure ports 80 and 443 are available
-EXPOSE 80
-EXPOSE 443
-
+# This is such great work Gavin. -br2490
 
 ###
 # Run the Apache web server
