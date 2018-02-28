@@ -48,7 +48,6 @@ services:
       - isle-internal
     ports:
       - "8091:8080"
-      - "8983:8983" # if this port only needs to be exposed to the host and isle-internal please remove this port map.
     tty: true
     depends_on:
       - mysql
