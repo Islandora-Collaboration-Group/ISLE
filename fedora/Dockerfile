@@ -1,11 +1,11 @@
 FROM tomcat:8.0-jre8
-## 
-LABEL "io.github.islandora-collaboration-group.name"="isle-fedora" 
+##
+LABEL "io.github.islandora-collaboration-group.name"="isle-fedora"
 LABEL "io.github.islandora-collaboration-group.description"="ISLE Fedora container, responsible for storing and serving archival repository data."
-LABEL "io.github.islandora-collaboration-group.license"="Apache-2.0" 
-LABEL "io.github.islandora-collaboration-group.vcs-url"="git@github.com:Islandora-Collaboration-Group/ISLE.git" 
+LABEL "io.github.islandora-collaboration-group.license"="Apache-2.0"
+LABEL "io.github.islandora-collaboration-group.vcs-url"="git@github.com:Islandora-Collaboration-Group/ISLE.git"
 LABEL "io.github.islandora-collaboration-group.vendor"="Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com"
-LABEL "io.github.islandora-collaboration-group.maintainer"="Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com" 
+LABEL "io.github.islandora-collaboration-group.maintainer"="Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com"
 ##
 
 ###
@@ -71,7 +71,7 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 #
 
 RUN cd /opt \
-    && wget -O /opt/adore-djatoka-1.1.tar.gz "http://downloads.sourceforge.net/project/djatoka/djatoka/1.1/adore-djatoka-1.1.tar.gz" \
+    && wget https://sourceforge.mirrorservice.org/d/dj/djatoka/djatoka/1.1/adore-djatoka-1.1.tar.gz \
     && tar -xzf adore-djatoka-1.1.tar.gz \
     && ln -s /opt/adore-djatoka-1.1/bin/Linux-x86-64/kdu_compress /usr/local/bin/kdu_compress \
     && ln -s /opt/adore-djatoka-1.1/bin/Linux-x86-64/kdu_expand /usr/local/bin/kdu_expand \
