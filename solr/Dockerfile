@@ -1,11 +1,12 @@
 FROM tomcat:8.0-jre8
-
-LABEL org.label-schema.name = "isle-solr" \
-      org.label-schema.description: "ISLE Base Image with sample site isle.localdomain solr Dockerfile for non-production usage." \
-      org.label-schema.license": "Apache-2.0" \
-      org.label-schema.vcs-url: "git@github.com:Islandora-Collaboration-Group/ISLE.git" \
-      org.label-schema.vendor": "Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com" \
-      org.label-schema.schema-version = "1.0"
+## 
+LABEL "io.github.islandora-collaboration-group.name"="isle-solr" 
+LABEL "io.github.islandora-collaboration-group.description"="ISLE Solr container, a powerful search engine responsible for handling user searches through your Islandora collections."
+LABEL "io.github.islandora-collaboration-group.license"="Apache-2.0" 
+LABEL "io.github.islandora-collaboration-group.vcs-url"="git@github.com:Islandora-Collaboration-Group/ISLE.git" 
+LABEL "io.github.islandora-collaboration-group.vendor"="Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com"
+LABEL "io.github.islandora-collaboration-group.maintainer"="Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com" 
+##
 
 ###
 # Copy over tomcat files for configuration
@@ -51,5 +52,7 @@ COPY solr/solrconfig.xml /usr/local/solr/collection1/conf/solrconfig.xml
 COPY solr/schema.xml /usr/local/solr/collection1/conf/schema.xml
 COPY solr/stopwords.txt /usr/local/solr/collection1/conf/stopwords.txt
 
-EXPOSE 8080
+VOLUME /usr/local/solr
+
+EXPOSE 8080 8983
 CMD ["catalina.sh", "run"]
