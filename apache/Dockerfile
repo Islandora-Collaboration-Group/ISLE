@@ -1,13 +1,13 @@
 FROM ubuntu:14.04 AS ffmpeg_base
 
-## 
-LABEL "io.github.islandora-collaboration-group.name"="isle-apache" 
+##
+LABEL "io.github.islandora-collaboration-group.name"="isle-apache"
 LABEL "io.github.islandora-collaboration-group.description"="ISLE Apache container, responsible for serving Drupal and Islandora's presentation layer!\
 A default site called isle.localdomain is prepared for those looking to explore Islandora for the first time!"
-LABEL "io.github.islandora-collaboration-group.license"="Apache-2.0" 
-LABEL "io.github.islandora-collaboration-group.vcs-url"="git@github.com:Islandora-Collaboration-Group/ISLE.git" 
+LABEL "io.github.islandora-collaboration-group.license"="Apache-2.0"
+LABEL "io.github.islandora-collaboration-group.vcs-url"="git@github.com:Islandora-Collaboration-Group/ISLE.git"
 LABEL "io.github.islandora-collaboration-group.vendor"="Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com"
-LABEL "io.github.islandora-collaboration-group.maintainer"="Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com" 
+LABEL "io.github.islandora-collaboration-group.maintainer"="Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com"
 ##
 
 ###
@@ -232,7 +232,7 @@ RUN cd /etc/ \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && cd /opt \
-    && wget "http://downloads.sourceforge.net/project/djatoka/djatoka/1.1/adore-djatoka-1.1.tar.gz" \
+    && wget https://sourceforge.mirrorservice.org/d/dj/djatoka/djatoka/1.1/adore-djatoka-1.1.tar.gz \
     && tar -xzf adore-djatoka-1.1.tar.gz \
     && rm adore-djatoka-1.1.tar.gz \
     && sed -i 's/DJATOKA_HOME=`pwd`/DJATOKA_HOME=\/opt\/adore-djatoka-1.1/g' /opt/adore-djatoka-1.1/bin/env.sh \
