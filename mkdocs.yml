@@ -41,9 +41,7 @@ pages:
 
 - Installation - Migration:
   - 'Migration Guide': '01_Installation_Migration/Migration_Guide.md'
-  - 'Migration Guide Alpha': '01_Installation_Migration/Migration_Guide_alpha.md'
   - 'Example User Story': '01_Installation_Migration/Migration_User_Story.md'
-  - 'Davids Edits': '01_Installation_Migration/DavidMigrationGuide.md'
   - 'Migration Export Checklist': '01_Installation_Migration/migration_export_checklist.md'
   - 'Migration Merge Checklist': '01_Installation_Migration/migration_merge_checklist.md'
 
