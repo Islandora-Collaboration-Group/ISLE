@@ -1,11 +1,14 @@
 FROM ubuntu:14.04 AS ffmpeg_base
 
-LABEL org.label-schema.name = "isle-apache" \
-      org.label-schema.description: "ISLE Base Image with sample site isle.localdomain apache Dockerfile for non-production usage." \
-      org.label-schema.license": "Apache-2.0" \
-      org.label-schema.vcs-url: "git@github.com:Islandora-Collaboration-Group/ISLE.git" \
-      org.label-schema.vendor": "Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com" \
-      org.label-schema.schema-version = "1.0"
+##
+LABEL "io.github.islandora-collaboration-group.name"="isle-apache"
+LABEL "io.github.islandora-collaboration-group.description"="ISLE Apache container, responsible for serving Drupal and Islandora's presentation layer!\
+A default site called isle.localdomain is prepared for those looking to explore Islandora for the first time!"
+LABEL "io.github.islandora-collaboration-group.license"="Apache-2.0"
+LABEL "io.github.islandora-collaboration-group.vcs-url"="git@github.com:Islandora-Collaboration-Group/ISLE.git"
+LABEL "io.github.islandora-collaboration-group.vendor"="Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com"
+LABEL "io.github.islandora-collaboration-group.maintainer"="Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com"
+##
 
 ###
 # https://github.com/phusion/baseimage-docker/issues/58
@@ -229,7 +232,7 @@ RUN cd /etc/ \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && cd /opt \
-    && wget "http://downloads.sourceforge.net/project/djatoka/djatoka/1.1/adore-djatoka-1.1.tar.gz" \
+    && wget https://sourceforge.mirrorservice.org/d/dj/djatoka/djatoka/1.1/adore-djatoka-1.1.tar.gz \
     && tar -xzf adore-djatoka-1.1.tar.gz \
     && rm adore-djatoka-1.1.tar.gz \
     && sed -i 's/DJATOKA_HOME=`pwd`/DJATOKA_HOME=\/opt\/adore-djatoka-1.1/g' /opt/adore-djatoka-1.1/bin/env.sh \
@@ -245,7 +248,9 @@ RUN cd /etc/ \
     && chmod 0644 /etc/cron.d/tmpreaper-cron
 
 COPY envinit.sh /opt/adore-djatoka-1.1/bin/envinit.sh
-COPY site.conf /etc/apache2/sites-available/site.conf
+COPY sites-available/isle_localdomain_ssl.conf /etc/apache2/sites-available/isle_localdomain_ssl.conf
+COPY sites-available/isle_localdomain.conf /etc/apache2/sites-available/isle_localdomain.conf
+COPY ssl-certs /certs
 
 ###
 # Set up environmental variables for tomcat & dependencies installation
@@ -311,8 +316,10 @@ RUN mkdir -p /tmp/build \
     && a2enconf servername \
     && mkdir -p /var/www/html \
     && chown islandora:www-data /var/www/html \
-    && chmod 0644 /etc/apache2/sites-available/site.conf \
-    && a2ensite site.conf \
+    && chmod 0644 /etc/apache2/sites-available/isle_localdomain_ssl.conf \
+    && chmod 0644 /etc/apache2/sites-available/isle_localdomain.conf \
+    && a2ensite isle_localdomain_ssl.conf \
+    && a2ensite isle_localdomain.conf \
     && a2enmod ssl rewrite deflate headers expires proxy proxy_http proxy_html proxy_connect xml2enc \
     && a2dissite 000-default \
     && a2dissite default-ssl \
@@ -333,11 +340,10 @@ COPY isle_drupal_build_tools/apache_provision.sh /tmp/isle_drupal_build_tools/ap
 COPY isle_drupal_build_tools/fix-permissions.sh /tmp/isle_drupal_build_tools/fix-permissions.sh
 COPY settings.php /tmp/settings.php
 
+VOLUME /var/www/html
 
-###
-# Make sure port 80 are available
-EXPOSE 80
-
+# Make sure ports 80 and 443 are available to the internal network.
+EXPOSE 80 443
 
 ###
 # Run the Apache web server

@@ -308,8 +308,8 @@ $drupal_hash_salt = ''; # enduser edit here
  * for you.
  */
 
- # enduser edit below
- $base_url = 'https://enduser_institution.com';  // NO trailing slash!
+ # enduser leave this commented out
+ # $base_url = 'https://enduser_institution.com';  // NO trailing slash!
 
 /**
  * PHP settings:
