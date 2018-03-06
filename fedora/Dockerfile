@@ -1,21 +1,18 @@
 FROM tomcat:8.0-jre8
-LABEL org.label-schema.name = "isle-fedora" \
-      org.label-schema.description: "ISLE Base Image with sample site isle.localdomain fedora Dockerfile for non-production usage." \
-      org.label-schema.license": "Apache-2.0" \
-      org.label-schema.vcs-url: "git@github.com:Islandora-Collaboration-Group/ISLE.git" \
-      org.label-schema.vendor": "Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com" \
-      org.label-schema.schema-version = "1.0"
+##
+LABEL "io.github.islandora-collaboration-group.name"="isle-fedora"
+LABEL "io.github.islandora-collaboration-group.description"="ISLE Fedora container, responsible for storing and serving archival repository data."
+LABEL "io.github.islandora-collaboration-group.license"="Apache-2.0"
+LABEL "io.github.islandora-collaboration-group.vcs-url"="git@github.com:Islandora-Collaboration-Group/ISLE.git"
+LABEL "io.github.islandora-collaboration-group.vendor"="Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com"
+LABEL "io.github.islandora-collaboration-group.maintainer"="Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com"
+##
 
 ###
 # COPY over tomcat config files
 COPY tomcat/server.xml /usr/local/tomcat/conf/server.xml
 COPY tomcat/web.xml /usr/local/tomcat/conf/web.xml
 COPY tomcat/tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
-COPY tomcat/runservices.sh /usr/local/tomcat/bin/runservices.sh
-
-
-RUN chmod 755 /usr/local/tomcat/bin/runservices.sh
-
 
 ###
 # Set up environmental variables for tomcat & dependencies installation
@@ -57,7 +54,6 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
     dnsutils \
     ca-certificates \
     apt-transport-https \
-    apache2 \
     openssl \
     libxml2-dev \
     oracle-java8-installer \
@@ -70,26 +66,12 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
     && touch /var/log/cron.log
 
 
-# Configure apache
-COPY apache/site.conf /etc/apache2/sites-available/site.conf
-
-RUN touch /etc/apache2/conf-available/servername.conf \
-    && echo 'ServerName localhost' > /etc/apache2/conf-available/servername.conf \
-    && a2enconf servername \
-    && mkdir -p /var/www/html \
-    && chmod 0644 /etc/apache2/sites-available/site.conf \
-    && a2ensite site.conf \
-    && a2enmod rewrite deflate headers expires proxy proxy_http proxy_html proxy_connect xml2enc \
-    && a2dissite 000-default \
-    && a2dissite default-ssl
-
-
 ###
 # Djatoka
 #
 
 RUN cd /opt \
-    && wget -O /opt/adore-djatoka-1.1.tar.gz "http://downloads.sourceforge.net/project/djatoka/djatoka/1.1/adore-djatoka-1.1.tar.gz" \
+    && wget https://sourceforge.mirrorservice.org/d/dj/djatoka/djatoka/1.1/adore-djatoka-1.1.tar.gz \
     && tar -xzf adore-djatoka-1.1.tar.gz \
     && ln -s /opt/adore-djatoka-1.1/bin/Linux-x86-64/kdu_compress /usr/local/bin/kdu_compress \
     && ln -s /opt/adore-djatoka-1.1/bin/Linux-x86-64/kdu_expand /usr/local/bin/kdu_expand \
@@ -180,5 +162,8 @@ RUN /usr/bin/ant -f /usr/local/tomcat/webapps/fedoragsearch/FgsConfig/fgsconfig-
 COPY gsearch/foxmlToSolr.xslt /usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/foxmlToSolr.xslt
 COPY gsearch/index.properties /usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/index.properties
 
-EXPOSE 80 8080
-CMD ["/usr/local/tomcat/bin/runservices.sh", "run"]
+# Docker volume this, please.
+VOLUME /usr/local/fedora/data
+
+EXPOSE 8080
+CMD ["catalina.sh", "run"]
