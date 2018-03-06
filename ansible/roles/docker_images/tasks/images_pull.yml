@@ -7,3 +7,4 @@
     - "{{ isle_docker_image_fedora }}"
     - "{{ isle_docker_image_solr }}"
     - "{{ isle_docker_image_apache }}"
+    - "{{ isle_docker_image_proxy }}"
