@@ -336,7 +336,7 @@ RUN mkdir -p /tmp/build \
 
 COPY isle_drupal_build_tools/drupal.drush.make /tmp/isle_drupal_build_tools/drupal.drush.make
 COPY isle_drupal_build_tools/islandora.drush.make /tmp/isle_drupal_build_tools/islandora.drush.make
-COPY isle_drupal_build_tools/apache_provision.sh /tmp/isle_drupal_build_tools/apache_provision.sh
+COPY isle_drupal_build_tools/install_isle_ld_site.sh /tmp/isle_drupal_build_tools/install_isle_ld_site.sh
 COPY isle_drupal_build_tools/fix-permissions.sh /tmp/isle_drupal_build_tools/fix-permissions.sh
 COPY settings.php /tmp/settings.php
 
