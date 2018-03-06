@@ -1,15 +1,14 @@
 version: '2'
 
-## ISLE Test Site: isle.localdomain ##
-## Run order: `docker-compose up -d
-## BUILD ISLE.LOCALDOMAIN SITE:
-## `docker exec -it isle-apache bash`
-## `cd /tmp/isle_drupal_build_tools`
-## `chmod 755 install_isle_ld_site.sh`
-## `./install_isle_ld_site.sh`
+## DEVELOPERS DOCKER COMPOSE NOT FOR THE END-USER ##
+## Build order: `docker-compose build` (does not matter)
+## Run order: `docker-compose up -d proxy` (if you want to watch proxy, remove -d this remains attached to proxy for testing - you will see ALL logs as stdin/stderr.)
+## BUILD ISLE.LOCALDOMAIN SITE: `docker exec -it isle-apache bash` `cd temp` `./make_site.sh` `./install_site.sh`
 
 services:
   mysql:
+    build:
+      context: ./mysql
     image: islandoracollabgroup/isle-mysql:latest
     container_name: isle-mysql-ld
     environment:
@@ -23,6 +22,8 @@ services:
       - ./data/mysql/log:/var/log/mysql
 
   fedora:
+    build:
+      context: ./fedora
     image: islandoracollabgroup/isle-fedora:latest
     container_name: isle-fedora-ld
     networks:
@@ -39,6 +40,8 @@ services:
       - ./data/fedora/log/tomcat:/usr/local/tomcat/logs
 
   solr:
+    build:
+      context: ./solr
     image: islandoracollabgroup/isle-solr:latest
     container_name: isle-solr-ld
     networks:
@@ -53,6 +56,8 @@ services:
       - ./data/solr/logs:/usr/local/tomcat/logs
 
   apache:
+    build:
+      context: ./apache
     image: islandoracollabgroup/isle-apache:latest
     container_name: isle-apache-ld
     networks:
@@ -69,6 +74,8 @@ services:
       - ./data/apache/log/apache:/var/log/apache2
 
   proxy:
+    build:
+      context: ./proxy
     image: islandoracollabgroup/isle-proxy:latest
     container_name: isle-proxy
     networks:
@@ -89,3 +96,9 @@ services:
 networks:
   isle-internal:
   isle-external:
+
+volumes:
+  db-data-ld:
+  fed-data-ld:
+  solr-data-ld:
+  apache-data-ld:

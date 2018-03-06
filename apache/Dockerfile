@@ -248,7 +248,6 @@ RUN cd /etc/ \
     && chmod 0644 /etc/cron.d/tmpreaper-cron
 
 COPY envinit.sh /opt/adore-djatoka-1.1/bin/envinit.sh
-# COPY site.conf /etc/apache2/sites-available/site.conf
 COPY sites-available/isle_localdomain_ssl.conf /etc/apache2/sites-available/isle_localdomain_ssl.conf
 COPY sites-available/isle_localdomain.conf /etc/apache2/sites-available/isle_localdomain.conf
 COPY ssl-certs /certs
@@ -345,8 +344,6 @@ VOLUME /var/www/html
 
 # Make sure ports 80 and 443 are available to the internal network.
 EXPOSE 80 443
-
-# This is such great work Gavin. -br2490
 
 ###
 # Run the Apache web server
