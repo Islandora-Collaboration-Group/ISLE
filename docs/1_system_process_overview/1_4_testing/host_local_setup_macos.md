@@ -4,8 +4,6 @@ This is a guide to setup and install all ISLE pre-requisites on a MacOS local la
 
 **Please note:** This guide is for using `Vagrant / Virtualbox` software only.
 
-**2/7/2018** There appears to be a networking bug found in `Docker For Mac` software that stops Fedoragsearch from properly starting in Tomcat.
-
 ### Assumptions / Pre-Requisites
 
 * Enduser has a local laptop / workstation that conforms to the specifications outlined in the [ISLE MVP Host Specifications Guide](../mvpspecs.md)

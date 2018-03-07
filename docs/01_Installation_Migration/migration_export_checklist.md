@@ -1,4 +1,4 @@
-### Migration Export Checklist
+## Migration Export Checklist
 This section is a checklist of materials to **COPY** from the current running institutional Islandora Production server(s) to the appropriate storage location / directory on the new ISLE directory.
 
 **Please Note:** _Ubuntu / Debian style paths are used for all examples file locations below, endusers might have different locations for these files HOWEVER the file and directory names etc should be roughly the same._
@@ -10,7 +10,7 @@ Ensure adequate backups of any production system(s) are made prior to any attemp
 
 ---
 
-#### Apache
+### Apache
 
 Copy the following below from the Islandora Production Server(s) to the suggested directory `/current-production-config/apache/` on the ISLE directory.
 
@@ -42,23 +42,18 @@ This data will be used in conjunction with an Apache container.
 
 ---
 
-#### Fedora
+### Fedora
 
 Copy the following below from the Islandora Production Server(s) to the suggested directory `current-production-config/fedora/` on the ISLE directory.
 
 This data will be used in conjunction with a Fedora container.  
 
-| Data              | Description                   | Possible Location                | Suggested ISLE Path Destination            | Notes         |
-| -------------     | -------------                 | -------------                    | -------------                              | ------------- |
-| yoursite.conf     | Apache webserver vhost file   | /etc/apache2/sites-available/    | /current-production-config/fedora/ | _see below_   |
+| Data              | Description                   | Possible Location                | Suggested ISLE Path Destination    | Notes         |
+| -------------     | -------------                 | -------------                    | -------------                      | ------------- |
 | data              | Entire Fedora data directory  | /usr/local/fedora/               | /current-production-config/fedora/ | --            |
 | fedora.fcfg       | Fedora repository config file | /usr/local/fedora/server/config/ | /current-production-config/fedora/ | --            |
 | fedora-users.xml  | Fedora users config file      | /usr/local/fedora/server/config/ | /current-production-config/fedora/ | --            |
 | filter-drupal.xml | Fedora Drupal filter file     | /usr/local/fedora/server/config/ | /current-production-config/fedora/ | --            |
-
-**Fedora Notes**:
-
-* `yoursite.conf` (_if you use Adore-Djatoka with a reverse proxy otherwise it is possible this file is not necessary_)
 
 ---
 
@@ -118,9 +113,8 @@ Copy the following below from the Islandora Production Server(s) to the suggeste
 
 This data will be used in conjunction with the Tomcat service found on a Fedora or SOLR container.
 
-| Data             | Description               | Possible Location                      | Suggested ISLE Path Destination            | Notes         |
-| -------------    | -------------             | -------------                          | -------------                              | ------------- |
-| server.xml       | Tomcat server config file | /var/lib/tomcat7/conf/server.xml       | /current-production-config/tomcat/ | --            |
+| Data             | Description               | Possible Location                      | Suggested ISLE Path Destination    | Notes         |
+| -------------    | -------------             | -------------                          | -------------                      | ------------- |
 | tomcat-users.xml | Tomcat server config file | /var/lib/tomcat7/conf/tomcat-users.xml | /current-production-config/tomcat/ | --            |
 
 
