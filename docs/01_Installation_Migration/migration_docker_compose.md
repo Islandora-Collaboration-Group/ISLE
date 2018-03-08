@@ -1,4 +1,4 @@
-#### Alpha Migration Docker Compose Edit Guidelines
+## Migration Docker Compose Edit Guidelines
 
 **Mysql Service section**
 ```

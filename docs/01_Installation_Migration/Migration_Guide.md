@@ -9,25 +9,25 @@ Prerequisites:
 
 1. Host Server set up according to the [instructions](../00Host_Server/Host_Server_Setup.md)
 
-1. Have a domain name that works - is set up with DNS etc...
+2. Have a domain name that works - is set up with DNS etc...
 
-1. Have SSL Certificates for the domain
+3. Have SSL Certificates for the domain
 
-1. ISLE project has been cloned to BOTH your local laptop/workstation AND the host server - see [Setup Guide](../00Host_Server/Host_Server_Setup)
+4. ISLE project has been cloned to BOTH your local laptop/workstation AND the host server - see [Setup Guide](../00Host_Server/Host_Server_Setup)
 
-2. Disk space on or mounted to the Host Server large enough to store a **copy** of your fedora data store
+5. Disk space on or mounted to the Host Server large enough to store a **copy** of your fedora data store
 
-2. Access to that server from your local workstation via SSH (`islandora` user with sudo privileges)
+6. Access to that server from your local workstation via SSH (`islandora` user with sudo privileges)
 
-3. Access to the current Islandora production server
+7. Access to the current Islandora production server
 
-4. Usernames/Passwords for key parts of your stack which are used **for** the migration.
+8. Usernames/Passwords for key parts of your stack which are used **for** the migration.
     * Drupal SQL information: username, password, database name can be obtained from your original `www/sites/default/settings.php`
     * Fedora SQL information: username, password, database name can be obtained from your original `fedora/server/config/fedora.fcfcg`
     * Fedora users: please have a copy of your `fedora-users.xml`
     * Tomcat users: please have a copy of your `tomcat-users.xml` OR use the default login: admin,ild_tc_adm_2018 (for both fedora and solr)
 
-5. SQL dump (export) of the current production site's Drupal database
+9. SQL dump (export) of the current production site's Drupal database
 
 
 --------------------
@@ -168,7 +168,6 @@ example:  `digital-collectionsconfig`
 * `cd` into the newly cloned directory - this is a good time to check that the ISLE directory contains your `yourdomain-config` directory and that it reflects all the edits and customizations.
 
 ## Spin up ISLE containers!
-
 
 ### Review or pull down ISLE Docker images
 

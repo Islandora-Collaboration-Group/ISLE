@@ -79,7 +79,6 @@ Compare, edit, merge or copy the following from the suggested directory `current
 | fedora-users.xml  | Fedora users config file      | /usr/local/fedora/server/config/ | /yourdomain-config/fedora/ | _see below_   |
 | filter-drupal.xml | Fedora Drupal filter file     | /usr/local/fedora/server/config/ | /yourdomain-config/fedora/ | _see below_   |
 | repository-policies | Fedora Drupal filter file     | /usr/local/fedora/server/config/ | /yourdomain-config/fedora/ | _see below_   |
-| site.conf         | Apache webserver vhost file   | /etc/apache2/sites-available/    | /yourdomain-config/fedora/ | _see below_   |
 
 **Fedora Notes**:
 
@@ -122,14 +121,6 @@ Compare, edit, merge or copy the following from the suggested directory `current
 
 
 * `fedora/repository-policies` - endusers can edit the files contained within for more granular or customized Fedora user permissions or repository access.
-
-* `site.conf` - endusers will want to edit this Apache vhost for the fedora proxy site name (if using Djatoka)
-
-    * The filename can stay the same or can be changed. Please note that Line 37 of the associated `docker-compose.yml` will need to be updated if the file is renamed
-
-    * Lines 2, 3, 6, 7, 34 - 37, 39, 40, 44 & 45:  endusers will edit this file as directed in the (# enduser please edit this and then remove this comment) instructions.
-
-       * Do remove (# enduser please edit this and then remove this comment) after editing or adding the appropriate values.
 
 
 #### Solr

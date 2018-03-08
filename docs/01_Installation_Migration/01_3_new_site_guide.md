@@ -1,16 +1,14 @@
+# Build a New ISLE / Islandora Environment
 
+This guide documents how an enduser can spin up and install the ISLE / Islandora environment using their own domain / URL.
 
-##Build a New ISLE / Islandora Environment
+**Assumptions:**
 
-This guide documents how an enduser can spin up and install the ISLE / Islandora environment using their own URL.
+* Have a domain name that works - is set up with DNS etc...
 
-  **Assumptions:**
+* Have SSL Certificates for the domain
 
-  * Have a domain name that works - is set up with DNS etc...
-
-  * Have SSL Certificates for the domain
-
-  * ISLE project has been cloned to BOTH your local laptop/workstation AND the host server - see [Setup Guide](../00Host_Server/Host_Server_Setup)
+* ISLE project has been cloned to BOTH your local laptop/workstation AND the host server - see [Setup Guide](../00Host_Server/Host_Server_Setup)
 
 ## Overview
 
@@ -44,9 +42,9 @@ example:  `digital-collectionsconfig`
 
 * You are now ready to perform the customization edits in this directory (you can use a text editor of choice now don't have to stay in terminal - just locate the folder in the finder and open file in text editor)
 
-##Edits
+##  Edits
 
-##Docker compose file:
+### Docker compose file:
 
 * Edit the file: **docker-compose.yml** accordingly:
 
@@ -70,7 +68,7 @@ a. to reflect **environment** (prod, stage, dev, etc...)
 b. to involve your **domain name** (digital-collections.example.edu)
 
 ----------
-##Apache directory
+### Apache directory
 
 * Copy your SSL certificates for Apache into `apache/ssl/certs`
 
@@ -102,7 +100,7 @@ Change the following in this line to the appropriate names and passwords for you
     site-name
 
 ----------
-##Fedora directory
+### Fedora directory
 
 * Within the fedora/fedora directories, **change the passwords** in the following files:
 
@@ -131,7 +129,7 @@ Change the following in this line to the appropriate names and passwords for you
 `fgsrepository.fedoraPass        = ild_fed_admin_2018`
 
 ---------
-##Tomcat directory
+### Tomcat directory
 
 * Within the **tomcat** sub directories:
 
@@ -149,13 +147,13 @@ Change the following in this line to the appropriate names and passwords for you
 
 ----------
 
-##Repository policies
+### Repository policies
 
 Edit the contents of the repository-policies directory as necessary IF YOU NEED TO otherwise leave alone.
 
 ------
 
-##Mysql directory
+### Mysql directory
 
 * edit the contents of `create_drupal_user.sql` to create the drupal site db user
 
@@ -169,7 +167,7 @@ Edit the contents of the repository-policies directory as necessary IF YOU NEED 
 
  -------
 
-##Proxy directory
+### Proxy directory
 
 * in the `config/sites-enabled` directory, rename the `conf` file to `yourdomain.conf` (where "yourdomain" is the domain name of your server)
   * for example: `digital-collections.example.edu.conf`
@@ -185,12 +183,12 @@ Edit the contents of the repository-policies directory as necessary IF YOU NEED 
     * append your environment type (prod, dev, stage, etc.) to the following lines proceeded by a hyphen i.e. `-dev`
 
 ----------
-##SSL-certs directory
+### SSL-certs directory
 Copy your SSL certs into the ssl-certs dir
 DO NOT OVERWRITE OR DELETE the dhparam.pem file that's in There
 --------
 
-##upstreams.d directory
+### Proxy upstreams.d directory
 
 * copy and rename: `sample-upstreams.conf.disabled` - replace "sample" in the file name w/ the environment name e.g. (dev, prod, stage, etc...)
 
@@ -216,7 +214,7 @@ DO NOT OVERWRITE OR DELETE the dhparam.pem file that's in There
 
 -----
 
-##Solr directory
+### Solr directory
 
 * Within the tomcat sub-directories
 
@@ -236,7 +234,7 @@ looks like this:
 
 --------
 
-##Final steps
+## Final steps
 
 * Now that all the changes are made (be sure to save), ISLE should be ready to test. First you'll need to push these changes to your private code repository.
 
@@ -264,7 +262,7 @@ looks like this:
 
 --------
 
-##Clone Custom Configuration to Host Server
+## Clone Custom Configuration to Host Server
 
 * Open a terminal - ssh into your host server using the `islandora` user
 
@@ -285,7 +283,7 @@ looks like this:
 
 * `cd` into the newly cloned directory
 
-##Spin up ISLE containers!
+## Spin up ISLE containers!
 
 * run `docker-compose up -d`
 
