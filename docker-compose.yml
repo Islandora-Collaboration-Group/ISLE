@@ -89,3 +89,9 @@ services:
 networks:
   isle-internal:
   isle-external:
+
+volumes:
+  db-data-ld:
+  fed-data-ld:
+  solr-data-ld:
+  apache-data-ld:
