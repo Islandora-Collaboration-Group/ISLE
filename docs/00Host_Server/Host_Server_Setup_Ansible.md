@@ -239,7 +239,7 @@ ansible
 * Test if the Ansible control laptop / workstation can connect to the ISLE Host server by running these commands. On the local Ansible control laptop / workstation, open a terminal window and enter the following:
 
 ```
-cd /path/to/ISLE/repo
+cd /path/to/ISLE/repo/ansible
 
 ansible -i inventory isle-host-server -m ping
 ```
@@ -326,6 +326,7 @@ islandoracollabgroup/isle-fedora   latest              6e2749ca2c2f        2 wee
 islandoracollabgroup/isle-apache   latest              82fe4ae16932        2 weeks ago         2.18GB
 islandoracollabgroup/isle-solr     latest              7fba26c10433        2 weeks ago         784MB
 islandoracollabgroup/isle-mysql    latest              f34162f1e0f8        2 weeks ago         299MB
+islandoracollabgroup/isle-proxy    latest              5gdc45f1a074        2 weeks ago         199MB
 ```
 
 
@@ -378,6 +379,7 @@ drwxr-xr-x. 7 islandora islandora  143 Jan 17 09:17 docs
 drwxr-xr-x. 7 islandora islandora  102 Jan 17 09:17 fedora
 -rwxr-xr-x. 1 islandora islandora  12K Jan 17 09:17 mkdocs.yml
 drwxr-xr-x. 3 islandora islandora   54 Jan 17 09:17 mysql
+drwxr-xr-x. 3 islandora islandora   54 Jan 17 09:17 proxy
 -rwxr-xr-x. 1 islandora islandora 4.1K Jan 17 09:17 README.md
 drwxr-xr-x. 4 islandora islandora   50 Jan 17 09:17 solr
 ```
