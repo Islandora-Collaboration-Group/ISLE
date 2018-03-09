@@ -113,8 +113,8 @@ The following setup will be the same if you are building a test on a Virtual Mac
 #### Next steps
 Once this process has finished one chose to do one of the following:
 
-* To spin up a test site w/ the built in isle.localdomain URL, continue next steps with the [Development Site Guide - isle.localdomain](/01_Installation_Migration/01_1_testsite_guide.md)
+* To spin up a test site w/ the built in isle.localdomain URL, continue next steps with the [Development Site Guide - isle.localdomain](../01_Installation_Migration/01_1_testsite_guide.md)
 
-* To spin up a new site using your own URL, continue next steps with the [New Site Guide](/01_Installation_Migration/01_3_new_site_guide.md)
+* To spin up a new site using your own URL, continue next steps with the [New Site Guide](../01_Installation_Migration/01_3_new_site_guide.md)
 
-* To spin up a site and migrate in an existing Islandora setup, continue next steps with [Migration Guide](/01_Installation_Migration/Migration_Guide.md)
+* To spin up a site and migrate in an existing Islandora setup, continue next steps with [Migration Guide](../01_Installation_Migration/Migration_Guide.md)
