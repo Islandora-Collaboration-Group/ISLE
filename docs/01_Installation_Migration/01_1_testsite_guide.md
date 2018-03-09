@@ -1,5 +1,8 @@
 ## Development Site Guide - isle.localdomain
 
+
+_Expectations: It takes an average of **15-45 minutes** to read this entire document and perform the installation as prescribed._
+
 Follow this guide to spin up and install ISLE with no URL utilizing the built-in `isle-localdomain` name for review and testing.
 
 This test ISLE / Islandora environment (`isle.localdomain`) includes an un-themed Drupal website and empty Fedora repository for endusers to develop code, test ingests, test metadata, update fields in SOLR indexing and otherwise "kick the tires" on ISLE prior for further usages e.g. creating a new ISLE production site or migrating a current Islandora production site to ISLE.
