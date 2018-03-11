@@ -169,12 +169,23 @@ Once this process finishes and the ISLE Host Vagrant CentOS VM is running.
 
     * `vagrant ssh`
 
-This command shells in the vagrant user to the ISLE Host. Install the following:
-     * `sudo yum install openssl git htop ntp wget curl nano`
+This command shells in the vagrant user to the ISLE Host.
+
+* Add the RHEL/CENTOS epel-release package repository first
+
+    * `sudo yum install epel-release`
+
+Install the following:
+
+* `sudo yum install openssl git htop ntp wget curl nano`
 
 #### Install Docker on CentOS 7 (as root user)
 
-* `wget -qO- https://get.docker.com/ | sh`
+* `sudo yum install -y yum-utils device-mapper-persistent-data lvm2`
+
+* `sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo`
+
+* `sudo yum install docker-ce`
 
 #### Create islandora user (as root)
 * `adduser islandora`
@@ -301,17 +312,28 @@ This process will switch one to islandora with out having to use a password.
     * `sudo systemctl enable docker.service`
 
 * Start the Docker service
-    * `sudo systemctl start docker.service`
+    * `sudo systemctl start docker`
 
 ---
 
-#### Install Docker-Compose (version 1.17.1 as of 11/16/2017) as islandora-user on CentOS 7
+#### Install Docker-Compose as islandora-user on CentOS 7
 * Open a terminal and ssh back into the CentOS Host Server/VM as the `islandora` user and perform the following:
 
-* Add the RHEL/CENTOS epel-release package repository
+* `sudo curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose`
 
-    * `sudo yum install epel-release`
+* `sudo chmod +x /usr/local/bin/docker-compose`
 
+* Test the Installation
+    * `docker-compose --version`
+**Example output:**
+
+```
+docker-compose version 1.19.0, build 1719ceb
+```
+
+#### Alternative install method for Docker-compose
+
+In case the commands in the steps above fail, please use this alternative install.
 
 * Install Python Pip (package manager for Python Scripting Language)
 
@@ -329,6 +351,7 @@ This process will switch one to islandora with out having to use a password.
 
     * `sudo pip install docker-compose`
 
+---
 
 #### Clone ISLE repository
 * Please note in some Linux Distributions, one might need to create the `/opt` directory (optional)
