@@ -373,7 +373,7 @@ In case the commands in the steps above fail, please use this alternative instal
 * `cd /opt/ISLE`
 
 
-#### Stop the Vagrant VM - You are ready for the workshop!
+#### To stop the Vagrant VM (if needed)
 
 * exit from the vm `exit` (you may have to exit twice to get back to your own machine's command line)
 
