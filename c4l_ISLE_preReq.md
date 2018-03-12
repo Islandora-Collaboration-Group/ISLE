@@ -188,6 +188,9 @@ Install the following:
 * `sudo yum install docker-ce`
 
 #### Create islandora user (as root)
+
+* `sudo su` (_if you're not root already_)
+
 * `adduser islandora`
 
 * `passwd islandora`
@@ -319,7 +322,13 @@ This process will switch one to islandora with out having to use a password.
 #### Install Docker-Compose as islandora-user on CentOS 7
 * Open a terminal and ssh back into the CentOS Host Server/VM as the `islandora` user and perform the following:
 
-* `sudo curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose`
+
+_Ensure the backtics below are in the command_
+```
+
+ sudo curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+
+```
 
 * `sudo chmod +x /usr/local/bin/docker-compose`
 
