@@ -97,7 +97,7 @@ The steps below are for all users (_Vagrant, VM, non Vagrant and Docker for Mac 
 
 The install times stated below for each container are highly dependent on the enduser's available Internet bandwidth and could take more or less time accordingly.
 
-* run `docker-compose up -d` - this is going to download and start all five images (roughly 600GB of data so it may take a little while depending on your connection)
+* run `docker-compose up -d` - this is going to download and start all five images (roughly 6 GB of data so it may take a little while depending on your connection)
 
    * Check if the containers are running: `docker ps` (shows only running containers)
 
@@ -110,7 +110,7 @@ The install times stated below for each container are highly dependent on the en
 #### Install script on Apache container
 
 * Run the following shell scripts manually on the apache container  
-    * `docker exec -it isle-apache bash`
+    * `docker exec -it isle-apache-ld bash`
     * `cd /tmp/isle_drupal_build_tools/`
     * `chmod 777 *.sh`
     * `./install_isle_ld_site.sh`
@@ -118,7 +118,7 @@ The install times stated below for each container are highly dependent on the en
 * Once finished press the `Cntrl` and `d` keys or type `exit` to get out of the apache container
 * Test (QC) the resulting setup by opening a web browser to the `isle.localdomain` URL of the new ISLE sample site (i.e. http://isle.localdomain)
 
-**Please note:** The cronjob setting in the `apache_provision.sh` script is still commented out as this will need to be flowed into the Docker build process prior. Issue with default Docker root user vs using islandora user. Drupal cron can run properly.
+**Please note:** The cronjob setting in the `install_isle_ld_site.sh` script is still commented out as this will need to be flowed into the Docker build process prior. Issue with default Docker root user vs using islandora user. Drupal cron can run properly.
 
 **Total build process** takes 50 - 120 minutes (_depending on system and internet speeds_)
 
