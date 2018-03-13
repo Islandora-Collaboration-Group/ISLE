@@ -2,7 +2,7 @@
 
 ##Building a new site using ISLE - sample user story
 
-Sam wants to spin up Islandora on an Ubuntu Linux server she has in the institutional data center. She accesses the server using ssh and determines that it meets the [minimum system requirements](System_Requirements.md) (basically - it has enough processor, memory, and storage space).
+Sam wants to spin up Islandora on an Ubuntu Linux server she has in the institutional data center. She accesses the server using ssh and determines that it meets the [minimum system requirements](System_Requirements.md) (basically - has enough processor, memory, and storage space).
 
 Sam already has a domain name she wants to use for this Islandora instance - https://islandoratest.university.edu (note: this is a made up sample url) and has requested the DNS update from IT so the name resolves to the IP address of her server.
 
