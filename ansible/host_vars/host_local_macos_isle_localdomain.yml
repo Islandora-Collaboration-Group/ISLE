@@ -13,6 +13,9 @@ user_name: islandora
 pub_locale: ~/Users/enduser/.ssh/id_rsa.pub # edit here for local enduser id_rsa.pub path
 user_password:  islandora
 user_shell: /bin/bash
+group_id_number: 10000
+user_id_number: 10000
+
 
 isle_repo: https://github.com/Islandora-Collaboration-Group/ISLE.git
 isle_repo_path: /opt/ISLE

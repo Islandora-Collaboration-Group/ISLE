@@ -136,7 +136,8 @@ RUN apt-get update \
 
 RUN cd /etc/ \
     && sudo ldconfig \
-    && useradd -ms /bin/bash islandora \
+    && groupadd -g 10000 islandora \
+    && useradd -m -d /home/islandora -s /bin/bash -u 10000 -g 10000 islandora \
     && add-apt-repository -y "deb http://us.archive.ubuntu.com/ubuntu trusty main multiverse" \
     && add-apt-repository -y "deb http://us.archive.ubuntu.com/ubuntu trusty-updates main multiverse" \
     && LC_ALL=en_US.UTF-8 add-apt-repository -y ppa:ondrej/php \
