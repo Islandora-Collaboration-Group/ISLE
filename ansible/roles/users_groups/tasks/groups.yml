@@ -1,4 +1,4 @@
 ---
 
 - name: create group
-  group: name={{ user_name }} state=present
+  group: name={{ user_name }} state=present gid={{ group_id_number }}

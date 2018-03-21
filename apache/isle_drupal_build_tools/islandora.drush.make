@@ -29,7 +29,6 @@ projects[islandora_altmetrics][download][url] = "https://github.com/Islandora/is
 projects[islandora_image_annotation][download][url] = "https://github.com/Islandora/islandora_image_annotation.git"
 projects[islandora_importer][download][url] = "https://github.com/Islandora/islandora_importer.git"
 projects[islandora_internet_archive_bookreader][download][url] = "https://github.com/Islandora/islandora_internet_archive_bookreader.git"
-projects[islandora_jwplayer][download][url] = "https://github.com/Islandora/islandora_jwplayer.git"
 projects[islandora_marcxml][download][url] = "https://github.com/Islandora/islandora_marcxml.git"
 projects[islandora_oai][download][url] = "https://github.com/Islandora/islandora_oai.git"
 projects[islandora_ocr][download][url] = "https://github.com/Islandora/islandora_ocr.git"
@@ -67,7 +66,6 @@ projects[islandora_newspaper_batch][download][url] = "https://github.com/Islando
 projects[php_lib][download][url] = "https://github.com/Islandora/php_lib.git"
 projects[islandora_webform][download][url] = "https://github.com/commonmedia/islandora_webform.git"
 projects[islandora_videojs][download][url] = "https://github.com/Islandora/islandora_videojs.git"
-projects[islandora_jwplayer][download][url] = "https://github.com/Islandora/islandora_jwplayer.git"
 
 ; Libraries
 
