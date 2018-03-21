@@ -43,11 +43,6 @@ libraries[JAIL][download][url] = "https://github.com/sebarmeli/JAIL.git"
 libraries[JAIL][directory_name] = "JAIL"
 libraries[JAIL][type] = "library"
 
-libraries[jwplayer][download][type] = "git"
-libraries[jwplayer][download][url] = "https://github.com/jwplayer/jwplayer.git"
-libraries[jwplayer][directory_name] = "jwplayer"
-libraries[jwplayer][type] = "library"
-
 libraries[openseadragon][download][type] = "git"
 libraries[openseadragon][download][url] = "https://github.com/openseadragon/openseadragon.git"
 libraries[openseadragon][directory_name] = "openseadragon"
@@ -59,7 +54,7 @@ libraries[pdfjs][directory_name] = "pdfjs"
 libraries[pdfjs][type] = "library"
 
 libraries[video-js][download][type] = "get"
-libraries[video-js][download][url] = "https://github.com/videojs/video.js/archive/v4.12.15.tar.gz"
+libraries[video-js][download][url] = "https://github.com/videojs/video.js.git"
 libraries[video-js][directory_name] = "video-js"
 libraries[video-js][type] = "library"
 
