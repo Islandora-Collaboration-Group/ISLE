@@ -5,20 +5,21 @@ version: '2'
 ## This is generic docker-compose that when will load a complete Islandora Stack ready to test.
 ## You do NOT need to edit anything here!
 ##
-## Quick Guide Instruction (Mac, *nix machines only: real or virtual)
-## YOU DO NOT NEED TO CLONE THIS REPOSITORY. Just save save the entire contents of this into a docker-compose.yml.
-## Quick Guide Instructions How to Run:  
+## Quick Start Instruction (Mac, *nix machines only: real or virtual)
+## You are not required to CLONE or downLoad this repo for testing ISLE. 
+## Please save the entire contents of this file into a docker-compose.yml on your computer.
+## 
+## Quick Start Steps:
 ## 0) If your user is not already added to the "docker" group (to find out type `groups`) do so now:
-##    `echo sudo usermod -aG docker $USER` - you MUST log out and log back in, ahd check `groups` again. 
-## 1) Place this docker-compose.yml in an EMPTY directory.  
+##    `echo sudo usermod -aG docker $USER` - you MUST log out and log back in, and check `groups` again. 
+## 1) Place this docker-compose.yml in an EMPTY directory.  Location does not matter, nor name of the folder.
 ## 2) In terminal or console navigate to the directory that contains your docker-compose.yml.  
 ## 3) Type:  `docker-compose up -d`
-## 4) Please wait.
 ##
 ## What you're watching: Docker is orchestrating all necessary components of Islandora and running them for us.
 ## The process includes download of large files, and may take some time.
 ## 
-## When docker has completed the job it will tell us that things are "done" 
+## When docker has completed the job it will tell us that things are "done" being created.
 ## example output:
 ## ```
 ## Creating isle-mysql-ld ... done
@@ -27,8 +28,11 @@ version: '2'
 ## Creating isle-apache-ld ... done
 ## Creating isle-proxy ... done
 ## ```
-## 4) The final step is to initalize the current version of Islandora!  In terminal please type:
+## 4) The final step is to initialize the current version of Islandora!  In terminal please type:
 ##    `docker exec -it isle-apache-ld bash /tmp/isle_drupal_build_tools/install_isle_ld_site.sh` 
+##
+## What you are watching:  An installation script will is running to fetch and install Drupal and the Islandora Modules!
+## This is achieved using Drupal's management tool called "Drush"
 ##
 ## 5) Visit http://localhost of if you installed it on a VM http://VM_IP and login with:
 ##      username: isle_localdomain_admin
@@ -36,6 +40,7 @@ version: '2'
 ##
 ## Stop editing here if you would like to try the Islandora ISLE default installation. You are not required to edit anything below.
 ## ## ##
+
 services:
   mysql:
     image: islandoracollabgroup/isle-mysql:latest
