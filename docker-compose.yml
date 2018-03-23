@@ -1,6 +1,6 @@
 version: '2'
 
-## ISLE Localdomain Docker-compose.  
+## ISLE Test Site (isle.localdomain) Docker-compose.yml
 ## 
 ## This is generic docker-compose that when will load a complete Islandora Stack ready to test.
 ## You do NOT need to edit anything here!
@@ -34,10 +34,18 @@ version: '2'
 ##
 ## What you are watching:  An installation script is running to fetch and install Drupal and the Islandora Modules!
 ##
-## 5) Visit http://localhost OR if you installed it on a VM http://VM_IP and login with:
+## 5) Visit http://isle.localdomain and login with:
 ##      username: isle_localdomain_admin
 ##      password: isle_localdomain_adminpw2018  
 ##
+## If isle.localdomain does _not_ resolve please see append /etc/hosts with a reference to isle.localdomain:
+## {insert link to relevant docs when they're up, and remove these instructions please}
+##   a) if you are on the computer running Docker enter: `echo '127.0.1.1 isle.localdomain' | sudo tee -a /etc/hosts` (only ever do this once)
+##   b) if you installed on a vm and do not want to work in the VM, but from your computer: 
+##        Retrieve the IP of the VM as seen from your computer and in terminal enter:
+##        `echo '<VM_IP> isle.localdomain' | sudo tee -a /etc/hosts`
+##    NB: Please remove any lines added when testing is complete. `sudo nano /etc/hosts`
+##  
 ## Stop editing here if you would like to try the Islandora ISLE default installation. You are not required to edit anything below.
 ## ## ##
 
