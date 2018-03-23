@@ -1,12 +1,53 @@
 version: '2'
 
-## ISLE Test Site: isle.localdomain ##
-## Run order: `docker-compose up -d
-## BUILD ISLE.LOCALDOMAIN SITE:
-## `docker exec -it isle-apache bash`
-## `cd /tmp/isle_drupal_build_tools`
-## `chmod 755 install_isle_ld_site.sh`
-## `./install_isle_ld_site.sh`
+## ISLE Test Site (isle.localdomain) Docker-compose.yml
+## 
+## This is generic docker-compose that when will load a complete Islandora Stack ready to test.
+## You do NOT need to edit anything here!
+##
+## Quick Start Instruction (Mac, *nix machines only: real or virtual)
+## You are not required to CLONE or downLoad this repo for testing ISLE. 
+## Please save the entire contents of this file into a docker-compose.yml on your computer.
+## 
+## Quick Start Steps:
+## 0) If your user is not already added to the "docker" group (to find out type `groups`) do so now:
+##    `echo sudo usermod -aG docker $USER` - you MUST log out and log back in, and check `groups` again. 
+## 1) Place this docker-compose.yml in an EMPTY directory.  Location does not matter, nor name of the folder.
+## 2) In terminal or console navigate to the directory that contains your docker-compose.yml.  
+## 3) Type:  `docker-compose up -d`
+##
+## What you're watching: Docker is orchestrating all necessary components of Islandora and running them for us.
+## The process includes download of large files, and may take some time.
+## 
+## When docker has completed the job it will tell us that things are "done" being created.
+## example output:
+## ```
+## Creating isle-mysql-ld ... done
+## Creating isle-solr-ld ... done
+## Creating isle-fedora-ld ... done
+## Creating isle-apache-ld ... done
+## Creating isle-proxy ... done
+## ```
+##
+## 4) The final step is to initialize the current version of Islandora!  In terminal please type:
+##    `docker exec -it isle-apache-ld bash /tmp/isle_drupal_build_tools/install_isle_ld_site.sh` 
+##
+## What you are watching:  An installation script is running to fetch and install Drupal and the Islandora Modules!
+##
+## 5) Visit http://isle.localdomain and login with:
+##      username: isle_localdomain_admin
+##      password: isle_localdomain_adminpw2018  
+##
+## If isle.localdomain does _not_ resolve please see append /etc/hosts with a reference to isle.localdomain:
+## {insert link to relevant docs when they're up, and remove these instructions please}
+##   a) if you are on the computer running Docker enter: `echo '127.0.1.1 isle.localdomain' | sudo tee -a /etc/hosts` (only ever do this once)
+##   b) if you installed on a vm and do not want to work in the VM, but from your computer: 
+##        Retrieve the IP of the VM as seen from your computer and in terminal enter:
+##        `echo '<VM_IP> isle.localdomain' | sudo tee -a /etc/hosts`
+##    NB: Please remove any lines added when testing is complete. `sudo nano /etc/hosts`
+##  
+## Stop editing here if you would like to try the Islandora ISLE default installation. You are not required to edit anything below.
+## ## ##
 
 services:
   mysql:
@@ -82,7 +123,6 @@ services:
       - fedora
       - solr
       - apache
-    command: [nginx-debug, '-g', 'daemon off;']
 
 
 # Defined networks
