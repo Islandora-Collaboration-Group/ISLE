@@ -28,13 +28,13 @@ version: '2'
 ## Creating isle-apache-ld ... done
 ## Creating isle-proxy ... done
 ## ```
+##
 ## 4) The final step is to initialize the current version of Islandora!  In terminal please type:
 ##    `docker exec -it isle-apache-ld bash /tmp/isle_drupal_build_tools/install_isle_ld_site.sh` 
 ##
-## What you are watching:  An installation script will is running to fetch and install Drupal and the Islandora Modules!
-## This is achieved using Drupal's management tool called "Drush"
+## What you are watching:  An installation script is running to fetch and install Drupal and the Islandora Modules!
 ##
-## 5) Visit http://localhost of if you installed it on a VM http://VM_IP and login with:
+## 5) Visit http://localhost OR if you installed it on a VM http://VM_IP and login with:
 ##      username: isle_localdomain_admin
 ##      password: isle_localdomain_adminpw2018  
 ##
