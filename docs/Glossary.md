@@ -4,11 +4,19 @@ In simple terms, ISLE is a set of resources that allow one to build a fully func
 
 **Glossary of Terms**
 
+### Systems
+
+* **Root User** - the user name or account that by default has access to all commands and files on a Linux or other Unix-like operating system. It is also referred to as the root account, root, root user and the superuser. [Learn more about root user](http://www.linfo.org/root.html)
+
+* **Sudo** - short for "super user do" and it allows the user to have root permissions when entered in front of a command. [Learn more about sudo](https://www.sudo.ws/intro.html)
+
+* **SSH** - is a cryptographic network protocol for operating network services securely over an unsecured network. The best known example application is for remote login to computer systems by users. [Learn more about SSH](https://en.wikipedia.org/wiki/Secure_Shell)
+
 ### Virtualization
 
 * **VM**: Virtual Machine - A virtual machine is a software computer that, similar to a physical computer, runs an operating system and applications comprised of specification and configuration files backed by the resources of a host (the physical computer).
 
-* **Virtualbox**: [VirtualBox](https://www.virtualbox.org/wiki/Downloads)is a general-purpose full virtualizer for x86 hardware, targeted at server, desktop and embedded use.
+* **Virtualbox**: [VirtualBox](https://www.virtualbox.org/wiki/Downloads) is a general-purpose full virtualizer for x86 hardware, targeted at server, desktop and embedded use.
 
 * **Vagrant**: [Vagrant](https://www.vagrantup.com/) provides easy to configure, reproducible, and portable work environments. Vagrant works on Mac, Linux, Windows, and more. Within the ISLE project there is a vagrant folder.
 
@@ -18,13 +26,13 @@ In simple terms, ISLE is a set of resources that allow one to build a fully func
 
 ### Docker
 
-* **Docker**: System virtualization software used to build ISLE - Docker is used to create virtual servers called containers based on pre-built images. A "recipe" file called docker-compose.yml orchestrates the setting up and networking of the containers.
+* **Docker**:  used to build ISLE - [Docker](https://www.docker.com/what-docker) is used to create containers (similar to virtual servers) based on pre-built images. A "recipe" file called docker-compose.yml orchestrates the setting up and networking of the containers.
 
-* **Containers**: virtual "servers" created by Docker - each major component of Islandora runs in its own container.
+* **Containers**: [Docker containers](https://www.docker.com/what-container) are lightweight, stand-alone, executable packages of a piece of software that includes everything needed to run it: code, runtime, system tools, system libraries, settings. Each major component of Islandora runs in its own container.
 
-* **Images**: source for the containers - these are built and updated by ISLE developers and stored on Dockerhub.
+* **Images**: [Docker images](https://docs.docker.com/engine/reference/commandline/images/) - source for the containers - these are built and updated by ISLE developers and stored on Dockerhub.
 
-* **Dockerhub**: website/repository that provides access to the latest images for the ISLE containers.
+* **Dockerhub**: [website / repository](https://hub.docker.com/website/repository) that provides access to the latest Docker images for the ISLE containers.
 
 * **ISLE on GitHub**: the ISLE repository on github.com contains documentation and configuration files necessary to build ISLE.
 
@@ -33,8 +41,8 @@ a server you connected to via ssh (REMOTE).
 
 * **Volume** a Docker controlled place to hold data on the local file system. Used to persist data across containers.
 
-* **Network** refers to a defined Docker network that is controlled by docker. ThIS has powerful implications in production.
-    * ISLE services: fedora, solr, apache, mysql, and proxy communicate using an internal private stack network. The service proxy also joins an insecure network that is accessible to the WAN (or for testing "WAN" likely means a smaller internal network). Why two networks? Swarms, scaling, replicating.
+* **Network** refers to a defined Docker network that is controlled by docker. This has powerful implications in production.
+    * ISLE services: `fedora`, `solr`, `apache`, `mysql`, and `proxy` communicate using an internal private stack network. The service proxy also joins an insecure network that is accessible to the WAN (or for testing "WAN" likely means a smaller internal network). Why two networks? Swarms, scaling, replicating.
 
 * **Variables go here...***
 

@@ -2,6 +2,8 @@
 
 This guide documents how an enduser can spin up and install the ISLE / Islandora environment using their own domain / URL.
 
+**Please note:** There is a [Glossary](glossary.md) with relevant terms to help guide installation.
+
 **Assumptions:**
 
 * Have a domain name that works - is set up with DNS etc...

@@ -4,6 +4,7 @@
 
 This Migration guide will help you migrate your existing production Islandora environment to utilize this ISLE framework for easily maintaining Islandora. This guide will walk you through how to identify and copy your institution's Islandora data and files (including your data volume, Drupal site or sites, and commonly customized xml and xslt files) to your ISLE framework.
 
+**Please note:** There is a [Glossary](glossary.md) with relevant terms to help guide installation.
 
 Prerequisites:
 

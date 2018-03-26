@@ -1,17 +1,21 @@
-### Host Local Setup Guide - Docker for Mac
+**MacOS** server version to use: `10.3.x+`
 
-This is a guide to setup and install all ISLE pre-requisites on a MacOS local laptop or workstation using Docker for Mac instead of Vagrant or a VM.
+This is a detailed operating system-specific guide to setup and install all ISLE pre-requisites on a Windows 10 local laptop or workstation using Docker for Mac.
 
-**Please note:** This guide is for using `Docker for Mac` software only on a MacOS.
+Called "the host" - this is the base computer upon which the entire ISLE stack is built.
+
+**Please note:** This guide is for using `Docker for Windows` software only on a MacOS 10.3.3 or higher system instead of Vagrant or a Virtual Machine (VM).
 
 ### Assumptions / Pre-Requisites
 
-* Enduser has a local laptop / workstation that conforms to the specifications outlined in the [ISLE MVP Host Specifications Guide](../mvpspecs.md)
+* Enduser has a local laptop / workstation that conforms to the specifications outlined in the [Host Server Specifications](01_installation_host_server/host_server_system_specifications.md)
+
+* Enduser **must** have administrator rights on the MacOS computer to proceed or the installation will fail.
 
 ### Install process overview
 
 * Install git
-* Install Docker for mac
+* Install Docker for Mac
 * Clone the ISLE project repository
 * Pull down the ISLE images from Dockerhub
 * Install the ISLE project and software dependencies using the Ubuntu (manual) or Ansible (scripted) guides
@@ -90,7 +94,8 @@ The built-in terminal for MacOs can be found in `~/Applications/Utilities/Termin
 
   * using the `Finder` application to navigate to this directory
 
-  * Or within the same terminal, enter `ls -lha`
+
+      * Or within the same terminal, enter `ls`  and verifying that `ISLE` appears in the list.
 
 ---
 
@@ -107,16 +112,8 @@ This process should may take 15 - 60+ mins depending on the speed of your Intern
 * `docker pull islandoracollabgroup/isle-solr:latest`
 
 
-### Step 5: Next steps
-Once this process has finished one chose to do one of the following:
+### Next steps
 
-* Continue next steps with the [Testsite Guide](testsite_guide.md) (isle.localdomain)
+* Return to the [Install Start Here section](../install_start_here.md) for additional instructions
 
-* Continue next steps with the [Newsite Guide](newsite_guide.md)
-
-* Continue next steps with the [Migration Guide](migration_guide.md)
-
-* Continue next steps with the [Developer Build Guide for Linux](dev_build_guide_linux.md)
-
-* Continue next steps with the [Developer Build Guide for MacOS](dev_build_guide_mac.md)
 ---
