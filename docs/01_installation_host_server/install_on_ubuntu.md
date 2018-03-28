@@ -12,6 +12,22 @@ The following setup will be the same if you are setting up an ISLE host server:
 
 In all these cases you'll be establishing a Ubuntu server with the following dependencies below.
 
+### Install process overview
+
+* Install server prerequisites
+* Install Docker
+* Create islandora user and group
+* Setup SSH access for islandora user on VM / server (Part 1)
+    * (optional) Create ssh keys on enduser's laptop / workstation
+* Setup SSH access for islandora user on VM / server (Part 2)
+    * (optional) Create ssh keys on enduser's laptop / workstation
+* Create Docker group
+* Add islandora user to wheel group
+* Install Docker-Compose
+    * (optional) Alternative install method for Docker-compose
+* Clone ISLE repository
+* Next steps
+
 #### Step 1: Install server prerequisites
 
 * Open a terminal on your local laptop or workstation and ssh to the CentOS server / VM:
@@ -121,7 +137,7 @@ ssh-keygen -t RSA -b 4096 -C "ISLE Islandora" -f /home/islandora/.ssh/
 
 ---
 
-##### Create ssh keys on enduser's laptop / workstation (optional)
+##### (optional) Create ssh keys on enduser's laptop / workstation
 
 Some endusers may or may not have created local SSH keys on their laptop or workstation prior to the next step. Please use the instructions below if this is the case.
 
@@ -169,7 +185,7 @@ Some endusers may or may not have created local SSH keys on their laptop or work
 
 ---
 
-##### Optional note for Vagrant and local VM users only
+##### (optional) Note for Vagrant and local VM users only
 
 **For local VM and Vagrant users only, not steps to follow in a production environment**
 
@@ -231,7 +247,7 @@ docker-compose version 1.20.1, build 1719ceb
 
 ---
 
-##### Alternative install method for Docker-compose (optional)
+##### (optional) Alternative install method for Docker-compose
 
 In case the commands in the steps above fail, please use this alternative install.
 
@@ -276,5 +292,6 @@ In case the commands in the steps above fail, please use this alternative instal
 
 * `cd /opt/ISLE`
 
-#### Next steps
-* Return to the [Install Start Here section](../install_start_here.md) to continue
+### Next steps
+
+* Return to the [Install Start Here section](../install_start_here.md) for additional instructions.

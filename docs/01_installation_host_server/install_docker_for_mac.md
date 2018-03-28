@@ -1,10 +1,10 @@
-**MacOS** server version to use: `10.3.x+`
+**MacOS** desktop version to use: `10.3.x+`
 
-This is a detailed operating system-specific guide to setup and install all ISLE pre-requisites on a Windows 10 local laptop or workstation using Docker for Mac.
+This is a detailed operating system-specific guide to setup and install all ISLE pre-requisites on a MacOS local laptop or workstation using Docker for Mac.
 
 Called "the host" - this is the base computer upon which the entire ISLE stack is built.
 
-**Please note:** This guide is for using `Docker for Windows` software only on a MacOS 10.3.3 or higher system instead of Vagrant or a Virtual Machine (VM).
+**Please note:** This guide is for using `Docker for Mac` software only on a MacOS system instead of Vagrant or a Virtual Machine (VM).
 
 ### Assumptions / Pre-Requisites
 
@@ -12,14 +12,15 @@ Called "the host" - this is the base computer upon which the entire ISLE stack i
 
 * Enduser **must** have administrator rights on the MacOS computer to proceed or the installation will fail.
 
+* This guide is not intended for production usage.
+
 ### Install process overview
 
 * Install git
 * Install Docker for Mac
 * Clone the ISLE project repository
 * Pull down the ISLE images from Dockerhub
-* Install the ISLE project and software dependencies using the Ubuntu (manual) or Ansible (scripted) guides
-* Install and run the ISLE project on the ISLE Host VM using the Testsite Guide
+* Next steps
 
 ### Step 1: Git Installation
 In order to get a copy (clone) of the current ISLE project, git will need to be installed. [Git](https://git-scm.com) is a software version control system for tracking changes in computer files and coordinating work on those files among multiple people.
@@ -114,6 +115,6 @@ This process should may take 15 - 60+ mins depending on the speed of your Intern
 
 ### Next steps
 
-* Return to the [Install Start Here section](../install_start_here.md) for additional instructions
+* Return to the [Install Start Here section](../install_start_here.md) for additional instructions.
 
 ---

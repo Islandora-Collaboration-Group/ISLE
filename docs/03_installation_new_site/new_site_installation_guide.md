@@ -10,7 +10,9 @@ This guide documents how an enduser can spin up and install the ISLE / Islandora
 
 * Have SSL Certificates for the domain
 
-* ISLE project has been cloned to BOTH your local laptop/workstation AND the host server - see [Setup Guide](../00Host_Server/Host_Server_Setup)
+* ISLE project has been cloned to BOTH your local laptop/workstation AND the ISLE host server
+
+* Comfortability with ISLE. Recommend first setting up the ISLE Test Site (isle.localdomain) via the [Install Start Here](install_start_here.md) guide. If you have already done this, please proceed.
 
 ## Overview
 
@@ -27,20 +29,24 @@ This guide documents how an enduser can spin up and install the ISLE / Islandora
 
 **ON your local laptop/workstation:**
 
-* On the repository of your choice (GitHub, GitLab, Bitbucket, etc.) create a PRIVATE remote git repo - see the specific code repository documentation online for setup instructions.
+* Using a git repository of your choice (GitHub, GitLab, Bitbucket, etc.) create a PRIVATE remote git repo - see the specific code repository documentation online for setup instructions.
 
-* Open a terminal - navigate to /opt/ISLE or where you put the ISLE directory on your local workstation.
+* Open a terminal - navigate to `/opt/ISLE/config` (_or where you put the ISLE directory on your local workstation._)
 
-* Create a directory named yourdomainconfig (where "yourdomain" is your server domain name)
+* Create a new directory with a name of your choice
 
-example:  `digital-collectionsconfig`
+   * Example: where "digital-collections.yourdomain.com" is your server domain name e.g.:  `config/digital-collections.example.edu`
 
-* Locate the directory called `config` and copy all the contents to the newly created directory
+   * Please do not use this literal value.
 
-* `cd` into the newly copied and renamed yourdomainconfig directory and type:
- `git init` to initate this directory as a code repository.
+* Locate the directory within the `/opt/ISLE/config/` directory called `new-site-sample.institution` and copy all of its contents into your newly created directory.
 
-* `git remote add NameOfYourRepository URLofYourRepository` to connect your local repository to the remote you set up in the above steps. [**NOTE** replace "NameOfYourRepository" and "URLofYourRepository" with the name of your repository and its URL]
+* `cd` into the newly copied and renamed `digital-collections.example.edu` directory and type:
+ `git init` to imitate this directory as a code repository.
+
+* `git remote add NameOfYourRepository URLofYourRepository` to connect your local repository to the remote you set up in the above steps.
+
+    * [**NOTE** replace "NameOfYourRepository" and "URLofYourRepository" with the name of your git repository and its URL]
 
 * You are now ready to perform the customization edits in this directory (you can use a text editor of choice now don't have to stay in terminal - just locate the folder in the finder and open file in text editor)
 
@@ -87,6 +93,8 @@ b. to involve your **domain name** (digital-collections.example.edu)
 * edit the file: `settings.php`   lines 251-253 add your database name, database user, and database password    
 
 * edit the file: `settings.php`   line 288 to include a 45+ alpha-numeric characters drupal hash between the quotes after this text: `$drupal_hash_salt = '';`
+
+   * You'll need to create this value, recommend using a password generator tool. Ensure only alpha-numeric characters are used, no symbols etc.
 
 * review the file: `settings.php`  near line 311 to ensure `# $base_url = ` is commented out
 

@@ -1,5 +1,3 @@
-
-
 ##Building a new site using ISLE - sample user story
 
 Sam wants to spin up Islandora on an Ubuntu Linux server she has in the institutional data center. She accesses the server using ssh and determines that it meets the [minimum system requirements](System_Requirements.md) (basically - has enough processor, memory, and storage space).

@@ -20,6 +20,8 @@ In simple terms, ISLE is a set of resources that allow one to build a fully func
 
 * **Vagrant**: [Vagrant](https://www.vagrantup.com/) provides easy to configure, reproducible, and portable work environments. Vagrant works on Mac, Linux, Windows, and more. Within the ISLE project there is a vagrant folder.
 
+* **Vagrantfile**: [Vagrantfile](https://www.vagrantup.com/docs/vagrantfile/) used to describe the type of virtual machine required for the ISLE project, and how to configure and provision these virtual  machines. Vagrantfiles are called Vagrantfiles because the actual literal filename for the file is Vagrantfile. Vagrant is meant to run with one Vagrantfile per project which allows endusers to check out the code, run vagrant up, and be on their way. Vagrantfiles are used primarily for use on local workstations and laptops running a Ubuntu or CentOS ISLE Host server.
+
 * **Docker for Mac**: [Docker for Mac](https://www.docker.com/docker-mac) is an easy-to-install desktop app for building, debugging and testing Dockerized apps on a Mac. Docker for Mac is a complete development environment deeply integrated with the MacOS Hypervisor framework, networking and filesystem
 
 ---
