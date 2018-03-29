@@ -1,9 +1,20 @@
 version: '2'
 
 ## DEVELOPERS DOCKER COMPOSE NOT FOR THE END-USER ##
+##
 ## Build order: `docker-compose build` (does not matter)
+## docker-compose build mysql
+## docker-compose build proxy
+## docker-compose build solr
+## docker-compose build fedora
+## docker-compose build apache
+##
 ## Run order: `docker-compose up -d proxy` (if you want to watch proxy, remove -d this remains attached to proxy for testing - you will see ALL logs as stdin/stderr.)
-## BUILD ISLE.LOCALDOMAIN SITE: `docker exec -it isle-apache bash` `cd temp` `./make_site.sh` `./install_site.sh`
+##
+## To Test Images using the built-in ISLE.LOCALDOMAIN SITE: `docker exec -it isle-apache bash` `cd /tmp` `./install_isle_ld_site.sh`
+## Please note: ^ this data will not be pushed or included in Dockerhub. Creating a Drupal site falls to the enduser or developer and is not part of the Docker image build process.
+##
+## DEVELOPERS DOCKER COMPOSE NOT FOR THE END-USER ##
 
 services:
   mysql:
