@@ -10,6 +10,8 @@ In simple terms, ISLE is a set of resources that allow one to build a fully func
 
 * **Sudo** - short for "super user do" and it allows the user to have root permissions when entered in front of a command. [Learn more about sudo](https://www.sudo.ws/intro.html)
 
+* **SSL certificate** - SSL Certificates are files that digitally bind a cryptographic key to an organization’s domain. When installed on a web server, it can display a green padlock and `https` appears in the browser path which allow secure connections from a web server to a user's browser. Typically, SSL certifcates are used to secure credit card transactions, data transfer and logins, and more. [Learn more about SSL Certificates](https://www.sslshopper.com/why-ssl-the-purpose-of-using-ssl-certificates.html)
+
 * **SSH** - is a cryptographic network protocol for operating network services securely over an unsecured network. The best known example application is for remote login to computer systems by users. [Learn more about SSH](https://en.wikipedia.org/wiki/Secure_Shell)
 
 ### Virtualization

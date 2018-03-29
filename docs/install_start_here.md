@@ -24,7 +24,7 @@ Please follow the columns below from left to right, to select:
 
 1. `Desktop OS` is your laptop or desktop running a particular operating system `(OS)`
 
-2. `ISLE Host Server Install instructions ` is what you'll follow to host (_run_) ISLE. This may involve additional steps for installing a virtualized OS (CentOS or Ubuntu).
+2. `ISLE Host Server Install instructions` is what you'll follow to host (_run_) ISLE. This may involve additional steps for installing a virtualized OS (CentOS or Ubuntu).
 
 3. `Install ISLE Host Server Dependencies` is the software you may need to run ISLE on a `Host Platform` whether you use CentOS or Ubuntu as the ISLE Host Server.
 

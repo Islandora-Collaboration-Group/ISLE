@@ -6,11 +6,11 @@ This test ISLE / Islandora environment (`isle.localdomain`) includes an un-theme
 
 While this checklist will attempt to point out most of the usage challenges or pitfalls, ISLE assumes no responsibility or liability in this matter should an enduser have customizations beyond what this guide outlines.
 
-**Please note:** There is a [Glossary](glossary.md) with relevant terms to help guide installation.
+**Please note:** There is a [Glossary](../../glossary) with relevant terms to help guide installation.
 
 ### Assumptions / Prerequisites
 
-* Laptop / workstation that conforms to the specifications outlined in the [ISLE Host Server OS requirements](01_installation_host_server/host_server_system_specifications.md)
+* Laptop / workstation that conforms to the specifications outlined in the [Host Server Specifications](../../01_installation_host_server/host_server_system_specifications/)
 
 * This test site guide is designed for a local laptop / workstation that has already followed the appropriate setup and configuration instructions in the `Test ISLE` section of the [Install Start Here](../install_start_here.md) guide.
 
@@ -194,13 +194,13 @@ _For Windows Users only_
    	* Username: `isle_localdomain_admin`
   	* Password: `isle_localdomain_adminpw2018`
 
-* There is additional information for users and passwords that can be found on the [Test Site Resources](02_installation_test/ild_resources.md) page.
+* There is additional information for users and passwords that can be found on the [Test Site Resources](ild_resources.md) page.
 
 ### Sample objects for ingest
 
 Courteous of the [Islandora Collaboration Group](https://github.com/Islandora-Collaboration-Group/icg_information) there is a sample set of objects and corresponding metadata that can be used for ingest.
 
-More information can be found on the [Test Site Resources](02_installation_test/ild_resources.md) page.
+More information can be found on the [Test Site Resources](ild_resources.md) page.
 
 ### Post Ingest Search Tip
 After ingesting content, you will need to add an Islandora Simple Search block to the Drupal structure.  The default search box that appears on install will only search Drupal content, not Islandora content.

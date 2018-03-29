@@ -6,7 +6,7 @@ This is a detailed operating system-specific guide to setup and install all ISLE
 
 ### Assumptions / Pre-Requisites
 
-* Enduser has a local laptop / workstation that conforms to the specifications outlined in the [Host Server Specifications](01_installation_host_server/host_server_system_specifications.md)
+* Enduser has a local laptop / workstation that conforms to the specifications outlined in the [Host Server Specifications](host_server_system_specifications.md)
 
 * Enduser **must** have administrator rights on the MacOS computer to proceed or the installation will fail.
 

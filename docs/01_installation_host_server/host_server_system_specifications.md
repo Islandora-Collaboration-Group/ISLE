@@ -65,7 +65,7 @@ Please ensure that both the host server's `/opt` and `/var` directories are on d
 
 Dear IT Dept,
 
-Our digital collections team will be testing a Docker implementation of the Islandora digitial repository system called [ISLE](https://islandora-collaboration-group.github.io/ISLE/).
+Our digital collections team will be testing a Docker implementation of the Islandora digital repository system called [ISLE](https://islandora-collaboration-group.github.io/ISLE/).
 
 We require access to a server meeting the following specifications:
 
@@ -75,7 +75,9 @@ We require access to a server meeting the following specifications:
  * 30 - 50GB for the Server OS & overhead
  * 16 - 32 GB of RAM
 
-Our team will either need root access, or a user called "islandora" that has sudo privileges. We will need the following software which we can install following the instructions at [this link](/01_1_testsite_guide.md)
+Our team will either need root access, or a user called "islandora" that has sudo privileges.
+
+We will need the following software which we can install following the instructions at [this link](host_server_system_specifications.md)
 
  * Git, Docker, Docker-Compose, openssl, git, htop, ntp, curl
 

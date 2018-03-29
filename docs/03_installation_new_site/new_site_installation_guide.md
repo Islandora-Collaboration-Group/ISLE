@@ -1,25 +1,40 @@
 # Build a New ISLE / Islandora Environment
 
-This guide documents how an enduser can spin up and install the ISLE / Islandora environment using their own domain / URL.
+_Expectations:  It takes an minimum of **4 - 6 hours or more** to read this entire document and perform the installation as prescribed._
 
-**Please note:** There is a [Glossary](glossary.md) with relevant terms to help guide installation.
+This guide documents how an enduser can spin up and install the ISLE / Islandora environment tailored to using their own domain / URL.
 
-**Assumptions:**
+This new ISLE / Islandora environment can include the option to create an un-themed Drupal website and empty Fedora repository for endusers to develop code, perform ingests, edit metadata, update fields in SOLR indexing all essential in ultimately creating a new ISLE production site.
 
-* Have a domain name that works - is set up with DNS etc...
+While this checklist will attempt to point out most of the usage challenges or pitfalls, ISLE assumes no responsibility or liability in this matter should an enduser have customizations beyond what this guide outlines.
 
-* Have SSL Certificates for the domain
+**Please note:** There is a [Glossary](../../glossary) with relevant terms to help guide installation.
+
+### Assumptions / Prerequisites
+
+* Comfortability with ISLE. Recommend first setting up the ISLE Test Site (isle.localdomain) via the [Install Start Here](../../install_start_here) guide. If you have already done this, please proceed.
+
+* Host Server that conforms to the specifications outlined in the [Host Server Specifications](../../01_installation_host_server/host_server_system_specifications/)
+
+* This new site guide is designed for a Host server that has already followed the appropriate setup and configuration instructions in the `Create a new ISLE site` section of the [Install Start Here](../install_start_here.md) guide.
+
+* Instructions below also assume a MacOS or Linux laptop or workstation to be used in conjunction with the ISLE Host Server for deploying configs, code, files etc. Windows users may have to adjust / swap out various tools as needed.
+
+* These directions also depend on the type of local computer used to connect via browser to Islandora.
+
+* Have an existing domain name that works - is set up with DNS etc...
+
+* Have SSL Certificates for the domain. (_Please work with the appropriate internal IT resource to provision these files for your domain_)
 
 * ISLE project has been cloned to BOTH your local laptop/workstation AND the ISLE host server
 
-* Comfortability with ISLE. Recommend first setting up the ISLE Test Site (isle.localdomain) via the [Install Start Here](install_start_here.md) guide. If you have already done this, please proceed.
 
 ## Overview
 
 * Setup a Private Code Repository
       * Most of the work in this guide involves careful editing of the various configuration and settings files that customize the pieces of Islandora (database, repository, web-server, etc...).
       * Doing this work in a code repository makes it easier to correct errors and to repeat the process for additional servers without needing to replicate all the work.
-      * Since the edits will include things like passwords, it's important to make this a private repository.
+      * Since the edits could include things like passwords, it's important to make this a private repository.
 
 * Customizing for your Environment
       * Many of the steps below describe adding the domain name or other specific bits of information into files or appending those bits to file names.
@@ -39,7 +54,7 @@ This guide documents how an enduser can spin up and install the ISLE / Islandora
 
    * Please do not use this literal value.
 
-* Locate the directory within the `/opt/ISLE/config/` directory called `new-site-sample.institution` and copy all of its contents into your newly created directory.
+* Locate the directory within the `/opt/ISLE/config/` directory called `isle-newsite-sample` and copy all of its contents into your newly created directory.
 
 * `cd` into the newly copied and renamed `digital-collections.example.edu` directory and type:
  `git init` to imitate this directory as a code repository.
@@ -60,32 +75,44 @@ This guide documents how an enduser can spin up and install the ISLE / Islandora
 
       * For example if you are building a dev server instance:
 
-  `container_name: isle-solr`
+          `container_name: isle-solr-newsite`
 
-  changes to:
+          changes to:
 
-  `container_name: isle-solr-dev`
+          `container_name: isle-solr-dev`
 
-and so on...
+          and so on...
 
----------
-Now proceed to edits within the child directories, make appropriate edits to config files:
+**Please note:** Much of the file is already with comments guiding the enduser to key areas or files to edit or modify accordingly.
+
+---
+
+## Config directories
+
+Now proceed to edits within the child directories, make edits to config files:
 
 a. to reflect **environment** (prod, stage, dev, etc...)
 
 b. to involve your **domain name** (digital-collections.example.edu)
 
-----------
+----
+
 ### Apache directory
 
 * Copy your SSL certificates for Apache into `apache/ssl/certs`
 
-* Within the `sites-available` directory, rename the files isle_localdomain_ssl.conf and isle_localdomain.conf to your domain names  example:
+* Within the `sites-enabled` directory, rename the files newsite-sample-ssl.conf and newsite-sample.conf to your domain names example:
 
     `digital-collections.example.edu_ssl.conf`
     `digital-collections.example.edu.conf`
 
-* edit the  `yourdomain_ssl.conf` file change lines 12 and 13 to point to the location of your certs - example:
+* edit the  `yourdomain_ssl.conf` file and change lines 4 and 5 to point to the location of your apache logs - example:
+
+    `ErrorLog /var/log/apache2/digital-collections.example.edu.ssl.error.log`
+    `CustomLog /var/log/apache2/digital-collections.example.edu.ssl.access.log combined`
+
+
+* edit the  `yourdomain_ssl.conf` file and change lines 12 and 13 to point to the location of your certs - example:
 
         `SSLCertificateFile    /certs/ssl-cert-example.pem`
         `SSLCertificateKeyFile /certs/ssl-cert-example.key`
@@ -109,7 +136,7 @@ Change the following in this line to the appropriate names and passwords for you
     account-mail
     site-name
 
-----------
+----
 ### Fedora directory
 
 * Within the fedora/fedora directories, **change the passwords** in the following files:
@@ -138,7 +165,7 @@ Change the following in this line to the appropriate names and passwords for you
 
 `fgsrepository.fedoraPass        = ild_fed_admin_2018`
 
----------
+---
 ### Tomcat directory
 
 * Within the **tomcat** sub directories:
@@ -155,7 +182,7 @@ Change the following in this line to the appropriate names and passwords for you
 
           </tomcat-users>
 
-----------
+----
 
 ### Repository policies
 
@@ -192,7 +219,7 @@ Edit the contents of the repository-policies directory as necessary IF YOU NEED 
 
     * append your environment type (prod, dev, stage, etc.) to the following lines proceeded by a hyphen i.e. `-dev`
 
-----------
+----
 ### SSL-certs directory
 Copy your SSL certs into the ssl-certs dir
 DO NOT OVERWRITE OR DELETE the dhparam.pem file that's in There
@@ -309,4 +336,4 @@ give this a few minutes and check the site - should be up now!
 
 
 
---------------
+--------
