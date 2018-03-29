@@ -248,9 +248,9 @@
 
 $databases['default']['default'] = array(
   'driver' => 'mysql',
-  'database' => 'enduser_institution_db', # enduser edit here
-  'username' => 'enduser_institution_user',   # enduser edit here
-  'password' => 'enduser_institution_pw',  # enduser edit here
+  'database' => 'newsite_sample_db', # enduser edit here
+  'username' => 'newsite_sample_user',   # enduser edit here
+  'password' => 'newsite_sample_password',  # enduser edit here
   'host' => 'mysql',
   'prefix' => '',
 );
@@ -309,7 +309,7 @@ $drupal_hash_salt = ''; # enduser edit here
  */
 
  # enduser leave this commented out
- # $base_url = 'https://enduser_institution.com';  // NO trailing slash!
+ # $base_url = '';  // NO trailing slash!
 
 /**
  * PHP settings:
