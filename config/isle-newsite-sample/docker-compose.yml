@@ -1,0 +1,118 @@
+version: '2'
+#labels:
+#  org.label-schema.version: "isle-newsite Sample Site"
+#  org.label-schema.description: "isle-newsite is the ISLE images using newsite-sample configs to help endusers get started creating a new site."
+#  org.label-schema.license: "Apache-2.0"
+#  org.label-schema.vcs-url: "To be determined"
+#  org.label-schema.vendor: "EDIT - ISLE enduser Institution information here" # edit here and remove comment
+#  org.label-schema.schema-version: "1.0"
+
+services:
+  mysql:
+    image: islandoracollabgroup/isle-mysql:latest
+    container_name: isle-mysql-newsite # rename container to indicate type e.g. prod, stage, dev or version here and remove comment
+    hostname: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD= # edit here and remove comment
+    networks:
+      - isle-internal
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/initscripts:/docker-entrypoint-initdb.d
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+      - ./isle_production_data_storage/mysql:/var/lib/mysql # edit here to change isle_production_data_storage to your data storage path on the ISLE host server and remove comment
+      - ./isle_production_data_storage/mysql/log:/var/log/mysql # edit here to change isle_production_data_storage to your data storage path on the ISLE host server and remove comment
+
+  fedora:
+    image: islandoracollabgroup/isle-fedora:latest
+    container_name: isle-fedora-newsite # rename container to indicate type e.g. prod, stage, dev or version here and remove comment
+    networks:
+      - isle-internal
+    environment:
+      - "JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom -Djava.awt.headless=true -Xmx1024m -XX:MaxPermSize=256m -XX:+UseConcMarkSweepGC -Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true -Dkakadu.home=/opt/adore-djatoka-1.1/bin/Linux-x86-64 -Djava.library.path=/opt/adore-djatoka-1.1/lib/Linux-x86-64 -DLD_LIBRARY_PATH=/opt/adore-djatoka-1.1/lib/Linux-x86-64"
+    ports:
+      - "8080:8080"
+    tty: true
+    depends_on:
+      - mysql
+      - solr
+    volumes:
+      - ./fedora/fedora/fedora.fcfg:/usr/local/fedora/server/config/fedora.fcfg # edit lines: 562 to change fedora_admin db username (if necessary) & 598 (necessary) for fedora_admin db password
+      - ./fedora/fedora/repository-policies/default:/usr/local/fedora/data/fedora-xacml-policies/repository-policies/default # may need to add Docker Host Server IP(s) to default/deny-apim-if-not-localhost.xml
+      - ./fedora/fedora/repository-policies/islandora:/usr/local/fedora/data/fedora-xacml-policies/repository-policies/islandora
+      - ./fedora/fedora/fedora-users.xml:/usr/local/fedora/server/config/fedora-users.xml # edit to add appropriate users and passwords
+      - ./fedora/fedora/filter-drupal.xml:/usr/local/fedora/server/config/filter-drupal.xml # edit to add appropriate Drupal site(s) along with mysql user(s) and password(s)
+      - ./fedora/gsearch/fedoragsearch.properties:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/fedoragsearch.properties # edit line 7 to add fgsAdmin password
+      - ./fedora/gsearch/fgsconfig-basic-configForIslandora.properties:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/fgsconfig-basic-configForIslandora.properties # edit lines: 26 to add fgsAdmin password, 67 to add fedoraAdmin password
+      - ./fedora/gsearch/fgsconfigObjects.properties:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/fgsconfigObjects.properties # edit line 15 to add fedoraAdmin password
+      - ./fedora/gsearch/repository.properties:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/repository/FgsRepos/repository.properties # edit line 7 to add fedoraAdmin password
+      - ./fedora/tomcat/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml # edit lines: 45 & 48 to add appropriate passwords
+      - ./isle_production_data_storage/fedora/data:/usr/local/fedora/data
+      - ./isle_production_data_storage/fedora/log/fedora:/usr/local/fedora/server/logs
+      - ./isle_production_data_storage/fedora/log/tomcat:/usr/local/tomcat/logs
+      - ./isle_production_data_storage/fedora/log/apache:/var/log/apache2
+
+  solr:
+    image: islandoracollabgroup/isle-solr:latest
+    container_name: isle-solr-newsite # rename container to indicate type e.g. prod, stage, dev or version here and remove comment
+    networks:
+      - isle-internal
+    ports:
+      - "8091:8080"
+    tty: true
+    depends_on:
+      - mysql
+    volumes:
+      - ./solr/tomcat/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml # edit lines: 45 & 48 to add appropriate passwords
+      - ./solr/solr/solr.xml:/usr/local/tomcat/conf/Catalina/localhost/solr.xml
+      - ./solr/solr/solrconfig.xml:/usr/local/solr/collection1/conf/solrconfig.xml # edit all appropriate lines for any customizations or merges from production settings.
+      - ./solr/solr/schema.xml:/usr/local/solr/collection1/conf/schema.xml # edit all appropriate lines for any customizations or merges from production settings.
+      - ./solr/solr/stopwords.txt:/usr/local/solr/collection1/conf/stopwords.txt # edit all appropriate lines for any customizations or merges from production settings.
+      - ./isle_production_data_storage/solr:/usr/local/solr/collection1/data
+      - ./isle_production_data_storage/solr/log/tomcat:/usr/local/tomcat/logs
+
+
+  apache:
+    image: islandoracollabgroup/isle-apache:latest
+    container_name: isle-apache-newsite # rename container to indicate type e.g. prod, stage, dev or version here and remove comment
+    networks:
+      isle-internal:
+          aliases:
+            - newsite-sample.com # change this to the correct ISLE newsite domain name
+    tty: true
+    depends_on:
+      - mysql
+      - fedora
+      - solr
+    volumes:
+      - ./apache/sites-enabled:/etc/apache2/sites-enabled # rename .conf files to reflect your domain name
+      - ./apache/certs:/certs:ro
+      - ./apache/settings.php:/var/www/html/sites/default/settings.php # make edits as necessary
+      - ./isle_production_data_storage/apache/html:/var/www/html
+      - ./isle_production_data_storage/apache/log:/var/log/apache2
+
+  proxy:
+    image: islandoracollabgroup/isle-proxy:latest
+    container_name: isle-proxy # DO NOT RENAME this container only
+    networks:
+      isle-internal:
+      isle-external:
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - mysql
+      - fedora
+      - solr
+      - apache
+    volumes:
+      - ./proxy/config/sites-enabled:/etc/nginx/sites-enabled # edit lines 6 & 15 to change to correct domain name, lines 18 & 19 change to correct ssl cert names. Rename .conf file to domain name sufffix last e.g. com.sample-newsite.conf
+      - ./proxy/config/ssl-certs:/certs:ro
+      - ./proxy/config/upstreams.d:/etc/nginx/upstreams.d # change .conf file name to appropriate domain name e.g. yourdomain-upstreams.conf
+
+
+# Defined networks
+networks:
+  isle-internal:
+  isle-external:
