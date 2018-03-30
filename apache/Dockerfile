@@ -196,6 +196,8 @@ RUN cd /etc/ \
     php5.6-soap \
     php5.6-xsl \
     php5.6-zip \
+    php5.6-bcmath \
+    php5.6-intl \
     libpng-dev \
     libjpeg-dev \
     libtiff-dev \
