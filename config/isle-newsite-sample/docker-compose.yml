@@ -87,14 +87,14 @@ services:
       - solr
     volumes:
       - ./apache/sites-enabled:/etc/apache2/sites-enabled # rename .conf files to reflect your domain name
-      - ./apache/certs:/certs:ro
+      - ./apache/ssl-certs:/certs:ro
       - ./apache/settings.php:/var/www/html/sites/default/settings.php # make edits as necessary
       - ./isle_production_data_storage/apache/html:/var/www/html
       - ./isle_production_data_storage/apache/log:/var/log/apache2
 
   proxy:
     image: islandoracollabgroup/isle-proxy:latest
-    container_name: isle-proxy # DO NOT RENAME this container only
+    container_name: isle-proxy # DO NOT RENAME this container only if you are running multiple environments that need to be siloed further.
     networks:
       isle-internal:
       isle-external:
