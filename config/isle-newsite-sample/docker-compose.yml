@@ -65,7 +65,6 @@ services:
       - mysql
     volumes:
       - ./solr/tomcat/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml # edit lines: 45 & 48 to add appropriate passwords
-      - ./solr/solr/solr.xml:/usr/local/tomcat/conf/Catalina/localhost/solr.xml
       - ./solr/solr/solrconfig.xml:/usr/local/solr/collection1/conf/solrconfig.xml # edit all appropriate lines for any customizations or merges from production settings.
       - ./solr/solr/schema.xml:/usr/local/solr/collection1/conf/schema.xml # edit all appropriate lines for any customizations or merges from production settings.
       - ./solr/solr/stopwords.txt:/usr/local/solr/collection1/conf/stopwords.txt # edit all appropriate lines for any customizations or merges from production settings.
@@ -116,3 +115,5 @@ services:
 networks:
   isle-internal:
   isle-external:
+#    external: true            # edit if running a new multi environment
+#    name: isle_isle-internal  # edit if running a new multi environment
