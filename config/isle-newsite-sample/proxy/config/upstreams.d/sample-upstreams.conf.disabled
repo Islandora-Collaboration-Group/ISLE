@@ -7,14 +7,10 @@
 # and of course nb:
 # This also might defeat the purpose of letting DOCKER do the balancing, but I hope that this can serve as a start.
 
-upstream fedora-internal-devel {
+upstream fedora-internal {
     server fedora:8080 fail_timeout=0;
 }
 
-upstream solr-internal-devel {
-    server solr:8080 fail_timeout=0;
-}
-
-upstream fedora-internal-devel {
+upstream apache-internal {
     server apache:443 fail_timeout=0;
 }
