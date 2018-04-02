@@ -47,11 +47,17 @@ Please follow the columns below from left to right, to select:
 
 ---
 
-## Create a new ISLE site
+## Create a new ISLE site or site(s)
 
-The recommended environments for setting up a new ISLE site are with the following type of servers. (_not desktop or workstation_)
+The recommended environments for setting up a new ISLE site using a single or multiple ISLE environment setup (e.g. an ISLE host server running production, staging or development versions of one site) are with the following type of servers. (_not desktop or workstation_)
 
 Typically new sites are used in production, staging or shared development environments.
+
+* If you are only going to setup one ISLE site within a single environment (e.g. production only) or run all of your ISLE environments on separate ISLE host servers or VMs please using the: [New ISLE Site - Single Env](03_installation_new_site/new_site_installation_guide_single.md)
+
+* If you are going to setup multiple ISLE sites using multiple environments (e.g. dev, stage, and prod etc.) on one ISLE Host server or VM please using the: [New ISLE Sites - Multi Envs](03_installation_new_site/new_site_installation_guide_multi.md)
+    * Please note: setting up multiple ISLE sites and environments on one ISLE host server will require adequate resources.
+    * A good rule of thumb is to take the specifications outlined in the [ISLE Host Server OS requirements](01_installation_host_server/host_server_system_specifications.md) and divide by three as an initial concept. Bear in mind, that any `dev` environment doesn't need as much resource but any potential `stage` and `prod` environments should mirror each other in resource usage and setup.
 
 Please review the [ISLE Host Server OS requirements](01_installation_host_server/host_server_system_specifications.md) prior to any installation.
 
@@ -70,16 +76,16 @@ Please follow the columns below from left to right, to select:
 
 * The operating systems displayed below are the minimum supported. Do not go lower than what is recommended.
 
-| Hosting Platform | Install ISLE Host Server Dependencies                         | ISLE install instructions                                                |
+| Hosting Platform | Install ISLE Host Server Dependencies                         | ISLE new site(s) install instructions                                    |
 | -------------    | -------------                                                 | -------------                                                            |
-| Amazon (AWS)     | [On CentOS](01_installation_host_server/install_on_centos.md) | [New ISLE Site](03_installation_new_site/new_site_installation_guide.md) |
-|                  | [On Ubuntu](01_installation_host_server/install_on_ubuntu.md) |                                                                          |
+| Amazon (AWS)     | [On CentOS](01_installation_host_server/install_on_centos.md) | [New ISLE Site - Single Env](03_installation_new_site/new_site_installation_guide_single.md) |
+|                  | [On Ubuntu](01_installation_host_server/install_on_ubuntu.md) | [New ISLE Sites - Multi Env](03_installation_new_site/new_site_installation_guide_multi.md)  |
 |                  |                                                               |                                                                          |
-| Google (GCP)     | [On CentOS](01_installation_host_server/install_on_centos.md) | [New ISLE Site](03_installation_new_site/new_site_installation_guide.md) |
-|                  | [On Ubuntu](01_installation_host_server/install_on_ubuntu.md) |                                                                          |
+| Google (GCP)     | [On CentOS](01_installation_host_server/install_on_centos.md) | [New ISLE Site - Single Env](03_installation_new_site/new_site_installation_guide_single.md) |
+|                  | [On Ubuntu](01_installation_host_server/install_on_ubuntu.md) | [New ISLE Sites - Multi Env](03_installation_new_site/new_site_installation_guide_multi.md)  |
 |                  |                                                               |                                                                          |
-| Server / VM      | [On CentOS](01_installation_host_server/install_on_centos.md) | [New ISLE Site](03_installation_new_site/new_site_installation_guide.md) |
-|                  | [On Ubuntu](01_installation_host_server/install_on_ubuntu.md) |                                                                          |
+| Server / VM      | [On CentOS](01_installation_host_server/install_on_centos.md) | [New ISLE Site - Single Env](03_installation_new_site/new_site_installation_guide_single.md) |
+|                  | [On Ubuntu](01_installation_host_server/install_on_ubuntu.md) | [New ISLE Sites - Multi Env](03_installation_new_site/new_site_installation_guide_multi.md)  |
 
 ---
 

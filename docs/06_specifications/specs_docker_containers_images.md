@@ -1,13 +1,13 @@
-| Container    | Software / Service | Version       | Logs Path on Container |
-------------   | ------------       | ------------- | -------------          |
-| isle-apache  | Docker Tag         | latest, 2.4   |                        |
-|              | Apache             | 2.4           | /var/log/apache2/      |
-|              | Djatoka            | 1.1           |                        |
-|              | Drupal             | 7.5x+         |                        |
-|              | Islandora          | 7.x-1.1x      |                        |
-|              | OpenJDK            | JDK 8.x       |                        |
-|              | Oracle Java        | JDK 8.x       |                        |
-|              | PHP                | 5.6           |                        |
+| ISLE Image                          | Container    | Software / Service | Version       | Logs Path on Container |
+| ------------                        | ------------ | ------------       | ------------- | -------------          |
+| [islandoracollabgroup/isle-apache](https://hub.docker.com/r/islandoracollabgroup/isle-apache/) | isle-apache  | Docker Tag         | [latest, 2.4](https://github.com/Islandora-Collaboration-Group/ISLE/blob/master/apache/Dockerfile)   |                        |
+| uses the official Docker base image |              | Apache             | 2.4           | /var/log/apache2/      |
+| [ubuntu:14.04](https://hub.docker.com/_/ubuntu/)|              | Djatoka            | 1.1           |                        |
+|                                     |              | Drupal             | 7.5x+         |                        |
+|                                     |              | Islandora          | 7.x-1.1x      |                        |
+|                                     |              | OpenJDK            | JDK 8.x       |                        |
+|                                     |              | Oracle Java        | JDK 8.x       |                        |
+|                                     |              | PHP                | 5.6           |                        |
 
 
 | Container    | Software / Service           | Version            | Logs Path on Container                                          |
