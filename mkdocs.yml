@@ -4,10 +4,8 @@ site_description: Documentation for Islandora Enterprise (ISLE)
 site_dir: site
 docs_dir: docs
 
-#dev_addr: '127.0.0.1:8009'#
-
 theme:
-  name: 'material' #mkdocs-material #readthedocs #material
+  name: 'material'
 
 extra:
   palette:
@@ -20,19 +18,22 @@ pages:
 - Home: index.md
 - About: about.md
 - Glossary of Terms and Variables: glossary.md
+- Installation Start Here: install_start_here.md
 - 'Installation':
-  - 'Host Server Overview': '01_installation_host_server/host_server_overview.md'
-  - 'System Requirements': '01_installation_host_server/host_server_system_requirements.md'
-  - 'CentOS': '01_installation_host_server/host_server_centos.md'
-  - 'Ubuntu': '01_installation_host_server/host_server_ubuntu.md'
-  - 'MacOS': '01_installation_host_server/host_server_macos.md'
-- 'Installation - Development (isle.localdomain)':
-  - 'Example User Story': '02_installation_development/ild_example_user_story.md'
-  - 'Installation Guide': '02_installation_development/ild_installation_guide.md'
-  - 'Resources': '02_installation_development/ild_resources.md'
+  - 'Host Server Specifications': '01_installation_host_server/host_server_system_specifications.md'
+  - 'Install ISLE Host Server Dependencies on CentOS': '01_installation_host_server/install_on_centos.md'
+  - 'Install ISLE Host Server Dependencies on Ubuntu': '01_installation_host_server/install_on_ubuntu.md'
+  - 'Docker for Mac': '01_installation_host_server/install_docker_for_mac.md'
+  - 'Docker for Windows': '01_installation_host_server/install_docker_for_windows.md'
+  - 'Vagrant & VirtualBox on MacOS': '01_installation_host_server/install_macos_vagrant.md'
+- 'Installation - Test (isle.localdomain)':
+  - 'Example User Story': '02_installation_test/ild_example_user_story.md'
+  - 'Test Site Installation Guide': '02_installation_test/ild_installation_guide.md'
+  - 'Test Site Resources': '02_installation_test/ild_resources.md'
 - 'Installation - New Site':
   - 'Example User Story': '03_installation_new_site/new_site_example_user_story.md'
-  - 'Installation Guide': '03_installation_new_site/new_site_installation_guide.md'
+  - 'New Site Installation Guide - w/ Single ISLE Environment': '03_installation_new_site/new_site_installation_guide_single.md'
+  - 'New Site Installation Guide - w/ multiple ISLE Environments': '03_installation_new_site/new_site_installation_guide_multi.md'
 - 'Installation - Migration':
   - 'Example User Story': '04_installation_migration/migration_example_user_story.md'
   - 'Installation Guide': '04_installation_migration/migration_installation_guide.md'
@@ -58,7 +59,7 @@ pages:
   - 'Ansible Guide': '05_developer_docs/dev_ansible_guide.md'
 - 'Specifications':
   - 'Dockerfiles': '06_specifications/specs_dockerfiles.md'
-  - 'Docker Images': '06_specifications/specs_docker_images.md'
-  - 'Docker Containers': '06_specifications/specs_docker_containers.md'
+  - 'Docker Containers & Images': '06_specifications/specs_docker_containers_images.md'
   - 'Diagram of network and connections': '06_specifications/specs_diagram_network.md'
-  - 'Supported Islandora Specification Matrix': '06_specifications/specs_supported_matrix.md'
+  - 'Supported ISLE Software Matrix': '06_specifications/specs_supported_software_matrix.md'
+  - 'Supported Drupal Modules on Test Site Matrix': '06_specifications/specs_supported_drupal_modules_matrix.md'

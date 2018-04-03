@@ -4,16 +4,17 @@
 
 This Migration guide will help you migrate your existing production Islandora environment to utilize this ISLE framework for easily maintaining Islandora. This guide will walk you through how to identify and copy your institution's Islandora data and files (including your data volume, Drupal site or sites, and commonly customized xml and xslt files) to your ISLE framework.
 
+**Please note:** There is a [Glossary](../../glossary) with relevant terms to help guide installation.
 
 Prerequisites:
 
-1. Host Server set up according to the [instructions](../00Host_Server/Host_Server_Setup.md)
+1. Host Server set up according to the [Host Server Specifications](../01_installation_host_server/host_server_system_specifications)
 
 2. Have a domain name that works - is set up with DNS etc...
 
 3. Have SSL Certificates for the domain
 
-4. ISLE project has been cloned to BOTH your local laptop/workstation AND the host server - see [Setup Guide](../00Host_Server/Host_Server_Setup)
+4. ISLE project has been cloned to BOTH your local laptop/workstation AND the host server.
 
 5. Disk space on or mounted to the Host Server large enough to store a **copy** of your fedora data store
 
