@@ -26,6 +26,10 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 * Having a cleaned up system prior to any build is key. Ensure that all local development containers, volumes and images associated with the build are deleted. Otherwise previously unaltered data or configurations could break or alter negatively the new images.
 
+* ISLE maintainers, Developers have pre-existing knowledge or familiarity with [Dockerfiles](https://docs.docker.com/engine/reference/builder/), the [Docker Build](https://docs.docker.com/engine/reference/commandline/build/) process and [pushing Docker images](https://docs.docker.com/engine/reference/commandline/push/) to repositories.
+
+* [Dockerfiles](https://docs.docker.com/engine/reference/builder/), their editing process and compositions are familiar or known concepts.
+
 * ISLE maintainers should already have access to the [ISLE Dockerhub](https://hub.docker.com/r/islandoracollabgroup) image repository.
 
 * Developers should have already setup their own separate Docker image repository. e.g. [Dockerhub](https://hub.docker.com) following that site's instructions.
