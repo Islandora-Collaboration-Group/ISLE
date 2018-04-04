@@ -97,6 +97,8 @@ Solr - an open source enterprise search platform with the such features as full-
 
 * **Docker**:  used to build ISLE - [Docker](https://www.docker.com/what-docker) is used to create containers (similar to virtual servers) based on pre-built images. A "recipe" file called docker-compose.yml orchestrates the setting up and networking of the containers.
 
+* **Dockerfile**: Docker can build images automatically by reading the instructions from a [Dockerfile](https://docs.docker.com/engine/reference/builder/). A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. Using docker build users can create an automated build that executes several command-line instructions in succession.
+
 * **Containers**: [Docker containers](https://www.docker.com/what-container) are lightweight, stand-alone, executable packages of a piece of software that includes everything needed to run it: code, runtime, system tools, system libraries, settings. Each major component of Islandora runs in its own container.
 
 * **Images**: [Docker images](https://docs.docker.com/engine/reference/commandline/images/) - source for the containers - these are built with installed software and updated by ISLE developers and stored on Dockerhub. You can see what software is used in each of the image's Dockerfiles e.g. `apache/Dockerfile` etc. This will contain additional information on official Docker images used as a Docker [base image](https://docs.docker.com/develop/develop-images/baseimages/)
