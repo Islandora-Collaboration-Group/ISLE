@@ -185,6 +185,34 @@ Compare, edit, merge or copy the following from the suggested directory `current
 
 * `fedora/repository-policies` - endusers can edit the files contained within for more granular or customized Fedora user permissions or repository access.
 
+## MySQL
+
+The `mysql` subdirectory contains all specific configurations and overrides necessary for the ISLE mysql image and resulting container to function properly with your changes. This is the Mysql database server that will contain at least two databases, one for the Islandora / Drupal website and the other for the Fedora repository. If you are running Drupal multi-sites, you'll need to create the additional users and database creation scripts.
+
+* (_Optional_) Edit the Mysql configuration file `my.cnf` as needed otherwise leave alone.
+
+
+#### Mysql -initscripts
+
+This subdirectory houses SQL scripts necessary for a one time creation of your associated new site and `fedora3` database.
+
+You'll want to rename `newsite_sample_db.sql` to the database or domain name of your choice.
+
+* Edit the contents of `newsite_sample_db.sql` to create the new drupal site database and user.
+
+    * Line 1: Change the database name from `newsite_sample_db` to the database name of your choice.
+
+    * Line 2: Change the database user name from `newsite_sample_db_user` to the database user name of your choice.
+
+    * Line 3: At almost the end of the line, change the value of `newsite_sample_db.*` to the to the database name of your choice ensuring the `.*` remain without a space.
+
+    * Line 3: At the end of the line, change the value of `newsite_sample_db_user'` to the to the database user name of your choice ensuring the values remain with in the `''`quotes without spaces. Do not alter the remaining code (`@'%';'`) beyond that point.
+
+* Edit the contents of `fedora3` to change the `fedora_admin` user password only.
+
+    * Line 2: Change the `fedora_admin` user password from `newsite_sample_fedora_admin_pw` to the password of your choice.
+
+    * It is not recommended to change anything else.
 
 ## Solr
 
