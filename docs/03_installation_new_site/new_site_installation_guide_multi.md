@@ -6,6 +6,33 @@ A new ISLE / Islandora environment can include the option to create an un-themed
 
 While this checklist will attempt to point out most of the usage challenges or pitfalls, ISLE assumes no responsibility or liability in this matter should an enduser have customizations beyond what this guide outlines.
 
+## Index of related documents
+* [New Site Example User Story](new_site_example_user_story.md)
+
+---
+
+**Please note:** There is a [Glossary](../../glossary) with relevant terms to help guide installation.
+
+## Assumptions / Prerequisites
+
+* Comfortability with ISLE. Recommend first setting up the ISLE Test Site (`isle.localdomain`) via the [Install Start Here](../../install_start_here) guide. If you have already done this, please proceed.
+
+* Host Server that conforms to the specifications outlined in the [Host Server Specifications](../../01_installation_host_server/host_server_system_specifications/)
+
+* This new site guide is designed for a Host server that has already followed the appropriate setup and configuration instructions in the `Create a new ISLE site` section of the [Install Start Here](../install_start_here.md) guide.
+
+* Instructions below also assume a MacOS or Linux laptop or workstation to be used in conjunction with the ISLE Host Server for deploying configs, code, files etc. Windows users may have to adjust / swap out various tools as needed.
+
+* These directions also depend on the type of local computer used to connect via browser to Islandora.
+
+* Have an existing domain name that works - is set up with DNS etc...
+
+* Have [SSL Certificates](../../glossary#systems) previously created for the web domain. (_Please work with the appropriate internal IT resource to provision these files for your domain_)
+
+* ISLE project has been cloned to BOTH your local laptop/workstation AND the ISLE host server
+
+---
+
 ## Multiple ISLE / Islandora Environments
 When attempting to configure multiple ISLE / Islandora environments, all sections labeled `(multi)` provide additional steps to follow and/or repeat.
 
@@ -59,26 +86,7 @@ In this example the `dev` ISLE environment was created first for testing and add
 └── isle-newsite-stage.yourdomain.edu           (2nd ISLE environment created, no proxy subdirectory, no proxy section in its docker-compose.yml)
 ```
 
-**Please note:** There is a [Glossary](../../glossary) with relevant terms to help guide installation.
-
-### Assumptions / Prerequisites
-
-* Comfortability with ISLE. Recommend first setting up the ISLE Test Site (`isle.localdomain`) via the [Install Start Here](../../install_start_here) guide. If you have already done this, please proceed.
-
-* Host Server that conforms to the specifications outlined in the [Host Server Specifications](../../01_installation_host_server/host_server_system_specifications/)
-
-* This new site guide is designed for a Host server that has already followed the appropriate setup and configuration instructions in the `Create a new ISLE site` section of the [Install Start Here](../install_start_here.md) guide.
-
-* Instructions below also assume a MacOS or Linux laptop or workstation to be used in conjunction with the ISLE Host Server for deploying configs, code, files etc. Windows users may have to adjust / swap out various tools as needed.
-
-* These directions also depend on the type of local computer used to connect via browser to Islandora.
-
-* Have an existing domain name that works - is set up with DNS etc...
-
-* Have [SSL Certificates](../../glossary#systems) previously created for the web domain. (_Please work with the appropriate internal IT resource to provision these files for your domain_)
-
-* ISLE project has been cloned to BOTH your local laptop/workstation AND the ISLE host server
-
+---
 
 ## Overview
 
@@ -90,6 +98,8 @@ In this example the `dev` ISLE environment was created first for testing and add
 * Customizing for your Environment
       * Many of the steps below describe adding the domain name or other specific bits of information into files or appending those bits to file names.
       * In these cases this guide will call out the customization point AND provide an example - it's important not to literally copy paste the example!
+
+---
 
 ## Create Private Code Repository
 
@@ -403,29 +413,29 @@ Otherwise, if you are planning on running multiple ISLE environments e.g. produc
 
 **Please also note:** The order of environment creation is not necessarily important e.g you don't need to setup a development environment prior to a production one. However in general, best practice is to test prior to opening up a server to the public.
 
-    * Line 54: Add the appropriate environment suffix e.g. `-prod, -stage, -dev etc.`
+* Line 54: Add the appropriate environment suffix e.g. `-prod, -stage, -dev etc.`
 
-        * Example: Change `proxy_pass https://apache-internal;` to `proxy_pass https://apache-internal-dev;`
+    * Example: Change `proxy_pass https://apache-internal;` to `proxy_pass https://apache-internal-dev;`
 
-    * Line 66: Add the appropriate environment suffix e.g. `-prod, -stage, -dev etc.`
+* Line 66: Add the appropriate environment suffix e.g. `-prod, -stage, -dev etc.`
 
-        * Example: Change `proxy_pass http://fedora-internal/adore-djatoka;` to `proxy_pass http://fedora-internal-dev/adore-djatoka;`
+    * Example: Change `proxy_pass http://fedora-internal/adore-djatoka;` to `proxy_pass http://fedora-internal-dev/adore-djatoka;`
 
-    * Line 74: Add the appropriate environment suffix e.g. `-prod, -stage, -dev etc.`
+* Line 74: Add the appropriate environment suffix e.g. `-prod, -stage, -dev etc.`
 
-        * Example: Change `proxy_pass http://fedora-internal/fedora/get;` to `proxy_pass http://fedora-internal-dev/fedora/get;``
+    * Example: Change `proxy_pass http://fedora-internal/fedora/get;` to `proxy_pass http://fedora-internal-dev/fedora/get;``
 
-    * Line 80: Add the appropriate environment suffix e.g. `-prod, -stage, -dev etc.`
+* Line 80: Add the appropriate environment suffix e.g. `-prod, -stage, -dev etc.`
 
-        * Example: Change `proxy_pass http://fedora-internal/fedora/services;` to `proxy_pass http://fedora-internal-dev/fedora/services;`
+    * Example: Change `proxy_pass http://fedora-internal/fedora/services;` to `proxy_pass http://fedora-internal-dev/fedora/services;`
 
-    * Line 86: Add the appropriate environment suffix e.g. `-prod, -stage, -dev etc.`
+* Line 86: Add the appropriate environment suffix e.g. `-prod, -stage, -dev etc.`
 
-        * Example: Change `proxy_pass http://fedora-internal/fedora/describe;` to `proxy_pass http://fedora-internal-dev/fedora/describe;`
+    * Example: Change `proxy_pass http://fedora-internal/fedora/describe;` to `proxy_pass http://fedora-internal-dev/fedora/describe;`
 
-    * Line 92: Add the appropriate environment suffix e.g. `-prod, -stage, -dev etc.`
+* Line 92: Add the appropriate environment suffix e.g. `-prod, -stage, -dev etc.`
 
-        * Example: Change `proxy_pass http://fedora-internal/fedora/risearch;` to `proxy_pass http://fedora-internal-dev/fedora/risearch;``
+    * Example: Change `proxy_pass http://fedora-internal/fedora/risearch;` to `proxy_pass http://fedora-internal-dev/fedora/risearch;``
 
 Upon completing all edits, move the resulting file to the first setup ISLE environment `proxy/config/sites-enabled` directory.
 
@@ -451,15 +461,15 @@ There are also additional links for the enduser to learn how to combine the SSL 
 
 * Copy your SSL certificates for the ISLE Proxy into `proxy/ssl-certs`. They will and should have different names than the examples provided below.
 
-    * There can only be 2 files involved in this process.
+* There can only be 2 files involved in this process.
 
-        * 1 x SSL Certificate Key File e.g. `newsite-sample-key.pem`
-            * This file is required.
-            * Please also note that the file extensions can also be: `.key` or `.pem`
+    * 1 x SSL Certificate Key File e.g. `newsite-sample-key.pem`
+        * This file is required.
+        * Please also note that the file extensions can also be: `.key` or `.pem`
 
-        * 1 x SSL Certificate File e.g. `newsite-sample.pem`
-            * This file is required.
-            * Please also note that the file extensions can also be: `.cer`, `.crt` or `.pem`
+    * 1 x SSL Certificate File e.g. `newsite-sample.pem`
+        * This file is required.
+        * Please also note that the file extensions can also be: `.cer`, `.crt` or `.pem`
 
 * Open a terminal, navigate to the is subdirectory, and run the `create_dhparam_pem.sh` script in `~/ISLE/config/isle-newsite-sample/proxy/ssl-certs/` subdirectory to create the `dhparam.pem` file (_if not already._) This file is critical to the SSL encryption process and for communication between the `proxy` and `apache` containers.
 
@@ -477,18 +487,20 @@ As per the instructions outlined previously in the section `Apache - ssl-certs (
 
 **Example:**
 
-    * 1 x SSL Certificate Key File e.g. `newsite-dev-key.pem`
-    * 1 x SSL Certificate File e.g. `newsite-dev.pem`
+* 1 x SSL Certificate Key File e.g. `newsite-dev-key.pem`
+* 1 x SSL Certificate File e.g. `newsite-dev.pem`
 
-    * 1 x SSL Certificate Key File e.g. `newsite-stage-key.pem`
-    * 1 x SSL Certificate File e.g. `newsite-stage.pem`
 
-    * 1 x SSL Certificate Key File e.g. `newsite-prod-key.pem`
-    * 1 x SSL Certificate File e.g. `newsite-prod.pem`
+* 1 x SSL Certificate Key File e.g. `newsite-stage-key.pem`
+* 1 x SSL Certificate File e.g. `newsite-stage.pem`
+
+
+* 1 x SSL Certificate Key File e.g. `newsite-prod-key.pem`
+* 1 x SSL Certificate File e.g. `newsite-prod.pem`
 
 For all following ISLE environments, please delete the proxy directory found within each environments config parent directory.
 
-Example:
+**Example:**
 
 * 1st ISLE environment setup: Keep the proxy directory e.g. Keep this `~/opt/ISLE/config/isle-newsite-dev/proxy`
 

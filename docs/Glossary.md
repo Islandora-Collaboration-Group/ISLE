@@ -113,11 +113,11 @@ a server you connected to via ssh (REMOTE).
 * **Network** refers to a defined Docker network that is controlled by docker. This has powerful implications in production.
     * ISLE services: `fedora`, `solr`, `apache`, `mysql`, and `proxy` communicate using an internal private stack network. The service proxy also joins an insecure network that is accessible to the WAN (or for testing "WAN" likely means a smaller internal network). Why two networks? Swarms, scaling, replicating.
 
-* **Variables go here...***
-
 ---
 
 ### Documentation / Development
+
+* **TL;DR** - "Too long; didn't read." - used to indicate a large post, article etc. that has a brief summary of said post, article etc. as it might be too long to read.
 
 * **Markdown** is a lightweight markup language with plain text formatting syntax. Markdown allows you to write using an easy-to-read, easy-to-write plain text format, then convert it to structurally valid XHTML (or HTML).
     * [https://en.wikipedia.org/wiki/Markdown](https://en.wikipedia.org/wiki/Markdown)

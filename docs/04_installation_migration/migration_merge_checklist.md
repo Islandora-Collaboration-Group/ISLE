@@ -1,34 +1,36 @@
-### Migration Merge Checklist
+This section is to serve as a new checklist for the editing or merging of the copied Islandora Production server(s) data and config files to the appropriate config directory on the enduser's local laptop and ultimately copied / deployed back to the new ISLE Host Server.
 
-This section is to serve as a new checklist for the editing or merging of the copied Islandora Production server(s) data and config files to the appropriate config directory on the new ISLE Host Server.
+The suggested workflow is for endusers to review the Production file(s) first, make note of any settings and then make appropriate edits within the `yourdomain-config` directory to change values, add passwords or usernames etc on your local laptop with the ultimate goal of checking all results into a git repository for deploy later on the ISLE Host server.
 
-The suggested workflow is for endusers to review the Production file(s) first, make note of any settings and then make appropriate edits within the `yourdomain-config` directory to change values, add passwords or usernames etc unless otherwise directed e.g. Apache `html` and Fedora `data`. (NOTE: as per the migration guide instructions the name of this directory shouldn't literally be "yourdomain-confg" but replace "yourdomain" with the name of your intended Islandora site's domain).
+The only change is that unless otherwise directed e.g. Apache `html` and Fedora `data`. all changes should be made on the local laptop in the `yourdomain-config` directory.
+
+Please note as per the migration guide instructions the name of this directory shouldn't literally be "yourdomain-config" or "yourdomain-data" so replace "yourdomain" with the name of your intended Islandora site's domain.
 
 While this checklist will attempt to point out most of the merge challenges or pitfalls, you may encounter unique situations depending on the edits and customizations made to your Islandora environment in the past. This is a good place to reach out to the Islandora community for assistance.
 
 **Please note:**
 
-* In most cases, many of the configuration files copied from your running production Islandora will have comments (#) in them to help guide endusers to make the appropriate edits e.g. (# enduser edit here)
+* In some cases, some of the configuration files copied from your running production Islandora may have comments (#) in them to help guide endusers to make the appropriate edits e.g. (# enduser edit here)
 
 * In most cases, many of the configuration files copied from ISLE repository to `yourdomain-config` will have fake or empty settings in them. Please remove, edit or enter new values as advised.
 
 ---
-#### Apache
+## Apache
 
 Compare, edit, merge or copy the following from the source directory `current-production-config/apache/` to:
 
-* `yourdomain-config/apache/`
+* `yourdomain-config/apache/` on your local laptop.
+
+| Data          | Description                 | Production Data Copy              | Merge, Copy or Edit Location / Destination | Copy location            |
+| ------------- | -------------               | -------------                     | -------------                              | -------------            |
+| html          | Islandora/Drupal Website    | current-production-config/apache/ | yourdomain-data/apache/                    | Remote ISLE Host server  |
+| settings.php  | Drupal settings.php file    | current-production-config/apache/ | yourdomain-config/apache/                  | Local ISLE config laptop |
+| site.conf     | Apache webserver vhost file | current-production-config/apache/ | reference file but do not copy             | Local ISLE config laptop |
 
 
-This data will be used in conjunction with an Apache container.
+### Apache Edits
 
-| Data          | Description                 | Production Data Copy  | Merge, Copy or Edit Location / Destination            | Notes         |
-| ------------- | -------------               | -------------                                      | -------------                                         | ------------- |
-| html          | Islandora/Drupal Website    | current-production-config/apache/ | yourdomain-config/apache/ | _see below_   |
-| settings.php  | Drupal settings.php file    | current-production-config/apache/ | yourdomain-config/apache/ | _see below_   |
-| site.conf     | Apache webserver vhost file | current-production-config/apache/ | yourdomain-config/apache/ | _see below_   |
-
-* `html` - endusers will **COPY** this entire directory **instead** to `yourdomain-config/apache/html`
+* `html` - endusers will have **copied** this entire directory **instead** to a new directory called `yourdomain-data/apache/html/` on your remote ISLE host server in the appropriate storage area.
 
 * `settings.php` - endusers will want to edit database and user names for Drupal sites to connect properly.
 
@@ -36,53 +38,114 @@ This data will be used in conjunction with an Apache container.
 
     * Line 288: _Recommend adding a Drupal hash value here of 25+ alpha-numeric characters_
 
-    * Line 312: `$base_url` should be the URL of the ISLE production Drupal website e.g. `https://site.institution.extension`
+    * Line 312: `$base_url` should be commented out as it isn't used due to the proxy.
 
-* `site.conf` - endusers will edit this file as required to setup the Apache webserver on the Apache container.
+### Apache - sites-enabled
 
-    * The filename can stay the same or can be changed. Please note that Line 85 of the associated `docker-compose.yml` will need to be updated if the file is renamed
+Please note that endusers will take values from the `site.conf` file and flow the information as needed into the to be renamed `newsite-sample-ssl.conf` & `newsite-sample.conf` files accordingly with the domain name of your choice. This file will not be copied to yourdomain-config/apache/ for any usage.
 
-    * Lines 2, 3, 6, 7, 34 - 37, 39, 40, 44 & 45:  endusers will edit this file as directed in the (# enduser please edit this and then remove this comment) instructions.
+* Within the `sites-enabled` directory, rename the files `newsite-sample-ssl.conf` and `newsite-sample.conf` to your domain names - example:
+    * `digital-collections.example.edu_ssl.conf`
 
-       * Do remove (# enduser please edit this and then remove this comment) after editing or adding the appropriate values.
+    * `digital-collections.example.edu.conf`
 
-#### Apache Optional Edits
+* Edit the previously named `newsite-sample.conf` file and change lines 3 and 4 to point to the location of your apache logs on the container - example:
 
-| Data          | Description                 | Production Data Copy  | Merge, Copy or Edit Location / Destination            | Notes         |
-| ------------- | -------------               | -------------                                      | -------------                                         | ------------- |
-| php.ini       | PHP configuration file      | current-production-config/apache/ | yourdomain-config/apache/ | _see below_   |
+    * `ErrorLog /var/log/apache2/digital-collections.example.edu.ssl.error.log`
+
+    * `CustomLog /var/log/apache2/digital-collections.example.edu.ssl.access.log combined`
+
+* Edit the previously named `newsite-sample-ssl.conf` file and change lines 4 and 5 to point to the location of your apache logs on the container - example:
+
+    * `ErrorLog /var/log/apache2/digital-collections.example.edu.ssl.error.log`
+
+    * `CustomLog /var/log/apache2/digital-collections.example.edu.ssl.access.log combined`
+
+* Edit the previously named `newsite-sample-ssl.conf` file and change lines 12, 13 and 14 to point to the location of your certs on the `apache` container - example:
+
+    ```
+
+        SSLCertificateFile	/certs/newsite-sample.pem
+        SSLCertificateChainFile /certs/newsite-sample-interm.pem
+        SSLCertificateKeyFile /certs/newsite-sample-key.pem
+
+    ```
+
+* If there are any additional customizations required, you'll need to copy them into these two vhost files accordingly.
+
+### Apache Optional Edits
+
+| Data          | Description                 | Production Data Copy              | Merge, Copy or Edit Location / Destination | Copy location            |
+| ------------- | -------------               | -------------                     | -------------                              | -------------            |
+| php.ini       | PHP configuration file      | current-production-config/apache/ | yourdomain-config/apache/                  | Local ISLE config laptop |
 
 * `php.ini` - endusers can make appropriate edits within `yourdomain-config/apache/php.ini` to increase the upload settings, memory etc. as needed. Otherwise leaving the default values should work.
 
 * **Please note:** an additional line will have to be added to the associated `docker-compose.yml` in the Apache `volumes:` section for this edit to work e.g. `- ./apache/php.ini:/etc/php.ini`
 
-| Data          | Description                 | Production Data Copy  | Merge, Copy or Edit Location / Destination            | Notes         |
-| ------------- | -------------               | -------------                                      | -------------                                         | ------------- |
-| tmpreaper     | Cronjob for tmpreaper       | current-production-config/apache/ | yourdomain-config/apache/ | _see below_   |
+| Data          | Description           | Production Data Copy              | Merge, Copy or Edit Location / Destination  | Copy location            |
+| ------------- | -------------         | -------------                     | -------------                               | -------------            |
+| tmpreaper     | Cronjob for tmpreaper | current-production-config/apache/ | yourdomain-config/apache/                   | Local ISLE config laptop |
 
 * `tmpreaper` - (optional) endusers may want to edit this tmpreaper cron job for different locations and/or times. The `docker-compose.yml` file will need an associated bind-mount for this change.
 
 * **Please note:** an additional line will have to be added to the associated `docker-compose.yml` in the Apache `volumes:` section for this edit to work e.g. `- ./apache/tmpreaper/cron:/etc/cron.d/tmpreaper-cron`
 
 
-#### Fedora
+### Apache - ssl-certs
 
+If need be, please refer to the **SSL certificate** section of the [Glossary](../../glossary) for relevant terms to help guide installation.
+
+* Copy your original production SSL certificates for Apache into the `apache/ssl-certs` subdirectory. They will and should have different names than the examples provided below dependent on the ISLE environment you are setting up e.g. (_production, staging or development_).
+
+    * There can be up to 2 - 3 files involved in this process.
+
+        * 1 x SSL Certificate Key File e.g. `newsite-sample-key.pem`
+            * This file is required.
+            * Please also note that the file extensions can also be: `.key` or `.pem`
+
+        * 1 x SSL Certificate File e.g. `newsite-sample.pem`
+            * This file is required.
+            * Please also note that the file extensions can also be: `.cer`, `.crt` or `.pem`
+
+        * 1 x SSL Certificate Chain File e.g. `newsite-sample-interm.pem`
+            * This file may be **optional** in some setups but is generally recommended for use by the `apache` container when available.
+            * It will not be used by the `proxy` container.
+            * Please also note that the file extensions can also be: `.cer`, `.crt` or `.pem`
+
+### Apache - ssl-certs (multi)
+
+* When creating multiple environments for ISLE, please change all of the file and key names accordingly to reflect the environment e.g. adding (`-prod, -stage, -dev` to file names). Later on, this process will assist in organizing proper filing of files for the `proxy` container and stop any situation where a file gets overwritten or improperly referenced by the wrong environment.
+
+**Example:**
+
+    * 1 x SSL Certificate Key File e.g. `newsite-dev-key.pem`
+    * 1 x SSL Certificate File e.g. `newsite-dev.pem`
+    * 1 x SSL Certificate Chain File e.g. `newsite-dev-interm.pem`
+
+## Fedora
 
 Compare, edit, merge or copy the following from the suggested directory `current-production-config/fedora/` to:
 
-* `yourdomain-config/fedora/`
+* `yourdomain-config/fedora/` on your local laptop.
 
-| Data              | Description                   | Possible Location                | Suggested Destination                      | Notes         |
-| -------------     | -------------                 | -------------                    | -------------                              | ------------- |
-| data              | Entire Fedora data directory  | /usr/local/fedora/             | yourdomain-config/fedora/ | _see below_ |
-| fedora.fcfg       | Fedora repository config file | /usr/local/fedora/server/config/ | /yourdomain-config/fedora/ | _see below_   |
-| fedora-users.xml  | Fedora users config file      | /usr/local/fedora/server/config/ | /yourdomain-config/fedora/ | _see below_   |
-| filter-drupal.xml | Fedora Drupal filter file     | /usr/local/fedora/server/config/ | /yourdomain-config/fedora/ | _see below_   |
-| repository-policies | Fedora Drupal filter file     | /usr/local/fedora/server/config/ | /yourdomain-config/fedora/ | _see below_   |
+| Data                  | Description                   | Possible Location                | Merge, Copy or Edit Location / Destination | Copy location |
+| -------------         | -------------                 | -------------                    | -------------                              | ------------- |
+| datastreamStore       | Entire Fedora data directory  | /usr/local/fedora/data/          | yourdomain-data/fedora/data/datastreamStore       | Remote ISLE Host server  |
+| fedora-xacml-policies | Entire Fedora data directory  | /usr/local/fedora/data/          | yourdomain-data/fedora/data/fedora-xacml-policies | Remote ISLE Host server  |
+| objectStore           | Entire Fedora data directory  | /usr/local/fedora/data/          | yourdomain-data/fedora/data/objectStore           | Remote ISLE Host server  |
+| fedora.fcfg           | Fedora repository config file | /usr/local/fedora/server/config/ | yourdomain-config/fedora/ |  Local ISLE config laptop |
+| fedora-users.xml      | Fedora users config file      | /usr/local/fedora/server/config/ | yourdomain-config/fedora/ |  Local ISLE config laptop |
+| filter-drupal.xml     | Fedora Drupal filter file     | /usr/local/fedora/server/config/ | yourdomain-config/fedora/ |  Local ISLE config laptop |
+| repository-policies   | Fedora Drupal filter file     | /usr/local/fedora/server/config/ | yourdomain-config/fedora/ |  Local ISLE config laptop |
 
-**Fedora Notes**:
+### Fedora Edits
 
-* `data` - endusers will **COPY** this entire directory **instead** to `yourdomain-config/fedora/data`
+* The outlined contents (above) of the production Islandora Fedora `data` directory should be copied to a new directory called `yourdomain-data/fedora/data/` on your remote ISLE host server in the appropriate storage area.
+
+    * Do not copy the following directories from the production Islandora fedora `/usr/local/fedora/data` directory.
+        * /usr/local/fedora/`data/activemq-data`
+        * /usr/local/fedora/`data/resourceIndex`
 
 * `fedora.fcfg` - endusers will want to edit the following:
     * Line: 562 (optional) to change the `fedora_admin` username for the `fedora3` database
@@ -123,18 +186,19 @@ Compare, edit, merge or copy the following from the suggested directory `current
 * `fedora/repository-policies` - endusers can edit the files contained within for more granular or customized Fedora user permissions or repository access.
 
 
-#### Solr
+## Solr
 
-       Copy the following below from the `current-production-config/solr/`
-       This data will be used in conjunction with a Solr container.
-       | Data           | Description               | Possible Location        | Suggested ISLE Path Destination          | Notes         |
-       | -------------  | -------------             | -------------            | -------------                            | ------------- |
-       | schema.xml     | Solr index config file    | ../solr/collection1/conf | /yourdomain-config/solr/ | _see below_   |
-       | solrconfig.xml | Solr config file          | ../solr/collection1/conf | /yourdomain-config/solr/ | _see below_   |
-       | solr.xml       | Solr config file file     | /opt/solr/               | /yourdomain-config/solr/ | _see below_   |
-       | stopwords.txt  | solr webserver vhost file | ../solr/collection1/conf | /yourdomain-config/solr/ | _see below_   |
+Compare, edit, merge or copy the following from the source directory `current-production-config/solr/` to:
 
-**Solr Notes**:
+* `yourdomain-config/solr/` on your local laptop.
+
+| Data           | Description               | Possible Location        | Merge, Copy or Edit Location / Destination | Copy location |
+| -------------  | -------------             | -------------            | -------------                              | -------------   |
+| schema.xml     | Solr index config file    | ../solr/collection1/conf | yourdomain-config/solr/                    | Local ISLE config laptop |
+| solrconfig.xml | Solr config file          | ../solr/collection1/conf | yourdomain-config/solr/                    | Local ISLE config laptop |
+| stopwords.txt  | solr webserver vhost file | ../solr/collection1/conf | yourdomain-config/solr/                    | Local ISLE config laptop |
+
+### Solr Edits
 
 * `schema.xml`
    * _Usually the first file one configures when setting up a new Solr installation_
@@ -143,6 +207,7 @@ Compare, edit, merge or copy the following from the suggested directory `current
      * which field should be used as the unique/primary key
      * which fields are required
      * how to index and search each field
+
 * `solrconfig.xml`
    * _The solrconfig.xml file is the configuration file with the most parameters affecting Solr itself._
    * In solrconfig.xml, one can configure the following:
@@ -151,8 +216,7 @@ Compare, edit, merge or copy the following from the suggested directory `current
      * the Request Dispatcher for managing HTTP communications
      * the Admin Web interface
      * parameters related to replication and duplication
-* `solr.xml`
-  * _The solr.xml file defines global configuration options that apply to all or many cores._
+
 * `stopwords.txt`
   * _Using the stopwords.txt file, one can avoid the common words of a language, which do not add a significant value to any search.
   * _For example, a, an, the, you, I, am, and so on. One can specify words to be removed from the Solr search in this file line-by-line._
@@ -162,3 +226,18 @@ Compare, edit, merge or copy the following from the suggested directory `current
   * /usr/local/solr
   * /var/lib/tomcat7/webapps/solr
   * /usr/share/tomcat/webapps/solr
+
+---
+
+## Proxy directory
+
+If need be, please refer to the **Systems** section of the [Glossary](../../glossary) for relevant terms to help guide installation.
+
+This directory and service will not exist on any current islandora production systems. Please pick one of the following guides to complete this configuration.
+
+* If the migrated production site is to be the first or only site running on the ISLE host server, please follow the [New Site Installation Guide - w/ Single ISLE Environment](../03_installation_new_site/new_site_installation_guide_single.md), `### Proxy directory` section, lines 317 - 395.
+
+* If the migrated production site is not the first or only site running on the ISLE host server, please follow the [New Site Installation Guide - w/ multiple ISLE Environments](../03_installation_new_site/new_site_installation_guide_multi.md)
+    * Read the `Assumptions / Prerequisites` section, lines 16 -32
+    * Read the `Multiple ISLE / Islandora Environments` section, lines 36 -88
+    * All of the sections starting with `Proxy directory` paying particular attention to anything labelled with `(multi)`, lines 384 - 623
