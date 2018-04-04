@@ -67,7 +67,6 @@ This Migration guide will help you migrate your existing production Islandora en
 *  **NOTE** Some of this will involve fairly complicated merging of files to account for custom edits that may have been made to your production Islandora site and/or to bring configuration files up to work with newer software versions. This is by far the trickiest part of the migration and definitely a good place to seek help from the community if you get stuck.
 
 * Edit the docker-compose.yml file to point to all these fine new config files.
-    * (following the [Migration Docker Compose Edit Checklist](migration_docker_compose_edit_checklist.md))
 * Download ISLE images from Dockerhub and spin up the ISLE Containers (takes a while depending on network speeds)
 * Go into the fedora container and do a re-indexing (takes a little while)
     * (following the [Migration Reindex Process](migration_reindex_process.md)).
