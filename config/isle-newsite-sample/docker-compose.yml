@@ -7,6 +7,16 @@ version: '2'
 #  org.label-schema.vendor: "EDIT - ISLE enduser Institution information here" # edit here and remove comment
 #  org.label-schema.schema-version: "1.0"
 
+###
+# Editing key
+# Change any instance of "yourdomain-data" to your data storage path and replace "yourdomain" with the correct domain name on the ISLE host server and remove comment
+# This is done to separate multple sites and their data stored and run on one ISLE host server
+# Examples:
+# digitalcollections.institution.com-data
+# digitalcollections-staging.institution.com-data
+# digitalcollections-staging.institution.com-data
+###
+
 services:
   mysql:
     image: islandoracollabgroup/isle-mysql:latest
@@ -21,8 +31,8 @@ services:
     volumes:
       - ./mysql/initscripts:/docker-entrypoint-initdb.d
       - ./mysql/my.cnf:/etc/mysql/my.cnf
-      - ./isle_production_data_storage/mysql:/var/lib/mysql # edit here to change isle_production_data_storage to your data storage path on the ISLE host server and remove comment
-      - ./isle_production_data_storage/mysql/log:/var/log/mysql # edit here to change isle_production_data_storage to your data storage path on the ISLE host server and remove comment
+      - ./yourdomain-data/mysql/mysql:/var/lib/mysql # edit here to change yourdomain-data to your data storage path and replacing yourdomain with the correct domain name on the ISLE host server and remove comment
+      - ./yourdomain-data/mysql/log:/var/log/mysql # edit here to change yourdomain-data to your data storage path and replacing yourdomain with the correct domain name on the ISLE host server and remove comment
 
   fedora:
     image: islandoracollabgroup/isle-fedora:latest
@@ -48,10 +58,10 @@ services:
       - ./fedora/gsearch/fgsconfigObjects.properties:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/fgsconfigObjects.properties # edit line 15 to add fedoraAdmin password
       - ./fedora/gsearch/repository.properties:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/repository/FgsRepos/repository.properties # edit line 7 to add fedoraAdmin password
       - ./fedora/tomcat/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml # edit lines: 45 & 48 to add appropriate passwords
-      - ./isle_production_data_storage/fedora/data:/usr/local/fedora/data
-      - ./isle_production_data_storage/fedora/log/fedora:/usr/local/fedora/server/logs
-      - ./isle_production_data_storage/fedora/log/tomcat:/usr/local/tomcat/logs
-      - ./isle_production_data_storage/fedora/log/apache:/var/log/apache2
+      - ./yourdomain-data/fedora/data:/usr/local/fedora/data # edit here to change yourdomain-data to your data storage path and replacing yourdomain with the correct domain name on the ISLE host server and remove comment
+      - ./yourdomain-data/fedora/log/fedora:/usr/local/fedora/server/logs # edit here to change yourdomain-data to your data storage path and replacing yourdomain with the correct domain name on the ISLE host server and remove comment
+      - ./yourdomain-data/fedora/log/tomcat:/usr/local/tomcat/logs # edit here to change yourdomain-data to your data storage path and replacing yourdomain with the correct domain name on the ISLE host server and remove comment
+      - ./yourdomain-data/fedora/log/apache:/var/log/apache2 # edit here to change yourdomain-data to your data storage path and replacing yourdomain with the correct domain name on the ISLE host server and remove comment
 
   solr:
     image: islandoracollabgroup/isle-solr:latest
@@ -68,8 +78,8 @@ services:
       - ./solr/solr/solrconfig.xml:/usr/local/solr/collection1/conf/solrconfig.xml # edit all appropriate lines for any customizations or merges from production settings.
       - ./solr/solr/schema.xml:/usr/local/solr/collection1/conf/schema.xml # edit all appropriate lines for any customizations or merges from production settings.
       - ./solr/solr/stopwords.txt:/usr/local/solr/collection1/conf/stopwords.txt # edit all appropriate lines for any customizations or merges from production settings.
-      - ./isle_production_data_storage/solr:/usr/local/solr/collection1/data
-      - ./isle_production_data_storage/solr/log/tomcat:/usr/local/tomcat/logs
+      - ./yourdomain-data/solr:/usr/local/solr/collection1/data # edit here to change yourdomain-data to your data storage path and replacing yourdomain with the correct domain name on the ISLE host server and remove comment
+      - ./yourdomain-data/solr/log/tomcat:/usr/local/tomcat/logs # edit here to change yourdomain-data to your data storage path and replacing yourdomain with the correct domain name on the ISLE host server and remove comment
 
 
   apache:
@@ -78,7 +88,7 @@ services:
     networks:
       isle-internal:
           aliases:
-            - newsite-sample.com # change this to the correct ISLE newsite domain name
+            - newsite-sample.com # change this to the correct ISLE newsite or migrated domain name
     tty: true
     depends_on:
       - mysql
@@ -88,9 +98,9 @@ services:
       - ./apache/sites-enabled:/etc/apache2/sites-enabled # rename .conf files to reflect your domain name
       - ./apache/ssl-certs:/certs:ro
       - ./apache/settings.php:/var/www/html/sites/default/settings.php # make edits as necessary
-      - ./isle_production_data_storage/apache/html:/var/www/html
-      - ./isle_production_data_storage/apache/log:/var/log/apache2
-      #- ./apache/site_vsets.sh:/var/www/html/site_vsets.sh # you'll need to uncomment to run this script once if migrating a production islandora site only   
+      - ./yourdomain-data/apache/html:/var/www/html # edit here to change yourdomain-data to your data storage path and replacing yourdomain with the correct domain name on the ISLE host server and remove comment
+      - ./yourdomain-data/apache/log:/var/log/apache2 # edit here to change yourdomain-data to your data storage path and replacing yourdomain with the correct domain name on the ISLE host server and remove comment
+      #- ./apache/site_vsets.sh:/var/www/html/site_vsets.sh # you'll need to uncomment to run this script once if migrating a production islandora site only
 
   proxy:
     image: islandoracollabgroup/isle-proxy:latest
