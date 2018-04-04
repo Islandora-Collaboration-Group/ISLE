@@ -38,3 +38,8 @@ TO DO : apache service edits
 **TO DO:**  git clone from the institutional git repo e.g. `ISLE-config` to the /opt/ISLE/config/ (on ISLE host server using terminal)
 
 ```
+
+
+apache service section
+
+uncomment       #- ./apache/site_vsets.sh:/var/www/html/site_vsets.sh # you'll need to uncomment to run this script once if migrating a production islandora site only   

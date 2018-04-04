@@ -8,7 +8,13 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 **Please note:** There is a [Glossary](../../glossary) with relevant terms to help guide installation.
 
-### Assumptions / Prerequisites
+## Index of related documents
+* [New Site Example User Story](new_site_example_user_story.md)
+
+---
+
+
+## Assumptions / Prerequisites
 
 * Comfortability with ISLE. Recommend first setting up the ISLE Test Site (`isle.localdomain`) via the [Install Start Here](../../install_start_here) guide. If you have already done this, please proceed.
 

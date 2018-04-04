@@ -27,20 +27,20 @@ pages:
   - 'Docker for Windows': '01_installation_host_server/install_docker_for_windows.md'
   - 'Vagrant & VirtualBox on MacOS': '01_installation_host_server/install_macos_vagrant.md'
 - 'Installation - Test (isle.localdomain)':
-  - 'Example User Story': '02_installation_test/ild_example_user_story.md'
+  - 'Test Site Example User Story': '02_installation_test/ild_example_user_story.md'
   - 'Test Site Installation Guide': '02_installation_test/ild_installation_guide.md'
   - 'Test Site Resources': '02_installation_test/ild_resources.md'
 - 'Installation - New Site':
-  - 'Example User Story': '03_installation_new_site/new_site_example_user_story.md'
+  - 'New Site Example User Story': '03_installation_new_site/new_site_example_user_story.md'
   - 'New Site Installation Guide - w/ Single ISLE Environment': '03_installation_new_site/new_site_installation_guide_single.md'
   - 'New Site Installation Guide - w/ multiple ISLE Environments': '03_installation_new_site/new_site_installation_guide_multi.md'
 - 'Installation - Migration':
-  - 'Example User Story': '04_installation_migration/migration_example_user_story.md'
-  - 'Installation Guide': '04_installation_migration/migration_installation_guide.md'
-  - 'Export Checklist': '04_installation_migration/migration_export_checklist.md'
-  - 'Merge Checklist': '04_installation_migration/migration_merge_checklist.md'
-  - 'Docker Composer Edit Checklist': '04_installation_migration/migration_docker_compose_edit_checklist.md'
-  - 'Reindex Process': '04_installation_migration/migration_reindex_process.md'
+  - 'Migration Example User Story': '04_installation_migration/migration_example_user_story.md'
+  - 'Migration Guide': '04_installation_migration/migration_installation_guide.md'
+  - 'Migration Export Checklist': '04_installation_migration/migration_export_checklist.md'
+  - 'Migration Merge Checklist': '04_installation_migration/migration_merge_checklist.md'
+  - 'Migration Docker Compose Edit Checklist': '04_installation_migration/migration_docker_compose_edit_checklist.md'
+  - 'Migration Reindex Process': '04_installation_migration/migration_reindex_process.md'
 - 'Developer Docs':
   - 'Contributing to Project': '05_developer_docs/dev_contributing_to_project.md'
   - 'Documentation Overview': '05_developer_docs/dev_documentation_overview.md'
