@@ -295,6 +295,8 @@ The `mysql` subdirectory contains all specific configurations and overrides nece
 
 This subdirectory houses SQL scripts necessary for a one time creation of your associated new site and `fedora3` database.
 
+You'll want to rename `newsite_sample_db.sql` to the database or domain name of your choice.
+
 * Edit the contents of `newsite_sample_db.sql` to create the new drupal site database and user.
 
     * Line 1: Change the database name from `newsite_sample_db` to the database name of your choice.
