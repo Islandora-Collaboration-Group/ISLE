@@ -39,7 +39,6 @@ pages:
   - 'Migration Guide': '04_installation_migration/migration_installation_guide.md'
   - 'Migration Export Checklist': '04_installation_migration/migration_export_checklist.md'
   - 'Migration Merge Checklist': '04_installation_migration/migration_merge_checklist.md'
-  - 'Migration Docker Compose Edit Checklist': '04_installation_migration/migration_docker_compose_edit_checklist.md'
   - 'Migration Reindex Process': '04_installation_migration/migration_reindex_process.md'
 - 'Developer Docs':
   - 'Contributing to Project': '05_developer_docs/dev_contributing_to_project.md'

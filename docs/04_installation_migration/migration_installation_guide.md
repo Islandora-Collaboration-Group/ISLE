@@ -7,8 +7,7 @@ This Migration guide will help you migrate your existing production Islandora en
 ## Index of related documents
 * [Migration Example User Story](migration_example_user_story.md)
 * [Migration Export Checklist](migration_export_checklist.md)
-* [Migration Merge Checklist](migration_merge_checklist/)
-* [Migration Docker Compose Edit Checklist](migration_docker_compose_edit_checklist.md)
+* [Migration Merge Checklist](migration_merge_checklist.md)
 * [Migration Reindex Process](migration_reindex_process.md)
 
 ---
@@ -160,14 +159,28 @@ The **goal** is to merge all site-specific data (domain names, variables, userna
    * Compare and merge the Solr files: `stopwords`
    * Compare and merge the Fedora GSearch Islandora Transform (XSLTs) folder of files: `islandora_transforms`
 
-### Docker Edit Checklist
-   * Edit the `docker-compose.yml` file to:
-   * Point to the new directories and config settings in `yourdomain-config`
+### Docker compose file:
+
+* Edit the file: **docker-compose.yml** accordingly:
+
+    * Change container names (you could do this based on the environment (e.g. prod)
+
+   * For example if you are building a prod server instance:
+
+       `container_name: isle-solr-newsite`
+
+       changes to:
+
+       `container_name: isle-solr-prod`
+
+       and so on...
+
+**Please note:** Much of the file is already with comments guiding the enduser to key areas or files to edit or modify accordingly.
 
 ---
 
 
-##Final steps
+## Final steps
 
 * Now that all the changes are made (be sure to save), ISLE should be ready to test. First you'll need to push these changes to your private code repository.
 
