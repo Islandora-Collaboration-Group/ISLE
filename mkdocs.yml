@@ -53,8 +53,6 @@ pages:
   - 'Policies': '05_developer_docs/dev_policies.md'
   - 'Build Guide': '05_developer_docs/dev_build_guide.md'
   - 'Testing Guide': '05_developer_docs/dev_testing_guide.md'
-  - 'Pushing images to Dockerhub Guide': '05_developer_docs/dev_push_images_dockerhub.md'
-  - 'Announcements of new releases': '05_developer_docs/dev_announcements_releases.md'
   - 'Ansible Guide': '05_developer_docs/dev_ansible_guide.md'
 - 'Specifications':
   - 'Dockerfiles': '06_specifications/specs_dockerfiles.md'

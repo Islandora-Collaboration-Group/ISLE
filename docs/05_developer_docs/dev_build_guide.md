@@ -109,9 +109,7 @@ Please perform these steps one at time. If any errors occur during the build pro
 
 This renamed `docker-compose-build.yml` file will tag all builds by default with the `latest` tag.
 
-You will need to tag each image further according to the [Docker Containers & Images](specs_docker_containers_images.md) Specifications Page as needed. There are always two tags for every image. It is possible there will be more tags for different image versions in the future.
-
-Review the current tags found on the [Docker Containers & Images](specs_docker_containers_images.md) Specifications Page. Should the software version change, update this document with the new tags.
+Review the current tags found on the [Docker Containers & Images](../06_specifications/specs_docker_containers_images.md) Specifications Page. Should the software version change, update this document with the new tags. You will need to tag each image further as needed. There are always two tags for every image, e.g. `latest` and the specific version of the primary software package used on the image or container. It is possible there will be more tags for different image versions in the future.
 
 For example if the installed proxy nginx software changes from `1.13` to `1.14`, change or add the new tag of `1.14`
 
@@ -153,6 +151,7 @@ Push the images one at a time. **Please note:** _Depending on your Internet conn
 * `docker push islandoracollabgroup/isle-solr:latest`
 
 Repeat the process with any additional tags. **Please note:** _Depending on your Internet connection's upload speed this process may take several minutes._
+
 * `docker push islandoracollabgroup/isle-apache:2.4`
 * `docker push islandoracollabgroup/isle-fedora:3.8.1`
 * `docker push islandoracollabgroup/isle-mysql:5.6`
@@ -176,6 +175,7 @@ Steps below are mandatory for any ISLE maintainer but optional (though recommend
 * `docker image ls`
 
 Example commands to repeat for each type of image.
+
 * `docker rm -f IMAGE ID islandoracollabgroup/TAG`
 * `docker rm -f 7cbd80c8b043 islandoracollabgroup/isle-proxy:1.13`
 
