@@ -16,7 +16,7 @@ This Migration guide will help you migrate your existing production Islandora en
 
 * Comfortability with ISLE. Recommend first setting up the ISLE Test Site (`isle.localdomain`) via the [Install Start Here](../install_start_here.md) guide. If you have already done this, please proceed.
 
-* Host Server that conforms to the specifications outlined in the [Host Server Specifications](../../01_installation_host_server/host_server_system_specifications/)
+* Host Server that conforms to the specifications outlined in the [Host Server Specifications](../01_installation_host_server/host_server_system_specifications.md)
 
 * This Migration guide is designed for a Host server that has already followed the appropriate setup and configuration instructions in the `Migrate to ISLE` section of the [Install Start Here](../install_start_here.md) guide.
 
