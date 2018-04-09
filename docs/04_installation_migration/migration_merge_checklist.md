@@ -94,7 +94,7 @@ Please note that endusers will take values from the `site.conf` file and flow th
 
 ### Apache - ssl-certs
 
-If need be, please refer to the **SSL certificate** section of the [Glossary](../../glossary) for relevant terms to help guide installation.
+If need be, please refer to the **SSL certificate** section of the [Glossary](../glossary.md) for relevant terms to help guide installation.
 
 * Copy your original production SSL certificates for Apache into the `apache/ssl-certs` subdirectory. They will and should have different names than the examples provided below dependent on the ISLE environment you are setting up e.g. (_production, staging or development_).
 
@@ -259,7 +259,7 @@ Compare, edit, merge or copy the following from the source directory `current-pr
 
 ## Proxy directory
 
-If need be, please refer to the **Systems** section of the [Glossary](../../glossary) for relevant terms to help guide installation.
+If need be, please refer to the **Systems** section of the [Glossary](../glossary.md) for relevant terms to help guide installation.
 
 This directory and service will not exist on any current islandora production systems. Please pick one of the following guides to complete this configuration.
 

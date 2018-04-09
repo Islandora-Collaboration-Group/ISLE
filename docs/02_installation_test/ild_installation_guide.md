@@ -6,11 +6,11 @@ This test ISLE / Islandora environment (`isle.localdomain`) includes an un-theme
 
 While this checklist will attempt to point out most of the usage challenges or pitfalls, ISLE assumes no responsibility or liability in this matter should an enduser have customizations beyond what this guide outlines.
 
-**Please note:** There is a [Glossary](../../glossary) with relevant terms to help guide installation.
+**Please note:** There is a [Glossary](../glossary.md) with relevant terms to help guide installation.
 
 ### Assumptions / Prerequisites
 
-* Laptop / workstation that conforms to the specifications outlined in the [Host Server Specifications](../../01_installation_host_server/host_server_system_specifications/)
+* Laptop / workstation that conforms to the specifications outlined in the [Host Server Specifications](../01_installation_host_server/host_server_system_specifications.md)
 
 * This test site guide is designed for a local laptop / workstation that has already followed the appropriate setup and configuration instructions in the `Test ISLE` section of the [Install Start Here](../install_start_here.md) guide.
 
