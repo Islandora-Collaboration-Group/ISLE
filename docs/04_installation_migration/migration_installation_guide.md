@@ -2,7 +2,7 @@ _Expectations:  It may take at least a minimum of **8 hours or more** to read th
 
 This Migration guide will help you migrate your existing production Islandora environment to utilize an ISLE environment for easily maintaining Islandora. This guide will walk you through how to identify and copy your institution's Islandora data and files (including your data volume, Drupal site or sites, and commonly customized xml and xslt files) to your ISLE framework.
 
-**Please note:** There is a [Glossary](../../glossary) with relevant terms to help guide installation.
+**Please note:** There is a [Glossary](../glossary.md) with relevant terms to help guide installation.
 
 ## Index of related documents
 * [Migration Example User Story](migration_example_user_story.md)
@@ -26,7 +26,7 @@ This Migration guide will help you migrate your existing production Islandora en
 
 * Have an existing domain name that works - is set up with DNS etc...
 
-* Have [SSL Certificates](../../glossary#systems) previously created for the web domain. (_Please work with the appropriate internal IT resource to provision these files for your domain_)
+* Have [SSL Certificates](../glossary.md#systems) previously created for the web domain. (_Please work with the appropriate internal IT resource to provision these files for your domain_)
 
 * ISLE project has been cloned to BOTH your local laptop/workstation AND the ISLE host server
 
@@ -62,7 +62,7 @@ This Migration guide will help you migrate your existing production Islandora en
 * Create a new directory on your local laptop for the /config folders and files, copy the ISLE repository /config into it, and make this into a private repository.
 
 * Edit the /config files so they have the proper site-specific information
-    * (following the [Migration Merge Checklist](migration_merge_checklist/)
+    * (following the [Migration Merge Checklist](migration_merge_checklist.md)
 
 *  **NOTE** Some of this will involve fairly complicated merging of files to account for custom edits that may have been made to your production Islandora site and/or to bring configuration files up to work with newer software versions. This is by far the trickiest part of the migration and definitely a good place to seek help from the community if you get stuck.
 

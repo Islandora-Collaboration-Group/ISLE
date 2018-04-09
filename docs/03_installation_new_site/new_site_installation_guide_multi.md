@@ -11,13 +11,13 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 ---
 
-**Please note:** There is a [Glossary](../../glossary) with relevant terms to help guide installation.
+**Please note:** There is a [Glossary](../glossary.md) with relevant terms to help guide installation.
 
 ## Assumptions / Prerequisites
 
-* Comfortability with ISLE. Recommend first setting up the ISLE Test Site (`isle.localdomain`) via the [Install Start Here](../../install_start_here) guide. If you have already done this, please proceed.
+* Comfortability with ISLE. Recommend first setting up the ISLE Test Site (`isle.localdomain`) via the [Install Start Here](../install_start_here.md) guide. If you have already done this, please proceed.
 
-* Host Server that conforms to the specifications outlined in the [Host Server Specifications](../../01_installation_host_server/host_server_system_specifications/)
+* Host Server that conforms to the specifications outlined in the [Host Server Specifications](../01_installation_host_server/host_server_system_specifications.md)
 
 * This new site guide is designed for a Host server that has already followed the appropriate setup and configuration instructions in the `Create a new ISLE site` section of the [Install Start Here](../install_start_here.md) guide.
 
@@ -27,7 +27,7 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 * Have an existing domain name that works - is set up with DNS etc...
 
-* Have [SSL Certificates](../../glossary#systems) previously created for the web domain. (_Please work with the appropriate internal IT resource to provision these files for your domain_)
+* Have [SSL Certificates](../glossary.md#systems) previously created for the web domain. (_Please work with the appropriate internal IT resource to provision these files for your domain_)
 
 * ISLE project has been cloned to BOTH your local laptop/workstation AND the ISLE host server
 
@@ -230,7 +230,7 @@ The `apache` subdirectory contains all specific configurations and overrides nec
 
 #### Apache - ssl-certs
 
-If need be, please refer to the **SSL certificate** section of the [Glossary](../../glossary) for relevant terms to help guide installation.
+If need be, please refer to the **SSL certificate** section of the [Glossary](../glossary.md) for relevant terms to help guide installation.
 
 * Copy your SSL certificates for Apache into the `apache/ssl-certs` subdirectory. They will and should have different names than the examples provided below dependent on the ISLE environment you are setting up e.g. (_production, staging or development_).
 
@@ -385,7 +385,7 @@ You'll want to rename `newsite_sample_db.sql` to the database or domain name of 
 
 ### Proxy directory
 
-If need be, please refer to the **Systems** section of the [Glossary](../../glossary) for relevant terms to help guide installation.
+If need be, please refer to the **Systems** section of the [Glossary](../glossary.md) for relevant terms to help guide installation.
 
 The `proxy` subdirectory contains all specific configurations and overrides necessary for the ISLE proxy image and resulting container to function properly with your changes. This is the Nginx reverse proxy server that properly routes all internal and external communication between the other four containers and the ISLE Host network.
 
@@ -457,7 +457,7 @@ Copy your SSL certs into the ssl-certs subdirectory.
 
 _DO NOT OVERWRITE OR DELETE the create_dhparam_pem file within this directory._
 
-If need be, please refer to the **SSL certificate** section of the [Glossary](../../glossary) for relevant terms to help guide installation.
+If need be, please refer to the **SSL certificate** section of the [Glossary](../glossary.md) for relevant terms to help guide installation.
 
 There are also additional links for the enduser to learn how to combine the SSL Certificate File with any available SSL Certificate Chain File for the `proxy` process to work properly.
 
@@ -629,7 +629,7 @@ d4994fca8ea7        isle_isle-external                          bridge          
 
 The `solr` subdirectory contains all specific configurations and overrides necessary for the ISLE solr image and resulting container to function properly with your changes. This is the SOLR search server that properly indexes all objects and metadata to provide speedy in-depth search functionality for the Islandora / Drupal site of the objects and collections contained within the Fedora repository.
 
-If need be, please refer to the **Solr** section of the [Glossary](../../glossary) for relevant terms to help guide installation.
+If need be, please refer to the **Solr** section of the [Glossary](../glossary.md) for relevant terms to help guide installation.
 
 #### Solr - solr
 
@@ -668,7 +668,7 @@ Example: ONLY ADD TOMCAT USERNAME/PASSWORD - can look like this but please use a
 
 ## Final steps
 
-If need be, please refer to the **Git** section of the [Glossary](../../glossary) for relevant terms to help guide installation.
+If need be, please refer to the **Git** section of the [Glossary](../glossary.md) for relevant terms to help guide installation.
 
 * Now that all the changes are made (be sure to save), ISLE should be ready to test. First you'll need to push these changes to your private code repository.
 
