@@ -26,6 +26,7 @@ pages:
   - 'Docker for Mac': '01_installation_host_server/install_docker_for_mac.md'
   - 'Docker for Windows': '01_installation_host_server/install_docker_for_windows.md'
   - 'Vagrant & VirtualBox on MacOS': '01_installation_host_server/install_macos_vagrant.md'
+  - 'Troubleshooting': '01_installation_host_server/install_troubleshooting.md'
 - 'Installation - Test (isle.localdomain)':
   - 'Test Site Example User Story': '02_installation_test/ild_example_user_story.md'
   - 'Test Site Installation Guide': '02_installation_test/ild_installation_guide.md'
