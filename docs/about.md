@@ -9,7 +9,7 @@ ISLE functions as both an initial installer and maintenance updater with the abi
 This process allows folks to choose between hosting:
 
 * locally on a laptop for development work
-* locally in an institutional data center
+* on site in an institutional data center
 * in a cloud environment such as ([Amazon Web Services](https://aws.amazon.com/)).
 
 ISLE’s production-ready platform will be updated monthly with:
@@ -24,9 +24,6 @@ ISLE is designed to be an evolving but trusted environment to help create a mana
 ### Project Overview
 
 ISLE public repository: https://github.com/Islandora-Collaboration-Group/ISLE
-
-### What is Islandora Enterprise (ISLE)?
-Islandora Enterprise (ISLE) is a new project in development that will address one of the most significant pain-points in Islandora: installation and maintenance.
 
 ### How does it work?
 ISLE separates an institution’s customizations from core code, and moves that core code into containers that are easily updated, simplifying and largely automating the process of installation and updates/maintenance of Islandora. ISLE also bundles together the best shared modules into a common, production-ready and security-hardened platform.
