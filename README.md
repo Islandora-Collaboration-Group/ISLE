@@ -58,7 +58,7 @@ ISLE lowers the barrier to entry for new institutions or organizations because i
 - Ben Rosner, Barnard College
 - Steve Young, Hamilton College
 
-## The funding ISLE supporters include
+## ISLE Funding Institutions
 * Amherst College
 * Barnard College
 * California Institute of Technology
