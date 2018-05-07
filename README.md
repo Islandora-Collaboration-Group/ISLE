@@ -2,8 +2,9 @@
 
 ## ISLE Documents
 * [ISLE Executive Summary](https://docs.google.com/document/d/17tAFxR6_b7sxXkE1teNDQZv0UZ0LLSkX8K05-U6A6nw/edit?usp=sharing) (a concise overview in plain English)
-* [ISLE Specifications](https://docs.google.com/document/d/1iTXYbBMtQ3TaujPXon01Hp6hVwnxYvsVXYa2G79SuWc/edit#) (technical specifications)
+* [ISLE Documentation](https://islandora-collaboration-group.github.io/ISLE-Documentation/) (user-friendly documentation)
 * [ISLE Supporters](https://docs.google.com/document/d/1ycx5ATbeWpUWvpZ6bwXws490CMgi0dyB9SBfPYUDEjk/edit?usp=sharing) (list of institutions)
+* [ISLE Specifications](https://docs.google.com/document/d/1iTXYbBMtQ3TaujPXon01Hp6hVwnxYvsVXYa2G79SuWc/edit#) (technical specifications)
 * [Public ISLE Updates ](https://docs.google.com/document/d/1GciJWXOgYXJz4U9SobVjbTa5sgbYJwN2KsLCp8zNwwU/edit#) (agenda and notes)
 * Participate in the [ISLE-Updates google group](https://groups.google.com/forum/#!forum/isle-updates)
 
