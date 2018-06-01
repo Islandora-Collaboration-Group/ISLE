@@ -8,8 +8,10 @@
 * [Public ISLE Updates ](https://docs.google.com/document/d/1GciJWXOgYXJz4U9SobVjbTa5sgbYJwN2KsLCp8zNwwU/edit#) (agenda and notes)
 * Participate in the [ISLE-Updates google group](https://groups.google.com/forum/#!forum/isle-updates)
 
-## ISLE Phase I Funding Successful: We've raised $90,000!!
-We successfully exceeded our funding goal of $84,000 with pledges totaling $90,000 from 17 higher education institutions and Born-Digital (BD contributed $24,000 as pro-bono expert labor).
+## Funding
+- ISLE Phase I: $90,000 contributed to fund Phase I ($66,000 from 17 academic institutions; $24,000 in-kind labor from Born-Digital), which exceeded our goal of $84,000.
+- ISLE Phase II: TBD
+- ISLE Phase III: TBD
 
 ## Timeline
 - 08/2016 - [Completed] ISLE Phase I conceived with the ICG and Common Media/Born-Digital
@@ -47,8 +49,8 @@ ISLE lowers the barrier to entry for new institutions or organizations because i
 - Spread the word about ISLE at conferences
 - Want to use ISLE? Add your institution's name to the [ISLE Supporters](https://docs.google.com/document/d/1ycx5ATbeWpUWvpZ6bwXws490CMgi0dyB9SBfPYUDEjk/edit?usp=sharing) list
 
-## Contributors welcome!
-* If you have questions, please contact [David Keiser-Clark](dwk2@williams.edu) or post to the [ISLE Updates google group](https://groups.google.com/forum/#!forum/isle-updates) or [Islandora google group](https://groups.google.com/forum/?utm_source=digest&utm_medium=email#!forum/islandora/topics)
+## Contact Information
+* If you have questions or would like to join our discussions, please contact [David Keiser-Clark](dwk2@williams.edu) or subscribe to the public [ISLE Updates google group](https://groups.google.com/forum/#!forum/isle-updates).
 
 ## ISLE Steering Committee
 - Sarah Goldstein, Mount Holyoke College
