@@ -1,4 +1,4 @@
-[Islandora Enterprise (ISLE)](https://github.com/Islandora-Collaboration-Group/ISLE) is a new project in development that will address one of the most significant pain-points in Islandora: installation and maintenance.
+[Islandora Enterprise (ISLE)](https://github.com/Islandora-Collaboration-Group/ISLE) is a new project in development that will address two of the most significant pain-points in Islandora: installation and maintenance.
 
 [Islandora](http://islandora.ca/) is an open-source software [framework](https://github.com/Islandora) designed to help institutions and organizations and their audiences collaboratively manage, and discover digital assets using a best-practices framework.
 
