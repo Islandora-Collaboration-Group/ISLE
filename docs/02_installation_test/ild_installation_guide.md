@@ -172,11 +172,9 @@ _For Windows Users only_
 ---
 
 * This will put you into a root prompt at the command line where you will enter the following commands:
-    * `cd /tmp/isle_drupal_build_tools/`
+    * `cd /utility-scripts/isle_drupal_build_tools/`
 
-    * `chmod 777 *.sh`
-
-    * `./install_isle_ld_site.sh`
+    * `.isle_islandora_installer.sh`
 
         * **This script will take some time (see estimate above.)** You should see a lot of green [ok] messages.
         * If the script appears to pause and prompt for y/n, do not enter any values; the script will answer for you.  
