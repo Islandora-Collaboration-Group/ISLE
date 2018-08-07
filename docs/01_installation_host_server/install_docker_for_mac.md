@@ -46,7 +46,7 @@ If git is already installed, then please proceed to the next section.
 
 ### Step 2: Docker for Mac Installation
 
-* Open a browser and navigate to https://www.docker.com/docker-mac
+* Open a browser and navigate to [Docker for Mac](https://www.docker.com/docker-mac)
 
 * Click the `Download from Docker Store` button in the center of the page
 
