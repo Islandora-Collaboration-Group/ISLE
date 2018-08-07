@@ -1,12 +1,13 @@
 # ISLE: Islandora Enterprise
 
 ## ISLE Documents
-* [ISLE Executive Summary](https://docs.google.com/document/d/17tAFxR6_b7sxXkE1teNDQZv0UZ0LLSkX8K05-U6A6nw/edit?usp=sharing) (a concise overview in plain English)
 * [ISLE Documentation](https://islandora-collaboration-group.github.io/ISLE-Documentation/) (user-friendly documentation)
-* [ISLE Supporters](https://docs.google.com/document/d/1ycx5ATbeWpUWvpZ6bwXws490CMgi0dyB9SBfPYUDEjk/edit?usp=sharing) (list of institutions)
-* [ISLE Specifications](https://docs.google.com/document/d/1iTXYbBMtQ3TaujPXon01Hp6hVwnxYvsVXYa2G79SuWc/edit#) (technical specifications)
-* [Public ISLE Updates ](https://docs.google.com/document/d/1GciJWXOgYXJz4U9SobVjbTa5sgbYJwN2KsLCp8zNwwU/edit#) (agenda and notes)
-* Participate in the [ISLE-Updates google group](https://groups.google.com/forum/#!forum/isle-updates)
+* [ISLE Executive Summary](https://docs.google.com/document/d/17tAFxR6_b7sxXkE1teNDQZv0UZ0LLSkX8K05-U6A6nw/edit?usp=sharing) (a concise overview in plain English)
+* *(Older documents: [ISLE Supporters (Institutions)](https://docs.google.com/document/d/1ycx5ATbeWpUWvpZ6bwXws490CMgi0dyB9SBfPYUDEjk/edit?usp=sharing), [ISLE Specifications (Phase I)](https://docs.google.com/document/d/1iTXYbBMtQ3TaujPXon01Hp6hVwnxYvsVXYa2G79SuWc/edit#), [early ISLE meeting notes](https://docs.google.com/document/d/1GciJWXOgYXJz4U9SobVjbTa5sgbYJwN2KsLCp8zNwwU/edit#)*)
+
+## How to Join
+* [Islandora ISLE Interest Group](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group) meetings are open to everybody! [Schedule](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group/#how-to-join) is every other Wednesday at 3:00pm EST.
+* Subscribe to [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle) (public) for updates, meeting announcements, and technical support
 
 ## Funding
 - ISLE Phase I: $90,000 contributed to fund Phase I ($66,000 from 17 academic institutions; $24,000 in-kind labor from Born-Digital), which exceeded our goal of $84,000.
@@ -25,9 +26,10 @@
 - 03/2018 - [In Process] Community Alpha Test #1: University of Pittsburgh (lead: Clinton Graham)
 - 03/2018 - [Completed] Community Alpha Test #2: Hamilton College (lead: Steve Young)
 - 03/2018 - [Completed] Community Alpha Test #3: Barnard College (lead: Ben Rosner)
-- 04/2018 - [In Process] Born-Digital handoff of ISLE (Islandora 7x) and documentation to ISLE Steering Committee
-- 05/2018 - [In Process] ISLE release 1.0 available as open-source for public use
-- 08/2018 - [Future] ICG to contribute ISLE to Islandora Foundation via [LSAP](https://islandora.ca/developers/lsap)
+- 05/2018 - [In Process] Born-Digital handoff of ISLE (Islandora 7x) and documentation to ISLE Steering Committee
+- 06/2018 - [Completed] ISLE release 1.0 available as open-source for public use
+- 08/2018 - [In Process] ISLE release 1.1 available as open-source for public use
+- 10/2018 - [Future] ISLE Phase II begins
 
 ## What is ISLE?
 ISLE is a new project in development -- funded by 17 institutions of higher-education and Born-Digital -- that will address one of the most significant pain-points in Islandora: installation and maintenance. ISLE separates an institution’s customizations from core code, and moves that core code into Docker containers that are easily updated, simplifying and largely automating the process of installation and updates/maintenance of Islandora. ISLE also bundles together the best shared modules into a common, production-ready and security-hardened platform.
@@ -44,20 +46,16 @@ ISLE lowers the barrier to entry for new institutions or organizations because i
 
 ## How can you help?
 - Discuss ISLE’s ease of use and cost savings with your CIO and/or Library Director
-- Participate in the [ISLE Updates google group](https://groups.google.com/forum/#!forum/isle-updates)
 - Pledge funding to refactor ISLE for Islandora CLAW (Phase II)
 - Spread the word about ISLE at conferences
 - Want to use ISLE? Add your institution's name to the [ISLE Supporters](https://docs.google.com/document/d/1ycx5ATbeWpUWvpZ6bwXws490CMgi0dyB9SBfPYUDEjk/edit?usp=sharing) list
-
-## Contact Information
-* If you have questions or would like to join our discussions, please contact [David Keiser-Clark](dwk2@williams.edu) or subscribe to the public [ISLE Updates google group](https://groups.google.com/forum/#!forum/isle-updates).
 
 ## ISLE Steering Committee
 - Sarah Goldstein, Mount Holyoke College
 - David Keiser-Clark (Chair), Williams College
 - Francesca Livermore, Wesleyan University
 - Mark McFate, Grinnell College
-- Carolyn Moritz (Testing Lead), Vassar College
+- Carolyn Moritz, Vassar College
 - Ben Rosner, Barnard College
 - Steve Young, Hamilton College
 
