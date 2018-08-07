@@ -1,6 +1,6 @@
-**Ubuntu** server version to use: `16.04 LTS`
+**Ubuntu** server version to use: `18.04 LTS`
 
-This is a detailed operating system-specific guide including commands to copy/paste for all the software you may need to run ISLE on a `Ubuntu` ISLE Host Server.
+This is a detailed operating system-specific guide including commands to copy/paste for all the software you may need to run ISLE on an `Ubuntu 18.04` ISLE Host Server.
 
 Called "the host" - this is the base computer upon which the entire ISLE stack is built - this can be a virtual machine on a laptop or a server you connected to via ssh.
 
