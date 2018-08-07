@@ -1,14 +1,16 @@
-Please select from one of the following four possible ISLE use cases.
+Please select your desired use case for ISLE.
 
-I would like to:
+**I would like to:**
 
-* Test ISLE
+* [Test ISLE](#test-isle) installation on my laptop or workstation
 
-* Setup a new ISLE site
+* [Create a new ISLE site](#create-a-new-isle-site-or-sites) on a production, staging or development server
 
-* Migrate to ISLE
+* [Migrate to ISLE](install_start_here/#migrate-to-isle) on a production, staging or development server
 
-* Build ISLE (Maintainer)
+* [Update ISLE](#update-isle) to install the newest improvements and security updates
+
+**Please note:** There is a [Glossary](glossary.md) with relevant terms to help guide installation.
 
 ---
 
@@ -17,8 +19,6 @@ I would like to:
 The recommended non-production environments for using the prebuilt ISLE test site (`isle.localdomain`) are with the following type of laptops or workstations.
 
 Please review the [ISLE Host Server OS requirements](01_installation_host_server/host_server_system_specifications.md) prior to any installation.
-
-**Please note:** There is a [Glossary](glossary.md) with relevant terms to help guide installation.
 
 Please follow the columns below from left to right, to select:
 
@@ -61,8 +61,6 @@ Typically new sites are used in production, staging or shared development enviro
 
 Please review the [ISLE Host Server OS requirements](01_installation_host_server/host_server_system_specifications.md) prior to any installation.
 
-**Please note:** There is a [Glossary](glossary.md) with relevant terms to help guide installation.
-
 Please follow the columns below from left to right, to select:
 
 1. `Host Platform Install instructions` is how you can setup your cloud hosting or server environment for an ISLE Host Server.
@@ -97,8 +95,6 @@ Typically migrated sites are used in production, staging or shared development e
 
 Please review the [ISLE Host Server OS requirements](01_installation_host_server/host_server_system_specifications.md) prior to any installation.
 
-**Please note:** There is a [Glossary](glossary.md) with relevant terms to help guide installation.
-
 Please follow the columns below from left to right, to select:
 
 1. `Host Platform Install instructions` is how you can setup your cloud hosting or server environment for an ISLE Host Server.
@@ -122,34 +118,10 @@ Please follow the columns below from left to right, to select:
 | Server / VM      | [On CentOS](01_installation_host_server/install_on_centos.md) | [Migrate to ISLE](04_installation_migration/migration_installation_guide.md) |
 |                  | [On Ubuntu](01_installation_host_server/install_on_ubuntu.md) |                                                                              |
 
-## Build ISLE (Maintainer)
+## Update ISLE
 
-The recommended environments for building ISLE images are with the following types of laptop or workstation.
+The following offers a method for updating an existing ISLE installation to install the newest improvements and security updates, regardless of environment.
 
-Please review the [ISLE Host Server OS requirements](01_installation_host_server/host_server_system_specifications.md) prior to any installation.
+This process is backwards compatible with your existing ISLE site.
 
-**Please note:** There is a [Glossary](glossary.md) with relevant terms to help guide installation.
-
-Please follow the columns below from left to right, to select:
-
-1. `Desktop OS` is your laptop or desktop running a particular operating system `(OS)`
-
-2. `ISLE Host Server Install instructions` is what you'll follow to host (_run_) ISLE. This may involve additional steps for installing a virtualized OS (CentOS or Ubuntu).
-
-3. `Install ISLE Host Server Dependencies` is the software you may need to run ISLE on a `Host Platform` whether you use CentOS or Ubuntu as the ISLE Host Server.
-
-4. `ISLE install instructions` _(for all OSes and Platform types)_
-
-**Please note:**
-
-* _Depending on the configuration you choose, you may have more or less instructions to follow._
-
-* The operating systems displayed below are the minimum supported. Do not go lower than what is recommended.
-
-| Desktop OS        | ISLE Host Server Install instructions | Install ISLE Host Server Dependencies | ISLE install instructions |
-| -------------     | -------------                         | -------------                         |  -------------            |
-| MacOS High Sierra | [Docker for Mac](01_installation_host_server/install_docker_for_mac.md) | _Skip to the next column_ | [Build ISLE](05_developer_docs/dev_build_guide.md)         |
-| MacOS High Sierra | [Vagrant](01_installation_host_server/install_macos_vagrant.md)         | [On CentOS](01_installation_host_server/install_on_centos.md) | [Build ISLE](05_developer_docs/dev_build_guide.md)|
-|                   |                                       | [On Ubuntu](01_installation_host_server/install_on_ubuntu.md)     |                                                      |
-|                   |                                       |                                                                   |                                                      |
-| Windows 10        | [Docker for Windows](01_installation_host_server/install_docker_for_windows.md) | _Skip to the next column_ | [Build ISLE](05_developer_docs/dev_build_guide.md) |
+- DETAILS COMING SOON...
