@@ -81,7 +81,7 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 #### Using Docker for Mac
 
-* **Docker For Mac** If you are using Docker For Mac, then use the IP address of `127.0.0.1`
+* **Docker For Mac** If you are using Docker For Mac, then use the IP address of `127.0.0.1` to resolve to `localhost` and to the `isle.localdomain` domain name
 
 * Open a terminal on the local laptop
 
