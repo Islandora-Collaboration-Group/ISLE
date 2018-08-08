@@ -104,14 +104,9 @@ The built-in terminal for MacOs can be found in `~/Applications/Utilities/Termin
 
 This process should may take 15 - 60+ mins depending on the speed of your Internet connection.
 
-* Open a terminal and enter the following commands, one at a time:
+* Open a terminal and enter the following command:
 
-* `docker pull islandoracollabgroup/isle-apache:latest`
-* `docker pull islandoracollabgroup/isle-fedora:latest`
-* `docker pull islandoracollabgroup/isle-mysql:latest`
-* `docker pull islandoracollabgroup/isle-proxy:latest`
-* `docker pull islandoracollabgroup/isle-solr:latest`
-
+* `docker-compose pull`
 
 ### Next steps
 
