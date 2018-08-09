@@ -22,13 +22,13 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 ### Step 0: edit /etc/hosts on local laptop or desktop
 
-#### Edit 1: Using Vagrant on all OSes
+#### Using Vagrant on all OSes
 
 * **Vagrant** If you are using Vagrant on a laptop move on to the next section (_Summary: Test site launch process_) as this part is handled automatically.
 
 ---
 
-#### Edit 1: Using Virtualbox VM (non-Vagrant) on MacOS or Ubuntu Desktop
+#### Using Virtualbox VM (non-Vagrant) on MacOS or Ubuntu Desktop
 
 * From the instructions in setting up the Virtualbox VM on your OS (MacOS, Ubuntu or Windows), the IP used to setup the Host-Only network was `10.10.10.130`
 
@@ -59,7 +59,7 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 ---
 
-#### Edit 1: Using Virtualbox VM (non-Vagrant) on Windows
+#### Using Virtualbox VM (non-Vagrant) on Windows
 
 * For endusers running Windows 10:
 
@@ -79,9 +79,9 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 ---
 
-#### Edit 1: Using Docker for Mac
+#### Using Docker for Mac
 
-* **Docker For Mac** If you are using Docker For Mac, then use the IP address of `127.0.0.1`
+* **Docker For Mac** If you are using Docker For Mac, then use the IP address of `127.0.0.1` to resolve to `localhost` and to the `isle.localdomain` domain name
 
 * Open a terminal on the local laptop
 
@@ -100,7 +100,7 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 ---
 
-#### Edit 1: Using Docker for Windows
+#### Using Docker for Windows
 
 * For endusers running Windows 10:
 
