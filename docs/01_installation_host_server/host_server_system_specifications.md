@@ -56,7 +56,7 @@ Currently ISLE has only been built, tested and supported using the free edition 
 
 While `ISLE` and its configs, images, software etc are typically cloned to `/opt/ISLE` and controlled from that location some data can be stored in `/var/docker`.
 
-Please ensure that both the host server's `/opt` and `/var` directories are on disks, mounts or storage systems that can accommodate at least 200 GB in size. In some cases, institutions during the Alpha testing of ISLE increased the size of the host server's `opt` directory by:
+Please ensure that both the host server's `/opt` and `/var` directories are on disks, mounts or storage systems that can accommodate at least 200 GB in size. Some institutions have increased the size of the host server's `opt` directory by:
 
   * Potentially increasing the overall size of the host server VM beyond 200GB
   * Attaching separate storage capacity directly to the `/opt` and `/var` directories
