@@ -239,12 +239,8 @@ _Please Note: You may have already done this in setting up the host server manua
 
   * If yes, then proceed to Step 7
 
-  * If no, the perform the following:
-    * `docker pull islandoracollabgroup/isle-mysql:latest`
-    * `docker pull islandoracollabgroup/isle-fedora:latest`
-    * `docker pull islandoracollabgroup/isle-solr:latest`
-    * `docker pull islandoracollabgroup/isle-apache:latest`
-    * `docker pull islandoracollabgroup/isle-proxy:latest`
+  * If not, then pull the latest images:
+    * `docker-compose pull`
 
 ---
 ### Spin up the proxy container
