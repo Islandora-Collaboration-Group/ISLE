@@ -41,7 +41,7 @@ git version 2.15.1
        * The package will take 1-2 minutes to download.
        * Click the `Done` button once finished.
 
-  * If git is not installed and the prompt doesn't show, then follow one of the recommended methods for installing git in this nice [tutorial](https://www.atlassian.com/git/tutorials/install-git)
+  * If git is not installed and the prompt doesn't show, then follow one of the recommended methods for installing git in this nice [tutorial](https://www.atlassian.com/git/tutorials/install-git).
 
 If git is already installed, then please proceed to the next section.
 
@@ -49,65 +49,22 @@ If git is already installed, then please proceed to the next section.
 
 VirtualBox is a general-purpose full virtualizer for x86 hardware, targeted at server, desktop and embedded use.
 
-* In a web browser, navigate to https://www.virtualbox.org/wiki/Downloads to download the latest version. Click on the `OS X hosts` link to start.
+* Go to [https://www.virtualbox.org/wiki/Downloads](https://www.virtualbox.org/wiki/Downloads) to download and install the latest platform package for OS X hosts. 
 
-* The `VirtualBox-x.x.xxx.dmg` file download process will start and depending on the enduser's Internet connection will take between 5 - 15 mins. This file once downloaded will be found in the endusers `Downloads` folder.
-
-* Double-click the `VirtualBox-x.x.xxx.dmg` file in the `Downloads` folder.
-
-* A `VirtualBox` install prompt will appear. Within the prompt, Double click on the `VirtualBox.pkg` icon as also instructed in the prompt.
-
-* A `Install Oracle VM VirtualBox` prompt will appear click on the `Continue` button.
-
-* The `Standard Install on...` window appears, click on the `Install` button at the lower right hand corner.
-
-* The `Installer is trying to install new software` prompt appears. The enduser's User Name should already be filled out in the top field. Enter the associated password in the second field and then click the `Install Software Button`.
-
-* A `The installation was successful` window should now appear. Click the `Close` button.
-
-* A final prompt may appear asking the enduser if they want to move the `Oracle VM VirtualBox Installer to the Trash`. Click the `Move to Trash` button.
-
-* Open a new `Finder` window and click on the `^` symbol to eject the `VirtualBox` install mount. This will close the previous `VirtualBox` install prompt.
 
 ### Step 3: VirtualBox Extensions for VirtualBox Installation
 
-* In a web browser, navigate to https://www.virtualbox.org/wiki/Downloads to download the latest version. Click on the Oracle VM VirtualBox Extension Pack `All supported platforms` link to start.
+* Return to [https://www.virtualbox.org/wiki/Downloads](https://www.virtualbox.org/wiki/Downloads)  to download the latest version. Click on the Oracle VM VirtualBox Extension Pack `All supported platforms` link to start.
 
-* The `Oracle_VM_VirtualBox_Extension_Pack-x.x.xxx.vbox-extpack` file download process will start and depending on the enduser's Internet connection will take between 5 - 15 mins. This file once downloaded will be found in the endusers `Downloads` folder.
+* Once the `Oracle_VM_VirtualBox_Extension_Pack-x.x.xxx.vbox-extpack` download has completed, open the download folder and double click on the file.
 
-* Double-click the `Oracle_VM_VirtualBox_Extension_Pack-x.x.xxx.vbox-extpack` file in the `Downloads` folder.
-
-* This should automatically start VirtualBox and a dropdown window will appear directing the enduser to either install or upgrade the Extension pack. Click on the appropriate install or upgrade button. Either will have the same effect.
-
-* A VirtualBox license agreement prompt should appear. Using the scrollbar on the right hand side of the prompt, scroll to the bottom (after reading of course ;) ) and click the `I agree` button.
-
-*  The enduser will be asked for their user name and password in a new prompt. Enter accordingly.
-
-* The extension pack should now install (<10 seconds) and a new prompt with `The extension pack Oracle VM VirtualBox Extension Pack was installed successfully.` should appear. Click the `OK` button to close. The enduser can also now close the VirtualBox window / application.
+* Follow the prompts to install the Extension Pack.
 
 ### Step 4: Vagrant Installation
 
 Vagrant is a tool for building and managing virtual machine environments in a single workflow. Endusers can read more [here](https://www.vagrantup.com/intro/index.html)
 
-* In a web browser, navigate to https://www.vagrantup.com/downloads.html to download the latest version. Click on the `64-bit` link in the Mac OS X section.
-
-* The `vagrant_x.x.x_x86_64.dmg` file download process will start and depending on the enduser's Internet connection will take between 5 - 15 mins. This file once downloaded will be found in the endusers `Downloads` folder.
-
-* Double-click the `vagrant_x.x.x_x86_64.dmg` file in the `Downloads` folder.
-
-* A `Vagrant` install prompt will appear. Within the prompt, Double click on the `vagrant.pkg` icon.
-
-* A `Install Vagrant` prompt will appear, click on the `Continue` button.
-
-* The `Standard Install on...` window appears, click on the `Install` button at the lower right hand corner.
-
-* The `Installer is trying to install new software` prompt appears. The enduser's User Name should already be filled out in the top field. Enter the associated password in the second field and then click the `Install Software Button`.
-
-* A `The installation was successful` window should now appear. Click the `Close` button.
-
-* A final prompt may appear asking the enduser if they want to move the `Vagrant Installer to the Trash`. Click the `Move to Trash` button.
-
-* Open a new `Finder` window and click on the `^` symbol to eject the `Vagrant` install mount. This will close the previous `Vagrant` install prompt.
+* Go to [https://www.vagrantup.com/downloads.html](https://www.vagrantup.com/downloads.html) to download and install the latest version for Mac OS X. 
 
 
 ### Step 5: Vagrant Plugin Installation
@@ -121,7 +78,6 @@ Vagrant is a tool for building and managing virtual machine environments in a si
    **Example**
 
 ```
-
 vagrant plugin install vagrant-hostsupdater
 
 Installing the 'vagrant-hostsupdater' plugin. This can take a few minutes...
@@ -134,7 +90,7 @@ Installed the plugin 'vagrant-hostsupdater (1.0.2)'!
 
 In this section, the enduser will need to decide on an appropriate area on their laptop to clone the current ISLE project software to.
 
-Some endusers create a new directory e.g. `Projects` or `Code` within their `Documents` directory. It is entirely up to the enduser to decide. The steps below are an example.
+Some endusers create a new directory e.g. `Projects` or `Code` within their `Documents` directory. It is entirely up to the enduser to decide. The steps below are an example and will install ISLE in `~/Documents/ISLE`.
 
 The built-in terminal for MacOs can be found in `~/Applications/Utilities/Terminal`
 
