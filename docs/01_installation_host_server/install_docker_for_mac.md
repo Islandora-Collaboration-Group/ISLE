@@ -1,4 +1,4 @@
-**MacOS** desktop version to use: `10.3.x+`
+**MacOS** desktop version to use: `10.13.x+`
 
 This is a detailed operating system-specific guide to setup and install all ISLE pre-requisites on a MacOS local laptop or workstation using Docker for Mac.
 
