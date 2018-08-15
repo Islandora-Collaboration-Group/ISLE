@@ -62,3 +62,7 @@ nav:
   - 'Diagram of network and connections': '06_specifications/specs_diagram_network.md'
   - 'Supported ISLE Software Matrix': '06_specifications/specs_supported_software_matrix.md'
   - 'Supported Drupal Modules on Test Site Matrix': '06_specifications/specs_supported_drupal_modules_matrix.md'
+- 'Appendices':
+  - 'Installing a Drupal Module with Composer': '07_appendices/installing-module-with-composer.md'
+  - 'Installing a Drupal Module with Drush': '07_appendices/installing-module-with-drush.md'
+  - 'Opening a Terminal in a Running Container': '07_appendices/open-terminal-in-running-container.md'

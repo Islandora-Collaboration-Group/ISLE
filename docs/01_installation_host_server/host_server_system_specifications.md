@@ -14,7 +14,7 @@ The basic requirements for this host machine vary depending on intended use. A V
   * Sufficient HD space to hold a test collection
   * MacOS High Sierra 10.13.x
   * Windows 10 Home or Pro
-  * Ubuntu 16.04+ Desktop
+  * Ubuntu 18.04+ Desktop
 
 ## Specifications for Production Servers
 
@@ -22,7 +22,7 @@ However, if the intent is a new or migrated site that will see actual production
 
 **Server Specifications**
 
-* Ubuntu 16.04 LTS or CentOS 7.x running on a server or VM
+* Ubuntu 18.04 LTS or CentOS 7.x running on a server or VM
 * Minimum 2 CPU's (w/ 1 - 4 cores each)
 * Sufficient HD or attached storage to hold your collection
 * 30 - 50GB for the Server OS & overhead
@@ -69,7 +69,7 @@ Our digital collections team will be testing a Docker implementation of the Isla
 
 We require access to a server meeting the following specifications:
 
- * Ubuntu 16.04 LTS or CentOS 7.x running on a server or VM
+ * Ubuntu 18.04 LTS or CentOS 7.x running on a server or VM
  * Minimum 2 CPU's (w/1-4 cores each)
  * Sufficient HD or attached storage to hold your collection
  * 30 - 50GB for the Server OS & overhead
