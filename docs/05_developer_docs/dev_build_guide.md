@@ -187,11 +187,7 @@ Example commands to repeat for each type of image.
 
 Pull down the newly pushed images.
 
-* `docker pull islandoracollabgroup/isle-apache:latest`
-* `docker pull islandoracollabgroup/isle-fedora:latest`
-* `docker pull islandoracollabgroup/isle-mysql:latest`
-* `docker pull islandoracollabgroup/isle-proxy:latest`
-* `docker pull islandoracollabgroup/isle-solr:latest`
+* `docker-compose pull`
 
 Follow the instructions within the `docker-compose.yml` file or within the [Test Site Installation Guide](../02_installation_test/ild_installation_guide.md) to start up containers and install the ISLE Test Site (`isle.localdomain`).
 
