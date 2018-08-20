@@ -4,7 +4,7 @@ This is a detailed operating system-specific guide to setup and install all ISLE
 
 Called "the host" - this is the base computer upon which the entire ISLE stack is built.
 
-**Please note:** This guide is for using `Docker for Windows` software only on a Windows 10 system instead of Vagrant or a Virtual Machine (VM).
+**Please note:** This guide is for using `Docker for Windows` software only on a Windows 10 system instead of Vagrant or a Virtual Machine (VM).  The current version of `Docker for Windows` clashes with Virtualbox.  If you with to test ISLE on a Windows 10 computer that must have Virtualbox installed on it, it is suggested that you install ISLE on a guest virtual machine running [Centos](install_on_centos.md) or [Ubuntu](install_on_ubuntu_1804.md).
 
 ### Assumptions / Pre-Requisites
 
@@ -26,23 +26,18 @@ Called "the host" - this is the base computer upon which the entire ISLE stack i
 In order to get a copy (clone) of the current ISLE project, git will need to be installed. [Git for Windows](https://gitforwindows.org/) is a software version control system for tracking changes in computer files and coordinating work on those files among multiple people.
 
 Dowload the installer and run.  The installer will prompt for several choices.  Generally, you should be okay with defaults except:
+
 * Change "use vi" to either Notepad++ (if installed) or nano.  Vi can be difficult to learn and Notepad++ and nano are simpler choices for those unfamiliar with vi.
 
 If git is already installed, then please proceed to the next section.
 
 ### Step 2: Docker for Windows Installation
 
-* Open a browser and navigate to https://www.docker.com/docker-windows
+* Go to [https://store.docker.com/editions/community/docker-ce-desktop-windows](https://store.docker.com/editions/community/docker-ce-desktop-windows)
 
-* Click the `Download from Docker Store` button in the center of the page
+* Choose the "Get Docker CE for Windows (stable)" link to download the installer. 
 
-* Click the blue `Get Docker` button on the right of the page
-
-* The `Docker for Windows Installer.exe` file should start to download. Check your `Downloads` directory
-
-* Double-click the `Docker for Windows Installer.exe` file.  
-
-* Follow the prompts.  
+* Run the installer and follow the prompts.  
 
 * You will be required to logout when the installation is complete.  
 
@@ -90,4 +85,4 @@ This process should may take 15 - 60+ mins depending on the speed of your Intern
 
 ### Next steps
 
-* Return to the [Install Start Here section](../install_start_here.md) for additional instructions.
+* Return to the [Install Start Here section](../install_start_here.md) for additional instructions or set up a [test version of ISLE](02_installation_test/ild_installation_guide/).

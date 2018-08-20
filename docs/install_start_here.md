@@ -6,7 +6,7 @@ Please select your desired use case for ISLE.
 
 * [Create a new ISLE site](#create-a-new-isle-site-or-sites) on a production, staging or development server
 
-* [Migrate to ISLE](install_start_here/#migrate-to-isle) on a production, staging or development server
+* [Migrate to ISLE](#migrate-to-isle) on a production, staging or development server
 
 * [Update ISLE](#update-isle) to install the newest improvements and security updates
 

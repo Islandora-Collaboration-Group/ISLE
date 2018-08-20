@@ -20,103 +20,24 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 ---
 
+### Process overview
+
+* Edit /etc/hosts on local laptop or desktop to allow user to easily connect to ISLE test system
+* Test site launch process
+* Run install script on Apache container
+* Test the site
+* Sample object ingestion
+* Toubleshooting
+
 ### Step 0: edit /etc/hosts on local laptop or desktop
 
-#### Using Vagrant on all OSes
+It is important to add `isle.localdomain` to your `/etc/hosts` file, as connecting directly to an IP address can prevent some components from working properly.
 
-* **Vagrant** If you are using Vagrant on a laptop move on to the next section (_Summary: Test site launch process_) as this part is handled automatically.
+* **Vagrant**: If you are using Vagrant, move on to the next section (_Summary: Test site launch process_) as this part is handled automatically.
+ 
+* **All other host configurations**: Instructions for editing hosts files can be found [here](editing-the-hosts-file.md).  
 
----
-
-#### Using Virtualbox VM (non-Vagrant) on MacOS or Ubuntu Desktop
-
-* From the instructions in setting up the Virtualbox VM on your OS (MacOS, Ubuntu or Windows), the IP used to setup the Host-Only network was `10.10.10.130`
-
-* Add the value of `10.10.10.130 isle.localdomain` to the laptop / workstation's `/etc/hosts` file.   
-
-* For endusers running MacOS and Ubuntu Desktop:
-
-   * Open a terminal on the local laptop
-
-   * Enter: `sudo nano /etc/hosts`
-     * _For endusers familiar with editing files on the command line, vim or alternative tools can be used in lieu of nano_
-
-   * Enter the laptop enduser password
-
-   * Add the values below the `127.0.0.1` entry in the `/etc/hosts` file.
-
-       * `10.10.10.130 isle.localdomain`  
-
-**Example**
-
-```
-  127.0.0.1 localhost
-  10.10.10.130 isle.localdomain
-```
-
-* Enter `Cntrl` and the letter `o` together to write the changes to the file.
-* Enter `Cntrl` and the letter `x` together to exit the file.
-
----
-
-#### Using Virtualbox VM (non-Vagrant) on Windows
-
-* For endusers running Windows 10:
-
-    * Press the Windows key.
-
-    * Type `Notepad` in the search field.
-
-    * In the search results, right-click `Notepad` and select `Run as administrator`.
-
-    * From `Notepad`, open the following file: `C:\Windows\System32\Drivers\etc\hosts`
-
-    * Add the values below the `127.0.0.1` entry in the `/etc/hosts` file.
-
-        * `10.10.10.130 isle.localdomain`  
-
-    * Click File > Save to save your changes.
-
----
-
-#### Using Docker for Mac
-
-* **Docker For Mac** If you are using Docker For Mac, then use the IP address of `127.0.0.1` to resolve to `localhost` and to the `isle.localdomain` domain name
-
-* Open a terminal on the local laptop
-
-* Enter: `sudo nano /etc/hosts`
-  * _For endusers familiar with editing files on the command line, vim or alternative tools can be used in lieu of nano_
-
-* Enter the laptop enduser password
-
-* Add the values next to the `127.0.0.1 localhost` entry in the `/etc/hosts` file.
-
-    * `127.0.0.1 localhost isle.localdomain` with a space in between the entries.  
-
-  * Enter `Cntrl` and the letter `o` together to write the changes to the file.
-
-  * Enter `Cntrl` and the letter `x` together to exit the file.
-
----
-
-#### Using Docker for Windows
-
-* For endusers running Windows 10:
-
-    * Press the Windows key.
-
-    * Type `Notepad` in the search field.
-
-    * In the search results, right-click `Notepad` and select `Run as administrator`.
-
-    * From `Notepad`, open the following file: `C:\Windows\System32\Drivers\etc\hosts`
-
-    * Add the values next to the `127.0.0.1 localhost` entry in the `/etc/hosts` file.
-
-        * `127.0.0.1 localhost isle.localdomain` with a space in between the entries.
-
-    * Click File > Save to save your changes.
+* After completing the appropriate steps, please return to this guide and continue with _Step 1: Test site Launch process_ below
 
 ---
 
@@ -182,7 +103,7 @@ _For Windows Users only_
 
 * Once finished press the `Cntrl` and `d` keys or type `exit` to get out of the apache container
 
-### Testing the site
+### Step 4: Testing the site
 
 * Test (QC) the resulting setup by opening a web browser to the `isle.localdomain` URL of the new ISLE sample site (i.e. [https://isle.localdomain](https://isle.localdomain)) and logging in.
 
@@ -194,9 +115,9 @@ _For Windows Users only_
 
 * There is additional information for users and passwords that can be found on the [Test Site Resources](ild_resources.md) page.
 
-### Sample objects for ingest
+### Step 5: Sample objects for ingest
 
-Courteous of the [Islandora Collaboration Group](https://github.com/Islandora-Collaboration-Group/icg_information) there is a sample set of objects and corresponding metadata that can be used for ingest.
+Courtesy of the [Islandora Collaboration Group](https://github.com/Islandora-Collaboration-Group/icg_information) there is a sample set of objects and corresponding metadata that can be used for ingest.
 
 More information can be found on the [Test Site Resources](ild_resources.md) page.
 
