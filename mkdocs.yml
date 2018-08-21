@@ -19,10 +19,8 @@ nav:
 - 'Installation and Migration Instructions':
   - '1. Start Here': install_start_here.md
   - '2. Host Server Prerequisites':
-    - 'Host Server Specifications': '01_installation_host_server/host_server_system_specifications.md'
-    - 'Install ISLE Host Server Dependencies on CentOS': '01_installation_host_server/install_on_centos.md'
-    - 'Install ISLE Host Server Dependencies on Ubuntu 16.04': '01_installation_host_server/install_on_ubuntu.md'
-    - 'Install ISLE Host Server Dependencies on Ubuntu 18.04 (ISLE RC 1.1)': '01_installation_host_server/install_on_ubuntu_1804.md'
+    - 'CentOS': '01_installation_host_server/install_on_centos.md'
+    - 'Ubuntu 18.04': '01_installation_host_server/install_on_ubuntu_1804.md'
     - 'Docker for Mac': '01_installation_host_server/install_docker_for_mac.md'
     - 'Docker for Windows': '01_installation_host_server/install_docker_for_windows.md'
     - 'Vagrant & VirtualBox on MacOS': '01_installation_host_server/install_macos_vagrant.md'
@@ -59,6 +57,7 @@ nav:
   - 'Supported ISLE Software Matrix': '06_specifications/specs_supported_software_matrix.md'
   - 'Supported Drupal Modules on Test Site Matrix': '06_specifications/specs_supported_drupal_modules_matrix.md'
 - 'Appendices':
+  - 'Host Server Specifications': '01_installation_host_server/host_server_system_specifications.md'
   - 'Editing the /ect/hosts file': '07_appendices/editing-the-hosts-file.md'
   - 'Sample IT Department Request Letter': '07_appendices\sample-it-department-request.md'
   - 'Installing a Drupal Module with Composer': '07_appendices/installing-module-with-composer.md'
