@@ -35,9 +35,9 @@ If git is already installed, then please proceed to the next section.
 
 * Go to [https://store.docker.com/editions/community/docker-ce-desktop-windows](https://store.docker.com/editions/community/docker-ce-desktop-windows)
 
-* Choose the "Get Docker CE for Windows (stable)" link to download the installer. 
+* Choose the "Get Docker CE for Windows (stable)" link to download the installer. You may need to create an account on Docker.com to continue.
 
-* Run the installer and follow the prompts.  
+* Run the installer and follow the prompts.  The default settings should be okay.
 
 * You will be required to logout when the installation is complete.  
 
@@ -49,6 +49,8 @@ If git is already installed, then please proceed to the next section.
 
 * Once fully started, one can see a whale icon in the notification area.  
 
+* If you are prompted to log in to Docker, you can choose to do so with your Docker.com account information, or you can simply close the window.  Docker is running and you do not need to log in to use it.
+
 * Please note: This process also installs the newest version of `Docker-Compose`.
 
 ### Step 3: Clone the ISLE repository
@@ -57,13 +59,13 @@ In this section, the enduser will need to decide on an appropriate area on their
 
 **Please note:** Windows PowerShell is already installed on Windows 10.  
 
-* Start Launch PowerShell
+* Launch PowerShell
 
     * Click on the Windows/Start icon and start typing "powershell".  The icon for PowerShell will appear in the menu. Double-click the icon to start.
 
 * `cd ~\Documents`
 
-* `git clone https://github.com/Islandora-Collaboration-Group/ISLE`
+* `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
 
    * _This process will take 3 - 5 minutes depending on internet bandwidth_
 

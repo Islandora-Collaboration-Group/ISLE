@@ -35,7 +35,7 @@ It is important to add `isle.localdomain` to your `/etc/hosts` file, as connecti
 
 * **Vagrant**: If you are using Vagrant, move on to the next section (_Summary: Test site launch process_) as this part is handled automatically.
  
-* **All other host configurations**: Instructions for editing hosts files can be found [here](editing-the-hosts-file.md).  
+* **All other host configurations**:  Instructions for editing hosts files can be found [here](../07_appendices/editing-the-hosts-file.md).  
 
 * After completing the appropriate steps, please return to this guide and continue with _Step 1: Test site Launch process_ below
 

@@ -16,43 +16,39 @@ extra:
 
 nav:
 - Home: index.md
-- About: about.md
-- Glossary of Terms and Variables: glossary.md
-- Installation Start Here: install_start_here.md
-- 'Installation':
-  - 'Host Server Specifications': '01_installation_host_server/host_server_system_specifications.md'
-  - 'Install ISLE Host Server Dependencies on CentOS': '01_installation_host_server/install_on_centos.md'
-  - 'Install ISLE Host Server Dependencies on Ubuntu 16.04': '01_installation_host_server/install_on_ubuntu.md'
-  - 'Install ISLE Host Server Dependencies on Ubuntu 18.04 (ISLE RC 1.1)': '01_installation_host_server/install_on_ubuntu_1804.md'
-  - 'Docker for Mac': '01_installation_host_server/install_docker_for_mac.md'
-  - 'Docker for Windows': '01_installation_host_server/install_docker_for_windows.md'
-  - 'Vagrant & VirtualBox on MacOS': '01_installation_host_server/install_macos_vagrant.md'
-  - 'Troubleshooting': '01_installation_host_server/install_troubleshooting.md'
-- 'Installation - Test (isle.localdomain)':
-  - 'Test Site Example User Story': '02_installation_test/ild_example_user_story.md'
-  - 'Test Site Installation Guide': '02_installation_test/ild_installation_guide.md'
-  - 'Test Site Resources': '02_installation_test/ild_resources.md'
-- 'Installation - New Site':
-  - 'New Site Example User Story': '03_installation_new_site/new_site_example_user_story.md'
-  - 'New Site Installation Guide - w/ Single ISLE Environment': '03_installation_new_site/new_site_installation_guide_single.md'
-  - 'New Site Installation Guide - w/ multiple ISLE Environments': '03_installation_new_site/new_site_installation_guide_multi.md'
-- 'Installation - Migration':
-  - 'Migration Example User Story': '04_installation_migration/migration_example_user_story.md'
-  - 'Migration Guide': '04_installation_migration/migration_installation_guide.md'
-  - 'Migration Export Checklist': '04_installation_migration/migration_export_checklist.md'
-  - 'Migration Merge Checklist': '04_installation_migration/migration_merge_checklist.md'
-  - 'Migration Reindex Process': '04_installation_migration/migration_reindex_process.md'
+- 'Installation and Migration Instructions':
+  - '1. Start Here': install_start_here.md
+  - '2. Host Server Prerequisites':
+    - 'Host Server Specifications': '01_installation_host_server/host_server_system_specifications.md'
+    - 'Install ISLE Host Server Dependencies on CentOS': '01_installation_host_server/install_on_centos.md'
+    - 'Install ISLE Host Server Dependencies on Ubuntu 16.04': '01_installation_host_server/install_on_ubuntu.md'
+    - 'Install ISLE Host Server Dependencies on Ubuntu 18.04 (ISLE RC 1.1)': '01_installation_host_server/install_on_ubuntu_1804.md'
+    - 'Docker for Mac': '01_installation_host_server/install_docker_for_mac.md'
+    - 'Docker for Windows': '01_installation_host_server/install_docker_for_windows.md'
+    - 'Vagrant & VirtualBox on MacOS': '01_installation_host_server/install_macos_vagrant.md'
+    - 'Troubleshooting': '01_installation_host_server/install_troubleshooting.md'
+  - '3. Install ISLE':
+    - 'Install a Test Site':
+      - 'Test Site Example User Story': '02_installation_test/ild_example_user_story.md'
+      - 'Test Site Installation Guide': '02_installation_test/ild_installation_guide.md'
+      - 'Test Site Resources': '02_installation_test/ild_resources.md'
+    - 'Install a New ISLE Site':
+      - 'New Site Example User Story': '03_installation_new_site/new_site_example_user_story.md'
+      - 'New Site Installation Guide - w/ Single ISLE Environment': '03_installation_new_site/new_site_installation_guide_single.md'
+      - 'New Site Installation Guide - w/ multiple ISLE Environments': '03_installation_new_site/new_site_installation_guide_multi.md'
+    - 'Migrate an Existing Islandora site to ISLE':
+      - 'Migration Example User Story': '04_installation_migration/migration_example_user_story.md'
+      - 'Migration Guide': '04_installation_migration/migration_installation_guide.md'
+      - 'Migration Export Checklist': '04_installation_migration/migration_export_checklist.md'
+      - 'Migration Merge Checklist': '04_installation_migration/migration_merge_checklist.md'
+      - 'Migration Reindex Process': '04_installation_migration/migration_reindex_process.md'
 - 'Developer Docs':
-  - 'Contributing to Project': '05_developer_docs/dev_contributing_to_project.md'
   - 'Documentation Overview': '05_developer_docs/dev_documentation_overview.md'
   - 'Documentation Editing - Online': '05_developer_docs/dev_documentation_editing_online.md'
   - 'Documentation Editing - Local': '05_developer_docs/dev_documentation_editing_local.md'
   - 'Installing Mkdocs': '05_developer_docs/dev_documentation_mkdocs.md'
-  - 'About Maintainers': '05_developer_docs/dev_about_maintainers.md'
-  - 'About Project': '05_developer_docs/dev_about_project.md'
   - 'Release process': '05_developer_docs/dev_release_process.md'
   - 'Example User Story': '05_developer_docs/dev_example_user_story.md'
-  - 'Policies': '05_developer_docs/dev_policies.md'
   - 'Build Guide': '05_developer_docs/dev_build_guide.md'
   - 'Testing Guide': '05_developer_docs/dev_testing_guide.md'
   - 'Ansible Guide': '05_developer_docs/dev_ansible_guide.md'
@@ -64,7 +60,13 @@ nav:
   - 'Supported Drupal Modules on Test Site Matrix': '06_specifications/specs_supported_drupal_modules_matrix.md'
 - 'Appendices':
   - 'Editing the /ect/hosts file': '07_appendices/editing-the-hosts-file.md'
+  - 'Sample IT Department Request Letter': '07_appendices\sample-it-department-request.md'
   - 'Installing a Drupal Module with Composer': '07_appendices/installing-module-with-composer.md'
   - 'Installing a Drupal Module with Drush': '07_appendices/installing-module-with-drush.md'
   - 'Opening a Terminal in a Running Container': '07_appendices/open-terminal-in-running-container.md'
-
+- 'About': 
+  - 'About ISLE': about.md
+  - 'Contributing to Project': '05_developer_docs/dev_contributing_to_project.md'
+  - 'About Maintainers': '05_developer_docs/dev_about_maintainers.md'
+  - 'Policies': '05_developer_docs/dev_policies.md'
+- 'Glossary of Terms and Variables': glossary.md
