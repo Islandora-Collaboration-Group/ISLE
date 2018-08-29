@@ -17,15 +17,14 @@ extra:
 nav:
 - Home: index.md
 - 'Installation and Migration Instructions':
-  - '1. Start Here': install_start_here.md
-  - '2. Host Server Prerequisites':
+  - '1. Set up the Host Server':
     - 'CentOS': '01_installation_host_server/install_on_centos.md'
     - 'Ubuntu 18.04': '01_installation_host_server/install_on_ubuntu_1804.md'
     - 'Docker for Mac': '01_installation_host_server/install_docker_for_mac.md'
     - 'Docker for Windows': '01_installation_host_server/install_docker_for_windows.md'
-    - 'Vagrant & VirtualBox on MacOS': '01_installation_host_server/install_macos_vagrant.md'
+    - 'Vagrant & VirtualBox on MacOS (Deprecated)': '01_installation_host_server/install_macos_vagrant.md'
     - 'Troubleshooting': '01_installation_host_server/install_troubleshooting.md'
-  - '3. Install ISLE':
+  - '2. Install ISLE':
     - 'Install a Test Site':
       - 'Test Site Example User Story': '02_installation_test/ild_example_user_story.md'
       - 'Test Site Installation Guide': '02_installation_test/ild_installation_guide.md'
@@ -40,6 +39,7 @@ nav:
       - 'Migration Export Checklist': '04_installation_migration/migration_export_checklist.md'
       - 'Migration Merge Checklist': '04_installation_migration/migration_merge_checklist.md'
       - 'Migration Reindex Process': '04_installation_migration/migration_reindex_process.md'
+- 'Get Help': 'get_help.md'
 - 'Developer Docs':
   - 'Documentation Overview': '05_developer_docs/dev_documentation_overview.md'
   - 'Documentation Editing - Online': '05_developer_docs/dev_documentation_editing_online.md'
@@ -58,11 +58,13 @@ nav:
   - 'Supported Drupal Modules on Test Site Matrix': '06_specifications/specs_supported_drupal_modules_matrix.md'
 - 'Appendices':
   - 'Host Server Specifications': '01_installation_host_server/host_server_system_specifications.md'
+  - 'Updating ISLE': 'update_isle.md'
   - 'Editing the /ect/hosts file': '07_appendices/editing-the-hosts-file.md'
   - 'Sample IT Department Request Letter': '07_appendices\sample-it-department-request.md'
   - 'Installing a Drupal Module with Composer': '07_appendices/installing-module-with-composer.md'
   - 'Installing a Drupal Module with Drush': '07_appendices/installing-module-with-drush.md'
   - 'Opening a Terminal in a Running Container': '07_appendices/open-terminal-in-running-container.md'
+  - 'Note/Warning about installing on Redhat': '07_appendices/redhat.md'
 - 'About': 
   - 'About ISLE': about.md
   - 'Contributing to Project': '05_developer_docs/dev_contributing_to_project.md'
