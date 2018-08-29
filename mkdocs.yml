@@ -66,8 +66,9 @@ nav:
   - 'Opening a Terminal in a Running Container': '07_appendices/open-terminal-in-running-container.md'
   - 'Note/Warning about installing on Redhat': '07_appendices/redhat.md'
 - 'About': 
-  - 'About ISLE': about.md
-  - 'Contributing to Project': '05_developer_docs/dev_contributing_to_project.md'
-  - 'About Maintainers': '05_developer_docs/dev_about_maintainers.md'
-  - 'Policies': '05_developer_docs/dev_policies.md'
+  - 'About ISLE': '08_about/about.md'
+  - 'Contributing to Project': '08_about/contributing_to_project.md'
+  - 'About Maintainers': '08_about/dbout_maintainers.md'
+  - 'Policies': '08_about/policies.md'
+- 'Release Notes': '09_release_notes/release_notes.md'
 - 'Glossary of Terms and Variables': glossary.md
