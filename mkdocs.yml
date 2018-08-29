@@ -18,10 +18,10 @@ nav:
 - Home: index.md
 - 'Installation and Migration Instructions':
   - '1. Set up the Host Server':
-    - 'CentOS': '01_installation_host_server/install_on_centos.md'
+    - 'CentOS' 7.x: '01_installation_host_server/install_on_centos.md'
     - 'Ubuntu 18.04': '01_installation_host_server/install_on_ubuntu_1804.md'
-    - 'Docker for Mac': '01_installation_host_server/install_docker_for_mac.md'
-    - 'Docker for Windows': '01_installation_host_server/install_docker_for_windows.md'
+    - 'Docker for Mac Hig Sierra': '01_installation_host_server/install_docker_for_mac.md'
+    - 'Docker for Windows 10': '01_installation_host_server/install_docker_for_windows.md'
     - 'Vagrant & VirtualBox on MacOS (Deprecated)': '01_installation_host_server/install_macos_vagrant.md'
     - 'Troubleshooting': '01_installation_host_server/install_troubleshooting.md'
   - '2. Install ISLE':

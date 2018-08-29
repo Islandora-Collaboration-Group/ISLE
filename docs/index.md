@@ -23,7 +23,7 @@ ISLE is designed and tested to work on the following operating systems.  Follow 
 
 * [Mac OSX High Sierra](01_installation_host_server/install_docker_for_mac.md)
 
-* [Windows](01_installation_host_server/install_docker_for_windows.md)
+* [Windows 10](01_installation_host_server/install_docker_for_windows.md)
 
 * [Ubuntu 18.04](01_installation_host_server/install_on_ubuntu_1804.md)
 
