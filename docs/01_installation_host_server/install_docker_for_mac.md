@@ -6,6 +6,8 @@ Called "the host" - this is the base computer upon which the entire ISLE stack i
 
 **Please note:** This guide is for using `Docker for Mac` software only on a MacOS system instead of Vagrant or a Virtual Machine (VM).
 
+**Please note:** This guide should also install on the older Sierra `10.12`, but we can't guarantee support (i.e, fixes) for things broken only on Sierra but not on High Sierra.
+
 ### Assumptions / Pre-Requisites
 
 * Enduser has a local laptop / workstation that conforms to the specifications outlined in the [Host Server Specifications](host_server_system_specifications.md)
