@@ -58,7 +58,7 @@ nav:
   - 'Supported Drupal Modules on Test Site Matrix': '06_specifications/specs_supported_drupal_modules_matrix.md'
 - 'Appendices':
   - 'Host Server Specifications': '01_installation_host_server/host_server_system_specifications.md'
-  - 'Updating ISLE': 'update_isle.md'
+  - 'Updating ISLE': '07_appendices/update_isle.md'
   - 'Editing the /ect/hosts file': '07_appendices/editing-the-hosts-file.md'
   - 'Sample IT Department Request Letter': '07_appendices\sample-it-department-request.md'
   - 'Installing a Drupal Module with Composer': '07_appendices/installing-module-with-composer.md'
@@ -68,7 +68,7 @@ nav:
 - 'About': 
   - 'About ISLE': '08_about/about.md'
   - 'Contributing to Project': '08_about/contributing_to_project.md'
-  - 'About Maintainers': '08_about/dbout_maintainers.md'
+  - 'About Maintainers': '08_about/about_maintainers.md'
   - 'Policies': '08_about/policies.md'
 - 'Release Notes': '09_release_notes/release_notes.md'
 - 'Glossary of Terms and Variables': glossary.md
