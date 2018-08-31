@@ -1,3 +1,4 @@
+###Test ISLE Installation Guide
 _Expectations:  It takes an average of **15-45 minutes** to read this entire document and perform the installation as prescribed._
 
 Follow this guide to spin up and install ISLE utilizing the built-in `isle.localdomain` domain name for review and testing.
@@ -10,13 +11,9 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 ### Assumptions / Prerequisites
 
-* Laptop / workstation that conforms to the specifications outlined in the [Host Server Specifications](../01_installation_host_server/host_server_system_specifications.md)
-
-* This test site guide is designed for a local laptop / workstation that has already followed the appropriate setup and configuration instructions in the `Test ISLE` section of the [Install Start Here](../install_start_here.md) guide.
+* This test site guide is designed for a local laptop / workstation that has already followed the appropriate setup and configuration instructions in the `Test ISLE` section of the [guide](/index.md#test-isle).
 
 * Instructions below assume a MacOS or Linux laptop or workstation. Windows users may have to adjust / swap out various tools as needed.
-
-* These directions depend on the type of local computer used to connect via browser to Islandora.
 
 ---
 
@@ -35,7 +32,7 @@ It is important to add `isle.localdomain` to your `/etc/hosts` file, as connecti
 
 * **Vagrant**: If you are using Vagrant, move on to the next section (_Summary: Test site launch process_) as this part is handled automatically.
  
-* **All other host configurations**: Instructions for editing hosts files can be found [here](editing-the-hosts-file.md).  
+* **All other host configurations**:  Instructions for editing hosts files can be found [here](../07_appendices/editing-the-hosts-file.md).  
 
 * After completing the appropriate steps, please return to this guide and continue with _Step 1: Test site Launch process_ below
 

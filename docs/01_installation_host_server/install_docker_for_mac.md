@@ -10,7 +10,7 @@ Called "the host" - this is the base computer upon which the entire ISLE stack i
 
 ### Assumptions / Pre-Requisites
 
-* Enduser has a local laptop / workstation that conforms to the specifications outlined in the [Host Server Specifications](host_server_system_specifications.md)
+* Enduser has a local laptop / workstation that conforms to the specifications outlined in the [Host Server Specifications](host_server_system_specifications.md)  Several users have reported success using these instructions on Sierra (10.12), but there is no guarantee that it will continue to work in the future.
 
 * Enduser **must** have administrator rights on the MacOS computer to proceed or the installation will fail.
 

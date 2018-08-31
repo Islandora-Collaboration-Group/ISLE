@@ -1,3 +1,7 @@
+##Install ISLE on a Mac with Vagrant
+
+**PLEASE NOTE** Installing ISLE on a [Mac using Docker](install_docker_for_mac.md) is simpler and can be done on a less powerful laptop or workstation.  Support for installing ISLE on a Mac with Vagrant is deprecated.
+
 **MacOS** desktop version to use: `10.13.x+`
 
 This is a detailed operating system-specific guide to setup and install all ISLE pre-requisites on a MacOS local laptop or workstation using Vagrant and VirtualBox.
