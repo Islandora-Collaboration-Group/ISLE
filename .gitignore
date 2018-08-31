@@ -61,6 +61,7 @@ Thumbs.db
 #===================
 # ISLE specific
 data
+logs
 site
 new_structure.md
 passwords.md

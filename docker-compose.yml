@@ -1,129 +1,146 @@
-version: '2'
+version: '3'
 
-## ISLE Test Site (isle.localdomain) Docker-compose.yml
-##
-## This is generic docker-compose that when will load a complete Islandora Stack ready to test.
-## You do NOT need to edit anything here!
-##
-## Quick Start Instruction (Mac, *nix machines only: real or virtual)
-## You are not required to CLONE or downLoad this repo for testing ISLE.
-## Please save the entire contents of this file into a docker-compose.yml on your computer.
-##
-## Quick Start Steps:
-## 0) If your user is not already added to the "docker" group (to find out type `groups`) do so now:
-##    `echo sudo usermod -aG docker $USER` - you MUST log out and log back in, and check `groups` again.
-## 1) Place this docker-compose.yml in an EMPTY directory.  Location does not matter, nor name of the folder.
-## 2) In terminal or console navigate to the directory that contains your docker-compose.yml.
-## 3) Type:  `docker-compose up -d`
-##
-## What you're watching: Docker is orchestrating all necessary components of Islandora and running them for us.
-## The process includes download of large files, and may take some time.
-##
-## When docker has completed the job it will tell us that things are "done" being created.
-## example output:
-## ```
-## Creating isle-mysql-ld ... done
-## Creating isle-solr-ld ... done
-## Creating isle-fedora-ld ... done
-## Creating isle-apache-ld ... done
-## Creating isle-proxy ... done
-## ```
-##
-## 4) The final step is to initialize the current version of Islandora!  In terminal please type:
-##    `docker exec -it isle-apache-ld bash /tmp/isle_drupal_build_tools/install_isle_ld_site.sh`
-##
-## What you are watching:  An installation script is running to fetch and install Drupal and the Islandora Modules!
-##
-## 5) Visit http://isle.localdomain and login with:
-##      username: isle_localdomain_admin
-##      password: isle_localdomain_adminpw2018
-##
-## If isle.localdomain does _not_ resolve please see append /etc/hosts with a reference to isle.localdomain:
-## {insert link to relevant docs when they're up, and remove these instructions please}
-##   a) if you are on the computer running Docker enter: `echo '127.0.1.1 isle.localdomain' | sudo tee -a /etc/hosts` (only ever do this once)
-##   b) if you installed on a vm and do not want to work in the VM, but from your computer:
-##        Retrieve the IP of the VM as seen from your computer and in terminal enter:
-##        `echo '<VM_IP> isle.localdomain' | sudo tee -a /etc/hosts`
-##    NB: Please remove any lines added when testing is complete. `sudo nano /etc/hosts`
-##
-## Stop editing here if you would like to try the Islandora ISLE default installation. You are not required to edit anything below.
-## ## ##
+#### docker-compose up -d;
+## Updated 2018-08-31 - Release 1.1.0
 
 services:
-  mysql:
-    image: islandoracollabgroup/isle-mysql:latest
-    container_name: isle-mysql-ld
-    environment:
-      - MYSQL_ROOT_PASSWORD=ild_mysqlrt_2018
+  isle-portainer: ## Renamed to avoid conflicts on systems/servers with portainer already running.
+    image: portainer/portainer
+    container_name: isle-portainer-${CONTAINER_SHORT_ID}
+    command: -H unix:///var/run/docker.sock --no-auth
     networks:
       - isle-internal
     ports:
-      - "3306:3306"
+      - "9010:9000" ## Remapped to avoid conflicts on systems/servers with portainer already running.
     volumes:
-      - db-data-ld:/var/lib/mysql
-      - ./data/mysql/log:/var/log/mysql
+      - /var/run/docker.sock:/var/run/docker.sock
+      - isle-portainer-data:/data
+    labels:
+      - traefik.port=9000
+      - traefik.backend=port-isle-${CONTAINER_SHORT_ID}
+      - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
+      - traefik.enable=true
+      - "traefik.frontend.rule=Host:portainer.${BASE_DOMAIN};"
+
+  mysql:
+    # build:
+    #   context: ./images/mysql
+    image: islandoracollabgroup/isle-mysql:latest
+    container_name: isle-mysql-${CONTAINER_SHORT_ID}
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    networks:
+      - isle-internal
+    volumes:
+      - isle-db-data:/var/lib/mysql
+      - ./logs/mysql:/var/log/mysql
 
   fedora:
-    image: islandoracollabgroup/isle-fedora:latest
-    container_name: isle-fedora-ld
+    # build:
+    #   context: ./images/isle-fedora
+    image: benjaminrosner/isle-fedora:latest
+    container_name: isle-fedora-${CONTAINER_SHORT_ID}
+    environment:
+      - JAVA_MAX_MEM=768M
+      - JAVA_MIN_MEM=128M
     networks:
       - isle-internal
     ports:
-      - "8080:8080"
-    tty: true
+      - "8081:8080"
     depends_on:
       - mysql
       - solr
     volumes:
-      - fed-data-ld:/usr/local/fedora/data
-      - ./data/fedora/log/fedora:/usr/local/fedora/server/logs
-      - ./data/fedora/log/tomcat:/usr/local/tomcat/logs
+      - isle-fedora-data:/usr/local/fedora/data
+      - ./logs/fedora/fcrepo:/usr/local/fedora/server/logs
+      - ./logs/fedora/tomcat:/usr/local/tomcat/logs
 
   solr:
-    image: islandoracollabgroup/isle-solr:latest
-    container_name: isle-solr-ld
+    # build:
+    #   context: ./images/isle-solr
+    image: benjaminrosner/isle-solr:latest
+    container_name: isle-solr-${CONTAINER_SHORT_ID}
+    environment:
+      - JAVA_MAX_MEM=512M
+      - JAVA_MIN_MEM=0
     networks:
       - isle-internal
     ports:
-      - "8091:8080"
-    tty: true
+      - "8082:8080"
     depends_on:
       - mysql
     volumes:
-      - solr-data-ld:/usr/local/solr/collection1/data
-      - ./data/solr/logs:/usr/local/tomcat/logs
+      - isle-solr-data:/usr/local/solr
+      - ./logs/solr:/usr/local/tomcat/logs
+
+  image-services:
+    # build:
+    #   context: ./images/isle-imageservices
+    image: benjaminrosner/isle-imageservices:latest
+    container_name: isle-images-${CONTAINER_SHORT_ID}
+    environment:
+      - JAVA_MAX_MEM=512M
+      - JAVA_MIN_MEM=0
+    networks:
+      - isle-internal
+    depends_on:
+      - apache
+      - fedora
+    ports:
+      - "8083:8080"
+    volumes:
+      - ./logs/imageservices:/usr/local/tomcat/logs
+    labels:
+      - traefik.backend=isle-imageservices-${CONTAINER_SHORT_ID}
+      - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
+      - traefik.enable=true
+      - "traefik.frontend.rule=Host:images.${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
 
   apache:
-    image: islandoracollabgroup/isle-apache:latest
-    container_name: isle-apache-ld
+    # build:
+    #   context: ./images/isle-apache
+    image: benjaminrosner/isle-apache:latest
+    container_name: isle-apache-${CONTAINER_SHORT_ID}
+    environment:
+      - PULL_ISLE_BUILD_TOOLS=true # Defaults to true.
     networks:
       isle-internal:
         aliases:
-          - isle.localdomain
-    tty: true
+          - ${BASE_DOMAIN}
     depends_on:
       - mysql
       - fedora
       - solr
+      - traefik
     volumes:
-      - apache-data-ld:/var/www/html
-      - ./data/apache/log/apache:/var/log/apache2
+      - isle-apache-data:/var/www/html
+      - ./logs/apache/httpd:/var/log/apache2
+      - ./logs/apache/fits:/var/log/fits
+    labels:
+      - traefik.backend=isle-apache-${CONTAINER_SHORT_ID}
+      - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
+      - traefik.enable=true
+      - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
 
-  proxy:
-    image: islandoracollabgroup/isle-proxy:latest
-    container_name: isle-proxy
+  traefik:
+    image: traefik:latest
+    container_name: isle-proxy-${CONTAINER_SHORT_ID}
     networks:
       isle-internal:
       isle-external:
     ports:
       - "80:80"
       - "443:443"
-    depends_on:
-      - mysql
-      - fedora
-      - solr
-      - apache
-
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./config/traefik/traefik.toml:/traefik.toml
+      - ./config/traefik/isle.localdomain:/certs/isle.localdomain
+    labels:
+      - traefik.backend=isle-proxy-${CONTAINER_SHORT_ID}
+      - traefik.port=8080
+      - traefik.enable=true
+      - traefik.frontend.rule=Host:admin.${BASE_DOMAIN};
 
 # Defined networks
 networks:
@@ -131,7 +148,8 @@ networks:
   isle-external:
 
 volumes:
-  db-data-ld:
-  fed-data-ld:
-  solr-data-ld:
-  apache-data-ld:
+  isle-db-data:
+  isle-fedora-data:
+  isle-solr-data:
+  isle-apache-data:
+  isle-portainer-data:
