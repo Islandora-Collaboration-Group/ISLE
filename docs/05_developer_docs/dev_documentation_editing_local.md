@@ -74,7 +74,7 @@ Changes not staged for commit:
   (use "git checkout -- <file>..." to discard changes in working directory)
 
 	modified:   docs/06_specifications/specs_diagram_network.md
-	modified:   docs/Glossary.md
+	modified:   docs/glossary.md
 	modified:   mkdocs.yml
 
 Untracked files:
@@ -89,7 +89,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 You now need to add these changed / new files to git.
 
 * `git add docs/06_specifications/specs_diagram_network.md`
-* `git add docs/Glossary.md`
+* `git add docs/glossary.md`
 * `git add mkdocs.yml`
 * `git add docs/05_developer_docs/dev_building_giant_robots.md`
 

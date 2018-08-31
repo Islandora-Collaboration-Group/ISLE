@@ -84,7 +84,7 @@ In order for `mkdocs` to understand that there is a new page and page title to d
 ### Commit changes
 
 * When finished editing, adding or updating, scroll down to the `Commit changes` section.
-  * In the first empty field, enter a short description of the file edited e.g. `Update Glossary.md`
+  * In the first empty field, enter a short description of the file edited e.g. `Update glossary.md`
 
   * In the second larger empty field, enter a larger description of the edits
   made to the file. Two to five sentences should suffice.
