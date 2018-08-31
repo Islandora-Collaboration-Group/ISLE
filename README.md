@@ -147,7 +147,6 @@ If you have been testing the stack extensively you may want to `prune` your Dock
 
 
 ### Important Notes, Ports, Pages and Usernames/Passwords
-@SEE: https://github.com/Islandora-Collaboration-Group/ISLE  
 [Portainer](https://portainer.io/) is a GUI for managing Docker containers. It has been built into ISLE for your convenience.  
 **Windows Users**: Please open the .env and uncomment `COMPOSE_CONVERT_WINDOWS_PATHS=1`  
 **Note that both HTTP and HTTPS work** Please accept the self-signed certificate for testing when using HTTPS.
