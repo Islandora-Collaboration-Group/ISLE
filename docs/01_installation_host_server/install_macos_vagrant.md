@@ -4,6 +4,8 @@ This is a detailed operating system-specific guide to setup and install all ISLE
 
 **Please note:** This guide is for using `Vagrant / Virtualbox` software only on a MacOS system instead of `Docker for Mac`.
 
+**Please note:** This guide should also install on the older Sierra `10.12`, but we can't guarantee support (i.e, fixes) for things broken only on Sierra but not on High Sierra.
+
 ### Assumptions / Pre-Requisites
 
 * Enduser has a local laptop / workstation that conforms to the specifications outlined in the [Host Server Specifications](host_server_system_specifications.md)
