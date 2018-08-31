@@ -7,3 +7,7 @@
 
 - name: Allow islandora user to sudo without password
   copy: src=islandora dest=/etc/sudoers.d/islandora owner=root group=root mode=0440
+
+- service:
+    name: sshd
+    state: restarted
