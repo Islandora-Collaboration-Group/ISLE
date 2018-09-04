@@ -63,8 +63,8 @@ If you are not familiar with ingest, one can follow instructions [here](https://
 | fedoraIntCallUser | ild_fed_IntCallUser_2018      | Fedora        | http://hostip:8080/fedora/objects                           |
 | anonymous         | anonymous                     | Fedora        | ---                                                         |
 | fgsAdmin          | ild_fgs_admin_2018            | Gsearch       | http://hostip:8080/fedoragsearch/rest?operation=updateIndex |
-| admin             | ild_tc_adm_2018               | Tomcat        | http://hostip:8080/manager/html                             |
-| manager           | ild_tc_man_2018               | Tomcat        | http://hostip:8080/manager/html                             |
+| admin             | isle_admin                    | Tomcat        | http://hostip:8080/manager/html                             |
+| manager           | isle_admin                    | Tomcat        | http://hostip:8080/manager/html                             |
 | --                | --                            | Djatoka       | http://hostip:8080/adore-djatoka/                           |
 
 ---
@@ -85,8 +85,8 @@ If you are not familiar with ingest, one can follow instructions [here](https://
 
 | Account           | Password        | Service       | URL                             |
 | -------------     | -------------   | ------------- | -------------                   |
-| admin             | ild_tc_adm_2018 | Tomcat        | http://hostip:8091/manager/html |
-| manager           | ild_tc_man_2018 | Tomcat        | http://hostip:8091/manager/html |
+| admin             | isle_admin      | Tomcat        | http://hostip:8091/manager/html |
+| manager           | iisle_admin     | Tomcat        | http://hostip:8091/manager/html |
 | --                | --              | Solr          | http://hostip:8091/solr/        |
 
 ---
@@ -109,7 +109,7 @@ If you are not familiar with ingest, one can follow instructions [here](https://
 
 | Account                | Password                      | Service               | URL                                                  |
 | -------------          | -------------                 | -------------         | -------------                                        |
-| isle_localdomain_admin | isle_localdomain_adminpw2018  | Drupal site admin     | [https://isle.localdomain](https://isle.localdomain) |
+| isle                  | isle                           | Drupal site admin     | [https://isle.localdomain](https://isle.localdomain) |
 
 ---
 
