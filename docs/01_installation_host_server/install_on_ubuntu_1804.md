@@ -228,6 +228,9 @@ Add the islandora user to the new docker group
 
 * `cd /opt/ISLE`
 
+
 ### Next steps
 
-* Return to the [Install Start Here section](../install_start_here.md) for additional instructions.
+* To install a Test or Demo site, follow [these instructions](../02_installation_test/ild_installation_guide.md)
+* To install a new ISLE site, follow [these instructions for a single production environment](../03_installation_new_site/new_site_installation_guide_single.md) or [these instructions for a multi site (dev,staging,prod)](../03_installation_new_site/new_site_installation_guide_multi.md)
+* To migrate an existing Islandora site to ISLE, follow [these instructions](../04_installation_migration/migration_installation_guide.md)

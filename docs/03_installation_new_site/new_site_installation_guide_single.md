@@ -71,21 +71,15 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 ##  Edits
 
-### Docker compose file:
+### .env file:
 
-* Edit the file: **docker-compose.yml** accordingly:
+* Edit the .env file and change the values of COMPOSE_PROJECT_NAME, BASE_DOMAIN, and CONTAINER_SHORT_ID. e.g. for a production site you may use:
 
-      * Change container names (you could do this based on the environment (e.g. prod)
+    `COMPOSE_PROJECT_NAME=isleproduction`
 
-      * For example if you are building a prod server instance:
+    `BASE_DOMAIN=mydomain.edu`
 
-          `container_name: isle-solr-newsite`
-
-          changes to:
-
-          `container_name: isle-solr-prod`
-
-          and so on...
+    `CONTAINER_SHORT_ID=prod`
 
 **Please note:** Much of the file is already with comments guiding the enduser to key areas or files to edit or modify accordingly.
 

@@ -42,11 +42,10 @@ It is important to add `isle.localdomain` to your `/etc/hosts` file, as connecti
 
 * If using:
 
-    * **Vagrant or a Virtualbox VM:** The steps below assume you are shelled in (connected by SSH) as the `islandora` user into the ISLE Host VM via a terminal on a local laptop.
+    * **~~Vagrant or a Virtualbox VM:~~** ~~The steps below assume you are shelled in (connected by SSH) as the `islandora` user into the ISLE Host VM via a terminal on a local laptop.~~
 
-        * `ssh islandora@10.10.10.130`
-
-        * `cd /opt/ISLE`
+        * ~~`ssh islandora@10.10.10.130`~~
+        * ~~`cd /opt/ISLE`~~
 
     * **Docker for Mac:** Continue to use the open terminal and navigate `cd /opt/ISLE` to the ISLE project directory.
 
