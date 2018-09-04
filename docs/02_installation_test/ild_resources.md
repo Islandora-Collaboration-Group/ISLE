@@ -122,3 +122,20 @@ If you are not familiar with ingest, one can follow instructions [here](https://
 | Account                | Password                      | Service               | URL        
 |
 | None Required          | None Required                 | Proxy UI     | [https://admin.isle.localdomain](https://admin.isle.localdomain) OR http://hostip:8080  |
+
+
+#### 6. Image Services
+| Compose Service Name | Container Name  | Software      | Ports                                            |
+| :-------------:      | :-------------: | ------------- | -------------                                    |      
+| image-services       |  isle-images-ld | see below     | 8080 (on container) mapped to 8083 (on host) |
+
+
+| Software                         | Version           |
+| -------------                    | -------------     |
+| Djatoka                          | 1.1               |
+| Cantaloupe IIIF                  | 3.4.3             |
+
+| Account           | Password                      | Service       | URL           |
+| -------------     | -------------                 | ------------- | ------------- |      
+| --                | --                            | Djatoka       | http://hostip:8083/adore-djatoka/                           |
+| admin             | isle_admin                    | Cantaloupe    | http://hostip:8083/cantaloupe/admin                         |
