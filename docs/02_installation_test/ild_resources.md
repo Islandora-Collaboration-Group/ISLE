@@ -64,8 +64,9 @@ If you are not familiar with ingest, one can follow instructions [here](https://
 | anonymous         | anonymous                     | Fedora        | ---                                                         |
 | fgsAdmin          | ild_fgs_admin_2018            | Gsearch       | http://hostip:8080/fedoragsearch/rest?operation=updateIndex |
 | admin             | isle_admin                    | Tomcat        | http://hostip:8080/manager/html                             |
-| manager           | isle_admin                    | Tomcat        | http://hostip:8080/manager/html                             |
+| manager           | isle_manager                  | Tomcat        | http://hostip:8080/manager/html                             |
 | --                | --                            | Djatoka       | http://hostip:8080/adore-djatoka/                           |
+| admin             | isle_admin                    | Cantaloupe    | http://hostip:8080/cantaloupe/admin                         |
 
 ---
 
@@ -86,7 +87,7 @@ If you are not familiar with ingest, one can follow instructions [here](https://
 | Account           | Password        | Service       | URL                             |
 | -------------     | -------------   | ------------- | -------------                   |
 | admin             | isle_admin      | Tomcat        | http://hostip:8091/manager/html |
-| manager           | iisle_admin     | Tomcat        | http://hostip:8091/manager/html |
+| manager           | isle_manager    | Tomcat        | http://hostip:8091/manager/html |
 | --                | --              | Solr          | http://hostip:8091/solr/        |
 
 ---
@@ -116,4 +117,8 @@ If you are not familiar with ingest, one can follow instructions [here](https://
 #### 5. Proxy container
 | Compose Service Name | Container Name  | Software      | Ports         |
 | :-------------:      | :-------------: | ------------- | ------------- |
-| proxy                | isle-proxy      | Nginx 1.13    | 80, 443       |
+| proxy                | isle-proxy      | Traefik    | 80, 443       |
+
+| Account                | Password                      | Service               | URL        
+|
+| None Required          | None Required                 | Proxy UI     | [https://admin.isle.localdomain](https://admin.isle.localdomain) OR http://hostip:8080  |
