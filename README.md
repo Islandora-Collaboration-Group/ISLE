@@ -1,6 +1,6 @@
 # ISLE: Islandora Enterprise
 
-**Skip directly to the [Quick-Start Guide](#quick-start-guide)**
+### **Skip directly to the [Quick-Start Guide](#quick-start-guide)**
 
 ## ISLE Documents
 * [ISLE Documentation](https://islandora-collaboration-group.github.io/ISLE-Documentation/) (user-friendly documentation)
