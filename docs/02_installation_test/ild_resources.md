@@ -42,7 +42,7 @@ If you are not familiar with ingest, one can follow instructions [here](https://
 #### 2. Fedora container
 | Compose Service Name | Container Name  | Software      | Ports                                            |
 | :-------------:      | :-------------: | ------------- | -------------                                    |      
-| fedora               | isle-fedora-ld  | see below     | 8080, 80 (on container) mapped to 8777 (on host) |
+| fedora               | isle-fedora-ld  | see below     | 8080 mapped to 8081 (on host) |
 
 
 | Software                         | Version           |
@@ -52,21 +52,18 @@ If you are not familiar with ingest, one can follow instructions [here](https://
 | Drupalfilter                     | 3.8.1             |
 | Gsearch (w/remote SOLR plugin)   | 2.8+ (DG patched) |
 | (DG) GSearch Extensions          | 0.13              |
-| (DG) Islandora Transforms (XSLTs)| as of 3/2018      |
+| (DG) Islandora Transforms (XSLTs)| as of 8/2018      |
 | Tomcat                           | 7.x               |  
 | Oracle JDK                       | 8.x               |
-| Djatoka                          | 1.1               |
 
 | Account           | Password                      | Service       | URL           |
 | -------------     | -------------                 | ------------- | ------------- |      
-| fedoraAdmin       | ild_fed_admin_2018            | Fedora        | http://hostip:8080/fedora/describe                          |
-| fedoraIntCallUser | ild_fed_IntCallUser_2018      | Fedora        | http://hostip:8080/fedora/objects                           |
+| fedoraAdmin       | ild_fed_admin_2018            | Fedora        | http://hostip:8081/fedora/describe                          |
+| fedoraIntCallUser | ild_fed_IntCallUser_2018      | Fedora        | http://hostip:8081/fedora/objects                           |
 | anonymous         | anonymous                     | Fedora        | ---                                                         |
-| fgsAdmin          | ild_fgs_admin_2018            | Gsearch       | http://hostip:8080/fedoragsearch/rest?operation=updateIndex |
-| admin             | isle_admin                    | Tomcat        | http://hostip:8080/manager/html                             |
-| manager           | isle_manager                  | Tomcat        | http://hostip:8080/manager/html                             |
-| --                | --                            | Djatoka       | http://hostip:8080/adore-djatoka/                           |
-| admin             | isle_admin                    | Cantaloupe    | http://hostip:8080/cantaloupe/admin                         |
+| fgsAdmin          | ild_fgs_admin_2018            | Gsearch       | http://hostip:8081/fedoragsearch/rest?operation=updateIndex |
+| admin             | isle_admin                    | Tomcat        | http://hostip:8081/manager/html                             |
+| manager           | isle_manager                  | Tomcat        | http://hostip:8081/manager/html                             |
 
 ---
 
@@ -74,7 +71,7 @@ If you are not familiar with ingest, one can follow instructions [here](https://
 
 | Compose Service Name | Container Name  | Software      | Ports                                              |
 | :-------------:      | :-------------: | ------------- | -------------                                      |      
-| solr                 | isle-solr-ld    | see below     | 8080 (on container) mapped to 8091 (on host)       |
+| solr                 | isle-solr-ld    | see below     | 8080 (on container) mapped to 8082 (on host)       |
 
 
 | Software               | Version       |
@@ -86,9 +83,9 @@ If you are not familiar with ingest, one can follow instructions [here](https://
 
 | Account           | Password        | Service       | URL                             |
 | -------------     | -------------   | ------------- | -------------                   |
-| admin             | isle_admin      | Tomcat        | http://hostip:8091/manager/html |
-| manager           | isle_manager    | Tomcat        | http://hostip:8091/manager/html |
-| --                | --              | Solr          | http://hostip:8091/solr/        |
+| admin             | isle_admin      | Tomcat        | http://hostip:8082/manager/html |
+| manager           | isle_manager    | Tomcat        | http://hostip:8082/manager/html |
+| --                | --              | Solr          | http://hostip:8082/solr/        |
 
 ---
 
@@ -123,6 +120,7 @@ If you are not familiar with ingest, one can follow instructions [here](https://
 |
 | None Required          | None Required                 | Proxy UI     | [https://admin.isle.localdomain](https://admin.isle.localdomain) OR http://hostip:8080  |
 
+---
 
 #### 6. Image Services
 | Compose Service Name | Container Name  | Software      | Ports                                            |
