@@ -107,8 +107,8 @@ _For Windows Users only_
 * Upon entering [https://isle.localdomain](https://isle.localdomain) within a browser, you will see a SSL error warning that the site is unsafe. It is safe, it simply uses "self-signed" SSL certs. Ignore the error and proceed to the site.
 
 * To log in to the Islandora Drupal Site:
-   	* Username: `isle_localdomain_admin`
-  	* Password: `isle_localdomain_adminpw2018`
+   * Username: `isle`
+  	* Password: `isle`
 
 * There is additional information for users and passwords that can be found on the [Test Site Resources](ild_resources.md) page.
 
