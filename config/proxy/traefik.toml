@@ -14,7 +14,7 @@
 # Optional
 # Default: "ERROR"
 #
-# logLevel = "DEBUG"
+logLevel = "DEBUG"
 
 # Periodically check if a new version has been released.
 #
@@ -43,7 +43,7 @@
 # Optional
 # Default: false
 #
-InsecureSkipVerify = true
+# InsecureSkipVerify = true
 
 # Register Certificates in the RootCA.
 #
@@ -69,14 +69,14 @@ defaultEntryPoints = ["http", "https"]
 [entryPoints]
   [entryPoints.http]
   address = ":80"
-    # [entryPoints.http.redirect]
-    # entryPoint = "https"
+    [entryPoints.http.redirect]
+    entryPoint = "https"
   [entryPoints.https]
   address = ":443"
     [entryPoints.https.tls]
       [[entryPoints.https.tls.certificates]]
-      certFile = "/certs/isle.localdomain/isle.localdomain.cert"
-      keyFile = "/certs/isle.localdomain/isle.localdomain.key"
+      certFile = "/certs/isle.localdomain.cert"
+      keyFile = "/certs/isle.localdomain.key"
 
 ################################################################
 # Traefik logs configuration
@@ -151,6 +151,20 @@ defaultEntryPoints = ["http", "https"]
   # Default: true
   #
   # dashboard = false
+
+################################################################
+# Ping configuration
+################################################################
+
+# Enable ping
+# [ping]
+
+  # Name of the related entry point
+  #
+  # Optional
+  # Default: "traefik"
+  #
+  # entryPoint = "traefik"
 
 ################################################################
 # Docker configuration backend

@@ -1,7 +1,7 @@
 version: '3'
 
 #### docker-compose up -d;
-## Updated 2018-08-31 - Release 1.1.0
+## Updated 2018-09-05 - Development Release 1.1.1
 
 services:
   isle-portainer: ## Renamed to avoid conflicts on systems/servers with portainer already running.
@@ -25,10 +25,10 @@ services:
   mysql:
     # build:
     #   context: ./images/mysql
-    image: islandoracollabgroup/isle-mysql:latest
+    image: benjaminrosner/isle-mysql:development
     container_name: isle-mysql-${CONTAINER_SHORT_ID}
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_ROOT_PASSWORD
     networks:
       - isle-internal
     volumes:
@@ -38,11 +38,14 @@ services:
   fedora:
     # build:
     #   context: ./images/isle-fedora
-    image: benjaminrosner/isle-fedora:latest
+    image: benjaminrosner/isle-fedora:development
     container_name: isle-fedora-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=768M
       - JAVA_MIN_MEM=128M
+    env_file: 
+      - tomcat.env
+      - .env
     networks:
       - isle-internal
     ports:
@@ -63,6 +66,8 @@ services:
     environment:
       - JAVA_MAX_MEM=512M
       - JAVA_MIN_MEM=0
+    env_file:
+      - tomcat.env
     networks:
       - isle-internal
     ports:
@@ -76,11 +81,14 @@ services:
   image-services:
     # build:
     #   context: ./images/isle-imageservices
-    image: benjaminrosner/isle-imageservices:latest
+    image: benjaminrosner/isle-imageservices:development
     container_name: isle-images-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=512M
       - JAVA_MIN_MEM=0
+    env_file: 
+      - tomcat.env
+      - .env
     networks:
       - isle-internal
     depends_on:
@@ -90,19 +98,16 @@ services:
       - "8083:8080"
     volumes:
       - ./logs/imageservices:/usr/local/tomcat/logs
-    labels:
-      - traefik.backend=isle-imageservices-${CONTAINER_SHORT_ID}
-      - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
-      - traefik.enable=true
-      - "traefik.frontend.rule=Host:images.${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
 
   apache:
     # build:
     #   context: ./images/isle-apache
-    image: benjaminrosner/isle-apache:latest
+    image: benjaminrosner/isle-apache:development
     container_name: isle-apache-${CONTAINER_SHORT_ID}
     environment:
       - PULL_ISLE_BUILD_TOOLS=true # Defaults to true.
+    env_file: 
+      - .env
     networks:
       isle-internal:
         aliases:
@@ -134,12 +139,12 @@ services:
       - "8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./config/traefik/traefik.toml:/traefik.toml
-      - ./config/traefik/isle.localdomain:/certs/isle.localdomain
+      - ./config/proxy/traefik.toml:/traefik.toml  ## Edit line 78, 79 with your crt/key, and optionally 190 to your domain.
+      - ./config/proxy/ssl-certs:/certs:ro  ## Place certs here.
     labels:
       - traefik.backend=isle-proxy-${CONTAINER_SHORT_ID}
       - traefik.port=8080
-      - traefik.enable=true
+      - traefik.enable=true  ## NOT SAFE FOR PRODUCTION! ##
       - traefik.frontend.rule=Host:admin.${BASE_DOMAIN};
 
 # Defined networks
