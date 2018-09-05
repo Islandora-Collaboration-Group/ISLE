@@ -224,7 +224,7 @@ You'll want to rename `newsite_sample_db.sql` to the database or domain name of 
 
 If need be, please refer to the **Systems** section of the [Glossary](../glossary.md) for relevant terms to help guide installation.
 
-The `proxy` subdirectory contains all specific configurations and overrides necessary for the ISLE proxy image and resulting container to function properly with your changes. This is the Nginx reverse proxy server that properly routes all internal and external communication between the other four containers and the ISLE Host network.
+The `traefik` subdirectory contains all specific configurations necessary for the Traefik proxy to function properly with your changes.
 
 #### ssl-certs
 
