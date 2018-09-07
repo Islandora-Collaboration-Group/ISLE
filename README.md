@@ -90,7 +90,7 @@ The ISLE Steering Committee (ISC) oversees the ISLE project and the ISLE Project
 - 03/2018 - [Completed] Community Alpha Test #3: Barnard College (lead: Ben Rosner)
 - 05/2018 - [In Process] ISLE Steering Committee approved ISLE (Islandora 7x) hand-off from Born-Digital
 - 05/2018 - [Completed] ISLE v1.0 release available as open-source for public use
-- 08/2018 - [In Process] ISLE v1.1 release available as open-source for public use
+- 08/2018 - [Completed, in UAC] ISLE v1.1 release available as open-source for public use
 - 10/2018 - [Future] ISLE Phase II begins
 
 ## Docker Images and Repositories
@@ -98,6 +98,7 @@ Docker Image GitHub Repositories that comprise this stack:
  - [`isle-fedora`](https://github.com/Islandora-Collaboration-Group/isle-fedora/)
  - [`isle-solr`](https://github.com/Islandora-Collaboration-Group/isle-solr/)
  - [`isle-apache`](https://github.com/Islandora-Collaboration-Group/isle-apache/)
+ - [`isle-mysql`](https://github.com/Islandora-Collaboration-Group/isle-mysql)
  - [`isle-imageservices`](https://github.com/Islandora-Collaboration-Group/isle-imageservices/)
 
 ## Quick Start Guide
@@ -112,18 +113,18 @@ Docker Image GitHub Repositories that comprise this stack:
 ### Quick Start
 1. Please read: [ISLE Release Candidate (RC): How to Test](https://docs.google.com/document/d/1VUiI_bXo6SLqqUjmInVjBg3-cs40Vj7I_92txjFUoQg/edit#heading=h.1e4943m60lsh)
 2. Clone this repo
-    - `git clone https://github.com/Islandora-Collaboration-Group/ISLE-Development.git` 
+    - `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git` 
 3. Change directory to the cloned directory:
-    - `cd ISLE-development` (by default)
+    - `cd ISLE` (by default)
 4. Pull the latest images:
     - `docker-compose pull`
-5. Launch the ISLE preRC stack for testing:
+5. Launch the ISLE stack:
     - `docker-compose up -d`
 6. Please wait a few moments for the stack to fully come up.  Approximately 3-5 minutes.
 7. Install Islandora on the isle-apache-ld container:
     - `docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh`
 8. To wrap up testing:
-    - In the folder with the docker-compose.yml `docker-compose down -v`
+    - In the folder with the docker-compose.yml `docker-compose down -v` (nb: the -v removes all volumes, and will delete any work. This option **does not persist your data**)
 
 ### Quick Stop and Cleanup 
 If you have been testing the stack extensively you may want to `prune` your Docker daemon as you test.
