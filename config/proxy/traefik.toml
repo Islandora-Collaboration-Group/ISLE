@@ -3,69 +3,18 @@
 ################################################################
 
 # Enable debug mode
-#
-# Optional
-# Default: false
-#
 # debug = true
 
 # Log level
-#
-# Optional
-# Default: "ERROR"
-#
-logLevel = "DEBUG"
-
-# Periodically check if a new version has been released.
-#
-# Optional
-# Default: true
-#
-# checkNewVersion = false
-
-# Backends throttle duration.
-#
-# Optional
-# Default: "2s"
-#
-# ProvidersThrottleDuration = "2s"
-
-# Controls the maximum idle (keep-alive) connections to keep per-host.
-#
-# Optional
-# Default: 200
-#
-# MaxIdleConnsPerHost = 200
-
-# If set to true invalid SSL certificates are accepted for backends.
-# This disables detection of man-in-the-middle attacks so should only be used on secure backend networks.
-#
-# Optional
-# Default: false
-#
-# InsecureSkipVerify = true
-
-# Register Certificates in the RootCA.
-#
-# Optional
-# Default: []
-#
-# RootCAs = [ "/mycert.cert" ]
-
-
-# Entrypoints to be used by frontends that do not specify any entrypoint.
-# Each frontend can specify its own entrypoints.
-#
-# Optional
-# Default: ["http"]
-#
-defaultEntryPoints = ["http", "https"]
+logLevel = "ERROR"
 
 ################################################################
 # Entrypoints configuration
 ################################################################
 
 # Entrypoints definition
+defaultEntryPoints = ["http", "https"]
+
 [entryPoints]
   [entryPoints.http]
   address = ":80"
@@ -153,20 +102,6 @@ defaultEntryPoints = ["http", "https"]
   # dashboard = false
 
 ################################################################
-# Ping configuration
-################################################################
-
-# Enable ping
-# [ping]
-
-  # Name of the related entry point
-  #
-  # Optional
-  # Default: "traefik"
-  #
-  # entryPoint = "traefik"
-
-################################################################
 # Docker configuration backend
 ################################################################
 
@@ -180,34 +115,8 @@ defaultEntryPoints = ["http", "https"]
 #
 # endpoint = "tcp://10.10.10.10:2375"
 endpoint = "unix:///var/run/docker.sock"
-
-# Default domain used.
-# Can be overridden by setting the "traefik.domain" label on a container.
-#
-# Optional
-# Default: ""
-#
-domain = "isle.localdomain"
-
-# Expose containers by default in traefik
-#
-# Optional
-# Default: true
-#
 exposedbydefault = false
-
-# Enable watch docker changes.
-#
-# Optional
-#
 watch = true
-
-# Use the IP address from the binded port instead of the inner network one.
-# For specific use-case :)
-#
-# Optional
-# Default: false
-#
 usebindportip = true
 
 # Use Swarm Mode services as data provider.
