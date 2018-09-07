@@ -98,6 +98,7 @@ Docker Image GitHub Repositories that comprise this stack:
  - [`isle-fedora`](https://github.com/Islandora-Collaboration-Group/isle-fedora/)
  - [`isle-solr`](https://github.com/Islandora-Collaboration-Group/isle-solr/)
  - [`isle-apache`](https://github.com/Islandora-Collaboration-Group/isle-apache/)
+ - [`isle-mysql`](https://github.com/Islandora-Collaboration-Group/isle-mysql)
  - [`isle-imageservices`](https://github.com/Islandora-Collaboration-Group/isle-imageservices/)
 
 ## Quick Start Guide
