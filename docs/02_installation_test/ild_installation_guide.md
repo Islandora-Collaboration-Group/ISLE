@@ -76,7 +76,7 @@ The install times stated below for each container are highly dependent on the en
 
 * Run the following shell scripts manually on the apache container  
 
-    * `docker exec -it isle-apache-ld bash`
+    * `docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh`
 
 _For Windows Users only_
 
@@ -88,14 +88,9 @@ _For Windows Users only_
 
 ---
 
-* This will put you into a root prompt at the command line where you will enter the following commands:
-    * `cd /utility-scripts/isle_drupal_build_tools/`
-
-    * `.isle_islandora_installer.sh`
-
-        * **This script will take some time (see estimate above.)** You should see a lot of green [ok] messages.
-        * If the script appears to pause and prompt for y/n, do not enter any values; the script will answer for you.  
-        * Wait until "Drush script finished! ...exiting" before proceeding.**
+    * **This script will take some time (see estimate above.)** You should see a lot of green [ok] messages.
+    * If the script appears to pause and prompt for y/n, do not enter any values; the script will answer for you.  
+    * Wait until "Drush script finished! ...exiting" before proceeding.**
 
 * Once finished press the `Cntrl` and `d` keys or type `exit` to get out of the apache container
 
