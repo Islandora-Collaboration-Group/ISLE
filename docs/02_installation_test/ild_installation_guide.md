@@ -42,11 +42,10 @@ It is important to add `isle.localdomain admin.isle.localdomian portainer.isle.l
 
 * If using:
 
-    * **Vagrant or a Virtualbox VM:** The steps below assume you are shelled in (connected by SSH) as the `islandora` user into the ISLE Host VM via a terminal on a local laptop.
+    * **~~Vagrant or a Virtualbox VM:~~** ~~The steps below assume you are shelled in (connected by SSH) as the `islandora` user into the ISLE Host VM via a terminal on a local laptop.~~
 
-        * `ssh islandora@10.10.10.130`
-
-        * `cd /opt/ISLE`
+        * ~~`ssh islandora@10.10.10.130`~~
+        * ~~`cd /opt/ISLE`~~
 
     * **Docker for Mac:** Continue to use the open terminal and navigate `cd /opt/ISLE` to the ISLE project directory.
 
@@ -77,7 +76,7 @@ The install times stated below for each container are highly dependent on the en
 
 * Run the following shell scripts manually on the apache container  
 
-    * `docker exec -it isle-apache-ld bash`
+    * `docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh`
 
 _For Windows Users only_
 
@@ -89,6 +88,11 @@ _For Windows Users only_
 
 ---
 
+<<<<<<< HEAD
+    * **This script will take some time (see estimate above.)** You should see a lot of green [ok] messages.
+    * If the script appears to pause and prompt for y/n, do not enter any values; the script will answer for you.  
+    * Wait until "Drush script finished! ...exiting" before proceeding.**
+=======
 * This will put you into a root prompt at the command line where you will enter the following commands:
     * `cd /utility-scripts/isle_drupal_build_tools/`
 
@@ -97,6 +101,7 @@ _For Windows Users only_
         * **This script will take some time (see estimate above.)** You should see a lot of green [ok] messages.
         * If the script appears to pause and prompt for y/n, do not enter any values; the script will answer for you.  
         * Wait until "Drush script finished! ...exiting" before proceeding.**
+>>>>>>> upstream/master
 
 * Once finished press the `Ctrl` and `d` keys or type `exit` to get out of the apache container
 

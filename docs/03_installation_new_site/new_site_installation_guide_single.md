@@ -67,6 +67,17 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 ##  Edits
 
+<<<<<<< HEAD
+### .env file:
+
+* Edit the .env file and change the values of COMPOSE_PROJECT_NAME, BASE_DOMAIN, and CONTAINER_SHORT_ID. e.g. for a production site you may use:
+
+    `COMPOSE_PROJECT_NAME=isleproduction`
+
+    `BASE_DOMAIN=mydomain.edu`
+
+    `CONTAINER_SHORT_ID=prod`
+=======
 ### Docker Environment File:
 
 * Edit the file: **.env** accordingly:
@@ -74,6 +85,7 @@ While this checklist will attempt to point out most of the usage challenges or p
     * COMPOSE_PROJECT_NAME to something unique (e.g. `COMPOSE_PROJECT_NAME=isle-production-collections`)
     * BASE_DOMAIN to your domainname (e.g. `BASE_DOMAIN=digital-collections.example.edu`)
     * CONTAINER_SHORT_ID to something unique.  It is appended to the end of all running containers, keep it _short_ (e.g. `CONTAINER_SHORT_ID=prod`)
+>>>>>>> upstream/master
 
 **Please note:** Much of the file is already with comments guiding the enduser to key areas or files to edit or modify accordingly.
 

@@ -3,7 +3,8 @@ site_description: Documentation for Islandora Enterprise (ISLE)
 
 site_dir: site
 docs_dir: docs
-
+markdown_extensions:
+    - del_ins
 theme:
   name: 'material'
 
@@ -20,7 +21,7 @@ nav:
   - '1. Set up the Host Server':
     - 'CentOS 7.x': '01_installation_host_server/install_on_centos.md'
     - 'Ubuntu 18.04': '01_installation_host_server/install_on_ubuntu_1804.md'
-    - 'Docker for Mac Hig Sierra': '01_installation_host_server/install_docker_for_mac.md'
+    - 'Docker for Mac High Sierra': '01_installation_host_server/install_docker_for_mac.md'
     - 'Docker for Windows 10': '01_installation_host_server/install_docker_for_windows.md'
     - 'Vagrant & VirtualBox on MacOS (Deprecated)': '01_installation_host_server/install_macos_vagrant.md'
     - 'Troubleshooting': '01_installation_host_server/install_troubleshooting.md'
@@ -41,15 +42,9 @@ nav:
       - 'Migration Reindex Process': '04_installation_migration/migration_reindex_process.md'
 - 'Get Help': 'get_help.md'
 - 'Developer Docs':
-  - 'Documentation Overview': '05_developer_docs/dev_documentation_overview.md'
-  - 'Documentation Editing - Online': '05_developer_docs/dev_documentation_editing_online.md'
-  - 'Documentation Editing - Local': '05_developer_docs/dev_documentation_editing_local.md'
-  - 'Installing Mkdocs': '05_developer_docs/dev_documentation_mkdocs.md'
   - 'Release process': '05_developer_docs/dev_release_process.md'
   - 'Example User Story': '05_developer_docs/dev_example_user_story.md'
-  - 'Build Guide': '05_developer_docs/dev_build_guide.md'
   - 'Testing Guide': '05_developer_docs/dev_testing_guide.md'
-  - 'Ansible Guide': '05_developer_docs/dev_ansible_guide.md'
 - 'Appendices':
   - 'Host Server Specifications': '01_installation_host_server/host_server_system_specifications.md'
   - 'Updating ISLE': '07_appendices/update_isle.md'
