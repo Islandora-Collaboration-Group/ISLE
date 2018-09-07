@@ -90,7 +90,7 @@ The ISLE Steering Committee (ISC) oversees the ISLE project and the ISLE Project
 - 03/2018 - [Completed] Community Alpha Test #3: Barnard College (lead: Ben Rosner)
 - 05/2018 - [In Process] ISLE Steering Committee approved ISLE (Islandora 7x) hand-off from Born-Digital
 - 05/2018 - [Completed] ISLE v1.0 release available as open-source for public use
-- 08/2018 - [In Process] ISLE v1.1 release available as open-source for public use
+- 08/2018 - [Completed, in UAC] ISLE v1.1 release available as open-source for public use
 - 10/2018 - [Future] ISLE Phase II begins
 
 ## Docker Images and Repositories
