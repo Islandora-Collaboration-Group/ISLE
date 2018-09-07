@@ -1,18 +1,21 @@
 [submodule "images/isle-tomcat"]
 	path = images/isle-tomcat
-	url = git@github.com:Islandora-Collaboration-Group/isle-tomcat.git
+	url = https://github.com/Islandora-Collaboration-Group/isle-tomcat.git
 [submodule "images/isle-fedora"]
 	path = images/isle-fedora
-	url = git@github.com:Islandora-Collaboration-Group/isle-fedora.git
+	url = https://github.com/Islandora-Collaboration-Group/isle-fedora.git
 [submodule "images/isle-solr"]
 	path = images/isle-solr
-	url = git@github.com:Islandora-Collaboration-Group/isle-solr.git
+	url = https://github.com/Islandora-Collaboration-Group/isle-solr.git
 [submodule "images/isle-apache"]
 	path = images/isle-apache
-	url = git@github.com:Islandora-Collaboration-Group/isle-apache.git
+	url = https://github.com/Islandora-Collaboration-Group/isle-apache.git
 [submodule "images/isle-imageservices"]
 	path = images/isle-imageservices
-	url = git@github.com:Islandora-Collaboration-Group/isle-imageservices.git
+	url = https://github.com/Islandora-Collaboration-Group/isle-imageservices.git
 [submodule "images/isle-ubuntu-basebox"]
 	path = images/isle-ubuntu-basebox
 	url = https://github.com/Islandora-Collaboration-Group/isle-ubuntu-basebox.git
+[submodule "images/isle-mysql"]
+	path = images/isle-mysql
+	url = https://github.com/Islandora-Collaboration-Group/isle-mysql.git
