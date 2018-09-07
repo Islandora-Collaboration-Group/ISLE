@@ -28,7 +28,7 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 ### Step 0: edit /etc/hosts on local laptop or desktop
 
-It is important to add `isle.localdomain` to your `/etc/hosts` file, as connecting directly to an IP address can prevent some components from working properly.
+It is important to add `isle.localdomain admin.isle.localdomian portainer.isle.localdomain` to your `/etc/hosts` file, as connecting directly to an IP address can prevent some components from working properly.
 
 * **Vagrant**: If you are using Vagrant, move on to the next section (_Summary: Test site launch process_) as this part is handled automatically.
  
@@ -88,11 +88,22 @@ _For Windows Users only_
 
 ---
 
+<<<<<<< HEAD
     * **This script will take some time (see estimate above.)** You should see a lot of green [ok] messages.
     * If the script appears to pause and prompt for y/n, do not enter any values; the script will answer for you.  
     * Wait until "Drush script finished! ...exiting" before proceeding.**
+=======
+* This will put you into a root prompt at the command line where you will enter the following commands:
+    * `cd /utility-scripts/isle_drupal_build_tools/`
 
-* Once finished press the `Cntrl` and `d` keys or type `exit` to get out of the apache container
+    * `./isle_islandora_installer.sh`
+
+        * **This script will take some time (see estimate above.)** You should see a lot of green [ok] messages.
+        * If the script appears to pause and prompt for y/n, do not enter any values; the script will answer for you.  
+        * Wait until "Drush script finished! ...exiting" before proceeding.**
+>>>>>>> upstream/master
+
+* Once finished press the `Ctrl` and `d` keys or type `exit` to get out of the apache container
 
 ### Step 4: Testing the site
 
@@ -101,8 +112,8 @@ _For Windows Users only_
 * Upon entering [https://isle.localdomain](https://isle.localdomain) within a browser, you will see a SSL error warning that the site is unsafe. It is safe, it simply uses "self-signed" SSL certs. Ignore the error and proceed to the site.
 
 * To log in to the Islandora Drupal Site:
-   * Username: `isle`
-  	* Password: `isle`
+    * Username: `isle`
+    * Password: `isle`
 
 * There is additional information for users and passwords that can be found on the [Test Site Resources](ild_resources.md) page.
 
@@ -125,7 +136,9 @@ This process will now allow you to search for ingested objects that have been in
 
 ### Note
 
-* The cronjob setting in the `install_isle_ld_site.sh` script is still commented out as this will need to be flowed into the Docker build process prior. Issue with default Docker root user vs using islandora user. Drupal cron can run properly manually however.
+* The Proxy Control Panel is available at admin.isle.localdomain(https://admin.isle.localdomain).  No username/password are required.  This is unsafe for production environments.
+
+* Portainer (a Docker control panel) is available at portainer.isle.localdomain(http://portainer.isle.localdomain). No username/password are required.  This is unsafe for production environments.
 
 ### WARNING
 
@@ -179,7 +192,7 @@ If you don't see five running containers, then stop the running containers with 
     * Please note the Tomcat service requires about  one to three minutes to startup and as such if the enduser rushes to the URL supplied below, the service page maytime out or be reported as unreachable. Give it a little time.
     * After spinning up fedora container, check if the Fedora service is running prior to advancing.
     * Navigate to http://fedora:8080/manager/html a popup login prompt should appear.
-    * Enter the user name of `admin` and the password of `ild_tc_adm_2018`
+    * Enter the user name of `admin` and the password of `isle_admin`
     * Upon login a large display of running Tomcat applications should display, scroll down to fedora
     * The application state / status should be true
     * If false appears instead, attempt to restart the fedora service manually.
@@ -198,9 +211,3 @@ If you don't see five running containers, then stop the running containers with 
     `docker pull islandoracollabgroup/isle-apache:latest`
 
     `docker-compose up -d apache`
-
-* Proxy image pull & container launch
-
-    `docker pull islandoracollabgroup/isle-proxy:latest`
-
-    `docker-compose up -d proxy`

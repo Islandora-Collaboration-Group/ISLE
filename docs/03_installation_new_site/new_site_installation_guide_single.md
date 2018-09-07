@@ -36,13 +36,13 @@ While this checklist will attempt to point out most of the usage challenges or p
 ## Overview
 
 * Setup a Private Code Repository
-      * Most of the work in this guide involves careful editing of the various configuration and settings files that customize the pieces of Islandora (database, repository, web-server, etc...).
-      * Doing this work in a code repository makes it easier to correct errors and to repeat the process for additional servers without needing to replicate all the work.
-      * Since the edits could include things like passwords, it's important to make this a private repository.
+    * Most of the work in this guide involves careful editing of the various configuration and settings files that customize the pieces of Islandora (database, repository, web-server, etc...).
+    * Doing this work in a code repository makes it easier to correct errors and to repeat the process for additional servers without needing to replicate all the work.
+    * Since the edits could include things like passwords, it's important to make this a private repository.
 
 * Customizing for your Environment
-      * Many of the steps below describe adding the domain name or other specific bits of information into files or appending those bits to file names.
-      * In these cases this guide will call out the customization point AND provide an example - it's important not to literally copy paste the example!
+    * Many of the steps below describe adding the domain name or other specific bits of information into files or appending those bits to file names.
+    * In these cases this guide will call out the customization point AND provide an example - it's important not to literally copy paste the example!
 
 ## Create Private Code Repository
 
@@ -50,27 +50,24 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 * Using a git repository of your choice (GitHub, GitLab, Bitbucket, etc.) create a PRIVATE remote git repo - see the specific code repository documentation online for setup instructions.
 
-* Open a terminal - navigate to `/opt/ISLE/config` (_or where you put the ISLE directory on your local workstation._)
+* Open a terminal and navigate to `/opt/ISLE` (_or where you cloned the ISLE directory on your local workstation._)
 
-* Create a new directory with a name of your choice
+* Copy the isle-new-site directory to a new directory with a name of your choice
 
-   * Example: where "digital-collections.yourdomain.com" is your server domain name e.g.:  `config/digital-collections.example.edu`
+   * Example: where "digital-collections.yourdomain.com" is your server domain name: 
+   * `cp -R isle-newsite-sample digital-collections.example.edu`
+   * Note, please do not use this literal value.
 
-   * Please do not use this literal value.
-
-* Locate the directory within the `/opt/ISLE/config/` directory called `isle-newsite-sample` and copy all of its contents into your newly created directory.
-
-* `cd` into the newly copied and renamed `digital-collections.example.edu` directory and type:
- `git init` to imitate this directory as a code repository.
+* `cd` into the newly copied `digital-collections.example.edu` directory and type: `git init` to imitate this directory as a code repository.
 
 * `git remote add NameOfYourRepository URLofYourRepository` to connect your local repository to the remote you set up in the above steps.
-
-    * [**NOTE** replace "NameOfYourRepository" and "URLofYourRepository" with the name of your git repository and its URL]
+  * **NOTE** replace "NameOfYourRepository" and "URLofYourRepository" with the name of your git repository and its URL
 
 * You are now ready to perform the customization edits in this directory (you can use a text editor of choice now don't have to stay in terminal - just locate the folder in the finder and open file in text editor)
 
 ##  Edits
 
+<<<<<<< HEAD
 ### .env file:
 
 * Edit the .env file and change the values of COMPOSE_PROJECT_NAME, BASE_DOMAIN, and CONTAINER_SHORT_ID. e.g. for a production site you may use:
@@ -80,6 +77,15 @@ While this checklist will attempt to point out most of the usage challenges or p
     `BASE_DOMAIN=mydomain.edu`
 
     `CONTAINER_SHORT_ID=prod`
+=======
+### Docker Environment File:
+
+* Edit the file: **.env** accordingly:
+
+    * COMPOSE_PROJECT_NAME to something unique (e.g. `COMPOSE_PROJECT_NAME=isle-production-collections`)
+    * BASE_DOMAIN to your domainname (e.g. `BASE_DOMAIN=digital-collections.example.edu`)
+    * CONTAINER_SHORT_ID to something unique.  It is appended to the end of all running containers, keep it _short_ (e.g. `CONTAINER_SHORT_ID=prod`)
+>>>>>>> upstream/master
 
 **Please note:** Much of the file is already with comments guiding the enduser to key areas or files to edit or modify accordingly.
 
@@ -89,29 +95,32 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 Now proceed to make edits to files within the config subdirectories:
 
-a. to reflect **environment** (prod, stage, dev, etc...)
+This will involve your adding **domain name** (digital-collections.example.edu), desired passwords to **ensure your safety**:
 
-b. to involve your **domain name** (digital-collections.example.edu)
-
-There are five subdirectories which have the appropriate settings for each respective container and service:
+There are seven (7) subdirectories which have the appropriate settings for each respective container and service:
 
 * apache
-* fedora
 * mysql
-* proxy
+* traefik - The proxy
+* tomcat - This applies settings to all instances of Tomcat.
+* fedora
+* gsearch
 * solr
 
 ----
 
 ### Apache directory
 
-The `apache` subdirectory contains all specific configurations and overrides necessary for the ISLE apache image and resulting container to function properly with your changes. This is the webserver that serves the Islandora / Drupal website.
+The `apache` subdirectory contains all specific configurations and overrides necessary for the ISLE apache image and resulting container to function properly with your changes. This is the webserver that serves the Islandora / Drupal website. These instructions assume you are installing a NEW SITE.
 
-* (_Optional_) Edit the php.ini file to change various appropriate settings if needed otherwise leave alone.
+* `cd` into the `config/apache` folder (`cd config/apache`).
 
-    * Example - Line 820: change the `upload_max_filesize = 2000M` to a higher setting if desired. Currently at a 2GB upload limit.
+* Clone the current [ISLE Drupal Build tools](https://github.com/Islandora-Collaboration-Group/isle_drupal_build_tools): 
+`git clone https://github.com/Islandora-Collaboration-Group/isle_drupal_build_tools -b 7.x-1.11`
 
-* Edit the file: `settings.php`
+* `cd` into the build tools directory: (`cd isle_drupal_build_tools`)
+
+* Edit the file: `isle_drush_make\settings.php`
 
     * Lines 251-253: add your database name, database user, and database password    
 
@@ -121,9 +130,14 @@ The `apache` subdirectory contains all specific configurations and overrides nec
 
     * Line 311: Review and ensure `# $base_url = ` is still commented out
 
-* Edit the file: `install_new_site.sh`  line 29:
+* Edit the file `isle_drush_make\islandora.drush.make` to add or remove Islandora modules.
 
-    * `/usr/local/bin/drush site-install -y --account-name=newsite_admin --account-pass=newsite_adminpw --account-mail=admin@newsite.com --site-name="ISLE New Site Sample"`
+  * To disable modules please use `;` to comment out the lines, or delete them entirely.
+
+* Edit the file: `isle_islandora_installer.sh`
+
+    * Find the section `## Site install` and edit:
+    `drush site-install -y --account-name=newsite_admin --account-pass=newsite_adminpw --account-mail=admin@newsite.com --site-name="ISLE New Site Sample"`
 
     * Change the following values in that line above to the appropriate names and passwords for your site.
 
@@ -132,12 +146,9 @@ The `apache` subdirectory contains all specific configurations and overrides nec
         *  --account-mail= Email address that can be associated with Drupal admin account
         *  --site-name= Name of your new ISLE website
 
----
-
 #### Apache - sites-enabled
 
-* Within the `sites-enabled` directory, rename the files `newsite-sample-ssl.conf` and `newsite-sample.conf` to your domain names - example:
-    * `digital-collections.example.edu_ssl.conf`
+* Within the `sites-enabled` directory, rename the file `newsite-sample.conf` to your domain name - example:
 
     * `digital-collections.example.edu.conf`
 
@@ -147,85 +158,25 @@ The `apache` subdirectory contains all specific configurations and overrides nec
 
     * `CustomLog /var/log/apache2/digital-collections.example.edu.ssl.access.log combined`
 
-* Edit the previously named `newsite-sample-ssl.conf` file and change lines 4 and 5 to point to the location of your apache logs on the container - example:
-
-    * `ErrorLog /var/log/apache2/digital-collections.example.edu.ssl.error.log`
-
-    * `CustomLog /var/log/apache2/digital-collections.example.edu.ssl.access.log combined`
-
-* Edit the previously named `newsite-sample-ssl.conf` file and change lines 12, 13 and 14 to point to the location of your certs on the `apache` container - example:
-
-```
-
-    SSLCertificateFile	/certs/newsite-sample.pem
-    SSLCertificateChainFile /certs/newsite-sample-interm.pem
-    SSLCertificateKeyFile /certs/newsite-sample-key.pem
-
-```
-
----
-
-#### Apache - ssl-certs
-
-If need be, please refer to the **SSL certificate** section of the [Glossary](../glossary.md) for relevant terms to help guide installation.
-
-* Copy your SSL certificates for Apache into the `apache/ssl-certs` subdirectory. They will and should have different names than the examples provided below dependent on the ISLE environment you are setting up e.g. (_production, staging or development_).
-
-    * There can be up to 2 - 3 files involved in this process.
-
-        * 1 x SSL Certificate Key File e.g. `newsite-sample-key.pem`
-            * This file is required.
-            * Please also note that the file extensions can also be: `.key` or `.pem`
-
-        * 1 x SSL Certificate File e.g. `newsite-sample.pem`
-            * This file is required.
-            * Please also note that the file extensions can also be: `.cer`, `.crt` or `.pem`
-
-        * 1 x SSL Certificate Chain File e.g. `newsite-sample-interm.pem`
-            * This file may be **optional** in some setups but is generally recommended for use by the `apache` container when available.
-            * It will not be used by the `proxy` container.
-            * Please also note that the file extensions can also be: `.cer`, `.crt` or `.pem`
-
----
-
-#### Apache - tmpreaper
-
-* (_Optional_) Edit the cron file within the `apache/tmpreaper` subdirectory to change various appropriate settings if needed otherwise leave alone if you are not familiar with how cron jobs work.
-
-* Currently this cronjob is set to run every 12 hours and using the tmpreaper utility to clean out and delete the contents of the /tmp folder if they are older than 4 days.
-
 ----
 
 ### Fedora directory
 
 The `fedora` subdirectory contains all specific configurations and overrides necessary for the ISLE fedora image and resulting container to function properly with your changes. This is the Fedora repository that will contain all objects, metadata etc.
 
-
-#### Fedora - fedora
-
-* Within the `fedora/fedora` subdirectory, **add new passwords** in the following files:
+* Within the `config/fedora` subdirectory, **add new passwords** in the following files:
 
      * Lines 3, 8, 14: `fedora-users.xml`  (change all applicable passwords for fedora users)
      * Line 598: `fedora.fcfg`  (change the password to the `fedora_admin` **database user password** only)
      * Line 15: `filter-drupal.xml`  (change the associated Drupal site database name , user and password, do not use settings for the `fedora3` database.)
 
-* (_Optional_) Edit either of the log4j.properties or logback.xml files to change logging levels for the `fedora` container if needed, otherwise leave alone.
-
-     * Please note: If making changes, you'll need to then edit the `docker-compose.yml` file accordingly in the `fedora` `volumes` section
-
-     * Example add a line to make changes for the Fedora application logging.
-     * `- ./fedora/fedora/logback.xml :/usr/local/fedora/server/config/logback.xml`
-
-     * Example add a line to make changes for the Djatoka application logging.
-     * `- ./fedora/fedora/logback.xml :/usr/local/tomcat/webapps/adore-djatoka/WEB-INF/classes/log4j.properties`     
-
-* (_Optional_) Edit the contents of the repository-policies subdirectory as necessary **IF YOU NEED TO**, otherwise leave alone.
+* (_Optional_) Edit the contents of the repository-policies subdirectory as necessary **ONLY IF YOU NEED TO**. If you have changed them uncomment the section in docker-compose.yml.
 
 ------
 
-#### Fedora - gsearch
+### GSearch directory (aka Fedora Generic Search)
 
-* Within the `fedora/gsearch` subdirectory, edit the file: `fedoragsearch.properties` at line 7 and add a space after the equal sign and then add the new *gsearch fgsAdmin user password*.
+* Within the `gsearch` directory, edit the file: `fedoragsearch.properties` at line 7 and add a space after the equal sign and then add the new *gsearch fgsAdmin user password*.
 
      * ` -  fedoragsearch.soapPass                = new_fgsAdmin_password_here`
 
@@ -246,35 +197,6 @@ The `fedora` subdirectory contains all specific configurations and overrides nec
 * Edit the file: `fedora/gsearch/repository.properties` at line 7 and add a space after the equal sign and then add the new *fedora admin password*.
 
      * `fgsrepository.fedoraPass        = new_fedoraAdmin_password_here`
-
----
-
-#### Fedora - tmpreaper
-
-* (_Optional_) Edit the cron file within `fedora/tmpreaper` to change various appropriate settings if needed otherwise leave alone if you are not familiar with how cron jobs work.
-
-* Currently this cronjob is set to run every 12 hours and using the tmpreaper utility to clean out and delete the contents of the /tmp folder if they are older than 4 days.
-
----
-
-#### Fedora - tomcat
-
-* Within the **tomcat** subdirectory:
-
-     * Strongly recommend adding tomcat user passwords in file: `fedora/tomcat/tomcat-users.xml`
-
-Example: ONLY ADD TOMCAT USERNAME/PASSWORD - can look like this but please use a stronger password with more than 10 alpha-numeric characters. Also note, they should NOT be the same password.:
-
-```
-          <!-- user manager can access only manager section -->
-             <user username=“manager” password=“tomcat_manager_password" roles=“manager-gui” />  <!--enduser please add passwords / users and remove this comment -->
-
-          <!-- user admin can access manager and admin section both -->
-             <user username=“admin” password=“tomcat_admin_password” roles=“manager-gui,admin-gui” /> <!--enduser please add passwords / users and remove this comment -->
-
-          </tomcat-users>
-
-```
 
 ----
 
@@ -308,45 +230,23 @@ You'll want to rename `newsite_sample_db.sql` to the database or domain name of 
 
     * It is not recommended to change anything else.
 
- -------
+-------
 
-### Proxy directory
+### Traefik directory
 
 If need be, please refer to the **Systems** section of the [Glossary](../glossary.md) for relevant terms to help guide installation.
 
-The `proxy` subdirectory contains all specific configurations and overrides necessary for the ISLE proxy image and resulting container to function properly with your changes. This is the Nginx reverse proxy server that properly routes all internal and external communication between the other four containers and the ISLE Host network.
+The `traefik` subdirectory contains all specific configurations necessary for the Traefik proxy to function properly with your changes.
 
-#### Proxy - sites-enabled
+#### ssl-certs
 
-* In the `config/sites-enabled` subdirectory, rename the `com.sample-newsite.conf` file to `com.yourdomain.conf` (where "yourdomain" is the domain name of your server but the suffix .com typically last is now first.)
-
-    * Example: `edu.example.digital-collections.conf`
-
-* Now edit the file...
-
-    * Line 6: change `newsite-sample.com` to the domain name of your choice
-
-        * Ensure a space between `server_name` and the domain name and a `;` after the domain name still remain.
-
-    * Line 15: change `newsite-sample.com` to the domain name of your choice
-
-        * Ensure a space between `server_name` and the domain name and a `;` after the domain name still remain.
-
-    * Lines 18 & 19: Change to the name of your ssl certs (should be same names as in previously made `apache` edits above)
-
-----
-
-#### Proxy - ssl-certs
-
-Copy your SSL certs into the ssl-certs subdirectory.
-
-_DO NOT OVERWRITE OR DELETE the create_dhparam_pem file within this directory._
+Copy your SSL certs into the `certs` subdirectory and tell Traefik about them.
 
 If need be, please refer to the **SSL certificate** section of the [Glossary](../glossary.md) for relevant terms to help guide installation.
 
 There are also additional links for the enduser to learn how to combine the SSL Certificate File with any available SSL Certificate Chain File for the `proxy` process to work properly.
 
-* Copy your SSL certificates for the ISLE Proxy into `proxy/ssl-certs`. They will and should have different names than the examples provided below.
+* Copy your SSL certificates for the ISLE Proxy into `config/traefik/certs`. They will and should have different names than the examples provided below.
 
     * There can only be 2 files involved in this process.
 
@@ -358,37 +258,12 @@ There are also additional links for the enduser to learn how to combine the SSL 
             * This file is required.
             * Please also note that the file extensions can also be: `.cer`, `.crt` or `.pem`
 
-* Open a terminal, navigate to the is subdirectory, and run the `create_dhparam_pem.sh` script in `~/ISLE/config/isle-newsite-sample/proxy/ssl-certs/` subdirectory to create the `dhparam.pem` file (_if not already._) This file is critical to the SSL encryption process and for communication between the `proxy` and `apache` containers.
+* Edit the `config/traefik/traefik.toml` file:
+  * Change line 78 and 79:
+    *  `certFile = "/certs/isle.localdomain.cert"`  ## Change to reflect your CERT, CRT, or PEM
+    *  `keyFile = "/certs/isle.localdomain.key"`  ## Change to reflect your KEY, or PEM.
 
-    * To run this script from within this subdirectory:  `./create_dhparam_pem.sh`.
-
-    * This will take 10 -20 mins depending on the speed of your local laptop or workstation.
-
---------
-
-#### Proxy - upstreams.d
-
-Single environment steps only below:
-
-* Copy and rename: `sample-upstreams.conf.disabled` to the appropriate domain name of your choice e.g. `yourdomain-upstreams.conf` while also removing the `.disabled` suffix.
-
-* **Example A:** Lines 10 and 14 look like this for a single environment (no additional environments to be setup). See `proxy/config/sites-enable/com.sample-newsite.conf.disabled`.
-
-**Please note:** If only ever deploying a single ISLE environment, you could chose not to add any suffixes and ISLE should function properly. This is entirely dependent on your organizational needs.
-
-Example: Single Environment (defaults, no edits made)
-
-```
-
-      upstream fedora-internal {
-        server fedora:8080 fail_timeout=0;
-      }
-
-      upstream fedora-internal {
-        server apache:443 fail_timeout=0;
-      }
-
-```
+  * Change line 167 `domain = "isle.localdomain"` to your domain (this is unnecessary but is important for consistency)
 
 -----
 
@@ -397,8 +272,6 @@ Example: Single Environment (defaults, no edits made)
 The `solr` subdirectory contains all specific configurations and overrides necessary for the ISLE solr image and resulting container to function properly with your changes. This is the SOLR search server that properly indexes all objects and metadata to provide speedy in-depth search functionality for the Islandora / Drupal site of the objects and collections contained within the Fedora repository.
 
 If need be, please refer to the **Solr** section of the [Glossary](../glossary.md) for relevant terms to help guide installation.
-
-#### Solr - solr
 
 * (_Optional_) Within the **solr** subdirectory:
 
@@ -412,25 +285,6 @@ If need be, please refer to the **Solr** section of the [Glossary](../glossary.m
 
         * `stopwords.txt`
 
-#### Solr - tomcat
-
-* Within the **tomcat** subdirectory:
-
-     * Strongly recommend adding tomcat user passwords in file: `solr/tomcat/tomcat-users.xml` on lines 45 & 48.
-
-Example: ONLY ADD TOMCAT USERNAME/PASSWORD - can look like this but please use a stronger password with more than 10 alpha-numeric characters. Also note, they should NOT be the same password.:
-
-```
-          <!-- user manager can access only manager section -->
-             <user username=“manager” password=“tomcat_manager_password" roles=“manager-gui” />  <!--enduser please add passwords / users and remove this comment -->
-
-          <!-- user admin can access manager and admin section both -->
-             <user username=“admin” password=“tomcat_admin_password” roles=“manager-gui,admin-gui” /> <!--enduser please add passwords / users and remove this comment -->
-
-          </tomcat-users>
-
-```
-
 --------
 
 ## Final steps
@@ -441,25 +295,15 @@ If need be, please refer to the **Git** section of the [Glossary](../glossary.md
 
     * Open a terminal - `cd` to the config directory you've been making the changes in...
 
-    * `git status`  this will show you all the files that have been modified and ready to be added to your private repo along with handy paths for the next steps.
+    * `git status` this will show you all the files that have been modified and ready to be added to your private repo along with handy paths for the next steps.
 
-    * `git add /pathtoyourmodifiedfile` (replace "pathtoyourmodifiedfile" with the path to your config directory)
-
-    * run these:
-
-    `git add apache`
-    `git add fedora`
-    `git add mysql`
-    `git add proxy`
-    `git add solr`
-    `git add docker-compose.yml`
-    `git add newsite-sample-cheatsheet.md`
+    * `git add -A` to commit all changes.
 
     * Enter `git status` again - everything should be in green now as all modified files have been added - if anything's still red use git add and the path to add it
 
     * then run `git commit -m "initial config commit"` inside the double quotes is the commit message you can say whatever you want in this message - so for example if this is the config for your dev instance you could say that...
 
-    * Enter `git push origin master`
+    * Enter `git push {NAME OF YOUR REPOSITORY REMOTE} master`
 
       * This will push all your changes to the repo.
 
