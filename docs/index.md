@@ -4,7 +4,7 @@ ISLE is a set of resources for building and updating a fully functioning Islando
 
 * [New ISLE](#new-isle): create a new ISLE instance on a production, staging or development server
 
-<!--- * [Update ISLE](#update-isle): update a preexisting ISLE instance with improvements and security updates --->
+* [Update ISLE](#update-isle): update a preexisting ISLE instance with improvements and security updates
 
 * [Migrate to ISLE](#migrate-to-isle): migrate a non-ISLE Islandora 7x instance to ISLE on a production, staging or development server
 
@@ -39,15 +39,13 @@ Once the prerequisites are installed, you will need to install Islandora:
 
 ---
 
-<!---
 ## Update ISLE
 
 The following offers a method for updating an existing ISLE installation to install the newest improvements and security updates, regardless of environment.
 
 This process is backwards compatible with your existing ISLE site.
 
-- DETAILS COMING SOON...
---->
+Please read these  instructions: [Update ISLE](07_appendices/update_isle.md)
 
 ---
 
