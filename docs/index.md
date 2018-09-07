@@ -8,7 +8,7 @@ ISLE is a set of resources for building and updating a fully functioning Islando
 
 * [Migrate to ISLE](#migrate-to-isle): migrate a non-ISLE Islandora 7x instance to ISLE on a production, staging or development server
 
-* [Test/Demo ISLE](#test-and-demo-isle): create a new ISLE instance on my laptop or workstation
+* [Test/Demo ISLE](#test-demo-isle): create a new ISLE instance on my laptop or workstation
 
 ---
 
