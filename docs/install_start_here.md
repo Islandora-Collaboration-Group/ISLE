@@ -1,42 +1,18 @@
-Please select your desired use case for ISLE.
+**Please select your desired type of ISLE installation:**
 
-**I would like to:**
+* [New ISLE](#new-isle): create a new ISLE instance on a production, staging or development server
 
-* [Test ISLE](#test-isle) installation on my laptop or workstation
+* [Update ISLE](#update-isle): update a preexisting ISLE instance with improvements and security updates
 
-* [Create a new ISLE site](#create-a-new-isle-site-or-sites) on a production, staging or development server
+* [Migrate to ISLE](#migrate-to-isle): migrate a non-ISLE Islandora 7x instance to ISLE on a production, staging or development server
 
-* [Migrate to ISLE](#migrate-to-isle) on a production, staging or development server
-
-* [Update ISLE](#update-isle) to install the newest improvements and security updates
+* [Test/Demo ISLE](#test-and-demo-isle): create a new ISLE instance on my laptop or workstation
 
 **Please note:** There is a [Glossary](glossary.md) with relevant terms to help guide installation.
 
 ---
 
-## Test ISLE
-
-The recommended non-production environments for using the prebuilt ISLE test site (`isle.localdomain`) are with the following type of laptops or workstations.
-
-Please review the [ISLE Host Server OS requirements](01_installation_host_server/host_server_system_specifications.md) prior to any installation.
-
-ISLE is designed and tested to work on the following OSes and environments.  Follow the link for your preferred system for instructions on setting up the testing environment.
-
-* [Mac OSX High Sierra and Docker](01_installation_host_server/install_docker_for_mac.md)
-
-* [Mac OSX High Sierra and Vagrant & VirtualBox](01_installation_host_server/install_macos_vagrant.md)
-
-* [Windows and Docker](01_installation_host_server/install_docker_for_windows.md)
-
-* [Ubuntu 18.04](01_installation_host_server/install_on_ubuntu_1804.md)
-
-* [Centos 7.x](01_installation_host_server/install_on_centos.md)
-
-Advice for installing a test instance of ISLE on other platforms may be available from the [ISLE ISLE Google Group](https://groups.google.com/forum/#!forum/islandora-isle).
-
----
-
-## Create a new ISLE site or site(s)
+## New ISLE
 
 Typically new sites are used in production, staging or shared development environments.  If you do not have an existing Islandora installation you need to migrate, follow these instructions. 
 
@@ -57,7 +33,15 @@ Once the prerequisites are installed, you will need to install Islandora:
 * If you are going to setup multiple ISLE sites using multiple environments (e.g. dev, stage, and prod etc.) on one ISLE Host server or VM please using the: [New ISLE Sites - Multi Envs](03_installation_new_site/new_site_installation_guide_multi.md) once you have set up the host server.
     * Note: setting up multiple ISLE sites and environments on one ISLE host server will require adequate resources. A good rule of thumb is to take the specifications outlined in the [ISLE Host Server OS requirements](01_installation_host_server/host_server_system_specifications.md) and divide by three as an initial concept. Bear in mind, that any `dev` environment doesn't need as much resource but any potential `stage` and `prod` environments should mirror each other in resource usage and setup.
 
+---
 
+## Update ISLE
+
+The following offers a method for updating an existing ISLE installation to install the newest improvements and security updates, regardless of environment.
+
+This process is backwards compatible with your existing ISLE site.
+
+- DETAILS COMING SOON...
 
 ---
 
@@ -81,10 +65,26 @@ Once the prerequisites are installed, you will need to install Islandora:
 
 * [Migrate to ISLE](04_installation_migration/migration_installation_guide.md)
 
-## Update ISLE
+---
 
-The following offers a method for updating an existing ISLE installation to install the newest improvements and security updates, regardless of environment.
+## Test/Demo ISLE
 
-This process is backwards compatible with your existing ISLE site.
+The recommended non-production environments for using the prebuilt ISLE test site (`isle.localdomain`) are with the following type of laptops or workstations.
 
-- DETAILS COMING SOON...
+Please review the [ISLE Host Server OS requirements](01_installation_host_server/host_server_system_specifications.md) prior to any installation.
+
+ISLE is designed and tested to work on the following OSes and environments.  Follow the link for your preferred system for instructions on setting up the testing environment.
+
+* [Mac OSX High Sierra and Docker](01_installation_host_server/install_docker_for_mac.md)
+
+* [Mac OSX High Sierra and Vagrant & VirtualBox](01_installation_host_server/install_macos_vagrant.md)
+
+* [Windows and Docker](01_installation_host_server/install_docker_for_windows.md)
+
+* [Ubuntu 18.04](01_installation_host_server/install_on_ubuntu_1804.md)
+
+* [Centos 7.x](01_installation_host_server/install_on_centos.md)
+
+Advice for installing a test instance of ISLE on other platforms may be available from the [ISLE ISLE Google Group](https://groups.google.com/forum/#!forum/islandora-isle).
+
+
