@@ -1,39 +1,18 @@
 # ISLE: Islandora Enterprise
 
-ISLE is a set of resources for building and updating a fully functioning Islandora system quickly using a system building tool called [Docker](https://docker.com). The purpose of this documentation is to provide clear instructions on how to do one, or all, of the following:
+ISLE is a set of resources for building and updating a fully functioning Islandora system quickly using a system building tool called [Docker](https://docker.com). The purpose of this documentation is to provide clear instructions on how to do one, or all, of the following types of installation:
 
-* [Test ISLE](#test-isle) installation on my laptop or workstation
+* [New ISLE](#new-isle): create a new ISLE instance on a production, staging or development server
 
-* [Create a new ISLE site](#create-a-new-isle-site-or-sites) on a production, staging or development server
+<!--- * [Update ISLE](#update-isle): update a preexisting ISLE instance with improvements and security updates --->
 
-* [Migrate to ISLE](#migrate-to-isle) on a production, staging or development server
+* [Migrate to ISLE](#migrate-to-isle): migrate a non-ISLE Islandora 7x instance to ISLE on a production, staging or development server
 
----
-
-## Test ISLE
-
-Below are the recommended specifications for a laptop or desktop running a TEST version of ISLE:
-
-  * <span style='font-size:medium'>8 - 16 GB RAM is recommended</span>
-  * <span style='font-size:medium'>Minimum 1 - 2 CPUs (w/ 1 - 4 cores each)  </span>
-  * <span style='font-size:medium'>128 - 500GB for the Desktop OS</span>
-  * <span style='font-size:medium'>Sufficient HD space to hold a test collection</span>
-
-ISLE is designed and tested to work on the following operating systems.  Follow the link for your system for instructions on setting up the testing environment.
-
-* [Mac OSX High Sierra](01_installation_host_server/install_docker_for_mac.md)
-
-* [Windows 10](01_installation_host_server/install_docker_for_windows.md)
-
-* [Ubuntu 18.04](01_installation_host_server/install_on_ubuntu_1804.md)
-
-* [Centos 7.x](01_installation_host_server/install_on_centos.md)
-
-Advice for installing a test instance of ISLE on other platforms may be available from the [ISLE ISLE Google Group](https://groups.google.com/forum/#!forum/islandora-isle).
+* [Test/Demo ISLE](#test-and-demo-isle): create a new ISLE instance on my laptop or workstation
 
 ---
 
-## Create a new ISLE site or site(s)
+## New ISLE
 
 Typically new sites are used in production, staging or shared development environments.  If you do not have an existing Islandora installation you need to migrate, follow these instructions. 
 
@@ -58,6 +37,17 @@ Once the prerequisites are installed, you will need to install Islandora:
 * If you are going to setup multiple ISLE sites using multiple environments (e.g. dev, stage, and prod etc.) on one ISLE Host server or VM please using the: [New ISLE Sites - Multi Envs](03_installation_new_site/new_site_installation_guide_multi.md) once you have set up the host server.
     * Note: setting up multiple ISLE sites and environments on one ISLE host server will require adequate resources. A good rule of thumb is to take the specifications outlined in the [ISLE Host Server OS requirements](01_installation_host_server/host_server_system_specifications.md) and divide by three as an initial concept. Bear in mind, that any `dev` environment doesn't need as much resource but any potential `stage` and `prod` environments should mirror each other in resource usage and setup.
 
+---
+
+<!---
+## Update ISLE
+
+The following offers a method for updating an existing ISLE installation to install the newest improvements and security updates, regardless of environment.
+
+This process is backwards compatible with your existing ISLE site.
+
+- DETAILS COMING SOON...
+--->
 
 ---
 
@@ -82,3 +72,26 @@ First, follow one of the guides below to configure your server for ISLE (**Pleas
 Once the prerequisites are installed, you will need to install Islandora:
 
 * [Migrate to ISLE](04_installation_migration/migration_installation_guide.md)
+
+---
+
+## Test/Demo ISLE
+
+Below are the recommended specifications for a laptop or desktop running a TEST version of ISLE:
+
+  * <span style='font-size:medium'>8 - 16 GB RAM is recommended</span>
+  * <span style='font-size:medium'>Minimum 1 - 2 CPUs (w/ 1 - 4 cores each)  </span>
+  * <span style='font-size:medium'>128 - 500GB for the Desktop OS</span>
+  * <span style='font-size:medium'>Sufficient HD space to hold a test collection</span>
+
+ISLE is designed and tested to work on the following operating systems.  Follow the link for your system for instructions on setting up the testing environment.
+
+* [Mac OSX High Sierra](01_installation_host_server/install_docker_for_mac.md)
+
+* [Windows 10](01_installation_host_server/install_docker_for_windows.md)
+
+* [Ubuntu 18.04](01_installation_host_server/install_on_ubuntu_1804.md)
+
+* [Centos 7.x](01_installation_host_server/install_on_centos.md)
+
+Advice for installing a test instance of ISLE on other platforms may be available from the [ISLE ISLE Google Group](https://groups.google.com/forum/#!forum/islandora-isle).
