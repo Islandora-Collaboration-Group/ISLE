@@ -2,7 +2,7 @@
 
 ISLE is a set of resources for building and updating a fully functioning Islandora system quickly using a system building tool called [Docker](https://docker.com). The purpose of this documentation is to provide clear instructions on how to do one, or all, of the following:
 
-* [Test ISLE](#test-isle) installation on my laptop or workstation
+* [Test ISLE](#test-demo-isle) installation on my laptop or workstation
 
 * [Create a new ISLE site](#create-a-new-isle-site-or-sites) on a production, staging or development server
 
