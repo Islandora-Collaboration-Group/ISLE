@@ -4,7 +4,7 @@ This is a detailed operating system-specific guide to setup and install all ISLE
 
 Called "the host" - this is the base computer upon which the entire ISLE stack is built.
 
-**Please note:** This guide is for using `Docker for Windows` software only on a Windows 10 system instead of Vagrant or a Virtual Machine (VM).  The current version of `Docker for Windows` clashes with Virtualbox.  If you with to test ISLE on a Windows 10 computer that must have Virtualbox installed on it, it is suggested that you install ISLE on a guest virtual machine running [Centos](install_on_centos.md) or [Ubuntu](install_on_ubuntu_1804.md).
+**Please note:** This guide is for using `Docker for Windows` software only on a Windows 10 system instead of Vagrant or a Virtual Machine (VM).  The current version of `Docker for Windows` clashes with Virtualbox.  If you with to Test/Demo ISLE on a Windows 10 computer that must have Virtualbox installed on it, it is suggested that you install ISLE on a guest virtual machine running [Centos](install_on_centos.md) or [Ubuntu](install_on_ubuntu_1804.md).
 
 ### Assumptions / Pre-Requisites
 

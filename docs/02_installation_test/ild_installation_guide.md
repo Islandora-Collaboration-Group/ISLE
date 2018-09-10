@@ -1,9 +1,9 @@
-###Test ISLE Installation Guide
+###Test/Demo ISLE - Installation Guide
 _Expectations:  It takes an average of **15-45 minutes** to read this entire document and perform the installation as prescribed._
 
 Follow this guide to spin up and install ISLE utilizing the built-in `isle.localdomain` domain name for review and testing.
 
-This test ISLE / Islandora environment (`isle.localdomain`) includes an un-themed Drupal website and empty Fedora repository for endusers to develop code, test ingests, test metadata, update fields in SOLR indexing and otherwise "kick the tires" on ISLE prior for further usages e.g. creating a new ISLE production site or migrating a current Islandora production site to ISLE.
+This Test/Demo ISLE guide creates an Islandora environment (`isle.localdomain`) that includes an un-themed Drupal website and empty Fedora repository for endusers to develop code, test ingests, test metadata, update fields in SOLR indexing and otherwise "kick the tires" on ISLE prior for further usages e.g. creating a new ISLE production site or migrating a current Islandora production site to ISLE.
 
 While this checklist will attempt to point out most of the usage challenges or pitfalls, ISLE assumes no responsibility or liability in this matter should an enduser have customizations beyond what this guide outlines.
 
@@ -11,7 +11,7 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 ### Assumptions / Prerequisites
 
-* This test site guide is designed for a local laptop / workstation that has already followed the appropriate setup and configuration instructions in the `Test ISLE` section of the [guide](/index.md#test-isle).
+* This test site guide is designed for a local laptop / workstation that has already followed the appropriate setup and configuration instructions in the `Test/Demo ISLE` section of the [guide](/index.md#test-demo-isle).
 
 * Instructions below assume a MacOS or Linux laptop or workstation. Windows users may have to adjust / swap out various tools as needed.
 
