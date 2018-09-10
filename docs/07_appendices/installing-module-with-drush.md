@@ -6,7 +6,7 @@ _Drush_, a "Command Line Shell for Drupal", provides convenient means of install
 
 _Git_ is a version control tool that I hope all readers of this document are already familiar with.  If you are not, please consider studying up on it at https://git-scm.com/.
 
-_Drush_ and _Git_ are included, or 'baked in', to ISLE's Apache container image.  You can open a shell inside a running ISLE Apache container (see _open-terminal-in-running-container.md_) to use them.  When you open a shell inside the Apache container you'll initially be logged in as 'root'; however, most _Drush_ and _Git_ operations should not be performed as 'root' so once the shell is open you should switch to the _islandora_ user.  Do this by entering `sudo su islandora`, and your prompt should change to something like this: `islandora@dd9ee02aa718:/$`.  
+_Drush_ and _Git_ are included, or 'baked in', to ISLE's Apache container image.  You can open a shell inside a running ISLE Apache container ([see these instructions](open-terminal-in-running-container.md)) to use them.  When you open a shell inside the Apache container you'll initially be logged in as 'root'; however, most _Drush_ and _Git_ operations should not be performed as 'root' so once the shell is open you should switch to the _islandora_ user.  Do this by entering `sudo su islandora`, and your prompt should change to something like this: `islandora@dd9ee02aa718:/$`.  
 
 You can confirm that Drush is installed and accessible by entering `drush --version`, and you should see something like this in response: `Drush Version   :  7.4.0`.  Likewise, you can confirm that Git is installed and working by entering `git --version`, and you should see something like this in response: `git version 1.9.1`.
 
@@ -43,9 +43,9 @@ That's it.  Your new module is installed and ready to be configured and used.  Y
 
 ## Example: Oral Histories Solution Pack - A Non-Contrib Islandora Module
 
-According to its README.md file, the *Oral Histories Solution Pack* (https://github.com/Islandora-Labs/islandora_solution_pack_oralhistories) "Provides a content model for Oral Histories and a viewer for displaying timed text content (XML or WebVTT) alongside video and audio files."  The remainder of this guide will demonstrate how to install and enable the *Oral Histories Solution Pack* inside your running Apache container using Git and Drush.
+According to its README.md file, the [*Oral Histories Solution Pack*](https://github.com/Islandora-Labs/islandora_solution_pack_oralhistories) "Provides a content model for Oral Histories and a viewer for displaying timed text content (XML or WebVTT) alongside video and audio files."  The remainder of this guide will demonstrate how to install and enable the *Oral Histories Solution Pack* inside your running Apache container using Git and Drush.
 
-The full installation instructions for the Oral Histories Solution Pack are relatively complex since there are a number of dependencies, and some necessary Solr configuration in order to be fully functional.  Please see https://github.com/Islandora-Labs/islandora_solution_pack_oralhistories/blob/7.x/README.md for complete details.
+The full installation instructions for the Oral Histories Solution Pack are relatively complex since there are a number of dependencies, and some necessary Solr configuration in order to be fully functional.  Please see the [README](https://github.com/Islandora-Labs/islandora_solution_pack_oralhistories/blob/7.x/README.md) for complete details.
 
 To begin the process of downloading, installing and configuring the Oral History Solution Pack do the following at the terminal inside your container:
 
