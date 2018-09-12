@@ -15,11 +15,11 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 ## Assumptions / Prerequisites
 
-* Comfortability with ISLE. Recommend first setting up the ISLE Test Site (`isle.localdomain`) via the [Install Start Here](../install_start_here.md) guide. If you have already done this, please proceed.
+* Comfortability with ISLE. Recommend first setting up the [ISLE Test Site](02_installation_test/ild_installation_guide.md) (`isle.localdomain`). If you have already done this, please proceed.
 
 * Host Server that conforms to the specifications outlined in the [Host Server Specifications](../01_installation_host_server/host_server_system_specifications.md)
 
-* This new site guide is designed for a Host server that has already followed the appropriate setup and configuration instructions in the `Create a new ISLE site` section of the [Install Start Here](../install_start_here.md) guide.
+* This new site guide is designed for a Host server that has already followed the appropriate setup and configuration instructions in the [Create a new ISLE site](03_installation_new_site/new_site_installation_guide_single.md) guide.
 
 * Instructions below also assume a MacOS or Linux laptop or workstation to be used in conjunction with the ISLE Host Server for deploying configs, code, files etc. Windows users may have to adjust / swap out various tools as needed.
 

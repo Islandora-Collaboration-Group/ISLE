@@ -91,4 +91,4 @@ This process should may take 15 - 60+ mins depending on the speed of your Intern
 
 ### Next steps
 
-* Return to the [Install Start Here section](../install_start_here.md) for additional instructions or set up a [test version of ISLE](02_installation_test/ild_installation_guide/).
+* Set up a [test version of ISLE](../02_installation_test/ild_installation_guide.md).

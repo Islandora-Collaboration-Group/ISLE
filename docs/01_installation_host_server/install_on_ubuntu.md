@@ -294,4 +294,9 @@ In case the commands in the steps above fail, please use this alternative instal
 
 ### Next steps
 
-* Return to the [Install Start Here section](../install_start_here.md) for additional instructions.
+Choose one of the following:
+
+* [Install a new single ISLE site](../03_installation_new_site/new_site_installation_guide_single.md)
+* [Install a new multi ISLE site](../03_installation_new_site/new_site_installation_guide_single.md)
+* [Install a Test/Demo site](../02_installation_test/ild_installation_guide.md)
+* [Migrate to ISLE(Draft docs)](../04_installation_migration/migration_installation_guide.md)
