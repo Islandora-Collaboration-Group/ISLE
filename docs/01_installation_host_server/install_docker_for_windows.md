@@ -75,7 +75,7 @@ In this section, the enduser will need to decide on an appropriate area on their
 
     * Or within the same terminal, enter `ls`  and verifying that `ISLE` appears in the list.
 
-* In the ISLE directory, find the file called .env (You may have to have Windows 10 show file extenions by following [these steps](https://www.thewindowsclub.com/show-file-extensions-in-windows)) and open it in Notepad.  Find the following line
+* **IMPORTANT** In the ISLE directory, find the file called .env (You may have to have Windows 10 show file extenions by following [these steps](https://www.thewindowsclub.com/show-file-extensions-in-windows)) and open it in Notepad.  Find the following line
     * `# COMPOSE_CONVERT_WINDOWS_PATHS=1`
     * Delete the `#` and save the file.
 ---
