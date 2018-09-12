@@ -142,4 +142,4 @@ This command shells in the vagrant user to the ISLE Host.
 
 ### Next steps
 
-* Return to the [Install Start Here section](../install_start_here.md) for additional instructions.
+* Proceed to the instructions for installing a [Test/Demo site](../02_installation_test/ild_installation_guide.md)
