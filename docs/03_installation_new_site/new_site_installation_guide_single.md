@@ -106,7 +106,7 @@ You should edit these files with unique users/passwords, your domain name, site-
 | DRUPAL_ADMIN_USER   | Set the name of Drupal admin                | Drupal                              | Specifies the 'admin user' for your Islandora website.                                                                                                                                          |
 | DRUPAL_ADMIN_PASS   | Set the password of Drupal admin            | Drupal                              | Specifies the password of 'admin user' for your Islandora website.                                                                                                                              |
 | DRUPAL_ADMIN_EMAIL  | Set the email of Drupal admin               | Drupal                              | Specifies the email address of the 'admin user' for your Islandora site.                                                                                                                        |
-| DRUPAL_HASH_SALT    | Secures your installation by hashing data   | Drupal                              | Secures your install of Drupal (Islandora) by hashing (obscuring) key data. Use password generation tool to create a HASH_SALT, remember alphanumeric characters ONLY (no special characters).  |
+| DRUPAL_HASH_SALT    | Secures your installation by hashing data   | Drupal                              | Secures your install of Drupal (Islandora) by hashing (obscuring) key data. Use [password generater tool](https://passwordsgenerator.net/) to create a HASH_SALT, remember alphanumeric characters ONLY (no special characters).  |
 
 ### Fedora Repository Section:
 | .env Variable         | Purpose                           | ISLE Services updated           | What it does                                                                                                                                                |
@@ -137,7 +137,7 @@ You should edit these files with unique users/passwords, your domain name, site-
 
 ## Config Directory
 
-The config directory has many purposes, but for a single simple site we only use it to define our domain name and as a place to store our SSL Certificate and Key.
+The config directory has many purposes like holding customized configuration files mounted to specific containers (which we have no covered here), but for a single simple site we only use it to hold our proxy configs and as a place to store our SSL Certificate and Key.
 
 -------
 
@@ -163,7 +163,7 @@ There are also additional links for the enduser to learn how to combine the SSL 
             * This file is required.
             * Please also note that the file extensions can also be: `.cer`, `.crt` or `.pem`
 
-* Edit the `config/traefik/traefik.toml` file:
+* Edit the `config/proxy/traefik.toml` file:
   * Change line 27 and 28:
     *  `certFile = "/certs/newsite-sample.cert"`  ## Change to reflect your CERT, CRT, or PEM
     *  `keyFile = "/certs/newsite-sample-key.key"`  ## Change to reflect your KEY, or PEM.
