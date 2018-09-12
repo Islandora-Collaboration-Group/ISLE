@@ -28,7 +28,7 @@ If you are not familiar with ingest, one can follow instructions [here](https://
 #### 1. MySQL container
 | Compose Service Name | Container Name  | Software      | Ports         |
 | :-------------:      | :-------------: | ------------- | ------------- |      
-| mysql                | isle-mysql-ld   | MySQL 5.6     | 3306          |
+| mysql                | isle-mysql-ld   | MySQL 5.7     | 3306          |
 
 
 | Account        | Password              | Database         | Perms                         |

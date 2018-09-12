@@ -86,24 +86,10 @@ _For Windows Users only_
         * Allow vpnkit.exe to communicate with the network.  Click Okay or Allow to accept the default selection.
         * If the process seems to halt, check the taskbar for background windows.
 
----
 
-<<<<<<< HEAD
     * **This script will take some time (see estimate above.)** You should see a lot of green [ok] messages.
     * If the script appears to pause and prompt for y/n, do not enter any values; the script will answer for you.  
     * Wait until "Drush script finished! ...exiting" before proceeding.**
-=======
-* This will put you into a root prompt at the command line where you will enter the following commands:
-    * `cd /utility-scripts/isle_drupal_build_tools/`
-
-    * `./isle_islandora_installer.sh`
-
-        * **This script will take some time (see estimate above.)** You should see a lot of green [ok] messages.
-        * If the script appears to pause and prompt for y/n, do not enter any values; the script will answer for you.  
-        * Wait until "Drush script finished! ...exiting" before proceeding.**
->>>>>>> upstream/master
-
-* Once finished press the `Ctrl` and `d` keys or type `exit` to get out of the apache container
 
 ### Step 4: Testing the site
 
@@ -136,9 +122,9 @@ This process will now allow you to search for ingested objects that have been in
 
 ### Note
 
-* The Proxy Control Panel is available at admin.isle.localdomain(https://admin.isle.localdomain).  No username/password are required.  This is unsafe for production environments.
+* The Proxy Control Panel is available at [admin.isle.localdomain](https://admin.isle.localdomain).  No username/password are required.  This is unsafe for production environments.
 
-* Portainer (a Docker control panel) is available at portainer.isle.localdomain(http://portainer.isle.localdomain). No username/password are required.  This is unsafe for production environments.
+* Portainer (a Docker control panel) is available at [portainer.isle.localdomain](http://portainer.isle.localdomain). No username/password are required.  This is unsafe for production environments.
 
 ### WARNING
 
@@ -177,13 +163,13 @@ If you don't see five running containers, then stop the running containers with 
 
 *  MySQL image pull & container launch
 
-    `docker pull islandoracollabgroup/isle-mysql:latest`
+    `docker pull islandoracollabgroup/isle-mysql:1.1`
 
     `docker-compose up -d mysql`
 
 *  Fedora image pull & container launch
 
-    `docker pull islandoracollabgroup/isle-fedora:latest`
+    `docker pull islandoracollabgroup/isle-fedora:1.1`
 
     `docker-compose up -d fedora`
 
@@ -191,7 +177,7 @@ If you don't see five running containers, then stop the running containers with 
 
     * Please note the Tomcat service requires about  one to three minutes to startup and as such if the enduser rushes to the URL supplied below, the service page maytime out or be reported as unreachable. Give it a little time.
     * After spinning up fedora container, check if the Fedora service is running prior to advancing.
-    * Navigate to http://fedora:8080/manager/html a popup login prompt should appear.
+    * Navigate to http://hostip:8081/manager/html a popup login prompt should appear.
     * Enter the user name of `admin` and the password of `isle_admin`
     * Upon login a large display of running Tomcat applications should display, scroll down to fedora
     * The application state / status should be true
@@ -202,12 +188,12 @@ If you don't see five running containers, then stop the running containers with 
 
 * Solr image pull & container launch
 
-    `docker pull islandoracollabgroup/isle-solr:latest`
+    `docker pull islandoracollabgroup/isle-solr:1.1`
 
     `docker-compose up -d solr`
 
 * Apache image pull & container launch
 
-    `docker pull islandoracollabgroup/isle-apache:latest`
+    `docker pull islandoracollabgroup/isle-apache:1.1`
 
     `docker-compose up -d apache`

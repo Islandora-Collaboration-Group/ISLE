@@ -35,16 +35,19 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 ## Overview
 
-* Setup a Private Code Repository
+* The .env and tomcat.env files are your primary resources for customizing your ISLE stack.
+  * As a result your .env file will container passwords and usernames and must be treated with the utmost care. **Never** share you .env that contains information related to your site. 
+
+<!-- * Setup a Private Code Repository
     * Most of the work in this guide involves careful editing of the various configuration and settings files that customize the pieces of Islandora (database, repository, web-server, etc...).
     * Doing this work in a code repository makes it easier to correct errors and to repeat the process for additional servers without needing to replicate all the work.
-    * Since the edits could include things like passwords, it's important to make this a private repository.
-
-* Customizing for your Environment
+    * Since the edits could include things like passwords, it's important to make this a private repository. -->
+<!-- 
+* Customizing your Environment
     * Many of the steps below describe adding the domain name or other specific bits of information into files or appending those bits to file names.
-    * In these cases this guide will call out the customization point AND provide an example - it's important not to literally copy paste the example!
+    * In these cases this guide will call out the customization point AND provide an example - it's important not to literally copy paste the example! -->
 
-## Create Private Code Repository
+<!-- ## Create Private Code Repository
 
 **ON your local laptop/workstation:**
 
@@ -64,177 +67,91 @@ While this checklist will attempt to point out most of the usage challenges or p
   * **NOTE** replace "NameOfYourRepository" and "URLofYourRepository" with the name of your git repository and its URL
 
 * You are now ready to perform the customization edits in this directory (you can use a text editor of choice now don't have to stay in terminal - just locate the folder in the finder and open file in text editor)
+ -->
 
-##  Edits
+##  Edits to make!
 
-### Docker Environment File:
+## Docker Environment Files:
 
-* Edit the file: **.env** accordingly:
+There are .env files that exist in your cloned copy of the repository. This section describes what these files do, and their importance to your stack! Chiefly these files are tasked with automatically configuring and setting all ISLE systems to work together in the stack. ISLE removes the need of editing the more complex config files that are part of the Islandora stack manually. Just .env it!
 
+You should edit these files with unique users/passwords, your domain name, site-name, etc. for your own _unique_ instance of ISLE to come alive.
+
+**Edit the file: **.env** and **tomcat.env** before you up (`docker-compose up`)**
+
+**REMEMBER: never share or post your complete .env publicly... EVER! Use caution, and when in doubt ask a maintainer for help (i.e., share the file privately with a maintainer)**
+
+### Master Section:
     * COMPOSE_PROJECT_NAME to something unique (e.g. `COMPOSE_PROJECT_NAME=isle-production-collections`)
+      * This variable is appended to things Docker objects like volume names and network names.
     * BASE_DOMAIN to your domainname (e.g. `BASE_DOMAIN=digital-collections.example.edu`)
-    * CONTAINER_SHORT_ID to something unique.  It is appended to the end of all running containers, keep it _short_ (e.g. `CONTAINER_SHORT_ID=prod`)
+      * This variable specifies your domain name!
+    * CONTAINER_SHORT_ID to something unique (e.g. `CONTAINER_SHORT_ID=prod`).
+      * This variable is appended to the end of all running containers, keep it _short_!
+    
 
-**Please note:** Much of the file is already with comments guiding the enduser to key areas or files to edit or modify accordingly.
+### Database Section:
+| .env Variable                   | Purpose                               | ISLE Services updated  | What it does                                                                                                                            |
+|-------------------------------  |-------------------------------------  |------------------------------------ |---------------------------------------------------------------------------------------------------------------------------------------  |
+| MYSQL_ROOT_PASSWORD             | Set the `root` password for MySQL     | MySQL, Fedora, Apache               | Allows Fedora and Apache to update their relevant databases as well as to configure themselves to work together.                        |
+| FEDORA_DB                       | Set the name of Fedora database       | MySQL, Fedora                       | Specifies which database to create or use for Fedora data.                                                                              |
+| DRUPAL_DB                       | Set the name of the Drupal database   | MySQL, Apache, Fedora               | Specifies which database to create or use for Fedora data. Updates components of Fedora so it can read the Drupal database for users.   |
+| FEDORA_DB_USER DRUPAL_DB_USER   | Sets the MySQL user                   | MySQL, Apache, Fedora               | Specifies names of Database users.                                                                                                      |
+| FEDORA_DB_PASS DRUPAL_DB_PASS   | Sets MySQL user passwords             | MySQl, Apache, Fedora               | Specifies passwords of Database users.                                                                                                  |
+
+### Islandora (DRUPAL) Section:
+| .env Variable       | Purpose                                     | ISLE Services updated  | What it does                                                                                                                                                                                    |
+|-------------------- |-------------------------------------------  |------------------------------------ |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| DRUPAL_SITE_NAME    | Sets the Drupal Site Name variable          | Drupal                              | Sets the name of your Islandora Website; e.g.:  "<Your Group's Name> Digital Collections"                                                                                                       |
+| DRUPAL_ADMIN_USER   | Set the name of Drupal admin                | Drupal                              | Specifies the 'admin user' for your Islandora website.                                                                                                                                          |
+| DRUPAL_ADMIN_PASS   | Set the password of Drupal admin            | Drupal                              | Specifies the password of 'admin user' for your Islandora website.                                                                                                                              |
+| DRUPAL_ADMIN_EMAIL  | Set the email of Drupal admin               | Drupal                              | Specifies the email address of the 'admin user' for your Islandora site.                                                                                                                        |
+| DRUPAL_HASH_SALT    | Secures your installation by hashing data   | Drupal                              | Secures your install of Drupal (Islandora) by hashing (obscuring) key data. Use password generation tool to create a HASH_SALT, remember alphanumeric characters ONLY (no special characters).  |
+
+### Fedora Repository Section:
+| .env Variable         | Purpose                           | ISLE Services updated           | What it does                                                                                                                                                |
+|---------------------  |---------------------------------- |-------------------------------  |------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| FEDORA_ADMIN_USER     | Set the name of Fedora admin      | Fedora                          | Sets the master administrator username to login to the Fedora repository. You login with this user.                                                         |
+| FEDORA_ADMIN_PASS     | Set the password of Fedora admin  | Fedora                          | Sets the master administrator password to login to the Fedora repository.                                                                                   |
+| FEDORA_GSEARCH_USER   | Sets the username for FGS         | Fedora, Fedora Generic Search   | Sets the Fedora Generic Search (FGS) username used to login to the Fedora repository. FGS uses this user to connect to Fedora to update your search index.  |
+| FEDORA_GSEARCH_PASS   | Sets the password for FGS         | Fedora, Fedora Generic Search   | Sets the password for FGS to gain access to your repository.                                                                                                |
+| FEDORA_INTCALL_USER   | Sets the internal call user       | Fedora                          | The internal call username                                                                                                                                  |
+| FEDORA_INTCALL_PASS   | Sets the internal call password   | Fedora                          | The internal call password                                                                                                                                  |
+
+### Image Services Section:
+| .env Variable                       | ISLE Services updated   | What it does                                                                                                                          |
+|-----------------------------------  |-----------------------  |-------------------------------------------------------------------------------------------------------------------------------------- |
+| CANTALOUPE_ADMIN_INTERFACE_ENABLE   | ImageServices           | Enables or Disables the Cantaloupe IIIF /admin control panel. Locatied at http://hostip:8083/cantaloupe/admin when true, else false.  |
+| CANTALOUPE_ADMIN_USER               | ImageServices           | Set the admin username to login to the admin panel.                                                                                   |
+| CANTALOUPE_ADMIN_PASS               | ImageServices           | Set the admin password to login to the admin panel.                                                                                   |
+
+### Tomcat.env applies to all Tomcat instances
+| Tomcat.env Variable   | ISLE Services updated         | What it does                                            |
+|---------------------  |-----------------------------  |-------------------------------------------------------  |
+| TOMCAT_ADMIN_USER     | Fedora, Solr, ImageServices   | Set the admin username to login to the admin panel.     |
+| TOMCAT_ADMIN_PASS     | Fedora, Solr, ImageServices   | Set the admin password to login to the admin panel.     |
+| TOMCAT_MANAGER_USER   | Fedora, Solr, ImageServices   | Set the manager username to login to the admin panel.   |
+| TOMCAT_MANAGER_PASS   | Fedora, Solr, ImageServices   | Set the manager password to login to the admin panel.   |
 
 ---
 
-## Config directories
+## Config Directory
 
-Now proceed to make edits to files within the config subdirectories:
-
-This will involve your adding **domain name** (digital-collections.example.edu), desired passwords to **ensure your safety**:
-
-There are seven (7) subdirectories which have the appropriate settings for each respective container and service:
-
-* apache
-* mysql
-* traefik - The proxy
-* tomcat - This applies settings to all instances of Tomcat.
-* fedora
-* gsearch
-* solr
-
-----
-
-### Apache directory
-
-The `apache` subdirectory contains all specific configurations and overrides necessary for the ISLE apache image and resulting container to function properly with your changes. This is the webserver that serves the Islandora / Drupal website. These instructions assume you are installing a NEW SITE.
-
-* `cd` into the `config/apache` folder (`cd config/apache`).
-
-* Clone the current [ISLE Drupal Build tools](https://github.com/Islandora-Collaboration-Group/isle_drupal_build_tools): 
-`git clone https://github.com/Islandora-Collaboration-Group/isle_drupal_build_tools -b 7.x-1.11`
-
-* `cd` into the build tools directory: (`cd isle_drupal_build_tools`)
-
-* Edit the file: `isle_drush_make\settings.php`
-
-    * Lines 251-253: add your database name, database user, and database password    
-
-    * Line 288: to include a 45+ alpha-numeric characters drupal hash between the quotes after this text: `$drupal_hash_salt = '';`
-
-        * You'll need to create this value, recommend using a password generator tool. Ensure only alpha-numeric characters are used, no symbols etc.
-
-    * Line 311: Review and ensure `# $base_url = ` is still commented out
-
-* Edit the file `isle_drush_make\islandora.drush.make` to add or remove Islandora modules.
-
-  * To disable modules please use `;` to comment out the lines, or delete them entirely.
-
-* Edit the file: `isle_islandora_installer.sh`
-
-    * Find the section `## Site install` and edit:
-    `drush site-install -y --account-name=newsite_admin --account-pass=newsite_adminpw --account-mail=admin@newsite.com --site-name="ISLE New Site Sample"`
-
-    * Change the following values in that line above to the appropriate names and passwords for your site.
-
-        *  --account-name= Drupal admin account
-        *  --account-pass= Drupal admin account password
-        *  --account-mail= Email address that can be associated with Drupal admin account
-        *  --site-name= Name of your new ISLE website
-
-#### Apache - sites-enabled
-
-* Within the `sites-enabled` directory, rename the file `newsite-sample.conf` to your domain name - example:
-
-    * `digital-collections.example.edu.conf`
-
-* Edit the previously named `newsite-sample.conf` file and change lines 3 and 4 to point to the location of your apache logs on the container - example:
-
-    * `ErrorLog /var/log/apache2/digital-collections.example.edu.ssl.error.log`
-
-    * `CustomLog /var/log/apache2/digital-collections.example.edu.ssl.access.log combined`
-
-----
-
-### Fedora directory
-
-The `fedora` subdirectory contains all specific configurations and overrides necessary for the ISLE fedora image and resulting container to function properly with your changes. This is the Fedora repository that will contain all objects, metadata etc.
-
-* Within the `config/fedora` subdirectory, **add new passwords** in the following files:
-
-     * Lines 3, 8, 14: `fedora-users.xml`  (change all applicable passwords for fedora users)
-     * Line 598: `fedora.fcfg`  (change the password to the `fedora_admin` **database user password** only)
-     * Line 15: `filter-drupal.xml`  (change the associated Drupal site database name , user and password, do not use settings for the `fedora3` database.)
-
-* (_Optional_) Edit the contents of the repository-policies subdirectory as necessary **ONLY IF YOU NEED TO**. If you have changed them uncomment the section in docker-compose.yml.
-
-------
-
-### GSearch directory (aka Fedora Generic Search)
-
-* Within the `gsearch` directory, edit the file: `fedoragsearch.properties` at line 7 and add a space after the equal sign and then add the new *gsearch fgsAdmin user password*.
-
-     * ` -  fedoragsearch.soapPass                = new_fgsAdmin_password_here`
-
-* Edit the file: `fgsconfig-basic-configForIslandora.properties`
-
-     * Line 26: add the new *gsearch fgsAdmin user password*.
-
-        * `gsearchPass=new_fgsAdmin_password_here`
-
-    * Line 67: Add the new fedora *fedora admin password*.
-
-        * `fedoraPass=new_fedoraAdmin_password_here`
-
-* Edit the file: `fedora/gsearch/fgsconfigObjects.properties` at line 15 and add a space after the equal sign and then add the new *fedora admin password*.
-
-     * `fgsconfigObjects.fedoraPass            = new_fedoraAdmin_password_here`
-
-* Edit the file: `fedora/gsearch/repository.properties` at line 7 and add a space after the equal sign and then add the new *fedora admin password*.
-
-     * `fgsrepository.fedoraPass        = new_fedoraAdmin_password_here`
-
-----
-
-### Mysql directory
-
-The `mysql` subdirectory contains all specific configurations and overrides necessary for the ISLE mysql image and resulting container to function properly with your changes. This is the Mysql database server that will contain two databases, one for the Islandora / Drupal website and the other for the Fedora repository.
-
-* (_Optional_) Edit the Mysql configuration file `my.cnf` as needed otherwise leave alone.
-
-
-#### Mysql - initscripts
-
-This subdirectory houses SQL scripts necessary for a one time creation of your associated new site and `fedora3` database.
-
-You'll want to rename `newsite_sample_db.sql` to the database or domain name of your choice.
-
-* Edit the contents of `newsite_sample_db.sql` to create the new drupal site database and user.
-
-    * Line 1: Change the database name from `newsite_sample_db` to the database name of your choice.
-
-    * Line 2: Change the database user name from `newsite_sample_db_user` to the database user name of your choice.
-
-    * Line 3: At almost the end of the line, change the value of `newsite_sample_db.*` to the to the database name of your choice ensuring the `.*` remain without a space.
-
-    * Line 3: At the end of the line, change the value of `newsite_sample_db_user'` to the to the database user name of your choice ensuring the values remain with in the `''`quotes without spaces. Do not alter the remaining code (`@'%';'`) beyond that point.
-
-
-* Edit the contents of `fedora3` to change the `fedora_admin` user password only.
-
-    * Line 2: Change the `fedora_admin` user password from `newsite_sample_fedora_admin_pw` to the password of your choice.
-
-    * It is not recommended to change anything else.
+The config directory has many purposes, but for a single simple site we only use it to define our domain name and as a place to store our SSL Certificate and Key.
 
 -------
 
-### Traefik directory
+### Proxy directory
 
 If need be, please refer to the **Systems** section of the [Glossary](../glossary.md) for relevant terms to help guide installation.
 
-The `traefik` subdirectory contains all specific configurations necessary for the Traefik proxy to function properly with your changes.
-
-#### ssl-certs
-
-Copy your SSL certs into the `certs` subdirectory and tell Traefik about them.
+The `proxy` subdirectory contains all specific configurations necessary for the Traefik proxy to function properly with your changes.
 
 If need be, please refer to the **SSL certificate** section of the [Glossary](../glossary.md) for relevant terms to help guide installation.
 
 There are also additional links for the enduser to learn how to combine the SSL Certificate File with any available SSL Certificate Chain File for the `proxy` process to work properly.
 
-* Copy your SSL certificates for the ISLE Proxy into `config/traefik/certs`. They will and should have different names than the examples provided below.
+* Copy your SSL certificates for the ISLE Proxy into `config/proxy/ssl-certs`. They will and should have different names than the examples provided below.
 
     * There can only be 2 files involved in this process.
 
@@ -247,13 +164,12 @@ There are also additional links for the enduser to learn how to combine the SSL 
             * Please also note that the file extensions can also be: `.cer`, `.crt` or `.pem`
 
 * Edit the `config/traefik/traefik.toml` file:
-  * Change line 78 and 79:
-    *  `certFile = "/certs/isle.localdomain.cert"`  ## Change to reflect your CERT, CRT, or PEM
-    *  `keyFile = "/certs/isle.localdomain.key"`  ## Change to reflect your KEY, or PEM.
+  * Change line 27 and 28:
+    *  `certFile = "/certs/newsite-sample.cert"`  ## Change to reflect your CERT, CRT, or PEM
+    *  `keyFile = "/certs/newsite-sample-key.key"`  ## Change to reflect your KEY, or PEM.
 
-  * Change line 167 `domain = "isle.localdomain"` to your domain (this is unnecessary but is important for consistency)
 
------
+<!-- -----
 
 ### Solr directory
 
@@ -321,19 +237,18 @@ If need be, please refer to the **Git** section of the [Glossary](../glossary.md
 
 * Back at your terminal command line, run `git clone URLpathtoyourremoteprivaterepo.git .` (replacing "URLpathtoyourremoteprivaterepo" with the URL to the repository provided by the website)
 
-* `cd` into the newly cloned directory
+* `cd` into the newly cloned directory -->
+
+---
 
 ## Spin up ISLE containers!
 
-* run `docker-compose up -d`
+* Run `docker-compose up -d`
 
-* run `docker exec -it yourApacheContainerNameHere bash`
+* Wait for the stack to completely initialize, about 5 minutes (typically much less).
 
-     * Using the name from the `docker-composer.yml` file here (_typically: isle-apache-prod, or -stage, etc..._)
-
-* `cd /tmp/isle_drupal_build_tools`
-
-* Run: `./install_new_site.sh`
+* Run `docker exec -it isle-apache-<CONTAINER_SHORT_ID> bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh`
+     * Using the <CONTAINER_SHORT_ID> value from the .env file here (_typically: isle-apache-prod, or -stage, -dev, etc._)
 
 * Give this process 15 - 25 minutes (_depending on the speed of the ISLE Host server internet connection_)
 

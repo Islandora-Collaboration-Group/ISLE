@@ -22,7 +22,10 @@ However, if the intent is a new or migrated site that will see actual production
 
 **Server Specifications**
 
-* Ubuntu 18.04 LTS or CentOS 7.x running on a server or VM
+* While these images can be run on any OS (i.e., they're platform agnostic) we suggest a server or VM running:
+	* Ubuntu 18.04 LTS  or 
+	* CentOS 7.x
+	* Please note you are not limited to these, and ISLE should perform equally on all OSes.
 * Minimum 2 CPU's (w/ 1 - 4 cores each)
 * Sufficient HD or attached storage to hold your collection
 * 30 - 50GB for the Server OS & overhead
