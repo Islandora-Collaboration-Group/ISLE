@@ -163,7 +163,7 @@ There are also additional links for the enduser to learn how to combine the SSL 
             * This file is required.
             * Please also note that the file extensions can also be: `.cer`, `.crt` or `.pem`
 
-* Edit the `config/traefik/traefik.toml` file:
+* Edit the `config/proxy/traefik.toml` file:
   * Change line 27 and 28:
     *  `certFile = "/certs/newsite-sample.cert"`  ## Change to reflect your CERT, CRT, or PEM
     *  `keyFile = "/certs/newsite-sample-key.key"`  ## Change to reflect your KEY, or PEM.
