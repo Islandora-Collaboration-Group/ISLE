@@ -36,7 +36,7 @@ While this checklist will attempt to point out most of the usage challenges or p
 ## Overview
 
 * The .env and tomcat.env files are your primary resources for customizing your ISLE stack.
-  * As a result your .env file will container passwords and usernames and must be treated with the utmost care. **Never** share you .env that contains information related to your site. 
+  * As a result your .env files contain passwords and usernames and must be treated with the utmost care. **Never** share or post your .env files publicly... EVER!
 
 <!-- * Setup a Private Code Repository
     * Most of the work in this guide involves careful editing of the various configuration and settings files that customize the pieces of Islandora (database, repository, web-server, etc...).
@@ -79,11 +79,11 @@ You should edit these files with unique users/passwords, your domain name, site-
 
 **Edit the file: **.env** and **tomcat.env** before you up (`docker-compose up`)**
 
-**REMEMBER: never share or post your complete .env publicly... EVER! Use caution, and when in doubt ask a maintainer for help (i.e., share the file privately with a maintainer)**
+**REMEMBER: never share or post your complete .env publicly... EVER! Use caution, and when in doubt ask a maintainer for help (i.e., discuss or share the file privately with an ISLE Maintainer)**
 
 ### Master Section:
     * COMPOSE_PROJECT_NAME to something unique (e.g. `COMPOSE_PROJECT_NAME=isle-production-collections`)
-      * This variable is appended to things Docker objects like volume names and network names.
+      * This variable is appended to Docker objects like: volume names, network names.
     * BASE_DOMAIN to your domainname (e.g. `BASE_DOMAIN=digital-collections.example.edu`)
       * This variable specifies your domain name!
     * CONTAINER_SHORT_ID to something unique (e.g. `CONTAINER_SHORT_ID=prod`).
@@ -106,7 +106,7 @@ You should edit these files with unique users/passwords, your domain name, site-
 | DRUPAL_ADMIN_USER   | Set the name of Drupal admin                | Drupal                              | Specifies the 'admin user' for your Islandora website.                                                                                                                                          |
 | DRUPAL_ADMIN_PASS   | Set the password of Drupal admin            | Drupal                              | Specifies the password of 'admin user' for your Islandora website.                                                                                                                              |
 | DRUPAL_ADMIN_EMAIL  | Set the email of Drupal admin               | Drupal                              | Specifies the email address of the 'admin user' for your Islandora site.                                                                                                                        |
-| DRUPAL_HASH_SALT    | Secures your installation by hashing data   | Drupal                              | Secures your install of Drupal (Islandora) by hashing (obscuring) key data. Use [password generater tool](https://passwordsgenerator.net/) to create a HASH_SALT, remember alphanumeric characters ONLY (no special characters).  |
+| DRUPAL_HASH_SALT    | Secures your installation by hashing data   | Drupal                              | Secures your install of Drupal (Islandora) by hashing (obscuring) key data. Use [password generator tool](https://passwordsgenerator.net/) to create a HASH_SALT, remember alphanumeric characters ONLY (no special characters).  |
 
 ### Fedora Repository Section:
 | .env Variable         | Purpose                           | ISLE Services updated           | What it does                                                                                                                                                |
