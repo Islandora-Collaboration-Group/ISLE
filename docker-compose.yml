@@ -109,10 +109,8 @@ services:
   apache:
     # build:
     #   context: ./images/isle-apache
-    image: islandoracollabgroup/isle-apache:1.1
+    image: islandoracollabgroup/isle-apache:development
     container_name: isle-apache-${CONTAINER_SHORT_ID}
-    environment:
-      - PULL_ISLE_BUILD_TOOLS=true # Defaults to true.
     env_file: 
       - .env
     networks:
