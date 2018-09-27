@@ -134,7 +134,7 @@ services:
       - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
 
   traefik:
-    image: traefik:latest
+    image: traefik:1.6
     container_name: isle-proxy-${CONTAINER_SHORT_ID}
     networks:
       isle-internal:
