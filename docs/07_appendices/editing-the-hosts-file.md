@@ -1,5 +1,25 @@
 Below are instructions on how to edit the hosts file to connect to ISLE on a test system.
 
+#### Mac or Ubuntu Using Docker
+
+* **Docker For Mac** If you are using Docker For Mac, then use the IP address of `127.0.0.1` to resolve to `localhost` and to the `isle.localdomain localhost isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain` domain names
+
+* Open a terminal on the local laptop
+
+* Enter: `sudo nano /etc/hosts`
+  * _For endusers familiar with editing files on the command line, vim, emacs or alternative tools can be used in lieu of nano_
+
+* Enter the laptop enduser password
+
+* Add the values next to the `127.0.0.1 localhost` entry in the `/etc/hosts` file.
+
+    * `127.0.0.1 localhost isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain` with a space in between the entries.  
+
+  * Enter `Cntrl` and the letter `o` together to write the changes to the file.
+
+  * Enter `Cntrl` and the letter `x` together to exit the file.
+
+---
 
 #### Mac or Ubuntu Desktop Using Virtualbox VM (non-Vagrant)
 
@@ -12,7 +32,7 @@ Below are instructions on how to edit the hosts file to connect to ISLE on a tes
    * Open a terminal on the local laptop
 
    * Enter: `sudo nano /etc/hosts`
-     * _For endusers familiar with editing files on the command line, vim or alternative tools can be used in lieu of nano_
+     * _For endusers familiar with editing files on the command line, vim, emacs or alternative tools can be used in lieu of nano_
 
    * Enter the laptop enduser password
 
@@ -29,27 +49,6 @@ Below are instructions on how to edit the hosts file to connect to ISLE on a tes
 
 * Enter `Cntrl` and the letter `o` together to write the changes to the file.
 * Enter `Cntrl` and the letter `x` together to exit the file.
-
----
-
-#### Mac or Ubuntu Using Docker
-
-* **Docker For Mac** If you are using Docker For Mac, then use the IP address of `127.0.0.1` to resolve to `localhost` and to the `isle.localdomain localhost isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain` domain names
-
-* Open a terminal on the local laptop
-
-* Enter: `sudo nano /etc/hosts`
-  * _For endusers familiar with editing files on the command line, vim or alternative tools can be used in lieu of nano_
-
-* Enter the laptop enduser password
-
-* Add the values next to the `127.0.0.1 localhost` entry in the `/etc/hosts` file.
-
-    * `127.0.0.1 localhost isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain` with a space in between the entries.  
-
-  * Enter `Cntrl` and the letter `o` together to write the changes to the file.
-
-  * Enter `Cntrl` and the letter `x` together to exit the file.
 
 ---
 
