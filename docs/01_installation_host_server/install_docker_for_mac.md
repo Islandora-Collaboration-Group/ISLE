@@ -48,11 +48,13 @@ If git is already installed, then please proceed to the next section.
 
 ### Step 2: Docker for Mac Installation
 
-* Open a browser and navigate to [Docker for Mac](https://www.docker.com/docker-mac)
+* Open a browser and navigate to [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
-* Click the `Download from Docker Store` button in the center of the page
+* Click the `Download for Mac` button in the center of the page
 
-* Click the blue `Get Docker` button on the right of the page
+* Click the `Please Login to Download` button on the right of the page (Login or click `Create Account`)
+
+* Click the `Get Docker` button on the right of the page
 
 * The `Docker.dmg` file should start to download. Check your `Downloads` directory
 
@@ -106,7 +108,9 @@ The built-in terminal for MacOs can be found in `~/Applications/Utilities/Termin
 
 This process should may take 15 - 60+ mins depending on the speed of your Internet connection.
 
-* Open a terminal and enter the following command:
+* Open a terminal and enter the following commands:
+
+* `cd ISLE`
 
 * `docker-compose pull`
 

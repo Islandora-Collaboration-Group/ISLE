@@ -24,14 +24,14 @@ While this checklist will attempt to point out most of the usage challenges or p
 * Run install script on Apache container
 * Test the site
 * Sample object ingestion
-* Toubleshooting
+* Troubleshooting
 
 ### Step 0: edit /etc/hosts on local laptop or desktop
 
 It is important to add `isle.localdomain admin.isle.localdomian portainer.isle.localdomain` to your `/etc/hosts` file, as connecting directly to an IP address can prevent some components from working properly.
 
 * **Vagrant**: If you are using Vagrant, move on to the next section (_Summary: Test site launch process_) as this part is handled automatically.
- 
+
 * **All other host configurations**:  Instructions for editing hosts files can be found [here](../07_appendices/editing-the-hosts-file.md).  
 
 * After completing the appropriate steps, please return to this guide and continue with _Step 1: Test site Launch process_ below
@@ -47,7 +47,7 @@ It is important to add `isle.localdomain admin.isle.localdomian portainer.isle.l
         * ~~`ssh islandora@10.10.10.130`~~
         * ~~`cd /opt/ISLE`~~
 
-    * **Docker for Mac:** Continue to use the open terminal and navigate `cd /opt/ISLE` to the ISLE project directory.
+    * **Docker for Mac:** Continue to use the open terminal and navigate `cd ~/Documents/ISLE` to the ISLE project directory.
 
     * **Docker for Windows:** Continue to use the open PowerShell window and navigate to the ISLE project directory if not already there: `cd ~\Documents\ISLE`.
 
@@ -59,13 +59,13 @@ The install times stated below for each container are highly dependent on the en
 
     *  `docker-compose up -d`
 
-* This is going to download and start all five ISLE Docker images (_roughly 6 GB of data so it may take a little while depending on your Internet connection_)
+* This is going to download and start all ISLE Docker images (_roughly 6 GB of data so it may take a little while depending on your Internet connection_)
 
 * To check if the containers are running: `docker ps` (shows only running containers)
 
-    * If you don't see all five containers try: `docker ps -a` (shows all containers running or not)
+    * If you don't see all containers try: `docker ps -a` (shows all containers running or not)
 
-**If all five containers are NOT running, then proceed to the Troubleshooting section first before advancing to the "Install script on Apache container" section below**
+**If all containers are NOT running, then proceed to the Troubleshooting section first before advancing to the "Install script on Apache container" section below**
 
 
 -----
@@ -159,7 +159,7 @@ You may need to remove or disable these local web servers before you can success
 Once your web server(s) have been disabled, resume the ISLE install process by repeating your last installation command, presumably `docker-compose up -d`.
 
 #### Non-running Containers
-If you don't see five running containers, then stop the running containers with `docker-compose down -d` and start the containers one at a time following the instructions below:
+If you don't see all containers running, then stop the running containers with `docker-compose down -d` and start the containers one at a time following the instructions below:
 
 *  MySQL image pull & container launch
 
