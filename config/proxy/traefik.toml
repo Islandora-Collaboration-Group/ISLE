@@ -117,7 +117,8 @@ defaultEntryPoints = ["http", "https"]
 endpoint = "unix:///var/run/docker.sock"
 exposedbydefault = false
 watch = true
-usebindportip = true
+
+## usebindportip = true ## deprecated per Traefik developers.
 
 # Use Swarm Mode services as data provider.
 #
