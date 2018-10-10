@@ -109,7 +109,7 @@ services:
   apache:
     # build:
     #   context: ./images/isle-apache
-    image: islandoracollabgroup/isle-apache:development
+    image: islandoracollabgroup/isle-apache:1.1
     container_name: isle-apache-${CONTAINER_SHORT_ID}
     env_file: 
       - .env
