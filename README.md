@@ -43,16 +43,18 @@ The ISLE Steering Committee (ISC) oversees the ISLE project and the ISLE Project
 - David Keiser-Clark (Chair), Williams College
 - Francesca Livermore, Wesleyan University
 - Mark McFate, Grinnell College
-- Carolyn Moritz, Vassar College
 - Ben Rosner, Barnard College
-- Steve Young, Hamilton College
+- Mark Sandford, Colgate University
 
 ## ISLE Project Maintainers
 - Ben Rosner (Lead), Barnard College
-- Carolyn Moritz, Vassar College
 - Mark Sandford (Lead), Colgate University
 - Francesca Livermore, Wesleyan University
 - David Keiser-Clark, Williams College
+
+## Former Contributors
+- Carolyn Moritz, Vassar College
+- Steve Young, Hamilton College
 
 ## ISLE Funding Institutions
 * Amherst College
@@ -90,16 +92,19 @@ The ISLE Steering Committee (ISC) oversees the ISLE project and the ISLE Project
 - 03/2018 - [Completed] Community Alpha Test #3: Barnard College (lead: Ben Rosner)
 - 05/2018 - [In Process] ISLE Steering Committee approved ISLE (Islandora 7x) hand-off from Born-Digital
 - 05/2018 - [Completed] ISLE v1.0 release available as open-source for public use
-- 08/2018 - [Completed, in UAC] ISLE v1.1 release available as open-source for public use
+- 08/2018 - [Completed, in UAC] ISLE v1.1 release candidate available as open-source for public use
 - 10/2018 - [Future] ISLE Phase II begins
 
 ## Docker Images and Repositories
 Docker Image GitHub Repositories that comprise this stack: 
+ - [`isle-ubuntu-basebox`](https://github.com/Islandora-Collaboration-Group/isle-ubuntu-basebox) from which all images are derived.
+ - [`isle-tomcat`](https://github.com/Islandora-Collaboration-Group/isle-tomcat)
  - [`isle-fedora`](https://github.com/Islandora-Collaboration-Group/isle-fedora/)
  - [`isle-solr`](https://github.com/Islandora-Collaboration-Group/isle-solr/)
  - [`isle-apache`](https://github.com/Islandora-Collaboration-Group/isle-apache/)
  - [`isle-mysql`](https://github.com/Islandora-Collaboration-Group/isle-mysql)
  - [`isle-imageservices`](https://github.com/Islandora-Collaboration-Group/isle-imageservices/)
+ - [`traefik` as Proxy](https://traefik.io/)
 
 ## Quick Start Guide
 
