@@ -1,5 +1,0 @@
----
-
-- include: images_pull.yml
-  tags:
-    - docker_images

@@ -19,3 +19,6 @@
 [submodule "images/isle-mysql"]
 	path = images/isle-mysql
 	url = https://github.com/Islandora-Collaboration-Group/isle-mysql.git
+[submodule "ansible"]
+	path = ansible
+	url = https://github.com/Islandora-Collaboration-Group/ISLE-Ansible.git

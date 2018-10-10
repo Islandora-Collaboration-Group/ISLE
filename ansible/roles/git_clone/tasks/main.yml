@@ -1,5 +1,0 @@
----
-
-- include: git_clone.yml
-  tags:
-    - git_clone
