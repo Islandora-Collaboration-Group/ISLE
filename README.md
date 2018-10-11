@@ -13,7 +13,7 @@
 ## What is ISLE?
 [ISLE](https://github.com/Islandora-Collaboration-Group/ISLE) is a community project—initially funded by [17 academic institutions](https://docs.google.com/document/d/1ycx5ATbeWpUWvpZ6bwXws490CMgi0dyB9SBfPYUDEjk/edit?usp=sharing) and Born-Digital—that addresses two of the most significant pain-points in Islandora: installation and maintenance.
 
-ISLE uses replaceable Docker images to streamline and largely automate the process of installing and maintaining the entire Islandora 7.x stack, while at the same time enabling institutions to create customizations that persist separately from core code. The result is the ability to easily, quickly and regularly update an institution’s entire Islandora stack. ISLE requires significantly less staff time and also reduces dependency on expert technical staff and outside vendors.
+ISLE uses replaceable Docker images to streamline and largely automate the process of installing and maintaining the entire Islandora 7.x stack, while at the same time enabling institutions to create customizations that persist separately from core code. The result is the ability to easily, quickly and regularly update an institution’s entire Islandora stack. Maintaining ISLE requires significantly less time and staff, and also reduces the dependency on expert technical staff and outside vendors.
 
 Perhaps most importantly, the ISLE [project maintainers](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group#project-maintainers) keep your Islandora stack smoothly running with minimal effort by regularly releasing updated (and tested) Docker images that contain up-to-date Islandora releases, software patches, security updates and feature improvements.
 
