@@ -36,7 +36,7 @@ A note about migration: ISLE contains complete documentation for migrating exist
 - **ISLE Phase III:** TBD
 
 ## Project Sustainability
-The ISLE Steering Committee (ISC) oversees the ISLE project and the ISLE Project Maintainers maintain the project and create scheduled new releases. The ISC will submit the resultant development via Islandora’s Licensed Software Acceptance Procedure ([LSAP](https://islandora.ca/developers/lsap)). The development will then become a core part of the Islandora 7x Release (Fall 2019) and will be supported and maintained by the Islandora community as part of the free and publicly shared open-source platform. Through this LSAP method, Islandora has already adopted a large number of externally contributed modules that are sustainably maintained by community members.
+The ISLE Steering Committee (ISC) oversees the ISLE project and the ISLE Project Maintainers maintain the project with scheduled new releases on [GitHub project boards](https://github.com/Islandora-Collaboration-Group/ISLE/projects), and issue [release notes](https://islandora-collaboration-group.github.io/ISLE-Documentation/09_release_notes/release_notes/). The ISC will submit the resultant development via Islandora’s Licensed Software Acceptance Procedure ([LSAP](https://islandora.ca/developers/lsap)). The development will then become a core part of the Islandora 7x Release (Fall 2019) and will be supported and maintained by the Islandora community as part of the free and publicly shared open-source platform. Through this LSAP method, Islandora has already adopted a large number of externally contributed modules that are sustainably maintained by community members.
 
 ## ISLE Steering Committee
 - Sarah Goldstein, Mount Holyoke College
