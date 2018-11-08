@@ -32,7 +32,7 @@ A note about migration: ISLE contains complete documentation for migrating exist
 
 ## Funding
 - **ISLE Phase I:** $90,000 crowdfunded ($66,000 from 17 academic institutions; $24,000 in-kind labor from Born-Digital); exceeded original goal of $84,000.
-- **ISLE Phase II:** Planning funding
+- **ISLE Phase II:** The Andrew W. Mellon Foundation has awarded a [$153,000 grant](https://communications.williams.edu/news-releases/10_30_2018_islandora/) to the Islandora Collaboration Group (ICG) to create “_Islandora for All:_ Extending the Open-Source Platform to Include Broad Scale Institutional Repository Appeal and High-Performance Scalability”
 - **ISLE Phase III:** TBD
 
 ## Project Sustainability
