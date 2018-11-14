@@ -9,7 +9,7 @@ Your ISLE **host server** can be a virtual machine (VM) on your desktop or on th
 - Ubuntu 18.04 LTS
 - CentOS 7.x
 - RHEL* 
-_*Currently RHEL does not support Docker Community Edition (CE), EE can be used._
+**Currently RHEL does not support Docker Community Edition (CE), EE can be used.*
 
 ## Production
 

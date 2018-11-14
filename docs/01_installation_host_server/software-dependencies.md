@@ -1,5 +1,6 @@
 # Installing Required Software to Run ISLE
-The following pieces of software are required to run ISLE: 
+The following pieces of software are required to run ISLE:
+
 - Docker CE or EE (https://docker.com)
 - Docker-compose (https://docs.docker.com/compose/install/)
 - Git (https://github.com) (https://git-scm.com/)

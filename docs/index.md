@@ -20,13 +20,8 @@ Follow these instructions if you **do not** have an existing Islandora installat
 
 1. Ensure you meet the hardware [Server Requirements](01_installation_host_server/server-requirements.md).
 
-2. Install the Required Software on your host server: [Docker CE, Docker-Compose, and git.](01_installation_host_server/software-dependencies.md)
-<!--
-* 
-    - [Ubuntu 18.04](01_installation_host_server/install_on_ubuntu_1804.md)
+2. Install the Required Software on your host server: [Docker CE, Docker-Compose, and git.]
 
-    - [Centos 7.x](01_installation_host_server/install_on_centos.md)
--->
 3. Configure and run ISLE after the prerequisites are installed.
     - If you are only going to setup one ISLE site within a single environment (e.g. production only) or run all of your ISLE environments on separate ISLE host servers or VMs please using the: [New ISLE Site - Single Env](03_installation_new_site/new_site_installation_guide_single.md) once you have set up the host server.
     - If you are going to setup multiple ISLE sites using multiple environments (e.g. dev, stage, and prod etc.) on one ISLE Host server or VM please using the: [New ISLE Sites - Multi Envs](03_installation_new_site/new_site_installation_guide_multi.md) once you have set up the host server.
@@ -41,11 +36,7 @@ Migrated sites can be used in production, staging or development environments.
 1. Ensure you meet the hardware [Server Requirements](01_installation_host_server/server-requirements.md).
 
 2. Install the Required Software on your host server: [Docker CE, Docker-Compose, and git.](01_installation_host_server/software-dependencies.md)
-<!--
-* [Ubuntu 18.04](01_installation_host_server/install_on_ubuntu_1804.md)
 
-* [Centos 7.x](01_installation_host_server/install_on_centos.md)
--->
 3. Copy your data, configure and run ISLE after the prerequisites are installed by following our [Migration Guide to ISLE](04_installation_migration/migration_installation_guide.md)
 
 ---

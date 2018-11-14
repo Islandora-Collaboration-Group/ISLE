@@ -27,16 +27,16 @@ nav:
     - 'Hardware Requirements': '01_installation_host_server/server-requirements.md'
     - 'Software Dependencies': '01_installation_host_server/software-dependencies.md'
     - 'Troubleshooting': '01_installation_host_server/install_troubleshooting.md'
-  - '2. Using ISLE':
+  - '2. Deploy ISLE':
     - 'Install a Test Site':
       - 'Test Site Example User Story': '02_installation_test/ild_example_user_story.md'
       - 'Test Site Installation Guide': '02_installation_test/ild_installation_guide.md'
       - 'Test Site Resources': '02_installation_test/ild_resources.md'
-    - 'Install a New ISLE Site':
+    - 'Deploy a New ISLE Site':
       - 'New Site Example User Story': '03_installation_new_site/new_site_example_user_story.md'
       - 'New Site Installation Guide - w/ Single ISLE Environment': '03_installation_new_site/new_site_installation_guide_single.md'
       - 'New Site Installation Guide - w/ multiple ISLE Environments': '03_installation_new_site/new_site_installation_guide_multi.md'
-    - 'Migrate an Existing Islandora site to ISLE':
+    - 'Migrate and Deploy an Existing Islandora site to ISLE':
       - 'Migration Example User Story': '04_installation_migration/migration_example_user_story.md'
       - 'Migration Guide': '04_installation_migration/migration_installation_guide.md'
       - 'Migration Export Checklist': '04_installation_migration/migration_export_checklist.md'
