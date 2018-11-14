@@ -6,7 +6,7 @@ The purpose of this documentation is to provide clear instructions on how to do 
 
 * [New ISLE](#new-isle): create a new Islandora instance for production, staging, or development server (i.e., starting "from strach").
 
-* [Migrate to ISLE](#migrate-to-isle): migrate a non-ISLE Islandora 7x-1.x instance to ISLE on a production, staging, or development server.
+* [Migrate to ISLE](#migrate-to-isle): migrate a non-ISLE Islandora 7.x-1.x instance to ISLE on a production, staging, or development server.
 
 * [Update ISLE](#update-isle): update your existing ISLE instance with improvements and security updates.
 
@@ -46,8 +46,7 @@ Migrated sites can be used in production, staging or development environments.
 
 * [Centos 7.x](01_installation_host_server/install_on_centos.md)
 -->
-3. Copy your data, configure and run ISLE after the prerequisites are installed.
-   - [Migrate to ISLE](04_installation_migration/migration_installation_guide.md)
+3. Copy your data, configure and run ISLE after the prerequisites are installed by following our [Migration Guide to ISLE](04_installation_migration/migration_installation_guide.md)
 
 ---
 

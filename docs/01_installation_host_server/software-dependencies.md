@@ -1,5 +1,10 @@
 # Installing Required Software to Run ISLE
-The following pieces of software are required to run ISLE: Docker CE, Docker-compose, and git. This document will walk you through the installation of these components based on your OS:
+The following pieces of software are required to run ISLE: 
+- Docker CE or EE (https://docker.com)
+- Docker-compose (https://docs.docker.com/compose/install/)
+- Git (https://github.com) (https://git-scm.com/)
+ 
+This document will walk you through the installation of these components based on your operating system:
 
 - [Ubuntu](#ubuntu)
 - [CentOS](#centos)
@@ -37,14 +42,14 @@ The following pieces of software are required to run ISLE: Docker CE, Docker-com
 * `apt-get install -y docker-ce`  
 
 * Check if Docker is running `systemctl status docker`
+    - if it is not: `systemctl enable docker && systemctl start docker`
 
 ### Step 3: Install Docker-Compose
 
 * Copy and paste the command below
 
-```
-
-  curl -L https://github.com/docker/compose/releases/download/1.20.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+```bash
+  curl -L https://github.com/docker/compose/releases/download/1.23.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 
 ```
 
@@ -56,8 +61,17 @@ The following pieces of software are required to run ISLE: Docker CE, Docker-com
 
 **Example output:**
 ```
-docker-compose version 1.20.1, build 1719ceb
+docker-compose version 1.23.1 ...
 ```
+
+### Step 4: Add your user to the `docker` group
+
+* Copy and paste the following command as your normal user (`exit` to leave root)
+```bash
+sudo usermod -aG docker $USER
+```
+
+* Disconnect `exit` and reconnect for your groups to update.
 
 ---
 
@@ -91,10 +105,8 @@ docker-compose version 1.20.1, build 1719ceb
 
 * Copy and paste the command below
 
-```
-
-  curl -L https://github.com/docker/compose/releases/download/1.20.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-
+```bash
+  curl -L https://github.com/docker/compose/releases/download/1.23.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 ```
 
 * `chmod +x /usr/local/bin/docker-compose`
@@ -104,9 +116,18 @@ docker-compose version 1.20.1, build 1719ceb
     * `docker-compose --version`
 
 **Example output:**
+```bash
+docker-compose version 1.23.1 ...
 ```
-docker-compose version 1.20.1, build 1719ceb
+
+### Step 4: Add your user to the `docker` group
+
+* Copy and paste the following command as your normal user (`exit` to leave root)
+```bash
+sudo usermod -aG docker $USER
 ```
+
+* Disconnect `exit` and reconnect for your groups to update.
 
 ---
 
@@ -157,7 +178,8 @@ If git is already installed, then please proceed to the next section.
 * This process should may take 2 -5 mins depending on the speed of your hard-drive.
 
 * Once fully started, one can see a whale icon at the top of their screen. If this is clicked, a dropdown should appear indicating that Docker is now running.
-  * Please note: This process also installs the newest version of `Docker-Compose`.
+
+* Please note: This process also installs the newest version of `docker-compose`.
 
 ---
 
@@ -192,5 +214,5 @@ If git is already installed, then please proceed to the next section.
 
 * If you are prompted to log in to Docker, you can choose to do so with your Docker.com account information, or you can simply close the window.  Docker is running and you do not need to log in to use it.
 
-* Please note: This process also installs the newest version of `Docker-Compose`.
+* Please note: This process also installs the newest version of `docker-compose`.
 
