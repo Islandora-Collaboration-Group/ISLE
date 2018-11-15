@@ -48,10 +48,10 @@ nav:
   - 'Example User Story': '05_developer_docs/dev_example_user_story.md'
   - 'Testing Guide': '05_developer_docs/dev_testing_guide.md'
 - 'Appendices':
-  - 'Host Server Specifications': '01_installation_host_server/host_server_system_specifications.md'
+  - 'Host Server Specifications': '01_installation_host_server/server-requirements.md'
   - 'Updating ISLE': '07_appendices/update_isle.md'
   - 'Editing the /ect/hosts file': '07_appendices/editing-the-hosts-file.md'
-  - 'Sample IT Department Request Letter': '07_appendices\sample-it-department-request.md'
+  - 'Sample IT Department Request Letter': '07_appendices/sample-it-department-request.md'
   - 'Installing a Drupal Module with Composer': '07_appendices/installing-module-with-composer.md'
   - 'Installing a Drupal Module with Drush': '07_appendices/installing-module-with-drush.md'
   - 'Opening a Terminal in a Running Container': '07_appendices/open-terminal-in-running-container.md'
