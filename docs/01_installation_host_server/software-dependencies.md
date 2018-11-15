@@ -12,7 +12,9 @@ This document will walk you through the installation of these components based o
 - [Mac](#mac)
 - [Windows](#windows)
 
+
 ---
+
 
 ## Ubuntu
 
@@ -24,12 +26,12 @@ This document will walk you through the installation of these components based o
   - If you are not already root, use either `sudo -s` or `sudo su` to become root.
 
 - Update and Install the following required software:
- ```bash
+```bash
  apt-get update && upgrade
- ```
- ```bash
+```
+```bash
  apt-get install -y openssl git htop ntp wget curl nano apt-transport-https ca-certificates software-properties-common
- ```
+```
 
 ### Step 2: Install Docker
 
@@ -96,9 +98,16 @@ git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 cd ISLE
 ```
 
-Your host server is now configured and ready to run ISLE. Continue on to section...
+Your host server is now configured and ready to run ISLE. Return to the [homepage](../) and continue with step 3 for your type of deployment (or pick from the list):
+
+- [Test/Demo ISLE Deployment Guide](../02_installation_test/ild_installation_guide.md)
+- [New ISLE Site - Single Env](../03_installation_new_site/new_site_installation_guide_single.md)
+- [New ISLE Sites - Multi Envs](../03_installation_new_site/new_site_installation_guide_multi.md)
+- [Migration Guide to ISLE](../04_installation_migration/migration_installation_guide.md)
+
 
 ---
+
 
 ## CentOS
 
@@ -174,9 +183,16 @@ git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 cd ISLE
 ```
 
-Your host server is now configured and ready to run ISLE. Continue on to section...
+Your host server is now configured and ready to run ISLE. Return to the [homepage](../) and continue with step 3 for your type of deployment (or pick from the list):
+
+- [Test/Demo ISLE Deployment Guide](../02_installation_test/ild_installation_guide.md)
+- [New ISLE Site - Single Env](../03_installation_new_site/new_site_installation_guide_single.md)
+- [New ISLE Sites - Multi Envs](../03_installation_new_site/new_site_installation_guide_multi.md)
+- [Migration Guide to ISLE](../04_installation_migration/migration_installation_guide.md)
+
 
 ---
+
 
 ## Mac
 
@@ -243,9 +259,16 @@ git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 cd ISLE
 ```
 
-Your host server is now configured and ready to run ISLE. Continue on to section...
+Your host server is now configured and ready to run ISLE. Return to the [homepage](../) and continue with step 3 for your type of deployment (or pick from the list):
+
+- [Test/Demo ISLE Deployment Guide](../02_installation_test/ild_installation_guide.md)
+- [New ISLE Site - Single Env](../03_installation_new_site/new_site_installation_guide_single.md)
+- [New ISLE Sites - Multi Envs](../03_installation_new_site/new_site_installation_guide_multi.md)
+- [Migration Guide to ISLE](../04_installation_migration/migration_installation_guide.md)
+
 
 ---
+
 
 ## Windows
 
@@ -295,4 +318,9 @@ git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 cd ISLE
 ```
 
-Your host server is now configured and ready to run ISLE. Continue on to section...
+Your host server is now configured and ready to run ISLE. Return to the [homepage](../) and continue with step 3 for your type of deployment (or pick from the list):
+
+- [Test/Demo ISLE Deployment Guide](../02_installation_test/ild_installation_guide.md)
+- [New ISLE Site - Single Env](../03_installation_new_site/new_site_installation_guide_single.md)
+- [New ISLE Sites - Multi Envs](../03_installation_new_site/new_site_installation_guide_multi.md)
+- [Migration Guide to ISLE](../04_installation_migration/migration_installation_guide.md)
