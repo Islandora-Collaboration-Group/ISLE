@@ -98,7 +98,7 @@ git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 cd ISLE
 ```
 
-Your host server is now configured and ready to run ISLE. Return to the [homepage](../) and continue with step 3 for your type of deployment (or pick from the list):
+Your host server is now configured and ready to run ISLE. Return to the [homepage](../index.md) and continue with step 3 for your type of deployment (or pick from the list):
 
 - [Test/Demo ISLE Deployment Guide](../02_installation_test/ild_installation_guide.md)
 - [New ISLE Site - Single Env](../03_installation_new_site/new_site_installation_guide_single.md)
@@ -183,7 +183,7 @@ git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 cd ISLE
 ```
 
-Your host server is now configured and ready to run ISLE. Return to the [homepage](../) and continue with step 3 for your type of deployment (or pick from the list):
+Your host server is now configured and ready to run ISLE. Return to the [homepage](../index.md) and continue with step 3 for your type of deployment (or pick from the list):
 
 - [Test/Demo ISLE Deployment Guide](../02_installation_test/ild_installation_guide.md)
 - [New ISLE Site - Single Env](../03_installation_new_site/new_site_installation_guide_single.md)
@@ -259,7 +259,7 @@ git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 cd ISLE
 ```
 
-Your host server is now configured and ready to run ISLE. Return to the [homepage](../) and continue with step 3 for your type of deployment (or pick from the list):
+Your host server is now configured and ready to run ISLE. Return to the [homepage](../index.md) and continue with step 3 for your type of deployment (or pick from the list):
 
 - [Test/Demo ISLE Deployment Guide](../02_installation_test/ild_installation_guide.md)
 - [New ISLE Site - Single Env](../03_installation_new_site/new_site_installation_guide_single.md)
@@ -318,7 +318,7 @@ git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 cd ISLE
 ```
 
-Your host server is now configured and ready to run ISLE. Return to the [homepage](../) and continue with step 3 for your type of deployment (or pick from the list):
+Your host server is now configured and ready to run ISLE. Return to the [homepage](../index.md) and continue with step 3 for your type of deployment (or pick from the list):
 
 - [Test/Demo ISLE Deployment Guide](../02_installation_test/ild_installation_guide.md)
 - [New ISLE Site - Single Env](../03_installation_new_site/new_site_installation_guide_single.md)
