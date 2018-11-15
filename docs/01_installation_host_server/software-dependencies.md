@@ -18,61 +18,85 @@ This document will walk you through the installation of these components based o
 
 ### Step 1: Install Server Prerequisites and Git
 
-* Open a terminal on your local laptop or workstation and ssh to the CentOS server / VM:
+- Open a terminal on your local laptop or workstation and ssh to the server / VM:
 
-* You need to become root first
+- You need to become root first
+  - If you are not already root, use either `sudo -s` or `sudo su` to become root.
 
-     * If you are not already root, use either `sudo -s` or `sudo su` to become root.
-
-* Install the following:
-
-     * `apt-get update`
-
-     * `apt-get upgrade`
-
-     * `apt-get install -y openssl git htop ntp wget curl nano apt-transport-https ca-certificates software-properties-common`
+- Update and Install the following required software:
+ ```bash
+ apt-get update && upgrade
+ ```
+ ```bash
+ apt-get install -y openssl git htop ntp wget curl nano apt-transport-https ca-certificates software-properties-common
+ ```
 
 ### Step 2: Install Docker
 
-* `curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -`  
+- Add the Docker Repository
+```bash
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+```
+```bash
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+```
+- Update package list
+```bash
+apt-get update
+```
+- Install Docker
+```bash
+apt-get install -y docker-ce
+```
 
-* `add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"`  
-
-* `apt-get update`  
-
-* `apt-get install -y docker-ce`  
-
-* Check if Docker is running `systemctl status docker`
-    - if it is not: `systemctl enable docker && systemctl start docker`
+- Enable and Start Docker
+```bash
+systemctl enable docker && systemctl start docker
+```
 
 ### Step 3: Install Docker-Compose
 
-* Copy and paste the command below
-
+- Copy and paste the command below
 ```bash
-  curl -L https://github.com/docker/compose/releases/download/1.23.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-
+curl -L https://github.com/docker/compose/releases/download/1.23.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
 ```
 
-* `chmod +x /usr/local/bin/docker-compose`
-
-* Test the Installation
-
-    * `docker-compose --version`
-
+- Test the Installation
+```bash
+docker-compose --version
+```
 **Example output:**
-```
-docker-compose version 1.23.1 ...
-```
+
+`docker-compose version 1.23.1 ...`
 
 ### Step 4: Add your user to the `docker` group
+This will allow your user to run docker commands, including the ones required to launch the entire ISLE stack.
 
-* Copy and paste the following command as your normal user (`exit` to leave root)
+- If you are still `root` (`whoami`) type `exit` to become your normal user.
+
+- Add yourself to the `docker` group.
 ```bash
 sudo usermod -aG docker $USER
 ```
 
-* Disconnect `exit` and reconnect for your groups to update.
+- Disconnect `exit` and reconnect for your effective groups to update.
+
+### Step 5: Clone ISLE repository
+**Please note:** The location you clone the repo to becomes your poject directory. It can be located anywhere and will include your configuration and log output of the containers.
+
+Please run these steps as your user.
+
+- Clone the repo by running
+```bash
+git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
+```
+
+- Change to the directory containing ISLE.
+```bash
+cd ISLE
+```
+
+Your host server is now configured and ready to run ISLE. Continue on to section...
 
 ---
 
@@ -80,55 +104,77 @@ sudo usermod -aG docker $USER
 
 ### Step 1: Install Server Prerequisites and Git
 
-* Open a terminal on your local laptop or workstation and ssh to the CentOS server / VM:
+- Open a terminal on your local laptop or workstation and ssh to the server / VM:
 
-* You need to become root first
+- You need to become root first
+  + If you are not already root, use either `sudo -s` or `sudo su` to become root.
 
-    * `sudo su`  
+- Add the RHEL/CENTOS epel-release package repository first
+```bash
+yum install -y epel-release
+```
 
-* Add the RHEL/CENTOS epel-release package repository first
-
-     * `yum install -y epel-release`
-
-* Install the following:
-
-     * `yum install -y openssl git htop ntp wget curl nano`
-
+- Install the following:
+```bash
+yum install -y openssl git htop ntp wget curl nano
+```
+```bash
+yum install -y yum-utils device-mapper-persistent-data lvm2
+```
 ### Step 2: Install Docker
 
-* `yum install -y yum-utils device-mapper-persistent-data lvm2`
+- Add the Docker Repository
+```bash
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo`
+```
 
-* `yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo`
-
-* `yum install -y docker-ce`
+- Install Docker
+```bash
+yum install -y docker-ce
+```
 
 ### Step 3: Install Docker-Compose
 
-* Copy and paste the command below
-
+- Copy and paste the command below
 ```bash
-  curl -L https://github.com/docker/compose/releases/download/1.23.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+curl -L https://github.com/docker/compose/releases/download/1.23.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
 ```
 
-* `chmod +x /usr/local/bin/docker-compose`
-
-* Test the Installation
-
-    * `docker-compose --version`
-
+- Test the Installation
+```bash
+docker-compose --version
+```
 **Example output:**
-```bash
-docker-compose version 1.23.1 ...
-```
+`docker-compose version 1.23.1 ...`
 
 ### Step 4: Add your user to the `docker` group
+This will allow your user to run docker commands, including the ones required to launch the entire ISLE stack.
 
-* Copy and paste the following command as your normal user (`exit` to leave root)
+- If you are still `root` (`whoami`) type `exit` to become your normal user.
+
+- Add yourself to the `docker` group.
 ```bash
 sudo usermod -aG docker $USER
 ```
 
-* Disconnect `exit` and reconnect for your groups to update.
+- Disconnect `exit` and reconnect for your effective groups to update.
+
+### Step 5: Clone ISLE repository
+**Please note:** The location you clone the repo to becomes your poject directory. It can be located anywhere and will include your configuration and log output of the containers.
+
+Please run these steps as your user.
+
+- Clone the repo by running
+```bash
+git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
+```
+
+- Change to the directory containing ISLE.
+```bash
+cd ISLE
+```
+
+Your host server is now configured and ready to run ISLE. Continue on to section...
 
 ---
 
@@ -182,6 +228,23 @@ If git is already installed, then please proceed to the next section.
 
 * Please note: This process also installs the newest version of `docker-compose`.
 
+### Step 3: Clone ISLE repository
+**Please note:** The location you clone the repo to becomes your poject directory. It can be located anywhere and will include your configuration and log output of the containers.
+
+Please run these steps as your user.
+
+- Clone the repo by running
+```bash
+git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
+```
+
+- Change to the directory containing ISLE.
+```bash
+cd ISLE
+```
+
+Your host server is now configured and ready to run ISLE. Continue on to section...
+
 ---
 
 ## Windows
@@ -217,3 +280,19 @@ If git is already installed, then please proceed to the next section.
 
 * Please note: This process also installs the newest version of `docker-compose`.
 
+### Step 3: Clone ISLE repository
+**Please note:** The location you clone the repo to becomes your poject directory. It can be located anywhere and will include your configuration and log output of the containers.
+
+Please run these steps as your user.
+
+- Clone the repo by running
+```bash
+git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
+```
+
+- Change to the directory containing ISLE.
+```bash
+cd ISLE
+```
+
+Your host server is now configured and ready to run ISLE. Continue on to section...
