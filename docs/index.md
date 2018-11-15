@@ -21,7 +21,7 @@ The purpose of this documentation is to provide clear instructions on how to do 
 
 2. Install the Required Software on your host server: [Docker CE, Docker-Compose, and git.](01_installation_host_server/software-dependencies.md)
 
-3. Configure and run ISLE after the prerequisites are installed.
+3. Configure and run ISLE after the prerequisites are installed: [Test/Demo ISLE Deployment Guide](02_installation_test/ild_installation_guide.md).
 
 Advice for installing a test instance of ISLE on other platforms may be available from the [ISLE ISLE Google Group](https://groups.google.com/forum/#!forum/islandora-isle).
 

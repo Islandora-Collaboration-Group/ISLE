@@ -11,7 +11,7 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 ### Assumptions / Prerequisites
 
-* This test site guide is designed for a local laptop / workstation that has already followed the appropriate setup and configuration instructions in the `Test/Demo ISLE` section of the [guide](/index.md#test-demo-isle).
+* This test site guide is designed for a local laptop / workstation that has already followed the appropriate setup and configuration instructions in the `Test/Demo ISLE` section of the [guide](../index.md#test-demo-isle).
 
 * Instructions below assume a MacOS or Linux laptop or workstation. Windows users may have to adjust / swap out various tools as needed.
 
@@ -42,7 +42,7 @@ It is important to add `isle.localdomain admin.isle.localdomian portainer.isle.l
 
 * If using:
 
-    * **~~Vagrant or a Virtualbox VM:~~** ~~The steps below assume you are shelled in (connected by SSH) as the `islandora` user into the ISLE Host VM via a terminal on a local laptop.~~
+    * **Linux:** ~~The steps below assume you are shelled in (connected by SSH) as the `islandora` user into the ISLE Host VM via a terminal on a local laptop.~~
 
         * ~~`ssh islandora@10.10.10.130`~~
         * ~~`cd /opt/ISLE`~~
