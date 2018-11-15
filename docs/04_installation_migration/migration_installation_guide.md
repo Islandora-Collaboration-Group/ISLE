@@ -297,6 +297,9 @@ Staying within `/opt/ISLE/yourdomain-config`
     * `cd /var/www/html`
     * `./vsets.sh`  
 
+* Edit .htaccess to enforce https
+    * `echo "SetEnvIf X-Forwarded-Proto https HTTPS=on" | tee -a /var/www/html/.htaccess`
+
 * Check if the site is now is running properly by opening a web browser and navigating to your new ISLE domain e.g. `https://isle-prod-project.institution`
 
 * Please note while you may be able to see objects being displayed, metadata and search results will be empty until you run the last step in the Reindex process.
