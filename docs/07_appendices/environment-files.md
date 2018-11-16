@@ -1,52 +1,7 @@
-_Expectations:  It may take at least a minimum of **4 - 6 hours or more** to read this entire document and perform the installation as prescribed. This is not a quick process._
+# The ISLE environment files and settings
+The .env and tomcat.env files located in the folder with the docker-comopse.yml are key to configuring the ISLE stack to suit your needs.
 
-This guide documents how an enduser can spin up and install a single ISLE / Islandora environment tailored to use only one unique domain / URL and one ISLE environment.
-
-A new ISLE / Islandora environment can include the option to create an un-themed Drupal website and empty Fedora repository for endusers to develop code, perform ingests, edit metadata, update fields in SOLR indexing all essential in ultimately creating a new ISLE production site.
-
-While this checklist will attempt to point out most of the usage challenges or pitfalls, ISLE assumes no responsibility or liability in this matter should an enduser have customizations beyond what this guide outlines.
-
-**Please note:** There is a [Glossary](../glossary.md) with relevant terms to help guide installation.
-
-## Index of related documents
-* [New Site Example User Story](new_site_example_user_story.md)
-
-
----
-
-
-## Assumptions / Prerequisites
-
-* Comfortability with ISLE. Recommend first setting up the [ISLE Test Site](../02_installation_test/ild_installation_guide.md) (`isle.localdomain`). If you have already done this, please proceed.
-
-* Host Server that conforms to the specifications outlined in the [Server Requirements](../01_installation_host_server/server-requirements.md#testingplayground)
-
-* This new site guide is designed for a single ISLE Host server that has already followed the appropriate setup and configuration instructions in the [New ISLE section](../index.md#new-isle) of the guide.
-
-* Instructions below also assume a MacOS or Linux laptop or workstation to be used in conjunction with the ISLE Host Server for deploying configs, code, files etc. Windows users may have to adjust / swap out various tools as needed.
-
-* These directions also depend on the type of local computer used to connect via browser to Islandora.
-
-* Have an existing domain name that works - is set up with DNS etc...
-
-* Have [SSL Certificates](../glossary.md#systems) previously created for the web domain. (_Please work with the appropriate internal IT resource to provision these files for your domain_)
-
-
-## Overview
-
-* The .env and tomcat.env files (also known as your "Docker Environment files") are your primary resources for customizing your ISLE stack.
-  * As a result your .env files contain passwords and usernames and must be treated with the utmost care. **Never** share or post your .env files publicly.
-
-
-## Docker Environment Files:
-
-There are .env files that exist in your cloned copy of the repository. This section describes what these files do, and their importance to your stack! Chiefly these files are tasked with automatically configuring and setting all ISLE systems to work together in the stack. ISLE removes the need of editing the more complex config files that are part of the Islandora stack manually. Just .env it!
-
-You should edit these files with unique users/passwords, your domain name, site-name, etc. for your own _unique_ instance of ISLE to come alive.
-
-**Edit the file: **.env** and **tomcat.env** before you up (`docker-compose up`)**
-
-**REMEMBER: never share or post your complete .env publicly... EVER! Use caution, and when in doubt ask a maintainer for help (i.e., discuss or share the file privately with an ISLE Maintainer)**
+Here are the variables and their job:
 
 ### Master Section:
     * COMPOSE_PROJECT_NAME to something unique (e.g. `COMPOSE_PROJECT_NAME=isle-production-collections`)
@@ -99,56 +54,3 @@ You should edit these files with unique users/passwords, your domain name, site-
 | TOMCAT_ADMIN_PASS     | Fedora, Solr, ImageServices   | Set the admin password to login to the admin panel.     |
 | TOMCAT_MANAGER_USER   | Fedora, Solr, ImageServices   | Set the manager username to login to the admin panel.   |
 | TOMCAT_MANAGER_PASS   | Fedora, Solr, ImageServices   | Set the manager password to login to the admin panel.   |
-
----
-
-## Config Directory
-
-The config directory has many purposes like holding customized configuration files mounted to specific containers (which we have no covered here), but for a single simple site we only use it to hold our proxy configs and as a place to store our SSL Certificate and Key.
-
--------
-
-### Proxy directory
-
-If need be, please refer to the **Systems** section of the [Glossary](../glossary.md) for relevant terms to help guide installation.
-
-The `proxy` subdirectory contains all specific configurations necessary for the Traefik proxy to function properly with your changes.
-
-If need be, please refer to the **SSL certificate** section of the [Glossary](../glossary.md) for relevant terms to help guide installation.
-
-There are also additional links for the enduser to learn how to combine the SSL Certificate File with any available SSL Certificate Chain File for the `proxy` process to work properly.
-
-* Copy your SSL certificates for the ISLE Proxy into `config/proxy/ssl-certs`. They will and should have different names than the examples provided below.
-
-    * There can only be 2 files involved in this process.
-
-        * 1 x SSL Certificate Key File e.g. `newsite-sample-key.pem`
-            * This file is required.
-            * Please also note that the file extensions can also be: `.key` or `.pem`
-
-        * 1 x SSL Certificate File e.g. `newsite-sample.pem`
-            * This file is required.
-            * Please also note that the file extensions can also be: `.cer`, `.crt` or `.pem`
-
-* Edit the `config/proxy/traefik.toml` file:
-  * Change line 27 and 28:
-    *  `certFile = "/certs/newsite-sample.cert"`  ## Change to reflect your CERT, CRT, or PEM
-    *  `keyFile = "/certs/newsite-sample-key.key"`  ## Change to reflect your KEY, or PEM.
-
-
----
-
-## Spin up ISLE containers!
-
-* Run `docker-compose up -d`
-
-* Wait for the stack to completely initialize, about 5 minutes (typically much less).
-
-* Run `docker exec -it isle-apache-<CONTAINER_SHORT_ID> bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh`
-     * Using the <CONTAINER_SHORT_ID> value from the .env file here (_typically: isle-apache-prod, or -stage, -dev, etc._)
-
-* Give this process 15 - 25 minutes (_depending on the speed of the ISLE Host server internet connection_)
-
-* Check the newly created and running new site by opening a browser and navigating to your site domain e.g. `https://digital-collections.example.edu`, you should now see an un-themed Drupal site.
-
---------
