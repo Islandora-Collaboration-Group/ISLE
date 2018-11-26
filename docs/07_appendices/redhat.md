@@ -2,7 +2,7 @@
 
 At this time, Red Hat Enterprise Server 7 has been tested but there is a distinct lack of clarity as to what version of Docker is running and/or is supported.
 
-It appears that unless a license for Docker EE is purchased, the project owners do not recommend using Red Hat at this time due to unanticipated cost.
+Unless a license for Docker EE is purchased, the project owners do not recommend using Red Hat at this time due to unanticipated cost.
 
 Currently ISLE has only been built, tested and supported using the free edition of Docker Community Edition (`docker-ce`).
 
