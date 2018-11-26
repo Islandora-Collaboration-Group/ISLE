@@ -304,6 +304,12 @@ Staying within `/opt/ISLE/yourdomain-config`
 
 * Please note while you may be able to see objects being displayed, metadata and search results will be empty until you run the last step in the Reindex process.
 
+**Troubleshooting Note** Sites migrating *from* a version of Drupal prior to 7.50 may need to update their mysql tables to utf8mb4.  On the new site, go to `https://isle-prod-project.institution/admin/reports/status` (you will need to be logged in as a Drupal Admin) and look for the following error:
+
+![Database 4 byte UTF-8 support Enabled, but database tables need conversion](../assets/utf8mb4-error.png)
+
+Instructions for converting the Drupal mysql database are available on the [Drupal website](https://www.drupal.org/project/utf8mb4_convert)
+
 ---
 
 ### Spin up solr container and complete the reindex processes
@@ -321,3 +327,4 @@ Staying within `/opt/ISLE/yourdomain-config`
 * Check the results on the site using Islandora simple search or the appropriate search method.
 
 Congratulations you should have successfully migrated your production Islandora site to ISLE!!
+
