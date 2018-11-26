@@ -56,11 +56,11 @@ nav:
   - 'Opening a Terminal in a Running Container': '07_appendices/open-terminal-in-running-container.md'
   - 'Using Let''s Encrypt with ISLE' : '07_appendices/configuring-lets-encrypt.md'
   - 'Note/Warning about installing on Redhat': '07_appendices/redhat.md'
-  - 'Installing on Google Cloud Platform': 'https://docs.google.com/document/d/1r-I9n8mUhlJ5Z-X9AO-RrikhzH6I8bTPIL25LmtRbxE'
+  - 'Installing on Google Cloud Platform (Google Doc)': 'https://docs.google.com/document/d/1r-I9n8mUhlJ5Z-X9AO-RrikhzH6I8bTPIL25LmtRbxE'
 - 'About': 
   - 'About ISLE': '08_about/about.md'
-  - 'Contributing to Project': '08_about/contributing_to_project.md'
+  - 'Contributing to the Project': '08_about/contributing_to_project.md'
   - 'About Maintainers': '08_about/about_maintainers.md'
-  - 'Policies': '08_about/policies.md'
+#  - 'Policies': '08_about/policies.md'
 - 'Release Notes': '09_release_notes/release_notes.md'
 - 'Glossary of Terms and Variables': glossary.md
