@@ -2,7 +2,7 @@
 
 ISLE is a set of [Docker](https://docker.com) images created to provide a fully functioning [Islandora](https://islandora.ca) system for development, staging, and production digital repositories. ISLE runs as set of Docker containers (virtual servers) that will run all necesary components of Islandora. 
 
-The purpose of this documentation is to provide clear instructions on how to do one, or all, of the following types of installation and activities:
+The purpose of this documentation is to provide clear instructions on how to do the following types of installations and updates:
 
 * [Test/Demo ISLE](#testdemo-isle): quickly create a new ISLE instance on your local laptop or workstation (also good for _local_ development).
 
