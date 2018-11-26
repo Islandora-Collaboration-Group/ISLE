@@ -6,7 +6,7 @@
 * [ISLE Documentation](https://islandora-collaboration-group.github.io/ISLE-Documentation/) (user-friendly documentation)
 * [ISLE Executive Summary](https://docs.google.com/document/d/17tAFxR6_b7sxXkE1teNDQZv0UZ0LLSkX8K05-U6A6nw/edit?usp=sharing) (project overview)
 
-## How to Join
+## Contributing to ISLE
 * [Islandora ISLE Interest Group](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group) - Meetings open to everybody!  [Schedule](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group/#how-to-join) is alternating Wednesdays, 3:00pm EDT
 * [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle) - Post your questions here and subscribe for updates, meeting announcements, and technical support
 
@@ -93,8 +93,9 @@ The ISLE Steering Committee (ISC) oversees the ISLE project and the ISLE Project
 - 03/2018 - [Completed] Community Alpha Test #3: Barnard College (lead: Ben Rosner)
 - 05/2018 - [In Process] ISLE Steering Committee approved ISLE (Islandora 7x) hand-off from Born-Digital
 - 05/2018 - [Completed] ISLE v1.0 release available as open-source for public use
-- 08/2018 - [Completed, in UAC] ISLE v1.1 release candidate available as open-source for public use
-- 10/2018 - [Future] ISLE Phase II begins
+- 08/2018 - [Completed] ISLE v1.1 release candidate available as open-source for public use
+- 10/2018 - [Completed] The Andrew W. Mellon Foundation awarded a $153,000 grant to fund ISLE Phase II
+- 11/2018 - [Completed] ISLE v1.1 released (open-source for public use)
 
 ## Docker Images and Repositories
 Docker Image GitHub Repositories that comprise this stack: 
