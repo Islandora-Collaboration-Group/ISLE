@@ -59,7 +59,7 @@ nav:
   - 'Installing on Google Cloud Platform (Google Doc)': 'https://docs.google.com/document/d/1r-I9n8mUhlJ5Z-X9AO-RrikhzH6I8bTPIL25LmtRbxE'
 - 'About': 
   - 'About ISLE': '08_about/about.md'
-  - 'Contributing to the Project': '08_about/contributing_to_project.md'
+  - 'Contributing to ISLE': '08_about/contributing_to_ISLE.md'
   - 'About Maintainers': '08_about/about_maintainers.md'
 #  - 'Policies': '08_about/policies.md'
 - 'Release Notes': '09_release_notes/release_notes.md'
