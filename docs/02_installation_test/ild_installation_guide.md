@@ -38,7 +38,7 @@ It is important to add `isle.localdomain admin.isle.localdomian portainer.isle.l
 
 ### Step 1: Test site launch process
 
-* In terminal (shell) or PowerShell navigate to your ISLE project directory. You may already be in this directory if you are coming from the [Software Requirements Guide](01_installation_host_server/software-dependencies.md).
+* In terminal (shell) or PowerShell navigate to your ISLE project directory. You may already be in this directory if you are coming from the [Software Requirements Guide](../01_installation_host_server/software-dependencies.md).
 
 The following steps below are for all users (_Vagrant, VM, non Vagrant and Docker for MacOS, Windows and Ubuntu Desktop users alike._)
 
