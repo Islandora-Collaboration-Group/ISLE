@@ -5,7 +5,7 @@ Follow this guide to spin up and install ISLE utilizing the built-in `isle.local
 
 This Test/Demo ISLE guide creates an Islandora environment (`isle.localdomain`) that includes an un-themed Drupal website and empty Fedora repository for endusers to develop code, test ingests, test metadata, update fields in SOLR indexing and otherwise "kick the tires" on ISLE prior for further usages e.g. creating a new ISLE production site or migrating a current Islandora production site to ISLE.
 
-While this checklist will attempt to point out most of the usage challenges or pitfalls, ISLE assumes no responsibility or liability in this matter should an enduser have customizations beyond what this guide outlines.
+This checklist will attempt to point out most of the usage challenges or pitfalls.  For additional help, please post a message to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle).
 
 **Please note:** There is a [Glossary](../glossary.md) with relevant terms to help guide installation.
 
