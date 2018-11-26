@@ -3,8 +3,8 @@ site_description: Documentation for Islandora Enterprise (ISLE)
 
 site_dir: site
 docs_dir: docs
-#markdown_extensions:
-#    - del_ins
+markdown_extensions:
+  - codehilite
 theme:
   name: 'material'
 
