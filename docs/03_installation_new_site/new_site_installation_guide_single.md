@@ -29,7 +29,7 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 * Have an existing domain name that works - is set up with DNS etc...
 
-* Have [SSL Certificates](../glossary.md#systems) previously created for the web domain. (_Please work with the appropriate internal IT resource to provision these files for your domain_)
+* Have [SSL Certificates](../glossary.md#systems) previously created for the web domain. (_Please work with the appropriate internal IT resource to provision these files for your domain_)  OR use the [Let's Encrypt guide](../08_appendices/configuring-lets-encrypt.md) to generate SSL Certificates.
 
 
 ## Overview
@@ -117,6 +117,8 @@ The `proxy` subdirectory contains all specific configurations necessary for the 
 If need be, please refer to the **SSL certificate** section of the [Glossary](../glossary.md) for relevant terms to help guide installation.
 
 There are also additional links for the enduser to learn how to combine the SSL Certificate File with any available SSL Certificate Chain File for the `proxy` process to work properly.
+
+**If you followed the [Let's Encrypt](../07_appendices/configuring-lets-encrypt.md) configuration guide, you can skip to the next section: Spin up ISLE containers**
 
 * Copy your SSL certificates for the ISLE Proxy into `config/proxy/ssl-certs`. They will and should have different names than the examples provided below.
 
