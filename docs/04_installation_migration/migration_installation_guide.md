@@ -26,7 +26,7 @@ This Migration guide will help you migrate your existing production Islandora en
 
 * Have an existing domain name that works - is set up with DNS etc...
 
-* Have [SSL Certificates](../glossary.md#systems) previously created for the web domain. (_Please work with the appropriate internal IT resource to provision these files for your domain_) OR: Use the [Let's Encrypt guide](../08_appendices/configuring-lets-encrypt.md) to generate and install SSL Certificates.
+* Have [SSL Certificates](../glossary.md#systems) previously created for the web domain. (_Please work with the appropriate internal IT resource to provision these files for your domain_) OR: Use the [Let's Encrypt guide](../07_appendices/configuring-lets-encrypt.md) to generate and install SSL Certificates.
 
 * ISLE project has been cloned to BOTH your local laptop/workstation AND the ISLE host server
 
