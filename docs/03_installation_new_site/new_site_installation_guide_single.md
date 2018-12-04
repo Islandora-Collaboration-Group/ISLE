@@ -29,7 +29,7 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 * Have an existing domain name that works - is set up with DNS etc...
 
-* Have [SSL Certificates](../glossary.md#systems) previously created for the web domain. (_Please work with the appropriate internal IT resource to provision these files for your domain_)  OR use the [Let's Encrypt guide](../08_appendices/configuring-lets-encrypt.md) to generate SSL Certificates.
+* Have [SSL Certificates](../glossary.md#systems) previously created for the web domain. (_Please work with the appropriate internal IT resource to provision these files for your domain_)  OR use the [Let's Encrypt guide](../07_appendices/configuring-lets-encrypt.md) to generate SSL Certificates.
 
 
 ## Overview
