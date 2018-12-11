@@ -1,16 +1,16 @@
 # ISLE: Islandora Enterprise
 
-ISLE is a set of [Docker](https://docker.com) images created to provide a fully functioning [Islandora](https://islandora.ca) system for development, staging, and production digital repositories. ISLE runs as set of Docker containers (virtual servers) that will run all necesary components of Islandora. 
+ISLE is a community developed project that supports a set of maintained [Docker](https://docker.com) images that provide a fully functioning [Islandora](https://islandora.ca) platform for development, staging, and production digital repositories. ISLE runs as set of Docker containers (virtual servers) that will run all necessary components of Islandora.
 
 The purpose of this documentation is to provide clear instructions on how to do the following types of installations and updates:
 
-* [Test/Demo ISLE](#testdemo-isle): quickly create a new ISLE instance on your local laptop or workstation (also good for _local_ development).
+* [Test/Demo ISLE](#testdemo-isle): quickly create a new Islandora platform on your laptop or workstation (also good for _local_ development)
 
-* [New ISLE](#new-isle): create a new Islandora instance for production, staging, or development server (i.e., starting "from strach").
+* [New ISLE](#new-isle): create a new Islandora platform on a production, staging, or development server (i.e., starting from scratch)
 
-* [Migrate to ISLE](#migrate-to-isle): migrate a non-ISLE Islandora 7.x-1.x instance to ISLE on a production, staging, or development server.
+* [Migrate to ISLE](#migrate-to-isle): migrate a (non-ISLE) Islandora 7.x platform to ISLE on a production, staging, or development server
 
-* [Update ISLE](#update-isle): update your existing ISLE instance with improvements and security updates.
+* [Update ISLE](#update-isle): update your existing ISLE instance with improvements and security updates
 
 
 ---
