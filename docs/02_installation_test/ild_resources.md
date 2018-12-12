@@ -7,7 +7,7 @@ Please always use the [https://isle.localdomain](https://isle.localdomain) domai
 ---
 
 ### Sample Objects for ingest.
-Courteous of the [Islandora Collaboration Group](https://github.com/Islandora-Collaboration-Group/icg_information) there is a sample set of objects and corresponding metadata (examples organized by solution pack, including zips for quicker bulk ingestion) that can be used to test ingest.
+Courtesy of the [Islandora Collaboration Group](https://github.com/Islandora-Collaboration-Group/icg_information) there is a sample set of objects and corresponding metadata (examples organized by solution pack, including zips for quicker bulk ingestion) that can be used to test ingest.
 
 * [https://github.com/Islandora-Collaboration-Group/islandora-sample-objects](https://github.com/Islandora-Collaboration-Group/islandora-sample-objects)
 
