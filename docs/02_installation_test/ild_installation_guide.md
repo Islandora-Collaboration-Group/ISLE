@@ -28,7 +28,7 @@ This checklist will attempt to point out most of the usage challenges or pitfall
 
 ### Step 0: edit /etc/hosts on local laptop or desktop
 
-It is important to add `isle.localdomain admin.isle.localdomian portainer.isle.localdomain` to your `/etc/hosts` file, as connecting directly to an IP address can prevent some components from working properly.
+It is important to add `isle.localdomain admin.isle.localdomain portainer.isle.localdomain` to your `/etc/hosts` file, as connecting directly to an IP address can prevent some components from working properly.
 
 * Instructions for editing hosts files can be found [here](../07_appendices/editing-the-hosts-file.md).  
 
