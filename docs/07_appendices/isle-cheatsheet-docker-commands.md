@@ -6,22 +6,21 @@ Docker commands that are useful to installing or updating ISLE.
 ## Docker Containers
 
 * List Containers
-
-  * Show currently running containers
-    * `docker ps`
-  * Show both currently running and all past containers
-    * `docker ps -a`
-  * Show names of all existing volumes
-    * `docker volume ls`
+   * Show currently running containers
+      * `docker ps`
+   * Show both currently running and all past containers
+      * `docker ps -a`
+   * Show names of all existing volumes
+     * `docker volume ls`
 
 * Stop Containers
-  * Stop all current containers
-    * `docker-compose stop`
-  * Stop one or more named containers
-    * usage: `docker stop [CONTAINER_NAME(S)]`
-    * example: `docker stop isle-tomcat isle-solr`
-  * Stop ALL containers (including old ones)
-    * `docker stop $(docker ps -a -q)`
+    * Stop all current containers
+      * `docker-compose stop`
+    * Stop one or more named containers
+      * usage: `docker stop [CONTAINER_NAME(S)]`
+      * example: `docker stop isle-tomcat isle-solr`
+    * Stop ALL containers (including old ones)
+      * `docker stop $(docker ps -a -q)`
 
 * Start Containers
   * Start all current containers
