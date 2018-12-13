@@ -116,19 +116,15 @@ Docker commands that are useful to installing or updating ISLE.
 ## How to Remove ALL Docker Containers and then Pull Down Fresh Images
 
 1. Stop all Current Containers
-   * `docker-compose stop`
-
+    * `docker-compose stop` 
 1. WARNING! This will remove: all stopped containers; etc.
-   * `docker system prune --all`
-
+    * `docker system prune --all`
 1. Delete "data" folder in ISLE-Developer folder so logs are fresh and clean
-   * `sudo rm -rf data`
-
+    * `sudo rm -rf data`
 1. Pull down the images from Docker Hub
-   * `docker-compose pull`
-
+    * `docker-compose pull`
 1. Launch all containers (creates volumes and starts containers)
-   * `docker-compose up -d`
+    * `docker-compose up -d`
 
 
 ## How Testers Can Maintain a Nice Clean Environment
