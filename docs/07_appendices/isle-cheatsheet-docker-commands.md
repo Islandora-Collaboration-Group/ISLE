@@ -92,7 +92,7 @@ Docker commands that are useful to installing or updating ISLE.
 ## UNIX Commands
 
 * Quickly View a File, Using Cat
-  * usage: `cat FILE_NAME]`
+  * usage: `cat [FILE_NAME]`
   * example: `cat /etc/hosts`
 
 * Ping to Test Connectivity
