@@ -262,8 +262,8 @@ _To improve performance on Mac OSX:_
 
 * Open `docker-compose.yml` in a text editor and go to the the `apache` section
 * Under `volumes` find the following line:
-  * `- ./mnt/html:/var/www/html`
-  * Change to: `- ./mnt/html:/var/www/html:cached`
+    * `- ./mnt/html:/var/www/html`
+    * Change to: `- ./mnt/html:/var/www/html:cached`
 
 Your host server is now configured and ready to run ISLE. Return to the [homepage](../index.md) and continue with step 3 for your type of deployment (or pick from the list):
 
