@@ -314,12 +314,23 @@ If git is already installed, then please proceed to the next section.
 
 Please run these steps as your user.
 
-- Clone the repo by running
+* Clone the repo by running
 ```bash
 git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 ```
 
-- Change to the directory containing ISLE.
+* Edit .env file
+    * Use any text editor to open the file `.env`.  Note:  You may need to set Windows to [show hidden files](https://support.microsoft.com/en-us/help/4028316/windows-view-hidden-files-and-folders-in-windows-10)
+    * Uncomment the following line (by deleted the preceding #):
+
+    ```# COMPOSE_CONVERT_WINDOWS_PATHS=1```
+    
+    * to:
+    
+    ```COMPOSE_CONVERT_WINDOWS_PATHS=1```
+
+
+* Change to the directory containing ISLE.
 ```bash
 cd ISLE
 ```
