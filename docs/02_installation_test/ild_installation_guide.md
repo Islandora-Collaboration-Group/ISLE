@@ -66,7 +66,7 @@ docker-compose up -d
 
 * Run the following install site script on the apache container by copying and pasting this command:
 ```bash
-docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh`
+docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh
 ```
 
 _For Windows Users only_
