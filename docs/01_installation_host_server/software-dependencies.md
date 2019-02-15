@@ -84,7 +84,7 @@ sudo usermod -aG docker $USER
 - Disconnect `exit` and reconnect for your effective groups to update.
 
 ### Step 5: Clone ISLE repository
-**Please note:** The location you clone the repo to becomes your poject directory. It can be located anywhere and will include your configuration and log output of the containers.
+**Please note:** The location you clone the repo to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
 
 Please run these steps as your user.
 
@@ -169,7 +169,7 @@ sudo usermod -aG docker $USER
 - Disconnect `exit` and reconnect for your effective groups to update.
 
 ### Step 5: Clone ISLE repository
-**Please note:** The location you clone the repo to becomes your poject directory. It can be located anywhere and will include your configuration and log output of the containers.
+**Please note:** The location you clone the repo to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
 
 Please run these steps as your user.
 
@@ -245,7 +245,7 @@ If git is already installed, then please proceed to the next section.
 * Please note: This process also installs the newest version of `docker-compose`.
 
 ### Step 3: Clone ISLE repository
-**Please note:** The location you clone the repo to becomes your poject directory. It can be located anywhere and will include your configuration and log output of the containers.
+**Please note:** The location you clone the repo to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
 
 Please run these steps as your user.
 
@@ -310,7 +310,7 @@ If git is already installed, then please proceed to the next section.
 * Please note: This process also installs the newest version of `docker-compose`.
 
 ### Step 3: Clone ISLE repository
-**Please note:** The location you clone the repo to becomes your poject directory. It can be located anywhere and will include your configuration and log output of the containers.
+**Please note:** The location you clone the repo to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
 
 Please run these steps as your user.
 
