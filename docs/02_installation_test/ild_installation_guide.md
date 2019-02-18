@@ -150,7 +150,7 @@ You may need to remove or disable these local web servers before you can success
 Once your web server(s) have been disabled, resume the ISLE install process by repeating your last installation command, presumably `docker-compose up -d`.
 
 #### Non-running Containers
-If you don't see all containers running, then stop the running containers with `docker-compose down -d` and start the containers one at a time following the instructions below:
+If you don't see all containers running, then stop the running containers with `docker-compose down` and start the containers one at a time following the instructions below:
 
 *  MySQL image pull & container launch
 
