@@ -287,7 +287,7 @@ Dowload the installer and run.  The installer will prompt for several choices.  
 
 If git is already installed, then please proceed to the next section.
 
-### Step 2: Docker for Windows Installation
+### Step 2: Docker for Windows (Pro or Enterprise Editions) Installation
 
 * Go to [https://store.docker.com/editions/community/docker-ce-desktop-windows](https://store.docker.com/editions/community/docker-ce-desktop-windows)
 

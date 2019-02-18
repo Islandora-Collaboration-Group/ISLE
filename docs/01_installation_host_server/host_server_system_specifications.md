@@ -13,7 +13,7 @@ The basic requirements for this host machine vary depending on intended use. A V
   * 128 - 500GB for the Desktop OS
   * Sufficient HD space to hold a test collection
   * MacOS High Sierra 10.13.x
-  * Windows 10 Home or Pro
+  * Windows 10 Enterprise or Pro Editions
   * Ubuntu 18.04+ Desktop
 
 ## Specifications for Production Servers
