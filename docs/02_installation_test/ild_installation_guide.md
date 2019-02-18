@@ -80,7 +80,7 @@ _For Windows Users only_
 
     * **This script will take some time (see estimate above.)** You should see a lot of green [ok] messages.
     * If the script appears to pause and prompt for y/n, do not enter any values; the script will answer for you.  
-    * Wait until "Drush script finished! ...exiting" before proceeding.**
+    * Wait until "Clearing Drupal Caches. 'all' cache was cleared." before proceeding.**
 
 ### Step 4: Testing the site
 
