@@ -43,18 +43,19 @@ The ISLE Steering Committee (ISC) oversees the ISLE project and the ISLE Project
 - David Keiser-Clark (Chair), Williams College
 - Francesca Livermore, Wesleyan University
 - Mark McFate, Grinnell College
-- Ben Rosner, Barnard College
 - Mark Sandford, Colgate University
+- Bethany Seeger, Amherst College
 
 ## ISLE Project Maintainers
-- Ben Rosner (Lead), Barnard College
+- Bethany Seeger (Lead), Amherst College
 - Mark Sandford (Lead), Colgate University
+- Francesca Baird, Wesleyan University
 - David Keiser-Clark, Williams College
-- Francesca Livermore, Wesleyan University
 - Shaun Trujillo, Mount Holyoke College
 
 ## Former Contributors
 - Carolyn Moritz, Vassar College
+- Ben Rosner, Barnard College
 - Steve Young, Hamilton College
 
 ## ISLE Funding Institutions
