@@ -43,6 +43,7 @@ The ISLE Steering Committee (ISC) oversees the ISLE project and the ISLE Project
 - Sarah Goldstein, Mount Holyoke College
 - David Keiser-Clark (Chair), Williams College
 - Mark McFate, Grinnell College
+- Gavin Morris, Born-Digital (ex officio, non-voting)
 - Mark Sandford, Colgate University (ex officio, non-voting)
 - Bethany Seeger, Amherst College (ex officio, non-voting)
 - Shaun Trujillo, Mount Holyoke College (ex officio, non-voting)
@@ -52,6 +53,7 @@ The ISLE Steering Committee (ISC) oversees the ISLE project and the ISLE Project
 - Mark Sandford (Lead), Colgate University
 - Francesca Baird, Wesleyan University
 - David Keiser-Clark, Williams College
+- Gavin Morris, Born-Digital
 - Shaun Trujillo, Mount Holyoke College
 
 ## Former Contributors
