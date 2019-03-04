@@ -58,7 +58,7 @@ The ISLE Steering Committee (ISC) oversees the ISLE project and the ISLE Project
 
 ## Former Contributors
 - Carolyn Moritz, Vassar College
-- Ben Rosner, Barnard College
+- Benjamin Rosner (Lead Maintainer 2018-19), Barnard College
 - Steve Young, Hamilton College
 
 ## ISLE Funding Institutions
