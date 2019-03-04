@@ -47,7 +47,6 @@ The ISLE Steering Committee (ISC) oversees the ISLE project and the ISLE Project
 - Mark Sandford, Colgate University
 
 ## ISLE Project Maintainers
-- Ben Rosner (Lead), Barnard College
 - Mark Sandford (Lead), Colgate University
 - David Keiser-Clark, Williams College
 - Francesca Livermore, Wesleyan University
@@ -55,6 +54,7 @@ The ISLE Steering Committee (ISC) oversees the ISLE project and the ISLE Project
 
 ## Former Contributors
 - Carolyn Moritz, Vassar College
+- Benjamin Rosner (Lead Maintainer 2018-19), Barnard College
 - Steve Young, Hamilton College
 
 ## ISLE Funding Institutions
