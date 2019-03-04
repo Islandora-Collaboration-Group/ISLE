@@ -39,17 +39,21 @@ A note about migration: ISLE contains complete documentation for migrating exist
 The ISLE Steering Committee (ISC) oversees the ISLE project and the ISLE Project Maintainers maintain the project with scheduled new releases on [GitHub project boards](https://github.com/Islandora-Collaboration-Group/ISLE/projects), and issue [release notes](https://islandora-collaboration-group.github.io/ISLE-Documentation/09_release_notes/release_notes/). The ISC will submit the resultant development via Islandora’s Licensed Software Acceptance Procedure ([LSAP](https://islandora.ca/developers/lsap)). The development will then become a core part of the Islandora 7x Release (Fall 2019) and will be supported and maintained by the Islandora community as part of the free and publicly shared open-source platform. Through this LSAP method, Islandora has already adopted a large number of externally contributed modules that are sustainably maintained by community members.
 
 ## ISLE Steering Committee
+- Francesca Baird, Wesleyan University
 - Sarah Goldstein, Mount Holyoke College
 - David Keiser-Clark (Chair), Williams College
-- Francesca Livermore, Wesleyan University
 - Mark McFate, Grinnell College
-- Ben Rosner, Barnard College
-- Mark Sandford, Colgate University
+- Gavin Morris, Born-Digital (ex officio, non-voting)
+- Mark Sandford, Colgate University (ex officio, non-voting)
+- Bethany Seeger, Amherst College (ex officio, non-voting)
+- Shaun Trujillo, Mount Holyoke College (ex officio, non-voting)
 
 ## ISLE Project Maintainers
+- Bethany Seeger (Lead), Amherst College
 - Mark Sandford (Lead), Colgate University
+- Francesca Baird, Wesleyan University
 - David Keiser-Clark, Williams College
-- Francesca Livermore, Wesleyan University
+- Gavin Morris, Born-Digital
 - Shaun Trujillo, Mount Holyoke College
 
 ## Former Contributors
