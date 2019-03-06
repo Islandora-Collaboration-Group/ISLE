@@ -4,14 +4,6 @@ This Migration guide will help you migrate your existing production Islandora en
 
 **Please note:** There is a [Glossary](../glossary.md) with relevant terms to help guide installation.
 
-## Index of related documents
-* [Migration Example User Story](migration_example_user_story.md)
-* [Migration Export Checklist](migration_export_checklist.md)
-* [Migration Merge Checklist](migration_merge_checklist.md)
-* [Migration Reindex Process](migration_reindex_process.md)
-
----
-
 ## Assumptions / Prerequisites
 
 * Comfortability with ISLE. Recommend first setting up the [ISLE Test Site](../02_installation_test/ild_installation_guide.md) (`isle.localdomain`). If you have already done this, please proceed.
@@ -47,32 +39,6 @@ This Migration guide will help you migrate your existing production Islandora en
 **Finally also please note:** Instructions from this guide  and it's associated checklists may call for you to **COPY** data from your running Islandora environment to a newly created folder: `current_prod_islandora_config` located on your ISLE Host Server or local workstation called `Local ISLE config laptop`. You will then work from this copy for future steps. In some cases, you'll need to copy configurations down to your laptop / workstation (`Local ISLE config laptop`) and merge contents as directed. (_if necessary_) In other cases, due to the size of the data e.g. Fedora data you may only be able to copy production data to the target ISLE Host server (`Remote ISLE Host server`) instead of your local laptop. Please attempt to balance as necessary when putting together the `docker-compose.yml` and config directory. Most instructions will attempt to direct you to copy to a local workstation. ultimately you will be putting this config in a git repository to deploy to the remote ISLE host server for everything to work with both your copied data and merged production settings.
 
 **Recommend:** Having adequate storage space available for the ISLE host server to accommodate a working copy of a production Islandora's associated configurations and data.
-
----
-
-## Overview
-
-**TL;DR** Copy old stuff over to host server and local laptop w/ checklist, create new private repo for configs, merge old configs into new configs w/ checklist, edit docker-compose.yml to point to new configs, spin up containers, go into fedora container & reindex, qc site - Done.
-
-* Create a new directory on your remote ISLE Host server for the /data folders and files
-
-* **COPY** the drupal/islandora site and configuration files from the running production Islandora
-    * (following the [Migration Export Checklist](migration_export_checklist.md)).
-
-* Create a new directory on your local laptop for the /config folders and files, copy the ISLE repository /config into it, and make this into a private repository.
-
-* Edit the /config files so they have the proper site-specific information
-    * (following the [Migration Merge Checklist](migration_merge_checklist.md)
-
-*  **NOTE** Some of this will involve fairly complicated merging of files to account for custom edits that may have been made to your production Islandora site and/or to bring configuration files up to work with newer software versions. This is by far the trickiest part of the migration and definitely a good place to seek help from the community if you get stuck.
-
-* Edit the docker-compose.yml file to point to all these fine new config files.
-* Download ISLE images from Dockerhub and spin up the ISLE Containers (takes a while depending on network speeds)
-* Go into the fedora container and do a re-indexing (takes a little while)
-    * (following the [Migration Reindex Process](migration_reindex_process.md)).
-* Go to the new site and QC!
-
----
 
 ## Detailed Steps
 
