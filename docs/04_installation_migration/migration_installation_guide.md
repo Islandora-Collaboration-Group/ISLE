@@ -26,59 +26,58 @@ This Migration guide will help you migrate your existing production Islandora en
 
 * Usernames/Passwords for key parts of your stack which are used **for** the migration. 
 
-    * Finding your Drupal MySQL username, password, and database
-    - `grep --include=filter-drupal.xml -rnw -e 'dbname.*user.*password.*"' / 2>/dev/null`
+    1. Finding your Drupal MySQL username, password, and database
+      * `grep --include=filter-drupal.xml -rnw -e 'dbname.*user.*password.*"' / 2>/dev/null`   
+      * Example output:
+         ```connection server="localhost" port="3306" dbname="**islandora**" user="**drupalIslandora**" password="**Kjs8n5zQXfPNhZ9k**"
+         ```
+         * Username: copy the value from `user=`
+         * Password: copy the value from `password=`
+         * Database: copy the value from `dbname=`
     
-    Example output:
-      > connection server="localhost" port="3306" dbname="**islandora**" user="**drupalIslandora**" password="**Kjs8n5zQXfPNhZ9k**"
-
-    - Username: copy the value from `user=`
-    - Password: copy the value from `password=`
-    - Database: copy the value from `dbname=`
-    
-    * Finding your Fedora MySQL username, password, and database
-    - `grep --include=fedora.fcfg -rnw -e 'name="dbUsername"' -e 'name="dbPassword"' -e 'name="jdbcURL"' / 2>/dev/null`
-    - This command _will_ print multiple lines. The first three lines are important but please save the rest (just in case).
-
-    Example output:
-     > param name="dbUsername" value="**fedoraDB**"  
-     > param name="jdbcURL" value="jdbc:mysql://localhost/**fedora3**?useUnicode=true&amp;amp;characterEncoding=UTF-8&amp;amp;autoReconnect=true"  
-     > param name="dbPassword" value="**zMgBM6hGwjCeEuPD**"
-
-    - Username: Copy the value from `dbUsername value=`
-    - Password: Copy the value from `dbPassword value=`
-    - Database: Copy from the value `jdbcURL value=` the database name which is directly between the "/" and the only "?"
+    2. Finding your Fedora MySQL username, password, and database
+      * `grep --include=fedora.fcfg -rnw -e 'name="dbUsername"' -e 'name="dbPassword"' -e 'name="jdbcURL"' / 2>/dev/null`
+      * This command _will_ print multiple lines. The first three lines are important but please save the rest (just in case).
+      * Example output:
+          ```param name="dbUsername" value="**fedoraDB**"  
+          param name="jdbcURL" value="jdbc:mysql://localhost/**fedora3**?useUnicode=true&amp;amp;characterEncoding=UTF-8&amp;amp;autoReconnect=true"  
+          param name="dbPassword" value="**zMgBM6hGwjCeEuPD**"
+         ``` 
+         * Username: Copy the value from `dbUsername value=`
+         * Password: Copy the value from `dbPassword value=`
+         * Database: Copy from the value `jdbcURL value=` the database name which is directly between the "/" and the only "?"
 
 * Know where your Fedora, Drupal (Islandora), and Solor data folders are located.
 
- 0. Login to your current Islandora production server. If your current production environment is located across multiple servers, you may need to check more than one server to located these data folders.
+    0. Login to your current Islandora production server. If your current production environment is located across multiple servers, you may need to check more than one server to located these data folders.
 
- 1. Finding your Fedora data folder
+   1. Finding your Fedora data folder
     - Common locations: `/usr/local/fedora/data` or `/usr/local/tomcat/fedora/data`  
     - Use find: `find / -type d -ipath '*fedora/data' -ls  2>/dev/null`
              
- 2. Finding your Drupal data folder  
+   2. Finding your Drupal data folder  
     - Common location: `/var/www/` (likely in a sub-folder; e.g., html, islandora, etc.)
     - `grep --include=index.php -rl -e 'Drupal' / 2>/dev/null`
 
- 3. Finding your Solr data folder  
+   3. Finding your Solr data folder  
     - Common location: `/usr/local/solr`, `/usr/local/tomcat/solr`, or `/usr/local/fedora/solr`
     - `find / -type d -ipath '*solr/*/data' -ls  2>/dev/null`
 
- 4. Finding your FedoraGSearch data (i.e. transforms) folder
+   4. Finding your FedoraGSearch data (i.e. transforms) folder
     - `find / -type d -ipath '*web-inf/classes/fgsconfigfinal' -ls 2>/dev/null`
 
 * SQL dump (export) of the current production site's Drupal database. Ensure that the contents of any `cache` table are not exported.
    *  > **Note**  you may add your password directly to the commands below as: `-p{PASSWORD}` (no additional space).
     This is **not** recommended as your shell history (e.g., `bash_history`) will have those passwords stored. You may delete your shell history when you are complete (`rm ~\.bash_history`)
-      - SQL dump of your Drupal database
-        - `mysqldump -u {DRUPAL_USERNAME} -p {DRUPAL_DATABASE_NAME} | gzip > drupal.sql.gz`
+    
+    * SQL dump of your Drupal database
+        * `mysqldump -u {DRUPAL_USERNAME} -p {DRUPAL_DATABASE_NAME} | gzip > drupal.sql.gz`
 
- 2. Drupal (Islandora) webroot
-      - In our backup location `cd ~/isledata`
-      - `tar -zcf drupal-web.tar.gz -C {DRUPAL_DATA_LOCATION} .` (don't forget the final `.`)
-        - for example: `tar -zcf drupal-web.tar.gz -C /var/www/html .`
-      - Permission error? Prepend the command with `sudo` (e.g., `sudo tar -zcf drupal-web.tar.gz -C /var/www/html .`)
+    * Drupal (Islandora) webroot
+        *  In our backup location `cd ~/isledata`
+        *  `tar -zcf drupal-web.tar.gz -C {DRUPAL_DATA_LOCATION} .` (don't forget the final `.`)
+        *  for example: `tar -zcf drupal-web.tar.gz -C /var/www/html .`
+        *  Permission error? Prepend the command with `sudo` (e.g., `sudo tar -zcf drupal-web.tar.gz -C /var/www/html .`)
 
 **Finally also please note:** Instructions from this guide  and it's associated checklists may call for you to **COPY** data from your current production Islandora environment to your ISLE Host Server or local computer. You will then work from these copies to build your ISLE environment. In some cases, you'll need to copy configurations down to your local computer (`Local ISLE config laptop`) and merge contents as directed. (_if necessary_) In other cases, due to the size of the data e.g. Fedora data you will copy directly to the ISLE Host server (`Remote ISLE Host server`). You will note where you have stored copies of files/data in a docker-compose.yml file. You will store your configured files in a git repository and use that to deploy to the ISLE host server.
 
