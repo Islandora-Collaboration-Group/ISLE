@@ -8,19 +8,15 @@ This Migration guide will help you migrate your existing production Islandora en
 
 * Comfortability with ISLE. Recommend first setting up the [ISLE Test Site](../02_installation_test/ild_installation_guide.md) (`isle.localdomain`). If you have already done this, please proceed.
 
-* Host Server that conforms to the specifications outlined in the [Host Server Specifications](../01_installation_host_server/host_server_system_specifications.md).
+* Host server that conforms to the spcifications outlined and has followed the appropriate setup and configuration instructions in the [New ISLE section](../01_installation_host_server) of the guide.
 
-* This Migration guide is designed for a Host server that has already followed the appropriate setup and configuration instructions in the [New ISLE section](/index.md#new-isle) of the guide.
+* All directions depend on the type of local computer used to connect via browser to Islandora. The instructions below assume a MacOS or Linux laptop or workstation to be used in conjunction with the ISLE Host Server for deploying configs, code, files etc. Windows users may have to adjust / swap out various tools as needed.
 
-* Instructions below also assume a MacOS or Linux laptop or workstation to be used in conjunction with the ISLE Host Server for deploying configs, code, files etc. Windows users may have to adjust / swap out various tools as needed.
-
-* These directions also depend on the type of local computer used to connect via browser to Islandora.
-
-* Have an existing domain name that works - is set up with DNS etc...
+* Have a web domain name that works (i.e. is set up with a DNS entry you can make changes to if needed)
 
 * Have [SSL Certificates](../glossary.md#systems) previously created for the web domain. (_Please work with the appropriate internal IT resource to provision these files for your domain_) OR: Use the [Let's Encrypt guide](../07_appendices/configuring-lets-encrypt.md) to generate and install SSL Certificates.
 
-* ISLE project has been cloned to BOTH your local laptop/workstation AND the ISLE host server
+* ISLE project has been cloned to BOTH your local computer AND the ISLE host server
 
 * Disk space on or mounted to the Host Server large enough to store a **copy** of your fedora data store
 
@@ -28,20 +24,68 @@ This Migration guide will help you migrate your existing production Islandora en
 
 * Access to the current Islandora production server
 
-* Usernames/Passwords for key parts of your stack which are used **for** the migration.
-    * Drupal SQL information: username, password, database name can be obtained from your original `www/sites/default/settings.php`
-    * Fedora SQL information: username, password, database name can be obtained from your original `fedora/server/config/fedora.fcfcg`
-    * Fedora users: please have a copy of your `fedora-users.xml`
-    * Tomcat users: please have a copy of your `tomcat-users.xml` but plan on generating new values for these logins for both the fedora and solr containers.
+* Usernames/Passwords for key parts of your stack which are used **for** the migration. 
+
+    * Finding your Drupal MySQL username, password, and database
+    - `grep --include=filter-drupal.xml -rnw -e 'dbname.*user.*password.*"' / 2>/dev/null`
+    
+    Example output:
+      > connection server="localhost" port="3306" dbname="**islandora**" user="**drupalIslandora**" password="**Kjs8n5zQXfPNhZ9k**"
+
+    - Username: copy the value from `user=`
+    - Password: copy the value from `password=`
+    - Database: copy the value from `dbname=`
+    
+    * Finding your Fedora MySQL username, password, and database
+    - `grep --include=fedora.fcfg -rnw -e 'name="dbUsername"' -e 'name="dbPassword"' -e 'name="jdbcURL"' / 2>/dev/null`
+    - This command _will_ print multiple lines. The first three lines are important but please save the rest (just in case).
+
+    Example output:
+     > param name="dbUsername" value="**fedoraDB**"  
+     > param name="jdbcURL" value="jdbc:mysql://localhost/**fedora3**?useUnicode=true&amp;amp;characterEncoding=UTF-8&amp;amp;autoReconnect=true"  
+     > param name="dbPassword" value="**zMgBM6hGwjCeEuPD**"
+
+    - Username: Copy the value from `dbUsername value=`
+    - Password: Copy the value from `dbPassword value=`
+    - Database: Copy from the value `jdbcURL value=` the database name which is directly between the "/" and the only "?"
+
+* Know where your Fedora, Drupal (Islandora), and Solor data folders are located.
+
+ 0. Login to your current Islandora production server. If your current production environment is located across multiple servers, you may need to check more than one server to located these data folders.
+
+ 1. Finding your Fedora data folder
+    - Common locations: `/usr/local/fedora/data` or `/usr/local/tomcat/fedora/data`  
+    - Use find: `find / -type d -ipath '*fedora/data' -ls  2>/dev/null`
+             
+ 2. Finding your Drupal data folder  
+    - Common location: `/var/www/` (likely in a sub-folder; e.g., html, islandora, etc.)
+    - `grep --include=index.php -rl -e 'Drupal' / 2>/dev/null`
+
+ 3. Finding your Solr data folder  
+    - Common location: `/usr/local/solr`, `/usr/local/tomcat/solr`, or `/usr/local/fedora/solr`
+    - `find / -type d -ipath '*solr/*/data' -ls  2>/dev/null`
+
+ 4. Finding your FedoraGSearch data (i.e. transforms) folder
+    - `find / -type d -ipath '*web-inf/classes/fgsconfigfinal' -ls 2>/dev/null`
 
 * SQL dump (export) of the current production site's Drupal database. Ensure that the contents of any `cache` table are not exported.
+   *  > **Note**  you may add your password directly to the commands below as: `-p{PASSWORD}` (no additional space).
+    This is **not** recommended as your shell history (e.g., `bash_history`) will have those passwords stored. You may delete your shell history when you are complete (`rm ~\.bash_history`)
+      - SQL dump of your Drupal database
+        - `mysqldump -u {DRUPAL_USERNAME} -p {DRUPAL_DATABASE_NAME} | gzip > drupal.sql.gz`
 
-**Finally also please note:** Instructions from this guide  and it's associated checklists may call for you to **COPY** data from your running Islandora environment to a newly created folder: `current_prod_islandora_config` located on your ISLE Host Server or local workstation called `Local ISLE config laptop`. You will then work from this copy for future steps. In some cases, you'll need to copy configurations down to your laptop / workstation (`Local ISLE config laptop`) and merge contents as directed. (_if necessary_) In other cases, due to the size of the data e.g. Fedora data you may only be able to copy production data to the target ISLE Host server (`Remote ISLE Host server`) instead of your local laptop. Please attempt to balance as necessary when putting together the `docker-compose.yml` and config directory. Most instructions will attempt to direct you to copy to a local workstation. ultimately you will be putting this config in a git repository to deploy to the remote ISLE host server for everything to work with both your copied data and merged production settings.
+ 2. Drupal (Islandora) webroot
+      - In our backup location `cd ~/isledata`
+      - `tar -zcf drupal-web.tar.gz -C {DRUPAL_DATA_LOCATION} .` (don't forget the final `.`)
+        - for example: `tar -zcf drupal-web.tar.gz -C /var/www/html .`
+      - Permission error? Prepend the command with `sudo` (e.g., `sudo tar -zcf drupal-web.tar.gz -C /var/www/html .`)
+
+**Finally also please note:** Instructions from this guide  and it's associated checklists may call for you to **COPY** data from your current production Islandora environment to your ISLE Host Server or local computer. You will then work from these copies to build your ISLE environment. In some cases, you'll need to copy configurations down to your local computer (`Local ISLE config laptop`) and merge contents as directed. (_if necessary_) In other cases, due to the size of the data e.g. Fedora data you will copy directly to the ISLE Host server (`Remote ISLE Host server`). You will note where you have stored copies of files/data in a docker-compose.yml file. You will store your configured files in a git repository and use that to deploy to the ISLE host server.
 
 **Recommend:** Having adequate storage space available for the ISLE host server to accommodate a working copy of a production Islandora's associated configurations and data.
 
 ## Detailed Steps
-
+    
 * Setup a Private Code Repository
       * Most of the work in this guide involves careful editing of the various configuration and settings files that customize the pieces of Islandora (database, repository, web-server, etc...).
       * Doing this work in a code repository makes it easier to correct errors and to repeat the process for additional servers without needing to replicate all the work.
