@@ -1,4 +1,4 @@
-##Building a new Islandora site using ISLE - sample user story
+##building a New Islandora Site Using ISLE - Sample User Story
 
 Sam wants to spin up Islandora on an Ubuntu Linux server she has in the institutional data center. She accesses the server using ssh and determines that it meets the [Host Server Specifications](../01_installation_host_server/host_server_system_specifications.md) (basically - has enough processor, memory, and storage space).
 

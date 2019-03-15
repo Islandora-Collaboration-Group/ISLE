@@ -19,4 +19,3 @@ We will need the following software which we can install following the instructi
  * Git, Docker, Docker-Compose, openssl, git, htop, ntp, curl
 
 Thank you,  
-Requesting Dept.

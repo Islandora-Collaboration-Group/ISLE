@@ -14,7 +14,7 @@ You can use the command-line interactive utility `fedora-rebuild.sh` on the `fed
 
 Depending on the size of your repository, this entire process may take minutes (thousands of objects) or hours (millions of objects) to complete.
 
-### Assumptions / Pre-Requisites
+### Assumptions / Prerequisites
 
 * All containers are currently running
 
@@ -63,7 +63,7 @@ Shell into the running `fedora` container
 
 ---
 
-#### Reindex SQL database (2 of 3)
+#### Reindex SQL Database (2 of 3)
 
 `mysqlrootpassword` = Change this to your MySQL root password from the MySQL container.
 

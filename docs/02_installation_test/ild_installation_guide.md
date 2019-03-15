@@ -19,24 +19,24 @@ This checklist will attempt to point out most of the usage challenges or pitfall
 
 ### Process overview
 
-* Edit /etc/hosts on local laptop or desktop to allow user to easily connect to ISLE test system
-* Test site launch process
-* Run install script on Apache container
-* Test the site
-* Sample object ingestion
+* Edit `/etc/hosts` File to View ISLE Locally on Laptop / Workstation Browser
+* Test Site Launch Process
+* Run Install Script on Apache Container
+* Test the Site
+* Ingest Sample Objects
 * Troubleshooting
 
-### Step 0: edit /etc/hosts on local laptop or desktop
+### Step 0: Edit `/etc/hosts` File to View ISLE Locally on Laptop / Workstation Browser
 
-It is important to add `isle.localdomain admin.isle.localdomain portainer.isle.localdomain` to your `/etc/hosts` file, as connecting directly to an IP address can prevent some components from working properly.
+Enable the Test/Demo ISLE site to be viewed locally as: `https://isle.localdomain`
 
-* Instructions for editing hosts files can be found [here](../07_appendices/editing-the-hosts-file.md).  
+* Please use these instructions for [Editing the "/etc/hosts" File](../07_appendices/editing-the-hosts-file.md).
 
-* After completing the appropriate steps, please return to this guide and continue with _Step 1: Test site Launch process_ below.
+* After completing the above, please continue below with _Step 1: Test Site Launch Process_.
 
 ---
 
-### Step 1: Test site launch process
+### Step 1: Test Site Launch Process
 
 * In terminal (shell) or PowerShell navigate to your ISLE project directory. You may already be in this directory if you are coming from the [Software Requirements Guide](../01_installation_host_server/software-dependencies.md).
 
@@ -60,7 +60,7 @@ docker-compose up -d
 
 -----
 
-### Step 2: Run install script on Apache container
+### Step 2: Run Install Script on Apache Container
 
 **Total build process** may take up to 15 - 45 minutes (_depending on system and internet speeds_)
 
@@ -82,7 +82,7 @@ _For Windows Users only_
     * If the script appears to pause and prompt for y/n, do not enter any values; the script will answer for you.  
     * Wait until "Clearing Drupal Caches. 'all' cache was cleared." before proceeding.**
 
-### Step 4: Testing the site
+### Step 4: Test the Site
 
 * Test (QC) the resulting setup by opening a web browser to the `isle.localdomain` URL of the new ISLE sample site (i.e. [https://isle.localdomain](https://isle.localdomain)) and logging in.
 
@@ -94,7 +94,7 @@ _For Windows Users only_
 
 * There is additional information for users and passwords that can be found on the [Test Site Resources](ild_resources.md) page.
 
-### Step 5: Sample objects for ingest
+### Step 5: Ingest Sample Objects
 
 Courtesy of the [Islandora Collaboration Group](https://github.com/Islandora-Collaboration-Group/icg_information) there is a sample set of objects and corresponding metadata that can be used for ingest.
 

@@ -21,7 +21,7 @@ A very handy primer for writing documentation using `MkDocs` has been written he
 
 ---
 
-## Project Directory structure
+## Project Directory Structure
 
 ```
 
@@ -31,7 +31,7 @@ A very handy primer for writing documentation using `MkDocs` has been written he
 │   ├── 02_installation_development
 │   ├── 03_installation_new_site
 │   ├── 04_installation_migration
-│   ├── 05_developer_docs
+│   ├── 05_maintainer_docs
 │   ├── 06_specifications
 │   ├── Previous_Structure_For_Merging
 │   ├── about.md
@@ -76,5 +76,5 @@ Within the `docs` directory, there are 6 major topical sections.
 | 02_installation_development | `ild_`          | ISLE test site installation (`isle.localdomain`) |
 | 03_installation_new_site    | `new_site_`     | New Islandora site installation in ISLE |
 | 04_installation_migration   | `migration_`    | Migrating an existing production Islandora site to ISLE |
-| 05_developer_docs           | `dev_`          | Documentation or development of ISLE |
+| 05_maintainer_docs           | `maintainer_`          | Documentation or development of ISLE |
 | 06_specifications           | `specs_`        | Systems or software specifications of ISLE |

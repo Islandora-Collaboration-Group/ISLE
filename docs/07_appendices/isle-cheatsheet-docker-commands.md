@@ -1,4 +1,4 @@
-# ISLE Cheat Sheet: Docker commands
+# ISLE Cheat Sheet: Docker Commands
 
 Docker commands that are useful to installing or updating ISLE.
 
@@ -62,7 +62,7 @@ Docker commands that are useful to installing or updating ISLE.
   * usage: `docker volume inspect [VOLUME_NAME]`
   * example: `docker volume inspect isle_fed-data`
   * resultant display is a JSON array that contains a location like this:
-    * "Mountpoint": "/var/lib/docker/volumes/isle_fed-data/_data"
+    * `"Mountpoint": "/var/lib/docker/volumes/isle_fed-data/_data"`
 
 ### Port Lookups
   * Query what is using a specific port number
@@ -70,11 +70,11 @@ Docker commands that are useful to installing or updating ISLE.
   * Query what is using a specific port number
     * `lsof -i :8381`
 
-### Shell into Docker Container
+### Shell Into Docker Container
   * usage: `docker exec -it [CONTAINER_NAME] bash`
   * example: `docker exec -it isle-apache-ld bash`
 
-### Shell into Docker Container and Open a File
+### Shell Into Docker Container and Open a File
   * usage: `docker exec -it [CONTAINER_NAME] [FILE_NAME]`
   * example: `docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh`
 
@@ -85,13 +85,13 @@ Docker commands that are useful to installing or updating ISLE.
   * `sudo service docker status`
 ### Restart Docker Service
   * `sudo /bin/systemctl restart docker.service`
-### Restart Docker Service (Alternate)
+### Restart Docker Service (alternate)
   * `sudo service docker restart`
 
 
 ## UNIX Commands
 
-### Quickly View a File, Using Cat
+### Quickly View a File, Using `cat`
   * usage: `cat [FILE_NAME]`
   * example: `cat /etc/hosts`
 
@@ -113,9 +113,9 @@ Docker commands that are useful to installing or updating ISLE.
 # *CAREFUL! BELOW THERE BE DRAGONS*
 
 
-## How to Remove ALL Docker Containers and then Pull Down Fresh Images
+## How to Remove All Docker Containers and Then Pull Down Fresh Images
 
-1. Stop all Current Containers
+1. Stop all current containers
     * `docker-compose stop`
 1. WARNING! This will remove: all stopped containers; etc.
     * `docker system prune --all`
@@ -132,7 +132,7 @@ Docker commands that are useful to installing or updating ISLE.
 ### Show Currently Running and All Past Containers
   * `docker ps -a`
 
-### Let's say you discover you have two older containers named `isle-web`, `isle-db`) and you want to remove them:
+### Let's Say You Discover You Have Two Older Containers (named `isle-web`, `isle-db`) and You Want to Remove Them:
   * Example to stop these 2 containers
     * `docker stop isle-web isle-db`
   * Example to remove these 2 containers

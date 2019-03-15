@@ -1,4 +1,4 @@
-## Testing ISLE -- 
+## Testing ISLE
 
 Alice is curious about ISLE and wants to know more about using Islandora for her university's digital collections.  She does not have access to a server and would like to test drive Islandora before deciding whether or not to move forward with it.
 

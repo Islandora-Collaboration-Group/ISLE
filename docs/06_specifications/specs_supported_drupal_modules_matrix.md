@@ -1,4 +1,4 @@
-Please find below a list o all involved Drupal and Islandora Modules on the test site `isle.locadomain`.
+Please find below a list of all involved Drupal and Islandora Modules on the test site `isle.locadomain`.
 
 | Package                 | Name                                                                | Type        | Status        | Version       |
 | ------------            | ------------                                                        | ------------| ------------  | ------------  |

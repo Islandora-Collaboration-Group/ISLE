@@ -1,6 +1,6 @@
 **MacOS** desktop version to use: `10.13.x+`
 
-This is a detailed operating system-specific guide to setup and install all ISLE pre-requisites on a MacOS local laptop or workstation using Docker for Mac.
+This is a detailed operating system-specific guide to setup and install all ISLE prerequisites on a MacOS local laptop or workstation using Docker for Mac.
 
 Called "the host" - this is the base computer upon which the entire ISLE stack is built.
 
@@ -8,7 +8,7 @@ Called "the host" - this is the base computer upon which the entire ISLE stack i
 
 **Please note:** This guide should also install on the older Sierra `10.12`, but we can't guarantee support (i.e, fixes) for things broken only on Sierra but not on High Sierra.
 
-### Assumptions / Pre-Requisites
+### Assumptions / Prerequisites
 
 * Enduser has a local laptop / workstation that conforms to the specifications outlined in the [Host Server Specifications](host_server_system_specifications.md)  Several users have reported success using these instructions on Sierra (10.12), but there is no guarantee that it will continue to work in the future.
 
@@ -16,13 +16,13 @@ Called "the host" - this is the base computer upon which the entire ISLE stack i
 
 * This guide is not intended for production usage.
 
-### Install process overview
+### Install Process Overview
 
 * Install git
 * Install Docker for Mac
 * Clone the ISLE project repository
 * Pull down the ISLE images from Dockerhub
-* Next steps
+* Next Steps
 
 ### Step 1: Git Installation
 In order to get a copy (clone) of the current ISLE project, git will need to be installed. [Git](https://git-scm.com) is a software version control system for tracking changes in computer files and coordinating work on those files among multiple people.
@@ -79,7 +79,7 @@ CONTAINER     ID    IMAGE     COMMAND     CREATED     STATUS    PORTS     NAMES
 
 ```
 
-### Step 3: Clone the ISLE repository
+### Step 3: Clone the ISLE Repository
 
 In this section, the enduser will need to decide on an appropriate area on their laptop to clone the current ISLE project software to.
 
@@ -104,7 +104,7 @@ The built-in terminal for MacOs can be found in `~/Applications/Utilities/Termin
 
 ---
 
-### Step 4: Pull down the ISLE images from Dockerhub
+### Step 4: Pull Down the ISLE Images from Dockerhub
 
 This process should may take 15 - 60+ mins depending on the speed of your Internet connection.
 
@@ -114,7 +114,7 @@ This process should may take 15 - 60+ mins depending on the speed of your Intern
 
 * `docker-compose pull`
 
-### Next steps
+### Next Steps
 
 * To install a Test or Demo site, follow [these instructions](../02_installation_test/ild_installation_guide.md)
 

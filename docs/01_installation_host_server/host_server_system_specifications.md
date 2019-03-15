@@ -23,7 +23,7 @@ However, if the intent is a new or migrated site that will see actual production
 **Server Specifications**
 
 * While these images can be run on any OS (i.e., they're platform agnostic) we suggest a server or VM running:
-	* Ubuntu 18.04 LTS  or 
+	* Ubuntu 18.04 LTS  or
 	* CentOS 7.x
 	* Please note you are not limited to these, and ISLE should perform equally on all OSes.
 * Minimum 2 CPU's (w/ 1 - 4 cores each)
@@ -36,7 +36,7 @@ However, if the intent is a new or migrated site that will see actual production
 
 ---
 
-## Note about Production Host Storage (optional)
+## Note about Production Host Storage (Optional)
 
 While `ISLE` and its configs, images, software etc are typically cloned to `/opt/ISLE` and controlled from that location some data can be stored in `/var/docker`.
 
@@ -44,5 +44,3 @@ Please ensure that both the host server's `/opt` and `/var` directories are on d
 
   * Potentially increasing the overall size of the host server VM beyond 200GB
   * Attaching separate storage capacity directly to the `/opt` and `/var` directories
-
-
