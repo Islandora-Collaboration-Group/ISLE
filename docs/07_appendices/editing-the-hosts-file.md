@@ -1,4 +1,4 @@
-Below are instructions on how to edit the hosts file to connect to ISLE on a test system.
+Below are instructions on how to edit the `/etc/hosts` file to view ISLE locally on a laptop or workstation browser.
 
 #### Mac or Ubuntu Using Docker
 

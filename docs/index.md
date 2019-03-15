@@ -30,7 +30,7 @@ Advice for installing a test instance of ISLE on other platforms may be availabl
 
 ## New ISLE
 
-Follow these instructions if you **do not** have an existing Islandora installation you wish to migrate. New sites can be used as production, staging, or development environments. 
+Follow these instructions if you **do not** have an existing Islandora installation you wish to migrate. New sites can be used as production, staging, or development environments.
 
 1. Ensure you meet the hardware [Server Requirements](01_installation_host_server/server-requirements.md).
 

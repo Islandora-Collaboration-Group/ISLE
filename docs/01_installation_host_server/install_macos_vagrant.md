@@ -4,13 +4,13 @@
 
 **MacOS** desktop version to use: `10.13.x+`
 
-This is a detailed operating system-specific guide to setup and install all ISLE pre-requisites on a MacOS local laptop or workstation using Vagrant and VirtualBox.
+This is a detailed operating system-specific guide to setup and install all ISLE prerequisites on a MacOS local laptop or workstation using Vagrant and VirtualBox.
 
 **Please note:** This guide is for using `Vagrant / Virtualbox` software only on a MacOS system instead of `Docker for Mac`.
 
 **Please note:** This guide should also install on the older Sierra `10.12`, but we can't guarantee support (i.e, fixes) for things broken only on Sierra but not on High Sierra.
 
-### Assumptions / Pre-Requisites
+### Assumptions / Prerequisites
 
 * Enduser has a local laptop / workstation that conforms to the specifications outlined in the [Host Server Specifications](host_server_system_specifications.md)
 
@@ -18,7 +18,7 @@ This is a detailed operating system-specific guide to setup and install all ISLE
 
 * This guide is not intended for production usage.
 
-### Install process overview
+### Install Process Overview
 
 * Install git
 * Install VirtualBox
@@ -27,7 +27,7 @@ This is a detailed operating system-specific guide to setup and install all ISLE
 * Install Vagrant plugin
 * Clone the ISLE project repository
 * Start the ISLE Host VM (using vagrant)
-* Next steps
+* Next Steps
 
 ### Step 1: Git Installation
 In order to get a copy (clone) of the current ISLE project, git will need to be installed. [Git](https://git-scm.com) is a software version control system for tracking changes in computer files and coordinating work on those files among multiple people.
@@ -55,7 +55,7 @@ If git is already installed, then please proceed to the next section.
 
 VirtualBox is a general-purpose full virtualizer for x86 hardware, targeted at server, desktop and embedded use.
 
-* Go to [https://www.virtualbox.org/wiki/Downloads](https://www.virtualbox.org/wiki/Downloads) to download and install the latest platform package for OS X hosts. 
+* Go to [https://www.virtualbox.org/wiki/Downloads](https://www.virtualbox.org/wiki/Downloads) to download and install the latest platform package for OS X hosts.
 
 
 ### Step 3: VirtualBox Extensions for VirtualBox Installation
@@ -70,7 +70,7 @@ VirtualBox is a general-purpose full virtualizer for x86 hardware, targeted at s
 
 Vagrant is a tool for building and managing virtual machine environments in a single workflow. Endusers can read more [here](https://www.vagrantup.com/intro/index.html)
 
-* Go to [https://www.vagrantup.com/downloads.html](https://www.vagrantup.com/downloads.html) to download and install the latest version for Mac OS X. 
+* Go to [https://www.vagrantup.com/downloads.html](https://www.vagrantup.com/downloads.html) to download and install the latest version for Mac OS X.
 
 
 ### Step 5: Vagrant Plugin Installation
@@ -92,7 +92,7 @@ Installed the plugin 'vagrant-hostsupdater (1.0.2)'!
 ```   
 
 
-### Step 6: Clone the ISLE repository
+### Step 6: Clone the ISLE Repository
 
 In this section, the enduser will need to decide on an appropriate area on their laptop to clone the current ISLE project software to.
 
@@ -114,7 +114,7 @@ The built-in terminal for MacOs can be found in `~/Applications/Utilities/Termin
 
   * Or within the same terminal, enter `ls -lha`
 
-### Step 7: Start the ISLE Host Vagrant VM and ssh in
+### Step 7: Start the ISLE Host Vagrant VM and SSH in...
 
 Endusers have a choice of using a CentOS or Ubuntu Vagrant VM.
 
@@ -140,6 +140,6 @@ Once this process finishes and the ISLE Host Vagrant VM is running.
 This command shells in the vagrant user to the ISLE Host.
 
 
-### Next steps
+### Next Steps
 
 * Proceed to the instructions for installing a [Test/Demo site](../02_installation_test/ild_installation_guide.md)

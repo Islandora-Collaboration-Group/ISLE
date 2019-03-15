@@ -4,7 +4,7 @@ The following pieces of software are required to run ISLE:
 - Docker CE or EE (https://docker.com)
 - Docker-compose (https://docs.docker.com/compose/install/)
 - Git (https://github.com) (https://git-scm.com/)
- 
+
 This document will walk you through the installation of these components based on your operating system:
 
 - [Ubuntu](#ubuntu)
@@ -71,7 +71,7 @@ docker-compose --version
 
 `docker-compose version 1.23.1 ...`
 
-### Step 4: Add your user to the `docker` group
+### Step 4: Add Your User to the `docker` Group
 This will allow your user to run docker commands, including the ones required to launch the entire ISLE stack.
 
 - If you are still `root` (`whoami`) type `exit` to become your normal user.
@@ -83,12 +83,12 @@ sudo usermod -aG docker $USER
 
 - Disconnect `exit` and reconnect for your effective groups to update.
 
-### Step 5: Clone ISLE repository
-**Please note:** The location you clone the repo to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
+### Step 5: Clone ISLE Repository
+**Please note:** The location you clone the repository to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
 
 Please run these steps as your user.
 
-- Clone the repo by running
+- Clone the repository by running
 ```bash
 git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 ```
@@ -168,12 +168,12 @@ sudo usermod -aG docker $USER
 
 - Disconnect `exit` and reconnect for your effective groups to update.
 
-### Step 5: Clone ISLE repository
-**Please note:** The location you clone the repo to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
+### Step 5: Clone ISLE Repository
+**Please note:** The location you clone the repository to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
 
 Please run these steps as your user.
 
-- Clone the repo by running
+- Clone the repository by running
 ```bash
 git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 ```
@@ -244,12 +244,12 @@ If git is already installed, then please proceed to the next section.
 
 * Please note: This process also installs the newest version of `docker-compose`.
 
-### Step 3: Clone ISLE repository
-**Please note:** The location you clone the repo to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
+### Step 3: Clone ISLE Repository
+**Please note:** The location you clone the repository to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
 
 Please run these steps as your user.
 
-- Clone the repo by running
+- Clone the repository by running
 ```bash
 git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 ```
@@ -309,12 +309,12 @@ If git is already installed, then please proceed to the next section.
 
 * Please note: This process also installs the newest version of `docker-compose`.
 
-### Step 3: Clone ISLE repository
-**Please note:** The location you clone the repo to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
+### Step 3: Clone ISLE Repository
+**Please note:** The location you clone the repository to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
 
 Please run these steps as your user.
 
-* Clone the repo by running
+* Clone the repository by running
 ```bash
 git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 ```
@@ -324,9 +324,9 @@ git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
     * Uncomment the following line (by deleted the preceding #):
 
     ```# COMPOSE_CONVERT_WINDOWS_PATHS=1```
-    
+
     * to:
-    
+
     ```COMPOSE_CONVERT_WINDOWS_PATHS=1```
 
 

@@ -7,14 +7,14 @@
 
 #### Assumptions / Prerequisites
 
-* `mkdocs` and `mkdocs-material` theme are installed following the [Installing Mkdocs](dev_documentation_mkdocs.md) documentation.
+* `mkdocs` and `mkdocs-material` theme are installed following the [Installing Mkdocs](maintainer_documentation_mkdocs.md) documentation.
 * The ISLE Documentation project directory has been cloned to the enduser's laptop / workstation in an appropriate Code or Project Directory.
    * `git clone https://github.com/Islandora-Collaboration-Group/ISLE-Documentation.git`
 * Familiarity or comfortability with git and cli commands.
 * Enduser has a web browser opened to this URL: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 * Enduser has a terminal open with `mkdocs serve` running.
 
-### Create a new git branch
+### Create a New Git Branch
 
 As there is a review process of any new changes to the ISLE code or documentation projects by the Maintainers, using git pull requests are ideal to avoid issues of missing materials, inappropriately edited files or incorrect overwrites of critical data.
 
@@ -26,12 +26,12 @@ You will now create a new git branch which will allow you to make changes withou
 
 * Proceed to edit or create new files as necessary using a text editor of your choice.
 
-### Adding new pages
+### Adding New Pages
 If you are adding new pages to the Documentation, in addition to creating the new page, you'll need to edit the `mkdocs.yml` (YAML) file at the root (base) of the ISLE-Documentation project directory in order for the page to show up in the documentation.
 
 The example used below is how to create a new documentation page that will be about building giant ISLE robots with the title of "Building Giant ISLE Robots" and be located in the Development section.
 
-* Create a new empty file in the `docs/05_developer_docs` directory e.g. `dev_building_giant_robots.md`
+* Create a new empty file in the `docs/05_maintainer_docs` directory e.g. `maintainer_building_giant_robots.md`
 
 * Open up the `mkdocs.yml` file in a text editor of your choice.
 
@@ -41,29 +41,29 @@ In order for `mkdocs` to understand that there is a new page and page title to d
 
 - 'Page Title': '/section/filename.md'
 
-* Within the `Developer Docs` section of the open `mkdocs.yml` file, add this new line in the appropriate order.
+* Within the `Maintainer Docs` section of the open `mkdocs.yml` file, add this new line in the appropriate order.
 
-`- 'Building Giant ISLE Robots': '05_developer_docs/dev_building_giant_robots.md'`
+`- 'Building Giant ISLE Robots': '05_maintainer_docs/maintainer_building_giant_robots.md'`
 
 ```
-- 'Developer Docs':
-  - 'Building Giant ISLE Robots': '05_developer_docs/dev_building_giant_robots.md'
-  - 'Contributing to Project': '05_developer_docs/dev_contributing_to_project.md'
-  - 'Documentation Overview': '05_developer_docs/dev_documentation_overview.md'
+- 'Maintainer Docs':
+  - 'Building Giant ISLE Robots': '05_maintainer_docs/maintainer_building_giant_robots.md'
+  - 'Contributing to Project': '05_maintainer_docs/maintainer_contributing_to_project.md'
+  - 'Documentation Overview': '05_maintainer_docs/maintainer_documentation_overview.md'
 ```
 
-* The enduser can now review the contents of this new page at http://127.0.0.1:8000/05_developer_docs/dev_building_giant_robots/
+* The enduser can now review the contents of this new page at http://127.0.0.1:8000/05_maintainer_docs/maintainer_building_giant_robots/
 
-* Edit the contents of `dev_building_giant_robots.md` and save the file each time. The associated webpage will refresh with the new changes.
+* Edit the contents of `maintainer_building_giant_robots.md` and save the file each time. The associated webpage will refresh with the new changes.
 
-### Commit changes to git
+### Commit Changes to Git
 
-Once finished with adding all new pages and editing files, it is time to add everything to git and then push to the remote ISLE githbu.com repo for review by ISLE Maintainers.
+Once finished with adding all new pages and editing files, it is time to add everything to git and then push to the remote ISLE github.com repository for review by ISLE Maintainers.
 
-#### Git status
+#### Git Status
 * Within the open terminal, enter `git status`
 
-The example git status output below displays that several files have been modified (edited or changed) and that there is a new file called `dev_building_giant_robots.md` has been created.
+The example git status output below displays that several files have been modified (edited or changed) and that there is a new file called `maintainer_building_giant_robots.md` has been created.
 
 ```
 git status
@@ -80,30 +80,30 @@ Changes not staged for commit:
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
 
-	docs/05_developer_docs/dev_building_giant_robots.md
+	docs/05_maintainer_docs/maintainer_building_giant_robots.md
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
-####  Git add files
+####  Git Add Files
 
 You now need to add these changed / new files to git.
 
 * `git add docs/06_specifications/specs_diagram_network.md`
 * `git add docs/glossary.md`
 * `git add mkdocs.yml`
-* `git add docs/05_developer_docs/dev_building_giant_robots.md`
+* `git add docs/05_maintainer_docs/maintainer_building_giant_robots.md`
 
-####  Git commit with message
+####  Git Commit with Message
 
 Now it is time to package up all these additions with a git commit command. Please ensure that you commit with a descriptive message of changes etc.
 
 * `git commit -m "Tweaked some specs in specs_diagram_network.md. Updated the Glossary with more terms. Made new Building Giant Robots page. I love big robots. Added new files and titles to mkdocs.yml "`
 
-###  Git push to ISLE Github repository
+###  Git Push to ISLE Github Repository
 
 * `git push origin githubusername-docs-fix2`
 
-### Create a pull request on ISLE Github.com repo
+### Create a Pull Request on ISLE Github.com Repository
 
 In order for the ISLE Maintainers to review suggested changes a "pull request" will need to be created. This process is a way for Maintainers to see a summary of the suggested changes to be made with any helpful comments and a catalog of potential differences between the original files and the new ones.
 
@@ -123,4 +123,4 @@ If you run into trouble, this Github.com support page may be of use: [https://he
 
 * Click the green `Create pull request` button at the bottom.
 
-This pull request should now appear in the [Pull Requests](https://github.com/Islandora-Collaboration-Group/ISLE-Documentation/pulls) section of the ISLE Repo, ready for review, commentary or inclusion by the ISLE Maintainers.
+This pull request should now appear in the [Pull Requests](https://github.com/Islandora-Collaboration-Group/ISLE-Documentation/pulls) section of the ISLE repository, ready for review, commentary or inclusion by the ISLE Maintainers.

@@ -40,7 +40,7 @@ Compare, edit, merge or copy the following from the source directory `current-pr
 
     * Line 312: `$base_url` should be commented out as it isn't used due to the proxy.
 
-### Apache - sites-enabled
+### Apache - Sites-Enabled
 
 Please note that endusers will take values from the `site.conf` file and flow the information as needed into the to be renamed `newsite-sample-ssl.conf` & `newsite-sample.conf` files accordingly with the domain name of your choice. This file will not be copied to yourdomain-config/apache/ for any usage.
 
@@ -92,7 +92,7 @@ Please note that endusers will take values from the `site.conf` file and flow th
 * **Please note:** an additional line will have to be added to the associated `docker-compose.yml` in the Apache `volumes:` section for this edit to work e.g. `- ./apache/tmpreaper/cron:/etc/cron.d/tmpreaper-cron`
 
 
-### Apache - ssl-certs
+### Apache - SSL-Certs
 
 If need be, please refer to the **SSL certificate** section of the [Glossary](../glossary.md) for relevant terms to help guide installation.
 
@@ -113,7 +113,7 @@ If need be, please refer to the **SSL certificate** section of the [Glossary](..
             * It will not be used by the `proxy` container.
             * Please also note that the file extensions can also be: `.cer`, `.crt` or `.pem`
 
-### Apache - ssl-certs (multi)
+### Apache - SSL-Certs (multi)
 
 * When creating multiple environments for ISLE, please change all of the file and key names accordingly to reflect the environment e.g. adding (`-prod, -stage, -dev` to file names). Later on, this process will assist in organizing proper filing of files for the `proxy` container and stop any situation where a file gets overwritten or improperly referenced by the wrong environment.
 
@@ -192,7 +192,7 @@ The `mysql` subdirectory contains all specific configurations and overrides nece
 * (_Optional_) Edit the Mysql configuration file `my.cnf` as needed otherwise leave alone.
 
 
-#### Mysql -initscripts
+#### Mysql - initscripts
 
 This subdirectory houses SQL scripts necessary for a one time creation of your associated new site and `fedora3` database.
 
@@ -257,13 +257,13 @@ Compare, edit, merge or copy the following from the source directory `current-pr
 
 ---
 
-## Proxy directory
+## Proxy Directory
 
 If need be, please refer to the **Systems** section of the [Glossary](../glossary.md) for relevant terms to help guide installation.
 
 This directory and service will not exist on any current islandora production systems. Please pick one of the following guides to complete this configuration.
 
-* If the migrated production site is to be the first or only site running on the ISLE host server, please follow the [New Site Installation Guide - w/ Single ISLE Environment](../03_installation_new_site/new_site_installation_guide_single.md), `### Proxy directory` section, lines 317 - 395.
+* If the migrated production site is to be the first or only site running on the ISLE host server, please follow the [New Site Installation Guide - w/ Single ISLE Environment](../03_installation_new_site/new_site_installation_guide_single.md), `### Proxy Directory` section, lines 317 - 395.
 
 * If the migrated production site is not the first or only site running on the ISLE host server, please follow the [New Site Installation Guide - w/ multiple ISLE Environments](../03_installation_new_site/new_site_installation_guide_multi.md)
     * Read the `Assumptions / Prerequisites` section, lines 16 -32

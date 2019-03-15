@@ -6,29 +6,29 @@ Called "the host" - this is the base computer upon which the entire ISLE stack i
 
 The following setup will be the same if you are setting up an ISLE host server:
 
-   * on your laptop / desktop using Vagrant or Virtualbox VM for the test site (isle.localdomain).
+   * on your laptop / workstation using Vagrant or Virtualbox VM for the test site (isle.localdomain).
 
    * or using a physical server or cloud hosted setup e.g. (AWS or GCP) to run an ISLE Host server for a new site or a migrated site.
 
 In all these cases you'll be establishing a Ubuntu server with the following dependencies below.
 
-### Install process overview
+### Install Process Overview
 
-* Install server prerequisites
+* Install Server Prerequisites
 * Install Docker
-* Create islandora user and group
-* Setup SSH access for islandora user on VM / server (Part 1)
-    * (optional) Create ssh keys on enduser's laptop / workstation
-* Setup SSH access for islandora user on VM / server (Part 2)
-    * (optional) Create ssh keys on enduser's laptop / workstation
-* Create Docker group
-* Add islandora user to wheel group
+* Create `islandora` User and Group
+* Setup SSH Access for Islandora User on VM / Server (part 1)
+    * (optional) Create SSH Keys on Enduser's Laptop / Workstation
+* Setup SSH Access for Islandora User on VM / Server (part 2)
+    * (optional) Create SSH Keys on Enduser's Laptop / Workstation
+* Create `docker` Group
+* Add `islandora` User to `wheel` Group
 * Install Docker-Compose
-    * (optional) Alternative install method for Docker-compose
-* Clone ISLE repository
-* Next steps
+    * (optional) Alternative Install Method for Docker-Compose
+* Clone ISLE Repository
+* Next Steps
 
-#### Step 1: Install server prerequisites
+#### Step 1: Install Server Prerequisites
 
 * Open a terminal on your local laptop or workstation and ssh to the CentOS server / VM:
 
@@ -46,10 +46,10 @@ In all these cases you'll be establishing a Ubuntu server with the following dep
      * `apt-get upgrade`
 
      * `apt-get install -y openssl git htop ntp wget curl nano apt-transport-https ca-certificates software-properties-common docker.io docker-compose`
-  
 
 
-#### Step 2: Create islandora user and group
+
+#### Step 2: Create `islandora` User and Group
 
 * `groupadd -g 10000 islandora`
 
@@ -64,7 +64,7 @@ In all these cases you'll be establishing a Ubuntu server with the following dep
 
     * `echo "islandora ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/islandora`
 
-#### Step 3a: Setup SSH access for islandora user on VM / server (Part 1)
+#### Step 3a: Setup SSH Access for Islandora User on VM / Server (part 1)
 
 Create a ssh key for the islandora user _(this will also enable us to push code out to a repository later)_
 
@@ -121,11 +121,11 @@ ssh-keygen -t RSA -b 4096 -C "ISLE Islandora" -f /home/islandora/.ssh/
 
    * Check if your laptop / workstation has existing ssh keys. If you do not know, use the `Create ssh keys on enduser's laptop / workstation (optional)` section below before advancing to `Part 2`.
 
-   * If you already have existing SSH keys, move onto the `Setup SSH access for islandora user on VM / server (Part 2)` section.
+   * If you already have existing SSH keys, move onto the `Setup SSH Access for Islandora User on VM / Server (part 2)` section.
 
 ---
 
-##### (optional) Create ssh keys on enduser's laptop / workstation
+##### (optional) Create SSH Keys on Enduser's Laptop / Workstation
 
 Some endusers may or may not have created local SSH keys on their laptop or workstation prior to the next step. Please use the instructions below if this is the case.
 
@@ -137,7 +137,7 @@ Some endusers may or may not have created local SSH keys on their laptop or work
 
 ---
 
-#### Step 3b: Setup SSH access for islandora user on VM / server (Part 2)
+#### Step 3b: Setup SSH Access for Islandora User on VM / Server (part 2)
 
 * If you would like to login to the host machine using key-pairs, continued from _(Part 1)_. Copy in the existing ssh key from the enduser's laptop /workstation. This is entirely dependent on the local computer being used to connect to the Islandora server. In some cases, cloud hosting based servers e.g. Google Cloud Platform may have different requirements. This will allow key based ssh access for the enduser.
     * Enduser's laptop /workstation running **MacOS example**:
@@ -173,7 +173,7 @@ Some endusers may or may not have created local SSH keys on their laptop or work
 
 ---
 
-##### (optional) Note for Vagrant and local VM users only
+##### (optional) Note for Vagrant and Local VM Users only
 
 **For local VM and Vagrant users only, not steps to follow in a production environment**
 
@@ -193,7 +193,7 @@ This process will switch one to islandora with out having to use a password.
 
 ---
 
-#### Step 4: Create Docker group
+#### Step 4: Create `docker` Group
 
 * Open a terminal and ssh back into the CentOS Host Server/VM as the `islandora` user and **become root again.**
 
@@ -209,7 +209,7 @@ Add the islandora user to the new docker group
 
 
 
-#### Step 5: Clone ISLE repository
+#### Step 5: Clone ISLE Repository
 * **Please note:** In some Linux Distributions, one might need to create the `/opt` directory _(optional)_   
 
     * One can `ls -lha /` to see if an `/opt` directory exists  
@@ -229,7 +229,7 @@ Add the islandora user to the new docker group
 * `cd /opt/ISLE`
 
 
-### Next steps
+### Next Steps
 
 * To install a Test or Demo site, follow [these instructions](../02_installation_test/ild_installation_guide.md)
 * To install a new ISLE site, follow [these instructions for a single production environment](../03_installation_new_site/new_site_installation_guide_single.md) or [these instructions for a multi site (dev,staging,prod)](../03_installation_new_site/new_site_installation_guide_multi.md)

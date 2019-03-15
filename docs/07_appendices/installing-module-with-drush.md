@@ -20,7 +20,7 @@ There may be many kinds of modules that can be installed and configured using Dr
 
 These two kinds of modules generally employ different techniques for installation and maintenance.  One example of each is presented in the sections that follow.
 
-## Example: Devel - A Drupal Contributed Module
+## Example: `Devel` - A Drupal Contributed Module
 _Devel_ is a Drupal contributed module maintained and distributed by Drupal.org.  Its stated purpose, taken directly from the module's README file is: "...contains helper functions and pages for Drupal developers and inquisitive admins...".
 
 The installation instructions for _Devel_ simply tell us to "install as usual", that is generally true of most Drupal.org contributed modules, and the process is extremely simple using Drush.  From a terminal in the container shell:

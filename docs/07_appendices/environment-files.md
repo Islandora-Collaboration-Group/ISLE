@@ -1,18 +1,18 @@
-# The ISLE environment files and settings
+# The ISLE Environment Files and Settings
 The .env and tomcat.env files located in the folder with the docker-comopse.yml are key to configuring the ISLE stack to suit your needs.
 
 Here are the variables and their job:
 
-### Master Section:
+### Master Section
     * COMPOSE_PROJECT_NAME to something unique (e.g. `COMPOSE_PROJECT_NAME=isle-production-collections`)
       * This variable is appended to Docker objects like: volume names, network names.
     * BASE_DOMAIN to your domainname (e.g. `BASE_DOMAIN=digital-collections.example.edu`)
       * This variable specifies your domain name!
     * CONTAINER_SHORT_ID to something unique (e.g. `CONTAINER_SHORT_ID=prod`).
       * This variable is appended to the end of all running containers, keep it _short_!
-    
 
-### Database Section:
+
+### Database Section
 | .env Variable                   | Purpose                               | ISLE Services updated  | What it does                                                                                                                            |
 |-------------------------------  |-------------------------------------  |------------------------------------ |---------------------------------------------------------------------------------------------------------------------------------------  |
 | MYSQL_ROOT_PASSWORD             | Set the `root` password for MySQL     | MySQL, Fedora, Apache               | Allows Fedora and Apache to update their relevant databases as well as to configure themselves to work together.                        |
@@ -21,7 +21,7 @@ Here are the variables and their job:
 | FEDORA_DB_USER DRUPAL_DB_USER   | Sets the MySQL user                   | MySQL, Apache, Fedora               | Specifies names of Database users.                                                                                                      |
 | FEDORA_DB_PASS DRUPAL_DB_PASS   | Sets MySQL user passwords             | MySQl, Apache, Fedora               | Specifies passwords of Database users.                                                                                                  |
 
-### Islandora (DRUPAL) Section:
+### Islandora (Drupal) Section
 | .env Variable       | Purpose                                     | ISLE Services updated  | What it does                                                                                                                                                                                    |
 |-------------------- |-------------------------------------------  |------------------------------------ |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | DRUPAL_SITE_NAME    | Sets the Drupal Site Name variable          | Drupal                              | Sets the name of your Islandora Website; e.g.:  "<Your Group's Name> Digital Collections"                                                                                                       |
@@ -30,7 +30,7 @@ Here are the variables and their job:
 | DRUPAL_ADMIN_EMAIL  | Set the email of Drupal admin               | Drupal                              | Specifies the email address of the 'admin user' for your Islandora site.                                                                                                                        |
 | DRUPAL_HASH_SALT    | Secures your installation by hashing data   | Drupal                              | Secures your install of Drupal (Islandora) by hashing (obscuring) key data. Use [password generator tool](https://passwordsgenerator.net/) to create a HASH_SALT, remember alphanumeric characters ONLY (no special characters).  |
 
-### Fedora Repository Section:
+### Fedora Repository Section
 | .env Variable         | Purpose                           | ISLE Services updated           | What it does                                                                                                                                                |
 |---------------------  |---------------------------------- |-------------------------------  |------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | FEDORA_ADMIN_USER     | Set the name of Fedora admin      | Fedora                          | Sets the master administrator username to login to the Fedora repository. You login with this user.                                                         |
@@ -40,14 +40,14 @@ Here are the variables and their job:
 | FEDORA_INTCALL_USER   | Sets the internal call user       | Fedora                          | The internal call username                                                                                                                                  |
 | FEDORA_INTCALL_PASS   | Sets the internal call password   | Fedora                          | The internal call password                                                                                                                                  |
 
-### Image Services Section:
+### Image Services Section
 | .env Variable                       | ISLE Services updated   | What it does                                                                                                                          |
 |-----------------------------------  |-----------------------  |-------------------------------------------------------------------------------------------------------------------------------------- |
 | CANTALOUPE_ADMIN_INTERFACE_ENABLE   | ImageServices           | Enables or Disables the Cantaloupe IIIF /admin control panel. Locatied at http://hostip:8083/cantaloupe/admin when true, else false.  |
 | CANTALOUPE_ADMIN_USER               | ImageServices           | Set the admin username to login to the admin panel.                                                                                   |
 | CANTALOUPE_ADMIN_PASS               | ImageServices           | Set the admin password to login to the admin panel.                                                                                   |
 
-### Tomcat.env applies to all Tomcat instances
+### Tomcat.env Applies to All Tomcat Instances
 | Tomcat.env Variable   | ISLE Services updated         | What it does                                            |
 |---------------------  |-----------------------------  |-------------------------------------------------------  |
 | TOMCAT_ADMIN_USER     | Fedora, Solr, ImageServices   | Set the admin username to login to the admin panel.     |

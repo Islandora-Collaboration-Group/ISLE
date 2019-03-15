@@ -8,7 +8,7 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 **Please note:** There is a [Glossary](../glossary.md) with relevant terms to help guide installation.
 
-## Index of related documents
+## Index of Related Documents
 * [New Site Example User Story](new_site_example_user_story.md)
 
 
@@ -38,7 +38,7 @@ While this checklist will attempt to point out most of the usage challenges or p
   * As a result your .env files contain passwords and usernames and must be treated with the utmost care. **Never** share or post your .env files publicly.
 
 
-## Docker Environment Files:
+## Docker Environment Files
 
 There are .env files that exist in your cloned copy of the repository. This section describes what these files do, and their importance to your stack! Chiefly these files are tasked with automatically configuring and setting all ISLE systems to work together in the stack. ISLE removes the need of editing the more complex config files that are part of the Islandora stack manually. Just .env it!
 
@@ -48,16 +48,16 @@ You should edit these files with unique users/passwords, your domain name, site-
 
 **REMEMBER: never share or post your complete .env publicly... EVER! Use caution, and when in doubt ask a maintainer for help (i.e., discuss or share the file privately with an ISLE Maintainer)**
 
-### Master Section:
+### Master Section
     * COMPOSE_PROJECT_NAME to something unique (e.g. `COMPOSE_PROJECT_NAME=isle-production-collections`)
       * This variable is appended to Docker objects like: volume names, network names.
     * BASE_DOMAIN to your domainname (e.g. `BASE_DOMAIN=digital-collections.example.edu`)
       * This variable specifies your domain name!
     * CONTAINER_SHORT_ID to something unique (e.g. `CONTAINER_SHORT_ID=prod`).
       * This variable is appended to the end of all running containers, keep it _short_!
-    
 
-### Database Section:
+
+### Database Section
 | .env Variable                   | Purpose                               | ISLE Services updated  | What it does                                                                                                                            |
 |-------------------------------  |-------------------------------------  |------------------------------------ |---------------------------------------------------------------------------------------------------------------------------------------  |
 | MYSQL_ROOT_PASSWORD             | Set the `root` password for MySQL     | MySQL, Fedora, Apache               | Allows Fedora and Apache to update their relevant databases as well as to configure themselves to work together.                        |
@@ -66,7 +66,7 @@ You should edit these files with unique users/passwords, your domain name, site-
 | FEDORA_DB_USER DRUPAL_DB_USER   | Sets the MySQL user                   | MySQL, Apache, Fedora               | Specifies names of Database users.                                                                                                      |
 | FEDORA_DB_PASS DRUPAL_DB_PASS   | Sets MySQL user passwords             | MySQl, Apache, Fedora               | Specifies passwords of Database users.                                                                                                  |
 
-### Islandora (DRUPAL) Section:
+### Islandora (Drupal) Section
 | .env Variable       | Purpose                                     | ISLE Services updated  | What it does                                                                                                                                                                                    |
 |-------------------- |-------------------------------------------  |------------------------------------ |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | DRUPAL_SITE_NAME    | Sets the Drupal Site Name variable          | Drupal                              | Sets the name of your Islandora Website; e.g.:  "<Your Group's Name> Digital Collections"                                                                                                       |
@@ -75,7 +75,7 @@ You should edit these files with unique users/passwords, your domain name, site-
 | DRUPAL_ADMIN_EMAIL  | Set the email of Drupal admin               | Drupal                              | Specifies the email address of the 'admin user' for your Islandora site.                                                                                                                        |
 | DRUPAL_HASH_SALT    | Secures your installation by hashing data   | Drupal                              | Secures your install of Drupal (Islandora) by hashing (obscuring) key data. Use [password generator tool](https://passwordsgenerator.net/) to create a HASH_SALT, remember alphanumeric characters ONLY (no special characters).  |
 
-### Fedora Repository Section:
+### Fedora Repository Section
 | .env Variable         | Purpose                           | ISLE Services updated           | What it does                                                                                                                                                |
 |---------------------  |---------------------------------- |-------------------------------  |------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | FEDORA_ADMIN_USER     | Set the name of Fedora admin      | Fedora                          | Sets the master administrator username to login to the Fedora repository. You login with this user.                                                         |
@@ -85,14 +85,14 @@ You should edit these files with unique users/passwords, your domain name, site-
 | FEDORA_INTCALL_USER   | Sets the internal call user       | Fedora                          | The internal call username                                                                                                                                  |
 | FEDORA_INTCALL_PASS   | Sets the internal call password   | Fedora                          | The internal call password                                                                                                                                  |
 
-### Image Services Section:
+### Image Services Section
 | .env Variable                       | ISLE Services updated   | What it does                                                                                                                          |
 |-----------------------------------  |-----------------------  |-------------------------------------------------------------------------------------------------------------------------------------- |
 | CANTALOUPE_ADMIN_INTERFACE_ENABLE   | ImageServices           | Enables or Disables the Cantaloupe IIIF /admin control panel. Locatied at http://hostip:8083/cantaloupe/admin when true, else false.  |
 | CANTALOUPE_ADMIN_USER               | ImageServices           | Set the admin username to login to the admin panel.                                                                                   |
 | CANTALOUPE_ADMIN_PASS               | ImageServices           | Set the admin password to login to the admin panel.                                                                                   |
 
-### Tomcat.env applies to all Tomcat instances
+### Tomcat.env Applies to All Tomcat Instances
 | Tomcat.env Variable   | ISLE Services updated         | What it does                                            |
 |---------------------  |-----------------------------  |-------------------------------------------------------  |
 | TOMCAT_ADMIN_USER     | Fedora, Solr, ImageServices   | Set the admin username to login to the admin panel.     |
@@ -108,7 +108,7 @@ The config directory has many purposes like holding customized configuration fil
 
 -------
 
-### Proxy directory
+### Proxy Directory
 
 If need be, please refer to the **Systems** section of the [Glossary](../glossary.md) for relevant terms to help guide installation.
 
@@ -140,7 +140,7 @@ There are also additional links for the enduser to learn how to combine the SSL 
 
 ---
 
-## Spin up ISLE containers!
+## Spin up ISLE Containers!
 
 * Run `docker-compose up -d`
 

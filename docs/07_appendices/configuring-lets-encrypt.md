@@ -16,7 +16,7 @@ _Note:_ These commands are run on a shell (terminal).
 
 _Note:_ You do **not** need to stop your stack to complete these steps.
 
-1. Change to the directory with your docker-compose.yml
+1. Change to the directory with your `docker-compose.yml`
 2. Change to the `config/proxy` directory
    `cd config/proxy`
 3. Create a blank file called `acme.json`
@@ -24,13 +24,13 @@ _Note:_ You do **not** need to stop your stack to complete these steps.
 4. Modify the permissions of `acme.json` to be user read-write ONLY.
    `chmod 600 acme.json`
 5. Using your favorite text editor open `traefik.toml` (_note:_ this file is in your `config/proxy` folder)
-6. Locate the following lines 
+6. Locate the following lines
 
         [[entryPoints.https.tls.certificates]]  
         certFile = "/certs/isle.localdomain.cert"  
         keyFile = "/certs/isle.localdomain.key"  
 
-7. Comment the three lines out by adding a # to the beginning of the line:
+7. Comment the three lines out by adding a `#` to the beginning of the line:
 
         # [[entryPoints.https.tls.certificates]]  
         # certFile = "/certs/isle.localdomain.cert"  
@@ -49,9 +49,9 @@ _Note:_ You do **not** need to stop your stack to complete these steps.
 
 8. Save and close the file.
 
-9. Change back to the directory with your docker-compose.yml in terminal.
+9. Change back to the directory with your `docker-compose.yml` in terminal.
 
-10. Using your favorite text editor open docker-compose.yml.
+10. Using your favorite text editor open `docker-compose.yml`.
 
 11. Locate the section for `traefik` and under the `volumes` area for `traefik` add:
 

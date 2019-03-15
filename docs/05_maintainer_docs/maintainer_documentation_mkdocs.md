@@ -5,7 +5,7 @@
    * `git clone https://github.com/Islandora-Collaboration-Group/ISLE-Documentation.git`
 * Familiarity or comfortability with git and cli commands.
 
-### Step 1. Install mkdocs
+### Step 1. Install `mkdocs`
 
 * Please follow the instructions found here: [http://www.mkdocs.org/#installation](http://www.mkdocs.org/#installation)
 
@@ -15,7 +15,7 @@
 
 ---
 
-### Step 2. Install the mkdocs-material theme
+### Step 2. Install the `mkdocs-material` Theme
 
 The ISLE Documentation Theme can be found here: [https://github.com/squidfunk/mkdocs-material](https://github.com/squidfunk/mkdocs-material)
 
@@ -25,7 +25,7 @@ The ISLE Documentation Theme can be found here: [https://github.com/squidfunk/mk
 
 ---
 
-### Step 3. Run the mkdocs software
+### Step 3. Run the `mkdocs` Software
 
 * Open a terminal and `cd to pathto/ISLE-Documentation project directory`
 * `mkdocs serve`
