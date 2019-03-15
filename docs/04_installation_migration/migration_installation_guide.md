@@ -27,7 +27,7 @@ This Migration guide will help you migrate your existing production Islandora en
 
 * You have access to the current Islandora production server(s)
 
-* You have usernames and passwords for key parts of your current Islandora production environment which will be used **for** the migration. The next steps will walk you through finding this information. 
+* You have usernames and passwords for key parts of your current Islandora production environment which will be used **for** the migration. The next steps will walk you through finding this information.
 
     0. Login to your current Islandora production server. If your current production environment is located across multiple servers, you may need to check more than one server to find this information.
     1. To find your Drupal MySQL username, password, and database run the following command:
@@ -38,7 +38,7 @@ This Migration guide will help you migrate your existing production Islandora en
          1. Username: copy the value from `user=`
          2. Password: copy the value from `password=`
          3. Database: copy the value from `dbname=`
-    
+
     2. To find your Fedora MySQL username, password, and database run the following command:
       * `grep --include=fedora.fcfg -rnw -e 'name="dbUsername"' -e 'name="dbPassword"' -e 'name="jdbcURL"' / 2>/dev/null`
       * This command _will_ print multiple lines. The first three lines are important but please save the rest (just in case).
@@ -46,7 +46,7 @@ This Migration guide will help you migrate your existing production Islandora en
           ```param name="dbUsername" value="**fedoraDB**"  
           param name="jdbcURL" value="jdbc:mysql://localhost/**fedora3**?useUnicode=true&amp;amp;characterEncoding=UTF-8&amp;amp;autoReconnect=true"  
           param name="dbPassword" value="**zMgBM6hGwjCeEuPD**"
-         ``` 
+         ```
          1. Username: Copy the value from `dbUsername value=`
          * Password: Copy the value from `dbPassword value=`
          * Database: Copy from the value `jdbcURL value=` the database name which is directly between the "/" and the only "?"
@@ -56,9 +56,9 @@ This Migration guide will help you migrate your existing production Islandora en
    0. Login to your current Islandora production server. If your current production environment is located across multiple servers, you may need to check more than one server to located these data folders.
 
    1. Finding your Fedora data folder (common locations include `/usr/local/fedora/data` or `/usr/local/tomcat/fedora/data`):
-   
+
         Run a find command: `find / -type d -ipath '*fedora/data' -ls  2>/dev/null`
-             
+
    2. Finding your Drupal data folder (common location is under `/var/www/` likely in a sub-folder; e.g., html, islandora, etc.)
 
         Run a grep command: `grep --include=index.php -rl -e 'Drupal' / 2>/dev/null`
@@ -73,14 +73,14 @@ This Migration guide will help you migrate your existing production Islandora en
 
 * You have a SQL dump (export) of the current production site's Drupal database. Ensure that the contents of any `cache` table are not exported.
     1. Login to your current Islandora production server and navigate to your Drupal data folder.
-  
+
         Run the following command to generate a SQL dump of your Drupal database: `mysqldump -u {DRUPAL_USERNAME} -p {DRUPAL_DATABASE_NAME} | gzip > drupal.sql.gz`
 
-    
+
 **Finally also please note:** Instructions from this guide  and it's associated checklists call for you to **COPY** data from your current production Islandora environment to your ISLE Host Server or local computer. You work from these copies to build your ISLE environment. In some cases, you'll need to copy configurations down to your local computer (`Local ISLE config laptop`) and merge contents as directed. In other cases, due to the size of the data e.g. Fedora data you will copy directly to the ISLE Host server (`Remote ISLE Host server`). You will note where you have stored copies of files/data in a docker-compose.yml file. You will store your configured files in a git repository and use that to deploy to the ISLE host server.
 
 ## Detailed Steps
-    
+
 * Setup a Private Code Repository
       * Most of the work in this guide involves careful editing of the various configuration and settings files that customize the pieces of Islandora (database, repository, web-server, etc...).
       * Doing this work in a code repository makes it easier to correct errors and to repeat the process for additional servers without needing to replicate all the work.
@@ -93,7 +93,7 @@ This Migration guide will help you migrate your existing production Islandora en
 
 ### Create Private Code Repository
 
-**ON your local laptop/workstation:**
+**ON your local laptop / workstation:**
 
 * On the repository of your choice (GitHub, GitLab, Bitbucket, etc.) create a PRIVATE remote git repo - see the specific code repository documentation online for setup instructions.
 
@@ -163,7 +163,7 @@ The **goal** is to merge all site-specific data (domain names, variables, userna
    * Compare and merge the Solr files: `stopwords`
    * Compare and merge the Fedora GSearch Islandora Transform (XSLTs) folder of files: `islandora_transforms`
 
-### Docker env file:
+### Docker .env File:
 
 * Edit the .env file and change the values of COMPOSE_PROJECT_NAME, BASE_DOMAIN, and CONTAINER_SHORT_ID. e.g. for a production site you may use:
 
@@ -178,7 +178,7 @@ The **goal** is to merge all site-specific data (domain names, variables, userna
 ---
 
 
-## Final steps
+## Final Steps
 
 * Now that all the changes are made (be sure to save), ISLE should be ready to test. First you'll need to push these changes to your private code repository.
 
@@ -227,9 +227,9 @@ The **goal** is to merge all site-specific data (domain names, variables, userna
 
 * `cd` into the newly cloned directory - this is a good time to check that the ISLE directory contains your `yourdomain-config` directory and that it reflects all the edits and customizations.
 
-## Spin up ISLE containers!
+## Spin Up ISLE Containers!
 
-### Review or pull down ISLE Docker images
+### Review or Pull Down ISLE Docker Images
 
 _Please Note: You may have already done this in setting up the host server manually and / or with Ansible. However it is always a good idea to review and check using the first command below._
 
@@ -242,13 +242,13 @@ _Please Note: You may have already done this in setting up the host server manua
     * `docker-compose pull`
 
 ---
-### Spin up the proxy container
+### Spin Up the Proxy Container
 
 * `cd /opt/ISLE/yourdomain-config`
 * `docker-compose up -d proxy`
 
 
-### Spin up the mysql container and import production database(s)
+### Spin up the MySQL Container and Import Production Database(s)
 
 * `cd /opt/ISLE/yourdomain-config`
 * `docker-compose up -d mysql`
@@ -275,7 +275,7 @@ The following are STEPS, not literal commands to prepare your db for ISLE (_doin
 
 ---
 
-### Spin up the fedora container and start the reindex processes
+### Spin up the Fedora Container and Start the Reindex Processes
 
 Staying within `/opt/ISLE/yourdomain-config`
 * `docker-compose up -d fedora`
@@ -290,7 +290,7 @@ Staying within `/opt/ISLE/yourdomain-config`
 
 ---
 
-### Spin up apache container
+### Spin up Apache Container
 
 * Staying within `/opt/ISLE/yourdomain-config`
 
@@ -317,7 +317,7 @@ Instructions for converting the Drupal mysql database are available on the [Drup
 
 ---
 
-### Spin up solr container and complete the reindex processes
+### Spin Up Solr Container and Complete the Reindex Processes
 
 * Staying within `/opt/ISLE/yourdomain-config`
 * `docker-compose up -d solr`
@@ -332,4 +332,3 @@ Instructions for converting the Drupal mysql database are available on the [Drup
 * Check the results on the site using Islandora simple search or the appropriate search method.
 
 Congratulations you should have successfully migrated your production Islandora site to ISLE!!
-
