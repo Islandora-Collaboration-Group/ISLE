@@ -1,18 +1,18 @@
-This section is a checklist of materials to **COPY** from the current running institutional Islandora Production server(s) to the appropriate storage location / directory on the new ISLE directory.
+This section is a checklist of materials to **COPY** from the current running Islandora Production server(s) to the appropriate storage location / directory in order to build your ISLE instance.
 
 **Please Note:** _Ubuntu / Debian style paths are used for all examples file locations below, endusers might have different locations for these files HOWEVER the file and directory names etc should be roughly the same._
 
 **Caution**: While the ISLE Project recommends use of export methods or tools such as rsync, scp etc., it assumes that endusers are familiar with them and are aware of possible dangers of improperly exporting or copying production data. Ensure adequate backups of any production system(s) are made prior to any attempts. If you are not familiar or are uncomfortable with these processes, it is highly advisable to work with an appropriate IT resource.
 
-**Finally also please note:** Instructions from this checklist and the [Migration Installation Guide](migration_installation_guide.md) may call for you to **COPY** data from your running Islandora environment to a newly created folder: `current_prod_islandora_config` located on your ISLE Host Server or local workstation called `local ISLE config laptop`. You will then work from this copy for future steps.
+**Finally also please note:** Instructions from this checklist and the [Migration Installation Guide](migration_installation_guide.md) may call for you to **COPY** data from your running Islandora environment to a newly created folder: `yourdomain-data` on your ISLE Host Server or `current_prod_islandora_config` on your local machine. You will then work from these copies for future steps.
 
-In some cases, you'll need to copy configurations down to your laptop / workstation (`local ISLE config laptop`) and merge contents as directed. (_if necessary_) In other cases, due to the size of the data e.g. Fedora data you may only be able to copy production data to the target ISLE Host server (`Remote ISLE Host server`) instead of your local laptop.
+In some cases, you'll need to copy configurations down to your machine and merge contents as directed. (_if necessary_) In other cases, due to the size of the data e.g. Fedora data you will copy production data to the ISLE Host server (`ISLE Host server`) instead of your local machine.
 
-* Contents of the production Islandora Apache `html` directory should be copied to a new directory called `yourdomain-data/apache/html/` on your remote ISLE host server in the appropriate storage area.
+* Contents of the production Islandora Apache `html` directory should be copied to a new directory called `yourdomain-data/apache/html/` on your ISLE host server in the appropriate storage area.
 
-* Contents of the  production Islandora Fedora `data` directory should be copied to a new directory called `yourdomain-data/fedora/data/` on your remote ISLE host server in the appropriate storage area.
+* Contents of the  production Islandora Fedora `data` directory should be copied to a new directory called `yourdomain-data/fedora/data/` on your ISLE host server in the appropriate storage area.
 
-Please attempt to balance as necessary when putting together the `docker-compose.yml` and config directory. Most instructions will attempt to direct you to copy to a local workstation. ultimately you will be putting this config in a git repository to deploy to the remote ISLE host server for everything to work with both your copied data and merged production settings.
+Once you've copied everything, you will add pointers to where all files and folders are stored in the `docker-compose.yml` file and you will be putting this custom config in a git repository to deploy to the ISLE host server. This should be all you need to do for everything to work with both your copied data and merged production settings.
 
 **Recommend:** Having adequate storage space available for the ISLE host server to accommodate a working copy of a production Islandora's associated configurations and data.
 
@@ -20,20 +20,20 @@ Please attempt to balance as necessary when putting together the `docker-compose
 
 ### Apache
 
-* Copy the following below from the Islandora Production Server(s) to the suggested directories `/current_prod_islandora_config/apache/` or `/data/apache/` on the ISLE directories located on both the local ISLE config laptop and remote ISLE Host server as designated.
+* Copy the following below from the Islandora Production Server(s) to the suggested directories `/current_prod_islandora_config/apache/` or `/yourdomain-data/apache/` on either your local machine or ISLE Host server.
 
-    * `/current_prod_islandora_config/apache/` should be a directory used for configurations to be merged or edited on an enduser's laptop (`local ISLE config laptop`)
+    * `/current_prod_islandora_config/apache/` should be a directory used for configuration files to be merged or edited on your machine
 
-    * `/data/apache/`should be a directory used for apache website code and data  to be copied to a storage area on the target ISLE Host server (`Remote ISLE Host server`)  due to size.
+    * `/data/apache/`should be a directory used for apache website code and data copied directly from your production Islandora server to the target ISLE Host server due to size.
 
 This data and these configurations will be used in conjunction with an Apache container.
 
-| Data          | Description                 | Possible Location             | Suggested ISLE Path Destination        | Copy location |
+| Data          | Description                 | Possible Location in current Islandora instance            | Suggested ISLE Path Destination        | Copy location |
 | ------------- | -------------               | -------------                 | -------------                          | ------------- |
-| html          | Islandora/Drupal Website    | /var/www/                     | yourdomain-data/apache/html/           | Remote ISLE Host server  |
-| settings.php  | Drupal settings.php file    | /var/www/html/sites/default/  | /current_prod_islandora_config/apache/ | Local ISLE config laptop |
-| php.ini       | PHP configuration file      | /etc/                         | /current_prod_islandora_config/apache/ | Local ISLE config laptop |
-| yoursite.conf | Apache webserver vhost file | /etc/apache2/sites-enabled/   | /current_prod_islandora_config/apache/ | Local ISLE config laptop |
+| html          | Islandora/Drupal Website    | /var/www/                     | yourdomain-data/apache/html/           |  ISLE Host server  |
+| settings.php  | Drupal settings.php file    | /var/www/html/sites/default/  | /current_prod_islandora_config/apache/ | local machine |
+| php.ini       | PHP configuration file      | /etc/                         | /current_prod_islandora_config/apache/ | local machine |
+| yoursite.conf | Apache webserver vhost file | /etc/apache2/sites-enabled/   | /current_prod_islandora_config/apache/ | local machine |
 
 
 #### Apache Notes
@@ -60,19 +60,18 @@ This data and these configurations will be used in conjunction with an Apache co
 
 ### Fedora
 
-Copy the following below from the Islandora Production Server(s) to the suggested directory `current_prod_islandora_config/fedora/` on the ISLE directories located on both the local ISLE config laptop and remote ISLE Host server as designated.
-
+Copy the following below from the Islandora Production Server(s) to the suggested directories `current_prod_islandora_config/fedora/` or `/yourdomain-data/fedora` on either your local machine or ISLE Host server.
 
 This data will be used in conjunction with a Fedora container.  
 
-| File / Directory      | Description                   | Possible Location                | Suggested ISLE Path Destination                   | Copy location            |
+| File / Directory      | Description                   | Possible Location in current Islandora instance               | Suggested ISLE Path Destination                   | Copy location            |
 | -------------         | -------------                 | -------------                    | -------------                                     | -------------            |
-| datastreamStore       | Entire Fedora data directory  | /usr/local/fedora/data/          | yourdomain-data/fedora/data/datastreamStore       | Remote ISLE Host server  |
-| fedora-xacml-policies | Entire Fedora data directory  | /usr/local/fedora/data/          | yourdomain-data/fedora/data/fedora-xacml-policies | Remote ISLE Host server  |
-| objectStore           | Entire Fedora data directory  | /usr/local/fedora/data/          | yourdomain-data/fedora/data/objectStore           | Remote ISLE Host server  |
-| fedora.fcfg       | Fedora repository config file | /usr/local/fedora/server/config/ | /current_prod_islandora_config/fedora/ | Local ISLE config laptop |
-| fedora-users.xml  | Fedora users config file      | /usr/local/fedora/server/config/ | /current_prod_islandora_config/fedora/ | Local ISLE config laptop |
-| filter-drupal.xml | Fedora Drupal filter file     | /usr/local/fedora/server/config/ | /current_prod_islandora_config/fedora/ | Local ISLE config laptop |
+| datastreamStore       | Entire Fedora data directory  | /usr/local/fedora/data/          | yourdomain-data/fedora/data/datastreamStore       | ISLE Host server  |
+| fedora-xacml-policies | Entire Fedora data directory  | /usr/local/fedora/data/          | yourdomain-data/fedora/data/fedora-xacml-policies | ISLE Host server  |
+| objectStore           | Entire Fedora data directory  | /usr/local/fedora/data/          | yourdomain-data/fedora/data/objectStore           | ISLE Host server  |
+| fedora.fcfg       | Fedora repository config file | /usr/local/fedora/server/config/ | /current_prod_islandora_config/fedora/ | local machine |
+| fedora-users.xml  | Fedora users config file      | /usr/local/fedora/server/config/ | /current_prod_islandora_config/fedora/ | local machine |
+| filter-drupal.xml | Fedora Drupal filter file     | /usr/local/fedora/server/config/ | /current_prod_islandora_config/fedora/ | local machine |
 
 #### Fedora Notes
 
@@ -83,31 +82,31 @@ This data will be used in conjunction with a Fedora container.
 
 ### Gsearch
 
-Copy the following below from the Islandora Production Server(s) to the suggested directory `current_prod_islandora_config/gsearch/` on the ISLE directory located on the local ISLE config laptop.
+Copy the following files from the Islandora Production Server(s) to the suggested directory `current_prod_islandora_config/gsearch/` on your local machine.
 
 This data will be used in conjunction with a Fedora container.
 
 | File / Directory | Description   | Possible Location   | Suggested ISLE Path Destination         | Copy location |
 | -------------    | ------------- | -------------       | -------------                           | ------------- |
-| fedoragsearch.properties | Gsearch config file | /var/lib/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/ | /current_prod_islandora_config/gsearch/ | Local ISLE config laptop |
-| fgsconfig-basic-configForIslandora.properties | Gsearch config file | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/ | /current_prod_islandora_config/gsearch/ | Local ISLE config laptop |
-| fgsconfigObjects.properties | Gsearch config file | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/ | /current_prod_islandora_config/gsearch/ | Local ISLE config laptop |
-| repository.properties | Gsearch config file | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/repository/FgsRepos/ | /current_prod_islandora_config/gsearch/ | Local ISLE config laptop |
-| islandora_transforms | Transformation XSLTs directory | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/ | /current_prod_islandora_config/gsearch/ | Local ISLE config laptop |
-| foxmlToSolr.xslt | "top-level" transformational XSLT | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/ | /current_prod_islandora_config/gsearch/ | Local ISLE config laptop |
+| fedoragsearch.properties | Gsearch config file | /var/lib/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/ | /current_prod_islandora_config/gsearch/ | local machine|
+| fgsconfig-basic-configForIslandora.properties | Gsearch config file | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/ | /current_prod_islandora_config/gsearch/ | local machine |
+| fgsconfigObjects.properties | Gsearch config file | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/ | /current_prod_islandora_config/gsearch/ | local machine |
+| repository.properties | Gsearch config file | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/repository/FgsRepos/ | /current_prod_islandora_config/gsearch/ | local machine |
+| islandora_transforms | Transformation XSLTs directory | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/ | /current_prod_islandora_config/gsearch/ | local machine |
+| foxmlToSolr.xslt | "top-level" transformational XSLT | /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/ | /current_prod_islandora_config/gsearch/ | local machine |
 
 ---
 
 ### MySQL
 
-Copy the following below from the Islandora Production Server(s) to the suggested directory `current_prod_islandora_config/mysql/` on the ISLE directory located on the local ISLE config laptop.
+Copy the following below from the Islandora Production Server(s) to the suggested directory `current_prod_islandora_config/mysql/` on your local machine.
 
 This data will be used in conjunction with a MySQL container.
 
 | Data          | Description              | Possible Location  | Suggested COPY Method                   | Suggested ISLE Path Destination       | Copy location            |
 | ------------- | -------------            | -------------      | -------------                           | -------------                         | -------------            |
-| Databases     | Drupal website databases |  /var/lib/mysql    | CLI, MySQL Workbench or Sequel Pro etc. | /current_prod_islandora_config/mysql/ | Local ISLE config laptop |
-| my.cnf        | MySQL server config file |  /etc/mysql/my.cnf | rsync / scp                             | /current_prod_islandora_config/mysql/ | Local ISLE config laptop |
+| Databases     | Drupal website databases |  /var/lib/mysql    | CLI, MySQL Workbench or Sequel Pro etc. | /current_prod_islandora_config/mysql/ | local machine |
+| my.cnf        | MySQL server config file |  /etc/mysql/my.cnf | rsync / scp                             | /current_prod_islandora_config/mysql/ | local machine |
 
 #### MySQL Notes
 
@@ -139,24 +138,24 @@ Here are a few pieces of documentation specific for the tasks above.
 
 ##Tomcat
 
-Copy the following below from the Islandora Production Server(s) to the suggested directory to the ISLE directory `current_prod_islandora_config/tomcat` located on the local ISLE config laptop.
+Copy the following below from the Islandora Production Server(s) to the suggested directory `current_prod_islandora_config/tomcat` located on the local machine.
 
 This data will be used in conjunction with the Tomcat service found on a Fedora or SOLR container.
 
 | Data             | Description               | Possible Location                      | Suggested ISLE Path Destination    | Copy location |
 | -------------    | -------------             | -------------                          | -------------                      | ------------- |
-| tomcat-users.xml | Tomcat server config file | /var/lib/tomcat7/conf/tomcat-users.xml | /current_prod_islandora_config/tomcat/ | Local ISLE config laptop |
+| tomcat-users.xml | Tomcat server config file | /var/lib/tomcat7/conf/tomcat-users.xml | /current_prod_islandora_config/tomcat/ | local machine |
 
 ---
 
 ##Solr
 
-Copy the following below from the Islandora Production Server(s) to the suggested directory to the ISLE directory `current_prod_islandora_config/solr` located on the local ISLE config laptop.
+Copy the following below from the Islandora Production Server(s) to the suggested directory `current_prod_islandora_config/solr` located on the local machine.
 
 This data will be used in conjunction with a SOLR container.
 
 | Data           | Description                              | Possible Location                                             | Suggested ISLE Path Destination     | Copy location |
 | -------------  | -------------                            | -------------                                                 | -------------                       | ------------- |
-| schema.xml     | Solr schema file                         | /var/lib/tomcat7/webapps/solr/collection1/conf/schema.xml     | /current_prod_islandora_config/solr | Local ISLE config laptop |
-| solrconfig.xml | Solr config file                         | /var/lib/tomcat7/webapps/solr/collection1/conf/solrconfig.xml | /current_prod_islandora_config/solr | Local ISLE config laptop |
-| stopwords.txt  | Solr file for filtering out common words | /var/lib/tomcat7/webapps/solr/collection1/conf/stopwords.txt  | /current_prod_islandora_config/solr | Local ISLE config laptop |
+| schema.xml     | Solr schema file                         | /var/lib/tomcat7/webapps/solr/collection1/conf/schema.xml     | /current_prod_islandora_config/solr | local machine |
+| solrconfig.xml | Solr config file                         | /var/lib/tomcat7/webapps/solr/collection1/conf/solrconfig.xml | /current_prod_islandora_config/solr | local machine |
+| stopwords.txt  | Solr file for filtering out common words | /var/lib/tomcat7/webapps/solr/collection1/conf/stopwords.txt  | /current_prod_islandora_config/solr | local machine |
