@@ -122,7 +122,7 @@ This Migration guide will help you migrate your existing production Islandora en
 
 This area will be where all current Islandora production data is to be stored. This includes the Apache `/var/www/html` directory and the appropriate Fedora `/usr/local/fedora/data` subdirectories outlined below.
 
-**ON your remote ISLE Host server:**
+**ON your ISLE Host server:**
 
 * Create a directory named `yourdomain-data` (where "yourdomain" is your server domain name)
 
@@ -140,7 +140,7 @@ This area will be where all current Islandora production data is to be stored. T
 
 * In the `/opt/ISLE/yourdoman-config` directory create a new sub-directory (you can call this `current_prod_islandora_config`)
 
-* You will copy some files from your current Islandora Production server(s) into this directory following the [Migration Export Checklist](migration_export_checklist.md) and you will copy some files and folders directly to your new ISLE host server (in case the data involved is too large for your local workstation) as directed in the checklist.
+* You will copy some files from your current Islandora Production server(s) into this directory following the [Migration Export Checklist](migration_export_checklist.md) and you will copy some files and folders directly to your ISLE host server (in case the data involved is too large for your local workstation) as directed in the checklist.
 
     * **Noting** most likely the Apache data (`/var/www/html`) & Fedora data (`/usr/local/fedora/data`) will be moved directly to your ISLE host server storage area and your new ISLE config files will be built on your local machine in the `current_prod_islandora_config` folder you just created.
 
