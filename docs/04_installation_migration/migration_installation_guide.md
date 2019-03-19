@@ -1,6 +1,6 @@
 _Expectations:  It may take at least a minimum of **8 hours or more** to read this entire document and perform the installation as prescribed. This is not a quick process and depending on access to resources may take several days. Proceed slowly and cautiously._
 
-This Migration guide will help you migrate your existing production Islandora environment to utilize an ISLE environment for easily maintaining Islandora. This guide will walk you through how to identify and copy your institution's Islandora data and files (including your data volume, Drupal site or sites, and commonly customized xml and xslt files) to your ISLE framework.
+This Migration guide will help you migrate your existing production Islandora environment to an ISLE environment for easily maintaining Islandora. This guide will walk you through how to identify and copy your institution's Islandora data and files (including your data volume, Drupal site or sites, and commonly customized xml and xslt files) to your ISLE framework.
 
 **Please note:** There is a [Glossary](../glossary.md) with relevant terms to help guide installation.
 
@@ -51,7 +51,7 @@ This Migration guide will help you migrate your existing production Islandora en
          * Password: Copy the value from `dbPassword value=`
          * Database: Copy from the value `jdbcURL value=` the database name which is directly between the "/" and the only "?"
 
-* You know where your Fedora, Drupal (Islandora), and Solor data folders are located.
+* You know where your Fedora, Drupal (Islandora), and Solr data folders are located.
 
    0. Login to your current Islandora production server. If your current production environment is located across multiple servers, you may need to check more than one server to located these data folders.
 
@@ -103,7 +103,7 @@ This Migration guide will help you migrate your existing production Islandora en
 
      * Example:  `digital-collections.yourdomain.com-config`
 
-* Within the ISLE directory, locate the directory called `config/isle-newsite-sample` and copy all the contents to the newly created directory
+* Copy all the contents of the ISLE directory to the newly created directory
 
 * `cd` into the newly copied and renamed `yourdomain-config` directory and type:
 
@@ -138,11 +138,11 @@ This area will be where all current Islandora production data is to be stored. T
 
 ### Migration Export Checklist
 
-* In the `/opt/ISLE/config` directory create a new sub-directory (you can call this `current_prod_islandora_config`)
+* In the `/opt/ISLE/yourdoman-config` directory create a new sub-directory (you can call this `current_prod_islandora_config`)
 
-* Copy the files from your current running institutional Islandora Production server(s) into this directory following the [Migration Export Checklist](migration_export_checklist.md) of materials on either the local workstation or remote server (in case the data involved is too large for your local workstation) as directed.
+* You will copy some files from your current Islandora Production server(s) into this directory following the [Migration Export Checklist](migration_export_checklist.md) and you will copy some files and folders directly to your new ISLE host server (in case the data involved is too large for your local workstation) as directed in the checklist.
 
-    * **Noting** that most likely the Apache data (`/var/www/html`) & Fedora data (`/usr/local/fedora/data`) will stay on your designated remote ISLE host server storage area not your local laptop used for creating the ISLE config.
+    * **Noting** most likely the Apache data (`/var/www/html`) & Fedora data (`/usr/local/fedora/data`) will be moved directly to your ISLE host server storage area and your new ISLE config files will be built on your local machine in the `current_prod_islandora_config` folder you just created.
 
 * These copied files will be the source for edits and merges - just to be very clear, please **don't work directly on these files in your currently running production Islandora system!**
 
