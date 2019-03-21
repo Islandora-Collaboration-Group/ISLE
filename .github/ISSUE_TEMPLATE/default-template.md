@@ -13,9 +13,11 @@ Describe the Issue you are experiencing here.  If it's not an issue but a new fe
 
 #### For an issue, describe steps to reproduce the issue
 
-1.  
-2. 
-3. 
+System setup (OS information, software versions, etc):
+
+1.
+2.
+3.
 
 
 ##### What's the expected result?
@@ -28,4 +30,11 @@ Describe the Issue you are experiencing here.  If it's not an issue but a new fe
 -
 
 
-#### Additional details / screenshots / software version information
+#### Additional details / screenshots
+
+If you would like to add a screenshot, please use one of the following formats and/or methods described here:
+
+https://help.github.com/en/articles/file-attachments-on-issues-and-pull-requests
+Or you can drag and drop your file to this comment directly
+Or you can edit the comment directly with markdown - ![Screenshot]()
+
