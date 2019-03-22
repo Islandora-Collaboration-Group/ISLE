@@ -1,13 +1,13 @@
-# Server / Host Requirements
+# Hardware Requirements
 
 Your ISLE **host server** can be a virtual machine (VM) on your desktop or on the cloud, it can also be a physical server. An SSH connection with a user that has root or admin privileges is necessary. If an IT department is doing this initial setup, see [this page](../07_appendices/sample-it-department-request.md) for sample language to use in requesting the server.
 
-## Know Working Operating Systems / Distributions
-- Windows 10 (only suggested for testing)
-- MacOS
-- Ubuntu 16.04 LTS
+## Known Working Operating Systems / Distributions
 - Ubuntu 18.04 LTS
+- Ubuntu 16.04 LTS
 - CentOS 7.x
+- MacOS
+- Windows 10 (for Demo only)
 - RHEL*
 _*Currently RHEL does not support Docker Community Edition (CE), EE can be used._
 

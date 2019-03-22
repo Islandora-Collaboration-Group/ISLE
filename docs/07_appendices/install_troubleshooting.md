@@ -1,3 +1,5 @@
+<!-- Troubleshooting -->
+
 This is a basic guide / area that includes some general troubleshooting tips, techniques, thoughts towards helping ISLE users. This section is to grow over time.
 
 ## Docker Service and Firewalls

@@ -17,35 +17,29 @@ extra:
 
 nav:
 - Home: index.md
-- 'Installation and Migration Instructions':
+- 'Installation and Migration':
   - '1. Configure the Host Server':
-    # - 'CentOS 7.x': '01_installation_host_server/install_on_centos.md'
-    # - 'Ubuntu 18.04': '01_installation_host_server/install_on_ubuntu_1804.md'
-    # - 'Docker for Mac High Sierra': '01_installation_host_server/install_docker_for_mac.md'
-    # - 'Docker for Windows 10': '01_installation_host_server/install_docker_for_windows.md'
-    # - 'Vagrant & VirtualBox on MacOS (Deprecated)': '01_installation_host_server/install_macos_vagrant.md'
-    - 'Hardware Requirements': '01_installation_host_server/server-requirements.md'
+    - 'Hardware Requirements': '01_installation_host_server/hardware-requirements.md'
     - 'Software Dependencies': '01_installation_host_server/software-dependencies.md'
-    - 'Troubleshooting': '01_installation_host_server/install_troubleshooting.md'
-  - '2. Deploy ISLE':
-    - 'Deploy a Test Site':
-      - 'Test Site Example User Story': '02_installation_test/ild_example_user_story.md'
-      - 'Test Site Deploy Guide': '02_installation_test/ild_installation_guide.md'
-      - 'Test Site Resources': '02_installation_test/ild_resources.md'
-    - 'Deploy a New ISLE Site':
-      - 'New Site Example User Story': '03_installation_new_site/new_site_example_user_story.md'
-      - 'New Site Deploy Guide - w/ Single ISLE Environment': '03_installation_new_site/new_site_installation_guide_single.md'
-      - 'New Site Deploy Guide - w/ multiple ISLE Environments': '03_installation_new_site/new_site_installation_guide_multi.md'
-    - 'Migrate and Deploy an Existing Islandora site to ISLE':
-      - 'Migration Example User Story': '04_installation_migration/migration_example_user_story.md'
+  - '2. Install ISLE':
+    - 'Install a Demo ISLE Site':
+      - 'Demo ISLE Site Installation': '02_installation_demo_site/demo_installation.md'
+      - 'Demo ISLE Site Resources': '02_installation_demo_site/demo_resources.md'
+    - 'Install a New ISLE Site Site':
+      - 'New Site Installation: Single ISLE Environment': '03_installation_new_site/new_site_installation_single.md'
+      - 'New Site Installation: Multiple ISLE Environments': '03_installation_new_site/new_site_installation_multiple.md'
+    - 'Migrate an Existing Islandora Site to ISLE':
       - 'Migration Guide': '04_installation_migration/migration_installation_guide.md'
       - 'Migration Export Checklist': '04_installation_migration/migration_export_checklist.md'
       - 'Migration Merge Checklist': '04_installation_migration/migration_merge_checklist.md'
       - 'Migration Reindex Process': '04_installation_migration/migration_reindex_process.md'
 - 'Get Help': 'get_help.md'
+- 'User Stories':
+  - 'Demo ISLE Site Example User Story': '10_user_stories/demo_site_example_user_story.md'
+  - 'New Site Example User Story': '10_user_stories/new_site_example_user_story.md'
+  - 'Migration Example User Story': '10_user_stories/migration_example_user_story.md'
 - 'Maintainer Docs':
   - 'Release Process': '05_maintainer_docs/maintainer_release_process.md'
-  - 'Example User Story': '05_maintainer_docs/maintainer_example_user_story.md'
   - 'Testing Guide': '05_maintainer_docs/maintainer_testing_guide.md'
 - 'Appendices':
   - 'Updating ISLE': '07_appendices/update_isle.md'
@@ -55,13 +49,13 @@ nav:
   - 'Installing a Drupal Module with Drush': '07_appendices/installing-module-with-drush.md'
   - 'Opening a Terminal in a Running Container': '07_appendices/open-terminal-in-running-container.md'
   - 'Using Let''s Encrypt with ISLE' : '07_appendices/configuring-lets-encrypt.md'
-  - 'Note/Warning about Installing on Redhat': '07_appendices/redhat.md'
+  - 'Warning about Installing on Redhat': '07_appendices/redhat.md'
   - 'Installing on Google Cloud Platform (Google Doc)': 'https://docs.google.com/document/d/1r-I9n8mUhlJ5Z-X9AO-RrikhzH6I8bTPIL25LmtRbxE'
   - 'ISLE Cheat Sheet: Docker Commands': '07_appendices/isle-cheatsheet-docker-commands.md'
+  - 'Troubleshooting': '07_appendices/install_troubleshooting.md'
 - 'About':
   - 'About ISLE': '08_about/about.md'
   - 'Contributing to ISLE': '08_about/contributing_to_ISLE.md'
   - 'About Maintainers': '08_about/about_maintainers.md'
-#  - 'Policies': '08_about/policies.md'
 - 'Release Notes': '09_release_notes/release_notes.md'
-- 'Glossary of Terms and Variables': glossary.md
+- 'Glossary': 'glossary.md'

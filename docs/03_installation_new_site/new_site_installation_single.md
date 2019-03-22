@@ -6,22 +6,16 @@ A new ISLE / Islandora environment can include the option to create an un-themed
 
 While this checklist will attempt to point out most of the usage challenges or pitfalls, ISLE assumes no responsibility or liability in this matter should an enduser have customizations beyond what this guide outlines.
 
-**Please note:** There is a [Glossary](../glossary.md) with relevant terms to help guide installation.
-
-## Index of Related Documents
-* [New Site Example User Story](new_site_example_user_story.md)
-
 
 ---
 
-
 ## Assumptions / Prerequisites
 
-* Comfortability with ISLE. Recommend first setting up the [ISLE Test Site](../02_installation_test/ild_installation_guide.md) (`isle.localdomain`). If you have already done this, please proceed.
+* Comfortability with ISLE. Recommend first setting up the [ISLE Test Site](../02_installation_demo_site/demo_installation.md) (`isle.localdomain`). If you have already done this, please proceed.
 
-* Host Server that conforms to the specifications outlined in the [Server Requirements](../01_installation_host_server/server-requirements.md#testingplayground)
+* Host Server that conforms to the specifications outlined in the [Hardware Requirements](../01_installation_host_server/hardware-requirements.md)
 
-* This new site guide is designed for a single ISLE Host server that has already followed the appropriate setup and configuration instructions in the [New ISLE section](../index.md#new-isle) of the guide.
+* This new site guide is designed for a single ISLE Host server that has already followed the appropriate setup and configuration instructions in the [New ISLE Site section](../index.md#new-isle) of the guide.
 
 * Instructions below also assume a MacOS or Linux laptop or workstation to be used in conjunction with the ISLE Host Server for deploying configs, code, files etc. Windows users may have to adjust / swap out various tools as needed.
 

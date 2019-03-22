@@ -1,9 +1,10 @@
-###Test/Demo ISLE - Installation Guide
+<!-- Demo ISLE Site Installation -->
+
 _Expectations:  It takes an average of **15-45 minutes** to read this entire document and perform the installation as prescribed._
 
 Follow this guide to spin up and install ISLE utilizing the built-in `isle.localdomain` domain name for review and testing.
 
-This Test/Demo ISLE guide creates an Islandora environment (`isle.localdomain`) that includes an un-themed Drupal website and empty Fedora repository for endusers to develop code, test ingests, test metadata, update fields in SOLR indexing and otherwise "kick the tires" on ISLE prior for further usages e.g. creating a new ISLE production site or migrating a current Islandora production site to ISLE.
+This Demo ISLE Site guide creates an Islandora environment (`isle.localdomain`) that includes an un-themed Drupal website and empty Fedora repository for endusers to develop code, test ingests, test metadata, update fields in SOLR indexing and otherwise "kick the tires" on ISLE prior for further usages e.g. creating a new ISLE production site or migrating a current Islandora production site to ISLE.
 
 This checklist will attempt to point out most of the usage challenges or pitfalls.  For additional help, please post a message to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle).
 
@@ -11,7 +12,7 @@ This checklist will attempt to point out most of the usage challenges or pitfall
 
 ### Assumptions / Prerequisites
 
-* This test site guide is designed for a local laptop / workstation that has already followed the appropriate setup and configuration instructions in the `Test/Demo ISLE` section of the [guide](../index.md#test-demo-isle).
+* This guide is designed for a local laptop / workstation that has already followed the appropriate setup and configuration instructions in the `Demo ISLE Site` section of the [guide](../index.md#test-demo-isle).
 
 * Instructions below assume a MacOS or Linux laptop or workstation. Windows users may have to adjust / swap out various tools as needed.
 
@@ -20,23 +21,23 @@ This checklist will attempt to point out most of the usage challenges or pitfall
 ### Process overview
 
 * Edit `/etc/hosts` File to View ISLE Locally on Laptop / Workstation Browser
-* Test Site Launch Process
+* Launch Process
 * Run Install Script on Apache Container
 * Test the Site
 * Ingest Sample Objects
 * Troubleshooting
 
-### Step 0: Edit `/etc/hosts` File to View ISLE Locally on Laptop / Workstation Browser
+### Step 1: Edit `/etc/hosts` File to View ISLE Locally on Laptop / Workstation Browser
 
-Enable the Test/Demo ISLE site to be viewed locally as: `https://isle.localdomain`
+Enable the Demo ISLE Site to be viewed locally as: `https://isle.localdomain`
 
 * Please use these instructions for [Editing the "/etc/hosts" File](../07_appendices/editing-the-hosts-file.md).
 
-* After completing the above, please continue below with _Step 1: Test Site Launch Process_.
+* After completing the above, please continue below with _Step 2: Launch Process_.
 
 ---
 
-### Step 1: Test Site Launch Process
+### Step 2: Launch Process
 
 * In terminal (shell) or PowerShell navigate to your ISLE project directory. You may already be in this directory if you are coming from the [Software Requirements Guide](../01_installation_host_server/software-dependencies.md).
 
@@ -45,7 +46,7 @@ The following steps below are for all users (_Vagrant, VM, non Vagrant and Docke
 The install times stated below for each container are highly dependent on the enduser's available Internet bandwidth and could take more or less time accordingly.
 
 * Within the open terminal, run:
-```bash
+```
 docker-compose up -d
 ```
 
@@ -60,12 +61,12 @@ docker-compose up -d
 
 -----
 
-### Step 2: Run Install Script on Apache Container
+### Step 3: Run Install Script on Apache Container
 
 **Total build process** may take up to 15 - 45 minutes (_depending on system and internet speeds_)
 
 * Run the following install site script on the apache container by copying and pasting this command:
-```bash
+```
 docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh
 ```
 
@@ -92,13 +93,13 @@ _For Windows Users only_
     * Username: `isle`
     * Password: `isle`
 
-* There is additional information for users and passwords that can be found on the [Test Site Resources](ild_resources.md) page.
+* There is additional information for users and passwords that can be found on the [Demo ISLE Site Resources](demo_resources.md) page.
 
 ### Step 5: Ingest Sample Objects
 
 Courtesy of the [Islandora Collaboration Group](https://github.com/Islandora-Collaboration-Group/icg_information) there is a sample set of objects and corresponding metadata that can be used for ingest.
 
-More information can be found on the [Test Site Resources](ild_resources.md) page.
+More information can be found on the [Demo ISLE Site Resources](demo_resources.md) page.
 
 ### Post Ingest Search Tip
 After ingesting content, you will need to add an Islandora Simple Search block to the Drupal structure.  The default search box that appears on install will only search Drupal content, not Islandora content.

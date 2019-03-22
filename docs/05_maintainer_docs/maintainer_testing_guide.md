@@ -1,10 +1,10 @@
 The ISLE project is currently testing the ISLE 1.1 Release Candidate.  We are actively soliciting volunteers to test the following scenarios:
 
-* Installing a New ISLE site on Ubuntu 18.04
-* Installing a New ISLE site on Centos 7.x
+* Installing a New ISLE Site on Ubuntu 18.04
+* Installing a New ISLE Site on Centos 7.x
 * Updating an exisiting ISLE site to the latest 1.1 Release Candidate
-* Installing a Test/Demo version of ISLE on Windows 10 using Docker
-* Installing a Test/Demo version of ISLE on Mac OSX High Sierra using Docker
+* Installing a Demo version of ISLE on Windows 10 using Docker
+* Installing a Demo version of ISLE on Mac OSX High Sierra using Docker
 
 After testing the above scenarios, the project will announce a second round of testing for migrations:
 
