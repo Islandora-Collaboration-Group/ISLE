@@ -1,6 +1,15 @@
-Below are instructions on how to edit the `/etc/hosts` file to view ISLE locally on a laptop or workstation browser.
+Edit the `/etc/hosts` file to view ISLE locally on a laptop or workstation browser.
 
-#### Mac or Ubuntu Using Docker
+Please select your operating system and software:
+
+- [Mac or Ubuntu Using Docker](#mac-or-ubuntu-using-docker)
+- [Mac or Ubuntu Desktop Using Virtualbox VM (non-Vagrant)](#mac-or-ubuntu-desktop-using-virtualbox-vm-non-vagrant)
+- [Windows Using Docker](#windows-using-docker)
+- [Windows Using Virtualbox VM (non-Vagrant)](#windows-using-virtualbox-vm-non-vagrant)
+
+---
+
+## Mac or Ubuntu Using Docker
 
 * **Docker For Mac** If you are using Docker For Mac, then use the IP address of `127.0.0.1` to resolve to `localhost` and to the `isle.localdomain localhost isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain` domain names
 
@@ -21,7 +30,7 @@ Below are instructions on how to edit the `/etc/hosts` file to view ISLE locally
 
 ---
 
-#### Mac or Ubuntu Desktop Using Virtualbox VM (non-Vagrant)
+## Mac or Ubuntu Desktop Using Virtualbox VM (non-Vagrant)
 
 * From the instructions in setting up the Virtualbox VM on your OS (MacOS, Ubuntu or Windows), the IP used to setup the Host-Only network was `10.10.10.130`
 
@@ -52,40 +61,50 @@ Below are instructions on how to edit the `/etc/hosts` file to view ISLE locally
 
 ---
 
-#### Windows Using Docker
+## Windows Using Docker
 
 * For endusers running Windows 10:
 
     * Press the Windows key.
 
-    * Type `Notepad` in the search field.
+    * Type `Notepad`.
 
-    * In the search results, right-click `Notepad` and select `Run as administrator`.
+    * In the search results, RIGHT-CLICK `Notepad`, select `Run as administrator`, and enter `Yes` to prompt.
 
-    * From `Notepad`, open the following file: `C:\Windows\System32\Drivers\etc\hosts`
+    * Select `File -> Open`.
 
-    * Add the values next to the `127.0.0.1 localhost` entry in the `/etc/hosts` file.
+    * In the `File name:` input box, paste this path `C:\Windows\System32\Drivers\etc\hosts`.
 
-        * `127.0.0.1 localhost isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain` with a space in between the entries.
+    * Click `Open`.
 
-    * Click File > Save to save your changes.
+    * Find the `127.0.0.1 localhost` entry and uncomment it (by deleting the preceding `#` character).
+
+    * Go to end of same line, add one space, and then paste the following:
+
+        `127.0.0.1 localhost isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain`
+
+    * Click `File > Save`, and then `File -> Exit`.
 
 ---
 
-#### Windows Using Virtualbox VM (non-Vagrant)
+## Windows Using Virtualbox VM (non-Vagrant)
 
 * For endusers running Windows 10:
 
     * Press the Windows key.
 
-    * Type `Notepad` in the search field.
+    * Type `Notepad`.
 
-    * In the search results, right-click `Notepad` and select `Run as administrator`.
+    * In the search results, RIGHT-CLICK `Notepad`, select `Run as administrator`, and enter `Yes` to prompt.
 
-    * From `Notepad`, open the following file: `C:\Windows\System32\Drivers\etc\hosts`
+    * Select `File -> Open`.
 
-    * Add the values below the `127.0.0.1` entry in the `/etc/hosts` file.
+    * In the `File name:` input box, paste this path `C:\Windows\System32\Drivers\etc\hosts`.
+
+    * Click `Open`.
+
+    * Find the `127.0.0.1` entry, then paste the following values below that line:
 
         * `10.10.10.130 isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain`  
 
-    * Click File > Save to save your changes.
+    * Click `File > Save`, and then `File -> Exit`.

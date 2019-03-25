@@ -260,7 +260,7 @@ isle-host-server | SUCCESS => {
 ```
 
 
-**Please Note:** _If SUCCESS doesn't appear as a value or if the wording of the prompt is in RED with "host doesn't exist ...", review all steps above and check the settings. Do not advance until the **Example** output above matches._  
+**Please Note:** _If SUCCESS does not appear as a value or if the wording of the prompt is in RED with "host does not exist ...", review all steps above and check the settings. Do not advance until the **Example** output above matches._  
 
 
 ### Ansible Commands for Deploy
@@ -441,7 +441,7 @@ host_local_macos_isle_localdomain | SUCCESS => {
    "ping": "pong"
  }
 ```
-**Please Note:** _If SUCCESS doesn't appear as a value or if the wording of the prompt is in RED with "host doesn't exist ...", review all steps above and check the settings. Do not advance until the **Example** output above matches._  
+**Please Note:** _If SUCCESS does not appear as a value or if the wording of the prompt is in RED with "host does not exist ...", review all steps above and check the settings. Do not advance until the **Example** output above matches._  
 
 
 * To deploy to the ISLE Host Server, run this command.

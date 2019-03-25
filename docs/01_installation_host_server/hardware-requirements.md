@@ -1,17 +1,17 @@
-# Server / Host Requirements
+# Hardware Requirements
 
-Your ISLE **host server** can be a virtual machine (VM) on your desktop or on the cloud, it can also be a physical server. An SSH connection with a user that has root or admin privileges is necessary. If an IT department is doing this initial setup, see [this page](../07_appendices/sample-it-department-request.md) for sample language to use in requesting the server.
+The ISLE **host server** can be a laptop or workstation, physical server, virtual machine (VM) or cloud service. An SSH connection with a user that has root or admin privileges is necessary. If an IT department is providing the server environment, please see the [Sample IT Department Request Letter](../07_appendices/sample-it-department-request.md) for sample language to use in requesting the server.
 
-## Know Working Operating Systems / Distributions
-- Windows 10 (only suggested for testing)
-- MacOS
-- Ubuntu 16.04 LTS
+## Known Working Operating Systems / Distributions
 - Ubuntu 18.04 LTS
+- Ubuntu 16.04 LTS
 - CentOS 7.x
-- RHEL*
-**Currently RHEL does not support Docker Community Edition (CE), EE can be used. Please [see this](../07_appendices/redhat.md) for more details.*
+- MacOS
+- Windows 10 (for Demo ISLE Site only)
+- Red Hat Enterprise Linux (RHEL) -
+*Please read this [Warning about Installing on Redhat](../07_appendices/redhat.md). Currently RHEL does not support Docker Community Edition (CE), although Docker Enterprise Edition (Docker EE) can be used.*
 
-## Production
+## Production Server
 
 Below are the recommended minimum specifications for a production server. The server can be a local physical server, a VM, or on a hosted platform such as Amazon's AWS or Google's GCP.  
 
@@ -46,7 +46,7 @@ image-services:
     - JAVA_MIN_MEM=128M
 ```
 
-## Staging
+## Staging Server
 
 Below are the recommended minimum specifications for a staging server. The server can be a local physical server, a VM, or on a hosted platform such as Amazon's AWS or Google's GCP.  
 
@@ -56,7 +56,7 @@ Below are the recommended minimum specifications for a staging server. The serve
 * Sufficient HD or attached storage to hold your collection
 * 30 - 50GB for the Server OS & overhead
 
-## Development
+## Development Server
 
 Below are the recommended minimum specifications for a development server. The server can be a local physical server, a VM, or on a hosted platform such as Amazon's AWS or Google's GCP.  
 
@@ -66,7 +66,7 @@ Below are the recommended minimum specifications for a development server. The s
 * Sufficient HD or attached storage to hold your collection
 * 30 - 50GB for the Server OS & overhead
 
-## Testing/Playground
+## Demo ISLE Site
 
 Below are the recommended specifications for a laptop or desktop running a TEST version of ISLE:
 

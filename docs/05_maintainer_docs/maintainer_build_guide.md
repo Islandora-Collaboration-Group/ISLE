@@ -16,9 +16,9 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 ### Assumptions / Prerequisites
 
-* Laptop / workstation that conforms to the specifications outlined in the [Host Server Specifications](../01_installation_host_server/host_server_system_specifications.md)
+* Laptop / workstation that conforms to the specifications outlined in the [Hardware Requirements](../01_installation_host_server/hardware-requirements.md)
 
-* This image build site guide is designed for a local laptop / workstation that has already followed the appropriate setup and configuration instructions in the [Test/Demo ISLE](../02_installation_test/ild_installation_guide.md) guide.
+* This image build site guide is designed for a local laptop / workstation that has already followed the appropriate setup and configuration instructions in the [Demo ISLE Site](../02_installation_demo_site/demo_installation.md) guide.
 
 * Instructions below assume a MacOS or Linux laptop or workstation. Windows users may have to adjust / swap out various tools as needed.
 
@@ -189,7 +189,7 @@ Pull down the newly pushed images.
 
 * `docker-compose pull`
 
-Follow the instructions within the `docker-compose.yml` file or within the [Test Site Installation Guide](../02_installation_test/ild_installation_guide.md) to start up containers and install the ISLE Test Site (`isle.localdomain`).
+Follow the instructions within the `docker-compose.yml` file or within the [Test Site Installation Guide](../02_installation_demo_site/demo_installation.md) to start up containers and install the ISLE Test Site (`isle.localdomain`).
 
 Ensure that all components, connections etc are working, otherwise troubleshoot as required, making the appropriate fixes to the associated Dockerfiles, pushing changes to the ISLE project git repository and then REPEATING this entire build and push process.
 

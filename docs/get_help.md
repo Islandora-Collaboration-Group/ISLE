@@ -1,3 +1,3 @@
 # Getting Help with ISLE
 
-The best place to get help installing or configuring ISLE is the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle) (public).
+Please use the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle) to ask questions about ISLE.

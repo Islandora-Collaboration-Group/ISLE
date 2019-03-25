@@ -6,12 +6,12 @@ This Migration guide will help you migrate your existing production Islandora en
 
 ## Assumptions
 
-* You are comfortable with ISLE. We recommend first setting up the [ISLE Test Site](../02_installation_test/ild_installation_guide.md) (`isle.localdomain`).
+* You are comfortable with ISLE. We recommend first setting up the [ISLE Test Site](../02_installation_demo_site/demo_installation.md) (`isle.localdomain`).
 
 * You understand that all directions in this guide depend on the type of local computer used to connect via browser to Islandora. The instructions below assume a MacOS or Linux laptop or workstation to be used in conjunction with the ISLE Host Server for deploying configs, code, files etc. Windows users may have to adjust / swap out various tools as needed.
 
 ## Prerequisites
-* A host server that conforms to the specifications outlined in - and has followed the appropriate setup and configuration instructions in - the [New ISLE section](../01_installation_host_server) of the guide.
+* A host server that conforms to the specifications outlined in - and has followed the appropriate setup and configuration instructions in - the [New ISLE Site section](../01_installation_host_server) of the guide.
 
 * You have disk space on - or mounted to - the host server large enough to store a **copy** of your fedora data store
 

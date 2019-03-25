@@ -263,9 +263,9 @@ If need be, please refer to the **Systems** section of the [Glossary](../glossar
 
 This directory and service will not exist on any current islandora production systems. Please pick one of the following guides to complete this configuration.
 
-* If the migrated production site is to be the first or only site running on the ISLE host server, please follow the [New Site Installation Guide - w/ Single ISLE Environment](../03_installation_new_site/new_site_installation_guide_single.md), `### Proxy Directory` section, lines 317 - 395.
+* If the migrated production site is to be the first or only site running on the ISLE host server, please follow the [New Site Installation Guide - w/ Single ISLE Environment](../03_installation_new_site/new_site_installation_single.md), `### Proxy Directory` section, lines 317 - 395.
 
-* If the migrated production site is not the first or only site running on the ISLE host server, please follow the [New Site Installation Guide - w/ multiple ISLE Environments](../03_installation_new_site/new_site_installation_guide_multi.md)
+* If the migrated production site is not the first or only site running on the ISLE host server, please follow the [New Site Installation Guide - w/ multiple ISLE Environments](../03_installation_new_site/new_site_installation_multiple.md)
     * Read the `Assumptions / Prerequisites` section, lines 16 -32
     * Read the `Multiple ISLE / Islandora Environments` section, lines 36 -88
     * All of the sections starting with `Proxy directory` paying particular attention to anything labelled with `(multi)`, lines 384 - 623
