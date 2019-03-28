@@ -1,0 +1,25 @@
+version: '3'
+
+#### docker-compose up -d;
+## Updated 2018-09-07 - Release 1.1 (@ 1.1)
+
+services:
+
+  isle-portainer: ## Renamed to avoid conflicts on systems/servers with portainer already running.
+    labels:
+      - "traefik.frontend.rule=Host:portainerx.${BASE_DOMAIN};"
+
+#  fedora:
+#    volumes:
+#      - /home/islandora/opt/FEDORA/data/datastreamStore:/usr/local/fedora/data/datastreamStore
+#      - /home/islandora/opt/FEDORA/data/objectStore:/usr/local/fedora/data/objectStore 
+#      - /home/islandora/opt/FEDORA/data/fedora-xacml-policies:/usr/local/fedora/data/fedora-xacml-policies
+
+  apache:
+    labels:
+      - "traefik.frontend.rule=Host:${FULL_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
+
+  traefik:
+    labels:
+      - traefik.frontend.rule=Host:traefikx.${BASE_DOMAIN};
+
