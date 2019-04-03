@@ -1,4 +1,5 @@
-_Expectations:  It may take at least a minimum of **8 hours or more** to read this entire document and perform the installation as prescribed. This is not a quick process and depending on access to resources may take several days. Proceed slowly and cautiously._
+_Expectations:  
+Migration is the most complicated of the ISLE installations. It is not a quick process and depending on access to resources may take several days. Proceed slowly and cautiously._
 
 This Migration guide will help you migrate your existing production Islandora environment to an ISLE environment for easily maintaining Islandora. This guide will walk you through how to identify and copy your institution's Islandora data and files (including your data volume, Drupal site or sites, and commonly customized xml and xslt files) to your ISLE framework.
 
