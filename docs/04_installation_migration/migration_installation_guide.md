@@ -35,8 +35,8 @@ This Migration guide will help you migrate your existing production Islandora en
     1. To find your Drupal MySQL username, password, and database run the following command:
       * `grep --include=filter-drupal.xml -rnw -e 'dbname.*user.*password.*"' / 2>/dev/null`   
       * Example output:
-         ```connection server="localhost" port="3306" dbname="**islandora**" user="**drupalIslandora**" password="**Kjs8n5zQXfPNhZ9k**"
-         ```
+         connection server="localhost" port="3306" dbname="**islandora**" user="**drupalIslandora**" password="**Kjs8n5zQXfPNhZ9k**"
+         
          1. Username: copy the value from `user=`
          2. Password: copy the value from `password=`
          3. Database: copy the value from `dbname=`
