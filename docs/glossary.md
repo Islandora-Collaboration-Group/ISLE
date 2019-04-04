@@ -1,5 +1,5 @@
 <!-- Glossary of Terms and Variables -->
-## Topics
+**Glossary Topics**
 
 - [ISLE](#isle)
 - [Docker](#docker)

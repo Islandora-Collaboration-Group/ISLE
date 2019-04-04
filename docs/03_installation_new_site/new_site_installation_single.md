@@ -1,4 +1,6 @@
-_Expectations:  It may take at least a minimum of **4 - 6 hours or more** to read this entire document and perform the installation as prescribed. This is not a quick process._
+<!--- New Site Installation: Single ISLE Environment --->
+
+_Expectations:  It may take at least a minimum of **4 - 6 hours or more** to read this documentation and complete this installation. Please proceed slowly._
 
 This guide documents how an enduser can spin up and install a single ISLE / Islandora environment tailored to use only one unique domain / URL and one ISLE environment.
 
@@ -6,12 +8,13 @@ A new ISLE / Islandora environment can include the option to create an un-themed
 
 While this checklist will attempt to point out most of the usage challenges or pitfalls, ISLE assumes no responsibility or liability in this matter should an enduser have customizations beyond what this guide outlines.
 
+For additional help, please post a message to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle). This [Glossary](../glossary.md) defines terms used in this documentation.
 
 ---
 
 ## Assumptions / Prerequisites
 
-* Comfortability with ISLE. Recommend first setting up the [ISLE Test Site](../02_installation_demo_site/demo_installation.md) (`isle.localdomain`). If you have already done this, please proceed.
+* Comfortability with ISLE. Recommend first setting up the [Demo ISLE Site](../02_installation_demo_site/demo_installation.md). If you have already done this, please proceed.
 
 * Host Server that conforms to the specifications outlined in the [Hardware Requirements](../01_installation_host_server/hardware-requirements.md)
 

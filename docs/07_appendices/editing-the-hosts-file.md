@@ -1,6 +1,6 @@
 Edit the `/etc/hosts` file to view ISLE locally on a laptop or workstation browser.
 
-Please select your operating system and software:
+**Please select your operating system and software:**
 
 - [Mac or Ubuntu Using Docker](#mac-or-ubuntu-using-docker)
 - [Mac or Ubuntu Desktop Using Virtualbox VM (non-Vagrant)](#mac-or-ubuntu-desktop-using-virtualbox-vm-non-vagrant)

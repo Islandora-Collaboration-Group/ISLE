@@ -1,18 +1,17 @@
+_Expectations:  It may take at least a minimum of **8 hours or more** to read this documentation and complete this installation, and depending on access to resources, may take several days. Please proceed slowly._
+=======
 ## THIS SECTION OF DOCUMENTATION IS A WORK IN PROGRESS.
-
-_Expectations: Migration is the most complicated of the ISLE installations. It is not a quick process and depending on access to resources may take several days. Proceed slowly and cautiously._
 
 This Migration guide will help you migrate your existing production Islandora environment to an ISLE environment for easily maintaining Islandora. This guide will walk you through how to identify and copy your institution's Islandora data and files (including your data volume, Drupal site or sites, and commonly customized xml and xslt files) to your ISLE framework.
 
-**Please note:** There is a [Glossary](../glossary.md) with relevant terms to help guide installation.
+For additional help, please post a message to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle). This [Glossary](../glossary.md) defines terms used in this documentation.
 
-## Assumptions
+## Assumptions / Prerequisites
 
-* You are comfortable with ISLE. We recommend first setting up the [ISLE Test Site](../02_installation_demo_site/demo_installation.md) (`isle.localdomain`).
+* You are comfortable with ISLE. We recommend first setting up the [Demo ISLE Site](../02_installation_demo_site/demo_installation.md) (`isle.localdomain`).
 
 * You understand that all directions in this guide depend on the type of local computer used to connect via browser to Islandora. The instructions below assume a MacOS or Linux laptop or workstation to be used in conjunction with the ISLE Host Server for deploying configs, code, files etc. Windows users may have to adjust / swap out various tools as needed.
 
-## Prerequisites
 * A host server that conforms to the specifications outlined in - and has followed the appropriate setup and configuration instructions in - the [New ISLE Site section](../01_installation_host_server) of the guide.
 
 * You have disk space on - or mounted to - the host server large enough to store a **copy** of your fedora data store

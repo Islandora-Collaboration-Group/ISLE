@@ -1,26 +1,13 @@
-### WARNING
-Do not use an IP e.g. `https://10.10.10.130` to view the Drupal site, login etc as somethings won't work e.g. Large Images using the OpenSeadragon Viewer.
-
-Please always use the [https://isle.localdomain](https://isle.localdomain) domain to view the site, login etc
-
+### Local URL
+Always use the `https://isle.localdomain` domain to view and log in to a local site. (Do not use an IP address, such as `https://10.10.10.130 or https://127.0.0.01` as some components may not function correctly.)
 
 ---
 
-### Ingest Sample Objects
-Courtesy of the [Islandora Collaboration Group](https://github.com/Islandora-Collaboration-Group/icg_information) there is a sample set of objects and corresponding metadata (examples organized by solution pack, including zips for quicker bulk ingestion) that can be used to test ingest.
-
-* [https://github.com/Islandora-Collaboration-Group/islandora-sample-objects](https://github.com/Islandora-Collaboration-Group/islandora-sample-objects)
-
-You are free to clone this repository to your local laptop or desktop and ingest as required.
-
-If you are not familiar with ingest, one can follow instructions [here](https://wiki.duraspace.org/display/ISLANDORA/How+to+Add+an+Item+to+a+Digital+Collection) or start with the [Getting Started with Islandora section](https://wiki.duraspace.org/display/ISLANDORA/Getting+Started+with+Islandora) of the official Islandora documentation.
-
----
-
-### Users and Passwords
+### Docker Containers: Passwords
 
 * `islandora` user on the ISLE host server uses `islandora` as the password.
 
+<!--- TODO this IP information conflicts with our statement to always use the `https://isle.localdomain` domain. Requires clarification. --->
 * Some of the information below is for accessing the non Drupal site admin panels and resources only. (optional). In this context, `hostip` below can mean either
      * the IP address e.g. `http://10.10.10.130` of the Vagrant or Non-Vagrant Host VM (_CentOS / Ubuntu_)
      * the IP address e.g. `127.0.0.1` for `Docker for Mac`
@@ -120,6 +107,8 @@ If you are not familiar with ingest, one can follow instructions [here](https://
 | :-------------:       | :-------------:   | :-------------: | :-------------: |
 | None Required         | None Required                 | Proxy UI     | [https://admin.isle.localdomain](https://admin.isle.localdomain) OR http://hostip:8080  |
 
+* The Proxy Control Panel is available at [admin.isle.localdomain](https://admin.isle.localdomain).  No username/password are required.  This is unsafe for production environments.
+
 ---
 
 #### 6. Image Services
@@ -139,3 +128,9 @@ If you are not familiar with ingest, one can follow instructions [here](https://
 | manager           | isle_manager                  | Tomcat        | http://hostip:8082/manager/html   |   
 | N/A               | N/A                           | Djatoka       | http://hostip:8083/adore-djatoka/     |
 | admin             | isle_admin                    | Cantaloupe    | http://hostip:8083/cantaloupe/admin   |
+
+---
+
+#### 7. Portainer
+
+* Portainer (a Docker control panel) is available at [portainer.isle.localdomain](http://portainer.isle.localdomain). No username/password are required.  This is unsafe for production environments.
