@@ -25,6 +25,7 @@ nav:
     - 'Install a Demo ISLE Site':
       - 'Demo ISLE Site Installation': '02_installation_demo_site/demo_installation.md'
       - 'Demo ISLE Site Resources': '02_installation_demo_site/demo_resources.md'
+      - 'Demo ISLE Site Troubleshooting': '02_installation_demo_site/demo_troubleshooting.md'
     - 'Install a New ISLE Site Site':
       - 'New Site Installation: Single ISLE Environment': '03_installation_new_site/new_site_installation_single.md'
       - 'New Site Installation: Multiple ISLE Environments': '03_installation_new_site/new_site_installation_multiple.md'
@@ -49,13 +50,13 @@ nav:
   - 'Installing a Drupal Module with Drush': '07_appendices/installing-module-with-drush.md'
   - 'Opening a Terminal in a Running Container': '07_appendices/open-terminal-in-running-container.md'
   - 'Using Let''s Encrypt with ISLE' : '07_appendices/configuring-lets-encrypt.md'
-  - 'Warning about Installing on Redhat': '07_appendices/redhat.md'
+  - 'Warning about Installing on Red Hat': '07_appendices/redhat.md'
   - 'Installing on Google Cloud Platform (Google Doc)': 'https://docs.google.com/document/d/1r-I9n8mUhlJ5Z-X9AO-RrikhzH6I8bTPIL25LmtRbxE'
   - 'ISLE Cheat Sheet: Docker Commands': '07_appendices/isle-cheatsheet-docker-commands.md'
   - 'Troubleshooting': '07_appendices/install_troubleshooting.md'
 - 'About':
-  - 'About ISLE': '08_about/about.md'
-  - 'Contributing to ISLE': '08_about/contributing_to_ISLE.md'
+  - 'About ISLE': '08_about/about_isle.md'
+  - 'Contributing to ISLE': '08_about/about_contributing_to_ISLE.md'
   - 'About Maintainers': '08_about/about_maintainers.md'
 - 'Release Notes': '09_release_notes/release_notes.md'
 - 'Glossary': 'glossary.md'

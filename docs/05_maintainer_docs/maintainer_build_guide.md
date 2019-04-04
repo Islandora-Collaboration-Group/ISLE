@@ -1,4 +1,4 @@
-_Expectations:  It can take an up to an average of **2 -4 hours** to read this entire document and perform the installation as prescribed. Highly dependent on the Developer's local laptop and Internet speed._
+_Expectations:  It can take an up to an average of **2 -4 hours** to read this documentation and complete this installation. Highly dependent on the Developer's local laptop and Internet speed._
 
 **Caution**: This guide is recommended for ISLE maintainers or Developers only and not for end-users.
 
@@ -8,11 +8,9 @@ Developers can follow this guide if they have edited their Dockerfiles with cust
 
 These images will contain the necessary base code, scripts and files to run the default sample `isle.localdomain`.
 
-This test ISLE / Islandora environment (`isle.localdomain`) includes an un-themed Drupal website and empty Fedora repository for endusers to develop code, test ingests, test metadata, update fields in SOLR indexing and otherwise "kick the tires" on ISLE prior for further usages e.g. creating a new ISLE production site or migrating a current Islandora production site to ISLE.
+The Demo ISLE Site creates a local Islandora installation (`isle.localdomain`) on your laptop or workstation. This includes an un-themed Drupal website and empty Fedora repository for endusers to test ingests, test metadata, update fields in SOLR indexing, develop code and otherwise "kick the tires" on ISLE.
 
-While this checklist will attempt to point out most of the usage challenges or pitfalls, ISLE assumes no responsibility or liability in this matter should an enduser have customizations beyond what this guide outlines.
-
-**Please note:** There is a [Glossary](../glossary.md) with relevant terms to help guide installation.
+For additional help, please post a message to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle). This [Glossary](../glossary.md) defines terms used in this documentation.
 
 ### Assumptions / Prerequisites
 
@@ -189,7 +187,7 @@ Pull down the newly pushed images.
 
 * `docker-compose pull`
 
-Follow the instructions within the `docker-compose.yml` file or within the [Test Site Installation Guide](../02_installation_demo_site/demo_installation.md) to start up containers and install the ISLE Test Site (`isle.localdomain`).
+Follow the instructions within the `docker-compose.yml` file or within the [Demo ISLE Site](../02_installation_demo_site/demo_installation.md) to start up containers and install the Demo ISLE Site (`isle.localdomain`).
 
 Ensure that all components, connections etc are working, otherwise troubleshoot as required, making the appropriate fixes to the associated Dockerfiles, pushing changes to the ISLE project git repository and then REPEATING this entire build and push process.
 

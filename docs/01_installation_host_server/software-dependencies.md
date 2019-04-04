@@ -1,22 +1,13 @@
-# Software Dependencies
+<!--- Software Dependencies --->
 
-## Install Required Software to Run ISLE
-The following pieces of software are required to run ISLE:
-
-- Docker CE or EE (https://docker.com)
-- Docker-compose (https://docs.docker.com/compose/install/)
-- Git (https://github.com) (https://git-scm.com/)
-
-Please select your operating system for installation instructions:
+**Please select your operating system:**
 
 - [Ubuntu](#ubuntu)
 - [CentOS](#centos)
 - [Mac](#mac)
 - [Windows](#windows)
 
-
 ---
-
 
 ## Ubuntu
 
@@ -102,16 +93,14 @@ cd ISLE
 
 Your host server is now configured and ready to run ISLE.
 
-Please continue by selecting your type of installation:
+**Please continue by selecting your type of installation:**
 
 - [Demo ISLE Site Installation](../02_installation_demo_site/demo_installation.md)
 - [New Site Installation: Single ISLE Environment](../03_installation_new_site/new_site_installation_single.md)
 - [New Site Installation: Multiple ISLE Environments](../03_installation_new_site/new_site_installation_multiple.md)
 - [Migration Guide to ISLE](../04_installation_migration/migration_installation_guide.md)
 
-
 ---
-
 
 ## CentOS
 
@@ -189,20 +178,18 @@ cd ISLE
 
 Your host server is now configured and ready to run ISLE.
 
-Please continue by selecting your type of installation:
+**Please continue by selecting your type of installation:**
 
 - [Demo ISLE Site Installation](../02_installation_demo_site/demo_installation.md)
 - [New Site Installation: Single ISLE Environment](../03_installation_new_site/new_site_installation_single.md)
 - [New Site Installation: Multiple ISLE Environments](../03_installation_new_site/new_site_installation_multiple.md)
 - [Migration Guide to ISLE](../04_installation_migration/migration_installation_guide.md)
 
-
 ---
-
 
 ## Mac
 
-### Step 1: Git Installation
+### Step 1: Install Git
 Git must be installed to get a copy (called a `clone`) of the current ISLE project. (Git is a software version control system for tracking changes in computer files and coordinating work on those files among multiple people.)
 
  * Open a `terminal` (launch Spotlight and type "Terminal," then double-click the search result)
@@ -224,7 +211,7 @@ git version 2.15.1
 
 When git is installed, then please proceed to the next section.
 
-### Step 2: Docker for Mac Installation
+### Step 2: Install Docker for Mac
 
 * Open a browser and navigate to [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
@@ -273,19 +260,18 @@ _To improve performance on Mac OSX:_
 
 Your host server is now configured and ready to run ISLE.
 
-Please continue by selecting your type of installation:
+**Please continue by selecting your type of installation:**
 
 - [Demo ISLE Site Installation](../02_installation_demo_site/demo_installation.md)
 - [New Site Installation: Single ISLE Environment](../03_installation_new_site/new_site_installation_single.md)
 - [New Site Installation: Multiple ISLE Environments](../03_installation_new_site/new_site_installation_multiple.md)
 - [Migration Guide to ISLE](../04_installation_migration/migration_installation_guide.md)
 
-
 ---
 
 ## Windows
 
-### Step 1: Git Installation
+### Step 1: Install Git
 Git must be installed to get a copy (called a `clone`) of the current ISLE project. (Git is a software version control system for tracking changes in computer files and coordinating work on those files among multiple people.)
 
 * Press the Windows key.
@@ -306,7 +292,7 @@ git version 2.15.1
 
 When git is installed, then please proceed to the next section.
 
-### Step 2: Docker for Windows Installation
+### Step 2: Install Docker Desktop for Windows
 
 **Important: Docker requires Windows Professional or Enterprise Editions**
 
@@ -372,7 +358,7 @@ pwd
 
 Your host server is now configured and ready to run ISLE.
 
-Please continue by selecting your type of installation:
+**Please continue by selecting your type of installation:**
 
 - [Demo ISLE Site Installation](../02_installation_demo_site/demo_installation.md)
 - [New Site Installation: Single ISLE Environment](../03_installation_new_site/new_site_installation_single.md)

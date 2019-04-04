@@ -34,7 +34,7 @@ A very handy primer for writing documentation using `MkDocs` has been written he
 │   ├── 05_maintainer_docs
 │   ├── 06_specifications
 │   ├── Previous_Structure_For_Merging
-│   ├── about.md
+│   ├── about_isle.md
 │   ├── assets
 │   ├── glossary.md
 │   └── index.md
@@ -46,7 +46,7 @@ A very handy primer for writing documentation using `MkDocs` has been written he
 | -------------     | ------------- |
 | README.md | Description of the documentation project contents and how to use them |
 | docs | where all documentation sections and topical pages are kept |
-| about.md | Description of the ISLE project, its maintainers and this documentation repository |
+| about_isle.md | Description of the ISLE project, its maintainers and this documentation repository |
 | assets | Image or logo files used in documentation |
 | glossary.md | A list of terms used in documentation |
 | index.md | The homepage (first page of the documentation |
@@ -72,9 +72,10 @@ Within the `docs` directory, there are 6 major topical sections.
 
 | Section                     | Page Prefix     | All topics related to                         |
 | -------------               | -------------   | -------------                                 |
-| 01_installation_host_server | `host_server_`  | Host server installation |
-| 02_installation_development | `ild_`          | ISLE test site installation (`isle.localdomain`) |
+| 01_installation_host_server | ``              | Host server hardware and software setup |
+| 02_installation_development | `demo_`         | Demo ISLE Site (`isle.localdomain`) |
 | 03_installation_new_site    | `new_site_`     | New Islandora site installation in ISLE |
 | 04_installation_migration   | `migration_`    | Migrating an existing production Islandora site to ISLE |
-| 05_maintainer_docs           | `maintainer_`          | Documentation or development of ISLE |
-| 06_specifications           | `specs_`        | Systems or software specifications of ISLE |
+| 05_maintainer_docs          | `maintainer_`   | Documentation for the ISLE Maintainers |
+| 06_specifications           | `specs_`        | ISLE systems/software specifications |
+| 08_specifications           | `about_`        | About ISLE |

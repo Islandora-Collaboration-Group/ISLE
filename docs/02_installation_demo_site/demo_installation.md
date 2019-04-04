@@ -1,33 +1,29 @@
-<!-- Demo ISLE Site Installation -->
+<!--- Demo ISLE Site Installation --->
 
-_Expectations:  It takes an average of **15-45 minutes** to read this entire document and perform the installation as prescribed._
+_Expectations:  It takes an average of **45 minutes** to read this documentation and complete this installation._
 
-Follow this guide to spin up and install ISLE utilizing the built-in `isle.localdomain` domain name for review and testing.
+This process creates a local Islandora installation (`isle.localdomain`) on your laptop or workstation. This includes an un-themed Drupal website and empty Fedora repository for endusers to test ingests, test metadata, update fields in SOLR indexing, develop code and otherwise "kick the tires" on ISLE.
 
-This Demo ISLE Site guide creates an Islandora environment (`isle.localdomain`) that includes an un-themed Drupal website and empty Fedora repository for endusers to develop code, test ingests, test metadata, update fields in SOLR indexing and otherwise "kick the tires" on ISLE prior for further usages e.g. creating a new ISLE production site or migrating a current Islandora production site to ISLE.
-
-This checklist will attempt to point out most of the usage challenges or pitfalls.  For additional help, please post a message to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle).
-
-**Please note:** There is a [Glossary](../glossary.md) with relevant terms to help guide installation.
+For additional help, please post a message to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle). This [Glossary](../glossary.md) defines terms used in this documentation.
 
 ### Assumptions / Prerequisites
 
-* This guide is designed for a local laptop / workstation that has already followed the appropriate setup and configuration instructions in the `Demo ISLE Site` section of the [guide](../index.md#test-demo-isle).
-
-* Instructions below assume a MacOS or Linux laptop or workstation. Windows users may have to adjust / swap out various tools as needed.
+* This installation is intended for a local laptop or workstation.
 
 ---
 
-### Process overview
+### Process Overview
 
-* Edit `/etc/hosts` File to View ISLE Locally on Laptop / Workstation Browser
+* Edit File `/etc/hosts` to View ISLE Locally on Laptop or Workstation Browser
 * Launch Process
-* Run Install Script on Apache Container
+* Run Install Script
 * Test the Site
 * Ingest Sample Objects
 * Troubleshooting
 
-### Step 1: Edit `/etc/hosts` File to View ISLE Locally on Laptop / Workstation Browser
+---
+
+### Step 1: Edit File `/etc/hosts` to View ISLE Locally on Laptop or Workstation Browser
 
 Enable the Demo ISLE Site to be viewed locally as: `https://isle.localdomain`
 
@@ -58,134 +54,63 @@ docker-compose up -d
 
 **If all containers are NOT running, then proceed to the Troubleshooting section first before advancing to the "Install script on Apache container" section below**
 
+---
 
------
+### Step 3: Run Install Script
 
-### Step 3: Run Install Script on Apache Container
+This build process may take 10 - 20 minutes (_depending on system and internet speeds_)
 
-**Total build process** may take up to 15 - 45 minutes (_depending on system and internet speeds_)
-
-* Run the following install site script on the apache container by copying and pasting this command:
+* Run the following install site script on the Apache container by copying and pasting this command:
 ```
 docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh
 ```
 
-_For Windows Users only_
 
-* You may be prompted by Windows to:
-    * Share the C drive with Docker.  Click okay or allow
-        * Enter your username and password
-        * Allow vpnkit.exe to communicate with the network.  Click Okay or Allow to accept the default selection.
-        * If the process seems to halt, check the taskbar for background windows.
+| For Windows Users only |
+| :-------------      |
+| You may be prompted by Windows to: |
+| - Share the C drive with Docker.  Click Okay or Allow.|
+| - Enter your username and password. Do this.|
+| - Allow vpnkit.exe to communicate with the network.  Click Okay or Allow (accept default selection).|
+| - If the process seems to halt, check the taskbar for background windows.|
 
+* You should see a lot of green [ok] messages.
+* If the script appears to pause and prompt for y/n, DO NOT enter any values; the script will answer for you.
+* **Proceed only after this message appears:** `Clearing Drupal Caches. 'all' cache was cleared.`
 
-    * **This script will take some time (see estimate above.)** You should see a lot of green [ok] messages.
-    * If the script appears to pause and prompt for y/n, do not enter any values; the script will answer for you.  
-    * Wait until "Clearing Drupal Caches. 'all' cache was cleared." before proceeding.**
+---
 
 ### Step 4: Test the Site
 
-* Test (QC) the resulting setup by opening a web browser to the `isle.localdomain` URL of the new ISLE sample site (i.e. [https://isle.localdomain](https://isle.localdomain)) and logging in.
-
-* Upon entering [https://isle.localdomain](https://isle.localdomain) within a browser, you will see a SSL error warning that the site is unsafe. It is safe, it simply uses "self-signed" SSL certs. Ignore the error and proceed to the site.
-
-* To log in to the Islandora Drupal Site:
+* Enter this URL `https://isle.localdomain` into your web browser.
+<!--- TODO: Add error message and how to proceed (click 'Advanced...') --->
+* Note: You may see an SSL error warning that the site is unsafe. It is safe, it simply uses "self-signed" SSL certs. Ignore the error and proceed to the site.
+* Log in to the local Islandora site:
     * Username: `isle`
     * Password: `isle`
+* ([Demo ISLE Site Resources](demo_resources.md) contains lists of passwords for Docker containers.)
 
-* There is additional information for users and passwords that can be found on the [Demo ISLE Site Resources](demo_resources.md) page.
+---
 
 ### Step 5: Ingest Sample Objects
 
-Courtesy of the [Islandora Collaboration Group](https://github.com/Islandora-Collaboration-Group/icg_information) there is a sample set of objects and corresponding metadata that can be used for ingest.
+The Islandora Collaboration Group provides a set of [Islandora Sample Objects](https://github.com/Islandora-Collaboration-Group/islandora-sample-objects) with corresponding metadata for testing Islandora's ingest process. These sample objects are organized by solution pack and are zipped for faster bulk ingestion.
 
-More information can be found on the [Demo ISLE Site Resources](demo_resources.md) page.
+* To download these sample objects, clone them to your computer's desktop:
+```
+git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-objects.git
+```
 
-### Post Ingest Search Tip
-After ingesting content, you will need to add an Islandora Simple Search block to the Drupal structure.  The default search box that appears on install will only search Drupal content, not Islandora content.
-
-* Structure Menu > Blocks
-* Scroll down to find "Islandora Simple Search".  Use dropdown to set to Sidebar Second.
-* Save Blocks on the bottom of the page
-
-This process will now allow you to search for ingested objects that have been indexed by SOLR.
-
----
-
-### Note
-
-* The Proxy Control Panel is available at [admin.isle.localdomain](https://admin.isle.localdomain).  No username/password are required.  This is unsafe for production environments.
-
-* Portainer (a Docker control panel) is available at [portainer.isle.localdomain](http://portainer.isle.localdomain). No username/password are required.  This is unsafe for production environments.
-
-### WARNING
-
-* Please always use the [https://isle.localdomain](https://isle.localdomain) domain to view the site, login etc
-
-* Do not use an IP e.g. `https://10.10.10.130 or https://127.0.0.01` to view the Drupal site, login etc as some components won't work e.g. Large Images using the OpenSeadragon Viewer.
+* Follow these ingestion instructions [How to Add an Item to a Digital Collection](https://wiki.duraspace.org/display/ISLANDORA/How+to+Add+an+Item+to+a+Digital+Collection)
+* ([Getting Started with Islandora](https://wiki.duraspace.org/display/ISLANDORA/Getting+Started+with+Islandora) contains explanations about content models, collections, and datastreams.
+* After ingesting content, you will need to add an Islandora Simple Search block to the Drupal structure. (The default search box will only search Drupal content, not Islandora content.)
+    * Select from the menu: `Structure > Blocks > Islandora Simple Search`
+    * Select: `Sidebar Second`
+    * Click: `Save Blocks` at bottom of page
+    * You may now search for ingested objects that have been indexed by SOLR
 
 ---
 
-### Troubleshooting
-
-#### Port Conflicts
-If you encounter an error like this:
-
-`Error starting userland proxy: Bind for 0.0.0.0:xxxx failed: port is already allocated`
-
-then ISLE may have encountered a conflict with the `xxxx` port identified in the error message.
-
-In MacOS, this can frequently be caused by a local Apache or Nginx web server, or local MySQL server.  
-
-You may need to remove or disable these local web servers before you can successfully install ISLE.
-
-* If you have a local Apache web server that ships with most MacOS machines may conflict with port 80, and can usually be disabled from a terminal using these commands:
-
-    * `sudo apachectl stop`
-    * `sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist 2>/dev/null`
-
-* If you have a local `Nginx` web server it may conflict with port 8080, and it can usually be disabled from a terminal using:
-
-    * `sudo nginx -s stop`
-
-Once your web server(s) have been disabled, resume the ISLE install process by repeating your last installation command, presumably `docker-compose up -d`.
-
-#### Non-running Containers
-If you don't see all containers running, then stop the running containers with `docker-compose down` and start the containers one at a time following the instructions below:
-
-*  MySQL image pull & container launch
-
-    `docker pull islandoracollabgroup/isle-mysql:1.1`
-
-    `docker-compose up -d mysql`
-
-*  Fedora image pull & container launch
-
-    `docker pull islandoracollabgroup/isle-fedora:1.1`
-
-    `docker-compose up -d fedora`
-
-    (Optional but recommended troubleshooting step)
-
-    * Please note the Tomcat service requires about  one to three minutes to startup and as such if the enduser rushes to the URL supplied below, the service page maytime out or be reported as unreachable. Give it a little time.
-    * After spinning up fedora container, check if the Fedora service is running prior to advancing.
-    * Navigate to http://hostip:8081/manager/html a popup login prompt should appear.
-    * Enter the user name of `admin` and the password of `isle_admin`
-    * Upon login a large display of running Tomcat applications should display, scroll down to fedora
-    * The application state / status should be true
-    * If false appears instead, attempt to restart the fedora service manually.
-    * Select the restart button to the right of the status area.
-    * If it still fails, review the mounted fedora logs. The docker-compose.yml file will indicate where the logs are located.
-    * Using terminal and then entering a command like `tail -n 300 - <path to ISLE project/data/fedora/log/tomcat:/usr/local/tomcat/logs/fedora.log` should display enough information to troubleshoot or restart the entire startup process.
-
-* Solr image pull & container launch
-
-    `docker pull islandoracollabgroup/isle-solr:1.1`
-
-    `docker-compose up -d solr`
-
-* Apache image pull & container launch
-
-    `docker pull islandoracollabgroup/isle-apache:1.1`
-
-    `docker-compose up -d apache`
+### Step 6: Additional Resources
+* [Demo ISLE Site Resources](demo_resources.md) contains passwords for the Docker containers.
+* [Demo ISLE Site Troubleshooting](demo_troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
