@@ -16,9 +16,9 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 ### Assumptions / Prerequisites
 
-* Laptop / workstation that conforms to the specifications outlined in the [Host Server Specifications](../01_installation_host_server/host_server_system_specifications.md)
+* Laptop / workstation that conforms to the specifications outlined in the [Hardware Requirements](../01_installation_host_server/hardware-requirements.md)
 
-* This image build site guide is designed for a local laptop / workstation that has already followed the appropriate setup and configuration instructions in the [Test/Demo ISLE](../02_installation_test/ild_installation_guide.md) guide.
+* This image build site guide is designed for a local laptop / workstation that has already followed the appropriate setup and configuration instructions in the [Demo ISLE Site](../02_installation_demo_site/demo_installation.md) guide.
 
 * Instructions below assume a MacOS or Linux laptop or workstation. Windows users may have to adjust / swap out various tools as needed.
 
@@ -38,7 +38,7 @@ While this checklist will attempt to point out most of the usage challenges or p
 
 ---
 
-### Step 1: Ensure there are no local ISLE Docker images present
+### Step 1: Ensure There Are No Local ISLE Docker Images Present
 
 If performing a brand new image build, the ISLE maintainer will need to ensure there are no previous image builds or cached build data.
 
@@ -65,15 +65,15 @@ islandoracollabgroup/isle-proxy    <none>              23cb1c73c232        2 wee
 *  `docker image rm -f 9bc727f301b8`
 *  `docker image rm -f 23cb1c73c232`
 
-### Step 2: Rename the docker-compose.yml file
+### Step 2: Rename the `docker-compose.yml` File
 
 * Rename the `docker-compose.yml` file to `docker-compose.bak`
 
-### Step 3: Rename the docker-compose-build.yml file
+### Step 3: Rename the `docker-compose-build.yml` File
 
 * Rename the `docker-compose-build.yml` file to `docker-compose.yml`
 
-### Step 3a: Alternative for non-ISLE maintainers only e.g. Developers
+### Step 3a: Alternative for Non-ISLE Maintainers only (e.g. developers)
 
 For **non-ISLE maintainers only e.g. Developers (only)**  you'll need to change the following lines in the newly renamed `docker-compose.yml` file.
 ```
@@ -95,7 +95,7 @@ For **non-ISLE maintainers only e.g. Developers (only)**  you'll need to change 
 
 Change only the images you need to rebuild or customize.
 
-### Step 4: Build the images in this suggested order
+### Step 4: Build the Images in this Suggested Order
 
 Please perform these steps one at time. If any errors occur during the build process, troubleshoot and edit the associated Dockerfile.
 
@@ -109,7 +109,7 @@ Please perform these steps one at time. If any errors occur during the build pro
 
 * `docker-compose build solr`
 
-### Step 5: Tag the resulting images
+### Step 5: Tag the Resulting Images
 
 This renamed `docker-compose-build.yml` file will tag all builds by default with the `latest` tag.
 
@@ -132,7 +132,7 @@ Please note: your IMAGE ID will be different than the examples above.
 
 Developers, please note you are welcome to use tags that are useful for your institution e.g. `docker tag 7cbd80c8b043 yourdockerimagerepo_orgname/isle-proxy:1.13`
 
-### Step 6: Push the images to the image repository
+### Step 6: Push the Images to the Image Repository
 
 **Please note:** These steps assume use of Dockerhub. If you use a different Docker image repository, you'll need to change the following steps per their specific instructions.
 
@@ -162,11 +162,11 @@ Repeat the process with any additional tags. **Please note:** _Depending on your
 * `docker push islandoracollabgroup/isle-proxy:1.13`
 * `docker push islandoracollabgroup/isle-solr:4.10.4`
 
-### Step 7: Rename the docker-compose-build.yml file
+### Step 7: Rename the `docker-compose-build.yml` File
 
 * Rename the `docker-compose.yml` file to `docker-compose-build.yml`
 
-### Step 8: Rename the docker-compose.yml file
+### Step 8: Rename the `docker-compose.yml` File
 
 * Rename the `docker-compose.bak` file to `docker-compose.yml`
 
@@ -174,7 +174,7 @@ Repeat the process with any additional tags. **Please note:** _Depending on your
 
 Steps below are mandatory for any ISLE maintainer but optional (though recommended) for any Developer.
 
-### Step 9: Delete all recently built and pushed ISLE images on local laptop
+### Step 9: Delete All Recently Built and Pushed ISLE Images on Local Laptop
 
 * `docker image ls`
 
@@ -183,13 +183,13 @@ Example commands to repeat for each type of image.
 * `docker rm -f IMAGE ID islandoracollabgroup/TAG`
 * `docker rm -f 7cbd80c8b043 islandoracollabgroup/isle-proxy:1.13`
 
-### Step 10: Test the images pushed.
+### Step 10: Test the Images Pushed
 
 Pull down the newly pushed images.
 
 * `docker-compose pull`
 
-Follow the instructions within the `docker-compose.yml` file or within the [Test Site Installation Guide](../02_installation_test/ild_installation_guide.md) to start up containers and install the ISLE Test Site (`isle.localdomain`).
+Follow the instructions within the `docker-compose.yml` file or within the [Test Site Installation Guide](../02_installation_demo_site/demo_installation.md) to start up containers and install the ISLE Test Site (`isle.localdomain`).
 
 Ensure that all components, connections etc are working, otherwise troubleshoot as required, making the appropriate fixes to the associated Dockerfiles, pushing changes to the ISLE project git repository and then REPEATING this entire build and push process.
 

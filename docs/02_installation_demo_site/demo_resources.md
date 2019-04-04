@@ -6,7 +6,7 @@ Please always use the [https://isle.localdomain](https://isle.localdomain) domai
 
 ---
 
-### Sample Objects for ingest.
+### Ingest Sample Objects
 Courtesy of the [Islandora Collaboration Group](https://github.com/Islandora-Collaboration-Group/icg_information) there is a sample set of objects and corresponding metadata (examples organized by solution pack, including zips for quicker bulk ingestion) that can be used to test ingest.
 
 * [https://github.com/Islandora-Collaboration-Group/islandora-sample-objects](https://github.com/Islandora-Collaboration-Group/islandora-sample-objects)
@@ -17,7 +17,7 @@ If you are not familiar with ingest, one can follow instructions [here](https://
 
 ---
 
-### Users and passwords
+### Users and Passwords
 
 * `islandora` user on the ISLE host server uses `islandora` as the password.
 
@@ -25,7 +25,7 @@ If you are not familiar with ingest, one can follow instructions [here](https://
      * the IP address e.g. `http://10.10.10.130` of the Vagrant or Non-Vagrant Host VM (_CentOS / Ubuntu_)
      * the IP address e.g. `127.0.0.1` for `Docker for Mac`
 
-#### 1. MySQL container
+#### 1. MySQL Container
 | Compose Service Name | Container Name  | Software      | Ports         |
 | :-------------:      | :-------------: | ------------- | ------------- |      
 | mysql                | isle-mysql-ld   | MySQL 5.7     | 3306          |
@@ -39,7 +39,7 @@ If you are not familiar with ingest, one can follow instructions [here](https://
 
 ---
 
-#### 2. Fedora container
+#### 2. Fedora Container
 | Compose Service Name | Container Name  | Software      | Ports                                            |
 | :-------------:      | :-------------: | ------------- | -------------                                    |      
 | fedora               | isle-fedora-ld  | see below     | 8080 mapped to 8081 (on host) |
@@ -67,7 +67,7 @@ If you are not familiar with ingest, one can follow instructions [here](https://
 
 ---
 
-#### 3. Solr container
+#### 3. Solr Container
 
 | Compose Service Name | Container Name  | Software      | Ports                                              |
 | :-------------:      | :-------------: | ------------- | -------------                                      |      
@@ -89,7 +89,7 @@ If you are not familiar with ingest, one can follow instructions [here](https://
 
 ---
 
-#### 4. Apache container
+#### 4. Apache Container
 
 | Compose Service Name | Container Name  | Software      | Ports         |
 | :-------------:      | :-------------: | ------------- | ------------- |      
@@ -111,7 +111,7 @@ If you are not familiar with ingest, one can follow instructions [here](https://
 
 ---
 
-#### 5. Proxy container
+#### 5. Proxy Container
 | Compose Service Name | Container Name  | Software      | Ports         |
 | :-------------:      | :-------------: | ------------- | ------------- |
 | proxy                | isle-proxy      | Traefik       | 80, 443       |

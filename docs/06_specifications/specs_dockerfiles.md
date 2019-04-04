@@ -7,7 +7,7 @@ The ISLE Images are created by the use of Dockerfiles, text documents that conta
 * [Dockerfiles](https://docs.docker.com/engine/reference/builder/), their editing process and compositions are familiar or known concepts.
 
 
-## Dockerfile locations
+## Dockerfile Locations
 
 These files can be found within the cloned ISLE project directory.
 
@@ -45,7 +45,7 @@ Each subdirectory is grouped by the image / container software type and each con
 └── vagrant
 ```
 
-## Dockerfile conventions
+## Dockerfile Conventions
 
 * Making changes within these files will alter the contents and functionality of the ISLE images.
 
@@ -57,7 +57,7 @@ Each subdirectory is grouped by the image / container software type and each con
 
 * All ISLE images use official Docker build images. Review the [Docker Containers & Images](../06_specifications/specs_docker_containers_images.md) Specifications Page for a listing of those builds.
 
-## Dockerfile composition
+## Dockerfile Composition
 
 Following [standard Docker convention](https://docs.docker.com/engine/reference/builder/), all ISLE Dockerfiles have similar structures. Examples displayed are from the [Apache Dockerfile](https://github.com/Islandora-Collaboration-Group/ISLE/blob/master/apache/Dockerfile)
 
@@ -91,7 +91,7 @@ ENV JAVA_HOME=/usr/lib/jvm/java-8-oracle \
 
 * Within the [apache Dockerfile](https://github.com/Islandora-Collaboration-Group/ISLE/blob/master/apache/Dockerfile), the server is told to "run" using the `apache2ctl` utility by this last line: `ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]`
 
-## Dockerfile commenting
+## Dockerfile Commenting
 
 For ISLE Maintainers when possible it is highly recommended that all sections be commented appropriately to explain functionality or actions to all Developers looking to customize or curious endusers.
 

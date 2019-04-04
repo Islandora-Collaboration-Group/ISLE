@@ -1,4 +1,4 @@
-You have the choice of using Ansible to deploy the Docker Host server dependencies instead of performing manual commands on either a CentOS or Ubuntu OS. The Ansible script and configuration files can be found in the root folder of the ISLE git repo in a directory named [ansible](https://github.com/Islandora-Collaboration-Group/ISLE/tree/master/ansible). Additionally, the Ansible script is designed to detect the chosen operating system and then install the appropriate dependencies with minimal user interaction or prior configuration.
+You have the choice of using Ansible to deploy the Docker Host server dependencies instead of performing manual commands on either a CentOS or Ubuntu OS. The Ansible script and configuration files can be found in the root folder of the ISLE git repository in a directory named [ansible](https://github.com/Islandora-Collaboration-Group/ISLE/tree/master/ansible). Additionally, the Ansible script is designed to detect the chosen operating system and then install the appropriate dependencies with minimal user interaction or prior configuration.
 
 Ansible is an free open source automation platform / tool which runs on Linux, Mac or BSD, doesn’t use local or remote agents and is relatively easy to setup. Ansible can help with server configuration management, application deployment, task automation and IT orchestration (_running tasks in sequence on several different servers or devices_).
 
@@ -17,7 +17,7 @@ If you are not familiar with the Ansible, it is recommended to start with their 
 
 * Do not use this script if running `Docker for Mac` or `Docker for Windows` as the dependencies are not required.
 
-* This script can be used with the supplied Vagrant profiles (Ubuntu or CentOS) found within the [vagrant](https://github.com/Islandora-Collaboration-Group/ISLE/tree/master/vagrant) directory of the ISLE repo.
+* This script can be used with the supplied Vagrant profiles (Ubuntu or CentOS) found within the [vagrant](https://github.com/Islandora-Collaboration-Group/ISLE/tree/master/vagrant) directory of the ISLE repository.
 
 ### Prerequisites / Assumptions
 
@@ -56,7 +56,7 @@ Within the `docker_install.yml` Ansible playbook, there are the following roles 
 | `docker_images`             | _Pulls down the latest ISLE Docker Images from Dockerhub.com_   |
 
 
-#### Installs software dependencies & tools including:
+#### Installs Software Dependencies and Tools Including
 
 The Ansible script will deploy the following to the ISLE Host server:
 
@@ -81,7 +81,7 @@ The Ansible script will deploy the following to the ISLE Host server:
 | ca-certificates             | --                |
 
 
-#### Makes ISLE Host service changes
+#### Makes ISLE Host Service Changes
 
 **Please Note:** _Any of these services can be re-enabled post installation see appropriate documentation for opening ports on firewalls etc._
 
@@ -91,7 +91,7 @@ The Ansible script will deploy the following to the ISLE Host server:
 | _disables ufw_              | _disables iptables_           |
 | --                          | _sets selinux to permissive_  |
 
-#### Adds users, groups and updates permissions
+#### Adds Users, Groups and Updates Permissions
 
 * Creates the `islandora` user
   * Along with an appropriate password
@@ -103,16 +103,16 @@ The Ansible script will deploy the following to the ISLE Host server:
   * Disables use of passwords with ssh.
   * _key based access only to the ISLE Host server_
 
-#### Installs additional software
+#### Installs Additional Software
 * Docker
 
 * Docker Compose
 
-* Git clones the ISLE repo to `/opt/ISLE`
+* Git clones the ISLE repository to `/opt/ISLE`
 
 * Pulls down the most recent ISLE images
 
-#### Ansible script directory structure
+#### Ansible Script Directory Structure
 
 ```
 ansible
@@ -156,7 +156,7 @@ ansible
 
 
 
-### Configure Ansible Script to deploy to ISLE Host
+### Configure Ansible Script to Deploy to ISLE Host
 
 To configure the Ansible script to deploy to one's institutional ISLE Host Server, please review and edit the following files within the `ansible` directory.
 
@@ -168,14 +168,14 @@ Basically wherever `isle-prod-project.institution` appears as a value in these t
 
 One can open up and edit all files in a text editor e.g. Atom, Textedit, Textwrangler etc.
 
-#### ansible/docker_install.yml
+#### `ansible/docker_install.yml`
 
 _This is the Ansible playbook necessary to deploy software to the ISLE host server._
 
 * At the top of the file remove `isle-prod-project.institution` and replace with the appropriate **fqdn**.  
 
 
-#### ansible/inventory.yml
+#### `ansible/inventory.yml`
 _This is the possible list of server(s) to deploy to using Ansible and its associated playbook(s)._
 
 **Please Note:** These instructions below are repeated within the file itself.
@@ -205,7 +205,7 @@ yourislesite.institution.com ansible_connection=ssh ansible_ssh_user=janesmith a
 ```
 
 
-#### ansible/isle-prod-project.institution.yml
+#### `ansible/isle-prod-project.institution.yml`
 
 * Copy this file and rename the copy to with the appropriate **fqdn**
 
@@ -238,7 +238,7 @@ ansible
 
 ---
 
-#### Ansible commands to test connection
+#### Ansible Commands to Test Connection
 
 * Test if the Ansible control laptop / workstation can connect to the ISLE Host server by running these commands. On the local Ansible control laptop / workstation, open a terminal window and enter the following:
 
@@ -260,10 +260,10 @@ isle-host-server | SUCCESS => {
 ```
 
 
-**Please Note:** _If SUCCESS doesn't appear as a value or if the wording of the prompt is in RED with "host doesn't exist ...", review all steps above and check the settings. Do not advance until the **Example** output above matches._  
+**Please Note:** _If SUCCESS does not appear as a value or if the wording of the prompt is in RED with "host does not exist ...", review all steps above and check the settings. Do not advance until the **Example** output above matches._  
 
 
-### Ansible commands for deploy
+### Ansible Commands for Deploy
 
 * To deploy to the ISLE Host Server, run this command.
 
@@ -271,7 +271,7 @@ isle-host-server | SUCCESS => {
 
 Ansible will start displaying output within the terminal. If any turn red and the script terminates, please review the above settings and connectivity to the server. Attempt to rerun the script.
 
-### QC Review checklist
+### QC Review Checklist
 
 To ensure a successful deploy to the ISLE Server, please review the following to ensure that the deploy to the Islandora Host server was successful.
 
@@ -354,7 +354,7 @@ islandoracollabgroup/isle-proxy    latest              5gdc45f1a074        2 wee
     `docker-compose version 1.20.1, build 1719ceb`
 
 
-#### Islandora user
+#### `islandora` User
 
 * To check if the `islandora` user has been created, enter:
 
@@ -365,9 +365,9 @@ islandoracollabgroup/isle-proxy    latest              5gdc45f1a074        2 wee
     `islandora:x:1002:1002::/home/islandora:/bin/bash`
 
 
-#### ISLE Project directory
+#### ISLE Project Directory
 
-* To check if the ISLE project git repo has been cloned to `/opt/ISLE`, enter:
+* To check if the ISLE project git repository has been cloned to `/opt/ISLE`, enter:
 
     `ls -lh /opt/ISLE`
 
@@ -398,7 +398,7 @@ Proceed to bottom of this page for next steps.
 
 ---
 
-### Walkthrough: Using Ansible on a MacOS control machine
+### Walkthrough: Using Ansible on a MacOS Control Machine
 
 * To install `Ansible` on the enduser's MacOS laptop / workstation.
 
@@ -441,7 +441,7 @@ host_local_macos_isle_localdomain | SUCCESS => {
    "ping": "pong"
  }
 ```
-**Please Note:** _If SUCCESS doesn't appear as a value or if the wording of the prompt is in RED with "host doesn't exist ...", review all steps above and check the settings. Do not advance until the **Example** output above matches._  
+**Please Note:** _If SUCCESS does not appear as a value or if the wording of the prompt is in RED with "host does not exist ...", review all steps above and check the settings. Do not advance until the **Example** output above matches._  
 
 
 * To deploy to the ISLE Host Server, run this command.

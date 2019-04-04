@@ -8,12 +8,12 @@ This Migration guide will help you migrate your existing production Islandora en
 
 ## Assumptions
 
-* You are comfortable with ISLE. We recommend first setting up the [ISLE Test Site](../02_installation_test/ild_installation_guide.md) (`isle.localdomain`).
+* You are comfortable with ISLE. We recommend first setting up the [ISLE Test Site](../02_installation_demo_site/demo_installation.md) (`isle.localdomain`).
 
 * You understand that all directions in this guide depend on the type of local computer used to connect via browser to Islandora. The instructions below assume a MacOS or Linux laptop or workstation to be used in conjunction with the ISLE Host Server for deploying configs, code, files etc. Windows users may have to adjust / swap out various tools as needed.
 
 ## Prerequisites
-* A host server that conforms to the specifications outlined in - and has followed the appropriate setup and configuration instructions in - the [New ISLE section](../01_installation_host_server) of the guide.
+* A host server that conforms to the specifications outlined in - and has followed the appropriate setup and configuration instructions in - the [New ISLE Site section](../01_installation_host_server) of the guide.
 
 * You have disk space on - or mounted to - the host server large enough to store a **copy** of your fedora data store
 
@@ -97,7 +97,7 @@ This Migration guide will help you migrate your existing production Islandora en
 
 **ON your local laptop / workstation:**
 
-* On the repository of your choice (GitHub, GitLab, Bitbucket, etc.) create a PRIVATE remote git repo - see the specific code repository documentation online for setup instructions.
+* On the repository of your choice (GitHub, GitLab, Bitbucket, etc.) create a PRIVATE remote git repository - see the specific code repository documentation online for setup instructions.
 
 * Open a terminal - navigate to `/opt/ISLE` or where you cloned the ISLE directory on your local workstation.
 
@@ -165,7 +165,10 @@ The **goal** is to merge all site-specific data (domain names, variables, userna
    * Compare and merge the Solr files: `stopwords`
    * Compare and merge the Fedora GSearch Islandora Transform (XSLTs) folder of files: `islandora_transforms`
 
+
 ### Docker .env File:
+=======
+
 
 * Edit the .env file and change the values of COMPOSE_PROJECT_NAME, BASE_DOMAIN, and CONTAINER_SHORT_ID. e.g. for a production site you may use:
 
@@ -186,7 +189,7 @@ The **goal** is to merge all site-specific data (domain names, variables, userna
 
     * Open a terminal - `cd` to the config directory you've been making the changes in...
 
-    * `git status`  this will show you all the files that have been modified and ready to be added to your private repo along with handy paths for the next steps.
+    * `git status`  this will show you all the files that have been modified and ready to be added to your private repository along with handy paths for the next steps.
 
     * `git add /pathtoyourmodifiedfile` (replace "pathtoyourmodifiedfile" with the path to your config directory)
 
@@ -203,7 +206,7 @@ The **goal** is to merge all site-specific data (domain names, variables, userna
 
     * then run `git commit -m "initial config commit"` inside the double quotes is the commit message you can say whatever you want in this message - so for example if this is the config for your dev instance you could say that...
 
-    * run `git push origin master` this will push all your changes to the repo further changes should be made on branches for different servers or to master branch for this same server
+    * run `git push origin master` this will push all your changes to the repository further changes should be made on branches for different servers or to master branch for this same server
 
 
 --------
@@ -244,7 +247,10 @@ _Please Note: You may have already done this in setting up the host server manua
     * `docker-compose pull`
 
 ---
+
 ### Spin Up the Proxy Container
+=======
+
 
 * `cd /opt/ISLE/yourdomain-config`
 * `docker-compose up -d proxy`
@@ -320,6 +326,7 @@ Instructions for converting the Drupal mysql database are available on the [Drup
 ---
 
 ### Spin Up Solr Container and Complete the Reindex Processes
+=======
 
 * Staying within `/opt/ISLE/yourdomain-config`
 * `docker-compose up -d solr`

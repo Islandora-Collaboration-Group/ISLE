@@ -1,14 +1,14 @@
-# Server/Host Requirements
+# Hardware Requirements
 
 Your ISLE **host server** can be a virtual machine (VM) on your desktop or on the cloud, it can also be a physical server. An SSH connection with a user that has root or admin privileges is necessary. If an IT department is doing this initial setup, see [this page](../07_appendices/sample-it-department-request.md) for sample language to use in requesting the server.
 
-## Know Working Operating Systems/Distributions
-- Windows 10 (only suggested for testing)
-- MacOS
-- Ubuntu 16.04 LTS
+## Known Working Operating Systems / Distributions
 - Ubuntu 18.04 LTS
+- Ubuntu 16.04 LTS
 - CentOS 7.x
-- RHEL* 
+- MacOS
+- Windows 10 (for Demo only)
+- RHEL*
 _*Currently RHEL does not support Docker Community Edition (CE), EE can be used._
 
 ## Production
@@ -21,7 +21,7 @@ Below are the recommended minimum specifications for a production server. The se
 * Sufficient HD or attached storage to hold your collection
 * 30 - 50GB for the Server OS & overhead
 
-If you are **migrating** please ensure you have enough storage space for your entire collection or that you can access those data via a network or other file-sharing protocol. 
+If you are **migrating** please ensure you have enough storage space for your entire collection or that you can access those data via a network or other file-sharing protocol.
 
 - Open your docker-compose and modify the environment variables called JAVA_MAX_MEM and JAVA_MIN_MEM for fedora, solr, and image-services. Here are some recommendations for production instances:
 ```yaml
@@ -66,11 +66,11 @@ Below are the recommended minimum specifications for a development server. The s
 * Sufficient HD or attached storage to hold your collection
 * 30 - 50GB for the Server OS & overhead
 
-## Testing/Playground
+## Testing / Playground
 
 Below are the recommended specifications for a laptop or desktop running a TEST version of ISLE:
 
-* Bring your own OS. 
+* Bring your own OS.
 * Minimum of 2 CPU cores
 * 8 - 16 GB of RAM is recommended
 * 128 - 500GB for the Desktop OS

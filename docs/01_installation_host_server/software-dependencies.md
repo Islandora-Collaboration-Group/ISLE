@@ -1,11 +1,13 @@
-# Installing Required Software to Run ISLE
+# Software Dependencies
+
+## Install Required Software to Run ISLE
 The following pieces of software are required to run ISLE:
 
 - Docker CE or EE (https://docker.com)
 - Docker-compose (https://docs.docker.com/compose/install/)
 - Git (https://github.com) (https://git-scm.com/)
- 
-This document will walk you through the installation of these components based on your operating system:
+
+Please select your operating system for installation instructions:
 
 - [Ubuntu](#ubuntu)
 - [CentOS](#centos)
@@ -26,83 +28,85 @@ This document will walk you through the installation of these components based o
   - If you are not already root, use either `sudo -s` or `sudo su` to become root.
 
 - Update and Install the following required software:
-```bash
+```
  apt-get update && upgrade
 ```
-```bash
+```
  apt-get install -y openssl git htop ntp wget curl nano apt-transport-https ca-certificates software-properties-common
 ```
 
 ### Step 2: Install Docker
 
 - Add the Docker Repository
-```bash
+```
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 ```
-```bash
+```
 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 ```
 - Update package list
-```bash
+```
 apt-get update
 ```
 - Install Docker
-```bash
+```
 apt-get install -y docker-ce
 ```
 
 - Enable and Start Docker
-```bash
+```
 systemctl enable docker && systemctl start docker
 ```
 
 ### Step 3: Install Docker-Compose
 
 - Copy and paste the command below
-```bash
+```
 curl -L https://github.com/docker/compose/releases/download/1.23.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
 ```
 
 - Test the Installation
-```bash
+```
 docker-compose --version
 ```
 **Example output:**
 
 `docker-compose version 1.23.1 ...`
 
-### Step 4: Add your user to the `docker` group
+### Step 4: Add Your User to the `docker` Group
 This will allow your user to run docker commands, including the ones required to launch the entire ISLE stack.
 
 - If you are still `root` (`whoami`) type `exit` to become your normal user.
 
 - Add yourself to the `docker` group.
-```bash
+```
 sudo usermod -aG docker $USER
 ```
 
 - Disconnect `exit` and reconnect for your effective groups to update.
 
-### Step 5: Clone ISLE repository
-**Please note:** The location you clone the repo to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
+### Step 5: Clone ISLE Repository
+**Please note:** The location you clone the repository to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
 
 Please run these steps as your user.
 
-- Clone the repo by running
-```bash
+* Clone the repository.
+```
 git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 ```
 
 - Change to the directory containing ISLE.
-```bash
+```
 cd ISLE
 ```
 
-Your host server is now configured and ready to run ISLE. Return to the [homepage](../index.md) and continue with step 3 for your type of deployment (or pick from the list):
+Your host server is now configured and ready to run ISLE.
 
-- [Test/Demo ISLE Deployment Guide](../02_installation_test/ild_installation_guide.md)
-- [New ISLE Site - Single Env](../03_installation_new_site/new_site_installation_guide_single.md)
-- [New ISLE Sites - Multi Envs](../03_installation_new_site/new_site_installation_guide_multi.md)
+Please continue by selecting your type of installation:
+
+- [Demo ISLE Site Installation](../02_installation_demo_site/demo_installation.md)
+- [New Site Installation: Single ISLE Environment](../03_installation_new_site/new_site_installation_single.md)
+- [New Site Installation: Multiple ISLE Environments](../03_installation_new_site/new_site_installation_multiple.md)
 - [Migration Guide to ISLE](../04_installation_migration/migration_installation_guide.md)
 
 
@@ -119,38 +123,38 @@ Your host server is now configured and ready to run ISLE. Return to the [homepag
   + If you are not already root, use either `sudo -s` or `sudo su` to become root.
 
 - Add the RHEL/CENTOS epel-release package repository first
-```bash
+```
 yum install -y epel-release
 ```
 
 - Install the following:
-```bash
+```
 yum install -y openssl git htop ntp wget curl nano
 ```
-```bash
+```
 yum install -y yum-utils device-mapper-persistent-data lvm2
 ```
 ### Step 2: Install Docker
 
 - Add the Docker Repository
-```bash
+```
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo`
 ```
 
 - Install Docker
-```bash
+```
 yum install -y docker-ce
 ```
 
 ### Step 3: Install Docker-Compose
 
 - Copy and paste the command below
-```bash
+```
 curl -L https://github.com/docker/compose/releases/download/1.23.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
 ```
 
 - Test the Installation
-```bash
+```
 docker-compose --version
 ```
 **Example output:**
@@ -162,32 +166,34 @@ This will allow your user to run docker commands, including the ones required to
 - If you are still `root` (`whoami`) type `exit` to become your normal user.
 
 - Add yourself to the `docker` group.
-```bash
+```
 sudo usermod -aG docker $USER
 ```
 
 - Disconnect `exit` and reconnect for your effective groups to update.
 
-### Step 5: Clone ISLE repository
-**Please note:** The location you clone the repo to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
+### Step 5: Clone ISLE Repository
+**Please note:** The location you clone the repository to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
 
 Please run these steps as your user.
 
-- Clone the repo by running
-```bash
+* Clone the repository.
+```
 git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 ```
 
 - Change to the directory containing ISLE.
-```bash
+```
 cd ISLE
 ```
 
-Your host server is now configured and ready to run ISLE. Return to the [homepage](../index.md) and continue with step 3 for your type of deployment (or pick from the list):
+Your host server is now configured and ready to run ISLE.
 
-- [Test/Demo ISLE Deployment Guide](../02_installation_test/ild_installation_guide.md)
-- [New ISLE Site - Single Env](../03_installation_new_site/new_site_installation_guide_single.md)
-- [New ISLE Sites - Multi Envs](../03_installation_new_site/new_site_installation_guide_multi.md)
+Please continue by selecting your type of installation:
+
+- [Demo ISLE Site Installation](../02_installation_demo_site/demo_installation.md)
+- [New Site Installation: Single ISLE Environment](../03_installation_new_site/new_site_installation_single.md)
+- [New Site Installation: Multiple ISLE Environments](../03_installation_new_site/new_site_installation_multiple.md)
 - [Migration Guide to ISLE](../04_installation_migration/migration_installation_guide.md)
 
 
@@ -197,26 +203,26 @@ Your host server is now configured and ready to run ISLE. Return to the [homepag
 ## Mac
 
 ### Step 1: Git Installation
-In order to get a copy (clone) of the current ISLE project, git will need to be installed. [Git](https://git-scm.com) is a software version control system for tracking changes in computer files and coordinating work on those files among multiple people.
+Git must be installed to get a copy (called a `clone`) of the current ISLE project. (Git is a software version control system for tracking changes in computer files and coordinating work on those files among multiple people.)
 
- * Open a terminal and enter: `git --version`.
-
-   * This command will inform the enduser if git is already installed.  
+ * Open a `terminal` (launch Spotlight and type "Terminal," then double-click the search result)
+ * Enter: `git --version`.
+ * If git is already installed, the above command will output the installed version number. For example:  
 
 ```
 $git --version
 git version 2.15.1
 ```
 
-  * If git is not installed, running that previous command may trigger the `Install Command Line Developer Tools` prompt. If the prompt appears:
-       * Click on the blue `Install` button for the license agreement.
-       * Click the white `Agree` button.
-       * The package will take 1-2 minutes to download.
-       * Click the `Done` button once finished.
+* If git is not installed, the above command may trigger the `Install Command Line Developer Tools` prompt to appear. If so:
+    * Click on the blue `Install` button for the license agreement.
+    * Click the white `Agree` button.
+    * The package will take 1-2 minutes to download.
+    * Click the `Done` button once finished.
 
-  * If git is not installed and the prompt doesn't show, then follow one of the recommended methods for installing git in this nice [tutorial](https://www.atlassian.com/git/tutorials/install-git)
+* If git is not installed and the prompt does not show, then use this tutorial to [Install Git on Mac OS X](https://www.atlassian.com/git/tutorials/install-git).
 
-If git is already installed, then please proceed to the next section.
+When git is installed, then please proceed to the next section.
 
 ### Step 2: Docker for Mac Installation
 
@@ -244,18 +250,18 @@ If git is already installed, then please proceed to the next section.
 
 * Please note: This process also installs the newest version of `docker-compose`.
 
-### Step 3: Clone ISLE repository
-**Please note:** The location you clone the repo to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
+### Step 3: Clone ISLE Repository
+**Please note:** The location you clone the repository to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
 
 Please run these steps as your user.
 
-- Clone the repo by running
-```bash
+* Clone the repository.
+```
 git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 ```
 
 - Change to the directory containing ISLE.
-```bash
+```
 cd ISLE
 ```
 _To improve performance on Mac OSX:_
@@ -265,79 +271,110 @@ _To improve performance on Mac OSX:_
     * `- ./mnt/html:/var/www/html`
     * Change to: `- ./mnt/html:/var/www/html:cached`
 
-Your host server is now configured and ready to run ISLE. Return to the [homepage](../index.md) and continue with step 3 for your type of deployment (or pick from the list):
+Your host server is now configured and ready to run ISLE.
 
-- [Test/Demo ISLE Deployment Guide](../02_installation_test/ild_installation_guide.md)
-- [New ISLE Site - Single Env](../03_installation_new_site/new_site_installation_guide_single.md)
-- [New ISLE Sites - Multi Envs](../03_installation_new_site/new_site_installation_guide_multi.md)
+Please continue by selecting your type of installation:
+
+- [Demo ISLE Site Installation](../02_installation_demo_site/demo_installation.md)
+- [New Site Installation: Single ISLE Environment](../03_installation_new_site/new_site_installation_single.md)
+- [New Site Installation: Multiple ISLE Environments](../03_installation_new_site/new_site_installation_multiple.md)
 - [Migration Guide to ISLE](../04_installation_migration/migration_installation_guide.md)
 
 
 ---
 
-
 ## Windows
 
 ### Step 1: Git Installation
-In order to get a copy (clone) of the current ISLE project, git will need to be installed. [Git for Windows](https://gitforwindows.org/) is a software version control system for tracking changes in computer files and coordinating work on those files among multiple people.
+Git must be installed to get a copy (called a `clone`) of the current ISLE project. (Git is a software version control system for tracking changes in computer files and coordinating work on those files among multiple people.)
 
-Dowload the installer and run.  The installer will prompt for several choices.  Generally, you should be okay with defaults except:
+* Press the Windows key.
+* Type `PowerShell`.
+* In the search results, RIGHT-CLICK `Windows PowerShell`, select `Run as administrator`, and enter `Yes` to prompt.
+* Enter: `git --version`.
+* If git is already installed, the above command will output the installed version number. For example:  
 
-* Change "use vi" to either Notepad++ (if installed) or nano.  Vi can be difficult to learn and Notepad++ and nano are simpler choices for those unfamiliar with vi.
+```
+$git --version
+git version 2.15.1
+```
 
-If git is already installed, then please proceed to the next section.
+* If git is not installed,
+    * [Download Git for Windows](https://gitforwindows.org/).
+    * Click `Download`, `Save` the file to your Desktop, `double-click` that file to install, then click `Yes` to the prompt.
+    * Click `Next` to accept all of the installer's default selections.
 
-### Step 2: Docker for Windows (Pro or Enterprise Editions) Installation
+When git is installed, then please proceed to the next section.
 
-* Go to [https://store.docker.com/editions/community/docker-ce-desktop-windows](https://store.docker.com/editions/community/docker-ce-desktop-windows)
+### Step 2: Docker for Windows Installation
 
-* Choose the "Get Docker CE for Windows (stable)" link to download the installer. You may need to create an account on Docker.com to continue.
+**Important: Docker requires Windows Professional or Enterprise Editions**
 
-* Run the installer and follow the prompts.  The default settings should be okay.
+* [Download Docker Desktop for Windows](https://store.docker.com/editions/community/docker-ce-desktop-windows)
 
-* You will be required to logout when the installation is complete.  
+* Click the `Please Login to Download` button on the right of the page (Login or click `Create Account`)
 
-* After logging back in, Docker will run automatically.  
+* Click the `Get Docker` button on the right of the page, `Save` the file to your Desktop, `double-click` that file to install, then click `Yes` to the prompt.
 
-* If you are asked to enable Hyper-V and Containers, click to continue.  
+* Click `OK` or `Next` to accept all of the installer's default selections.
 
-* Your system will reboot after a few minutes.
+* You will be required to `Close and log out` when the installation is complete.
 
-* Once fully started, one can see a whale icon in the notification area.  
+* The computer will reboot; please sign in.
 
-* If you are prompted to log in to Docker, you can choose to do so with your Docker.com account information, or you can simply close the window.  Docker is running and you do not need to log in to use it.
+* If prompted to enable `Hyper-V and Containers features`, click `OK`.
+
+* If prompted with a Docker popup dialogue to `Login with your Docker ID`, you may do so with your Docker.com account information, or you may simply close the window.  Docker is running and you do not need to login to use it.
+
+* One can see a whale icon in the notification area.  
 
 * Please note: This process also installs the newest version of `docker-compose`.
 
-### Step 3: Clone ISLE repository
-**Please note:** The location you clone the repo to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
+### Step 3: Clone ISLE Repository
+**Please note:** The location you select to clone the ISLE repository becomes your project directory. We recommend using the default user home directory; this location will include your configuration and log output of the Docker containers. (You may choose a different location, but it must not be a protected folder such as system or root directory.)
 
-Please run these steps as your user.
+* Use `PowerShell` (remember to `Run as administrator`)
+* Enter `cd ~` (to change to the user's home directory).
+* Clone the repository.
 
-* Clone the repo by running
-```bash
+```
 git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 ```
 
-* Edit .env file
-    * Use any text editor to open the file `.env`.  Note:  You may need to set Windows to [show hidden files](https://support.microsoft.com/en-us/help/4028316/windows-view-hidden-files-and-folders-in-windows-10)
-    * Uncomment the following line (by deleted the preceding #):
-
-    ```# COMPOSE_CONVERT_WINDOWS_PATHS=1```
-    
-    * to:
-    
-    ```COMPOSE_CONVERT_WINDOWS_PATHS=1```
-
-
 * Change to the directory containing ISLE.
-```bash
+```
 cd ISLE
 ```
 
-Your host server is now configured and ready to run ISLE. Return to the [homepage](../index.md) and continue with step 3 for your type of deployment (or pick from the list):
+* Copy the path of the present working directory.
+```
+pwd
+```
+* Use mouse/trackpad to highlight the full path (i.e. `C:\Users\somebody\ISLE`) and click enter to copy to clipboard.
 
-- [Test/Demo ISLE Deployment Guide](../02_installation_test/ild_installation_guide.md)
-- [New ISLE Site - Single Env](../03_installation_new_site/new_site_installation_guide_single.md)
-- [New ISLE Sites - Multi Envs](../03_installation_new_site/new_site_installation_guide_multi.md)
+* Edit .env file
+  * Press the Windows key.
+  * Type `Notepad`.
+  * In the search results, RIGHT-CLICK `Notepad`, select `Run as administrator`, and enter `Yes` to prompt.
+  * Select `File -> Open`
+  * In the `File name:` input box, paste the above copied path. Click enter.
+    * Use dropdown on right to change `Text Documents (*.txt)` to `All Files (*.*)` (if needed, see [How to show hidden files](https://support.microsoft.com/en-us/help/4028316/windows-view-hidden-files-and-folders-in-windows-10))
+    * Select the `.env` file and click `Open`
+    * Find the following line and uncomment it (by deleting the preceding `#` character):
+
+    ```# COMPOSE_CONVERT_WINDOWS_PATHS=1```
+
+    * to:
+
+    ```COMPOSE_CONVERT_WINDOWS_PATHS=1```
+
+    * Click `File > Save`, and then `File -> Exit`.
+
+Your host server is now configured and ready to run ISLE.
+
+Please continue by selecting your type of installation:
+
+- [Demo ISLE Site Installation](../02_installation_demo_site/demo_installation.md)
+- [New Site Installation: Single ISLE Environment](../03_installation_new_site/new_site_installation_single.md)
+- [New Site Installation: Multiple ISLE Environments](../03_installation_new_site/new_site_installation_multiple.md)
 - [Migration Guide to ISLE](../04_installation_migration/migration_installation_guide.md)

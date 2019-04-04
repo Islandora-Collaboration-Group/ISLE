@@ -1,10 +1,20 @@
-## ISLE Basics
+<!-- Glossary of Terms and Variables -->
+## Topics
 
-In simple terms, ISLE is a set of resources that allow one to build a fully functioning Islandora system fairly quickly using a system building tool called [Docker](https://docker.com)
+- [ISLE](#isle)
+- [Docker](#docker)
+- [Documentation / Development](#documentation-development)
+- [Solr](#solr)
+- [Systems](#systems)
+- [Virtualization](#virtualization)
 
-**Glossary of Terms**
+---
 
-### Docker
+## ISLE
+
+* **ISLE**: In simple terms, ISLE is a set of resources that allows one to build a fully functioning Islandora system fairly quickly using a system building tool called [Docker](https://docker.com).
+
+## Docker
 
 * **Containers**: [Docker containers](https://www.docker.com/what-container) are lightweight, stand-alone, executable packages of a piece of software that includes everything needed to run it: code, runtime, system tools, system libraries, settings. Each major component of Islandora runs in its own container.
 
@@ -30,7 +40,7 @@ a server you connected to via ssh (REMOTE).
 
 ---
 
-### Documentation / Development
+## Documentation / Development
 
 * **CLI / cli** - A command-line interface or command language interpreter (CLI), also known as command-line user interface, console user interface[1] and character user interface (CUI), is a means of interacting with a computer program where the user (or client) issues commands to the program in the form of successive lines of text (command lines). A program which handles the interface is called a command language interpreter or shell.
 
@@ -54,7 +64,7 @@ a server you connected to via ssh (REMOTE).
 
 ---
 
-### Solr
+## Solr
 
 **Please note:** Online versions of the SOLR documentation are for 6.6+ or higher, ISLE currently users version 4.10.4 only.
 
@@ -82,7 +92,7 @@ Solr - an open source enterprise search platform with the such features as full-
 
 ---
 
-### Systems
+## Systems
 
 * **cronjob** - The software utility cron is a time-based job scheduler in Unix-like computer operating systems. People who set up and maintain software environments use cron to schedule jobs (commands or shell scripts) to run periodically at fixed times, dates, or intervals. It typically automates system maintenance or administration [Learn more here](https://en.wikipedia.org/wiki/Cron). This is used by such utilities like [tmpreaper](http://manpages.ubuntu.com/manpages/trusty/man8/tmpreaper.8.html) and the Drupal site on the `apache` container.
 
@@ -128,7 +138,7 @@ Solr - an open source enterprise search platform with the such features as full-
 
 ---
 
-### Virtualization
+## Virtualization
 
 * **Vagrant**: [Vagrant](https://www.vagrantup.com/) provides easy to configure, reproducible, and portable work environments. Vagrant works on Mac, Linux, Windows, and more. Within the ISLE project there is a vagrant folder.
 

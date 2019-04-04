@@ -25,10 +25,10 @@ ISLE is designed to be an evolving but trusted environment to help create a mana
 
 ISLE public repository: [https://github.com/Islandora-Collaboration-Group/ISLE](https://github.com/Islandora-Collaboration-Group/ISLE)
 
-### How does it work?
+### How Does It Work?
 ISLE separates an institution’s customizations from core code, and moves that core code into containers that are easily updated, simplifying and largely automating the process of installation and updates/maintenance of Islandora. ISLE also bundles together the best shared modules into a common, production-ready and security-hardened platform.
 
-### Why is it needed?
+### Why Is It Needed?
 Islandora is a powerful digital repository comprised of more than 80 different open-source software libraries. This complex ecosystem makes Islandora difficult and expensive to install, maintain and customize. ISLE lowers the barrier to entry for new schools while allowing existing institutions to reallocate funds towards development or ingestion instead of maintenance.
 
 ### High Level Objective

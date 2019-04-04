@@ -6,7 +6,7 @@ _Composer_ is a PHP package/dependency manager employed in Drupal 8 and many oth
 
 _Composer_ is included, or 'baked in', to ISLE's Apache container image.  You can open a shell inside a running ISLE Apache container ([see these instructions for opening a terminal ina container](open-terminal-in-running-container.md) to use it.  When you open a shell inside the Apache container you'll initially be logged in as 'root'; however, _Composer_ should not be run as 'root' so once the shell is open you should switch to the _islandora_ user.  Do this by entering `sudo su islandora`, and your prompt should change to something like this: `islandora@dd9ee02aa718:/$`.  You can confirm that Composer is installed and accessible by entering `composer --version`, and you should see something like this in response: `Composer version 1.6.3 2018-01-31 16:28:17`.
 
-## Example: Islandora Multi-Importer
+## Example: Islandora Multi-Importer (IMI)
 
 The *Islandora Multi-Importer* (https://github.com/mnylc/islandora_multi_importer) module uses _Composer_ for installation.  The remainder of this guide will demonstrate how to install and enable the *Islandora Multi-Importer* or _IMI_.  
 
