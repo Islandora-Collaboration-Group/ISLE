@@ -1,6 +1,6 @@
 <!--- New Site Installation: Single ISLE Environment --->
 
-_Expectations:  It may take at least a minimum of **4 - 6 hours or more** to read this documentation and complete this installation. Please proceed slowly._
+_Expectations:  It may take at least **4 - 6 hours or more** to read this documentation and complete this installation. Please proceed slowly._
 
 This guide documents how an enduser can spin up and install a single ISLE / Islandora environment tailored to use only one unique domain / URL and one ISLE environment.
 
@@ -18,7 +18,7 @@ For additional help, please post a message to the [Islandora ISLE Google group](
 
 * Host Server that conforms to the specifications outlined in the [Hardware Requirements](../01_installation_host_server/hardware-requirements.md)
 
-* This new site guide is designed for a single ISLE Host server that has already followed the appropriate setup and configuration instructions in the [New ISLE Site section](../index.md#new-isle) of the guide.
+* This new site guide is designed for a single ISLE Host server that has already followed the appropriate setup and configuration instructions in the [New ISLE Site](../index.md#new-isle) section of the guide.
 
 * Instructions below also assume a MacOS or Linux laptop or workstation to be used in conjunction with the ISLE Host Server for deploying configs, code, files etc. Windows users may have to adjust / swap out various tools as needed.
 
@@ -103,9 +103,37 @@ You should edit these files with unique users/passwords, your domain name, site-
 
 The config directory has many purposes like holding customized configuration files mounted to specific containers (which we have no covered here), but for a single simple site we only use it to hold our proxy configs and as a place to store our SSL Certificate and Key.
 
--------
+---
 
-### Proxy Directory
+## Edit File `docker-compose.yml`
+
+**For Production and Staging Servers Only:** Open the `docker-compose.yml` file and modify the environment variables called JAVA_MAX_MEM and JAVA_MIN_MEM for fedora, solr, and image-services.
+
+```yaml
+fedora:
+  ...
+  environment:
+    - JAVA_MAX_MEM=2048M
+    - JAVA_MIN_MEM=256M
+...
+
+solr:
+  ...
+  environment:
+    - JAVA_MAX_MEM=2048M
+    - JAVA_MIN_MEM=256M
+...
+
+image-services:
+  ...
+  environment:
+    - JAVA_MAX_MEM=2048M
+    - JAVA_MIN_MEM=128M
+```
+
+---
+
+## Proxy Directory
 
 If need be, please refer to the **Systems** section of the [Glossary](../glossary.md) for relevant terms to help guide installation.
 
@@ -150,4 +178,4 @@ There are also additional links for the enduser to learn how to combine the SSL 
 
 * Check the newly created and running new site by opening a browser and navigating to your site domain e.g. `https://digital-collections.example.edu`, you should now see an un-themed Drupal site.
 
---------
+---

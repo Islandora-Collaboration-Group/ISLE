@@ -1,3 +1,5 @@
+<!--- Migration Merge Checklist --->
+
 This section is to serve as a new checklist for the editing or merging of the copied Islandora Production server(s) data and config files to the appropriate config directory on the enduser's local laptop and ultimately copied / deployed back to the new ISLE Host Server.
 
 The suggested workflow is for endusers to review the Production file(s) first, make note of any settings and then make appropriate edits within the `yourdomain-config` directory to change values, add passwords or usernames etc on your local laptop with the ultimate goal of checking all results into a git repository for deploy later on the ISLE Host server.

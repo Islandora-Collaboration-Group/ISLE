@@ -27,7 +27,7 @@ For additional help, please post a message to the [Islandora ISLE Google group](
 
 Enable the Demo ISLE Site to be viewed locally as: `https://isle.localdomain`
 
-* Please use these instructions for [Editing the "/etc/hosts" File](../07_appendices/editing-the-hosts-file.md).
+* Please use these instructions to [Edit the "/etc/hosts" File](../07_appendices/edit-the-hosts-file.md).
 
 * After completing the above, please continue below with _Step 2: Launch Process_.
 
@@ -35,32 +35,25 @@ Enable the Demo ISLE Site to be viewed locally as: `https://isle.localdomain`
 
 ### Step 2: Launch Process
 
-* In terminal (shell) or PowerShell navigate to your ISLE project directory. You may already be in this directory if you are coming from the [Software Requirements Guide](../01_installation_host_server/software-dependencies.md).
-
-The following steps below are for all users (_Vagrant, VM, non Vagrant and Docker for MacOS, Windows and Ubuntu Desktop users alike._)
-
-The install times stated below for each container are highly dependent on the enduser's available Internet bandwidth and could take more or less time accordingly.
-
-* Within the open terminal, run:
+* Open a `terminal` (Windows: open `PowerShell`)
+* Navigate to your ISLE project directory. (You may already be in this directory if you are coming from the [Software Dependencies](../01_installation_host_server/software-dependencies.md).)
+* Download and start all ISLE Docker images (_~6 GB of data may take 5-10 minutes_):
 ```
 docker-compose up -d
 ```
 
-* This is going to download and start all ISLE Docker images (_roughly 6 GB of data so it may take a little while depending on your Internet connection_)
-
-* To check if the containers are running: `docker ps` (shows only running containers)
-
-    * If you don't see all containers try: `docker ps -a` (shows all containers running or not)
-
-**If all containers are NOT running, then proceed to the Troubleshooting section first before advancing to the "Install script on Apache container" section below**
+* After the above process is completed:
+    * View only the running containers: `docker ps`
+    * View all containers (both those running and stopped): `docker ps -a`
+    * **If any `isle-` containers are NOT running, then use [Demo ISLE Site Troubleshooting](../02_installation_demo/demo_troubleshooting.md) to solve before continuing below.** <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running --->
 
 ---
 
 ### Step 3: Run Install Script
 
-This build process may take 10 - 20 minutes (_depending on system and internet speeds_)
+This process may take 10 - 20 minutes (_depending on system and internet speeds_)
 
-* Run the following install site script on the Apache container by copying and pasting this command:
+* Run the install site script on the Apache container by copying and pasting this command:
 ```
 docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh
 ```
@@ -82,13 +75,12 @@ docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isl
 
 ### Step 4: Test the Site
 
-* Enter this URL `https://isle.localdomain` into your web browser.
+* In your web browser, enter this URL: `https://isle.localdomain`
 <!--- TODO: Add error message and how to proceed (click 'Advanced...') --->
 * Note: You may see an SSL error warning that the site is unsafe. It is safe, it simply uses "self-signed" SSL certs. Ignore the error and proceed to the site.
 * Log in to the local Islandora site:
     * Username: `isle`
     * Password: `isle`
-* ([Demo ISLE Site Resources](demo_resources.md) contains lists of passwords for Docker containers.)
 
 ---
 
@@ -102,7 +94,7 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
 ```
 
 * Follow these ingestion instructions [How to Add an Item to a Digital Collection](https://wiki.duraspace.org/display/ISLANDORA/How+to+Add+an+Item+to+a+Digital+Collection)
-* ([Getting Started with Islandora](https://wiki.duraspace.org/display/ISLANDORA/Getting+Started+with+Islandora) contains explanations about content models, collections, and datastreams.
+* (Note: [Getting Started with Islandora](https://wiki.duraspace.org/display/ISLANDORA/Getting+Started+with+Islandora) contains explanations about content models, collections, and datastreams.)
 * After ingesting content, you will need to add an Islandora Simple Search block to the Drupal structure. (The default search box will only search Drupal content, not Islandora content.)
     * Select from the menu: `Structure > Blocks > Islandora Simple Search`
     * Select: `Sidebar Second`
@@ -112,5 +104,5 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
 ---
 
 ### Step 6: Additional Resources
-* [Demo ISLE Site Resources](demo_resources.md) contains passwords for the Docker containers.
+* [Demo ISLE Site Resources](demo_resources.md) contains Docker container passwords and URLs for administrator tools.
 * [Demo ISLE Site Troubleshooting](demo_troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.

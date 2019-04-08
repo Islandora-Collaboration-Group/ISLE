@@ -1,3 +1,5 @@
+<!--- PAGE_TITLE --->
+
 ## How to contribute to ISLE
 
 Please join us in our open Islandora ISLE Interest Group meetings and our Islandora ISLE Google group. We welcome questions and suggestions, and respond promptly to requests for technical help.

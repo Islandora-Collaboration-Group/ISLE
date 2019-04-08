@@ -3,6 +3,7 @@ site_description: Documentation for Islandora Enterprise (ISLE)
 
 site_dir: site
 docs_dir: docs
+extra_css: [extra.css]
 #markdown_extensions:
 #    - del_ins
 theme:
@@ -30,7 +31,7 @@ nav:
       - 'New Site Installation: Single ISLE Environment': '03_installation_new_site/new_site_installation_single.md'
       - 'New Site Installation: Multiple ISLE Environments': '03_installation_new_site/new_site_installation_multiple.md'
     - 'Migrate an Existing Islandora Site to ISLE':
-      - 'Migration Guide': '04_installation_migration/migration_installation_guide.md'
+      - 'Migration Installation Guide': '04_installation_migration/migration_installation_guide.md'
       - 'Migration Export Checklist': '04_installation_migration/migration_export_checklist.md'
       - 'Migration Merge Checklist': '04_installation_migration/migration_merge_checklist.md'
       - 'Migration Reindex Process': '04_installation_migration/migration_reindex_process.md'
@@ -44,7 +45,7 @@ nav:
   - 'Testing Guide': '05_maintainer_docs/maintainer_testing_guide.md'
 - 'Appendices':
   - 'Updating ISLE': '07_appendices/update_isle.md'
-  - 'Editing the "/etc/hosts" File': '07_appendices/editing-the-hosts-file.md'
+  - 'Edit the "/etc/hosts" File': '07_appendices/edit-the-hosts-file.md'
   - 'Sample IT Department Request Letter': '07_appendices/sample-it-department-request.md'
   - 'Installing a Drupal Module with Composer': '07_appendices/installing-module-with-composer.md'
   - 'Installing a Drupal Module with Drush': '07_appendices/installing-module-with-drush.md'
