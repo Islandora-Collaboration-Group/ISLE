@@ -45,7 +45,7 @@ docker-compose up -d
 * After the above process is completed:
     * View only the running containers: `docker ps`
     * View all containers (both those running and stopped): `docker ps -a`
-    * **If any `isle-` containers are NOT running, then use [Demo ISLE Site Troubleshooting](../02_installation_demo/demo_troubleshooting.md) to solve before continuing below.** <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running --->
+    * **If any `isle-` containers are NOT running, then use [Demo ISLE Site Troubleshooting](demo_troubleshooting.md) to solve before continuing below.** <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running --->
 
 ---
 
