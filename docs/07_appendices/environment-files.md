@@ -1,3 +1,5 @@
+<!--- PAGE_TITLE --->
+
 # The ISLE Environment Files and Settings
 The .env and tomcat.env files located in the folder with the docker-comopse.yml are key to configuring the ISLE stack to suit your needs.
 

@@ -1,3 +1,5 @@
+<!--- PAGE_TITLE --->
+
 # Installing a Module with Composer
 
 _Note: There is always more than one way to do things, like installing a module, with Docker.  This is just one of many approaches for installing a module using Composer._

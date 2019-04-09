@@ -1,3 +1,5 @@
+<!--- Migration Export Checklist --->
+
 This section is a checklist of materials to **COPY** from the current running Islandora Production server(s) to the appropriate storage location / directory in order to build your ISLE instance.
 
 **Please Note:** _Ubuntu / Debian style paths are used for all examples file locations below, endusers might have different locations for these files HOWEVER the file and directory names etc should be roughly the same._

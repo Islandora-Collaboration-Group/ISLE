@@ -1,3 +1,5 @@
+<!--- PAGE_TITLE --->
+
 | ISLE Image                          | Container    | Software / Service | Version       | Logs Path on Container |
 | ------------                        | ------------ | ------------       | ------------- | -------------          |
 | [islandoracollabgroup/isle-apache](https://hub.docker.com/r/islandoracollabgroup/isle-apache/) | isle-apache  | Docker Tag | [latest, 2.4](https://github.com/Islandora-Collaboration-Group/ISLE/blob/master/apache/Dockerfile) |                        |

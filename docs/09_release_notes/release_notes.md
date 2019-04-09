@@ -1,3 +1,5 @@
+<!--- PAGE_TITLE --->
+
 # ISLE Release 1.1 (Codenamed `Pembroke`)
 
 * Base Images to serve them all:

@@ -1,10 +1,11 @@
+<!--- Demo ISLE Site Troubleshooting --->
 
 **Please select a topic:**
 
 - [Port Conflicts](#port-conflicts)
 - [Non-Running Docker Containers](#non-running-docker-containers)
 
-### Port Conflicts
+## Port Conflicts
 If you encounter an error like this:
 
 `Error starting userland proxy: Bind for 0.0.0.0:xxxx failed: port is already allocated`
@@ -26,7 +27,7 @@ You may need to remove or disable these local web servers before you can success
 
 Once your web server(s) have been disabled, resume the ISLE install process by repeating your last installation command, presumably `docker-compose up -d`.
 
-### Non-Running Docker Containers
+## Non-Running Docker Containers
 If you don't see all containers running, then stop the running containers with `docker-compose down` and start the containers one at a time following the instructions below:
 
 *  MySQL image pull & container launch

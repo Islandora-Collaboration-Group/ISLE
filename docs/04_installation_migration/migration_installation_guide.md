@@ -1,4 +1,6 @@
-_Expectations:  It may take at least a minimum of **8 hours or more** to read this documentation and complete this installation, and depending on access to resources, may take several days. Please proceed slowly._
+<!--- Migration Installation Guide --->
+
+_Expectations:  It may take at least **8 hours or more** to read this documentation and complete this installation, and depending on access to resources, may take several days. Please proceed slowly._
 =======
 ## THIS SECTION OF DOCUMENTATION IS A WORK IN PROGRESS.
 
@@ -12,7 +14,7 @@ For additional help, please post a message to the [Islandora ISLE Google group](
 
 * You understand that all directions in this guide depend on the type of local computer used to connect via browser to Islandora. The instructions below assume a MacOS or Linux laptop or workstation to be used in conjunction with the ISLE Host Server for deploying configs, code, files etc. Windows users may have to adjust / swap out various tools as needed.
 
-* A host server that conforms to the specifications outlined in - and has followed the appropriate setup and configuration instructions in - the [New ISLE Site section](../01_installation_host_server) of the guide.
+* A host server that conforms to the specifications outlined in - and has followed the appropriate setup and configuration instructions in - the [New ISLE Site](../01_installation_host_server) section of the guide.
 
 * You have disk space on - or mounted to - the host server large enough to store a **copy** of your fedora data store
 
@@ -35,7 +37,7 @@ For additional help, please post a message to the [Islandora ISLE Google group](
       * `grep --include=filter-drupal.xml -rnw -e 'dbname.*user.*password.*"' / 2>/dev/null`   
       * Example output:
          ```connection server="localhost" port="3306" dbname="**islandora**" user="**drupalIslandora**" password="**Kjs8n5zQXfPNhZ9k**" ```
-         
+
          1. Username: copy the value from `user=`
          2. Password: copy the value from `password=`
          3. Database: copy the value from `dbname=`
@@ -168,7 +170,6 @@ The **goal** is to merge all site-specific data (domain names, variables, userna
 ### Docker .env File:
 =======
 
-
 * Edit the .env file and change the values of COMPOSE_PROJECT_NAME, BASE_DOMAIN, and CONTAINER_SHORT_ID. e.g. for a production site you may use:
 
     `COMPOSE_PROJECT_NAME=isleproduction`
@@ -181,6 +182,33 @@ The **goal** is to merge all site-specific data (domain names, variables, userna
 
 ---
 
+## Edit File `docker-compose.yml`
+
+**For Production and Staging Servers Only:** Open the `docker-compose.yml` file and modify the environment variables called JAVA_MAX_MEM and JAVA_MIN_MEM for fedora, solr, and image-services.
+
+```yaml
+fedora:
+  ...
+  environment:
+    - JAVA_MAX_MEM=2048M
+    - JAVA_MIN_MEM=256M
+...
+
+solr:
+  ...
+  environment:
+    - JAVA_MAX_MEM=2048M
+    - JAVA_MIN_MEM=256M
+...
+
+image-services:
+  ...
+  environment:
+    - JAVA_MAX_MEM=2048M
+    - JAVA_MIN_MEM=128M
+```
+
+---
 
 ## Final Steps
 
@@ -208,7 +236,7 @@ The **goal** is to merge all site-specific data (domain names, variables, userna
     * run `git push origin master` this will push all your changes to the repository further changes should be made on branches for different servers or to master branch for this same server
 
 
---------
+---
 
 ##Clone Custom Configuration to Host Server
 

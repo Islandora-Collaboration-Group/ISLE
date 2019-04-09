@@ -1,3 +1,5 @@
+<!--- PAGE_TITLE --->
+
 # Opening a Terminal/Shell Inside a Running Container
 
 At times you may find it necessary to open a terminal window or 'shell' inside a running container.  In ISLE this will usually involve the 'Apache' container.

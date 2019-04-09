@@ -1,3 +1,5 @@
+<!--- PAGE_TITLE --->
+
 The ISLE project is currently testing the ISLE 1.1 Release Candidate.  We are actively soliciting volunteers to test the following scenarios:
 
 * Installing a New ISLE Site on Ubuntu 18.04

@@ -13,12 +13,12 @@
 
 ### Step 1: Install Server Prerequisites and Git
 
-- Open a terminal on your local laptop or workstation and ssh to the server / VM:
+- Open a terminal on your local laptop or workstation and ssh to the server or VM.
 
-- You need to become root first
-  - If you are not already root, use either `sudo -s` or `sudo su` to become root.
+- You must have `root` level permissions.
+    - If you are not already `root`, enter either `sudo -s` or `sudo su` to become root.
 
-- Update and Install the following required software:
+- Update and install the following required software:
 ```
  apt-get update && upgrade
 ```
@@ -51,35 +51,36 @@ systemctl enable docker && systemctl start docker
 
 ### Step 3: Install Docker-Compose
 
-- Copy and paste the command below
+- Copy and paste the command below.
+<!--- Why do we hardcode this version of docker-compose? Is there a way to get the latest stable release instead? Or do we create a list of software versions to update periodically? Note: This occurs 2 times in this file. --->
 ```
 curl -L https://github.com/docker/compose/releases/download/1.23.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
 ```
 
-- Test the Installation
+- Test the Installation.
 ```
 docker-compose --version
 ```
-**Example output:**
 
-`docker-compose version 1.23.1 ...`
+- **Example output:**
+`docker-compose version 1.23.1, build 1110ad01`
 
 ### Step 4: Add Your User to the `docker` Group
-This will allow your user to run docker commands, including the ones required to launch the entire ISLE stack.
+Allow your user to run Docker commands and to launch the entire ISLE stack.
 
-- If you are still `root` (`whoami`) type `exit` to become your normal user.
+- If you are still `root` (`whoami`), type `exit` to become your normal user.
 
 - Add yourself to the `docker` group.
 ```
 sudo usermod -aG docker $USER
 ```
 
-- Disconnect `exit` and reconnect for your effective groups to update.
+- Type `exit` and then reconnect (this allows your effective groups to update).
 
 ### Step 5: Clone ISLE Repository
 **Please note:** The location you clone the repository to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
 
-Please run these steps as your user.
+Please run these steps as your normal user (not `root`):
 
 * Clone the repository.
 ```
@@ -98,7 +99,7 @@ Your host server is now configured and ready to run ISLE.
 - [Demo ISLE Site Installation](../02_installation_demo_site/demo_installation.md)
 - [New Site Installation: Single ISLE Environment](../03_installation_new_site/new_site_installation_single.md)
 - [New Site Installation: Multiple ISLE Environments](../03_installation_new_site/new_site_installation_multiple.md)
-- [Migration Guide to ISLE](../04_installation_migration/migration_installation_guide.md)
+- [Migration Installation Guide](../04_installation_migration/migration_installation_guide.md)
 
 ---
 
@@ -106,12 +107,12 @@ Your host server is now configured and ready to run ISLE.
 
 ### Step 1: Install Server Prerequisites and Git
 
-- Open a terminal on your local laptop or workstation and ssh to the server / VM:
+- Open a terminal on your local laptop or workstation and ssh to the server or VM.
 
-- You need to become root first
-  + If you are not already root, use either `sudo -s` or `sudo su` to become root.
+- You must have `root` level permissions.
+    - If you are not already `root`, enter either `sudo -s` or `sudo su` to become root.
 
-- Add the RHEL/CENTOS epel-release package repository first
+- Add the CentOS/RHEL epel-release package repository.
 ```
 yum install -y epel-release
 ```
@@ -137,34 +138,35 @@ yum install -y docker-ce
 
 ### Step 3: Install Docker-Compose
 
-- Copy and paste the command below
+- Copy and paste the command below.
 ```
 curl -L https://github.com/docker/compose/releases/download/1.23.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
 ```
 
-- Test the Installation
+- Test the Installation.
 ```
 docker-compose --version
 ```
-**Example output:**
-`docker-compose version 1.23.1 ...`
 
-### Step 4: Add your user to the `docker` group
-This will allow your user to run docker commands, including the ones required to launch the entire ISLE stack.
+- **Example output:**
+`docker-compose version 1.23.1, build 1110ad01`
 
-- If you are still `root` (`whoami`) type `exit` to become your normal user.
+### Step 4: Add Your User to the `docker` Group
+Allow your user to run Docker commands and to launch the entire ISLE stack.
+
+- If you are still `root` (`whoami`), type `exit` to become your normal user.
 
 - Add yourself to the `docker` group.
 ```
 sudo usermod -aG docker $USER
 ```
 
-- Disconnect `exit` and reconnect for your effective groups to update.
+- Type `exit` and then reconnect (this allows your effective groups to update).
 
 ### Step 5: Clone ISLE Repository
 **Please note:** The location you clone the repository to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
 
-Please run these steps as your user.
+Please run these steps as your normal user (not `root`):
 
 * Clone the repository.
 ```
@@ -183,7 +185,7 @@ Your host server is now configured and ready to run ISLE.
 - [Demo ISLE Site Installation](../02_installation_demo_site/demo_installation.md)
 - [New Site Installation: Single ISLE Environment](../03_installation_new_site/new_site_installation_single.md)
 - [New Site Installation: Multiple ISLE Environments](../03_installation_new_site/new_site_installation_multiple.md)
-- [Migration Guide to ISLE](../04_installation_migration/migration_installation_guide.md)
+- [Migration Installation Guide](../04_installation_migration/migration_installation_guide.md)
 
 ---
 
@@ -240,7 +242,7 @@ When git is installed, then please proceed to the next section.
 ### Step 3: Clone ISLE Repository
 **Please note:** The location you clone the repository to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
 
-Please run these steps as your user.
+Please run these steps as your normal user (not `root`):
 
 * Clone the repository.
 ```
@@ -265,7 +267,7 @@ Your host server is now configured and ready to run ISLE.
 - [Demo ISLE Site Installation](../02_installation_demo_site/demo_installation.md)
 - [New Site Installation: Single ISLE Environment](../03_installation_new_site/new_site_installation_single.md)
 - [New Site Installation: Multiple ISLE Environments](../03_installation_new_site/new_site_installation_multiple.md)
-- [Migration Guide to ISLE](../04_installation_migration/migration_installation_guide.md)
+- [Migration Installation Guide](../04_installation_migration/migration_installation_guide.md)
 
 ---
 
@@ -363,4 +365,4 @@ Your host server is now configured and ready to run ISLE.
 - [Demo ISLE Site Installation](../02_installation_demo_site/demo_installation.md)
 - [New Site Installation: Single ISLE Environment](../03_installation_new_site/new_site_installation_single.md)
 - [New Site Installation: Multiple ISLE Environments](../03_installation_new_site/new_site_installation_multiple.md)
-- [Migration Guide to ISLE](../04_installation_migration/migration_installation_guide.md)
+- [Migration Installation Guide](../04_installation_migration/migration_installation_guide.md)

@@ -1,3 +1,5 @@
+<!--- PAGE_TITLE --->
+
 You have the choice of using Ansible to deploy the Docker Host server dependencies instead of performing manual commands on either a CentOS or Ubuntu OS. The Ansible script and configuration files can be found in the root folder of the ISLE git repository in a directory named [ansible](https://github.com/Islandora-Collaboration-Group/ISLE/tree/master/ansible). Additionally, the Ansible script is designed to detect the chosen operating system and then install the appropriate dependencies with minimal user interaction or prior configuration.
 
 Ansible is an free open source automation platform / tool which runs on Linux, Mac or BSD, doesn’t use local or remote agents and is relatively easy to setup. Ansible can help with server configuration management, application deployment, task automation and IT orchestration (_running tasks in sequence on several different servers or devices_).
@@ -48,7 +50,7 @@ Within the `docker_install.yml` Ansible playbook, there are the following roles 
 
 | Ansible Role                | Action / Event                                                  |
 | -------------               | -------------                                                   |
-| `dependencies`              | _Installs software dependencies & tools as described above_     |
+| `dependencies`              | _Installs software dependencies and tools_     |
 | `users_groups`              | _Adds users, groups and updates permissions as described above_ |
 | `docker`                    | _Installs Docker_                                               |
 | `docker_compose`            | _Installs Docker Compose_                                       |
@@ -56,7 +58,7 @@ Within the `docker_install.yml` Ansible playbook, there are the following roles 
 | `docker_images`             | _Pulls down the latest ISLE Docker Images from Dockerhub.com_   |
 
 
-#### Installs Software Dependencies and Tools Including
+#### Installs Software Dependencies and Tools
 
 The Ansible script will deploy the following to the ISLE Host server:
 

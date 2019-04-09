@@ -1,6 +1,8 @@
+<!--- PAGE_TITLE --->
+
 If you are already running an older version of ISLE, update to the latest version by doing the following:
 
-**WARNING** It is recommended you do not do this on a production server until after the ISLE 
+**WARNING** It is recommended you do not do this on a production server until after the ISLE
 1.1 Release Candidate has been fully tested by the community and released as a stable version.
 
 These instructions assume you have already installed a version of ISLE using git.

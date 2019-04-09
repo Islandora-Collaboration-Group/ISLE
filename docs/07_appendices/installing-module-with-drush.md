@@ -1,3 +1,5 @@
+<!--- PAGE_TITLE --->
+
 # Installing a Module with Drush (and Git)
 
 _Note: There is always more than one way to do things, like installing a module, with Docker.  This is just one of many approaches for installing a module using Drush, and in some cases, Git.  This technique works, in Islandora version 7.x, for most Drupal and Islandora modules._

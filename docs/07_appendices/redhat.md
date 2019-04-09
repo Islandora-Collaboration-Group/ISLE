@@ -1,3 +1,5 @@
+<!--- PAGE_TITLE --->
+
 The ISLE Maintainers do not recommend using Red Hat at this time for the following reason:
 
 Red Hat Enterprise Linux (RHEL) seems to not support the free Docker Community Edition (CE), although RHEL does seem to support Docker Enterprise Edition (Docker EE) although the latter must be purchased.

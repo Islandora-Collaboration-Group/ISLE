@@ -1,3 +1,5 @@
+<!--- Migration Merge Checklist --->
+
 When migrating any non-ISLE Islandora site, it is crucial to rebuild (reindex) the following three indices from the FOXML and datastream files on disk.
 
 **Fedora's indices:**
