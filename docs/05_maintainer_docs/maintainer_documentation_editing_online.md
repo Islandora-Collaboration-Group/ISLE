@@ -10,7 +10,7 @@
 
 **Please note:** You'll need to create separate pull requests for each type of change whether editing or adding new pages with a `mkdocs.yml` file update. Using the online editor means you can only do one thing at a time.
 
-If you need to edit more than one file or want to create more than one new page of content, it is recommended to instead follow the steps contained within the [Documentation Editing - Local](maintainer_documentation_editing_local.md) Guide.
+If you need to edit more than one file or want to create more than one new page of content, it is recommended to instead follow the steps contained within the [Documentation Editing - Local](../05_maintainer_docs/maintainer_documentation_editing_local.md) Guide.
 
 ---
 

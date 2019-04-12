@@ -16,7 +16,7 @@ Please note there are two key elements to the ISLE Documentation.
     * [https://github.com/Islandora-Collaboration-Group/ISLE-Documentation](https://github.com/Islandora-Collaboration-Group/ISLE-Documentation)
 
 
-_Please refer to the **Documentation** section of the [Glossary](../glossary.md) if terms used are not clear._
+_Please refer to the **Documentation** section of the [Glossary](../07_appendices/glossary.md) if terms used are not clear._
 
 
 A very handy primer for writing documentation using `MkDocs` has been written here: [http://www.mkdocs.org/user-guide/writing-your-docs/](http://www.mkdocs.org/user-guide/writing-your-docs/)

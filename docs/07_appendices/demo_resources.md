@@ -1,4 +1,4 @@
-<!--- Demo ISLE Site Resources --->
+# Demo ISLE Site Resources
 
 ### Local URL
 Always use the `https://isle.localdomain` domain to view and log in to a local site. (Do not use an IP address, such as `https://10.10.10.130 or https://127.0.0.01` as some components may not function correctly.)

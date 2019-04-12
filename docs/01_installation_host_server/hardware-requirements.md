@@ -1,4 +1,4 @@
-<!--- Hardware Requirements --->
+# Hardware Requirements
 
 The ISLE host server can be a laptop or workstation, physical server, virtual machine (VM) or cloud service. An SSH connection with a user that has root or admin privileges is necessary. If an IT department is providing the server environment, please see the [Sample IT Department Request Letter](../07_appendices/sample-it-department-request.md) for requesting the server.
 

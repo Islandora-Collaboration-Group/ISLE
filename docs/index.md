@@ -22,7 +22,7 @@ This documentation provides friendly and clear instructions on how to do the fol
 
 2. [Software Dependencies](01_installation_host_server/software-dependencies.md) - Install required software dependencies on host server.
 
-3. [Demo ISLE Site Installation](02_installation_demo_site/demo_installation.md) - Install ISLE, run it, and view your site.
+3. [Demo ISLE Site Installation](02_installation_site/site_installation.md) - Install ISLE, run it, and view your site.
 
 ---
 
@@ -35,8 +35,8 @@ Follow these instructions if you **do not** have an existing Islandora installat
 2. [Software Dependencies](01_installation_host_server/software-dependencies.md) - Install required software dependencies on host server.
 
 3. Install ISLE, run it, and view your site.
-    * [New Site Installation: Single ISLE Environment](03_installation_new_site/new_site_installation_single.md) - Setup **one** ISLE site within a single environment (e.g. production only) or run all of your ISLE environments on separate ISLE host servers or VMs.
-    * [New Site Installation: Multiple ISLE Environments](03_installation_new_site/new_site_installation_multiple.md) - Setup **multiple** ISLE sites using multiple environments (e.g. development, staging, and production) on one ISLE Host server or VM.
+    * [New Site Installation: Single ISLE Environment](02_installation_site/site_installation_single.md) - Setup **one** ISLE site within a single environment (e.g. production only) or run all of your ISLE environments on separate ISLE host servers or VMs.
+    * [New Site Installation: Multiple ISLE Environments](02_installation_site/site_installation_multiple.md) - Setup **multiple** ISLE sites using multiple environments (e.g. development, staging, and production) on one ISLE Host server or VM.
         - Note: setting up multiple ISLE sites and environments on one ISLE host server will require adequate resources. A rough estimate is to use the [Hardware Requirements](01_installation_host_server/hardware-requirements.md) and multiply by three. Please note that a `dev` environment needs fewer resources, but `stage` and `prod` environments should mirror each other in resource usage and setup.
 
 ---

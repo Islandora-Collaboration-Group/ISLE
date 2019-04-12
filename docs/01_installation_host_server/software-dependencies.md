@@ -1,4 +1,4 @@
-<!--- Software Dependencies --->
+# Software Dependencies
 
 **Please select your operating system:**
 
@@ -96,9 +96,9 @@ Your host server is now configured and ready to run ISLE.
 
 **Please continue by selecting your type of installation:**
 
-- [Demo ISLE Site Installation](../02_installation_demo_site/demo_installation.md)
-- [New Site Installation: Single ISLE Environment](../03_installation_new_site/new_site_installation_single.md)
-- [New Site Installation: Multiple ISLE Environments](../03_installation_new_site/new_site_installation_multiple.md)
+- [Demo ISLE Site Installation](../02_installation_site/site_installation.md)
+- [New Site Installation: Single ISLE Environment](../02_installation_site/site_installation_single.md)
+- [New Site Installation: Multiple ISLE Environments](../02_installation_site/site_installation_multiple.md)
 - [Migration Installation Guide](../04_installation_migration/migration_installation_guide.md)
 
 ---
@@ -182,9 +182,9 @@ Your host server is now configured and ready to run ISLE.
 
 **Please continue by selecting your type of installation:**
 
-- [Demo ISLE Site Installation](../02_installation_demo_site/demo_installation.md)
-- [New Site Installation: Single ISLE Environment](../03_installation_new_site/new_site_installation_single.md)
-- [New Site Installation: Multiple ISLE Environments](../03_installation_new_site/new_site_installation_multiple.md)
+- [Demo ISLE Site Installation](../02_installation_site/site_installation.md)
+- [New Site Installation: Single ISLE Environment](../02_installation_site/site_installation_single.md)
+- [New Site Installation: Multiple ISLE Environments](../02_installation_site/site_installation_multiple.md)
 - [Migration Installation Guide](../04_installation_migration/migration_installation_guide.md)
 
 ---
@@ -264,9 +264,9 @@ Your host server is now configured and ready to run ISLE.
 
 **Please continue by selecting your type of installation:**
 
-- [Demo ISLE Site Installation](../02_installation_demo_site/demo_installation.md)
-- [New Site Installation: Single ISLE Environment](../03_installation_new_site/new_site_installation_single.md)
-- [New Site Installation: Multiple ISLE Environments](../03_installation_new_site/new_site_installation_multiple.md)
+- [Demo ISLE Site Installation](../02_installation_site/site_installation.md)
+- [New Site Installation: Single ISLE Environment](../02_installation_site/site_installation_single.md)
+- [New Site Installation: Multiple ISLE Environments](../02_installation_site/site_installation_multiple.md)
 - [Migration Installation Guide](../04_installation_migration/migration_installation_guide.md)
 
 ---
@@ -362,7 +362,7 @@ Your host server is now configured and ready to run ISLE.
 
 **Please continue by selecting your type of installation:**
 
-- [Demo ISLE Site Installation](../02_installation_demo_site/demo_installation.md)
-- [New Site Installation: Single ISLE Environment](../03_installation_new_site/new_site_installation_single.md)
-- [New Site Installation: Multiple ISLE Environments](../03_installation_new_site/new_site_installation_multiple.md)
+- [Demo ISLE Site Installation](../02_installation_site/site_installation.md)
+- [New Site Installation: Single ISLE Environment](../02_installation_site/site_installation_single.md)
+- [New Site Installation: Multiple ISLE Environments](../02_installation_site/site_installation_multiple.md)
 - [Migration Installation Guide](../04_installation_migration/migration_installation_guide.md)
