@@ -12,13 +12,13 @@ These images will contain the necessary base code, scripts and files to run the 
 
 The Demo ISLE Site creates a local Islandora installation (`isle.localdomain`) on your laptop or workstation. This includes an un-themed Drupal website and empty Fedora repository for endusers to test ingests, test metadata, update fields in SOLR indexing, develop code and otherwise "kick the tires" on ISLE.
 
-For additional help, please post a message to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle). This [Glossary](../glossary.md) defines terms used in this documentation.
+For additional help, please post a message to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle). This [Glossary](../07_appendices/glossary.md) defines terms used in this documentation.
 
 ### Assumptions / Prerequisites
 
 * Laptop / workstation that conforms to the specifications outlined in the [Hardware Requirements](../01_installation_host_server/hardware-requirements.md)
 
-* This image build site guide is designed for a local laptop / workstation that has already followed the appropriate setup and configuration instructions in the [Demo ISLE Site](../02_installation_demo_site/demo_installation.md) guide.
+* This image build site guide is designed for a local laptop / workstation that has already followed the appropriate setup and configuration instructions in the [Demo ISLE Site](../02_installation_site/site_installation.md) guide.
 
 * Instructions below assume a MacOS or Linux laptop or workstation. Windows users may have to adjust / swap out various tools as needed.
 
@@ -189,7 +189,7 @@ Pull down the newly pushed images.
 
 * `docker-compose pull`
 
-Follow the instructions within the `docker-compose.yml` file or within the [Demo ISLE Site](../02_installation_demo_site/demo_installation.md) to start up containers and install the Demo ISLE Site (`isle.localdomain`).
+Follow the instructions within the `docker-compose.yml` file or within the [Demo ISLE Site](../02_installation_site/site_installation.md) to start up containers and install the Demo ISLE Site (`isle.localdomain`).
 
 Ensure that all components, connections etc are working, otherwise troubleshoot as required, making the appropriate fixes to the associated Dockerfiles, pushing changes to the ISLE project git repository and then REPEATING this entire build and push process.
 

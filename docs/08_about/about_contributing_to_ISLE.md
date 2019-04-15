@@ -8,4 +8,4 @@ Please join us in our open Islandora ISLE Interest Group meetings and our Island
 
 * Subscribe to [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle) (public) for updates, meeting announcements, and technical support
 
-Please read the [ISLE Executive Summary](https://docs.google.com/document/d/17tAFxR6_b7sxXkE1teNDQZv0UZ0LLSkX8K05-U6A6nw/edit?usp=sharing) for a concise overview of the ISLE project.
+The [ISLE Executive Summary](https://docs.google.com/document/d/17tAFxR6_b7sxXkE1teNDQZv0UZ0LLSkX8K05-U6A6nw/edit?usp=sharing) provides a concise overview of the ISLE project.

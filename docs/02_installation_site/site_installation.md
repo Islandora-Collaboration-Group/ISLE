@@ -1,10 +1,10 @@
-<!--- Demo ISLE Site Installation --->
+# Install ISLE
 
 _Expectations:  It takes an average of **45 minutes** to read this documentation and complete this installation._
 
 This process creates a local Islandora installation (`isle.localdomain`) on your laptop or workstation. This includes an un-themed Drupal website and empty Fedora repository for endusers to test ingests, test metadata, update fields in SOLR indexing, develop code and otherwise "kick the tires" on ISLE.
 
-For additional help, please post a message to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle). This [Glossary](../glossary.md) defines terms used in this documentation.
+For additional help, please post a message to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle). This [Glossary](../07_appendices/glossary.md) defines terms used in this documentation.
 
 ### Assumptions / Prerequisites
 
@@ -45,7 +45,7 @@ docker-compose up -d
 * After the above process is completed:
     * View only the running containers: `docker ps`
     * View all containers (both those running and stopped): `docker ps -a`
-    * **If any `isle-` containers are NOT running, then use [Demo ISLE Site Troubleshooting](demo_troubleshooting.md) to solve before continuing below.** <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running --->
+    * **If any `isle-` containers are NOT running, then use [Demo ISLE Site Troubleshooting](../07_appendices/demo_troubleshooting.md) to solve before continuing below.** <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running --->
 
 ---
 
@@ -104,5 +104,5 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
 ---
 
 ### Step 6: Additional Resources
-* [Demo ISLE Site Resources](demo_resources.md) contains Docker container passwords and URLs for administrator tools.
-* [Demo ISLE Site Troubleshooting](demo_troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
+* [Demo ISLE Site Resources](../07_appendices/demo_resources.md) contains Docker container passwords and URLs for administrator tools.
+* [Demo ISLE Site Troubleshooting](../07_appendices/demo_troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.

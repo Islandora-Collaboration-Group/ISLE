@@ -1,4 +1,4 @@
-<!--- New Site Installation: Single ISLE Environment --->
+# New Site Installation: Single ISLE Environment
 
 _Expectations:  It may take at least **4 - 6 hours or more** to read this documentation and complete this installation. Please proceed slowly._
 
@@ -8,13 +8,13 @@ A new ISLE / Islandora environment can include the option to create an un-themed
 
 While this checklist will attempt to point out most of the usage challenges or pitfalls, ISLE assumes no responsibility or liability in this matter should an enduser have customizations beyond what this guide outlines.
 
-For additional help, please post a message to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle). This [Glossary](../glossary.md) defines terms used in this documentation.
+For additional help, please post a message to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle). This [Glossary](../07_appendices/glossary.md) defines terms used in this documentation.
 
 ---
 
 ## Assumptions / Prerequisites
 
-* Comfortability with ISLE. Recommend first setting up the [Demo ISLE Site](../02_installation_demo_site/demo_installation.md). If you have already done this, please proceed.
+* Comfortability with ISLE. Recommend first setting up the [Demo ISLE Site](../02_installation_site/site_installation.md). If you have already done this, please proceed.
 
 * Host Server that conforms to the specifications outlined in the [Hardware Requirements](../01_installation_host_server/hardware-requirements.md)
 
@@ -135,11 +135,11 @@ image-services:
 
 ## Proxy Directory
 
-If need be, please refer to the **Systems** section of the [Glossary](../glossary.md) for relevant terms to help guide installation.
+If need be, please refer to the **Systems** section of the [Glossary](../07_appendices/glossary.md) for relevant terms to help guide installation.
 
 The `proxy` subdirectory contains all specific configurations necessary for the Traefik proxy to function properly with your changes.
 
-If need be, please refer to the **SSL certificate** section of the [Glossary](../glossary.md) for relevant terms to help guide installation.
+If need be, please refer to the **SSL certificate** section of the [Glossary](../07_appendices/glossary.md) for relevant terms to help guide installation.
 
 There are also additional links for the enduser to learn how to combine the SSL Certificate File with any available SSL Certificate Chain File for the `proxy` process to work properly.
 

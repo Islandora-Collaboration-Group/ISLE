@@ -17,47 +17,45 @@ extra:
     icon: 'account_balance'
 
 nav:
-- Home: index.md
-- 'Installation and Migration':
-  - '1. Configure the Host Server':
-    - 'Hardware Requirements': '01_installation_host_server/hardware-requirements.md'
-    - 'Software Dependencies': '01_installation_host_server/software-dependencies.md'
-  - '2. Install ISLE':
-    - 'Install a Demo ISLE Site':
-      - 'Demo ISLE Site Installation': '02_installation_demo_site/demo_installation.md'
-      - 'Demo ISLE Site Resources': '02_installation_demo_site/demo_resources.md'
-      - 'Demo ISLE Site Troubleshooting': '02_installation_demo_site/demo_troubleshooting.md'
-    - 'Install a New ISLE Site Site':
-      - 'New Site Installation: Single ISLE Environment': '03_installation_new_site/new_site_installation_single.md'
-      - 'New Site Installation: Multiple ISLE Environments': '03_installation_new_site/new_site_installation_multiple.md'
-    - 'Migrate an Existing Islandora Site to ISLE':
-      - 'Migration Installation Guide': '04_installation_migration/migration_installation_guide.md'
-      - 'Migration Export Checklist': '04_installation_migration/migration_export_checklist.md'
-      - 'Migration Merge Checklist': '04_installation_migration/migration_merge_checklist.md'
-      - 'Migration Reindex Process': '04_installation_migration/migration_reindex_process.md'
-- 'Get Help': 'get_help.md'
-- 'User Stories':
-  - 'Demo ISLE Site Example User Story': '10_user_stories/demo_site_example_user_story.md'
-  - 'New Site Example User Story': '10_user_stories/new_site_example_user_story.md'
-  - 'Migration Example User Story': '10_user_stories/migration_example_user_story.md'
-- 'Maintainer Docs':
-  - 'Release Process': '05_maintainer_docs/maintainer_release_process.md'
-  - 'Testing Guide': '05_maintainer_docs/maintainer_testing_guide.md'
+- Get Started: index.md
+- 'Install ISLE':
+  - '1. Hardware Requirements': '01_installation_host_server/hardware-requirements.md'
+  - '2. Software Dependencies': '01_installation_host_server/software-dependencies.md'
+  - '3. Install ISLE': '02_installation_site/site_installation.md'
+  - '4. Server Configurations':
+    - 'Single ISLE Environment': '02_installation_site/site_installation_single.md'
+    - 'Multiple ISLE Environments': '02_installation_site/site_installation_multiple.md'
+- 'Update ISLE': '03_update_site/update_isle.md'
+- 'Migrate Existing Site to ISLE':
+  - 'Migration Installation Guide': '04_installation_migration/migration_installation_guide.md'
+  - 'Migration Export Checklist': '04_installation_migration/migration_export_checklist.md'
+  - 'Migration Merge Checklist': '04_installation_migration/migration_merge_checklist.md'
+  - 'Migration Reindex Process': '04_installation_migration/migration_reindex_process.md'
 - 'Appendices':
-  - 'Updating ISLE': '07_appendices/update_isle.md'
+  - 'Demo ISLE Site Resources': '07_appendices/demo_resources.md'
+  - 'Demo ISLE Site Troubleshooting': '07_appendices/demo_troubleshooting.md'
   - 'Edit the "/etc/hosts" File': '07_appendices/edit-the-hosts-file.md'
-  - 'Sample IT Department Request Letter': '07_appendices/sample-it-department-request.md'
+  - 'Glossary': '07_appendices/glossary.md'
   - 'Installing a Drupal Module with Composer': '07_appendices/installing-module-with-composer.md'
   - 'Installing a Drupal Module with Drush': '07_appendices/installing-module-with-drush.md'
+  - 'Installing on Google Cloud Platform (Google Doc)': 'https://docs.google.com/document/d/1r-I9n8mUhlJ5Z-X9AO-RrikhzH6I8bTPIL25LmtRbxE'
   - 'Opening a Terminal in a Running Container': '07_appendices/open-terminal-in-running-container.md'
+  - 'Sample IT Department Request Letter': '07_appendices/sample-it-department-request.md'
+  - 'Troubleshooting': '07_appendices/install_troubleshooting.md'
+  - 'User Stories':
+    - 'Demo ISLE Site Example User Story': '07_appendices/user_story_demo_site.md'
+    - 'New Site Example User Story': '07_appendices/user_story_.md'
+    - 'Migration Example User Story': '07_appendices/user_story_migration_site.md'
   - 'Using Let''s Encrypt with ISLE' : '07_appendices/configuring-lets-encrypt.md'
   - 'Warning about Installing on Red Hat': '07_appendices/redhat.md'
-  - 'Installing on Google Cloud Platform (Google Doc)': 'https://docs.google.com/document/d/1r-I9n8mUhlJ5Z-X9AO-RrikhzH6I8bTPIL25LmtRbxE'
-  - 'ISLE Cheat Sheet: Docker Commands': '07_appendices/isle-cheatsheet-docker-commands.md'
-  - 'Troubleshooting': '07_appendices/install_troubleshooting.md'
+- 'Cookbook Recipes':
+  - 'ISLE Cheat Sheet: Docker Commands': '10_cookbook_recipes/isle-cheatsheet-docker-commands.md'
 - 'About':
-  - 'About ISLE': '08_about/about_isle.md'
   - 'Contributing to ISLE': '08_about/about_contributing_to_ISLE.md'
+  - 'About ISLE': '08_about/about_isle.md'
   - 'About Maintainers': '08_about/about_maintainers.md'
+  - 'Maintainer Docs':
+    - 'Release Process': '05_maintainer_docs/maintainer_release_process.md'
+    - 'Testing Guide': '05_maintainer_docs/maintainer_testing_guide.md'
+  - 'Get Help': '08_about/about_get_help.md'
 - 'Release Notes': '09_release_notes/release_notes.md'
-- 'Glossary': 'glossary.md'

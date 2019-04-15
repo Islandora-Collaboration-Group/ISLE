@@ -1,4 +1,4 @@
-<!--- Migration Merge Checklist --->
+# Migration Merge Checklist
 
 This section is to serve as a new checklist for the editing or merging of the copied Islandora Production server(s) data and config files to the appropriate config directory on the enduser's local laptop and ultimately copied / deployed back to the new ISLE Host Server.
 
@@ -96,7 +96,7 @@ Please note that endusers will take values from the `site.conf` file and flow th
 
 ### Apache - SSL-Certs
 
-If need be, please refer to the **SSL certificate** section of the [Glossary](../glossary.md) for relevant terms to help guide installation.
+If need be, please refer to the **SSL certificate** section of the [Glossary](../07_appendices/glossary.md) for relevant terms to help guide installation.
 
 * Copy your original production SSL certificates for Apache into the `apache/ssl-certs` subdirectory. They will and should have different names than the examples provided below dependent on the ISLE environment you are setting up e.g. (_production, staging or development_).
 
@@ -261,13 +261,13 @@ Compare, edit, merge or copy the following from the source directory `current-pr
 
 ## Proxy Directory
 
-If need be, please refer to the **Systems** section of the [Glossary](../glossary.md) for relevant terms to help guide installation.
+If need be, please refer to the **Systems** section of the [Glossary](../07_appendices/glossary.md) for relevant terms to help guide installation.
 
 This directory and service will not exist on any current islandora production systems. Please pick one of the following guides to complete this configuration.
 
-* If the migrated production site is to be the first or only site running on the ISLE host server, please follow the [New Site Installation Guide - w/ Single ISLE Environment](../03_installation_new_site/new_site_installation_single.md), `### Proxy Directory` section, lines 317 - 395.
+* If the migrated production site is to be the first or only site running on the ISLE host server, please follow the [New Site Installation: Single ISLE Environment](../02_installation_site/site_installation_single.md), `### Proxy Directory` section, lines 317 - 395.
 
-* If the migrated production site is not the first or only site running on the ISLE host server, please follow the [New Site Installation Guide - w/ multiple ISLE Environments](../03_installation_new_site/new_site_installation_multiple.md)
+* If the migrated production site is not the first or only site running on the ISLE host server, please follow the [New Site Installation: Multiple ISLE Environments](../02_installation_site/site_installation_multiple.md)
     * Read the `Assumptions / Prerequisites` section, lines 16 -32
     * Read the `Multiple ISLE / Islandora Environments` section, lines 36 -88
     * All of the sections starting with `Proxy directory` paying particular attention to anything labelled with `(multi)`, lines 384 - 623

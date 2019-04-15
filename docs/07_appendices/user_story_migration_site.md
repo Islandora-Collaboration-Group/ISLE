@@ -1,6 +1,4 @@
-<!--- PAGE_TITLE --->
-
-### Migrating an Islandora Site to ISLE: Sample User Story...
+# User Story: Migrating an Islandora Site to ISLE
 
 Laverne's college archive runs an Islandora site on a server in the college IT data center. The site was installed and set up by a colleague who has since left. Some components are outdated and the work of maintaining the server and software stack is taking up a lot of Laverne's time. She's decided to try migrating the site to a new one built with ISLE.
 
