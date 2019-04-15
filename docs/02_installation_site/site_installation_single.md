@@ -26,7 +26,7 @@ For additional help, please post a message to the [Islandora ISLE Google group](
 
 * Have an existing domain name that works - is set up with DNS etc...
 
-* Have [SSL Certificates](../glossary.md#systems) previously created for the web domain. (_Please work with the appropriate internal IT resource to provision these files for your domain_)  OR use the [Let's Encrypt guide](../07_appendices/configuring-lets-encrypt.md) to generate SSL Certificates.
+* Have [SSL Certificates](../07_appendices/glossary.md#systems) previously created for the web domain. (_Please work with the appropriate internal IT resource to provision these files for your domain_)  OR use the [Let's Encrypt guide](../07_appendices/configuring-lets-encrypt.md) to generate SSL Certificates.
 
 
 ## Overview

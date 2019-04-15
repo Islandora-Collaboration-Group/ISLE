@@ -55,5 +55,5 @@ Migrated sites can be used in production, staging or development environments.
 
 ## Update ISLE Site
 
-1. [Update ISLE Site](07_appendices/update_isle.md) - Update an existing ISLE installation to install the newest improvements and security updates, regardless of type of installation or environment. This process is intended to be backwards compatible with your existing ISLE site.
+1. [Update ISLE Site](03_update_site/update_isle.md) - Update an existing ISLE installation to install the newest improvements and security updates, regardless of type of installation or environment. This process is intended to be backwards compatible with your existing ISLE site.
 2. [Release Notes](09_release_notes/release_notes.md) - Please always read the release notes.

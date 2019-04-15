@@ -24,7 +24,7 @@ For additional help, please post a message to the [Islandora ISLE Google group](
 
 * You have a web domain name that works (i.e. is set up with a DNS entry you can make changes to if needed)
 
-* You have [SSL Certificates](../glossary.md#systems) previously created for the web domain. (_Please work with the appropriate internal IT resource to provision these files for your domain_) OR: Use the [Let's Encrypt guide](../07_appendices/configuring-lets-encrypt.md) to generate and install SSL Certificates.
+* You have [SSL Certificates](../07_appendices/glossary.md#systems) previously created for the web domain. (_Please work with the appropriate internal IT resource to provision these files for your domain_) OR: Use the [Let's Encrypt guide](../07_appendices/configuring-lets-encrypt.md) to generate and install SSL Certificates.
 
 * You have cloned the ISLE repository to BOTH your local computer AND the ISLE host server
 
