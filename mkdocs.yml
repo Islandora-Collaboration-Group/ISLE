@@ -44,7 +44,7 @@ nav:
   - 'Troubleshooting': '07_appendices/install_troubleshooting.md'
   - 'User Stories':
     - 'Demo ISLE Site Example User Story': '07_appendices/user_story_demo_site.md'
-    - 'New Site Example User Story': '07_appendices/user_story_.md'
+    - 'New Site Example User Story': '07_appendices/user_story_new_site.md'
     - 'Migration Example User Story': '07_appendices/user_story_migration_site.md'
   - 'Using Let''s Encrypt with ISLE' : '07_appendices/configuring-lets-encrypt.md'
   - 'Warning about Installing on Red Hat': '07_appendices/redhat.md'
