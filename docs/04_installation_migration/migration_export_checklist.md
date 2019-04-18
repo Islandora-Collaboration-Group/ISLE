@@ -2,9 +2,9 @@
 
 This section is a checklist of materials to **COPY** from the current running Islandora Production server(s) to the appropriate storage location / directory in order to build your ISLE instance.
 
-**Please Note:** _Ubuntu / Debian style paths are used for all examples file locations below, endusers might have different locations for these files HOWEVER the file and directory names etc should be roughly the same._
+**Please Note:** _Ubuntu / Debian style paths are used for all examples file locations below, end users might have different locations for these files HOWEVER the file and directory names etc should be roughly the same._
 
-**Caution**: While the ISLE Project recommends use of export methods or tools such as rsync, scp etc., it assumes that endusers are familiar with them and are aware of possible dangers of improperly exporting or copying production data. Ensure adequate backups of any production system(s) are made prior to any attempts. If you are not familiar or are uncomfortable with these processes, it is highly advisable to work with an appropriate IT resource.
+**Caution**: While the ISLE Project recommends use of export methods or tools such as rsync, scp etc., it assumes that end users are familiar with them and are aware of possible dangers of improperly exporting or copying production data. Ensure adequate backups of any production system(s) are made prior to any attempts. If you are not familiar or are uncomfortable with these processes, it is highly advisable to work with an appropriate IT resource.
 
 **Finally also please note:** Instructions from this checklist and the [Migration Installation Guide](../04_installation_migration/migration_installation_guide.md) may call for you to **COPY** data from your running Islandora environment to a newly created folder: `yourdomain-data` on your ISLE Host Server or `current_prod_islandora_config` on your local machine. You will then work from these copies for future steps.
 
@@ -55,7 +55,7 @@ This data and these configurations will be used in conjunction with an Apache co
 * `yoursite.conf`
 
     * _File will have different name but this should be the enabled Apache vhost file of your production Islandora website._
-    * _There may also be a seperate vhost that uses SSL and https. Copy that too if available._
+    * _There may also be a separate vhost that uses SSL and https. Copy that too if available._
 
 
 ---
@@ -118,7 +118,7 @@ This data will be used in conjunction with a MySQL container.
 
 * _Recommended that the production databases be exported using the `.sql` and `.gz` file formats e.g. `drupal_site_2018.sql.gz` for better compression and minimal storage footprint._
 
-* _If the enduser is running multi-sites, there will be additional databases to export._
+* _If the end user is running multi-sites, there will be additional databases to export._
 
 * _Do not export the `fedora3` database as it will be recreated by the SQL index in later steps of the Migration Guide_
 
@@ -128,7 +128,7 @@ This data will be used in conjunction with a MySQL container.
 #### MySQL Tools for Export
 Here are a few pieces of documentation specific for the tasks above.
 
-**Caution**: While the ISLE Project recommends use of export methods or tools such as mysqldump etc., it assumes that endusers are familiar with them and are aware of possible dangers of improperly exporting or copying production data. Ensure adequate backups of any production system(s) are made prior to any attempts. If you are not familiar or are uncomfortable with these processes, it is highly advisable to work with an appropriate IT resource.
+**Caution**: While the ISLE Project recommends use of export methods or tools such as mysqldump etc., it assumes that end users are familiar with them and are aware of possible dangers of improperly exporting or copying production data. Ensure adequate backups of any production system(s) are made prior to any attempts. If you are not familiar or are uncomfortable with these processes, it is highly advisable to work with an appropriate IT resource.
 
 * [Official MySQL documentation](https://dev.mysql.com/doc/)
     * [mysqldump console utility documentation](https://dev.mysql.com/doc/refman/5.7/en/mysqldump.html)

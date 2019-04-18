@@ -10,11 +10,11 @@
 #### Assumptions / Prerequisites
 
 * `mkdocs` and `mkdocs-material` theme are installed following the [Installing Mkdocs](../05_maintainer_docs/maintainer_documentation_mkdocs.md) documentation.
-* The ISLE Documentation project directory has been cloned to the enduser's laptop / workstation in an appropriate Code or Project Directory.
+* The ISLE Documentation project directory has been cloned to the end user's laptop / workstation in an appropriate Code or Project Directory.
    * `git clone https://github.com/Islandora-Collaboration-Group/ISLE-Documentation.git`
 * Familiarity or comfortability with git and cli commands.
-* Enduser has a web browser opened to this URL: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
-* Enduser has a terminal open with `mkdocs serve` running.
+* End user has a web browser opened to this URL: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+* End user has a terminal open with `mkdocs serve` running.
 
 ### Create a New Git Branch
 
@@ -54,7 +54,7 @@ In order for `mkdocs` to understand that there is a new page and page title to d
   - 'Documentation Overview': '05_maintainer_docs/maintainer_documentation_overview.md'
 ```
 
-* The enduser can now review the contents of this new page at http://127.0.0.1:8000/05_maintainer_docs/maintainer_building_giant_robots/
+* The end user can now review the contents of this new page at http://127.0.0.1:8000/05_maintainer_docs/maintainer_building_giant_robots/
 
 * Edit the contents of `maintainer_building_giant_robots.md` and save the file each time. The associated webpage will refresh with the new changes.
 

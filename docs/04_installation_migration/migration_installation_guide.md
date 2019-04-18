@@ -178,7 +178,7 @@ The **goal** is to merge all site-specific data (domain names, variables, userna
 
     `CONTAINER_SHORT_ID=prod`
 
-**Please note:** Much of the file is already with comments guiding the enduser to key areas or files to edit or modify accordingly.
+**Please note:** Much of the file is already with comments guiding the end user to key areas or files to edit or modify accordingly.
 
 ---
 
@@ -306,7 +306,7 @@ The following are STEPS, not literal commands to prepare your db for ISLE (_doin
 * truncate all tables that start with `cache` on the isle-mysql-institution container
 * export this new database to the `mysql` directory on the isle host server
 * delete all tables (_not the database itself_) on the isle-mysql-institution container
-* Reimport the new lighter database to the isle-mysql container
+* Re-import the new lighter database to the isle-mysql container
 
 ---
 

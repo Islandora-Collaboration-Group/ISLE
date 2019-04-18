@@ -10,7 +10,7 @@ Developers can follow this guide if they have edited their Dockerfiles with cust
 
 These images will contain the necessary base code, scripts and files to run the default sample `isle.localdomain`.
 
-The Demo ISLE Site creates a local Islandora installation (`isle.localdomain`) on your laptop or workstation. This includes an un-themed Drupal website and empty Fedora repository for endusers to test ingests, test metadata, update fields in SOLR indexing, develop code and otherwise "kick the tires" on ISLE.
+The Demo ISLE Site creates a local Islandora installation (`isle.localdomain`) on your laptop or workstation. This includes an un-themed Drupal website and empty Fedora repository for end users to test ingests, test metadata, update fields in SOLR indexing, develop code and otherwise "kick the tires" on ISLE.
 
 For additional help, please post a message to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle). This [Glossary](../07_appendices/glossary.md) defines terms used in this documentation.
 
@@ -193,4 +193,4 @@ Follow the instructions within the `docker-compose.yml` file or within the [Demo
 
 Ensure that all components, connections etc are working, otherwise troubleshoot as required, making the appropriate fixes to the associated Dockerfiles, pushing changes to the ISLE project git repository and then REPEATING this entire build and push process.
 
-Always test prior and post to ensure there are no issues pushed to endusers.
+Always test prior and post to ensure there are no issues pushed to end users.
