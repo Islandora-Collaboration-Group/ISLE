@@ -9,7 +9,7 @@
 
 #### Assumptions / Prerequisites
 
-* `mkdocs` and `mkdocs-material` theme are installed following the [Installing Mkdocs](../05_maintainer_docs/maintainer_documentation_mkdocs.md) documentation.
+* `mkdocs` and `mkdocs-material` theme are installed following the [Installing Mkdocs](../05_maintainer_docs/maintainer_docs_mkdocs.md) documentation.
 * The ISLE Documentation project directory has been cloned to the enduser's laptop / workstation in an appropriate Code or Project Directory.
    * `git clone https://github.com/Islandora-Collaboration-Group/ISLE-Documentation.git`
 * Familiarity or comfortability with git and cli commands.
@@ -51,7 +51,7 @@ In order for `mkdocs` to understand that there is a new page and page title to d
 - 'Maintainer Docs':
   - 'Building Giant ISLE Robots': '05_maintainer_docs/maintainer_building_giant_robots.md'
   - 'Contributing to Project': '05_maintainer_docs/maintainer_contributing_to_project.md'
-  - 'Documentation Overview': '05_maintainer_docs/maintainer_documentation_overview.md'
+  - 'Documentation Overview': '05_maintainer_docs/maintainer_docs_overview.md'
 ```
 
 * The enduser can now review the contents of this new page at http://127.0.0.1:8000/05_maintainer_docs/maintainer_building_giant_robots/
