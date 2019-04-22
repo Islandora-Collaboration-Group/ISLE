@@ -5,7 +5,7 @@ Edit the `/etc/hosts` file to view ISLE locally on a laptop or workstation brows
 **Please select your operating system and software:**
 
 - [Mac or Ubuntu Using Docker](#mac-or-ubuntu-using-docker)
-- [Mac or Ubuntu Desktop Using Virtualbox VM (non-Vagrant)](#mac-or-ubuntu-desktop-using-virtualbox-vm-non-vagrant)
+- [Mac or Ubuntu Desktop Using VirtualBox VM (non-Vagrant)](#mac-or-ubuntu-desktop-using-virtualbox-vm-non-vagrant)
 - [Windows Using Docker](#windows-using-docker)
 - [Windows Using Virtualbox VM (non-Vagrant)](#windows-using-virtualbox-vm-non-vagrant)
 
@@ -20,7 +20,7 @@ Edit the `/etc/hosts` file to view ISLE locally on a laptop or workstation brows
 * Enter: `sudo nano /etc/hosts`
   * _For endusers familiar with editing files on the command line, vim, emacs or alternative tools can be used in lieu of nano_
 
-* Enter the laptop enduser password
+* Enter the laptop end user password
 
 * Add the values next to the `127.0.0.1 localhost` entry in the `/etc/hosts` file.
 
@@ -45,7 +45,7 @@ Edit the `/etc/hosts` file to view ISLE locally on a laptop or workstation brows
    * Enter: `sudo nano /etc/hosts`
      * _For endusers familiar with editing files on the command line, vim, emacs or alternative tools can be used in lieu of nano_
 
-   * Enter the laptop enduser password
+   * Enter the laptop end user password
 
    * Add the values below the `127.0.0.1` entry in the `/etc/hosts` file.
 

@@ -12,7 +12,7 @@ While this checklist will attempt to point out most of the merge challenges or p
 
 **Please note:**
 
-* In some cases, some of the configuration files copied from your running production Islandora may have comments (#) in them to help guide endusers to make the appropriate edits e.g. (# enduser edit here)
+* In some cases, some of the configuration files copied from your running production Islandora may have comments (#) in them to help guide endusers to make the appropriate edits e.g. (# end user edit here)
 
 * In most cases, many of the configuration files copied from ISLE repository to `yourdomain-config` will have fake or empty settings in them. Please remove, edit or enter new values as advised.
 

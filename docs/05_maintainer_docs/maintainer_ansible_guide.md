@@ -277,7 +277,7 @@ Ansible will start displaying output within the terminal. If any turn red and th
 
 To ensure a successful deploy to the ISLE Server, please review the following to ensure that the deploy to the Islandora Host server was successful.
 
-Open a terminal window on the Ansible control laptop /workstation and `ssh` into the Islandora Host server using the appropriate enduser account setup prior to the deploy.
+Open a terminal window on the Ansible control laptop /workstation and `ssh` into the Islandora Host server using the appropriate end user account setup prior to the deploy.
 
 **Example**:
 
@@ -402,7 +402,7 @@ Proceed to bottom of this page for next steps.
 
 ### Walkthrough: Using Ansible on a MacOS Control Machine
 
-* To install `Ansible` on the enduser's MacOS laptop / workstation.
+* To install `Ansible` on the end user's MacOS laptop / workstation.
 
     * Install Ansible via Python pip
         * Follow here [http://docs.ansible.com/ansible/latest/intro_installation.html#latest-releases-via-pip](http://docs.ansible.com/ansible/latest/intro_installation.html#latest-releases-via-pip)
@@ -423,7 +423,7 @@ Proceed to bottom of this page for next steps.
 host_local_macos_isle_localdomain ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_private_key_file=/Users/enduser/.vagrant.d/insecure_private_key
 ```
 
-* **Line 13** in the `ansible/host_vars/host_local_macos_isle_localdomain.yml` file will need to be edited with the correct path to the enduser's id_rsa.pub  file. Change the `enduser` value to the real username. (_assumes the_ `id_rsa.pub` _file exists!_)
+* **Line 13** in the `ansible/host_vars/host_local_macos_isle_localdomain.yml` file will need to be edited with the correct path to the end user's id_rsa.pub  file. Change the `enduser` value to the real username. (_assumes the_ `id_rsa.pub` _file exists!_)
 
 * **Line 3** in the `ansible/docker_install.yml` file will need to be edited, change the value of `isle-prod-project.institution` to `host_local_macos_isle_localdomain`
 

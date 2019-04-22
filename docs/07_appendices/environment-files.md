@@ -21,7 +21,7 @@ Here are the variables and their job:
 | FEDORA_DB                       | Set the name of Fedora database       | MySQL, Fedora                       | Specifies which database to create or use for Fedora data.                                                                              |
 | DRUPAL_DB                       | Set the name of the Drupal database   | MySQL, Apache, Fedora               | Specifies which database to create or use for Fedora data. Updates components of Fedora so it can read the Drupal database for users.   |
 | FEDORA_DB_USER DRUPAL_DB_USER   | Sets the MySQL user                   | MySQL, Apache, Fedora               | Specifies names of Database users.                                                                                                      |
-| FEDORA_DB_PASS DRUPAL_DB_PASS   | Sets MySQL user passwords             | MySQl, Apache, Fedora               | Specifies passwords of Database users.                                                                                                  |
+| FEDORA_DB_PASS DRUPAL_DB_PASS   | Sets MySQL user passwords             | MySQL, Apache, Fedora               | Specifies passwords of Database users.                                                                                                  |
 
 ### Islandora (Drupal) Section
 | .env Variable       | Purpose                                     | ISLE Services updated  | What it does                                                                                                                                                                                    |

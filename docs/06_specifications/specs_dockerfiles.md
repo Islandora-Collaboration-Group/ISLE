@@ -95,7 +95,7 @@ ENV JAVA_HOME=/usr/lib/jvm/java-8-oracle \
 
 ## Dockerfile Commenting
 
-For ISLE Maintainers when possible it is highly recommended that all sections be commented appropriately to explain functionality or actions to all Developers looking to customize or curious endusers.
+For ISLE Maintainers when possible it is highly recommended that all sections be commented appropriately to explain functionality or actions to all Developers looking to customize or curious end users.
 
 Example:
 

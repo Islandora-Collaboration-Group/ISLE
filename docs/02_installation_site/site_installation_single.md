@@ -2,11 +2,11 @@
 
 _Expectations:  It may take at least **4 - 6 hours or more** to read this documentation and complete this installation. Please proceed slowly._
 
-This guide documents how an enduser can spin up and install a single ISLE / Islandora environment tailored to use only one unique domain / URL and one ISLE environment.
+This guide documents how an end user can spin up and install a single ISLE / Islandora environment tailored to use only one unique domain / URL and one ISLE environment.
 
-A new ISLE / Islandora environment can include the option to create an un-themed Drupal website and empty Fedora repository for endusers to develop code, perform ingests, edit metadata, update fields in SOLR indexing all essential in ultimately creating a new ISLE production site.
+A new ISLE / Islandora environment can include the option to create an un-themed Drupal website and empty Fedora repository for end users to develop code, perform ingests, edit metadata, update fields in SOLR indexing all essential in ultimately creating a new ISLE production site.
 
-While this checklist will attempt to point out most of the usage challenges or pitfalls, ISLE assumes no responsibility or liability in this matter should an enduser have customizations beyond what this guide outlines.
+While this checklist will attempt to point out most of the usage challenges or pitfalls, ISLE assumes no responsibility or liability in this matter should an end user have customizations beyond what this guide outlines.
 
 For additional help, please post a message to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle). This [Glossary](../07_appendices/glossary.md) defines terms used in this documentation.
 
@@ -61,7 +61,7 @@ You should edit these files with unique users/passwords, your domain name, site-
 | FEDORA_DB                       | Set the name of Fedora database       | MySQL, Fedora                       | Specifies which database to create or use for Fedora data.                                                                              |
 | DRUPAL_DB                       | Set the name of the Drupal database   | MySQL, Apache, Fedora               | Specifies which database to create or use for Fedora data. Updates components of Fedora so it can read the Drupal database for users.   |
 | FEDORA_DB_USER DRUPAL_DB_USER   | Sets the MySQL user                   | MySQL, Apache, Fedora               | Specifies names of Database users.                                                                                                      |
-| FEDORA_DB_PASS DRUPAL_DB_PASS   | Sets MySQL user passwords             | MySQl, Apache, Fedora               | Specifies passwords of Database users.                                                                                                  |
+| FEDORA_DB_PASS DRUPAL_DB_PASS   | Sets MySQL user passwords             | MySQL, Apache, Fedora               | Specifies passwords of Database users.                                                                                                  |
 
 ### Islandora (Drupal) Section
 | .env Variable       | Purpose                                     | ISLE Services updated  | What it does                                                                                                                                                                                    |
@@ -85,7 +85,7 @@ You should edit these files with unique users/passwords, your domain name, site-
 ### Image Services Section
 | .env Variable                       | ISLE Services updated   | What it does                                                                                                                          |
 |-----------------------------------  |-----------------------  |-------------------------------------------------------------------------------------------------------------------------------------- |
-| CANTALOUPE_ADMIN_INTERFACE_ENABLE   | ImageServices           | Enables or Disables the Cantaloupe IIIF /admin control panel. Locatied at http://hostip:8083/cantaloupe/admin when true, else false.  |
+| CANTALOUPE_ADMIN_INTERFACE_ENABLE   | ImageServices           | Enables or Disables the Cantaloupe IIIF /admin control panel. Located at http://hostip:8083/cantaloupe/admin when true, else false.  |
 | CANTALOUPE_ADMIN_USER               | ImageServices           | Set the admin username to login to the admin panel.                                                                                   |
 | CANTALOUPE_ADMIN_PASS               | ImageServices           | Set the admin password to login to the admin panel.                                                                                   |
 
@@ -141,7 +141,7 @@ The `proxy` subdirectory contains all specific configurations necessary for the 
 
 If need be, please refer to the **SSL certificate** section of the [Glossary](../07_appendices/glossary.md) for relevant terms to help guide installation.
 
-There are also additional links for the enduser to learn how to combine the SSL Certificate File with any available SSL Certificate Chain File for the `proxy` process to work properly.
+There are also additional links for the end user to learn how to combine the SSL Certificate File with any available SSL Certificate Chain File for the `proxy` process to work properly.
 
 **If you followed the [Let's Encrypt](../07_appendices/configuring-lets-encrypt.md) configuration guide, you can skip to the next section: Spin up ISLE containers**
 

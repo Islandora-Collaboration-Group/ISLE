@@ -44,7 +44,7 @@ If you don't see all containers running, then stop the running containers with `
 
     (Optional but recommended troubleshooting step)
 
-    * Please note the Tomcat service requires about  one to three minutes to startup and as such if the enduser rushes to the URL supplied below, the service page maytime out or be reported as unreachable. Give it a little time.
+    * Please note the Tomcat service requires about  one to three minutes to startup and as such if the end user rushes to the URL supplied below, the service page may time out or be reported as unreachable. Give it a little time.
     * After spinning up fedora container, check if the Fedora service is running prior to advancing.
     * Navigate to http://hostip:8081/manager/html a popup login prompt should appear.
     * Enter the user name of `admin` and the password of `isle_admin`

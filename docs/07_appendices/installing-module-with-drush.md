@@ -61,7 +61,7 @@ drush cc all
 
 In this command sequence, the `cd /var/www/html/sites/all/modules/contrib` command sets our working directory to correspond with the location where we want our module to reside.  
 
-The `git clone...` command downloads the Oral History solution pack code from its repository on Github. If all goes smoothly this step will create a new `islandora_solution_pack_oralhistories` directory.
+The `git clone...` command downloads the Oral History solution pack code from its repository on GitHub. If all goes smoothly this step will create a new `islandora_solution_pack_oralhistories` directory.
 
 The `cd /var/www/html/sites/default` command sets our working directory to the location of our site's `settings.php` file.  This directory, and file, hold key information about our site, and working from this directory makes subsequent commands easier to use.
 

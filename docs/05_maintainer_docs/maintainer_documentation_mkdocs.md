@@ -2,8 +2,8 @@
 
 ### Assumptions / Prerequisites
 
-* Python 2.7+ or higher is installed on the enduser's laptop / workstation
-* The ISLE Documentation project directory has been cloned to the enduser's laptop / workstation in an appropriate Code or Project Directory.
+* Python 2.7+ or higher is installed on the end user's laptop / workstation
+* The ISLE Documentation project directory has been cloned to the end user's laptop / workstation in an appropriate Code or Project Directory.
    * `git clone https://github.com/Islandora-Collaboration-Group/ISLE-Documentation.git`
 * Familiarity or comfortability with git and cli commands.
 
