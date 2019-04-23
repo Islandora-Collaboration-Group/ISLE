@@ -42,17 +42,17 @@ Docker commands that are useful to installing or updating ISLE.
     * `docker-compose up -d`
 
 ### Remove Containers
-  * Remove All: Stop and remove all containers and all volumes
-    * `docker-compose down -v`
-  * WARNING! This will remove all stopped containers, all networks not used by a container, all images that lack an associated container, and all build cache.
-    * `docker system prune --all`
   * Delete an (unused) volume
     * usage: `docker volume rm [VOLUME_NAME]`
     * example: `docker volume rm isle_fed-data`
   * Remove one or more (stopped) containers
     * usage: `docker rm [CONTAINER_NAME(S)]`
     * example: `docker rm isle_fed-data`
-  * WARNING! This will remove ALL containers on the machine!
+  * **WARNING!** Never run this command in production. Never ever. ONLY consider doing this on your Demo Local machine. This command will delete all Docker containers AND all attached Docker Volumes (TBD: does this remove only-running or running-and-stopped containers). This command will not delete your git repository or the paths or contents of your bind mounts.
+    * `docker-compose down -v`
+  * **WARNING!**! This will remove all stopped containers, all networks not used by a container, all images that lack an associated container, and all build cache.
+    * `docker system prune --all`
+  * **WARNING!**! This will remove ALL containers on the machine!
     * `docker rm $(docker ps -a -q)`
 
 ### Watching Docker Logs
@@ -119,7 +119,7 @@ Docker commands that are useful to installing or updating ISLE.
 
 1. Stop all current containers
     * `docker-compose stop`
-1. WARNING! This will remove: all stopped containers; etc.
+1. **WARNING!** This will remove: all stopped containers; etc.
     * `docker system prune --all`
 1. Delete "data" folder in ISLE-Developer folder so logs are fresh and clean
     * `sudo rm -rf data`

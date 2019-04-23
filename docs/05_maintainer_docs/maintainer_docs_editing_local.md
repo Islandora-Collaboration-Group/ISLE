@@ -51,7 +51,7 @@ In order for `mkdocs` to understand that there is a new page and page title to d
 - 'Maintainer Docs':
   - 'Building Giant ISLE Robots': '05_maintainer_docs/maintainer_building_giant_robots.md'
   - 'Contributing to Project': '05_maintainer_docs/maintainer_contributing_to_project.md'
-  - 'Documentation Overview': '05_maintainer_docs/maintainer_documentation_overview.md'
+  - 'Documentation Overview': '05_maintainer_docs/maintainer_docs_overview.md'
 ```
 
 * The end user can now review the contents of this new page at http://127.0.0.1:8000/05_maintainer_docs/maintainer_building_giant_robots/

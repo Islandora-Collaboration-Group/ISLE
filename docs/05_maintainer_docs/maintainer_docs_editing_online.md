@@ -10,7 +10,7 @@
 
 **Please note:** You'll need to create separate pull requests for each type of change whether editing or adding new pages with a `mkdocs.yml` file update. Using the online editor means you can only do one thing at a time.
 
-If you need to edit more than one file or want to create more than one new page of content, it is recommended to instead follow the steps contained within the [Documentation Editing - Local](../05_maintainer_docs/maintainer_documentation_editing_local.md) Guide.
+If you need to edit more than one file or want to create more than one new page of content, it is recommended to instead follow the steps contained within the [Documentation Editing - Local](../05_maintainer_docs/maintainer_docs_editing_local.md) Guide.
 
 ---
 
@@ -76,7 +76,7 @@ In order for `mkdocs` to understand that there is a new page and page title to d
 - 'Maintainer Docs':
   - 'Building Giant ISLE Robots': '05_maintainer_docs/maintainer_building_giant_robots.md'
   - 'Contributing to Project': '05_maintainer_docs/maintainer_contributing_to_project.md'
-  - 'Documentation Overview': '05_maintainer_docs/maintainer_documentation_overview.md'
+  - 'Documentation Overview': '05_maintainer_docs/maintainer_docs_overview.md'
 ```
 
 * When finished and ready to "save" the changes, follow the instructions immediately in the `Commit changes` section below.
