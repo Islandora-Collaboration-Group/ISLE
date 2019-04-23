@@ -1,13 +1,13 @@
-<!--- PAGE_TITLE --->
+# Documentation: MkDocs
 
-### Assumptions / Prerequisites
+## Assumptions / Prerequisites
 
 * Python 2.7+ or higher is installed on the end user's laptop / workstation
 * The ISLE Documentation project directory has been cloned to the end user's laptop / workstation in an appropriate Code or Project Directory.
    * `git clone https://github.com/Islandora-Collaboration-Group/ISLE-Documentation.git`
 * Familiarity or comfortability with git and cli commands.
 
-### Step 1. Install `mkdocs`
+## Step 1. Install `mkdocs`
 
 * Please follow the instructions found here: [http://www.mkdocs.org/#installation](http://www.mkdocs.org/#installation)
 
@@ -17,17 +17,17 @@
 
 ---
 
-### Step 2. Install the `mkdocs-material` Theme
+## Step 2. Install the `mkdocs-material` Theme
 
 The ISLE Documentation Theme can be found here: [https://github.com/squidfunk/mkdocs-material](https://github.com/squidfunk/mkdocs-material)
 
 **Example: (All OS)**
 
-* sudo -H pip install mkdocs-material
+* `sudo -H pip install mkdocs-material`
 
 ---
 
-### Step 3. Run the `mkdocs` Software
+## Step 3. Run the `mkdocs` Software
 
 * Open a terminal and `cd to pathto/ISLE-Documentation project directory`
 * `mkdocs serve`
@@ -46,3 +46,13 @@ INFO    -  Cleaning site directory
     * To review changes in real time via the browser
 * Use the terminal output for debugging issues or missing files, links etc.
 * To stop `mkdocs`, click the `Cntrl` and `c` key at the same time. `(Cntrl-C)`
+
+---
+
+## How to Upgrade `mkdocs` version
+
+* [MkDocs Release Notes](https://www.mkdocs.org/about/release-notes/#release-notes)
+* To upgrade MkDocs to the latest version, use pip:
+  `pip install -U mkdocs`
+* You can determine your currently installed version using
+  `mkdocs --version`

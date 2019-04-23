@@ -4,6 +4,7 @@ site_description: Documentation for Islandora Enterprise (ISLE)
 site_dir: site
 docs_dir: docs
 extra_css: [extra.css]
+extra_javascript: [extra.js]
 #markdown_extensions:
 #    - del_ins
 theme:
@@ -55,6 +56,9 @@ nav:
   - 'About ISLE': '08_about/about_isle.md'
   - 'About Maintainers': '08_about/about_maintainers.md'
   - 'Maintainer Docs':
+    - 'Docs: MkDocs': '05_maintainer_docs/maintainer_docs_mkdocs.md'
+    - 'Docs: Spell Checker': '05_maintainer_docs/maintainer_docs_spell_checker.md'
+    - 'Docs: Style Guide': '05_maintainer_docs/maintainer_docs_style_guide.md'
     - 'Release Process': '05_maintainer_docs/maintainer_release_process.md'
     - 'Testing Guide': '05_maintainer_docs/maintainer_testing_guide.md'
   - 'Get Help': '08_about/about_get_help.md'
