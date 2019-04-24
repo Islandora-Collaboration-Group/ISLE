@@ -32,7 +32,7 @@ services:
       - isle-internal
     volumes:
       - isle-db-data:/var/lib/mysql
-      - ./logs/mysql:/var/log/mysql
+      - isle-mysql-log:/var/log/mysql
 
   fedora:
     # build:
@@ -155,6 +155,7 @@ networks:
 
 volumes:
   isle-db-data:
+  isle-mysql-log:
   isle-solr-data:
   isle-apache-data:
   isle-portainer-data:
