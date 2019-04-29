@@ -1,7 +1,7 @@
 version: '3'
 
 #### docker-compose up -d;
-## Updated 2018-09-07 - Release 1.1 (@ 1.1)
+## Updated 2019-03-27 - Release 1.1.1 (@ 1.1.1)
 
 services:
   isle-portainer: ## Renamed to avoid conflicts on systems/servers with portainer already running.
@@ -23,8 +23,8 @@ services:
 
   mysql:
     # build:
-    #   context: ./images/mysql
-    image: islandoracollabgroup/isle-mysql:1.1
+    #   context: ../images/isle-mysql
+    image: islandoracollabgroup/isle-mysql:1.1.1
     container_name: isle-mysql-${CONTAINER_SHORT_ID}
     environment:
       - MYSQL_ROOT_PASSWORD
@@ -32,12 +32,12 @@ services:
       - isle-internal
     volumes:
       - isle-db-data:/var/lib/mysql
-      - ./logs/mysql:/var/log/mysql
+      - isle-mysql-log:/var/log/mysql
 
   fedora:
     # build:
-    #   context: ./images/isle-fedora
-    image: islandoracollabgroup/isle-fedora:1.1
+    #   context: ../images/isle-fedora
+    image: islandoracollabgroup/isle-fedora:1.1.1
     container_name: isle-fedora-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=768M
@@ -63,8 +63,8 @@ services:
 
   solr:
     # build:
-    #   context: ./images/isle-solr
-    image: islandoracollabgroup/isle-solr:1.1
+    #   context: ../images/isle-solr
+    image: islandoracollabgroup/isle-solr:1.1.1
     container_name: isle-solr-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=512M
@@ -83,8 +83,8 @@ services:
 
   image-services:
     # build:
-    #   context: ./images/isle-imageservices
-    image: islandoracollabgroup/isle-imageservices:1.1
+    #   context: ../images/isle-imageservices
+    image: islandoracollabgroup/isle-imageservices:1.1.1
     container_name: isle-images-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=512M
@@ -108,8 +108,8 @@ services:
 
   apache:
     # build:
-    #   context: ./images/isle-apache
-    image: islandoracollabgroup/isle-apache:1.1
+    #   context: ../images/isle-apache
+    image: islandoracollabgroup/isle-apache:1.1.1
     container_name: isle-apache-${CONTAINER_SHORT_ID}
     env_file: 
       - .env
@@ -130,7 +130,7 @@ services:
       - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
 
   traefik:
-    image: traefik:1.6
+    image: traefik:1.7.9
     container_name: isle-proxy-${CONTAINER_SHORT_ID}
     networks:
       isle-internal:
@@ -155,6 +155,7 @@ networks:
 
 volumes:
   isle-db-data:
+  isle-mysql-log:
   isle-solr-data:
   isle-apache-data:
   isle-portainer-data:
