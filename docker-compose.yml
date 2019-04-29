@@ -32,12 +32,13 @@ services:
       - isle-internal
     volumes:
       - isle-db-data:/var/lib/mysql
-      - ./logs/mysql:/var/log/mysql
+      #- ./logs/mysql:/var/log/mysql
 
   fedora:
     # build:
     #   context: ../images/isle-fedora
-    image: islandoracollabgroup/isle-fedora:1.1.1
+    image: islandoracollabgroup/isle-fedora:dashboards-dev    
+    # image: islandoracollabgroup/isle-fedora:1.1.1
     container_name: isle-fedora-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=768M
@@ -58,13 +59,15 @@ services:
       - isle-fedora-resourceIndex:/usr/local/fedora/data/resourceIndex # Migrators change this to your local RI folder.
       - isle-fedora-activemq:/usr/local/fedora/data/activemq-data # Migrators change this to your local MQ folder.
       - isle-fedora-XACML:/usr/local/fedora/data/fedora-xacml-policies
+      #- ./config/fedora/logging.properties:/usr/local/tomcat/conf/logging.properties
+      #- ./config/tomcat/server.xml:/usr/local/tomcat/conf/server.xml
       - ./logs/fedora/fcrepo:/usr/local/fedora/server/logs
       - ./logs/fedora/tomcat:/usr/local/tomcat/logs
 
   solr:
     # build:
     #   context: ../images/isle-solr
-    image: islandoracollabgroup/isle-solr:1.1.1
+    image: islandoracollabgroup/isle-solr:dashboards-dev
     container_name: isle-solr-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=512M
@@ -79,6 +82,7 @@ services:
       - mysql
     volumes:
       - isle-solr-data:/usr/local/solr
+      #- ./config/solr/log4j.properties:/usr/local/tomcat/webapps/solr/WEB-INF/classes/log4j.properties    
       - ./logs/solr:/usr/local/tomcat/logs
 
   image-services:
