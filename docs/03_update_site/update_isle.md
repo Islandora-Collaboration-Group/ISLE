@@ -1,10 +1,10 @@
 # Update ISLE
 
-Update your version of ISLE to the latest release by doing the following:
-
 These instructions assume you have already installed a version of ISLE using git.
 
-**As with any enterprise system, it is strongly suggested you run these update steps in a test environment before trying to update your production server to avoid downtime.**
+**As with any enterprise system, it is strongly suggested you run these update steps in a test environment before updating your production server.**
+
+Update your version of ISLE to the latest release by doing the following:
 
 * In the command line, navigate to the ISLE directory.  This directory should contain the `docker-compose.yml` file.
 * Stop and remove your existing ISLE containers
