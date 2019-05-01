@@ -24,13 +24,24 @@ Docker commands that are useful to installing or updating ISLE.
     * example: `docker stop isle-tomcat isle-solr`
   * `docker stop $(docker ps -a -q)` # Stop all running and stopped containers
 
-### [Pull Containers]([https://docs.docker.com/compose/reference/pull/)
+### [Stop and Remove Containers](https://docs.docker.com/compose/reference/down/)
+  * `docker-compose down` # Stops containers and removes containers and networks for services defined in the Compose file
+
+### [Pull Containers](https://docs.docker.com/compose/reference/pull/)
   * `docker-compose pull` # Pull down all images from Docker Hub
   * `docker pull [GROUP]/[REPO]` # Pull one specific image from Docker Hub
     * example: `docker pull islandoracollabgroup/isle-fedora:latest`
 
-### [Up Containers]([https://docs.docker.com/compose/reference/up/)
+### [Up Containers](https://docs.docker.com/compose/reference/up/)
   * `docker-compose up -d` # Launch all containers for this service
+
+### [Remove Volumes](https://docs.docker.com/engine/reference/commandline/volume_rm/)
+  * `docker volume rm [VOLUME_NAME]` # Remove one or more volumes. You cannot remove a volume that is in use by a container.
+    * example: `docker volume rm isle_fed-data`
+
+### [Remove Containers](https://docs.docker.com/engine/reference/commandline/rm/)
+  * `docker rm [CONTAINER_NAME(S)]` # Remove one or more containers
+    * example: `docker rm isle_fed-data`
 
 ### [Shell Into Docker Container](https://docs.docker.com/v17.12/engine/reference/commandline/exec/)
   * `docker exec -it [CONTAINER_NAME] bash` # Shell Into Docker Container
@@ -42,14 +53,6 @@ Docker commands that are useful to installing or updating ISLE.
   * `sudo service docker status` # Show Docker Status
   * `sudo /bin/systemctl restart docker.service` # Restart Docker Service
   * `sudo service docker restart` # Restart Docker Service (alternate)
-
-### [Remove Volumes](https://docs.docker.com/engine/reference/commandline/volume_rm/)
-  * `docker volume rm [VOLUME_NAME]` # Remove one or more volumes. You cannot remove a volume that is in use by a container.
-    * example: `docker volume rm isle_fed-data`
-
-### [Remove Containers](https://docs.docker.com/engine/reference/commandline/rm/)
-  * `docker rm [CONTAINER_NAME(S)]` # Remove one or more containers
-    * example: `docker rm isle_fed-data`
 
 ### [Watching Docker Logs](https://docs.docker.com/engine/reference/commandline/logs/)
   * `docker logs -f --tail 10 [CONTAINER_NAME]` # Show the last 10 lines (`--tail 10`) of a container's logs; `-f` means continuous/live feed
