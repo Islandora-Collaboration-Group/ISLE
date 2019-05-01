@@ -23,7 +23,7 @@
 
 * Server package management updates via `apt-get`
 * Updated `GEN_DEP_PACKS` dependencies via `apt-get`
-* Upgraded `tomcat` to `8.5.39`
+* Upgraded `tomcat` to `8.5.40`
 
 #### isle-fedora
 
@@ -40,19 +40,19 @@
 * Server package management updates via `apt-get`
 * Updated `GEN_DEP_PACKS` dependencies via `apt-get`
 * Updated `openjpeg` to [Dec 21,2018 commit](https://github.com/uclouvain/openjpeg/commit/51f097e6d5754ddae93e716276fe8176b44ec548)
-* Upgraded Imagemagick to `7.0.8-34`
+* Upgraded Imagemagick to `7.0.8-42`
 
 #### isle-solr
-  * Server package management updates via `apt-get`
+* Server package management updates via `apt-get`
 
 #### isle-apache
-  * Upgraded Imagemagick to version `ImageMagick-7.0.8-34.x86_64`
-  * Upgraded Composer to version `1.84`
-  * Upgraded Drush to `8.2.1` with `8.1.18` as fallback
-  * Upgraded FITS to `1.4` (Nov 2018)
+* Upgraded Imagemagick to version `ImageMagick-7.0.8-42.x86_64`
+* Upgraded Composer to version `1.8.5`
+* Upgraded Drush to `8.2.3` with `8.1.18` as fallback
+* Upgraded FITS to `1.4` (Nov 2018)
 
 #### isle-mysql
-  * Updated `mysql:5.7` build image
+* Updated `mysql:5.7` build image
 
 ---
 
