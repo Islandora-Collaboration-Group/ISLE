@@ -54,12 +54,12 @@ nav:
 - 'About':
   - 'Contributing to ISLE': '08_about/about_contributing_to_ISLE.md'
   - 'About ISLE': '08_about/about_isle.md'
-  - 'About Maintainers': '08_about/about_maintainers.md'
-  - 'Maintainer Docs':
-    - 'Docs: MkDocs': '05_maintainer_docs/maintainer_docs_mkdocs.md'
-    - 'Docs: Spell Checker': '05_maintainer_docs/maintainer_docs_spell_checker.md'
-    - 'Docs: Style Guide': '05_maintainer_docs/maintainer_docs_style_guide.md'
-    - 'Release Process': '05_maintainer_docs/maintainer_release_process.md'
-    - 'Testing Guide': '05_maintainer_docs/maintainer_testing_guide.md'
+  - 'About Committers': '08_about/about_maintainers.md'
+  - 'Contributor Docs':
+    - 'Docs: MkDocs': '05_contributor_docs/contributor_docs_mkdocs.md'
+    - 'Docs: Spell Checker': '05_contributor_docs/contributor_docs_spell_checker.md'
+    - 'Docs: Style Guide': '05_contributor_docs/contributor_docs_style_guide.md'
+    - 'Release Process': '05_contributor_docs/contributor_release_process.md'
+    - 'Testing Guide': '05_contributor_docs/contributor_testing_guide.md'
   - 'Get Help': '08_about/about_get_help.md'
 - 'Release Notes': '09_release_notes/release_notes.md'

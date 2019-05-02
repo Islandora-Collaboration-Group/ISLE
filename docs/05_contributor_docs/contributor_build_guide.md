@@ -2,9 +2,9 @@
 
 _Expectations:  It can take an up to an average of **2 -4 hours** to read this documentation and complete this installation. Highly dependent on the Developer's local laptop and Internet speed._
 
-**Caution**: This guide is recommended for ISLE Committers or Developers only and not for end-users.
+**Caution**: This guide is recommended for ISLE Contributors or Developers only and not for end-users.
 
-ISLE Committers are to follow this guide to build the five Docker ISLE images using the `docker-compose-build.yml` file.
+ISLE Contributors are to follow this guide to build the five Docker ISLE images using the `docker-compose-build.yml` file.
 
 Developers can follow this guide if they have edited their Dockerfiles with custom software and they then can push to their own Docker image repository.
 
@@ -40,7 +40,7 @@ For additional help, please post a message to the [Islandora ISLE Google group](
 
 ### Step 1: Ensure There Are No Local ISLE Docker Images Present
 
-If performing a brand new image build, the ISLE Committer will need to ensure there are no previous image builds or cached build data.
+If performing a brand new image build, the ISLE contributor will need to ensure there are no previous image builds or cached build data.
 
 * `docker image ls`
 
@@ -172,7 +172,7 @@ Repeat the process with any additional tags. **Please note:** _Depending on your
 
 ---
 
-Steps below are mandatory for any ISLE Committer but optional (though recommended) for any Developer.
+Steps below are mandatory for any ISLE contributor but optional (though recommended) for any Developer.
 
 ### Step 9: Delete All Recently Built and Pushed ISLE Images on Local Laptop
 
