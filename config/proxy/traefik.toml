@@ -23,9 +23,8 @@ defaultEntryPoints = ["http", "https"]
   [entryPoints.https]
   address = ":443"
     [entryPoints.https.tls]
-      [[entryPoints.https.tls.certificates]]
-      certFile = "/certs/isle.localdomain.cert"
-      keyFile = "/certs/isle.localdomain.key"
+
+# BD Customization - Start: lines 26 - 28 delete above to use Let's Encrypt
 
 ################################################################
 # Traefik logs configuration
@@ -126,3 +125,19 @@ watch = true
 # Default: false
 #
 # swarmmode = false
+
+
+################################################################
+# Letsencrypt / acme / certbot configuration backend
+################################################################
+#
+# Uncommented to use Letsencrypt
+#
+[acme]
+  email = "bd_admin@demo.born-digital.com"
+  storage = "acme.json"
+  entryPoint = "https"
+  onHostRule = true
+  onDemand = false
+    [acme.httpChallenge]
+    entryPoint = "http"
