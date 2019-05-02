@@ -63,10 +63,6 @@ services:
       - isle-fedora-resourceIndex:/usr/local/fedora/data/resourceIndex # Migrators change this to your local RI folder.
       - isle-fedora-activemq:/usr/local/fedora/data/activemq-data # Migrators change this to your local MQ folder.
       - isle-fedora-XACML:/usr/local/fedora/data/fedora-xacml-policies
-      #- ./config/fedora/logging.properties:/usr/local/tomcat/conf/logging.properties
-      #- ./config/tomcat/server.xml:/usr/local/tomcat/conf/server.xml
-      - ./logs/fedora/fcrepo:/usr/local/fedora/server/logs
-      - ./logs/fedora/tomcat:/usr/local/tomcat/logs
     logging:
       driver: syslog
       options:
@@ -89,9 +85,7 @@ services:
     depends_on:
       - mysql
     volumes:
-      - isle-solr-data:/usr/local/solr
-      #- ./config/solr/log4j.properties:/usr/local/tomcat/webapps/solr/WEB-INF/classes/log4j.properties    
-      - ./logs/solr:/usr/local/tomcat/logs
+      - isle-solr-data:/usr/local/solr  
     logging:
       driver: syslog
       options:
@@ -142,8 +136,6 @@ services:
       - traefik
     volumes:
       - isle-apache-data:/var/www/html
-      - ./logs/apache/httpd:/var/log/apache2
-      - ./logs/apache/fits:/var/log/fits
     labels:
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
       - traefik.enable=true
