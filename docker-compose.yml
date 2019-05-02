@@ -1,7 +1,7 @@
 version: '3'
 
 #### docker-compose up -d;
-## Updated 2019-03-27 - Release 1.1.1 (@ 1.1.1)
+## Updated 2019-03-27 - Release dashboards-dev (@ dashboards-dev)
 
 services:
   isle-portainer: ## Renamed to avoid conflicts on systems/servers with portainer already running.
@@ -24,7 +24,7 @@ services:
   mysql:
     # build:
     #   context: ../images/isle-mysql
-    image: islandoracollabgroup/isle-mysql:1.1.1
+    image: islandoracollabgroup/isle-mysql:dashboards-dev
     container_name: isle-mysql-${CONTAINER_SHORT_ID}
     environment:
       - MYSQL_ROOT_PASSWORD
@@ -33,12 +33,16 @@ services:
     volumes:
       - isle-db-data:/var/lib/mysql
       - isle-mysql-log:/var/log/mysql
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
 
   fedora:
     # build:
     #   context: ../images/isle-fedora
     image: islandoracollabgroup/isle-fedora:dashboards-dev    
-    # image: islandoracollabgroup/isle-fedora:1.1.1
+    # image: islandoracollabgroup/isle-fedora:dashboards-dev
     container_name: isle-fedora-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=768M
@@ -63,6 +67,10 @@ services:
       #- ./config/tomcat/server.xml:/usr/local/tomcat/conf/server.xml
       - ./logs/fedora/fcrepo:/usr/local/fedora/server/logs
       - ./logs/fedora/tomcat:/usr/local/tomcat/logs
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
 
   solr:
     # build:
@@ -84,11 +92,15 @@ services:
       - isle-solr-data:/usr/local/solr
       #- ./config/solr/log4j.properties:/usr/local/tomcat/webapps/solr/WEB-INF/classes/log4j.properties    
       - ./logs/solr:/usr/local/tomcat/logs
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
 
   image-services:
     # build:
     #   context: ../images/isle-imageservices
-    image: islandoracollabgroup/isle-imageservices:1.1.1
+    image: islandoracollabgroup/isle-imageservices:dashboards-dev
     container_name: isle-images-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=512M
@@ -109,11 +121,15 @@ services:
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
       - traefik.enable=false
       - "traefik.frontend.rule=Host:images.${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
 
   apache:
     # build:
     #   context: ../images/isle-apache
-    image: islandoracollabgroup/isle-apache:1.1.1
+    image: islandoracollabgroup/isle-apache:dashboards-dev
     container_name: isle-apache-${CONTAINER_SHORT_ID}
     env_file: 
       - .env
@@ -132,6 +148,10 @@ services:
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
       - traefik.enable=true
       - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
 
   traefik:
     image: traefik:1.7.9
@@ -151,6 +171,10 @@ services:
       - traefik.port=8080
       - traefik.enable=true  ## NOT SAFE FOR PRODUCTION! ##
       - traefik.frontend.rule=Host:admin.${BASE_DOMAIN};
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
 
 # Defined networks
 networks:
