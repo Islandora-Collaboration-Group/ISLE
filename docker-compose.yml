@@ -109,8 +109,6 @@ services:
       - fedora
     ports:
       - "8083:8080"
-    volumes:
-      - ./logs/imageservices:/usr/local/tomcat/logs
     labels:
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
       - traefik.enable=false
