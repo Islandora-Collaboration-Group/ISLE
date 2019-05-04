@@ -75,14 +75,14 @@ Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git checkout -- <file>..." to discard changes in working directory)
 
-	modified:   docs/06_specifications/specs_diagram_network.md
-	modified:   docs/glossary.md
-	modified:   mkdocs.yml
+  modified:   docs/06_specifications/specs_diagram_network.md
+  modified:   docs/glossary.md
+  modified:   mkdocs.yml
 
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
 
-	docs/05_contributor_docs/contributor_building_giant_robots.md
+  docs/05_contributor_docs/contributor_building_giant_robots.md
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
