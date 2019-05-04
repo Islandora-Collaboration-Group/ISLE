@@ -60,7 +60,7 @@
 
 * Base Images to serve them all:
     * In Docker fashion two new base-images were created for the 1.1 ISLE stack. There are major benefits both for the contributors and users of ISLE.
-    * Keeping our users safe has never been easier.  For users and contributors alike when a security update or patch arrives we (the ISLE contributors) need only update the base image.  By virtue of inheritance these updates are automatically inherited and built into each and every component of the ISLE stack.
+    * Keeping our users safe has never been easier.  For users and contributors alike when a security update or patch arrives we (the ISLE Contributors) need only update the base image.  By virtue of inheritance these updates are automatically inherited and built into each and every component of the ISLE stack.
     * Quick downloads, faster launch: these shared base images decrease the time to pull and launch the ISLE stack.  Since the images have the same layers (like a cake) they are downloaded only once and reused as building blocks for the rest of the ISLE stack.
     * This also significantly decreases the overall size of all images because we are able to finely tune and trim our base images so they’re stable, without being bloated by unneeded components.
         * [ISLE-Ubuntu-Base](https://github.com/Islandora-Collaboration-Group/isle-ubuntu-basebox)

@@ -1,10 +1,10 @@
 <!--- PAGE_TITLE --->
 
-The ISLE Images are created by the use of Dockerfiles, text documents that contain all the commands an ISLE contributor could call on the command line to assemble an image. Using docker build users e.g. ISLE contributors or Developers can create an automated build that executes several command-line instructions in succession.
+The ISLE Images are created by the use of Dockerfiles, text documents that contain all the commands an ISLE contributor could call on the command line to assemble an image. Using docker build users e.g. ISLE Contributors or Developers can create an automated build that executes several command-line instructions in succession.
 
 ## Assumptions / Prerequisites
 
-* ISLE contributors, Developers have pre-existing knowledge or familiarity with Dockerfile
+* ISLE Contributors, Developers have pre-existing knowledge or familiarity with Dockerfile
 
 * [Dockerfiles](https://docs.docker.com/engine/reference/builder/), their editing process and compositions are familiar or known concepts.
 
