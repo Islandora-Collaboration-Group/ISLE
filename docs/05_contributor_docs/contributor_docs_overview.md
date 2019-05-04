@@ -48,7 +48,7 @@ A very handy primer for writing documentation using `MkDocs` has been written he
 | -------------     | ------------- |
 | README.md | Description of the documentation project contents and how to use them |
 | docs | where all documentation sections and topical pages are kept |
-| about_isle.md | Description of the ISLE project, its contributors and this documentation repository |
+| about_isle.md | Description of the ISLE project, its maintainers and this documentation repository |
 | assets | Image or logo files used in documentation |
 | glossary.md | A list of terms used in documentation |
 | index.md | The homepage (first page of the documentation |

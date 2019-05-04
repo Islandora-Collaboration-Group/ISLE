@@ -10,7 +10,7 @@
 
 **Please note:** You'll need to create separate pull requests for each type of change whether editing or adding new pages with a `mkdocs.yml` file update. Using the online editor means you can only do one thing at a time.
 
-If you need to edit more than one file or want to create more than one new page of content, it is recommended to instead follow the steps contained within the [Documentation Editing - Local](../05_maintainer_docs/maintainer_docs_editing_local.md) Guide.
+If you need to edit more than one file or want to create more than one new page of content, it is recommended to instead follow the steps contained within the [Documentation Editing - Local](../05_contributor_docs/contributor_docs_editing_local.md) Guide.
 
 ---
 
@@ -38,11 +38,11 @@ If you need to edit more than one file or want to create more than one new page 
 
 The example used below is how to create a new documentation page that will be about building giant ISLE robots with the title of "Building Giant ISLE Robots" and be located in the Development section.
 
-* Click into the `docs/05_maintainer_docs` directory
+* Click into the `docs/05_contributor_docs` directory
 
 * On the right hand side of the page, a navigation bar that will display `Create new file | Upload files | Find File History`, click the `Create new file` button.
 
-* In the empty `Name your file...` field at the top of the page, enter `maintainer_building_giant_robots.md`
+* In the empty `Name your file...` field at the top of the page, enter `contributor_building_giant_robots.md`
 
 * Enter the appropriate content to the page.
 
@@ -68,15 +68,15 @@ In order for `mkdocs` to understand that there is a new page and page title to d
 
 - 'Page Title': '/section/filename.md'
 
-* Within the `Maintainer Docs` section of the open `mkdocs.yml` file, add this new line in the appropriate order.
+* Within the `Contributor Docs` section of the open `mkdocs.yml` file, add this new line in the appropriate order.
 
-`- 'Building Giant ISLE Robots': '05_maintainer_docs/maintainer_building_giant_robots.md'`
+`- 'Building Giant ISLE Robots': '05_contributor_docs/contributor_building_giant_robots.md'`
 
 ```
-- 'Maintainer Docs':
-  - 'Building Giant ISLE Robots': '05_maintainer_docs/maintainer_building_giant_robots.md'
-  - 'Contributing to Project': '05_maintainer_docs/maintainer_contributing_to_project.md'
-  - 'Documentation Overview': '05_maintainer_docs/maintainer_docs_overview.md'
+- 'Contributor Docs':
+  - 'Building Giant ISLE Robots': '05_contributor_docs/contributor_building_giant_robots.md'
+  - 'Contributing to Project': '05_contributor_docs/contributor_contributing_to_project.md'
+  - 'Documentation Overview': '05_contributor_docs/contributor_docs_overview.md'
 ```
 
 * When finished and ready to "save" the changes, follow the instructions immediately in the `Commit changes` section below.
@@ -105,4 +105,4 @@ The "Open a pull request" page should now appear along with text like `The chang
 * The first and second text fields may contain part of the short description. Either keep the default text or change accordingly.
 * Click the green `Create pull request` button.
 
-This pull request should now appear in the [Pull Requests](https://github.com/Islandora-Collaboration-Group/ISLE-Documentation/pulls) section of the ISLE repository, ready for review, commentary or inclusion by the ISLE Maintainers.
+This pull request should now appear in the [Pull Requests](https://github.com/Islandora-Collaboration-Group/ISLE-Documentation/pulls) section of the ISLE repository, ready for review, commentary or inclusion by the ISLE Committers.

@@ -1,66 +1,8 @@
-# Release Notes - ISLE v.1.1.1, 2019-03-28
-
-## Updates and testing performed by ISLE Committer Gavin Morris, Born-Digital
-
-### ISLE (main project)
-
-* `docker-compose.yml`
-  * Release header changed to `1.1.1` with date of release
-  * All isle-image tags changed to `1.1.1`
-  * Upgraded `traefik` to `1.7.9`
-
-### Images
-
-#### isle-ubuntu-basebox
-
-* Updated `ubuntu:bionic` build image
-* Server package management updates via `apt-get`
-* Updated `GEN_DEP_PACKS` dependencies via `apt-get`
-* Upgraded `S6_OVERLAY` to `1.21.7.0`
-* Upgraded `Java (Server JRE)` to `jre-8u202 /1.8.0_202`
-
-#### isle-tomcat
-
-* Server package management updates via `apt-get`
-* Updated `GEN_DEP_PACKS` dependencies via `apt-get`
-* Upgraded `tomcat` to `8.5.40`
-
-#### isle-fedora
-
-* Server package management updates via `apt-get`
-* Updated `GEN_DEP_PACKS` dependencies via `apt-get`
-* Updated `Islandora XACML policies` to [Jan 2019 commit](https://github.com/Islandora/islandora-xacml-policies/commit/73deba6b90f6de40d72c890233ba6ff0159031de)
-* Upgraded `Islandora Drupal Filter` to `7.1.12`
-* Upgraded `Apache Maven` to `3.6.0`
-* Updated `Discovery Garden's basic-solr 4.10.x config` to newest [March 19, 2019 commit](https://github.com/discoverygarden/basic-solr-config/commit/0a7cdf3447b033e1b6614b80155a3441d46f9eec)
-* Updated `Discovery Garden's Islandora Transforms` to [March 19, 2019 commit](https://github.com/discoverygarden/islandora_transforms/commit/cdfef63b7e2f6740c06e56bfa32d496c09837ae8)
-
-#### isle-imageservices
-
-* Server package management updates via `apt-get`
-* Updated `GEN_DEP_PACKS` dependencies via `apt-get`
-* Updated `openjpeg` to [Dec 21,2018 commit](https://github.com/uclouvain/openjpeg/commit/51f097e6d5754ddae93e716276fe8176b44ec548)
-* Upgraded Imagemagick to `7.0.8-42`
-
-#### isle-solr
-* Server package management updates via `apt-get`
-
-#### isle-apache
-* Upgraded Imagemagick to version `ImageMagick-7.0.8-42.x86_64`
-* Upgraded Composer to version `1.8.5`
-* Upgraded Drush to `8.2.3` with `8.1.18` as fallback
-* Upgraded FITS to `1.4` (Nov 2018)
-
-#### isle-mysql
-* Updated `mysql:5.7` build image
-
----
-
 # ISLE Release 1.1 (Codenamed `Pembroke`)
 
 * Base Images to serve them all:
-    * In Docker fashion two new base-images were created for the 1.1 ISLE stack. There are major benefits both for the contributors and users of ISLE.
-    * Keeping our users safe has never been easier.  For users and contributors alike when a security update or patch arrives we (the ISLE contributors) need only update the base image.  By virtue of inheritance these updates are automatically inherited and built into each and every component of the ISLE stack.
+    * In Docker fashion two new base-images were created for the 1.1 ISLE stack. There are major benefits both for the committers and users of ISLE.
+    * Keeping our users safe has never been easier.  For users and committers alike when a security update or patch arrives we (the ISLE committers) need only update the base image.  By virtue of inheritance these updates are automatically inherited and built into each and every component of the ISLE stack.
     * Quick downloads, faster launch: these shared base images decrease the time to pull and launch the ISLE stack.  Since the images have the same layers (like a cake) they are downloaded only once and reused as building blocks for the rest of the ISLE stack.
     * This also significantly decreases the overall size of all images because we are able to finely tune and trim our base images so they’re stable, without being bloated by unneeded components.
         * [ISLE-Ubuntu-Base](https://github.com/Islandora-Collaboration-Group/isle-ubuntu-basebox)

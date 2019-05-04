@@ -1,10 +1,10 @@
 <!--- PAGE_TITLE --->
 
-The ISLE Images are created by the use of Dockerfiles, text documents that contain all the commands an ISLE maintainer could call on the command line to assemble an image. Using docker build users e.g. ISLE maintainers or Developers can create an automated build that executes several command-line instructions in succession.
+The ISLE Images are created by the use of Dockerfiles, text documents that contain all the commands an ISLE contributor could call on the command line to assemble an image. Using docker build users e.g. ISLE contributors or Developers can create an automated build that executes several command-line instructions in succession.
 
 ## Assumptions / Prerequisites
 
-* ISLE maintainers, Developers have pre-existing knowledge or familiarity with Dockerfile
+* ISLE contributors, Developers have pre-existing knowledge or familiarity with Dockerfile
 
 * [Dockerfiles](https://docs.docker.com/engine/reference/builder/), their editing process and compositions are familiar or known concepts.
 
@@ -68,7 +68,7 @@ Following [standard Docker convention](https://docs.docker.com/engine/reference/
     * `FROM ubuntu:14.04 AS ffmpeg_base` is the first base image used.
     * `FROM ubuntu:14.04` is the second base image used.
 
-* LABEL - For ISLE maintainers to version control image descriptions, functionality and additional meta-data. (_optional_)
+* LABEL - For ISLE Committers to version control image descriptions, functionality and additional meta-data. (_optional_)
 
 * RUN - Execute commands e.g. `RUN apt-get update` etc.
 
@@ -95,7 +95,7 @@ ENV JAVA_HOME=/usr/lib/jvm/java-8-oracle \
 
 ## Dockerfile Commenting
 
-For ISLE Maintainers when possible it is highly recommended that all sections be commented appropriately to explain functionality or actions to all Developers looking to customize or curious end users.
+For ISLE Contributors when possible it is highly recommended that all sections be commented appropriately to explain functionality or actions to all Developers looking to customize or curious end users.
 
 Example:
 

@@ -43,7 +43,7 @@ You should edit these files with unique users/passwords, your domain name, site-
 
 **Edit the file: **.env** and **tomcat.env** before you up (`docker-compose up`)**
 
-**REMEMBER: never share or post your complete .env publicly... EVER! Use caution, and when in doubt ask a maintainer for help (i.e., discuss or share the file privately with an ISLE Maintainer)**
+**REMEMBER: never share or post your complete .env publicly... EVER! Use caution, and when in doubt ask a committer for help (i.e., discuss or share the file privately with an ISLE Committer)**
 
 ### Master Section
     * COMPOSE_PROJECT_NAME to something unique (e.g. `COMPOSE_PROJECT_NAME=isle-production-collections`)
