@@ -10,7 +10,7 @@
 
 **Please note:** You'll need to create separate pull requests for each type of change whether editing or adding new pages with a `mkdocs.yml` file update. Using the online editor means you can only do one thing at a time.
 
-If you need to edit more than one file or want to create more than one new page of content, it is recommended to instead follow the steps contained within the [Documentation Editing - Local](../05_contributor_docs/contributor_docs_editing_local.md) Guide.
+If you need to edit more than one file or want to create more than one new page of content, it is recommended to instead follow the steps contained within the [Documentation Editing - Local](../contributor-docs/editing-local.md) Guide.
 
 ---
 
@@ -38,11 +38,11 @@ If you need to edit more than one file or want to create more than one new page 
 
 The example used below is how to create a new documentation page that will be about building giant ISLE robots with the title of "Building Giant ISLE Robots" and be located in the Development section.
 
-* Click into the `docs/05_contributor_docs` directory
+* Click into the `docs/contributor-docs` directory
 
 * On the right hand side of the page, a navigation bar that will display `Create new file | Upload files | Find File History`, click the `Create new file` button.
 
-* In the empty `Name your file...` field at the top of the page, enter `contributor_building_giant_robots.md`
+* In the empty `Name your file...` field at the top of the page, enter `building_giant_robots.md`
 
 * Enter the appropriate content to the page.
 
@@ -70,13 +70,13 @@ In order for `mkdocs` to understand that there is a new page and page title to d
 
 * Within the `Contributor Docs` section of the open `mkdocs.yml` file, add this new line in the appropriate order.
 
-`- 'Building Giant ISLE Robots': '05_contributor_docs/contributor_building_giant_robots.md'`
+`- 'Building Giant ISLE Robots': 'contributor-docs/building_giant_robots.md'`
 
 ```
 - 'Contributor Docs':
-  - 'Building Giant ISLE Robots': '05_contributor_docs/contributor_building_giant_robots.md'
-  - 'Contributing to Project': '05_contributor_docs/contributor_contributing_to_project.md'
-  - 'Documentation Overview': '05_contributor_docs/contributor_docs_overview.md'
+  - 'Building Giant ISLE Robots': 'contributor-docs/building_giant_robots.md'
+  - 'Contributing to Project': 'contributor-docs/contributing_to_project.md'
+  - 'Documentation Overview': 'contributor-docs/overview.md'
 ```
 
 * When finished and ready to "save" the changes, follow the instructions immediately in the `Commit changes` section below.

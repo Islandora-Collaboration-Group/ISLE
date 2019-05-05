@@ -57,7 +57,7 @@ Each subdirectory is grouped by the image / container software type and each con
 
 * Each new command or action added will increase the size of the image once built. Attempt to balance size with functionality.
 
-* All ISLE images use official Docker build images. Review the [Docker Containers & Images](../06_specifications/specs_docker_containers_images.md) Specifications Page for a listing of those builds.
+* All ISLE images use official Docker build images. Review the [Docker Containers & Images](../specifications/docker-containers-images.md) Specifications Page for a listing of those builds.
 
 ## Dockerfile Composition
 

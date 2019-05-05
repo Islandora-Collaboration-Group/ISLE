@@ -1,4 +1,4 @@
-# Migration Merge Checklist
+# Migration Reindex Process
 
 When migrating any non-ISLE Islandora site, it is crucial to rebuild (reindex) the following three indices from the FOXML and datastream files on disk.
 
@@ -148,6 +148,6 @@ As such, it is recommended starting a screen session prior to running the follow
 
 * Again this process will take up to **1 - 30 or more hours** to complete depending on the size of your Fedora collection.
 
-    * You can tail either Fedora Gsearch or Solr logs, ([locations here](../06_specifications/specs_docker_containers_images.md)) to watch the indexing process (_if necessary_).
+    * You can tail either Fedora Gsearch or Solr logs, ([locations here](../specifications/docker-containers-images.md)) to watch the indexing process (_if necessary_).
 
 * Type `exit` when finished to exit the container.

@@ -12,13 +12,13 @@ These images will contain the necessary base code, scripts and files to run the 
 
 The Demo ISLE Site creates a local Islandora installation (`isle.localdomain`) on your laptop or workstation. This includes an un-themed Drupal website and empty Fedora repository for end users to test ingests, test metadata, update fields in SOLR indexing, develop code and otherwise "kick the tires" on ISLE.
 
-For additional help, please post a message to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle). This [Glossary](../07_appendices/glossary.md) defines terms used in this documentation.
+For additional help, please post a message to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle). This [Glossary](../appendices/glossary.md) defines terms used in this documentation.
 
 ### Assumptions / Prerequisites
 
-* Laptop / workstation that conforms to the specifications outlined in the [Hardware Requirements](../01_installation_host_server/hardware-requirements.md)
+* Laptop / workstation that conforms to the specifications outlined in the [Hardware Requirements](../install/host-hardware-requirements.md)
 
-* This image build site guide is designed for a local laptop / workstation that has already followed the appropriate setup and configuration instructions in the [Demo ISLE Site](../02_installation_site/site_installation.md) guide.
+* This image build site guide is designed for a local laptop / workstation that has already followed the appropriate setup and configuration instructions in the [Demo ISLE Site](../install/install.md) guide.
 
 * Instructions below assume a MacOS or Linux laptop or workstation. Windows users may have to adjust / swap out various tools as needed.
 
@@ -113,7 +113,7 @@ Please perform these steps one at time. If any errors occur during the build pro
 
 This renamed `docker-compose-build.yml` file will tag all builds by default with the `latest` tag.
 
-Review the current tags found on the [Docker Containers & Images](../06_specifications/specs_docker_containers_images.md) Specifications Page. Should the software version change, update this document with the new tags. You will need to tag each image further as needed. There are always two tags for every image, e.g. `latest` and the specific version of the primary software package used on the image or container. It is possible there will be more tags for different image versions in the future.
+Review the current tags found on the [Docker Containers & Images](../specifications/docker-containers-images.md) Specifications Page. Should the software version change, update this document with the new tags. You will need to tag each image further as needed. There are always two tags for every image, e.g. `latest` and the specific version of the primary software package used on the image or container. It is possible there will be more tags for different image versions in the future.
 
 For example if the installed proxy nginx software changes from `1.13` to `1.14`, change or add the new tag of `1.14`
 
@@ -189,7 +189,7 @@ Pull down the newly pushed images.
 
 * `docker-compose pull`
 
-Follow the instructions within the `docker-compose.yml` file or within the [Demo ISLE Site](../02_installation_site/site_installation.md) to start up containers and install the Demo ISLE Site (`isle.localdomain`).
+Follow the instructions within the `docker-compose.yml` file or within the [Demo ISLE Site](../install/install.md) to start up containers and install the Demo ISLE Site (`isle.localdomain`).
 
 Ensure that all components, connections etc are working, otherwise troubleshoot as required, making the appropriate fixes to the associated Dockerfiles, pushing changes to the ISLE project git repository and then REPEATING this entire build and push process.
 

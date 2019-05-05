@@ -6,15 +6,15 @@ _Expectations:  It may take at least **8 hours or more** to read this documentat
 
 This Migration guide will help you migrate your existing production Islandora environment to an ISLE environment for easily maintaining Islandora. This guide will walk you through how to identify and copy your institution's Islandora data and files (including your data volume, Drupal site or sites, and commonly customized xml and xslt files) to your ISLE framework.
 
-For additional help, please post a message to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle). This [Glossary](../07_appendices/glossary.md) defines terms used in this documentation.
+For additional help, please post a message to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle). This [Glossary](../appendices/glossary.md) defines terms used in this documentation.
 
 ## Assumptions / Prerequisites
 
-* You are comfortable with ISLE. We recommend first setting up the [Demo ISLE Site](../02_installation_site/site_installation.md) (`isle.localdomain`).
+* You are comfortable with ISLE. We recommend first setting up the [Demo ISLE Site](../install/install.md) (`isle.localdomain`).
 
 * You understand that all directions in this guide depend on the type of local computer used to connect via browser to Islandora. The instructions below assume a MacOS or Linux laptop or workstation to be used in conjunction with the ISLE Host Server for deploying configs, code, files etc. Windows users may have to adjust / swap out various tools as needed.
 
-* A host server that conforms to the specifications outlined in - and has followed the appropriate setup and configuration instructions in - the [New ISLE Site](../01_installation_host_server) section of the guide.
+* A host server that conforms to the specifications outlined in - and has followed the appropriate setup and configuration instructions in - the [New ISLE Site](../install) section of the guide.
 
 * You have disk space on - or mounted to - the host server large enough to store a **copy** of your fedora data store
 
@@ -24,7 +24,7 @@ For additional help, please post a message to the [Islandora ISLE Google group](
 
 * You have a web domain name that works (i.e. is set up with a DNS entry you can make changes to if needed)
 
-* You have [SSL Certificates](../07_appendices/glossary.md#systems) previously created for the web domain. (_Please work with the appropriate internal IT resource to provision these files for your domain_) OR: Use the [Let's Encrypt guide](../07_appendices/configuring-lets-encrypt.md) to generate and install SSL Certificates.
+* You have [SSL Certificates](../appendices/glossary.md#systems) previously created for the web domain. (_Please work with the appropriate internal IT resource to provision these files for your domain_) OR: Use the [Let's Encrypt guide](../appendices/configuring-lets-encrypt.md) to generate and install SSL Certificates.
 
 * You have cloned the ISLE repository to BOTH your local computer AND the ISLE host server
 
@@ -143,7 +143,7 @@ This area will be where all current Islandora production data is to be stored. T
 
 * In the `/opt/ISLE/yourdoman-config` directory create a new sub-directory (you can call this `current_prod_islandora_config`)
 
-* You will copy some files from your current Islandora Production server(s) into this directory following the [Migration Export Checklist](../04_installation_migration/migration_export_checklist.md) and you will copy some files and folders directly to your ISLE host server (in case the data involved is too large for your local workstation) as directed in the checklist.
+* You will copy some files from your current Islandora Production server(s) into this directory following the [Migration Export Checklist](../migrate/export-checklist.md) and you will copy some files and folders directly to your ISLE host server (in case the data involved is too large for your local workstation) as directed in the checklist.
 
     * **Noting** most likely the Apache data (`/var/www/html`) & Fedora data (`/usr/local/fedora/data`) will be moved directly to your ISLE host server storage area and your new ISLE config files will be built on your local machine in the `current_prod_islandora_config` folder you just created.
 
@@ -157,7 +157,7 @@ This area will be where all current Islandora production data is to be stored. T
 
 The **goal** is to merge all site-specific data (domain names, variables, usernames, passwords, etc..) AND all site-specific customizations or settings from the files in directory B. into the matching files in directory A.
 
-* Compare the data and settings of the files found within directory **B.** `current_prod_islandora_config`, and then merge, edit or copy as necessary with the templated settings found within the renamed directory **A.** `yourdomain-config` as guided in the [Migration Merge Checklist](../04_installation_migration/migration_merge_checklist.md).
+* Compare the data and settings of the files found within directory **B.** `current_prod_islandora_config`, and then merge, edit or copy as necessary with the templated settings found within the renamed directory **A.** `yourdomain-config` as guided in the [Migration Merge Checklist](../migrate/merge-checklist.md).
 
 * Customizations: (_optional_) Carefully compare the following most frequently customized files with the new, default versions found within your new ISLE config folder. Use a "Diff" tool (example: [Beyond Compare](https://www.scootersoftware.com/download.php) to merge any desired customizations from your production Islandora files to persist within the new ISLE config folder of files:
 
@@ -317,7 +317,7 @@ Staying within `/opt/ISLE/yourdomain-config`
     * _optional_ check if fedora is running properly e.g. `http://isle-prod-project.institution:8080/manager/html`
 * `docker exec -it isle-fedora-institution bash`
 
-* Follow the steps outlined in the [Migration Reindex Process Guide](../04_installation_migration/migration_reindex_process.md)
+* Follow the steps outlined in the [Migration Reindex Process Guide](../migrate/reindex-process.md)
     * Follow the steps outlined in the Reindex Fedora RI (1 of 3) section
     * Follow the steps outlined in the Reindex SQL database (2 of 3) section
     * Pause here before attempting the steps within the Reindex Solr (3 of 3) section.
@@ -361,7 +361,7 @@ Instructions for converting the Drupal mysql database are available on the [Drup
 
 * `docker exec -it isle-fedora-institution bash` **NOTE FEDORA NOT SOLR!**
 
-* Follow the steps outlined in the [Migration Reindex Process Guide](../04_installation_migration/migration_reindex_process.md)
+* Follow the steps outlined in the [Migration Reindex Process Guide](../migrate/reindex-process.md)
     * Follow the steps outlined only in the Reindex Solr (3 of 3) section.
        * (_Ensure that Tomcat and Fedora are running._)
 

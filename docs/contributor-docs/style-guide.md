@@ -1,18 +1,19 @@
-# Documentation: Style Guide
+# ISLE Documentation: Style Guide
 
-## Site Theme
-- [MdDocs Themes](https://www.mkdocs.org/user-guide/styling-your-docs/#built-in-themes)
-
----
-
-## CSS Overrides
-- The `extra.css` file overrides some basic CSS styles.
+## MkDocs Configurations
+- Site Theme: [MdDocs Themes](https://www.mkdocs.org/user-guide/styling-your-docs/#built-in-themes)
+- CSS Overrides: The `extra.css` file overrides some basic CSS styles.
+- Javascript Overrides: The `extra.js` file (could) override some basic JS styles.
 
 ---
+## Files
+- Files use dashes, not underscores, and are lowercase.
+- Example: `host-hardware-requirements.md`
+---
 
-## Links
-- Please use the destination page title as the name of the link
-- Example: [Demo ISLE Site Installation](../02_installation_site/site_installation.md)
+## URLs
+- Hyperlinks use the title of their destination page as the text of the URL.
+- Example: [Hardware Requirements](../install/host-hardware-requirements.md)
 ---
 
 ## Tables

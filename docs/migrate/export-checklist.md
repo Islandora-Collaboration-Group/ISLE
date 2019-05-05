@@ -6,7 +6,7 @@ This section is a checklist of materials to **COPY** from the current running Is
 
 **Caution**: While the ISLE Project recommends use of export methods or tools such as rsync, scp etc., it assumes that end users are familiar with them and are aware of possible dangers of improperly exporting or copying production data. Ensure adequate backups of any production system(s) are made prior to any attempts. If you are not familiar or are uncomfortable with these processes, it is highly advisable to work with an appropriate IT resource.
 
-**Finally also please note:** Instructions from this checklist and the [Migration Installation Guide](../04_installation_migration/migration_installation_guide.md) may call for you to **COPY** data from your running Islandora environment to a newly created folder: `yourdomain-data` on your ISLE Host Server or `current_prod_islandora_config` on your local machine. You will then work from these copies for future steps.
+**Finally also please note:** Instructions from this checklist and the [Migration Installation Guide](../migrate/install-migration.md) may call for you to **COPY** data from your running Islandora environment to a newly created folder: `yourdomain-data` on your ISLE Host Server or `current_prod_islandora_config` on your local machine. You will then work from these copies for future steps.
 
 In some cases, you'll need to copy configurations down to your machine and merge contents as directed. (_if necessary_) In other cases, due to the size of the data e.g. Fedora data you will copy production data to the ISLE Host server (`ISLE Host server`) instead of your local machine.
 
