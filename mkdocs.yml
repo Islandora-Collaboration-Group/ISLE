@@ -62,4 +62,7 @@ nav:
     - 'Release Process': 'contributor-docs/release-process.md'
     - 'Testing Guide': 'contributor-docs/testing-guide.md'
   - 'Get Help': 'about/get-help.md'
-- 'Release Notes': 'release-notes/release.md'
+- 'Release Notes':
+  - 'Latest release: 1.1.1': 'release-notes/release.md'
+  - 'Previous releases': 
+     - '1.1': 'release-notes/release-1-1.md'
