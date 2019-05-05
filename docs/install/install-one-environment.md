@@ -8,15 +8,15 @@ A new ISLE / Islandora environment can include the option to create an un-themed
 
 While this checklist will attempt to point out most of the usage challenges or pitfalls, ISLE assumes no responsibility or liability in this matter should an end user have customizations beyond what this guide outlines.
 
-For additional help, please post a message to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle). This [Glossary](../07_appendices/glossary.md) defines terms used in this documentation.
+For additional help, please post a message to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle). This [Glossary](../appendices/glossary.md) defines terms used in this documentation.
 
 ---
 
 ## Assumptions / Prerequisites
 
-* Comfortability with ISLE. Recommend first setting up the [Demo ISLE Site](../02_installation_site/site_installation.md). If you have already done this, please proceed.
+* Comfortability with ISLE. Recommend first setting up the [Demo ISLE Site](../install/install.md). If you have already done this, please proceed.
 
-* Host Server that conforms to the specifications outlined in the [Hardware Requirements](../01_installation_host_server/hardware-requirements.md)
+* Host Server that conforms to the specifications outlined in the [Hardware Requirements](../install/host-hardware-requirements.md)
 
 * This new site guide is designed for a single ISLE Host server that has already followed the appropriate setup and configuration instructions in the [New ISLE Site](../index.md#new-isle) section of the guide.
 
@@ -26,7 +26,7 @@ For additional help, please post a message to the [Islandora ISLE Google group](
 
 * Have an existing domain name that works - is set up with DNS etc...
 
-* Have [SSL Certificates](../07_appendices/glossary.md#systems) previously created for the web domain. (_Please work with the appropriate internal IT resource to provision these files for your domain_)  OR use the [Let's Encrypt guide](../07_appendices/configuring-lets-encrypt.md) to generate SSL Certificates.
+* Have [SSL Certificates](../appendices/glossary.md#systems) previously created for the web domain. (_Please work with the appropriate internal IT resource to provision these files for your domain_)  OR use the [Let's Encrypt guide](../appendices/configuring-lets-encrypt.md) to generate SSL Certificates.
 
 
 ## Overview
@@ -135,15 +135,15 @@ image-services:
 
 ## Proxy Directory
 
-If need be, please refer to the **Systems** section of the [Glossary](../07_appendices/glossary.md) for relevant terms to help guide installation.
+If need be, please refer to the **Systems** section of the [Glossary](../appendices/glossary.md) for relevant terms to help guide installation.
 
 The `proxy` subdirectory contains all specific configurations necessary for the Traefik proxy to function properly with your changes.
 
-If need be, please refer to the **SSL certificate** section of the [Glossary](../07_appendices/glossary.md) for relevant terms to help guide installation.
+If need be, please refer to the **SSL certificate** section of the [Glossary](../appendices/glossary.md) for relevant terms to help guide installation.
 
 There are also additional links for the end user to learn how to combine the SSL Certificate File with any available SSL Certificate Chain File for the `proxy` process to work properly.
 
-**If you followed the [Let's Encrypt](../07_appendices/configuring-lets-encrypt.md) configuration guide, you can skip to the next section: Spin up ISLE containers**
+**If you followed the [Let's Encrypt](../appendices/configuring-lets-encrypt.md) configuration guide, you can skip to the next section: Spin up ISLE containers**
 
 * Copy your SSL certificates for the ISLE Proxy into `config/proxy/ssl-certs`. They will and should have different names than the examples provided below.
 

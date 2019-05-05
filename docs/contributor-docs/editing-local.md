@@ -9,7 +9,7 @@
 
 #### Assumptions / Prerequisites
 
-* `mkdocs` and `mkdocs-material` theme are installed following the [Installing Mkdocs](../05_contributor_docs/contributor_docs_mkdocs.md) documentation.
+* `mkdocs` and `mkdocs-material` theme are installed following the [Installing Mkdocs](../contributor-docs/mkdocs.md) documentation.
 * The ISLE Documentation project directory has been cloned to the end user's laptop / workstation in an appropriate Code or Project Directory.
    * `git clone https://github.com/Islandora-Collaboration-Group/ISLE-Documentation.git`
 * Familiarity or comfortability with git and cli commands.
@@ -33,7 +33,7 @@ If you are adding new pages to the Documentation, in addition to creating the ne
 
 The example used below is how to create a new documentation page that will be about building giant ISLE robots with the title of "Building Giant ISLE Robots" and be located in the Development section.
 
-* Create a new empty file in the `docs/05_contributor_docs` directory e.g. `contributor_building_giant_robots.md`
+* Create a new empty file in the `docs/contributor-docs` directory e.g. `building_giant_robots.md`
 
 * Open up the `mkdocs.yml` file in a text editor of your choice.
 
@@ -45,18 +45,18 @@ In order for `mkdocs` to understand that there is a new page and page title to d
 
 * Within the `Contributor Docs` section of the open `mkdocs.yml` file, add this new line in the appropriate order.
 
-`- 'Building Giant ISLE Robots': '05_contributor_docs/contributor_building_giant_robots.md'`
+`- 'Building Giant ISLE Robots': 'contributor-docs/building_giant_robots.md'`
 
 ```
 - 'Contributor Docs':
-  - 'Building Giant ISLE Robots': '05_contributor_docs/contributor_building_giant_robots.md'
-  - 'Contributing to Project': '05_contributor_docs/contributor_contributing_to_project.md'
-  - 'Documentation Overview': '05_contributor_docs/contributor_docs_overview.md'
+  - 'Building Giant ISLE Robots': 'contributor-docs/building_giant_robots.md'
+  - 'Contributing to Project': 'contributor-docs/contributing_to_project.md'
+  - 'Documentation Overview': 'contributor-docs/overview.md'
 ```
 
-* The end user can now review the contents of this new page at http://127.0.0.1:8000/05_contributor_docs/contributor_building_giant_robots/
+* The end user can now review the contents of this new page at http://127.0.0.1:8000/contributor-docs/building_giant_robots/
 
-* Edit the contents of `contributor_building_giant_robots.md` and save the file each time. The associated webpage will refresh with the new changes.
+* Edit the contents of `building_giant_robots.md` and save the file each time. The associated webpage will refresh with the new changes.
 
 ### Commit Changes to Git
 
@@ -65,7 +65,7 @@ Once finished with adding all new pages and editing files, it is time to add eve
 #### Git Status
 * Within the open terminal, enter `git status`
 
-The example git status output below displays that several files have been modified (edited or changed) and that there is a new file called `contributor_building_giant_robots.md` has been created.
+The example git status output below displays that several files have been modified (edited or changed) and that there is a new file called `building_giant_robots.md` has been created.
 
 ```
 git status
@@ -75,14 +75,14 @@ Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git checkout -- <file>..." to discard changes in working directory)
 
-  modified:   docs/06_specifications/specs_diagram_network.md
+  modified:   docs/specifications/diagram-network.md
   modified:   docs/glossary.md
   modified:   mkdocs.yml
 
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
 
-  docs/05_contributor_docs/contributor_building_giant_robots.md
+  docs/contributor-docs/building_giant_robots.md
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
@@ -90,16 +90,16 @@ no changes added to commit (use "git add" and/or "git commit -a")
 
 You now need to add these changed / new files to git.
 
-* `git add docs/06_specifications/specs_diagram_network.md`
+* `git add docs/specifications/diagram-network.md`
 * `git add docs/glossary.md`
 * `git add mkdocs.yml`
-* `git add docs/05_contributor_docs/contributor_building_giant_robots.md`
+* `git add docs/contributor-docs/building_giant_robots.md`
 
 ####  Git Commit with Message
 
 Now it is time to package up all these additions with a git commit command. Please ensure that you commit with a descriptive message of changes etc.
 
-* `git commit -m "Tweaked some specs in specs_diagram_network.md. Updated the Glossary with more terms. Made new Building Giant Robots page. I love big robots. Added new files and titles to mkdocs.yml "`
+* `git commit -m "Tweaked some specs in diagram-network.md. Updated the Glossary with more terms. Made new Building Giant Robots page. I love big robots. Added new files and titles to mkdocs.yml "`
 
 ###  Git Push to ISLE Github Repository
 

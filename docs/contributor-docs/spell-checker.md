@@ -1,4 +1,4 @@
-# How to check documentation spelling
+# How to Spell-Check the Documentation 
 
 ## Installing Aspell
 

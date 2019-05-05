@@ -18,11 +18,11 @@ This documentation provides friendly and clear instructions on how to do the fol
 
 ## Demo ISLE Site
 
-1. [Hardware Requirements](01_installation_host_server/hardware-requirements.md) - Ensure your host server meets these minimum requirements.
+1. [Hardware Requirements](install/host-hardware-requirements.md) - Ensure your host server meets these minimum requirements.
 
-2. [Software Dependencies](01_installation_host_server/software-dependencies.md) - Install required software dependencies on host server.
+2. [Software Dependencies](install/host-software-dependencies.md) - Install required software dependencies on host server.
 
-3. [Demo ISLE Site Installation](02_installation_site/site_installation.md) - Install ISLE, run it, and view your site.
+3. [Demo ISLE Site Installation](install/install.md) - Install ISLE, run it, and view your site.
 
 ---
 
@@ -30,14 +30,14 @@ This documentation provides friendly and clear instructions on how to do the fol
 
 Follow these instructions if you **do not** have an existing Islandora installation you wish to migrate. New sites can be used as production, staging, or development environments.
 
-1. [Hardware Requirements](01_installation_host_server/hardware-requirements.md) - Ensure your host server meets these minimum requirements.
+1. [Hardware Requirements](install/host-hardware-requirements.md) - Ensure your host server meets these minimum requirements.
 
-2. [Software Dependencies](01_installation_host_server/software-dependencies.md) - Install required software dependencies on host server.
+2. [Software Dependencies](install/host-software-dependencies.md) - Install required software dependencies on host server.
 
 3. Install ISLE, run it, and view your site.
-    * [New Site Installation: Single ISLE Environment](02_installation_site/site_installation_single.md) - Setup **one** ISLE site within a single environment (e.g. production only) or run all of your ISLE environments on separate ISLE host servers or VMs.
-    * [New Site Installation: Multiple ISLE Environments](02_installation_site/site_installation_multiple.md) - Setup **multiple** ISLE sites using multiple environments (e.g. development, staging, and production) on one ISLE Host server or VM.
-        - Note: setting up multiple ISLE sites and environments on one ISLE host server will require adequate resources. A rough estimate is to use the [Hardware Requirements](01_installation_host_server/hardware-requirements.md) and multiply by three. Please note that a `dev` environment needs fewer resources, but `stage` and `prod` environments should mirror each other in resource usage and setup.
+    * [New Site Installation: Single ISLE Environment](install/install-one-environment.md) - Setup **one** ISLE site within a single environment (e.g. production only) or run all of your ISLE environments on separate ISLE host servers or VMs.
+    * [New Site Installation: Multiple ISLE Environments](install/install-multiple-environments.md) - Setup **multiple** ISLE sites using multiple environments (e.g. development, staging, and production) on one ISLE Host server or VM.
+        - Note: setting up multiple ISLE sites and environments on one ISLE host server will require adequate resources. A rough estimate is to use the [Hardware Requirements](install/host-hardware-requirements.md) and multiply by three. Please note that a `dev` environment needs fewer resources, but `stage` and `prod` environments should mirror each other in resource usage and setup.
 
 ---
 
@@ -45,15 +45,15 @@ Follow these instructions if you **do not** have an existing Islandora installat
 
 Migrated sites can be used in production, staging or development environments.
 
-1. [Hardware Requirements](01_installation_host_server/hardware-requirements.md) - Ensure your host server meets these minimum requirements.
+1. [Hardware Requirements](install/host-hardware-requirements.md) - Ensure your host server meets these minimum requirements.
 
-2. [Software Dependencies](01_installation_host_server/software-dependencies.md) - Install required software dependencies on host server.
+2. [Software Dependencies](install/host-software-dependencies.md) - Install required software dependencies on host server.
 
-3. [Migration Installation Guide](04_installation_migration/migration_installation_guide.md) - Copy your data, configure and run ISLE, and view your site.
+3. [Migration Installation Guide](migrate/install-migration.md) - Copy your data, configure and run ISLE, and view your site.
 
 ---
 
 ## Update ISLE Site
 
-1. [Update ISLE Site](03_update_site/update_isle.md) - Update an existing ISLE installation to install the newest improvements and security updates, regardless of type of installation or environment. This process is intended to be backwards compatible with your existing ISLE site.
-2. [Release Notes](09_release_notes/release_notes.md) - Please always read the release notes.
+1. [Update ISLE Site](update/update.md) - Update an existing ISLE installation to install the newest improvements and security updates, regardless of type of installation or environment. This process is intended to be backwards compatible with your existing ISLE site.
+2. [Release Notes](release-notes/release.md) - Please always read the release notes.

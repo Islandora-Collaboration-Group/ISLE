@@ -1,19 +1,25 @@
-<!--- PAGE_TITLE --->
-
 # Hardware Requirements
 
-Your ISLE **host server** can be a virtual machine (VM) on your desktop or on the cloud, it can also be a physical server. An SSH connection with a user that has root or admin privileges is necessary. If an IT department is doing this initial setup, see [this page](../07_appendices/sample-it-department-request.md) for sample language to use in requesting the server.
+The ISLE host server can be a laptop or workstation, physical server, virtual machine (VM) or cloud service. An SSH connection with a user that has root or admin privileges is necessary. If an IT department is providing the server environment, please see the [Sample IT Department Request Letter](../appendices/sample-it-department-request.md) for requesting the server.
 
-## Known Working Operating Systems / Distributions
-- Ubuntu 18.04 LTS
-- Ubuntu 16.04 LTS
-- CentOS 7.x
-- MacOS
-- Windows 10 (for Demo only)
-- RHEL*
-_*Currently RHEL does not support Docker Community Edition (CE), EE can be used._
+**Known working operating systems and distributions:**
 
-## Production
+* Ubuntu 18.04 LTS (also: Ubuntu 16.04 LTS)
+* CentOS 7.x
+* MacOS (only for: Demo ISLE Site)
+* Windows 10 Professional or Enterprise (only for: Demo ISLE Site)
+* (Read the [Warning about Installing on Red Hat](../appendices/redhat.md))
+
+**Please select your hardware environment:**
+
+- [Production Server](#production-server)
+- [Staging Server](#staging-server)
+- [Development Server](#development-server)
+- [Demo ISLE Site](#demo-isle-site)
+
+---
+
+## Production Server
 
 Below are the recommended minimum specifications for a production server. The server can be a local or hosted physical server or virtual machine, or it can be a cloud hosted platform (AWS, GCP, etc.).  
 
@@ -23,32 +29,15 @@ Below are the recommended minimum specifications for a production server. The se
 * 30 - 50GB for the server OS and overhead
 * Sufficient hard drive or attached storage to hold your collection
 
-If you are **migrating** please ensure you have enough storage space for your entire collection or that you can access those data via a network or other file-sharing protocol.
+| For Migrations only |
+| :-------------      |
+| Please ensure you have enough storage space for your entire collection or that you can access those data via a network or other file-sharing protocol. |
 
-- Open your docker-compose and modify the environment variables called JAVA_MAX_MEM and JAVA_MIN_MEM for fedora, solr, and image-services. Here are some recommendations for production instances:
-```yaml
-fedora:
-  ...
-  environment:
-    - JAVA_MAX_MEM=2048M
-    - JAVA_MIN_MEM=256M
-...
+**Please continue by selecting: [Software Dependencies](../install/host-software-dependencies.md).**
 
-solr:
-  ...
-  environment:
-    - JAVA_MAX_MEM=2048M
-    - JAVA_MIN_MEM=256M
-...
+---
 
-image-services:
-  ...
-  environment:
-    - JAVA_MAX_MEM=2048M
-    - JAVA_MIN_MEM=128M
-```
-
-## Staging
+## Staging Server
 
 Below are the recommended minimum specifications for a staging server. The server can be a local or hosted physical server or virtual machine, or it can be a cloud hosted platform (AWS, GCP, etc.).  
 
@@ -58,7 +47,11 @@ Below are the recommended minimum specifications for a staging server. The serve
 * 30 - 50GB for the server OS and overhead
 * Sufficient hard drive or attached storage to hold your collection
 
-## Development
+**Please continue by selecting: [Software Dependencies](../install/host-software-dependencies.md).**
+
+---
+
+## Development Server
 
 Below are the recommended minimum specifications for a development server. The server can be a local or hosted physical server or virtual machine, or it can be a cloud hosted platform (AWS, GCP, etc.).  
 
@@ -68,7 +61,11 @@ Below are the recommended minimum specifications for a development server. The s
 * 30 - 50GB for the server OS and overhead
 * Sufficient hard drive or attached storage to hold your collection
 
-## Testing / Playground
+**Please continue by selecting: [Software Dependencies](../install/host-software-dependencies.md).**
+
+---
+
+## Demo ISLE Site
 
 Below are the recommended specifications for a laptop or desktop running a TEST version of ISLE:
 
@@ -77,3 +74,7 @@ Below are the recommended specifications for a laptop or desktop running a TEST 
 * 8 - 16 GB of RAM is recommended
 * 128 - 500GB for the Desktop OS
 * Sufficient hard drive or attached storage to hold a small test collection (depending on your testing ~5-10GB for objects and their derivatives)
+
+**Please continue by selecting: [Software Dependencies](../install/host-software-dependencies.md).**
+
+---
