@@ -28,6 +28,8 @@ services:
     container_name: isle-mysql-${CONTAINER_SHORT_ID}
     environment:
       - MYSQL_ROOT_PASSWORD
+    env_file:
+      - .env      
     networks:
       - isle-internal
     volumes:
@@ -76,8 +78,9 @@ services:
     environment:
       - JAVA_MAX_MEM=512M
       - JAVA_MIN_MEM=0
-    env_file:
+    env_file: 
       - tomcat.env
+      - .env
     networks:
       - isle-internal
     ports:
