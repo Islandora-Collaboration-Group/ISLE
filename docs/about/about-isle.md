@@ -6,7 +6,7 @@
 
 ISLE is an orchestrated group of Docker containers to be run on a server, laptop or cloud instance with a minimal suite of tools enabling an efficient deploy and release of an updated production-ready Islandora environment.
 
-ISLE functions as both an initial installer and maintenance updater with the ability to build new production, staging and sandbox environments as distributable, lightweight and fast “containers” in a [Docker Engine](https://docs.docker.com/engine/) environment.
+ISLE functions as both an initial installer and maintenance updater with the ability to build new production, staging, or development environments as distributable, lightweight and fast “containers” in a [Docker Engine](https://docs.docker.com/engine/) environment.
 
 This process allows folks to choose between hosting:
 

@@ -98,7 +98,7 @@ Please note that endusers will take values from the `site.conf` file and flow th
 
 If need be, please refer to the **SSL certificate** section of the [Glossary](../appendices/glossary.md) for relevant terms to help guide installation.
 
-* Copy your original production SSL certificates for Apache into the `apache/ssl-certs` subdirectory. They will and should have different names than the examples provided below dependent on the ISLE environment you are setting up e.g. (_production, staging or development_).
+* Copy your original production SSL certificates for Apache into the `apache/ssl-certs` subdirectory. They will and should have different names than the examples provided below dependent on the ISLE environment you are setting up e.g. (_production, staging, or development_).
 
     * There can be up to 2 - 3 files involved in this process.
 
