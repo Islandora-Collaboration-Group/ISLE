@@ -28,10 +28,10 @@ services:
     container_name: isle-mysql-${CONTAINER_SHORT_ID}
     environment:
       - MYSQL_ROOT_PASSWORD
-    env_file:
-      - .env      
     networks:
       - isle-internal
+    ports:
+      - "3306:3306"      
     volumes:
       - isle-db-data:/var/lib/mysql
       - isle-mysql-log:/var/log/mysql
@@ -44,7 +44,6 @@ services:
     # build:
     #   context: ../images/isle-fedora
     image: islandoracollabgroup/isle-fedora:dashboards-dev    
-    # image: islandoracollabgroup/isle-fedora:dashboards-dev
     container_name: isle-fedora-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=768M
