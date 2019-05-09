@@ -1,0 +1,6 @@
+{
+  "log-driver": "syslog",
+  "log-opts": {
+    "tag": "{{.Name}}"
+  }
+}  

@@ -1,7 +1,7 @@
 version: '3'
 
 #### docker-compose up -d;
-## Updated 2019-03-27 - Release dashboards-dev (@ dashboards-dev)
+## Updated 2019-03-27 - Release TICK (@ dashboards-dev)
 
 services:
   isle-portainer: ## Renamed to avoid conflicts on systems/servers with portainer already running.
@@ -35,10 +35,7 @@ services:
     volumes:
       - isle-db-data:/var/lib/mysql
       - isle-mysql-log:/var/log/mysql
-    logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
+
 
   fedora:
     # build:
@@ -64,10 +61,7 @@ services:
       - isle-fedora-resourceIndex:/usr/local/fedora/data/resourceIndex # Migrators change this to your local RI folder.
       - isle-fedora-activemq:/usr/local/fedora/data/activemq-data # Migrators change this to your local MQ folder.
       - isle-fedora-XACML:/usr/local/fedora/data/fedora-xacml-policies
-    logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
+
 
   solr:
     # build:
@@ -88,10 +82,7 @@ services:
       - mysql
     volumes:
       - isle-solr-data:/usr/local/solr  
-    logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
+
 
   image-services:
     # build:
@@ -115,10 +106,7 @@ services:
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
       - traefik.enable=false
       - "traefik.frontend.rule=Host:images.${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
-    logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
+
 
   apache:
     # build:
@@ -140,10 +128,70 @@ services:
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
       - traefik.enable=true
       - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
-    logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
+
+# Start TICK - Services
+
+  influxdb:
+    image: influxdb:latest
+    volumes:
+      # Mount for influxdb data directory
+      - isle-influxdb-data:/var/lib/influxdb
+      # Mount for influxdb configuration
+      - ./config/tick/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf
+    ports:
+      # The API for InfluxDB is served on port 8086
+      - "8086:8086"
+      - "8082:8082"
+      # UDP Port
+      - "8089:8089"
+
+  telegraf:
+    image: telegraf:latest
+    # Telegraf requires network access to InfluxDB
+    links:
+      - influxdb
+    volumes:
+      # Mount for telegraf configuration
+      - ./config/tick/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
+      # Mount for Docker API access
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - influxdb
+
+  kapacitor:
+    image: "kapacitor"
+    volumes:
+      # Mount for kapacitor data directory
+      - isle-kapacitor-data:/var/lib/kapacitor
+      # Mount for kapacitor configuration
+      - ./config/kapacitor/kapacitor.conf:/etc/kapacitor/kapacitor.conf
+    # Kapacitor requires network access to Influxdb
+    links:
+      - influxdb
+    ports:
+      # The API for Kapacitor is served on port 9092
+      - "9092:9092"
+
+  chronograf:
+    image: chronograf:latest
+    environment:
+      RESOURCES_PATH: "/usr/share/chronograf/resources"
+    volumes:
+      # Mount for chronograf database
+      - isle-chronograf-data:/var/lib/chronograf/
+    links:
+      # Chronograf requires network access to InfluxDB and Kapacitor
+      - influxdb
+      - kapacitor
+    ports:
+      # The WebUI for Chronograf is served on port 8888
+      - "8888:8888"
+    depends_on:
+      - kapacitor
+      - influxdb
+      - telegraf
+
+# END TICK - Services
 
   traefik:
     image: traefik:1.7.9
@@ -163,10 +211,7 @@ services:
       - traefik.port=8080
       - traefik.enable=true  ## NOT SAFE FOR PRODUCTION! ##
       - traefik.frontend.rule=Host:admin.${BASE_DOMAIN};
-    logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
+
 
 # Defined networks
 networks:
@@ -184,3 +229,6 @@ volumes:
   isle-fedora-resourceIndex:
   isle-fedora-activemq:
   isle-fedora-XACML:
+  isle-influxdb-data:
+  isle-kapacitor-data:
+  isle-chronograf-data:
