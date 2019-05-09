@@ -1,20 +1,20 @@
-# Install ISLE
+# Demo ISLE Installation
 
 _Expectations:  It takes an average of **45 minutes** to read this documentation and complete this installation._
 
-This process creates a local Islandora installation (`isle.localdomain`) on your laptop or workstation. This includes an un-themed Drupal website and empty Fedora repository for end users to test ingests, test metadata, update fields in SOLR indexing, develop code and otherwise "kick the tires" on ISLE.
+This process creates a local Islandora platform (`isle.localdomain`) on your workstation. This includes an un-themed Drupal website and empty Fedora repository for end users to test ingests, test metadata, update fields in SOLR indexing, develop code and otherwise "kick the tires" on ISLE.
 
 For additional help, please post a message to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle). This [Glossary](../appendices/glossary.md) defines terms used in this documentation.
 
 ### Assumptions / Prerequisites
 
-* This installation is intended for a local laptop or workstation.
+* This installation is intended for a local workstation.
 
 ---
 
 ### Process Overview
 
-* Edit File `/etc/hosts` to View ISLE Locally on Laptop or Workstation Browser
+* Edit File `/etc/hosts` to View ISLE Locally on Workstation Browser
 * Launch Process
 * Run Install Script
 * Test the Site
@@ -23,9 +23,9 @@ For additional help, please post a message to the [Islandora ISLE Google group](
 
 ---
 
-### Step 1: Edit File `/etc/hosts` to View ISLE Locally on Laptop or Workstation Browser
+### Step 1: Edit File `/etc/hosts` to View ISLE Locally on Workstation Browser
 
-Enable the Demo ISLE Site to be viewed locally as: `https://isle.localdomain`
+Enable the Demo ISLE Installation to be viewed locally as: `https://isle.localdomain`
 
 * Please use these instructions to [Edit the "/etc/hosts" File](../appendices/edit-the-hosts-file.md).
 
@@ -45,7 +45,7 @@ docker-compose up -d
 * After the above process is completed:
     * View only the running containers: `docker ps`
     * View all containers (both those running and stopped): `docker ps -a`
-    * **If any `isle-` containers are NOT running, then use [Demo ISLE Site Troubleshooting](../appendices/demo-troubleshooting.md) to solve before continuing below.** <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running --->
+    * **If any `isle-` containers are NOT running, then use [Demo ISLE Installation Troubleshooting](../appendices/demo-troubleshooting.md) to solve before continuing below.** <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running --->
 
 ---
 
@@ -104,5 +104,5 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
 ---
 
 ### Step 6: Additional Resources
-* [Demo ISLE Site Resources](../appendices/demo-resources.md) contains Docker container passwords and URLs for administrator tools.
-* [Demo ISLE Site Troubleshooting](../appendices/demo-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
+* [Demo ISLE Installation Resources](../appendices/demo-resources.md) contains Docker container passwords and URLs for administrator tools.
+* [Demo ISLE Installation Troubleshooting](../appendices/demo-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.

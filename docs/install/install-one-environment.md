@@ -1,11 +1,11 @@
-# New Site Installation: Single ISLE Environment
+# New ISLE Installation
 
 _Expectations:  It may take at least **4 - 6 hours or more** to read this documentation and complete this installation. Please proceed slowly._
 
 This guide documents how an end user can spin up and install a single ISLE / Islandora environment tailored to use only one unique domain / URL and one ISLE environment.
 
-* [New Site Installation: Single ISLE Environment](install/install-one-environment.md) - Setup **one** ISLE site within a single environment (e.g. production only) or run all of your ISLE environments on separate ISLE host servers or VMs.
-* [New Site Installation: Multiple ISLE Environments](install/install-multiple-environments.md) - Setup **multiple** ISLE sites using multiple environments (e.g. development, staging, and production) on one ISLE Host server or VM. Note: setting up multiple ISLE sites and environments on one ISLE host server will require adequate resources. A rough estimate is to use the [Hardware Requirements](install/host-hardware-requirements.md) and multiply by three. Please note that a `dev` environment needs fewer resources, but `stage` and `prod` environments should mirror each other in resource usage and setup.
+* [New ISLE Installation](../install/install-one-environment.md) - Setup **one** ISLE site within a single environment (e.g. production only) or run all of your ISLE environments on separate ISLE host servers or VMs.
+* New ISLE Installation: Multiple Environments - Setup **multiple** ISLE sites using multiple environments (e.g. development, staging, and production) on one ISLE Host server or VM. Note: setting up multiple ISLE sites and environments on one ISLE host server will require adequate resources. A rough estimate is to use the [Hardware Requirements](../install/host-hardware-requirements.md) and multiply by three. Please note that a `dev` environment needs fewer resources, but `stage` and `prod` environments should mirror each other in resource usage and setup.
 
 A new ISLE / Islandora environment can include the option to create an un-themed Drupal website and empty Fedora repository for end users to develop code, perform ingests, edit metadata, update fields in SOLR indexing all essential in ultimately creating a new ISLE production site.
 
@@ -18,13 +18,13 @@ For additional help, please post a message to the [Islandora ISLE Google group](
 
 ## Assumptions / Prerequisites
 
-* Comfortability with ISLE. Recommend first setting up the [Demo ISLE Site](../install/install.md). If you have already done this, please proceed.
+* Comfortability with ISLE. Recommend first setting up the [Demo ISLE Installation](../install/install.md). If you have already done this, please proceed.
 
 * Host Server that conforms to the specifications outlined in the [Hardware Requirements](../install/host-hardware-requirements.md)
 
-* This new site guide is designed for a single ISLE Host server that has already followed the appropriate setup and configuration instructions in the [New ISLE Site](../index.md#new-isle) section of the guide.
+* This new site guide is designed for a single ISLE Host server that has already followed the appropriate setup and configuration instructions in the [New ISLE Installation](../index.md#new-isle) section of the guide.
 
-* Instructions below also assume a MacOS or Linux laptop or workstation to be used in conjunction with the ISLE Host Server for deploying configs, code, files etc. Windows users may have to adjust / swap out various tools as needed.
+* Instructions below also assume a MacOS or Linux workstation to be used in conjunction with the ISLE Host Server for deploying configs, code, files etc. Windows users may have to adjust / swap out various tools as needed.
 
 * These directions also depend on the type of local computer used to connect via browser to Islandora.
 

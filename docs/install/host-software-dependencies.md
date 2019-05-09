@@ -13,7 +13,7 @@
 
 ### Step 1: Install Server Prerequisites and Git
 
-- Open a terminal on your local laptop or workstation and ssh to the server or VM.
+- Open a terminal on your local workstation or ssh to the server or VM.
 
 - You must have `root` level permissions.
     - If you are not already `root`, enter either `sudo -s` or `sudo su` to become root.
@@ -28,23 +28,23 @@
 
 ### Step 2: Install Docker
 
-- Add the Docker Repository
+- Add the Docker Repository.
 ```
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 ```
 ```
 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 ```
-- Update package list
+- Update package list.
 ```
 apt-get update
 ```
-- Install Docker
+- Install Docker.
 ```
 apt-get install -y docker-ce
 ```
 
-- Enable and Start Docker
+- Enable and start Docker.
 ```
 systemctl enable docker && systemctl start docker
 ```
@@ -96,10 +96,9 @@ Your host server is now configured and ready to run ISLE.
 
 **Please continue by selecting your type of installation:**
 
-- [Demo ISLE Site Installation](../install/install.md)
-- [New Site Installation: Single ISLE Environment](../install/install-one-environment.md)
-- [New Site Installation: Multiple ISLE Environments](../install/install-multiple-environments.md)
-- [Migration Installation Guide](../migrate/install-migration.md)
+- [Demo ISLE Installation](../install/install.md)
+- [New ISLE Installation](../install/install-one-environment.md)
+- [Migrate to ISLE Environment](../migrate/install-migration.md)
 
 ---
 
@@ -107,7 +106,7 @@ Your host server is now configured and ready to run ISLE.
 
 ### Step 1: Install Server Prerequisites and Git
 
-- Open a terminal on your local laptop or workstation and ssh to the server or VM.
+- Open a terminal on your local workstation or ssh to the server or VM.
 
 - You must have `root` level permissions.
     - If you are not already `root`, enter either `sudo -s` or `sudo su` to become root.
@@ -126,12 +125,12 @@ yum install -y yum-utils device-mapper-persistent-data lvm2
 ```
 ### Step 2: Install Docker
 
-- Add the Docker Repository
+- Add the Docker Repository.
 ```
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo`
 ```
 
-- Install Docker
+- Install Docker.
 ```
 yum install -y docker-ce
 ```
@@ -182,10 +181,9 @@ Your host server is now configured and ready to run ISLE.
 
 **Please continue by selecting your type of installation:**
 
-- [Demo ISLE Site Installation](../install/install.md)
-- [New Site Installation: Single ISLE Environment](../install/install-one-environment.md)
-- [New Site Installation: Multiple ISLE Environments](../install/install-multiple-environments.md)
-- [Migration Installation Guide](../migrate/install-migration.md)
+- [Demo ISLE Installation](../install/install.md)
+- [New ISLE Installation](../install/install-one-environment.md)
+- [Migrate to ISLE Environment](../migrate/install-migration.md)
 
 ---
 
@@ -194,7 +192,7 @@ Your host server is now configured and ready to run ISLE.
 ### Step 1: Install Git
 Git must be installed to get a copy (called a `clone`) of the current ISLE project. (Git is a software version control system for tracking changes in computer files and coordinating work on those files among multiple people.)
 
- * Open a `terminal` (launch Spotlight and type "Terminal," then double-click the search result)
+ * Open a `terminal` (launch Spotlight, type "Terminal," double-click result "Terminal")
  * Enter: `git --version`.
  * If git is already installed, the above command will output the installed version number. For example:  
 
@@ -211,15 +209,13 @@ git version 2.15.1
 
 * If git is not installed and the prompt does not show, then use this tutorial to [Install Git on Mac OS X](https://www.atlassian.com/git/tutorials/install-git).
 
-When git is installed, then please proceed to the next section.
-
 ### Step 2: Install Docker for Mac
 
 * Open a browser and navigate to [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
 * Click the `Download for Mac` button in the center of the page
 
-* Click the `Please Login to Download` button on the right of the page (Login or click `Create Account`)
+* Click the `Please Login to Download` button on the right of the page (click: `Sign In` or `Create Account`)
 
 * Click the `Get Docker` button on the right of the page
 
@@ -264,10 +260,9 @@ Your host server is now configured and ready to run ISLE.
 
 **Please continue by selecting your type of installation:**
 
-- [Demo ISLE Site Installation](../install/install.md)
-- [New Site Installation: Single ISLE Environment](../install/install-one-environment.md)
-- [New Site Installation: Multiple ISLE Environments](../install/install-multiple-environments.md)
-- [Migration Installation Guide](../migrate/install-migration.md)
+- [Demo ISLE Installation](../install/install.md)
+- [New ISLE Installation](../install/install-one-environment.md)
+- [Migrate to ISLE Environment](../migrate/install-migration.md)
 
 ---
 
@@ -287,20 +282,18 @@ $git --version
 git version 2.15.1
 ```
 
-* If git is not installed,
+* If git is not installed, then
     * [Download Git for Windows](https://gitforwindows.org/).
     * Click `Download`, `Save` the file to your Desktop, `double-click` that file to install, then click `Yes` to the prompt.
     * Click `Next` to accept all of the installer's default selections.
 
-When git is installed, then please proceed to the next section.
-
 ### Step 2: Install Docker Desktop for Windows
 
-**Important: Docker requires Windows Professional or Enterprise Editions**
+**Important: Docker requires Windows Professional or Windows Enterprise**
 
 * [Download Docker Desktop for Windows](https://store.docker.com/editions/community/docker-ce-desktop-windows)
 
-* Click the `Please Login to Download` button on the right of the page (Login or click `Create Account`)
+* Click the `Please Login to Download` button on the right of the page (click: `Sign In` or `Create Account`)
 
 * Click the `Get Docker` button on the right of the page, `Save` the file to your Desktop, `double-click` that file to install, then click `Yes` to the prompt.
 
@@ -362,7 +355,6 @@ Your host server is now configured and ready to run ISLE.
 
 **Please continue by selecting your type of installation:**
 
-- [Demo ISLE Site Installation](../install/install.md)
-- [New Site Installation: Single ISLE Environment](../install/install-one-environment.md)
-- [New Site Installation: Multiple ISLE Environments](../install/install-multiple-environments.md)
-- [Migration Installation Guide](../migrate/install-migration.md)
+- [Demo ISLE Installation](../install/install.md)
+- [New ISLE Installation](../install/install-one-environment.md)
+- [Migrate to ISLE Environment](../migrate/install-migration.md)

@@ -36,10 +36,10 @@ Sections within a section that is specific to a certain type of circumstance sho
 ---
 
 ## Terms We Use
-- Demo ISLE Site
-- New ISLE Site
-- Migrate to ISLE Site
-- Update ISLE Site
+- Demo ISLE Installation
+- New ISLE Installation
+- Migrate to ISLE Environment
+- Update ISLE
 - end users (not endusers)
 
 ---

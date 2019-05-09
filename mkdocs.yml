@@ -22,19 +22,17 @@ nav:
 - 'Install ISLE':
   - '1. Hardware Requirements': 'install/host-hardware-requirements.md'
   - '2. Software Dependencies': 'install/host-software-dependencies.md'
-  - '3. Install ISLE': 'install/install.md'
-  - '4. Server Configurations':
-    - 'Single ISLE Environment': 'install/install-one-environment.md'
-    - 'Multiple ISLE Environments': 'install/install-multiple-environments.md'
+  - '3. Demo ISLE Installation': 'install/install.md'
+  - '4. New ISLE Installation': 'install/install-one-environment.md'
 - 'Update ISLE': 'update/update.md'
 - 'Migrate Existing Site to ISLE':
-  - 'Migration Installation Guide': 'migrate/install-migration.md'
+  - 'Migrate to ISLE Environment': 'migrate/install-migration.md'
   - 'Migration Export Checklist': 'migrate/export-checklist.md'
   - 'Migration Merge Checklist': 'migrate/merge-checklist.md'
   - 'Migration Reindex Process': 'migrate/reindex-process.md'
 - 'Appendices':
-  - 'Demo ISLE Site Resources': 'appendices/demo-resources.md'
-  - 'Demo ISLE Site Troubleshooting': 'appendices/demo-troubleshooting.md'
+  - 'Demo ISLE Installation Resources': 'appendices/demo-resources.md'
+  - 'Demo ISLE Installation Troubleshooting': 'appendices/demo-troubleshooting.md'
   - 'Edit the "/etc/hosts" File': 'appendices/edit-the-hosts-file.md'
   - 'Glossary': 'appendices/glossary.md'
   - 'Installing a Drupal Module with Composer': 'appendices/installing-module-with-composer.md'
@@ -44,7 +42,7 @@ nav:
   - 'Sample IT Department Request Letter': 'appendices/sample-it-department-request.md'
   - 'Troubleshooting': 'appendices/install-troubleshooting.md'
   - 'User Stories':
-    - 'Demo ISLE Site Example User Story': 'appendices/user-story-demo-site.md'
+    - 'Demo ISLE Installation Example User Story': 'appendices/user-story-demo-site.md'
     - 'New Site Example User Story': 'appendices/user-story-new-site.md'
     - 'Migration Example User Story': 'appendices/user-story-migration-site.md'
   - 'Using Let''s Encrypt with ISLE' : 'appendices/configuring-lets-encrypt.md'
