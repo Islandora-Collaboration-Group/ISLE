@@ -144,19 +144,24 @@ services:
       - "8082:8082"
       # UDP Port
       - "8089:8089"
+    networks:
+      isle-internal:
 
   telegraf:
     image: telegraf:latest
     # Telegraf requires network access to InfluxDB
-    links:
-      - influxdb
     volumes:
       # Mount for telegraf configuration
-      - ./config/tick/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
+      - ./config/tick/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
       # Mount for Docker API access
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     depends_on:
       - influxdb
+    networks:
+      isle-internal:
+    ports:
+      # This port should be for rsyslog
+      - "6514:6514"
 
   kapacitor:
     image: "kapacitor"
@@ -166,11 +171,11 @@ services:
       # Mount for kapacitor configuration
       - ./config/kapacitor/kapacitor.conf:/etc/kapacitor/kapacitor.conf
     # Kapacitor requires network access to Influxdb
-    links:
-      - influxdb
     ports:
       # The API for Kapacitor is served on port 9092
       - "9092:9092"
+    networks:
+      isle-internal:
 
   chronograf:
     image: chronograf:latest
@@ -179,10 +184,6 @@ services:
     volumes:
       # Mount for chronograf database
       - isle-chronograf-data:/var/lib/chronograf/
-    links:
-      # Chronograf requires network access to InfluxDB and Kapacitor
-      - influxdb
-      - kapacitor
     ports:
       # The WebUI for Chronograf is served on port 8888
       - "8888:8888"
@@ -190,6 +191,8 @@ services:
       - kapacitor
       - influxdb
       - telegraf
+    networks:
+      isle-internal:
 
 # END TICK - Services
 
