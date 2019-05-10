@@ -221,7 +221,7 @@ services:
     volumes:
       # Mount for chronograf database
       - isle-chronograf-data:/var/lib/chronograf/
-      - /.config/tick/chronograf/chronograf:/etc/default/chronograf
+      - ./config/tick/chronograf/chronograf:/etc/default/chronograf
     ports:
       # The WebUI for Chronograf is served on port 8888
       - "8888:8888"
