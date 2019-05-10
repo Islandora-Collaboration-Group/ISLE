@@ -8,15 +8,13 @@
 * [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle) - Post your questions here and subscribe for updates, meeting announcements, and technical support
 
 ## Introduction
-[ISLE](https://github.com/Islandora-Collaboration-Group/ISLE) is a community project—initially funded by [17 academic institutions](https://docs.google.com/document/d/1ycx5ATbeWpUWvpZ6bwXws490CMgi0dyB9SBfPYUDEjk/edit?usp=sharing) and Born-Digital—that addresses two of the most significant pain-points in Islandora: installation and maintenance.
-
 ISLE uses replaceable Docker images to streamline and largely automate the process of installing and maintaining the entire Islandora 7.x stack, while at the same time enabling institutions to create customizations that persist separately from core code. The result is the ability to easily, quickly and regularly update an institution’s entire Islandora stack. Maintaining ISLE requires significantly less time and staff, and also reduces the dependency on expert technical staff and outside vendors.
 
 Perhaps most importantly, the ISLE [project maintainers](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group#project-maintainers) keep your Islandora stack smoothly running with minimal effort by regularly releasing updated (and tested) Docker images that contain up-to-date Islandora releases, software patches, security updates and feature improvements.
 
 ISLE is quite flexible and may be run on an institution’s servers or in the cloud, or as a hybrid; similarly, it may be maintained by an institution’s staff, by a vendor, or as a shared project.
 
-N.B. The Quick Start Guide should not be used in production. Please review the full documentation (LINK) for production installations.
+N.B. The Quick Start Guide should **not** be used in production. Please review the full documentation (LINK) for production installations.
 
 ## Quick Start Guide
 
@@ -94,3 +92,14 @@ All Tomcat services come with the default users and passwords:
 Portainer's authentication can be configured: 
 * By default there is no username or password required to login to Portainer.
 * [Portainer Configuration](https://portainer.readthedocs.io/en/stable/configuration.html)
+
+
+## Maintainers
+* Bethany Seeger (Lead), Amherst College
+* Mark Sandford (Lead), Colgate University
+* Francesca Baird, Wesleyan University
+* David Keiser-Clark, Williams College
+* Gavin Morris, Born-Digital
+* Shaun Trujillo, Mount Holyoke College
+
+
