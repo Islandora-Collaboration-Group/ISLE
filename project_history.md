@@ -6,12 +6,6 @@
 ## What is ISLE?
 [ISLE](https://github.com/Islandora-Collaboration-Group/ISLE) is a community project—initially funded by [17 academic institutions](https://docs.google.com/document/d/1ycx5ATbeWpUWvpZ6bwXws490CMgi0dyB9SBfPYUDEjk/edit?usp=sharing) and Born-Digital—that addresses two of the most significant pain-points in Islandora: installation and maintenance.
 
-ISLE uses replaceable Docker images to streamline and largely automate the process of installing and maintaining the entire Islandora 7.x stack, while at the same time enabling institutions to create customizations that persist separately from core code. The result is the ability to easily, quickly and regularly update an institution’s entire Islandora stack. Maintaining ISLE requires significantly less time and staff, and also reduces the dependency on expert technical staff and outside vendors.
-
-Perhaps most importantly, the ISLE [project maintainers](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group#project-maintainers) keep your Islandora stack smoothly running with minimal effort by regularly releasing updated (and tested) Docker images that contain up-to-date Islandora releases, software patches, security updates and feature improvements.
-
-ISLE is quite flexible and may be run on an institution’s servers or in the cloud, or as a hybrid; similarly, it may be maintained by an institution’s staff, by a vendor, or as a shared project.
-
 Looking ahead: ISLE is collaborating with the community’s [LASIR](https://github.com/Islandora-Collaboration-Group/LASIR) project to develop and include a robust suite of Institutional Repository (IR) features within Islandora. ISLE’s common, updatable platform will be advantageous to the community as we prepare to move toward the next major version of Islandora CLAW.
 
 ## Why Use ISLE?
@@ -40,14 +34,6 @@ The ISLE Steering Committee (ISC) oversees the ISLE project and the ISLE Project
 - Mark Sandford, Colgate University (ex officio, non-voting)
 - Bethany Seeger, Amherst College (ex officio, non-voting)
 - Shaun Trujillo, Mount Holyoke College (ex officio, non-voting)
-
-## ISLE Project Maintainers
-- Bethany Seeger (Lead), Amherst College
-- Mark Sandford (Lead), Colgate University
-- Francesca Baird, Wesleyan University
-- David Keiser-Clark, Williams College
-- Gavin Morris, Born-Digital
-- Shaun Trujillo, Mount Holyoke College
 
 ## Former Contributors
 - Carolyn Moritz, Vassar College
