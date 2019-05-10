@@ -3,7 +3,7 @@
 ## Introduction
 ISLE uses replaceable Docker images to streamline and largely automate the process of installing and maintaining the entire Islandora 7.x stack, while at the same time enabling institutions to create customizations that persist separately from core code. The result is the ability to easily, quickly and regularly update an institution’s entire Islandora stack. Maintaining ISLE requires significantly less time and staff, and also reduces the dependency on expert technical staff and outside vendors.
 
-The ISLE [project maintainers](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group#project-maintainers) keep your Islandora stack smoothly running with minimal effort by regularly releasing updated (and tested) Docker images that contain up-to-date Islandora releases, software patches, security updates and feature improvements.
+The ISLE [project maintainers](#maintainers) keep your Islandora stack smoothly running with minimal effort by regularly releasing updated (and tested) Docker images that contain up-to-date Islandora releases, software patches, security updates and feature improvements.
 
 ISLE is quite flexible and may be run on an institution’s servers or in the cloud, or as a hybrid; similarly, it may be maintained by an institution’s staff, by a vendor, or as a shared project.
 
