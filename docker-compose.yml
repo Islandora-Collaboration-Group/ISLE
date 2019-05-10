@@ -236,6 +236,6 @@ volumes:
   isle-fedora-resourceIndex:
   isle-fedora-activemq:
   isle-fedora-XACML:
-  #isle-influxdb-data:
-  #isle-kapacitor-data:
-  #isle-chronograf-data:
+  isle-influxdb-data:
+  isle-kapacitor-data:
+  isle-chronograf-data:
