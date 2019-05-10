@@ -241,11 +241,6 @@ services:
       driver: syslog
       options:
         tag: "{{.Name}}"
-    labels:
-      - traefik.port=8888
-      - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
-      - traefik.enable=true
-      - "traefik.frontend.rule=Host:${BASE_DOMAIN};"
 
 
 # END TICK - Services
