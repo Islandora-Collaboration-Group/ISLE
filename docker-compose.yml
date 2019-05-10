@@ -182,6 +182,12 @@ services:
       - ./config/tick/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
       # Mount for Docker API access
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      # To get metrics off the host
+      - /:/hostfs:ro
+      - /etc:/hostfs/etc:ro
+      - /proc:/hostfs/proc:ro
+      - /sys:/hostfs/sys:ro
+      - /var/run/utmp:/var/run/utmp:ro
     depends_on:
       - influxdb
     networks:
