@@ -218,6 +218,7 @@ services:
     container_name: isle-chronograf-${CONTAINER_SHORT_ID}    
     environment:
       RESOURCES_PATH: "/usr/share/chronograf/resources"
+      LOG_LEVEL: error
     volumes:
       # Mount for chronograf database
       - isle-chronograf-data:/var/lib/chronograf/
