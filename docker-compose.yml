@@ -172,7 +172,7 @@ services:
 #      # Mount for kapacitor data directory
 #      - isle-kapacitor-data:/var/lib/kapacitor
 #      # Mount for kapacitor configuration
-#      - ./config/kapacitor/kapacitor.conf:/etc/kapacitor/kapacitor.conf
+#      - ./config/tick/kapacitor/kapacitor.conf:/etc/kapacitor/kapacitor.conf
 #    # Kapacitor requires network access to Influxdb
 #    ports:
 #      # The API for Kapacitor is served on port 9092
