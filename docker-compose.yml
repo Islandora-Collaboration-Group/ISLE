@@ -20,6 +20,11 @@ services:
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
       - traefik.enable=true  ## NOT SAFE FOR PRODUCTION! ##
       - "traefik.frontend.rule=Host:portainer.${BASE_DOMAIN};"
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
+
 
   mysql:
     # build:
@@ -35,7 +40,10 @@ services:
     volumes:
       - isle-db-data:/var/lib/mysql
       - isle-mysql-log:/var/log/mysql
-
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
 
   fedora:
     # build:
@@ -61,7 +69,10 @@ services:
       - isle-fedora-resourceIndex:/usr/local/fedora/data/resourceIndex # Migrators change this to your local RI folder.
       - isle-fedora-activemq:/usr/local/fedora/data/activemq-data # Migrators change this to your local MQ folder.
       - isle-fedora-XACML:/usr/local/fedora/data/fedora-xacml-policies
-
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
 
   solr:
     # build:
@@ -82,7 +93,10 @@ services:
       - mysql
     volumes:
       - isle-solr-data:/usr/local/solr  
-
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
 
   image-services:
     # build:
@@ -106,7 +120,10 @@ services:
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
       - traefik.enable=false
       - "traefik.frontend.rule=Host:images.${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
-
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
 
   apache:
     # build:
@@ -128,6 +145,10 @@ services:
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
       - traefik.enable=true
       - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
 
 # Start TICK - Services
 
@@ -147,6 +168,10 @@ services:
       - "8089:8089"
     networks:
       isle-internal:
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
 
   telegraf:
     image: telegraf:latest
@@ -164,6 +189,10 @@ services:
     ports:
       # This port should be for rsyslog
       - "6514:6514"
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
 
   kapacitor:
     image: "kapacitor"
@@ -179,6 +208,10 @@ services:
       - "9092:9092"
     networks:
       isle-internal:
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
 
   chronograf:
     image: chronograf:latest
@@ -197,6 +230,10 @@ services:
       - telegraf
     networks:
       isle-internal:
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
 
 # END TICK - Services
 
@@ -218,7 +255,10 @@ services:
       - traefik.port=8080
       - traefik.enable=true  ## NOT SAFE FOR PRODUCTION! ##
       - traefik.frontend.rule=Host:admin.${BASE_DOMAIN};
-
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
 
 # Defined networks
 networks:
