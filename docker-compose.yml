@@ -161,9 +161,9 @@ services:
       - influxdb
     networks:
       isle-internal:
-    #ports:
+    ports:
       # This port should be for rsyslog
-    #  - "6514:6514"
+      - "6514:6514"
 
   kapacitor:
     image: "kapacitor"
