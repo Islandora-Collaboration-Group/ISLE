@@ -11,14 +11,12 @@ A new ISLE / Islandora environment can include the option to create an un-themed
 
 While this checklist will attempt to point out most of the usage challenges or pitfalls, ISLE assumes no responsibility or liability in this matter should an end user have customizations beyond what this guide outlines.
 
-For additional help, please post a message to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle). This [Glossary](../appendices/glossary.md) defines terms used in this documentation.
+Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive email discussion updates. This [Glossary](../appendices/glossary.md) defines terms used in this documentation.
 
 ---
 
 
 ## Assumptions / Prerequisites
-
-* Comfortability with ISLE. Recommend first setting up the [Demo ISLE Installation](../install/install.md). If you have already done this, please proceed.
 
 * Host Server that conforms to the specifications outlined in the [Hardware Requirements](../install/host-hardware-requirements.md)
 

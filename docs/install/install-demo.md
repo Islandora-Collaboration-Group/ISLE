@@ -2,9 +2,9 @@
 
 _Expectations:  It takes an average of **45 minutes** to read this documentation and complete this installation._
 
-This process creates a local Islandora platform (`isle.localdomain`) on your workstation. This includes an un-themed Drupal website and empty Fedora repository for end users to test ingests, test metadata, update fields in SOLR indexing, develop code and otherwise "kick the tires" on ISLE.
+This creates an Islandora platform on your workstation that you can view locally in your browser as `https://isle.localdomain`. This process includes an un-themed Drupal website and empty Fedora repository for end users to test ingests and metadata, update fields in SOLR indexing, develop code, and otherwise "kick the tires" on ISLE.
 
-For additional help, please post a message to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle). This [Glossary](../appendices/glossary.md) defines terms used in this documentation.
+Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive email discussion updates. This [Glossary](../appendices/glossary.md) defines terms used in this documentation.
 
 ### Assumptions / Prerequisites
 
@@ -12,24 +12,11 @@ For additional help, please post a message to the [Islandora ISLE Google group](
 
 ---
 
-### Process Overview
-
-* Edit File `/etc/hosts` to View ISLE Locally on Workstation Browser
-* Launch Process
-* Run Install Script
-* Test the Site
-* Ingest Sample Objects
-* Troubleshooting
-
----
-
 ### Step 1: Edit File `/etc/hosts` to View ISLE Locally on Workstation Browser
 
 Enable the Demo ISLE Installation to be viewed locally as: `https://isle.localdomain`
 
-* Please use these instructions to [Edit the "/etc/hosts" File](../appendices/edit-the-hosts-file.md).
-
-* After completing the above, please continue below with _Step 2: Launch Process_.
+* Please use these instructions to [Edit the "/etc/hosts" File](../install/install-demo-edit-hosts-file.md).
 
 ---
 
@@ -106,3 +93,5 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
 ### Step 6: Additional Resources
 * [Demo ISLE Installation Resources](../appendices/demo-resources.md) contains Docker container passwords and URLs for administrator tools.
 * [Demo ISLE Installation Troubleshooting](../appendices/demo-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
+
+**End of: Demo ISLE Installation.**

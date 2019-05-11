@@ -6,11 +6,9 @@ _Expectations:  It may take at least **8 hours or more** to read this documentat
 
 This Migration guide will help you migrate your existing production Islandora environment to an ISLE environment for easily maintaining Islandora. This guide will walk you through how to identify and copy your institution's Islandora data and files (including your data volume, Drupal site or sites, and commonly customized xml and xslt files) to your ISLE framework.
 
-For additional help, please post a message to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle). This [Glossary](../appendices/glossary.md) defines terms used in this documentation.
+Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive email discussion updates. This [Glossary](../appendices/glossary.md) defines terms used in this documentation.
 
 ## Assumptions / Prerequisites
-
-* You are comfortable with ISLE. We recommend first setting up the [Demo ISLE Installation](../install/install.md) (`isle.localdomain`).
 
 * You understand that all directions in this guide depend on the type of local computer used to connect via browser to Islandora. The instructions below assume a MacOS or Linux workstation to be used in conjunction with the ISLE Host Server for deploying configs, code, files etc. Windows users may have to adjust / swap out various tools as needed.
 

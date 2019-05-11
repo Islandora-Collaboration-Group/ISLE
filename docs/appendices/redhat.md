@@ -4,7 +4,7 @@ The ISLE Maintainers do not recommend using Red Hat at this time for the followi
 
 Red Hat Enterprise Linux (RHEL) seems to not support the free Docker Community Edition (CE), although RHEL does seem to support Docker Enterprise Edition (Docker EE) although the latter must be purchased.
 
-If you have a different experience, please tell us on the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle).
+Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive email discussion updates.
 
    * Additional information:
      * [https://docs.docker.com/install/](About Docker CE)
