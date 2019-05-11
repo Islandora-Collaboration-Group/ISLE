@@ -136,6 +136,8 @@ Solr - an open source enterprise search platform with the such features as full-
 
 * **sudo** - short for "substitute user do" and it allows the user to have root permissions when entered in front of a command. [Learn more about sudo](https://www.sudo.ws/intro.html)
 
+* **workstation** - a workstation represents a personal laptop or desk computer.
+
 ---
 
 ## Virtualization

@@ -1,4 +1,4 @@
-# Migration Installation Guide
+# Migrate to ISLE Environment
 
 _Expectations:  It may take at least **8 hours or more** to read this documentation and complete this installation, and depending on access to resources, may take several days. Please proceed slowly._
 =======
@@ -10,11 +10,11 @@ For additional help, please post a message to the [Islandora ISLE Google group](
 
 ## Assumptions / Prerequisites
 
-* You are comfortable with ISLE. We recommend first setting up the [Demo ISLE Site](../install/install.md) (`isle.localdomain`).
+* You are comfortable with ISLE. We recommend first setting up the [Demo ISLE Installation](../install/install.md) (`isle.localdomain`).
 
-* You understand that all directions in this guide depend on the type of local computer used to connect via browser to Islandora. The instructions below assume a MacOS or Linux laptop or workstation to be used in conjunction with the ISLE Host Server for deploying configs, code, files etc. Windows users may have to adjust / swap out various tools as needed.
+* You understand that all directions in this guide depend on the type of local computer used to connect via browser to Islandora. The instructions below assume a MacOS or Linux workstation to be used in conjunction with the ISLE Host Server for deploying configs, code, files etc. Windows users may have to adjust / swap out various tools as needed.
 
-* A host server that conforms to the specifications outlined in - and has followed the appropriate setup and configuration instructions in - the [New ISLE Site](../install) section of the guide.
+* A host server that conforms to the specifications outlined in - and has followed the appropriate setup and configuration instructions in - the [New ISLE Installation](../install) section of the guide.
 
 * You have disk space on - or mounted to - the host server large enough to store a **copy** of your fedora data store
 

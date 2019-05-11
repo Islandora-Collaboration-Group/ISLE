@@ -263,11 +263,6 @@ Compare, edit, merge or copy the following from the source directory `current-pr
 
 If need be, please refer to the **Systems** section of the [Glossary](../appendices/glossary.md) for relevant terms to help guide installation.
 
-This directory and service will not exist on any current islandora production systems. Please pick one of the following guides to complete this configuration.
+This directory and service will not exist on any current islandora production systems.
 
-* If the migrated production site is to be the first or only site running on the ISLE host server, please follow the [New Site Installation: Single ISLE Environment](../install/install-one-environment.md), `### Proxy Directory` section, lines 317 - 395.
-
-* If the migrated production site is not the first or only site running on the ISLE host server, please follow the [New Site Installation: Multiple ISLE Environments](../install/install-multiple-environments.md)
-    * Read the `Assumptions / Prerequisites` section, lines 16 -32
-    * Read the `Multiple ISLE / Islandora Environments` section, lines 36 -88
-    * All of the sections starting with `Proxy directory` paying particular attention to anything labelled with `(multi)`, lines 384 - 623
+* Please follow the [New ISLE Installation](../install/install-one-environment.md), `### Proxy Directory` section, lines 317 - 395.

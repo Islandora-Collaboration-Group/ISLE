@@ -1,6 +1,6 @@
 <!--- PAGE_TITLE --->
 
-The ISLE project uses `mkdocs` a static site generator designed for building project documentation. Documentation source files are written in `Markdown`, and configured with a single `YAML` configuration file. The `mkdocs` software then creates static `HTML` pages for hosting on GitHub Pages. This software can also be used locally on an end user's laptop or workstation for review and editing of materials.
+The ISLE project uses `mkdocs` a static site generator designed for building project documentation. Documentation source files are written in `Markdown`, and configured with a single `YAML` configuration file. The `mkdocs` software then creates static `HTML` pages for hosting on GitHub Pages. This software can also be used locally on an end user's workstation for review and editing of materials.
 
 Please note there are two key elements to the ISLE Documentation.
 
@@ -27,20 +27,24 @@ A very handy primer for writing documentation using `MkDocs` has been written he
 
 ```
 
-├── README.md
 ├── docs
-│   ├── install
-│   ├── 02_installation_development
-│   ├── 03_installation_new_site
-│   ├── migrate
-│   ├── contributor-docs
-│   ├── specifications
-│   ├── Previous_Structure_For_Merging
-│   ├── about-isle.md
+│   ├── about
+│   ├── appendices
 │   ├── assets
-│   ├── glossary.md
+│   ├── contributor-docs
+│   ├── cookbook-recipes
+│   ├── install
+│   ├── migrate
+│   ├── release-notes
+│   ├── specifications
+│   ├── update
+│   ├── extra.css
+│   ├── extra.js
 │   └── index.md
+├── /.aspell.en.pws
+├── .gitignore
 ├── mkdocs.yml
+├── README.md
 
 ```
 
@@ -71,13 +75,3 @@ Within the `docs` directory, there are 6 major topical sections.
 * Please keep all filenames lowercase
 
 * Please ensure that all files are Markdown (`.md`) files otherwise the documentation system will fail.
-
-| Section                     | Page Prefix     | All topics related to                         |
-| -------------               | -------------   | -------------                                 |
-| install | ``              | Host server hardware and software setup |
-| 02_installation_development | `demo_`         | Demo ISLE Site (`isle.localdomain`) |
-| 03_installation_new_site    | `new_site_`     | New Islandora site installation in ISLE |
-| migrate   | `migration_`    | Migrating an existing production Islandora site to ISLE |
-| contributor-docs          | ``   | Documentation for the ISLE Contributors |
-| specifications           | ``        | ISLE systems/software specifications |
-| 08_specifications           | `about_`        | About ISLE |

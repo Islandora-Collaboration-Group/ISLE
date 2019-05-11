@@ -12,7 +12,7 @@ If you are not familiar with the Ansible, it is recommended to start with their 
 
 **Notes:**
 
-* For MacOS users using a local ISLE Host VM on their laptop or workstation, please scroll down to line **395** the section called
+* For MacOS users using a local ISLE Host VM on their workstation, please scroll down to line **395** the section called
 `Using Ansible on MacOS`.
 
 * Windows sadly as of yet [cannot be used](http://docs.ansible.com/ansible/latest/intro_installation.html#control-machine-requirements) as a Ansible control machine  

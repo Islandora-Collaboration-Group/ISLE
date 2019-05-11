@@ -1,6 +1,6 @@
 <!--- PAGE_TITLE --->
 
-Edit the `/etc/hosts` file to view ISLE locally on a laptop or workstation browser.
+Edit the `/etc/hosts` file to view ISLE locally on a workstation browser.
 
 **Please select your operating system and software:**
 

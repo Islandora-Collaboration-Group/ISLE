@@ -1,13 +1,15 @@
 # Hardware Requirements
 
-The ISLE host server can be a laptop or workstation, physical server, virtual machine (VM) or cloud service. An SSH connection with a user that has root or admin privileges is necessary. If an IT department is providing the server environment, please see the [Sample IT Department Request Letter](../appendices/sample-it-department-request.md) for requesting the server.
+The ISLE host server can be a workstation, physical server, virtual machine (VM) or cloud service. An SSH connection with a user that has root or admin privileges is necessary. 
+
+If you need help requesting a server environment, please see the [Sample IT Department Request Letter](../appendices/sample-it-department-request.md).
 
 **Known working operating systems and distributions:**
 
 * Ubuntu 18.04 LTS (also: Ubuntu 16.04 LTS)
 * CentOS 7.x
-* MacOS (only for: Demo ISLE Site)
-* Windows 10 Professional or Enterprise (only for: Demo ISLE Site)
+* MacOS (only for: Demo ISLE Installation)
+* Windows 10 Professional or Enterprise (only for: Demo ISLE Installation)
 * (Read the [Warning about Installing on Red Hat](../appendices/redhat.md))
 
 **Please select your hardware environment:**
@@ -15,7 +17,7 @@ The ISLE host server can be a laptop or workstation, physical server, virtual ma
 - [Production Server](#production-server)
 - [Staging Server](#staging-server)
 - [Development Server](#development-server)
-- [Demo ISLE Site](#demo-isle-site)
+- [Workstation Demo](#workstation-demo)
 
 ---
 
@@ -65,11 +67,11 @@ Below are the recommended minimum specifications for a development server. The s
 
 ---
 
-## Demo ISLE Site
+## Workstation Demo
 
-Below are the recommended specifications for a laptop or desktop running a TEST version of ISLE:
+Below are the recommended specifications for a workstation running a Demo ISLE Installation:
 
-* Bring your own OS.
+* Your own OS (whatever it is)
 * Minimum of 2 CPU cores
 * 8 - 16 GB of RAM is recommended
 * 128 - 500GB for the Desktop OS
