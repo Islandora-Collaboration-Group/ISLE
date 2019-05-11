@@ -31,8 +31,6 @@ nav:
   - 'Migration Merge Checklist': 'migrate/merge-checklist.md'
   - 'Migration Reindex Process': 'migrate/reindex-process.md'
 - 'Appendices':
-  - 'Demo ISLE Installation Resources': 'appendices/demo-resources.md'
-  - 'Demo ISLE Installation Troubleshooting': 'appendices/demo-troubleshooting.md'
   - 'Glossary': 'appendices/glossary.md'
   - 'Installing a Drupal Module with Composer': 'appendices/installing-module-with-composer.md'
   - 'Installing a Drupal Module with Drush': 'appendices/installing-module-with-drush.md'

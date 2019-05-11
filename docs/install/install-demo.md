@@ -32,7 +32,7 @@ docker-compose up -d
 * After the above process is completed:
     * View only the running containers: `docker ps`
     * View all containers (both those running and stopped): `docker ps -a`
-    * **If any `isle-` containers are NOT running, then use [Demo ISLE Installation Troubleshooting](../appendices/demo-troubleshooting.md) to solve before continuing below.** <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running --->
+    * All containers prefixed with `isle-` are expected to have a `STATUS` of `UP` (for x time). **If any of these are not `UP`, then use [Demo ISLE Installation: Troubleshooting](../install/install-demo-troubleshooting.md) to solve before continuing below.** <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running, oe (c) older exited ISLE containers that maybe should be removed. --->
 
 ---
 
@@ -91,8 +91,8 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
 ---
 
 ### Step 6: Additional Resources
-* [Demo ISLE Installation Resources](../install/install-demo-resources.md) contains Docker container passwords and URLs for administrator tools.
-* [Demo ISLE Installation Troubleshooting](../install/install-demo-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
+* [Demo ISLE Installation: Resources](../install/install-demo-resources.md) contains Docker container passwords and URLs for administrator tools.
+* [Demo ISLE Installation: Troubleshooting](../install/install-demo-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
 
 ---
 
