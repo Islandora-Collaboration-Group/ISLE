@@ -1,4 +1,4 @@
-# Demo ISLE Installation Resources
+# Demo ISLE Installation: Resources
 
 ### Local URL
 Always use the `https://isle.localdomain` domain to view and log in to a local site. (Do not use an IP address, such as `https://10.10.10.130 or https://127.0.0.01` as some components may not function correctly.)
@@ -136,3 +136,7 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 #### 7. Portainer
 
 * Portainer (a Docker control panel) is available at [portainer.isle.localdomain](http://portainer.isle.localdomain). No username/password are required.  This is unsafe for production environments.
+
+---
+
+**Return to [Demo ISLE Installation](../install/install-demo.md#step-6-additional-resources).**

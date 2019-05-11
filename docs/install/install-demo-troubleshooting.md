@@ -1,4 +1,4 @@
-# Demo ISLE Installation Troubleshooting
+# Demo ISLE Installation: Troubleshooting
 
 **Please select a topic:**
 
@@ -66,3 +66,7 @@ If you don't see all containers running, then stop the running containers with `
     `docker pull islandoracollabgroup/isle-apache:1.1`
 
     `docker-compose up -d apache`
+
+---
+
+**Return to [Demo ISLE Installation](../install/install-demo.md#step-6-additional-resources).**

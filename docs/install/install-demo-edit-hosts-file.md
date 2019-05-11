@@ -30,7 +30,7 @@ Edit the `/etc/hosts` file to view ISLE locally on a workstation browser.
 
   * Enter `Cntrl` and the letter `x` together to exit the file.
 
-**Please return to [Demo ISLE Installation](../install/install-demo.md) and continue with _Step 2: Launch Process_.**
+**Please return to [Demo ISLE Installation](../install/install-demo.md#step-2-launch-process) and continue with _Step 2: Launch Process_.**
 
 ---
 
@@ -63,7 +63,7 @@ Edit the `/etc/hosts` file to view ISLE locally on a workstation browser.
 * Enter `Cntrl` and the letter `o` together to write the changes to the file.
 * Enter `Cntrl` and the letter `x` together to exit the file.
 
-**Please return to [Demo ISLE Installation](../install/install-demo.md) and continue with _Step 2: Launch Process_.**
+**Please return to [Demo ISLE Installation](../install/install-demo.md#step-2-launch-process) and continue with _Step 2: Launch Process_.**
 
 ---
 
@@ -91,7 +91,7 @@ Edit the `/etc/hosts` file to view ISLE locally on a workstation browser.
 
     * Click `File > Save`, and then `File -> Exit`.
 
-**Please return to [Demo ISLE Installation](../install/install-demo.md) and continue with _Step 2: Launch Process_.**
+**Please return to [Demo ISLE Installation](../install/install-demo.md#step-2-launch-process) and continue with _Step 2: Launch Process_.**
 
 ---
 
@@ -117,4 +117,4 @@ Edit the `/etc/hosts` file to view ISLE locally on a workstation browser.
 
     * Click `File > Save`, and then `File -> Exit`.
 
-**Please return to [Demo ISLE Installation](../install/install-demo.md) and continue with _Step 2: Launch Process_.**
+**Please return to [Demo ISLE Installation](../install/install-demo.md#step-2-launch-process) and continue with _Step 2: Launch Process_.**
