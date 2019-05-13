@@ -2,50 +2,27 @@
 
 _Expectations:  It may take at least **4 - 6 hours or more** to read this documentation and complete this installation. Please proceed slowly._
 
-This guide documents how an end user can spin up and install a single ISLE / Islandora environment tailored to use only one unique domain / URL and one ISLE environment.
+This New ISLE Installation creates an Islandora environment with a unique domain (URL) on your host server, virtual machine, or cloud hosted platform.
+You may also use this documentation to install ISLE on several host servers, virtual machines, or cloud hosted platforms to create multiple Islandora environments (e.g. development, staging, and production). This process will result in an un-themed Drupal website and an empty Fedora repository. (Please refer back to the [Hardware Requirements](../install/host-hardware-requirements.md) as the development environment needs fewer resources than the staging and production environments; the latter two should mirror each other in resource usage and setup.)
 
-* [New ISLE Installation](../install/install-one-environment.md) - Setup **one** ISLE site within a single environment (e.g. production only) or run all of your ISLE environments on separate ISLE host servers or VMs.
-* New ISLE Installation: Multiple Environments - Setup **multiple** ISLE sites using multiple environments (e.g. development, staging, and production) on one ISLE Host server or VM. Note: setting up multiple ISLE sites and environments on one ISLE host server will require adequate resources. A rough estimate is to use the [Hardware Requirements](../install/host-hardware-requirements.md) and multiply by three. Please note that a `dev` environment needs fewer resources, but `stage` and `prod` environments should mirror each other in resource usage and setup.
-
-A new ISLE / Islandora environment can include the option to create an un-themed Drupal website and empty Fedora repository for end users to develop code, perform ingests, edit metadata, update fields in SOLR indexing all essential in ultimately creating a new ISLE production site.
-
-While this checklist will attempt to point out most of the usage challenges or pitfalls, ISLE assumes no responsibility or liability in this matter should an end user have customizations beyond what this guide outlines.
-
-Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive email discussion updates. This [Glossary](../appendices/glossary.md) defines terms used in this documentation.
+Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive emails. The [Glossary](../appendices/glossary.md) defines terms used in this documentation.
 
 ---
 
 
 ## Assumptions / Prerequisites
 
-* Host Server that conforms to the specifications outlined in the [Hardware Requirements](../install/host-hardware-requirements.md)
+* You have already completed the [Hardware Requirements](../install/host-hardware-requirements.md) and the [Software Dependencies](../install/host-software-dependencies.md) for your host server(s). 
 
-* This new site guide is designed for a single ISLE Host server that has already followed the appropriate setup and configuration instructions in the [New ISLE Installation](../index.md#new-isle) section of the guide.
+* SSL Certificates: Use the [Let's Encrypt guide](../appendices/configuring-lets-encrypt.md) to generate SSL Certificates or ask your IT resource to provision [SSL Certificates](../appendices/glossary.md#systems) for the web domain.
 
-* Instructions below also assume a MacOS or Linux workstation to be used in conjunction with the ISLE Host Server for deploying configs, code, files etc. Windows users may have to adjust / swap out various tools as needed.
-
-* These directions also depend on the type of local computer used to connect via browser to Islandora.
-
-* Have an existing domain name that works - is set up with DNS etc...
-
-* Have [SSL Certificates](../appendices/glossary.md#systems) previously created for the web domain. (_Please work with the appropriate internal IT resource to provision these files for your domain_)  OR use the [Let's Encrypt guide](../appendices/configuring-lets-encrypt.md) to generate SSL Certificates.
+* **Never ever share or post your .env files publicly.** The .env and tomcat.env files ("Docker Environment files") are your primary resources for customizing your ISLE stack. These .env files contain passwords and usernames and must be treated with the utmost care.
 
 
-## Overview
-
-* The .env and tomcat.env files (also known as your "Docker Environment files") are your primary resources for customizing your ISLE stack.
-  * As a result your .env files contain passwords and usernames and must be treated with the utmost care. **Never** share or post your .env files publicly.
 
 
 ## Docker Environment Files
 
-There are .env files that exist in your cloned copy of the repository. This section describes what these files do, and their importance to your stack! Chiefly these files are tasked with automatically configuring and setting all ISLE systems to work together in the stack. ISLE removes the need of editing the more complex config files that are part of the Islandora stack manually. Just .env it!
-
-You should edit these files with unique users/passwords, your domain name, site-name, etc. for your own _unique_ instance of ISLE to come alive.
-
-**Edit the file: **.env** and **tomcat.env** before you up (`docker-compose up`)**
-
-**REMEMBER: never share or post your complete .env publicly... EVER! Use caution, and when in doubt ask a committer for help (i.e., discuss or share the file privately with an ISLE Committer)**
 
 ### Master Section
     * COMPOSE_PROJECT_NAME to something unique (e.g. `COMPOSE_PROJECT_NAME=isle-production-collections`)
@@ -54,6 +31,27 @@ You should edit these files with unique users/passwords, your domain name, site-
       * This variable specifies your domain name!
     * CONTAINER_SHORT_ID to something unique (e.g. `CONTAINER_SHORT_ID=prod`).
       * This variable is appended to the end of all running containers, keep it _short_!
+
+
+<!-- 
+TODO: 
+
+FLOW of Customization:
+
+If New Installation....
+- Explain that ISLE creates the mysql, fedora, etc. servers from Docker images, and that data for these can be stored with persistence on a bind mount.
+  - Explain how to update usernames and passwords for mysql, fedora, etc.
+
+If Migrate to ISLE Environment...
+- Explain how to find pwds, how to rsync data:
+  - mysql, fedora installations on bind mount
+  - usernames and passwords for mysql, fedora, etc.
+
+Explain Git Workflow and how to setup
+
+Explain how to setup bind mounts OR volumes? (are these docker volumes?)
+
+-->
 
 
 ### Database Section
@@ -181,3 +179,19 @@ There are also additional links for the end user to learn how to combine the SSL
 * Check the newly created and running new site by opening a browser and navigating to your site domain e.g. `https://digital-collections.example.edu`, you should now see an un-themed Drupal site.
 
 ---
+
+
+(Good points for somewhere else:)
+
+- ISLE removes the need to manually edit the more complex config files that are part of the Islandora stack. 
+
+---
+
+## Additional Resources
+* [Migrate to ISLE Environment](../migrate/install-migration.md) will help you migrate your existing production Islandora 7.x environment to an ISLE environment.
+* [Demo ISLE Installation: Resources](../install/install-demo-resources.md) contains Docker container passwords and URLs for administrator tools.
+* [Demo ISLE Installation: Troubleshooting](../install/install-demo-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
+
+---
+
+## End of New ISLE Installation.

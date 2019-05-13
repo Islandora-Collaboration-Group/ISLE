@@ -2,13 +2,13 @@
 
 _Expectations:  It takes an average of **45 minutes** to read this documentation and complete this installation._
 
-This creates an Islandora platform on your workstation that you can view locally in your browser as `https://isle.localdomain`. This process includes an un-themed Drupal website and empty Fedora repository for end users to test ingests and metadata, update fields in SOLR indexing, develop code, and otherwise "kick the tires" on ISLE.
+This Demo ISLE Installation creates an Islandora environment on your workstation that you can view locally in your browser as `https://isle.localdomain`. This process includes an un-themed Drupal website and an empty Fedora repository so you may ingest test objects, add or edit metadata, update fields in SOLR indexing, develop code, and otherwise "kick the tires" on ISLE.
 
-Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive email discussion updates. This [Glossary](../appendices/glossary.md) defines terms used in this documentation.
+Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive emails. The [Glossary](../appendices/glossary.md) defines terms used in this documentation.
 
 ### Assumptions / Prerequisites
 
-* This installation is intended for a local workstation.
+* This Demo ISLE Installation is intended for a local workstation.
 
 ---
 
@@ -55,7 +55,7 @@ docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isl
 | - If the process seems to halt, check the taskbar for background windows.|
 
 * You should see a lot of green [ok] messages.
-* If the script appears to pause and prompt for y/n, DO NOT enter any values; the script will answer for you.
+* If the script appears to pause or prompt for `y/n`, DO NOT enter any values; the script will automatically answer for you.
 * **Proceed only after this message appears:** `Clearing Drupal Caches. 'all' cache was cleared.`
 
 ---
@@ -96,4 +96,4 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
 
 ---
 
-### End of Demo ISLE Installation
+### End of Demo ISLE Installation.

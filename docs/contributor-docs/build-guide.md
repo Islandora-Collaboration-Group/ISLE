@@ -10,9 +10,9 @@ Developers can follow this guide if they have edited their Dockerfiles with cust
 
 These images will contain the necessary base code, scripts and files to run the default sample `https://isle.localdomain`.
 
-The Demo ISLE Installation creates a local Islandora platform (`https://isle.localdomain`) on your workstation. This includes an un-themed Drupal website and empty Fedora repository for end users to test ingests, test metadata, update fields in SOLR indexing, develop code and otherwise "kick the tires" on ISLE.
+The Demo ISLE Installation creates a local Islandora platform (`https://isle.localdomain`) on your workstation. This process includes an un-themed Drupal website and an empty Fedora repository so you may ingest test objects, add or edit metadata, update fields in SOLR indexing, develop code, and otherwise "kick the tires" on ISLE.
 
-Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive email discussion updates. This [Glossary](../appendices/glossary.md) defines terms used in this documentation.
+Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive emails. The [Glossary](../appendices/glossary.md) defines terms used in this documentation.
 
 ### Assumptions / Prerequisites
 

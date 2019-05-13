@@ -1,32 +1,24 @@
 # Migrate to ISLE Environment
 
 _Expectations:  It may take at least **8 hours or more** to read this documentation and complete this installation, and depending on access to resources, may take several days. Please proceed slowly._
-=======
+
 ## THIS SECTION OF DOCUMENTATION IS A WORK IN PROGRESS.
 
-This Migration guide will help you migrate your existing production Islandora environment to an ISLE environment for easily maintaining Islandora. This guide will walk you through how to identify and copy your institution's Islandora data and files (including your data volume, Drupal site or sites, and commonly customized xml and xslt files) to your ISLE framework.
+This will help you migrate your existing production Islandora 7.x environment to an ISLE environment for easily maintaining Islandora. This documentation will help you identify and copy your institution's preexisting Islandora data, files, and themes (including your data volume, Drupal site(s) and theme(s), and commonly customized xml and xslt files) to your ISLE environment.
 
-Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive email discussion updates. This [Glossary](../appendices/glossary.md) defines terms used in this documentation.
+Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive emails. The [Glossary](../appendices/glossary.md) defines terms used in this documentation.
 
 ## Assumptions / Prerequisites
 
-* You understand that all directions in this guide depend on the type of local computer used to connect via browser to Islandora. The instructions below assume a MacOS or Linux workstation to be used in conjunction with the ISLE Host Server for deploying configs, code, files etc. Windows users may have to adjust / swap out various tools as needed.
+* You have already completed the [Hardware Requirements](../install/host-hardware-requirements.md) and the [Software Dependencies](../install/host-software-dependencies.md) for your host server(s), and the [New ISLE Installation](../install/install-one-environment.md). 
 
-* A host server that conforms to the specifications outlined in - and has followed the appropriate setup and configuration instructions in - the [New ISLE Installation](../install) section of the guide.
+* SSL Certificates: Use the [Let's Encrypt guide](../appendices/configuring-lets-encrypt.md) to generate SSL Certificates or ask your IT resource to provision [SSL Certificates](../appendices/glossary.md#systems) for the web domain.
+
+* **Never ever share or post your .env files publicly.** The .env and tomcat.env files ("Docker Environment files") are your primary resources for customizing your ISLE stack. These .env files contain passwords and usernames and must be treated with the utmost care.
 
 * You have disk space on - or mounted to - the host server large enough to store a **copy** of your fedora data store
 
 * You also have adequate storage space available for the ISLE host server to accommodate a working copy of a production Islandora's associated configurations and data.
-
-* You have access to the ISLE host server from your local workstation via SSH as the `islandora` user with sudo privileges.
-
-* You have a web domain name that works (i.e. is set up with a DNS entry you can make changes to if needed)
-
-* You have [SSL Certificates](../appendices/glossary.md#systems) previously created for the web domain. (_Please work with the appropriate internal IT resource to provision these files for your domain_) OR: Use the [Let's Encrypt guide](../appendices/configuring-lets-encrypt.md) to generate and install SSL Certificates.
-
-* You have cloned the ISLE repository to BOTH your local computer AND the ISLE host server
-
-* You have access to the current Islandora production server(s)
 
 * You have usernames and passwords for key parts of your current Islandora production environment which will be used **for** the migration. The next steps will walk you through finding this information.
 
@@ -54,23 +46,23 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 * You know where your Fedora, Drupal (Islandora), and Solr data folders are located.
 
-   0. Login to your current Islandora production server. If your current production environment is located across multiple servers, you may need to check more than one server to located these data folders.
+    0. Login to your current Islandora production server. If your current production environment is located across multiple servers, you may need to check more than one server to located these data folders.
 
-   1. Finding your Fedora data folder (common locations include `/usr/local/fedora/data` or `/usr/local/tomcat/fedora/data`):
+    1. Finding your Fedora data folder (common locations include `/usr/local/fedora/data` or `/usr/local/tomcat/fedora/data`):
 
-        Run a find command: `find / -type d -ipath '*fedora/data' -ls  2>/dev/null`
+          Run a find command: `find / -type d -ipath '*fedora/data' -ls  2>/dev/null`
 
-   2. Finding your Drupal data folder (common location is under `/var/www/` likely in a sub-folder; e.g., html, islandora, etc.)
+    2. Finding your Drupal data folder (common location is under `/var/www/` likely in a sub-folder; e.g., html, islandora, etc.)
 
-        Run a grep command: `grep --include=index.php -rl -e 'Drupal' / 2>/dev/null`
+          Run a grep command: `grep --include=index.php -rl -e 'Drupal' / 2>/dev/null`
 
-   3. Finding your Solr data folder (common location: `/usr/local/solr`, `/usr/local/tomcat/solr`, or `/usr/local/fedora/solr`)
+    3. Finding your Solr data folder (common location: `/usr/local/solr`, `/usr/local/tomcat/solr`, or `/usr/local/fedora/solr`)
 
-        Run a find command: `find / -type d -ipath '*solr/*/data' -ls  2>/dev/null`
+          Run a find command: `find / -type d -ipath '*solr/*/data' -ls  2>/dev/null`
 
-   4. Finding your FedoraGSearch data (i.e. transforms) folder
+    4. Finding your FedoraGSearch data (i.e. transforms) folder
 
-        Run a find command: `find / -type d -ipath '*web-inf/classes/fgsconfigfinal' -ls 2>/dev/null`
+          Run a find command: `find / -type d -ipath '*web-inf/classes/fgsconfigfinal' -ls 2>/dev/null`
 
 * You have a SQL dump (export) of the current production site's Drupal database. Ensure that the contents of any `cache` table are not exported.
     1. Login to your current Islandora production server and navigate to your Drupal data folder.
@@ -78,7 +70,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
         Run the following command to generate a SQL dump of your Drupal database: `mysqldump -u {DRUPAL_USERNAME} -p {DRUPAL_DATABASE_NAME} | gzip > drupal.sql.gz`
 
 
-**Finally also please note:** Instructions from this guide  and it's associated checklists call for you to **COPY** data from your current production Islandora environment to your ISLE Host Server or local computer. You work from these copies to build your ISLE environment. In some cases, you'll need to copy configurations down to your local computer (`Local ISLE config laptop`) and merge contents as directed. In other cases, due to the size of the data e.g. Fedora data you will copy directly to the ISLE Host server (`Remote ISLE Host server`). You will note where you have stored copies of files/data in a docker-compose.yml file. You will store your configured files in a git repository and use that to deploy to the ISLE host server.
+**Finally also please note:** Instructions from this guide and it's associated checklists call for you to **COPY** data from your current production Islandora environment to your ISLE Host Server or local computer. You work from these copies to build your ISLE environment. In some cases, you'll need to copy configurations down to your local computer (`Local ISLE config laptop`) and merge contents as directed. In other cases, due to the size of the data e.g. Fedora data you will copy directly to the ISLE Host server (`Remote ISLE Host server`). You will note where you have stored copies of files/data in a docker-compose.yml file. You will store your configured files in a git repository and use that to deploy to the ISLE host server.
 
 ## Detailed Steps
 
