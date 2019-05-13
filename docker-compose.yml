@@ -201,7 +201,7 @@ services:
       isle-internal:
     ports:
       # This port should be for rsyslog
-      - "6514:6514"
+      - "514:514"
     logging:
       driver: syslog
       options:
