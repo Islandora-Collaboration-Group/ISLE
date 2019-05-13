@@ -22,7 +22,7 @@ nav:
 - 'Install ISLE':
   - '1. Hardware Requirements': 'install/host-hardware-requirements.md'
   - '2. Software Dependencies': 'install/host-software-dependencies.md'
-  - '3. Demo ISLE Installation': 'install/install.md'
+  - '3. Demo ISLE Installation': 'install/install-demo.md'
   - '4. New ISLE Installation': 'install/install-one-environment.md'
 - 'Update ISLE': 'update/update.md'
 - 'Migrate Existing Site to ISLE':
@@ -31,9 +31,6 @@ nav:
   - 'Migration Merge Checklist': 'migrate/merge-checklist.md'
   - 'Migration Reindex Process': 'migrate/reindex-process.md'
 - 'Appendices':
-  - 'Demo ISLE Installation Resources': 'appendices/demo-resources.md'
-  - 'Demo ISLE Installation Troubleshooting': 'appendices/demo-troubleshooting.md'
-  - 'Edit the "/etc/hosts" File': 'appendices/edit-the-hosts-file.md'
   - 'Glossary': 'appendices/glossary.md'
   - 'Installing a Drupal Module with Composer': 'appendices/installing-module-with-composer.md'
   - 'Installing a Drupal Module with Drush': 'appendices/installing-module-with-drush.md'

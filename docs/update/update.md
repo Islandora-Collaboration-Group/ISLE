@@ -23,4 +23,6 @@ Update an existing ISLE installation to install the newest improvements and secu
 
 The new containers should start up and your Islandora site should be available, without any loss of existing content. 
 
-If you run into trouble, please see the [Cleanup section of the quick start guide](https://github.com/Islandora-Collaboration-Group/ISLE#quick-stop-and-cleanup), or post a question to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle).
+If you run into trouble, please see the [Cleanup section of the quick start guide](https://github.com/Islandora-Collaboration-Group/ISLE#quick-stop-and-cleanup).
+
+Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive emails.

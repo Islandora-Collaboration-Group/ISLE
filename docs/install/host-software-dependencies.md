@@ -96,7 +96,7 @@ Your host server is now configured and ready to run ISLE.
 
 **Please continue by selecting your type of installation:**
 
-- [Demo ISLE Installation](../install/install.md)
+- [Demo ISLE Installation](../install/install-demo.md)
 - [New ISLE Installation](../install/install-one-environment.md)
 - [Migrate to ISLE Environment](../migrate/install-migration.md)
 
@@ -181,7 +181,7 @@ Your host server is now configured and ready to run ISLE.
 
 **Please continue by selecting your type of installation:**
 
-- [Demo ISLE Installation](../install/install.md)
+- [Demo ISLE Installation](../install/install-demo.md)
 - [New ISLE Installation](../install/install-one-environment.md)
 - [Migrate to ISLE Environment](../migrate/install-migration.md)
 
@@ -260,7 +260,7 @@ Your host server is now configured and ready to run ISLE.
 
 **Please continue by selecting your type of installation:**
 
-- [Demo ISLE Installation](../install/install.md)
+- [Demo ISLE Installation](../install/install-demo.md)
 - [New ISLE Installation](../install/install-one-environment.md)
 - [Migrate to ISLE Environment](../migrate/install-migration.md)
 
@@ -314,7 +314,7 @@ git version 2.15.1
 ### Step 3: Clone ISLE Repository
 **Please note:** The location you select to clone the ISLE repository becomes your project directory. We recommend using the default user home directory; this location will include your configuration and log output of the Docker containers. (You may choose a different location, but it must not be a protected folder such as system or root directory.)
 
-* Use `PowerShell` (remember to `Run as administrator`)
+* Use `PowerShell` (and remember to `Run as administrator`).
 * Enter `cd ~` (to change to the user's home directory).
 * Clone the repository.
 
@@ -331,16 +331,16 @@ cd ISLE
 ```
 pwd
 ```
-* Use mouse/trackpad to highlight the full path (i.e. `C:\Users\somebody\ISLE`) and click enter to copy to clipboard.
+* Use mouse/trackpad to highlight the full path (i.e. `C:\Users\somebody\ISLE`) and Click `Enter` to copy to clipboard.
 
-* Edit .env file
+* Edit .env file.
   * Press the Windows key.
   * Type `Notepad`.
   * In the search results, RIGHT-CLICK `Notepad`, select `Run as administrator`, and enter `Yes` to prompt.
   * Select `File -> Open`
-  * In the `File name:` input box, paste the above copied path. Click enter.
-    * Use dropdown on right to change `Text Documents (*.txt)` to `All Files (*.*)` (if needed, see [How to show hidden files](https://support.microsoft.com/en-us/help/4028316/windows-view-hidden-files-and-folders-in-windows-10))
-    * Select the `.env` file and click `Open`
+  * In the `File name:` input box, paste the above copied path. Click `Enter`.
+    * Use dropdown on right to change `Text Documents (*.txt)` to `All Files (*.*)` (if needed, see [How to show hidden files](https://support.microsoft.com/en-us/help/4028316/windows-view-hidden-files-and-folders-in-windows-10)).
+    * Select the `.env` file and click `Open`.
     * Find the following line and uncomment it (by deleting the preceding `#` character):
 
     ```# COMPOSE_CONVERT_WINDOWS_PATHS=1```
@@ -355,6 +355,6 @@ Your host server is now configured and ready to run ISLE.
 
 **Please continue by selecting your type of installation:**
 
-- [Demo ISLE Installation](../install/install.md)
+- [Demo ISLE Installation](../install/install-demo.md)
 - [New ISLE Installation](../install/install-one-environment.md)
 - [Migrate to ISLE Environment](../migrate/install-migration.md)

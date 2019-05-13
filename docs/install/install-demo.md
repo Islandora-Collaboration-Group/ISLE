@@ -2,24 +2,13 @@
 
 _Expectations:  It takes an average of **45 minutes** to read this documentation and complete this installation._
 
-This process creates a local Islandora platform (`isle.localdomain`) on your workstation. This includes an un-themed Drupal website and empty Fedora repository for end users to test ingests, test metadata, update fields in SOLR indexing, develop code and otherwise "kick the tires" on ISLE.
+This Demo ISLE Installation creates an Islandora environment on your workstation that you can view locally in your browser as `https://isle.localdomain`. This process includes an un-themed Drupal website and an empty Fedora repository so you may ingest test objects, add or edit metadata, update fields in SOLR indexing, develop code, and otherwise "kick the tires" on ISLE.
 
-For additional help, please post a message to the [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle). This [Glossary](../appendices/glossary.md) defines terms used in this documentation.
+Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive emails. The [Glossary](../appendices/glossary.md) defines terms used in this documentation.
 
 ### Assumptions / Prerequisites
 
-* This installation is intended for a local workstation.
-
----
-
-### Process Overview
-
-* Edit File `/etc/hosts` to View ISLE Locally on Workstation Browser
-* Launch Process
-* Run Install Script
-* Test the Site
-* Ingest Sample Objects
-* Troubleshooting
+* This Demo ISLE Installation is intended for a local workstation.
 
 ---
 
@@ -27,9 +16,7 @@ For additional help, please post a message to the [Islandora ISLE Google group](
 
 Enable the Demo ISLE Installation to be viewed locally as: `https://isle.localdomain`
 
-* Please use these instructions to [Edit the "/etc/hosts" File](../appendices/edit-the-hosts-file.md).
-
-* After completing the above, please continue below with _Step 2: Launch Process_.
+* Please use these instructions to [Edit the "/etc/hosts" File](../install/install-demo-edit-hosts-file.md).
 
 ---
 
@@ -45,7 +32,7 @@ docker-compose up -d
 * After the above process is completed:
     * View only the running containers: `docker ps`
     * View all containers (both those running and stopped): `docker ps -a`
-    * **If any `isle-` containers are NOT running, then use [Demo ISLE Installation Troubleshooting](../appendices/demo-troubleshooting.md) to solve before continuing below.** <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running --->
+    * All containers prefixed with `isle-` are expected to have a `STATUS` of `UP` (for x time). **If any of these are not `UP`, then use [Demo ISLE Installation: Troubleshooting](../install/install-demo-troubleshooting.md) to solve before continuing below.** <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running, oe (c) older exited ISLE containers that maybe should be removed. --->
 
 ---
 
@@ -68,7 +55,7 @@ docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isl
 | - If the process seems to halt, check the taskbar for background windows.|
 
 * You should see a lot of green [ok] messages.
-* If the script appears to pause and prompt for y/n, DO NOT enter any values; the script will answer for you.
+* If the script appears to pause or prompt for `y/n`, DO NOT enter any values; the script will automatically answer for you.
 * **Proceed only after this message appears:** `Clearing Drupal Caches. 'all' cache was cleared.`
 
 ---
@@ -104,5 +91,9 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
 ---
 
 ### Step 6: Additional Resources
-* [Demo ISLE Installation Resources](../appendices/demo-resources.md) contains Docker container passwords and URLs for administrator tools.
-* [Demo ISLE Installation Troubleshooting](../appendices/demo-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
+* [Demo ISLE Installation: Resources](../install/install-demo-resources.md) contains Docker container passwords and URLs for administrator tools.
+* [Demo ISLE Installation: Troubleshooting](../install/install-demo-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
+
+---
+
+### End of Demo ISLE Installation.

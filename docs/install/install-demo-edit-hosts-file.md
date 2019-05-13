@@ -1,4 +1,4 @@
-<!--- PAGE_TITLE --->
+# Demo ISLE Installation: Edit the "/etc/hosts" File
 
 Edit the `/etc/hosts` file to view ISLE locally on a workstation browser.
 
@@ -29,6 +29,8 @@ Edit the `/etc/hosts` file to view ISLE locally on a workstation browser.
   * Enter `Cntrl` and the letter `o` together to write the changes to the file.
 
   * Enter `Cntrl` and the letter `x` together to exit the file.
+
+**Please return to [Demo ISLE Installation](../install/install-demo.md#step-2-launch-process) and continue with _Step 2: Launch Process_.**
 
 ---
 
@@ -61,6 +63,8 @@ Edit the `/etc/hosts` file to view ISLE locally on a workstation browser.
 * Enter `Cntrl` and the letter `o` together to write the changes to the file.
 * Enter `Cntrl` and the letter `x` together to exit the file.
 
+**Please return to [Demo ISLE Installation](../install/install-demo.md#step-2-launch-process) and continue with _Step 2: Launch Process_.**
+
 ---
 
 ## Windows Using Docker
@@ -87,6 +91,8 @@ Edit the `/etc/hosts` file to view ISLE locally on a workstation browser.
 
     * Click `File > Save`, and then `File -> Exit`.
 
+**Please return to [Demo ISLE Installation](../install/install-demo.md#step-2-launch-process) and continue with _Step 2: Launch Process_.**
+
 ---
 
 ## Windows Using Virtualbox VM (non-Vagrant)
@@ -110,3 +116,5 @@ Edit the `/etc/hosts` file to view ISLE locally on a workstation browser.
         * `10.10.10.130 isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain`  
 
     * Click `File > Save`, and then `File -> Exit`.
+
+**Please return to [Demo ISLE Installation](../install/install-demo.md#step-2-launch-process) and continue with _Step 2: Launch Process_.**

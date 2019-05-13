@@ -1,9 +1,11 @@
-# Demo ISLE Installation Troubleshooting
+# Demo ISLE Installation: Troubleshooting
 
 **Please select a topic:**
 
 - [Port Conflicts](#port-conflicts)
 - [Non-Running Docker Containers](#non-running-docker-containers)
+
+---
 
 ## Port Conflicts
 If you encounter an error like this:
@@ -26,6 +28,11 @@ You may need to remove or disable these local web servers before you can success
     * `sudo nginx -s stop`
 
 Once your web server(s) have been disabled, resume the ISLE install process by repeating your last installation command, presumably `docker-compose up -d`.
+
+
+**Return to [Demo ISLE Installation](../install/install-demo.md).**
+
+---
 
 ## Non-Running Docker Containers
 If you don't see all containers running, then stop the running containers with `docker-compose down` and start the containers one at a time following the instructions below:
@@ -66,3 +73,6 @@ If you don't see all containers running, then stop the running containers with `
     `docker pull islandoracollabgroup/isle-apache:1.1`
 
     `docker-compose up -d apache`
+
+
+**Return to [Demo ISLE Installation](../install/install-demo.md).**
