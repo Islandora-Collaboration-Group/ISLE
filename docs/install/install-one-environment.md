@@ -188,10 +188,14 @@ There are also additional links for the end user to learn how to combine the SSL
 ---
 
 ## Additional Resources
-* [Migrate to ISLE Environment](../migrate/install-migration.md) will help you migrate your existing production Islandora 7.x environment to an ISLE environment.
-* [Demo ISLE Installation: Resources](../install/install-demo-resources.md) contains Docker container passwords and URLs for administrator tools.
-* [Demo ISLE Installation: Troubleshooting](../install/install-demo-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
+* TBD: [Demo ISLE Installation: Resources](../install/install-demo-resources.md) contains Docker container passwords and URLs for administrator tools.
+* TBD: [Demo ISLE Installation: Troubleshooting](../install/install-demo-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
 
 ---
 
 ## End of New ISLE Installation.
+
+---
+
+## Migrate to ISLE Environment 
+* Please click [Migrate to ISLE Environment](../migrate/install-migration.md) if you are installing ISLE to migrate your existing production Islandora 7.x environment to an ISLE environment. This documentation will help you identify and copy your institution's preexisting Islandora data, files, and themes (including your data volume, Drupal site(s) and theme(s), and commonly customized xml and xslt files) to your ISLE environment.
