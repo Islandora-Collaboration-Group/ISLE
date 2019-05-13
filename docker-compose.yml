@@ -23,7 +23,6 @@ services:
     logging:
       driver: syslog
       options:
-        syslog-address: "udp://localhost:514"
         tag: "{{.Name}}"
 
 
@@ -44,7 +43,6 @@ services:
     logging:
       driver: syslog
       options:
-        syslog-address: "udp://localhost:514"
         tag: "{{.Name}}"
 
   fedora:
@@ -74,7 +72,6 @@ services:
     logging:
       driver: syslog
       options:
-        syslog-address: "udp://localhost:514"
         tag: "{{.Name}}"
 
   solr:
@@ -99,7 +96,6 @@ services:
     logging:
       driver: syslog
       options:
-        syslog-address: "udp://localhost:514"
         tag: "{{.Name}}"
 
   image-services:
@@ -127,7 +123,6 @@ services:
     logging:
       driver: syslog
       options:
-        syslog-address: "udp://localhost:514"
         tag: "{{.Name}}"
 
   apache:
@@ -153,7 +148,6 @@ services:
     logging:
       driver: syslog
       options:
-        syslog-address: "udp://localhost:514"
         tag: "{{.Name}}"
 
 # Start TICK - Services
@@ -177,7 +171,6 @@ services:
     logging:
       driver: syslog
       options:
-        syslog-address: "udp://localhost:514"
         tag: "{{.Name}}"
 
   telegraf:
@@ -201,11 +194,10 @@ services:
       isle-internal:
     ports:
       # This port should be for rsyslog
-      - "514:514"
+      - "6514:6514"
     logging:
       driver: syslog
       options:
-        syslog-address: "udp://localhost:514"
         tag: "{{.Name}}"
 
   kapacitor:
@@ -225,7 +217,6 @@ services:
     logging:
       driver: syslog
       options:
-        syslog-address: "udp://localhost:514"
         tag: "{{.Name}}"
 
   chronograf:
@@ -249,7 +240,6 @@ services:
     logging:
       driver: syslog
       options:
-        syslog-address: "udp://localhost:514"
         tag: "{{.Name}}"
 
 
@@ -276,7 +266,6 @@ services:
     logging:
       driver: syslog
       options:
-        syslog-address: "udp://localhost:514"
         tag: "{{.Name}}"
 
 # Defined networks
