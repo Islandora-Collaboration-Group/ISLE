@@ -1,4 +1,4 @@
-# Release Notes - ISLE v.1.1.1, 2019-03-28
+# Release Notes - ISLE v.1.1.1, 2019-05-01
 
 ## Updates and testing performed by ISLE Committer Gavin Morris, Born-Digital
 
