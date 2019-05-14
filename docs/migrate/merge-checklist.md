@@ -47,21 +47,21 @@ Compare, edit, merge or copy the following from the source directory `current-pr
 Please note that endusers will take values from the `site.conf` file and flow the information as needed into the to be renamed `newsite-sample-ssl.conf` & `newsite-sample.conf` files accordingly with the domain name of your choice. This file will not be copied to yourdomain-config/apache/ for any usage.
 
 * Within the `sites-enabled` directory, rename the files `newsite-sample-ssl.conf` and `newsite-sample.conf` to your domain names - example:
-    * `digital-collections.example.edu_ssl.conf`
+    * `yourproject.yourdomain.edu_ssl.conf`
 
-    * `digital-collections.example.edu.conf`
+    * `yourproject.yourdomain.edu.conf`
 
 * Edit the previously named `newsite-sample.conf` file and change lines 3 and 4 to point to the location of your apache logs on the container - example:
 
-    * `ErrorLog /var/log/apache2/digital-collections.example.edu.ssl.error.log`
+    * `ErrorLog /var/log/apache2/yourproject.yourdomain.edu.ssl.error.log`
 
-    * `CustomLog /var/log/apache2/digital-collections.example.edu.ssl.access.log combined`
+    * `CustomLog /var/log/apache2/yourproject.yourdomain.edu.ssl.access.log combined`
 
 * Edit the previously named `newsite-sample-ssl.conf` file and change lines 4 and 5 to point to the location of your apache logs on the container - example:
 
-    * `ErrorLog /var/log/apache2/digital-collections.example.edu.ssl.error.log`
+    * `ErrorLog /var/log/apache2/yourproject.yourdomain.edu.ssl.error.log`
 
-    * `CustomLog /var/log/apache2/digital-collections.example.edu.ssl.access.log combined`
+    * `CustomLog /var/log/apache2/yourproject.yourdomain.edu.ssl.access.log combined`
 
 * Edit the previously named `newsite-sample-ssl.conf` file and change lines 12, 13 and 14 to point to the location of your certs on the `apache` container - example:
 

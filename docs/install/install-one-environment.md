@@ -27,7 +27,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 ### Master Section
     * COMPOSE_PROJECT_NAME to something unique (e.g. `COMPOSE_PROJECT_NAME=isle-production-collections`)
       * This variable is appended to Docker objects like: volume names, network names.
-    * BASE_DOMAIN to your domainname (e.g. `BASE_DOMAIN=digital-collections.example.edu`)
+    * BASE_DOMAIN to your domainname (e.g. `BASE_DOMAIN=yourproject.yourdomain.edu`)
       * This variable specifies your domain name!
     * CONTAINER_SHORT_ID to something unique (e.g. `CONTAINER_SHORT_ID=prod`).
       * This variable is appended to the end of all running containers, keep it _short_!
@@ -176,7 +176,7 @@ There are also additional links for the end user to learn how to combine the SSL
 
 * Give this process 15 - 25 minutes (_depending on the speed of the ISLE Host server internet connection_)
 
-* Check the newly created and running new site by opening a browser and navigating to your site domain e.g. `https://digital-collections.example.edu`, you should now see an un-themed Drupal site.
+* Check the newly created and running new site by opening a browser and navigating to your site domain e.g. `https://yourproject.yourdomain.edu`, you should now see an un-themed Drupal site.
 
 ---
 

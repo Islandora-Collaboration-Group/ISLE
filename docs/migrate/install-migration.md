@@ -94,7 +94,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 * Create a directory named `yourdomain-config` (where "yourdomain" is your server domain name)
 
-     * Example:  `digital-collections.yourdomain.com-config`
+     * Example:  `yourproject.yourdomain.edu-config`
 
 * Copy all the contents of the ISLE directory to the newly created directory
 
@@ -119,11 +119,11 @@ This area will be where all current Islandora production data is to be stored. T
 
 * Create a directory named `yourdomain-data` (where "yourdomain" is your server domain name)
 
-    * Example:  `digital-collections.yourdomain.com-data`
+    * Example:  `yourproject.yourdomain.edu-data`
 
 * Ensure that the islandora user has ownership and permissions to access this data.
 
-    * `chown -Rv islandora:islandora ~/digital-collections.yourdomain.com-data`
+    * `chown -Rv islandora:islandora ~/yourproject.yourdomain.edu-data`
 
     * Please note this path may change depending on how your ISLE host server storage area is setup.
 
@@ -140,7 +140,7 @@ This area will be where all current Islandora production data is to be stored. T
 * These copied files will be the source for edits and merges - just to be very clear, please **don't work directly on these files in your currently running production Islandora system!**
 
 * To be even more clear, after following the checklist, you should now have two nearly identical `/config` subdirectories
-    * **A.** copied from the cloned ISLE repository and renamed with your domain e.g. `yourdomain-config or digital-collections.yourdomain.com-config`
+    * **A.** copied from the cloned ISLE repository and renamed with your domain e.g. `yourdomain-config or yourproject.yourdomain.edu-config`
     * **B.** copied from your currently running Islandora environment. e.g. `current_prod_islandora_config`
 
 ### Migration Merge Checklist

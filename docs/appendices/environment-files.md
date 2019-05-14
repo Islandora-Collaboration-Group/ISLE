@@ -8,7 +8,7 @@ Here are the variables and their job:
 ### Master Section
     * COMPOSE_PROJECT_NAME to something unique (e.g. `COMPOSE_PROJECT_NAME=isle-production-collections`)
       * This variable is appended to Docker objects like: volume names, network names.
-    * BASE_DOMAIN to your domainname (e.g. `BASE_DOMAIN=digital-collections.example.edu`)
+    * BASE_DOMAIN to your domainname (e.g. `BASE_DOMAIN=yourproject.yourdomain.edu`)
       * This variable specifies your domain name!
     * CONTAINER_SHORT_ID to something unique (e.g. `CONTAINER_SHORT_ID=prod`).
       * This variable is appended to the end of all running containers, keep it _short_!
