@@ -6,7 +6,7 @@
 
 **Data**, in this context, can include digital objects, files, logs, code, or information stored in mysql, solr, or fedora.  Essentially, anything typically written to or read from disk in some format, is data. 
 
-By default, each time a docker container is brought up using a command like `docker-compose up -d` the container is recreated using the base container image. When a process in the container creates or changes a file (for example, an apache log file) those changes only exist while the container is running.  If the container is brought down and back up again, it is recreated using the base image, which will not include the apache log. In order to preserve certain data--for example, the Fedora datastore, Drupal’s database and files, etc, ISLE uses volumes and/or bind mounts defined in `docker-compose.yml`.  
+By default, each time a docker container is brought up using a command like `docker-compose up -d` the container is recreated using the base container image. When a process in the container creates or changes a file (for example, an apache log file) those changes only exist while the container is running.  If the container is brought down and back up again, it is recreated using the base image, which will not include the apache log. In order to preserve certain data--for example, the Fedora datastore, Drupal’s database and files, etc, ISLE uses volumes and/or bind mounts defined in 'docker-compose.yml'.  
 
 Data written to volumes and bind mounts are different to other data in Docker in two important ways: 
 
@@ -23,27 +23,24 @@ Volumes can be named in the docker-compose.yml file and are managed by docker.  
 
 Below is an example docker-compose.yml directive for an apache container using a volume:
 
-  ```
-  volumes:
-  apache-data:/var/www/html
-  ```
+    volumes:
+    apache-data:/var/www/html
 
-  Explanation: If not already created, docker will create a directory on the host at /var/lib/docker and use that for the apache container’s /var/www/html directory.
+
+  Explanation: If not already created, docker will create a directory on the host at '/var/lib/docker' and use that for the apache container’s '/var/www/html' directory.
 
 ### Bind Mounts
 
 Bind mounts map a directory in the container to a directory anywhere on the host and are not managed directly by docker.  
 
-Below is an example docker-compose.yml directive for an apache container using a bind mount:
+Below is an example 'docker-compose.yml' directive for an apache container using a bind mount:
 
-  ```
-  volumes:
-  /opt/ISLE/apache/html:/var/www/html
-  ```
+    volumes:
+    /opt/ISLE/apache/html:/var/www/html
 
   Explanation:  Data in the host’s /opt/ISLE/apache/html directory will be in the apache container’s /var/www/html.  If the directory does not exist on the host, it will NOT be created on `docker-compose up -d`, so be sure to create any necessary directories on the host manually.  
 
-  If the container’s `/var/www/html/` directory has content, it will be masked by the contents of the host’s `/opt/ISLE/apache/html/` directory.
+  If the container’s '/var/www/html/' directory has content, it will be masked by the contents of the host’s '/opt/ISLE/apache/html/' directory.
 
 ## What should be persisted this way?
 
