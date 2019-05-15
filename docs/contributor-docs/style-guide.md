@@ -37,7 +37,7 @@ Sections within a section that is specific to a certain type of circumstance sho
 
 ## Terms We Use
 - Demo ISLE Installation
-- New ISLE Installation
+- Remote Server ISLE Installation
 - Migrate to ISLE Environment
 - Update ISLE
 - end users (not endusers)

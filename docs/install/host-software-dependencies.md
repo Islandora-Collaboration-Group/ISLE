@@ -97,7 +97,7 @@ Your host server is now configured and ready to run ISLE.
 **Please continue by selecting your type of installation:**
 
 - [Demo ISLE Installation](../install/install-demo.md)
-- [New ISLE Installation](../install/install-one-environment.md)
+- [Remote Server ISLE Installation](../install/install-server.md)
 - [Migrate to ISLE Environment](../migrate/install-migration.md)
 
 ---
@@ -182,7 +182,7 @@ Your host server is now configured and ready to run ISLE.
 **Please continue by selecting your type of installation:**
 
 - [Demo ISLE Installation](../install/install-demo.md)
-- [New ISLE Installation](../install/install-one-environment.md)
+- [Remote Server ISLE Installation](../install/install-server.md)
 - [Migrate to ISLE Environment](../migrate/install-migration.md)
 
 ---
@@ -261,7 +261,7 @@ Your host server is now configured and ready to run ISLE.
 **Please continue by selecting your type of installation:**
 
 - [Demo ISLE Installation](../install/install-demo.md)
-- [New ISLE Installation](../install/install-one-environment.md)
+- [Remote Server ISLE Installation](../install/install-server.md)
 - [Migrate to ISLE Environment](../migrate/install-migration.md)
 
 ---
@@ -356,5 +356,5 @@ Your host server is now configured and ready to run ISLE.
 **Please continue by selecting your type of installation:**
 
 - [Demo ISLE Installation](../install/install-demo.md)
-- [New ISLE Installation](../install/install-one-environment.md)
+- [Remote Server ISLE Installation](../install/install-server.md)
 - [Migrate to ISLE Environment](../migrate/install-migration.md)
