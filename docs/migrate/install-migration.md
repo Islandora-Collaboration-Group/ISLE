@@ -1,25 +1,46 @@
 # Migrate to ISLE Environment
 
-_Expectations:  It may take at least **8 hours or more** to read this documentation and complete this installation, and depending on access to resources, may take several days. Please proceed slowly._
-
-## THIS SECTION OF DOCUMENTATION IS A WORK IN PROGRESS.
+_Expectations:  It may take at least **8 hours or more** to read this documentation and complete this installation. Please proceed slowly._
 
 This will help you migrate your existing production Islandora 7.x environment to an ISLE environment for easily maintaining Islandora. This documentation will help you identify and copy your institution's preexisting Islandora data, files, and themes (including your data volume, Drupal site(s) and theme(s), and commonly customized xml and xslt files) to your ISLE environment.
 
 Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive emails. The [Glossary](../appendices/glossary.md) defines terms used in this documentation.
 
+---
+
 ## Assumptions / Prerequisites
 
-* You have already completed the [Hardware Requirements](../install/host-hardware-requirements.md) and the [Software Dependencies](../install/host-software-dependencies.md) for your host server(s), and the [New ISLE Installation](../install/install-one-environment.md). 
+* You have already completed the [Hardware Requirements](../install/host-hardware-requirements.md), [Software Dependencies](../install/host-software-dependencies.md) for your host server, and [Remote Server ISLE Installation](../install/install-server.md). 
 
 * SSL Certificates: Use the [Let's Encrypt guide](../appendices/configuring-lets-encrypt.md) to generate SSL Certificates or ask your IT resource to provision [SSL Certificates](../appendices/glossary.md#systems) for the web domain.
 
 * **Never ever share or post your .env files publicly.** The .env and tomcat.env files ("Docker Environment files") are your primary resources for customizing your ISLE stack. These .env files contain passwords and usernames and must be treated with the utmost care.
 
-* You have disk space on - or mounted to - the host server large enough to store a **copy** of your fedora data store
+* You have disk space on - or mounted to - the host server large enough to store a **full copy** of your fedora data store.
 
-* You also have adequate storage space available for the ISLE host server to accommodate a working copy of a production Islandora's associated configurations and data.
+* You have sufficient storage available for the ISLE host server to accommodate a working copy of a production Islandora's associated configurations and data.
 
+---
+
+## THIS SECTION IS IN DEVELOPMENT. PLEASE COME BACK SOON.
+
+<!-- OLD STUFF
+**ON your local laptop / workstation:**
+* Create a directory named `yourdomain-config` (where "yourdomain" is your server domain name)
+     * Example:  `project-name.yourdomain.edu-config`
+* Copy all the contents of the ISLE directory to the newly created directory
+* `cd` into the newly copied and renamed `yourdomain-config` directory and type:
+    * `git init`
+    * _Initiates this directory as a code repository._
+* Type: `git remote add NameOfYourRepository URLofYourRepository`
+    * Connects your local repository to the remote you set up in the above steps.
+    * **NOTE:** replace "NameOfYourRepository" and "URLofYourRepository" with the name of your repository and its URL
+* You are now ready to perform the customization edits in this directory (you can use a text editor of choice now don't have to stay in terminal - just locate the folder in the finder and open file in text editor)
+-->
+
+---
+
+## Migrate Only: Finding Usernames and Passwords
 * You have usernames and passwords for key parts of your current Islandora production environment which will be used **for** the migration. The next steps will walk you through finding this information.
 
     0. Login to your current Islandora production server. If your current production environment is located across multiple servers, you may need to check more than one server to find this information.
@@ -72,44 +93,6 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 **Finally also please note:** Instructions from this guide and it's associated checklists call for you to **COPY** data from your current production Islandora environment to your ISLE Host Server or local computer. You work from these copies to build your ISLE environment. In some cases, you'll need to copy configurations down to your local computer (`Local ISLE config laptop`) and merge contents as directed. In other cases, due to the size of the data e.g. Fedora data you will copy directly to the ISLE Host server (`Remote ISLE Host server`). You will note where you have stored copies of files/data in a docker-compose.yml file. You will store your configured files in a git repository and use that to deploy to the ISLE host server.
 
-## Detailed Steps
-
-* Setup a Private Code Repository
-      * Most of the work in this guide involves careful editing of the various configuration and settings files that customize the pieces of Islandora (database, repository, web-server, etc...).
-      * Doing this work in a code repository makes it easier to correct errors and to repeat the process for additional servers without needing to replicate all the work.
-      * Since the edits will include things like passwords, it's important to make this a private repository.
-
-* Customizing for your Environment
-      * Many of the steps below describe adding the domain name or other specific bits of information into files or appending those bits to file names.
-      * In these cases this guide will call out the customization point AND provide an example - it's important not to literally copy paste the example!
-      * Your best guide for these customizations are the source files from your currently running Islandora environment.
-
-### Create Private Code Repository
-
-**ON your local laptop / workstation:**
-
-* On the repository of your choice (GitHub, GitLab, Bitbucket, etc.) create a PRIVATE remote git repository - see the specific code repository documentation online for setup instructions.
-
-* Open a terminal - navigate to `/opt/ISLE` or where you cloned the ISLE directory on your local workstation.
-
-* Create a directory named `yourdomain-config` (where "yourdomain" is your server domain name)
-
-     * Example:  `digital-collections.yourdomain.com-config`
-
-* Copy all the contents of the ISLE directory to the newly created directory
-
-* `cd` into the newly copied and renamed `yourdomain-config` directory and type:
-
-    * `git init`
-    * _Initiates this directory as a code repository._
-
-* Type: `git remote add NameOfYourRepository URLofYourRepository`
-
-    * Connects your local repository to the remote you set up in the above steps.
-    * **NOTE:** replace "NameOfYourRepository" and "URLofYourRepository" with the name of your repository and its URL
-
-* You are now ready to perform the customization edits in this directory (you can use a text editor of choice now don't have to stay in terminal - just locate the folder in the finder and open file in text editor)
-
 
 ### Create Data Storage Directory
 
@@ -119,11 +102,11 @@ This area will be where all current Islandora production data is to be stored. T
 
 * Create a directory named `yourdomain-data` (where "yourdomain" is your server domain name)
 
-    * Example:  `digital-collections.yourdomain.com-data`
+    * Example:  `project-name.yourdomain.edu-data`
 
 * Ensure that the islandora user has ownership and permissions to access this data.
 
-    * `chown -Rv islandora:islandora ~/digital-collections.yourdomain.com-data`
+    * `chown -Rv islandora:islandora ~/project-name.yourdomain.edu-data`
 
     * Please note this path may change depending on how your ISLE host server storage area is setup.
 
@@ -140,7 +123,7 @@ This area will be where all current Islandora production data is to be stored. T
 * These copied files will be the source for edits and merges - just to be very clear, please **don't work directly on these files in your currently running production Islandora system!**
 
 * To be even more clear, after following the checklist, you should now have two nearly identical `/config` subdirectories
-    * **A.** copied from the cloned ISLE repository and renamed with your domain e.g. `yourdomain-config or digital-collections.yourdomain.com-config`
+    * **A.** copied from the cloned ISLE repository and renamed with your domain e.g. `yourdomain-config or project-name.yourdomain.edu-config`
     * **B.** copied from your currently running Islandora environment. e.g. `current_prod_islandora_config`
 
 ### Migration Merge Checklist
@@ -156,47 +139,6 @@ The **goal** is to merge all site-specific data (domain names, variables, userna
    * Compare and merge the Solr files: `stopwords`
    * Compare and merge the Fedora GSearch Islandora Transform (XSLTs) folder of files: `islandora_transforms`
 
-
-### Docker .env File:
-=======
-
-* Edit the .env file and change the values of COMPOSE_PROJECT_NAME, BASE_DOMAIN, and CONTAINER_SHORT_ID. e.g. for a production site you may use:
-
-    `COMPOSE_PROJECT_NAME=isleproduction`
-
-    `BASE_DOMAIN=mydomain.edu`
-
-    `CONTAINER_SHORT_ID=prod`
-
-**Please note:** Much of the file is already with comments guiding the end user to key areas or files to edit or modify accordingly.
-
----
-
-## Edit File `docker-compose.yml`
-
-**For Production and Staging Servers Only:** Open the `docker-compose.yml` file and modify the environment variables called JAVA_MAX_MEM and JAVA_MIN_MEM for fedora, solr, and image-services.
-
-```yaml
-fedora:
-  ...
-  environment:
-    - JAVA_MAX_MEM=2048M
-    - JAVA_MIN_MEM=256M
-...
-
-solr:
-  ...
-  environment:
-    - JAVA_MAX_MEM=2048M
-    - JAVA_MIN_MEM=256M
-...
-
-image-services:
-  ...
-  environment:
-    - JAVA_MAX_MEM=2048M
-    - JAVA_MIN_MEM=128M
-```
 
 ---
 

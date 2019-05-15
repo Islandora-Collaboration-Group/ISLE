@@ -8,7 +8,7 @@ This documentation provides friendly and clear instructions on how to do the fol
 
 * [Demo ISLE Installation](install/host-hardware-requirements.md): Quickly create a new Islandora platform on your personal computer for testing or local development.
 
-* [New ISLE Installation](install/host-hardware-requirements.md): Create a new Islandora platform that can be used as a production, staging, or development environment. This process assumes you are starting fresh and do not have an existing Islandora installation you wish to migrate.
+* [Remote Server ISLE Installation](install/host-hardware-requirements.md): Create a new Islandora platform that can be used as a production, staging, or development environment. This process assumes you are starting fresh and do not have an existing Islandora installation you wish to migrate.
 
 * [Update ISLE](update/update.md): Update your version of ISLE to the latest release and receive improvements and security updates.
 

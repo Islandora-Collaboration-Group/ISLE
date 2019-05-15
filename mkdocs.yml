@@ -23,7 +23,7 @@ nav:
   - '1. Hardware Requirements': 'install/host-hardware-requirements.md'
   - '2. Software Dependencies': 'install/host-software-dependencies.md'
   - '3. Demo ISLE Installation': 'install/install-demo.md'
-  - '4. New ISLE Installation': 'install/install-one-environment.md'
+  - '4. Remote Server ISLE Installation': 'install/install-server.md'
 - 'Update ISLE': 'update/update.md'
 - 'Migrate Existing Site to ISLE':
   - 'Migrate to ISLE Environment': 'migrate/install-migration.md'
