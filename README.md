@@ -7,9 +7,11 @@ The ISLE [project maintainers](#maintainers) keep your Islandora stack smoothly 
 
 ISLE is quite flexible and may be run on an institution’s servers or in the cloud, or as a hybrid; similarly, it may be maintained by an institution’s staff, by a vendor, or as a shared project.
 
-N.B. The Quick Start Guide **should not** be used in production. Please review the full documentation (LINK) for production installations.
+## Documentation
+Please use the [ISLE Documentation](https://islandora-collaboration-group.github.io/ISLE-Documentation/) for using ISLE to install Islandora on server environments.
 
 ## Quick Start Guide
+**Important:** This "Quick Start Guide" is for testing ISLE and **should not** be used in production. 
 
 ### Requirements  
 * Docker-CE or EE
@@ -93,6 +95,11 @@ Portainer's authentication can be configured:
 * David Keiser-Clark, Williams College
 * Gavin Morris, Born-Digital
 * Shaun Trujillo, Mount Holyoke College
+
+## Former Contributors	
+- Carolyn Moritz, Vassar College	
+- Benjamin Rosner (Lead Maintainer 2018-19), Barnard College	
+- Steve Young, Hamilton College
 
 ## Contributing to ISLE
 * [Islandora ISLE Interest Group](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group) - Meetings open to everybody! [Schedule](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group/#how-to-join) is alternating Wednesdays, 3:00pm EDT
