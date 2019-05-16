@@ -7,9 +7,11 @@ The ISLE [project maintainers](#maintainers) keep your Islandora stack smoothly 
 
 ISLE is quite flexible and may be run on an institution’s servers or in the cloud, or as a hybrid; similarly, it may be maintained by an institution’s staff, by a vendor, or as a shared project.
 
-**Important:** This Quick Start Guide **should not** be used in production. Please use the [ISLE Documentation](https://islandora-collaboration-group.github.io/ISLE-Documentation/) for production installations.
+## Documentation
+Please use the [ISLE Documentation](https://islandora-collaboration-group.github.io/ISLE-Documentation/) for using ISLE to install Islandora on server environments.
 
 ## Quick Start Guide
+**Important:** This "Quick Start Guide" is for testing ISLE and **should not** be used in production. 
 
 ### Requirements  
 * Docker-CE or EE
