@@ -1,4 +1,4 @@
-<!--- PAGE_TITLE --->
+<!--- TODO: Unsure if this page is obsolete. Ask a Committer. --->
 
 You have the choice of using Ansible to deploy the Docker Host server dependencies instead of performing manual commands on either a CentOS or Ubuntu OS. The Ansible script and configuration files can be found in the root folder of the ISLE git repository in a directory named [ansible](https://github.com/Islandora-Collaboration-Group/ISLE/tree/master/ansible). Additionally, the Ansible script is designed to detect the chosen operating system and then install the appropriate dependencies with minimal user interaction or prior configuration.
 

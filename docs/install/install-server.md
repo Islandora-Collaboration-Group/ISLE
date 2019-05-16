@@ -23,7 +23,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 ---
 
-## Setup GIT Workflow
+## Step 1: Setup GIT Workflow
 
 ### Create Two Private Institutional GIT Repositories
 
@@ -74,27 +74,25 @@ upstream        https://github.com/Islandora-Collaboration-Group/ISLE.git (push)
     * On development, staging, and production environments: pull from your single institutional git repository (e.g. williamscollege/unbound-ISLE)
 
 
-## Docker Environment Files (.env)
+## Step 2: Edit the Docker Environment Files
 
-* Edit the .env file and change the values of COMPOSE_PROJECT_NAME, BASE_DOMAIN, and CONTAINER_SHORT_ID. e.g. for a production site you may use:
+The .env and tomcat.env Docker files are located in the folder with the docker-compose.yml, and are key to configuring the ISLE stack to suit your needs.
 
-    `COMPOSE_PROJECT_NAME=isleproduction`
+Edit `.env` (found in root of ISLE directory). For example, a production server might be described as:
 
-    `BASE_DOMAIN=mydomain.edu`
+  * `COMPOSE_PROJECT_NAME=isle-production`
+      * This variable is appended to Docker objects like volume and network names.
+  * `BASE_DOMAIN=mydomain.edu`
+      * This variable specifies your domain name.
+  * `CONTAINER_SHORT_ID=ld`
+      * Okay to leave this as is. Keep this variable short as it is appended to the end of all running containers.
 
-    `CONTAINER_SHORT_ID=prod`
+Edit `tomcat.env` (found in root of ISLE directory). For example, a production server might be described as:
 
-**Please note:** Much of the file is already with comments guiding the end user to key areas or files to edit or modify accordingly.
-
-
-### Master Section
-    * COMPOSE_PROJECT_NAME to something unique (e.g. `COMPOSE_PROJECT_NAME=isle-production-collections`)
-      * This variable is appended to Docker objects like: volume names, network names.
-    * BASE_DOMAIN to your domainname (e.g. `BASE_DOMAIN=project-name.yourdomain.edu`)
-      * This variable specifies your domain name!
-    * CONTAINER_SHORT_ID to something unique (e.g. `CONTAINER_SHORT_ID=prod`).
-      * This variable is appended to the end of all running containers, keep it _short_!
-
+  * `TOMCAT_ADMIN_USER=admin`
+  * `TOMCAT_ADMIN_PASS=xxxxxxxxxxxxxx` (enter a secure password)
+  * `TOMCAT_MANAGER_USER=manager`
+  * `TOMCAT_MANAGER_PASS=xxxxxxxxxxxxxx` (enter a secure password)
 
 <!-- 
 TODO: 
@@ -116,7 +114,7 @@ Explain how to setup bind mounts OR volumes? (are these docker volumes?)
 
 -->
 
-[Environment Files](../appendices/environment-files.md) - Tables contain important user names that relate to mysql and fedora and drupal databases.
+[ISLE Environment Files](../appendices/environment-files.md) - This page lists all the .env variables and corresponding user names and passwords used throughout the Islandora stack.
 
 ---
 
@@ -188,14 +186,21 @@ There are also additional links for the end user to learn how to combine the SSL
 
 ## Spin up ISLE Containers!
 
-* Run `docker-compose up -d`
+* Download and start all ISLE Docker images (_~6 GB of data may take 5-10 minutes_):
+```
+docker-compose up -d
+```
 
-* Wait for the stack to completely initialize, about 5 minutes (typically much less).
+* Wait for the stack to completely initialize.
 
-* Run `docker exec -it isle-apache-<CONTAINER_SHORT_ID> bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh`
-     * Using the <CONTAINER_SHORT_ID> value from the .env file here (_typically: isle-apache-prod, or -stage, -dev, etc._)
 
-* Give this process 15 - 25 minutes (_depending on the speed of the ISLE Host server internet connection_)
+This process may take 10 - 20 minutes (_depending on system and internet speeds_)
+
+* Run the install site script on the Apache container by copying and pasting this command:
+[TODO: A server install should not be told to run this script: we want the install to be persistent, not ephemeral.]
+```
+docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh
+```
 
 * Check the newly created and running new site by opening a browser and navigating to your site domain e.g. `https://project-name.yourdomain.edu`, you should now see an un-themed Drupal site.
 

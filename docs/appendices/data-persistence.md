@@ -1,5 +1,3 @@
-<!--- PAGE_TITLE --->
-
 # Data Persistence in Docker
 
 **Please note this is a simplified explanation of how Docker stores data in relation to a typical ISLE installation. This document assumes the use of the docker-compose command and docker-compose.yml, though there are other ways to specify how docker uses volumes and bind mounts.  For more complete descriptions of bind mounts and volumes, and their management, please see the official docker documentation.**

@@ -10,7 +10,7 @@ If you need help requesting a server environment, please see the [Sample IT Depa
 * CentOS 7.x
 * MacOS (only for: Demo ISLE Installation)
 * Windows 10 Professional or Enterprise (only for: Demo ISLE Installation)
-* (Read the [Warning about Installing on Red Hat](../appendices/redhat.md))
+* (Read the [Warning about Red Hat Install](../appendices/redhat.md))
 
 **Please select your hardware environment:**
 

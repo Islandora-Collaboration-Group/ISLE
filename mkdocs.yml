@@ -43,7 +43,7 @@ nav:
     - 'New Site Example User Story': 'appendices/user-story-new-site.md'
     - 'Migration Example User Story': 'appendices/user-story-migration-site.md'
   - 'Using Let''s Encrypt with ISLE' : 'appendices/configuring-lets-encrypt.md'
-  - 'Warning about Installing on Red Hat': 'appendices/redhat.md'
+  - 'Warning about Red Hat Install': 'appendices/redhat.md'
 - 'Cookbook Recipes':
   - 'ISLE Cheat Sheet: Docker Commands': 'cookbook-recipes/isle-cheatsheet-docker-commands.md'
 - 'About':
