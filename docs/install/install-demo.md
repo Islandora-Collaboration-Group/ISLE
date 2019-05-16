@@ -6,21 +6,21 @@ This Demo ISLE Installation creates an Islandora environment on your workstation
 
 Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive emails. The [Glossary](../appendices/glossary.md) defines terms used in this documentation.
 
-### Assumptions / Prerequisites
+## Assumptions / Prerequisites
 
 * This Demo ISLE Installation is intended for a local workstation.
 
 ---
 
-### Step 1: Edit File `/etc/hosts` to View ISLE Locally on Workstation Browser
+## Step 1: Edit `/etc/hosts` File
 
-Enable the Demo ISLE Installation to be viewed locally as: `https://isle.localdomain`
+Enable the Demo ISLE Installation to be viewed locally on workstation browser as: `https://isle.localdomain`.
 
 * Please use these instructions to [Edit the "/etc/hosts" File](../install/install-demo-edit-hosts-file.md).
 
 ---
 
-### Step 2: Launch Process
+## Step 2: Launch Process
 
 * Open a `terminal` (Windows: open `PowerShell`)
 * Navigate to your ISLE project directory. (You may already be in this directory if you are coming from the [Software Dependencies](../install/host-software-dependencies.md).)
@@ -32,11 +32,11 @@ docker-compose up -d
 * After the above process is completed:
     * View only the running containers: `docker ps`
     * View all containers (both those running and stopped): `docker ps -a`
-    * All containers prefixed with `isle-` are expected to have a `STATUS` of `UP` (for x time). **If any of these are not `UP`, then use [Demo ISLE Installation: Troubleshooting](../install/install-demo-troubleshooting.md) to solve before continuing below.** <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running, oe (c) older exited ISLE containers that maybe should be removed. --->
+    * All containers prefixed with `isle-` are expected to have a `STATUS` of `Up` (for x time). **If any of these are not `UP`, then use [Demo ISLE Installation: Troubleshooting](../install/install-demo-troubleshooting.md) to solve before continuing below.** <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running, oe (c) older exited ISLE containers that maybe should be removed. --->
 
 ---
 
-### Step 3: Run Install Script
+## Step 3: Run Install Script
 
 This process may take 10 - 20 minutes (_depending on system and internet speeds_)
 
@@ -60,7 +60,7 @@ docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isl
 
 ---
 
-### Step 4: Test the Site
+## Step 4: Test the Site
 
 * In your web browser, enter this URL: `https://isle.localdomain`
 <!--- TODO: Add error message and how to proceed (click 'Advanced...') --->
@@ -71,7 +71,7 @@ docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isl
 
 ---
 
-### Step 5: Ingest Sample Objects
+## Step 5: Ingest Sample Objects
 
 The Islandora Collaboration Group provides a set of [Islandora Sample Objects](https://github.com/Islandora-Collaboration-Group/islandora-sample-objects) with corresponding metadata for testing Islandora's ingest process. These sample objects are organized by solution pack and are zipped for faster bulk ingestion.
 
@@ -90,10 +90,10 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
 
 ---
 
-### Step 6: Additional Resources
+## Step 6: Additional Resources
 * [Demo ISLE Installation: Resources](../install/install-demo-resources.md) contains Docker container passwords and URLs for administrator tools.
 * [Demo ISLE Installation: Troubleshooting](../install/install-demo-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
 
 ---
 
-### End of Demo ISLE Installation.
+## End of Demo ISLE Installation.

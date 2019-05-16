@@ -11,19 +11,17 @@
 
 * Please follow the instructions found here: [http://www.mkdocs.org/#installation](http://www.mkdocs.org/#installation)
 
-**Example: (All OS)**
-
-* `sudo -H pip install mkdocs`
+	* Mac/Unix: `sudo -H pip install mkdocs`
+	* Windows: `pip install mkdocs` (PowerShell: Run as administrator)
 
 ---
 
 ## Step 2. Install the `mkdocs-material` Theme
 
-The ISLE Documentation Theme can be found here: [https://github.com/squidfunk/mkdocs-material](https://github.com/squidfunk/mkdocs-material)
+* The ISLE Documentation Theme can be found here: [https://github.com/squidfunk/mkdocs-material](https://github.com/squidfunk/mkdocs-material)
 
-**Example: (All OS)**
-
-* `sudo -H pip install mkdocs-material`
+	* Mac/Unix: `sudo -H pip install mkdocs-material`
+	* Windows OS: `install mkdocs-material` (PowerShell: Run as administrator)
 
 ---
 

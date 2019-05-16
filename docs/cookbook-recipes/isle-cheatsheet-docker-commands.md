@@ -69,6 +69,9 @@ Docker commands that are useful to installing or updating ISLE.
   * `docker ps | grep 8381` # Query what is using a specific port number
   * `lsof -i :8381` # Query what is using a specific port number
 
+### [Docker Version](https://docs.docker.com/engine/reference/commandline/version/)
+  * `docker version` # This will render all version information in an easy to read layout
+
 
 ## Docker: WARNING: BE CAREFUL WITH THESE COMMANDS
 
