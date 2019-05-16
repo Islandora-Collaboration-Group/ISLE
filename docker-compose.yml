@@ -201,7 +201,7 @@ services:
         tag: "{{.Name}}"
 
   kapacitor:
-    image: "kapacitor"
+    image: kapacitor:latest
     container_name: isle-kapacitor-${CONTAINER_SHORT_ID}
     volumes:
       # Mount for kapacitor data directory
