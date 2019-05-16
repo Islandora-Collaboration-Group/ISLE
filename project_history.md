@@ -35,11 +35,6 @@ The ISLE Steering Committee (ISC) oversees the ISLE project and the ISLE Project
 - Bethany Seeger, Amherst College (ex officio, non-voting)
 - Shaun Trujillo, Mount Holyoke College (ex officio, non-voting)
 
-## Former Contributors
-- Carolyn Moritz, Vassar College
-- Benjamin Rosner (Lead Maintainer 2018-19), Barnard College
-- Steve Young, Hamilton College
-
 ## ISLE Funding Institutions
 * Amherst College
 * Barnard College
