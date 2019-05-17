@@ -12,8 +12,6 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 * You have already completed the [Hardware Requirements](../install/host-hardware-requirements.md), [Software Dependencies](../install/host-software-dependencies.md) for your host server, and [Remote Server ISLE Installation](../install/install-server.md). 
 
-* SSL Certificates: Use the [Let's Encrypt guide](../appendices/configuring-lets-encrypt.md) to generate SSL Certificates or ask your IT resource to provision [SSL Certificates](../appendices/glossary.md#systems) for the web domain.
-
 * **Never ever share or post your .env files publicly.** The .env and tomcat.env files ("Docker Environment files") are your primary resources for customizing your ISLE stack. These .env files contain passwords and usernames and must be treated with the utmost care.
 
 * You have disk space on - or mounted to - the host server large enough to store a **full copy** of your fedora data store.
@@ -191,7 +189,7 @@ The **goal** is to merge all site-specific data (domain names, variables, userna
 
 * `cd` into the newly cloned directory - this is a good time to check that the ISLE directory contains your `yourdomain-config` directory and that it reflects all the edits and customizations.
 
-## Spin Up ISLE Containers!
+## Spin up ISLE Containers
 
 ### Review or Pull Down ISLE Docker Images
 

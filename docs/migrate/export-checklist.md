@@ -4,7 +4,7 @@ This section is a checklist of materials to **COPY** from the current running Is
 
 **Please Note:** _Ubuntu / Debian style paths are used for all examples file locations below, end users might have different locations for these files HOWEVER the file and directory names etc should be roughly the same._
 
-**Caution**: While the ISLE Project recommends use of export methods or tools such as rsync, scp etc., it assumes that end users are familiar with them and are aware of possible dangers of improperly exporting or copying production data. Ensure adequate backups of any production system(s) are made prior to any attempts. If you are not familiar or are uncomfortable with these processes, it is highly advisable to work with an appropriate IT resource.
+**Caution**: While the ISLE Project recommends use of export methods or tools such as rsync, scp etc., it assumes that end users are familiar with them and are aware of possible dangers of improperly exporting or copying production data. Ensure adequate backups of any production system(s) are made prior to any attempts. If you are not familiar or are uncomfortable with these processes, it is highly advisable to work with an appropriate IT department.
 
 **Finally also please note:** Instructions from this checklist and the [Migrate to ISLE Environment](../migrate/install-migration.md) may call for you to **COPY** data from your running Islandora environment to a newly created folder: `yourdomain-data` on your ISLE Host Server or `current_prod_islandora_config` on your local machine. You will then work from these copies for future steps.
 
@@ -112,7 +112,7 @@ This data will be used in conjunction with a MySQL container.
 
 #### MySQL Notes
 
-* _Drupal website databases can have a multitude of names and conventions. Confer with the appropriate IT resources for your institution's database naming conventions._
+* _Drupal website databases can have a multitude of names and conventions. Confer with the appropriate IT departments for your institution's database naming conventions._
 
 * _CLI == Command line_
 
@@ -128,7 +128,7 @@ This data will be used in conjunction with a MySQL container.
 #### MySQL Tools for Export
 Here are a few pieces of documentation specific for the tasks above.
 
-**Caution**: While the ISLE Project recommends use of export methods or tools such as mysqldump etc., it assumes that end users are familiar with them and are aware of possible dangers of improperly exporting or copying production data. Ensure adequate backups of any production system(s) are made prior to any attempts. If you are not familiar or are uncomfortable with these processes, it is highly advisable to work with an appropriate IT resource.
+**Caution**: While the ISLE Project recommends use of export methods or tools such as mysqldump etc., it assumes that end users are familiar with them and are aware of possible dangers of improperly exporting or copying production data. Ensure adequate backups of any production system(s) are made prior to any attempts. If you are not familiar or are uncomfortable with these processes, it is highly advisable to work with an appropriate IT department.
 
 * [Official MySQL documentation](https://dev.mysql.com/doc/)
     * [mysqldump console utility documentation](https://dev.mysql.com/doc/refman/5.7/en/mysqldump.html)

@@ -13,7 +13,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 * You have already completed the [Hardware Requirements](../install/host-hardware-requirements.md) and the [Software Dependencies](../install/host-software-dependencies.md) for your host server. 
 
-* SSL Certificates: Use the [Let's Encrypt guide](../appendices/configuring-lets-encrypt.md) to generate SSL Certificates or ask your IT resource to provision [SSL Certificates](../appendices/glossary.md#systems) for the web domain.
+* SSL Certificates: You will either ask your IT department to provision [SSL Certificates](../appendices/glossary.md#systems) or you will use the [Let's Encrypt: Free SSL Certificates](../appendices/configuring-lets-encrypt.md) to generate SSL certificates for the ISLE environment.
 
 * **Never ever share or post your .env files publicly.** The .env and tomcat.env files ("Docker Environment files") are your primary resources for customizing your ISLE stack. These .env files contain passwords and usernames and must be treated with the utmost care.
 
@@ -29,8 +29,10 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 Note: Since public forks can’t be made private, we will duplicate (instead of forking) the repository to enable them to be private.
 
-1. Create a PRIVATE remote git repository on your institution's GitHub account (or Bitbucket) and name it: `[project-name]-ISLE` (example: `digital-ISLE`). Leave this repository empty.
-2. Create another PRIVATE remote git repository on your institution's GitHub account (or Bitbucket) and name it: `[project-name]-islandora` (example: `digital-islandora`). Leave this repository empty.
+1. Create a new PRIVATE repository on your institution's GitHub (or Bitbucket) account.
+2. Name it: `[project-name]-ISLE` (example: `digital-ISLE`). Leave this repository empty.
+3. Create another new PRIVATE repository on your institution's GitHub (or Bitbucket) account.
+4. Name it: `[project-name]-islandora` (example: `digital-islandora`). Leave this repository empty.
 
 ### Set your Remotes: Upstream and Origin
 
@@ -39,8 +41,8 @@ Note: Since public forks can’t be made private, we will duplicate (instead of 
 * You want to have four lines returned, two that describe your private repository (called `origin`) and two that describe the source ISLE github site (called `upstream`):
 
 ```
-origin  https://github.com/dwk2/ISLE-Documentation.git (fetch)
-origin  https://github.com/dwk2/ISLE-Documentation.git (push)
+origin  https://github.com/your-github-name/ISLE-Documentation.git (fetch)
+origin  https://github.com/your-github-name/ISLE-Documentation.git (push)
 upstream        https://github.com/Islandora-Collaboration-Group/ISLE.git (fetch)
 upstream        https://github.com/Islandora-Collaboration-Group/ISLE.git (push)
 ```
@@ -118,13 +120,7 @@ Explain how to setup bind mounts OR volumes? (are these docker volumes?)
 
 ---
 
-## Config Directory
-
-The config directory has many purposes like holding customized configuration files mounted to specific containers (which we have no covered here), but for a single simple site we only use it to hold our proxy configs and as a place to store our SSL Certificate and Key.
-
----
-
-## Edit File `docker-compose.yml`
+## Step 5: Edit File `docker-compose.yml`
 
 **For Production and Staging Servers Only:** Open the `docker-compose.yml` file and modify the environment variables called JAVA_MAX_MEM and JAVA_MIN_MEM for fedora, solr, and image-services.
 
@@ -152,39 +148,39 @@ image-services:
 
 ---
 
-## Proxy Directory
+## Step 7: Config Directory
 
-If need be, please refer to the **Systems** section of the [Glossary](../appendices/glossary.md) for relevant terms to help guide installation.
+The `./ISLE/config/` directory, along with the `proxy` and `ssl-certs` subdirectories, store the customized configuration files necessary (i.e. proxy settings, SSL Certificate and Key) for the Traefik proxy to interact properly with your web domain (URL). The Docker environment file (.env) bind mounts these subdirectories to communicate with precise locations within the Docker containers. 
 
-The `proxy` subdirectory contains all specific configurations necessary for the Traefik proxy to function properly with your changes.
 
-If need be, please refer to the **SSL certificate** section of the [Glossary](../appendices/glossary.md) for relevant terms to help guide installation.
+### SSL Certificates
 
-There are also additional links for the end user to learn how to combine the SSL Certificate File with any available SSL Certificate Chain File for the `proxy` process to work properly.
+A Remote Server ISLE Installation requires that you provision and place a complete [SSL Certificate Chain](https://support.dnsimple.com/articles/what-is-ssl-certificate-chain/) into the `./ISLE/config/proxy/ssl-certs` directory. These SSL certificates are used by the `apache` & `proxy` Docker containers.
 
-**If you followed the [Let's Encrypt](../appendices/configuring-lets-encrypt.md) configuration guide, you can skip to the next section: Spin up ISLE containers**
+**Generate SSL certificates by using ONE of the following two methods:**
 
-* Copy your SSL certificates for the ISLE Proxy into `config/proxy/ssl-certs`. They will and should have different names than the examples provided below.
+#### Method 1:
+1. Ask your IT department to provision a complete [SSL Certificate Chain](https://support.dnsimple.com/articles/what-is-ssl-certificate-chain/).
+2. Copy these SSL certificates into the `./ISLE/config/proxy/ssl-certs` directory.
+    * You are required to have exactly two files: (names will differ from examples)
+        * (1) SSL Certificate Key File (file extension may be: ".key" or ".pem")
+            * Example: `sample-key.key` or `sample-key.pem`
+        * (1) SSL Certificate File (file extension may be: ".cer", ".crt" or ".pem")
+            * Example: `sample.cer` or `sample.crt` or `sample.pem`
+3. Edit the `./ISLE/config/proxy/traefik.toml` file.
+    * Change lines 27 and 28:
+      *  `certFile = "/certs/sample.cert"`  ## Change to reflect your ".cer", ".crt" or ".pem"
+      *  `keyFile = "/certs/sample-key.key"`  ## Change to reflect your ".key" or ".pem"
+4. Proceed to the section below: [Step 9: Spin up ISLE Containers](../install/install-server.md#step-9-spin-up-isle-containers).
 
-    * There can only be 2 files involved in this process.
-
-        * 1 x SSL Certificate Key File e.g. `newsite-sample-key.pem`
-            * This file is required.
-            * Please also note that the file extensions can also be: `.key` or `.pem`
-
-        * 1 x SSL Certificate File e.g. `newsite-sample.pem`
-            * This file is required.
-            * Please also note that the file extensions can also be: `.cer`, `.crt` or `.pem`
-
-* Edit the `config/proxy/traefik.toml` file:
-  * Change line 27 and 28:
-    *  `certFile = "/certs/newsite-sample.cert"`  ## Change to reflect your CERT, CRT, or PEM
-    *  `keyFile = "/certs/newsite-sample-key.key"`  ## Change to reflect your KEY, or PEM.
-
+####Method 2:
+1. Use [Let's Encrypt](https://letsencrypt.org/), a free, automated, and open Certificate Authority for generating SSL certificates for your ISLE environment. In order to get a certificate for your website’s domain from Let’s Encrypt, you have to demonstrate control over the domain. With Let’s Encrypt, you do this using software that uses the ACME protocol, which typically runs on your web host.
+2. Complete the [Let's Encrypt: Free SSL Certificates](../appendices/configuring-lets-encrypt.md) ISLE guide.
+3. Proceed to the section below: [Step 9: Spin up ISLE Containers](../install/install-server.md#step-9-spin-up-isle-containers).
 
 ---
 
-## Spin up ISLE Containers!
+## Step 9: Spin up ISLE Containers
 
 * Download and start all ISLE Docker images (_~6 GB of data may take 5-10 minutes_):
 ```
@@ -210,6 +206,7 @@ docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isl
 (Good points for somewhere else:)
 
 - ISLE removes the need to manually edit the more complex config files that are part of the Islandora stack. 
+- The `./ISLE/config/proxy/ssl-certs` directory for a Demo ISLE Installation is what holds our proxy configs and is where we store our SSL Certificate and Key.
 
 ---
 
