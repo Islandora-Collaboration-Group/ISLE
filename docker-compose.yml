@@ -18,7 +18,9 @@ services:
     labels:
       - traefik.port=9000
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
-      - traefik.enable=true  ## NOT SAFE FOR PRODUCTION! ##
+      ## Making portainer accessible via traefik is not safe in a production enviroment unless
+      ## you have the ISLE system behind a firewall and, overall, only ports 80 and 443 exposed.
+      - traefik.enable=true
       - "traefik.frontend.rule=Host:portainer.${BASE_DOMAIN};"
 
   mysql:
@@ -145,7 +147,9 @@ services:
       - ./config/proxy/traefik.toml:/etc/traefik/traefik.toml  ## Edit line 27, 28 with your cert and key names.
     labels:
       - traefik.port=8080
-      - traefik.enable=true  ## NOT SAFE FOR PRODUCTION! ##
+      ## Enabling Traefik is not safe in a production enviroment unless you have the ISLE system
+      ## behind a firewall and only ports 80 and 443 exposed.
+      - traefik.enable=true
       - traefik.frontend.rule=Host:admin.${BASE_DOMAIN};
 
 # Defined networks
