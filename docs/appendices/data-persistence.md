@@ -1,10 +1,10 @@
 # Data Persistence in Docker
 
-**Please note this is a simplified explanation of how Docker stores data in relation to a typical ISLE installation. This document assumes the use of the docker-compose command and docker-compose.yml, though there are other ways to specify how docker uses volumes and bind mounts.  For more complete descriptions of bind mounts and volumes, and their management, please see the official docker documentation.**
+**Please note this is a simplified explanation of how Docker stores data in relation to a typical ISLE installation.** This document assumes the use of the docker-compose command and docker-compose.yml, though there are other ways to specify how docker uses volumes and bind mounts.  For more complete descriptions of bind mounts and volumes, and their management, please see the official docker documentation.
 
 **Data**, in this context, can include digital objects, files, logs, code, or information stored in mysql, solr, or fedora.  Essentially, anything typically written to or read from disk in some format, is data. 
 
-By default, each time a docker container is brought up using a command like `docker-compose up -d` the container is recreated using the base container image. When a process in the container creates or changes a file (for example, an apache log file) those changes only exist while the container is running.  If the container is brought down and back up again, it is recreated using the base image, which will not include the apache log. In order to preserve certain data--for example, the Fedora datastore, Drupal’s database and files, etc, ISLE uses volumes and/or bind mounts defined in 'docker-compose.yml'.  
+Each time a docker container is brought up using a command like `docker-compose up -d` the container is recreated using the base container image. When a process in the container creates or changes a file (for example, an apache log file) those changes only exist while the container is running.  If the container is brought down and back up again, it is recreated using the base image, which will not include the apache log. In order to preserve certain data--for example, the Fedora datastore, Drupal’s database and files, etc, ISLE uses volumes and/or bind mounts defined in 'docker-compose.yml'.  
 
 Data written to volumes and bind mounts are different to other data in Docker in two important ways: 
 

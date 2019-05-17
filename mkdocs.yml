@@ -31,6 +31,7 @@ nav:
   - 'Migration Merge Checklist': 'migrate/merge-checklist.md'
   - 'Migration Reindex Process': 'migrate/reindex-process.md'
 - 'Appendices':
+  - 'Data Persistence in Docker': 'appendices/data-persistence.md'
   - 'Glossary': 'appendices/glossary.md'
   - 'Installing a Drupal Module with Composer': 'appendices/installing-module-with-composer.md'
   - 'Installing a Drupal Module with Drush': 'appendices/installing-module-with-drush.md'
@@ -42,7 +43,7 @@ nav:
     - 'Demo ISLE Installation Example User Story': 'appendices/user-story-demo-site.md'
     - 'New Site Example User Story': 'appendices/user-story-new-site.md'
     - 'Migration Example User Story': 'appendices/user-story-migration-site.md'
-  - 'Using Let''s Encrypt with ISLE' : 'appendices/configuring-lets-encrypt.md'
+  - 'Let''s Encrypt: Free SSL Certificates' : 'appendices/configuring-lets-encrypt.md'
   - 'Warning about Red Hat Install': 'appendices/redhat.md'
 - 'Cookbook Recipes':
   - 'ISLE Cheat Sheet: Docker Commands': 'cookbook-recipes/isle-cheatsheet-docker-commands.md'

@@ -44,32 +44,32 @@ Compare, edit, merge or copy the following from the source directory `current-pr
 
 ### Apache - Sites-Enabled
 
-Please note that endusers will take values from the `site.conf` file and flow the information as needed into the to be renamed `newsite-sample-ssl.conf` & `newsite-sample.conf` files accordingly with the domain name of your choice. This file will not be copied to yourdomain-config/apache/ for any usage.
+Please note that endusers will take values from the `site.conf` file and flow the information as needed into the to be renamed `sample-ssl.conf` & `sample.conf` files accordingly with the domain name of your choice. This file will not be copied to yourdomain-config/apache/ for any usage.
 
-* Within the `sites-enabled` directory, rename the files `newsite-sample-ssl.conf` and `newsite-sample.conf` to your domain names - example:
+* Within the `sites-enabled` directory, rename the files `sample-ssl.conf` and `sample.conf` to your domain names - example:
     * `project-name.yourdomain.edu_ssl.conf`
 
     * `project-name.yourdomain.edu.conf`
 
-* Edit the previously named `newsite-sample.conf` file and change lines 3 and 4 to point to the location of your apache logs on the container - example:
+* Edit the previously named `sample.conf` file and change lines 3 and 4 to point to the location of your apache logs on the container - example:
 
     * `ErrorLog /var/log/apache2/project-name.yourdomain.edu.ssl.error.log`
 
     * `CustomLog /var/log/apache2/project-name.yourdomain.edu.ssl.access.log combined`
 
-* Edit the previously named `newsite-sample-ssl.conf` file and change lines 4 and 5 to point to the location of your apache logs on the container - example:
+* Edit the previously named `sample-ssl.conf` file and change lines 4 and 5 to point to the location of your apache logs on the container - example:
 
     * `ErrorLog /var/log/apache2/project-name.yourdomain.edu.ssl.error.log`
 
     * `CustomLog /var/log/apache2/project-name.yourdomain.edu.ssl.access.log combined`
 
-* Edit the previously named `newsite-sample-ssl.conf` file and change lines 12, 13 and 14 to point to the location of your certs on the `apache` container - example:
+* Edit the previously named `sample-ssl.conf` file and change lines 12, 13 and 14 to point to the location of your certs on the `apache` container - example:
 
     ```
 
-        SSLCertificateFile	/certs/newsite-sample.pem
-        SSLCertificateChainFile /certs/newsite-sample-interm.pem
-        SSLCertificateKeyFile /certs/newsite-sample-key.pem
+        SSLCertificateFile	/certs/sample.pem
+        SSLCertificateChainFile /certs/sample-interm.pem
+        SSLCertificateKeyFile /certs/sample-key.pem
 
     ```
 
@@ -102,15 +102,15 @@ If need be, please refer to the **SSL certificate** section of the [Glossary](..
 
     * There can be up to 2 - 3 files involved in this process.
 
-        * 1 x SSL Certificate Key File e.g. `newsite-sample-key.pem`
+        * 1 x SSL Certificate Key File e.g. `sample-key.pem`
             * This file is required.
             * Please also note that the file extensions can also be: `.key` or `.pem`
 
-        * 1 x SSL Certificate File e.g. `newsite-sample.pem`
+        * 1 x SSL Certificate File e.g. `sample.pem`
             * This file is required.
             * Please also note that the file extensions can also be: `.cer`, `.crt` or `.pem`
 
-        * 1 x SSL Certificate Chain File e.g. `newsite-sample-interm.pem`
+        * 1 x SSL Certificate Chain File e.g. `sample-interm.pem`
             * This file may be **optional** in some setups but is generally recommended for use by the `apache` container when available.
             * It will not be used by the `proxy` container.
             * Please also note that the file extensions can also be: `.cer`, `.crt` or `.pem`

@@ -29,7 +29,7 @@ Each subdirectory is grouped by the image / container software type and each con
 │   ├── Dockerfile
 |   └── ...
 ├── config
-│   └── isle-newsite-sample
+│   └── isle-sample
 ├── docker-compose-build.yml
 ├── docker-compose.yml
 ├── fedora
