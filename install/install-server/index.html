@@ -1,0 +1,1442 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Documentation for Islandora Enterprise (ISLE)">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0, mkdocs-material-3.0.3">
+    
+    
+      
+        <title>4. Remote Server ISLE Installation - Islandora Enterprise (ISLE)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+      <link rel="stylesheet" href="../../extra.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="../../#remote-server-isle-installation" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="Islandora Enterprise (ISLE)" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Islandora Enterprise (ISLE)
+              </span>
+              <span class="md-header-nav__topic">
+                4. Remote Server ISLE Installation
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="Islandora Enterprise (ISLE)" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Islandora Enterprise (ISLE)
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Get Started" class="md-nav__link">
+      Get Started
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Install ISLE
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Install ISLE
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../host-hardware-requirements/" title="1. Hardware Requirements" class="md-nav__link">
+      1. Hardware Requirements
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../host-software-dependencies/" title="2. Software Dependencies" class="md-nav__link">
+      2. Software Dependencies
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install-demo/" title="3. Demo ISLE Installation" class="md-nav__link">
+      3. Demo ISLE Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        4. Remote Server ISLE Installation
+      </label>
+    
+    <a href="./" title="4. Remote Server ISLE Installation" class="md-nav__link md-nav__link--active">
+      4. Remote Server ISLE Installation
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#assumptions-prerequisites" title="Assumptions / Prerequisites" class="md-nav__link">
+    Assumptions / Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#this-section-is-in-development-please-come-back-soon" title="THIS SECTION IS IN DEVELOPMENT. PLEASE COME BACK SOON." class="md-nav__link">
+    THIS SECTION IS IN DEVELOPMENT. PLEASE COME BACK SOON.
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-setup-git-workflow" title="Step 1: Setup GIT Workflow" class="md-nav__link">
+    Step 1: Setup GIT Workflow
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-two-private-institutional-git-repositories" title="Create Two Private Institutional GIT Repositories" class="md-nav__link">
+    Create Two Private Institutional GIT Repositories
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-your-remotes-upstream-and-origin" title="Set your Remotes: Upstream and Origin" class="md-nav__link">
+    Set your Remotes: Upstream and Origin
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-edit-the-docker-environment-files" title="Step 2: Edit the Docker Environment Files" class="md-nav__link">
+    Step 2: Edit the Docker Environment Files
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5-edit-file-docker-composeyml" title="Step 5: Edit File docker-compose.yml" class="md-nav__link">
+    Step 5: Edit File docker-compose.yml
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-7-config-directory" title="Step 7: Config Directory" class="md-nav__link">
+    Step 7: Config Directory
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ssl-certificates" title="SSL Certificates" class="md-nav__link">
+    SSL Certificates
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#method-1" title="Method 1:" class="md-nav__link">
+    Method 1:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#method-2" title="Method 2:" class="md-nav__link">
+    Method 2:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-9-spin-up-isle-containers" title="Step 9: Spin up ISLE Containers" class="md-nav__link">
+    Step 9: Spin up ISLE Containers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-resources" title="Additional Resources" class="md-nav__link">
+    Additional Resources
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#end-of-remote-server-isle-installation" title="End of Remote Server ISLE Installation." class="md-nav__link">
+    End of Remote Server ISLE Installation.
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migrate-to-isle-environment" title="Migrate to ISLE Environment" class="md-nav__link">
+    Migrate to ISLE Environment
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../update/update/" title="Update ISLE" class="md-nav__link">
+      Update ISLE
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Migrate Existing Site to ISLE
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Migrate Existing Site to ISLE
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrate/install-migration/" title="Migrate to ISLE Environment" class="md-nav__link">
+      Migrate to ISLE Environment
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrate/export-checklist/" title="Migration Export Checklist" class="md-nav__link">
+      Migration Export Checklist
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrate/merge-checklist/" title="Migration Merge Checklist" class="md-nav__link">
+      Migration Merge Checklist
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrate/reindex-process/" title="Migration Reindex Process" class="md-nav__link">
+      Migration Reindex Process
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Appendices
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Appendices
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/data-persistence/" title="Data Persistence in Docker" class="md-nav__link">
+      Data Persistence in Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/glossary/" title="Glossary" class="md-nav__link">
+      Glossary
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/installing-module-with-composer/" title="Installing a Drupal Module with Composer" class="md-nav__link">
+      Installing a Drupal Module with Composer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/installing-module-with-drush/" title="Installing a Drupal Module with Drush" class="md-nav__link">
+      Installing a Drupal Module with Drush
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://docs.google.com/document/d/1r-I9n8mUhlJ5Z-X9AO-RrikhzH6I8bTPIL25LmtRbxE" title="Installing on Google Cloud Platform (Google Doc)" class="md-nav__link">
+      Installing on Google Cloud Platform (Google Doc)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/open-terminal-in-running-container/" title="Opening a Terminal in a Running Container" class="md-nav__link">
+      Opening a Terminal in a Running Container
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/sample-it-department-request/" title="Sample IT Department Request Letter" class="md-nav__link">
+      Sample IT Department Request Letter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/install-troubleshooting/" title="Troubleshooting" class="md-nav__link">
+      Troubleshooting
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-9" type="checkbox" id="nav-5-9">
+    
+    <label class="md-nav__link" for="nav-5-9">
+      User Stories
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-9">
+        User Stories
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/user-story-demo-site/" title="Demo ISLE Installation Example User Story" class="md-nav__link">
+      Demo ISLE Installation Example User Story
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/user-story-new-site/" title="New Site Example User Story" class="md-nav__link">
+      New Site Example User Story
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/user-story-migration-site/" title="Migration Example User Story" class="md-nav__link">
+      Migration Example User Story
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/configuring-lets-encrypt/" title="Let's Encrypt: Free SSL Certificates" class="md-nav__link">
+      Let's Encrypt: Free SSL Certificates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/redhat/" title="Warning about Red Hat Install" class="md-nav__link">
+      Warning about Red Hat Install
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Cookbook Recipes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Cookbook Recipes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cookbook-recipes/isle-cheatsheet-docker-commands/" title="ISLE Cheat Sheet: Docker Commands" class="md-nav__link">
+      ISLE Cheat Sheet: Docker Commands
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      About
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        About
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/contributing/" title="Contributing to ISLE" class="md-nav__link">
+      Contributing to ISLE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/about-isle/" title="About ISLE" class="md-nav__link">
+      About ISLE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/committers/" title="About Committers" class="md-nav__link">
+      About Committers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4" type="checkbox" id="nav-7-4">
+    
+    <label class="md-nav__link" for="nav-7-4">
+      Contributor Docs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-4">
+        Contributor Docs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributor-docs/mkdocs/" title="Docs: MkDocs" class="md-nav__link">
+      Docs: MkDocs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributor-docs/spell-checker/" title="Docs: Spell Checker" class="md-nav__link">
+      Docs: Spell Checker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributor-docs/style-guide/" title="Docs: Style Guide" class="md-nav__link">
+      Docs: Style Guide
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributor-docs/release-process/" title="Release Process" class="md-nav__link">
+      Release Process
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributor-docs/testing-guide/" title="Testing Guide" class="md-nav__link">
+      Testing Guide
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/get-help/" title="Get Help" class="md-nav__link">
+      Get Help
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Release Notes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Release Notes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release/" title="Latest release: 1.1.1" class="md-nav__link">
+      Latest release: 1.1.1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-2" type="checkbox" id="nav-8-2">
+    
+    <label class="md-nav__link" for="nav-8-2">
+      Previous releases
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-2">
+        Previous releases
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-1/" title="1.1" class="md-nav__link">
+      1.1
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#assumptions-prerequisites" title="Assumptions / Prerequisites" class="md-nav__link">
+    Assumptions / Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#this-section-is-in-development-please-come-back-soon" title="THIS SECTION IS IN DEVELOPMENT. PLEASE COME BACK SOON." class="md-nav__link">
+    THIS SECTION IS IN DEVELOPMENT. PLEASE COME BACK SOON.
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-setup-git-workflow" title="Step 1: Setup GIT Workflow" class="md-nav__link">
+    Step 1: Setup GIT Workflow
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-two-private-institutional-git-repositories" title="Create Two Private Institutional GIT Repositories" class="md-nav__link">
+    Create Two Private Institutional GIT Repositories
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-your-remotes-upstream-and-origin" title="Set your Remotes: Upstream and Origin" class="md-nav__link">
+    Set your Remotes: Upstream and Origin
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-edit-the-docker-environment-files" title="Step 2: Edit the Docker Environment Files" class="md-nav__link">
+    Step 2: Edit the Docker Environment Files
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5-edit-file-docker-composeyml" title="Step 5: Edit File docker-compose.yml" class="md-nav__link">
+    Step 5: Edit File docker-compose.yml
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-7-config-directory" title="Step 7: Config Directory" class="md-nav__link">
+    Step 7: Config Directory
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ssl-certificates" title="SSL Certificates" class="md-nav__link">
+    SSL Certificates
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#method-1" title="Method 1:" class="md-nav__link">
+    Method 1:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#method-2" title="Method 2:" class="md-nav__link">
+    Method 2:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-9-spin-up-isle-containers" title="Step 9: Spin up ISLE Containers" class="md-nav__link">
+    Step 9: Spin up ISLE Containers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-resources" title="Additional Resources" class="md-nav__link">
+    Additional Resources
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#end-of-remote-server-isle-installation" title="End of Remote Server ISLE Installation." class="md-nav__link">
+    End of Remote Server ISLE Installation.
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migrate-to-isle-environment" title="Migrate to ISLE Environment" class="md-nav__link">
+    Migrate to ISLE Environment
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="remote-server-isle-installation">Remote Server ISLE Installation</h1>
+<p><em>Expectations:  It may take at least <strong>4 - 6 hours or more</strong> to read this documentation and complete this installation. Please proceed slowly.</em></p>
+<p>This Remote Server ISLE Installation creates an Islandora environment with a unique domain (URL) on your host server, virtual machine, or cloud hosted platform.
+You may also use this documentation to install ISLE on several host servers, virtual machines, or cloud hosted platforms to create multiple Islandora environments (e.g. development, staging, and production). This process will result in an un-themed Drupal website and an empty Fedora repository. (Please refer back to the <a href="../host-hardware-requirements/">Hardware Requirements</a> as the development environment needs fewer resources than the staging and production environments; the latter two should mirror each other in resource usage and setup.)</p>
+<p>Please post questions to the public <a href="https://groups.google.com/forum/#!forum/islandora-isle">Islandora ISLE Google group</a>, or subscribe to receive emails. The <a href="../../appendices/glossary/">Glossary</a> defines terms used in this documentation.</p>
+<hr />
+<h2 id="assumptions-prerequisites">Assumptions / Prerequisites</h2>
+<ul>
+<li>
+<p>You have already completed the <a href="../host-hardware-requirements/">Hardware Requirements</a> and the <a href="../host-software-dependencies/">Software Dependencies</a> for your host server. </p>
+</li>
+<li>
+<p>SSL Certificates: You will either ask your IT department to provision <a href="../../appendices/glossary/#systems">SSL Certificates</a> or you will use the <a href="../../appendices/configuring-lets-encrypt/">Let's Encrypt: Free SSL Certificates</a> to generate SSL certificates for the ISLE environment.</p>
+</li>
+<li>
+<p><strong>Never ever share or post your .env files publicly.</strong> The .env and tomcat.env files ("Docker Environment files") are your primary resources for customizing your ISLE stack. These .env files contain passwords and usernames and must be treated with the utmost care.</p>
+</li>
+</ul>
+<hr />
+<h2 id="this-section-is-in-development-please-come-back-soon">THIS SECTION IS IN DEVELOPMENT. PLEASE COME BACK SOON.</h2>
+<hr />
+<h2 id="step-1-setup-git-workflow">Step 1: Setup GIT Workflow</h2>
+<h3 id="create-two-private-institutional-git-repositories">Create Two Private Institutional GIT Repositories</h3>
+<p>Note: Since public forks can’t be made private, we will duplicate (instead of forking) the repository to enable them to be private.</p>
+<ol>
+<li>Create a new PRIVATE repository on your institution's GitHub (or Bitbucket) account.</li>
+<li>Name it: <code>[project-name]-ISLE</code> (example: <code>digital-ISLE</code>). Leave this repository empty.</li>
+<li>Create another new PRIVATE repository on your institution's GitHub (or Bitbucket) account.</li>
+<li>Name it: <code>[project-name]-islandora</code> (example: <code>digital-islandora</code>). Leave this repository empty.</li>
+</ol>
+<h3 id="set-your-remotes-upstream-and-origin">Set your Remotes: Upstream and Origin</h3>
+<ul>
+<li>Open a terminal and navigate to <code>/opt/ISLE</code> (or where you cloned the ISLE directory).</li>
+<li>Type <code>git remote -v</code></li>
+<li>You want to have four lines returned, two that describe your private repository (called <code>origin</code>) and two that describe the source ISLE github site (called <code>upstream</code>):</li>
+</ul>
+<pre><code>origin  https://github.com/your-github-name/ISLE-Documentation.git (fetch)
+origin  https://github.com/your-github-name/ISLE-Documentation.git (push)
+upstream        https://github.com/Islandora-Collaboration-Group/ISLE.git (fetch)
+upstream        https://github.com/Islandora-Collaboration-Group/ISLE.git (push)
+</code></pre>
+
+<ul>
+<li>
+<p>If the name of the <code>https://github.com/Islandora-Collaboration-Group/ISLE.git</code> is not <code>upstream</code>, then please correct that:</p>
+<ul>
+<li>Remove the non-upstream name: <code>git remote rm non-upstream-name-here</code></li>
+<li>Rename it to be "upstream": <code>git remote add upstream https://github.com/Islandora-Collaboration-Group/ISLE</code></li>
+</ul>
+</li>
+<li>
+<p>Add your private insitutional repository as the remote <code>origin</code>.</p>
+<ul>
+<li>In the line below, substitute <code>your-institution</code> and "project-name", then enter it in your terminal.
+<code>git remote add origin https://github.com/your-institution/project-name-ISLE</code></li>
+</ul>
+</li>
+<li>
+<p>Pull from the remote upstream master and update the remote origin master branch.</p>
+<ul>
+<li>Pull from upstream: <code>git pull upstream master</code></li>
+<li>
+<p>Git will ask you to authenicate with username and password:</p>
+<ul>
+<li>$&gt; Username for 'https://github.com': your-github-name</li>
+<li>$&gt; Password for 'https://your-github-name@github.com': xxxxx</li>
+<li>TODO: Lookup how to have your server remember your pwd and link to that here.</li>
+<li>TODO: Do you have 2-factor auth set up for github?<ul>
+<li>No - okay, enter your github account username and pwd</li>
+<li>Yes - have to setup keys (link to how to do that..)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Push to origin: <code>git push -u origin master</code> (-u is a one-time command that sets up tracking for branches)</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Done: You have now setup your server to consider ICG as upstream and "[project-name]-ISLE" as origin.</p>
+</li>
+<li>
+<p>General outline of Git Workflow:</p>
+<ul>
+<li>Work on local</li>
+<li>Pull from upstream master</li>
+<li>Push to origin master</li>
+<li>On development, staging, and production environments: pull from your single institutional git repository (e.g. williamscollege/unbound-ISLE)</li>
+</ul>
+</li>
+</ul>
+<h2 id="step-2-edit-the-docker-environment-files">Step 2: Edit the Docker Environment Files</h2>
+<p>The .env and tomcat.env Docker files are located in the folder with the docker-compose.yml, and are key to configuring the ISLE stack to suit your needs.</p>
+<p>Edit <code>.env</code> (found in root of ISLE directory). For example, a production server might be described as:</p>
+<ul>
+<li><code>COMPOSE_PROJECT_NAME=isle-production</code><ul>
+<li>This variable is appended to Docker objects like volume and network names.</li>
+</ul>
+</li>
+<li><code>BASE_DOMAIN=mydomain.edu</code><ul>
+<li>This variable specifies your domain name.</li>
+</ul>
+</li>
+<li><code>CONTAINER_SHORT_ID=ld</code><ul>
+<li>Okay to leave this as is. Keep this variable short as it is appended to the end of all running containers.</li>
+</ul>
+</li>
+</ul>
+<p>Edit <code>tomcat.env</code> (found in root of ISLE directory). For example, a production server might be described as:</p>
+<ul>
+<li><code>TOMCAT_ADMIN_USER=admin</code></li>
+<li><code>TOMCAT_ADMIN_PASS=xxxxxxxxxxxxxx</code> (enter a secure password)</li>
+<li><code>TOMCAT_MANAGER_USER=manager</code></li>
+<li><code>TOMCAT_MANAGER_PASS=xxxxxxxxxxxxxx</code> (enter a secure password)</li>
+</ul>
+<!-- 
+TODO:
+
+FLOW of Customization:
+
+If New Installation....
+- Explain that ISLE creates the mysql, fedora, etc. servers from Docker images, and that data for these can be stored with persistence on a bind mount.
+  - Explain how to update usernames and passwords for mysql, fedora, etc.
+
+If Migrate to ISLE Environment...
+- Explain how to find pwds, how to rsync data:
+  - mysql, fedora installations on bind mount
+  - usernames and passwords for mysql, fedora, etc.
+
+Explain Git Workflow and how to setup
+
+Explain how to setup bind mounts OR volumes? (are these docker volumes?)
+
+-->
+
+<p><a href="../../appendices/environment-files/">ISLE Environment Files</a> - This page lists all the .env variables and corresponding user names and passwords used throughout the Islandora stack.</p>
+<hr />
+<h2 id="step-5-edit-file-docker-composeyml">Step 5: Edit File <code>docker-compose.yml</code></h2>
+<p><strong>For Production and Staging Servers Only:</strong> Open the <code>docker-compose.yml</code> file and modify the environment variables called JAVA_MAX_MEM and JAVA_MIN_MEM for fedora, solr, and image-services.</p>
+<pre><code class="yaml">fedora:
+  ...
+  environment:
+    - JAVA_MAX_MEM=2048M
+    - JAVA_MIN_MEM=256M
+...
+
+solr:
+  ...
+  environment:
+    - JAVA_MAX_MEM=2048M
+    - JAVA_MIN_MEM=256M
+...
+
+image-services:
+  ...
+  environment:
+    - JAVA_MAX_MEM=2048M
+    - JAVA_MIN_MEM=128M
+</code></pre>
+
+<hr />
+<h2 id="step-7-config-directory">Step 7: Config Directory</h2>
+<p>The <code>./ISLE/config/</code> directory, along with the <code>proxy</code> and <code>ssl-certs</code> subdirectories, store the customized configuration files necessary (i.e. proxy settings, SSL Certificate and Key) for the Traefik proxy to interact properly with your web domain (URL). The Docker environment file (.env) bind mounts these subdirectories to communicate with precise locations within the Docker containers. </p>
+<h3 id="ssl-certificates">SSL Certificates</h3>
+<p>A Remote Server ISLE Installation requires that you provision and place a complete <a href="https://support.dnsimple.com/articles/what-is-ssl-certificate-chain/">SSL Certificate Chain</a> into the <code>./ISLE/config/proxy/ssl-certs</code> directory. These SSL certificates are used by the <code>apache</code> &amp; <code>proxy</code> Docker containers.</p>
+<p><strong>Generate SSL certificates by using ONE of the following two methods:</strong></p>
+<h4 id="method-1">Method 1:</h4>
+<ol>
+<li>Ask your IT department to provision a complete <a href="https://support.dnsimple.com/articles/what-is-ssl-certificate-chain/">SSL Certificate Chain</a>.</li>
+<li>Copy these SSL certificates into the <code>./ISLE/config/proxy/ssl-certs</code> directory.<ul>
+<li>You are required to have exactly two files: (names will differ from examples)<ul>
+<li>(1) SSL Certificate Key File (file extension may be: ".key" or ".pem")<ul>
+<li>Example: <code>sample-key.key</code> or <code>sample-key.pem</code></li>
+</ul>
+</li>
+<li>(1) SSL Certificate File (file extension may be: ".cer", ".crt" or ".pem")<ul>
+<li>Example: <code>sample.cer</code> or <code>sample.crt</code> or <code>sample.pem</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Edit the <code>./ISLE/config/proxy/traefik.toml</code> file.<ul>
+<li>Change lines 27 and 28:</li>
+<li><code>certFile = "/certs/sample.cert"</code>  ## Change to reflect your ".cer", ".crt" or ".pem"</li>
+<li><code>keyFile = "/certs/sample-key.key"</code>  ## Change to reflect your ".key" or ".pem"</li>
+</ul>
+</li>
+<li>Proceed to the section below: <a href="./#step-9-spin-up-isle-containers">Step 9: Spin up ISLE Containers</a>.</li>
+</ol>
+<h4 id="method-2">Method 2:</h4>
+<ol>
+<li>Use <a href="https://letsencrypt.org/">Let's Encrypt</a>, a free, automated, and open Certificate Authority for generating SSL certificates for your ISLE environment. In order to get a certificate for your website’s domain from Let’s Encrypt, you have to demonstrate control over the domain. With Let’s Encrypt, you do this using software that uses the ACME protocol, which typically runs on your web host.</li>
+<li>Complete the <a href="../../appendices/configuring-lets-encrypt/">Let's Encrypt: Free SSL Certificates</a> ISLE guide.</li>
+<li>Proceed to the section below: <a href="./#step-9-spin-up-isle-containers">Step 9: Spin up ISLE Containers</a>.</li>
+</ol>
+<hr />
+<h2 id="step-9-spin-up-isle-containers">Step 9: Spin up ISLE Containers</h2>
+<ul>
+<li>Download and start all ISLE Docker images (<em>~6 GB of data may take 5-10 minutes</em>):</li>
+</ul>
+<pre><code>docker-compose up -d
+</code></pre>
+
+<ul>
+<li>Wait for the stack to completely initialize.</li>
+</ul>
+<p>This process may take 10 - 20 minutes (<em>depending on system and internet speeds</em>)</p>
+<ul>
+<li>Run the install site script on the Apache container by copying and pasting this command:
+[TODO: A server install should not be told to run this script: we want the install to be persistent, not ephemeral.]</li>
+</ul>
+<pre><code>docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh
+</code></pre>
+
+<ul>
+<li>Check the newly created and running new site by opening a browser and navigating to your site domain e.g. <code>https://project-name.yourdomain.edu</code>, you should now see an un-themed Drupal site.</li>
+</ul>
+<hr />
+<p>(Good points for somewhere else:)</p>
+<ul>
+<li>ISLE removes the need to manually edit the more complex config files that are part of the Islandora stack. </li>
+<li>The <code>./ISLE/config/proxy/ssl-certs</code> directory for a Demo ISLE Installation is what holds our proxy configs and is where we store our SSL Certificate and Key.</li>
+</ul>
+<hr />
+<h2 id="additional-resources">Additional Resources</h2>
+<ul>
+<li>TBD: <a href="../install-demo-resources/">Demo ISLE Installation: Resources</a> contains Docker container passwords and URLs for administrator tools.</li>
+<li>TBD: <a href="../install-demo-troubleshooting/">Demo ISLE Installation: Troubleshooting</a> contains help for port conflicts, non-running Docker containers, etc.</li>
+</ul>
+<hr />
+<h2 id="end-of-remote-server-isle-installation">End of Remote Server ISLE Installation.</h2>
+<hr />
+<h2 id="migrate-to-isle-environment">Migrate to ISLE Environment</h2>
+<ul>
+<li>Please click <a href="../../migrate/install-migration/">Migrate to ISLE Environment</a> if you are installing ISLE to migrate your existing production Islandora 7.x environment to an ISLE environment. This documentation will help you identify and copy your institution's preexisting Islandora data, files, and themes (including your data volume, Drupal site(s) and theme(s), and commonly customized xml and xslt files) to your ISLE environment.</li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../install-demo/" title="3. Demo ISLE Installation" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                3. Demo ISLE Installation
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../update/update/" title="Update ISLE" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Update ISLE
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.583bbe55.js"></script>
+      
+      <script>app.initialize({version:"1.0",url:{base:"../.."}})</script>
+      
+        <script src="../../extra.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

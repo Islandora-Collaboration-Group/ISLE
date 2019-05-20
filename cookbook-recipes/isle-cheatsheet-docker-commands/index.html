@@ -1,0 +1,1522 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Documentation for Islandora Enterprise (ISLE)">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0, mkdocs-material-3.0.3">
+    
+    
+      
+        <title>ISLE Cheat Sheet: Docker Commands - Islandora Enterprise (ISLE)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+      <link rel="stylesheet" href="../../extra.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="../../#isle-cheat-sheet-docker-commands" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="Islandora Enterprise (ISLE)" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Islandora Enterprise (ISLE)
+              </span>
+              <span class="md-header-nav__topic">
+                ISLE Cheat Sheet: Docker Commands
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="Islandora Enterprise (ISLE)" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Islandora Enterprise (ISLE)
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Get Started" class="md-nav__link">
+      Get Started
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Install ISLE
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Install ISLE
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../install/host-hardware-requirements/" title="1. Hardware Requirements" class="md-nav__link">
+      1. Hardware Requirements
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../install/host-software-dependencies/" title="2. Software Dependencies" class="md-nav__link">
+      2. Software Dependencies
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../install/install-demo/" title="3. Demo ISLE Installation" class="md-nav__link">
+      3. Demo ISLE Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../install/install-server/" title="4. Remote Server ISLE Installation" class="md-nav__link">
+      4. Remote Server ISLE Installation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../update/update/" title="Update ISLE" class="md-nav__link">
+      Update ISLE
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Migrate Existing Site to ISLE
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Migrate Existing Site to ISLE
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrate/install-migration/" title="Migrate to ISLE Environment" class="md-nav__link">
+      Migrate to ISLE Environment
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrate/export-checklist/" title="Migration Export Checklist" class="md-nav__link">
+      Migration Export Checklist
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrate/merge-checklist/" title="Migration Merge Checklist" class="md-nav__link">
+      Migration Merge Checklist
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrate/reindex-process/" title="Migration Reindex Process" class="md-nav__link">
+      Migration Reindex Process
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Appendices
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Appendices
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/data-persistence/" title="Data Persistence in Docker" class="md-nav__link">
+      Data Persistence in Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/glossary/" title="Glossary" class="md-nav__link">
+      Glossary
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/installing-module-with-composer/" title="Installing a Drupal Module with Composer" class="md-nav__link">
+      Installing a Drupal Module with Composer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/installing-module-with-drush/" title="Installing a Drupal Module with Drush" class="md-nav__link">
+      Installing a Drupal Module with Drush
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://docs.google.com/document/d/1r-I9n8mUhlJ5Z-X9AO-RrikhzH6I8bTPIL25LmtRbxE" title="Installing on Google Cloud Platform (Google Doc)" class="md-nav__link">
+      Installing on Google Cloud Platform (Google Doc)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/open-terminal-in-running-container/" title="Opening a Terminal in a Running Container" class="md-nav__link">
+      Opening a Terminal in a Running Container
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/sample-it-department-request/" title="Sample IT Department Request Letter" class="md-nav__link">
+      Sample IT Department Request Letter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/install-troubleshooting/" title="Troubleshooting" class="md-nav__link">
+      Troubleshooting
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-9" type="checkbox" id="nav-5-9">
+    
+    <label class="md-nav__link" for="nav-5-9">
+      User Stories
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-9">
+        User Stories
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/user-story-demo-site/" title="Demo ISLE Installation Example User Story" class="md-nav__link">
+      Demo ISLE Installation Example User Story
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/user-story-new-site/" title="New Site Example User Story" class="md-nav__link">
+      New Site Example User Story
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/user-story-migration-site/" title="Migration Example User Story" class="md-nav__link">
+      Migration Example User Story
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/configuring-lets-encrypt/" title="Let's Encrypt: Free SSL Certificates" class="md-nav__link">
+      Let's Encrypt: Free SSL Certificates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/redhat/" title="Warning about Red Hat Install" class="md-nav__link">
+      Warning about Red Hat Install
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
+    
+    <label class="md-nav__link" for="nav-6">
+      Cookbook Recipes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Cookbook Recipes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        ISLE Cheat Sheet: Docker Commands
+      </label>
+    
+    <a href="./" title="ISLE Cheat Sheet: Docker Commands" class="md-nav__link md-nav__link--active">
+      ISLE Cheat Sheet: Docker Commands
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#docker-containers" title="Docker Containers" class="md-nav__link">
+    Docker Containers
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-containers" title="List Containers" class="md-nav__link">
+    List Containers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list-volumes" title="List Volumes" class="md-nav__link">
+    List Volumes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-containers" title="Start Containers" class="md-nav__link">
+    Start Containers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop-containers" title="Stop Containers" class="md-nav__link">
+    Stop Containers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop-and-remove-containers" title="Stop and Remove Containers" class="md-nav__link">
+    Stop and Remove Containers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pull-containers" title="Pull Containers" class="md-nav__link">
+    Pull Containers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#up-containers" title="Up Containers" class="md-nav__link">
+    Up Containers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-volumes" title="Remove Volumes" class="md-nav__link">
+    Remove Volumes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-containers" title="Remove Containers" class="md-nav__link">
+    Remove Containers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shell-into-docker-container" title="Shell Into Docker Container" class="md-nav__link">
+    Shell Into Docker Container
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-service" title="Docker Service" class="md-nav__link">
+    Docker Service
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#watching-docker-logs" title="Watching Docker Logs" class="md-nav__link">
+    Watching Docker Logs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#locate-docker-volume" title="Locate Docker Volume" class="md-nav__link">
+    Locate Docker Volume
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#port-lookups" title="Port Lookups" class="md-nav__link">
+    Port Lookups
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-version" title="Docker Version" class="md-nav__link">
+    Docker Version
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-warning-be-careful-with-these-commands" title="Docker: WARNING: BE CAREFUL WITH THESE COMMANDS" class="md-nav__link">
+    Docker: WARNING: BE CAREFUL WITH THESE COMMANDS
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#delete-all-containers-networks-volumes-and-images" title="Delete All Containers, Networks, Volumes and Images" class="md-nav__link">
+    Delete All Containers, Networks, Volumes and Images
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-unused-data" title="Remove Unused Data" class="md-nav__link">
+    Remove Unused Data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-all-containers" title="Remove All Containers" class="md-nav__link">
+    Remove All Containers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unix-commands" title="UNIX Commands" class="md-nav__link">
+    UNIX Commands
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quickly-view-a-file-using-cat" title="Quickly View a File, Using cat" class="md-nav__link">
+    Quickly View a File, Using cat
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ping-to-test-connectivity" title="Ping to Test Connectivity" class="md-nav__link">
+    Ping to Test Connectivity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dns-lookup-and-querying-tool" title="DNS Lookup and Querying Tool" class="md-nav__link">
+    DNS Lookup and Querying Tool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extreme-caution-remove-directory-recursively-and-with-force" title="EXTREME CAUTION: Remove Directory: Recursively and with Force" class="md-nav__link">
+    EXTREME CAUTION: Remove Directory: Recursively and with Force
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      About
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        About
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/contributing/" title="Contributing to ISLE" class="md-nav__link">
+      Contributing to ISLE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/about-isle/" title="About ISLE" class="md-nav__link">
+      About ISLE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/committers/" title="About Committers" class="md-nav__link">
+      About Committers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4" type="checkbox" id="nav-7-4">
+    
+    <label class="md-nav__link" for="nav-7-4">
+      Contributor Docs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-4">
+        Contributor Docs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributor-docs/mkdocs/" title="Docs: MkDocs" class="md-nav__link">
+      Docs: MkDocs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributor-docs/spell-checker/" title="Docs: Spell Checker" class="md-nav__link">
+      Docs: Spell Checker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributor-docs/style-guide/" title="Docs: Style Guide" class="md-nav__link">
+      Docs: Style Guide
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributor-docs/release-process/" title="Release Process" class="md-nav__link">
+      Release Process
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributor-docs/testing-guide/" title="Testing Guide" class="md-nav__link">
+      Testing Guide
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/get-help/" title="Get Help" class="md-nav__link">
+      Get Help
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Release Notes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Release Notes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release/" title="Latest release: 1.1.1" class="md-nav__link">
+      Latest release: 1.1.1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-2" type="checkbox" id="nav-8-2">
+    
+    <label class="md-nav__link" for="nav-8-2">
+      Previous releases
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-2">
+        Previous releases
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-1/" title="1.1" class="md-nav__link">
+      1.1
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#docker-containers" title="Docker Containers" class="md-nav__link">
+    Docker Containers
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-containers" title="List Containers" class="md-nav__link">
+    List Containers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list-volumes" title="List Volumes" class="md-nav__link">
+    List Volumes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-containers" title="Start Containers" class="md-nav__link">
+    Start Containers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop-containers" title="Stop Containers" class="md-nav__link">
+    Stop Containers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop-and-remove-containers" title="Stop and Remove Containers" class="md-nav__link">
+    Stop and Remove Containers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pull-containers" title="Pull Containers" class="md-nav__link">
+    Pull Containers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#up-containers" title="Up Containers" class="md-nav__link">
+    Up Containers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-volumes" title="Remove Volumes" class="md-nav__link">
+    Remove Volumes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-containers" title="Remove Containers" class="md-nav__link">
+    Remove Containers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shell-into-docker-container" title="Shell Into Docker Container" class="md-nav__link">
+    Shell Into Docker Container
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-service" title="Docker Service" class="md-nav__link">
+    Docker Service
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#watching-docker-logs" title="Watching Docker Logs" class="md-nav__link">
+    Watching Docker Logs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#locate-docker-volume" title="Locate Docker Volume" class="md-nav__link">
+    Locate Docker Volume
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#port-lookups" title="Port Lookups" class="md-nav__link">
+    Port Lookups
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-version" title="Docker Version" class="md-nav__link">
+    Docker Version
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-warning-be-careful-with-these-commands" title="Docker: WARNING: BE CAREFUL WITH THESE COMMANDS" class="md-nav__link">
+    Docker: WARNING: BE CAREFUL WITH THESE COMMANDS
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#delete-all-containers-networks-volumes-and-images" title="Delete All Containers, Networks, Volumes and Images" class="md-nav__link">
+    Delete All Containers, Networks, Volumes and Images
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-unused-data" title="Remove Unused Data" class="md-nav__link">
+    Remove Unused Data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-all-containers" title="Remove All Containers" class="md-nav__link">
+    Remove All Containers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unix-commands" title="UNIX Commands" class="md-nav__link">
+    UNIX Commands
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quickly-view-a-file-using-cat" title="Quickly View a File, Using cat" class="md-nav__link">
+    Quickly View a File, Using cat
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ping-to-test-connectivity" title="Ping to Test Connectivity" class="md-nav__link">
+    Ping to Test Connectivity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dns-lookup-and-querying-tool" title="DNS Lookup and Querying Tool" class="md-nav__link">
+    DNS Lookup and Querying Tool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extreme-caution-remove-directory-recursively-and-with-force" title="EXTREME CAUTION: Remove Directory: Recursively and with Force" class="md-nav__link">
+    EXTREME CAUTION: Remove Directory: Recursively and with Force
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <!--- PAGE_TITLE --->
+
+<h1 id="isle-cheat-sheet-docker-commands">ISLE Cheat Sheet: Docker Commands</h1>
+<p>Docker commands that are useful to installing or updating ISLE.</p>
+<h2 id="docker-containers">Docker Containers</h2>
+<h3 id="list-containers"><a href="https://docs.docker.com/engine/reference/commandline/ps/">List Containers</a></h3>
+<ul>
+<li><code>docker ps</code>     # Show all running containers</li>
+<li><code>docker ps -a</code>  # Show all running and stopped containers</li>
+</ul>
+<h3 id="list-volumes"><a href="https://docs.docker.com/engine/reference/commandline/volume_ls/">List Volumes</a></h3>
+<ul>
+<li><code>docker volume ls</code>  # List all volumes</li>
+</ul>
+<h3 id="start-containers"><a href="https://docs.docker.com/compose/reference/start/">Start Containers</a></h3>
+<ul>
+<li><code>docker-compose start</code> # Starts existing containers for a service</li>
+<li><code>docker start $(docker ps -a -q)</code> # Start all running and stopped containers</li>
+</ul>
+<h3 id="stop-containers"><a href="https://docs.docker.com/compose/reference/stop/">Stop Containers</a></h3>
+<ul>
+<li><code>docker-compose stop</code> # Stops running containers without removing them</li>
+<li><code>docker stop [CONTAINER_NAME(S)]</code> # Stop one or more named containers<ul>
+<li>example: <code>docker stop isle-tomcat isle-solr</code></li>
+</ul>
+</li>
+<li><code>docker stop $(docker ps -a -q)</code> # Stop all running and stopped containers</li>
+</ul>
+<h3 id="stop-and-remove-containers"><a href="https://docs.docker.com/compose/reference/down/">Stop and Remove Containers</a></h3>
+<ul>
+<li><code>docker-compose down</code> # Stops containers and removes containers and networks for services defined in the Compose file</li>
+</ul>
+<h3 id="pull-containers"><a href="https://docs.docker.com/compose/reference/pull/">Pull Containers</a></h3>
+<ul>
+<li><code>docker-compose pull</code> # Pull down all images from Docker Hub</li>
+<li><code>docker pull [GROUP]/[REPO]</code> # Pull one specific image from Docker Hub<ul>
+<li>example: <code>docker pull islandoracollabgroup/isle-fedora:latest</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="up-containers"><a href="https://docs.docker.com/compose/reference/up/">Up Containers</a></h3>
+<ul>
+<li><code>docker-compose up -d</code> # Launch all containers for this service</li>
+</ul>
+<h3 id="remove-volumes"><a href="https://docs.docker.com/engine/reference/commandline/volume_rm/">Remove Volumes</a></h3>
+<ul>
+<li><code>docker volume rm [VOLUME_NAME]</code> # Remove one or more volumes. You cannot remove a volume that is in use by a container.<ul>
+<li>example: <code>docker volume rm isle_fed-data</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="remove-containers"><a href="https://docs.docker.com/engine/reference/commandline/rm/">Remove Containers</a></h3>
+<ul>
+<li><code>docker rm [CONTAINER_NAME(S)]</code> # Remove one or more containers<ul>
+<li>example: <code>docker rm isle_fed-data</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="shell-into-docker-container"><a href="https://docs.docker.com/v17.12/engine/reference/commandline/exec/">Shell Into Docker Container</a></h3>
+<ul>
+<li><code>docker exec -it [CONTAINER_NAME] bash</code> # Shell Into Docker Container<ul>
+<li>example: <code>docker exec -it isle-apache-ld bash</code></li>
+</ul>
+</li>
+<li><code>docker exec -it [CONTAINER_NAME] [FILE_NAME]</code> # Shell Into Docker Container and Open a File<ul>
+<li>example: <code>docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="docker-service"><a href="https://docs.docker.com/engine/reference/commandline/docker/">Docker Service</a></h3>
+<ul>
+<li><code>sudo service docker status</code> # Show Docker Status</li>
+<li><code>sudo /bin/systemctl restart docker.service</code> # Restart Docker Service</li>
+<li><code>sudo service docker restart</code> # Restart Docker Service (alternate)</li>
+</ul>
+<h3 id="watching-docker-logs"><a href="https://docs.docker.com/engine/reference/commandline/logs/">Watching Docker Logs</a></h3>
+<ul>
+<li><code>docker logs -f --tail 10 [CONTAINER_NAME]</code> # Show the last 10 lines (<code>--tail 10</code>) of a container's logs; <code>-f</code> means continuous/live feed<ul>
+<li>example: <code>docker logs -f --tail 10 isle-apache-ld</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="locate-docker-volume"><a href="https://docs.docker.com/engine/reference/commandline/volume_inspect/">Locate Docker Volume</a></h3>
+<ul>
+<li><code>docker volume inspect [VOLUME_NAME]</code> # Locate Docker Volume<ul>
+<li>example: <code>docker volume inspect isle_fed-data</code></li>
+<li>resultant display is a JSON array that contains a location like this:<ul>
+<li><code>"Mountpoint": "/var/lib/docker/volumes/isle_fed-data/_data"</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="port-lookups"><a href="https://docs.docker.com/engine/reference/commandline/port/">Port Lookups</a></h3>
+<ul>
+<li><code>docker port [CONTAINER_NAME]</code> # List port mappings or a specific mapping for the container</li>
+<li><code>docker ps | grep 8381</code> # Query what is using a specific port number</li>
+<li><code>lsof -i :8381</code> # Query what is using a specific port number</li>
+</ul>
+<h3 id="docker-version"><a href="https://docs.docker.com/engine/reference/commandline/version/">Docker Version</a></h3>
+<ul>
+<li><code>docker version</code> # This will render all version information in an easy to read layout</li>
+</ul>
+<h2 id="docker-warning-be-careful-with-these-commands">Docker: WARNING: BE CAREFUL WITH THESE COMMANDS</h2>
+<h3 id="delete-all-containers-networks-volumes-and-images"><a href="https://docs.docker.com/compose/reference/down/">Delete All Containers, Networks, Volumes and Images</a></h3>
+<ul>
+<li><code>docker-compose down -v</code> # <strong>WARNING!</strong> NEVER run this command in production. ONLY consider doing this on your Demo Local machine. This command will delete all Docker containers, networks, volumes, and images created by <code>up</code>. (This command will not delete your git repository or the paths or contents of your bind mounts.)</li>
+</ul>
+<h3 id="remove-unused-data"><a href="https://docs.docker.com/engine/reference/commandline/system_prune/">Remove Unused Data</a></h3>
+<ul>
+<li><code>docker system prune --all</code> # <strong>WARNING!</strong> Remove all unused containers, networks, images and volumes. (Translation: This will remove all stopped containers, all networks not used by a container, all images that lack an associated container, and all build cache.)</li>
+</ul>
+<h3 id="remove-all-containers"><a href="https://docs.docker.com/engine/reference/commandline/rm/">Remove All Containers</a></h3>
+<ul>
+<li><code>docker rm $(docker ps -a -q)</code> # <strong>WARNING!</strong> This will remove ALL containers on the machine!</li>
+</ul>
+<h2 id="unix-commands">UNIX Commands</h2>
+<h3 id="quickly-view-a-file-using-cat">Quickly View a File, Using <code>cat</code></h3>
+<ul>
+<li>usage: <code>cat [FILE_NAME]</code></li>
+<li>example: <code>cat /etc/hosts</code></li>
+</ul>
+<h3 id="ping-to-test-connectivity">Ping to Test Connectivity</h3>
+<ul>
+<li>usage: <code>ping [DOMAIN]</code></li>
+<li>example: <code>ping www.google.com</code></li>
+<li>example: <code>ping isle.localdomain</code></li>
+</ul>
+<h3 id="dns-lookup-and-querying-tool">DNS Lookup and Querying Tool</h3>
+<ul>
+<li>usage: <code>dig [DOMAIN]</code></li>
+<li>example: <code>dig www.google.com</code></li>
+<li>example: <code>dig isle.localdomain</code></li>
+</ul>
+<h3 id="extreme-caution-remove-directory-recursively-and-with-force">EXTREME CAUTION: Remove Directory: Recursively and with Force</h3>
+<ul>
+<li>usage: <code>sudo rm -rf [DIRECTORY_NAME]</code></li>
+<li>example: <code>sudo rm -rf /var/tmp/scrap/</code></li>
+</ul>
+<h1 id="careful-below-there-be-dragons"><em>CAREFUL! BELOW THERE BE DRAGONS</em></h1>
+<h2 id="how-to-remove-all-docker-containers-and-then-pull-down-fresh-images">How to Remove All Docker Containers and Then Pull Down Fresh Images</h2>
+<ol>
+<li>Stop all current containers<ul>
+<li><code>docker-compose stop</code></li>
+</ul>
+</li>
+<li><strong>WARNING!</strong> This will remove: all stopped containers; etc.<ul>
+<li><code>docker system prune --all</code></li>
+</ul>
+</li>
+<li>Delete "data" folder in ISLE-Developer folder so logs are fresh and clean<ul>
+<li><code>sudo rm -rf data</code></li>
+</ul>
+</li>
+<li>Pull down the images from Docker Hub<ul>
+<li><code>docker-compose pull</code></li>
+</ul>
+</li>
+<li>Launch all containers (creates volumes and starts containers)<ul>
+<li><code>docker-compose up -d</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="how-testers-can-maintain-a-nice-clean-environment">How Testers Can Maintain a Nice Clean Environment</h2>
+<h3 id="show-currently-running-and-all-past-containers">Show Currently Running and All Past Containers</h3>
+<ul>
+<li><code>docker ps -a</code></li>
+</ul>
+<h3 id="lets-say-you-discover-you-have-two-older-containers-named-isle-web-isle-db-and-you-want-to-remove-them">Let's Say You Discover You Have Two Older Containers (named <code>isle-web</code>, <code>isle-db</code>) and You Want to Remove Them:</h3>
+<ul>
+<li>Example to stop these 2 containers<ul>
+<li><code>docker stop isle-web isle-db</code></li>
+</ul>
+</li>
+<li>Example to remove these 2 containers<ul>
+<li><code>docker rm isle-web isle-db</code></li>
+</ul>
+</li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../appendices/redhat/" title="Warning about Red Hat Install" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Warning about Red Hat Install
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../about/contributing/" title="Contributing to ISLE" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Contributing to ISLE
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.583bbe55.js"></script>
+      
+      <script>app.initialize({version:"1.0",url:{base:"../.."}})</script>
+      
+        <script src="../../extra.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

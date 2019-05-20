@@ -1,0 +1,2588 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Documentation for Islandora Enterprise (ISLE)">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0, mkdocs-material-3.0.3">
+    
+    
+      
+        <title>ISLE Build Process - Islandora Enterprise (ISLE)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+      <link rel="stylesheet" href="../../extra.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="../../#isle-build-process" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="Islandora Enterprise (ISLE)" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Islandora Enterprise (ISLE)
+              </span>
+              <span class="md-header-nav__topic">
+                ISLE Build Process
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="Islandora Enterprise (ISLE)" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Islandora Enterprise (ISLE)
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Get Started" class="md-nav__link">
+      Get Started
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Install ISLE
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Install ISLE
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../install/host-hardware-requirements/" title="1. Hardware Requirements" class="md-nav__link">
+      1. Hardware Requirements
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../install/host-software-dependencies/" title="2. Software Dependencies" class="md-nav__link">
+      2. Software Dependencies
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../install/install-demo/" title="3. Demo ISLE Installation" class="md-nav__link">
+      3. Demo ISLE Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../install/install-server/" title="4. Remote Server ISLE Installation" class="md-nav__link">
+      4. Remote Server ISLE Installation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../update/update/" title="Update ISLE" class="md-nav__link">
+      Update ISLE
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Migrate Existing Site to ISLE
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Migrate Existing Site to ISLE
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrate/install-migration/" title="Migrate to ISLE Environment" class="md-nav__link">
+      Migrate to ISLE Environment
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrate/export-checklist/" title="Migration Export Checklist" class="md-nav__link">
+      Migration Export Checklist
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrate/merge-checklist/" title="Migration Merge Checklist" class="md-nav__link">
+      Migration Merge Checklist
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../migrate/reindex-process/" title="Migration Reindex Process" class="md-nav__link">
+      Migration Reindex Process
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Appendices
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Appendices
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/data-persistence/" title="Data Persistence in Docker" class="md-nav__link">
+      Data Persistence in Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/glossary/" title="Glossary" class="md-nav__link">
+      Glossary
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/installing-module-with-composer/" title="Installing a Drupal Module with Composer" class="md-nav__link">
+      Installing a Drupal Module with Composer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/installing-module-with-drush/" title="Installing a Drupal Module with Drush" class="md-nav__link">
+      Installing a Drupal Module with Drush
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://docs.google.com/document/d/1r-I9n8mUhlJ5Z-X9AO-RrikhzH6I8bTPIL25LmtRbxE" title="Installing on Google Cloud Platform (Google Doc)" class="md-nav__link">
+      Installing on Google Cloud Platform (Google Doc)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/open-terminal-in-running-container/" title="Opening a Terminal in a Running Container" class="md-nav__link">
+      Opening a Terminal in a Running Container
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/sample-it-department-request/" title="Sample IT Department Request Letter" class="md-nav__link">
+      Sample IT Department Request Letter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/install-troubleshooting/" title="Troubleshooting" class="md-nav__link">
+      Troubleshooting
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-9" type="checkbox" id="nav-5-9">
+    
+    <label class="md-nav__link" for="nav-5-9">
+      User Stories
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-9">
+        User Stories
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/user-story-demo-site/" title="Demo ISLE Installation Example User Story" class="md-nav__link">
+      Demo ISLE Installation Example User Story
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/user-story-new-site/" title="New Site Example User Story" class="md-nav__link">
+      New Site Example User Story
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/user-story-migration-site/" title="Migration Example User Story" class="md-nav__link">
+      Migration Example User Story
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/configuring-lets-encrypt/" title="Let's Encrypt: Free SSL Certificates" class="md-nav__link">
+      Let's Encrypt: Free SSL Certificates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/redhat/" title="Warning about Red Hat Install" class="md-nav__link">
+      Warning about Red Hat Install
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Cookbook Recipes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Cookbook Recipes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cookbook-recipes/isle-cheatsheet-docker-commands/" title="ISLE Cheat Sheet: Docker Commands" class="md-nav__link">
+      ISLE Cheat Sheet: Docker Commands
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      About
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        About
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/contributing/" title="Contributing to ISLE" class="md-nav__link">
+      Contributing to ISLE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/about-isle/" title="About ISLE" class="md-nav__link">
+      About ISLE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/committers/" title="About Committers" class="md-nav__link">
+      About Committers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4" type="checkbox" id="nav-7-4">
+    
+    <label class="md-nav__link" for="nav-7-4">
+      Contributor Docs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-4">
+        Contributor Docs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mkdocs/" title="Docs: MkDocs" class="md-nav__link">
+      Docs: MkDocs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../spell-checker/" title="Docs: Spell Checker" class="md-nav__link">
+      Docs: Spell Checker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../style-guide/" title="Docs: Style Guide" class="md-nav__link">
+      Docs: Style Guide
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../release-process/" title="Release Process" class="md-nav__link">
+      Release Process
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../testing-guide/" title="Testing Guide" class="md-nav__link">
+      Testing Guide
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/get-help/" title="Get Help" class="md-nav__link">
+      Get Help
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Release Notes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Release Notes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release/" title="Latest release: 1.1.1" class="md-nav__link">
+      Latest release: 1.1.1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-2" type="checkbox" id="nav-8-2">
+    
+    <label class="md-nav__link" for="nav-8-2">
+      Previous releases
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-2">
+        Previous releases
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-1/" title="1.1" class="md-nav__link">
+      1.1
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#build-setup" title="Build Setup" class="md-nav__link">
+    Build Setup
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build-steps" title="Build Steps" class="md-nav__link">
+    Build Steps
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#isle" title="ISLE" class="md-nav__link">
+    ISLE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#all-images" title="All Images" class="md-nav__link">
+    All Images
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isle-ubuntu-basebox" title="isle-ubuntu-basebox" class="md-nav__link">
+    isle-ubuntu-basebox
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#isle-ubuntu-basebox-software-dependencies" title="isle-ubuntu-basebox - Software Dependencies" class="md-nav__link">
+    isle-ubuntu-basebox - Software Dependencies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isle-ubuntu-basebox-software-updates-requiring-manual-changes-andor-lookups-for-recent-versions" title="isle-ubuntu-basebox - Software updates requiring manual changes and/or lookups for recent versions." class="md-nav__link">
+    isle-ubuntu-basebox - Software updates requiring manual changes and/or lookups for recent versions.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isle-ubuntu-basebox-build-actions-steps" title="isle-ubuntu-basebox - Build Actions / Steps" class="md-nav__link">
+    isle-ubuntu-basebox - Build Actions / Steps
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-manual-method-of-reviewing-image" title="(Optional) Manual method of reviewing image" class="md-nav__link">
+    (Optional) Manual method of reviewing image
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isle-ubuntu-basebox-post-qc-release-build-image" title="isle-ubuntu-basebox - Post QC - Release build image" class="md-nav__link">
+    isle-ubuntu-basebox - Post QC - Release build image
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-reference-command" title="EXAMPLE / REFERENCE COMMAND" class="md-nav__link">
+    EXAMPLE / REFERENCE COMMAND
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-actual-command-w-forked-commit-hash" title="EXAMPLE / ACTUAL COMMAND W/ FORKED COMMIT HASH" class="md-nav__link">
+    EXAMPLE / ACTUAL COMMAND W/ FORKED COMMIT HASH
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isle-ubuntu-basebox-tagging-outcome" title="isle-ubuntu-basebox - Tagging outcome" class="md-nav__link">
+    isle-ubuntu-basebox - Tagging outcome
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isle-tomcat" title="isle-tomcat" class="md-nav__link">
+    isle-tomcat
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#isle-tomcat-software-dependencies" title="isle-tomcat - Software Dependencies" class="md-nav__link">
+    isle-tomcat - Software Dependencies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes" title="Notes" class="md-nav__link">
+    Notes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isle-tomcat-software-updates-requiring-manual-changes-andor-lookups-for-recent-versions" title="isle-tomcat - Software updates requiring manual changes and/or lookups for recent versions." class="md-nav__link">
+    isle-tomcat - Software updates requiring manual changes and/or lookups for recent versions.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isle-tomcat-build-actions-steps" title="isle-tomcat - Build Actions / Steps" class="md-nav__link">
+    isle-tomcat - Build Actions / Steps
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-manual-method-of-reviewing-image_1" title="(Optional) Manual method of reviewing image" class="md-nav__link">
+    (Optional) Manual method of reviewing image
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isle-tomcat-post-qc-release-build-image" title="isle-tomcat - Post QC - Release Build image" class="md-nav__link">
+    isle-tomcat - Post QC - Release Build image
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-reference-command_1" title="EXAMPLE / REFERENCE COMMAND" class="md-nav__link">
+    EXAMPLE / REFERENCE COMMAND
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-actual-command-w-forked-commit-hash_1" title="EXAMPLE / ACTUAL COMMAND W/ FORKED COMMIT HASH" class="md-nav__link">
+    EXAMPLE / ACTUAL COMMAND W/ FORKED COMMIT HASH
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isle-tomcat-tagging-outcome" title="isle-tomcat - Tagging outcome" class="md-nav__link">
+    isle-tomcat - Tagging outcome
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isle-fedora" title="isle-fedora" class="md-nav__link">
+    isle-fedora
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#isle-fedora-software-dependencies" title="isle-fedora - Software Dependencies" class="md-nav__link">
+    isle-fedora - Software Dependencies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isle-fedora-software-updates-requiring-manual-changes-andor-lookups-for-recent-versions" title="isle-fedora - Software updates requiring manual changes and/or lookups for recent versions" class="md-nav__link">
+    isle-fedora - Software updates requiring manual changes and/or lookups for recent versions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isle-fedora-build-actions-steps" title="isle-fedora - Build Actions / Steps" class="md-nav__link">
+    isle-fedora - Build Actions / Steps
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isle-fedora-post-qc-release-build-image" title="isle-fedora - Post QC - Release Build Image" class="md-nav__link">
+    isle-fedora - Post QC - Release Build Image
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-reference-command_2" title="EXAMPLE / REFERENCE COMMAND" class="md-nav__link">
+    EXAMPLE / REFERENCE COMMAND
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-actual-command-w-forked-commit-hash_2" title="EXAMPLE / ACTUAL COMMAND W/ FORKED COMMIT HASH" class="md-nav__link">
+    EXAMPLE / ACTUAL COMMAND W/ FORKED COMMIT HASH
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-manual-method-of-reviewing-image_2" title="(Optional) Manual method of reviewing image" class="md-nav__link">
+    (Optional) Manual method of reviewing image
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isle-fedora-tagging-outcome" title="isle-fedora -  Tagging Outcome" class="md-nav__link">
+    isle-fedora -  Tagging Outcome
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isle-imageservices" title="isle-imageservices" class="md-nav__link">
+    isle-imageservices
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#isle-imageservices-software-dependencies" title="isle-imageservices - Software Dependencies" class="md-nav__link">
+    isle-imageservices - Software Dependencies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isle-imageservices-software-updates-requiring-manual-changes-andor-lookups" title="isle-imageservices - Software updates requiring manual changes and/or lookups" class="md-nav__link">
+    isle-imageservices - Software updates requiring manual changes and/or lookups
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isle-imageservices-build-steps-actions" title="isle-imageservices - Build Steps / Actions" class="md-nav__link">
+    isle-imageservices - Build Steps / Actions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-manual-method-of-reviewing-image_3" title="(Optional) Manual method of reviewing image" class="md-nav__link">
+    (Optional) Manual method of reviewing image
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isle-imageservices-post-qc-release-build-image" title="isle-imageservices - Post QC - Release Build Image" class="md-nav__link">
+    isle-imageservices - Post QC - Release Build Image
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-reference-command_3" title="EXAMPLE / REFERENCE COMMAND" class="md-nav__link">
+    EXAMPLE / REFERENCE COMMAND
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-actual-command-w-forked-commit-hash_3" title="EXAMPLE / ACTUAL COMMAND W/ FORKED COMMIT HASH" class="md-nav__link">
+    EXAMPLE / ACTUAL COMMAND W/ FORKED COMMIT HASH
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tagging" title="Tagging" class="md-nav__link">
+    Tagging
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isle-solr" title="isle-solr" class="md-nav__link">
+    isle-solr
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actions" title="Actions" class="md-nav__link">
+    Actions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-manual-method-of-reviewing-image_4" title="(Optional) Manual method of reviewing image" class="md-nav__link">
+    (Optional) Manual method of reviewing image
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-build-process" title="Review &amp; Build Process" class="md-nav__link">
+    Review &amp; Build Process
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-reference-command_4" title="EXAMPLE / REFERENCE COMMAND" class="md-nav__link">
+    EXAMPLE / REFERENCE COMMAND
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-actual-command-w-forked-commit-hash_4" title="EXAMPLE / ACTUAL COMMAND W/ FORKED COMMIT HASH" class="md-nav__link">
+    EXAMPLE / ACTUAL COMMAND W/ FORKED COMMIT HASH
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tagging_1" title="Tagging" class="md-nav__link">
+    Tagging
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isle-apache" title="isle-apache" class="md-nav__link">
+    isle-apache
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#software-dependencies" title="Software Dependencies" class="md-nav__link">
+    Software Dependencies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isle-apache-software-updates-requiring-manual-changes-andor-lookups" title="isle-apache - Software updates requiring manual changes and/or lookups" class="md-nav__link">
+    isle-apache - Software updates requiring manual changes and/or lookups
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actions_1" title="Actions" class="md-nav__link">
+    Actions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-manual-method-of-reviewing-image_5" title="(Optional) Manual method of reviewing image" class="md-nav__link">
+    (Optional) Manual method of reviewing image
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-build-process_1" title="Review &amp; Build Process" class="md-nav__link">
+    Review &amp; Build Process
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-build-process_2" title="Review &amp; Build Process" class="md-nav__link">
+    Review &amp; Build Process
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-reference-command_5" title="EXAMPLE / REFERENCE COMMAND" class="md-nav__link">
+    EXAMPLE / REFERENCE COMMAND
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-actual-command-w-forked-commit-hash_5" title="EXAMPLE / ACTUAL COMMAND W/ FORKED COMMIT HASH" class="md-nav__link">
+    EXAMPLE / ACTUAL COMMAND W/ FORKED COMMIT HASH
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tagging_2" title="Tagging" class="md-nav__link">
+    Tagging
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isle-mysql" title="isle-mysql" class="md-nav__link">
+    isle-mysql
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recommendations" title="Recommendations" class="md-nav__link">
+    Recommendations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-manual-method-of-reviewing-image_6" title="(Optional) Manual method of reviewing image" class="md-nav__link">
+    (Optional) Manual method of reviewing image
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-build-process_3" title="Review &amp; Build Process" class="md-nav__link">
+    Review &amp; Build Process
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tagging_3" title="Tagging" class="md-nav__link">
+    Tagging
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#all-images-testing" title="All images - Testing" class="md-nav__link">
+    All images - Testing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#all-images-release" title="All images  - Release" class="md-nav__link">
+    All images  - Release
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="isle-build-process">ISLE Build Process</h1>
+<h2 id="build-setup">Build Setup</h2>
+<ul>
+<li>Clear / prune old docker images from local</li>
+<li><code>docker image ls</code></li>
+<li>
+<p><code>docker image rm -f &lt;Docker IMAGE ID&gt;</code></p>
+</li>
+<li>
+<p>Fork ISLE to personal / company github.com repo </p>
+</li>
+<li>
+<p>https://github.com/Islandora-Collaboration-Group/ISLE</p>
+</li>
+<li>
+<p>Fork ISLE-Documentation to personal / company github.com repo</p>
+</li>
+<li>
+<p>ISLE-Documentation https://github.com/Islandora-Collaboration-Group/ISLE-Documentation</p>
+</li>
+<li>
+<p>Fork all ISLE images to personal / company github.com repos</p>
+</li>
+<li>isle-ubuntu-basebox https://github.com/Islandora-Collaboration-Group/isle-ubuntu-basebox</li>
+<li>isle-tomcat https://github.com/Islandora-Collaboration-Group/isle-tomcat</li>
+<li>isle-fedora https://github.com/Islandora-Collaboration-Group/isle-fedora</li>
+<li>isle-imageservices https://github.com/Islandora-Collaboration-Group/isle-imageservices</li>
+<li>isle-solr https://github.com/Islandora-Collaboration-Group/isle-solr</li>
+<li>isle-apache https://github.com/Islandora-Collaboration-Group/isle-apache</li>
+<li>
+<p>isle-mysql https://github.com/Islandora-Collaboration-Group/isle-mysql</p>
+</li>
+<li>
+<p>Git clone the forked ISLE project git repo to your local development workstation.</p>
+</li>
+<li>
+<p>Git clone the forked ISLE images git repos into a sibling "images" directory</p>
+</li>
+<li>
+<p>Git clone the forked ISLE-Documentation git repo to your local development workstation.</p>
+</li>
+<li>
+<p>Git checkout (make new) release branch in each repo for each image starting with and descending in this order:</p>
+</li>
+<li>isle-ubuntu-basebox</li>
+<li>isle-tomcat</li>
+<li>isle-fedora</li>
+<li>isle-imageservices</li>
+<li>isle-solr</li>
+<li>isle-apache</li>
+<li>isle-mysql</li>
+<li>ISLE (main project)</li>
+<li>ISLE-Documentation</li>
+</ul>
+<h2 id="build-steps">Build Steps</h2>
+<h3 id="isle">ISLE</h3>
+<ul>
+<li>
+<p><strong>ISLE</strong> - uncomment all <code>build / context blocks</code> in the main <code>docker-compose.yml</code> file</p>
+</li>
+<li>
+<p><strong>ISLE</strong> - Edit the <code>traefik</code> magic number (Line 133) within the <code>docker-compose.yml</code> file</p>
+</li>
+</ul>
+<h3 id="all-images">All Images</h3>
+<ul>
+<li>
+<p><strong>Images</strong> - update "magic" numbers within each Dockerfile.</p>
+</li>
+<li>
+<p><strong>Images</strong> - Within a terminal, cd to each cloned forked image directory. </p>
+</li>
+<li>Run build command per image one at a time: <code>docker build - islandoracollabgroup/isle-image:1.1.1</code></li>
+<li>If the build works without error, then the image is tagged, can be tested locally and move onto the next image in order.</li>
+<li>Repeat this process and command for each image (7 times)</li>
+</ul>
+<h3 id="isle-ubuntu-basebox">isle-ubuntu-basebox</h3>
+<p>Start with this image first before all others.</p>
+<ul>
+<li>Image name: <strong>islandoracollabgroup / isle-ubuntu-basebox</strong></li>
+<li>Last build: <code>1.1 / latest</code> (Last built 4 months ago)</li>
+<li>
+<p>Build date: Sept 27, 2018</p>
+</li>
+<li>
+<p>This Dockerfile has the <code>FROM: ubuntu:bionic</code> which means it pulls from here:</p>
+</li>
+<li>https://hub.docker.com/_/ubuntu</li>
+<li>https://github.com/tianon/docker-brew-ubuntu-core/blob/bfd753a747344ff1c6838a2c91ff0606e936f0d0/bionic/Dockerfile</li>
+<li>https://hub.docker.com/_/scratch</li>
+</ul>
+<h4 id="isle-ubuntu-basebox-software-dependencies">isle-ubuntu-basebox - Software Dependencies</h4>
+<p>The following software packages will be handled and updated by <code>apt-get</code>. Please note there may be further dependencies and libraries updated.</p>
+<ul>
+<li><code>GEN_DEP_PACKS</code></li>
+<li>https://packages.ubuntu.com/bionic/ca-certificates</li>
+<li>https://packages.ubuntu.com/bionic/dnsutils</li>
+<li>https://packages.ubuntu.com/bionic/curl</li>
+<li>https://packages.ubuntu.com/bionic/wget </li>
+<li>https://packages.ubuntu.com/bionic/rsync</li>
+<li>https://packages.ubuntu.com/bionic/git</li>
+<li>https://packages.ubuntu.com/bionic/unzip</li>
+</ul>
+<h4 id="isle-ubuntu-basebox-software-updates-requiring-manual-changes-andor-lookups-for-recent-versions">isle-ubuntu-basebox - Software updates requiring manual changes and/or lookups for recent versions.</h4>
+<ul>
+<li><strong>S6 Overlay</strong></li>
+<li>https://github.com/just-containers/s6-overlay</li>
+<li><code>S6_OVERLAY_VERSION:-1.21.4.0</code></li>
+<li>https://github.com/just-containers/s6-overlay/releases/download/v$S6_OVERLAY_VERSION/s6-overlay-amd64.tar.gz</li>
+<li>
+<p>https://github.com/just-containers/s6-overlay/releases</p>
+</li>
+<li>
+<p><strong>Java</strong></p>
+</li>
+<li>
+<p>Version Lookup URLs:</p>
+<ul>
+<li>https://www.java.com/en/download/faq/release_dates.xml</li>
+<li>https://www.oracle.com/technetwork/java/javase/downloads/server-jre8-downloads-2133154.html</li>
+</ul>
+</li>
+<li>
+<p>To determine the newest Java version and values to flow in:</p>
+<ul>
+<li>Visit https://www.oracle.com/technetwork/java/javase/downloads/server-jre8-downloads-2133154.html</li>
+<li>Accept the License Agreement</li>
+<li>On the newest number e.g the bottom section i.e. <code>Server JRE (Java SE Runtime Environment) 8u202</code></li>
+<li>Right-click on the first Download link for Linux x64 e.g. <code>server-jre-8u202-linux-x64.tar.gz</code> and copy the link address.</li>
+<li>It should look like this: <code>https://download.oracle.com/otn-pub/java/jdk/8u202-b08/1961070e4c9b4e26a04e7f5a083f551e/server-jre-8u202-linux-x64.tar.gz</code></li>
+<li><code>ENV JAVA_VERSION=${JAVA_VERSION:-xxxxx}</code> should be set to <code>8u202</code></li>
+<li><code>ENV JAVA_BUILD=${JAVA_BUILD:-xxx}</code> should be set to <code>b08</code></li>
+<li><code>ENV JAVA_SECURITY_BUILD=${JAVA_SECURITY_BUILD:-x.x.x_xxx}</code> should be set to <code>1.8.0_202</code><ul>
+<li>This isn't particularly obvious from the URL per se. One can simply leave the <code>1.8.0_</code> alone and simply add the <code>202</code> as needed.</li>
+</ul>
+</li>
+<li><code>ENV JAVA_SEC_HASH=${JAVA_SEC_HASH:-}</code> - change or overwrite the value (random numbers) found between <code>8u202-b08/</code> &amp; <code>/server-jre-8u202-linux-x64.tar.gz</code> in the written down URL from the look up process e.g. <code>1961070e4c9b4e26a04e7f5a083f551e</code> after the <code>-</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="isle-ubuntu-basebox-build-actions-steps">isle-ubuntu-basebox - Build Actions / Steps</h4>
+<ul>
+<li>Start the update process with the <code>isle-ubuntu-basebox</code> image</li>
+<li>Clone down the <strong>FORKED</strong> <code>isle-ubuntu-basebox</code> to your local development workstation.</li>
+<li>
+<p>Create a new branch e.g. <code>ISLE-v.1.1.1</code></p>
+</li>
+<li>
+<p>Edit the following files with the version changes:</p>
+</li>
+<li>
+<p><code>Dockerfile</code></p>
+<ul>
+<li>Line 39: <code>ENV S6_OVERLAY_VERSION=${S6_OVERLAY_VERSION:-x.xx.x.x}</code> - change or overwrite with a value like <code>1.21.7.0</code> after the <code>-</code></li>
+<li>Line 45: <code>ENV JAVA_VERSION=${JAVA_VERSION:-xxxxx}</code> - change or overwrite with a value like <code>8u202</code> after the <code>-</code></li>
+<li>Line 46: <code>ENV JAVA_BUILD=${JAVA_BUILD:-xxx}</code> - change or overwrite with a value like <code>b08</code> after the <code>-</code></li>
+<li>Line 47: <code>ENV JAVA_SECURITY_BUILD=${JAVA_SECURITY_BUILD:-x.x.x_xxx}</code> - change or overwrite with a value like <code>1.8.0_202</code> after the <code>-</code></li>
+<li>This isn't particularly obvious from the resource URL per se. One can simply leave the <code>1.8.0_</code> alone and simply add the <code>202</code> as needed.</li>
+<li>Line 48: <code>ENV JAVA_SEC_HASH=${JAVA_SEC_HASH:-}</code> - change or overwrite with a value like <code>1961070e4c9b4e26a04e7f5a083f551e</code> after the <code>-</code></li>
+<li>This is the random sequence of numbers from the URL e.g. https://download.oracle.com/otn-pub/java/jdk/8u202-b08/1961070e4c9b4e26a04e7f5a083f551e/server-jre-8u202-linux-x64.tar.gz</li>
+</ul>
+</li>
+<li>
+<p><code>Makefile</code></p>
+<ul>
+<li><code>S6_OVERLAY_VERSION=x.xx.x.x</code> - change or overwrite with a value like <code>1.21.7.0</code> after the <code>=</code></li>
+<li><code>JAVA_VERSION=xxxxx</code> - change or overwrite with a value like <code>8u202</code> after the <code>=</code></li>
+<li><code>JAVA_BUILD=xxx</code> - change or overwrite with a value like <code>b08</code> after the <code>=</code></li>
+<li><code>JAVA_SECURITY_BUILD=x.x.x_xxx</code> - change or overwrite with a value like <code>1.8.0_202</code> after the <code>=</code></li>
+<li><code>JAVA_SEC_HASH=</code> - change or overwrite with a value like <code>1961070e4c9b4e26a04e7f5a083f551e</code> after the <code>-</code></li>
+<li>This is the random sequence of numbers from the URL e.g. https://download.oracle.com/otn-pub/java/jdk/8u202-b08/1961070e4c9b4e26a04e7f5a083f551e/server-jre-8u202-linux-x64.tar.gz</li>
+</ul>
+</li>
+<li>
+<p>Commit the changes to git</p>
+</li>
+<li>
+<p>Build the image</p>
+</li>
+<li>open a terminal</li>
+<li><code>cd ~/pathto/isle-ubuntu-basebox</code></li>
+<li><code>docker build -t islandoracollabgroup/isle-ubuntu-basebox:1.1.1 .</code></li>
+<li>Then move onto building the next image in the sequence prior to testing</li>
+</ul>
+<h3 id="optional-manual-method-of-reviewing-image">(Optional) Manual method of reviewing image</h3>
+<ul>
+<li><code>docker run -it --rm islandoracollabgroup/isle-ubuntu-basebox bash</code></li>
+</ul>
+<h3 id="isle-ubuntu-basebox-post-qc-release-build-image">isle-ubuntu-basebox - Post QC - Release build image</h3>
+<ul>
+<li>open a terminal</li>
+<li><code>cd ~/pathto/isle-ubuntu-basebox</code></li>
+</ul>
+<h4 id="example-reference-command">EXAMPLE / REFERENCE COMMAND</h4>
+<ul>
+<li>Review this syntax first to understand how to construct the build command that follows.</li>
+</ul>
+<pre><code>docker build \
+    --build-arg BUILD_DATE=`date -u \+&quot;%Y-%m-%dT%H:%M:%SZ&quot;` \
+    --build-arg VCS_REF=$SOURCE_COMMIT \
+    --build-arg VERSION=RC-`date -u \+&quot;%Y-%m-%dT%H:%M:%SZ&quot;` \
+    -t $IMAGE_NAME .
+</code></pre>
+
+<h4 id="example-actual-command-w-forked-commit-hash">EXAMPLE / ACTUAL COMMAND W/ FORKED COMMIT HASH</h4>
+<ul>
+<li>This will be the command to use and construct to build an image to push to Dockerhub. Please note that <code>VCS_REF</code> uses the last git commit hash from the forked branch on the image prior to merge in ISLE <code>master</code>.</li>
+</ul>
+<pre><code>docker build \
+    --build-arg BUILD_DATE=`date -u \+&quot;%Y-%m-%dT%H:%M:%SZ&quot;` \
+    --build-arg VCS_REF=a6f60de7619724485c287f19e7bd59d74190fd60 \
+    --build-arg VERSION=RC-`date -u +&quot;%Y-%m-%dT%H:%M:%SZ&quot;` \ 
+    -t islandoracollabgroup/isle-ubuntu-basebox:1.1.1 .
+</code></pre>
+
+<ul>
+<li>
+<p>Push built images to Dockerhub with new tag
+<code>docker push islandoracollabgroup/isle-ubuntu-basebox:1.1.1</code></p>
+</li>
+<li>
+<p>Test with new images</p>
+</li>
+</ul>
+<h3 id="isle-ubuntu-basebox-tagging-outcome">isle-ubuntu-basebox - Tagging outcome</h3>
+<ul>
+<li><code>1.1</code> (last image build from 9/27/2018) leave alone</li>
+<li><code>1.1.1</code> (new image build with sec updates 3/22/2019)</li>
+<li>
+<p><code>latest</code> (new image build with sec updates 3/22/2019)</p>
+</li>
+<li>
+<p>deprecate for future removal <code>serverjr8</code> ( last image build from 9/27/2018)</p>
+</li>
+</ul>
+<hr />
+<h3 id="isle-tomcat">isle-tomcat</h3>
+<ul>
+<li>Image name: <strong>islandoracollabgroup / isle-tomcat</strong></li>
+<li>Last build: <code>1.1 / latest</code> (Last built 4 months ago)</li>
+<li>Build date: Sept 27, 2018</li>
+</ul>
+<h4 id="isle-tomcat-software-dependencies">isle-tomcat - Software Dependencies</h4>
+<p>The following software packages will be handled and updated by <code>apt-get</code>. Please note there may be further dependencies and libraries updated.</p>
+<ul>
+<li><code>GEN_DEP_PACKS</code></li>
+<li>https://packages.ubuntu.com/bionic/cron</li>
+<li>https://packages.ubuntu.com/bionic/tmpreaper</li>
+<li>https://packages.ubuntu.com/bionic/libapr1-dev</li>
+<li>https://packages.ubuntu.com/bionic/libssl-dev</li>
+</ul>
+<h4 id="notes">Notes</h4>
+<ul>
+<li><code>gcc</code> - is installed for building tomcat from source and then removed from the final image</li>
+<li><code>make</code> - is installed for building tomcat from source and then removed from the final image</li>
+<li><code>gcc-7-base</code> - is installed for building tomcat from source and then removed from the final image</li>
+</ul>
+<h4 id="isle-tomcat-software-updates-requiring-manual-changes-andor-lookups-for-recent-versions">isle-tomcat - Software updates requiring manual changes and/or lookups for recent versions.</h4>
+<ul>
+<li><strong>confd</strong></li>
+<li>https://github.com/kelseyhightower/confd/releases/download/v0.16.0</li>
+<li>
+<p>No upgrade available at this time.</p>
+</li>
+<li>
+<p><strong>tomcat</strong></p>
+</li>
+<li>http://tomcat.apache.org/</li>
+<li>https://tomcat.apache.org/download-80.cgi</li>
+<li><code>TOMCAT_MAJOR=${TOMCAT_MAJOR:-8}</code></li>
+<li><code>TOMCAT_VERSION=${TOMCAT_VERSION:-8.5.34}</code></li>
+<li><code>curl -O -L "https://www.apache.org/dyn/closer.cgi?action=download&amp;filename=tomcat/tomcat-$TOMCAT_MAJOR/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz" &amp;&amp; \</code></li>
+</ul>
+<h3 id="isle-tomcat-build-actions-steps">isle-tomcat - Build Actions / Steps</h3>
+<p>Assumptions: The <code>isle-ubuntu-basebox</code> has been already updated, built and pushed to Dockerhub. This image will work (build) from that foundational image.</p>
+<ul>
+<li>Start the update process with the <code>isle-tomcat</code> image</li>
+<li>Clone down the <strong>FORKED</strong> <code>isle-tomcat</code> to your local development workstation.</li>
+<li>
+<p>Create a new branch e.g. <code>ISLE-v.1.1.1</code></p>
+</li>
+<li>
+<p>Edit the following files with the version changes:</p>
+</li>
+<li>
+<p><code>Dockerfile</code></p>
+<ul>
+<li>Line 1: <code>FROM islandoracollabgroup/isle-ubuntu-basebox:serverjre8</code> change the tag to <code>1.1.1</code> e.g.
+<code>islandoracollabgroup/isle-ubuntu-basebox:1.1.1</code></li>
+<li>Line 44: <code>TOMCAT_VERSION=${TOMCAT_VERSION:-x.x.xx}</code> - change or overwrite with a value like <code>8.5.39</code> after the <code>-</code></li>
+</ul>
+</li>
+<li>
+<p>Commit the changes to git</p>
+</li>
+<li>
+<p>Build the image</p>
+</li>
+<li>open a terminal</li>
+<li><code>cd ~/pathto/isle-tomcat</code></li>
+<li><code>docker build -t islandoracollabgroup/isle-tomcat:1.1.1 .</code></li>
+<li>Then move onto building the next image in the sequence prior to testing</li>
+</ul>
+<h3 id="optional-manual-method-of-reviewing-image_1">(Optional) Manual method of reviewing image</h3>
+<ul>
+<li><code>docker run -p 8080:8080 -it --rm islandoracollabgroup/isle-tomcat:1.1.1 bash</code></li>
+</ul>
+<h3 id="isle-tomcat-post-qc-release-build-image">isle-tomcat - Post QC - Release Build image</h3>
+<ul>
+<li>open a terminal</li>
+<li><code>cd ~/pathto/isle-tomcat</code></li>
+</ul>
+<h4 id="example-reference-command_1">EXAMPLE / REFERENCE COMMAND</h4>
+<ul>
+<li>Review this syntax first to understand how to construct the build command that follows.</li>
+</ul>
+<pre><code>docker build \
+    --build-arg BUILD_DATE=`date -u \+&quot;%Y-%m-%dT%H:%M:%SZ&quot;` \
+    --build-arg VCS_REF=$SOURCE_COMMIT \
+    --build-arg VERSION=RC-`date -u \+&quot;%Y-%m-%dT%H:%M:%SZ&quot;` \
+    -t $IMAGE_NAME .
+</code></pre>
+
+<h4 id="example-actual-command-w-forked-commit-hash_1">EXAMPLE / ACTUAL COMMAND W/ FORKED COMMIT HASH</h4>
+<ul>
+<li>This will be the command to use and construct to build an image to push to Dockerhub. Please note that <code>VCS_REF</code> uses the last git commit hash from the forked branch on the image prior to merge in ISLE <code>master</code>.</li>
+</ul>
+<pre><code class="bash">
+docker build --build-arg BUILD_DATE=`date -u +&quot;%Y-%m-%dT%H:%M:%SZ&quot;` --build-arg VCS_REF=6fb610e9ab1eab68f819fa9ded0bc678c4db385c --build-arg VERSION=RC-`date -u +&quot;%Y-%m-%dT%H:%M:%SZ&quot;` -t islandoracollabgroup/isle-tomcat:1.1.1 .
+</code></pre>
+
+<ul>
+<li>Push built images to Dockerhub with new tag
+<code>docker push islandoracollabgroup/isle-tomcat:1.1.1</code></li>
+</ul>
+<h3 id="isle-tomcat-tagging-outcome">isle-tomcat - Tagging outcome</h3>
+<p>Suggested outcome:
+<em> <code>1.1</code> (last image build from 9/27/2018)
+</em> <code>1.1.1</code> (new image build with sec updates 3/20/2019)
+* <code>latest</code> (new image build with sec updates 3/20/2019)</p>
+<ul>
+<li>deprecate <code>serverjr8</code> (last image build from 9/27/2018)</li>
+</ul>
+<hr />
+<h3 id="isle-fedora">isle-fedora</h3>
+<ul>
+<li>Image name: <strong>islandoracollabgroup / isle-fedora</strong></li>
+<li>Last build: <code>1.1</code> (Last built 4 months ago)</li>
+<li>Build date: Oct 10, 2018</li>
+</ul>
+<h4 id="isle-fedora-software-dependencies">isle-fedora - Software Dependencies</h4>
+<p>The following software packages will be handled and updated by <code>apt-get</code>. Please note there may be further dependencies and libraries updated.</p>
+<ul>
+<li><code>GEN_DEP_PACKS</code></li>
+<li>https://packages.ubuntu.com/bionic/mysql-client</li>
+<li>https://packages.ubuntu.com/bionic/python-mysqldb</li>
+<li>https://packages.ubuntu.com/bionic/default-libmysqlclient-dev</li>
+<li>https://packages.ubuntu.com/bionic/openssl</li>
+<li>https://packages.ubuntu.com/bionic/libxml2-dev</li>
+</ul>
+<h4 id="isle-fedora-software-updates-requiring-manual-changes-andor-lookups-for-recent-versions">isle-fedora - Software updates requiring manual changes and/or lookups for recent versions</h4>
+<ul>
+<li><strong>Fedora</strong></li>
+<li>https://github.com/fcrepo3/fcrepo</li>
+<li>https://github.com/fcrepo3/fcrepo/releases/download/v3.8.1/fcrepo-installer-3.8.1.jar</li>
+<li>version <code>3.8.1</code></li>
+<li>
+<p><strong>Not eligible for upgrade</strong></p>
+</li>
+<li>
+<p><strong>Gsearch</strong></p>
+</li>
+<li><code>v2.9.0</code></li>
+<li><code>git clone https://github.com/discoverygarden/gsearch.git</code></li>
+<li><code>Latest commit 701400e  on Dec 11, 2017</code></li>
+<li>
+<p><strong>Not eligible for upgrade</strong></p>
+</li>
+<li>
+<p><strong>DGI Gsearch Extensions</strong></p>
+</li>
+<li>`https://github.com/discoverygarden/dgi_gsearch_extensions.git</li>
+<li><code>v.0.1.3</code></li>
+<li><code>/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/lib/gsearch_extensions-0.1.3-jar-with-dependencies.jar</code></li>
+<li>Last commit was June 16, 2017 https://github.com/discoverygarden/dgi_gsearch_extensions/commit/35f37a486cc5ba748fcee9a4f95b98187b1c6731</li>
+<li>
+<p><strong>Not eligible for upgrade</strong></p>
+</li>
+<li>
+<p><strong>Islandora XACML policies</strong></p>
+</li>
+<li>https://github.com/Islandora/islandora-xacml-policies</li>
+<li>Previous build (Oct 10, 2018) uses this commit https://github.com/Islandora/islandora-xacml-policies/commit/40663fbb0f8de7e45d14fc1ebc6b7e8dc04cffb9</li>
+<li>
+<p>Latest is new commit Jan 2019 https://github.com/Islandora/islandora-xacml-policies/commit/73deba6b90f6de40d72c890233ba6ff0159031de</p>
+</li>
+<li>
+<p><strong>Islandora Drupal Filter</strong></p>
+</li>
+<li>Built Oct 10, 2018</li>
+<li>https://github.com/Islandora/islandora_drupal_filter</li>
+<li>Build uses this release * <code>v7.1.9</code> https://github.com/Islandora/islandora_drupal_filter/releases/download/v7.1.9/fcrepo-drupalauthfilter-3.8.1.jar  </li>
+<li>
+<p>Latest is: <code>7.1.12</code> https://github.com/Islandora/islandora_drupal_filter/releases/tag/7.1.12</p>
+</li>
+<li>
+<p><strong>Apache Maven</strong></p>
+</li>
+<li>https://maven.apache.org/index.html</li>
+<li>version used <code>3.5.4</code> on Oct 10, 2018</li>
+<li>
+<p><code>curl -O -L "https://www.apache.org/dyn/closer.cgi?action=download&amp;filename=maven/maven-$MAVEN_MAJOR/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz"</code></p>
+</li>
+<li>
+<p><strong>Apache Ant</strong></p>
+</li>
+<li>https://ant.apache.org/</li>
+<li>version used <code>1.10.5</code> on Oct 10, 2018</li>
+<li>
+<p><code>curl -O -L "https://www.apache.org/dyn/closer.cgi?action=download&amp;filename=ant/binaries/apache-ant-$ANT_VERSION-bin.tar.gz"</code></p>
+</li>
+<li>
+<p><strong>DGI Basic-Solr Config</strong></p>
+</li>
+<li>The git branch to clone from is: <code>-b 4.10.x</code></li>
+<li>https://github.com/discoverygarden/basic-solr-config.git</li>
+<li>
+<p>Oct 10 was build date so the last commit used (version) was on Sept 21, 2018</p>
+<ul>
+<li>https://github.com/discoverygarden/basic-solr-config/commit/0282f703a486ab89c7bbded6af846540be234833</li>
+</ul>
+</li>
+<li>
+<p>"Magic number" comparison process for release notes:</p>
+<ul>
+<li><code>cd /tmp</code></li>
+<li><code>git clone --recursive -b 4.10.x https://github.com/discoverygarden/basic-solr-config.git old</code></li>
+<li><code>git clone --recursive -b 4.10.x https://github.com/discoverygarden/basic-solr-config.git new</code></li>
+<li>Check build date on last Dockerhub push e.g. Oct 10, 2018</li>
+<li>Check commits page https://github.com/discoverygarden/basic-solr-config/commits/4.10.x</li>
+<li>Determine which commit came on or before Oct 10, 2018 e.g. <code>Sept 21, 2018 0282f703a486ab89c7bbded6af846540be234833</code> (<em>you can click the clipboard to copy this value</em>)</li>
+<li><code>cd /tmp/old</code></li>
+<li><code>git checkout last used build commit</code> i.e. <code>git checkout 0282f703a486ab89c7bbded6af846540be234833</code></li>
+<li>Compare both directories using a visual diff tool like <code>Kaleidoscope</code> (MAC), <code>diff</code> or <code>KDiff3</code> (Linux)</li>
+<li>Note the differences in files and the line numbers for inclusion in release notes.</li>
+<li><code>foxmlToSolr.xslt</code> - Lines 47 &amp; 48 - New lines added</li>
+<li><code>README.md</code> - Lines 31 &amp; 32 explanations for the line additions in <code>foxmlToSolr.xslt</code></li>
+</ul>
+</li>
+<li>
+<p><strong>DGI Islandora Transforms</strong></p>
+</li>
+<li>git submodule of <strong>DGI Basic-Solr Config</strong></li>
+<li>https://github.com/discoverygarden/islandora_transforms</li>
+<li>Oct 10 was build date so the last commit used (version) was on Sept 21, 2018<ul>
+<li>https://github.com/discoverygarden/islandora_transforms/commit/ee7e9d32a71381abfa5c3ead13255c0c5b66ed45</li>
+</ul>
+</li>
+<li>
+<p>Newest commit: March 19, 2019 https://github.com/discoverygarden/islandora_transforms/commit/cdfef63b7e2f6740c06e56bfa32d496c09837ae8</p>
+</li>
+<li>
+<p>"Magic number" comparison process for release notes:</p>
+<ul>
+<li><code>cd /tmp</code></li>
+<li><code>git clone https://github.com/discoverygarden/islandora_transforms old</code></li>
+<li><code>git clone https://github.com/discoverygarden/islandora_transforms new</code></li>
+<li>Check build date on last Dockerhub push e.g. Oct 10, 2018</li>
+<li>Check commits page https://github.com/discoverygarden/islandora_transforms/commits/master</li>
+<li>Determine which commit came on or before Oct 10, 2018 e.g. <code>Sept 21, 2018 ee7e9d32a71381abfa5c3ead13255c0c5b66ed45</code> (<em>you can click the clipboard to copy this value</em>)</li>
+<li><code>cd /tmp/old</code></li>
+<li><code>git checkout last used build commit</code> i.e. <code>git checkout ee7e9d32a71381abfa5c3ead13255c0c5b66ed45</code></li>
+<li>Compare both directories using a visual diff tool like <code>Kaleidoscope</code> (MAC), <code>diff</code> or <code>KDiff3</code> (Linux)</li>
+<li>Note the differences in files and the line numbers for inclusion in release notes.</li>
+<li><code>datastream_info_to_solr.xslt</code> - Lines 35 - 49 - new lines &amp; content added</li>
+<li><code>RELS-EXT_to_solr.xslt</code><ul>
+<li>Line 7 - modified</li>
+<li>Line 8 - new line &amp; content added</li>
+<li>Line 42 - new line &amp; content added</li>
+<li>Line 49 - new line &amp; content added</li>
+</ul>
+</li>
+<li><code>slurp_all_MODS_to_solr.xslt</code> - Lines 289 - 300 new lines &amp; content added</li>
+</ul>
+</li>
+</ul>
+<h4 id="isle-fedora-build-actions-steps">isle-fedora - Build Actions / Steps</h4>
+<p>Assumptions: The <code>isle-ubuntu-basebox</code> &amp; <code>isle-tomcat</code> images have been already updated, built and pushed to Dockerhub. This image will work (build) from those foundational images.</p>
+<ul>
+<li>Start the update process with the <code>isle-fedora</code> image</li>
+<li>Clone down the <strong>FORKED</strong> <code>isle-fedora</code> to your local development workstation.</li>
+<li>
+<p>Create a new branch e.g. <code>ISLE-v.1.1.1</code></p>
+</li>
+<li>
+<p>Edit the following files with the version changes:</p>
+</li>
+<li>
+<p><code>Dockerfile</code></p>
+<ul>
+<li>Line 1: change the tag from <code>FROM islandoracollabgroup/isle-tomcat:x</code> to <code>isle-tomcat:1.1.1</code></li>
+<li>Line 53: change <code>vx.x.x</code> in the curl url to <code>v.7.1.12</code></li>
+<li>Line 62: change <code>MAVEN_VERSION:-x.x.x</code> to <code>MAVEN_VERSION:-3.6.0</code></li>
+<li>Line 63: change <code>ANT_VERSION:-x.xx.x</code> to <code>ANT_VERSION:-1.9.14</code></li>
+</ul>
+</li>
+<li>
+<p>Commit the changes to git</p>
+</li>
+<li>
+<p>Build the image</p>
+</li>
+<li>open a terminal</li>
+<li><code>cd ~/pathto/isle-fedora</code></li>
+<li><code>docker build -t islandoracollabgroup/isle-fedora:1.1.1 .</code></li>
+<li>Then move onto building the next image in the sequence prior to testing</li>
+</ul>
+<h3 id="isle-fedora-post-qc-release-build-image">isle-fedora - Post QC - Release Build Image</h3>
+<h4 id="example-reference-command_2">EXAMPLE / REFERENCE COMMAND</h4>
+<ul>
+<li>Review this syntax first to understand how to construct the build command that follows.</li>
+</ul>
+<pre><code>docker build \
+    --build-arg BUILD_DATE=`date -u \+&quot;%Y-%m-%dT%H:%M:%SZ&quot;` \
+    --build-arg VCS_REF=$SOURCE_COMMIT \
+    --build-arg VERSION=RC-`date -u \+&quot;%Y-%m-%dT%H:%M:%SZ&quot;` \
+    -t $IMAGE_NAME .
+</code></pre>
+
+<h4 id="example-actual-command-w-forked-commit-hash_2">EXAMPLE / ACTUAL COMMAND W/ FORKED COMMIT HASH</h4>
+<ul>
+<li>This will be the command to use and construct to build an image to push to Dockerhub. Please note that <code>VCS_REF</code> uses the last git commit hash from the forked branch on the image prior to merge in ISLE <code>master</code>.</li>
+</ul>
+<pre><code>docker build --build-arg BUILD_DATE=`date -u +&quot;%Y-%m-%dT%H:%M:%SZ&quot;` --build-arg VCS_REF=180e2382626a6972b0251d18769c45e4a1e2d7cb --build-arg VERSION=RC-`date -u +&quot;%Y-%m-%dT%H:%M:%SZ&quot;` -t islandoracollabgroup/isle-fedora:1.1.1 .
+</code></pre>
+
+<h3 id="optional-manual-method-of-reviewing-image_2">(Optional) Manual method of reviewing image</h3>
+<ul>
+<li>
+<p><code>docker run -p 8080:8080 -it --rm islandoracollabgroup/isle-fedora:1.1 bash</code></p>
+</li>
+<li>
+<p>Push built images to Dockerhub with new tag
+<code>docker push islandoracollabgroup/isle-fedora:1.1.1</code></p>
+</li>
+<li>
+<p>Test with new images</p>
+</li>
+</ul>
+<h3 id="isle-fedora-tagging-outcome">isle-fedora -  Tagging Outcome</h3>
+<p>Suggested outcome:
+<em> <code>1.0</code> (9/7/2018)
+</em> <code>1.1</code> (last image build from 10/10/2018)
+<em> <code>1.1.1</code> (new image build with sec updates 3/20/2019)
+</em> <code>latest</code> (new image build with sec updates 3/20/2019)</p>
+<ul>
+<li>leave <code>blazegraph</code> alone</li>
+<li>deprecate <code>1.dev</code> <em>what is this? <code>Nov5th, 2018</code></em></li>
+<li>deprecate <code>3.8.1</code></li>
+</ul>
+<hr />
+<h3 id="isle-imageservices">isle-imageservices</h3>
+<ul>
+<li>Image name: <strong>islandoracollabgroup / isle-imageservices</strong> </li>
+<li>Last Build: <code>1.1 / latest</code> (Last built 5 months ago)</li>
+<li><code>1.11</code> is Sept 15, 2018</li>
+<li><code>latest</code> is Sept 7, 2018
+  ^ Needs fix</li>
+</ul>
+<h4 id="isle-imageservices-software-dependencies">isle-imageservices - Software Dependencies</h4>
+<p>The following software packages will be handled and updated by <code>apt-get</code>. Please note there may be further dependencies and libraries updated.</p>
+<ul>
+<li><code>GEN_DEP_PACKS</code></li>
+<li>https://packages.ubuntu.com/bionic/ffmpeg</li>
+<li>https://packages.ubuntu.com/bionic/ffmpeg2theora</li>
+<li>https://packages.ubuntu.com/bionic/libavcodec-extra</li>
+<li>https://packages.ubuntu.com/bionic/ghostscript</li>
+<li>https://packages.ubuntu.com/bionic/xpdf</li>
+<li>
+<p>https://packages.ubuntu.com/bionic/poppler-utils</p>
+</li>
+<li>
+<p>NOTE: <code>$BUILD_DEPS</code> means all dev tools are uninstalled after building <code>openjpeg</code> from source</p>
+</li>
+</ul>
+<h4 id="isle-imageservices-software-updates-requiring-manual-changes-andor-lookups">isle-imageservices - Software updates requiring manual changes and/or lookups</h4>
+<ul>
+<li><strong>openjpeg</strong></li>
+<li>https://github.com/uclouvain/openjpeg</li>
+<li>Last commit used: Sept 5, 2018 https://github.com/uclouvain/openjpeg/commit/31a03b390a77bfbe4b0f140121d1296acb611f76</li>
+<li>
+<p>Upgraded <strong>openjpeg</strong> to latest Dec 21,2018 commit https://github.com/uclouvain/openjpeg/commit/51f097e6d5754ddae93e716276fe8176b44ec548</p>
+</li>
+<li>
+<p><strong>Imagemagick</strong></p>
+</li>
+<li>https://www.imagemagick.org</li>
+<li><code>curl -O https://www.imagemagick.org/download/ImageMagick.tar.gz</code></li>
+<li><code>/</code>usr/local/bin/convert -v`</li>
+<li>
+<p><code>Version: ImageMagick 7.0.8-11 Q16 x86_64 2018-09-15 https://www.imagemagick.org</code></p>
+</li>
+<li>
+<p><strong>Adore-Djatoka</strong></p>
+</li>
+<li>https://sourceforge.mirrorservice.org/d/dj/djatoka/djatoka/1.1/adore-djatoka-1.1.tar.gz</li>
+<li>
+<p>No upgrade possible</p>
+</li>
+<li>
+<p><strong>Cantaloupe</strong></p>
+</li>
+<li>https://github.com/medusa-project/cantaloupe</li>
+<li><code>v4.0.1</code></li>
+<li>Going to hold off on an update due to <code>delegates.rb</code> and <code>cantaloupe.properties</code> files not being fully tested in the Islandora community.</li>
+<li>Don't attempt to upgrade Cantaloupe to <code>v4.0.3</code> DUE to potential key changes and confusion over version usage.</li>
+</ul>
+<h3 id="isle-imageservices-build-steps-actions">isle-imageservices - Build Steps / Actions</h3>
+<p>Assumptions: The <code>isle-ubuntu-basebox</code> &amp; <code>isle-tomcat</code> images have been already updated, built and pushed to Dockerhub. This image will work (build) from those foundational images.</p>
+<ul>
+<li>Start the update process with the <code>isle-image-services</code> image</li>
+<li>Clone down the <strong>FORKED</strong> <code>isle-image-services</code> to your local development workstation.</li>
+<li>
+<p>Create a new branch e.g. <code>ISLE-v.1.1.1</code></p>
+</li>
+<li>
+<p>Edit the following files with the version changes:</p>
+</li>
+<li>
+<p><code>Dockerfile</code></p>
+<ul>
+<li>Line 1: change the tag from <code>FROM islandoracollabgroup/isle-tomcat:x</code> to <code>isle-tomcat:1.1.1</code></li>
+<li>Line 87: change <code>vx.x.x</code> in the curl url to <code>v4.0.1</code> (Not done on March 25)</li>
+</ul>
+</li>
+<li>
+<p>Commit the changes to git</p>
+</li>
+<li>
+<p>Build the image</p>
+</li>
+<li>open a terminal</li>
+<li><code>cd ~/pathto/isle-image-services</code></li>
+<li><code>docker build -t islandoracollabgroup/isle-imageservices:1.1.1 .</code></li>
+<li>
+<p>Then move onto building the next image in the sequence prior to testing</p>
+</li>
+<li>
+<p>Test with new images</p>
+</li>
+</ul>
+<h3 id="optional-manual-method-of-reviewing-image_3">(Optional) Manual method of reviewing image</h3>
+<ul>
+<li><code>docker run -it -p "8080:8080" --rm islandoracollabgroup/isle-imageservices:1.1 bash</code></li>
+</ul>
+<h3 id="isle-imageservices-post-qc-release-build-image">isle-imageservices - Post QC - Release Build Image</h3>
+<h4 id="example-reference-command_3">EXAMPLE / REFERENCE COMMAND</h4>
+<ul>
+<li>Review this syntax first to understand how to construct the build command that follows.</li>
+</ul>
+<pre><code>docker build \
+    --build-arg BUILD_DATE=`date -u \+&quot;%Y-%m-%dT%H:%M:%SZ&quot;` \
+    --build-arg VCS_REF=$SOURCE_COMMIT \
+    --build-arg VERSION=RC-`date -u \+&quot;%Y-%m-%dT%H:%M:%SZ&quot;` \
+    -t $IMAGE_NAME .
+</code></pre>
+
+<h4 id="example-actual-command-w-forked-commit-hash_3">EXAMPLE / ACTUAL COMMAND W/ FORKED COMMIT HASH</h4>
+<ul>
+<li>This will be the command to use and construct to build an image to push to Dockerhub. Please note that <code>VCS_REF</code> uses the last git commit hash from the forked branch on the image prior to merge in ISLE <code>master</code>.</li>
+</ul>
+<pre><code class="bash">
+docker build --build-arg BUILD_DATE=`date -u +&quot;%Y-%m-%dT%H:%M:%SZ&quot;` --build-arg VCS_REF=6e7f82aa405848e05771ff6e926c6dc0f73fbb8f --build-arg VERSION=RC-`date -u +&quot;%Y-%m-%dT%H:%M:%SZ&quot;` -t islandoracollabgroup/isle-imageservices:1.1.1 .
+</code></pre>
+
+<ul>
+<li>Push built images to Dockerhub with new tag
+<code>docker push islandoracollabgroup/isle-imageservices:1.1.1</code></li>
+</ul>
+<h3 id="tagging">Tagging</h3>
+<p>Suggested outcome:
+<em> <code>1.1</code> (last image build from 9/2018)
+</em> <code>1.1.1</code> (new image build with sec updates 3/20/2019)
+* <code>latest</code> (new image build with sec updates 3/20/2019)</p>
+<hr />
+<h3 id="isle-solr">isle-solr</h3>
+<ul>
+<li>Image name: <strong>islandoracollabgroup / isle-solr</strong></li>
+<li>Last Build: <code>1.1 / latest</code> (Last built 3 months ago)</li>
+<li>
+<p>November 5th, 2018</p>
+</li>
+<li>
+<p>Solr </p>
+</li>
+<li><code>v4.10.4</code></li>
+<li><code>curl -O -L http://archive.apache.org/dist/lucene/solr/$SOLR_VERSION/solr-$SOLR_VERSION.tgz</code></li>
+<li>http://archive.apache.org/dist/lucene/solr/4.10.4/</li>
+<li>
+<p>No apparent updates since <code>2015-03-03</code></p>
+</li>
+<li>
+<p><strong>DGI Basic-Solr Config</strong></p>
+</li>
+<li>The git branch to clone from is: <code>-b 4.10.x</code></li>
+<li>https://github.com/discoverygarden/basic-solr-config.git</li>
+<li>But the area of this that is used is <ul>
+<li>https://github.com/discoverygarden/basic-solr-config/tree/4.10.x/conf</li>
+<li>this has not changed since Aug 2107 https://github.com/discoverygarden/basic-solr-config/commit/a3457c2ec6a44cb5c74937b5e45056ab5ae99916</li>
+</ul>
+</li>
+</ul>
+<h3 id="actions">Actions</h3>
+<ul>
+<li>Run package management updates but given this builds off the two previous images I'm not sure there are any changes per se.</li>
+</ul>
+<h3 id="optional-manual-method-of-reviewing-image_4">(Optional) Manual method of reviewing image</h3>
+<ul>
+<li><code>docker run -p 8080:8080 -it --rm islandoracollabgroup/isle-solr:1.1 bash</code></li>
+</ul>
+<h3 id="review-build-process">Review &amp; Build Process</h3>
+<p>Assumptions: The <code>isle-ubuntu-basebox</code> &amp; <code>isle-tomcat</code> images have been already updated, built and pushed to Dockerhub. This image will work (build) from those foundational images.</p>
+<ul>
+<li>Start the update process with the <code>isle-solr</code> image</li>
+<li>Clone down the <strong>FORKED</strong> <code>isle-solr</code> to your local development workstation.</li>
+<li>
+<p>Create a new branch e.g. <code>ISLE-v.1.1.1</code></p>
+</li>
+<li>
+<p>Edit the following files with the version changes:</p>
+</li>
+<li>
+<p><code>Dockerfile</code></p>
+<ul>
+<li>Line 1: change the tag from <code>FROM islandoracollabgroup/isle-tomcat:x</code> to <code>isle-tomcat:1.1.1</code></li>
+</ul>
+</li>
+<li>
+<p>Commit the changes to git</p>
+</li>
+<li>
+<p>Build the image</p>
+</li>
+<li>open a terminal</li>
+<li><code>cd ~/pathto/isle-solr</code></li>
+<li>
+<p><code>docker build -t islandoracollabgroup/isle-solr:1.1.1 .</code></p>
+</li>
+<li>
+<p>Test with new images</p>
+</li>
+</ul>
+<h4 id="example-reference-command_4">EXAMPLE / REFERENCE COMMAND</h4>
+<ul>
+<li>Review this syntax first to understand how to construct the build command that follows.</li>
+</ul>
+<pre><code>docker build \
+    --build-arg BUILD_DATE=`date -u \+&quot;%Y-%m-%dT%H:%M:%SZ&quot;` \
+    --build-arg VCS_REF=$SOURCE_COMMIT \
+    --build-arg VERSION=RC-`date -u \+&quot;%Y-%m-%dT%H:%M:%SZ&quot;` \
+    -t $IMAGE_NAME .
+</code></pre>
+
+<h4 id="example-actual-command-w-forked-commit-hash_4">EXAMPLE / ACTUAL COMMAND W/ FORKED COMMIT HASH</h4>
+<ul>
+<li>This will be the command to use and construct to build an image to push to Dockerhub. Please note that <code>VCS_REF</code> uses the last git commit hash from the forked branch on the image prior to merge in ISLE <code>master</code>.</li>
+</ul>
+<pre><code class="bash">
+docker build --build-arg BUILD_DATE=`date -u +&quot;%Y-%m-%dT%H:%M:%SZ&quot;` --build-arg VCS_REF=730d9ee566a55430d81d0691fb6b3370aa9148ed --build-arg VERSION=RC-`date -u +&quot;%Y-%m-%dT%H:%M:%SZ&quot;` -t islandoracollabgroup/isle-solr:1.1.1 .
+
+</code></pre>
+
+<ul>
+<li>Push built images to Dockerhub with new tag
+<code>docker push islandoracollabgroup/isle-solr:1.1.1</code></li>
+</ul>
+<h3 id="tagging_1">Tagging</h3>
+<p>Suggested outcome
+<em> <code>1.1</code> (last image build from 9/2018)
+</em> <code>1.1.1</code> (new image build with sec updates 3/20/2019)
+* <code>latest</code> (new image build with sec updates 3/20/2019)</p>
+<ul>
+<li>deprecate 4.10.4 tag</li>
+</ul>
+<hr />
+<h3 id="isle-apache">isle-apache</h3>
+<ul>
+<li>Image name: <strong>islandoracollabgroup / isle-apache</strong> </li>
+<li>Last Build: <code>1.1 / latest</code> (Last built 3 months ago)</li>
+<li>Last build: November 5th, 2018</li>
+</ul>
+<h4 id="software-dependencies">Software Dependencies</h4>
+<p>The following software packages will be handled and updated by <code>apt-get</code>. Please note there may be further dependencies and libraries updated.</p>
+<ul>
+<li><code>GEN_DEP_PACKS</code></li>
+<li>https://packages.ubuntu.com/bionic/language-pack-en-base</li>
+<li>https://packages.ubuntu.com/bionic/tmpreaper</li>
+<li>https://packages.ubuntu.com/bionic/cron</li>
+<li>https://packages.ubuntu.com/bionic/xz-utils</li>
+<li>https://packages.ubuntu.com/bionic/zip</li>
+<li>https://packages.ubuntu.com/bionic/bzip2</li>
+<li>https://packages.ubuntu.com/bionic/openssl</li>
+<li>https://packages.ubuntu.com/bionic/openssh-client</li>
+<li>https://packages.ubuntu.com/bionic/mysql-client</li>
+<li>
+<p>https://packages.ubuntu.com/bionic/file</p>
+</li>
+<li>
+<p><code>FFMPEG_PACKS</code></p>
+</li>
+<li>https://packages.ubuntu.com/bionic/ffmpeg</li>
+<li>https://packages.ubuntu.com/bionic/ffmpeg2theora</li>
+<li>https://packages.ubuntu.com/bionic/libavcodec-extra</li>
+<li>https://packages.ubuntu.com/bionic/ghostscript</li>
+<li>https://packages.ubuntu.com/bionic/xpdf</li>
+<li>
+<p>https://packages.ubuntu.com/bionic/poppler-utils</p>
+</li>
+<li>
+<p><code>APACHE_PACKS</code></p>
+</li>
+<li>https://packages.ubuntu.com/bionic/apache2</li>
+<li>https://packages.ubuntu.com/bionic/python-mysqldb</li>
+<li>https://packages.ubuntu.com/bionic/libxml2-dev</li>
+<li>https://packages.ubuntu.com/bionic/libapache2-mod-php5.6</li>
+<li>https://packages.ubuntu.com/bionic/libcurl3-openssl-dev</li>
+<li>https://packages.ubuntu.com/bionic/php5.6</li>
+<li>https://packages.ubuntu.com/bionic/php5.6-cli</li>
+<li>https://packages.ubuntu.com/bionic/php5.6-json</li>
+<li>https://packages.ubuntu.com/bionic/php5.6-common</li>
+<li>https://packages.ubuntu.com/bionic/php5.6-readline</li>
+<li>https://packages.ubuntu.com/bionic/php-pear</li>
+<li>https://packages.ubuntu.com/bionic/php5.6-curl</li>
+<li>https://packages.ubuntu.com/bionic/php5.6-mbstring</li>
+<li>https://packages.ubuntu.com/bionic/php5.6-xmlrpc</li>
+<li>https://packages.ubuntu.com/bionic/php5.6-dev</li>
+<li>https://packages.ubuntu.com/bionic/php5.6-gd</li>
+<li>https://packages.ubuntu.com/bionic/php5.6-ldap</li>
+<li>https://packages.ubuntu.com/bionic/php5.6-xml</li>
+<li>https://packages.ubuntu.com/bionic/php5.6-mcrypt</li>
+<li>https://packages.ubuntu.com/bionic/php5.6-mysql</li>
+<li>https://packages.ubuntu.com/bionic/php5.6-soap</li>
+<li>https://packages.ubuntu.com/bionic/php5.6-xsl</li>
+<li>https://packages.ubuntu.com/bionic/php5.6-zip</li>
+<li>https://packages.ubuntu.com/bionic/php5.6-bcmath</li>
+<li>https://packages.ubuntu.com/bionic/php5.6-intl</li>
+<li>https://packages.ubuntu.com/bionic/php-uploadprogress</li>
+<li>https://packages.ubuntu.com/bionic/php-xdebug</li>
+<li>https://packages.ubuntu.com/bionic/bibutils</li>
+<li>https://packages.ubuntu.com/bionic/libicu-dev</li>
+<li>https://packages.ubuntu.com/bionic/tesseract-ocr</li>
+<li>https://packages.ubuntu.com/bionic/tesseract-ocr-eng</li>
+<li>https://packages.ubuntu.com/bionic/tesseract-ocr-fra</li>
+<li>https://packages.ubuntu.com/bionic/tesseract-ocr-spa</li>
+<li>https://packages.ubuntu.com/bionic/tesseract-ocr-ita</li>
+<li>https://packages.ubuntu.com/bionic/tesseract-ocr-por</li>
+<li>https://packages.ubuntu.com/bionic/tesseract-ocr-hin</li>
+<li>https://packages.ubuntu.com/bionic/tesseract-ocr-deu</li>
+<li>https://packages.ubuntu.com/bionic/tesseract-ocr-jpn</li>
+<li>https://packages.ubuntu.com/bionic/tesseract-ocr-rus</li>
+<li>https://packages.ubuntu.com/bionic/leptonica-progs</li>
+<li>https://packages.ubuntu.com/bionic/libleptonica-dev</li>
+<li>https://packages.ubuntu.com/bionic/libbz2-dev</li>
+<li>https://packages.ubuntu.com/bionic/libdjvulibre-dev</li>
+<li>https://packages.ubuntu.com/bionic/libexif-dev</li>
+<li>https://packages.ubuntu.com/bionic/libgif-dev</li>
+<li>https://packages.ubuntu.com/bionic/libjpeg8</li>
+<li>https://packages.ubuntu.com/bionic/libjpeg-dev</li>
+<li>https://packages.ubuntu.com/bionic/liblqr-dev</li>
+<li>https://packages.ubuntu.com/bionic/libopenexr-dev</li>
+<li>https://packages.ubuntu.com/bionic/libopenjp2-7-dev</li>
+<li>https://packages.ubuntu.com/bionic/libpng-dev</li>
+<li>https://packages.ubuntu.com/bionic/libraw-dev</li>
+<li>https://packages.ubuntu.com/bionic/librsvg2-dev</li>
+<li>https://packages.ubuntu.com/bionic/libtiff-dev</li>
+<li>https://packages.ubuntu.com/bionic/libwmf-dev</li>
+<li>https://packages.ubuntu.com/bionic/libwebp-dev</li>
+<li>https://packages.ubuntu.com/bionic/libwmf-dev</li>
+<li>
+<p>https://packages.ubuntu.com/bionic/zlib1g-dev</p>
+</li>
+<li>
+<p><code>IMAGEMAGICK_LIBS_EXTENDED</code>  </p>
+</li>
+<li>https://packages.ubuntu.com/bionic/libfontconfig</li>
+<li>https://packages.ubuntu.com/bionic/libfreetype6-dev</li>
+</ul>
+<p>The following software packages will be handled and updated by <code>curl</code>. Please note there may be further dependencies and libraries updated.</p>
+<ul>
+<li><strong>openjpeg</strong></li>
+<li>https://github.com/uclouvain/openjpeg</li>
+<li>
+<p>Last commit used: Nov 1, 2018 https://github.com/uclouvain/openjpeg/commit/0bc90e4062a5f9258c91eca018c019b179066c62</p>
+</li>
+<li>
+<p><strong>ImageMagick</strong> </p>
+</li>
+<li>https://www.imagemagick.org</li>
+<li><code>curl -O -L https://www.imagemagick.org/download/ImageMagick.tar.gz</code></li>
+<li><code>convert -v</code></li>
+<li>
+<p><code>Version: ImageMagick 7.0.8-13 Q16 x86_64 2018-10-22 https://imagemagick.org</code></p>
+</li>
+<li>
+<p><strong>PHP ImageMagick latest (IMagick)</strong></p>
+</li>
+<li>http://pecl.php.net/package/imagick</li>
+<li><code>curl -O -L http://pecl.php.net/get/imagick</code></li>
+<li>
+<p>Last released <code>2017-02-01   imagick-3.4.3.tgz</code></p>
+</li>
+<li>
+<p>Note: All packages within <code>$BUILD_DEPS</code> and <code>software-properties-common</code> are purged after install of Imagemagick. Not listed here.</p>
+</li>
+</ul>
+<p>The following software packages will be handled and updated by <code>composer</code>. Please note there may be further dependencies and libraries updated.</p>
+<ul>
+<li><strong>drush</strong></li>
+<li>https://www.drush.org/</li>
+<li>https://packagist.org/packages/drush</li>
+<li><code>drush --version</code></li>
+<li><code>Drush Version   :  8.1.17</code></li>
+</ul>
+<h4 id="isle-apache-software-updates-requiring-manual-changes-andor-lookups">isle-apache - Software updates requiring manual changes and/or lookups</h4>
+<ul>
+<li><strong>confd</strong></li>
+<li>https://github.com/kelseyhightower/confd/releases/download/v0.16.0/  confd-0.16.0-linux-amd64</li>
+<li>
+<p>version 0.16.0</p>
+<ul>
+<li>No upgrade available at moment</li>
+</ul>
+</li>
+<li>
+<p><strong>Adore-Djatoka</strong></p>
+</li>
+<li>https://sourceforge.mirrorservice.org/d/dj/djatoka/djatoka/1.1/adore-djatoka-1.1.tar.gz</li>
+<li>
+<p>No upgrade possible</p>
+</li>
+<li>
+<p><strong>composer</strong></p>
+</li>
+<li>https://getcomposer.org/</li>
+<li><code>/usr/local/bin/composer --version</code></li>
+<li><code>Composer version 1.7.2 2018-08-16 16:57:12</code></li>
+<li><code>wget -O composer-setup.php https://raw.githubusercontent.com/composer/getcomposer.org/2091762d2ebef14c02301f3039c41d08468fb49e/web/installer</code></li>
+<li>
+<p>You'll need to visit https://getcomposer.org/doc/faqs/how-to-install-composer-programmatically.md</p>
+<ul>
+<li>You may replace the commit hash by whatever the last commit hash is on https://github.com/composer/getcomposer.org/commits/master</li>
+<li>Or copy the hash from the last line</li>
+<li>Add it to the Dockerfile on line 201 after https://raw.githubusercontent.com/composer/getcomposer.org/</li>
+</ul>
+</li>
+<li>
+<p><strong>fits</strong></p>
+</li>
+<li>https://projects.iq.harvard.edu/fits/home</li>
+<li><code>curl -O -L https://projects.iq.harvard.edu/files/fits/files/fits-1.2.0.zip</code></li>
+<li>You'll need to visit https://projects.iq.harvard.edu/fits/home<ul>
+<li>Click the Downloads button</li>
+<li>Check the version number e.g. <code>fits-1.4.0.zip</code> and the release date <code>Nov 7, 2018</code></li>
+<li>Update the Dockerfile on lines 213 &amp; 214 with the new version.</li>
+</ul>
+</li>
+</ul>
+<h3 id="actions_1">Actions</h3>
+<ul>
+<li>
+<p>Upgraded / Rebuilt <strong>openjpeg</strong> to latest Dec 21,2018 commit https://github.com/uclouvain/openjpeg/commit/51f097e6d5754ddae93e716276fe8176b44ec548</p>
+</li>
+<li>
+<p>Upgraded Imagemagick to version <code>ImageMagick-7.0.8-34.x86_64</code></p>
+</li>
+<li>
+<p>Upgraded Composer to version <code>1.84</code></p>
+</li>
+<li>
+<p>Upgraded Drush to <code>8.2.1</code> with <code>8.1.18</code> as fallback</p>
+</li>
+<li>
+<p>Upgraded FITS to <code>1.4</code> (Nov 2018)</p>
+</li>
+<li>
+<p>Run package updates</p>
+</li>
+</ul>
+<h3 id="optional-manual-method-of-reviewing-image_5">(Optional) Manual method of reviewing image</h3>
+<ul>
+<li><code>docker run -p 80:80 -it --rm islandoracollabgroup/isle-apache:1.1 bash</code></li>
+</ul>
+<h3 id="review-build-process_1">Review &amp; Build Process</h3>
+<p>Assumptions: The <code>isle-ubuntu-basebox</code> &amp; <code>isle-tomcat</code> images have been already updated, built and pushed to Dockerhub. This image will work (build) from those foundational images.</p>
+<ul>
+<li>Start the update process with the <code>isle-apache</code> image</li>
+<li>Clone down the <strong>FORKED</strong> <code>isle-apache</code> to your local development workstation.</li>
+<li>
+<p>Create a new branch e.g. <code>ISLE-v.1.1.1</code></p>
+</li>
+<li>
+<p>Edit the following files with the version changes:</p>
+</li>
+<li>
+<p><code>Dockerfile</code></p>
+<ul>
+<li>Line 1: change the tag from <code>FROM islandoracollabgroup/isle-ubuntu-basebox:x</code> to <code>isle-ubuntu-basebox:1.1.1</code></li>
+<li>Line 195: change the composer download hash <code>COMPOSER_HASH:-x</code> to the newest one used on the composer website. (usually a long string of alpha-numeric characters)</li>
+<li>Line 196: Change <code>FITS_VERSION:-x.x.x</code> to <code>FITS_VERSION:-1.4.0</code></li>
+</ul>
+</li>
+<li>
+<p>Commit the changes to git</p>
+</li>
+<li>
+<p>Build the image</p>
+</li>
+<li>open a terminal</li>
+<li><code>cd ~/pathto/isle-apache</code></li>
+<li>
+<p><code>docker build -t islandoracollabgroup/isle-apache:1.1.1 .</code></p>
+</li>
+<li>
+<p>Test with new images</p>
+</li>
+</ul>
+<h3 id="review-build-process_2">Review &amp; Build Process</h3>
+<h4 id="example-reference-command_5">EXAMPLE / REFERENCE COMMAND</h4>
+<ul>
+<li>Review this syntax first to understand how to construct the build command that follows.</li>
+</ul>
+<pre><code>docker build \
+    --build-arg BUILD_DATE=`date -u \+&quot;%Y-%m-%dT%H:%M:%SZ&quot;` \
+    --build-arg VCS_REF=$SOURCE_COMMIT \
+    --build-arg VERSION=RC-`date -u \+&quot;%Y-%m-%dT%H:%M:%SZ&quot;` \
+    -t $IMAGE_NAME .
+</code></pre>
+
+<h4 id="example-actual-command-w-forked-commit-hash_5">EXAMPLE / ACTUAL COMMAND W/ FORKED COMMIT HASH</h4>
+<ul>
+<li>This will be the command to use and construct to build an image to push to Dockerhub. Please note that <code>VCS_REF</code> uses the last git commit hash from the forked branch on the image prior to merge in ISLE <code>master</code>.</li>
+</ul>
+<pre><code class="bash">
+docker build --build-arg BUILD_DATE=`date -u +&quot;%Y-%m-%dT%H:%M:%SZ&quot;` --build-arg VCS_REF=30d63d6db0007e3682037e5759e0ffcd9e47d203 --build-arg VERSION=RC-`date -u +&quot;%Y-%m-%dT%H:%M:%SZ&quot;` -t islandoracollabgroup/isle-apache:1.1.1 .
+
+</code></pre>
+
+<ul>
+<li>Push built images to Dockerhub with new tag
+<code>docker push islandoracollabgroup/isle-apache:1.1.1</code></li>
+</ul>
+<h3 id="tagging_2">Tagging</h3>
+<p>Suggested Outcome:
+<em> deprecate <code>2.4</code> tag to <code>1.0</code> (April 2018)
+</em> <code>1.1</code> (last image build from 11/05/2018)
+<em> <code>1.1.1</code> (new image build with sec updates 3/22/2019)
+</em> <code>latest</code> (new image build with sec updates 3/20/2019)</p>
+<ul>
+<li>deprecate the <code>development</code> tag</li>
+</ul>
+<hr />
+<h3 id="isle-mysql">isle-mysql</h3>
+<ul>
+<li>Image name: <strong>islandoracollabgroup / isle-mysql</strong> </li>
+<li>Last Build: <code>1.1 / latest</code> (Last built 5 months ago)</li>
+<li>Sept 15, 2018 was last build</li>
+<li>
+<p>This is an official image which uses <code>mysql 5.7</code></p>
+<ul>
+<li>https://github.com/docker-library/mysql/blob/bb7ea52db4e12d3fb526450d22382d5cd8cd41ca/5.7/Dockerfile
+^ Just check for this</li>
+</ul>
+</li>
+<li>
+<p><strong>MySQL</strong></p>
+</li>
+<li><code>mysql --version</code></li>
+<li><code>mysql  Ver 14.14 Distrib 5.7.23, for Linux (x86_64) using  EditLine wrapper</code></li>
+</ul>
+<h3 id="recommendations">Recommendations</h3>
+<ul>
+<li>Upgrade this image by simple reruning the build process. It will pull the newest version (<code>5.7.25-1debian9</code>)of the official image.</li>
+</ul>
+<h3 id="optional-manual-method-of-reviewing-image_6">(Optional) Manual method of reviewing image</h3>
+<ul>
+<li><code>docker run -p 3306:3306 -it --rm islandoracollabgroup/isle-mysql:1.1 bash</code></li>
+</ul>
+<h3 id="review-build-process_3">Review &amp; Build Process</h3>
+<ul>
+<li>Start the update process with the <code>isle-mysql</code> image</li>
+<li>Clone down the <strong>FORKED</strong> <code>isle-mysql</code> to your local development workstation.</li>
+<li>
+<p>Create a new branch e.g. <code>ISLE-v.1.1.1</code></p>
+</li>
+<li>
+<p>Edit the following files with the version changes:</p>
+</li>
+<li>
+<p><code>Dockerfile</code></p>
+<ul>
+<li>Line: None to be edited at this point</li>
+</ul>
+</li>
+<li>
+<p>Commit the changes to git</p>
+</li>
+<li>
+<p>Build the image</p>
+</li>
+<li>open a terminal</li>
+<li><code>cd ~/pathto/isle-mysql</code></li>
+<li>
+<p><code>docker build -t islandoracollabgroup/isle-mysql:1.1.1 .</code></p>
+</li>
+<li>
+<p>Test with new images</p>
+</li>
+<li>
+<p>Run Makefile with <code>docker-build</code> etc.</p>
+</li>
+</ul>
+<pre><code class="bash">
+docker build --build-arg BUILD_DATE=`date -u +&quot;%Y-%m-%dT%H:%M:%SZ&quot;` --build-arg VCS_REF=6473095566c24684eaf483b19169bdf87af04be5 --build-arg VERSION=RC-`date -u +&quot;%Y-%m-%dT%H:%M:%SZ&quot;` -t islandoracollabgroup/isle-mysql:1.1.1 .
+
+</code></pre>
+
+<ul>
+<li>
+<p>Push built images to Dockerhub with new tag
+<code>docker push islandoracollabgroup/isle-mysql:1.1.1</code></p>
+</li>
+<li>
+<p>Test with new image</p>
+</li>
+</ul>
+<h3 id="tagging_3">Tagging</h3>
+<p>Suggested outcome:
+<em> <code>1.0</code> (last image build from 9/14/2018)
+</em> <code>1.1</code> (last image build from 9/15/2018)
+<em> <code>1.1.1</code> (new image build with sec updates 3/25/2019)
+</em> <code>latest</code> (new image build with sec updates 3/25/2019)</p>
+<ul>
+<li>deprecate 5.6 (april 2018)</li>
+<li>fix latest from april 2018 to 3/25/2019)</li>
+</ul>
+<hr />
+<h2 id="all-images-testing">All images - Testing</h2>
+<ul>
+<li>Spin up and QC</li>
+<li>
+<p>Did all containers start?</p>
+</li>
+<li>
+<p>Install site</p>
+</li>
+<li>
+<p><code>docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh</code></p>
+</li>
+<li>
+<p>Test ingest for all content types</p>
+</li>
+</ul>
+<hr />
+<h2 id="all-images-release">All images  - Release</h2>
+<ul>
+<li>
+<p><strong>Image Code</strong> - git push image repo edits to personal / company remotes</p>
+</li>
+<li>
+<p><strong>ISLE</strong> code comment out build / context blocks and any other local dev edits</p>
+</li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.583bbe55.js"></script>
+      
+      <script>app.initialize({version:"1.0",url:{base:"../.."}})</script>
+      
+        <script src="../../extra.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>
