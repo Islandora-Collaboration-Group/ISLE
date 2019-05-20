@@ -61,7 +61,10 @@ Thumbs.db
 #===================
 # ISLE specific
 data
+<<<<<<< HEAD
 logs
+=======
+>>>>>>> docsrepo/master
 site
 new_structure.md
 passwords.md
