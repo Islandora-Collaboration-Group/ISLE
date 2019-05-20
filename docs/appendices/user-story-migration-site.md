@@ -1,0 +1,17 @@
+# User Story: Migrating an Islandora Site to ISLE
+
+Laverne's college archive runs an Islandora site on a server in the college IT data center. The site was installed and set up by a colleague who has since left. Some components are outdated and the work of maintaining the server and software stack is taking up a lot of Laverne's time. She's decided to try migrating the site to a new one built with ISLE.
+
+She begins by requesting a second server from IT - based on the [System_Requirements]. IT prefers not to give clients root-level access so they agree to make Laverne a user called islandora according to the [Host_Server_Setup] instructions and provide her with the SSH login instructions. The new server has attached storage large enough to hold a copy of the existing Fedora data store from the old server.
+
+Additionally, Laverne requests a new URL for the ISLE-based Islandora site "https://digital.university-college.edu" and ensures that IT has created DNS records so that this URL directs to the new server.
+
+Once she has access to the server and has installed the necessary software including the ISLE repository files from GitHub [Host_Server_Setup], Larverne is ready for the step-by-step [Migration_Guide]. She begins by creating a place-holder directory in the new server for all the existing Islandora site data - and copying that data over from the old server using the [migration_export_checklist] as a guide. This data will be left in the place-holder directory as a backup during the coming migration process.
+
+Laverne now creates the permanent directory structure for ISLE to use in customizing the Islandora install and re-copies the data into this structure from the place-holder directory. Since this is merely a test, she's going to skip the process of setting up an institutional Git Repository for her customization files and move on to the merge section of the guide.
+
+Working through the [migration_merge_checklist], Laverne ensures that the directories and files listed have been copied into the ISLE directory structure created above. As specified in the checklist, some of these files are slightly different in her current production Islandora. For example, the  and that they have been compared to (and in some cases merged by hand) with the stock up-to-date versions of these files that come with ISLE. This turns out to be the most complex part of the entire migration process and Laverne reaches out to the [ISLE_Group_List] for assistance with a couple of the configuration files that had been edited in the past by the colleague who set up the original Islandora system.
+
+Finally, she makes the necessary edits to the docker-compose.yml file to add the necessary connection specific information. This is where she will insert the new URL and IP addresses along with a number of other site-specific customizations [migration_docker_compose_checklist].
+
+Now she can enter the commands from the [Migration_Guide] to download the container images from Dockerhub and start them according to the instructions. After the Fedora container is up and running, Laverne follows the steps to test that all is well and sees a running Tomcat server w/ a list of running applications including fedora and Fedoragsearch. After starting the remaining containers, Laverne runs the Apache install script. If all goes well the next step will be to point a browser at the new URL and see a working Islandora site!
