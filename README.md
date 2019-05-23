@@ -8,7 +8,7 @@ The ISLE [project maintainers](#maintainers) keep your Islandora stack smoothly 
 ISLE is quite flexible and may be run on an institution’s servers or in the cloud, or as a hybrid; similarly, it may be maintained by an institution’s staff, by a vendor, or as a shared project.
 
 ## Documentation
-Please use the [ISLE Documentation](https://islandora-collaboration-group.github.io/ISLE-Documentation/) for using ISLE to install Islandora on server environments.
+Please use the [ISLE Documentation](https://islandora-collaboration-group.github.io/ISLE) for using ISLE to install Islandora on server environments.
 
 ## Quick Start Guide
 **Important:** This "Quick Start Guide" is for testing ISLE and **should not** be used in production. 
@@ -63,7 +63,7 @@ If you have been testing the stack extensively you may want to `prune` your Dock
 **Note that both HTTP and HTTPS work** Please accept the self-signed certificate for testing when using HTTPS.
 
 #### Locations, Ports:
-* Make sure your /etc/hosts points isle.localdomain to 127.0.0.1. See original docs on how-to.
+* Make sure your /etc/hosts points isle.localdomain to 127.0.0.1. See original docs on [how-to](docs/install/install-demo-edit-hosts-file.md)
 * Islandora is available at http://isle.localdomain
   * **You may need to point directly to the IP address of isle-apache, here's how:**
     - `docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' isle-apache-ld`
