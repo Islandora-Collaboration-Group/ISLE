@@ -4,47 +4,28 @@ version: '3'
 ## Updated 2019-03-27 - Release 1.1.1 (@ 1.1.1)
 
 services:
-  isle-portainer: ## Renamed to avoid conflicts on systems/servers with portainer already running.
-    image: portainer/portainer
-    container_name: isle-portainer-${CONTAINER_SHORT_ID}
-    command: -H unix:///var/run/docker.sock --no-auth
-    networks:
-      - isle-internal
-    ports:
-      - "9010:9000" ## Remapped to avoid conflicts on systems/servers with portainer already running.
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - isle-portainer-data:/data
-    labels:
-      - traefik.port=9000
-      - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
-      - traefik.enable=true  ## NOT SAFE FOR PRODUCTION! ##
-      - "traefik.frontend.rule=Host:portainer.${BASE_DOMAIN};"
 
   mysql:
-    # build:
-    #   context: ../images/isle-mysql
     image: islandoracollabgroup/isle-mysql:1.1.1
     container_name: isle-mysql-${CONTAINER_SHORT_ID}
-    environment:
-      - MYSQL_ROOT_PASSWORD
+    # environment:
+    #   - MYSQL_ROOT_PASSWORD
+    env_file:
+      - local.env
     networks:
       - isle-internal
     volumes:
       - isle-db-data:/var/lib/mysql
-      - isle-mysql-log:/var/log/mysql
+      # - isle-mysql-log:/var/log/mysql
 
   fedora:
-    # build:
-    #   context: ../images/isle-fedora
     image: islandoracollabgroup/isle-fedora:1.1.1
     container_name: isle-fedora-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=768M
       - JAVA_MIN_MEM=128M
-    env_file: 
-      - tomcat.env
-      - .env
+    env_file:
+      - local.env
     networks:
       - isle-internal
     ports:
@@ -58,19 +39,17 @@ services:
       - isle-fedora-resourceIndex:/usr/local/fedora/data/resourceIndex # Migrators change this to your local RI folder.
       - isle-fedora-activemq:/usr/local/fedora/data/activemq-data # Migrators change this to your local MQ folder.
       - isle-fedora-XACML:/usr/local/fedora/data/fedora-xacml-policies
-      - ./logs/fedora/fcrepo:/usr/local/fedora/server/logs
-      - ./logs/fedora/tomcat:/usr/local/tomcat/logs
+      # - ./logs/fedora/fcrepo:/usr/local/fedora/server/logs
+      # - ./logs/fedora/tomcat:/usr/local/tomcat/logs
 
   solr:
-    # build:
-    #   context: ../images/isle-solr
     image: islandoracollabgroup/isle-solr:1.1.1
     container_name: isle-solr-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=512M
       - JAVA_MIN_MEM=0
     env_file:
-      - tomcat.env
+      - local.env
     networks:
       - isle-internal
     ports:
@@ -79,19 +58,16 @@ services:
       - mysql
     volumes:
       - isle-solr-data:/usr/local/solr
-      - ./logs/solr:/usr/local/tomcat/logs
+      # - ./logs/solr:/usr/local/tomcat/logs
 
   image-services:
-    # build:
-    #   context: ../images/isle-imageservices
     image: islandoracollabgroup/isle-imageservices:1.1.1
     container_name: isle-images-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=512M
       - JAVA_MIN_MEM=0
-    env_file: 
-      - tomcat.env
-      - .env
+    env_file:
+      - local.env
     networks:
       - isle-internal
     depends_on:
@@ -99,20 +75,18 @@ services:
       - fedora
     ports:
       - "8083:8080"
-    volumes:
-      - ./logs/imageservices:/usr/local/tomcat/logs
+    # volumes:
+    #   - ./logs/imageservices:/usr/local/tomcat/logs
     labels:
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
       - traefik.enable=false
       - "traefik.frontend.rule=Host:images.${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
 
   apache:
-    # build:
-    #   context: ../images/isle-apache
     image: islandoracollabgroup/isle-apache:1.1.1
     container_name: isle-apache-${CONTAINER_SHORT_ID}
-    env_file: 
-      - .env
+    env_file:
+      - local.env
     networks:
       isle-internal:
     depends_on:
@@ -121,9 +95,9 @@ services:
       - solr
       - traefik
     volumes:
-      - isle-apache-data:/var/www/html
-      - ./logs/apache/httpd:/var/log/apache2
-      - ./logs/apache/fits:/var/log/fits
+      - ./data/isle-apache-data:/var/www/html:cached
+      # - ./logs/apache/httpd:/var/log/apache2
+      # - ./logs/apache/fits:/var/log/fits
     labels:
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
       - traefik.enable=true
@@ -135,6 +109,8 @@ services:
     networks:
       isle-internal:
       isle-external:
+    env_file:
+      - local.env
     ports:
       - "80:80"
       - "443:443"
@@ -155,10 +131,9 @@ networks:
 
 volumes:
   isle-db-data:
-  isle-mysql-log:
+  # isle-mysql-log:
   isle-solr-data:
   isle-apache-data:
-  isle-portainer-data:
   isle-fedora-datastreamStore:
   isle-fedora-objectStore:
   isle-fedora-resourceIndex:
