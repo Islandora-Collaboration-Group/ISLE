@@ -38,8 +38,8 @@ services:
     image: islandoracollabgroup/isle-fedora:1.1.1
     container_name: isle-fedora-${CONTAINER_SHORT_ID}
     environment:
-      - JAVA_MAX_MEM=768M
-      - JAVA_MIN_MEM=128M
+      - JAVA_MAX_MEM=2048M
+      - JAVA_MIN_MEM=256M
     env_file:
       - staging.env
     networks:
@@ -62,8 +62,8 @@ services:
     image: islandoracollabgroup/isle-solr:1.1.1
     container_name: isle-solr-${CONTAINER_SHORT_ID}
     environment:
-      - JAVA_MAX_MEM=512M
-      - JAVA_MIN_MEM=0
+      - JAVA_MAX_MEM=2048M
+      - JAVA_MIN_MEM=256M
     env_file:
       - staging.env
     networks:
@@ -80,8 +80,8 @@ services:
     image: islandoracollabgroup/isle-imageservices:1.1.1
     container_name: isle-images-${CONTAINER_SHORT_ID}
     environment:
-      - JAVA_MAX_MEM=512M
-      - JAVA_MIN_MEM=0
+      - JAVA_MAX_MEM=2048M
+      - JAVA_MIN_MEM=256M
     env_file:
       - staging.env
     networks:
