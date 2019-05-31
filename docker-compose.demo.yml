@@ -104,6 +104,7 @@ services:
     image: islandoracollabgroup/isle-apache:1.1.1
     container_name: isle-apache-${CONTAINER_SHORT_ID}
     env_file:
+      - .env
       - demo.env
     networks:
       isle-internal:
