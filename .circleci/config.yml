@@ -1,0 +1,92 @@
+version: 2
+jobs:
+  build:
+    machine: true
+    working_directory: ~/born-digital
+    parallelism: 1
+    shell: /bin/bash --login
+    parameters:
+      full_ingest:
+        type: boolean
+        default: false
+    steps:
+      - checkout
+
+      - run:
+          name: Fetch bd sample repo
+          command: |
+            cp .circleci/fetch-key* ~/.ssh/
+            mkdir data
+            cd data
+            git clone git@github.com:Born-Digital-US/isle-ingest-samples.git data/isle-apache-data/isle-ingest-samples
+      # - run: docker-compose pull
+      - run: docker-compose up -d
+      - run: sleep 40 # sleep reduced because the next line takes some time
+      # - run: sudo apt-get update && sudo apt --fix-broken install -y
+      - run:
+          name: Start container and verify it's working
+          command: |
+            set -x
+            docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh
+      - run:
+          name: Drush en dependencies
+          command: |
+            docker exec -it isle-apache-ld bash -c "cd /var/www/html && drush -y -u 1 en islandora_batch"
+            docker exec -it isle-apache-ld bash -c "cd /var/www/html/sites/all/modules/islandora && git clone https://github.com/mjordan/islandora_batch_with_derivs.git"
+            docker exec -it isle-apache-ld bash -c "cd /var/www/html && drush -y -u 1 en islandora_batch_with_derivs"
+            docker exec -it isle-apache-ld bash -c "cd /var/www/html && drush -y -u 1 en islandora_book_batch"
+            docker exec -it isle-apache-ld bash -c "cd /var/www/html && drush -y -u 1 en islandora_newspaper_batch"
+            docker exec -it isle-apache-ld bash -c "cd /var/www/html/sites/all/modules/islandora && git clone https://github.com/MarcusBarnes/islandora_compound_batch.git"
+            docker exec -it isle-apache-ld bash -c "cd /var/www/html && drush -y -u 1 en islandora_compound_batch"
+            docker exec -it isle-apache-ld bash -c "cd /var/www/html && drush dis overlay -y"
+            sudo -- sh -c "echo 127.0.0.1 isle.localdomain >> /etc/hosts"
+
+      - run:
+          name: Set up for BEHAT on remote server
+          command: |
+            docker exec -it isle-apache-ld bash -c "cd /var/www/html/ && git clone https://github.com/Born-Digital-US/isle-ingest-samples.git"
+            docker exec -it isle-apache-ld bash -c "ln -s /var/www/html/isle-ingest-samples/behat /var/www/html/sites/behat"
+            docker exec -it isle-apache-ld bash -c "mkdir /tmp/artifacts"
+            docker exec -it isle-apache-ld bash -c "mkdir /var/www/html/isle-ingest-samples/behat/debug/logs/"
+            docker exec -it isle-apache-ld bash -c "chown -R islandora:www-data /var/www/html/isle-ingest-samples/behat"
+            docker exec -it isle-apache-ld bash -c "cd /var/www/html/sites/behat && composer install "
+
+      - run:
+          name: Ingest base collection
+          command: |
+            docker exec -it isle-apache-ld bash -c "cd /var/www/html && drush -u 1 islandora_batch_with_derivs_preprocess --key_datastream=MODS --scan_target=/var/www/html/isle-ingest-samples/Batches-by-CModel/Collections/files --use_pids=true --namespace=samples --parent=islandora:root --content_models=islandora:collectionCModel"
+            docker exec -it isle-apache-ld bash -c "cd /var/www/html && drush -u 1 islandora_batch_ingest"
+          # no_output_timeout: 20m
+
+  # test:
+  #   machine: true
+  #   working_directory: ~/born-digital
+  #   parallelism: 1
+  #   shell: /bin/bash --login
+  #   parameters:
+  #     full_ingest:
+  #       type: boolean
+  #       default: false
+  #   steps:
+      # - run: docker-compose up -d
+      # - run: sleep 40
+      - run:
+          name: Actually run the behat tests
+          command: docker exec -it isle-apache-ld bash -c "cd /var/www/html/sites/behat && php behat --tags apache --verbose"
+      - run:
+          name: Move artifacts
+          command: |
+            docker cp isle-apache-ld:/var/www/html/sites/behat/results/ /tmp/artifacts
+            docker cp isle-apache-ld:/var/www/html/sites/behat/debug/ /tmp/artifacts
+
+      - store_artifacts:
+          path: /tmp/artifacts
+
+# workflows:
+#   version: 2
+#   build-and-test: # sequentially
+#     jobs:
+#       - build
+#       - test:
+#           requires:
+#             - build
