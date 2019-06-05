@@ -22,7 +22,7 @@
   
   * A new Fedora image that has slight image and functional changes is required to be used in tandem with Blazegraph. These image changes are primarily edits to the `fedora.fcg` file to use Blazegraph instead of Mulgara. 
   
-  * Additionally, a new `confd` configuration within the Fedora image and linked environmental variable has been added to the `.env` to allow users to "toggle" between Blazegraph and Mulgara as desired. In the event a user toggles between either desired triplestore, a reindex of the Fedora repository is required. With Fedora repositories of 600K+ objects or more, **the indexing process will take hours to days** depending on the complexity of the object relationships, ontology etc.
+  * Additionally, a new `confd` configuration within the Fedora image and linked environmental variable has been added to the `.env` to allow users to "toggle" between Blazegraph and Mulgara as desired. In the event a user toggles between either desired triplestore, a reindex of the Fedora repository is required. With Fedora repositories of 600K+ objects or more, **the indexing process will take double-digit hours to days** depending on the complexity of the object relationships, ontology etc.
 
 * No new software is required to be installed on the ISLE host machine, only new Docker containers, images and configurations are added to the ISLE platform.
 
@@ -101,7 +101,17 @@
 
 #### Blazegraph Edits - docker-compose.yml file
 
-* Add a new service to your docker-compose file:
+* For Phase II UAT testing of TICK, Blazegraph and Varnish please change the following image tags of these services from `1.1.1` to `dashboards-dev`
+  * Apache
+      * `image: islandoracollabgroup/isle-apache:1.1.1` should now become `image: islandoracollabgroup/isle-apache:dashboards-dev`
+  * Image-services
+      * `image: islandoracollabgroup/isle-imageservices:1.1.1` should now become `image: islandoracollabgroup/isle-imageservices:dashboards-dev`
+  * MySQL 
+    * `image: islandoracollabgroup/isle-mysql:1.1.1` should now become `image: islandoracollabgroup/isle-mysql:dashboards-dev`
+  * Solr
+    * `image: islandoracollabgroup/isle-solr:1.1.1` should now become `image: islandoracollabgroup/isle-solr:dashboards-dev`
+
+* Add the new `Blazegraph`service to your docker-compose file:
 
 ```bash
 isle-blazegraph:
@@ -113,34 +123,35 @@ isle-blazegraph:
       - JAVA_MAX_MEM=4096M
       - JAVA_MIN_MEM=1024M
     env_file:
-      - tomcat_blazegraph.env
+      - tomcat.env
     networks:
       - isle-internal
     ports:
       - "8084:8080"
     volumes:
       - isle-blazegraph-data:/var/bigdata
-    logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
 ```
 
-#### Blazegraph Edits - tomcat_blazegraph file
-
-* Create a new `tomcat_blazegraph.env` file
-  * Add the following below to this file.
-  * For the `TOMCAT_ADMIN_PASS` and `TOMCAT_MANAGER_PASS`: 
-    * Remove the word `r3m0v3th1sp@ssw0rd` below. 
-    * Add a unique 20+ alpha-numeric password of your choice after the `=` sign
-    * Ensure that the first character is lined up against the `=` sign.
+* Edit the `Fedora` service definition so that the default Fedora tag (1.1.1. as of June 5,2019_)is replaced with the `isle-fedora:blazegraph.dashboards-dev` image for use with Blazegraph. This Fedora image is configured to use either the Blazegraph or default Mulgara triplestore. By default it is set to Mulgara  
 
 ```bash
-TOMCAT_ADMIN_USER=admin
-TOMCAT_ADMIN_PASS=r3m0v3th1sp@ssw0rd
-TOMCAT_MANAGER_USER=manager
-TOMCAT_MANAGER_PASS=r3m0v3th1sp@ssw0rd
+  fedora:
+    # build:
+    #   context: ../images/isle-fedora
+    image: islandoracollabgroup/isle-fedora:1.1.1
 ```
+
+becomes
+
+```bash
+
+ fedora:
+    # build:
+    #   context: ../images/isle-fedora
+    image: islandoracollabgroup/isle-fedora:blazegraph.dashboards-dev
+```
+
+---
 
 #### Blazegraph Edits - .env file
 
@@ -305,6 +316,10 @@ BLAZEGRAPH_BIGDATA_RULE_LOG=INFO
 
 * Add another new block of ENV variables to your main .env file. Underneath the `### Fedora internal call password ` section and above the `## End Fedora Repository` section is ideal.
 
+  * If using Blazegraph, you will have to change the `FEDORA_RESOURCE_INDEX=mulgara` to `FEDORA_RESOURCE_INDEX=blazegraph`
+
+  * Whether using Mulgara or Blazegraph, please leave the `FEDORA_WEBAPP_HOME` value to the default below.
+
 ```bash
 ### Fedora Resource Index
 #
@@ -314,7 +329,7 @@ BLAZEGRAPH_BIGDATA_RULE_LOG=INFO
 # If you would like to use blazegraph instead, you'll also need to use its image
 # https://github.com/Islandora-Collaboration-Group/isle-blazegraph
 # Please note: If you mistype or leave this value blank, more than likely Fedora won't work properly.
-FEDORA_RESOURCE_INDEX=blazegraph
+FEDORA_RESOURCE_INDEX=mulgara
 
 # Set below as a variable for Fedora to start up properly, helps with env-set.sh 
 FEDORA_WEBAPP_HOME=/usr/local/tomcat/webapps/fedora
@@ -322,23 +337,51 @@ FEDORA_WEBAPP_HOME=/usr/local/tomcat/webapps/fedora
 ## End Fedora Repository
 ```
 
----
+* Pull down the new isle images
+  * `docker-compose pull`
 
-## Troubleshooting
+* Spin up new containers
+  * `docker-compose up -d`
 
-*
-*
+* Wait a few minutes (_3 - 8 depending on the size of your site_) for the site and services to come up.
 
----
+#### Check Fedora
 
-## Release Notes
+* Q: Does Fedora start up properly?
+  * Navigate to your domain e.g. http://yourdomain:8081/manager/html or 
+  * Login using the correct admin / tomcat pw ) (check tomcat.env)
+  * Click on the Fedora link or navigate to http://yourdomain:8081/fedora/objects and click search. 
+  * Objects might appear if working but they should only be a small amount of content models at this point.
 
-*
-*
+* If you have switched to Blazegraph, then you'll need to re-index the Fedora repository so that the new Blazegraph triplestore is used instead of the previously used Mulgara triplestore. 
 
----
+  * **WARNING** - With Fedora repositories of 600K+ objects or more, **these indexing processes will take double-digit hours to days** depending on the complexity of the object relationships, ontology etc. 
+  
+  * When re-indexing in this manner, we recommend the use of the `screen` program which will allow an end-user to disengage from a long continuous bash session and terminal based command without breaking the process.
 
-## Additional Resources
+    * You may need to install `screen` on your ISLE host server.
+      * Ubuntu - `sudo apt-get install screen`
+      * CentOS - `sudo yum install screen`
+
+  * Once installed simply run `screen` in your terminal. You might be instructed to hit the Spacebar or the Return key to proceed with the `screen` session.
+
+  * `docker-exec -it isle-fedora-ld bash`
+  
+  * `cd utility_scripts`
+
+  * `./rebuildFedora.sh`
+
+  * This process should start spewing out a large column of data
+
+  * To disengage hold down the `control` key and the `a` key, then tap the `d` key. This will get you out of the screen session. 
+
+  * To check on the progress, simply type `screen -r`, check the progress and then disengage again.
+
+  * Once that is complete run the SOLR reindex script
+    * `docker-exec -it isle-fedora-ld bash -c "/bin/sh /utility_scripts/updateSolrIndex.sh`
+
+* Verify it's working by:
+  * Navigating to https://yourdomain and you can still see the Drupal site. This may take a few minutes depending on the size of the site.
 
 ### Check the Blazegraph triples count
 
@@ -368,6 +411,26 @@ SELECT (COUNT(*) AS ?triples) WHERE {?s ?p ?o}
 ```
 
 * This value should increase as more objects are ingested and indexed by Fedora. The difference is that instead of these values being in the previously used Mulgara triplestore, they are now handled by Blazegraph.
+
+---
+
+## Troubleshooting
+
+*
+*
+
+---
+
+## Release Notes
+
+*
+*
+
+---
+
+## Additional Resources
+
+
 
 
 ## Need help?

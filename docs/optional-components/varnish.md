@@ -109,7 +109,7 @@
       - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
   ```
 
-* Please note: if you intend to use TICK with Varnish please change the following image tags of these services from `1.1.1` to `dashboards-dev`
+* For Phase II UAT testing of TICK, Blazegraph and Varnish please change the following image tags of these services from `1.1.1` to `dashboards-dev`
   * Apache
       * `image: islandoracollabgroup/isle-apache:1.1.1` should now become `image: islandoracollabgroup/isle-apache:dashboards-dev`
   * Fedora
