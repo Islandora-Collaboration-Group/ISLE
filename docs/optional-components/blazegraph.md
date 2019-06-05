@@ -8,9 +8,7 @@
 
 * Several paragraphs describing the functional differences between Blazegraph and Mulgara
   
-  * [Blazegraph™](https://www.blazegraph.com/) is a ultra high-performance graph database supporting Apache TinkerPop™ and RDF/SPARQL APIs. It supports up to 50 Billion edges on a single machine. Formerly known as BigData.
-
-* Setting expectations for the upgrade.
+  * The new `isle-blazegraph` image was built using [Blazegraph™](https://www.blazegraph.com/) which is a ultra high-performance graph database supporting Apache TinkerPop™ and RDF/SPARQL APIs. It supports up to 50 Billion edges on a single machine. Formerly known as BigData. The intended use is solely for maintaining performant support of large Fedora repositories containing millions of objects.
 
   * Why use this component with ISLE?
     * Islandora users who have Fedora repositories with over 600K~ objects ingested have reported issues with using the default Mulgara triplestore used for indexing objects ingested into the Fedora repository. These issues include crashes, extreme performance slowdowns,system timeouts and more. Blazegraph is used to replace Mulgara as the triplestore and to deliver a higher level of performance for larger Fedora repositories. Please note the threshold given above for object count is an compilation of the anecdotal ranges gathered by the Islandora community. In some cases the number is as low as 600K~ when endusers report challenges, others haven't encountered issues until the 1 million object count.
@@ -21,14 +19,23 @@
 * Additional notes commenting on tradeoffs in removing Mulgara
 
 * Additional notes concerning administrative overhead and/or necessary process changes
+  
   * A new Fedora image that has slight image and functional changes is required to be used in tandem with Blazegraph. These image changes are primarily edits to the `fedora.fcg` file to use Blazegraph instead of Mulgara. 
+  
   * Additionally, a new `confd` configuration within the Fedora image and linked environmental variable has been added to the `.env` to allow users to "toggle" between Blazegraph and Mulgara as desired. In the event a user toggles between either desired triplestore, a reindex of the Fedora repository is required. With Fedora repositories of 600K+ objects or more, **the indexing process will take hours to days** depending on the complexity of the object relationships, ontology etc.
 
 * No new software is required to be installed on the ISLE host machine, only new Docker containers, images and configurations are added to the ISLE platform.
 
 ## Systems Requirements
 
-* ISLE running system using the following images and tags from Docker-Hub:
+* [ISLE](https://github.com/Islandora-Collaboration-Group/ISLE) release version `1.1.1`
+  * `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
+
+### ISLE Images
+
+* Following the installation steps below, an enduser will configure  / edit their ISLE running system(s) to ultimately use the following images and tags from Docker-Hub:
+
+(_These tags are for usage during Phase II Sprints only and will change during the release process._)
 
 (_Phase II Sprints only_)
 
@@ -44,9 +51,6 @@
 | Traefik | [traefik/traefik](https://hub.docker.com/_/traefik) | `1.7.9` |
 
 
-* [ISLE](https://github.com/Islandora-Collaboration-Group/ISLE) release version `1.1.1` 
-  * `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
-  
 * Additional systems overhead, including:
   
   * Add an additional 2 GB RAM in total ISLE Host memory for Blazegraph to run
@@ -61,35 +65,262 @@
 
 ---
 
-## Assumptions
+## Adoption Process Overview
 
-* Assumes you have a running ISLE system using the `dashboards-dev` images
+*
 
-* Assumes you've configured your ISLE system to use Blazegraph
-
-* Assumes port 8084 is not open to the public Internet only to select trusted administrators.
+*
 
 ---
 
-## Installation / Use with ISLE
+## Installation Instructions
 
-*
-*
-*
+### Assumptions
 
+* Prior to installation, enduser will have a running ISLE system using the current release of `1.1.1.` images.
+
+* This installation process will give the functionality as stated in the `Systems Requirements` image table above for `Blazegraph` testing and even `TICK` stack usage.
+
+* Assumes you're prepared to configure your ISLE system to use Blazegraph instead of the default Mulgara triplestore.
+
+* Assumes the new Blazegraph port `8084` will not be open to the public Internet only to select trusted administrators.
+
+---
+
+### Installation
+
+* Shut down your running containers
+  * `docker-compose down`
+
+* Make the below mentioned edits to:
+  * `docker-compose.yml` file
+  * `.env` file
 ---
 
 ## Installation
 
-*
-*
+#### Blazegraph Edits - docker-compose.yml file
 
----
+* Add a new service to your docker-compose file:
 
-### Docker-compose.yml edits
+```bash
+isle-blazegraph:
+    #build:
+    #  context: ./images/isle-blazegraph
+    image: islandoracollabgroup/isle-blazegraph:dashboards-dev
+    container_name: isle-blazegraph-${CONTAINER_SHORT_ID}
+    environment:
+      - JAVA_MAX_MEM=4096M
+      - JAVA_MIN_MEM=1024M
+    env_file:
+      - tomcat_blazegraph.env
+    networks:
+      - isle-internal
+    ports:
+      - "8084:8080"
+    volumes:
+      - isle-blazegraph-data:/var/bigdata
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
+```
 
-*
-*
+#### Blazegraph Edits - tomcat_blazegraph file
+
+* Create a new `tomcat_blazegraph.env` file
+  * Add the following below to this file.
+  * For the `TOMCAT_ADMIN_PASS` and `TOMCAT_MANAGER_PASS`: 
+    * Remove the word `r3m0v3th1sp@ssw0rd` below. 
+    * Add a unique 20+ alpha-numeric password of your choice after the `=` sign
+    * Ensure that the first character is lined up against the `=` sign.
+
+```bash
+TOMCAT_ADMIN_USER=admin
+TOMCAT_ADMIN_PASS=r3m0v3th1sp@ssw0rd
+TOMCAT_MANAGER_USER=manager
+TOMCAT_MANAGER_PASS=r3m0v3th1sp@ssw0rd
+```
+
+#### Blazegraph Edits - .env file
+
+* Due to the usage of `dashboards-dev` images and an upcoming ISLE release that will by default change ISLE's log handling, the following block of ENV variables need to be added to your main .env for the `dashboards-dev` images to work in testing.
+
+* Add this new block of ENV variables to your main .env file beneath all other defined services but above the `###################### Please stop editing! #######################` section is ideal.
+
+```bash
+
+###################### LOGS ######################
+# Endusers can change log levels here for debugging
+# Changing log levels will require a container restart.
+
+## Apache Container Logs and Levels
+#
+### Apache Error log - lowercase only please
+# This log is a combination of the Apache web server error and access log 
+# for the domain. Please note it will register only web traffic from the
+# the traefik container.
+#
+# Available output values range from most verbose to least (left to right): 
+# trace8, ..., trace1, debug, info, notice, warn, error, crit, alert, emerg
+#
+### Recommended level is warn
+APACHE_ERROR_LOGLEVEL=warn
+
+## FITS Tool Set Log and Levels
+# The File Information Tool Set (FITS) identifies, validates and extracts technical 
+# metadata for a wide range of file formats.
+# Use the following logs below to debug ingests of PDF, Video, audio and more.
+# 
+# Available output values range from most verbose to least (left to right): 
+# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
+#
+### Recommended levels are ERROR or FATAL
+#
+# Use these logs for general purpose debugging
+FITS_ROOTLOGGER_LOG_LEVEL=ERROR
+FITS_CONSOLE_LOG_LEVEL=ERROR
+
+FITS_UK_GOV_NATIONALARCHIVES_DROID_LOG_LEVEL=FATAL
+FITS_EDU_HARVARD_HUL_OIS_JHOVE_LOG_LEVEL=FATAL
+FITS_ORG_APACHE_TIKA_LOG_LEVEL=ERROR
+FITS_NET_SF_LOG_LEVEL=ERROR
+FITS_ORG_APACHE_PDFBOX_LOG_LEVEL=ERROR
+
+## Fedora Container Loggers and Levels
+#
+# These logs contain information and output concerning the Fedora Commons Repository
+#
+# Available output values range from most verbose to least (left to right): 
+# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
+#
+### Recommended levels are WARN
+#
+# Use these two logs below for general purpose debugging of Fedora
+# Main FEDORA Logger
+FEDORA_ORG_FCREPO_LOG=WARN
+# All other Fedora loggers default level
+FEDORA_ROOT_LOG=WARN
+
+# Fedora Apache CXF™ services framework logger
+FEDORA_ORG_APACHE_CXF_LOG=WARN
+
+# Fedora Security Loggers previously known as the fesl.log
+# This log is typically used for auditing and logging access to Fedora
+FEDORA_ORG_FCREPO_SERVER_SECURITY_JAAS_LOG=WARN
+FEDORA_ORG_FCREPO_SERVER_SECURITY_XACML_LOG=WARN
+
+# Fedora Gsearch logs
+#
+# These logs contain information and output concerning the interaction of Fedora, Gsearch and 
+# Solr Search. Given that most output is the result of successful Gsearch transforms & Solr search queries
+# It is highly recommended that these logs be set to WARN due to the large amount of output.
+#
+# Available output values range from most verbose to least (left to right): 
+# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
+#
+### Recommended levels are WARN
+# 
+# Use these two logs below for general purpose debugging of Fedoragsearch
+GSEARCH_DK_DEFXWS_FEDORAGSEARCH_LOG=WARN
+GSEARCH_ROOT_LOG=WARN
+
+# All other Gsearch loggers default level. 
+# Change levels below only for a larger scale of debugging.
+### Recommended levels are WARN
+GSEARCH_DK_DEFXWS_FGSZEBRA_LOG=WARN
+GSEARCH_DK_DEFXWS_FGSLUCENE_LOG=WARN
+GSEARCH_DK_DEFXWS_FGSSOLR_LOG=WARN
+
+
+## Image Services Container Logs and Levels
+# These logs contain information and output concerning the two image servers
+# Cantaloupe and Adore-Djatoka.
+# 
+# Available output values range from most verbose to least (left to right): 
+# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
+#
+### Recommended levels are ERROR
+#
+# Adore-Djatoka
+ADORE_DJATOKA_ROOT_LOGGER=ERROR
+
+# Cantaloupe (change this one first to debug)
+# Cantaloupe loggers appear to prefer loglevels to be lowercase.
+# otherwise values fail.
+#
+# Available output values range from most verbose to least (left to right): 
+# `trace`, `debug`, `info`, `warn`, `error`, `all`, or `off`
+#
+### Recommended level is error
+CANTALOUPE_LOG_APPLICATION_LEVEL=error
+
+##### SOLR Log Levels #####
+# These logs contain information and output concerning the Solr Search
+# Given that most output is the result of successful Solr search queries
+# It is highly recommended that these logs be set to OFF or WARN due to the
+# large amount of output.
+#
+# Available output values range from most verbose to least (left to right): 
+# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
+#
+### Recommended levels are WARN or OFF
+#
+# Main Solr log (change this one first to debug)
+SOLR_ROOT_LOGGER=WARN
+# These logs most likely can be kept at their default levels of WARN and for the third OFF.
+SOLR_ORG_APACHE_ZOOKEEPER_LOG=WARN
+SOLR_ORG_APACHE_HADOOP_LOG=WARN
+SOLR_ORG_APACHE_SOLR_UPDATE_LOGGINGINFORSTREAM=OFF
+
+## End Logs
+```
+
+* Add another new block of ENV variables to your main .env file. Above the logging section and beneath all other defined services is fine. These ENV variables are for Blazegraph logging.
+
+```bash
+
+## Blazegraph
+# These logs contain information and output concerning the Blazegraph
+# graph-database and Fedora triplestore
+# 
+# Available output values range from most verbose to least (left to right): 
+# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
+#
+### Recommended levels are WARN for all logs except the Rule execution log otherwise
+# performance issues could occur. This is a lot of data suddenly being logged. Only
+# Use in the event of needed issue debugging. Otherwise do not change from default settings.
+#
+# Change these log levels below for only for general purpose debugging of Blazegraph
+# Default setting is: WARN
+BLAZEGRAPH_ROOT_CATEGORY_LOG=WARN
+BLAZEGRAPH_BIGDATA_LOG=WARN
+BLAZEGRAPH_BIGDATA_BTREE_LOG=WARN
+
+# Rule execution log.
+# Default setting is: INFO
+BLAZEGRAPH_BIGDATA_RULE_LOG=INFO
+
+```
+
+* Add another new block of ENV variables to your main .env file. Underneath the `### Fedora internal call password ` section and above the `## End Fedora Repository` section is ideal.
+
+```bash
+### Fedora Resource Index
+#
+# Only one of two values (mulgara) or (blazegraph) can be used below for FEDORA_RESOURCE_INDEX 
+# By DEFAULT the value of (mulgara) is used to set which type of Fedora Resource Index can be used
+# https://wiki.duraspace.org/display/FEDORA38/Resource+Index
+# If you would like to use blazegraph instead, you'll also need to use its image
+# https://github.com/Islandora-Collaboration-Group/isle-blazegraph
+# Please note: If you mistype or leave this value blank, more than likely Fedora won't work properly.
+FEDORA_RESOURCE_INDEX=blazegraph
+
+# Set below as a variable for Fedora to start up properly, helps with env-set.sh 
+FEDORA_WEBAPP_HOME=/usr/local/tomcat/webapps/fedora
+
+## End Fedora Repository
+```
 
 ---
 

@@ -71,7 +71,7 @@
 
 * Prior to installation, enduser will have a running ISLE system using the current release of `1.1.1.` images.
 
-* This installation process will give the functionality as stated in the `Systems Requirements` image table above for `Varnish` testing and TICK stack usage.
+* This installation process will give the functionality as stated in the `Systems Requirements` image table above for `Varnish` testing and even `TICK` stack usage.
 
 ### Installation
 
@@ -196,7 +196,140 @@ becomes
 ---
 
 #### Varnish Edits - .env file
-* Add a new block of ENV variables to your main .env file:
+
+* Due to the usage of `dashboards-dev` images and an upcoming ISLE release that will by default change ISLE's log handling, the following block of ENV variables need to be added to your main .env for the `dashboards-dev` images to work in testing.
+
+* Add this new block of ENV variables to your main .env file beneath all other defined services but above the `###################### Please stop editing! #######################` section is ideal.
+
+```bash
+
+###################### LOGS ######################
+# Endusers can change log levels here for debugging
+# Changing log levels will require a container restart.
+
+## Apache Container Logs and Levels
+#
+### Apache Error log - lowercase only please
+# This log is a combination of the Apache web server error and access log 
+# for the domain. Please note it will register only web traffic from the
+# the traefik container.
+#
+# Available output values range from most verbose to least (left to right): 
+# trace8, ..., trace1, debug, info, notice, warn, error, crit, alert, emerg
+#
+### Recommended level is warn
+APACHE_ERROR_LOGLEVEL=warn
+
+## FITS Tool Set Log and Levels
+# The File Information Tool Set (FITS) identifies, validates and extracts technical 
+# metadata for a wide range of file formats.
+# Use the following logs below to debug ingests of PDF, Video, audio and more.
+# 
+# Available output values range from most verbose to least (left to right): 
+# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
+#
+### Recommended levels are ERROR or FATAL
+#
+# Use these logs for general purpose debugging
+FITS_ROOTLOGGER_LOG_LEVEL=ERROR
+FITS_CONSOLE_LOG_LEVEL=ERROR
+
+FITS_UK_GOV_NATIONALARCHIVES_DROID_LOG_LEVEL=FATAL
+FITS_EDU_HARVARD_HUL_OIS_JHOVE_LOG_LEVEL=FATAL
+FITS_ORG_APACHE_TIKA_LOG_LEVEL=ERROR
+FITS_NET_SF_LOG_LEVEL=ERROR
+FITS_ORG_APACHE_PDFBOX_LOG_LEVEL=ERROR
+
+## Fedora Container Loggers and Levels
+#
+# These logs contain information and output concerning the Fedora Commons Repository
+#
+# Available output values range from most verbose to least (left to right): 
+# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
+#
+### Recommended levels are WARN
+#
+# Use these two logs below for general purpose debugging of Fedora
+# Main FEDORA Logger
+FEDORA_ORG_FCREPO_LOG=WARN
+# All other Fedora loggers default level
+FEDORA_ROOT_LOG=WARN
+
+# Fedora Apache CXF™ services framework logger
+FEDORA_ORG_APACHE_CXF_LOG=WARN
+
+# Fedora Security Loggers previously known as the fesl.log
+# This log is typically used for auditing and logging access to Fedora
+FEDORA_ORG_FCREPO_SERVER_SECURITY_JAAS_LOG=WARN
+FEDORA_ORG_FCREPO_SERVER_SECURITY_XACML_LOG=WARN
+
+# Fedora Gsearch logs
+#
+# These logs contain information and output concerning the interaction of Fedora, Gsearch and 
+# Solr Search. Given that most output is the result of successful Gsearch transforms & Solr search queries
+# It is highly recommended that these logs be set to WARN due to the large amount of output.
+#
+# Available output values range from most verbose to least (left to right): 
+# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
+#
+### Recommended levels are WARN
+# 
+# Use these two logs below for general purpose debugging of Fedoragsearch
+GSEARCH_DK_DEFXWS_FEDORAGSEARCH_LOG=WARN
+GSEARCH_ROOT_LOG=WARN
+
+# All other Gsearch loggers default level. 
+# Change levels below only for a larger scale of debugging.
+### Recommended levels are WARN
+GSEARCH_DK_DEFXWS_FGSZEBRA_LOG=WARN
+GSEARCH_DK_DEFXWS_FGSLUCENE_LOG=WARN
+GSEARCH_DK_DEFXWS_FGSSOLR_LOG=WARN
+
+
+## Image Services Container Logs and Levels
+# These logs contain information and output concerning the two image servers
+# Cantaloupe and Adore-Djatoka.
+# 
+# Available output values range from most verbose to least (left to right): 
+# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
+#
+### Recommended levels are ERROR
+#
+# Adore-Djatoka
+ADORE_DJATOKA_ROOT_LOGGER=ERROR
+
+# Cantaloupe (change this one first to debug)
+# Cantaloupe loggers appear to prefer loglevels to be lowercase.
+# otherwise values fail.
+#
+# Available output values range from most verbose to least (left to right): 
+# `trace`, `debug`, `info`, `warn`, `error`, `all`, or `off`
+#
+### Recommended level is error
+CANTALOUPE_LOG_APPLICATION_LEVEL=error
+
+##### SOLR Log Levels #####
+# These logs contain information and output concerning the Solr Search
+# Given that most output is the result of successful Solr search queries
+# It is highly recommended that these logs be set to OFF or WARN due to the
+# large amount of output.
+#
+# Available output values range from most verbose to least (left to right): 
+# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
+#
+### Recommended levels are WARN or OFF
+#
+# Main Solr log (change this one first to debug)
+SOLR_ROOT_LOGGER=WARN
+# These logs most likely can be kept at their default levels of WARN and for the third OFF.
+SOLR_ORG_APACHE_ZOOKEEPER_LOG=WARN
+SOLR_ORG_APACHE_HADOOP_LOG=WARN
+SOLR_ORG_APACHE_SOLR_UPDATE_LOGGINGINFORSTREAM=OFF
+
+## End Logs
+```
+
+* Add another new block of ENV variables to your main .env file. Above the logging section and beneath all other defined services is fine.
 
 ```bash
 ## Varnish
