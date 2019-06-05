@@ -20,8 +20,9 @@
 
 * Additional notes commenting on tradeoffs in removing Mulgara
 
-* Additional notes concerning administrative overhead and/or necessary process changes 
-  * (almost none in either case)
+* Additional notes concerning administrative overhead and/or necessary process changes
+  * A new Fedora image that has slight image and functional changes is required to be used in tandem with Blazegraph. These image changes are primarily edits to the `fedora.fcg` file to use Blazegraph instead of Mulgara. 
+  * Additionally, a new `confd` configuration within the Fedora image and linked environmental variable has been added to the `.env` to allow users to "toggle" between Blazegraph and Mulgara as desired. In the event a user toggles between either desired triplestore, a reindex of the Fedora repository is required. With Fedora repositories of 600K+ objects or more, **the indexing process will take hours to days** depending on the complexity of the object relationships, ontology etc.
 
 * No new software is required to be installed on the ISLE host machine, only new Docker containers, images and configurations are added to the ISLE platform.
 
