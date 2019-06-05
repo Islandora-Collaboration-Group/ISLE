@@ -203,9 +203,123 @@ Jun 04 10:56:26 ip-172-31-40-28 rsyslogd[11815]: rsyslogd's userid changed to 10
 Jun 04 10:56:26 ip-172-31-40-28 rsyslogd[11815]:  [origin software="rsyslogd" swVersion="8.32.0" x-pid="11815" x-info="http://www.rsyslog.com"] start
 ```
 
+---
+
+#### TICK Edits - docker-compose.yml file
+
+* For Phase II UAT testing of TICK, Blazegraph and Varnish please change the following image tags of these services from `1.1.1` to `dashboards-dev`
+  * Apache
+      * `image: islandoracollabgroup/isle-apache:1.1.1` should now become `image: islandoracollabgroup/isle-apache:dashboards-dev`
+  * Image-services
+      * `image: islandoracollabgroup/isle-imageservices:1.1.1` should now become `image: islandoracollabgroup/isle-imageservices:dashboards-dev`
+  * MySQL 
+    * `image: islandoracollabgroup/isle-mysql:1.1.1` should now become `image: islandoracollabgroup/isle-mysql:dashboards-dev`
+  * Solr
+    * `image: islandoracollabgroup/isle-solr:1.1.1` should now become `image: islandoracollabgroup/isle-solr:dashboards-dev`
+
+---
+
 #### Docker-compose.yml edits
 
-* Copy and paste the contents of the `config/tick/tick-config.md` file and insert them into your `docker-compose.yml` in between the `apache` and `traefik` services.
+* Add the new `TICK`services to your docker-compose file in between the `apache` and `traefik` services.
+
+```bash
+# Start TICK - Services
+
+  influxdb:
+    image: influxdb:latest
+    container_name: isle-influxdb-${CONTAINER_SHORT_ID}
+    volumes:
+      # Mount for influxdb data directory
+      - isle-influxdb-data:/var/lib/influxdb
+      # Mount for influxdb configuration
+      - ./config/tick/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf
+    ports:
+      # The API for InfluxDB is served on port 8086
+      - "8086:8086"
+      - "8088:8088"
+      # UDP Port
+      - "8089:8089"
+    networks:
+      isle-internal:
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
+
+  telegraf:
+    image: telegraf:latest
+    # Telegraf requires network access to InfluxDB
+    container_name: isle-telegraf-${CONTAINER_SHORT_ID}
+    volumes:
+      # Mount for telegraf configuration
+      - ./config/tick/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      # Mount for Docker API access
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      # To get metrics off the host
+      - /:/hostfs:ro
+      - /etc:/hostfs/etc:ro
+      - /proc:/hostfs/proc:ro
+      - /sys:/hostfs/sys:ro
+      - /var/run/utmp:/var/run/utmp:ro
+    depends_on:
+      - influxdb
+    networks:
+      isle-internal:
+    ports:
+      # This port should be for rsyslog
+      - "6514:6514"
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
+
+  kapacitor:
+    image: kapacitor:latest
+    container_name: isle-kapacitor-${CONTAINER_SHORT_ID}
+    volumes:
+      # Mount for kapacitor data directory
+      - isle-kapacitor-data:/var/lib/kapacitor
+      # Mount for kapacitor configuration
+      - ./config/tick/kapacitor/kapacitor.conf:/etc/kapacitor/kapacitor.conf
+    # Kapacitor requires network access to Influxdb
+    ports:
+      # The API for Kapacitor is served on port 9092
+      - "9092:9092"
+    networks:
+      isle-internal:
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
+
+  chronograf:
+    image: chronograf:latest
+    container_name: isle-chronograf-${CONTAINER_SHORT_ID}    
+    environment:
+      - RESOURCES_PATH="/usr/share/chronograf/resources"
+      - LOG_LEVEL=error
+    volumes:
+      # Mount for chronograf database
+      - isle-chronograf-data:/var/lib/chronograf/
+    ports:
+      # The WebUI for Chronograf is served on port 8888
+      - "8888:8888"
+    depends_on:
+      - kapacitor
+      - influxdb
+      - telegraf
+    networks:
+      isle-internal:
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
+
+
+# END TICK - Services
+
+```
 
 * Copy and paste the contents of the `config/tick/dc-syslog-config.md` file and insert repeatedly into your `docker-compose.yml` at the end of every service definition.
   * mysql
