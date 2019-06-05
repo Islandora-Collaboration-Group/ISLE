@@ -44,9 +44,9 @@
 | Traefik | [traefik/traefik](https://hub.docker.com/_/traefik) | `1.7.9` |
 
 
-* ISLE configuration from the [dashboards-dev](https://github.com/Born-Digital-US/ISLE/tree/dashboards-dev) branch on Born-Digital Fork
-  * `git clone -b dashboards-dev https://github.com/Born-Digital-US/ISLE.git`
-
+* [ISLE](https://github.com/Islandora-Collaboration-Group/ISLE) release version `1.1.1` 
+  * `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
+  
 * Additional systems overhead, including:
   
   * Add an additional 2 GB RAM in total ISLE Host memory for Blazegraph to run
@@ -137,3 +137,17 @@ SELECT (COUNT(*) AS ?triples) WHERE {?s ?p ?o}
 ```
 
 * This value should increase as more objects are ingested and indexed by Fedora. The difference is that instead of these values being in the previously used Mulgara triplestore, they are now handled by Blazegraph.
+
+
+## Need help?
+
+* Please use the following as resources for institutions or endusers needing support
+
+  * [Islandora ISLE Interest Group](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group) - Meetings open to everybody!   
+    * The [Schedule](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group/#how-to-join) is alternating Wednesdays, 3:00pm EDT
+
+  * [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle) - Post your questions here and subscribe for updates, meeting announcements, and technical support
+
+  * [ISLE Github Issues queue](https://github.com/Islandora-Collaboration-Group/ISLE/issues) - Post your issues, bugs and requests for technical documentation here.
+
+---
