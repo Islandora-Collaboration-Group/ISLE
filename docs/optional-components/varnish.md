@@ -71,7 +71,7 @@
 
 * Prior to installation, enduser will have a running ISLE system using the current release of `1.1.1.` images.
 
-* This installation process will give the functionality as stated in the `Systems Requirements` image table above for `Varnish` testing and even `TICK` stack usage.
+* This installation process will give the functionality as stated in the `Systems Requirements` image table above for `Varnish` testing and even [TICK](tickstack.md) stack usage.
 
 ### Installation
 
@@ -109,7 +109,7 @@
       - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
   ```
 
-* For Phase II UAT testing of TICK, Blazegraph and Varnish please change the following image tags of these services from `1.1.1` to `dashboards-dev`
+* For Phase II UAT testing of [TICK](tickstack.md), [Blazegraph](blazegraph.md) and Varnish please change the following image tags of these services from `1.1.1` to `dashboards-dev`
   * Apache
       * `image: islandoracollabgroup/isle-apache:1.1.1` should now become `image: islandoracollabgroup/isle-apache:dashboards-dev`
   * Fedora
@@ -125,7 +125,7 @@
 
 #### Varnish Edits - docker-compose.yml file (_TICK only instructions_)
 
-* If you're pushing log events to TICK, add this snippet of code below (_logging instructions_) to the bottom of **every** ISLE service.
+* If you're pushing log events to [TICK](tickstack.md), add this snippet of code below (_logging instructions_) to the bottom of **every** ISLE service.
 
 ```bash
     logging:
