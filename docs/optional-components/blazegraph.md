@@ -28,7 +28,7 @@
 
 ---
 
-## Systems Requirements
+## System Requirements
 
 * [ISLE](https://github.com/Islandora-Collaboration-Group/ISLE) release version `1.1.1`
   * `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
@@ -69,7 +69,7 @@
 
 ## Adoption Process Overview
 
-*
+* Highlevel overview with no actual details, what and a little of why but not how
 
 *
 
@@ -499,5 +499,3 @@ becomes
 ## Additional Resources
 
 * [Blazegraph Documentation](https://wiki.blazegraph.com/wiki/index.php/Main_Page)
-
----

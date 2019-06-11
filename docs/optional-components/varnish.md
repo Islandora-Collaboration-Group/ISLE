@@ -33,7 +33,7 @@
 
 ---
 
-## Systems Requirements
+## System Requirements
 
 * [ISLE](https://github.com/Islandora-Collaboration-Group/ISLE) release version `1.1.1`
   * `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
@@ -67,7 +67,7 @@
 
 ## Adoption Process Overview
 
-*
+* Highlevel overview with no actual details, what and a little of why but not how
 
 *
 
@@ -324,6 +324,8 @@ VARNISH_VARNISH_PORT=6081
 
 ## Using Varnish & the TICK stack
 
+* Please first follow the instructions for installing and using the [TICK stack](tickstack.md)
+
 * If you're pushing log events to [TICK](tickstack.md), add this snippet of code below (_logging instructions_) to the bottom of **every** ISLE service within your `docker-compose.yml` file.
 
 ```bash
@@ -418,5 +420,3 @@ becomes
   * [Varnish Software](https://www.varnish-software.com/) is the commercial wing of the Varnish.
     * Varnish Admin Console is a [paid](https://www.varnish-software.com/solutions/varnish-enterprise/varnish-administration-console-2/) not for free product that is a GUI for Varnish Cache. The language around this feature is vague and sometimes misleadingly used in tutorials as software anyone can use. There are trials but ultimately this is a paid product.
   * [Varnish Cache](https://www.varnish-software.com/community/varnish-cache/) is the open-source project maintained by Varnish Software and intended to be used by anyone.
-
----
