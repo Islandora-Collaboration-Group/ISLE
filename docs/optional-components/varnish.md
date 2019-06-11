@@ -44,6 +44,8 @@
 
 (_These tags are for usage during Phase II Sprints only and will change during the release process._)
 
+(_Phase II Sprints only_)
+
 | Service | Repository | Tag |
 | ---     | ---        | --- | 
 | Apache | [islandoracollabgroup/isle-apache](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-apache/tags) | `dashboards-dev`|
@@ -55,6 +57,12 @@
 | Traefik | [traefik/traefik](https://hub.docker.com/_/traefik) | `1.7.9` |
 | Varnish | [islandoracollabgroup/isle-varnish](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-varnish) | `1.1.1`|
 
+* Additional systems overhead, including:
+
+  * Add an additional 1 - 2 GB RAM in total ISLE Host memory for Varnish to keep the cache in memory.
+    * You can adjust the amount that Varnish puts into memory in the supplied `.env` file
+      * On the line: `VARNISH_MALLOC=256m` you can change the amount of memory to a higher value other than the default `256` Megabytes. We recommend that you do not attempt to exceed 1 GB for now.
+
 ---
 
 ## Adoption Process Overview
@@ -65,15 +73,17 @@
 
 ---
 
-## Installation Instructions
+## Installation
 
-### Installation Assumptions
+### Assumptions
 
 * Prior to installation, enduser will have a running ISLE system using the current release of `1.1.1.` images.
 
 * This installation process will give the functionality as stated in the `Systems Requirements` image table above for `Varnish` testing and even [TICK](tickstack.md) stack usage.
 
-### Installation
+---
+
+### Installation Instructions
 
 * Shut down your running containers
   * `docker-compose down`
@@ -120,67 +130,6 @@
     * `image: islandoracollabgroup/isle-mysql:1.1.1` should now become `image: islandoracollabgroup/isle-mysql:dashboards-dev`
   * Solr
     * `image: islandoracollabgroup/isle-solr:1.1.1` should now become `image: islandoracollabgroup/isle-solr:dashboards-dev`
-
----
-
-#### Varnish Edits - docker-compose.yml file (_TICK only instructions_)
-
-* If you're pushing log events to [TICK](tickstack.md), add this snippet of code below (_logging instructions_) to the bottom of **every** ISLE service.
-
-```bash
-    logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
-```
-
-**For example:**
-
-```bash
-
-solr:
-    # build:
-    #   context: ../images/isle-solr
-    image: islandoracollabgroup/isle-solr:dashboards-dev
-    container_name: isle-solr-${CONTAINER_SHORT_ID}
-    environment:
-      - JAVA_MAX_MEM=512M
-      - JAVA_MIN_MEM=0
-    env_file:
-      - tomcat.env
-    networks:
-      - isle-internal
-    ports:
-      - "8082:8080"
-    depends_on:
-      - mysql
-    volumes:
-      - isle-solr-data:/usr/local/solr
-    logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
-```        
-
-* Additionally you'll need to remove or comment out every line or reference to logs from the `volumes` section.
-
-**For example:**
-
-```bash
-    volumes:
-      - isle-solr-data:/usr/local/solr
-      - ./logs/solr:/usr/local/tomcat/logs
-```
-
-becomes
-
-```bash
-    volumes:
-      - isle-solr-data:/usr/local/solr
-```
----
-
-#### Varnish Edits - docker-compose.yml file _continued..._
 
 * Edit your apache service to remove the `traefik` labels so that Varnish can "take over" handling and routing web traffic.
 
@@ -329,7 +278,13 @@ SOLR_ORG_APACHE_SOLR_UPDATE_LOGGINGINFORSTREAM=OFF
 ## End Logs
 ```
 
-* Add another new block of ENV variables to your main .env file. Above the logging section and beneath all other defined services is fine.
+* Add another new block of ENV variables to your main .env file. Above the logging section and beneath all other defined services is fine. 
+
+* Please note we recommned that ISLE endusers only make changes to the following:
+
+  * VARNISH_MALLOC=256m
+  * VARNISH_MAX_CONNECTIONS=300
+  * VARNISH_SECRET=isle_varnish_secret
 
 ```bash
 ## Varnish
@@ -364,6 +319,65 @@ VARNISH_VARNISH_PORT=6081
     * (TO DO) Expand on `hit` or `miss` examples
   * Checking the Varnish cli for registered content / page requests
     * (TO DO) Expand on using Varnish console with 1 -2 examples
+
+---
+
+## Using Varnish & the TICK stack
+
+* If you're pushing log events to [TICK](tickstack.md), add this snippet of code below (_logging instructions_) to the bottom of **every** ISLE service within your `docker-compose.yml` file.
+
+```bash
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
+```
+
+**For example:**
+
+```bash
+varnish:
+  # build:
+  #   context: ../images/isle-varnish
+  image: islandoracollabgroup/isle-varnish:1.1.1
+  container_name: isle-varnish-${CONTAINER_SHORT_ID}
+  env_file:
+    - .env
+  networks:
+    isle-internal:
+  depends_on:
+    - mysql
+    - fedora
+    - solr
+    - apache
+    - traefik
+  labels:
+    - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
+    - traefik.port=6081
+    - traefik.enable=true
+    - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
+  logging:
+    driver: syslog
+    options:
+      tag: "{{.Name}}"        
+```
+
+* Additionally you'll need to remove or comment out every line or reference to logs from the `volumes` section of each service. Varnish by default doesn't log unless directed to manually.
+
+**For example:**
+
+```bash
+    volumes:
+      - isle-solr-data:/usr/local/solr
+      - ./logs/solr:/usr/local/tomcat/logs
+```
+
+becomes
+
+```bash
+    volumes:
+      - isle-solr-data:/usr/local/solr
+```
 
 ---
 

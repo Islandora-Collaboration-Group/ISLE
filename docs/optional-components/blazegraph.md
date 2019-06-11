@@ -26,6 +26,8 @@
 
 * No new software is required to be installed on the ISLE host machine, only new Docker containers, images and configurations are added to the ISLE platform.
 
+---
+
 ## Systems Requirements
 
 * [ISLE](https://github.com/Islandora-Collaboration-Group/ISLE) release version `1.1.1`
@@ -73,7 +75,7 @@
 
 ---
 
-## Installation Instructions
+## Installation
 
 ### Assumptions
 
@@ -87,7 +89,7 @@
 
 ---
 
-### Installation
+### Installation Instructions
 
 * Shut down your running containers
   * `docker-compose down`
@@ -95,9 +97,6 @@
 * Make the below mentioned edits to:
   * `docker-compose.yml` file
   * `.env` file
----
-
-## Installation
 
 #### Blazegraph Edits - docker-compose.yml file
 
@@ -414,24 +413,75 @@ SELECT (COUNT(*) AS ?triples) WHERE {?s ?p ?o}
 
 ---
 
-## Troubleshooting
+## Using Blazegraph & the TICK stack
+
+* If you're pushing log events to [TICK](tickstack.md), add this snippet of code below (_logging instructions_) to the bottom of **every** ISLE service within your `docker-compose.yml` file.
+
+```bash
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
+```
+
+**For example:**
+
+```bash
+
+  isle-blazegraph:
+    #build:
+    #  context: ./images/isle-blazegraph
+    image: islandoracollabgroup/isle-blazegraph:dashboards-dev
+    container_name: isle-blazegraph-${CONTAINER_SHORT_ID}
+    environment:
+      - JAVA_MAX_MEM=4096M
+      - JAVA_MIN_MEM=1024M
+    env_file:
+      - tomcat_blazegraph.env
+    networks:
+      - isle-internal
+    ports:
+      - "8084:8080"
+    volumes:
+      - isle-blazegraph-data:/var/bigdata
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
+```
+
+* Additionally you'll need to remove or comment out every line or reference to logs from the `volumes` section of each service.
+
+**For example:**
+
+```bash
+    volumes:
+      - isle-blazegraph-data:/var/bigdata
+      - ./logs/blazegraph:/usr/local/tomcat/logs
+```
+
+becomes
+
+```bash
+    volumes:
+      - isle-blazegraph-data:/var/bigdata
+```
+
+---
+
+## Uninstallation Instructions
 
 *
 *
 
 ---
 
-## Release Notes
+## Maintenance Notes
 
 *
 *
 
 ---
-
-## Additional Resources
-
-
-
 
 ## Need help?
 
@@ -443,5 +493,11 @@ SELECT (COUNT(*) AS ?triples) WHERE {?s ?p ?o}
   * [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle) - Post your questions here and subscribe for updates, meeting announcements, and technical support
 
   * [ISLE Github Issues queue](https://github.com/Islandora-Collaboration-Group/ISLE/issues) - Post your issues, bugs and requests for technical documentation here.
+
+---
+
+## Additional Resources
+
+* [Blazegraph Documentation](https://wiki.blazegraph.com/wiki/index.php/Main_Page)
 
 ---

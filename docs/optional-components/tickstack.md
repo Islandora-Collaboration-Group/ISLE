@@ -675,9 +675,31 @@ If you are not seeing your server appear in the `Hosts` section nor seeing log i
   * The new rsyslog / Telegraf configuration should be found here: `/etc/rsyslog.d/50-telegraf.conf`
 
 * Check that the TICK related containers are running without exit codes. 
-  * `docker ps -a` 
+  * `docker ps -a`
   
 * Check that the new `Telegraf` docker container is running on `Production`
+
+* You can check if the Telegraf agent is communicating properly with the Influxdb database and if the Influxdb database is running by using the following command in your terminal:
+
+  * Shell into the telegraph container
+    * `docker exec -it isle-telegraf-ld bash`
+
+  * `curl -I http://influxdb:8086/ping`
+
+The output should confirm connectivity by looking like this:
+
+```bash
+
+root@b2e3471b3bbb:/# curl -I http://influxdb:8086/ping
+
+HTTP/1.1 204 No Content
+Content-Type: application/json
+Request-Id: 9d832e9b-8924-11e9-9314-0242ac180005
+X-Influxdb-Build: OSS
+X-Influxdb-Version: 1.7.6
+X-Request-Id: 9d832e9b-8924-11e9-9314-0242ac180005
+Date: Fri, 31 May 2019 13:03:16 GMT
+```
 
 * Repeat these instructions from the start if need be.
 
