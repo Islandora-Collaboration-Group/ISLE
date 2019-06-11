@@ -69,9 +69,25 @@
 
 ## Adoption Process Overview
 
-* Highlevel overview with no actual details, what and a little of why but not how
+* The installation instructions below will walk you through how to setup and run the optional Blazegraph container for use as an replacement triplestore for Fedora repositories with 600K+ of objects.
 
-*
+- You'll start by backing up all important data as needed.
+
+* You'll stop any running containers
+
+- You'll download new ISLE images temporarily tagged as `dashboards-dev` instead of the standard ISLE `1.1.1`. 
+  * **Please note:** _This is a temporary process until all ISLE Phase II UAT testing is completed and the images can be released._
+  * You'll download a new ISLE image called `isle-blazegraph:dashboards-dev`
+
+* You'll make additional edits and modifications to the following ISLE configuration files:
+  * `docker-compose.yml`
+  * `.env`
+
+- You'll restart your containers with the new services having been added and configured.
+
+* You'll re-index your Fedora Resource & SQL indices and ensure that the new Blazegraph triplestore is displaying triples.
+
+- You can _optionally_ use and/or setup the new [TICK stack](tickstack.md) to monitor this container and service.
 
 ---
 
@@ -81,11 +97,11 @@
 
 * Prior to installation, enduser will have a running ISLE system using the current release of `1.1.1.` images.
 
-* This installation process will give the functionality as stated in the `Systems Requirements` image table above for `Blazegraph` testing and even `TICK` stack usage.
+- This installation process will give the functionality as stated in the `Systems Requirements` image table above for `Blazegraph` testing and even `TICK` stack usage.
 
 * Assumes you're prepared to configure your ISLE system to use Blazegraph instead of the default Mulgara triplestore.
 
-* Assumes the new Blazegraph port `8084` will not be open to the public Internet only to select trusted administrators.
+- Assumes the new Blazegraph port `8084` will not be open to the public Internet only to select trusted administrators.
 
 ---
 
@@ -94,7 +110,7 @@
 * Shut down your running containers
   * `docker-compose down`
 
-* Make the below mentioned edits to:
+- Make the below mentioned edits to:
   * `docker-compose.yml` file
   * `.env` file
 

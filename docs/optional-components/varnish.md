@@ -67,9 +67,23 @@
 
 ## Adoption Process Overview
 
-* Highlevel overview with no actual details, what and a little of why but not how
+* The installation instructions below will walk you through how to setup and run the optional Varnish container to cache assets for highly trafficked Islandora sites.
 
-*
+* You'll start by backing up all important data as needed.
+
+- You'll stop any running containers
+
+* You'll download new ISLE images temporarily tagged as `dashboards-dev` instead of the standard ISLE `1.1.1`. 
+  * **Please note:** _This is a temporary process until all ISLE Phase II UAT testing is completed and the images can be released._
+  * You'll download a new ISLE image called `isle-varnish:1.1.1`
+
+- You'll make additional edits and modifications to the following ISLE configuration files:
+  * `docker-compose.yml`
+  * `.env`
+
+* You'll restart your containers with the new services having been added and configured.
+
+- You can test by inspecting content in your web-browser and/or using Varnish command line tools to ensure that the new caching is occuring.
 
 ---
 
