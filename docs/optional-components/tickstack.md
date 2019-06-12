@@ -634,6 +634,47 @@ Text insertion example:
 
 ---
 
+## Troubleshooting
+
+If you are not seeing your server(s) appear in the `Hosts` section nor seeing log information flowing into the `Log Viewer` section, recommend the following:
+
+* Check that any potential firewalls are allowing communication between the `Production` and `Staging` servers on port `8086`
+
+* Ensure that all configuration files have been copied over:
+  * The new Docker log driver configuration should be found here `/etc/docker/daemon.json`
+  * The new rsyslog / Telegraf configuration should be found here: `/etc/rsyslog.d/50-telegraf.conf`
+
+* Check that the TICK related containers are running without exit codes. 
+  * `docker ps -a`
+  
+* Check that the new `Telegraf` docker container is running on `Production`
+
+* You can check if the Telegraf agent is communicating properly with the Influxdb database and if the Influxdb database is running by using the following command in your terminal:
+
+  * Shell into the telegraph container
+    * `docker exec -it isle-telegraf-ld bash`
+
+  * `curl -I http://influxdb:8086/ping`
+
+The output should confirm connectivity by looking like this:
+
+```bash
+
+root@b2e3471b3bbb:/# curl -I http://influxdb:8086/ping
+
+HTTP/1.1 204 No Content
+Content-Type: application/json
+Request-Id: 9d832e9b-8924-11e9-9314-0242ac180005
+X-Influxdb-Build: OSS
+X-Influxdb-Version: 1.7.6
+X-Request-Id: 9d832e9b-8924-11e9-9314-0242ac180005
+Date: Fri, 31 May 2019 13:03:16 GMT
+```
+
+* Repeat these instructions from the start if need be.
+
+---
+
 ## Using Chronograf
 
 ### Adoption Process Overview
@@ -679,118 +720,138 @@ Within the `Log Viewer` page:
 
 #### Adoption Process Overview
 
-* We're going to need an Alert Handler to deliver Alerts
-* This tuturial is going to show you how to set up four basic alerts using your new handler
+The instructions below are going to:
 
-* Chronograf Alert Handlers will need to be setup prior to these steps. 
+* Setup an "alert handler" in the Chronograf dashboard for delivery of alert messages. We'll use email as the example alert handler service.
 
-* Ability to send emails from the ISLE host server
-  * You may already be using an existing off host email server or service that is integrated with the ISLE Drupal site. Alternatively your IT dept may provide you with an existing email server as well. 
-  * We recommend using 
+- Show you how to set up four basic alerts using your new alert handler
+  * `Disk Space` Alert - Alerts you when your disks are running out of space
+  * `RAM Usage` Alert - Alerts you when your server is almost out of memory
+  * `CPU Usage` Alert - Alerts you when your server's CPU has been running past a set period of time
+  * `Deadman` Alert - Alerts you when the ISLE host server is unresponsive, has crashed or is "dead."
 
-The ISLE Project can provide the following alert creation processes
-  * Disk Space Alert - 
-  * RAM Usage Alert
-  * CPU Usage Alert
-  * Deadman Alert
+#### Assumptions
 
-Additional alerts will be contributed by the ISLE maintainers and/or community.
+* Ability to send emails from the ISLE host server has already been setup.
+  * You may already be using an existing off host email server or service that is integrated with the ISLE Drupal site. 
+  * Alternatively your IT dept may provide you with an existing email server or account details as well. 
+  * We recommend setting up a [SendGrid](https://sendgrid.com/) or [MailGun](https://www.mailgun.com/) account which are cloud-based email delivery platforms. While both these services have "free" tiers, both are commercial products. However, the ease of use in setting up, using and keeping your ISLE system free of additional complex email service or software installations are why they're recommended here.
+
+- Additional alerts may be contributed by the ISLE maintainers and/or community over time.
 
 ### Chronograf Alert Handler Setup
 
-Basic alerts use email. TICK also supports Slack alerts, etc.
+While TICK supports a wide variety of alert types and delivery mechanisms we're going to configure the basic alerts using email.
 
-What you will need are SMTP credentials. Your IT group may be able to provide these, or if not, we recommend setting up [SendGrid](https://sendgrid.com/) or [MailGun](https://www.mailgun.com/) which are cloud-based email delivery platforms. [free caveat]
+* Prior to starting, you will need to have your SMTP credentials (user name, password and location of the 3rd party email server)  at the ready. This information may have been provided to you by your IT department or from when you may have used one of the recommended cloud-based email delivery platforms;  [SendGrid](https://sendgrid.com/) or [MailGun](https://www.mailgun.com/).
 
-When you have these, click into the Kapacitor settings (probably `/sources/1/kapacitors/1/edit`), click SMTP, and fill in your creds. 
+- When you have these credentials, click on the `Configuration` (wrench icon) button on the left hand side of the Chronograf dashboard. 
+
+* Under the `Kapacitor Connection` column
+  * click into the Kapacitor settings dropdown
+  * click on the pencil symbol (_Not the trashcan_)
+    * If that doesn't work, try navigating to http://yourdomainhere:8888/sources/1/kapacitors/1/edit 
+
+- Within the `Configure Alert Endpoints` page, click on the `SMTP` section / button and fill in your creds.
+
+  * `SMTP Host` - change `localhost` to the correct host name
+  * `SMTP Port` - change `25` to the correct port
+  * `From Email` - enter the email account you'll be using to send alerts **with**
+  * `To Email` - enter the email account you'll be sending alerts **to**
+  * `User` - enter the username for the email account you'll be using to send alerts **with**
+  * `Password` - enter the password for the email account you'll be using to send alerts **with**
+  * Click the `Configuration Enabled` checkbox
+  * Click the blue `Save Changes` button
+  * Click the `Send Test Alert` and confirm that a new test email has been sent to the email account you'll be receiving alerts **to /at** 
 
 You can now use this delivery mechanism when you set up individual alerts.
 
-### Disk Space Alert
+---
 
-This alert is designed to warn you when one of the ISLE host server disk(s) is/are almost full. Please note this setting should not alert you when the disk is already full. We suggest you use a lower value (e.g. 80%) such that you can safely shutdown containers, backup data and then expand the affected disk's capacity as needed.
+#### Sendgrid Email:
 
-#### To create this Alert:
+These instructions are for Sendgrid users only but demonstrate the easy of use in setup and lack of additional infrastructural overhead.
+
+* Create the API Key for the ISLE host server.
+  * **Please note**; you should repeat this process for each server e.g. Production and Staging sending email.
+- Log into your Sendgrid account
+* Navigate to Settings > API Keys
+- Click on the `Create API Key` button
+* Set the level of API Key Permissions (_recommend Restricted Access_)
+  * Set the appropriate level of permissions for each section
+- Copy the generated API Key to a password manager. This is the token you'll use to send email with. You'll need to use it again below.
+
+* Log into the Chronograf Dasboard and repeat the steps above to configure the SMTP Alert handler.
+  * `SMTP Host` - change `localhost` to `smtp.sendgrid.net`
+  * `SMTP Port` - change `25` to `587`
+  * `From Email` - enter the email account you'll be using to send alerts **with**
+  * `To Email` - enter the email account you'll be sending alerts **to**
+  * `User` - Enter the username of `apikey`
+  * `Password` - Enter the long API key generated from the above steps 
+  * Click the `Configuration Enabled` checkbox
+  * Click the blue `Save Changes` button
+  * Click the `Send Test Alert` and confirm that a new test email has been sent to the email account you'll be receiving alerts **to /at** 
+
+##### Sendgrid Resource
+
+* Sendgrid SMTP [Documentation](https://sendgrid.com/docs/API_Reference/SMTP_API/integrating_with_the_smtp_api.html)
+
+---
+
+### Chronograf Alerts Setup
+
+#### Disk Space Alert
+
+This alert is designed to warn you when one of the ISLE host server disk(s) is/are almost full. Please note this setting should not alert you when the disk is already full. We suggest you use a lower value (e.g. 75%) such that you can safely shutdown containers, backup data and then expand the affected disk's capacity as needed.
 
 * Within the TICK Chronograf dashboard, click on the `Alerting` symbol on the left (_this is a triangle with a ! symbol in the middle_). 
   * By default the `Manage Tasks on ...` page should appear
   * Click the blue `+ Build Alert Rule` button on the right hand side.
 
-* Within the displayed fields, please change the following:
+- Within the displayed fields, please change the following:
 
 * `Name this Alert Rule` - Change Untitled Rule to `Disk Space Alert` or to a name of your choice.
 
-* `Alert Type` - Choose `Threshold` - _this should be selected by default_
+- `Alert Type` - Choose `Threshold` - _this should be selected by default_
 
 * `Time Series` 
   * Within the `DB.RetentionPolicy` column, select `telegraf.autogen`
   * Within the `Measurements & Tags` column, 
     * Select `> disk`
-      * Select `host` (_there may be an additional number here e.g. `host - 2`_)
+      * Select `host` (_there may be an additional number here e.g. `host - 2` if you have more than one host configured_)
       * Choose the appropriate hostname (_this was the name you used to setup reporting on the Telegraf agent prior_)
    * Within the `Fields` column, select `used_percent`
 
-* `Conditions`
-  * You'll notice that a graph now appears in this area with most likely an increasing trend of usage. This graph indicates the current usage by the host of a particular disk, in our example this is the HOST ISLE operating system disk. You can create multiple alerts for additional disks, simply repeat this process as needed.
-  * Within the `Send Alert where used_percent is greater than` bar, add the number `80` or a numeric value of your choice. This establishes the percent full the disk has to reach before the alert is sent. 
-    * Please note, again we stress the importance of setting this value to 80 or lower to give yourself or your IT staff time to anticipate the growth prior to system challenges.
+- `Conditions`
+  * You'll notice that a graph now appears in this area with most likely a green increasing trend of usage. This graph indicates the current usage by the host of a particular disk, in our example this is the HOST ISLE operating system disk. You can create multiple alerts for additional disks, simply repeat this process as needed.
+  * Within the `Send Alert where used_percent is greater than` bar
+    * add the number `75` or a numeric value of your choice. This establishes the percent full the disk has to reach before the alert is sent. 
+    * Please note, again we stress the importance of setting this value to `75` or lower to give yourself or your IT staff time to anticipate the growth prior to system challenges.
   * You'll note that the graph may adjust visually to match this new value
 
 * `Alert Handlers`
-  * Within the `Send this Alert to:` bar, click the `Add a Handler` dropdown list to add the appropriate Alert Handler. This can be email, slack etc.
-  * If the `Alert Handler` is not enabled, the blue `Save Rule and Configure this Alert Handler` button will appear. We recommend that you click it and follow the instructions therein.
-  * If the `Alert Handler` is enabled, then the appropriate service 
-
-If you would like to setup ISLE and the TICK sidecar to generate alerts, you'll need to setup the following on the ISLE host server
-
-#### Resources
-
-* Official [Documentation](https://docs.influxdata.com/chronograf/v1.7/guides/create-alert-rules/) for setting up alerts in Chronograf
-
----
-
-
-
----
-
-## Troubleshooting
-
-If you are not seeing your server appear in the `Hosts` section nor seeing log information flowing into the `Log Viewer` section, recommend the following:
-
-* Check that any potential firewalls are allowing communication between the `Production` and `Staging` servers on port `8086`
-
-* Ensure that all configuration files have been copied over:
-  * The new Docker log driver configuration should be found here `/etc/docker/daemon.json`
-  * The new rsyslog / Telegraf configuration should be found here: `/etc/rsyslog.d/50-telegraf.conf`
-
-* Check that the TICK related containers are running without exit codes. 
-  * `docker ps -a`
+  * Within the `Send this Alert to:` bar, click the `Add a Handler` dropdown list to add the appropriate Alert Handler. This can be email, slack etc but for you'll be using `email` for this setup.
+    - **Please note:** Confusingly you were instructed to setup up the email using the `SMTP` alert handler but are forced to choose `email` when configuring the Alert rule. We're not sure why TICK behaves like this.
+  - The `Parameters from Kapacitor Configuration` fields will now auto-populate with the appropriate account information.
+  * You may have to re-enter the email address you are sending to in the `Recipient E-mail Address` field. If more than one, separate all email addresses with a comma.
+  * Within the `Enter the body for your email ...` empty field, you can format the email as you see fit. This can be formatting that is in addition to the actual alert message.
+  * Within the `Message` field copy and paste the following example alert message:
   
-* Check that the new `Telegraf` docker container is running on `Production`
-
-* You can check if the Telegraf agent is communicating properly with the Influxdb database and if the Influxdb database is running by using the following command in your terminal:
-
-  * Shell into the telegraph container
-    * `docker exec -it isle-telegraf-ld bash`
-
-  * `curl -I http://influxdb:8086/ping`
-
-The output should confirm connectivity by looking like this:
-
 ```bash
 
-root@b2e3471b3bbb:/# curl -I http://influxdb:8086/ping
+{{.Level}} - {{ index .Tags "host"}}\'s {{ .Name }} usage is at {{ index .Fields "value" | printf "%0.2f" }}%
 
-HTTP/1.1 204 No Content
-Content-Type: application/json
-Request-Id: 9d832e9b-8924-11e9-9314-0242ac180005
-X-Influxdb-Build: OSS
-X-Influxdb-Version: 1.7.6
-X-Request-Id: 9d832e9b-8924-11e9-9314-0242ac180005
-Date: Fri, 31 May 2019 13:03:16 GMT
 ```
 
-* Repeat these instructions from the start if need be.
+This alert message uses   enter the alert message to be sent as an email.While this can be any message, we recommend that you tailor it for maximum comprehension and brevity while also using TICK's unique `FLUX` syntax. Flux is a lightweight scripting language for querying databases (like InfluxDB) and working with data.
+  
+  * EXAMPLE:
+
+---
+
+#### Alerts Resources
+
+* Official [Documentation](https://docs.influxdata.com/chronograf/v1.7/guides/create-alert-rules/) for setting up alerts in Chronograf
 
 ---
 
@@ -812,8 +873,11 @@ Additional changes were made to the ISLE base images to allow for:
 
 ## Additional Resources
 
-*
-*
+* [Influxdata](https://www.influxdata.com/) - Company Website
+* Telegraf [Documentation](https://docs.influxdata.com/telegraf/v1.10/)
+* Influxdb [Documentation](https://docs.influxdata.com/influxdb/v1.7/)
+* Chronograf [Documentation](https://docs.influxdata.com/chronograf/v1.7/)
+* Kapacitor [Documentation](https://docs.influxdata.com/kapacitor/v1.5/)
 
 ---
 
