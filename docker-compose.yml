@@ -105,7 +105,7 @@ services:
       - ./logs/imageservices:/usr/local/tomcat/logs
     labels:
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
-      ## Making imagge-services accessible via traefik is not safe and not recommended
+      ## Making image-services accessible via traefik is not safe and not recommended
       - traefik.enable=false
       - "traefik.frontend.rule=Host:images.${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
 
