@@ -233,8 +233,6 @@ git version 2.15.1
 
 * Once fully started, one can see a whale icon at the top of their screen. If this is clicked, a dropdown should appear indicating that Docker is now running.
 
-* Please note: This process also installs the newest version of `docker-compose`.
-
 ### Step 3: Clone ISLE Repository
 **Please note:** The location you clone the repository to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
 
@@ -309,7 +307,12 @@ git version 2.15.1
 
 * One can see a whale icon in the notification area.  
 
-* Please note: This process also installs the newest version of `docker-compose`.
+* Enable Docker Shared Drives
+    * Right-click on the Docker whale icon
+    * Select "Settings"
+    * Select "Shared Drives"
+    * Check the box for your local "C" drive
+    * Click "Apply"
 
 ### Step 3: Clone ISLE Repository
 **Please note:** The location you select to clone the ISLE repository becomes your project directory. We recommend using the default user home directory; this location will include your configuration and log output of the Docker containers. (You may choose a different location, but it must not be a protected folder such as system or root directory.)
