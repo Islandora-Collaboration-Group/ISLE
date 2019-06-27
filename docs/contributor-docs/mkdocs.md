@@ -29,6 +29,7 @@
 
 * Open a terminal and `cd to pathto/ISLE project directory`
 * `mkdocs serve`
+
 ```
 INFO    -  Building documentation...
 INFO    -  Cleaning site directory
