@@ -1,7 +1,7 @@
 version: '3'
 
 #### docker-compose up -d;
-## Updated 2019-03-27 - Release 1.1.1 (@ 1.1.1)
+## Updated 2019-03-27 - Release 1.1.2 (@ 1.1.2)
 
 services:
   isle-portainer: ## Renamed to avoid conflicts on systems/servers with portainer already running.
@@ -26,7 +26,7 @@ services:
   mysql:
     # build:
     #   context: ../images/isle-mysql
-    image: islandoracollabgroup/isle-mysql:1.1.1
+    image: islandoracollabgroup/isle-mysql:1.1.2
     container_name: isle-mysql-${CONTAINER_SHORT_ID}
     environment:
       - MYSQL_ROOT_PASSWORD
@@ -39,7 +39,7 @@ services:
   fedora:
     # build:
     #   context: ../images/isle-fedora
-    image: islandoracollabgroup/isle-fedora:1.1.1
+    image: islandoracollabgroup/isle-fedora:1.1.2
     container_name: isle-fedora-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=768M
@@ -66,7 +66,7 @@ services:
   solr:
     # build:
     #   context: ../images/isle-solr
-    image: islandoracollabgroup/isle-solr:1.1.1
+    image: islandoracollabgroup/isle-solr:1.1.2
     container_name: isle-solr-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=512M
@@ -86,7 +86,7 @@ services:
   image-services:
     # build:
     #   context: ../images/isle-imageservices
-    image: islandoracollabgroup/isle-imageservices:1.1.1
+    image: islandoracollabgroup/isle-imageservices:1.1.2
     container_name: isle-images-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=512M
@@ -112,7 +112,7 @@ services:
   apache:
     # build:
     #   context: ../images/isle-apache
-    image: islandoracollabgroup/isle-apache:1.1.1
+    image: islandoracollabgroup/isle-apache:1.1.2
     container_name: isle-apache-${CONTAINER_SHORT_ID}
     env_file:
       - .env
