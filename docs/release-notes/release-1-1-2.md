@@ -5,7 +5,7 @@
 * David Keiser-Clark (Williams College), documentation
 * Francesca Livermore (Wesleyan University), documentation
 * Gavin Morris (Born-Digital), code updates and testing
-* Mark Sanford (Colgate University), documentation
+* Mark Sandford (Colgate University), documentation
 * Bethany Seeger (Amherst College), release manager
 * Noah Smith (Born-Digital), code updates and testing
 * Shaun Trujillo (Mount Holyoke College), code updates
