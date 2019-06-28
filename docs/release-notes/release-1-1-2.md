@@ -3,11 +3,12 @@
 ### Contributions to this release from: 
 
 * David Keiser-Clark (Williams College), documentation
-* Gavin Morris (Born-Digital), updates and testing
+* Francesca Livermore (Wesleyan University), documentation
+* Gavin Morris (Born-Digital), code updates and testing
 * Mark Sanford (Colgate University), documentation
 * Bethany Seeger (Amherst College), release manager
-* Noah Smith (Born-Digital), updates and testing
-* Shaun Trujillo (Mount Holyoke College), issue fix
+* Noah Smith (Born-Digital), code updates and testing
+* Shaun Trujillo (Mount Holyoke College), code updates
 
 ### ISLE (main project)
 
