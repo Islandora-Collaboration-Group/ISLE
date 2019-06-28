@@ -9,9 +9,6 @@
 * Fork ISLE to personal / company github.com repo 
   * https://github.com/Islandora-Collaboration-Group/ISLE
 
-* Fork ISLE-Documentation to personal / company github.com repo
-  * ISLE-Documentation https://github.com/Islandora-Collaboration-Group/ISLE-Documentation
-
 * Fork all ISLE images to personal / company github.com repos
   * isle-ubuntu-basebox https://github.com/Islandora-Collaboration-Group/isle-ubuntu-basebox
   * isle-tomcat https://github.com/Islandora-Collaboration-Group/isle-tomcat
@@ -25,8 +22,6 @@
 
 * Git clone the forked ISLE images git repos into a sibling "images" directory
 
-* Git clone the forked ISLE-Documentation git repo to your local development workstation.
-
 * Git checkout (make new) release branch in each repo for each image starting with and descending in this order:
   * isle-ubuntu-basebox
   * isle-tomcat
@@ -36,7 +31,6 @@
   * isle-apache
   * isle-mysql
   * ISLE (main project)
-  * ISLE-Documentation
 
 ## Build Steps
 

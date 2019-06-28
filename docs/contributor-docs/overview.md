@@ -7,13 +7,13 @@ Please note there are two key elements to the ISLE Documentation.
 1. ISLE Documentation Github.com Pages **(static HTML):**  
     * Used by endusers for Documentation
     * Clean, crisp nicely formatted hosted ISLE Documentation with navigation.
-    * [https://islandora-collaboration-group.github.io/ISLE-Documentation/](https://islandora-collaboration-group.github.io/ISLE-Documentation/)
+    * [https://islandora-collaboration-group.github.io/ISLE/](https://islandora-collaboration-group.github.io/ISLE/)
 
 
 2. ISLE Documentation Github.com Repository **(Markdown files):**  
     * Used by ISLE Committers to create and manage ISLE Documentation
     * `Markdown` files (`.md`) stored in an online git repository that when rendered by the `mkdocs` software produce the above mentioned nicely formatted static HTML pages.
-    * [https://github.com/Islandora-Collaboration-Group/ISLE-Documentation](https://github.com/Islandora-Collaboration-Group/ISLE-Documentation)
+    * [https://github.com/Islandora-Collaboration-Group/ISLE](https://github.com/Islandora-Collaboration-Group/ISLE)
 
 
 _Please refer to the **Documentation** section of the [Glossary](../appendices/glossary.md) if terms used are not clear._
