@@ -19,13 +19,13 @@
   * All ISLE docker image tags changed to `1.1.2`
   
 * Switched to using OpenJDK for Java because of Oracle license changes. This has resulted in a few changes to the docker images:
-  * `isle-ubuntu-basebox` is removed from ISLE, replaced with `adoptopenjdk:openjdk8` image, whose base image is `ubuntu:18.04` (ubuntu-bionic).  This means the underlying operating system setup is the same.
+  * `isle-ubuntu-basebox` is removed from ISLE, replaced with [adoptopenjdk:openjdk8 image](https://hub.docker.com/r/adoptopenjdk/openjdk8), whose base image is `ubuntu:18.04` (ubuntu-bionic).  This means the underlying operating system setup is the same.
   * Tools pulled in from the `isle-ubuntu-basebox` and needed by child images have been moved to `isle-tomcat` and `isle-apache` as appropritate.
-  * Djatoka is removed from `isle-imageservices`. 
+  * Djatoka is removed from `isle-imageservices`.  
   
 * Installer script updates/changes:
   * OpenSeadragon vset was updated and made more complete for mobile device usage.
-  * New vsets in the installer script to turn off Kakadu by default and to use Imagemagick with OpenJPG instead for JP2 derivative creation.
+  * New vsets in the installer script to turn off Kakadu by default and to use Imagemagick with OpenJPG instead for JP2 derivative creation.  Please read more on Kakadu licensing on the [Cantaloupe website](https://cantaloupe-project.github.io/manual/4.1/processors.html#KakaduNativeProcessor).
 
 ### Docker Images
 
@@ -44,6 +44,7 @@
 
 * Server package management updates via `apt-get`
 * Updated `GEN_DEP_PACKS` dependencies via `apt-get`
+* Djatoka removed from image.
 
 #### isle-solr
 
