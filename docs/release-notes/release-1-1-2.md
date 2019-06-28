@@ -2,12 +2,12 @@
 
 ### Contributions to this release from: 
 
-David Keiser-Clark (Williams College), documentation
-Gavin Morris (Born-Digital), updates and testing
-Mark Sanford (Colgate University), documentation
-Bethany Seeger (Amherst College), Release Manager
-Noah Smith (Born-Digital), updates and testing
-Shaun Trujillo (Mount Holyoke College)
+* David Keiser-Clark (Williams College), documentation
+* Gavin Morris (Born-Digital), updates and testing
+* Mark Sanford (Colgate University), documentation
+* Bethany Seeger (Amherst College), Release Manager
+* Noah Smith (Born-Digital), updates and testing
+* Shaun Trujillo (Mount Holyoke College)
 
 ### ISLE (main project)
 
