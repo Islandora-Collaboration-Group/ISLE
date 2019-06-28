@@ -107,7 +107,7 @@ services:
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
       ## Making image-services accessible via traefik is not safe and not recommended
       - traefik.enable=false
-      - "traefik.frontend.rule=Host:images.${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
+      - "traefik.frontend.rule=Host:images.${BASE_DOMAIN}; PathPrefix: /, /cantaloupe"
 
   apache:
     # build:
@@ -130,7 +130,7 @@ services:
     labels:
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
       - traefik.enable=true
-      - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
+      - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /cantaloupe"
 
   traefik:
     image: traefik:1.7.9
