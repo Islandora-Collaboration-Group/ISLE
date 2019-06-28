@@ -22,9 +22,10 @@ Edit the `/etc/hosts` file to view ISLE locally on a workstation browser.
 
 * Enter the laptop end user password
 
-* Add the values next to the `127.0.0.1 localhost` entry in the `/etc/hosts` file.
+* Find the `127.0.0.1 localhost` entry in the `/etc/hosts` file.
+* Go to end of same line, add one space, and then paste the following:
 
-    * `127.0.0.1 localhost isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain` with a space in between the entries.  
+    * `isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain`
 
   * Enter `Cntrl` and the letter `o` together to write the changes to the file.
 
@@ -87,7 +88,7 @@ Edit the `/etc/hosts` file to view ISLE locally on a workstation browser.
 
     * Go to end of same line, add one space, and then paste the following:
 
-        `127.0.0.1 localhost isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain`
+        * `isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain`
 
     * Click `File > Save`, and then `File -> Exit`.
 
