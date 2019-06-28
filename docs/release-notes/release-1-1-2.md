@@ -1,9 +1,17 @@
 # Release Notes - ISLE v.1.1.2, 2019-06-27
 
-## Updates and testing performed by ISLE Committer Gavin Morris, Born-Digital
+### Contributions to this release from: 
 
+David Keiser-Clark (Williams College), documentation
+Gavin Morris (Born-Digital), updates and testing
+Mark Sanford (Colgate University), documentation
+Bethany Seeger (Amherst College), Release Manager
+Noah Smith (Born-Digital), updates and testing
+Shaun Trujillo (Mount Holyoke College)
 
 ### ISLE (main project)
+
+* Documentation for ISLE is now found in the `docs` directory of the ISLE repository
 
 * `docker-compose.yml`
   * Release header changed to `1.1.2` with date of release
