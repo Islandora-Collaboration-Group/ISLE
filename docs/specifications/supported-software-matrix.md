@@ -14,7 +14,6 @@
 | MySQL                        | 5.6                | [https://www.mysql.com/](https://www.mysql.com/) |
 | Nginx                        | 1.13               | [https://www.nginx.com/](https://www.nginx.com/) |
 | OpenJDK                      | JDK 8.x            | [http://openjdk.java.net/](http://openjdk.java.net/) |
-| Oracle Java                  | JDK 8.x            | [http://www.oracle.com/technetwork/java/javase/overview/index.html](http://www.oracle.com/technetwork/java/javase/overview/index.html)
 | PHP                          | 5.6                | [http://www.php.net/](http://www.php.net/) |
 | Solr                         | 4.10.4             | [http://lucene.apache.org/solr/](http://lucene.apache.org/solr/) |
 | Tomcat                       | 8.x                | [http://tomcat.apache.org/](http://tomcat.apache.org/) |

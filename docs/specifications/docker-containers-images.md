@@ -7,8 +7,7 @@
 | [ubuntu:14.04](https://hub.docker.com/_/ubuntu/) | | Djatoka            | 1.1           |                        |
 |                                     |              | Drupal             | 7.5x+         |                        |
 |                                     |              | Islandora          | 7.x-1.1x      |                        |
-|                                     |              | OpenJDK            | JDK 8.x       |                        |
-|                                     |              | Oracle Java        | JDK 8.x       |                        |
+|                                     |              | OpenJDK            | JDK 8.x        |                        |
 |                                     |              | PHP                | 5.6           |                        |
 
 
@@ -23,7 +22,6 @@
 |                                     |              | Islandora Transforms (XSLTs) | latest XSLTs from DG [repo](https://github.com/discoverygarden/islandora_transforms) |
 |                                     |              | MySQL (client)               | 5.6                |                                                                 |
 |                                     |              | OpenJDK                      | JDK 8.x            |                                                                 |
-|                                     |              | Oracle Java                  | JDK 8.x            |                                                                 |
 |                                     |              | Tomcat                       | 8.x                | /usr/local/tomcat/logs/                                         |
 
 

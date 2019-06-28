@@ -43,7 +43,7 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 | (DG) GSearch Extensions          | 0.13              |
 | (DG) Islandora Transforms (XSLTs)| as of 8/2018      |
 | Tomcat                           | 7.x               |  
-| Oracle JDK                       | 8.x               |
+| Open JDK                         | 8.x               |
 
 | Account           | Password                      | Service       | URL           |
 | -------------     | -------------                 | ------------- | ------------- |      
@@ -67,7 +67,7 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 | -------------          | ------------- |
 | Solr                   | 4.10.4        |
 | Tomcat                 | 7.x           |  
-| Oracle JDK             | 8.x           |
+| OpenJDK                | 8.x           |
 | (DG) Basic Solr Config | 4.10.x branch |
 
 | Account           | Password        | Service       | URL                             |
@@ -88,7 +88,7 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 | Software      | Version       |
 | ------------- | ------------- |
 | Apache        | 2.4.7         |
-| Oracle JDK    | 8.x           |
+| OpenJDK       | 8.x           |
 | Djatoka       | 1.1           |
 | Drupal        | 7.57          |
 | PHP           | 5.6           |
