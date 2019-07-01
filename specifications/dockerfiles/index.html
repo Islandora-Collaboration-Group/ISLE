@@ -755,8 +755,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release-notes/release/" title="Latest release: 1.1.1" class="md-nav__link">
-      Latest release: 1.1.1
+    <a href="../../release-notes/release-1-1-2/" title="Latest release: 1.1.2" class="md-nav__link">
+      Latest release: 1.1.2
     </a>
   </li>
 
@@ -786,8 +786,20 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release-notes/release-1-1/" title="1.1" class="md-nav__link">
-      1.1
+    <a href="../../release-notes/release-1-1-0/" title="1.1.0" class="md-nav__link">
+      1.1.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-1-1/" title="1.1.1" class="md-nav__link">
+      1.1.1
     </a>
   </li>
 
@@ -957,22 +969,10 @@
 </li>
 <li>
 <p>COPY - Within each ISLE image directory there are additional files or subdirectories are copied from the local laptop to the image itself.</p>
-<ul>
-<li><code>e.g. COPY envinit.sh /opt/adore-djatoka-1.1/bin/envinit.sh</code></li>
-</ul>
 </li>
 <li>
 <p>ENV - sets any environmental variables necessary for software to run or be configured properly.</p>
 </li>
-</ul>
-<pre><code>ENV JAVA_HOME=/usr/lib/jvm/java-8-oracle \
-    JRE_HOME=/usr/lib/jvm/java-8-oracle/jre \
-    PATH=$PATH:$HOME/.composer/vendor/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/jre/bin \
-    KAKADU_LIBRARY_PATH=/opt/adore-djatoka-1.1/lib/Linux-x86-64 \
-    KAKADU_HOME=/opt/adore-djatoka-1.1/lib/Linux-x86-64
-</code></pre>
-
-<ul>
 <li>
 <p>VOLUME - Exposes a volume for data necessary for the build to continue. e.g. <code>VOLUME /var/www/html</code></p>
 </li>

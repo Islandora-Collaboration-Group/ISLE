@@ -362,8 +362,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-3-clone-isle-repository" title="Step 3: Clone ISLE Repository" class="md-nav__link">
-    Step 3: Clone ISLE Repository
+  <a href="#step-3-install-docker-compose_2" title="Step 3: Install Docker-Compose" class="md-nav__link">
+    Step 3: Install Docker-Compose
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-clone-isle-repository" title="Step 4: Clone ISLE Repository" class="md-nav__link">
+    Step 4: Clone ISLE Repository
   </a>
   
 </li>
@@ -396,8 +403,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-3-clone-isle-repository_1" title="Step 3: Clone ISLE Repository" class="md-nav__link">
-    Step 3: Clone ISLE Repository
+  <a href="#step-3-install-docker-compose_3" title="Step 3: Install Docker-Compose" class="md-nav__link">
+    Step 3: Install Docker-Compose
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-clone-isle-repository_1" title="Step 4: Clone ISLE Repository" class="md-nav__link">
+    Step 4: Clone ISLE Repository
   </a>
   
 </li>
@@ -952,8 +966,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release-notes/release/" title="Latest release: 1.1.1" class="md-nav__link">
-      Latest release: 1.1.1
+    <a href="../../release-notes/release-1-1-2/" title="Latest release: 1.1.2" class="md-nav__link">
+      Latest release: 1.1.2
     </a>
   </li>
 
@@ -983,8 +997,20 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release-notes/release-1-1/" title="1.1" class="md-nav__link">
-      1.1
+    <a href="../../release-notes/release-1-1-0/" title="1.1.0" class="md-nav__link">
+      1.1.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-1-1/" title="1.1.1" class="md-nav__link">
+      1.1.1
     </a>
   </li>
 
@@ -1138,8 +1164,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-3-clone-isle-repository" title="Step 3: Clone ISLE Repository" class="md-nav__link">
-    Step 3: Clone ISLE Repository
+  <a href="#step-3-install-docker-compose_2" title="Step 3: Install Docker-Compose" class="md-nav__link">
+    Step 3: Install Docker-Compose
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-clone-isle-repository" title="Step 4: Clone ISLE Repository" class="md-nav__link">
+    Step 4: Clone ISLE Repository
   </a>
   
 </li>
@@ -1172,8 +1205,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-3-clone-isle-repository_1" title="Step 3: Clone ISLE Repository" class="md-nav__link">
-    Step 3: Clone ISLE Repository
+  <a href="#step-3-install-docker-compose_3" title="Step 3: Install Docker-Compose" class="md-nav__link">
+    Step 3: Install Docker-Compose
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-clone-isle-repository_1" title="Step 4: Clone ISLE Repository" class="md-nav__link">
+    Step 4: Clone ISLE Repository
   </a>
   
 </li>
@@ -1348,7 +1388,7 @@
 <ul>
 <li>Add the Docker Repository.</li>
 </ul>
-<pre><code>yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo`
+<pre><code>yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 </code></pre>
 
 <ul>
@@ -1472,13 +1512,14 @@ git version 2.15.1
 <p>This process should may take 2 -5 mins depending on the speed of your hard-drive.</p>
 </li>
 <li>
-<p>Once fully started, one can see a whale icon at the top of their screen. If this is clicked, a dropdown should appear indicating that Docker is now running.</p>
-</li>
-<li>
-<p>Please note: This process also installs the newest version of <code>docker-compose</code>.</p>
+<p>Once fully started, a whale icon will appear at top of the screen. If clicked, a dropdown should appear indicating that Docker is now running.</p>
 </li>
 </ul>
-<h3 id="step-3-clone-isle-repository">Step 3: Clone ISLE Repository</h3>
+<h3 id="step-3-install-docker-compose_2">Step 3: Install Docker-Compose</h3>
+<ul>
+<li>The Docker installation has installed the newest version of <code>docker-compose</code>.</li>
+</ul>
+<h3 id="step-4-clone-isle-repository">Step 4: Clone ISLE Repository</h3>
 <p><strong>Please note:</strong> The location you clone the repository to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.</p>
 <p>Please run these steps as your normal user (not <code>root</code>):</p>
 <ul>
@@ -1560,13 +1601,24 @@ git version 2.15.1
 <p>If prompted with a Docker popup dialogue to <code>Login with your Docker ID</code>, you may do so with your Docker.com account information, or you may simply close the window.  Docker is running and you do not need to login to use it.</p>
 </li>
 <li>
-<p>One can see a whale icon in the notification area.  </p>
+<p>Once fully started, a whale icon will appear in the notification area. If clicked, a dropdown should appear indicating that Docker is now running.</p>
 </li>
 <li>
-<p>Please note: This process also installs the newest version of <code>docker-compose</code>.</p>
+<p>Enable Docker Shared Drives</p>
+<ul>
+<li>Right-click on the Docker whale icon</li>
+<li>Select "Settings"</li>
+<li>Select "Shared Drives"</li>
+<li>Check the box for your local "C" drive</li>
+<li>Click "Apply"</li>
+</ul>
 </li>
 </ul>
-<h3 id="step-3-clone-isle-repository_1">Step 3: Clone ISLE Repository</h3>
+<h3 id="step-3-install-docker-compose_3">Step 3: Install Docker-Compose</h3>
+<ul>
+<li>The Docker installation has installed the newest version of <code>docker-compose</code>.</li>
+</ul>
+<h3 id="step-4-clone-isle-repository_1">Step 4: Clone ISLE Repository</h3>
 <p><strong>Please note:</strong> The location you select to clone the ISLE repository becomes your project directory. We recommend using the default user home directory; this location will include your configuration and log output of the Docker containers. (You may choose a different location, but it must not be a protected folder such as system or root directory.)</p>
 <ul>
 <li>Use <code>PowerShell</code> (and remember to <code>Run as administrator</code>).</li>
