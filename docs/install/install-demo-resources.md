@@ -42,7 +42,7 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 | Gsearch (w/remote SOLR plugin)   | 2.8+ (DG patched) |
 | (DG) GSearch Extensions          | 0.13              |
 | (DG) Islandora Transforms (XSLTs)| as of 8/2018      |
-| Tomcat                           | 8.5.40            |  
+| Tomcat                           | 8.5.42            |  
 | Open JDK                         | 8.x               |
 
 | Account           | Password                      | Service       | URL           |
@@ -66,7 +66,7 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 | Software               | Version       |
 | -------------          | ------------- |
 | Solr                   | 4.10.4        |
-| Tomcat                 | 7.x           |  
+| Tomcat                 | 8.x           |  
 | OpenJDK                | 8.x           |
 | (DG) Basic Solr Config | 4.10.x branch |
 
