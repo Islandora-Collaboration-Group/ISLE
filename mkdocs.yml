@@ -59,6 +59,7 @@ nav:
     - 'Testing Guide': 'contributor-docs/testing-guide.md'
   - 'Get Help': 'about/get-help.md'
 - 'Release Notes':
-  - 'Latest release: 1.1.1': 'release-notes/release.md'
+  - 'Latest release: 1.1.2': 'release-notes/release-1-1-2.md'
   - 'Previous releases': 
-     - '1.1': 'release-notes/release-1-1.md'
+     - '1.1.0': 'release-notes/release-1-1-0.md'
+     - '1.1.1': 'release-notes/release-1-1-1.md'
