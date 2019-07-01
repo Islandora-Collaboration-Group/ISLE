@@ -42,8 +42,8 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 | Gsearch (w/remote SOLR plugin)   | 2.8+ (DG patched) |
 | (DG) GSearch Extensions          | 0.13              |
 | (DG) Islandora Transforms (XSLTs)| as of 8/2018      |
-| Tomcat                           | 7.x               |  
-| Oracle JDK                       | 8.x               |
+| Tomcat                           | 8.5.42            |  
+| Open JDK                         | 8.x               |
 
 | Account           | Password                      | Service       | URL           |
 | -------------     | -------------                 | ------------- | ------------- |      
@@ -66,8 +66,8 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 | Software               | Version       |
 | -------------          | ------------- |
 | Solr                   | 4.10.4        |
-| Tomcat                 | 7.x           |  
-| Oracle JDK             | 8.x           |
+| Tomcat                 | 8.x           |  
+| OpenJDK                | 8.x           |
 | (DG) Basic Solr Config | 4.10.x branch |
 
 | Account           | Password        | Service       | URL                             |
@@ -88,11 +88,13 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 | Software      | Version       |
 | ------------- | ------------- |
 | Apache        | 2.4.7         |
-| Oracle JDK    | 8.x           |
-| Djatoka       | 1.1           |
+| OpenJDK       | 8.x           |
+| Djatoka*      | 1.1           |
 | Drupal        | 7.57          |
 | PHP           | 5.6           |
 | Islandora     | 7.x           |
+
+\* Djatoka is included because it bundles useful binaries, but is not running as a service.
 
 | Account                | Password                      | Service               | URL                                                  |
 | -------------          | -------------                 | -------------         | -------------                                        |
@@ -121,14 +123,12 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 
 | Software                         | Version           |
 | -------------                    | -------------     |
-| Djatoka                          | 1.1               |
-| Cantaloupe IIIF                  | 3.4.3             |
+| Cantaloupe IIIF                  | 4.x               |
 
 | Account           | Password                      | Service       | URL           |
 | -------------     | -------------                 | ------------- | ------------- |
 | admin             | isle_admin                    | Tomcat        | http://hostip:8082/manager/html   |
 | manager           | isle_manager                  | Tomcat        | http://hostip:8082/manager/html   |   
-| N/A               | N/A                           | Djatoka       | http://hostip:8083/adore-djatoka/     |
 | admin             | isle_admin                    | Cantaloupe    | http://hostip:8083/cantaloupe/admin   |
 
 ---
