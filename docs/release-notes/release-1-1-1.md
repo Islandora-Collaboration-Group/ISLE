@@ -5,9 +5,9 @@
 ### ISLE (main project)
 
 * `docker-compose.yml`
-  * Release header changed to `1.1.1` with date of release
-  * All isle-image tags changed to `1.1.1`
-  * Upgraded `traefik` to `1.7.9`
+    * Release header changed to `1.1.1` with date of release
+    * All isle-image tags changed to `1.1.1`
+    * Upgraded `traefik` to `1.7.9`
 
 ### Images
 
