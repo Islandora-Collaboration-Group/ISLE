@@ -1,7 +1,7 @@
 version: '3'
 
 #### docker-compose up -d;
-## Updated 2019-03-27 - Release 1.1.1 (@ 1.1.1)
+## Updated 2019-06-28 - Release 1.1.2 (@ 1.1.2)
 
 services:
   isle-portainer: ## Renamed to avoid conflicts on systems/servers with portainer already running.
@@ -18,13 +18,15 @@ services:
     labels:
       - traefik.port=9000
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
-      - traefik.enable=true  ## NOT SAFE FOR PRODUCTION! ##
+      ## Enabling access the Portainer interface via traefik is not safe in a production enviroment unless
+      ## you have the ISLE system behind a firewall and, overall, only ports 80 and 443 exposed.
+      - traefik.enable=true
       - "traefik.frontend.rule=Host:portainer.${BASE_DOMAIN};"
 
   mysql:
     # build:
     #   context: ../images/isle-mysql
-    image: islandoracollabgroup/isle-mysql:1.1.1
+    image: islandoracollabgroup/isle-mysql:1.1.2
     container_name: isle-mysql-${CONTAINER_SHORT_ID}
     environment:
       - MYSQL_ROOT_PASSWORD
@@ -37,12 +39,12 @@ services:
   fedora:
     # build:
     #   context: ../images/isle-fedora
-    image: islandoracollabgroup/isle-fedora:1.1.1
+    image: islandoracollabgroup/isle-fedora:1.1.2
     container_name: isle-fedora-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=768M
       - JAVA_MIN_MEM=128M
-    env_file: 
+    env_file:
       - tomcat.env
       - .env
     networks:
@@ -64,7 +66,7 @@ services:
   solr:
     # build:
     #   context: ../images/isle-solr
-    image: islandoracollabgroup/isle-solr:1.1.1
+    image: islandoracollabgroup/isle-solr:1.1.2
     container_name: isle-solr-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=512M
@@ -84,12 +86,12 @@ services:
   image-services:
     # build:
     #   context: ../images/isle-imageservices
-    image: islandoracollabgroup/isle-imageservices:1.1.1
+    image: islandoracollabgroup/isle-imageservices:1.1.2
     container_name: isle-images-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=512M
       - JAVA_MIN_MEM=0
-    env_file: 
+    env_file:
       - tomcat.env
       - .env
     networks:
@@ -103,15 +105,16 @@ services:
       - ./logs/imageservices:/usr/local/tomcat/logs
     labels:
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
+      ## Making image-services accessible via traefik is not safe and not recommended
       - traefik.enable=false
-      - "traefik.frontend.rule=Host:images.${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
+      - "traefik.frontend.rule=Host:images.${BASE_DOMAIN}; PathPrefix: /, /cantaloupe"
 
   apache:
     # build:
     #   context: ../images/isle-apache
-    image: islandoracollabgroup/isle-apache:1.1.1
+    image: islandoracollabgroup/isle-apache:1.1.2
     container_name: isle-apache-${CONTAINER_SHORT_ID}
-    env_file: 
+    env_file:
       - .env
     networks:
       isle-internal:
@@ -127,7 +130,7 @@ services:
     labels:
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
       - traefik.enable=true
-      - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
+      - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /cantaloupe"
 
   traefik:
     image: traefik:1.7.9
@@ -145,7 +148,9 @@ services:
       - ./config/proxy/traefik.toml:/etc/traefik/traefik.toml  ## Edit line 27, 28 with your cert and key names.
     labels:
       - traefik.port=8080
-      - traefik.enable=true  ## NOT SAFE FOR PRODUCTION! ##
+      ## Enabling access to the Traefik interface is not safe in a production enviroment unless you have the
+      ## ISLE system behind a firewall and only ports 80 and 443 exposed.
+      - traefik.enable=true
       - traefik.frontend.rule=Host:admin.${BASE_DOMAIN};
 
 # Defined networks
