@@ -1,7 +1,7 @@
 <!--- PAGE_TITLE --->
 
 ## Overview
-* Navigate to online ISLE-Documentation repository
+* Navigate to online ISLE repository
 * Edit existing pages
 * Adding new pages
     * Updating `mkdocs.yml`
@@ -14,8 +14,8 @@ If you need to edit more than one file or want to create more than one new page 
 
 ---
 
-### Navigate to Online ISLE-Documentation Repository
-* In a web browser navigate to [https://github.com/Islandora-Collaboration-Group/ISLE-Documentation](https://github.com/Islandora-Collaboration-Group/ISLE-Documentation)
+### Navigate to Online ISLE Repository
+* In a web browser navigate to [https://github.com/Islandora-Collaboration-Group/ISLE](https://github.com/Islandora-Collaboration-Group/ISLE)
 
 ---
 
@@ -34,7 +34,7 @@ If you need to edit more than one file or want to create more than one new page 
 ---
 
 ### Adding New Pages
-**Please note:** If you are adding new pages to the Documentation, in addition to creating the new page, you'll need to edit the `mkdocs.yml` (YAML) file at the root (base) of the ISLE-Documentation project directory in order for the page to show up in the documentation after adding the new page.
+**Please note:** If you are adding new pages to the Documentation, in addition to creating the new page, you'll need to edit the `mkdocs.yml` (YAML) file at the root (base) of the ISLE project directory in order for the page to show up in the documentation after adding the new page.
 
 The example used below is how to create a new documentation page that will be about building giant ISLE robots with the title of "Building Giant ISLE Robots" and be located in the Development section.
 
@@ -52,7 +52,7 @@ The example used below is how to create a new documentation page that will be ab
 
 #### Updating `mkdocs`
 
-If you have added a new page to the Documentation, you'll need to edit the `mkdocs.yml` (YAML) file at the root (base) of the ISLE-Documentation project directory in order for the page to show up in the documentation.
+If you have added a new page to the Documentation, you'll need to edit the `mkdocs.yml` (YAML) file at the root (base) of the ISLE project directory in order for the page to show up in the documentation.
 
 * Click into the `mkdocs.yml` file.
 
@@ -105,4 +105,4 @@ The "Open a pull request" page should now appear along with text like `The chang
 * The first and second text fields may contain part of the short description. Either keep the default text or change accordingly.
 * Click the green `Create pull request` button.
 
-This pull request should now appear in the [Pull Requests](https://github.com/Islandora-Collaboration-Group/ISLE-Documentation/pulls) section of the ISLE repository, ready for review, commentary or inclusion by the ISLE Committers.
+This pull request should now appear in the [Pull Requests](https://github.com/Islandora-Collaboration-Group/ISLE/pulls) section of the ISLE repository, ready for review, commentary or inclusion by the ISLE Committers.

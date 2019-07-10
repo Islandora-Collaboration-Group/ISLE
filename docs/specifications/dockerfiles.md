@@ -73,17 +73,8 @@ Following [standard Docker convention](https://docs.docker.com/engine/reference/
 * RUN - Execute commands e.g. `RUN apt-get update` etc.
 
 * COPY - Within each ISLE image directory there are additional files or subdirectories are copied from the local laptop to the image itself.
-    * `e.g. COPY envinit.sh /opt/adore-djatoka-1.1/bin/envinit.sh`
 
 * ENV - sets any environmental variables necessary for software to run or be configured properly.
-
-```
-ENV JAVA_HOME=/usr/lib/jvm/java-8-oracle \
-    JRE_HOME=/usr/lib/jvm/java-8-oracle/jre \
-    PATH=$PATH:$HOME/.composer/vendor/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/jre/bin \
-    KAKADU_LIBRARY_PATH=/opt/adore-djatoka-1.1/lib/Linux-x86-64 \
-    KAKADU_HOME=/opt/adore-djatoka-1.1/lib/Linux-x86-64
-```
 
 * VOLUME - Exposes a volume for data necessary for the build to continue. e.g. `VOLUME /var/www/html`
 
