@@ -41,8 +41,8 @@ Note: Since public forks can’t be made private, we will duplicate (instead of 
 * You want to have four lines returned, two that describe your private repository (called `origin`) and two that describe the source ISLE github site (called `upstream`):
 
 ```
-origin  https://github.com/your-github-name/ISLE-Documentation.git (fetch)
-origin  https://github.com/your-github-name/ISLE-Documentation.git (push)
+origin  https://github.com/your-github-name/ISLE.git (fetch)
+origin  https://github.com/your-github-name/ISLE.git (push)
 upstream        https://github.com/Islandora-Collaboration-Group/ISLE.git (fetch)
 upstream        https://github.com/Islandora-Collaboration-Group/ISLE.git (push)
 ```

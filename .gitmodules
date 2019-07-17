@@ -13,9 +13,6 @@
 [submodule "images/isle-imageservices"]
 	path = images/isle-imageservices
 	url = https://github.com/Islandora-Collaboration-Group/isle-imageservices.git
-[submodule "images/isle-ubuntu-basebox"]
-	path = images/isle-ubuntu-basebox
-	url = https://github.com/Islandora-Collaboration-Group/isle-ubuntu-basebox.git
 [submodule "images/isle-mysql"]
 	path = images/isle-mysql
 	url = https://github.com/Islandora-Collaboration-Group/isle-mysql.git

@@ -22,6 +22,7 @@
 ```
  apt-get update && upgrade
 ```
+
 ```
  apt-get install -y openssl git htop ntp wget curl nano apt-transport-https ca-certificates software-properties-common
 ```
@@ -32,6 +33,7 @@
 ```
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 ```
+
 ```
 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 ```
@@ -120,6 +122,7 @@ yum install -y epel-release
 ```
 yum install -y openssl git htop ntp wget curl nano
 ```
+
 ```
 yum install -y yum-utils device-mapper-persistent-data lvm2
 ```
@@ -127,7 +130,7 @@ yum install -y yum-utils device-mapper-persistent-data lvm2
 
 - Add the Docker Repository.
 ```
-yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo`
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 ```
 
 - Install Docker.
@@ -231,11 +234,13 @@ git version 2.15.1
 
 * This process should may take 2 -5 mins depending on the speed of your hard-drive.
 
-* Once fully started, one can see a whale icon at the top of their screen. If this is clicked, a dropdown should appear indicating that Docker is now running.
+* Once fully started, a whale icon will appear at top of the screen. If clicked, a dropdown should appear indicating that Docker is now running.
 
-* Please note: This process also installs the newest version of `docker-compose`.
+### Step 3: Install Docker-Compose
 
-### Step 3: Clone ISLE Repository
+- The Docker installation has installed the newest version of `docker-compose`.
+
+### Step 4: Clone ISLE Repository
 **Please note:** The location you clone the repository to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
 
 Please run these steps as your normal user (not `root`):
@@ -307,11 +312,20 @@ git version 2.15.1
 
 * If prompted with a Docker popup dialogue to `Login with your Docker ID`, you may do so with your Docker.com account information, or you may simply close the window.  Docker is running and you do not need to login to use it.
 
-* One can see a whale icon in the notification area.  
+* Once fully started, a whale icon will appear in the notification area. If clicked, a dropdown should appear indicating that Docker is now running.
 
-* Please note: This process also installs the newest version of `docker-compose`.
+* Enable Docker Shared Drives
+    * Right-click on the Docker whale icon
+    * Select "Settings"
+    * Select "Shared Drives"
+    * Check the box for your local "C" drive
+    * Click "Apply"
 
-### Step 3: Clone ISLE Repository
+### Step 3: Install Docker-Compose
+
+- The Docker installation has installed the newest version of `docker-compose`.
+
+### Step 4: Clone ISLE Repository
 **Please note:** The location you select to clone the ISLE repository becomes your project directory. We recommend using the default user home directory; this location will include your configuration and log output of the Docker containers. (You may choose a different location, but it must not be a protected folder such as system or root directory.)
 
 * Use `PowerShell` (and remember to `Run as administrator`).

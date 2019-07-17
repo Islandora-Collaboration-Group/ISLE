@@ -1,7 +1,7 @@
 version: '3'
 
 #### docker-compose up -d;
-## Updated 2019-03-27 - Release TICK (@ dashboards-dev)
+## Updated 2019-07 - Release 1.2.0 (@ 1.2.0)
 
 services:
   isle-portainer: ## Renamed to avoid conflicts on systems/servers with portainer already running.
@@ -18,18 +18,21 @@ services:
     labels:
       - traefik.port=9000
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
-      - traefik.enable=true  ## NOT SAFE FOR PRODUCTION! ##
+      ## Enabling access the Portainer interface via traefik is not safe in a production enviroment unless
+      ## you have the ISLE system behind a firewall and, overall, only ports 80 and 443 exposed.
+      - traefik.enable=true
       - "traefik.frontend.rule=Host:portainer.${BASE_DOMAIN};"
-    logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
+    # (Optional) Uncomment lines below to run ISLE with the TICK monitoring system
+    #logging:
+    #  driver: syslog
+    #  options:
+    #    tag: "{{.Name}}"
 
 
   mysql:
     # build:
     #   context: ../images/isle-mysql
-    image: islandoracollabgroup/isle-mysql:dashboards-dev
+    image: islandoracollabgroup/isle-mysql:1.2.0
     container_name: isle-mysql-${CONTAINER_SHORT_ID}
     environment:
       - MYSQL_ROOT_PASSWORD
@@ -40,20 +43,22 @@ services:
     volumes:
       - isle-db-data:/var/lib/mysql
       - isle-mysql-log:/var/log/mysql
-    logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
+    # (Optional) Uncomment lines below to run ISLE with the TICK monitoring system
+    #logging:
+    #  driver: syslog
+    #  options:
+    #    tag: "{{.Name}}"
+
 
   fedora:
     # build:
     #   context: ../images/isle-fedora
-    image: islandoracollabgroup/isle-fedora:dashboards-dev    
+    image: islandoracollabgroup/isle-fedora:1.2.0    
     container_name: isle-fedora-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=768M
       - JAVA_MIN_MEM=128M
-    env_file: 
+    env_file:
       - tomcat.env
       - .env
     networks:
@@ -69,15 +74,17 @@ services:
       - isle-fedora-resourceIndex:/usr/local/fedora/data/resourceIndex # Migrators change this to your local RI folder.
       - isle-fedora-activemq:/usr/local/fedora/data/activemq-data # Migrators change this to your local MQ folder.
       - isle-fedora-XACML:/usr/local/fedora/data/fedora-xacml-policies
-    logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
+    # (Optional) Uncomment lines below to run ISLE with the TICK monitoring system
+    #logging:
+    #  driver: syslog
+    #  options:
+    #    tag: "{{.Name}}"
+
 
   solr:
     # build:
     #   context: ../images/isle-solr
-    image: islandoracollabgroup/isle-solr:dashboards-dev
+    image: islandoracollabgroup/isle-solr:1.2.0
     container_name: isle-solr-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=512M
@@ -93,20 +100,22 @@ services:
       - mysql
     volumes:
       - isle-solr-data:/usr/local/solr  
-    logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
+    # (Optional) Uncomment lines below to run ISLE with the TICK monitoring system
+    #logging:
+    #  driver: syslog
+    #  options:
+    #    tag: "{{.Name}}"
+
 
   image-services:
     # build:
     #   context: ../images/isle-imageservices
-    image: islandoracollabgroup/isle-imageservices:dashboards-dev
+    image: islandoracollabgroup/isle-imageservices:1.2.0
     container_name: isle-images-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=512M
       - JAVA_MIN_MEM=0
-    env_file: 
+    env_file:
       - tomcat.env
       - .env
     networks:
@@ -118,19 +127,22 @@ services:
       - "8083:8080"
     labels:
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
+      ## Making image-services accessible via traefik is not safe and not recommended
       - traefik.enable=false
-      - "traefik.frontend.rule=Host:images.${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
-    logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
+      - "traefik.frontend.rule=Host:images.${BASE_DOMAIN}; PathPrefix: /, /cantaloupe"
+    # (Optional) Uncomment lines below to run ISLE with the TICK monitoring system
+    #logging:
+    #  driver: syslog
+    #  options:
+    #    tag: "{{.Name}}"
+
 
   apache:
     # build:
     #   context: ../images/isle-apache
-    image: islandoracollabgroup/isle-apache:dashboards-dev
+    image: islandoracollabgroup/isle-apache:1.2.0
     container_name: isle-apache-${CONTAINER_SHORT_ID}
-    env_file: 
+    env_file:
       - .env
     networks:
       isle-internal:
@@ -144,106 +156,12 @@ services:
     labels:
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
       - traefik.enable=true
-      - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
-    logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
-
-# Start TICK - Services
-
-  influxdb:
-    image: influxdb:latest
-    container_name: isle-influxdb-${CONTAINER_SHORT_ID}
-    volumes:
-      # Mount for influxdb data directory
-      - isle-influxdb-data:/var/lib/influxdb
-      # Mount for influxdb configuration
-      - ./config/tick/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf
-    ports:
-      # The API for InfluxDB is served on port 8086
-      - "8086:8086"
-      - "8088:8088"
-      # UDP Port
-      - "8089:8089"
-    networks:
-      isle-internal:
-    logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
-
-  telegraf:
-    image: telegraf:latest
-    # Telegraf requires network access to InfluxDB
-    container_name: isle-telegraf-${CONTAINER_SHORT_ID}
-    volumes:
-      # Mount for telegraf configuration
-      - ./config/tick/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
-      # Mount for Docker API access
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      # To get metrics off the host
-      - /:/hostfs:ro
-      - /etc:/hostfs/etc:ro
-      - /proc:/hostfs/proc:ro
-      - /sys:/hostfs/sys:ro
-      - /var/run/utmp:/var/run/utmp:ro
-    depends_on:
-      - influxdb
-    networks:
-      isle-internal:
-    ports:
-      # This port should be for rsyslog
-      - "6514:6514"
-    logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
-
-  kapacitor:
-    image: kapacitor:latest
-    container_name: isle-kapacitor-${CONTAINER_SHORT_ID}
-    volumes:
-      # Mount for kapacitor data directory
-      - isle-kapacitor-data:/var/lib/kapacitor
-      # Mount for kapacitor configuration
-      - ./config/tick/kapacitor/kapacitor.conf:/etc/kapacitor/kapacitor.conf
-    # Kapacitor requires network access to Influxdb
-    ports:
-      # The API for Kapacitor is served on port 9092
-      - "9092:9092"
-    networks:
-      isle-internal:
-    logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
-
-  chronograf:
-    image: chronograf:latest
-    container_name: isle-chronograf-${CONTAINER_SHORT_ID}    
-    environment:
-      - RESOURCES_PATH="/usr/share/chronograf/resources"
-      - LOG_LEVEL=error
-    volumes:
-      # Mount for chronograf database
-      - isle-chronograf-data:/var/lib/chronograf/
-    ports:
-      # The WebUI for Chronograf is served on port 8888
-      - "8888:8888"
-    depends_on:
-      - kapacitor
-      - influxdb
-      - telegraf
-    networks:
-      isle-internal:
-    logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
-
-
-# END TICK - Services
+      "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /cantaloupe"
+    # (Optional) Uncomment lines below to run ISLE with the TICK monitoring system
+    #logging:
+    #  driver: syslog
+    #  options:
+    #    tag: "{{.Name}}"
 
   traefik:
     image: traefik:1.7.9
@@ -261,12 +179,110 @@ services:
       - ./config/proxy/traefik.toml:/etc/traefik/traefik.toml  ## Edit line 27, 28 with your cert and key names.
     labels:
       - traefik.port=8080
-      - traefik.enable=true  ## NOT SAFE FOR PRODUCTION! ##
+      ## Enabling access to the Traefik interface is not safe in a production enviroment unless you have the
+      ## ISLE system behind a firewall and only ports 80 and 443 exposed.
+      - traefik.enable=true
       - traefik.frontend.rule=Host:admin.${BASE_DOMAIN};
-    logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
+    # (Optional) Uncomment lines below to run ISLE with the TICK monitoring system
+    #logging:
+    #  driver: syslog
+    #  options:
+    #    tag: "{{.Name}}"
+
+# Start - TICK stack services section
+# (Optional) Uncomment lines below to run ISLE with the TICK monitoring system
+
+#  influxdb:
+#    image: influxdb:latest
+#    container_name: isle-influxdb-${CONTAINER_SHORT_ID}
+#    volumes:
+#      # Mount for influxdb data directory
+#      - isle-influxdb-data:/var/lib/influxdb
+#      # Mount for influxdb configuration
+#      - ./config/tick/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf
+#    ports:
+#      # The API for InfluxDB is served on port 8086
+#      - "8086:8086"
+#      - "8088:8088"
+#      # UDP Port
+#      - "8089:8089"
+#    networks:
+#      isle-internal:
+#    logging:
+#      driver: syslog
+#      options:
+#        tag: "{{.Name}}"
+
+#  telegraf:
+#    image: telegraf:latest
+#    # Telegraf requires network access to InfluxDB
+#    container_name: isle-telegraf-${CONTAINER_SHORT_ID}
+#    volumes:
+#      # Mount for telegraf configuration
+#      - ./config/tick/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+#      # Mount for Docker API access
+#      - /var/run/docker.sock:/var/run/docker.sock:ro
+#      # To get metrics off the host
+#      - /:/hostfs:ro
+#      - /etc:/hostfs/etc:ro
+#      - /proc:/hostfs/proc:ro
+#      - /sys:/hostfs/sys:ro
+#      - /var/run/utmp:/var/run/utmp:ro
+#    depends_on:
+#      - influxdb
+#    networks:
+#      isle-internal:
+#    ports:
+#      # This port should be for rsyslog
+#      - "6514:6514"
+#    logging:
+#      driver: syslog
+#      options:
+#        tag: "{{.Name}}"
+
+#  kapacitor:
+#    image: kapacitor:latest
+#    container_name: isle-kapacitor-${CONTAINER_SHORT_ID}
+#    volumes:
+#      # Mount for kapacitor data directory
+#      - isle-kapacitor-data:/var/lib/kapacitor
+#      # Mount for kapacitor configuration
+#      - ./config/tick/kapacitor/kapacitor.conf:/etc/kapacitor/kapacitor.conf
+#    # Kapacitor requires network access to Influxdb
+#    ports:
+#      # The API for Kapacitor is served on port 9092
+#      - "9092:9092"
+#    networks:
+#      isle-internal:
+#    logging:
+#      driver: syslog
+#      options:
+#        tag: "{{.Name}}"
+
+#  chronograf:
+#    image: chronograf:latest
+#    container_name: isle-chronograf-${CONTAINER_SHORT_ID}    
+#    environment:
+#      - RESOURCES_PATH="/usr/share/chronograf/resources"
+#      - LOG_LEVEL=error
+#    volumes:
+#      # Mount for chronograf database
+#      - isle-chronograf-data:/var/lib/chronograf/
+#    ports:
+#      # The WebUI for Chronograf is served on port 8888
+#      - "8888:8888"
+#    depends_on:
+#      - kapacitor
+#      - influxdb
+#      - telegraf
+#    networks:
+#      isle-internal:
+#    logging:
+#      driver: syslog
+#      options:
+#        tag: "{{.Name}}"
+
+# END - TICK stack services section
 
 # Defined networks
 networks:
@@ -284,6 +300,7 @@ volumes:
   isle-fedora-resourceIndex:
   isle-fedora-activemq:
   isle-fedora-XACML:
-  isle-influxdb-data:
-  isle-kapacitor-data:
-  isle-chronograf-data:
+  # (Optional) Uncomment lines below to run ISLE with the TICK monitoring system
+  #isle-influxdb-data: 
+  #isle-kapacitor-data:
+  #isle-chronograf-data:

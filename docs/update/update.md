@@ -6,7 +6,7 @@ Update an existing ISLE installation to install the newest improvements and secu
 
 - These instructions assume you have already installed a version of ISLE using git.
 - As with any enterprise system, it is strongly suggested you run these update steps in a test environment before updating your production server.
-- Please always read the latest [Release Notes](../release-notes/release.md).
+- Please always read the latest [Release Notes](../release-notes/release-1-1-2.md).
 
 **Update your version of ISLE to the latest release:**
 

@@ -1,4 +1,4 @@
-# ISLE Release 1.1 (Codenamed `Pembroke`)
+# ISLE Release 1.1.0
 
 * Base Images to serve them all:
     * In Docker fashion two new base-images were created for the 1.1 ISLE stack. There are major benefits both for the committers and users of ISLE.
