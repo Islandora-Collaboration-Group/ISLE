@@ -24,7 +24,20 @@ defaultEntryPoints = ["http", "https"]
   address = ":443"
     [entryPoints.https.tls]
 
-# BD Customization - Start: lines 26 - 28 delete above to use Let's Encrypt
+# To use a Let's Encrypt SSL certificate
+# Leave this above section [entryPoints] as is / untouched
+# Scroll down to the Let's Encrypt section and uncomment all lines starting with Line 144 [acme]
+# Modify values as needed or directed.
+# 
+# To use a Commercial SSL certificate
+# Add the following below after line 25
+# Replace .pem & .key with the name of your Staging SSL certificate and associated key
+# Do note the positioning of the added lines. Third character indentation.
+# Example: 
+#    [entryPoints.https.tls]
+#      [[entryPoints.https.tls.certificates]]
+#      certFile = "/certs/sitename-staging.institution.edu.pem"
+#      keyFile = "/certs/sitename-staging.institution.edu.key"
 
 ################################################################
 # Traefik logs configuration
@@ -43,14 +56,14 @@ defaultEntryPoints = ["http", "https"]
 # Optional
 # Default: os.Stdout
 #
-# filePath = "log/traefik.log"
+#filePath = "/etc/traefik/traefik_logs/traefik.log"
 
 # Format is either "json" or "common".
 #
 # Optional
 # Default: "common"
 #
-# format = "common"
+format = "common"
 
 ################################################################
 # Access logs configuration
@@ -70,14 +83,14 @@ defaultEntryPoints = ["http", "https"]
 # Optional
 # Default: os.Stdout
 #
-# filePath = "/path/to/log/log.txt"
+#filePath = "/etc/traefik/traefik_logs/access.log"
 
 # Format is either "json" or "common".
 #
 # Optional
 # Default: "common"
 #
-# format = "common"
+format = "common"
 
 ################################################################
 # API and dashboard configuration
@@ -126,18 +139,19 @@ watch = true
 #
 # swarmmode = false
 
-
 ################################################################
 # Letsencrypt / acme / certbot configuration backend
 ################################################################
 #
-# Uncommented to use Letsencrypt
-#
-[acme]
-  email = "bd_admin@demo.born-digital.com"
-  storage = "acme.json"
-  entryPoint = "https"
-  onHostRule = true
-  onDemand = false
-    [acme.httpChallenge]
-    entryPoint = "http"
+# Uncomment to use Letsencrypt instead of self-signed or commercial SSLs.
+# Change settings as needed. The email used should be for an admin level user or group account.
+# For additional reference please see: https://docs.traefik.io/configuration/acme/
+# 
+#[acme]
+#  email = "admin@sitename-staging.institution.edu"
+#  storage = "acme.json"
+#  entryPoint = "https"
+#  onHostRule = true
+#  onDemand = false
+#    [acme.httpChallenge]
+#    entryPoint = "http"
