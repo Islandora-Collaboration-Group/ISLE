@@ -248,9 +248,9 @@
 
 $databases['default']['default'] = array(
   'driver' => 'mysql',
-  'database' => '',
-  'username' => '',
-  'password' => '',
+  'database' => 'isle_ld',
+  'username' => 'isle_ld_user',
+  'password' => 'isle_ld_db2018',
   'host' => 'mysql',
   'prefix' => '',
   'charset' => 'utf8mb4',
@@ -287,7 +287,7 @@ $update_free_access = FALSE;
  *   $drupal_hash_salt = file_get_contents('/home/example/salt.txt');
  *
  */
-$drupal_hash_salt = '';
+$drupal_hash_salt = 'YO9ST25G4zaVnJT7w05PEH3r39pxhQQUf0LMo6NztY9al';
 
 /**
  * Base URL (optional).
