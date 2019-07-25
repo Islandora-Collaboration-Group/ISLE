@@ -155,7 +155,7 @@ services:
       # Ensure that the values of (Lines 23, 26, 29, & 62) found in the production.env have been inserted in (Lines 251, 252, 253 & 290) of the settings.production.php 
       - ./config/apache/settings_php/settings.production.php:/var/www/html/sites/default/settings.php
       ## (Optional): Uncomment line below to allow bind mounting of the php.ini file for editing of php memory, upload and max_post values.
-      #- ./config/apache/php_ini/php.production.ini:/etc/php/5.6/apache2/php.ini
+      #- ./config/apache/php_ini/php.production.ini:/etc/php/7.1/apache2/php.ini
     labels:
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
       - traefik.enable=true
