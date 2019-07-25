@@ -26,10 +26,10 @@ services:
       - traefik.enable=true
       - "traefik.frontend.rule=Host:portainer.${BASE_DOMAIN};"
     ## (Optional): Uncomment lines below to run ISLE with the TICK monitoring system
-    #logging:
-    #  driver: syslog
-    #  options:
-    #    tag: "{{.Name}}"
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
 
 
   mysql:
@@ -49,10 +49,10 @@ services:
       - ./config/mysql/ISLE.cnf:/etc/mysql/mysql.conf.d/ISLE.cnf
       - isle-db-data:/var/lib/mysql
     ## (Optional): Uncomment lines below to run ISLE with the TICK monitoring system
-    #logging:
-    #  driver: syslog
-    #  options:
-    #    tag: "{{.Name}}"
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
 
 
   fedora:
@@ -78,10 +78,10 @@ services:
       - isle-fedora-activemq:/usr/local/fedora/data/activemq-data # (Optional) Migrators can change this to your local MQ folder instead of using a Docker volume.
       - isle-fedora-XACML:/usr/local/fedora/data/fedora-xacml-policies
     ## (Optional): Uncomment lines below to run ISLE with the TICK monitoring system
-    #logging:
-    #  driver: syslog
-    #  options:
-    #    tag: "{{.Name}}"
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
 
 
   solr:
@@ -102,10 +102,10 @@ services:
     volumes:
       - isle-solr-data:/usr/local/solr
     ## (Optional): Uncomment lines below to run ISLE with the TICK monitoring system
-    #logging:
-    #  driver: syslog
-    #  options:
-    #    tag: "{{.Name}}"
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
 
 
   image-services:
@@ -130,10 +130,10 @@ services:
       - traefik.enable=false
       - "traefik.frontend.rule=Host:images.${BASE_DOMAIN}; PathPrefix: /, /cantaloupe"
     ## (Optional): Uncomment lines below to run ISLE with the TICK monitoring system
-    #logging:
-    #  driver: syslog
-    #  options:
-    #    tag: "{{.Name}}"
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
 
 
   apache:
@@ -163,10 +163,10 @@ services:
       - traefik.enable=true
       - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /cantaloupe"
     ## (Optional): Uncomment lines below to run ISLE with the TICK monitoring system
-    #logging:
-    #  driver: syslog
-    #  options:
-    #    tag: "{{.Name}}"
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
 
 
   traefik:
@@ -192,10 +192,10 @@ services:
       - traefik.enable=true
       - traefik.frontend.rule=Host:admin.${BASE_DOMAIN};
     ## (Optional): Uncomment lines below to run ISLE with the TICK monitoring system
-    #logging:
-    #  driver: syslog
-    #  options:
-    #    tag: "{{.Name}}"
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
 
 # Start - Automated Testing section
 
