@@ -10,15 +10,10 @@ jobs:
     shell: /bin/bash --login
     steps:
       - checkout
-      # - run:
-      #     name: "Pull Submodules"
-      #     command: |
-      #       git submodule init
-      #       git submodule update --remote
 
       # - run:
       #     name: Change main UID
-      #     command: sed -i 's/ISLANDORA_UID=1000/ISLANDORA_UID=1001/g' .env
+      #     command: sed -i 's/ISLANDORA_UID=1000/ISLANDORA_UID=1001/g' test.env
       - run:
           name: Fetch behat suite repo
           command: |
@@ -72,7 +67,7 @@ jobs:
             docker exec -it isle-apache-td bash -c "chown -R islandora:www-data /var/www/html/sites/behat/"
             docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && composer install "
             docker exec -it isle-apache-td bash -c "chmod 700 /var/www/html/sites/behat/run-isle-tests.sh"
-            sudo chmod -R 777 ~/isle/data/apache/sites/behat/debug
+            sudo chmod -R 777 ~/isle/data/apache/html/sites/behat/debug
 
       # sudo chmod -R 777 ~/isle/data/apache/sites/behat/
       # - run:
@@ -93,7 +88,7 @@ jobs:
           name: Fix artifact file permissions
           command: |
             sudo mkdir /home/circleci/artifacts
-            sudo cp -r /home/circleci/isle/data/apache/sites/behat/debug/ /home/circleci/artifacts
+            sudo cp -r /home/circleci/isle/data/apache/html/sites/behat/debug/ /home/circleci/artifacts
             sudo chown -R circleci:circleci /home/circleci/artifacts/
           when: always
       - store_artifacts:
