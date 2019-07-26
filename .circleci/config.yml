@@ -29,7 +29,7 @@ jobs:
           name: Switch to using TEST profile for docker-compose
           command: |
             rm .env
-            echo "COMPOSE_PROJECT_NAME=isle_test \nBASE_DOMAIN=isle.localdomain \nCONTAINER_SHORT_ID=td \n\COMPOSE_FILE=docker-compose.test.yml" > .env
+            printf "COMPOSE_PROJECT_NAME=isle_test \nBASE_DOMAIN=isle.localdomain \nCONTAINER_SHORT_ID=td \n\COMPOSE_FILE=docker-compose.test.yml" > .env
 
       - run: docker-compose up -d
       - run: sleep 40
