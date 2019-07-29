@@ -41,8 +41,8 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 | Drupalfilter                     | 3.8.1             |
 | Gsearch (w/remote SOLR plugin)   | 2.8+ (DG patched) |
 | (DG) GSearch Extensions          | 0.13              |
-| (DG) Islandora Transforms (XSLTs)| as of 8/2018      |
-| Tomcat                           | 8.5.42            |  
+| (DG) Islandora Transforms (XSLTs)| as of 7/2019      |
+| Tomcat                           | 8.5.x            |  
 | Open JDK                         | 8.x               |
 
 | Account           | Password                      | Service       | URL           |
@@ -66,7 +66,7 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 | Software               | Version       |
 | -------------          | ------------- |
 | Solr                   | 4.10.4        |
-| Tomcat                 | 8.x           |  
+| Tomcat                 | 8.5.x           |  
 | OpenJDK                | 8.x           |
 | (DG) Basic Solr Config | 4.10.x branch |
 
@@ -91,10 +91,10 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 | OpenJDK       | 8.x           |
 | Djatoka*      | 1.1           |
 | Drupal        | 7.57          |
-| PHP           | 5.6           |
+| PHP           | 7.1           |
 | Islandora     | 7.x           |
 
-\* Djatoka is included because it bundles useful binaries, but is not running as a service.
+\* Djatoka is included because it bundles useful Kakadu binaries, but is not running as a service.
 
 | Account                | Password                      | Service               | URL                                                  |
 | -------------          | -------------                 | -------------         | -------------                                        |

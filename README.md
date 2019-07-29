@@ -14,9 +14,9 @@ Please use the [ISLE Documentation](https://islandora-collaboration-group.github
 **Important:** This "Quick Start Guide" is for testing ISLE and **should not** be used in production. 
 
 ### Requirements  
-* Docker-CE or EE
-* Docker-compose
-* Git
+* Docker-CE or EE version `18.09.x`+
+* [Docker-compose](https://docs.docker.com/compose/install/) version `1.24.0`+
+* Git `2.0+`
 * Time required < 30 minutes.
 * **Windows Users**: Please open the .env and uncomment `COMPOSE_CONVERT_WINDOWS_PATHS=1`
 
@@ -26,6 +26,12 @@ Please use the [ISLE Documentation](https://islandora-collaboration-group.github
     - `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git` 
 3. Change directory to the cloned directory:
     - `cd ISLE` (by default)
+4. Uncomment (_remove the `#` symbol from_) **only** the following lines in the `.env` file so that the resulting values look like the following:
+    * **Line 8 -** `COMPOSE_PROJECT_NAME=isle_demo`
+    * **Line 10 -** `BASE_DOMAIN=isle.localdomain`
+    * **Line 12 -** `CONTAINER_SHORT_ID=ld`
+    * **Line 14 -** `COMPOSE_FILE=docker-compose.demo.yml`
+    * Save the file and continue.    
 4. Pull the latest images:
     - `docker-compose pull`
 5. Launch the ISLE stack:
@@ -38,7 +44,7 @@ Please use the [ISLE Documentation](https://islandora-collaboration-group.github
 
 ### Quick Stop and Cleanup 
 If you have been testing the stack extensively you may want to `prune` your Docker daemon as you test.
-1. In the folder with the `docker-compose.yml`
+1. In the folder with the `docker-compose.demo.yml`
     - `docker-compose down -v`
 - If you would like to *completely clean your docker-daemon*:
 2. If you have no other _stopped_ services that you do not want `pruned` on Docker:
