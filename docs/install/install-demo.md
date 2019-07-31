@@ -60,7 +60,7 @@ Enable the Demo ISLE Installation to be viewed locally on workstation browser as
     * View only the running containers: `docker ps`
     * View all containers (both those running and stopped): `docker ps -a`
     * All containers prefixed with `isle-` are expected to have a `STATUS` of `Up` (for x time).
-      * **If any of these are not `UP`, then use [Demo ISLE Installation: Troubleshooting](../install/install-demo-troubleshooting.md) to solve before continuing below.**
+      * **If any of these are not `UP`, then use [Demo ISLE Installation: Troubleshooting](../install/install-troubleshooting.md) to solve before continuing below.**
       <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running, oe (c) older exited ISLE containers that maybe should be removed. --->
 
 ---
@@ -121,7 +121,7 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
 
 ## Additional Resources
 * [Demo ISLE Installation: Resources](../install/install-demo-resources.md) contains Docker container passwords and URLs for administrator tools.
-* [Demo ISLE Installation: Troubleshooting](../install/install-demo-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
+* [ISLE Installation: Troubleshooting](../install/install-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
 
 ---
 
