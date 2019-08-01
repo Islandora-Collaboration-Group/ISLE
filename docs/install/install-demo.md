@@ -103,10 +103,18 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
 
 ---
 
+* Once you are ready, you can move onto either:
+
+  * the [Local ISLE Installation - New site](install-local.md) instructions.
+
+  * the [Local ISLE Installation - Migrate existing site](install-local-migrate.md) instructions.
+
+---
+
 ## Additional Resources
 * [Demo ISLE Installation: Resources](../install/install-demo-resources.md) contains Docker container passwords and URLs for administrator tools.
 * [ISLE Installation: Troubleshooting](../install/install-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
 
 ---
 
-## End of Demo ISLE Installation.
+### End of Demo ISLE Installation

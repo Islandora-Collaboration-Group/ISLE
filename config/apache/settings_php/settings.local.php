@@ -248,9 +248,9 @@
 
 $databases['default']['default'] = array(
   'driver' => 'mysql',
-  'database' => 'isle_ld',
-  'username' => 'isle_ld_user',
-  'password' => 'isle_ld_db2018',
+  'database' => '#Replace this with the value of Line 23 (DRUPAL_DB) in the local.env',
+  'username' => '#Replace this with the value of Line 26 (DRUPAL_DB_USER) in the local.env',
+  'password' => '#Replace this with the value of Line 29 (DRUPAL_DB_PASS) in the local.env',
   'host' => 'mysql',
   'prefix' => '',
   'charset' => 'utf8mb4',
@@ -287,7 +287,7 @@ $update_free_access = FALSE;
  *   $drupal_hash_salt = file_get_contents('/home/example/salt.txt');
  *
  */
-$drupal_hash_salt = 'YO9ST25G4zaVnJT7w05PEH3r39pxhQQUf0LMo6NztY9al';
+$drupal_hash_salt = '#Replace this with the value of Line 62 (DRUPAL_HASH_SALT) in the local.env';
 
 /**
  * Base URL (optional).
