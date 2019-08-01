@@ -23,15 +23,9 @@ Please use the [ISLE Documentation](https://islandora-collaboration-group.github
 ### Quick Start
 1. Please read: [ISLE Release Candidate (RC): How to Test](https://docs.google.com/document/d/1VUiI_bXo6SLqqUjmInVjBg3-cs40Vj7I_92txjFUoQg/edit#heading=h.1e4943m60lsh)
 2. Clone this repo
-    - `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git` 
+    - `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
 3. Change directory to the cloned directory:
     - `cd ISLE` (by default)
-4. Uncomment (_remove the `#` symbol from_) **only** the following lines in the `.env` file so that the resulting values look like the following:
-    * **Line 8 -** `COMPOSE_PROJECT_NAME=isle_demo`
-    * **Line 10 -** `BASE_DOMAIN=isle.localdomain`
-    * **Line 12 -** `CONTAINER_SHORT_ID=ld`
-    * **Line 14 -** `COMPOSE_FILE=docker-compose.demo.yml`
-    * Save the file and continue.    
 4. Pull the latest images:
     - `docker-compose pull`
 5. Launch the ISLE stack:
@@ -102,12 +96,11 @@ Portainer's authentication can be configured:
 * Gavin Morris, Born-Digital
 * Shaun Trujillo, Mount Holyoke College
 
-## Former Contributors	
-- Carolyn Moritz, Vassar College	
-- Benjamin Rosner (Lead Maintainer 2018-19), Barnard College	
-- Steve Young, Hamilton College
+## Former Contributors
+* Carolyn Moritz, Vassar College
+* Benjamin Rosner (Lead Maintainer 2018-19), Barnard College
+* Steve Young, Hamilton College
 
 ## Contributing to ISLE
 * [Islandora ISLE Interest Group](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group) - Meetings open to everybody! [Schedule](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group/#how-to-join) is alternating Wednesdays, 3:00pm EDT
 * [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle) - Post your questions here and subscribe for updates, meeting announcements, and technical support$
-
