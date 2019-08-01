@@ -310,6 +310,10 @@ volumes:
   isle-fedora-resourceIndex:
   isle-fedora-activemq:
   isle-fedora-XACML:
+  #isle-influxdb-data:
+  #isle-kapacitor-data:
+  #isle-chronograf-data:
+
 
 # Customization: Bindmounts used instead of docker volumes
 # removed isle-apache-data: Bind-mounting for custom Drupal code

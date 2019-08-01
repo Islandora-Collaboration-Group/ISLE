@@ -1,4 +1,4 @@
-# Demo ISLE Installation: Troubleshooting
+# ISLE Installation: Troubleshooting
 
 **Please select a topic:**
 
