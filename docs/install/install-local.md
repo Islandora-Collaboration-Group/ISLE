@@ -197,7 +197,7 @@ docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isl
 
 ## Step 9: Test the Site
 
-* In your web browser, enter this URL: `https://.localdomain`
+* In your web browser, enter this URL: `https://yourprojectname-here.localdomain`
 <!--- TODO: Add error message and how to proceed (click 'Advanced...') --->
 * Note: You may see an SSL error warning that the site is unsafe. It is safe, it simply uses "self-signed" SSL certs. Ignore the error and proceed to the site.
 * Log in to the local Islandora site:
