@@ -85,9 +85,7 @@ origin	git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.
 
 * Navigate to your ISLE project directory. (You may already be in this directory if you are coming from the [Software Dependencies](../install/host-software-dependencies.md).)
 
-* Open  `.env` file
-
-* Enter: `nano .env`
+* Open `.env` file by running: `nano .env`
   * _For endusers familiar with editing files on the command line, vim, emacs or alternative tools can be used in lieu of nano_
 
 * Change only the following lines in the `.env` file so that the resulting values look like the following: **Please note: the following below is an example not actual values you should use. Use one word to describe your project and follow the conventions below accordingly**
@@ -100,23 +98,21 @@ origin	git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.
 
 * Enter `Cntrl` and the letter `x` together to exit the file
 
-* [change passwords in local.env]
-
 ---
 
-## Step 4: Create new users and passwords
+## Step 4: Create new users and passwords by editing `local.env`
 
 * Open up the `local.env` file in a text editor of your choice.
 
 * Where ever there is a comment like:
-  * `# Replace this comment with a ...` - add a value of your choice. Typically there are suggestions like `26 alpha-numeric characters` but in some cases the instructions change to `# Replace this comment with a easy to read but short database user e.g.` so **review** carefully. 
+  * `# Replace this comment with a ...` - add a value of your choice. Typically there are suggestions like `26 alpha-numeric characters` but in some cases the instructions change to `# Replace this comment with a easy to read but short database user e.g.` so **review** carefully.
 
 * In many cases the username is already pre-populated. If it doesn't have a comment directing you to change or add a value after the `=`, then don't change it.
 
 * Once finished, save the file and close it.
 
 * Once you have added all of the passwords, database and user names as directed by the in-line comments of the `local.env`, there is one additional file to be updated.
-  * Open up the `config/apache/settings_php/settings.local.php` file. 
+  * Open up the `config/apache/settings_php/settings.local.php` file.
   * Between the '', replace the `#Replace this...` comments with the appropriate values from the `local.env` file.
     * **Line 251** - 'database' => '#Replace this with the value of Line 23 (DRUPAL_DB) in the local.env'
     * **Line 252** - 'username' => '#Replace this with the value of Line 26 (DRUPAL_DB_USER) in the local.env'
@@ -147,7 +143,7 @@ origin	git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.
 
 ## Step 6: Download the ISLE images
 
-* Download all of the latest ISLE Docker images (_~6 GB of data may take 5-10 minutes_): 
+* Download all of the latest ISLE Docker images (_~6 GB of data may take 5-10 minutes_):
   * _Using the same open terminal / Powershell_
   * `docker-compose pull`
 
@@ -241,7 +237,7 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
     * Between the `""` add a message like "Setting up Drupal site" that reflects the changes you are making in the Drupal code.
     * `git commit -m "Setting up Drupal site"`
 
-* Add the git `remote` (this will be remote / cloud based git repository that you'll push changes to) This can be Bitbucket, Github or Gitlab. 
+* Add the git `remote` (this will be remote / cloud based git repository that you'll push changes to) This can be Bitbucket, Github or Gitlab.
   * For example: `git remote add origin git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-islandora.git`
 
 * Push the changes to the remote git repository on the `master` branch
