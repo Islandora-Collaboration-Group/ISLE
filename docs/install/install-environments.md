@@ -106,11 +106,8 @@ COMPOSE_FILE=docker-compose.demo.yml
 
 ```bash
 COMPOSE_PROJECT_NAME=                 # (Suggested) Add an identifiable project or institutional name plus environment e.g. acme_digital_local
-
 BASE_DOMAIN=                          # (Suggested) This is not a real domain and can be anything, so add your institution name only e.g. acme.localdomain
-
 CONTAINER_SHORT_ID=ld                 # (Mandatory)
-
 COMPOSE_FILE=docker-compose.local.yml # (Mandatory) The docker-compose file used for configuring and launching the Local environment.
 ```
 
