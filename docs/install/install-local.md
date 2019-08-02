@@ -139,6 +139,11 @@ origin	git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.
   * `./local.sh`
   * The generated keys can now be found in `proxy/ssl-certs`
 
+* Add the SSL .pem and .key file names generated from running `local.sh` to the `proxy/traefik.local.toml` file on lines 27 & 28:
+  * Example:
+    * **Line 27** - `certFile = "/certs/yourprojectname-here.localdomain.pem"`
+    * **Line 28** - `keyFile = "/certs/yourprojectname-here.localdomain.key"`
+
 ---
 
 ## Step 6: Download the ISLE images
