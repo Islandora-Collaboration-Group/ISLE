@@ -201,9 +201,7 @@ docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isl
 * In your web browser, enter this URL: `https://yourprojectname-here.localdomain`
 <!--- TODO: Add error message and how to proceed (click 'Advanced...') --->
 * Note: You may see an SSL error warning that the site is unsafe. It is safe, it simply uses "self-signed" SSL certs. Ignore the error and proceed to the site.
-* Log in to the local Islandora site:
-    * Username: ``
-    * Password: ``
+* Log in to the local Islandora site with the credentials you created in `local.env` (`DRUPAL_ADMIN_USER` and `DRUPAL_ADMIN_PASS`)
 
 ---
 
