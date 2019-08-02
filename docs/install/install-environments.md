@@ -124,7 +124,7 @@ COMPOSE_FILE=docker-compose.local.yml # (Mandatory) The docker-compose file used
 ```bash
 COMPOSE_PROJECT_NAME=                   # (Suggested) Add an identifiable project or institutional name plus environment e.g. acme_digital_stage
 BASE_DOMAIN=                            # (Suggested) Add the full production domain here e.g. digital-staging.institution.edu
-CONTAINER_SHORT_ID=                     # (Suggested) Add the first 3 letters of your institution's name plus environment e.g. (acme digitalcollections staging) is acdcs
+CONTAINER_SHORT_ID=                     # (Suggested) Make an easy to read acronym from the letters of your institution and collection names plus environment e.g. (acme digitalcollections staging) is acdcs
 COMPOSE_FILE=docker-compose.staging.yml # (Mandatory) The docker-compose file used for configuring and launching the Staging environment.
 ```
 
@@ -141,7 +141,7 @@ COMPOSE_FILE=docker-compose.staging.yml # (Mandatory) The docker-compose file us
 ```bash
 COMPOSE_PROJECT_NAME=                      # (Suggested) Add an identifiable project or institutional name plus environment e.g. acme_digital_prod
 BASE_DOMAIN=                               # (Suggested) Add the full production domain here e.g. digital.institution.edu
-CONTAINER_SHORT_ID=                        # (Suggested) Add the first 3 letters of your institution's name plus environment e.g. (acme digitalcollections prod) is acdcp
+CONTAINER_SHORT_ID=                        # (Suggested) Make an easy to read acronym from the letters of your institution and collection names plus environment e.g. (acme digitalcollections prod) is acdcp
 COMPOSE_FILE=docker-compose.production.yml # (Mandatory) The docker-compose file used for configuring and launching the Production environment.
 ```
 
