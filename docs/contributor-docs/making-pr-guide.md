@@ -20,7 +20,7 @@ the “Fork” box (upper right corner of screen) to make a copy of this repo in
 own github.com account that you can then clone down to  your local development
 environment:
 
-![Image of Github with arrow pointing to where Fork button is](https://www.github.com/Islandora-Collaboration-Group/ISLE/docs/contributor-docs/images/GithubForkExample.png)
+![GithubForkExample.png](../assets/GithubForkExample.png)
 
 Next open a terminal:
 
@@ -28,9 +28,9 @@ Next open a terminal:
 $ git clone https://github.com/your-user-name/ISLE.git
 ```
 
-You will now have a local copy of the ISLE project. 
+You will now have a local copy of the ISLE project.
 
-Got into the ISLE projects directory: 
+Got into the ISLE projects directory:
 
 ```
 $ cd ISLE
@@ -223,11 +223,11 @@ In a browser, navigate to your fork of ISLE in github.com.  Across the top it wi
 ask if you want to make a PR on the main ISLE repository, based on your most recent
 changes. If you’re ready, then start the PR by clicking on “Compare & pull request”.
 
-![Image of Github with arrow pointing to where fork information is](https://www.github.com/Islandora-Collaboration-Group/ISLE/docs/contributor-docs/images/GithubPrePRExample.png)
+![GithubPrePRExample.png](../assets/GithubPrePRExample.png)
 
 You’ll be taken to a screen that looks like this:
 
-![Image of Github PR Screen](https://www.github.com/Islandora-Collaboration-Group/ISLE/docs/contributor-docs/images/GithubPRExample.png)
+![GithubPRExample.png](../assets/GithubPRExample.png)
 
 In the banner above, the “base repository” should be the repository you want the
 changes to end up in.  In this case it’s: “Islandora-Collaboration-Group/ISLE”
