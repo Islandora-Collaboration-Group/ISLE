@@ -125,7 +125,7 @@ origin	git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.
 
 ## Step 5: Create new self-signed certs for your project
 
-* Open up the `scripts/proxy/ssl-certs/local.sh` in a text editor of your choice.
+* Open up the `./scripts/proxy/ssl-certs/local.sh` in a text editor of your choice.
 
 * Follow the in-line instructions to add your project's name to the appropriate areas.
 
@@ -137,9 +137,9 @@ origin	git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.
 
 * This command will generate new self-signed SSL keys using your `yourprojectname-here.localdomain` domain. This now secures the local site.
   * `./local.sh`
-  * The generated keys can now be found in `proxy/ssl-certs`
+  * The generated keys can now be found in `./config/proxy/ssl-certs`
 
-* Add the SSL .pem and .key file names generated from running `local.sh` to the `proxy/traefik.local.toml` file on lines 27 & 28:
+* Add the SSL .pem and .key file names generated from running `local.sh` to the `./config/proxy/traefik.local.toml` file on lines 27 & 28:
   * Example:
     * **Line 27** - `certFile = "/certs/yourprojectname-here.localdomain.pem"`
     * **Line 28** - `keyFile = "/certs/yourprojectname-here.localdomain.key"`
