@@ -48,25 +48,22 @@ The use and setup of TICK within the ISLE platform is as an optional [sidecar](h
 
 ## System Requirements
 
-* [ISLE](https://github.com/Islandora-Collaboration-Group/ISLE) release version `1.1.1`
+* [ISLE](https://github.com/Islandora-Collaboration-Group/ISLE) release version `1.2.0`
   * `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
 
 ### ISLE Images
 
 * Following the installation steps below, an enduser will configure  / edit their ISLE running system(s) to ultimately use the following images and tags from Docker-Hub:
 
-(_These tags are for usage during Phase II Sprints only and will change during the release process._)
-
-(_Phase II Sprints only_)
 
 | Service | Repository | Tag |
 | ---     | ---        | --- | 
-| Apache | [islandoracollabgroup/isle-apache](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-apache/tags) | `dashboards-dev`|
-| Fedora | [islandoracollabgroup/isle-fedora](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-fedora/tags) | `dashboards-dev`|
-| Image-services | [islandoracollabgroup/isle-imageservices](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-imageservices) | `dashboards-dev` |
-| MySQL | [islandoracollabgroup/isle-mysql](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-mysql) | `dashboards-dev` |
+| Apache | [islandoracollabgroup/isle-apache](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-apache/tags) | `1.2.0`|
+| Fedora | [islandoracollabgroup/isle-fedora](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-fedora/tags) | `1.2.0`|
+| Image-services | [islandoracollabgroup/isle-imageservices](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-imageservices) | `1.2.0` |
+| MySQL | [islandoracollabgroup/isle-mysql](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-mysql) | `1.2.0` |
 | Portainer | [portainer/portainer](https://hub.docker.com/r/portainer/portainer) | `latest` |
-| Solr  | [islandoracollabgroup/isle-solr](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-solr/tags) | `dashboards-dev` |
+| Solr  | [islandoracollabgroup/isle-solr](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-solr/tags) | `1.2.0` |
 | Traefik | [traefik/traefik](https://hub.docker.com/_/traefik) | `1.7.9` |
 
 * Additional systems overhead, including:
@@ -139,7 +136,6 @@ If an ISLE User would like to add a plugin to monitor additional services, pleas
 
 * `inputs.varnish` - [Gather metrics from a Varnish cache](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/varnish/README.md)
 
-* `inputs.x509_cert` - [Reads metrics from a SSL certificate to check validity, expiration etc](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/x509_cert/README.md)
 
 ---
 
@@ -153,8 +149,7 @@ The data from both systems will be collected, analyzed and accessed on / from th
 
 - You'll stop any running containers
 
-* You'll download new ISLE images temporarily tagged as `dashboards-dev` instead of the standard ISLE `1.1.1`. 
-  * **Please note:** _This is a temporary process until all ISLE Phase II UAT testing is completed and the images can be released._
+* You'll download new ISLE images tagged as `1.2.0`
 
 - You'll copy over a new configuration file for a service called `rsyslog`. 
   * This will allow TICK to get information from the ISLE Host server `syslog` logger.
@@ -163,8 +158,10 @@ The data from both systems will be collected, analyzed and accessed on / from th
 * You'll copy over a new Docker `daemon.json` file to get Docker the right log driver; which will change from `json` to `syslog`.
 
 - You'll make additional edits and modifications to the following ISLE configuration files:
-  * `docker-compose.yml`
-  * `.env`
+  * `docker-compose.staging.yml`
+  * `docker-compose.production.yml`  
+  * `staging.env`
+  * `production.env`  
 
 * You'll edit the Telegraf Agent's empty or default settings to properly monitor the various local ISLE services and send metrics to the local Influxdb database on the Staging system.
 
@@ -186,11 +183,11 @@ The data from both systems will be collected, analyzed and accessed on / from th
 
 ### Assumptions
 
-* A previously installed and running ISLE system is in place already.
+* Previously installed and running Production and Staging ISLE Host systems are in place already
 
-- You'll need to use the `dashboards-dev` branch and higher for the syslog driver changes to be in place. (_Phase II only_)
+- You'll need to use the ISLE images tagged as `1.2.0` and higher for the syslog driver changes to be in place.
 
-* That the "sidecar" method will be the installation type.
+* That the "sidecar" method will be the installation type running on the Staging system to receive data from Staging and Production.
 
 - A firewall configuration that allows incoming public traffic to port `8086` traffic
 
@@ -205,7 +202,7 @@ The data from both systems will be collected, analyzed and accessed on / from th
 
 ### Installation Instructions
 
-* Shut down all running ISLE containers.
+* Shut down all running ISLE containers, Staging first, then production second once Staging is up and running again.
 
 ---
 
@@ -268,139 +265,24 @@ Jun 04 10:56:26 ip-172-31-40-28 rsyslogd[11815]:  [origin software="rsyslogd" sw
 
 ---
 
-#### 03. Edits - docker-compose.yml file
+#### 03. Edits - docker-compose.staging.yml file 
 
-* For Phase II UAT testing of TICK, Blazegraph and Varnish please change the following image tags of these services from `1.1.1` to `dashboards-dev`
-  * Apache
-      * `image: islandoracollabgroup/isle-apache:1.1.1` should now become `image: islandoracollabgroup/isle-apache:dashboards-dev`
-  * Image-services
-      * `image: islandoracollabgroup/isle-imageservices:1.1.1` should now become `image: islandoracollabgroup/isle-imageservices:dashboards-dev`
-  * MySQL 
-    * `image: islandoracollabgroup/isle-mysql:1.1.1` should now become `image: islandoracollabgroup/isle-mysql:dashboards-dev`
-  * Solr
-    * `image: islandoracollabgroup/isle-solr:1.1.1` should now become `image: islandoracollabgroup/isle-solr:dashboards-dev`
+* Edit the `docker-compose.staging.yml` file and uncomment lines `205` through `296` to enable the new `TICK` services. There is a section called `# Start - TICK stack services section`, underneath that is the `TICK` code to be uncommented. (_remove the # before and ensure all code aligns properly like the services above it._)
 
-- Add the new `TICK`services to your docker-compose file in between the `apache` and `traefik` services.
+* At the end of every service definition (_mysql, fedora, solr etc_) within the `docker-compose.staging.yml`, uncomment the following:
 
 ```bash
-# Start TICK - Services
-
-  influxdb:
-    image: influxdb:latest
-    container_name: isle-influxdb-${CONTAINER_SHORT_ID}
-    volumes:
-      # Mount for influxdb data directory
-      - isle-influxdb-data:/var/lib/influxdb
-      # Mount for influxdb configuration
-      - ./config/tick/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf
-    ports:
-      # The API for InfluxDB is served on port 8086
-      - "8086:8086"
-      - "8088:8088"
-      # UDP Port
-      - "8089:8089"
-    networks:
-      isle-internal:
-    logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
-
-  telegraf:
-    image: telegraf:latest
-    # Telegraf requires network access to InfluxDB
-    container_name: isle-telegraf-${CONTAINER_SHORT_ID}
-    volumes:
-      # Mount for telegraf configuration
-      - ./config/tick/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
-      # Mount for Docker API access
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      # To get metrics off the host
-      - /:/hostfs:ro
-      - /etc:/hostfs/etc:ro
-      - /proc:/hostfs/proc:ro
-      - /sys:/hostfs/sys:ro
-      - /var/run/utmp:/var/run/utmp:ro
-    depends_on:
-      - influxdb
-    networks:
-      isle-internal:
-    ports:
-      # This port should be for rsyslog
-      - "6514:6514"
-    logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
-
-  kapacitor:
-    image: kapacitor:latest
-    container_name: isle-kapacitor-${CONTAINER_SHORT_ID}
-    volumes:
-      # Mount for kapacitor data directory
-      - isle-kapacitor-data:/var/lib/kapacitor
-      # Mount for kapacitor configuration
-      - ./config/tick/kapacitor/kapacitor.conf:/etc/kapacitor/kapacitor.conf
-    # Kapacitor requires network access to Influxdb
-    ports:
-      # The API for Kapacitor is served on port 9092
-      - "9092:9092"
-    networks:
-      isle-internal:
-    logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
-
-  chronograf:
-    image: chronograf:latest
-    container_name: isle-chronograf-${CONTAINER_SHORT_ID}
-    environment:
-      - RESOURCES_PATH="/usr/share/chronograf/resources"
-      - LOG_LEVEL=error
-    volumes:
-      # Mount for chronograf database
-      - isle-chronograf-data:/var/lib/chronograf/
-    ports:
-      # The WebUI for Chronograf is served on port 8888
-      - "8888:8888"
-    depends_on:
-      - kapacitor
-      - influxdb
-      - telegraf
-    networks:
-      isle-internal:
-    logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
-
-
-# END TICK - Services
-
+#    logging:
+#      driver: syslog
+#      options:
+#        tag: "{{.Name}}"
 ```
 
-* Copy and paste the contents of the `config/tick/dc-syslog-config.md` file and insert repeatedly into your `docker-compose.yml` at the end of every service definition.
-  * mysql
-  * fedora
-  * solr
-  * image-services
-  * apache
-  * traefik
-
-Text to copy:
-```bash
-     logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
-```
-
-Text insertion example:
+Uncommented example:
 
 ```bash
   mysql:
-    image: islandoracollabgroup/isle-mysql:dashboards-dev
+    image: islandoracollabgroup/isle-mysql:1.2.0
     container_name: isle-mysql-${CONTAINER_SHORT_ID}
     networks:
       - isle-internal
@@ -415,37 +297,21 @@ Text insertion example:
         tag: "{{.Name}}"
 ```
 
-* Copy and paste the following values for the TICK stack data volumes to the end of the `volumes` section of the `docker-compose.yml` file. Most likely **Lines 287 -289**.
+* Uncomment the following lines `313 - 315` for the TICK stack data volumes to the end of the `volumes` section of the `docker-compose.staging.yml` file.
 
-TICK volumes:
-
-```bash
-
-  isle-influxdb-data:
-  isle-kapacitor-data:
-  isle-chronograf-data:
-
-```
-
-The volumes section should now look like this:
+Uncommented TICK volumes example:
 
 ```bash
-
 volumes:
   isle-db-data:
-  isle-mysql-log:
   isle-solr-data:
-  isle-apache-data:
   isle-portainer-data:
-  isle-fedora-datastreamStore:
-  isle-fedora-objectStore:
   isle-fedora-resourceIndex:
   isle-fedora-activemq:
   isle-fedora-XACML:
   isle-influxdb-data:
   isle-kapacitor-data:
   isle-chronograf-data:
-
 ```
 
 ---
@@ -462,7 +328,7 @@ The instructions to setup only the Telegraf Agent on an ISLE system e.g. your Pr
   * **Line 97**: `database = "telegraf"`
     * By default, the ISLE TICK setup assumes this database as it is the easiest but pools all data received by individual monitored hosts into one database. For first time users, recommend leaving this value in place.
     * Users are free to change this to any value to segregate data by systems, group etc.
-  * **Line 290**: Change `servers = ["root:ild_mysqlrt_2018@tcp(mysql:3306)/?tls=false"]` to use your `Staging` MySQL Root password. Typically this value is in your `.env` file. Swap out the `ild_mysqlrt_2018` with your `Staging` MySQL Root password.
+  * **Line 291**: Change `servers = ["root:<ISLE_ROOT_PASSWORD_HERE>@tcp(mysql:3306)/?tls=false"]` to use your `Staging` MySQL Root password. Typically this value is in your `staging.env` file. Swap out the `<ISLE_ROOT_PASSWORD_HERE>` with your `Staging` MySQL Root password.
 
 - Start up the ISLE Docker containers again. `docker-compose up -d`
 
@@ -470,7 +336,7 @@ The instructions to setup only the Telegraf Agent on an ISLE system e.g. your Pr
 
 ---
 
-#### 05. Chronograf Dashboard setup
+#### 05. Chronograf Dashboard setup on Staging
 
 * To configure and setup your new TICK stack, navigate to http://**<replacethiswithyourdomain_here>**:8888
 
@@ -524,9 +390,9 @@ The instructions to setup only the Telegraf Agent on an ISLE system e.g. your Pr
 
 #### Assumptions
 
-* A previously installed and running ISLE system is in place already.
+* A previously installed and running ISLE Host Production system is in place already.
 
-- You'll need to use ISLE `v.1.1.x+` or `dashboards-dev` for the syslog driver changes to be in place.
+- You'll need to use ISLE version `1.2.0` for the syslog driver changes to be in place.
 
 * That the "sidecar" TICK installation is already in place on the `Staging` server prior.
 
@@ -538,7 +404,7 @@ In the recommended setup and usage of TICK, the `Staging` server will be running
 
 To install the Telegraf agent on a `Production` system:
 
-* Shut down all running ISLE containers.
+* Shut down all running ISLE containers on the Production system
 
 - You'll need to edit the `config/tick/telegraf/telegraf.conf` to add the following:
   * **Line 76**: `hostname = ""`
@@ -549,62 +415,26 @@ To install the Telegraf agent on a `Production` system:
   * **Line 97**: `database = "telegraf"`
     * By default, the ISLE TICK setup assumes this database as it is the easiest but pools all data received by individual monitored hosts into one database. For first time users, recommend leaving this value in place.
     * Users are free to change this to any value to segregate data by systems, group etc.
-  * **Line 290**: Change `servers = ["root:ild_mysqlrt_2018@tcp(mysql:3306)/?tls=false"]` to use your `Production` MySQL Root password. Typically this value is in your `.env` file. Swap out the `ild_mysqlrt_2018` with your `Production` MySQL Root password.
+  * **Line 290**: Change `servers = ["root:<ISLE_ROOT_PASSWORD_HERE>@tcp(mysql:3306)/?tls=false"]` to use your `Production` MySQL Root password. Typically this value is in your `production.env` file. Swap out the `<ISLE_ROOT_PASSWORD_HERE>` with your `Production` MySQL Root password.
 
-* Copy and paste only the following of the `config/tick/tick-config.md` file and insert it into your `docker-compose.yml` in between the `apache` and `traefik` services.
+#### Edits - docker-compose.production.yml file 
+
+* Edit the `docker-compose.production.yml` file and uncomment lines `205` through `228` to enable the new `TICK - Telegraf` agent / service. There is a section called `# Start - TICK stack services section`, underneath that is the `TICK` code to be uncommented. (_remove the # before and ensure all code aligns properly like the services above it._)
+
+* At the end of every service definition (_mysql, fedora, solr etc_) within the `docker-compose.production.yml`, uncomment the following:
 
 ```bash
-
-  telegraf:
-    image: telegraf:latest
-    # Telegraf requires network access to InfluxDB
-    container_name: isle-telegraf-${CONTAINER_SHORT_ID}
-    volumes:
-      # Mount for telegraf configuration
-      - ./config/tick/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
-      # Mount for Docker API access
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      # To get metrics off the host
-      - /:/hostfs:ro
-      - /etc:/hostfs/etc:ro
-      - /proc:/hostfs/proc:ro
-      - /sys:/hostfs/sys:ro
-      - /var/run/utmp:/var/run/utmp:ro
-    depends_on:
-      - influxdb
-    networks:
-      isle-internal:
-    ports:
-      # This port should be for rsyslog
-      - "6514:6514"
-    logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
-
+#    logging:
+#      driver: syslog
+#      options:
+#        tag: "{{.Name}}"
 ```
 
-- Copy and paste the contents of the `config/tick/dc-syslog-config.md` file and insert repeatedly into your `Production` `docker-compose.yml` at the end of every service definition.
-  * mysql
-  * fedora
-  * solr
-  * image-services
-  * apache
-  * traefik
-
-Text to copy:
-```bash
-     logging:
-      driver: syslog
-      options:
-        tag: "{{.Name}}"
-```
-
-Text insertion example:
+Uncommented example:
 
 ```bash
   mysql:
-    image: islandoracollabgroup/isle-mysql:dashboards-dev
+    image: islandoracollabgroup/isle-mysql:1.2.0
     container_name: isle-mysql-${CONTAINER_SHORT_ID}
     networks:
       - isle-internal
@@ -702,11 +532,11 @@ Date: Fri, 31 May 2019 13:03:16 GMT
 
 Within the `Log Viewer` page:
 
-* Scroll at the bottom of the page over to the `Host` column in the viewer and click on the name e.g. `bd-demo`
+* Scroll at the bottom of the page over to the `Host` column in the viewer and click on the name e.g. `your-hostname-here`
 
   * This should now filter out all other host information
 
-  * At the top left hand corner below the search bar, the following appears `host == bd-demo`. This is the syntax used for searching by host e.g. `host == your-hostname-here` this is the same shorthand name used to configure the Telegraf agent.
+  * At the top left hand corner below the search bar, the following appears `host == your-hostname-here`. This is the syntax used for searching by host e.g. `host == your-hostname-here` this is the same shorthand name used to configure the Telegraf agent.
 
   * Alternatively, you can now use this value `host == your-hostname-here` within the _Search logs using keywords or regular expressions_ search bar.
 
@@ -859,7 +689,7 @@ This alert message uses   enter the alert message to be sent as an email.While t
 
 Additional changes were made to the ISLE base images to allow for:
 
-* Log levels to be set by users in the project `.env`
+* Log levels to be set by users in the project in the respective environment's `.env` file (_staging.env or production.env_)
 
 * Logging in ISLE is now set to `stdout` and `stderr` by default instead of log files.
 

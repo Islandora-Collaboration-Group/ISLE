@@ -1,4 +1,4 @@
-# Demo ISLE Installation: Troubleshooting
+# ISLE Installation: Troubleshooting
 
 **Please select a topic:**
 
@@ -39,13 +39,13 @@ If you don't see all containers running, then stop the running containers with `
 
 *  MySQL image pull & container launch
 
-    `docker pull islandoracollabgroup/isle-mysql:1.1`
+    `docker pull islandoracollabgroup/isle-mysql:1.2.0`
 
     `docker-compose up -d mysql`
 
 *  Fedora image pull & container launch
 
-    `docker pull islandoracollabgroup/isle-fedora:1.1`
+    `docker pull islandoracollabgroup/isle-fedora:1.2.0`
 
     `docker-compose up -d fedora`
 
@@ -64,13 +64,13 @@ If you don't see all containers running, then stop the running containers with `
 
 * Solr image pull & container launch
 
-    `docker pull islandoracollabgroup/isle-solr:1.1`
+    `docker pull islandoracollabgroup/isle-solr:1.2.0`
 
     `docker-compose up -d solr`
 
 * Apache image pull & container launch
 
-    `docker pull islandoracollabgroup/isle-apache:1.1`
+    `docker pull islandoracollabgroup/isle-apache:1.2.0`
 
     `docker-compose up -d apache`
 

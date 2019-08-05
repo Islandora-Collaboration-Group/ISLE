@@ -248,9 +248,9 @@
 
 $databases['default']['default'] = array(
   'driver' => 'mysql',
-  'database' => '',
-  'username' => '',
-  'password' => '',
+  'database' => '#Replace this with the value of Line 23 (DRUPAL_DB) in the production.env',
+  'username' => '#Replace this with the value of Line 26 (DRUPAL_DB_USER) in the production.env',
+  'password' => '#Replace this with the value of Line 29 (DRUPAL_DB_PASS) in the production.env',
   'host' => 'mysql',
   'prefix' => '',
   'charset' => 'utf8mb4',
@@ -287,7 +287,7 @@ $update_free_access = FALSE;
  *   $drupal_hash_salt = file_get_contents('/home/example/salt.txt');
  *
  */
-$drupal_hash_salt = '';
+$drupal_hash_salt = '#Replace this with the value of Line 62 (DRUPAL_HASH_SALT) in the production.env';
 
 /**
  * Base URL (optional).

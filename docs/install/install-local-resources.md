@@ -1,13 +1,15 @@
-# Demo ISLE Installation: Resources
+# Local ISLE Installation: Resources
 
 ### Local URL
-Always use the `https://isle.localdomain` domain to view and log in to a local site. (Do not use an IP address, such as `https://10.10.10.130 or https://127.0.0.01` as some components may not function correctly.)
+Always use the `https://yourprojectnamehere.localdomain` domain to view and log in to a local site. (Do not use an IP address, such as `https://10.10.10.130 or https://127.0.0.01` as some components may not function correctly.)
 
 ---
 
 ### Docker Containers: Passwords
 
-* `islandora` user on the ISLE host server uses `islandora` as the password.
+As instructed in the `## Step 4: Create new users and passwords by editing local.env` section of the [Local ISLE Installation - New site](install-local.md) documentation, you'll need to refer to the edited `local.env` for your password choices.
+
+* `islandora` user on the ISLE host server uses `islandora` as the password. This might not apply to your setup if using local Docker clients.
 
 <!--- TODO this IP information conflicts with our statement to always use the `https://isle.localdomain` domain. Requires clarification. --->
 * Some of the information below is for accessing the non Drupal site admin panels and resources only. (optional). In this context, `hostip` below can mean either
@@ -17,21 +19,21 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 #### 1. MySQL Container
 | Compose Service Name | Container Name  | Software      | Ports         |
 | :-------------:      | :-------------: | ------------- | ------------- |      
-| mysql                | isle-mysql-ld   | MySQL 5.7     | 3306          |
+| mysql                | Run `docker ps` to determine   | MySQL 5.7     | 3306          |
 
 
 | Account        | Password              | Database         | Perms                         |
 | -------------  | -------------         | -------------    | -------------                 |      
-| root           | ild_mysqlrt_2018      | **ALL**          | **ALL**                       |
-| fedora_admin   | ild_feddb_2018        | fedora3          | **All** except `Grant` option |
-| isle_ld_user   | isle_ld_db2018        | isle_ld          | **All** except `Grant` option |
+| root           | Based on your `local.env` edits | **ALL**          | **ALL**                       |
+| fedora_admin   | Based on your `local.env` edits | fedora3          | **All** except `Grant` option |
+| isle_ld_user   | Based on your `local.env` edits        | Based on your `local.env` edits          | **All** except `Grant` option |
 
 ---
 
 #### 2. Fedora Container
 | Compose Service Name | Container Name  | Software      | Ports                                            |
 | :-------------:      | :-------------: | ------------- | -------------                                    |      
-| fedora               | isle-fedora-ld  | see below     | 8080 mapped to 8081 (on host) |
+| fedora               | Run `docker ps` to determine  | see below     | 8080 mapped to 8081 (on host) |
 
 
 | Software                         | Version           |
@@ -47,12 +49,12 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 
 | Account           | Password                      | Service       | URL           |
 | -------------     | -------------                 | ------------- | ------------- |      
-| fedoraAdmin       | ild_fed_admin_2018            | Fedora        | http://hostip:8081/fedora/describe                          |
-| fedoraIntCallUser | ild_fed_IntCallUser_2018      | Fedora        | http://hostip:8081/fedora/objects                           |
+| fedoraAdmin       | Based on your `local.env` edits            | Fedora        | http://yourprojectnamehere.localdomain:8081/fedora/describe                          |
+| fedoraIntCallUser | Based on your `local.env` edits      | Fedora        | http://yourprojectnamehere.localdomain:8081/fedora/objects                           |
 | anonymous         | anonymous                     | Fedora        | ---                                                         |
-| fgsAdmin          | ild_fgs_admin_2018            | Gsearch       | http://hostip:8081/fedoragsearch/rest?operation=updateIndex |
-| admin             | isle_admin                    | Tomcat        | http://hostip:8081/manager/html                             |
-| manager           | isle_manager                  | Tomcat        | http://hostip:8081/manager/html                             |
+| fgsAdmin          | Based on your `local.env` edits            | Gsearch       | http://yourprojectnamehere.localdomain:8081/fedoragsearch/rest?operation=updateIndex |
+| admin             | Based on your `local.env` edits                    | Tomcat        | http://yourprojectnamehere.localdomain:8081/manager/html                             |
+| manager           | Based on your `local.env` edits                  | Tomcat        | http://yourprojectnamehere.localdomain:8081/manager/html                             |
 
 ---
 
@@ -72,9 +74,9 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 
 | Account           | Password        | Service       | URL                             |
 | -------------     | -------------   | ------------- | -------------                   |
-| admin             | isle_admin      | Tomcat        | http://hostip:8082/manager/html |
-| manager           | isle_manager    | Tomcat        | http://hostip:8082/manager/html |
-| --                | --              | Solr          | http://hostip:8082/solr/        |
+| admin             | Based on your `local.env` edits      | Tomcat        | http://yourprojectnamehere.localdomain:8082/manager/html |
+| manager           | Based on your `local.env` edits    | Tomcat        | http://yourprojectnamehere.localdomain:8082/manager/html |
+| --                | --              | Solr          | http://yourprojectnamehere.localdomain:8082/solr/        |
 
 ---
 
@@ -98,7 +100,7 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 
 | Account                | Password                      | Service               | URL                                                  |
 | -------------          | -------------                 | -------------         | -------------                                        |
-| isle                  | isle                           | Drupal site admin     | [https://isle.localdomain](https://isle.localdomain) |
+| Based on your `local.env` edits                  | Based on your `local.env` edits                           | Drupal site admin     | [https://yourprojectnamehere.localdomain](https://yourprojectnamehere.localdomain) |
 
 ---
 
@@ -109,16 +111,16 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 
 | Account               | Password      | Service      | URL        |
 | :-------------:       | :-------------:   | :-------------: | :-------------: |
-| None Required         | None Required                 | Proxy UI     | [https://admin.isle.localdomain](https://admin.isle.localdomain) OR http://hostip:8080  |
+| None Required         | None Required                 | Proxy UI     | [https://admin.yourprojectnamehere.localdomain](https://admin.yourprojectnamehere.localdomain) OR http://yourprojectnamehere:8080  |
 
-* The Proxy Control Panel is available at [admin.isle.localdomain](https://admin.isle.localdomain).  No username/password are required.  This is unsafe for production environments.
+* The Proxy Control Panel is available at [admin.yourprojectnamehere.localdomain](https://admin.yourprojectnamehere.localdomain).  No username/password are required.  This is unsafe for production environments.
 
 ---
 
 #### 6. Image Services
 | Compose Service Name | Container Name  | Software      | Ports                                            |
 | :-------------:      | :-------------: | ------------- | -------------                                    |      
-| image-services       |  isle-images-ld | see below     | 8080 (on container) mapped to 8083 (on host)     |
+| image-services       |  Run `docker ps` to determine | see below     | 8080 (on container) mapped to 8083 (on host)     |
 
 
 | Software                         | Version           |
@@ -127,9 +129,9 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 
 | Account           | Password                      | Service       | URL           |
 | -------------     | -------------                 | ------------- | ------------- |
-| admin             | isle_admin                    | Tomcat        | http://hostip:8082/manager/html   |
-| manager           | isle_manager                  | Tomcat        | http://hostip:8082/manager/html   |   
-| admin             | isle_admin                    | Cantaloupe    | http://hostip:8083/cantaloupe/admin   |
+| admin             | Based on your `local.env` edits                    | Tomcat        | http://yourprojectnamehere.localdomain:8082/manager/html   |
+| manager           | Based on your `local.env` edits                  | Tomcat        | http://yourprojectnamehere.localdomain:8082/manager/html   |   
+| admin             | Based on your `local.env` edits                    | Cantaloupe    | http://yourprojectnamehere.localdomain:8083/cantaloupe/admin   |
 
 ---
 
@@ -139,4 +141,4 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 
 ---
 
-**Return to [Demo ISLE Installation](../install/install-demo.md#step-6-additional-resources).**
+**Return to [Local ISLE Installation - New site](../install/install-local-new.md).**
