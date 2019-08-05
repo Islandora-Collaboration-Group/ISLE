@@ -28,7 +28,7 @@ Enable the Demo ISLE Installation to be viewed locally on workstation browser as
 
 * Navigate to your ISLE project directory. (You may already be in this directory if you are coming from the [Software Dependencies](../install/host-software-dependencies.md).)
 
-* Download all of the latest ISLE Docker images (_~6 GB of data may take 5-10 minutes_): 
+* Download all of the latest ISLE Docker images (_~6 GB of data may take 5-10 minutes_):
   * `docker-compose pull`
 
 ---
@@ -37,6 +37,7 @@ Enable the Demo ISLE Installation to be viewed locally on workstation browser as
 
 * _Using the same open terminal / Powershell_
   * `docker-compose up -d`
+  * **Please note:** the “ -d” argument stands for “detached” meaning the command will persist even if you close your terminal or your computer sleeps etc…)
 
 * Please wait a few moments for the stack to fully come up. Approximately 3-5 minutes.
 

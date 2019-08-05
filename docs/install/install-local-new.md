@@ -41,8 +41,10 @@ Enable the Local ISLE Installation to be viewed locally on workstation browser a
 **Please note:** The commands given below are for command line usage of git. GUI based clients such as the [SourceTree App](https://www.sourcetreeapp.com/) may be easier for endusers to use for the git process.
 
 * Within your git repository provider / hoster e.g [Github](github.com), [Bitbucket](bitbucket.org), [Gitlab](gitlab.com), create two new empty git repositories:
-  1. ISLE project config - e.g. `yourprojectnamehere-isle`
-  2. Drupal / Islandora site code - e.g. `yourprojectnamehere-islandora`
+  * ISLE project config - e.g. `yourprojectnamehere-isle`
+    * This Git repository will hold your copy of the ISLE code along with your environment-specific customizations. Storing this in a code repository and following the workflow described here will save you a lot of time and confusion.
+  * Drupal / Islandora site code - e.g. `yourprojectnamehere-islandora`
+    * This Git repository will hold your copy of the Drupal / Islandora code along with your site specific customizations. Storing this in a code repository and following the workflow described here will save you a lot of time and confusion.
 
 The git project name can be your institution name or the name of the collections you plan to deploy; your choice entirely. A very clear distinction between the ISLE and Islandora code should be made in the repo name. Do not confuse or label Drupal / Islandora site code as ISLE and vice-versa.
 
@@ -250,7 +252,7 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
 
 ---
 
-* Once you are ready to deploy your finished Drupal site, you can move onto the [Staging ISLE Installation - New site](install-staging.md) instructions.
+* Once you are ready to deploy your finished Drupal site, you can move onto the [Staging ISLE Installation - New site](install-staging-new.md) instructions.
 
 ---
 

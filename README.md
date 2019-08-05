@@ -11,7 +11,7 @@ ISLE is quite flexible and may be run on an institution’s servers or in the cl
 Please use the [ISLE Documentation](https://islandora-collaboration-group.github.io/ISLE) for using ISLE to install Islandora on server environments.
 
 ## Quick Start Guide
-**Important:** This "Quick Start Guide" is for testing ISLE and **should not** be used in production. 
+**Important:** This "Quick Start Guide" is for testing ISLE and **should not** be used in production.
 
 ### Requirements  
 * Docker-CE or EE version `18.09.x`+
@@ -30,6 +30,7 @@ Please use the [ISLE Documentation](https://islandora-collaboration-group.github
     - `docker-compose pull`
 5. Launch the ISLE stack:
     - `docker-compose up -d`
+    * **Please note:** the “ -d” argument stands for “detached” meaning the command will persist even if you close your terminal or your computer sleeps etc…)
 6. Please wait a few moments for the stack to fully come up.  Approximately 3-5 minutes.
 7. Install Islandora on the isle-apache-ld container:
     - `docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh`
