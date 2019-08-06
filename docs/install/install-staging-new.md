@@ -393,6 +393,9 @@ git commit -m "Added the edited .env configuration file for Staging. DO NOT PUSH
       * **If any of these are not `UP`, then use [Local ISLE Installation: Troubleshooting](../install/install-Local-troubleshooting.md) to solve before continuing below.**
       <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running, or (c) older exited ISLE containers that maybe should be removed. --->
 
+* In your web browser, enter your Staging site URL: `https://yourprojectname-here.institution.edu`
+  * **Please note:** You should not see any errors with respect to the SSL certifications, you should see a nice green lock padlock for the site security. If you see a red error or unknown SSL cert provider, you'll need to shut the containers down and review the previous steps taken especially if using Let's Encrypt. You may need to repeat those steps to get rid of the errors.
+
 ---
 
 ### Step 15: On Remote Staging - Import the Local MySQL Drupal database
@@ -448,7 +451,7 @@ Prior to attempting this step, do consider the following:
 ### Step 17: On Remote Staging - Review and test the Drupal Staging site
 
 * In your web browser, enter this URL: `https://yourprojectname-here.institution.edu`
-  * Please note: You should not see any errors with respect to the SSL certifications. If so, please review your previous steps especially if using Let's Encrypt. You may need to repeat those steps to get rid of the errors. 
+  * Please note: You should not see any errors with respect to the SSL certifications. If so, please review your previous steps especially if using Let's Encrypt. You may need to repeat those steps to get rid of the errors.
 
 * Log in to the local Islandora site with the credentials you created in `staging.env` (`DRUPAL_ADMIN_USER` and `DRUPAL_ADMIN_PASS`)
   * **Please note:** You are free to use previously Drupal admin or user accounts created during the `Local` site development process.
