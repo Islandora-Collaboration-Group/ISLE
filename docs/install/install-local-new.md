@@ -172,7 +172,7 @@ origin	git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.
 
 ## Step 8: Run Islandora / Drupal site Install Script
 
-We highly recommend that you first review the contents of the `docker-compose.local.yml` file as `line 26` uses bind mounts for the intended Drupal Code instead of using default Docker volumes. This allows users to perform local Drupal site development with an IDE. This line is a suggested path and users are free to change values to the left of the `:` to match their Apache data folder of choice. However we recommend starting out with the default setting below.
+We highly recommend that you first review the contents of the `docker-compose.local.yml` file as `line 131` uses bind mounts for the intended Drupal Code instead of using default Docker volumes. This allows users to perform local Drupal site development with an IDE. This line is a suggested path and users are free to change values to the left of the `:` to match their Apache data folder of choice. However we recommend starting out with the default setting below.
 Default: `- ./data/apache/html:/var/www/html:cached`
 
 Initially when starting up, end-users will need to run the install script and then ultimately check the resulting Drupal code into a git repository. If you are familiar with that process then Step 9.
@@ -263,4 +263,4 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
 
 ---
 
-### End of Local ISLE Installation
+### End of Local ISLE Installation - New site

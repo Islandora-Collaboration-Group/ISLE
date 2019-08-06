@@ -220,7 +220,7 @@ If not then you'll need to check your Drupal site into a git repo following the 
 
 ---
 
-**Please note:** We highly recommend that you also review the contents of the `docker-compose.local.yml` file as `line 26` uses bind mounts for the intended Drupal Code instead of using default Docker volumes. This allows users to perform local Drupal site development with an IDE. This line is a suggested path and users are free to change values to the left of the `:` to match their Apache data folder of choice. However we recommend starting out with the default setting below.
+**Please note:** We highly recommend that you also review the contents of the `docker-compose.local.yml` file as `line 131` uses bind mounts for the intended Drupal Code instead of using default Docker volumes. This allows users to perform local Drupal site development with an IDE. This line is a suggested path and users are free to change values to the left of the `:` to match their Apache data folder of choice. However we recommend starting out with the default setting below.
 Default: `- ./data/apache/html:/var/www/html:cached`
 
 * Additionally, depending on your decision from **Step 0**, you may need to make additional edits to `docker-compose.local.yml` and move files into place as directed from the (**Intermediate**) and (**Advanced**) sections.
@@ -412,4 +412,4 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
 
 ---
 
-### End of Local ISLE Installation
+### End of Local ISLE Installation - Migrate your existing Islandora site
