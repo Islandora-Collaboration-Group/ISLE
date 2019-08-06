@@ -51,7 +51,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 ## Index of instructions
 
-This process will differ slightly from previous builds in that there work to be done on the local to push to the `Staging` ISLE Host server and then followup work to be performed on the remote `Staging` ISLE Host server.
+This process will differ slightly from previous builds in that there is work to be done on the local to then be pushed to the `Staging` ISLE Host server with additional followup work to be performed on the remote `Staging` ISLE Host server.
 
 The instructions that follow below will have either a `On Local` or a `On Remote Staging` pre-fix to indicate where the work and focus should be. In essence, the git workflow established during the local build process will be extended for deploying on `Staging` and for future ISLE updates and upgrades.
 
