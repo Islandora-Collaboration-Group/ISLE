@@ -129,12 +129,12 @@ Prior to attempting this step, do consider the following:
 * Once finished, save the file and close it.
 
 * Once you have added all of the passwords, database and user names as directed by the in-line comments of the `staging.env`, there is one additional file to be updated.
-  * Open up the `config/apache/settings_php/settings.local.php` file.
+  * Open up the `config/apache/settings_php/settings.staging.php` file.
   * Between the '', replace the `#Replace this...` comments with the appropriate values from the `staging.env` file.
-    * **Line 251** - 'database' => '#Replace this with the value of Line 23 (DRUPAL_DB) in the local.env'
-    * **Line 252** - 'username' => '#Replace this with the value of Line 26 (DRUPAL_DB_USER) in the local.env'
-    * **Line 253** - 'password' => '#Replace this with the value of Line 29 (DRUPAL_DB_PASS) in the local.env'
-     * **Line 290** - 'password' => '#Replace this with the value of Line 62 (DRUPAL_HASH_SALT) in the local.env'
+    * **Line 251** - 'database' => '#Replace this with the value of Line 23 (DRUPAL_DB) in the staging.env'
+    * **Line 252** - 'username' => '#Replace this with the value of Line 26 (DRUPAL_DB_USER) in the staging.env'
+    * **Line 253** - 'password' => '#Replace this with the value of Line 29 (DRUPAL_DB_PASS) in the staging.env'
+     * **Line 290** - 'password' => '#Replace this with the value of Line 62 (DRUPAL_HASH_SALT) in the staging.env'
 
 * Once finished, save the file and close it.
 
@@ -157,9 +157,9 @@ Prior to attempting this step, do consider the following:
 
   * * To use commercial SSLs - Uncomment
     * **Line 187** - `./config/proxy/ssl-certs:/certs:ro`
-      * Additionally you'll need to add your SSL certs (.cert, .pem, .key) files to `config/proxy/ssl-certs`
+      * Additionally you'll need to add your SSL certs (.cert, .pem, .key) files to `./config/proxy/ssl-certs`
 
-  * Based on the choice of SSL type made above, you'll need to refer to either **Lines 27 or 33** within `/config/proxy/traefik.staging.toml` file for further configuration instructions.
+  * Based on the choice of SSL type made above, you'll need to refer to either **Lines 27 or 33** within `./config/proxy/traefik.staging.toml` file for further configuration instructions.
 
 ### Step 4A: On Local - (Optional) changes for  docker-compose.staging.yml
 
@@ -173,7 +173,7 @@ The options include PHP settings, Java Memory Allocation, MySQL configuration an
       * `- ./config/apache/php_ini/php.staging.ini:/etc/php/7.1/apache2/php.ini`
     * You'll then need to make edits in the `./config/apache/php_ini/php.staging.ini` file.
 
-* _(Optional)_ - This line is already uncommented by default in ISLE but we're calling it out here that you can changes to the suggested levels or values within the `config/mysql/ISLE.cnf` file if needed. When setting up for the first time, it is best practice to leave these settings in place. Over time, you can experiment with further tuning and experimentation based on your project or system needs.
+* _(Optional)_ - This line is already uncommented by default in ISLE but we're calling it out here that you can changes to the suggested levels or values within the `./config/mysql/ISLE.cnf` file if needed. When setting up for the first time, it is best practice to leave these settings in place. Over time, you can experiment with further tuning and experimentation based on your project or system needs.
 
 * _(Optional)_ - You can change the suggested `JAVA_MAX_MEM` & `JAVA_MIN_MEM` levels but do not exceed more than 50% of your system memory. When setting up for the first time, it is best practice to leave these settings in place as they are configured for a `Staging` ISLE Host Server using 16 GB of RAM. Over time, you can experiment with further tuning and experimentation based on your project or system needs.
 
@@ -188,7 +188,7 @@ The options include PHP settings, Java Memory Allocation, MySQL configuration an
         tag: "{{.Name}}"
   ```
   * Uncomment **Lines 205 - 296** for the TICK stack services to be hosted on the `Staging` ISLE Host server.
-    * There are additional configurations to be made to files contained within `config/tick` but you'll need to follow the [TICK Stack](../optional-components/tickstack.md) instructions prior to committing changes to your ISLE git repository.
+    * There are additional configurations to be made to files contained within `./config/tick` but you'll need to follow the [TICK Stack](../optional-components/tickstack.md) instructions prior to committing changes to your ISLE git repository.
   * Uncomment **Lines 313 - 315** for the TICK stack data volumes to be hosted on the `Staging` ISLE Host server.
 
 ---
@@ -199,12 +199,12 @@ If you are going to use Let's Encrypt instead, you can skip this step and move o
 
 If you have decided to use Commercial SSL certs supplied to you by your IT team or appropriate resource, please continue following this step.
 
-* Add your Commercial SSL certificate and key files to the `config/proxy/ssl-certs` directory
+* Add your Commercial SSL certificate and key files to the `./config/proxy/ssl-certs` directory
   * **Example**
-    * `config/proxy/ssl-certs/yourprojectname-here-staging.domain.cert`
-    * `config/proxy/ssl-certs/yourprojectname-here-staging.domain.key`
+    * `./config/proxy/ssl-certs/yourprojectname-here-staging.domain.cert`
+    * `./config/proxy/ssl-certs/yourprojectname-here-staging.domain.key`
 
-* Edit the `config/proxy/traefik.staging.toml` and follow the in-line instructions on **Line 32** which are to add the following below after **Line 25** of the same file. Replace the .pem & .key with the name of your Staging SSL certificate and associated key. Do note the positioning of the added lines. Third character indentation.
+* Edit the `./config/proxy/traefik.staging.toml` and follow the in-line instructions on **Line 32** which are to add the following below after **Line 25** of the same file. Replace the .pem & .key with the name of your Staging SSL certificate and associated key. Do note the positioning of the added lines. Third character indentation.
 
 **Please note** despite the instruction examples differing on file type, (`.pem` or `cert`), either one is compatible, use what you have been given. Merely change the file type suffix accordingly.
 
@@ -294,7 +294,7 @@ If you are using Commercial SSLs, then please stop and move onto the next step.
 
 If using Let's Encrypt, please continue to follow this step.
 
-* Create an empty `acme.json` within the `/config/proxy/ssl-certs/` directory of your ISLE project.
+* Create an empty `acme.json` within the `./config/proxy/ssl-certs/` directory of your ISLE project.
   * `touch /opt/yourprojectname-here/config/proxy/ssl-certs/acme.json`
     * `chmod 600 /opt/yourprojectname-here/config/proxy/ssl-certs/acme.json`
   * This file will be ignored by git and won't cause any errors with checking in code despite the location
