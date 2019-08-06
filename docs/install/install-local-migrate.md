@@ -41,12 +41,24 @@ Be sure to run a backup of any current non-ISLE systems prior to copying or expo
 
 #### Drupal site database
 
-* Export the MySQL database for the current Production Drupal site in use and copy it to your local in an easy to find place. In later steps you'll be directed to import this file.
-  * Drupal website databases can have a multitude of names and conventions. Confer with the appropriate IT departments for your institution's database naming conventions.
-  * Recommended that the production databases be exported using the `.sql` and `.gz` file formats e.g. `prod_drupal_site_082019.sql.gz` for better compression and minimal storage footprint.
-  * If the end user is running multi-sites, there will be additional databases to export.
-  * Do not export the `fedora3` database
-  * If possible, on the production Apache webserver, run `drush cc all` from the command line on the production server in the `/var/www/html` directory PRIOR to any db export(s). Otherwise issues can occur on import due to all cache tables being larger than `innodb_log_file_size` allows
+Prior to attempting this step, do consider the following:
+
+* Drupal website databases can have a multitude of names and conventions. Confer with the appropriate IT departments for your institution's database naming conventions.
+
+* Recommended that the production databases be exported using the `.sql` /or `.gz` file formats e.g. `prod_drupal_site_082019.sql.gz` for better compression and minimal storage footprint.
+
+* If the end user is running multi-sites, there will be additional databases to export.
+
+* Do not export the `fedora3` database
+
+* If possible, on the production Apache webserver, run `drush cc all` from the command line on the production server in the `/var/www/html` directory PRIOR to any db export(s). Otherwise issues can occur on import due to all cache tables being larger than `innodb_log_file_size` allows
+
+##### Production Drupal site database export process
+
+* Export the MySQL database for the current Production Drupal site in use and copy it to your local in an easy to find place. In later steps you'll be directed to import this file. **Please be careful** performing any of these potential actions below as the process impacts your Production site. If you are not comfortable or familiar with performing these actions, we recommend that you instead work with your available IT resources to do so.
+  * You can use a MySQL GUI client for this process or if you have command line access to the MySQL database server
+  `mysqldump -u username -p database_name > prod_drupal_site_082019.sql`
+  * Copy this file down to your local laptop or workstation.
 
 #### Solr schema & Islandora transforms
 
