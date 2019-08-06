@@ -327,7 +327,7 @@ You can reuse some of the older Production settings in the `local.env` if you li
     * This might take a few minutes depending on the size of the file.
   * Shell into the mysql container
     * `docker exec -it yourmysql-container-name bash`
-    * `mysql -u DRUPAL_DB_USER -p DRUPAL_DB < prod_drupal_site_082019.sql.gz
+    * `mysql -u DRUPAL_DB_USER -p DRUPAL_DB < prod_drupal_site_082019.sql.gz`
     * This might take a few minutes depending on the size of the file.
     * Exit out of the container when finished.
 
