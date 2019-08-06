@@ -8,8 +8,12 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 ## Assumptions / Prerequisites
 
-* This Demo ISLE Installation is intended for a local workstation.
+* This Demo ISLE Installation is intended for a local laptop or workstation.
+
 * Using ISLE version `1.2.0` or higher
+
+* Using Docker-compose `1.24.0` or higher
+
 * You have already git cloned the ISLE Project to your local workstation.
 
 ---

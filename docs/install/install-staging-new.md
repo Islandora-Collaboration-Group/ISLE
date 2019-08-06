@@ -20,11 +20,12 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 ## Assumptions / Prerequisites
 
-* This Staging ISLE installation is intended for a remote ISLE host server.
-
-* This Staging ISLE installation is intended for a brand new ISLE site for further Drupal theme development, ingest testing etc.
+* This Staging ISLE installation is intended for a brand new ISLE site for further Drupal theme development, ingest testing etc on a remote ISLE host server.
   * All materials are to be "migrated" from the work you performed on your local laptop or workstation from the prior steps & processes in [Local ISLE Installation - New site](install-local-new.md) instructions.
+
 * Using ISLE version `1.2.0` or higher
+
+* Using Docker-compose `1.24.0` or higher
 
 * You have git installed on your local laptop or workstation as well as the remote ISLE host server.
 

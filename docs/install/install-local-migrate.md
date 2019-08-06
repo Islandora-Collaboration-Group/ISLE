@@ -16,10 +16,14 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 ## Assumptions / Prerequisites
 
-* This Local ISLE Installation is intended for a local laptop workstation.
-* This Local ISLE installation is intended for an existing Production Drupal site to be imported for further ISLE migration testing, Drupal theme development, ingest testing etc.
+* This Local ISLE installation is intended for an existing Production Drupal site to be imported for further ISLE migration testing, Drupal theme development, ingest testing etc on a local laptop or workstation.
+
 * Using ISLE version `1.2.0` or higher
+
+* Using Docker-compose `1.24.0` or higher
+
 * You have git installed on your local laptop or workstation.
+
 * You have access to a private git repository in [Github](github.com), [Bitbucket](bitbucket.org), [Gitlab](gitlab.com) etc.
   * If you do not, please contact your IT department for git resources
   * If they do not have git repository resources, suggest you create an account with one of the online providers mentioned above.
