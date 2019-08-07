@@ -33,7 +33,25 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 ---
 
-## Step 0. Copy Production data to your local
+## Index of instructions
+
+* Step 0: Copy Production data to your local
+* Step 1: Edit `/etc/hosts` File
+* Step 2: Setup git for the ISLE project
+* Step 3: Git clone the Production Drupal site code
+* Step 4: Edit the `.env` File to change to the Local Environment
+* Step 5: Create new users and passwords by editing `local.env`
+* Step 6: Create new self-signed certs for your project
+* Step 7: Download the ISLE images
+* Step 8: Launch Process
+* Step 9: Import the Production MySQL Drupal database
+* Step 10: Run Islandora / Drupal site scripts
+* Step 11: Test the Site
+* Step 12: Ingest Sample Objects
+
+---
+
+## Step 0: Copy Production data to your local
 
 Be sure to run a backup of any current non-ISLE systems prior to copying or exporting any files.
 
@@ -398,7 +416,7 @@ You can determine the name of the Apache container by running `docker ps`. make 
 
 ---
 
-## Step 10: Ingest Sample Objects
+## Step 12: Ingest Sample Objects
 
 It is recommended that endusers migrating their sites opt to either import sample objects from their non-ISLE Production Fedora servers or use the following below:
 

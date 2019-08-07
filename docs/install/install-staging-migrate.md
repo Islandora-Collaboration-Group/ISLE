@@ -23,7 +23,7 @@ Once this has been completed, if you do not want to use Let's Encrypt, you can a
 
 Unlike the Local and Demo setups, you will not have to edit `/etc/localhosts` to view your domain given that DNS is now involved. Your new domain will no longer use the `.localdomain` but instead something like `https://yourprojectnamehere-staging.institution.edu`
 
-This document also has directions on how you can check in newly created ISLE & Islandora code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging and finally to Production. The [ISLE Installation - Environments](install-environments.md) documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE end-users should use for the `.env`, `staging.env`, etc.
+This document also has directions on how you can check in newly updated ISLE code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging and finally to Production. The [ISLE Installation - Environments](install-environments.md) documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE end-users should use for the `.env`, `staging.env`, etc.
 
 This document **does not** have directions on how you can check in previously existing Drupal / Islandora code into a git repository and assumes this step has already happened. The directions below will explain how to clone Drupal / Islandora code from a previously existing Drupal / Islandora git repository that should already be accessible to you.
 
@@ -62,6 +62,10 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 * You are familiar with using tools like `scp, cp or rsync` to move configurations, files and data from your local to the remote `Staging` server.
 
+* You have access to your Production Drupal, Solr and Fedora data and copy from your servers to the new ISLE Staging server.
+
+* You will schedule a content freeze for all Production Fedora ingests and additions to your Production website. This will allow you to get up to date data from Production to Staging.
+
 ---
 
 ## Index of instructions
@@ -80,18 +84,20 @@ The instructions that follow below will have either a `On Local` or a `On Remote
   * Step 5: On Local Staging - If using Commercial SSLs
   * Step 6: On Local - Commit ISLE code to git repository
 
-* **Steps 7 - 17**   - `On Remote Staging - Configure the ISLE Staging environment profile for launch and usage`
+* **Steps 7 - 18**   - `On Remote Staging - Configure the ISLE Staging environment profile for launch and usage`
   * Step 7: On Remote Staging - Git clone the ISLE repository to the remote Staging ISLE host server
   * Step 8: On Remote Staging - Create the appropriate local data paths for Apache, Fedora and log data
-  * Step 9: On Remote Staging - Clone your Islandora code
-  * Step 10: On Remote Staging - Copy over the Local Drupal files directory
+  * Step 9: On Remote Staging - Clone your Production Islandora code
+  * Step 10: On Remote Staging - Copy over the Production Data directories
+    * change perms to local
   * Step 11: On Remote Staging - If using Let's Encrypt
   * Step 12: On Remote Staging - Edit the .env file to change to the Staging environment
   * Step 13: On Remote Staging - Download the ISLE images
   * Step 14: On Remote Staging - Start Containers
-  * Step 15: On Remote Staging - Import the Local MySQL Drupal database
+  * Step 15: On Remote Staging - Import the Production MySQL Drupal database
   * Step 16: On Remote Staging - Run the fix-permissions.sh script
-  * Step 17: On Remote Staging - Review and test the Drupal Staging site
+  * Step 17: On Remote Staging - Re-index Fedora & Solr
+  * Step 18: On Remote Staging - Review and test the Drupal Staging site
 
 ---
 
@@ -288,7 +294,9 @@ Since the `/opt` directory might not let you do this at first, we suggest the fo
 
 ---
 
-### Step 9: On Remote Staging - Clone your Islandora code
+### Step 9: On Remote Staging - Clone your Production Islandora code
+
+Please clone from your existing Production Islandora git repository.
 
 * `git clone git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-islandora.git /opt/data/apache/html`
 
@@ -297,14 +305,22 @@ Since the `/opt` directory might not let you do this at first, we suggest the fo
 
 ---
 
-### Step 10: On Remote Staging - Copy over the Local Drupal files directory
+### Step 10: On Remote Staging - Copy over the Production Data directories
 
-This `files` directory should be on your local laptop and should be copied to the remote Staging server.
+* It is recommended that you schedule a content freeze for all Production Fedora ingests and additions to your Production website. This will allow you to get up to date data from Production to Staging.
 
-* Copy `~/yourprojectnamehere-isle/data/apache/html/sites/default/files` to `/opt/data/apache/html/sites/default/files`
-
-* Fix the permissions so that the `islandora` user has access.
-  * `sudo chown -Rv islandora:islandora /opt/data/apache/html/sites/default/files`
+* As you may have made some critical decisions potentially from `Step 0: Copy Production data to your local` of the [Local ISLE Installation - Migrate existing site](install-local-migrate.md) instructions, you need to re-follow the steps to get your:
+  * `Production` Drupal site `files` directory
+  * `Solr schema & Islandora transforms`
+    * If you picked **Easy** option:
+      * then you don't need to do anything here for the `Solr schema & Islandora transforms`
+    * If you picked the **Intermediate** or **Advanced** options:
+      * You'll need to copy in the customizations and files you created during the `local` environment into the `docker-compose.staging.yml`. Ensure that one set of transforms and schema are used across all environments.
+  * `Production` Fedora `datastreamStore` directory
+    * You'll need to adjust the paths below in case your setup differs on either the non-ISLE Production server or the ISLE Staging server.
+    * Copy your `/usr/local/fedora/data/datastreamStore` data to the suggested path of `/mnt/data/fedora/datastreamStore`
+  * `Production` Fedora `objectStore`
+    * Copy your `/usr/local/fedora/data/objectStore` data to the suggested path of `/opt/data/fedora/objectStore`
 
 ---
 

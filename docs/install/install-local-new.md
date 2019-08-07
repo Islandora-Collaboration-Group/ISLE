@@ -30,6 +30,22 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 ---
 
+## Index of instructions
+
+* Step 1: Edit `/etc/hosts` File
+* Step 2: Setup git for the ISLE project
+* Step 3: Edit the `.env` File to change to the Local Environment
+* Step 4: Create new users and passwords by editing `local.env`
+* Step 5: Create new self-signed certs for your project
+* Step 6: Download the ISLE images
+* Step 7: Launch Process
+* Step 8: Run Islandora / Drupal site Install Script
+* Step 9: Test the Site
+* Step 10: Ingest Sample Objects
+* Step 11: Check-in the newly created Drupal / Islandora site code into a git repository
+
+---
+
 ## Step 1: Edit `/etc/hosts` File
 
 Enable the Local ISLE Installation to be viewed locally on workstation browser as: e.g. `https://yourprojectnamehere.localdomain`.
