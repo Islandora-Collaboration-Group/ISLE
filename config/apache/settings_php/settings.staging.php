@@ -246,11 +246,16 @@
  */
 #$databases = array();
 
+# ISLE Configuration
+# Copy the value of DRUPAL_DB from the staging.env and paste it into the '' below for the database e.g 'database' => 'institution_db',
+# Copy the value of DRUPAL_DB_USER from the staging.env between the '' below for the username e.g 'username' => 'institution_db_user',
+# Copy the value of DRUPAL_DB_PASS from the staging.env between the '' below for the password e.g 'password' => 'yourpasswordhere',
+
 $databases['default']['default'] = array(
   'driver' => 'mysql',
-  'database' => '#Replace this with the value of Line 23 (DRUPAL_DB) in the staging.env',
-  'username' => '#Replace this with the value of Line 26 (DRUPAL_DB_USER) in the staging.env',
-  'password' => '#Replace this with the value of Line 29 (DRUPAL_DB_PASS) in the staging.env',
+  'database' => '',
+  'username' => '',
+  'password' => '',
   'host' => 'mysql',
   'prefix' => '',
   'charset' => 'utf8mb4',
@@ -286,8 +291,8 @@ $update_free_access = FALSE;
  * Example:
  *   $drupal_hash_salt = file_get_contents('/home/example/salt.txt');
  *
- */
-$drupal_hash_salt = '#Replace this with the value of Line 62 (DRUPAL_HASH_SALT) in the staging.env';
+ * # ISLE Configuration - Replace the value below with the value of DRUPAL_HASH_SALT from the staging.env */
+$drupal_hash_salt = '';
 
 /**
  * Base URL (optional).

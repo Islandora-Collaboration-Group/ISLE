@@ -152,7 +152,7 @@ services:
       ## The next line is a suggested path and users can change values to the left of the : to match their Apache data folder of choice.
       - /opt/data/apache/html:/var/www/html
       # Customization: Separate settings.php files based on environment.
-      # Ensure that the values of (Lines 23, 26, 29, & 62) found in the production.env have been inserted in (Lines 251, 252, 253 & 290) of the settings.production.php 
+      # Ensure that the values from the production.env have been inserted in the corresponding ISLE configuration sections of the settings.production.php
       - ./config/apache/settings_php/settings.production.php:/var/www/html/sites/default/settings.php
       ## (Optional): Uncomment line below to allow bind mounting of the php.ini file for editing of php memory, upload and max_post values.
       #- ./config/apache/php_ini/php.production.ini:/etc/php/7.1/apache2/php.ini
@@ -185,7 +185,7 @@ services:
       # - ./config/proxy/acme.json:/acme.json
       # SSL Choice 2: To use commercial SSLs - uncomment ONLY the line below. Add your SSL certs (.cert, .pem, .key) files to config/proxy/ssl-certs
       # - ./config/proxy/ssl-certs:/certs:ro
-      # Based on the choice of SSL type made above, you'll need to refer to either lines 27 or 33 within this /config/proxy/traefik.*.toml file for further configuration instructions.      
+      # Based on the choice of SSL type made above, you'll need to refer to this /config/proxy/traefik.production.toml file for further configuration instructions.      
       - ./config/proxy/traefik.production.toml:/etc/traefik/traefik.toml
     labels:
       - traefik.port=8080

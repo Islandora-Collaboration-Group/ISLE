@@ -1,27 +1,38 @@
-# Staging ISLE Installation - New site
+# Staging ISLE Installation - Migrate your existing Islandora site
 
 _Expectations:  It takes an average of **2 - 4+ hours** to read this documentation and complete this installation._
 
-This `Staging` ISLE Installation will use the themed Drupal website created during the [Local ISLE Installation - New site](install-local-new.md) process and will create an empty Fedora repository for remote (non-local / cloud) hosting of a `Staging` site. Islandora / Drupal site code here should be considered almost finished but hosted here for last touches and team review privately prior to pushing to public `Production`. Fedora data might have tests collections or collections that should then be synced to the `Production` site. It is recommended that this remote site not be publicly accessible.
+This `Staging` ISLE Installation will be similar to the [Local ISLE Installation - Migrate existing site](install-local-migrate.md) instructions you just followed but in addition to using a copy of your currently running Production themed Drupal website, a copy of the Production Fedora repository will also be needed for you to continue migrating to ISLE with the end goal of first deploying to an ISLE Production environment and then cut over from the existing non-ISLE Production and Staging servers to their new ISLE counterparts.
 
-While this installation will get you a brand new `Staging` site, it is **not** intended as a migration process of a previously existing Islandora site. If you need to build a `Staging` environment to migrate a previously existing Islandora site, please use the [Staging ISLE Installation - Migrate existing site](install-staging-migrate.md) instructions instead.
+Islandora / Drupal site code here should be considered almost finished but hosted here for last touches and team review privately prior to pushing to public `Production`. Fedora data will be a mirror of your currently running Production Fedora repository. It is recommended that this remote site not be publicly accessible.
 
-As this `Staging` domain will require a real domain name or [FQDN](https://kb.iu.edu/d/aiuv), you will need to ask your IT department or appropriate resource for an "A record" to be added for your domain to "point" to your `Staging` Host Server IP address in your institution's DNS records. We recommend that this sub-domain use `-staging` to differentiate it from the Production site.
+This installation builds a `Staging` environment for the express purpose of migrating a previously existing Islandora site onto the ISLE platform. If you need to build a brand new `Staging` site for development, please **stop** and use the [Local ISLE Installation - New site](install-local-new.md) instructions first and then the [Staging ISLE Installation - New site](install-staging-new.md) instead.
 
-Example:`https://yourprojectnamehere-staging.institution.edu`
+As this `Staging` domain will require a real domain name or [FQDN](https://kb.iu.edu/d/aiuv), we recommend the following:
+* If you do not have a `Staging` server:
+  * Work with your IT department or appropriate resource for an "A record" to be added for your domain to "point" to your new `Staging` Host Server IP address in your institution's DNS records. We recommend that this sub-domain use `-staging` to differentiate it from the Production site
+    * Example:`https://yourprojectnamehere-staging.institution.edu`
+
+* If you have a current non-ISLE `Staging` server(s)
+  * You shutdown any current non-ISLE `Staging` servers and only use the ISLE server from now on.
+  * Work with your IT department or appropriate resource for the existing "A record" for the current non-ISLE `Staging` domain to now "point" to your new `Staging` Host Server IP address in your institution's DNS records. **This is critical to be performed PRIOR to any further work below.**
 
 Once this has been completed, if you do not want to use Let's Encrypt, you can also request commercial SSL certificates from your IT department for this domain as well. Please note the DNS records will need to exist prior to the creation of any SSL certificate (Commercial or Let's Encrypt.)
+
+* If you already have pre-existing `Staging` commercial SSL certificates, they can certainly be reused and copied into the ISLE project as directed.
 
 Unlike the Local and Demo setups, you will not have to edit `/etc/localhosts` to view your domain given that DNS is now involved. Your new domain will no longer use the `.localdomain` but instead something like `https://yourprojectnamehere-staging.institution.edu`
 
 This document also has directions on how you can check in newly created ISLE & Islandora code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging and finally to Production. The [ISLE Installation - Environments](install-environments.md) documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE end-users should use for the `.env`, `staging.env`, etc.
 
+This document **does not** have directions on how you can check in previously existing Drupal / Islandora code into a git repository and assumes this step has already happened. The directions below will explain how to clone Drupal / Islandora code from a previously existing Drupal / Islandora git repository that should already be accessible to you.
+
 Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive emails. The [Glossary](../appendices/glossary.md) defines terms used in this documentation.
 
 ## Assumptions / Prerequisites
 
-* This Staging ISLE installation is intended for a brand new ISLE site for further Drupal theme development, ingest testing etc on a remote ISLE host server.
-  * All materials are to be "migrated" from the work you performed on your local laptop or workstation from the prior steps & processes in [Local ISLE Installation - New site](install-local-new.md) instructions.
+* This Staging ISLE installation is intended for an existing Production Drupal site to be imported along with a copy of the current Production Fedora Repository for further ISLE migration testing, Drupal theme development, ingest testing etc. on a remote ISLE host server.
+  * Some materials are to be "migrated" from the work you performed on your local laptop or workstation from the prior steps & processes in [Local ISLE Installation - Migrate existing site](install-local-migrate.md) instructions.
 
 * Using ISLE version `1.2.0` or higher
 
@@ -35,11 +46,15 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
     * [Hardware Requirements](host-hardware-dependencies.md)
     * [Software Dependencies](host-software-dependencies.md)
   * This server should be running at the time of deploy.
-  * This server has enough disk space to store a large Fedora repository e.g. 1 - 5 TB or larger depending on how many objects you plan on ingesting.  
+  * **Critical** - This `Staging` server has the same amount of disk space as your current Production Fedora server does in order to store a copy of the Fedora repository. Please ensure that these sizes match. Please also plan on adding additional capacity as needed for any potential ingest testing etc.
 
-* You have already created the two private git repositories for your projects ISLE and Islandora code in [Github](github.com), [Bitbucket](bitbucket.org), [Gitlab](gitlab.com) etc having followed Step 2 from the [Local ISLE Installation - New site](install-local-new.md) instructions. You will continue to use these two git repositories for all environments.
-  1. ISLE project config - e.g. `yourprojectnamehere-isle`
-  2. Drupal / Islandora site code - e.g. `yourprojectnamehere-islandora`
+* You have access to a private git repository in [Github](github.com), [Bitbucket](bitbucket.org), [Gitlab](gitlab.com) etc.
+  * If you do not, please contact your IT department for git resources
+  * If they do not have git repository resources, suggest you create an account with one of the online providers mentioned above.
+  * **WARNING:** Only use **Private** git repositories given the sensitive nature of the configuration files.
+  * **DO NOT** share these git repos publicly.
+
+* You have a previously existing private Drupal / Islandora git repository
 
 * You have already have the appropriate A record entered into your institutions DNS system and can resolve the Staging domain (https://yourprojectnamehere-staging.institution.edu) using a tool like https://www.whatsmydns.net/
 
@@ -100,7 +115,7 @@ Prior to attempting this step, do consider the following:
     * `docker exec -it yourmysql-container-name bash`
   * Export the Local Drupal database. Replace the `DRUPAL_DB` & `DRUPAL_DB_USER` below in the command with the values found in your `local.env`.
     * `mysqldump -u DRUPAL_DB_USER -p DRUPAL_DB > local_drupal_site_082019.sql`
-    * Enter the appropriate password: value of `DRUPAL_DB_PASS` in the `local.env`)
+    * Enter the appropriate password: `DRUPAL_DB_PASS` in the `local.env`)
     * Upon completion, exit the MySQL container  
   * Copy this file from the MySQL container to a location on your local laptop or workstation.
     * `docker cp yourmysql-container-name:/local_drupal_site_082019.sql /path/to/location`
@@ -150,10 +165,10 @@ Prior to attempting this step, do consider the following:
 * Review the disks and volumes on your remote `Staging` ISLE Host server to ensure they are of an adequate capacity for your collection needs and match what has been written in the `docker-compose.staging.yml` file.
 
 * Please read through the `docker-compose.staging.yml` file as there are bind mount points that need to be configured on the host machine, to ensure data persistence. There are suggested bind mounts that the end-user can change to fit their needs or they can setup additional volumes or disks to match the suggestions.
-  * In the `fedora` service section
+  * In the `fedora` services section
     * `- /mnt/data/fedora/datastreamStore:/usr/local/fedora/data/datastreamStore`
     * `- /opt/data/fedora/objectStore:/usr/local/fedora/data/objectStore`
-  * In the `apache` service section
+  * In the `apache` services section
     * `- /opt/data/apache/html:/var/www/html`
 
 * Depending on your choice of SSL type (Commercial SSL files or the Let's Encrypt service), you'll need to uncomment only one line of the `traefik` services section. There are also inline instructions to this effect in the `docker-compose.staging.yml` file.
@@ -161,12 +176,12 @@ Prior to attempting this step, do consider the following:
     * `- ./config/proxy/acme.json:/acme.json`
 
   * * To use commercial SSLs - Uncomment
-    * - `./config/proxy/ssl-certs:/certs:ro`
-      * Additionally you'll need to add your SSL certs (.cert, .pem, .key) files to `./config/proxy/ssl-certs`
+    * `./config/proxy/ssl-certs:/certs:ro`
+      * Additionally you'll need to add your SSL certs (.cert, .pem, .key) files to `config/proxy/ssl-certs`
 
-  * Based on the choice of SSL type made above, you'll need to refer to to the `./config/proxy/traefik.staging.toml` file for further configuration instructions.
+  * Based on the choice of SSL type made above, you'll need to refer to the `/config/proxy/traefik.staging.toml` file for further configuration instructions.
 
-### Step 4A: On Local - (Optional) changes for docker-compose.staging.yml
+### Step 4A: On Local - (Optional) changes for  docker-compose.staging.yml
 
 This section is for optional changes for the `docker-compose.staging.yml`, end-users do not have feel like they have to make any choices here and can continue to **Step 4** as needed.
 
@@ -174,7 +189,7 @@ The options include PHP settings, Java Memory Allocation, MySQL configuration an
 
 
 * _(Optional)_ - You can change PHP settings such as file upload limits and memory usage by uncommenting
-    * In the `apache` services section, this line:
+    * **Line 158** in the `apache` services section.
       * `- ./config/apache/php_ini/php.staging.ini:/etc/php/7.1/apache2/php.ini`
     * You'll then need to make edits in the `./config/apache/php_ini/php.staging.ini` file.
 
@@ -209,7 +224,7 @@ If you have decided to use Commercial SSL certs supplied to you by your IT team 
     * `./config/proxy/ssl-certs/yourprojectname-here-staging.domain.cert`
     * `./config/proxy/ssl-certs/yourprojectname-here-staging.domain.key`
 
-* Edit the `./config/proxy/traefik.staging.toml` and follow the in-line instructions. Replace the .pem & .key with the name of your Staging SSL certificate and associated key. Do note the positioning of the added lines. Third character indentation.
+* Edit the `./config/proxy/traefik.staging.toml` and follow the in-line instructions on **Line 32** which are to add the following below after **Line 25** of the same file. Replace the .pem & .key with the name of your Staging SSL certificate and associated key. Do note the positioning of the added lines. Third character indentation.
 
 **Please note** despite the instruction examples differing on file type, (`.pem` or `cert`), either one is compatible, use what you have been given. Merely change the file type suffix accordingly.
 
@@ -315,13 +330,13 @@ This step is a multi-step, involved process that allows an end-user to make appr
 * Edit the .env, remove the `local` settings and then commit locally
   * `cd /opt/yourprojectname-here`
   * `vi / nano / pico /opt/yourprojectname-here/.env`
-  * Edit `COMPOSE_PROJECT_NAME=` and replace the `local` settings with:
+  * Edit Line **9** and replace the `local` settings with:
     * `COMPOSE_PROJECT_NAME=`  (Suggested) Add an identifiable project or institutional name plus environment e.g. acme_digital_stage`
-  * Edit `BASE_DOMAIN=` and replace the `local` settings with:
+  * Edit Line **10** and replace the `local` settings with:
     * `BASE_DOMAIN=`            (Suggested) Add the full production domain here e.g. digital-staging.institution.edu
-  * Edit `CONTAINER_SHORT_ID=` and replace the `local` settings with:
+  * Edit Line **11** and replace the `local` settings with:
     * `CONTAINER_SHORT_ID=`     (Suggested) Make an easy to read acronym from the letters of your institution and collection names plus environment e.g. (acme digitalcollections staging) is acdcs
-  * Edit `COMPOSE_FILE` change `local` to `staging`
+  * Edit Line **12** change `local` to `staging`
     * `COMPOSE_FILE=docker-compose.staging.yml`
   * Save the file
 

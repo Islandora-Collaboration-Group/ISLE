@@ -91,10 +91,10 @@ Bind mount in existing transforms and schemas  to override ISLE settings with yo
 
 * Move your `foxmltoSolr.xslt` file & `islandora_transforms` directory into `config/fedora/gsearch/`
 
-* Add a new line after **Line 88** in the Solr volumes section of your `docker-compose.local.yml`
+* Add a new line in the Solr volumes section of your `docker-compose.local.yml`
   * `config/solr/schema.xml:/usr/local/solr/collection1/conf/schema.xml`
 
-* Add new lines after **Line** in the Fedora volumes section of your `docker-compose.local.yml`
+* Add new lines in the Fedora volumes section of your `docker-compose.local.yml`
 ```bash
 - ./config/fedora/gsearch/islandora_transforms:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms`
 - ./config/fedora/gsearch/foxmlToSolr.xslt:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/foxmlToSolr.xslt`
@@ -132,10 +132,10 @@ Bind mount in existing transforms and schemas  to override ISLE settings with yo
 
 * Move your newly edited `foxmltoSolr.xslt` file & `islandora_transforms` directory into the `config/fedora/gsearch/` directory
 
-* Add a new line after **Line 88** in the Solr volumes section of your `docker-compose.local.yml`
+* Add a new line in the Solr volumes section of your `docker-compose.local.yml`
   * `config/solr/schema.xml:/usr/local/solr/collection1/conf/schema.xml`
 
-* Add new lines after **Line** in the Fedora volumes section of your `docker-compose.local.yml`
+* Add new lines in the Fedora volumes section of your `docker-compose.local.yml`
 ```bash
 - ./config/fedora/gsearch/islandora_transforms:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms
 - ./config/fedora/gsearch/foxmlToSolr.xslt:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/foxmlToSolr.xslt
@@ -207,7 +207,7 @@ If not then you'll need to check your Drupal site into a git repo following the 
 * Using the still open `terminal` (Windows: `PowerShell`)
   * `mkdir -p data/apache/html`
   * `git clone git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-islandora.git data/apache/html`
-    * (Optional) You can chose another directory of your choice as long as **Line 131** of the `docker-compose.local.yml` matches that other location
+    * (Optional) You can chose another directory of your choice as the bind-mounts match in the Apache services volume section within the `docker-compose.local.yml` matches that other location
 
 * Move the previously copied Production Drupal `files` directory to inside the `data/apache/html/sites/default/` directory.
 
@@ -223,12 +223,12 @@ If not then you'll need to check your Drupal site into a git repo following the 
   * _For endusers familiar with editing files on the command line, vim, emacs or alternative tools can be used in lieu of nano_
 
 * Change only the following lines in the `.env` file so that the resulting values look like the following: **Please note: the following below is an example not actual values you should use. Use one word to describe your project and follow the conventions below accordingly**
-  * **Line 9 -** `COMPOSE_PROJECT_NAME=yourprojectnamehere_local`
-  * **Line 10 -** `BASE_DOMAIN=yourprojectnamehere.localdomain`
-  * **Line 11 -** _leave default setting of `ld` as is. Do not change._
-  * **Line 12 -** `COMPOSE_FILE=docker-compose.local.yml`
+  * `COMPOSE_PROJECT_NAME=yourprojectnamehere_local`
+  * `BASE_DOMAIN=yourprojectnamehere.localdomain`
+  * `CONTAINER_SHORT_ID=ld` _leave default setting of `ld` as is. Do not change._
+  * `COMPOSE_FILE=docker-compose.local.yml`
 
-* If you want to use a MySQL client with a GUI to import the Production MySQL Drupal database you'll need to uncomment **Lines 40 & 41** to open up the `3306` port. If you are already running MySQL on your local laptop, you'll have a port conflict either shutdown that service prior to running ISLE or change 3306:3306 to something like `9306:3306`. Please double-check.
+* If you want to use a MySQL client with a GUI to import the Production MySQL Drupal database you'll need to uncomment the `ports` section of the MySQL service within the `docker-compose.local.yml` to open up the `3306` port. If you are already running MySQL on your local laptop, you'll have a port conflict either shutdown that service prior to running ISLE or change 3306:3306 to something like `9306:3306`. Please double-check.
 
 * Enter `Cntrl` and the letter `o` together to write the changes to the file.
 
@@ -236,7 +236,7 @@ If not then you'll need to check your Drupal site into a git repo following the 
 
 ---
 
-**Please note:** We highly recommend that you also review the contents of the `docker-compose.local.yml` file as `line 131` uses bind mounts for the intended Drupal Code instead of using default Docker volumes. This allows users to perform local Drupal site development with an IDE. This line is a suggested path and users are free to change values to the left of the `:` to match their Apache data folder of choice. However we recommend starting out with the default setting below.
+**Please note:** We highly recommend that you also review the contents of the `docker-compose.local.yml` file as the Apache service volume section uses bind mounts for the intended Drupal Code instead of using default Docker volumes. This allows users to perform local Drupal site development with an IDE. This line is a suggested path and users are free to change values to the left of the `:` to match their Apache data folder of choice. However we recommend starting out with the default setting below.
 Default: `- ./data/apache/html:/var/www/html:cached`
 
 * Additionally, depending on your decision from **Step 0**, you may need to make additional edits to `docker-compose.local.yml` and move files into place as directed from the (**Intermediate**) and (**Advanced**) sections.
@@ -258,11 +258,15 @@ You can reuse some of the older Production settings in the `local.env` if you li
 
 * Once you have added all of the passwords, database and user names as directed by the in-line comments of the `local.env`, there is one additional file to be updated.
   * Open up the `config/apache/settings_php/settings.local.php` file.
+  * Search for the `# ISLE Configuration`
+  * Follow the in-line instructions below that comment
   * Between the '', replace the `#Replace this...` comments with the appropriate values from the `local.env` file.
-    * **Line 251** - 'database' => '#Replace this with the value of Line 23 (DRUPAL_DB) in the local.env'
-    * **Line 252** - 'username' => '#Replace this with the value of Line 26 (DRUPAL_DB_USER) in the local.env'
-    * **Line 253** - 'password' => '#Replace this with the value of Line 29 (DRUPAL_DB_PASS) in the local.env'
-     * **Line 290** - 'password' => '#Replace this with the value of Line 62 (DRUPAL_HASH_SALT) in the local.env'
+    * Copy the value of `DRUPAL_DB` from the local.env and paste it into the '' below for the database e.g `'database' => 'institution_db',`
+    * Copy the value of `DRUPAL_DB_USER` from the local.env between the '' below for the username e.g `'username' => 'institution_db_user',`
+    * Copy the value of `DRUPAL_DB_PASS` from the local.env between the '' below for the password e.g `'password' => 'yourpasswordhere',`
+    * Search for `# ISLE Configuration again`
+    * Follow the in-line instructions below that comment
+    * Copy the value of `DRUPAL_HASH_SALT` from the local.env between the '' below for the Drupal hash salt e.g `$drupal_hash_salt = 'yourhashhere';`
 
 * Once finished, save the file and close it.
 
@@ -284,10 +288,10 @@ You can reuse some of the older Production settings in the `local.env` if you li
   * `./local.sh`
   * The generated keys can now be found in `./config/proxy/ssl-certs`
 
-* Add the SSL .pem and .key file names generated from running `local.sh` to the `./config/proxy/traefik.local.toml` file on lines 27 & 28:
+* Add the SSL .pem and .key file names generated from running `local.sh` to the `./config/proxy/traefik.local.toml` file.
   * Example:
-    * **Line 27** - `certFile = "/certs/yourprojectname-here.localdomain.pem"`
-    * **Line 28** - `keyFile = "/certs/yourprojectname-here.localdomain.key"`
+    * - `certFile = "/certs/yourprojectname-here.localdomain.pem"`
+    * - `keyFile = "/certs/yourprojectname-here.localdomain.key"`
 
 ---
 
@@ -318,8 +322,8 @@ You can reuse some of the older Production settings in the `local.env` if you li
     * Host = `127.0.0.1`
     * Port: `3306` _or a different port if you changed it_
     * Username: `root`
-    * Password: `YOUR_MYSQL_ROOT_PASSWORD` (**Line 11** in your `local.env`)
-  * Select the Drupal database (**Line 23** `(DRUPAL_DB)` in the `local.env`)
+    * Password: `YOUR_MYSQL_ROOT_PASSWORD` in the `local.env`)
+  * Select the Drupal database `DRUPAL_DB` in the `local.env`)
   * Click File > Import (_or equivalent_)
   * Select your exported Production Drupal database file e.g. `prod_drupal_site_082019.sql.gz`
   * The import process will take 1 -3 minutes depending on the size.
@@ -329,7 +333,7 @@ You can reuse some of the older Production settings in the `local.env` if you li
     * Run `docker ps` to determine the mysql container name
     * `docker cp /pathto/prod_drupal_site_082019.sql.gz yourmysql-container-name:/prod_drupal_site_082019.sql.gz`
     * This might take a few minutes depending on the size of the file.
-  * Shell into the mysql container
+  * Shell into the mysql container. Replace the `DRUPAL...` below with the values from the `local.env`
     * `docker exec -it yourmysql-container-name bash`
     * `mysql -u DRUPAL_DB_USER -p DRUPAL_DB < prod_drupal_site_082019.sql.gz`
     * This might take a few minutes depending on the size of the file.

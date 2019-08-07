@@ -83,6 +83,7 @@ origin	git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.
   * This will take 2 - 5 mins depending on your internet speed.
 
 * Now you have the current ISLE project code checked into git as foundation to make changes on specific to your local and project needs. You'll use this git upstream `icg-upstream` and process in the future to pull updates / releases from the main ISLE project.
+
 ---
 
 ## Step 3: Edit the `.env` File to change to the Local Environment
@@ -99,6 +100,8 @@ origin	git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.
   * `BASE_DOMAIN=yourprojectnamehere.localdomain`
   * `CONTAINER_SHORT_ID=ld` _leave default setting of `ld` as is. Do not change._
   * `COMPOSE_FILE=docker-compose.local.yml`
+
+* If you want to use a MySQL client with a GUI to import the Production MySQL Drupal database you'll need to uncomment the `ports` section of the MySQL service within the `docker-compose.local.yml` to open up the `3306` port. If you are already running MySQL on your local laptop, you'll have a port conflict either shutdown that service prior to running ISLE or change 3306:3306 to something like `9306:3306`. Please double-check.
 
 * Enter `Cntrl` and the letter `o` together to write the changes to the file.
 

@@ -26,11 +26,10 @@ defaultEntryPoints = ["http", "https"]
 
 # To use a Let's Encrypt SSL certificate
 # Leave this above section [entryPoints] as is / untouched
-# Scroll down to the Let's Encrypt section and uncomment all lines starting with Line 144 [acme]
+# Scroll down to the Let's Encrypt section and uncomment all lines starting with [acme]
 # Modify values as needed or directed.
 # 
 # To use a Commercial SSL certificate
-# Add the following below after line 25
 # Replace .pem & .key with the name of your Staging SSL certificate and associated key
 # Do note the positioning of the added lines. Third character indentation.
 # Example: 

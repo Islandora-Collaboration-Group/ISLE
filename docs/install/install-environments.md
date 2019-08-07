@@ -138,7 +138,7 @@ COMPOSE_FILE=docker-compose.staging.yml # (Mandatory) The docker-compose file us
 
 * Please read through the `docker-compose.production.yml` file as there are bind mount points that need to be configured on the host machine, to ensure data persistence. There are suggested bind mounts that the end-user can change to fit their needs or they can setup additional volumes or disks to match the suggestions.
 
-* To use this environment, change the values in the Activated ISLE environment lines (5 - 8) to match the values described below and save the file.
+* To use this environment, change the values in the Activated ISLE environment to match the values described below and save the file.
 
 * Inline comments below are merely suggestions except for the mandatory `COMPOSE_FILE` value. Otherwise change however you see fit. Do not copy the comments (#) below when editing the main `.env`, simply add the suggested or mandatory values as directed to the right of any `=`.
 
@@ -155,7 +155,7 @@ COMPOSE_FILE=docker-compose.production.yml # (Mandatory) The docker-compose file
 
 * Used by ISLE Maintainers for testing ISLE releases, pull releases and ISLE development etc.
 
-* To use this environment, change the values in the Activated ISLE environment lines (5 - 8) to match the values described below and save the file.
+* To use this environment, change the values in the Activated ISLE environment to match the values described below and save the file.
 
 * All values below are mandatory. Do not change. Simply fill them in as directed. Do not copy the comments (#) below when editing the main `.env`, simply add the suggested or mandatory values as directed to the right of any `=`.
 

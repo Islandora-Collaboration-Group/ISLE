@@ -168,7 +168,7 @@ A Remote Server ISLE Installation requires that you provision and place a comple
         * (1) SSL Certificate File (file extension may be: ".cer", ".crt" or ".pem")
             * Example: `sample.cer` or `sample.crt` or `sample.pem`
 3. Edit the `./ISLE/config/proxy/traefik.toml` file.
-    * Change lines 27 and 28:
+    * Change lines:
       *  `certFile = "/certs/sample.cert"`  ## Change to reflect your ".cer", ".crt" or ".pem"
       *  `keyFile = "/certs/sample-key.key"`  ## Change to reflect your ".key" or ".pem"
 4. Proceed to the section below: [Step 9: Spin up ISLE Containers](../install/install-server.md#step-9-spin-up-isle-containers).
