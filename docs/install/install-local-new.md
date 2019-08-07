@@ -95,10 +95,10 @@ origin	git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.
   * _For endusers familiar with editing files on the command line, vim, emacs or alternative tools can be used in lieu of nano_
 
 * Change only the following lines in the `.env` file so that the resulting values look like the following: **Please note: the following below is an example not actual values you should use. Use one word to describe your project and follow the conventions below accordingly**
-  * **Line 9 -** `COMPOSE_PROJECT_NAME=yourprojectnamehere_local`
-  * **Line 10 -** `BASE_DOMAIN=yourprojectnamehere.localdomain`
-  * **Line 11 -** _leave default setting of `ld` as is. Do not change._
-  * **Line 12 -** `COMPOSE_FILE=docker-compose.local.yml`
+  * `COMPOSE_PROJECT_NAME=yourprojectnamehere_local`
+  * `BASE_DOMAIN=yourprojectnamehere.localdomain`
+  * `CONTAINER_SHORT_ID=ld` _leave default setting of `ld` as is. Do not change._
+  * `COMPOSE_FILE=docker-compose.local.yml`
 
 * Enter `Cntrl` and the letter `o` together to write the changes to the file.
 
@@ -119,11 +119,15 @@ origin	git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.
 
 * Once you have added all of the passwords, database and user names as directed by the in-line comments of the `local.env`, there is one additional file to be updated.
   * Open up the `config/apache/settings_php/settings.local.php` file.
+  * Search for the `# ISLE Configuration`
+  * Follow the in-line instructions below that comment
   * Between the '', replace the `#Replace this...` comments with the appropriate values from the `local.env` file.
-    * **Line 251** - 'database' => '#Replace this with the value of Line 23 (DRUPAL_DB) in the local.env'
-    * **Line 252** - 'username' => '#Replace this with the value of Line 26 (DRUPAL_DB_USER) in the local.env'
-    * **Line 253** - 'password' => '#Replace this with the value of Line 29 (DRUPAL_DB_PASS) in the local.env'
-     * **Line 290** - 'password' => '#Replace this with the value of Line 62 (DRUPAL_HASH_SALT) in the local.env'
+    * Copy the value of `DRUPAL_DB` from the local.env and paste it into the '' below for the database e.g `'database' => 'institution_db',`
+    * Copy the value of `DRUPAL_DB_USER` from the local.env between the '' below for the username e.g `'username' => 'institution_db_user',`
+    * Copy the value of `DRUPAL_DB_PASS` from the local.env between the '' below for the password e.g `'password' => 'yourpasswordhere',`
+    * Search for `# ISLE Configuration again`
+    * Follow the in-line instructions below that comment
+    * Copy the value of `DRUPAL_HASH_SALT` from the local.env between the '' below for the Drupal hash salt e.g `$drupal_hash_salt = 'yourhashhere';`
 
 * Once finished, save the file and close it.
 
@@ -145,10 +149,10 @@ origin	git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.
   * `./local.sh`
   * The generated keys can now be found in `./config/proxy/ssl-certs`
 
-* Add the SSL .pem and .key file names generated from running `local.sh` to the `./config/proxy/traefik.local.toml` file on lines 27 & 28:
+* Add the SSL .pem and .key file names generated from running `local.sh` to the `./config/proxy/traefik.local.toml` file.
   * Example:
-    * **Line 27** - `certFile = "/certs/yourprojectname-here.localdomain.pem"`
-    * **Line 28** - `keyFile = "/certs/yourprojectname-here.localdomain.key"`
+    * - `certFile = "/certs/yourprojectname-here.localdomain.pem"`
+    * - `keyFile = "/certs/yourprojectname-here.localdomain.key"`
 
 ---
 
@@ -176,7 +180,7 @@ origin	git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.
 
 ## Step 8: Run Islandora / Drupal site Install Script
 
-We highly recommend that you first review the contents of the `docker-compose.local.yml` file as `line 131` uses bind mounts for the intended Drupal Code instead of using default Docker volumes. This allows users to perform local Drupal site development with an IDE. This line is a suggested path and users are free to change values to the left of the `:` to match their Apache data folder of choice. However we recommend starting out with the default setting below.
+We highly recommend that you first review the contents of the `docker-compose.local.yml` file as the ISLE Apache service uses bind mounts for the intended Drupal Code instead of using default Docker volumes. This allows users to perform local Drupal site development with an IDE. This line is a suggested path and users are free to change values to the left of the `:` to match their Apache data folder of choice. However we recommend starting out with the default setting below.
 Default: `- ./data/apache/html:/var/www/html:cached`
 
 Initially when starting up, end-users will need to run the install script and then ultimately check the resulting Drupal code into a git repository. If you are familiar with that process then Step 9.
