@@ -1,12 +1,12 @@
-# Staging ISLE Installation - Migrate your existing Islandora site
+# Staging ISLE Installation: Migrate Existing Islandora Site
 
 _Expectations:  It takes an average of **2 - 4+ hours** to read this documentation and complete this installation._
 
-This `Staging` ISLE Installation will be similar to the [Local ISLE Installation - Migrate existing site](install-local-migrate.md) instructions you just followed but in addition to using a copy of your currently running Production themed Drupal website, a copy of the Production Fedora repository will also be needed for you to continue migrating to ISLE with the end goal of first deploying to an ISLE Production environment and then cut over from the existing non-ISLE Production and Staging servers to their new ISLE counterparts.
+This `Staging` ISLE Installation will be similar to the [Local ISLE Installation: Migrate Existing Islandora Site](../install/install-local-migrate.md) instructions you just followed but in addition to using a copy of your currently running Production themed Drupal website, a copy of the Production Fedora repository will also be needed for you to continue migrating to ISLE with the end goal of first deploying to an ISLE Production environment and then cut over from the existing non-ISLE Production and Staging servers to their new ISLE counterparts.
 
 Islandora / Drupal site code here should be considered almost finished but hosted here for last touches and team review privately prior to pushing to public `Production`. Fedora data will be a mirror of your currently running Production Fedora repository. It is recommended that this remote site not be publicly accessible.
 
-This installation builds a `Staging` environment for the express purpose of migrating a previously existing Islandora site onto the ISLE platform. If you need to build a brand new `Staging` site for development, please **stop** and use the [Local ISLE Installation - New site](install-local-new.md) instructions first and then the [Staging ISLE Installation - New site](install-staging-new.md) instead.
+This installation builds a `Staging` environment for the express purpose of migrating a previously existing Islandora site onto the ISLE platform. If you need to build a brand new `Staging` site for development and are not migrating an existing Islandora site, then please **stop** and use the [Local ISLE Installation: New Site](../install/install-local-new.md) instructions first and then the [Staging ISLE Installation: New Site](../install/install-staging-new.md) instead.
 
 As this `Staging` domain will require a real domain name or [FQDN](https://kb.iu.edu/d/aiuv), we recommend the following:
 * If you do not have a `Staging` server:
@@ -23,7 +23,7 @@ Once this has been completed, if you do not want to use Let's Encrypt, you can a
 
 Unlike the Local and Demo setups, you will not have to edit `/etc/localhosts` to view your domain given that DNS is now involved. Your new domain will no longer use the `.localdomain` but instead something like `https://yourprojectnamehere-staging.institution.edu`
 
-This document also has directions on how you can check in newly updated ISLE code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging and finally to Production. The [ISLE Installation - Environments](install-environments.md) documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE end-users should use for the `.env`, `staging.env`, etc.
+This document also has directions on how you can check in newly updated ISLE code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging and finally to Production. The [ISLE Installation: Environments](../install/install-environments.md) documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE end-users should use for the `.env`, `staging.env`, etc.
 
 This document **does not** have directions on how you can check in previously existing Drupal / Islandora code into a git repository and assumes this step has already happened. The directions below will explain how to clone Drupal / Islandora code from a previously existing Drupal / Islandora git repository that should already be accessible to you.
 
@@ -32,7 +32,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 ## Assumptions / Prerequisites
 
 * This Staging ISLE installation is intended for an existing Production Drupal site to be imported along with a copy of the current Production Fedora Repository for further ISLE migration testing, Drupal theme development, ingest testing etc. on a remote ISLE host server.
-  * Some materials are to be "migrated" from the work you performed on your local laptop or workstation from the prior steps & processes in [Local ISLE Installation - Migrate existing site](install-local-migrate.md) instructions.
+  * Some materials are to be "migrated" from the work you performed on your local laptop or workstation from the prior steps & processes in [Local ISLE Installation: Migrate Existing Islandora Site](../install/install-local-migrate.md) instructions.
 
 * Using ISLE version `1.2.0` or higher
 
@@ -48,7 +48,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
   * This server should be running at the time of deploy.
   * **Critical** - This `Staging` server has the same amount of disk space as your current Production Fedora server does in order to store a copy of the Fedora repository. Please ensure that these sizes match. Please also plan on adding additional capacity as needed for any potential ingest testing etc.
 
-* You have access to a private git repository in [Github](github.com), [Bitbucket](bitbucket.org), [Gitlab](gitlab.com) etc.
+* You have access to a private git repository in [Github](https://github.com), [Bitbucket](https://bitbucket.org/), [Gitlab](https://gitlab.com) etc.
   * If you do not, please contact your IT department for git resources
   * If they do not have git repository resources, suggest you create an account with one of the online providers mentioned above.
   * **WARNING:** Only use **Private** git repositories given the sensitive nature of the configuration files.
@@ -58,7 +58,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 * You have already have the appropriate A record entered into your institutions DNS system and can resolve the Staging domain (https://yourprojectnamehere-staging.institution.edu) using a tool like https://www.whatsmydns.net/
 
-* You have reviewed the [ISLE Installation - Environments](install-environments.md) for more information about suggested `Staging` values.
+* You have reviewed the [ISLE Installation: Environments](../install/install-environments.md) for more information about suggested `Staging` values.
 
 * You are familiar with using tools like `scp, cp or rsync` to move configurations, files and data from your local to the remote `Staging` server.
 
@@ -68,7 +68,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 ---
 
-## Index of instructions
+## Index of Instructions
 
 This process will differ slightly from previous builds in that there is work to be done on the local to then be pushed to the `Staging` ISLE Host server with additional followup work to be performed on the remote `Staging` ISLE Host server.
 
@@ -309,7 +309,7 @@ Please clone from your existing Production Islandora git repository.
 
 * It is recommended that you schedule a content freeze for all Production Fedora ingests and additions to your Production website. This will allow you to get up to date data from Production to Staging.
 
-* As you may have made some critical decisions potentially from `Step 0: Copy Production data to your local` of the [Local ISLE Installation - Migrate existing site](install-local-migrate.md) instructions, you need to re-follow the steps to get your:
+* As you may have made some critical decisions potentially from `Step 0: Copy Production data to your local` of the [Local ISLE Installation: Migrate Existing Islandora Site](../install/install-local-migrate.md) instructions, you need to re-follow the steps to get your:
   * `Production` Drupal site `files` directory
   * `Solr schema & Islandora transforms`
     * If you picked **Easy** option:
@@ -497,15 +497,19 @@ Prior to attempting this step, do consider the following:
 
 ---
 
-* Once you are ready to deploy your finished Drupal site, you can move onto the [Production ISLE Installation - New site](install-production-new.md) instructions.
+## Next Steps
+
+Once you are ready to deploy your finished Drupal site, you may progress to:
+
+* [Production ISLE Installation: Migrate Existing Islandora Site](../install/install-production-migrate.md)
 
 ---
 
 ## Additional Resources
-* [ISLE Installation - Environments](install-environments.md) documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE end-users should use for the `.env`, `local.env`, etc.
+* [ISLE Installation: Environments](../install/install-environments.md) documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE end-users should use for the `.env`, `local.env`, etc.
 * [Local ISLE Installation: Resources](../install/install-local-resources.md) contains Docker container passwords and URLs for administrator tools.
 * [ISLE Installation: Troubleshooting](../install/install-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
 
 ---
 
-### End of Staging ISLE Installation - New site
+### End of Staging ISLE Installation: New Site

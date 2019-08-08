@@ -196,7 +196,7 @@ _This is the possible list of server(s) to deploy to using Ansible and its assoc
 ansible_ssh_private_key_file=/home/janesmith/.ssh/id_rsa.pub
 ```
 
-**Please Note:** This key is typically found on the local control (Ansible deploy laptop / workstation) system and should have been previously copied to the appropriate ISLE Host server user account's `/home/islehostserver_user/.ssh/authorized_keys` file.
+**Please Note:** This key is typically found on the local control (Ansible deploy personal computer) system and should have been previously copied to the appropriate ISLE Host server user account's `/home/islehostserver_user/.ssh/authorized_keys` file.
 
 
   * **Final Example** end result for inventory file with all settings above
@@ -236,13 +236,13 @@ ansible
     * _This is the appropriate ISLE Host server user account that has `sudo` passwordless permissions._
 
   * Line 15: `pub_locale: /home/janesmith/.ssh/id_rsa.pub`
-    * _This is the key found on the local control (Ansible deploy laptop / workstation) system which has been previously copied to the appropriate ISLE Host server user account's `/home/islehostserver_user/.ssh/authorized_keys` file._
+    * _This is the key found on the local control (Ansible deploy personal computer) system which has been previously copied to the appropriate ISLE Host server user account's `/home/islehostserver_user/.ssh/authorized_keys` file._
 
 ---
 
 #### Ansible Commands to Test Connection
 
-* Test if the Ansible control laptop / workstation can connect to the ISLE Host server by running these commands. On the local Ansible control laptop / workstation, open a terminal window and enter the following:
+* Test if the Ansible control personal computer can connect to the ISLE Host server by running these commands. On the local Ansible control personal computer, open a terminal window and enter the following:
 
 ```
 cd /path/to/ISLE/repo/ansible
@@ -402,7 +402,7 @@ Proceed to bottom of this page for next steps.
 
 ### Walkthrough: Using Ansible on a MacOS Control Machine
 
-* To install `Ansible` on the end user's MacOS laptop / workstation.
+* To install `Ansible` on the end user's MacOS personal computer.
 
     * Install Ansible via Python pip
         * Follow here [http://docs.ansible.com/ansible/latest/intro_installation.html#latest-releases-via-pip](http://docs.ansible.com/ansible/latest/intro_installation.html#latest-releases-via-pip)

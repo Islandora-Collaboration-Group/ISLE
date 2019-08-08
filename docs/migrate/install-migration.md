@@ -23,7 +23,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 ## THIS SECTION IS IN DEVELOPMENT. PLEASE COME BACK SOON.
 
 <!-- OLD STUFF
-**ON your local laptop / workstation:**
+**ON your local personal computer:**
 * Create a directory named `yourdomain-config` (where "yourdomain" is your server domain name)
      * Example:  `project-name.yourdomain.edu-config`
 * Copy all the contents of the ISLE directory to the newly created directory

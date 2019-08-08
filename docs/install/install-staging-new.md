@@ -1,10 +1,10 @@
-# Staging ISLE Installation - New site
+# Staging ISLE Installation: New Site
 
 _Expectations:  It takes an average of **2 - 4+ hours** to read this documentation and complete this installation._
 
-This `Staging` ISLE Installation will use the themed Drupal website created during the [Local ISLE Installation - New site](install-local-new.md) process and will create an empty Fedora repository for remote (non-local / cloud) hosting of a `Staging` site. Islandora / Drupal site code here should be considered almost finished but hosted here for last touches and team review privately prior to pushing to public `Production`. Fedora data might have tests collections or collections that should then be synced to the `Production` site. It is recommended that this remote site not be publicly accessible.
+This `Staging` ISLE Installation will use the themed Drupal website created during the [Local ISLE Installation: New Site](../install/install-local-new.md) process and will create an empty Fedora repository for remote (non-local / cloud) hosting of a `Staging` site. Islandora / Drupal site code here should be considered almost finished but hosted here for last touches and team review privately prior to pushing to public `Production`. Fedora data might have tests collections or collections that should then be synced to the `Production` site. It is recommended that this remote site not be publicly accessible.
 
-While this installation will get you a brand new `Staging` site, it is **not** intended as a migration process of a previously existing Islandora site. If you need to build a `Staging` environment to migrate a previously existing Islandora site, please use the [Staging ISLE Installation - Migrate existing site](install-staging-migrate.md) instructions instead.
+While this installation will get you a brand new `Staging` site, it is **not** intended as a migration process of a previously existing Islandora site. If you need to build a `Staging` environment to migrate a previously existing Islandora site, please use the [Staging ISLE Installation: Migrate Existing Islandora Site](../install/install-staging-migrate.md) instructions instead.
 
 As this `Staging` domain will require a real domain name or [FQDN](https://kb.iu.edu/d/aiuv), you will need to ask your IT department or appropriate resource for an "A record" to be added for your domain to "point" to your `Staging` Host Server IP address in your institution's DNS records. We recommend that this sub-domain use `-staging` to differentiate it from the Production site.
 
@@ -14,14 +14,14 @@ Once this has been completed, if you do not want to use Let's Encrypt, you can a
 
 Unlike the Local and Demo setups, you will not have to edit `/etc/localhosts` to view your domain given that DNS is now involved. Your new domain will no longer use the `.localdomain` but instead something like `https://yourprojectnamehere-staging.institution.edu`
 
-This document also has directions on how you can check in newly created ISLE & Islandora code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging and finally to Production. The [ISLE Installation - Environments](install-environments.md) documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE end-users should use for the `.env`, `staging.env`, etc.
+This document also has directions on how you can check in newly created ISLE & Islandora code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging and finally to Production. The [ISLE Installation: Environments](../install/install-environments.md) documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE end-users should use for the `.env`, `staging.env`, etc.
 
 Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive emails. The [Glossary](../appendices/glossary.md) defines terms used in this documentation.
 
 ## Assumptions / Prerequisites
 
 * This Staging ISLE installation is intended for a brand new ISLE site for further Drupal theme development, ingest testing etc on a remote ISLE host server.
-  * All materials are to be "migrated" from the work you performed on your local laptop or workstation from the prior steps & processes in [Local ISLE Installation - New site](install-local-new.md) instructions.
+  * All materials are to be "migrated" from the work you performed on your local laptop or workstation from the prior steps & processes in [Local ISLE Installation: New Site](../install/install-local-new.md) instructions.
 
 * Using ISLE version `1.2.0` or higher
 
@@ -37,19 +37,19 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
   * This server should be running at the time of deploy.
   * This server has enough disk space to store a large Fedora repository e.g. 1 - 5 TB or larger depending on how many objects you plan on ingesting.  
 
-* You have already created the two private git repositories for your projects ISLE and Islandora code in [Github](github.com), [Bitbucket](bitbucket.org), [Gitlab](gitlab.com) etc having followed Step 2 from the [Local ISLE Installation - New site](install-local-new.md) instructions. You will continue to use these two git repositories for all environments.
+* You have already created the two private git repositories for your projects ISLE and Islandora code in [Github](https://github.com), [Bitbucket](https://bitbucket.org/), [Gitlab](https://gitlab.com) etc having followed Step 2 from the [Local ISLE Installation: New Site](../install/install-local-new.md) instructions. You will continue to use these two git repositories for all environments.
   1. ISLE project config - e.g. `yourprojectnamehere-isle`
   2. Drupal / Islandora site code - e.g. `yourprojectnamehere-islandora`
 
 * You have already have the appropriate A record entered into your institutions DNS system and can resolve the Staging domain (https://yourprojectnamehere-staging.institution.edu) using a tool like https://www.whatsmydns.net/
 
-* You have reviewed the [ISLE Installation - Environments](install-environments.md) for more information about suggested `Staging` values.
+* You have reviewed the [ISLE Installation: Environments](../install/install-environments.md) for more information about suggested `Staging` values.
 
 * You are familiar with using tools like `scp, cp or rsync` to move configurations, files and data from your local to the remote `Staging` server.
 
 ---
 
-## Index of instructions
+## Index of Instructions
 
 This process will differ slightly from previous builds in that there is work to be done on the local to then be pushed to the `Staging` ISLE Host server with additional followup work to be performed on the remote `Staging` ISLE Host server.
 
@@ -466,15 +466,19 @@ Prior to attempting this step, do consider the following:
 
 ---
 
-* Once you are ready to deploy your finished Drupal site, you can move onto the [Production ISLE Installation - New site](install-production-new.md) instructions.
+## Next Steps
+
+Once you are ready to deploy your finished Drupal site, you may progress to:
+
+* [Production ISLE Installation: New Site](../install/install-production-new.md)
 
 ---
 
 ## Additional Resources
-* [ISLE Installation - Environments](install-environments.md) documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE end-users should use for the `.env`, `local.env`, etc.
+* [ISLE Installation: Environments](../install/install-environments.md) documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE end-users should use for the `.env`, `local.env`, etc.
 * [Local ISLE Installation: Resources](../install/install-local-resources.md) contains Docker container passwords and URLs for administrator tools.
 * [ISLE Installation: Troubleshooting](../install/install-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
 
 ---
 
-### End of Staging ISLE Installation - New site
+### End of Staging ISLE Installation: New Site
