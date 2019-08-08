@@ -16,9 +16,9 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 ### Assumptions / Prerequisites
 
-* Laptop / workstation that conforms to the specifications outlined in the [Hardware Requirements](../install/host-hardware-requirements.md)
+* personal computer that conforms to the specifications outlined in the [Hardware Requirements](../install/host-hardware-requirements.md)
 
-* This image build site guide is designed for a local laptop / workstation that has already followed the appropriate setup and configuration instructions in the [Demo ISLE Installation](../install/install-demo.md) guide.
+* This image build site guide is designed for a local personal computer that has already followed the appropriate setup and configuration instructions in the [Demo ISLE Installation](../install/install-demo.md) guide.
 
 * Instructions below assume a MacOS or Linux workstation. Windows users may have to adjust / swap out various tools as needed.
 

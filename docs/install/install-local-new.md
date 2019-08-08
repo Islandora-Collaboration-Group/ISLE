@@ -1,4 +1,4 @@
-# Local ISLE Installation - New site
+# Local ISLE Installation: New Site
 
 _Expectations:  It takes an average of **60 - 120 minutes** to read this documentation and complete this installation._
 
@@ -6,9 +6,9 @@ This `Local` ISLE Installation creates an un-themed Drupal website and an empty 
 
 You will now be able to change the ability to view locally in your browser from the Demo url `https://isle.localdomain` to a new domain of your choice for example `https://yourprojectnamehere.localdomain`.
 
-While this installation gets you a brand new local development site, it is **not** intended as a migration process of a previously existing Islandora site. If you need to build a local environment to migrate a previously existing Islandora site, please use the [Local ISLE Installation - Migrate existing site](install-local-migrate.md) instructions instead.
+While this installation gets you a brand new local development site, it is **not** intended as a migration process of a previously existing Islandora site. If you need to build a local environment to migrate a previously existing Islandora site, please use the [Local ISLE Installation: Migrate Existing Islandora Site](../install/install-local-migrate.md) instructions instead.
 
-This document also has directions on how you can check in newly created ISLE & Islandora code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging and finally to Production. The [ISLE Installation - Environments](install-environments.md) documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE endusers should use for the `.env`, `local.env`, etc.
+This document also has directions on how you can check in newly created ISLE & Islandora code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging and finally to Production. The [ISLE Installation: Environments](../install/install-environments.md) documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE endusers should use for the `.env`, `local.env`, etc.
 
 Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive emails. The [Glossary](../appendices/glossary.md) defines terms used in this documentation.
 
@@ -22,7 +22,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 * You have git installed on your local laptop or workstation.
 
-* You have access to a private git repository in [Github](github.com), [Bitbucket](bitbucket.org), [Gitlab](gitlab.com) etc.
+* You have access to a private git repository in [Github](https://github.com), [Bitbucket](https://bitbucket.org/), [Gitlab](https://gitlab.com) etc.
   * If you do not, please contact your IT department for git resources
   * If they do not have git repository resources, suggest you create an account with one of the online providers mentioned above.
   * **WARNING:** Only use **Private** git repositories given the sensitive nature of the configuration files.
@@ -30,7 +30,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 ---
 
-## Index of instructions
+## Index of Instructions
 
 * Step 1: Edit `/etc/hosts` File
 * Step 2: Setup git for the ISLE project
@@ -60,7 +60,7 @@ Enable the Local ISLE Installation to be viewed locally on workstation browser a
 
 **Please note:** The commands given below are for command line usage of git. GUI based clients such as the [SourceTree App](https://www.sourcetreeapp.com/) may be easier for endusers to use for the git process.
 
-* Within your git repository provider / hoster e.g [Github](github.com), [Bitbucket](bitbucket.org), [Gitlab](gitlab.com), create two new empty git repositories:
+* Within your git repository provider / hoster e.g [Github](https://github.com), [Bitbucket](https://bitbucket.org/), [Gitlab](https://gitlab.com), create two new empty git repositories:
   * ISLE project config - e.g. `yourprojectnamehere-isle`
     * This Git repository will hold your copy of the ISLE code along with your environment-specific customizations. Storing this in a code repository and following the workflow described here will save you a lot of time and confusion.
   * Drupal / Islandora site code - e.g. `yourprojectnamehere-islandora`
@@ -83,8 +83,8 @@ The git project name can be your institution name or the name of the collections
 ```bash  
 icg-upstream	https://github.com/Islandora-Collaboration-Group/ISLE.git (fetch)
 icg-upstream	https://github.com/Islandora-Collaboration-Group/ISLE.git (push)
-origin	git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git (fetch)
-origin	git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git (push)
+origin	https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git (fetch)
+origin	https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git (push)
 ```
 
 * Run a git fetch
@@ -270,7 +270,7 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
     * `git commit -m "Setting up Drupal site"`
 
 * Add the git `remote` (this will be remote / cloud based git repository that you'll push changes to) This can be Bitbucket, Github or Gitlab.
-  * For example: `git remote add origin git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-islandora.git`
+  * For example: `git remote add origin https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-islandora.git`
 
 * Push the changes to the remote git repository on the `master` branch
   * `git push -u origin master`
@@ -279,15 +279,19 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
 
 ---
 
-* Once you are ready to deploy your finished Drupal site, you can move onto the [Staging ISLE Installation - New site](install-staging-new.md) instructions.
+## Next Steps
+
+Once you are ready to deploy your finished Drupal site, you may progress to:
+
+* [Staging ISLE Installation: New Site](../install/install-staging-new.md)
 
 ---
 
 ## Additional Resources
-* [ISLE Installation - Environments](install-environments.md) documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE endusers should use for the `.env`, `local.env`, etc.
+* [ISLE Installation: Environments](../install/install-environments.md) documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE endusers should use for the `.env`, `local.env`, etc.
 * [Local ISLE Installation: Resources](../install/install-local-resources.md) contains Docker container passwords and URLs for administrator tools.
 * [ISLE Installation: Troubleshooting](../install/install-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
 
 ---
 
-### End of Local ISLE Installation - New site
+### End of Local ISLE Installation: New Site

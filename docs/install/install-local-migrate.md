@@ -1,14 +1,14 @@
-# Local ISLE Installation - Migrate your existing Islandora site
+# Local ISLE Installation: Migrate Existing Islandora Site
 
 _Expectations:  It takes an average of **60 - 120 minutes** to read this documentation and complete this installation._
 
-This `Local` ISLE Installation builds a local environment for the express purpose of migrating a previously existing Islandora site onto the ISLE platform. If you need to build a brand new local development site, please **stop** and use the [Local ISLE Installation - New site](install-local-new.md) instructions instead.
+This `Local` ISLE Installation builds a local environment for the express purpose of migrating a previously existing Islandora site onto the ISLE platform. If you need to build a brand new local development site, please **stop** and use the [Local ISLE Installation: New Site](../install/install-local-new.md) instructions instead.
 
 This `Local` ISLE Installation will use a copy of a currently running Production Drupal website and an empty Fedora repository for endusers to test migration to ISLE and even for further site development or and design with the end goal of deploying to ISLE Staging and Production environments for public use. The final goal would be to cut over from the existing non-ISLE Production and Staging servers to their new ISLE counterparts.
 
 You will now be able to change the ability to view locally in your browser from the Demo url `https://isle.localdomain` to a new domain of your choice for example `https://yourprojectnamehere.localdomain`.
 
-This document has directions on how you can check in newly created ISLE code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging and finally to Production. The [ISLE Installation - Environments](install-environments.md) documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE endusers should use for the `.env`, `local.env`, etc.
+This document has directions on how you can check in newly created ISLE code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging and finally to Production. The [ISLE Installation: Environments](../install/install-environments.md) documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE endusers should use for the `.env`, `local.env`, etc.
 
 This document **does not** have directions on how you can check in previously existing Drupal / Islandora code into a git repository and assumes this step has already happened. The directions below will explain how to clone Drupal / Islandora code from a previously existing Drupal / Islandora git repository that should already be accessible to you.
 
@@ -24,7 +24,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 * You have git installed on your local laptop or workstation.
 
-* You have access to a private git repository in [Github](github.com), [Bitbucket](bitbucket.org), [Gitlab](gitlab.com) etc.
+* You have access to a private git repository in [Github](https://github.com), [Bitbucket](https://bitbucket.org/), [Gitlab](https://gitlab.com) etc.
   * If you do not, please contact your IT department for git resources
   * If they do not have git repository resources, suggest you create an account with one of the online providers mentioned above.
   * **WARNING:** Only use **Private** git repositories given the sensitive nature of the configuration files.
@@ -33,7 +33,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 ---
 
-## Index of instructions
+## Index of Instructions
 
 * Step 0: Copy Production data to your local
 * Step 1: Edit `/etc/hosts` File
@@ -177,7 +177,7 @@ Enable the Local ISLE Installation to be viewed locally on workstation browser a
 
 **Please note:** The commands given below are for command line usage of git. GUI based clients such as the [SourceTree App](https://www.sourcetreeapp.com/) may be easier for endusers to use for the git process.
 
-* Within your git repository provider / hoster e.g [Github](github.com), [Bitbucket](bitbucket.org), [Gitlab](gitlab.com), create this new empty git repositories:
+* Within your git repository provider / hoster e.g [Github](https://github.com), [Bitbucket](https://bitbucket.org/), [Gitlab](https://gitlab.com), create this new empty git repositories:
   1. ISLE project config - e.g. `yourprojectnamehere-isle`
 
 The git project name can be your institution name or the name of the collections you plan to deploy; your choice entirely. A very clear distinction between the ISLE and Islandora code should be made in the repo name. Do not confuse or label Drupal / Islandora site code as ISLE and vice-versa.
@@ -197,8 +197,8 @@ The git project name can be your institution name or the name of the collections
 ```bash  
 icg-upstream	https://github.com/Islandora-Collaboration-Group/ISLE.git (fetch)
 icg-upstream	https://github.com/Islandora-Collaboration-Group/ISLE.git (push)
-origin	git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git (fetch)
-origin	git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git (push)
+origin	https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git (fetch)
+origin	https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git (push)
 ```
 
 * Run a git fetch
@@ -220,11 +220,11 @@ origin	git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.
 
 This step assumes you have an existing Drupal /Islandora site checked into a git repository.
 
-If not then you'll need to check your Drupal site into a git repo following the same commands from [Local ISLE Installation - New site](install-local-new.md) documentation.
+If not then you'll need to check your Drupal site into a git repo following the same commands from [Local ISLE Installation: New Site](../install/install-local-new.md) documentation.
 
 * Using the still open `terminal` (Windows: `PowerShell`)
   * `mkdir -p data/apache/html`
-  * `git clone git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-islandora.git data/apache/html`
+  * `git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-islandora.git data/apache/html`
     * (Optional) You can chose another directory of your choice as the bind-mounts match in the Apache services volume section within the `docker-compose.local.yml` matches that other location
 
 * Move the previously copied Production Drupal `files` directory to inside the `data/apache/html/sites/default/` directory.
@@ -439,15 +439,19 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
 
 ---
 
-* Once you are ready to deploy your finished Drupal site, you can move onto the [Staging ISLE Installation - New site](install-staging-migrate.md) instructions.
+## Next Steps
+
+Once you are ready to deploy your finished Drupal site, you may progress to:
+
+* [Staging ISLE Installation: Migrate Existing Islandora Site](../install/install-staging-migrate.md)
 
 ---
 
 ## Additional Resources
-* [ISLE Installation - Environments](install-environments.md) documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE endusers should use for the `.env`, `local.env`, etc.
+* [ISLE Installation: Environments](../install/install-environments.md) documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE endusers should use for the `.env`, `local.env`, etc.
 * [Local ISLE Installation: Resources](../install/install-local-resources.md) contains Docker container passwords and URLs for administrator tools.
 * [ISLE Installation: Troubleshooting](../install/install-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
 
 ---
 
-### End of Local ISLE Installation - Migrate your existing Islandora site
+### End of Local ISLE Installation: Migrate Existing Islandora Site

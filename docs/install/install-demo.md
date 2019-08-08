@@ -108,11 +108,13 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
 
 ---
 
-* Once you are ready, you can move onto either:
+## Next Steps
 
-  * the [Local ISLE Installation - New site](install-local.md) instructions.
+Once you are ready, you may progress to either:
 
-  * the [Local ISLE Installation - Migrate existing site](install-local-migrate.md) instructions.
+* [Local ISLE Installation: New Site](../install/install-local-new.md)
+
+* [Local ISLE Installation: Migrate Existing Islandora Site](../install/install-local-migrate.md)
 
 ---
 
