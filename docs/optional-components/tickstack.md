@@ -265,7 +265,7 @@ Jun 04 10:56:26 ip-172-31-40-28 rsyslogd[11815]:  [origin software="rsyslogd" sw
 
 ---
 
-#### 03. Edits - docker-compose.staging.yml file 
+#### 03. Edits - docker-compose.staging.yml file
 
 * Edit the `docker-compose.staging.yml` file and uncomment lines `205` through `296` to enable the new `TICK` services. There is a section called `# Start - TICK stack services section`, underneath that is the `TICK` code to be uncommented. (_remove the # before and ensure all code aligns properly like the services above it._)
 
@@ -554,10 +554,8 @@ The instructions below are going to:
 
 * Setup an "alert handler" in the Chronograf dashboard for delivery of alert messages. We'll use email as the example alert handler service.
 
-- Show you how to set up four basic alerts using your new alert handler
+- Show you how to set up two basic alerts using your new alert handler
   * `Disk Space` Alert - Alerts you when your disks are running out of space
-  * `RAM Usage` Alert - Alerts you when your server is almost out of memory
-  * `CPU Usage` Alert - Alerts you when your server's CPU has been running past a set period of time
   * `Deadman` Alert - Alerts you when the ISLE host server is unresponsive, has crashed or is "dead."
 
 #### Assumptions
@@ -632,50 +630,15 @@ These instructions are for Sendgrid users only but demonstrate the easy of use i
 
 #### Disk Space Alert
 
+[COMING SOON in the 1.2.1 release]
+
 This alert is designed to warn you when one of the ISLE host server disk(s) is/are almost full. Please note this setting should not alert you when the disk is already full. We suggest you use a lower value (e.g. 75%) such that you can safely shutdown containers, backup data and then expand the affected disk's capacity as needed.
 
-* Within the TICK Chronograf dashboard, click on the `Alerting` symbol on the left (_this is a triangle with a ! symbol in the middle_). 
-  * By default the `Manage Tasks on ...` page should appear
-  * Click the blue `+ Build Alert Rule` button on the right hand side.
+#### Deadman Alert
 
-- Within the displayed fields, please change the following:
+[COMING SOON in the 1.2.1 release]
 
-* `Name this Alert Rule` - Change Untitled Rule to `Disk Space Alert` or to a name of your choice.
-
-- `Alert Type` - Choose `Threshold` - _this should be selected by default_
-
-* `Time Series` 
-  * Within the `DB.RetentionPolicy` column, select `telegraf.autogen`
-  * Within the `Measurements & Tags` column, 
-    * Select `> disk`
-      * Select `host` (_there may be an additional number here e.g. `host - 2` if you have more than one host configured_)
-      * Choose the appropriate hostname (_this was the name you used to setup reporting on the Telegraf agent prior_)
-   * Within the `Fields` column, select `used_percent`
-
-- `Conditions`
-  * You'll notice that a graph now appears in this area with most likely a green increasing trend of usage. This graph indicates the current usage by the host of a particular disk, in our example this is the HOST ISLE operating system disk. You can create multiple alerts for additional disks, simply repeat this process as needed.
-  * Within the `Send Alert where used_percent is greater than` bar
-    * add the number `75` or a numeric value of your choice. This establishes the percent full the disk has to reach before the alert is sent. 
-    * Please note, again we stress the importance of setting this value to `75` or lower to give yourself or your IT staff time to anticipate the growth prior to system challenges.
-  * You'll note that the graph may adjust visually to match this new value
-
-* `Alert Handlers`
-  * Within the `Send this Alert to:` bar, click the `Add a Handler` dropdown list to add the appropriate Alert Handler. This can be email, slack etc but for you'll be using `email` for this setup.
-    - **Please note:** Confusingly you were instructed to setup up the email using the `SMTP` alert handler but are forced to choose `email` when configuring the Alert rule. We're not sure why TICK behaves like this.
-  - The `Parameters from Kapacitor Configuration` fields will now auto-populate with the appropriate account information.
-  * You may have to re-enter the email address you are sending to in the `Recipient E-mail Address` field. If more than one, separate all email addresses with a comma.
-  * Within the `Enter the body for your email ...` empty field, you can format the email as you see fit. This can be formatting that is in addition to the actual alert message.
-  * Within the `Message` field copy and paste the following example alert message:
-  
-```bash
-
-{{.Level}} - {{ index .Tags "host"}}\'s {{ .Name }} usage is at {{ index .Fields "value" | printf "%0.2f" }}%
-
-```
-
-This alert message uses   enter the alert message to be sent as an email.While this can be any message, we recommend that you tailor it for maximum comprehension and brevity while also using TICK's unique `FLUX` syntax. Flux is a lightweight scripting language for querying databases (like InfluxDB) and working with data.
-  
-  * EXAMPLE:
+This alert is designed to warn you when one of the ISLE host server disk(s) is unresponsive or offline.
 
 ---
 
