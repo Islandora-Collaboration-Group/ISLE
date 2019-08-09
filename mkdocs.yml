@@ -24,8 +24,14 @@ nav:
   - '2. Software Dependencies': 'install/host-software-dependencies.md'
   - '3. Demo ISLE Installation': 'install/install-demo.md'
   - '4. ISLE Installation':
+    - 'ISLE Environments': 'install/install-environments.md'
     - 'Local Installation: New Site': 'install/install-local-new.md'
     - 'Local Installation: Migrate Islandora Site': 'install/install-local-migrate.md'
+    - 'Staging Installation: New Site': 'install/install-staging-new.md'
+    - 'Staging Installation: Migrate Existing Islandora Site': 'install/install-staging-migrate.md'
+    - 'Production Installation: New Site': 'install/install-production-new.md'
+    - 'Production Installation: Migrate Existing Islandora Site': 'install/install-production-migrate.md'    
+    - 'Troubleshooting Installations': 'install/install-troubleshooting.md'
 - 'Update ISLE': 'update/update.md'
 - 'Appendices':
   - 'Data Persistence in Docker': 'appendices/data-persistence.md'
@@ -60,9 +66,3 @@ nav:
   - 'Previous releases': 
      - '1.1.0': 'release-notes/release-1-1-0.md'
      - '1.1.1': 'release-notes/release-1-1-1.md'
-- 'Deprecated Notes':
-  - '(Migrate Existing Site to ISLE)':
-    - '(Migrate to ISLE Environment)': 'migrate/install-migration.md'
-    - '(Migration Export Checklist)': 'migrate/export-checklist.md'
-    - '(Migration Merge Checklist)': 'migrate/merge-checklist.md'
-    - '(Migration Reindex Process)': 'migrate/reindex-process.md'
