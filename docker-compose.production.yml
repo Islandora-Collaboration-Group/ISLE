@@ -2,7 +2,7 @@ version: '3.7'
 
 #### docker-compose up -d;
 ## Production Environment - Used for remote (non-local / cloud) hosting of a Production site. Site and collections are public and accessible to the world.
-## Updated 2019-07 - Release 1.2.0 (@ 1.2.0)
+## Updated 2019-08 - Release 1.2.0 (@ 1.2.0)
 
 services:
   isle-portainer: ## Renamed to avoid conflicts on systems/servers with portainer already running.

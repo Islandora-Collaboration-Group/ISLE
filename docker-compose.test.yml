@@ -2,7 +2,7 @@ version: '3.7'
 
 #### docker-compose up -d;
 ## Test Environment - Used by ISLE contributors for testing ISLE releases, ISLE development and submitting pull releases etc.
-## Updated 2019-07 - Release 1.2.0-dev (@ 1.2.0-dev)
+## Updated 2019-08 - Release 1.2.0 (@ 1.2.0)
 
 services:
   isle-portainer: ## Renamed to avoid conflicts on systems/servers with portainer already running.
@@ -33,8 +33,7 @@ services:
 
 
   mysql:
-    #image: islandoracollabgroup/isle-mysql:1.2.0
-    image: borndigital/isle-mysql:1.2.0-dev
+    image: islandoracollabgroup/isle-mysql:1.2.0
     container_name: isle-mysql-${CONTAINER_SHORT_ID}
     env_file:
       - test.env
@@ -56,8 +55,7 @@ services:
 
 
   fedora:
-    #image: islandoracollabgroup/isle-fedora:1.2.0
-    image: borndigital/isle-fedora:1.2.0-dev
+    image: islandoracollabgroup/isle-fedora:1.2.0
     container_name: isle-fedora-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=768M
@@ -85,8 +83,7 @@ services:
 
 
   solr:
-    #image: islandoracollabgroup/isle-solr:1.2.0
-    image: borndigital/isle-solr:1.2.0-dev
+    image: islandoracollabgroup/isle-solr:1.2.0
     container_name: isle-solr-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=512M
@@ -109,8 +106,7 @@ services:
 
 
   image-services:
-    #image: islandoracollabgroup/isle-imageservices:1.2.0
-    image: borndigital/isle-imageservices:1.2.0-dev
+    image: islandoracollabgroup/isle-imageservices:1.2.0
     container_name: isle-images-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=512M
@@ -137,8 +133,7 @@ services:
 
 
   apache:
-    #image: islandoracollabgroup/isle-apache:1.2.0
-    image: borndigital/isle-apache:1.2.0-dev
+    image: islandoracollabgroup/isle-apache:1.2.0
     container_name: isle-apache-${CONTAINER_SHORT_ID}
     env_file:
       - .env
