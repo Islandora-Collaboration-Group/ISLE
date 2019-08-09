@@ -317,7 +317,7 @@ This step is a multi-step, involved process that allows an end-user to make appr
   * Edit `COMPOSE_PROJECT_NAME=` and replace the `local` settings with:
     * `COMPOSE_PROJECT_NAME=`  (Suggested) Add an identifiable project or institutional name plus environment e.g. acme_digital_stage`
   * Edit `BASE_DOMAIN=` and replace the `local` settings with:
-    * `BASE_DOMAIN=`            (Suggested) Add the full production domain here e.g. digital-staging.institution.edu
+    * `BASE_DOMAIN=`            (Suggested) Add the full staging domain here e.g. digital-staging.institution.edu
   * Edit `CONTAINER_SHORT_ID=` and replace the `local` settings with:
     * `CONTAINER_SHORT_ID=`     (Suggested) Make an easy to read acronym from the letters of your institution and collection names plus environment e.g. (acme digitalcollections staging) is acdcs
   * Edit `COMPOSE_FILE` change `local` to `staging`
@@ -396,7 +396,7 @@ git commit -m "Added the edited .env configuration file for Staging. DO NOT PUSH
     * View only the running containers: `docker ps`
     * View all containers (both those running and stopped): `docker ps -a`
     * All containers prefixed with `isle-` are expected to have a `STATUS` of `Up` (for x time).
-      * **If any of these are not `UP`, then use [Local ISLE Installation: Troubleshooting](../install/install-Local-troubleshooting.md) to solve before continuing below.**
+      * **If any of these are not `UP`, then use [ISLE Installations: Troubleshooting](install-troubleshooting.md) to solve before continuing below.**
       <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running, or (c) older exited ISLE containers that maybe should be removed. --->
 
 * In your web browser, enter your Staging site URL: `https://yourprojectnamehere-staging.institution.edu`
