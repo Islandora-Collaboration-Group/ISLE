@@ -1,26 +1,26 @@
-# Staging ISLE Installation: New Site
+# Production ISLE Installation: New Site
 
 _Expectations:  It takes an average of **2 - 4+ hours** to read this documentation and complete this installation._
 
-This `Staging` ISLE Installation will use the themed Drupal website created during the [Local ISLE Installation: New Site](../install/install-local-new.md) process and will create an empty Fedora repository for remote (non-local / cloud) hosting of a `Staging` site. Islandora / Drupal site code here should be considered almost finished but hosted here for last touches and team review privately prior to pushing to public `Production`. Fedora data might have tests collections or collections that should then be synced to the `Production` site. It is recommended that this remote site not be publicly accessible.
+This `Production` ISLE Installation will use the themed Drupal website created during the [Local ISLE Installation: New Site](../install/install-local-new.md) process and will create an empty Fedora repository for remote (non-local / cloud) hosting of a `Production` site. Islandora / Drupal site code here should be considered finished and ready for public access. The previously used `Production` system might have Fedora data & collections that should then be synced to this `Production` site or endusers can choose to only ingest on `Production`. It is recommended that this remote site not be publicly accessible until ready to launch.
 
-While this installation will get you a brand new `Staging` site, it is **not** intended as a migration process of a previously existing Islandora site. If you need to build a `Staging` environment to migrate a previously existing Islandora site, please use the [Staging ISLE Installation: Migrate Existing Islandora Site](../install/install-staging-migrate.md) instructions instead.
+While this installation will get you a brand new `Production` site, it is **not** intended as a migration process of a previously existing Islandora site. If you need to build a `Production` environment to migrate a previously existing Islandora site, please use the [Production ISLE Installation: Migrate Existing Islandora Site](../install/install-production-migrate.md) instructions instead.
 
-As this `Staging` domain will require a real domain name or [FQDN](https://kb.iu.edu/d/aiuv), you will need to ask your IT department or appropriate resource for an "A record" to be added for your domain to "point" to your `Staging` Host Server IP address in your institution's DNS records. We recommend that this sub-domain use `-staging` to differentiate it from the Production site.
+As this `Production` domain will require a real domain name or [FQDN](https://kb.iu.edu/d/aiuv), you will need to ask your IT department or appropriate resource for an "A record" to be added for your domain to "point" to your `Production` Host Server IP address in your institution's DNS records. 
 
-Example:`https://yourprojectnamehere-staging.institution.edu`
+Example:`https://yourprojectnamehere.institution.edu`
 
 Once this has been completed, if you do not want to use Let's Encrypt, you can also request commercial SSL certificates from your IT department for this domain as well. Please note the DNS records will need to exist prior to the creation of any SSL certificate (Commercial or Let's Encrypt.)
 
-Unlike the Local and Demo setups, you will not have to edit `/etc/localhosts` to view your domain given that DNS is now involved. Your new domain will no longer use the `.localdomain` but instead something like `https://yourprojectnamehere-staging.institution.edu`
+Unlike the Local and Demo setups, you will not have to edit `/etc/localhosts` to view your domain given that DNS is now involved. Your new domain will no longer use the `.localdomain` but instead something like `https://yourprojectnamehere.institution.edu`
 
-This document also has directions on how you can check in newly created ISLE & Islandora code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging and finally to Production. The [ISLE Installation: Environments](../install/install-environments.md) documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE end-users should use for the `.env`, `staging.env`, etc.
+This document also has directions on how you can check in newly created ISLE & Islandora code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Production and finally to Production. The [ISLE Installation: Environments](../install/install-environments.md) documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE end-users should use for the `.env`, `production.env`, etc.
 
 Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive emails. The [Glossary](../appendices/glossary.md) defines terms used in this documentation.
 
 ## Assumptions / Prerequisites
 
-* This Staging ISLE installation is intended for a brand new ISLE site for further Drupal theme development, ingest testing etc on a remote ISLE host server.
+* This Production ISLE installation is intended for a brand new ISLE site for ingest and public use on a remote ISLE host server.
   * All materials are to be "migrated" from the work you performed on your local laptop or workstation from the prior steps & processes in [Local ISLE Installation: New Site](../install/install-local-new.md) instructions.
 
 * Using ISLE version `1.2.0` or higher
@@ -31,7 +31,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 * You have already provisioned a remote ISLE hosts server and have documented its IP address.
   * You may have used the [ISLE Ansible script](https://github.com/Islandora-Collaboration-Group/ISLE-Ansible) to accomplish this.
-  * If doing this manually, please review the following to ensure the remote Staging ISLE host server has all dependencies e.g. CPU, memory and disk space prior to deploying the ISLE Staging environment profile for deploy
+  * If doing this manually, please review the following to ensure the remote Production ISLE host server has all dependencies e.g. CPU, memory and disk space prior to deploying the ISLE Production environment profile for deploy
     * [Hardware Requirements](host-hardware-dependencies.md)
     * [Software Dependencies](host-software-dependencies.md)
   * This server should be running at the time of deploy.
@@ -41,46 +41,46 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
   1. ISLE project config - e.g. `yourprojectnamehere-isle`
   2. Drupal / Islandora site code - e.g. `yourprojectnamehere-islandora`
 
-* You have already have the appropriate A record entered into your institutions DNS system and can resolve the Staging domain (https://yourprojectnamehere-staging.institution.edu) using a tool like https://www.whatsmydns.net/
+* You have already have the appropriate A record entered into your institutions DNS system and can resolve the Production domain (https://yourprojectnamehere.institution.edu) using a tool like https://www.whatsmydns.net/
 
-* You have reviewed the [ISLE Installation: Environments](../install/install-environments.md) for more information about suggested `Staging` values.
+* You have reviewed the [ISLE Installation: Environments](../install/install-environments.md) for more information about suggested `Production` values.
 
-* You are familiar with using tools like `scp, cp or rsync` to move configurations, files and data from your local to the remote `Staging` server.
+* You are familiar with using tools like `scp, cp or rsync` to move configurations, files and data from your local to the remote `Production` server.
 
 ---
 
 ## Index of Instructions
 
-This process will differ slightly from previous builds in that there is work to be done on the local to then be pushed to the `Staging` ISLE Host server with additional followup work to be performed on the remote `Staging` ISLE Host server.
+This process will differ slightly from previous builds in that there is work to be done on the local to then be pushed to the `Production` ISLE Host server with additional followup work to be performed on the remote `Production` ISLE Host server.
 
-The instructions that follow below will have either a `On Local` or a `On Remote Staging` pre-fix to indicate where the work and focus should be. In essence, the git workflow established during the local build process will be extended for deploying on `Staging` and for future ISLE updates and upgrades.
+The instructions that follow below will have either a `On Local` or a `On Remote Production` pre-fix to indicate where the work and focus should be. In essence, the git workflow established during the local build process will be extended for deploying on `Production` and for future ISLE updates and upgrades.
 
-* **Steps 1 - 6** - `On Local - Configure the ISLE Staging environment profile for deploy to Remote`
+* **Steps 1 - 6** - `On Local - Configure the ISLE Production environment profile for deploy to Remote`
   * Step 1: On Local - Export the Local MySQL database
     * Local Drupal site database export process
   * Step 2: On Local - Shutdown any local containers & review local code
-  * Step 3: On Local - Create new users and passwords by editing `staging.env`
-  * Step 4: On Local - Review and edit docker-compose.staging.yml
-  * Step 4A: On Local - (Optional) changes for  docker-compose.staging.yml
-  * Step 5: On Local Staging - If using Commercial SSLs
+  * Step 3: On Local - Create new users and passwords by editing `production.env`
+  * Step 4: On Local - Review and edit docker-compose.production.yml
+  * Step 4A: On Local - (Optional) changes for docker-compose.production.yml
+  * Step 5: On Local Production - If using Commercial SSLs
   * Step 6: On Local - Commit ISLE code to git repository
 
-* **Steps 7 - 17**   - `On Remote Staging - Configure the ISLE Staging environment profile for launch and usage`
-  * Step 7: On Remote Staging - Git clone the ISLE repository to the remote Staging ISLE host server
-  * Step 8: On Remote Staging - Create the appropriate local data paths for Apache, Fedora and log data
-  * Step 9: On Remote Staging - Clone your Islandora code
-  * Step 10: On Remote Staging - Copy over the Local Drupal files directory
-  * Step 11: On Remote Staging - If using Let's Encrypt
-  * Step 12: On Remote Staging - Edit the .env file to change to the Staging environment
-  * Step 13: On Remote Staging - Download the ISLE images
-  * Step 14: On Remote Staging - Start Containers
-  * Step 15: On Remote Staging - Import the Local MySQL Drupal database
-  * Step 16: On Remote Staging - Run the fix-permissions.sh script
-  * Step 17: On Remote Staging - Review and test the Drupal Staging site
+* **Steps 7 - 17**   - `On Remote Production - Configure the ISLE Production environment profile for launch and usage`
+  * Step 7: On Remote Production - Git clone the ISLE repository to the remote Production ISLE host server
+  * Step 8: On Remote Production - Create the appropriate local data paths for Apache, Fedora and log data
+  * Step 9: On Remote Production - Clone your Islandora code
+  * Step 10: On Remote Production - Copy over the Local Drupal files directory
+  * Step 11: On Remote Production - If using Let's Encrypt
+  * Step 12: On Remote Production - Edit the .env file to change to the Production environment
+  * Step 13: On Remote Production - Download the ISLE images
+  * Step 14: On Remote Production - Start Containers
+  * Step 15: On Remote Production - Import the Local MySQL Drupal database
+  * Step 16: On Remote Production - Run the fix-permissions.sh script
+  * Step 17: On Remote Production - Review and test the Drupal Production site
 
 ---
 
-## On Local - Configure the ISLE Staging environment profile for deploy to Remote
+## On Local - Configure the ISLE Production environment profile for deploy to Remote
 
 ### Step 1: On Local - Export the Local MySQL database
 
@@ -117,23 +117,23 @@ Prior to attempting this step, do consider the following:
 
 ---
 
-### Step 3: On Local - Create new users and passwords by editing staging.env
+### Step 3: On Local - Create new users and passwords by editing production.env
 
-* Open up the `staging.env` file in a text editor of your choice.
+* Open up the `production.env` file in a text editor of your choice.
 
 * Where ever there is a comment like:
   * `# Replace this comment with a ...` - add a value of your choice. Typically there are suggestions like `26 alpha-numeric characters` but in some cases the instructions change to `# Replace this comment with a easy to read but short database user e.g.` so **review** carefully.
-  * It is okay if you potentially repeat the values previously entered for your local `(DRUPAL_DB)` & `(DRUPAL_DB_USER)` in this `Staging` environment but we strongly recommend not reusing all passwords for environments e.g. `(DRUPAL_DB_PASS)` & `(DRUPAL_HASH_SALT)` should be unique values for each environment.
+  * It is okay if you potentially repeat the values previously entered for your local `(DRUPAL_DB)` & `(DRUPAL_DB_USER)` in this `Production` environment but we strongly recommend not reusing all passwords for environments e.g. `(DRUPAL_DB_PASS)` & `(DRUPAL_HASH_SALT)` should be unique values for each environment.
 
 * In many cases the username is already pre-populated. If it doesn't have a comment directing you to change or add a value after the `=`, then don't change it.
 
 * Once finished, save the file and close it.
 
-* Once you have added all of the passwords, database and user names as directed by the in-line comments of the `staging.env`, there is one additional file to be updated.
-  * Open up the `config/apache/settings_php/settings.staging.php` file.
+* Once you have added all of the passwords, database and user names as directed by the in-line comments of the `production.env`, there is one additional file to be updated.
+  * Open up the `config/apache/settings_php/settings.production.php` file.
   * Search for the `# ISLE Configuration`
   * Follow the in-line instructions below that comment
-  * Between the '', replace the `#Replace this...` comments with the appropriate values from the `staging.env` file.
+  * Between the '', replace the `#Replace this...` comments with the appropriate values from the `production.env` file.
     * Copy the value of `DRUPAL_DB` from the local.env and paste it into the '' below for the database e.g `'database' => 'institution_db',`
     * Copy the value of `DRUPAL_DB_USER` from the local.env between the '' below for the username e.g `'username' => 'institution_db_user',`
     * Copy the value of `DRUPAL_DB_PASS` from the local.env between the '' below for the password e.g `'password' => 'yourpasswordhere',`
@@ -145,18 +145,18 @@ Prior to attempting this step, do consider the following:
 
 ---
 
-### Step 4: On Local - Review and edit docker-compose.staging.yml
+### Step 4: On Local - Review and edit docker-compose.production.yml
 
-* Review the disks and volumes on your remote `Staging` ISLE Host server to ensure they are of an adequate capacity for your collection needs and match what has been written in the `docker-compose.staging.yml` file.
+* Review the disks and volumes on your remote `Production` ISLE Host server to ensure they are of an adequate capacity for your collection needs and match what has been written in the `docker-compose.production.yml` file.
 
-* Please read through the `docker-compose.staging.yml` file as there are bind mount points that need to be configured on the host machine, to ensure data persistence. There are suggested bind mounts that the end-user can change to fit their needs or they can setup additional volumes or disks to match the suggestions.
+* Please read through the `docker-compose.production.yml` file as there are bind mount points that need to be configured on the host machine, to ensure data persistence. There are suggested bind mounts that the end-user can change to fit their needs or they can setup additional volumes or disks to match the suggestions.
   * In the `fedora` service section
     * `- /mnt/data/fedora/datastreamStore:/usr/local/fedora/data/datastreamStore`
     * `- /opt/data/fedora/objectStore:/usr/local/fedora/data/objectStore`
   * In the `apache` service section
     * `- /opt/data/apache/html:/var/www/html`
 
-* Depending on your choice of SSL type (Commercial SSL files or the Let's Encrypt service), you'll need to uncomment only one line of the `traefik` services section. There are also inline instructions to this effect in the `docker-compose.staging.yml` file.
+* Depending on your choice of SSL type (Commercial SSL files or the Let's Encrypt service), you'll need to uncomment only one line of the `traefik` services section. There are also inline instructions to this effect in the `docker-compose.production.yml` file.
   * To use `Let's Encrypt for SSL` - Uncomment
     * `- ./config/proxy/acme.json:/acme.json`
 
@@ -164,25 +164,25 @@ Prior to attempting this step, do consider the following:
     * `- ./config/proxy/ssl-certs:/certs:ro`
       * Additionally you'll need to add your SSL certs (.cert, .pem, .key) files to `./config/proxy/ssl-certs`
 
-  * Based on the choice of SSL type made above, you'll need to refer to to the `./config/proxy/traefik.staging.toml` file for further configuration instructions.
+  * Based on the choice of SSL type made above, you'll need to refer to to the `./config/proxy/traefik.production.toml` file for further configuration instructions.
 
-### Step 4A: On Local - (Optional) changes for docker-compose.staging.yml
+### Step 4A: On Local - (Optional) changes for docker-compose.production.yml
 
-This section is for optional changes for the `docker-compose.staging.yml`, end-users do not have feel like they have to make any choices here and can continue to **Step 4** as needed.
+This section is for optional changes for the `docker-compose.production.yml`, end-users do not have feel like they have to make any choices here and can continue to **Step 4** as needed.
 
 The options include PHP settings, Java Memory Allocation, MySQL configuration and use of the [TICK Stack](../optional-components/tickstack.md)
 
 * _(Optional)_ - You can change PHP settings such as file upload limits and memory usage by uncommenting
   * In the `apache` services section, this line:
-    * `- ./config/apache/php_ini/php.staging.ini:/etc/php/7.1/apache2/php.ini`
-  * You'll then need to make edits in the `./config/apache/php_ini/php.staging.ini` file.
+    * `- ./config/apache/php_ini/php.production.ini:/etc/php/7.1/apache2/php.ini`
+  * You'll then need to make edits in the `./config/apache/php_ini/php.production.ini` file.
 
 * _(Optional)_ - This line is already uncommented by default in ISLE but we're calling it out here that you can changes to the suggested levels or values within the `./config/mysql/ISLE.cnf` file if needed. When setting up for the first time, it is best practice to leave these settings in place. Over time, you can experiment with further tuning and experimentation based on your project or system needs.
 
-* _(Optional)_ - You can change the suggested `JAVA_MAX_MEM` & `JAVA_MIN_MEM` levels but do not exceed more than 50% of your system memory. When setting up for the first time, it is best practice to leave these settings in place as they are configured for a `Staging` ISLE Host Server using 16 GB of RAM. Over time, you can experiment with further tuning and experimentation based on your project or system needs.
+* _(Optional)_ - You can change the suggested `JAVA_MAX_MEM` & `JAVA_MIN_MEM` levels but do not exceed more than 50% of your system memory. When setting up for the first time, it is best practice to leave these settings in place as they are configured for a `Production` ISLE Host Server using 16 GB of RAM. Over time, you can experiment with further tuning and experimentation based on your project or system needs.
 
 * _(Optional)_ - You can opt to uncomment the TICK stack settings for monitoring but you'll need to follow the [TICK Stack](../optional-components/tickstack.md) instructions prior to committing changes to your ISLE git repository.
-  * All TICK related code can be found at the end of all ISLE services within the `docker-compose.staging.yml` file.
+  * All TICK related code can be found at the end of all ISLE services within the `docker-compose.production.yml` file.
   **Example**
   ```bash
     ## _(Optional)_: Uncomment lines below to run ISLE with the TICK monitoring system
@@ -191,13 +191,12 @@ The options include PHP settings, Java Memory Allocation, MySQL configuration an
       options:
         tag: "{{.Name}}"
   ```
-  * Uncomment the lines found in the new TICK stack services section of the `docker-compose.staging.yml` file for hosting of that monitoring service on the `Staging` ISLE Host server.
+  * Uncomment the lines found in the new TICK stack services section of the `docker-compose.production.yml` file for hosting of that monitoring service on the `Production` ISLE Host server. This will allow the TICK - Telegraf agent to report properly to either the TICK stack on your Staging server or a remote TICK server.
     * There are additional configurations to be made to files contained within `./config/tick` but you'll need to follow the [TICK Stack](../optional-components/tickstack.md) instructions prior to committing changes to your ISLE git repository.
-  * Uncomment the TICK stack data volumes as well at the bottom of the file.
 
 ---
 
-### Step 5: On Local Staging - If using Commercial SSLs
+### Step 5: On Local Production - If using Commercial SSLs
 
 If you are going to use Let's Encrypt instead, you can skip this step and move onto the next one. There will be additional steps further in this document, to help you configure it.
 
@@ -205,10 +204,10 @@ If you have decided to use Commercial SSL certs supplied to you by your IT team 
 
 * Add your Commercial SSL certificate and key files to the `./config/proxy/ssl-certs` directory
   * **Example**
-    * `./config/proxy/ssl-certs/yourprojectnamehere-staging.domain.cert`
-    * `./config/proxy/ssl-certs/yourprojectnamehere-staging.domain.key`
+    * `./config/proxy/ssl-certs/yourprojectnamehere.domain.cert`
+    * `./config/proxy/ssl-certs/yourprojectnamehere.domain.key`
 
-* Edit the `./config/proxy/traefik.staging.toml` and follow the in-line instructions. Replace the .pem & .key with the name of your Staging SSL certificate and associated key. Do note the positioning of the added lines. Third character indentation.
+* Edit the `./config/proxy/traefik.production.toml` and follow the in-line instructions. Replace the .pem & .key with the name of your Production SSL certificate and associated key. Do note the positioning of the added lines. Third character indentation.
 
 **Please note** despite the instruction examples differing on file type, (`.pem` or `cert`), either one is compatible, use what you have been given. Merely change the file type suffix accordingly.
 
@@ -216,32 +215,32 @@ If you have decided to use Commercial SSL certs supplied to you by your IT team 
 ```bash
     [entryPoints.https.tls]
       [[entryPoints.https.tls.certificates]]
-      certFile = "/certs/yourprojectnamehere-staging.domain.cert"
-      keyFile = "/certs/yourprojectnamehere-staging.domain.key"
+      certFile = "/certs/yourprojectnamehere.domain.cert"
+      keyFile = "/certs/yourprojectnamehere.domain.key"
 ```
 
 **Example: .pem**
 ```bash
     [entryPoints.https.tls]
       [[entryPoints.https.tls.certificates]]
-      certFile = "/certs/yourprojectnamehere-staging.institution.edu.pem"
-      keyFile = "/certs/yourprojectnamehere-staging.institution.edu.key"
+      certFile = "/certs/yourprojectnamehere.institution.edu.pem"
+      keyFile = "/certs/yourprojectnamehere.institution.edu.key"
 ```
 
 ---
 
 ### Step 6: On Local - Commit ISLE code to git repository
 
-* Once you have made all of the appropriate changes to your `Staging` profile. Please note the steps below are suggestions. You might use a different git commit message. Substitute `<changedfileshere>` with the actual file names and paths. You may need to do this repeatedly prior to the commit message.
+* Once you have made all of the appropriate changes to your `Production` profile. Please note the steps below are suggestions. You might use a different git commit message. Substitute `<changedfileshere>` with the actual file names and paths. You may need to do this repeatedly prior to the commit message.
   * `git add <changedfileshere>`
-  * `git commit -m "Changes for Staging"`
+  * `git commit -m "Changes for Production"`
   * `git push origin master`
 
 ---
 
-## On Remote Staging - Configure the ISLE Staging environment profile for launch and usage
+## On Remote Production - Configure the ISLE Production environment profile for launch and usage
 
-### Step 7: On Remote Staging - Git clone the ISLE repository to the remote Staging ISLE host server
+### Step 7: On Remote Production - Git clone the ISLE repository to the remote Production ISLE host server
 
 * This assumes you have setup an `Islandora` deploy user. If not use a different non-root user for this purpose.
 
@@ -249,9 +248,9 @@ If you have decided to use Commercial SSL certs supplied to you by your IT team 
 
 Since the `/opt` directory might not let you do this at first, we suggest the following workaround which you'll only need to do once. Future ISLE updates will not require this step.
 
-* Shell into your `Staging` ISLE host server as the `Islandora` user.
+* Shell into your `Production` ISLE host server as the `Islandora` user.
 
-* Clone your ISLE project repo with the newly committed changes for `Staging` to the `Islandora` user home directory.
+* Clone your ISLE project repo with the newly committed changes for `Production` to the `Islandora` user home directory.
   * `git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git /home/islandora/`
   * This may take a few minutes (2 - 4) depending on your server's Internet connection.
 
@@ -263,7 +262,7 @@ Since the `/opt` directory might not let you do this at first, we suggest the fo
 
 ---
 
-### Step 8: On Remote Staging - Create the appropriate local data paths for Apache, Fedora and log data
+### Step 8: On Remote Production - Create the appropriate local data paths for Apache, Fedora and log data
 
 * Create the `/opt/data` directory
   * `sudo mkdir -p /opt/data`
@@ -272,7 +271,7 @@ Since the `/opt` directory might not let you do this at first, we suggest the fo
 
 ---
 
-### Step 9: On Remote Staging - Clone your Islandora code
+### Step 9: On Remote Production - Clone your Islandora code
 
 * `git clone git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-islandora.git /opt/data/apache/html`
 
@@ -281,9 +280,9 @@ Since the `/opt` directory might not let you do this at first, we suggest the fo
 
 ---
 
-### Step 10: On Remote Staging - Copy over the Local Drupal files directory
+### Step 10: On Remote Production - Copy over the Local Drupal files directory
 
-This `files` directory should be on your local laptop and should be copied to the remote Staging server.
+This `files` directory should be on your local laptop and should be copied to the remote Production server.
 
 * Copy `~/yourprojectnamehere-isle/data/apache/html/sites/default/files` to `/opt/data/apache/html/sites/default/files`
 
@@ -292,7 +291,7 @@ This `files` directory should be on your local laptop and should be copied to th
 
 ---
 
-### Step 11: On Remote Staging - If using Let's Encrypt
+### Step 11: On Remote Production - If using Let's Encrypt
 
 If you are using Commercial SSLs, then please stop and move onto the next step.
 
@@ -307,7 +306,7 @@ If using Let's Encrypt, please continue to follow this step.
 
 ---
 
-### Step 12: On Remote Staging - Edit the .env file to change to the Staging environment
+### Step 12: On Remote Production - Edit the .env file to change to the Production environment
 
 This step is a multi-step, involved process that allows an end-user to make appropriate changes to the `.env` and then commit it locally to git. This local commit that never gets pushed back to the git repository is critical to allow future ISLE updates or config changes.
 
@@ -317,11 +316,11 @@ This step is a multi-step, involved process that allows an end-user to make appr
   * Edit `COMPOSE_PROJECT_NAME=` and replace the `local` settings with:
     * `COMPOSE_PROJECT_NAME=`  (Suggested) Add an identifiable project or institutional name plus environment e.g. acme_digital_stage`
   * Edit `BASE_DOMAIN=` and replace the `local` settings with:
-    * `BASE_DOMAIN=`            (Suggested) Add the full production domain here e.g. digital-staging.institution.edu
+    * `BASE_DOMAIN=`            (Suggested) Add the full production domain here e.g. digital.institution.edu
   * Edit `CONTAINER_SHORT_ID=` and replace the `local` settings with:
-    * `CONTAINER_SHORT_ID=`     (Suggested) Make an easy to read acronym from the letters of your institution and collection names plus environment e.g. (acme digitalcollections staging) is acdcs
-  * Edit `COMPOSE_FILE` change `local` to `staging`
-    * `COMPOSE_FILE=docker-compose.staging.yml`
+    * `CONTAINER_SHORT_ID=`     (Suggested) Make an easy to read acronym from the letters of your institution and collection names plus environment e.g. (acme digitalcollections production) is acdcp
+  * Edit `COMPOSE_FILE` change `local` to `production`
+    * `COMPOSE_FILE=docker-compose.production.yml`
   * Save the file
 
   * Enter `git status` - You'll now see the following:
@@ -339,7 +338,7 @@ Changes not staged for commit:
 
 * You'll need to add this file and commit it in git to be able to get future updates from ISLE as a process.
   * `git add .env`
-  * `git commit -m "Added the edited .env configuration file for Staging. DO NOT PUSH BACK TO UPSTREAM REPOSITORY - Jane Doe 8/2019"`
+  * `git commit -m "Added the edited .env configuration file for Production. DO NOT PUSH BACK TO UPSTREAM REPOSITORY - Jane Doe 8/2019"`
       * This is a suggested warning for users **NOT TO**  push back this configuration change to the main git repository. If that were done it could conflict with other setups.
 
 * You may run into the following:
@@ -355,7 +354,7 @@ Run
 to set your account's default identity.
 Omit --global to set the identity only in this repository.
 
-fatal: empty ident name (for <islandora@yourprojectnamehere-staging.institution.edu>) not allowed  
+fatal: empty ident name (for <islandora@yourprojectnamehere.institution.edu>) not allowed  
 ```
 
 * Configure your server git client but don't use the `--global` setting as that could interfere with other git repositories e.g. your Drupal / Islandora code.
@@ -366,14 +365,14 @@ fatal: empty ident name (for <islandora@yourprojectnamehere-staging.institution.
 * Now re-run the commit command:
 
 ```bash
-git commit -m "Added the edited .env configuration file for Staging. DO NOT PUSH BACK TO UPSTREAM REPOSITORY - Jane Doe 8/2019"
-[master 7ab3fcf9] Added the edited .env configuration file for Staging. DO NOT PUSH BACK TO UPSTREAM REPOSITORY - Jane Doe 8/2019
+git commit -m "Added the edited .env configuration file for Production. DO NOT PUSH BACK TO UPSTREAM REPOSITORY - Jane Doe 8/2019"
+[master 7ab3fcf9] Added the edited .env configuration file for Production. DO NOT PUSH BACK TO UPSTREAM REPOSITORY - Jane Doe 8/2019
  1 file changed, 4 insertions(+), 4 deletions(-)
 ```
 
 ---
 
-### Step 13: On Remote Staging - Download the ISLE images
+### Step 13: On Remote Production - Download the ISLE images
 
 * Download all of the latest ISLE Docker images (_~6 GB of data may take 5-10 minutes_):
   * _Using the same open terminal / Powershell_
@@ -383,7 +382,7 @@ git commit -m "Added the edited .env configuration file for Staging. DO NOT PUSH
 
 ---
 
-### Step 14: On Remote Staging - Start Containers
+### Step 14: On Remote Production - Start Containers
 
 **Please note:** Prior to starting the launch process, it is recommended that you briefly open your firewall to allow ports 80 and 443 access to the world. You'll only need to keep this open for 3 -5 minutes and then promptly close access once the Let's Encrypt SSL certificates have been generated.
 
@@ -399,12 +398,12 @@ git commit -m "Added the edited .env configuration file for Staging. DO NOT PUSH
       * **If any of these are not `UP`, then use [Local ISLE Installation: Troubleshooting](../install/install-Local-troubleshooting.md) to solve before continuing below.**
       <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running, or (c) older exited ISLE containers that maybe should be removed. --->
 
-* In your web browser, enter your Staging site URL: `https://yourprojectnamehere-staging.institution.edu`
+* In your web browser, enter your Production site URL: `https://yourprojectnamehere.institution.edu`
   * **Please note:** You should not see any errors with respect to the SSL certifications, you should see a nice green lock padlock for the site security. If you see a red error or unknown SSL cert provider, you'll need to shut the containers down and review the previous steps taken especially if using Let's Encrypt. You may need to repeat those steps to get rid of the errors.
 
 ---
 
-### Step 15: On Remote Staging - Import the Local MySQL Drupal database
+### Step 15: On Remote Production - Import the Local MySQL Drupal database
 
 Prior to attempting this step, do consider the following:
 
@@ -416,26 +415,26 @@ Prior to attempting this step, do consider the following:
 
 #### Local Drupal site database import process
 
-* Copy the `local_drupal_site_082019.sql` created in Step 1 to the Remote Staging server.
+* Copy the `local_drupal_site_082019.sql` created in Step 1 to the Remote Production server.
 
-* Import the exported `Local` MySQL database for use in the current `Staging` Drupal site. Refer to your `staging.env` for the usernames and passwords used below.
+* Import the exported `Local` MySQL database for use in the current `Production` Drupal site. Refer to your `production.env` for the usernames and passwords used below.
   * You can use a MySQL GUI client for this process instead but the command line directions are only included below.
   * Run `docker ps` to determine the MySQL container name
-  * Shell into your currently running `Staging` MySQL container
+  * Shell into your currently running `Production` MySQL container
     * `docker exec -it yourmysql-container-name bash`
-  * Import the Local Drupal database. Replace the `DRUPAL_DB` & `DRUPAL_DB_USER` below in the command with the values found in your `staging.env`.
+  * Import the Local Drupal database. Replace the `DRUPAL_DB` & `DRUPAL_DB_USER` below in the command with the values found in your `production.env`.
     * `mysqldump -u DRUPAL_DB_USER -p DRUPAL_DB < local_drupal_site_082019.sql`
-    * Enter the appropriate password: value of `DRUPAL_DB_PASS` in the `staging.env`)
+    * Enter the appropriate password: value of `DRUPAL_DB_PASS` in the `production.env`)
     * This might take a few minutes depending on the size of the file.
     * Exit out of the container when finished.
 
 ---
 
-### Step 16: On Remote Staging - Run the fix-permissions.sh script
+### Step 16: On Remote Production - Run the fix-permissions.sh script
 
 * You'll need to fix the Drupal site permissions by running the `/fix-permissions.sh` script from the Apache container
   * Run `docker ps` to determine the Apache container name
-  * Shell into your currently running `Staging` Apache container
+  * Shell into your currently running `Production` Apache container
     * `docker exec -it yourapache-container-name bash`
     * `sh /utility-scripts/isle_drupal_build_tools/drupal/fix-permissions.sh --drupal_path=/var/www/html --drupal_user=islandora --httpd_group=www-data`
     * This process will take 2 - 5 mins depending
@@ -454,12 +453,12 @@ Prior to attempting this step, do consider the following:
 
 ---
 
-### Step 17: On Remote Staging - Review and test the Drupal Staging site
+### Step 17: On Remote Production - Review and test the Drupal Production site
 
-* In your web browser, enter this URL: `https://yourprojectnamehere-staging.institution.edu`
+* In your web browser, enter this URL: `https://yourprojectnamehere.institution.edu`
   * Please note: You should not see any errors with respect to the SSL certifications. If so, please review your previous steps especially if using Let's Encrypt. You may need to repeat those steps to get rid of the errors.
 
-* Log in to the local Islandora site with the credentials you created in `staging.env` (`DRUPAL_ADMIN_USER` and `DRUPAL_ADMIN_PASS`)
+* Log in to the local Islandora site with the credentials you created in `production.env` (`DRUPAL_ADMIN_USER` and `DRUPAL_ADMIN_PASS`)
   * **Please note:** You are free to use previously Drupal admin or user accounts created during the `Local` site development process.
 
 * You can decide to further QC and review the site as you wish or start to add digital collections and objects.
@@ -469,9 +468,7 @@ Prior to attempting this step, do consider the following:
 
 ## Next Steps
 
-Once you are ready to deploy your finished Drupal site, you may progress to:
-
-* [Production ISLE Installation: New Site](../install/install-production-new.md)
+Once you are ready to deploy your finished Drupal site, you may progress to launching the Production site publicly, lifting any firewall restrictions and allowing full Internet access on http (port 80) and https (443). Do not allow any other port to be publicly accessible.
 
 ---
 
@@ -482,4 +479,4 @@ Once you are ready to deploy your finished Drupal site, you may progress to:
 
 ---
 
-### End of Staging ISLE Installation: New Site
+### End of Production ISLE Installation: New Site
