@@ -206,8 +206,8 @@ If you have decided to use Commercial SSL certs supplied to you by your IT team 
 
 * Add your Commercial SSL certificate and key files to the `./config/proxy/ssl-certs` directory
   * **Example**
-    * `./config/proxy/ssl-certs/yourprojectname-here-staging.domain.cert`
-    * `./config/proxy/ssl-certs/yourprojectname-here-staging.domain.key`
+    * `./config/proxy/ssl-certs/yourprojectnamehere-staging.domain.cert`
+    * `./config/proxy/ssl-certs/yourprojectnamehere-staging.domain.key`
 
 * Edit the `./config/proxy/traefik.staging.toml` and follow the in-line instructions. Replace the .pem & .key with the name of your Staging SSL certificate and associated key. Do note the positioning of the added lines. Third character indentation.
 
@@ -217,8 +217,8 @@ If you have decided to use Commercial SSL certs supplied to you by your IT team 
 ```bash
     [entryPoints.https.tls]
       [[entryPoints.https.tls.certificates]]
-      certFile = "/certs/yourprojectname-here-staging.domain.cert"
-      keyFile = "/certs/yourprojectname-here-staging.domain.key"
+      certFile = "/certs/yourprojectnamehere-staging.domain.cert"
+      keyFile = "/certs/yourprojectnamehere-staging.domain.key"
 ```
 
 **Example: .pem**
@@ -300,8 +300,8 @@ If you are using Commercial SSLs, then please stop and move onto the next step.
 If using Let's Encrypt, please continue to follow this step.
 
 * Create an empty `acme.json` within the `./config/proxy/ssl-certs/` directory of your ISLE project.
-  * `touch /opt/yourprojectname-here/config/proxy/ssl-certs/acme.json`
-    * `chmod 600 /opt/yourprojectname-here/config/proxy/ssl-certs/acme.json`
+  * `touch /opt/yourprojectnamehere/config/proxy/ssl-certs/acme.json`
+    * `chmod 600 /opt/yourprojectnamehere/config/proxy/ssl-certs/acme.json`
   * This file will be ignored by git and won't cause any errors with checking in code despite the location
   * Do note that you may need to open your firewall briefly to allow the SSL certs to be added to the `acme.json` file. This will be indicated in the following steps.
   * Open your firewall to ports 80, 443 prior to starting up the containers to ensure SSL cert creation.
@@ -313,8 +313,8 @@ If using Let's Encrypt, please continue to follow this step.
 This step is a multi-step, involved process that allows an end-user to make appropriate changes to the `.env` and then commit it locally to git. This local commit that never gets pushed back to the git repository is critical to allow future ISLE updates or config changes.
 
 * Edit the .env, remove the `local` settings and then commit locally
-  * `cd /opt/yourprojectname-here`
-  * `vi / nano / pico /opt/yourprojectname-here/.env`
+  * `cd /opt/yourprojectnamehere`
+  * `vi / nano / pico /opt/yourprojectnamehere/.env`
   * Edit `COMPOSE_PROJECT_NAME=` and replace the `local` settings with:
     * `COMPOSE_PROJECT_NAME=`  (Suggested) Add an identifiable project or institutional name plus environment e.g. acme_digital_stage`
   * Edit `BASE_DOMAIN=` and replace the `local` settings with:
@@ -356,11 +356,11 @@ Run
 to set your account's default identity.
 Omit --global to set the identity only in this repository.
 
-fatal: empty ident name (for <islandora@yourprojectname-here-staging.institution.edu>) not allowed  
+fatal: empty ident name (for <islandora@yourprojectnamehere-staging.institution.edu>) not allowed  
 ```
 
 * Configure your server git client but don't use the `--global` setting as that could interfere with other git repositories e.g. your Drupal / Islandora code.
-  * Example: Within `/opt/yourprojectname-here`
+  * Example: Within `/opt/yourprojectnamehere`
     * `git config user.email "jane@institution.edu"`
     * `git config user.name "Jane Doe"`
 
@@ -378,6 +378,8 @@ git commit -m "Added the edited .env configuration file for Staging. DO NOT PUSH
 
 * Download all of the latest ISLE Docker images (_~6 GB of data may take 5-10 minutes_):
   * _Using the same open terminal / Powershell_
+    * Navigate to the root of your ISLE project
+    * `cd /opt/yourprojectnamehere`
   * `docker-compose pull`
 
 ---
@@ -398,7 +400,7 @@ git commit -m "Added the edited .env configuration file for Staging. DO NOT PUSH
       * **If any of these are not `UP`, then use [Local ISLE Installation: Troubleshooting](../install/install-Local-troubleshooting.md) to solve before continuing below.**
       <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running, or (c) older exited ISLE containers that maybe should be removed. --->
 
-* In your web browser, enter your Staging site URL: `https://yourprojectname-here.institution.edu`
+* In your web browser, enter your Staging site URL: `https://yourprojectnamehere.institution.edu`
   * **Please note:** You should not see any errors with respect to the SSL certifications, you should see a nice green lock padlock for the site security. If you see a red error or unknown SSL cert provider, you'll need to shut the containers down and review the previous steps taken especially if using Let's Encrypt. You may need to repeat those steps to get rid of the errors.
 
 ---
@@ -455,7 +457,7 @@ Prior to attempting this step, do consider the following:
 
 ### Step 17: On Remote Staging - Review and test the Drupal Staging site
 
-* In your web browser, enter this URL: `https://yourprojectname-here.institution.edu`
+* In your web browser, enter this URL: `https://yourprojectnamehere.institution.edu`
   * Please note: You should not see any errors with respect to the SSL certifications. If so, please review your previous steps especially if using Let's Encrypt. You may need to repeat those steps to get rid of the errors.
 
 * Log in to the local Islandora site with the credentials you created in `staging.env` (`DRUPAL_ADMIN_USER` and `DRUPAL_ADMIN_PASS`)

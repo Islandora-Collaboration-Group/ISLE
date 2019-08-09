@@ -40,6 +40,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 * Step 2: Setup git for the ISLE project
 * Step 3: Git clone the Production Drupal site code
 * Step 4: Edit the `.env` File to change to the Local Environment
+
 * Step 5: Create new users and passwords by editing `local.env`
 * Step 6: Create new self-signed certs for your project
 * Step 7: Download the ISLE images
@@ -81,6 +82,15 @@ Prior to attempting this step, do consider the following:
   * You can use a MySQL GUI client for this process or if you have command line access to the MySQL database server
   `mysqldump -u username -p database_name > prod_drupal_site_082019.sql`
   * Copy this file down to your local laptop or workstation.
+
+#### Fedora hash size (Conditional)
+
+While this will depend on your pre-existing Production system, it is important to double-check this. If you have a larger hash size than the default ISLE system (##), and don't follow the settings below, ISLE may not function properly when your data has been migrated.
+
+*  If you have larger Fedora collections, there is a possibility that you made changes to the `akubra-llstore.xml` file to allow for the creation of larger or deeper hash directories)
+  * You will need to copy your `/usr/local/fedora/server/config/spring/akubra-llstore.xml` from your Production Fedora System to `./config/fedora/akubra-llstore.xml`
+  * You will then need to add an extra line in the Fedora service (fedora) volumes section to bind mount this file in. This will guarantee proper Fedora data hash structure.
+    * `- ./config/fedora/akubra-llstore.xml:/usr/local/fedora/server/config/spring/akubra-llstore.xml`
 
 #### Solr schema & Islandora transforms
 
@@ -298,18 +308,19 @@ You can reuse some of the older Production settings in the `local.env` if you li
 
 * Once finished, save the file and close it.
 
-* _Using the same open terminal / Powershell_, navigate to `/pathto/yourprojectname-here/scripts/proxy/ssl-certs/`
+* _Using the same open terminal / Powershell_, navigate to `/pathto/yourprojectnamehere/scripts/proxy/ssl-certs/`
+  * `cd ~/pathto/yourprojectnamehere/scripts/proxy/ssl-certs/`
 
 * `chmod +x local.sh`
 
-* This command will generate new self-signed SSL keys using your `yourprojectname-here.localdomain` domain. This now secures the local site.
+* This command will generate new self-signed SSL keys using your `yourprojectnamehere.localdomain` domain. This now secures the local site.
   * `./local.sh`
   * The generated keys can now be found in `./config/proxy/ssl-certs`
 
 * Add the SSL .pem and .key file names generated from running `local.sh` to the `./config/proxy/traefik.local.toml` file.
   * Example:
-    * - `certFile = "/certs/yourprojectname-here.localdomain.pem"`
-    * - `keyFile = "/certs/yourprojectname-here.localdomain.key"`
+    * - `certFile = "/certs/yourprojectnamehere.localdomain.pem"`
+    * - `keyFile = "/certs/yourprojectnamehere.localdomain.key"`
 
 ---
 
@@ -317,6 +328,8 @@ You can reuse some of the older Production settings in the `local.env` if you li
 
 * Download all of the latest ISLE Docker images (_~6 GB of data may take 5-10 minutes_):
   * _Using the same open terminal / Powershell_
+    * Navigate to the root of your ISLE project
+      * `cd ~/pathto/yourprojectnamehere`
   * `docker-compose pull`
 
 ## Step 8: Launch Process
@@ -399,7 +412,7 @@ You can determine the name of the Apache container by running `docker ps`. make 
 
 ## Step 11: Test the Site
 
-* In your web browser, enter this URL: `https://yourprojectname-here.localdomain`
+* In your web browser, enter this URL: `https://yourprojectnamehere.localdomain`
 <!--- TODO: Add error message and how to proceed (click 'Advanced...') --->
 * Note: You may see an SSL error warning that the site is unsafe. It is safe, it simply uses "self-signed" SSL certs. Ignore the error and proceed to the site.
 * Log in to the local Islandora site with the credentials you created in `local.env` (`DRUPAL_ADMIN_USER` and `DRUPAL_ADMIN_PASS`)

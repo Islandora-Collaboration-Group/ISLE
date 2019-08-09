@@ -160,18 +160,19 @@ origin	https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-i
 
 * Once finished, save the file and close it.
 
-* _Using the same open terminal / Powershell_, navigate to `/pathto/yourprojectname-here/scripts/proxy/ssl-certs/`
+* _Using the same open terminal / Powershell_, navigate to `/pathto/yourprojectnamehere/scripts/proxy/ssl-certs/`
+  * `cd /pathto/yourprojectnamehere/scripts/proxy/ssl-certs/`
 
 * `chmod +x local.sh`
 
-* This command will generate new self-signed SSL keys using your `yourprojectname-here.localdomain` domain. This now secures the local site.
+* This command will generate new self-signed SSL keys using your `yourprojectnamehere.localdomain` domain. This now secures the local site.
   * `./local.sh`
   * The generated keys can now be found in `./config/proxy/ssl-certs`
 
 * Add the SSL .pem and .key file names generated from running `local.sh` to the `./config/proxy/traefik.local.toml` file.
   * Example:
-    * - `certFile = "/certs/yourprojectname-here.localdomain.pem"`
-    * - `keyFile = "/certs/yourprojectname-here.localdomain.key"`
+    * - `certFile = "/certs/yourprojectnamehere.localdomain.pem"`
+    * - `keyFile = "/certs/yourprojectnamehere.localdomain.key"`
 
 ---
 
@@ -179,6 +180,8 @@ origin	https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-i
 
 * Download all of the latest ISLE Docker images (_~6 GB of data may take 5-10 minutes_):
   * _Using the same open terminal / Powershell_
+    * Navigate to the root of your ISLE project
+      * `cd ~/pathto/yourprojectnamehere`
   * `docker-compose pull`
 
 ## Step 7: Launch Process
@@ -227,7 +230,7 @@ docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isl
 
 ## Step 9: Test the Site
 
-* In your web browser, enter this URL: `https://yourprojectname-here.localdomain`
+* In your web browser, enter this URL: `https://yourprojectnamehere.localdomain`
 <!--- TODO: Add error message and how to proceed (click 'Advanced...') --->
 * Note: You may see an SSL error warning that the site is unsafe. It is safe, it simply uses "self-signed" SSL certs. Ignore the error and proceed to the site.
 * Log in to the local Islandora site with the credentials you created in `local.env` (`DRUPAL_ADMIN_USER` and `DRUPAL_ADMIN_PASS`)

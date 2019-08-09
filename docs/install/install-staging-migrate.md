@@ -75,8 +75,7 @@ This process will differ slightly from previous builds in that there is work to 
 The instructions that follow below will have either a `On Local` or a `On Remote Staging` pre-fix to indicate where the work and focus should be. In essence, the git workflow established during the local build process will be extended for deploying on `Staging` and for future ISLE updates and upgrades.
 
 * **Steps 1 - 6** - `On Local - Configure the ISLE Staging environment profile for deploy to Remote`
-  * Step 1: On Local - Export the Local MySQL database
-    * Local Drupal site database export process
+  * Step 1: Copy Production data to your local
   * Step 2: On Local - Shutdown any local containers & review local code
   * Step 3: On Local - Create new users and passwords by editing `staging.env`
   * Step 4: On Local - Review and edit docker-compose.staging.yml
@@ -89,42 +88,41 @@ The instructions that follow below will have either a `On Local` or a `On Remote
   * Step 8: On Remote Staging - Create the appropriate local data paths for Apache, Fedora and log data
   * Step 9: On Remote Staging - Clone your Production Islandora code
   * Step 10: On Remote Staging - Copy over the Production Data directories
-    * change perms to local
   * Step 11: On Remote Staging - If using Let's Encrypt
   * Step 12: On Remote Staging - Edit the .env file to change to the Staging environment
   * Step 13: On Remote Staging - Download the ISLE images
   * Step 14: On Remote Staging - Start Containers
   * Step 15: On Remote Staging - Import the Production MySQL Drupal database
-  * Step 16: On Remote Staging - Run the fix-permissions.sh script
+  * Step 16: On Remote Staging - Run ISLE scripts
   * Step 17: On Remote Staging - Re-index Fedora & Solr
   * Step 18: On Remote Staging - Review and test the Drupal Staging site
 
 ---
 
-## On Local - Configure the ISLE Staging environment profile for deploy to Remote
+### Step 1: Copy Production data to your local
 
-### Step 1: On Local - Export the Local MySQL database
+#### Drupal site database
+
+You are repeating this step given that data may have changed on the Production site since creating your local. It is critical that Staging be a mirror or close to exact copy of Production.
 
 Prior to attempting this step, do consider the following:
+
+* Drupal website databases can have a multitude of names and conventions. Confer with the appropriate IT departments for your institution's database naming conventions.
+
+* Recommended that the production databases be exported using the `.sql` /or `.gz` file formats e.g. `prod_drupal_site_082019.sql.gz` for better compression and minimal storage footprint.
 
 * If the end user is running multi-sites, there will be additional databases to export.
 
 * Do not export the `fedora3` database
 
-* If possible, on the production Apache webserver, run `drush cc all` from the command line on the local Apache container in the `/var/www/html` directory PRIOR to any db export(s). Otherwise issues can occur on import due to all cache tables being larger than `innodb_log_file_size` allows
+* If possible, on the production Apache webserver, run `drush cc all` from the command line on the production server in the `/var/www/html` directory PRIOR to any db export(s). Otherwise issues can occur on import due to all cache tables being larger than `innodb_log_file_size` allows
 
-#### Local Drupal site database export process
+##### Production Drupal site database export process
 
-* Export the MySQL database for the current `Local` Drupal site in use and copy it on your local in an easy to find place. In later steps you'll be directed to import this file. **Please be careful** performing any of these potential actions below as the process impacts your newly created and themed new Islandora site. Refer to your `local.env` for the usernames and passwords used below.
-  * You can use a MySQL GUI client for this process instead but the command line directions are only included below.
-  * Shell into your currently running Local MySQL container
-    * `docker exec -it yourmysql-container-name bash`
-  * Export the Local Drupal database. Replace the `DRUPAL_DB` & `DRUPAL_DB_USER` below in the command with the values found in your `local.env`.
-    * `mysqldump -u DRUPAL_DB_USER -p DRUPAL_DB > local_drupal_site_082019.sql`
-    * Enter the appropriate password: `DRUPAL_DB_PASS` in the `local.env`)
-    * Upon completion, exit the MySQL container  
-  * Copy this file from the MySQL container to a location on your local laptop or workstation.
-    * `docker cp yourmysql-container-name:/local_drupal_site_082019.sql /path/to/location`
+* Export the MySQL database for the current Production Drupal site in use and copy it to your local in an easy to find place. In later steps you'll be directed to import this file. **Please be careful** performing any of these potential actions below as the process impacts your Production site. If you are not comfortable or familiar with performing these actions, we recommend that you instead work with your available IT resources to do so.
+  * You can use a MySQL GUI client for this process or if you have command line access to the MySQL database server
+  `mysqldump -u username -p database_name > prod_drupal_site_082019.sql`
+  * Copy this file down to your local laptop or workstation.
 
 ---
 
@@ -177,6 +175,10 @@ Prior to attempting this step, do consider the following:
   * In the `apache` services section
     * `- /opt/data/apache/html:/var/www/html`
 
+* Review the your `docker-compose.local.yml` file for custom edits made and copy them to the `docker-compose.staging.yml` file as needed, this can include changes to Fedora Gsearch Transforms, Fedora hash size and more.
+
+#### SSL certificates
+
 * Depending on your choice of SSL type (Commercial SSL files or the Let's Encrypt service), you'll need to uncomment only one line of the `traefik` services section. There are also inline instructions to this effect in the `docker-compose.staging.yml` file.
   * To use `Let's Encrypt for SSL` - Uncomment
     * `- ./config/proxy/acme.json:/acme.json`
@@ -186,6 +188,8 @@ Prior to attempting this step, do consider the following:
       * Additionally you'll need to add your SSL certs (.cert, .pem, .key) files to `config/proxy/ssl-certs`
 
   * Based on the choice of SSL type made above, you'll need to refer to the `/config/proxy/traefik.staging.toml` file for further configuration instructions.
+
+---
 
 ### Step 4A: On Local - (Optional) changes for  docker-compose.staging.yml
 
@@ -227,8 +231,8 @@ If you have decided to use Commercial SSL certs supplied to you by your IT team 
 
 * Add your Commercial SSL certificate and key files to the `./config/proxy/ssl-certs` directory
   * **Example**
-    * `./config/proxy/ssl-certs/yourprojectname-here-staging.domain.cert`
-    * `./config/proxy/ssl-certs/yourprojectname-here-staging.domain.key`
+    * `./config/proxy/ssl-certs/yourprojectnamehere-staging.domain.cert`
+    * `./config/proxy/ssl-certs/yourprojectnamehere-staging.domain.key`
 
 * Edit the `./config/proxy/traefik.staging.toml` and follow the in-line instructions on **Line 32** which are to add the following below after **Line 25** of the same file. Replace the .pem & .key with the name of your Staging SSL certificate and associated key. Do note the positioning of the added lines. Third character indentation.
 
@@ -238,8 +242,8 @@ If you have decided to use Commercial SSL certs supplied to you by your IT team 
 ```bash
     [entryPoints.https.tls]
       [[entryPoints.https.tls.certificates]]
-      certFile = "/certs/yourprojectname-here-staging.domain.cert"
-      keyFile = "/certs/yourprojectname-here-staging.domain.key"
+      certFile = "/certs/yourprojectnamehere-staging.domain.cert"
+      keyFile = "/certs/yourprojectnamehere-staging.domain.key"
 ```
 
 **Example: .pem**
@@ -319,8 +323,10 @@ Please clone from your existing Production Islandora git repository.
   * `Production` Fedora `datastreamStore` directory
     * You'll need to adjust the paths below in case your setup differs on either the non-ISLE Production server or the ISLE Staging server.
     * Copy your `/usr/local/fedora/data/datastreamStore` data to the suggested path of `/mnt/data/fedora/datastreamStore`
-  * `Production` Fedora `objectStore`
+      * You may need to change the permissions to `root:root` on the Staging `/mnt/data/fedora/datastreamStore` directory above after copying so the Fedora container can access properly. Do not do this on your existing Production system please.
+  * `Production` Fedora `objectStore`. 
     * Copy your `/usr/local/fedora/data/objectStore` data to the suggested path of `/opt/data/fedora/objectStore`
+      * You may need to change the permissions to `root:root` on the Staging `/opt/data/fedora/objectStore` above after copying so the Fedora container can access properly. Do not do this on your existing Production system please.
 
 ---
 
@@ -331,8 +337,8 @@ If you are using Commercial SSLs, then please stop and move onto the next step.
 If using Let's Encrypt, please continue to follow this step.
 
 * Create an empty `acme.json` within the `./config/proxy/ssl-certs/` directory of your ISLE project.
-  * `touch /opt/yourprojectname-here/config/proxy/ssl-certs/acme.json`
-    * `chmod 600 /opt/yourprojectname-here/config/proxy/ssl-certs/acme.json`
+  * `touch /opt/yourprojectnamehere/config/proxy/ssl-certs/acme.json`
+    * `chmod 600 /opt/yourprojectnamehere/config/proxy/ssl-certs/acme.json`
   * This file will be ignored by git and won't cause any errors with checking in code despite the location
   * Do note that you may need to open your firewall briefly to allow the SSL certs to be added to the `acme.json` file. This will be indicated in the following steps.
   * Open your firewall to ports 80, 443 prior to starting up the containers to ensure SSL cert creation.
@@ -344,8 +350,8 @@ If using Let's Encrypt, please continue to follow this step.
 This step is a multi-step, involved process that allows an end-user to make appropriate changes to the `.env` and then commit it locally to git. This local commit that never gets pushed back to the git repository is critical to allow future ISLE updates or config changes.
 
 * Edit the .env, remove the `local` settings and then commit locally
-  * `cd /opt/yourprojectname-here`
-  * `vi / nano / pico /opt/yourprojectname-here/.env`
+  * `cd /opt/yourprojectnamehere`
+  * `vi / nano / pico /opt/yourprojectnamehere/.env`
   * Edit Line **9** and replace the `local` settings with:
     * `COMPOSE_PROJECT_NAME=`  (Suggested) Add an identifiable project or institutional name plus environment e.g. acme_digital_stage`
   * Edit Line **10** and replace the `local` settings with:
@@ -387,11 +393,11 @@ Run
 to set your account's default identity.
 Omit --global to set the identity only in this repository.
 
-fatal: empty ident name (for <islandora@yourprojectname-here-staging.institution.edu>) not allowed  
+fatal: empty ident name (for <islandora@yourprojectnamehere-staging.institution.edu>) not allowed  
 ```
 
 * Configure your server git client but don't use the `--global` setting as that could interfere with other git repositories e.g. your Drupal / Islandora code.
-  * Example: Within `/opt/yourprojectname-here`
+  * Example: Within `/opt/yourprojectnamehere`
     * `git config user.email "jane@institution.edu"`
     * `git config user.name "Jane Doe"`
 
@@ -409,6 +415,8 @@ git commit -m "Added the edited .env configuration file for Staging. DO NOT PUSH
 
 * Download all of the latest ISLE Docker images (_~6 GB of data may take 5-10 minutes_):
   * _Using the same open terminal / Powershell_
+    * Navigate to the root of your ISLE project
+      * `cd /opt/yourprojectnamehere`  
   * `docker-compose pull`
 
 ---
@@ -429,7 +437,7 @@ git commit -m "Added the edited .env configuration file for Staging. DO NOT PUSH
       * **If any of these are not `UP`, then use [Local ISLE Installation: Troubleshooting](../install/install-Local-troubleshooting.md) to solve before continuing below.**
       <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running, or (c) older exited ISLE containers that maybe should be removed. --->
 
-* In your web browser, enter your Staging site URL: `https://yourprojectname-here.institution.edu`
+* In your web browser, enter your Staging site URL: `https://yourprojectnamehere.institution.edu`
   * **Please note:** You should not see any errors with respect to the SSL certifications, you should see a nice green lock padlock for the site security. If you see a red error or unknown SSL cert provider, you'll need to shut the containers down and review the previous steps taken especially if using Let's Encrypt. You may need to repeat those steps to get rid of the errors.
 
 ---
@@ -451,6 +459,7 @@ Prior to attempting this step, do consider the following:
 * Import the exported `Local` MySQL database for use in the current `Staging` Drupal site. Refer to your `staging.env` for the usernames and passwords used below.
   * You can use a MySQL GUI client for this process instead but the command line directions are only included below.
   * Run `docker ps` to determine the MySQL container name
+  * _Using the same open terminal / Powershell_  
   * Shell into your currently running `Staging` MySQL container
     * `docker exec -it yourmysql-container-name bash`
   * Import the Local Drupal database. Replace the `DRUPAL_DB` & `DRUPAL_DB_USER` below in the command with the values found in your `staging.env`.
@@ -461,14 +470,28 @@ Prior to attempting this step, do consider the following:
 
 ---
 
-### Step 16: On Remote Staging - Run the fix-permissions.sh script
+### Step 16: On Remote Staging - Run ISLE scripts
 
+You can determine the name of the Apache container by running `docker ps`. make note of the Apache container name, you'll need to use it for the commands below.
+
+#### Run migration_site_vsets.sh script on the Apache container
+
+* _Using the same open terminal / Powershell_
+  * Run the `migration_site_vsets.sh` script on the Apache container. This will change Drupal database site settings only for ISLE connectivity.
+    * Copy the `./scripts/apache/migration_site_vsets.sh` to the root of the Drupal directory on your Apache container
+      * `docker cp ./scripts/apache/migration_site_vsets.sh yourapache-container-name:/var/www/html/migration_site_vsets.sh`
+    * Change the permissions on the script to make it executable
+      * `docker exec -it your-apache-containername chmod +x /var/www/html/migration_site_vsets.sh`
+    * Run the script
+      * `docker exec -it your-apache-containername bash /var/www/html/migration_site_vsets.sh`
+
+#### Run fix-permissions.sh script on the Apache container
 * You'll need to fix the Drupal site permissions by running the `/fix-permissions.sh` script from the Apache container
-  * Run `docker ps` to determine the Apache container name
   * Shell into your currently running `Staging` Apache container
     * `docker exec -it yourapache-container-name bash`
     * `sh /utility-scripts/isle_drupal_build_tools/drupal/fix-permissions.sh --drupal_path=/var/www/html --drupal_user=islandora --httpd_group=www-data`
     * This process will take 2 - 5 mins depending
+    * Type `exit` to exit the container
 
 | For Windows Users only |
 | :-------------      |
@@ -478,15 +501,103 @@ Prior to attempting this step, do consider the following:
 | - Allow vpnkit.exe to communicate with the network.  Click Okay or Allow (accept default selection).|
 | - If the process seems to halt, check the taskbar for background windows.|
 
-* You should see a lot of green [ok] messages.
 * If the script appears to pause or prompt for `y/n`, DO NOT enter any values; the script will automatically answer for you.
-* **Proceed only after this message appears:** `Clearing Drupal Caches. 'all' cache was cleared.`
 
 ---
 
-### Step 17: On Remote Staging - Review and test the Drupal Staging site
+## Step 17: On Remote Staging - Re-index Fedora & Solr
 
-* In your web browser, enter this URL: `https://yourprojectname-here.institution.edu`
+When migrating any non-ISLE Islandora site, it is crucial to rebuild (reindex) the following three indices from the FOXML and datastream files on disk.
+
+* **Fedora's indices:**
+  * Resource Index - The Resource Index is the Fedora module that provides the infrastructure for indexing relationships among objects and their components.
+  * SQL database - `fedora3` contains information vital for the Drupal site to connect to Fedora correctly.
+
+* **Solr index** - Solr an open source enterprise search platform works in conjunction with the Islandora Solr module to provide a way to configure the Islandora search functions, the search results display, and the display of metadata on object pages. The index serves as a list of those objects for fast searching across large collections.
+
+You can use the command-line interactive utility `fedora-rebuild.sh` on the `fedora` container to rebuild all indices when the Fedora (not Tomcat) server is offline.
+
+Depending on the size of your repository, this entire process may take minutes (thousands of objects) or hours (millions of objects) to complete.
+
+### Reindex Fedora RI & Fedora SQL Database (2/3)
+
+Since this command can take minutes or hours depending on the size of your repository, As such, it is recommended starting a screen session prior to running the following commands. Learn more about [screen here](https://www.tecmint.com/screen-command-examples-to-manage-linux-terminals/) 
+
+**Please note:** The method described below is a longer way of doing this process to onboard users.
+
+* Shell into your currently running `Staging` Fedora container
+  * Run `docker ps` to determine the Fedora container name
+    * `docker exec -it yourfedora-container-name bash`
+
+* Navigate to the `utility_scripts` directory
+  * `cd utility_scripts`
+
+* Run the `rebuildFedora.sh` script. This script will give you output like the example below.
+  * `./rebuildFedora.sh`
+
+```bash
+  OK - Stopped application at context path [/fedora]
+Starting the rebuild process in the background. This may take a while depending on your Fedora repository size.
+To watch the log and process run: tail -f $CATALINA_HOME/logs/fedora-rebuild.out
+Truncating old SQL tables.
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Automatically tailing the log file...
+Press CTRL+C to stop watching at any time. This will NOT stop the rebuild process
+```
+
+* After a good period of time, again depending on the size of your Fedora collection there should be output like the example below. This indicates that the Fedora RI & SQL reindex process was sucessful. The number of objects rebuilt will vary. You can hit the CNTRL and C keys to exit out of the process, if need be. Do not exit the Fedora container yet, one more index to go; Solr.
+
+```bash
+Adding object #31: islandora:sp_web_archive_collection
+Adding object #32: islandora:sp_web_archive
+Adding object #33: islandora:newspaperPageCModel
+Adding object #34: islandora:compound_collection
+Adding object #35: islandora:newspaperCModel
+Adding object #36: islandora:newspaperIssueCModel
+Adding object #37: ir:citationCollection
+Adding object #38: islandora:sp_basic_image_collection
+SUCCESS: 38 objects rebuilt.
+OK - Started application at context path [/fedora]
+```
+
+### Reindex Solr (3/3)
+
+**WARNING** - This reindex process takes the longest of all three, with up to **1 - 30 or more hours** to complete depending on the size of your Fedora collection. As such, it is recommended starting a screen session prior to running the following command. Learn more about [screen here](https://www.tecmint.com/screen-command-examples-to-manage-linux-terminals/)
+
+* Still staying within the `utility_scripts` directory on the Fedora container or reenter the Fedora container having started a new screen session, now run the `updateSolrIndex.sh` script. This script will give you output like the example below.
+  * `./updateSolrIndex.sh`
+
+```bash
+FedoraGenericSearch (FGS) update Solr index from Fedora helper script.
+Starting to reindex your Fedora repository. This process runs in the background and may take some time.
+Checked and this operation is still running. You may disconnect and the process will continue to run.
+Find logs at /usr/local/tomcat/logs/fgs-update-foxml.out and /usr/local/tomcat/logs/fgs-update-foxml.err.
+You can watch log file 'tail -f /usr/local/tomcat/logs/fedoragsearch.daily.log' as the process runs.
+```
+
+**Please note:** Within this output, options to tail logs and watch progress are offered. Depending on the size of your collection this process may take hours, however it is okay to exit out of the container and even log off the remote `Staging` server. You can check back frequently by running `tail -f /usr/local/tomcat/logs/fgs-update-foxml.out` on the Fedora container. If you visit your Drupal site and run a Solr search, you should start to see objects and facets start to work. The number of objects will increase over time.
+
+* After a good period of time, again depending on the size of your Fedora collection, when the Solr re-index process finishes, output like the example below will appear in the `/usr/local/tomcat/logs/fgs-update-foxml.out` log. This indicates that the Solr reindex process was completed. The number of objects rebuilt will vary. You can hit the CNTRL and C keys to exit out of the tail process, if need be.
+
+```bash
+ tail -f /usr/local/tomcat/logs/fgs-update-foxml.out
+Args
+0=http://localhost:8080
+1=updateIndex
+2=fromFoxmlFiles
+<?xml version="1.0" encoding="UTF-8"?>
+<resultPage operation="updateIndex" action="fromFoxmlFiles" value="" repositoryName="FgsRepos" indexNames="" resultPageXslt="" dateTime="Thu Aug 08 20:43:12 GMT 2019">
+<updateIndex xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foxml="info:fedora/fedora-system:def/foxml#" xmlns:zs="http://www.loc.gov/zing/srw/" warnCount="0" docCount="13" deleteTotal="0" updateTotal="13" insertTotal="0" indexName="FgsIndex"/>
+</resultPage>
+```
+
+* Type `exit` when finished to exit the container.
+
+---
+
+### Step 18: On Remote Staging - Review and test the Drupal Staging site
+
+* In your web browser, enter this URL: `https://yourprojectnamehere.institution.edu`
   * Please note: You should not see any errors with respect to the SSL certifications. If so, please review your previous steps especially if using Let's Encrypt. You may need to repeat those steps to get rid of the errors.
 
 * Log in to the local Islandora site with the credentials you created in `staging.env` (`DRUPAL_ADMIN_USER` and `DRUPAL_ADMIN_PASS`)

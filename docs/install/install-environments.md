@@ -33,8 +33,8 @@ ISLE endusers will make the appropriate changes to the values found in the ISLE 
       * `config/apache/php_ini/php.local.ini`
       * `config/apache/settings_php/settings.local.php`
       * `config/mysql/ISLE.cnf`
-      * `config/proxy/ssl-certs/yourprojectname-here.localdomain.cert`
-      * `config/proxy/ssl-certs/yourprojectname-here.localdomain.key`
+      * `config/proxy/ssl-certs/yourprojectnamehere.localdomain.cert`
+      * `config/proxy/ssl-certs/yourprojectnamehere.localdomain.key`
       * `config/proxy/traefik.local.toml`
   
   * **Staging**
@@ -47,8 +47,8 @@ ISLE endusers will make the appropriate changes to the values found in the ISLE 
         * If using Let's Encrypt:
            * `acme.json`
         * If using Commercial SSL Certs:
-           * `yourprojectname-here.domain-staging.cert`
-           * `yourprojectname-here.domain-staging.key`
+           * `yourprojectnamehere.domain-staging.cert`
+           * `yourprojectnamehere.domain-staging.key`
       * `config/proxy/traefik.staging.toml`
 
   * **Production**
@@ -61,8 +61,8 @@ ISLE endusers will make the appropriate changes to the values found in the ISLE 
         * If using Let's Encrypt:
            * `acme.json`
         * If using Commercial SSL Certs:
-           * `yourprojectname-here.domain-production.cert`
-           * `yourprojectname-here.domain-production.key`
+           * `yourprojectnamehere.domain-production.cert`
+           * `yourprojectnamehere.domain-production.key`
       * `config/proxy/traefik.production.toml`
 
   * **Test**
