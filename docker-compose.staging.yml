@@ -10,7 +10,7 @@ services:
     container_name: isle-portainer-${CONTAINER_SHORT_ID}
     command: -H unix:///var/run/docker.sock --no-auth
     env_file:
-      - demo.env
+      - staging.env
     networks:
       - isle-internal
     ports:
