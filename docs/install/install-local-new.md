@@ -50,9 +50,9 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 Enable the Local ISLE Installation to be viewed locally on workstation browser as: e.g. `https://yourprojectnamehere.localdomain`.
 
-* Please use these instructions to [Edit the "/etc/hosts" File](../install/install-Local-edit-hosts-file.md).
+* Please use these instructions to [Edit the "/etc/hosts" File](../install/install-demo-edit-hosts-file.md).
 
-* Replace `isle` or `yourprojectnamehere` with your domain / project name e.g. `yourprojectnamehere.localdomain`
+* Replace `isle` or `yourprojectnamehere` with your domain or project name: e.g. `yourprojectnamehere.localdomain`
 
 ---
 

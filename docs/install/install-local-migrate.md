@@ -72,7 +72,7 @@ Prior to attempting this step, do consider the following:
 
 * If the end user is running multi-sites, there will be additional databases to export.
 
-* Do not export the `fedora3` database
+* Do not export the `fedora3` database or any system tables (such as `information_schema`, `performance_schema`, `mysql`)
 
 * If possible, on the production Apache webserver, run `drush cc all` from the command line on the production server in the `/var/www/html` directory PRIOR to any db export(s). Otherwise issues can occur on import due to all cache tables being larger than `innodb_log_file_size` allows
 
@@ -177,9 +177,9 @@ Bind mount in existing transforms and schemas  to override ISLE settings with yo
 
 Enable the Local ISLE Installation to be viewed locally on workstation browser as: e.g. `https://yourprojectnamehere.localdomain`.
 
-* Please use these instructions to [Edit the "/etc/hosts" File](../install/install-Local-edit-hosts-file.md).
+* Please use these instructions to [Edit the "/etc/hosts" File](../install/install-demo-edit-hosts-file.md).
 
-* Replace `isle` or `yourprojectnamehere` with your domain / project name e.g. `yourprojectnamehere.localdomain`
+* Replace `isle` or `yourprojectnamehere` with your domain or project name: e.g. `yourprojectnamehere.localdomain`
 
 ---
 
