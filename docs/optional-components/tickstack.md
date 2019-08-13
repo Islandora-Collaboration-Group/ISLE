@@ -93,7 +93,7 @@ The use and setup of TICK within the ISLE platform is as an optional [sidecar](h
     * [Red Hat / CentOS](https://www.rsyslog.com/rhelcentos-rpms/)
     * [Ubuntu / Debian](https://www.rsyslog.com/ubuntu-repository/)
 
-- (_Optional_) Use some of the "canned" `.tick` (_tickscript_) templates to create dashboards and alerts provided in the `config/tick/chronograf/tickscripts` directory. See the section Templates for more detail. (TO DO)
+- (_Optional_) Use some of the "canned" `.tick` (_tickscript_) templates to create dashboards and alerts provided in the `./config/tick/chronograf/tickscripts` directory. See the section Templates for more detail. (TO DO)
 
 ---
 
@@ -101,7 +101,7 @@ The use and setup of TICK within the ISLE platform is as an optional [sidecar](h
 
 The Telegraf agent used for ISLE has a default configuration which runs the following plugins to monitor various services whether it is on a Production or Staging system.
 
-* To review or configure plugins, edit the `config/tick/telegraf/telegraf.conf` file and navigate to the `INPUT PLUGINS` section starting Line 154.
+* To review or configure plugins, edit the `./config/tick/telegraf/telegraf.conf` file and navigate to the `INPUT PLUGINS` section starting Line 154.
 
 If an ISLE User would like to add a plugin to monitor additional services, please review the additional information below on Telegraf plugins which can be found in two places:
 
@@ -211,9 +211,9 @@ The data from both systems will be collected, analyzed and accessed on / from th
 * You will need to use the `sudo` command or become the `root` user for the steps below. Copying this file allows the Docker Daemon to use the `syslog` driver for log files and reporting to the `telegraf` agent.
 
 - Check if you already have an existing `/etc/docker/daemon.json` file. 
-  * If **YES**, add / merge  the contents of `/ISLE/config/proxy/tick/docker/daemon.json` with your current `/etc/docker/daemon.json` file.
-  * If **NO**, copy `/ISLE/config/proxy/tick/docker/daemon.json` to `/etc/docker/`
-    * Example: `sudo cp /ISLE/config/proxy/tick/docker/daemon.json /etc/docker/`
+  * If **YES**, add / merge  the contents of `./config/tick/docker/daemon.json` with your current `/etc/docker/daemon.json` file.
+  * If **NO**, copy `./config/tick/docker/daemon.json` to `/etc/docker/`
+    * Example: `sudo cp ./config/tick/docker/daemon.json /etc/docker/`
 
 * Restart the Docker service
   * `sudo service docker restart` or `sudo systemctl restart docker`
@@ -225,9 +225,9 @@ The data from both systems will be collected, analyzed and accessed on / from th
 
 * You will need to use the `sudo` command or become the `root` user for the steps below. Copying this file allows the information from the host `syslog` be forwarded to the `telegraf` agent.
 
-- Copy the Telegraf configuration file to the Rsyslog.d directory so Rsyslog will forward logs to the Telegraf agent with correct formatting. Your ISLE project location may be different from the example below.
+- Copy the Telegraf configuration file to the Rsyslog.d directory so Rsyslog will forward logs to the Telegraf agent with correct formatting. Assumes you are in the ISLE project root directory.
   
-  * `sudo cp /ISLE/config/proxy/tick/rsyslog/50-telegraf.conf /etc/rsyslog.d/`
+  * `sudo cp ./config/tick/rsyslog/50-telegraf.conf /etc/rsyslog.d/`
 
 * Please note on `Ubuntu` systems, you will need to also reset the `/var/spool/rsyslog` permissions due to a bug. This has not been observed behavior on `CentOS` Host servers _yet_.
   
@@ -261,6 +261,26 @@ Jun 04 10:56:26 ip-172-31-40-28 rsyslogd[11815]: rsyslogd's groupid changed to 1
 Jun 04 10:56:26 ip-172-31-40-28 rsyslogd[11815]: rsyslogd's userid changed to 102
 Jun 04 10:56:26 ip-172-31-40-28 rsyslogd[11815]:  [origin software="rsyslogd" swVersion="8.32.0" x-pid="11815" x-info="http://www.rsyslog.com"] start
 
+```
+
+* You may find that that rsyslog starts to show errors, this is typically due to the containers not having been start up yet. You will restart this service in a later step to resolve these potential errors. 
+
+```bash
+sudo service rsyslog status
+
+● rsyslog.service - System Logging Service
+   Loaded: loaded (/lib/systemd/system/rsyslog.service; enabled; vendor preset: enabled)
+   Active: active (running) since Tue 2019-08-13 17:15:46 UTC; 8min ago
+     Docs: man:rsyslogd(8)
+           http://www.rsyslog.com/doc/
+ Main PID: 9995 (rsyslogd)
+    Tasks: 5 (limit: 4915)
+   CGroup: /system.slice/rsyslog.service
+           └─9995 /usr/sbin/rsyslogd -n
+
+Aug 13 17:23:22 ip-172-31-69-204 rsyslogd[9995]: action 'action 8' resumed (module 'builtin:omfwd') [v8.32.0 try http://www.rsyslog.com/e/2359 ]
+Aug 13 17:23:32 ip-172-31-69-204 rsyslogd[9995]: omfwd: TCPSendBuf error -2027, destruct TCP Connection to 127.0.0.1:6514 [v8.32.0 try http://www.rsyslog.com/e/2027 ]
+Aug 13 17:23:32 ip-172-31-69-204 rsyslogd[9995]: action 'action 8' suspended (module 'builtin:omfwd'), retry 0. There should be messages before this one giving the reason for suspension. [v8.32.0 try http://www.rsyslog.
 ```
 
 ---
@@ -322,7 +342,7 @@ volumes:
 
 The instructions to setup only the Telegraf Agent on an ISLE system e.g. your Production system are found below in the section called `06. Telegraf Agent (Agent only) installation on Production`.
 
-* You'll need to edit the `config/tick/telegraf/telegraf.conf` to add the following:
+* You'll need to edit the `./config/tick/telegraf/telegraf.conf` to add the following:
   * **Line 76**: `hostname = ""`
     * Enter the name of the server you will be monitoring e.g. `isle-server-staging` or `icg-staging` etc. This value can be a [FQDN](https://kb.iu.edu/d/aiuv), an IP or any name really.
   * **Line 97**: `database = "telegraf"`
@@ -333,6 +353,34 @@ The instructions to setup only the Telegraf Agent on an ISLE system e.g. your Pr
 - Start up the ISLE Docker containers again. `docker-compose up -d`
 
 * Depending on your internet connection, this startup process may take a few minutes, as the new TICK images are being downloaded and started.
+
+* As a precaution, restart the `rsyslog` service once the ISLE Docker containers have reported that they have started up without issue.
+    * `sudo service rsyslog restart` or `sudo systemctl restart rsyslog`
+  
+  * You can check if the service is running
+    * `sudo service rsyslog status`
+    * Note the any previous errors have stopped.
+
+```bash
+
+sudo service rsyslog status
+● rsyslog.service - System Logging Service
+   Loaded: loaded (/lib/systemd/system/rsyslog.service; enabled; vendor preset: enabled)
+   Active: active (running) since Tue 2019-08-13 17:24:49 UTC; 8s ago
+     Docs: man:rsyslogd(8)
+           http://www.rsyslog.com/doc/
+ Main PID: 28257 (rsyslogd)
+    Tasks: 5 (limit: 4915)
+   CGroup: /system.slice/rsyslog.service
+           └─28257 /usr/sbin/rsyslogd -n
+
+Aug 13 17:24:49 ip-172-31-69-204 systemd[1]: Starting System Logging Service...
+Aug 13 17:24:49 ip-172-31-69-204 rsyslogd[28257]: imuxsock: Acquired UNIX socket '/run/systemd/journal/syslog' (fd 3) from systemd.  [v8.32.0]
+Aug 13 17:24:49 ip-172-31-69-204 rsyslogd[28257]: rsyslogd's groupid changed to 106
+Aug 13 17:24:49 ip-172-31-69-204 systemd[1]: Started System Logging Service.
+Aug 13 17:24:49 ip-172-31-69-204 rsyslogd[28257]: rsyslogd's userid changed to 102
+Aug 13 17:24:49 ip-172-31-69-204 rsyslogd[28257]:  [origin software="rsyslogd" swVersion="8.32.0" x-pid="28257" x-info="http://www.rsyslog.com"] start
+```
 
 ---
 
@@ -406,7 +454,7 @@ To install the Telegraf agent on a `Production` system:
 
 * Shut down all running ISLE containers on the Production system
 
-- You'll need to edit the `config/tick/telegraf/telegraf.conf` to add the following:
+- You'll need to edit the `./config/tick/telegraf/telegraf.conf` to add the following:
   * **Line 76**: `hostname = ""`
     * Enter the name of the server you will be monitoring e.g. `isle-server-prod` or `icg-production` etc. This value can be a [FQDN](https://kb.iu.edu/d/aiuv) i.e. `production-server.domain.edu`, an IP or any name really. Recommend a short name to be easily read and understood.
   * **Line 94**: `urls = ["http://influxdb:8086"]`
@@ -449,11 +497,11 @@ Uncommented example:
         tag: "{{.Name}}"
 ```
 
-* Copy the Telegraf configuration file to the Rsyslog.d directory so Rsyslog will forward logs to the Telegraf agent with correct formatting. Your ISLE project location may be different from the example below.
-  * Example: `sudo cp /opt/ISLE/config/tick/rsyslog/50-telegraf.conf /etc/rsyslog.d/50-telegraf.conf`
+* Copy the Telegraf configuration file to the Rsyslog.d directory so Rsyslog will forward logs to the Telegraf agent with correct formatting. Assumes you are in the ISLE project root directory.
+  * Example: `sudo cp ./config/tick/rsyslog/50-telegraf.conf /etc/rsyslog.d/50-telegraf.conf`
 
 - Copy over the Docker log driver configuration and then restart the Docker service.
-  * Example: `sudo cp /opt/ISLE/config/tick/docker/daemon.json /etc/docker/daemon.json`
+  * Example: `sudo cp ./config/tick/docker/daemon.json /etc/docker/daemon.json`
   * `sudo service docker restart`
 
 * Start up the ISLE Docker containers again. `docker-compose up -d`
