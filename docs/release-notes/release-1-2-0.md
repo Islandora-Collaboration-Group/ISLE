@@ -74,7 +74,7 @@
 #### isle-apache
 
 * Server package management updates via `apt-get`
-* Upgraded `PHP` to version `7.1` from `5.61
+* Upgraded `PHP` to version `7.1` from `5.61`
 * Upgraded `FITS` to version `1.4.1`
 * Upgraded `S6 overlay` to `1.22.1`
 * Upgraded `ImageMagick` to version `7.0.8-56`
