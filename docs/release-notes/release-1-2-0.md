@@ -16,7 +16,7 @@
   * New docker-compose files and environment profiles created for:
     * [Demo](../install/install-demo.md) - use this to spin up ISLE quickly just to check it out
     * Local ([new](../install/install-local-new.md), [migrate](../install/install-local-migrate.md)) - use this for a local development environment
-    * Staging ([new](../install/install-staging-new.md), [migrate](../install/install-staging-migrate.md)) -- use this to setup a staging environement for your production website
+    * Staging ([new](../install/install-staging-new.md), [migrate](../install/install-staging-migrate.md)) -- use this to setup a staging environment for your production website
     * Production ([new](../install/install-production-new.md), [migrate](../install/install-production-migrate.md)) - use this for your production environment
     * Test - an environment for ISLE contributors; it includes automated testing code
   * New settings.php and php.ini files for each of the above configurations.
