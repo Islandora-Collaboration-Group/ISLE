@@ -424,7 +424,7 @@ Prior to attempting this step, do consider the following:
   * Shell into your currently running `Staging` MySQL container
     * `docker exec -it yourmysql-container-name bash`
   * Import the Local Drupal database. Replace the `DRUPAL_DB` & `DRUPAL_DB_USER` below in the command with the values found in your `staging.env`.
-    * `mysqldump -u DRUPAL_DB_USER -p DRUPAL_DB < local_drupal_site_082019.sql`
+    * `mysql -u DRUPAL_DB_USER -p DRUPAL_DB < local_drupal_site_082019.sql`
     * Enter the appropriate password: value of `DRUPAL_DB_PASS` in the `staging.env`)
     * This might take a few minutes depending on the size of the file.
     * Exit out of the container when finished.
