@@ -39,7 +39,7 @@ Edit the `/etc/hosts` file to view ISLE locally on a workstation browser.
 
 * From the instructions in setting up the Virtualbox VM on your OS (MacOS, Ubuntu or Windows), the IP used to setup the Host-Only network was `10.10.10.130`
 
-* Add the value of `10.10.10.130 isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain` to the laptop / workstation's `/etc/hosts` file.   
+* Add the value of `10.10.10.130 isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain` to the personal computer's `/etc/hosts` file.   
 
 * For endusers running MacOS and Ubuntu Desktop:
 

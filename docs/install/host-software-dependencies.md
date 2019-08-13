@@ -99,8 +99,8 @@ Your host server is now configured and ready to run ISLE.
 **Please continue by selecting your type of installation:**
 
 - [Demo ISLE Installation](../install/install-demo.md)
-- [Remote Server ISLE Installation](../install/install-server.md)
-- [Migrate to ISLE Environment](../migrate/install-migration.md)
+- [Local ISLE Installation: New Site](../install/install-local-new.md)
+- [Local ISLE Installation: Migrate Existing Islandora Site](../install/install-local-migrate.md)
 
 ---
 
@@ -185,8 +185,8 @@ Your host server is now configured and ready to run ISLE.
 **Please continue by selecting your type of installation:**
 
 - [Demo ISLE Installation](../install/install-demo.md)
-- [Remote Server ISLE Installation](../install/install-server.md)
-- [Migrate to ISLE Environment](../migrate/install-migration.md)
+- [Local ISLE Installation: New Site](../install/install-local-new.md)
+- [Local ISLE Installation: Migrate Existing Islandora Site](../install/install-local-migrate.md)
 
 ---
 
@@ -266,8 +266,8 @@ Your host server is now configured and ready to run ISLE.
 **Please continue by selecting your type of installation:**
 
 - [Demo ISLE Installation](../install/install-demo.md)
-- [Remote Server ISLE Installation](../install/install-server.md)
-- [Migrate to ISLE Environment](../migrate/install-migration.md)
+- [Local ISLE Installation: New Site](../install/install-local-new.md)
+- [Local ISLE Installation: Migrate Existing Islandora Site](../install/install-local-migrate.md)
 
 ---
 
@@ -370,5 +370,5 @@ Your host server is now configured and ready to run ISLE.
 **Please continue by selecting your type of installation:**
 
 - [Demo ISLE Installation](../install/install-demo.md)
-- [Remote Server ISLE Installation](../install/install-server.md)
-- [Migrate to ISLE Environment](../migrate/install-migration.md)
+- [Local ISLE Installation: New Site](../install/install-local-new.md)
+- [Local ISLE Installation: Migrate Existing Islandora Site](../install/install-local-migrate.md)

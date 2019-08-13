@@ -66,3 +66,6 @@ site
 new_structure.md
 passwords.md
 .vagrant
+*.retry
+.vscode
+config/proxy/acme.json
