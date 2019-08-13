@@ -8,7 +8,13 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 ## Assumptions / Prerequisites
 
-* This Demo ISLE Installation is intended for a local workstation.
+* This Demo ISLE Installation is intended for a local laptop or workstation.
+
+* Using ISLE version `1.2.0` or higher
+
+* Using Docker-compose `1.24.0` or higher
+
+* You have already git cloned the ISLE Project to your local workstation.
 
 ---
 
@@ -20,23 +26,35 @@ Enable the Demo ISLE Installation to be viewed locally on workstation browser as
 
 ---
 
-## Step 2: Launch Process
+## Step 2: Download the ISLE images
 
 * Open a `terminal` (Windows: open `PowerShell`)
-* Navigate to your ISLE project directory. (You may already be in this directory if you are coming from the [Software Dependencies](../install/host-software-dependencies.md).)
-* Download and start all ISLE Docker images (_~6 GB of data may take 5-10 minutes_):
-```
-docker-compose up -d
-```
 
-* After the above process is completed:
-    * View only the running containers: `docker ps`
-    * View all containers (both those running and stopped): `docker ps -a`
-    * All containers prefixed with `isle-` are expected to have a `STATUS` of `Up` (for x time). **If any of these are not `UP`, then use [Demo ISLE Installation: Troubleshooting](../install/install-demo-troubleshooting.md) to solve before continuing below.** <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running, oe (c) older exited ISLE containers that maybe should be removed. --->
+* Navigate to your ISLE project directory. (You may already be in this directory if you are coming from the [Software Dependencies](../install/host-software-dependencies.md).)
+
+* Download all of the latest ISLE Docker images (_~6 GB of data may take 5-10 minutes_):
+  * `docker-compose pull`
 
 ---
 
-## Step 3: Run Install Script
+## Step 3: Launch Process
+
+* _Using the same open terminal / Powershell_
+  * `docker-compose up -d`
+  * **Please note:** the “ -d” argument stands for “detached” meaning the command will persist even if you close your terminal or your computer sleeps etc…)
+
+* Please wait a few moments for the stack to fully come up. Approximately 3-5 minutes.
+
+* After the above process is completed using the already open terminal or Powershell again.
+    * View only the running containers: `docker ps`
+    * View all containers (both those running and stopped): `docker ps -a`
+    * All containers prefixed with `isle-` are expected to have a `STATUS` of `Up` (for x time).
+      * **If any of these are not `UP`, then use [Demo ISLE Installation: Troubleshooting](../install/install-troubleshooting.md) to solve before continuing below.**
+      <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running, oe (c) older exited ISLE containers that maybe should be removed. --->
+
+---
+
+## Step 4: Run Islandora / Drupal site Install Script
 
 This process may take 10 - 20 minutes (_depending on system and internet speeds_)
 
@@ -60,7 +78,7 @@ docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isl
 
 ---
 
-## Step 4: Test the Site
+## Step 5: Test the Site
 
 * In your web browser, enter this URL: `https://isle.localdomain`
 <!--- TODO: Add error message and how to proceed (click 'Advanced...') --->
@@ -71,7 +89,7 @@ docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isl
 
 ---
 
-## Step 5: Ingest Sample Objects
+## Step 6: Ingest Sample Objects
 
 The Islandora Collaboration Group provides a set of [Islandora Sample Objects](https://github.com/Islandora-Collaboration-Group/islandora-sample-objects) with corresponding metadata for testing Islandora's ingest process. These sample objects are organized by solution pack and are zipped for faster bulk ingestion.
 
@@ -90,10 +108,20 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
 
 ---
 
-## Step 6: Additional Resources
-* [Demo ISLE Installation: Resources](../install/install-demo-resources.md) contains Docker container passwords and URLs for administrator tools.
-* [Demo ISLE Installation: Troubleshooting](../install/install-demo-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
+## Next Steps
+
+Once you are ready, you may progress to either:
+
+* [Local ISLE Installation: New Site](../install/install-local-new.md)
+
+* [Local ISLE Installation: Migrate Existing Islandora Site](../install/install-local-migrate.md)
 
 ---
 
-## End of Demo ISLE Installation.
+## Additional Resources
+* [Demo ISLE Installation: Resources](../install/install-demo-resources.md) contains Docker container passwords and URLs for administrator tools.
+* [ISLE Installation: Troubleshooting](../install/install-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
+
+---
+
+### End of Demo ISLE Installation

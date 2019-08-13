@@ -10,7 +10,7 @@
 #### Assumptions / Prerequisites
 
 * `mkdocs` and `mkdocs-material` theme are installed following the [Installing Mkdocs](../contributor-docs/mkdocs.md) documentation.
-* The ISLE project directory has been cloned to the end user's laptop / workstation in an appropriate Code or Project Directory.
+* The ISLE project directory has been cloned to the end user's personal computer in an appropriate Code or Project Directory.
    * `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
 * Familiarity or comfortability with git and cli commands.
 * End user has a web browser opened to this URL: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)

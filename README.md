@@ -11,25 +11,26 @@ ISLE is quite flexible and may be run on an institution’s servers or in the cl
 Please use the [ISLE Documentation](https://islandora-collaboration-group.github.io/ISLE) for using ISLE to install Islandora on server environments.
 
 ## Quick Start Guide
-**Important:** This "Quick Start Guide" is for testing ISLE and **should not** be used in production. 
+**Important:** This "Quick Start Guide" is for testing ISLE and **should not** be used in production.
 
 ### Requirements  
-* Docker-CE or EE
-* Docker-compose
-* Git
+* Docker-CE or EE version `18.09.x`+
+* [Docker-compose](https://docs.docker.com/compose/install/) version `1.24.0`+
+* Git `2.0+`
 * Time required < 30 minutes.
 * **Windows Users**: Please open the .env and uncomment `COMPOSE_CONVERT_WINDOWS_PATHS=1`
 
 ### Quick Start
 1. Please read: [ISLE Release Candidate (RC): How to Test](https://docs.google.com/document/d/1VUiI_bXo6SLqqUjmInVjBg3-cs40Vj7I_92txjFUoQg/edit#heading=h.1e4943m60lsh)
 2. Clone this repo
-    - `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git` 
+    - `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
 3. Change directory to the cloned directory:
     - `cd ISLE` (by default)
 4. Pull the latest images:
     - `docker-compose pull`
 5. Launch the ISLE stack:
     - `docker-compose up -d`
+    * **Please note:** the “ -d” argument stands for “detached” meaning the command will persist even if you close your terminal or your computer sleeps etc…)
 6. Please wait a few moments for the stack to fully come up.  Approximately 3-5 minutes.
 7. Install Islandora on the isle-apache-ld container:
     - `docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh`
@@ -38,7 +39,7 @@ Please use the [ISLE Documentation](https://islandora-collaboration-group.github
 
 ### Quick Stop and Cleanup 
 If you have been testing the stack extensively you may want to `prune` your Docker daemon as you test.
-1. In the folder with the `docker-compose.yml`
+1. In the folder with the `docker-compose.demo.yml`
     - `docker-compose down -v`
 - If you would like to *completely clean your docker-daemon*:
 2. If you have no other _stopped_ services that you do not want `pruned` on Docker:
@@ -96,12 +97,11 @@ Portainer's authentication can be configured:
 * Gavin Morris, Born-Digital
 * Shaun Trujillo, Mount Holyoke College
 
-## Former Contributors	
-- Carolyn Moritz, Vassar College	
-- Benjamin Rosner (Lead Maintainer 2018-19), Barnard College	
-- Steve Young, Hamilton College
+## Former Contributors
+* Carolyn Moritz, Vassar College
+* Benjamin Rosner (Lead Maintainer 2018-19), Barnard College
+* Steve Young, Hamilton College
 
 ## Contributing to ISLE
 * [Islandora ISLE Interest Group](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group) - Meetings open to everybody! [Schedule](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group/#how-to-join) is alternating Wednesdays, 3:00pm EDT
 * [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle) - Post your questions here and subscribe for updates, meeting announcements, and technical support$
-
