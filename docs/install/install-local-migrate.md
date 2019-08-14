@@ -140,7 +140,7 @@ Bind mount in existing transforms and schemas  to override ISLE settings with yo
 
 * Run the Demo ISLE briefly to pull files for modification and correct ISLE system paths.
   * You can find these paths by running the Demo and copying these files out to an appropriate location. 
-    * `docker cp isle-fedora-ld:/usr/local/solr/collection1/conf/schema.xml schema.xml`
+    * `docker cp isle-solr-ld:/usr/local/solr/collection1/conf/schema.xml schema.xml`
     * `docker cp isle-fedora-ld:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/foxmlToSolr.xslt foxmlToSolr.xslt`
     * `docker cp isle-fedora-ld:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms islandora_transforms`
 
