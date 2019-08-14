@@ -1,4 +1,4 @@
-# Demo ISLE Installation: Troubleshooting
+# ISLE Installation: Troubleshooting
 
 **Please select a topic:**
 
@@ -39,13 +39,13 @@ If you don't see all containers running, then stop the running containers with `
 
 *  MySQL image pull & container launch
 
-    `docker pull islandoracollabgroup/isle-mysql:1.1`
+    `docker pull islandoracollabgroup/isle-mysql:1.2.0`
 
     `docker-compose up -d mysql`
 
 *  Fedora image pull & container launch
 
-    `docker pull islandoracollabgroup/isle-fedora:1.1`
+    `docker pull islandoracollabgroup/isle-fedora:1.2.0`
 
     `docker-compose up -d fedora`
 
@@ -64,15 +64,37 @@ If you don't see all containers running, then stop the running containers with `
 
 * Solr image pull & container launch
 
-    `docker pull islandoracollabgroup/isle-solr:1.1`
+    `docker pull islandoracollabgroup/isle-solr:1.2.0`
 
     `docker-compose up -d solr`
 
 * Apache image pull & container launch
 
-    `docker pull islandoracollabgroup/isle-apache:1.1`
+    `docker pull islandoracollabgroup/isle-apache:1.2.0`
 
     `docker-compose up -d apache`
 
+## Viewing Logs in ISLE 1.2.0
 
+As of ISLE release logging to physical file has been turned off, stdout & stderr are to console only no more physical files. This means if you need to view logs for debugging, here are some methods:
+
+* [Docker method:](https://docs.docker.com/engine/reference/commandline/logs/) (_when using the Docker json driver and TICK is not on_)
+  * Single container: `docker logs -f <container-name>`
+  * All containers: `docker logs --tail=0 --follow`
+
+* [Docker-compose method:(https://docs.docker.com/compose/reference/logs/)] (when using the Docker json driver and TICK is not on)
+Single container: docker-compose logs -f  <container-name>
+All containers: docker-compose logs --tail=0 --follow
+
+* Use the [TICK Log viewer](../optional-components/tickstack.md) if TICK is setup and using the Docker syslog driver (Production / Staging only) 
+
+---
+
+Pick one of the following:
 **Return to [Demo ISLE Installation](../install/install-demo.md).**
+**Return to [Local ISLE Installation: New site](../install/install-local-new.md).**
+**Return to [Local ISLE Installation: Migrate existing Islandora site](../install/install-local-migrate.md).**
+**Return to [Staging ISLE Installation: New site](../install/install-staging-new.md).**
+**Return to [Staging ISLE Installation: Migrate existing Islandora site](../install/install-staging-migrate.md).**
+**Return to [Production ISLE Installation: New site](../install/install-production-new.md).**
+**Return to [Production ISLE Installation: Migrate existing Islandora site](../install/install-production-migrate.md).**

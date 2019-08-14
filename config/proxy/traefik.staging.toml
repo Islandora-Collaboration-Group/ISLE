@@ -23,9 +23,20 @@ defaultEntryPoints = ["http", "https"]
   [entryPoints.https]
   address = ":443"
     [entryPoints.https.tls]
-      [[entryPoints.https.tls.certificates]]
-      certFile = "/certs/isle.localdomain.cert"
-      keyFile = "/certs/isle.localdomain.key"
+
+# To use a Let's Encrypt SSL certificate
+# Leave this above section [entryPoints] as is / untouched
+# Scroll down to the Let's Encrypt section and uncomment all lines starting with [acme]
+# Modify values as needed or directed.
+# 
+# To use a Commercial SSL certificate
+# Replace .pem & .key with the name of your Staging SSL certificate and associated key
+# Do note the positioning of the added lines. Third character indentation.
+# Example: 
+#    [entryPoints.https.tls]
+#      [[entryPoints.https.tls.certificates]]
+#      certFile = "/certs/sitename-staging.institution.edu.pem"
+#      keyFile = "/certs/sitename-staging.institution.edu.key"
 
 ################################################################
 # Traefik logs configuration
@@ -36,7 +47,7 @@ defaultEntryPoints = ["http", "https"]
 #
 # Optional
 #
-# [traefikLog]
+[traefikLog]
 
 # Sets the filepath for the traefik log. If not specified, stdout will be used.
 # Intermediate directories are created if necessary.
@@ -44,14 +55,14 @@ defaultEntryPoints = ["http", "https"]
 # Optional
 # Default: os.Stdout
 #
-# filePath = "log/traefik.log"
+#filePath = "/etc/traefik/traefik_logs/traefik.log"
 
 # Format is either "json" or "common".
 #
 # Optional
 # Default: "common"
 #
-# format = "common"
+format = "common"
 
 ################################################################
 # Access logs configuration
@@ -63,7 +74,7 @@ defaultEntryPoints = ["http", "https"]
 #
 # Optional
 #
-# [accessLog]
+[accessLog]
 
 # Sets the file path for the access log. If not specified, stdout will be used.
 # Intermediate directories are created if necessary.
@@ -71,14 +82,14 @@ defaultEntryPoints = ["http", "https"]
 # Optional
 # Default: os.Stdout
 #
-# filePath = "/path/to/log/log.txt"
+#filePath = "/etc/traefik/traefik_logs/access.log"
 
 # Format is either "json" or "common".
 #
 # Optional
 # Default: "common"
 #
-# format = "common"
+format = "common"
 
 ################################################################
 # API and dashboard configuration
@@ -126,3 +137,20 @@ watch = true
 # Default: false
 #
 # swarmmode = false
+
+################################################################
+# Letsencrypt / acme / certbot configuration backend
+################################################################
+#
+# Uncomment to use Letsencrypt instead of self-signed or commercial SSLs.
+# Change settings as needed. The email used should be for an admin level user or group account.
+# For additional reference please see: https://docs.traefik.io/configuration/acme/
+# 
+#[acme]
+#  email = "admin@sitename-staging.institution.edu"
+#  storage = "acme.json"
+#  entryPoint = "https"
+#  onHostRule = true
+#  onDemand = false
+#    [acme.httpChallenge]
+#    entryPoint = "http"
