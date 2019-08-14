@@ -42,6 +42,46 @@
   * Use the TICK Log viewer if TICK is setup and using the Docker syslog driver. Please read the 
     ISLE TICK documentation to see how to set this up [TICK Stack Page](../optional-components/tickstack.md)
 
+### Upgrade
+
+If you are coming from ISLE releases `1.1.1` & `1.1.2` - there will be some additional steps to take to migrate to this new release. 
+
+* We recommend that you also review the following:
+  * [ISLE Installation: Environments](../install/install-environments.md)
+  * [Update ISLE](../update/update.md) documentation as well. 
+
+The following files will need you to review, edit and/or merge in previous settings:
+
+* `.env` - All previous variables with the exception of the four below have been moved to the demo, local, staging and production .env files. By default this file will be set to the demo environment. 
+  * Default settings for ISLE. Change for other environments as needed.
+
+```bash
+COMPOSE_PROJECT_NAME=isle_demo
+BASE_DOMAIN=isle.localdomain
+CONTAINER_SHORT_ID=ld
+COMPOSE_FILE=docker-compose.demo.yml
+```
+  * You'll need to change the settings above to match whatever ISLE environment you would like. You'll need to copy over the settings from your previous local, Staging and Production. Please note on Staging and Production, you'll be making a local commit but NOT pushing back to your main ISLE git repository. 
+
+* All other users, names and passwords from your previous ISLE 1.1.1 & 1.1.2 `.env` will now need to be copied into the new environment .env files
+  * `demo.env` - Prepopulated. Nothing to change.
+  * `local.env` - Copy over all users, names and passwords from your previous `Local` ISLE 1.1.1 & 1.1.2 `.env` to the appropriate variable. Remove the comments and replace with the appropriate `Local` values.
+  * `staging.env` - Copy over all users, names and passwords from your previous `Staging` ISLE 1.1.1 & 1.1.2 `.env` to the appropriate variable. Remove the comments and replace with the appropriate `Staging` values.
+  * `production.env` - Copy over all users, names and passwords from your previous `Production` ISLE 1.1.1 & 1.1.2 `.env` to the appropriate variable. Remove the comments and replace with the appropriate `Production` values.
+
+* `docker-compose.yml` - This file no longer exists in ISLE 1.2.0 and has been replaced by new docker-compose files and environment profiles created for:
+  * **Demo** - `docker-compose.demo.yml` - use this to spin up ISLE quickly just to check it out.
+  * **Local** - `docker-compose.local.yml` - use this for a local development environment. 
+    * Copy over your previous ISLE Local docker-compose.yml settings as needed and merge into this file.
+  * **Staging** - `docker-compose.staging.yml` -- use this for your staging environment. 
+    * Copy over your previous ISLE Staging docker-compose.yml settings as needed and merge into this file.
+  * **Production** - `docker-compose.production.yml`- use this for your production environment.
+    * Copy over your previous ISLE Production docker-compose.yml settings as needed and merge into this file.
+
+* There are also new `./config/apache/settings_php/settings.*.php` files used in ISLE 1.2.0 which are also seperated by enviornment e.g. `settings.local.php` etc.
+  * As instructed above, you'll need to ensure that for every `settings.*.php` file, the values from your previous `.env` file are copied in here as well.
+  * Within the new `settings.*.php` files, search for two sections called `ISLE Configuration`. Follow the inline instructions as directed to determine which values should be copied in.
+
 ### ISLE Docker Images
 
 #### isle-tomcat
