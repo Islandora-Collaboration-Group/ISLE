@@ -12,7 +12,7 @@
 ### ISLE (main project)
 
 * New structure for launching [ISLE environments](../install/install-environments.md). 
-  This allows guidance in how one would configure ISLE for different scenarios.  If you are upgrading from ISLE versions 1.1.1 or 1.1.2, see the [upgrade instructions](../update/update.md) to configure your existing environments for the updated workflow.
+  This allows guidance in how one would configure ISLE for different scenarios.
   * New docker-compose files and environment profiles created for:
     * [Demo](../install/install-demo.md) - use this to spin up ISLE quickly just to check it out
     * Local ([new](../install/install-local-new.md), [migrate](../install/install-local-migrate.md)) - use this for a local development environment
