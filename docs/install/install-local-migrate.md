@@ -111,26 +111,9 @@ Bind mount in existing transforms and schemas  to override ISLE settings with yo
   * Gsearch `foxmltoSolr.xslt` file
   * Gsearch `islandora_transforms`
 
-* Once Step 2 has been completed and the ISLE project is cloned to your laptop and checked into git, create a new directory in:
-  * `config/solr`
-  * `config/fedora/gsearch`
-
-* Move your `schema.xml` file into `config/solr/`
-
-* Move your `foxmltoSolr.xslt` file & `islandora_transforms` directory into `config/fedora/gsearch/`
-
-* Add a new line in the Solr volumes section of your `docker-compose.local.yml`
-  * `config/solr/schema.xml:/usr/local/solr/collection1/conf/schema.xml`
-
-* Add new lines in the Fedora volumes section of your `docker-compose.local.yml`
-```bash
-- ./config/fedora/gsearch/islandora_transforms:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms`
-- ./config/fedora/gsearch/foxmlToSolr.xslt:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/foxmlToSolr.xslt`
-```
+  * Keep the files you create during this process; you will need them again for `Step 2a` (below)!
 
 * **Please note:** You may need to further review paths in these above files and edit them to match ISLE system paths.  
-
-* Continue the local setup as directed below and ultimately import some objects from your existing Fedora repository and see if they display properly in searches as you like.
 
 ##### (**Advanced**) - Diff & merge current production customization edits into ISLE configs
 * Copy these current production files and directory to your local laptop in an appropriate location.
@@ -139,7 +122,7 @@ Bind mount in existing transforms and schemas  to override ISLE settings with yo
   * Gsearch `islandora_transforms`
 
 * Run the Demo ISLE briefly to pull files for modification and correct ISLE system paths.
-  * You can find these paths by running the Demo and copying these files out to an appropriate location. 
+  * You can find these paths by running the Demo and copying these files out to an appropriate location.
     * `docker cp isle-solr-ld:/usr/local/solr/collection1/conf/schema.xml schema.xml`
     * `docker cp isle-fedora-ld:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/foxmlToSolr.xslt foxmlToSolr.xslt`
     * `docker cp isle-fedora-ld:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms islandora_transforms`
@@ -151,25 +134,7 @@ Bind mount in existing transforms and schemas  to override ISLE settings with yo
 
 * Look for edits and comments that indicate specific customization and make note of the differences.
   * Merge in the customizations into the ISLE versions.
-
-* Once Step 2 has been completed  and the ISLE project is cloned to your laptop and checked into git, create a new directory in:
-  * `config/solr`
-  * `config/fedora/gsearch`
-
-* Move your newly edited `schema.xml` file into the `config/solr/` directory.
-
-* Move your newly edited `foxmltoSolr.xslt` file & `islandora_transforms` directory into the `config/fedora/gsearch/` directory
-
-* Add a new line in the Solr volumes section of your `docker-compose.local.yml`
-  * `config/solr/schema.xml:/usr/local/solr/collection1/conf/schema.xml`
-
-* Add new lines in the Fedora volumes section of your `docker-compose.local.yml`
-```bash
-- ./config/fedora/gsearch/islandora_transforms:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms
-- ./config/fedora/gsearch/foxmlToSolr.xslt:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/foxmlToSolr.xslt
-```
-
-* Continue the local setup as directed below and ultimately import some objects from your existing Fedora repository and see if they display properly in searches as you like.
+  * Keep the files you create during this merge process; you will need them again for `Step 2a` (below)!
 
 ---
 
@@ -183,12 +148,13 @@ Enable the Local ISLE Installation to be viewed locally on workstation browser a
 
 ---
 
-## Step 2: Setup git for the ISLE project
+## Step 2: Setup `git` for the ISLE Project
 
 **Please note:** The commands given below are for command line usage of git. GUI based clients such as the [SourceTree App](https://www.sourcetreeapp.com/) may be easier for endusers to use for the git process.
 
-* Within your git repository provider / hoster e.g [Github](https://github.com), [Bitbucket](https://bitbucket.org/), [Gitlab](https://gitlab.com), create this new empty git repositories:
+* Within your git repository provider / hoster e.g [Github](https://github.com), [Bitbucket](https://bitbucket.org/), [Gitlab](https://gitlab.com), create these new empty git repositories, if they do not already exist:
   1. ISLE project config - e.g. `yourprojectnamehere-isle`
+  2. Drupal / Islandora code - e.g. `yourprojectnamehere-islandora`
 
 The git project name can be your institution name or the name of the collections you plan to deploy; your choice entirely. A very clear distinction between the ISLE and Islandora code should be made in the repo name. Do not confuse or label Drupal / Islandora site code as ISLE and vice-versa.
 
@@ -197,12 +163,14 @@ The git project name can be your institution name or the name of the collections
   * Navigate to an directory that will house your new ISLE project directory using the `cd` command.
   * `git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git`
 
+
 * Navigate to this directory
-  * `cd /path/to/your/repo`
+  * `cd /path/to/your/repo`  
+
 
 * Add the ICG ISLE git repository as a git upstream. (_the code below is a real path and command_)
   * `git remote add icg-upstream https://github.com/Islandora-Collaboration-Group/ISLE.git`
-  * you can check by running this command: `git remote -v`
+  * You can check by running this command: `git remote -v`  
 
 ```bash  
 icg-upstream	https://github.com/Islandora-Collaboration-Group/ISLE.git (fetch)
@@ -211,18 +179,46 @@ origin	https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-i
 origin	https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git (push)
 ```
 
-* Run a git fetch
+* Run a git fetch  
   * `git fetch icg-upstream`
+
 
 * Pull down the ICG ISLE `master` branch into your local project's `master` branch
   * `git pull icg-upstream master`
-  * if you `ls -lha` in this directory, you'll now have code.
+  * if you `ls -lha` in this directory, you'll now have code.  
 
-* Push this code to your online git provider ISLE
+
+* Push this code to your online git provider ISLE  
   * `git push -u origin master`
   * This will take 2 - 5 mins depending on your internet speed.
 
+
 * Now you have the current ISLE project code checked into git as foundation to make changes on specific to your local and project needs. You'll use this git upstream `icg-upstream` and process in the future to pull updates / releases from the main ISLE project.
+
+### Step 2a: Add Customizations from `Step 0`
+In your local `ISLE` directory (`cd /path/to/your/repo`) create new directories under `./config` to hold the Solr and GSearch files you retrieved in `Step 0`.  Generally this can be done like so:
+
+```
+mkdir -p ./config/solr
+mkdir -p ./config/fedora/gsearch
+```
+
+* Copy your `schema.xml` file from `Step 0` into the new `./config/solr/` directory.
+
+* Copy your `foxmltoSolr.xslt` file and `islandora_transforms` directory from `Step 0` into the `config/fedora/gsearch/` directory.
+
+* Add a new line in the Solr volumes section of your `docker-compose.local.yml`  
+```
+  - config/solr/schema.xml:/usr/local/solr/collection1/conf/schema.xml`  
+```
+
+* Add new lines in the Fedora volumes section of your `docker-compose.local.yml`  
+```
+  - ./config/fedora/gsearch/islandora_transforms:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms
+  - ./config/fedora/gsearch/foxmlToSolr.xslt:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/foxmlToSolr.xslt
+```
+
+Continue the local setup as directed below and ultimately import some objects from your existing Fedora repository and see if they display properly in searches as you like.
 
 ---
 
