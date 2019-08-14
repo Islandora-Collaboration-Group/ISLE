@@ -834,6 +834,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#upgrade" title="Upgrade" class="md-nav__link">
+    Upgrade
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#isle-docker-images" title="ISLE Docker Images" class="md-nav__link">
     ISLE Docker Images
   </a>
@@ -999,6 +1006,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#upgrade" title="Upgrade" class="md-nav__link">
+    Upgrade
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#isle-docker-images" title="ISLE Docker Images" class="md-nav__link">
     ISLE Docker Images
   </a>
@@ -1122,6 +1136,61 @@
 </li>
 <li>Use the TICK Log viewer if TICK is setup and using the Docker syslog driver. Please read the 
     ISLE TICK documentation to see how to set this up <a href="../../optional-components/tickstack/">TICK Stack Page</a></li>
+</ul>
+<h3 id="upgrade">Upgrade</h3>
+<p>If you are coming from ISLE releases <code>1.1.1</code> &amp; <code>1.1.2</code> - there will be some additional steps to take to migrate to this new release. </p>
+<ul>
+<li>We recommend that you also review the following:</li>
+<li><a href="../../install/install-environments/">ISLE Installation: Environments</a></li>
+<li><a href="../../update/update/">Update ISLE</a> documentation as well. </li>
+</ul>
+<p>The following files will need you to review, edit and/or merge in previous settings:</p>
+<ul>
+<li><code>.env</code> - All previous variables with the exception of the four below have been moved to the demo, local, staging and production .env files. By default this file will be set to the demo environment. </li>
+<li>Default settings for ISLE. Change for other environments as needed.</li>
+</ul>
+<pre><code class="bash">COMPOSE_PROJECT_NAME=isle_demo
+BASE_DOMAIN=isle.localdomain
+CONTAINER_SHORT_ID=ld
+COMPOSE_FILE=docker-compose.demo.yml
+</code></pre>
+
+<ul>
+<li>
+<p>You'll need to change the settings above to match whatever ISLE environment you would like. You'll need to copy over the settings from your previous local, Staging and Production. Please note on Staging and Production, you'll be making a local commit but NOT pushing back to your main ISLE git repository. </p>
+</li>
+<li>
+<p>All other users, names and passwords from your previous ISLE 1.1.1 &amp; 1.1.2 <code>.env</code> will now need to be copied into the new environment .env files</p>
+</li>
+<li><code>demo.env</code> - Prepopulated. Nothing to change.</li>
+<li><code>local.env</code> - Copy over all users, names and passwords from your previous <code>Local</code> ISLE 1.1.1 &amp; 1.1.2 <code>.env</code> to the appropriate variable. Remove the comments and replace with the appropriate <code>Local</code> values.</li>
+<li><code>staging.env</code> - Copy over all users, names and passwords from your previous <code>Staging</code> ISLE 1.1.1 &amp; 1.1.2 <code>.env</code> to the appropriate variable. Remove the comments and replace with the appropriate <code>Staging</code> values.</li>
+<li>
+<p><code>production.env</code> - Copy over all users, names and passwords from your previous <code>Production</code> ISLE 1.1.1 &amp; 1.1.2 <code>.env</code> to the appropriate variable. Remove the comments and replace with the appropriate <code>Production</code> values.</p>
+</li>
+<li>
+<p><code>docker-compose.yml</code> - This file no longer exists in ISLE 1.2.0 and has been replaced by new docker-compose files and environment profiles created for:</p>
+</li>
+<li><strong>Demo</strong> - <code>docker-compose.demo.yml</code> - use this to spin up ISLE quickly just to check it out.</li>
+<li><strong>Local</strong> - <code>docker-compose.local.yml</code> - use this for a local development environment. <ul>
+<li>Copy over your previous ISLE Local docker-compose.yml settings as needed and merge into this file.</li>
+</ul>
+</li>
+<li><strong>Staging</strong> - <code>docker-compose.staging.yml</code> -- use this for your staging environment. <ul>
+<li>Copy over your previous ISLE Staging docker-compose.yml settings as needed and merge into this file.</li>
+</ul>
+</li>
+<li>
+<p><strong>Production</strong> - <code>docker-compose.production.yml</code>- use this for your production environment.</p>
+<ul>
+<li>Copy over your previous ISLE Production docker-compose.yml settings as needed and merge into this file.</li>
+</ul>
+</li>
+<li>
+<p>There are also new <code>./config/apache/settings_php/settings.*.php</code> files used in ISLE 1.2.0 which are also seperated by enviornment e.g. <code>settings.local.php</code> etc.</p>
+</li>
+<li>As instructed above, you'll need to ensure that for every <code>settings.*.php</code> file, the values from your previous <code>.env</code> file are copied in here as well.</li>
+<li>Within the new <code>settings.*.php</code> files, search for two sections called <code>ISLE Configuration</code>. Follow the inline instructions as directed to determine which values should be copied in.</li>
 </ul>
 <h3 id="isle-docker-images">ISLE Docker Images</h3>
 <h4 id="isle-tomcat">isle-tomcat</h4>
