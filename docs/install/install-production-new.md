@@ -32,7 +32,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 * You have already provisioned a remote ISLE hosts server and have documented its IP address.
   * You may have used the [ISLE Ansible script](https://github.com/Islandora-Collaboration-Group/ISLE-Ansible) to accomplish this.
   * If doing this manually, please review the following to ensure the remote Production ISLE host server has all dependencies e.g. CPU, memory and disk space prior to deploying the ISLE Production environment profile for deploy
-    * [Hardware Requirements](host-hardware-dependencies.md)
+    * [Hardware Requirements](host-hardware-requirements.md)
     * [Software Dependencies](host-software-dependencies.md)
   * This server should be running at the time of deploy.
   * This server has enough disk space to store a large Fedora repository e.g. 1 - 5 TB or larger depending on how many objects you plan on ingesting.  
