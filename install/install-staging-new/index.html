@@ -1,0 +1,2056 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Documentation for Islandora Enterprise (ISLE)">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0, mkdocs-material-3.0.3">
+    
+    
+      
+        <title>Staging Installation: New Site - Islandora Enterprise (ISLE)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+      <link rel="stylesheet" href="../../extra.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="../../#staging-isle-installation-new-site" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="Islandora Enterprise (ISLE)" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Islandora Enterprise (ISLE)
+              </span>
+              <span class="md-header-nav__topic">
+                Staging Installation: New Site
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="Islandora Enterprise (ISLE)" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Islandora Enterprise (ISLE)
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Get Started" class="md-nav__link">
+      Get Started
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Install ISLE
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Install ISLE
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../host-hardware-requirements/" title="1. Hardware Requirements" class="md-nav__link">
+      1. Hardware Requirements
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../host-software-dependencies/" title="2. Software Dependencies" class="md-nav__link">
+      2. Software Dependencies
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install-demo/" title="3. Demo ISLE Installation" class="md-nav__link">
+      3. Demo ISLE Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4" checked>
+    
+    <label class="md-nav__link" for="nav-2-4">
+      4. ISLE Installation
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        4. ISLE Installation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install-environments/" title="ISLE Environments" class="md-nav__link">
+      ISLE Environments
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install-local-new/" title="Local Installation: New Site" class="md-nav__link">
+      Local Installation: New Site
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install-local-migrate/" title="Local Installation: Migrate Islandora Site" class="md-nav__link">
+      Local Installation: Migrate Islandora Site
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Staging Installation: New Site
+      </label>
+    
+    <a href="./" title="Staging Installation: New Site" class="md-nav__link md-nav__link--active">
+      Staging Installation: New Site
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#assumptions-prerequisites" title="Assumptions / Prerequisites" class="md-nav__link">
+    Assumptions / Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#index-of-instructions" title="Index of Instructions" class="md-nav__link">
+    Index of Instructions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#on-local-configure-the-isle-staging-environment-profile-for-deploy-to-remote" title="On Local - Configure the ISLE Staging environment profile for deploy to Remote" class="md-nav__link">
+    On Local - Configure the ISLE Staging environment profile for deploy to Remote
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-on-local-export-the-local-mysql-database" title="Step 1: On Local - Export the Local MySQL database" class="md-nav__link">
+    Step 1: On Local - Export the Local MySQL database
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-drupal-site-database-export-process" title="Local Drupal site database export process" class="md-nav__link">
+    Local Drupal site database export process
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-on-local-shutdown-any-local-containers-review-local-code" title="Step 2: On Local - Shutdown any local containers &amp; review local code" class="md-nav__link">
+    Step 2: On Local - Shutdown any local containers &amp; review local code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-on-local-create-new-users-and-passwords-by-editing-stagingenv" title="Step 3: On Local - Create new users and passwords by editing staging.env" class="md-nav__link">
+    Step 3: On Local - Create new users and passwords by editing staging.env
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-on-local-review-and-edit-docker-composestagingyml" title="Step 4: On Local - Review and edit docker-compose.staging.yml" class="md-nav__link">
+    Step 4: On Local - Review and edit docker-compose.staging.yml
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4a-on-local-optional-changes-for-docker-composestagingyml" title="Step 4A: On Local - (Optional) changes for docker-compose.staging.yml" class="md-nav__link">
+    Step 4A: On Local - (Optional) changes for docker-compose.staging.yml
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-on-local-staging-if-using-commercial-ssls" title="Step 5: On Local Staging - If using Commercial SSLs" class="md-nav__link">
+    Step 5: On Local Staging - If using Commercial SSLs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-6-on-local-commit-isle-code-to-git-repository" title="Step 6: On Local - Commit ISLE code to git repository" class="md-nav__link">
+    Step 6: On Local - Commit ISLE code to git repository
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#on-remote-staging-configure-the-isle-staging-environment-profile-for-launch-and-usage" title="On Remote Staging - Configure the ISLE Staging environment profile for launch and usage" class="md-nav__link">
+    On Remote Staging - Configure the ISLE Staging environment profile for launch and usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-7-on-remote-staging-git-clone-the-isle-repository-to-the-remote-staging-isle-host-server" title="Step 7: On Remote Staging - Git clone the ISLE repository to the remote Staging ISLE host server" class="md-nav__link">
+    Step 7: On Remote Staging - Git clone the ISLE repository to the remote Staging ISLE host server
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-8-on-remote-staging-create-the-appropriate-local-data-paths-for-apache-fedora-and-log-data" title="Step 8: On Remote Staging - Create the appropriate local data paths for Apache, Fedora and log data" class="md-nav__link">
+    Step 8: On Remote Staging - Create the appropriate local data paths for Apache, Fedora and log data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-9-on-remote-staging-clone-your-islandora-code" title="Step 9: On Remote Staging - Clone your Islandora code" class="md-nav__link">
+    Step 9: On Remote Staging - Clone your Islandora code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-10-on-remote-staging-copy-over-the-local-drupal-files-directory" title="Step 10: On Remote Staging - Copy over the Local Drupal files directory" class="md-nav__link">
+    Step 10: On Remote Staging - Copy over the Local Drupal files directory
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-11-on-remote-staging-if-using-lets-encrypt" title="Step 11: On Remote Staging - If using Let's Encrypt" class="md-nav__link">
+    Step 11: On Remote Staging - If using Let's Encrypt
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-12-on-remote-staging-edit-the-env-file-to-change-to-the-staging-environment" title="Step 12: On Remote Staging - Edit the .env file to change to the Staging environment" class="md-nav__link">
+    Step 12: On Remote Staging - Edit the .env file to change to the Staging environment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-13-on-remote-staging-download-the-isle-images" title="Step 13: On Remote Staging - Download the ISLE images" class="md-nav__link">
+    Step 13: On Remote Staging - Download the ISLE images
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-14-on-remote-staging-start-containers" title="Step 14: On Remote Staging - Start Containers" class="md-nav__link">
+    Step 14: On Remote Staging - Start Containers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-15-on-remote-staging-import-the-local-mysql-drupal-database" title="Step 15: On Remote Staging - Import the Local MySQL Drupal database" class="md-nav__link">
+    Step 15: On Remote Staging - Import the Local MySQL Drupal database
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-drupal-site-database-import-process" title="Local Drupal site database import process" class="md-nav__link">
+    Local Drupal site database import process
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-16-on-remote-staging-run-the-fix-permissionssh-script" title="Step 16: On Remote Staging - Run the fix-permissions.sh script" class="md-nav__link">
+    Step 16: On Remote Staging - Run the fix-permissions.sh script
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-17-on-remote-staging-review-and-test-the-drupal-staging-site" title="Step 17: On Remote Staging - Review and test the Drupal Staging site" class="md-nav__link">
+    Step 17: On Remote Staging - Review and test the Drupal Staging site
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" title="Next Steps" class="md-nav__link">
+    Next Steps
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-resources" title="Additional Resources" class="md-nav__link">
+    Additional Resources
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#end-of-staging-isle-installation-new-site" title="End of Staging ISLE Installation: New Site" class="md-nav__link">
+    End of Staging ISLE Installation: New Site
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install-staging-migrate/" title="Staging Installation: Migrate Existing Islandora Site" class="md-nav__link">
+      Staging Installation: Migrate Existing Islandora Site
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install-production-new/" title="Production Installation: New Site" class="md-nav__link">
+      Production Installation: New Site
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install-production-migrate/" title="Production Installation: Migrate Existing Islandora Site" class="md-nav__link">
+      Production Installation: Migrate Existing Islandora Site
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install-troubleshooting/" title="Troubleshooting Installations" class="md-nav__link">
+      Troubleshooting Installations
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../update/update/" title="Update ISLE" class="md-nav__link">
+      Update ISLE
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Appendices
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Appendices
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/data-persistence/" title="Data Persistence in Docker" class="md-nav__link">
+      Data Persistence in Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/glossary/" title="Glossary" class="md-nav__link">
+      Glossary
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/installing-module-with-composer/" title="Installing a Drupal Module with Composer" class="md-nav__link">
+      Installing a Drupal Module with Composer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/installing-module-with-drush/" title="Installing a Drupal Module with Drush" class="md-nav__link">
+      Installing a Drupal Module with Drush
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://docs.google.com/document/d/1r-I9n8mUhlJ5Z-X9AO-RrikhzH6I8bTPIL25LmtRbxE" title="Installing on Google Cloud Platform (Google Doc)" class="md-nav__link">
+      Installing on Google Cloud Platform (Google Doc)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/open-terminal-in-running-container/" title="Opening a Terminal in a Running Container" class="md-nav__link">
+      Opening a Terminal in a Running Container
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/sample-it-department-request/" title="Sample IT Department Request Letter" class="md-nav__link">
+      Sample IT Department Request Letter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/install-troubleshooting/" title="Troubleshooting" class="md-nav__link">
+      Troubleshooting
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9" type="checkbox" id="nav-4-9">
+    
+    <label class="md-nav__link" for="nav-4-9">
+      User Stories
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-9">
+        User Stories
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/user-story-demo-site/" title="Demo ISLE Installation Example User Story" class="md-nav__link">
+      Demo ISLE Installation Example User Story
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/user-story-new-site/" title="New Site Example User Story" class="md-nav__link">
+      New Site Example User Story
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/user-story-migration-site/" title="Migration Example User Story" class="md-nav__link">
+      Migration Example User Story
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/configuring-lets-encrypt/" title="Let's Encrypt: Free SSL Certificates" class="md-nav__link">
+      Let's Encrypt: Free SSL Certificates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/redhat/" title="Warning about Red Hat Install" class="md-nav__link">
+      Warning about Red Hat Install
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Cookbook Recipes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Cookbook Recipes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cookbook-recipes/isle-cheatsheet-docker-commands/" title="ISLE Cheat Sheet: Docker Commands" class="md-nav__link">
+      ISLE Cheat Sheet: Docker Commands
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      About
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        About
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/contributing/" title="Contributing to ISLE" class="md-nav__link">
+      Contributing to ISLE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/about-isle/" title="About ISLE" class="md-nav__link">
+      About ISLE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/committers/" title="About Committers" class="md-nav__link">
+      About Committers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-4" type="checkbox" id="nav-6-4">
+    
+    <label class="md-nav__link" for="nav-6-4">
+      Contributor Docs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-4">
+        Contributor Docs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributor-docs/mkdocs/" title="Docs: MkDocs" class="md-nav__link">
+      Docs: MkDocs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributor-docs/spell-checker/" title="Docs: Spell Checker" class="md-nav__link">
+      Docs: Spell Checker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributor-docs/style-guide/" title="Docs: Style Guide" class="md-nav__link">
+      Docs: Style Guide
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributor-docs/release-process/" title="Release Process" class="md-nav__link">
+      Release Process
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributor-docs/testing-guide/" title="Testing Guide" class="md-nav__link">
+      Testing Guide
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/get-help/" title="Get Help" class="md-nav__link">
+      Get Help
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Release Notes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Release Notes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-2-0/" title="Latest release: 1.2.0" class="md-nav__link">
+      Latest release: 1.2.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2">
+    
+    <label class="md-nav__link" for="nav-7-2">
+      Previous releases
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-2">
+        Previous releases
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-1-2/" title="1.1.2" class="md-nav__link">
+      1.1.2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-1-1/" title="1.1.1" class="md-nav__link">
+      1.1.1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-1-0/" title="1.1.0" class="md-nav__link">
+      1.1.0
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#assumptions-prerequisites" title="Assumptions / Prerequisites" class="md-nav__link">
+    Assumptions / Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#index-of-instructions" title="Index of Instructions" class="md-nav__link">
+    Index of Instructions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#on-local-configure-the-isle-staging-environment-profile-for-deploy-to-remote" title="On Local - Configure the ISLE Staging environment profile for deploy to Remote" class="md-nav__link">
+    On Local - Configure the ISLE Staging environment profile for deploy to Remote
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-on-local-export-the-local-mysql-database" title="Step 1: On Local - Export the Local MySQL database" class="md-nav__link">
+    Step 1: On Local - Export the Local MySQL database
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-drupal-site-database-export-process" title="Local Drupal site database export process" class="md-nav__link">
+    Local Drupal site database export process
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-on-local-shutdown-any-local-containers-review-local-code" title="Step 2: On Local - Shutdown any local containers &amp; review local code" class="md-nav__link">
+    Step 2: On Local - Shutdown any local containers &amp; review local code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-on-local-create-new-users-and-passwords-by-editing-stagingenv" title="Step 3: On Local - Create new users and passwords by editing staging.env" class="md-nav__link">
+    Step 3: On Local - Create new users and passwords by editing staging.env
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-on-local-review-and-edit-docker-composestagingyml" title="Step 4: On Local - Review and edit docker-compose.staging.yml" class="md-nav__link">
+    Step 4: On Local - Review and edit docker-compose.staging.yml
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4a-on-local-optional-changes-for-docker-composestagingyml" title="Step 4A: On Local - (Optional) changes for docker-compose.staging.yml" class="md-nav__link">
+    Step 4A: On Local - (Optional) changes for docker-compose.staging.yml
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-on-local-staging-if-using-commercial-ssls" title="Step 5: On Local Staging - If using Commercial SSLs" class="md-nav__link">
+    Step 5: On Local Staging - If using Commercial SSLs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-6-on-local-commit-isle-code-to-git-repository" title="Step 6: On Local - Commit ISLE code to git repository" class="md-nav__link">
+    Step 6: On Local - Commit ISLE code to git repository
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#on-remote-staging-configure-the-isle-staging-environment-profile-for-launch-and-usage" title="On Remote Staging - Configure the ISLE Staging environment profile for launch and usage" class="md-nav__link">
+    On Remote Staging - Configure the ISLE Staging environment profile for launch and usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-7-on-remote-staging-git-clone-the-isle-repository-to-the-remote-staging-isle-host-server" title="Step 7: On Remote Staging - Git clone the ISLE repository to the remote Staging ISLE host server" class="md-nav__link">
+    Step 7: On Remote Staging - Git clone the ISLE repository to the remote Staging ISLE host server
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-8-on-remote-staging-create-the-appropriate-local-data-paths-for-apache-fedora-and-log-data" title="Step 8: On Remote Staging - Create the appropriate local data paths for Apache, Fedora and log data" class="md-nav__link">
+    Step 8: On Remote Staging - Create the appropriate local data paths for Apache, Fedora and log data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-9-on-remote-staging-clone-your-islandora-code" title="Step 9: On Remote Staging - Clone your Islandora code" class="md-nav__link">
+    Step 9: On Remote Staging - Clone your Islandora code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-10-on-remote-staging-copy-over-the-local-drupal-files-directory" title="Step 10: On Remote Staging - Copy over the Local Drupal files directory" class="md-nav__link">
+    Step 10: On Remote Staging - Copy over the Local Drupal files directory
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-11-on-remote-staging-if-using-lets-encrypt" title="Step 11: On Remote Staging - If using Let's Encrypt" class="md-nav__link">
+    Step 11: On Remote Staging - If using Let's Encrypt
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-12-on-remote-staging-edit-the-env-file-to-change-to-the-staging-environment" title="Step 12: On Remote Staging - Edit the .env file to change to the Staging environment" class="md-nav__link">
+    Step 12: On Remote Staging - Edit the .env file to change to the Staging environment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-13-on-remote-staging-download-the-isle-images" title="Step 13: On Remote Staging - Download the ISLE images" class="md-nav__link">
+    Step 13: On Remote Staging - Download the ISLE images
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-14-on-remote-staging-start-containers" title="Step 14: On Remote Staging - Start Containers" class="md-nav__link">
+    Step 14: On Remote Staging - Start Containers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-15-on-remote-staging-import-the-local-mysql-drupal-database" title="Step 15: On Remote Staging - Import the Local MySQL Drupal database" class="md-nav__link">
+    Step 15: On Remote Staging - Import the Local MySQL Drupal database
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-drupal-site-database-import-process" title="Local Drupal site database import process" class="md-nav__link">
+    Local Drupal site database import process
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-16-on-remote-staging-run-the-fix-permissionssh-script" title="Step 16: On Remote Staging - Run the fix-permissions.sh script" class="md-nav__link">
+    Step 16: On Remote Staging - Run the fix-permissions.sh script
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-17-on-remote-staging-review-and-test-the-drupal-staging-site" title="Step 17: On Remote Staging - Review and test the Drupal Staging site" class="md-nav__link">
+    Step 17: On Remote Staging - Review and test the Drupal Staging site
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" title="Next Steps" class="md-nav__link">
+    Next Steps
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-resources" title="Additional Resources" class="md-nav__link">
+    Additional Resources
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#end-of-staging-isle-installation-new-site" title="End of Staging ISLE Installation: New Site" class="md-nav__link">
+    End of Staging ISLE Installation: New Site
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="staging-isle-installation-new-site">Staging ISLE Installation: New Site</h1>
+<p><em>Expectations:  It takes an average of <strong>2 - 4+ hours</strong> to read this documentation and complete this installation.</em></p>
+<p>This <code>Staging</code> ISLE Installation will use the themed Drupal website created during the <a href="../install-local-new/">Local ISLE Installation: New Site</a> process and will create an empty Fedora repository for remote (non-local / cloud) hosting of a <code>Staging</code> site. Islandora / Drupal site code here should be considered almost finished but hosted here for last touches and team review privately prior to pushing to public <code>Production</code>. Fedora data might have tests collections or collections that should then be synced to the <code>Production</code> site. It is recommended that this remote site not be publicly accessible.</p>
+<p>While this installation will get you a brand new <code>Staging</code> site, it is <strong>not</strong> intended as a migration process of a previously existing Islandora site. If you need to build a <code>Staging</code> environment to migrate a previously existing Islandora site, please use the <a href="../install-staging-migrate/">Staging ISLE Installation: Migrate Existing Islandora Site</a> instructions instead.</p>
+<p>As this <code>Staging</code> domain will require a real domain name or <a href="https://kb.iu.edu/d/aiuv">FQDN</a>, you will need to ask your IT department or appropriate resource for an "A record" to be added for your domain to "point" to your <code>Staging</code> Host Server IP address in your institution's DNS records. We recommend that this sub-domain use <code>-staging</code> to differentiate it from the Production site.</p>
+<p>Example:<code>https://yourprojectnamehere-staging.institution.edu</code></p>
+<p>Once this has been completed, if you do not want to use Let's Encrypt, you can also request commercial SSL certificates from your IT department for this domain as well. Please note the DNS records will need to exist prior to the creation of any SSL certificate (Commercial or Let's Encrypt.)</p>
+<p>Unlike the Local and Demo setups, you will not have to edit <code>/etc/localhosts</code> to view your domain given that DNS is now involved. Your new domain will no longer use the <code>.localdomain</code> but instead something like <code>https://yourprojectnamehere-staging.institution.edu</code></p>
+<p>This document also has directions on how you can check in newly created ISLE &amp; Islandora code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging and finally to Production. The <a href="../install-environments/">ISLE Installation: Environments</a> documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE end-users should use for the <code>.env</code>, <code>staging.env</code>, etc.</p>
+<p>Please post questions to the public <a href="https://groups.google.com/forum/#!forum/islandora-isle">Islandora ISLE Google group</a>, or subscribe to receive emails. The <a href="../../appendices/glossary/">Glossary</a> defines terms used in this documentation.</p>
+<h2 id="assumptions-prerequisites">Assumptions / Prerequisites</h2>
+<ul>
+<li>This Staging ISLE installation is intended for a brand new ISLE site for further Drupal theme development, ingest testing etc on a remote ISLE host server.</li>
+<li>
+<p>All materials are to be "migrated" from the work you performed on your local laptop or workstation from the prior steps &amp; processes in <a href="../install-local-new/">Local ISLE Installation: New Site</a> instructions.</p>
+</li>
+<li>
+<p>Using ISLE version <code>1.2.0</code> or higher</p>
+</li>
+<li>
+<p>Using Docker-compose <code>1.24.0</code> or higher</p>
+</li>
+<li>
+<p>You have git installed on your local laptop or workstation as well as the remote ISLE host server.</p>
+</li>
+<li>
+<p>You have already provisioned a remote ISLE hosts server and have documented its IP address.</p>
+</li>
+<li>You may have used the <a href="https://github.com/Islandora-Collaboration-Group/ISLE-Ansible">ISLE Ansible script</a> to accomplish this.</li>
+<li>If doing this manually, please review the following to ensure the remote Staging ISLE host server has all dependencies e.g. CPU, memory and disk space prior to deploying the ISLE Staging environment profile for deploy<ul>
+<li><a href="../host-hardware-requirements/">Hardware Requirements</a></li>
+<li><a href="../host-software-dependencies/">Software Dependencies</a></li>
+</ul>
+</li>
+<li>This server should be running at the time of deploy.</li>
+<li>
+<p>This server has enough disk space to store a large Fedora repository e.g. 1 - 5 TB or larger depending on how many objects you plan on ingesting.  </p>
+</li>
+<li>
+<p>You have already created the two private git repositories for your projects ISLE and Islandora code in <a href="https://github.com">Github</a>, <a href="https://bitbucket.org/">Bitbucket</a>, <a href="https://gitlab.com">Gitlab</a> etc having followed Step 2 from the <a href="../install-local-new/">Local ISLE Installation: New Site</a> instructions. You will continue to use these two git repositories for all environments.</p>
+</li>
+<li>ISLE project config - e.g. <code>yourprojectnamehere-isle</code></li>
+<li>
+<p>Drupal / Islandora site code - e.g. <code>yourprojectnamehere-islandora</code></p>
+</li>
+<li>
+<p>You have already have the appropriate A record entered into your institutions DNS system and can resolve the Staging domain (https://yourprojectnamehere-staging.institution.edu) using a tool like https://www.whatsmydns.net/</p>
+</li>
+<li>
+<p>You have reviewed the <a href="../install-environments/">ISLE Installation: Environments</a> for more information about suggested <code>Staging</code> values.</p>
+</li>
+<li>
+<p>You are familiar with using tools like <code>scp, cp or rsync</code> to move configurations, files and data from your local to the remote <code>Staging</code> server.</p>
+</li>
+</ul>
+<hr />
+<h2 id="index-of-instructions">Index of Instructions</h2>
+<p>This process will differ slightly from previous builds in that there is work to be done on the local to then be pushed to the <code>Staging</code> ISLE Host server with additional followup work to be performed on the remote <code>Staging</code> ISLE Host server.</p>
+<p>The instructions that follow below will have either a <code>On Local</code> or a <code>On Remote Staging</code> pre-fix to indicate where the work and focus should be. In essence, the git workflow established during the local build process will be extended for deploying on <code>Staging</code> and for future ISLE updates and upgrades.</p>
+<ul>
+<li><strong>Steps 1 - 6</strong> - <code>On Local - Configure the ISLE Staging environment profile for deploy to Remote</code></li>
+<li>Step 1: On Local - Export the Local MySQL database<ul>
+<li>Local Drupal site database export process</li>
+</ul>
+</li>
+<li>Step 2: On Local - Shutdown any local containers &amp; review local code</li>
+<li>Step 3: On Local - Create new users and passwords by editing <code>staging.env</code></li>
+<li>Step 4: On Local - Review and edit docker-compose.staging.yml</li>
+<li>Step 4A: On Local - (Optional) changes for  docker-compose.staging.yml</li>
+<li>Step 5: On Local Staging - If using Commercial SSLs</li>
+<li>
+<p>Step 6: On Local - Commit ISLE code to git repository</p>
+</li>
+<li>
+<p><strong>Steps 7 - 17</strong>   - <code>On Remote Staging - Configure the ISLE Staging environment profile for launch and usage</code></p>
+</li>
+<li>Step 7: On Remote Staging - Git clone the ISLE repository to the remote Staging ISLE host server</li>
+<li>Step 8: On Remote Staging - Create the appropriate local data paths for Apache, Fedora and log data</li>
+<li>Step 9: On Remote Staging - Clone your Islandora code</li>
+<li>Step 10: On Remote Staging - Copy over the Local Drupal files directory</li>
+<li>Step 11: On Remote Staging - If using Let's Encrypt</li>
+<li>Step 12: On Remote Staging - Edit the .env file to change to the Staging environment</li>
+<li>Step 13: On Remote Staging - Download the ISLE images</li>
+<li>Step 14: On Remote Staging - Start Containers</li>
+<li>Step 15: On Remote Staging - Import the Local MySQL Drupal database</li>
+<li>Step 16: On Remote Staging - Run the fix-permissions.sh script</li>
+<li>Step 17: On Remote Staging - Review and test the Drupal Staging site</li>
+</ul>
+<hr />
+<h2 id="on-local-configure-the-isle-staging-environment-profile-for-deploy-to-remote">On Local - Configure the ISLE Staging environment profile for deploy to Remote</h2>
+<h3 id="step-1-on-local-export-the-local-mysql-database">Step 1: On Local - Export the Local MySQL database</h3>
+<p>Prior to attempting this step, do consider the following:</p>
+<ul>
+<li>
+<p>If the end user is running multi-sites, there will be additional databases to export.</p>
+</li>
+<li>
+<p>Do not export the <code>fedora3</code> database</p>
+</li>
+<li>
+<p>If possible, on the production Apache webserver, run <code>drush cc all</code> from the command line on the local Apache container in the <code>/var/www/html</code> directory PRIOR to any db export(s). Otherwise issues can occur on import due to all cache tables being larger than <code>innodb_log_file_size</code> allows</p>
+</li>
+</ul>
+<h4 id="local-drupal-site-database-export-process">Local Drupal site database export process</h4>
+<ul>
+<li>Export the MySQL database for the current <code>Local</code> Drupal site in use and copy it on your local in an easy to find place. In later steps you'll be directed to import this file. <strong>Please be careful</strong> performing any of these potential actions below as the process impacts your newly created and themed new Islandora site. Refer to your <code>local.env</code> for the usernames and passwords used below.</li>
+<li>You can use a MySQL GUI client for this process instead but the command line directions are only included below.</li>
+<li>Shell into your currently running Local MySQL container<ul>
+<li><code>docker exec -it yourmysql-container-name bash</code></li>
+</ul>
+</li>
+<li>Export the Local Drupal database. Replace the <code>DRUPAL_DB</code> &amp; <code>DRUPAL_DB_USER</code> below in the command with the values found in your <code>local.env</code>.<ul>
+<li><code>mysqldump -u DRUPAL_DB_USER -p DRUPAL_DB &gt; local_drupal_site_082019.sql</code></li>
+<li>Enter the appropriate password: value of <code>DRUPAL_DB_PASS</code> in the <code>local.env</code>)</li>
+<li>Upon completion, exit the MySQL container  </li>
+</ul>
+</li>
+<li>Copy this file from the MySQL container to a location on your local laptop or workstation.<ul>
+<li><code>docker cp yourmysql-container-name:/local_drupal_site_082019.sql /path/to/location</code></li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="step-2-on-local-shutdown-any-local-containers-review-local-code">Step 2: On Local - Shutdown any local containers &amp; review local code</h3>
+<ul>
+<li>
+<p>Ensure that your ISLE and Islandora git repositories have all the latest commits and pushes from the development process that took place on your local laptop and/or workstation. If you haven't yet finished, do not proceed until everything is completed.</p>
+</li>
+<li>
+<p>Once finished, open a <code>terminal</code> (Windows: open <code>PowerShell</code>)</p>
+</li>
+<li>Navigate to your local ISLE directory</li>
+<li>Shut down any local containers e.g. <code>docker-compose down</code></li>
+</ul>
+<hr />
+<h3 id="step-3-on-local-create-new-users-and-passwords-by-editing-stagingenv">Step 3: On Local - Create new users and passwords by editing staging.env</h3>
+<ul>
+<li>
+<p>Open up the <code>staging.env</code> file in a text editor of your choice.</p>
+</li>
+<li>
+<p>Where ever there is a comment like:</p>
+</li>
+<li><code># Replace this comment with a ...</code> - add a value of your choice. Typically there are suggestions like <code>26 alpha-numeric characters</code> but in some cases the instructions change to <code># Replace this comment with a easy to read but short database user e.g.</code> so <strong>review</strong> carefully.</li>
+<li>
+<p>It is okay if you potentially repeat the values previously entered for your local <code>(DRUPAL_DB)</code> &amp; <code>(DRUPAL_DB_USER)</code> in this <code>Staging</code> environment but we strongly recommend not reusing all passwords for environments e.g. <code>(DRUPAL_DB_PASS)</code> &amp; <code>(DRUPAL_HASH_SALT)</code> should be unique values for each environment.</p>
+</li>
+<li>
+<p>In many cases the username is already pre-populated. If it doesn't have a comment directing you to change or add a value after the <code>=</code>, then don't change it.</p>
+</li>
+<li>
+<p>Once finished, save the file and close it.</p>
+</li>
+<li>
+<p>Once you have added all of the passwords, database and user names as directed by the in-line comments of the <code>staging.env</code>, there is one additional file to be updated.</p>
+</li>
+<li>Open up the <code>config/apache/settings_php/settings.staging.php</code> file.</li>
+<li>Search for the <code># ISLE Configuration</code></li>
+<li>Follow the in-line instructions below that comment</li>
+<li>
+<p>Between the '', replace the <code>#Replace this...</code> comments with the appropriate values from the <code>staging.env</code> file.</p>
+<ul>
+<li>Copy the value of <code>DRUPAL_DB</code> from the local.env and paste it into the '' below for the database e.g <code>'database' =&gt; 'institution_db',</code></li>
+<li>Copy the value of <code>DRUPAL_DB_USER</code> from the local.env between the '' below for the username e.g <code>'username' =&gt; 'institution_db_user',</code></li>
+<li>Copy the value of <code>DRUPAL_DB_PASS</code> from the local.env between the '' below for the password e.g <code>'password' =&gt; 'yourpasswordhere',</code></li>
+<li>Search for <code># ISLE Configuration again</code></li>
+<li>Follow the in-line instructions below that comment</li>
+<li>Copy the value of <code>DRUPAL_HASH_SALT</code> from the local.env between the '' below for the Drupal hash salt e.g <code>$drupal_hash_salt = 'yourhashhere';</code></li>
+</ul>
+</li>
+<li>
+<p>Once finished, save the file and close it.</p>
+</li>
+</ul>
+<hr />
+<h3 id="step-4-on-local-review-and-edit-docker-composestagingyml">Step 4: On Local - Review and edit docker-compose.staging.yml</h3>
+<ul>
+<li>
+<p>Review the disks and volumes on your remote <code>Staging</code> ISLE Host server to ensure they are of an adequate capacity for your collection needs and match what has been written in the <code>docker-compose.staging.yml</code> file.</p>
+</li>
+<li>
+<p>Please read through the <code>docker-compose.staging.yml</code> file as there are bind mount points that need to be configured on the host machine, to ensure data persistence. There are suggested bind mounts that the end-user can change to fit their needs or they can setup additional volumes or disks to match the suggestions.</p>
+</li>
+<li>In the <code>fedora</code> service section<ul>
+<li><code>- /mnt/data/fedora/datastreamStore:/usr/local/fedora/data/datastreamStore</code></li>
+<li><code>- /opt/data/fedora/objectStore:/usr/local/fedora/data/objectStore</code></li>
+</ul>
+</li>
+<li>
+<p>In the <code>apache</code> service section</p>
+<ul>
+<li><code>- /opt/data/apache/html:/var/www/html</code></li>
+</ul>
+</li>
+<li>
+<p>Depending on your choice of SSL type (Commercial SSL files or the Let's Encrypt service), you'll need to uncomment only one line of the <code>traefik</code> services section. There are also inline instructions to this effect in the <code>docker-compose.staging.yml</code> file.</p>
+</li>
+<li>
+<p>To use <code>Let's Encrypt for SSL</code> - Uncomment</p>
+<ul>
+<li><code>- ./config/proxy/acme.json:/acme.json</code></li>
+</ul>
+</li>
+<li>
+<p>To use commercial SSLs - Uncomment</p>
+<ul>
+<li><code>- ./config/proxy/ssl-certs:/certs:ro</code></li>
+<li>Additionally you'll need to add your SSL certs (.cert, .pem, .key) files to <code>./config/proxy/ssl-certs</code></li>
+</ul>
+</li>
+<li>
+<p>Based on the choice of SSL type made above, you'll need to refer to to the <code>./config/proxy/traefik.staging.toml</code> file for further configuration instructions.</p>
+</li>
+</ul>
+<h3 id="step-4a-on-local-optional-changes-for-docker-composestagingyml">Step 4A: On Local - (Optional) changes for docker-compose.staging.yml</h3>
+<p>This section is for optional changes for the <code>docker-compose.staging.yml</code>, end-users do not have feel like they have to make any choices here and can continue to <strong>Step 4</strong> as needed.</p>
+<p>The options include PHP settings, Java Memory Allocation, MySQL configuration and use of the <a href="../../optional-components/tickstack/">TICK Stack</a></p>
+<ul>
+<li><em>(Optional)</em> - You can change PHP settings such as file upload limits and memory usage by uncommenting</li>
+<li>In the <code>apache</code> services section, this line:<ul>
+<li><code>- ./config/apache/php_ini/php.staging.ini:/etc/php/7.1/apache2/php.ini</code></li>
+</ul>
+</li>
+<li>
+<p>You'll then need to make edits in the <code>./config/apache/php_ini/php.staging.ini</code> file.</p>
+</li>
+<li>
+<p><em>(Optional)</em> - This line is already uncommented by default in ISLE but we're calling it out here that you can changes to the suggested levels or values within the <code>./config/mysql/ISLE.cnf</code> file if needed. When setting up for the first time, it is best practice to leave these settings in place. Over time, you can experiment with further tuning and experimentation based on your project or system needs.</p>
+</li>
+<li>
+<p><em>(Optional)</em> - You can change the suggested <code>JAVA_MAX_MEM</code> &amp; <code>JAVA_MIN_MEM</code> levels but do not exceed more than 50% of your system memory. When setting up for the first time, it is best practice to leave these settings in place as they are configured for a <code>Staging</code> ISLE Host Server using 16 GB of RAM. Over time, you can experiment with further tuning and experimentation based on your project or system needs.</p>
+</li>
+<li>
+<p><em>(Optional)</em> - You can opt to uncomment the TICK stack settings for monitoring but you'll need to follow the <a href="../../optional-components/tickstack/">TICK Stack</a> instructions prior to committing changes to your ISLE git repository.</p>
+</li>
+<li>All TICK related code can be found at the end of all ISLE services within the <code>docker-compose.staging.yml</code> file.
+  <strong>Example</strong>
+  <code>bash
+    ## _(Optional)_: Uncomment lines below to run ISLE with the TICK monitoring system
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"</code></li>
+<li>Uncomment the lines found in the new TICK stack services section of the <code>docker-compose.staging.yml</code> file for hosting of that monitoring service on the <code>Staging</code> ISLE Host server.<ul>
+<li>There are additional configurations to be made to files contained within <code>./config/tick</code> but you'll need to follow the <a href="../../optional-components/tickstack/">TICK Stack</a> instructions prior to committing changes to your ISLE git repository.</li>
+</ul>
+</li>
+<li>Uncomment the TICK stack data volumes as well at the bottom of the file.</li>
+</ul>
+<hr />
+<h3 id="step-5-on-local-staging-if-using-commercial-ssls">Step 5: On Local Staging - If using Commercial SSLs</h3>
+<p>If you are going to use Let's Encrypt instead, you can skip this step and move onto the next one. There will be additional steps further in this document, to help you configure it.</p>
+<p>If you have decided to use Commercial SSL certs supplied to you by your IT team or appropriate resource, please continue following this step.</p>
+<ul>
+<li>Add your Commercial SSL certificate and key files to the <code>./config/proxy/ssl-certs</code> directory</li>
+<li>
+<p><strong>Example</strong></p>
+<ul>
+<li><code>./config/proxy/ssl-certs/yourprojectnamehere-staging.domain.cert</code></li>
+<li><code>./config/proxy/ssl-certs/yourprojectnamehere-staging.domain.key</code></li>
+</ul>
+</li>
+<li>
+<p>Edit the <code>./config/proxy/traefik.staging.toml</code> and follow the in-line instructions. Replace the .pem &amp; .key with the name of your Staging SSL certificate and associated key. Do note the positioning of the added lines. Third character indentation.</p>
+</li>
+</ul>
+<p><strong>Please note</strong> despite the instruction examples differing on file type, (<code>.pem</code> or <code>cert</code>), either one is compatible, use what you have been given. Merely change the file type suffix accordingly.</p>
+<p><strong>Example: .cert</strong></p>
+<pre><code class="bash">    [entryPoints.https.tls]
+      [[entryPoints.https.tls.certificates]]
+      certFile = &quot;/certs/yourprojectnamehere-staging.domain.cert&quot;
+      keyFile = &quot;/certs/yourprojectnamehere-staging.domain.key&quot;
+</code></pre>
+
+<p><strong>Example: .pem</strong></p>
+<pre><code class="bash">    [entryPoints.https.tls]
+      [[entryPoints.https.tls.certificates]]
+      certFile = &quot;/certs/yourprojectnamehere-staging.institution.edu.pem&quot;
+      keyFile = &quot;/certs/yourprojectnamehere-staging.institution.edu.key&quot;
+</code></pre>
+
+<hr />
+<h3 id="step-6-on-local-commit-isle-code-to-git-repository">Step 6: On Local - Commit ISLE code to git repository</h3>
+<ul>
+<li>Once you have made all of the appropriate changes to your <code>Staging</code> profile. Please note the steps below are suggestions. You might use a different git commit message. Substitute <code>&lt;changedfileshere&gt;</code> with the actual file names and paths. You may need to do this repeatedly prior to the commit message.</li>
+<li><code>git add &lt;changedfileshere&gt;</code></li>
+<li><code>git commit -m "Changes for Staging"</code></li>
+<li><code>git push origin master</code></li>
+</ul>
+<hr />
+<h2 id="on-remote-staging-configure-the-isle-staging-environment-profile-for-launch-and-usage">On Remote Staging - Configure the ISLE Staging environment profile for launch and usage</h2>
+<h3 id="step-7-on-remote-staging-git-clone-the-isle-repository-to-the-remote-staging-isle-host-server">Step 7: On Remote Staging - Git clone the ISLE repository to the remote Staging ISLE host server</h3>
+<ul>
+<li>
+<p>This assumes you have setup an <code>Islandora</code> deploy user. If not use a different non-root user for this purpose.</p>
+</li>
+<li>
+<p>You will also need to ensure that any <code>/home/islandora/.ssh/id_rsa.pub</code> key has been added to your git repository admin panel to allow for cloning from your two private git repositories.</p>
+</li>
+</ul>
+<p>Since the <code>/opt</code> directory might not let you do this at first, we suggest the following workaround which you'll only need to do once. Future ISLE updates will not require this step.</p>
+<ul>
+<li>
+<p>Shell into your <code>Staging</code> ISLE host server as the <code>Islandora</code> user.</p>
+</li>
+<li>
+<p>Clone your ISLE project repo with the newly committed changes for <code>Staging</code> to the <code>Islandora</code> user home directory.</p>
+</li>
+<li><code>git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git /home/islandora/</code></li>
+<li>
+<p>This may take a few minutes (2 - 4) depending on your server's Internet connection.</p>
+</li>
+<li>
+<p>Move the newly cloned directory to the <code>/opt</code> directory as the root user</p>
+</li>
+<li>
+<p><code>sudo mv /home/islandora/yourprojectnamehere-isle /opt/yourprojectnamehere-isle</code></p>
+</li>
+<li>
+<p>Fix the permissions so that the <code>islandora</code> user has access.</p>
+</li>
+<li><code>sudo chown -Rv islandora:islandora /opt/yourprojectnamehere-isle</code></li>
+</ul>
+<hr />
+<h3 id="step-8-on-remote-staging-create-the-appropriate-local-data-paths-for-apache-fedora-and-log-data">Step 8: On Remote Staging - Create the appropriate local data paths for Apache, Fedora and log data</h3>
+<ul>
+<li>Create the <code>/opt/data</code> directory</li>
+<li><code>sudo mkdir -p /opt/data</code></li>
+<li>Change the permissions to the Islandora user.<ul>
+<li><code>sudo chown -Rv islandora:islandora /opt/data</code></li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="step-9-on-remote-staging-clone-your-islandora-code">Step 9: On Remote Staging - Clone your Islandora code</h3>
+<ul>
+<li>
+<p><code>git clone git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-islandora.git /opt/data/apache/html</code></p>
+</li>
+<li>
+<p>Fix the permissions so that the <code>islandora</code> user has access.</p>
+</li>
+<li><code>sudo chown -Rv islandora:islandora /opt/yourprojectnamehere-islandora</code></li>
+</ul>
+<hr />
+<h3 id="step-10-on-remote-staging-copy-over-the-local-drupal-files-directory">Step 10: On Remote Staging - Copy over the Local Drupal files directory</h3>
+<p>This <code>files</code> directory should be on your local laptop and should be copied to the remote Staging server.</p>
+<ul>
+<li>
+<p>Copy <code>~/yourprojectnamehere-isle/data/apache/html/sites/default/files</code> to <code>/opt/data/apache/html/sites/default/files</code></p>
+</li>
+<li>
+<p>Fix the permissions so that the <code>islandora</code> user has access.</p>
+</li>
+<li><code>sudo chown -Rv islandora:islandora /opt/data/apache/html/sites/default/files</code></li>
+</ul>
+<hr />
+<h3 id="step-11-on-remote-staging-if-using-lets-encrypt">Step 11: On Remote Staging - If using Let's Encrypt</h3>
+<p>If you are using Commercial SSLs, then please stop and move onto the next step.</p>
+<p>If using Let's Encrypt, please continue to follow this step.</p>
+<ul>
+<li>Create an empty <code>acme.json</code> within the <code>./config/proxy/ssl-certs/</code> directory of your ISLE project.</li>
+<li><code>touch /opt/yourprojectnamehere/config/proxy/ssl-certs/acme.json</code><ul>
+<li><code>chmod 600 /opt/yourprojectnamehere/config/proxy/ssl-certs/acme.json</code></li>
+</ul>
+</li>
+<li>This file will be ignored by git and won't cause any errors with checking in code despite the location</li>
+<li>Do note that you may need to open your firewall briefly to allow the SSL certs to be added to the <code>acme.json</code> file. This will be indicated in the following steps.</li>
+<li>Open your firewall to ports 80, 443 prior to starting up the containers to ensure SSL cert creation.</li>
+</ul>
+<hr />
+<h3 id="step-12-on-remote-staging-edit-the-env-file-to-change-to-the-staging-environment">Step 12: On Remote Staging - Edit the .env file to change to the Staging environment</h3>
+<p>This step is a multi-step, involved process that allows an end-user to make appropriate changes to the <code>.env</code> and then commit it locally to git. This local commit that never gets pushed back to the git repository is critical to allow future ISLE updates or config changes.</p>
+<ul>
+<li>Edit the .env, remove the <code>local</code> settings and then commit locally</li>
+<li><code>cd /opt/yourprojectnamehere</code></li>
+<li><code>vi / nano / pico /opt/yourprojectnamehere/.env</code></li>
+<li>Edit <code>COMPOSE_PROJECT_NAME=</code> and replace the <code>local</code> settings with:<ul>
+<li><code>COMPOSE_PROJECT_NAME=</code>  (Suggested) Add an identifiable project or institutional name plus environment e.g. acme_digital_stage`</li>
+</ul>
+</li>
+<li>Edit <code>BASE_DOMAIN=</code> and replace the <code>local</code> settings with:<ul>
+<li><code>BASE_DOMAIN=</code>            (Suggested) Add the full staging domain here e.g. digital-staging.institution.edu</li>
+</ul>
+</li>
+<li>Edit <code>CONTAINER_SHORT_ID=</code> and replace the <code>local</code> settings with:<ul>
+<li><code>CONTAINER_SHORT_ID=</code>     (Suggested) Make an easy to read acronym from the letters of your institution and collection names plus environment e.g. (acme digitalcollections staging) is acdcs</li>
+</ul>
+</li>
+<li>Edit <code>COMPOSE_FILE</code> change <code>local</code> to <code>staging</code><ul>
+<li><code>COMPOSE_FILE=docker-compose.staging.yml</code></li>
+</ul>
+</li>
+<li>
+<p>Save the file</p>
+</li>
+<li>
+<p>Enter <code>git status</code> - You'll now see the following:</p>
+</li>
+</ul>
+<pre><code class="bash">On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+
+    modified:   .env
+</code></pre>
+
+<ul>
+<li>You'll need to add this file and commit it in git to be able to get future updates from ISLE as a process.</li>
+<li><code>git add .env</code></li>
+<li>
+<p><code>git commit -m "Added the edited .env configuration file for Staging. DO NOT PUSH BACK TO UPSTREAM REPOSITORY - Jane Doe 8/2019"</code></p>
+<ul>
+<li>This is a suggested warning for users <strong>NOT TO</strong>  push back this configuration change to the main git repository. If that were done it could conflict with other setups.</li>
+</ul>
+</li>
+<li>
+<p>You may run into the following:</p>
+</li>
+</ul>
+<pre><code class="bash">*** Please tell me who you are.
+
+Run
+
+  git config --global user.email &quot;you@example.com&quot;
+  git config --global user.name &quot;Your Name&quot;
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: empty ident name (for &lt;islandora@yourprojectnamehere-staging.institution.edu&gt;) not allowed  
+</code></pre>
+
+<ul>
+<li>Configure your server git client but don't use the <code>--global</code> setting as that could interfere with other git repositories e.g. your Drupal / Islandora code.</li>
+<li>
+<p>Example: Within <code>/opt/yourprojectnamehere</code></p>
+<ul>
+<li><code>git config user.email "jane@institution.edu"</code></li>
+<li><code>git config user.name "Jane Doe"</code></li>
+</ul>
+</li>
+<li>
+<p>Now re-run the commit command:</p>
+</li>
+</ul>
+<pre><code class="bash">git commit -m &quot;Added the edited .env configuration file for Staging. DO NOT PUSH BACK TO UPSTREAM REPOSITORY - Jane Doe 8/2019&quot;
+[master 7ab3fcf9] Added the edited .env configuration file for Staging. DO NOT PUSH BACK TO UPSTREAM REPOSITORY - Jane Doe 8/2019
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+</code></pre>
+
+<hr />
+<h3 id="step-13-on-remote-staging-download-the-isle-images">Step 13: On Remote Staging - Download the ISLE images</h3>
+<ul>
+<li>Download all of the latest ISLE Docker images (<em>~6 GB of data may take 5-10 minutes</em>):</li>
+<li><em>Using the same open terminal / Powershell</em><ul>
+<li>Navigate to the root of your ISLE project</li>
+<li><code>cd /opt/yourprojectnamehere</code></li>
+</ul>
+</li>
+<li><code>docker-compose pull</code></li>
+</ul>
+<hr />
+<h3 id="step-14-on-remote-staging-start-containers">Step 14: On Remote Staging - Start Containers</h3>
+<p><strong>Please note:</strong> Prior to starting the launch process, it is recommended that you briefly open your firewall to allow ports 80 and 443 access to the world. You'll only need to keep this open for 3 -5 minutes and then promptly close access once the Let's Encrypt SSL certificates have been generated.</p>
+<ul>
+<li><em>Using the same open terminal / Powershell</em></li>
+<li>
+<p><code>docker-compose up -d</code></p>
+</li>
+<li>
+<p>Please wait a few moments for the stack to fully come up. Approximately 3-5 minutes.</p>
+</li>
+<li>
+<p>After the above process is completed using the already open terminal or Powershell again.</p>
+<ul>
+<li>View only the running containers: <code>docker ps</code></li>
+<li>View all containers (both those running and stopped): <code>docker ps -a</code></li>
+<li>All containers prefixed with <code>isle-</code> are expected to have a <code>STATUS</code> of <code>Up</code> (for x time).</li>
+<li><strong>If any of these are not <code>UP</code>, then use <a href="../install-troubleshooting/">ISLE Installations: Troubleshooting</a> to solve before continuing below.</strong>
+  <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running, or (c) older exited ISLE containers that maybe should be removed. ---></li>
+</ul>
+</li>
+<li>
+<p>In your web browser, enter your Staging site URL: <code>https://yourprojectnamehere-staging.institution.edu</code></p>
+</li>
+<li><strong>Please note:</strong> You should not see any errors with respect to the SSL certifications, you should see a nice green lock padlock for the site security. If you see a red error or unknown SSL cert provider, you'll need to shut the containers down and review the previous steps taken especially if using Let's Encrypt. You may need to repeat those steps to get rid of the errors.</li>
+</ul>
+<hr />
+<h3 id="step-15-on-remote-staging-import-the-local-mysql-drupal-database">Step 15: On Remote Staging - Import the Local MySQL Drupal database</h3>
+<p>Prior to attempting this step, do consider the following:</p>
+<ul>
+<li>
+<p>If the end user is running multi-sites, there will be additional databases to export.</p>
+</li>
+<li>
+<p>Do not import the <code>fedora3</code> database</p>
+</li>
+</ul>
+<hr />
+<h4 id="local-drupal-site-database-import-process">Local Drupal site database import process</h4>
+<ul>
+<li>
+<p>Copy the <code>local_drupal_site_082019.sql</code> created in Step 1 to the Remote Staging server.</p>
+</li>
+<li>
+<p>Import the exported <code>Local</code> MySQL database for use in the current <code>Staging</code> Drupal site. Refer to your <code>staging.env</code> for the usernames and passwords used below.</p>
+</li>
+<li>You can use a MySQL GUI client for this process instead but the command line directions are only included below.</li>
+<li>Run <code>docker ps</code> to determine the MySQL container name</li>
+<li>Shell into your currently running <code>Staging</code> MySQL container<ul>
+<li><code>docker exec -it yourmysql-container-name bash</code></li>
+</ul>
+</li>
+<li>Import the Local Drupal database. Replace the <code>DRUPAL_DB</code> &amp; <code>DRUPAL_DB_USER</code> below in the command with the values found in your <code>staging.env</code>.<ul>
+<li><code>mysql -u DRUPAL_DB_USER -p DRUPAL_DB &lt; local_drupal_site_082019.sql</code></li>
+<li>Enter the appropriate password: value of <code>DRUPAL_DB_PASS</code> in the <code>staging.env</code>)</li>
+<li>This might take a few minutes depending on the size of the file.</li>
+<li>Exit out of the container when finished.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="step-16-on-remote-staging-run-the-fix-permissionssh-script">Step 16: On Remote Staging - Run the fix-permissions.sh script</h3>
+<ul>
+<li>You'll need to fix the Drupal site permissions by running the <code>/fix-permissions.sh</code> script from the Apache container</li>
+<li>Run <code>docker ps</code> to determine the Apache container name</li>
+<li>Shell into your currently running <code>Staging</code> Apache container<ul>
+<li><code>docker exec -it yourapache-container-name bash</code></li>
+<li><code>sh /utility-scripts/isle_drupal_build_tools/drupal/fix-permissions.sh --drupal_path=/var/www/html --drupal_user=islandora --httpd_group=www-data</code></li>
+<li>This process will take 2 - 5 mins depending</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">For Windows Users only</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">You may be prompted by Windows to:</td>
+</tr>
+<tr>
+<td align="left">- Share the C drive with Docker.  Click Okay or Allow.</td>
+</tr>
+<tr>
+<td align="left">- Enter your username and password. Do this.</td>
+</tr>
+<tr>
+<td align="left">- Allow vpnkit.exe to communicate with the network.  Click Okay or Allow (accept default selection).</td>
+</tr>
+<tr>
+<td align="left">- If the process seems to halt, check the taskbar for background windows.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>You should see a lot of green [ok] messages.</li>
+<li>If the script appears to pause or prompt for <code>y/n</code>, DO NOT enter any values; the script will automatically answer for you.</li>
+<li><strong>Proceed only after this message appears:</strong> <code>Clearing Drupal Caches. 'all' cache was cleared.</code></li>
+</ul>
+<hr />
+<h3 id="step-17-on-remote-staging-review-and-test-the-drupal-staging-site">Step 17: On Remote Staging - Review and test the Drupal Staging site</h3>
+<ul>
+<li>In your web browser, enter this URL: <code>https://yourprojectnamehere-staging.institution.edu</code></li>
+<li>
+<p>Please note: You should not see any errors with respect to the SSL certifications. If so, please review your previous steps especially if using Let's Encrypt. You may need to repeat those steps to get rid of the errors.</p>
+</li>
+<li>
+<p>Log in to the local Islandora site with the credentials you created in <code>staging.env</code> (<code>DRUPAL_ADMIN_USER</code> and <code>DRUPAL_ADMIN_PASS</code>)</p>
+</li>
+<li>
+<p><strong>Please note:</strong> You are free to use previously Drupal admin or user accounts created during the <code>Local</code> site development process.</p>
+</li>
+<li>
+<p>You can decide to further QC and review the site as you wish or start to add digital collections and objects.</p>
+</li>
+<li>You could also further test using the <a href="https://github.com/Islandora-Collaboration-Group/islandora-sample-objects">Islandora Sample Objects</a> as you may have done in the previous <code>Local</code> installation.</li>
+</ul>
+<hr />
+<h2 id="next-steps">Next Steps</h2>
+<p>Once you are ready to deploy your finished Drupal site, you may progress to:</p>
+<ul>
+<li><a href="../install-production-new/">Production ISLE Installation: New Site</a></li>
+</ul>
+<hr />
+<h2 id="additional-resources">Additional Resources</h2>
+<ul>
+<li><a href="../install-environments/">ISLE Installation: Environments</a> documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE end-users should use for the <code>.env</code>, <code>local.env</code>, etc.</li>
+<li><a href="../install-local-resources/">Local ISLE Installation: Resources</a> contains Docker container passwords and URLs for administrator tools.</li>
+<li><a href="../install-troubleshooting/">ISLE Installation: Troubleshooting</a> contains help for port conflicts, non-running Docker containers, etc.</li>
+</ul>
+<hr />
+<h3 id="end-of-staging-isle-installation-new-site">End of Staging ISLE Installation: New Site</h3>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../install-local-migrate/" title="Local Installation: Migrate Islandora Site" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Local Installation: Migrate Islandora Site
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../install-staging-migrate/" title="Staging Installation: Migrate Existing Islandora Site" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Staging Installation: Migrate Existing Islandora Site
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.583bbe55.js"></script>
+      
+      <script>app.initialize({version:"1.0",url:{base:"../.."}})</script>
+      
+        <script src="../../extra.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

@@ -38,7 +38,7 @@
     
     
       
-        <title>Demo ISLE Installation: Troubleshooting - Islandora Enterprise (ISLE)</title>
+        <title>Troubleshooting Installations - Islandora Enterprise (ISLE)</title>
       
     
     
@@ -75,7 +75,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../../#demo-isle-installation-troubleshooting" tabindex="1" class="md-skip">
+      <a href="../../#isle-installation-troubleshooting" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -101,7 +101,7 @@
                 Islandora Enterprise (ISLE)
               </span>
               <span class="md-header-nav__topic">
-                Demo ISLE Installation: Troubleshooting
+                Troubleshooting Installations
               </span>
             
           
@@ -182,10 +182,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
       Install ISLE
@@ -237,11 +239,173 @@
           
           
 
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4" checked>
+    
+    <label class="md-nav__link" for="nav-2-4">
+      4. ISLE Installation
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        4. ISLE Installation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
 
   <li class="md-nav__item">
-    <a href="../install-server/" title="4. Remote Server ISLE Installation" class="md-nav__link">
-      4. Remote Server ISLE Installation
+    <a href="../install-environments/" title="ISLE Environments" class="md-nav__link">
+      ISLE Environments
     </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install-local-new/" title="Local Installation: New Site" class="md-nav__link">
+      Local Installation: New Site
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install-local-migrate/" title="Local Installation: Migrate Islandora Site" class="md-nav__link">
+      Local Installation: Migrate Islandora Site
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install-staging-new/" title="Staging Installation: New Site" class="md-nav__link">
+      Staging Installation: New Site
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install-staging-migrate/" title="Staging Installation: Migrate Existing Islandora Site" class="md-nav__link">
+      Staging Installation: Migrate Existing Islandora Site
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install-production-new/" title="Production Installation: New Site" class="md-nav__link">
+      Production Installation: New Site
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install-production-migrate/" title="Production Installation: Migrate Existing Islandora Site" class="md-nav__link">
+      Production Installation: Migrate Existing Islandora Site
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Troubleshooting Installations
+      </label>
+    
+    <a href="./" title="Troubleshooting Installations" class="md-nav__link md-nav__link--active">
+      Troubleshooting Installations
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#port-conflicts" title="Port Conflicts" class="md-nav__link">
+    Port Conflicts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#non-running-docker-containers" title="Non-Running Docker Containers" class="md-nav__link">
+    Non-Running Docker Containers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#viewing-logs-in-isle-120" title="Viewing Logs in ISLE 1.2.0" class="md-nav__link">
+    Viewing Logs in ISLE 1.2.0
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -272,82 +436,10 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
     
     <label class="md-nav__link" for="nav-4">
-      Migrate Existing Site to ISLE
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-4">
-        Migrate Existing Site to ISLE
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../migrate/install-migration/" title="Migrate to ISLE Environment" class="md-nav__link">
-      Migrate to ISLE Environment
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../migrate/export-checklist/" title="Migration Export Checklist" class="md-nav__link">
-      Migration Export Checklist
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../migrate/merge-checklist/" title="Migration Merge Checklist" class="md-nav__link">
-      Migration Merge Checklist
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../migrate/reindex-process/" title="Migration Reindex Process" class="md-nav__link">
-      Migration Reindex Process
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
-    
-    <label class="md-nav__link" for="nav-5">
       Appendices
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-5">
+      <label class="md-nav__title" for="nav-4">
         Appendices
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -456,13 +548,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-9" type="checkbox" id="nav-5-9">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9" type="checkbox" id="nav-4-9">
     
-    <label class="md-nav__link" for="nav-5-9">
+    <label class="md-nav__link" for="nav-4-9">
       User Stories
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-5-9">
+      <label class="md-nav__title" for="nav-4-9">
         User Stories
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -545,13 +637,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
     
-    <label class="md-nav__link" for="nav-6">
+    <label class="md-nav__link" for="nav-5">
       Cookbook Recipes
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-6">
+      <label class="md-nav__title" for="nav-5">
         Cookbook Recipes
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -581,13 +673,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
-    <label class="md-nav__link" for="nav-7">
+    <label class="md-nav__link" for="nav-6">
       About
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-7">
+      <label class="md-nav__title" for="nav-6">
         About
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -636,13 +728,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4" type="checkbox" id="nav-7-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-4" type="checkbox" id="nav-6-4">
     
-    <label class="md-nav__link" for="nav-7-4">
+    <label class="md-nav__link" for="nav-6-4">
       Contributor Docs
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-7-4">
+      <label class="md-nav__title" for="nav-6-4">
         Contributor Docs
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -737,13 +829,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
     
-    <label class="md-nav__link" for="nav-8">
+    <label class="md-nav__link" for="nav-7">
       Release Notes
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-8">
+      <label class="md-nav__title" for="nav-7">
         Release Notes
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -755,8 +847,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release-notes/release-1-1-2/" title="Latest release: 1.1.2" class="md-nav__link">
-      Latest release: 1.1.2
+    <a href="../../release-notes/release-1-2-0/" title="Latest release: 1.2.0" class="md-nav__link">
+      Latest release: 1.2.0
     </a>
   </li>
 
@@ -768,13 +860,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-2" type="checkbox" id="nav-8-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2">
     
-    <label class="md-nav__link" for="nav-8-2">
+    <label class="md-nav__link" for="nav-7-2">
       Previous releases
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-8-2">
+      <label class="md-nav__title" for="nav-7-2">
         Previous releases
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -786,8 +878,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release-notes/release-1-1-0/" title="1.1.0" class="md-nav__link">
-      1.1.0
+    <a href="../../release-notes/release-1-1-2/" title="1.1.2" class="md-nav__link">
+      1.1.2
     </a>
   </li>
 
@@ -800,6 +892,18 @@
   <li class="md-nav__item">
     <a href="../../release-notes/release-1-1-1/" title="1.1.1" class="md-nav__link">
       1.1.1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-1-0/" title="1.1.0" class="md-nav__link">
+      1.1.0
     </a>
   </li>
 
@@ -848,6 +952,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#viewing-logs-in-isle-120" title="Viewing Logs in ISLE 1.2.0" class="md-nav__link">
+    Viewing Logs in ISLE 1.2.0
+  </a>
+  
+</li>
+      
       
       
       
@@ -865,7 +976,7 @@
               
                 
                 
-                <h1 id="demo-isle-installation-troubleshooting">Demo ISLE Installation: Troubleshooting</h1>
+                <h1 id="isle-installation-troubleshooting">ISLE Installation: Troubleshooting</h1>
 <p><strong>Please select a topic:</strong></p>
 <ul>
 <li><a href="#port-conflicts">Port Conflicts</a></li>
@@ -901,12 +1012,12 @@
 <ul>
 <li>
 <p>MySQL image pull &amp; container launch</p>
-<p><code>docker pull islandoracollabgroup/isle-mysql:1.1</code></p>
+<p><code>docker pull islandoracollabgroup/isle-mysql:1.2.0</code></p>
 <p><code>docker-compose up -d mysql</code></p>
 </li>
 <li>
 <p>Fedora image pull &amp; container launch</p>
-<p><code>docker pull islandoracollabgroup/isle-fedora:1.1</code></p>
+<p><code>docker pull islandoracollabgroup/isle-fedora:1.2.0</code></p>
 <p><code>docker-compose up -d fedora</code></p>
 <p>(Optional but recommended troubleshooting step)</p>
 <ul>
@@ -924,16 +1035,41 @@
 </li>
 <li>
 <p>Solr image pull &amp; container launch</p>
-<p><code>docker pull islandoracollabgroup/isle-solr:1.1</code></p>
+<p><code>docker pull islandoracollabgroup/isle-solr:1.2.0</code></p>
 <p><code>docker-compose up -d solr</code></p>
 </li>
 <li>
 <p>Apache image pull &amp; container launch</p>
-<p><code>docker pull islandoracollabgroup/isle-apache:1.1</code></p>
+<p><code>docker pull islandoracollabgroup/isle-apache:1.2.0</code></p>
 <p><code>docker-compose up -d apache</code></p>
 </li>
 </ul>
-<p><strong>Return to <a href="../install-demo/">Demo ISLE Installation</a>.</strong></p>
+<h2 id="viewing-logs-in-isle-120">Viewing Logs in ISLE 1.2.0</h2>
+<p>As of ISLE release logging to physical file has been turned off, stdout &amp; stderr are to console only no more physical files. This means if you need to view logs for debugging, here are some methods:</p>
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/logs/">Docker method:</a> (<em>when using the Docker json driver and TICK is not on</em>)</li>
+<li>Single container: <code>docker logs -f &lt;container-name&gt;</code></li>
+<li>
+<p>All containers: <code>docker logs --tail=0 --follow</code></p>
+</li>
+<li>
+<p>[Docker-compose method:(https://docs.docker.com/compose/reference/logs/)] (when using the Docker json driver and TICK is not on)
+Single container: docker-compose logs -f  <container-name>
+All containers: docker-compose logs --tail=0 --follow</p>
+</li>
+<li>
+<p>Use the <a href="../../optional-components/tickstack/">TICK Log viewer</a> if TICK is setup and using the Docker syslog driver (Production / Staging only) </p>
+</li>
+</ul>
+<hr />
+<p>Pick one of the following:
+<strong>Return to <a href="../install-demo/">Demo ISLE Installation</a>.</strong>
+<strong>Return to <a href="../install-local-new/">Local ISLE Installation: New site</a>.</strong>
+<strong>Return to <a href="../install-local-migrate/">Local ISLE Installation: Migrate existing Islandora site</a>.</strong>
+<strong>Return to <a href="../install-staging-new/">Staging ISLE Installation: New site</a>.</strong>
+<strong>Return to <a href="../install-staging-migrate/">Staging ISLE Installation: Migrate existing Islandora site</a>.</strong>
+<strong>Return to <a href="../install-production-new/">Production ISLE Installation: New site</a>.</strong>
+<strong>Return to <a href="../install-production-migrate/">Production ISLE Installation: Migrate existing Islandora site</a>.</strong></p>
                 
                   
                 
@@ -950,6 +1086,41 @@
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../install-production-migrate/" title="Production Installation: Migrate Existing Islandora Site" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Production Installation: Migrate Existing Islandora Site
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../update/update/" title="Update ISLE" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Update ISLE
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

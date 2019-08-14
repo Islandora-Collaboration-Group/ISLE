@@ -1,0 +1,1990 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Documentation for Islandora Enterprise (ISLE)">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0, mkdocs-material-3.0.3">
+    
+    
+      
+        <title>Utilizing and Extending ISLE’s Test Suite - Islandora Enterprise (ISLE)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+      <link rel="stylesheet" href="../../extra.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="../../#utilizing-and-extending-isles-test-suite" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="Islandora Enterprise (ISLE)" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Islandora Enterprise (ISLE)
+              </span>
+              <span class="md-header-nav__topic">
+                Utilizing and Extending ISLE’s Test Suite
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="Islandora Enterprise (ISLE)" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Islandora Enterprise (ISLE)
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Get Started" class="md-nav__link">
+      Get Started
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Install ISLE
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Install ISLE
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../install/host-hardware-requirements/" title="1. Hardware Requirements" class="md-nav__link">
+      1. Hardware Requirements
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../install/host-software-dependencies/" title="2. Software Dependencies" class="md-nav__link">
+      2. Software Dependencies
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../install/install-demo/" title="3. Demo ISLE Installation" class="md-nav__link">
+      3. Demo ISLE Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4">
+    
+    <label class="md-nav__link" for="nav-2-4">
+      4. ISLE Installation
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        4. ISLE Installation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../install/install-environments/" title="ISLE Environments" class="md-nav__link">
+      ISLE Environments
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../install/install-local-new/" title="Local Installation: New Site" class="md-nav__link">
+      Local Installation: New Site
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../install/install-local-migrate/" title="Local Installation: Migrate Islandora Site" class="md-nav__link">
+      Local Installation: Migrate Islandora Site
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../install/install-staging-new/" title="Staging Installation: New Site" class="md-nav__link">
+      Staging Installation: New Site
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../install/install-staging-migrate/" title="Staging Installation: Migrate Existing Islandora Site" class="md-nav__link">
+      Staging Installation: Migrate Existing Islandora Site
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../install/install-production-new/" title="Production Installation: New Site" class="md-nav__link">
+      Production Installation: New Site
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../install/install-production-migrate/" title="Production Installation: Migrate Existing Islandora Site" class="md-nav__link">
+      Production Installation: Migrate Existing Islandora Site
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../install/install-troubleshooting/" title="Troubleshooting Installations" class="md-nav__link">
+      Troubleshooting Installations
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../update/update/" title="Update ISLE" class="md-nav__link">
+      Update ISLE
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Appendices
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Appendices
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/data-persistence/" title="Data Persistence in Docker" class="md-nav__link">
+      Data Persistence in Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/glossary/" title="Glossary" class="md-nav__link">
+      Glossary
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/installing-module-with-composer/" title="Installing a Drupal Module with Composer" class="md-nav__link">
+      Installing a Drupal Module with Composer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/installing-module-with-drush/" title="Installing a Drupal Module with Drush" class="md-nav__link">
+      Installing a Drupal Module with Drush
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://docs.google.com/document/d/1r-I9n8mUhlJ5Z-X9AO-RrikhzH6I8bTPIL25LmtRbxE" title="Installing on Google Cloud Platform (Google Doc)" class="md-nav__link">
+      Installing on Google Cloud Platform (Google Doc)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/open-terminal-in-running-container/" title="Opening a Terminal in a Running Container" class="md-nav__link">
+      Opening a Terminal in a Running Container
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/sample-it-department-request/" title="Sample IT Department Request Letter" class="md-nav__link">
+      Sample IT Department Request Letter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/install-troubleshooting/" title="Troubleshooting" class="md-nav__link">
+      Troubleshooting
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9" type="checkbox" id="nav-4-9">
+    
+    <label class="md-nav__link" for="nav-4-9">
+      User Stories
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-9">
+        User Stories
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/user-story-demo-site/" title="Demo ISLE Installation Example User Story" class="md-nav__link">
+      Demo ISLE Installation Example User Story
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/user-story-new-site/" title="New Site Example User Story" class="md-nav__link">
+      New Site Example User Story
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/user-story-migration-site/" title="Migration Example User Story" class="md-nav__link">
+      Migration Example User Story
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/configuring-lets-encrypt/" title="Let's Encrypt: Free SSL Certificates" class="md-nav__link">
+      Let's Encrypt: Free SSL Certificates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/redhat/" title="Warning about Red Hat Install" class="md-nav__link">
+      Warning about Red Hat Install
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Cookbook Recipes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Cookbook Recipes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cookbook-recipes/isle-cheatsheet-docker-commands/" title="ISLE Cheat Sheet: Docker Commands" class="md-nav__link">
+      ISLE Cheat Sheet: Docker Commands
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      About
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        About
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/contributing/" title="Contributing to ISLE" class="md-nav__link">
+      Contributing to ISLE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/about-isle/" title="About ISLE" class="md-nav__link">
+      About ISLE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/committers/" title="About Committers" class="md-nav__link">
+      About Committers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-4" type="checkbox" id="nav-6-4">
+    
+    <label class="md-nav__link" for="nav-6-4">
+      Contributor Docs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-4">
+        Contributor Docs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributor-docs/mkdocs/" title="Docs: MkDocs" class="md-nav__link">
+      Docs: MkDocs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributor-docs/spell-checker/" title="Docs: Spell Checker" class="md-nav__link">
+      Docs: Spell Checker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributor-docs/style-guide/" title="Docs: Style Guide" class="md-nav__link">
+      Docs: Style Guide
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributor-docs/release-process/" title="Release Process" class="md-nav__link">
+      Release Process
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributor-docs/testing-guide/" title="Testing Guide" class="md-nav__link">
+      Testing Guide
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/get-help/" title="Get Help" class="md-nav__link">
+      Get Help
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Release Notes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Release Notes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-2-0/" title="Latest release: 1.2.0" class="md-nav__link">
+      Latest release: 1.2.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2">
+    
+    <label class="md-nav__link" for="nav-7-2">
+      Previous releases
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-2">
+        Previous releases
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-1-2/" title="1.1.2" class="md-nav__link">
+      1.1.2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-1-1/" title="1.1.1" class="md-nav__link">
+      1.1.1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-1-0/" title="1.1.0" class="md-nav__link">
+      1.1.0
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-this-component" title="What is this component?" class="md-nav__link">
+    What is this component?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-isle-tests" title="Running ISLE Tests" class="md-nav__link">
+    Running ISLE Tests
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation-instructions" title="Installation Instructions:" class="md-nav__link">
+    Installation Instructions:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#automated-test-triggers" title="Automated test triggers" class="md-nav__link">
+    Automated test triggers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extending-the-test-suite" title="Extending the test suite" class="md-nav__link">
+    Extending the test suite
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" title="Troubleshooting" class="md-nav__link">
+    Troubleshooting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-coverage" title="Test Coverage" class="md-nav__link">
+    Test Coverage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#isledocker-images" title="ISLE/DOCKER IMAGES" class="md-nav__link">
+    ISLE/DOCKER IMAGES
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drupal-installation" title="DRUPAL INSTALLATION" class="md-nav__link">
+    DRUPAL INSTALLATION
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-object-ingestion" title="SAMPLE OBJECT INGESTION" class="md-nav__link">
+    SAMPLE OBJECT INGESTION
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#collections" title="Collections" class="md-nav__link">
+    Collections
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#audio-content-model" title="Audio Content Model" class="md-nav__link">
+    Audio Content Model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basic-image-content-model" title="Basic Image Content Model" class="md-nav__link">
+    Basic Image Content Model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-content-model" title="Book Content Model" class="md-nav__link">
+    Book Content Model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compound-object-content-model" title="Compound Object Content Model" class="md-nav__link">
+    Compound Object Content Model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#large-image-content-model" title="Large Image Content Model" class="md-nav__link">
+    Large Image Content Model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#newspaper-content-model" title="Newspaper Content Model" class="md-nav__link">
+    Newspaper Content Model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oral-history-content-model" title="Oral History Content Model" class="md-nav__link">
+    Oral History Content Model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pdf-content-model" title="PDF Content Model" class="md-nav__link">
+    PDF Content Model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#video-content-model" title="Video Content Model" class="md-nav__link">
+    Video Content Model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#warc-content-model" title="WARC Content Model" class="md-nav__link">
+    WARC Content Model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maintenance-tasks" title="MAINTENANCE TASKS" class="md-nav__link">
+    MAINTENANCE TASKS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional-testing" title="Additional Testing" class="md-nav__link">
+    Additional Testing
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fedora-able-to-overide-existing-settings-for" title="FEDORA - Able to overide existing settings for:" class="md-nav__link">
+    FEDORA - Able to overide existing settings for:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solr-able-to-overide-existing-settings-for" title="SOLR - Able to overide existing settings for:" class="md-nav__link">
+    SOLR - Able to overide existing settings for:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-resources" title="Additional Resources" class="md-nav__link">
+    Additional Resources
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="utilizing-and-extending-isles-test-suite">Utilizing and Extending ISLE’s Test Suite</h1>
+<h2 id="what-is-this-component">What is this component?</h2>
+<ul>
+<li>Early in the history of ISLE, we did all build tests manually. We even developed a checklist spreadsheet for it: https://docs.google.com/spreadsheets/d/1L-wrivXq2pUz7vcGsMCx3X7yKf27uokoaR8SovU_BsU/edit#gid=0</li>
+<li>The test coverage section of this document identifies (by Spreadsheet id number) where in the test suite we have addressed the testing requirement.</li>
+<li>The tests themselves are currently in a temporary location: https://github.com/Born-Digital-US/isle-ingest-samples/tree/master/behat</li>
+<li>ISLE Phase 2 included budget to automate this test suite, and to make it easy to trigger for various ISLE use cases on every build, as well as for use by implementing institutions to check the integrity of their ISLE builds.</li>
+<li>We chose to use Behat to do behavioral testing as it is the most similar to an end-user, and ultimately we want to make sure that ISLE delivers a good end-user experience. Running Unit tests was deemed insufficient, as it only tests programatic aspects, not whether the Drupal UI allows utilization of Islandora's features.</li>
+<li>We chose to use Selinium and Chrome as Docker sidecars for actually executing the tests.</li>
+</ul>
+<hr />
+<h2 id="running-isle-tests">Running ISLE Tests</h2>
+<ul>
+<li>The most straightforward example of use is available in Born-Digital's working branch: https://github.com/Born-Digital-US/ISLE/tree/travis</li>
+<li>This use case is abstracted and summarized below:</li>
+</ul>
+<h3 id="installation-instructions">Installation Instructions:</h3>
+<ul>
+<li>Docker-compose.yml additions: several new services, for running Chrome/Selenium</li>
+</ul>
+<pre><code class="bash">  chrome:
+    image: selenium/node-chrome:3.11.0-dysprosium
+    volumes:
+      - /dev/shm:/dev/shm
+      - ./data/isle-apache-data:/var/www/html:ro
+    depends_on:
+      - apache
+      - hub
+    environment:
+      - HUB_PORT=4444
+      - HUB_HOST=hub
+    container_name: bd-ld-chrome
+    networks:
+      - isle-internal
+  hub:
+    image: selenium/hub:3.11.0-dysprosium
+    ports:
+      - &quot;4444:4444&quot;
+    container_name: bd-ld-hub
+    networks:
+      - isle-internal
+</code></pre>
+
+<ul>
+<li>Notes:</li>
+<li>To allow uploads in tests, we must mount in the Apache file root.</li>
+<li><code>/dev/shm</code> must be shared by all testing services or they will run out of RAM and crash</li>
+<li>Newer <code>selenium</code> images are available, but are untested. YMMV.</li>
+<li>No changes to <code>.env</code> file(s) are necessary, although for the examples shown here we have:</li>
+<li><code>COMPOSE_PROJECT_NAME=isledevelopment</code></li>
+<li><code>BASE_DOMAIN=isle.localdomain</code></li>
+<li><code>CONTAINER_SHORT_ID=ld</code></li>
+<li>If your use case uses other values for these variables, you may need to find/replace in the instructions below (e.g. <code>isle-apache-ld</code> corresponds with the CONTAINER_SHORT_ID above)</li>
+<li>The full series of commands to install a clean new ISLE with a clean new Drupal/Islandora, then add extra modules to support our test cases, and then execute the tests is as follows.</li>
+<li>Get a good ISLE base for this test run:</li>
+</ul>
+<pre><code class="bash">git clone https://github.com/Born-Digital-US/ISLE.git
+git checkout -b travis origin/travis
+
+docker-compose pull
+docker-compose up -d
+
+sleep 40
+</code></pre>
+
+<ul>
+<li>Now install Islandora from scratch, and init your Fedora repo using the tools provided by ISLE:</li>
+</ul>
+<pre><code class="bash">set -x &amp;&amp; docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh
+</code></pre>
+
+<ul>
+<li>Now install bulk-ingest dependencies (some not required for our tests) and extra modules required by test coverage:</li>
+</ul>
+<pre><code class="bash">docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html/sites/all/modules/islandora &amp;&amp; git clone https://github.com/Islandora-Labs/islandora_solution_pack_oralhistories.git&quot;
+docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html &amp;&amp; drush -y -u 1 en islandora_oralhistories&quot;
+
+docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html &amp;&amp; drush -y -u 1 en islandora_batch&quot;
+docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html/sites/all/modules/islandora &amp;&amp; git clone https://github.com/mjordan/islandora_batch_with_derivs.git&quot;
+docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html &amp;&amp; drush -y -u 1 en islandora_batch_with_derivs&quot;
+docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html &amp;&amp; drush -y -u 1 en islandora_book_batch&quot;
+docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html &amp;&amp; drush -y -u 1 en islandora_newspaper_batch&quot;
+docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html/sites/all/modules/islandora &amp;&amp; git clone https://github.com/MarcusBarnes/islandora_compound_batch.git&quot;
+docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html &amp;&amp; drush -y -u 1 en islandora_compound_batch&quot;
+# &quot;Batch Ingest dependencies are installed&quot;
+docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html/sites/all/modules/islandora &amp;&amp; git clone https://github.com/mnylc/islandora_multi_importer.git&quot;
+docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html/sites/all/modules/islandora/islandora_multi_importer &amp;&amp;  composer install&quot;
+docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html &amp;&amp; drush en islandora_multi_importer -y&quot;
+# &quot;IMI dependencies installed&quot;
+</code></pre>
+
+<ul>
+<li>Now clone the repository with the tests, put it where Drupal expects it (<code>sites/all/behat</code>), and install Behat dependencies with Composer:</li>
+</ul>
+<pre><code class="bash">git clone git@github.com:Born-Digital-US/isle-ingest-samples.git data/isle-apache-data/isle-ingest-samples
+docker exec -it isle-apache-ld bash -c &quot;ln -s /var/www/html/isle-ingest-samples/behat /var/www/html/sites/behat &amp;&amp; chown -R islandora:www-data /var/www/html/isle-ingest-samples/behat&quot; # symlink up to the ingest samples location
+docker exec -it isle-apache-ld bash -c &quot;mkdir /var/www/html/isle-ingest-samples/behat/debug/logs/&quot;
+docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html/sites/behat &amp;&amp; composer install&quot;
+</code></pre>
+
+<ul>
+<li>A few more basics, again only necessary if this is a BRAND NEW Drupal/Islandora site:</li>
+</ul>
+<pre><code class="bash">docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html &amp;&amp; drush dis overlay -y&quot;
+docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html &amp;&amp; drush -u 1 islandora_batch_with_derivs_preprocess --key_datastream=MODS --scan_target=/var/www/html/isle-ingest-samples/Batches-by-CModel/Collections/files --use_pids=true --namespace=samples --parent=islandora:root --content_models=islandora:collectionCModel&quot;
+docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html &amp;&amp; drush -u 1 islandora_batch_ingest&quot;
+# &quot;Samples ingested&quot;
+</code></pre>
+
+<ul>
+<li>And now we're finally ready to run tests:</li>
+</ul>
+<pre><code class="bash">docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html/sites/behat &amp;&amp; ./run-isle-tests.sh --run=services&quot;
+docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html/sites/behat &amp;&amp; ./run-isle-tests.sh --run=apache&quot;
+# &quot;Testing complete&quot;
+</code></pre>
+
+<ul>
+<li>If you want to just run this as a script, you can find that here: https://github.com/Born-Digital-US/ISLE/blob/travis/local_setup.sh. There are a few extra steps in there, but nothing that should get in the way of basic test usage.</li>
+<li>If you have your own ISLE already, just omit that initial <code>git clone</code> for ISLE. If you use the script, we're assuming you've cloned our whole repo, switched to the <code>travis</code> branch, and are running it from there.</li>
+<li>If you're running this many times a day for active development, you'll eventually want to teardown. Recommended steps:</li>
+</ul>
+<pre><code class="bash">docker-compose down -v
+rm -rf isle-ingest-samples &amp;&amp; rm -rf data/isle-apache-data/isle-ingest-samples
+</code></pre>
+
+<hr />
+<h2 id="automated-test-triggers">Automated test triggers</h2>
+<ul>
+<li>It turned out Travis couldn't run long enough (greater than 50 minutes) to complete a full test run. CircleCI can, and Born-Digital has configured this to run on their branch: https://github.com/Born-Digital-US/ISLE/blob/travis/.circleci/config.yml</li>
+<li>Next steps:</li>
+<li>Decide what CI workflows we want to run automatically, alter/fork CI scripts to enable</li>
+</ul>
+<hr />
+<h2 id="extending-the-test-suite">Extending the test suite</h2>
+<ul>
+<li>TK
+*</li>
+</ul>
+<hr />
+<h2 id="troubleshooting">Troubleshooting</h2>
+<ul>
+<li>Come discuss on the ISLE Interest Group email list and/or bi-weekly meetings.
+*</li>
+</ul>
+<hr />
+<h2 id="test-coverage">Test Coverage</h2>
+<h4 id="isledocker-images">ISLE/DOCKER IMAGES</h4>
+<ul>
+<li>1-1   Able to create new ISLE instance?<ul>
+<li>N/A - our CI tool can set up various situations, one of which could be a new ISLE instance.</li>
+</ul>
+</li>
+<li>1-2   Able to view Traefik admin port?<ul>
+<li>Covered by isle-services.feature "traefik online"</li>
+</ul>
+</li>
+<li>1-3   Able to view Portainer Admin panel?<ul>
+<li>Covered by isle-services.feature "portainer online"</li>
+</ul>
+</li>
+<li>1-4   Able to view Tomcat admin panel for solr container?<ul>
+<li>Covered by isle-services.feature "solr online"</li>
+</ul>
+</li>
+<li>1-5   Able to view the Solr admin panel for solr container?<ul>
+<li>Covered by isle-services.feature "solr online"</li>
+</ul>
+</li>
+<li>1-6   Able to view Tomcat admin panel for image-services container?<ul>
+<li>Covered by isle-services.feature "imageservices online</li>
+</ul>
+</li>
+<li>1-7   Able to view Cantaloupe admin panel for image-services container?<ul>
+<li>Covered by isle-services.feature "imageservices online"</li>
+</ul>
+</li>
+<li>1-8   Able to view Adore-djatoka admin panel for image-services container?<ul>
+<li>Covered by isle-services.feature "imageservices online"</li>
+</ul>
+</li>
+<li>1-9   Able to view Tomcat admin panel for fedora container?<ul>
+<li>Covered by isle-services.feature "fedora online"</li>
+</ul>
+</li>
+<li>1-10  Able to view Fedora services panels e.g. /objects, /describe etc<ul>
+<li>Covered by isle-services.feature "fedora online"</li>
+</ul>
+</li>
+<li>1-11  Able to view Fedoragsearch panels e.g. /fedoragsearch/rest?operation=updateIndex<ul>
+<li>Covered by isle-services.feature "fedora online"</li>
+</ul>
+</li>
+</ul>
+<h4 id="drupal-installation">DRUPAL INSTALLATION</h4>
+<ul>
+<li>2-1   Able to view domain / website url as anonymous user?<ul>
+<li>Covered by isle-drupal.feature "Viewing homepage"</li>
+</ul>
+</li>
+<li>2-2   Able to login to Drupal site as an admin user?<ul>
+<li>Covered by isle-drupal.feature "Viewing login page as admin"</li>
+</ul>
+</li>
+<li>2-3   Able to view persistent data folders for xml/xslt/sites and for fedora data store?<ul>
+<li>WONTFIX- N/A</li>
+</ul>
+</li>
+<li>2-4   If Drupal multisite, able to login to multisite (not parent) site?<ul>
+<li>MAYBE TODO Not covered. Need test case?</li>
+</ul>
+</li>
+<li>2-5   Drupal Status Report not showing errors? https://<domain>/admin/reports/status<ul>
+<li>WONTFIX- Intentionally commented out, but left relic in isle-drupal.feature</li>
+</ul>
+</li>
+</ul>
+<h4 id="sample-object-ingestion">SAMPLE OBJECT INGESTION</h4>
+<h5 id="collections">Collections</h5>
+<ul>
+<li>3-1   Able to create a new collection e.g. test:collection?<ul>
+<li>This currently happens on test setup</li>
+</ul>
+</li>
+<li>3-2   Able to modify a new collection's Collection policies and add Content Models?<ul>
+<li>Covered in the first steps of almost all content model feature files</li>
+</ul>
+</li>
+</ul>
+<h5 id="audio-content-model">Audio Content Model</h5>
+<ul>
+<li>3-3   Able to ingest the test AUDIO sample objects?<ul>
+<li>Covered by audio.feature: "Ingest Audio Sample Object"</li>
+</ul>
+</li>
+<li>3-4   Able to upload thumbnail for Audio object?<ul>
+<li>Covered by audio.feature: "Replace Audio Thumbnail</li>
+</ul>
+</li>
+<li>3-5   Able to view / hear an AUDIO object?<ul>
+<li>WONTFIX Not covered - does not appear to be possible?</li>
+</ul>
+</li>
+<li>3-6   Able to download an AUDIO object?<ul>
+<li>Covered by audio.feature: "Check for Audio OBJ download"</li>
+</ul>
+</li>
+<li>3-7   Able to search for newly ingested AUDIO object using Islandora simple search?<ul>
+<li>Covered by audio.feature: "Check for Audio Objects using simple search"</li>
+</ul>
+</li>
+<li>3-8   Able to edit AUDIO object’s title using the XML form?<ul>
+<li>Covered by audio.feature: "Edit Audio object title"</li>
+</ul>
+</li>
+<li>3-9   Able to search for newly edited AUDIO object’s title using Islandora simple search?<ul>
+<li>Covered by audio.feature: "Edit Audio object title"</li>
+</ul>
+</li>
+<li>3-10  Able to edit the Item Label of an AUDIO object's Properties?<ul>
+<li>Covered by audio.feature: "Edit Audio object Item Label"</li>
+</ul>
+</li>
+<li>3-11  Able to search for newly edited Item Label of an AUDIO object's Properties using Islandora simple search?<ul>
+<li>Covered by audio.feature: "Edit Audio object Item Label"</li>
+</ul>
+</li>
+<li>3-12  Able to edit MODS datastream for AUDIO object?<ul>
+<li>Covered by audio.feature: "Replace MODS datastream for Audio Object"</li>
+</ul>
+</li>
+<li>3-13  Able to search for newly edited MODS datastream for AUDIO object using Islandora simple search?<ul>
+<li>Covered by audio.feature: "Replace MODS datastream for Audio Object"</li>
+</ul>
+</li>
+<li>3-14  Able to delete TN derivative for AUDIO object?<ul>
+<li>Covered by audio.feature: "Delete TN derivative for Audio Object"</li>
+</ul>
+</li>
+<li>3-15  Able to regenerate all derivatives for AUDIO object?<ul>
+<li>Covered by audio.feature: "Regenerate all derivatives for Audio Object"</li>
+</ul>
+</li>
+</ul>
+<h5 id="basic-image-content-model">Basic Image Content Model</h5>
+<ul>
+<li>3-16  Able to ingest these test BASIC IMAGE sample objects?<ul>
+<li>Covered by basicimage.feature: "Ingest Basic Image Sample Object"</li>
+</ul>
+</li>
+<li>3-17  Able to view a BASIC IMAGE object?<ul>
+<li>Covered by basicimage.feature: "Check for Basic Image OBJ download"</li>
+</ul>
+</li>
+<li>3-18  Able to download a BASIC IMAGE object?<ul>
+<li>Covered by basicimage.feature: "Check for Basic Image OBJ download"</li>
+</ul>
+</li>
+<li>3-19  Able to search for newly ingested BASIC IMAGE object using Islandora simple search?<ul>
+<li>Covered by basicimage.feature: "Check for Basic Image Objects using simple search"</li>
+</ul>
+</li>
+<li>3-20  Able to edit BASIC IMAGE object’s title using the XML form?<ul>
+<li>Covered by basicimage.feature: "Edit Basic Image object title"</li>
+</ul>
+</li>
+<li>3-21  Able to search for newly edited BASIC IMAGE object’s title using Islandora simple search?<ul>
+<li>Covered by basicimage.feature: "Edit Basic Image object title"</li>
+</ul>
+</li>
+<li>3-22  Able to edit the Item Label of an BASIC IMAGE object's Properties?<ul>
+<li>Covered by basicimage.feature: "Edit Basic Image object Item Label"</li>
+</ul>
+</li>
+<li>3-23  Able to search for newly edited Item Label of an BASIC IMAGE object's Properties using Islandora simple search?<ul>
+<li>Covered by basicimage.feature: "Edit Basic Image object Item Label"</li>
+</ul>
+</li>
+<li>3-24  Able to edit MODS datastream for BASIC IMAGE object?<ul>
+<li>Covered by basicimage.feature: "Replace MODS datastream for Basic Image Object"</li>
+</ul>
+</li>
+<li>3-25  Able to search for newly edited MODS datastream for BASIC IMAGE object using Islandora simple search?<ul>
+<li>Covered by basicimage.feature: "Replace MODS datastream for Basic Image Object"</li>
+</ul>
+</li>
+<li>3-26  Able to delete TN derivative for BASIC IMAGE object?<ul>
+<li>Covered by basicimage.feature: "Delete TN derivative for Basic Image Object"</li>
+</ul>
+</li>
+<li>3-27  Able to regenerate all derivatives for BASIC IMAGE object?<ul>
+<li>Covered by basicimage.feature: "Regenerate all derivatives for Basic Image Object"</li>
+</ul>
+</li>
+</ul>
+<h5 id="book-content-model">Book Content Model</h5>
+<ul>
+<li>3-28  Able to ingest these test BOOK sample objects?<ul>
+<li>Covered by book.feature: "Ingest Book Sample Object"</li>
+</ul>
+</li>
+<li>3-29  Able to view a BOOK object?<ul>
+<li>Covered by book.feature: "Check for BOOK OBJ download"</li>
+</ul>
+</li>
+<li>3-30  Able to download a BOOK object?<ul>
+<li>Covered by book.feature: "Check for BOOK OBJ download"</li>
+</ul>
+</li>
+<li>3-31  Able to search for newly ingested BOOK object using Islandora simple search?<ul>
+<li>Covered by book.feature: "Check for BOOK Objects using simple search"</li>
+</ul>
+</li>
+<li>3-32  Able to edit BOOK object’s title using the XML form?<ul>
+<li>Covered by book.feature: "Edit BOOK object title"</li>
+</ul>
+</li>
+<li>3-33  Able to search for newly edited BOOK object’s title using Islandora simple search?<ul>
+<li>Covered by book.feature: "Edit BOOK object title"</li>
+</ul>
+</li>
+<li>3-34  Able to edit the Item Label of an BOOK object's Properties?<ul>
+<li>Covered by book.feature: "Edit BOOK object Item Label"</li>
+</ul>
+</li>
+<li>3-35  Able to search for newly edited Item Label of an BOOK object's Properties using Islandora simple search?<ul>
+<li>Covered by book.feature: "Edit BOOK object Item Label"</li>
+</ul>
+</li>
+<li>3-36  Able to edit MODS datastream for BOOK object?<ul>
+<li>Covered by book.feature: "Replace MODS datastream for BOOK Object"</li>
+</ul>
+</li>
+<li>3-37  Able to search for newly edited MODS datastream for BOOK object using Islandora simple search?<ul>
+<li>Covered by book.feature: "Replace MODS datastream for BOOK Object"</li>
+</ul>
+</li>
+<li>3-38  Able to delete TN derivative for BOOK object?<ul>
+<li>Covered by book.feature: "Delete TN derivative for BOOK Object"</li>
+</ul>
+</li>
+<li>3-39  Able to regenerate all derivatives for BOOK object?<ul>
+<li>Covered by book.feature: "Regenerate all derivatives for BOOK Object"</li>
+</ul>
+</li>
+</ul>
+<h5 id="compound-object-content-model">Compound Object Content Model</h5>
+<ul>
+<li>3-40  Able to ingest these test COMPOUND OBJECT sample objects?<ul>
+<li>Covered by compound.feature: "Ingest Compound Object Sample Object"</li>
+</ul>
+</li>
+<li>3-41  Able to view a COMPOUND OBJECT object?<ul>
+<li>This is theme specific.</li>
+</ul>
+</li>
+<li>3-42  Able to download a COMPOUND OBJECT object?<ul>
+<li>This is theme specific.</li>
+</ul>
+</li>
+<li>3-43  Able to search for newly ingested COMPOUND OBJECT object using Islandora simple search?<ul>
+<li>Covered by compound.feature: "Check for Compound Object Objects using simple search"</li>
+</ul>
+</li>
+<li>3-44  Able to edit COMPOUND OBJECT object’s title using the XML form?<ul>
+<li>Covered by compound.feature: "Edit Compound Object object title"</li>
+</ul>
+</li>
+<li>3-45  Able to search for newly edited COMPOUND OBJECT object’s title using Islandora simple search?<ul>
+<li>Covered by compound.feature: "Edit Compound Object object title"</li>
+</ul>
+</li>
+<li>3-46  Able to edit the Item Label of an COMPOUND OBJECT object's Properties?<ul>
+<li>Covered by compound.feature: "Edit Compound Object object Item Label"</li>
+</ul>
+</li>
+<li>3-47  Able to search for newly edited Item Label of an COMPOUND OBJECT object's Properties using Islandora simple search?<ul>
+<li>Covered by compound.feature: "Edit Compound Object object Item Label"</li>
+</ul>
+</li>
+<li>3-48  Able to edit MODS datastream for COMPOUND OBJECT object?<ul>
+<li>Covered by compound.feature: "Replace MODS datastream for Compound Object Object"</li>
+</ul>
+</li>
+<li>3-49  Able to search for newly edited MODS datastream for COMPOUND OBJECT object using Islandora simple search?<ul>
+<li>Covered by compound.feature: "Replace MODS datastream for Compound Object Object</li>
+</ul>
+</li>
+<li>3-50  Able to delete TN derivative for COMPOUND OBJECT object?<ul>
+<li>Covered by compound.feature: "Delete TN derivative for Compound Object Object"</li>
+</ul>
+</li>
+<li>3-51  Able to regenerate all derivatives for COMPOUND OBJECT object?<ul>
+<li>WONTFIX- Does not appear to be possible as derivatives are tied to child objects</li>
+<li>Testing regen derivs is already covered in the other content types that appear as children of compounds</li>
+</ul>
+</li>
+<li>Testing viewers<ul>
+<li>WONTFIX- this is theme dependent. All we do is ingest and test relationships and data integrity</li>
+</ul>
+</li>
+</ul>
+<h5 id="large-image-content-model">Large Image Content Model</h5>
+<ul>
+<li>3-52  Able to ingest these test LARGE IMAGE sample objects?<ul>
+<li>Covered by largeimage.feature: "Ingest Large Image Sample Object"</li>
+</ul>
+</li>
+<li>3-53  Able to view a LARGE IMAGE object?<ul>
+<li>Covered by largeimage.feature: "Check for Large Image OBJ download"</li>
+</ul>
+</li>
+<li>3-54  Able to download a LARGE IMAGE object?<ul>
+<li>Covered by largeimage.feature: "Check for Large Image OBJ download"</li>
+</ul>
+</li>
+<li>3-55  Able to search for newly ingested LARGE IMAGE object using Islandora simple search?<ul>
+<li>Covered by largeimage.feature: "Check for Large Image Objects using simple search"</li>
+</ul>
+</li>
+<li>3-56  Able to edit LARGE IMAGE object’s title using the XML form?<ul>
+<li>Covered by largeimage.feature: "Edit Large Image object title"</li>
+</ul>
+</li>
+<li>3-57  Able to search for newly edited  LARGE IMAGE object’s title using Islandora simple search?<ul>
+<li>Covered by largeimage.feature: "Edit Large Image object title"</li>
+</ul>
+</li>
+<li>3-58  Able to edit the Item Label of an LARGE IMAGE object's Properties?<ul>
+<li>Covered by largeimage.feature: "Edit Large Image object Item Label"</li>
+</ul>
+</li>
+<li>3-59  Able to search for newly edited Item Label of an LARGE IMAGE object's Properties using Islandora simple search?<ul>
+<li>Covered by largeimage.feature: "Edit Large Image object Item Label"</li>
+</ul>
+</li>
+<li>3-60  Able to edit MODS datastream for LARGE IMAGE object?<ul>
+<li>Covered by largeimage.feature: "Replace MODS datastream for Large Image Object"</li>
+</ul>
+</li>
+<li>3-61  Able to search for newly edited MODS datastream for LARGE IMAGE object using Islandora simple search?<ul>
+<li>Covered by largeimage.feature: "Replace MODS datastream for Large Image Object"</li>
+</ul>
+</li>
+<li>3-62  Able to delete TN derivative for LARGE IMAGE object?<ul>
+<li>Covered by largeimage.feature: "Delete TN derivative for Large Image Object"</li>
+</ul>
+</li>
+<li>3-63  Able to regenerate all derivatives for LARGE IMAGE object?<ul>
+<li>Covered by largeimage.feature: "Regenerate all derivatives for Large Image Object"</li>
+</ul>
+</li>
+</ul>
+<h5 id="newspaper-content-model">Newspaper Content Model</h5>
+<ul>
+<li>3-64  Able to ingest these test NEWSPAPER sample objects?<ul>
+<li>Covered by newspaper.feature: "Ingest Newspaper Sample Object"</li>
+</ul>
+</li>
+<li>3-65  Able to view a NEWSPAPER object?<ul>
+<li>Covered by newspaper.feature: "Check for Newspaper OBJ download"</li>
+</ul>
+</li>
+<li>3-66  Able to download a NEWSPAPER object?<ul>
+<li>Covered by newspaper.feature: "Check for Newspaper OBJ download"</li>
+</ul>
+</li>
+<li>3-67  Able to search for newly ingested NEWSPAPER object using Islandora simple search?<ul>
+<li>Covered by newspaper.feature: "Check for Newspaper Objects using simple search"</li>
+</ul>
+</li>
+<li>3-68  Able to edit NEWSPAPER object’s title using the XML form?<ul>
+<li>Covered by newspaper.feature: "Edit Newspaper object title"</li>
+</ul>
+</li>
+<li>3-69  Able to search for newly edited NEWSPAPER object’s title using Islandora simple search?<ul>
+<li>Covered by newspaper.feature: "Edit Newspaper object title"</li>
+</ul>
+</li>
+<li>3-70  Able to edit the Item Label of an NEWSPAPER object's Properties?<ul>
+<li>Covered by newspaper.feature: "Edit Newspaper object Item Label"</li>
+</ul>
+</li>
+<li>3-71  Able to search for newly edited Item Label of an NEWSPAPER object's Properties using Islandora simple search?<ul>
+<li>Covered by newspaper.feature: "Edit Newspaper object Item Label"</li>
+</ul>
+</li>
+<li>3-72  Able to edit MODS datastream for NEWSPAPER object?<ul>
+<li>Covered by newspaper.feature: "Replace MODS datastream for Newspaper Object"</li>
+</ul>
+</li>
+<li>3-73  Able to search for newly edited MODS datastream for NEWSPAPER object using Islandora simple search?<ul>
+<li>Covered by newspaper.feature: "Replace MODS datastream for Newspaper Object"</li>
+</ul>
+</li>
+<li>3-74  Able to delete TN derivative for NEWSPAPER object?<ul>
+<li>Covered by newspaper.feature: "Delete TN derivative for Newspaper Object"</li>
+</ul>
+</li>
+<li>3-75  Able to regenerate all derivatives for NEWSPAPER object?<ul>
+<li>Covered by newspaper.feature: "Regenerate all derivatives for Newspaper Object"</li>
+</ul>
+</li>
+</ul>
+<h5 id="oral-history-content-model">Oral History Content Model</h5>
+<ul>
+<li>3-76  Able to ingest these test ORAL HISTORY sample objects?<ul>
+<li>Covered by oralhistories.feature: "Ingest ORAL HISTORIES Sample Object"</li>
+</ul>
+</li>
+<li>3-77  Able to view a ORAL HISTORY object?<ul>
+<li>Covered by oralhistories.feature: "Check for ORAL HISTORIES OBJ download"</li>
+</ul>
+</li>
+<li>3-78  Able to download a ORAL HISTORY object?<ul>
+<li>Covered by oralhistories.feature: "Check for ORAL HISTORIES OBJ download"</li>
+</ul>
+</li>
+<li>3-79  Able to search for newly ingested ORAL HISTORY object using Islandora simple search?<ul>
+<li>Covered by oralhistories.feature: "Check for ORAL HISTORIES Objects using simple search"</li>
+</ul>
+</li>
+<li>3-80  Able to edit ORAL HISTORY object’s title using the XML form?<ul>
+<li>Covered by oralhistories.feature: "Edit ORAL HISTORIES object title"</li>
+</ul>
+</li>
+<li>3-81  Able to search for newly edited ORAL HISTORY object’s title using Islandora simple search?<ul>
+<li>Covered by oralhistories.feature: "Edit ORAL HISTORIES object title"</li>
+</ul>
+</li>
+<li>3-82  Able to edit the Item Label of an ORAL HISTORY object's Properties?<ul>
+<li>Covered by oralhistories.feature: "Edit ORAL HISTORIES object Item Label"</li>
+</ul>
+</li>
+<li>3-83  Able to search for newly edited Item Label of an ORAL HISTORY object's Properties using Islandora simple search?<ul>
+<li>Covered by oralhistories.feature: "Edit ORAL HISTORIES object Item Label"</li>
+</ul>
+</li>
+<li>3-84  Able to edit MODS datastream for ORAL HISTORY object?<ul>
+<li>Covered by oralhistories.feature: "Replace MODS datastream for ORAL HISTORIES Object"</li>
+</ul>
+</li>
+<li>3-85  Able to search for newly edited MODS datastream for ORAL HISTORY object using Islandora simple search?<ul>
+<li>Covered by oralhistories.feature: "Replace MODS datastream for ORAL HISTORIES Object"</li>
+</ul>
+</li>
+<li>3-86  Able to delete TN derivative for ORAL HISTORY object?<ul>
+<li>Covered by oralhistories.feature: "Delete TN derivative for ORAL HISTORIES Object"</li>
+</ul>
+</li>
+<li>3-87  Able to regenerate all derivatives for ORAL HISTORY object?<ul>
+<li>Covered by oralhistories.feature: "Regenerate all derivatives for ORAL HISTORIES Object"</li>
+</ul>
+</li>
+</ul>
+<h5 id="pdf-content-model">PDF Content Model</h5>
+<ul>
+<li>3-88  Able to ingest these test PDF sample objects?<ul>
+<li>Covered by pdf.feature: "Ingest PDF Sample Object"</li>
+</ul>
+</li>
+<li>3-89  Able to view a PDF object?<ul>
+<li>Covered by pdf.feature: "Check for PDF OBJ download"</li>
+</ul>
+</li>
+<li>3-90  Able to download a PDF object?<ul>
+<li>Covered by pdf.feature: "Check for PDF OBJ download"</li>
+</ul>
+</li>
+<li>3-91  Able to search for newly ingested PDF object using Islandora simple search?<ul>
+<li>Covered by pdf.feature: "Check for PDF Objects using simple search"</li>
+</ul>
+</li>
+<li>3-92  Able to edit PDF object’s title using the XML form?<ul>
+<li>Covered by pdf.feature: "Edit PDF object title"</li>
+</ul>
+</li>
+<li>3-93  Able to search for newly edited PDF object’s title using Islandora simple search?<ul>
+<li>Covered by pdf.feature: "Edit PDF object title"</li>
+</ul>
+</li>
+<li>3-94  Able to edit the Item Label of an PDF object's Properties?<ul>
+<li>Covered by pdf.feature: "Edit PDF object Item Label"</li>
+</ul>
+</li>
+<li>3-95  Able to search for newly edited Item Label of an PDF object's Properties using Islandora simple search?<ul>
+<li>Covered by pdf.feature: "Edit PDF object Item Label"</li>
+</ul>
+</li>
+<li>3-96  Able to edit MODS datastream for PDF object?<ul>
+<li>Covered by pdf.feature: "Replace MODS datastream for PDF Object"</li>
+</ul>
+</li>
+<li>3-97  Able to search for newly edited MODS datastream for PDF object using Islandora simple search?<ul>
+<li>Covered by pdf.feature: "Replace MODS datastream for PDF Object"</li>
+</ul>
+</li>
+<li>3-98  Able to delete TN derivative for PDF object?<ul>
+<li>Covered by pdf.feature: "Delete TN derivative for PDF Object"</li>
+</ul>
+</li>
+<li>3-99  Able to regenerate all derivatives for PDF object?<ul>
+<li>Covered by pdf.feature: "Regenerate all derivatives for PDF Object"</li>
+</ul>
+</li>
+</ul>
+<h5 id="video-content-model">Video Content Model</h5>
+<ul>
+<li>3-100 Able to ingest these test VIDEO sample objects?<ul>
+<li>Covered by video.feature: "Ingest Video Sample Object"</li>
+</ul>
+</li>
+<li>3-101 Able to view a VIDEO object?<ul>
+<li>Covered by video.feature: "Check for Video OBJ download"</li>
+</ul>
+</li>
+<li>3-102 Able to download a VIDEO object?<ul>
+<li>Covered by video.feature: "Check for Video OBJ download"</li>
+</ul>
+</li>
+<li>3-103 Able to search for newly ingested VIDEO object using Islandora simple search?<ul>
+<li>Covered by video.feature: "Check for Video Objects using simple search"</li>
+</ul>
+</li>
+<li>3-104 Able to edit VIDEO object’s title using the XML form?<ul>
+<li>Covered by video.feature: "Edit Video object title"</li>
+</ul>
+</li>
+<li>3-105 Able to search for newly edited VIDEO object’s title using Islandora simple search?<ul>
+<li>Covered by video.feature: "Edit Video object title"</li>
+</ul>
+</li>
+<li>3-106 Able to edit the Item Label of an VIDEO object's Properties?<ul>
+<li>Covered by video.feature: "Edit Video object Item Label"</li>
+</ul>
+</li>
+<li>3-107 Able to search for newly edited Item Label of an VIDEO object's Properties using Islandora simple search?<ul>
+<li>Covered by video.feature: "Edit Video object Item Label"</li>
+</ul>
+</li>
+<li>3-108 Able to edit MODS datastream for VIDEO object?<ul>
+<li>Covered by video.feature: "Replace MODS datastream for Video Object"</li>
+</ul>
+</li>
+<li>3-109 Able to search for newly edited MODS datastream for VIDEO object using Islandora simple search?<ul>
+<li>Covered by video.feature: "Replace MODS datastream for Video Object"</li>
+</ul>
+</li>
+<li>3-110 Able to replace MODS datastreams<ul>
+<li>Covered by video.feature: "Replace MODS datastream for Video Object"</li>
+</ul>
+</li>
+<li>3-111 Able to search for newly replaced MODS datastreams using Islandora simple search?<ul>
+<li>Covered by video.feature: "Replace MODS datastream for Video Object"</li>
+</ul>
+</li>
+<li>3-112 Able to delete TN derivative for VIDEO object?<ul>
+<li>Covered by video.feature: "Delete TN derivative for Video Object"</li>
+</ul>
+</li>
+<li>3-113 Able to regenerate all derivatives for VIDEO object?<ul>
+<li>Covered by video.feature: "Regenerate all derivatives for Video Object"</li>
+</ul>
+</li>
+</ul>
+<h5 id="warc-content-model">WARC Content Model</h5>
+<ul>
+<li>3-114 Able to ingest these test WEB ARCHIVE sample objects?<ul>
+<li>Covered by warc.feature: "Ingest WARC Sample Object"</li>
+</ul>
+</li>
+<li>3-115 Able to view a WEB ARCHIVE object?<ul>
+<li>N/A There is no WARC viewer</li>
+</ul>
+</li>
+<li>3-116 Able to download a WEB ARCHIVE object?<ul>
+<li>Covered by warc.feature: "Check for WARC OBJ download"</li>
+</ul>
+</li>
+<li>3-117 Able to search for newly ingested WEB ARCHIVE object using Islandora simple search?<ul>
+<li>Covered by warc.feature: "Check for WARC Objects using simple search"</li>
+</ul>
+</li>
+<li>3-118 Able to edit WEB ARCHIVE object’s title using the XML form?<ul>
+<li>Covered by warc.feature: "Edit WARC object title"</li>
+</ul>
+</li>
+<li>3-119 Able to search for newly edited WEB ARCHIVE object’s title using Islandora simple search?<ul>
+<li>Covered by warc.feature: "Edit WARC object title"</li>
+</ul>
+</li>
+<li>3-120 Able to edit the Item Label of an WEB ARCHIVE object's Properties?<ul>
+<li>Covered by warc.feature: "Edit WARC object Item Label"</li>
+</ul>
+</li>
+<li>3-121 Able to search for newly edited Item Label of an WEB ARCHIVE object's Properties using Islandora simple search?<ul>
+<li>Covered by warc.feature: "Edit WARC object Item Label"</li>
+</ul>
+</li>
+<li>3-122 Able to edit MODS datastream for WEB ARCHIVE object?<ul>
+<li>Covered by warc.feature: "Replace MODS datastream for WARC Object"</li>
+</ul>
+</li>
+<li>3-123 Able to search for newly edited MODS datastream for WEB ARCHIVE object using Islandora simple search?<ul>
+<li>Covered by warc.feature: "Replace MODS datastream for WARC Object"</li>
+</ul>
+</li>
+<li>3-124 Able to delete TN derivative for WEB ARCHIVE object?<ul>
+<li>Covered by warc.feature: "Delete TN derivative for WARC Object"</li>
+</ul>
+</li>
+<li>3-125 Able to regenerate all derivatives for WEB ARCHIVE object?<ul>
+<li>Covered by warc.feature: "Regenerate all derivatives for WARC Object"</li>
+</ul>
+</li>
+</ul>
+<h5 id="maintenance-tasks">MAINTENANCE TASKS</h5>
+<ul>
+<li>4-1   Able to view the expected number of data objects?<ul>
+<li>N/A</li>
+</ul>
+</li>
+<li>4-2   Able to run Drupal cron manuall as signed in user?<ul>
+<li>Covered by )-sile-drupal.feature: "Run cron"</li>
+</ul>
+</li>
+<li>4-3   Confirm that Drupal cron runs automatically as scheduled?<ul>
+<li>N/A</li>
+</ul>
+</li>
+<li>4-4   Able to view / tail logs from within containers<ul>
+<li>N/A</li>
+</ul>
+</li>
+<li>4-5   Able to view / tail logs on Host server?<ul>
+<li>N/A</li>
+</ul>
+</li>
+<li>4-6   Able to run a Solr search from website and find ingested objects?<ul>
+<li>Covered above</li>
+</ul>
+</li>
+<li>4-7   Able to reindex / rebuild Fedora RI?
+    *</li>
+<li>4-8   Able to reindex / rebuild Fedora db MYSQL?</li>
+<li>4-9   Able to reindex SOLR?</li>
+</ul>
+<h5 id="additional-testing">Additional Testing</h5>
+<ul>
+<li>5-1   Able to create single host server with multi-sites (link to Ben's instructions)<ul>
+<li>WONTFIX - ISLE doesn't support this anymore</li>
+</ul>
+</li>
+<li>5-2   Able to use mounts instead of Docker<ul>
+<li>N/A - To be covered by one or more CI configurations</li>
+</ul>
+</li>
+<li>5-3   Able to create new config directories for services<ul>
+<li>N/A - To be covered by one or more CI configurations</li>
+</ul>
+</li>
+</ul>
+<h4 id="fedora-able-to-overide-existing-settings-for">FEDORA - Able to overide existing settings for:</h4>
+<ul>
+<li>5-4         - ./config/fedora/akubra-llstore.xml:/usr/local/fedora/server/config/spring/akubra-llstore.xml (Allows for deeper hash directories for larger Fedora collections)<ul>
+<li>N/A - To be covered by one or more CI configurations</li>
+</ul>
+</li>
+<li>5-5   foxmltoSolr.xslt<ul>
+<li>N/A - To be covered by one or more CI configurations</li>
+</ul>
+</li>
+<li>5-6   islandora_transforms<ul>
+<li>N/A - To be covered by one or more CI configurations</li>
+</ul>
+</li>
+</ul>
+<h4 id="solr-able-to-overide-existing-settings-for">SOLR - Able to overide existing settings for:</h4>
+<ul>
+<li>5-7   schema.xml<ul>
+<li>N/A - To be covered by one or more CI configurations</li>
+</ul>
+</li>
+<li>5-8   solrconfig.xml<ul>
+<li>N/A - To be covered by one or more CI configurations</li>
+</ul>
+</li>
+<li>5-9   Use IMI for sample ingest testing to speed things up<ul>
+<li>N/A</li>
+</ul>
+</li>
+<li>5-10  Test bind mounting - with nested ancestors set to true foxmltoSolr.xslt and all islandora_transforms, along with solrconfig and schemas<ul>
+<li>N/A - To be covered by one or more CI configurations</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="additional-resources">Additional Resources</h2>
+<p><em>
+</em></p>
+<hr />
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.583bbe55.js"></script>
+      
+      <script>app.initialize({version:"1.0",url:{base:"../.."}})</script>
+      
+        <script src="../../extra.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

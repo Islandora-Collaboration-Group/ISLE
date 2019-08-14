@@ -1,0 +1,1655 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Documentation for Islandora Enterprise (ISLE)">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0, mkdocs-material-3.0.3">
+    
+    
+      
+        <title>Local Installation: New Site - Islandora Enterprise (ISLE)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+      <link rel="stylesheet" href="../../extra.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="../../#local-isle-installation-new-site" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="Islandora Enterprise (ISLE)" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Islandora Enterprise (ISLE)
+              </span>
+              <span class="md-header-nav__topic">
+                Local Installation: New Site
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="Islandora Enterprise (ISLE)" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Islandora Enterprise (ISLE)
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Get Started" class="md-nav__link">
+      Get Started
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Install ISLE
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Install ISLE
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../host-hardware-requirements/" title="1. Hardware Requirements" class="md-nav__link">
+      1. Hardware Requirements
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../host-software-dependencies/" title="2. Software Dependencies" class="md-nav__link">
+      2. Software Dependencies
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install-demo/" title="3. Demo ISLE Installation" class="md-nav__link">
+      3. Demo ISLE Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4" checked>
+    
+    <label class="md-nav__link" for="nav-2-4">
+      4. ISLE Installation
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        4. ISLE Installation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install-environments/" title="ISLE Environments" class="md-nav__link">
+      ISLE Environments
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Local Installation: New Site
+      </label>
+    
+    <a href="./" title="Local Installation: New Site" class="md-nav__link md-nav__link--active">
+      Local Installation: New Site
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#assumptions-prerequisites" title="Assumptions / Prerequisites" class="md-nav__link">
+    Assumptions / Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#index-of-instructions" title="Index of Instructions" class="md-nav__link">
+    Index of Instructions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-edit-etchosts-file" title="Step 1: Edit /etc/hosts File" class="md-nav__link">
+    Step 1: Edit /etc/hosts File
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-setup-git-for-the-isle-project" title="Step 2: Setup git for the ISLE project" class="md-nav__link">
+    Step 2: Setup git for the ISLE project
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-edit-the-env-file-to-change-to-the-local-environment" title="Step 3: Edit the .env File to change to the Local Environment" class="md-nav__link">
+    Step 3: Edit the .env File to change to the Local Environment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-create-new-users-and-passwords-by-editing-localenv" title="Step 4: Create new users and passwords by editing local.env" class="md-nav__link">
+    Step 4: Create new users and passwords by editing local.env
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5-create-new-self-signed-certs-for-your-project" title="Step 5: Create new self-signed certs for your project" class="md-nav__link">
+    Step 5: Create new self-signed certs for your project
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-6-download-the-isle-images" title="Step 6: Download the ISLE images" class="md-nav__link">
+    Step 6: Download the ISLE images
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-7-launch-process" title="Step 7: Launch Process" class="md-nav__link">
+    Step 7: Launch Process
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-8-run-islandora-drupal-site-install-script" title="Step 8: Run Islandora / Drupal site Install Script" class="md-nav__link">
+    Step 8: Run Islandora / Drupal site Install Script
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-9-test-the-site" title="Step 9: Test the Site" class="md-nav__link">
+    Step 9: Test the Site
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-10-ingest-sample-objects" title="Step 10: Ingest Sample Objects" class="md-nav__link">
+    Step 10: Ingest Sample Objects
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-11-check-in-the-newly-created-drupal-islandora-site-code-into-a-git-repository" title="Step 11: Check-in the newly created Drupal / Islandora site code into a git repository" class="md-nav__link">
+    Step 11: Check-in the newly created Drupal / Islandora site code into a git repository
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" title="Next Steps" class="md-nav__link">
+    Next Steps
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-resources" title="Additional Resources" class="md-nav__link">
+    Additional Resources
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#end-of-local-isle-installation-new-site" title="End of Local ISLE Installation: New Site" class="md-nav__link">
+    End of Local ISLE Installation: New Site
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install-local-migrate/" title="Local Installation: Migrate Islandora Site" class="md-nav__link">
+      Local Installation: Migrate Islandora Site
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install-staging-new/" title="Staging Installation: New Site" class="md-nav__link">
+      Staging Installation: New Site
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install-staging-migrate/" title="Staging Installation: Migrate Existing Islandora Site" class="md-nav__link">
+      Staging Installation: Migrate Existing Islandora Site
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install-production-new/" title="Production Installation: New Site" class="md-nav__link">
+      Production Installation: New Site
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install-production-migrate/" title="Production Installation: Migrate Existing Islandora Site" class="md-nav__link">
+      Production Installation: Migrate Existing Islandora Site
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install-troubleshooting/" title="Troubleshooting Installations" class="md-nav__link">
+      Troubleshooting Installations
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../update/update/" title="Update ISLE" class="md-nav__link">
+      Update ISLE
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Appendices
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Appendices
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/data-persistence/" title="Data Persistence in Docker" class="md-nav__link">
+      Data Persistence in Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/glossary/" title="Glossary" class="md-nav__link">
+      Glossary
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/installing-module-with-composer/" title="Installing a Drupal Module with Composer" class="md-nav__link">
+      Installing a Drupal Module with Composer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/installing-module-with-drush/" title="Installing a Drupal Module with Drush" class="md-nav__link">
+      Installing a Drupal Module with Drush
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://docs.google.com/document/d/1r-I9n8mUhlJ5Z-X9AO-RrikhzH6I8bTPIL25LmtRbxE" title="Installing on Google Cloud Platform (Google Doc)" class="md-nav__link">
+      Installing on Google Cloud Platform (Google Doc)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/open-terminal-in-running-container/" title="Opening a Terminal in a Running Container" class="md-nav__link">
+      Opening a Terminal in a Running Container
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/sample-it-department-request/" title="Sample IT Department Request Letter" class="md-nav__link">
+      Sample IT Department Request Letter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/install-troubleshooting/" title="Troubleshooting" class="md-nav__link">
+      Troubleshooting
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9" type="checkbox" id="nav-4-9">
+    
+    <label class="md-nav__link" for="nav-4-9">
+      User Stories
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-9">
+        User Stories
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/user-story-demo-site/" title="Demo ISLE Installation Example User Story" class="md-nav__link">
+      Demo ISLE Installation Example User Story
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/user-story-new-site/" title="New Site Example User Story" class="md-nav__link">
+      New Site Example User Story
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/user-story-migration-site/" title="Migration Example User Story" class="md-nav__link">
+      Migration Example User Story
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/configuring-lets-encrypt/" title="Let's Encrypt: Free SSL Certificates" class="md-nav__link">
+      Let's Encrypt: Free SSL Certificates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../appendices/redhat/" title="Warning about Red Hat Install" class="md-nav__link">
+      Warning about Red Hat Install
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Cookbook Recipes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Cookbook Recipes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cookbook-recipes/isle-cheatsheet-docker-commands/" title="ISLE Cheat Sheet: Docker Commands" class="md-nav__link">
+      ISLE Cheat Sheet: Docker Commands
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      About
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        About
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/contributing/" title="Contributing to ISLE" class="md-nav__link">
+      Contributing to ISLE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/about-isle/" title="About ISLE" class="md-nav__link">
+      About ISLE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/committers/" title="About Committers" class="md-nav__link">
+      About Committers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-4" type="checkbox" id="nav-6-4">
+    
+    <label class="md-nav__link" for="nav-6-4">
+      Contributor Docs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-4">
+        Contributor Docs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributor-docs/mkdocs/" title="Docs: MkDocs" class="md-nav__link">
+      Docs: MkDocs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributor-docs/spell-checker/" title="Docs: Spell Checker" class="md-nav__link">
+      Docs: Spell Checker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributor-docs/style-guide/" title="Docs: Style Guide" class="md-nav__link">
+      Docs: Style Guide
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributor-docs/release-process/" title="Release Process" class="md-nav__link">
+      Release Process
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributor-docs/testing-guide/" title="Testing Guide" class="md-nav__link">
+      Testing Guide
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/get-help/" title="Get Help" class="md-nav__link">
+      Get Help
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Release Notes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Release Notes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-2-0/" title="Latest release: 1.2.0" class="md-nav__link">
+      Latest release: 1.2.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2">
+    
+    <label class="md-nav__link" for="nav-7-2">
+      Previous releases
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-2">
+        Previous releases
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-1-2/" title="1.1.2" class="md-nav__link">
+      1.1.2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-1-1/" title="1.1.1" class="md-nav__link">
+      1.1.1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-1-0/" title="1.1.0" class="md-nav__link">
+      1.1.0
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#assumptions-prerequisites" title="Assumptions / Prerequisites" class="md-nav__link">
+    Assumptions / Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#index-of-instructions" title="Index of Instructions" class="md-nav__link">
+    Index of Instructions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-edit-etchosts-file" title="Step 1: Edit /etc/hosts File" class="md-nav__link">
+    Step 1: Edit /etc/hosts File
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-setup-git-for-the-isle-project" title="Step 2: Setup git for the ISLE project" class="md-nav__link">
+    Step 2: Setup git for the ISLE project
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-edit-the-env-file-to-change-to-the-local-environment" title="Step 3: Edit the .env File to change to the Local Environment" class="md-nav__link">
+    Step 3: Edit the .env File to change to the Local Environment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-create-new-users-and-passwords-by-editing-localenv" title="Step 4: Create new users and passwords by editing local.env" class="md-nav__link">
+    Step 4: Create new users and passwords by editing local.env
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5-create-new-self-signed-certs-for-your-project" title="Step 5: Create new self-signed certs for your project" class="md-nav__link">
+    Step 5: Create new self-signed certs for your project
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-6-download-the-isle-images" title="Step 6: Download the ISLE images" class="md-nav__link">
+    Step 6: Download the ISLE images
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-7-launch-process" title="Step 7: Launch Process" class="md-nav__link">
+    Step 7: Launch Process
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-8-run-islandora-drupal-site-install-script" title="Step 8: Run Islandora / Drupal site Install Script" class="md-nav__link">
+    Step 8: Run Islandora / Drupal site Install Script
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-9-test-the-site" title="Step 9: Test the Site" class="md-nav__link">
+    Step 9: Test the Site
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-10-ingest-sample-objects" title="Step 10: Ingest Sample Objects" class="md-nav__link">
+    Step 10: Ingest Sample Objects
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-11-check-in-the-newly-created-drupal-islandora-site-code-into-a-git-repository" title="Step 11: Check-in the newly created Drupal / Islandora site code into a git repository" class="md-nav__link">
+    Step 11: Check-in the newly created Drupal / Islandora site code into a git repository
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" title="Next Steps" class="md-nav__link">
+    Next Steps
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-resources" title="Additional Resources" class="md-nav__link">
+    Additional Resources
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#end-of-local-isle-installation-new-site" title="End of Local ISLE Installation: New Site" class="md-nav__link">
+    End of Local ISLE Installation: New Site
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="local-isle-installation-new-site">Local ISLE Installation: New Site</h1>
+<p><em>Expectations:  It takes an average of <strong>60 - 120 minutes</strong> to read this documentation and complete this installation.</em></p>
+<p>This <code>Local</code> ISLE Installation creates an un-themed Drupal website and an empty Fedora repository similar to the <code>Demo</code> installation but one that you can use to develop and design your Drupal site and Fedora collections with the end goal of deploying to ISLE Staging and Production environments for public use.</p>
+<p>You will now be able to change the ability to view locally in your browser from the Demo url <code>https://isle.localdomain</code> to a new domain of your choice for example <code>https://yourprojectnamehere.localdomain</code>.</p>
+<p>While this installation gets you a brand new local development site, it is <strong>not</strong> intended as a migration process of a previously existing Islandora site. If you need to build a local environment to migrate a previously existing Islandora site, please use the <a href="../install-local-migrate/">Local ISLE Installation: Migrate Existing Islandora Site</a> instructions instead.</p>
+<p>This document also has directions on how you can check in newly created ISLE &amp; Islandora code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging and finally to Production. The <a href="../install-environments/">ISLE Installation: Environments</a> documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE endusers should use for the <code>.env</code>, <code>local.env</code>, etc.</p>
+<p>Please post questions to the public <a href="https://groups.google.com/forum/#!forum/islandora-isle">Islandora ISLE Google group</a>, or subscribe to receive emails. The <a href="../../appendices/glossary/">Glossary</a> defines terms used in this documentation.</p>
+<h2 id="assumptions-prerequisites">Assumptions / Prerequisites</h2>
+<ul>
+<li>
+<p>This Local ISLE installation is intended for a brand new ISLE site for further Drupal theme development, ingest testing etc on a local laptop or workstation.</p>
+</li>
+<li>
+<p>Using ISLE version <code>1.2.0</code> or higher</p>
+</li>
+<li>
+<p>Using Docker-compose <code>1.24.0</code> or higher</p>
+</li>
+<li>
+<p>You have git installed on your local laptop or workstation.</p>
+</li>
+<li>
+<p>You have access to a private git repository in <a href="https://github.com">Github</a>, <a href="https://bitbucket.org/">Bitbucket</a>, <a href="https://gitlab.com">Gitlab</a> etc.</p>
+</li>
+<li>If you do not, please contact your IT department for git resources</li>
+<li>If they do not have git repository resources, suggest you create an account with one of the online providers mentioned above.</li>
+<li><strong>WARNING:</strong> Only use <strong>Private</strong> git repositories given the sensitive nature of the configuration files.</li>
+<li><strong>DO NOT</strong> share these git repos publicly.</li>
+</ul>
+<hr />
+<h2 id="index-of-instructions">Index of Instructions</h2>
+<ul>
+<li>Step 1: Edit <code>/etc/hosts</code> File</li>
+<li>Step 2: Setup git for the ISLE project</li>
+<li>Step 3: Edit the <code>.env</code> File to change to the Local Environment</li>
+<li>Step 4: Create new users and passwords by editing <code>local.env</code></li>
+<li>Step 5: Create new self-signed certs for your project</li>
+<li>Step 6: Download the ISLE images</li>
+<li>Step 7: Launch Process</li>
+<li>Step 8: Run Islandora / Drupal site Install Script</li>
+<li>Step 9: Test the Site</li>
+<li>Step 10: Ingest Sample Objects</li>
+<li>Step 11: Check-in the newly created Drupal / Islandora site code into a git repository</li>
+</ul>
+<hr />
+<h2 id="step-1-edit-etchosts-file">Step 1: Edit <code>/etc/hosts</code> File</h2>
+<p>Enable the Local ISLE Installation to be viewed locally on workstation browser as: e.g. <code>https://yourprojectnamehere.localdomain</code>.</p>
+<ul>
+<li>
+<p>Please use these instructions to <a href="../install-demo-edit-hosts-file/">Edit the "/etc/hosts" File</a>.</p>
+</li>
+<li>
+<p>Replace <code>isle</code> or <code>yourprojectnamehere</code> with your domain or project name: e.g. <code>yourprojectnamehere.localdomain</code></p>
+</li>
+</ul>
+<hr />
+<h2 id="step-2-setup-git-for-the-isle-project">Step 2: Setup git for the ISLE project</h2>
+<p><strong>Please note:</strong> The commands given below are for command line usage of git. GUI based clients such as the <a href="https://www.sourcetreeapp.com/">SourceTree App</a> may be easier for endusers to use for the git process.</p>
+<ul>
+<li>Within your git repository provider / hoster e.g <a href="https://github.com">Github</a>, <a href="https://bitbucket.org/">Bitbucket</a>, <a href="https://gitlab.com">Gitlab</a>, create two new empty git repositories:</li>
+<li>ISLE project config - e.g. <code>yourprojectnamehere-isle</code><ul>
+<li>This Git repository will hold your copy of the ISLE code along with your environment-specific customizations. Storing this in a code repository and following the workflow described here will save you a lot of time and confusion.</li>
+</ul>
+</li>
+<li>Drupal / Islandora site code - e.g. <code>yourprojectnamehere-islandora</code><ul>
+<li>This Git repository will hold your copy of the Drupal / Islandora code along with your site specific customizations. Storing this in a code repository and following the workflow described here will save you a lot of time and confusion.</li>
+</ul>
+</li>
+</ul>
+<p>The git project name can be your institution name or the name of the collections you plan to deploy; your choice entirely. A very clear distinction between the ISLE and Islandora code should be made in the repo name. Do not confuse or label Drupal / Islandora site code as ISLE and vice-versa.</p>
+<ul>
+<li>Clone this newly created ISLE project to your local laptop or workstation.</li>
+<li>Open a <code>terminal</code> (Windows: open <code>PowerShell</code>)</li>
+<li>Navigate to an directory that will house your new ISLE project directory using the <code>cd</code> command.</li>
+<li>
+<p><code>git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git</code></p>
+</li>
+<li>
+<p>Navigate to this directory</p>
+</li>
+<li>
+<p><code>cd /path/to/your/repo</code></p>
+</li>
+<li>
+<p>Add the ICG ISLE git repository as a git upstream. (<em>the code below is a real path and command</em>)</p>
+</li>
+<li><code>git remote add icg-upstream https://github.com/Islandora-Collaboration-Group/ISLE.git</code></li>
+<li>you can check by running this command: <code>git remote -v</code></li>
+</ul>
+<pre><code class="bash">icg-upstream    https://github.com/Islandora-Collaboration-Group/ISLE.git (fetch)
+icg-upstream    https://github.com/Islandora-Collaboration-Group/ISLE.git (push)
+origin  https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git (fetch)
+origin  https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git (push)
+</code></pre>
+
+<ul>
+<li>Run a git fetch</li>
+<li>
+<p><code>git fetch icg-upstream</code></p>
+</li>
+<li>
+<p>Pull down the ICG ISLE <code>master</code> branch into your local project's <code>master</code> branch</p>
+</li>
+<li><code>git pull icg-upstream master</code></li>
+<li>
+<p>if you <code>ls -lha</code> in this directory, you'll now have code.</p>
+</li>
+<li>
+<p>Push this code to your online git provider ISLE</p>
+</li>
+<li><code>git push -u origin master</code></li>
+<li>
+<p>This will take 2 - 5 mins depending on your internet speed.</p>
+</li>
+<li>
+<p>Now you have the current ISLE project code checked into git as foundation to make changes on specific to your local and project needs. You'll use this git upstream <code>icg-upstream</code> and process in the future to pull updates / releases from the main ISLE project.</p>
+</li>
+</ul>
+<hr />
+<h2 id="step-3-edit-the-env-file-to-change-to-the-local-environment">Step 3: Edit the <code>.env</code> File to change to the Local Environment</h2>
+<ul>
+<li>
+<p>Open a <code>terminal</code> (Windows: open <code>PowerShell</code>)</p>
+</li>
+<li>
+<p>Navigate to your ISLE project directory. (You may already be in this directory if you are coming from the <a href="../host-software-dependencies/">Software Dependencies</a>.)</p>
+</li>
+<li>
+<p>Open <code>.env</code> file by running: <code>nano .env</code></p>
+</li>
+<li>
+<p><em>For endusers familiar with editing files on the command line, vim, emacs or alternative tools can be used in lieu of nano</em></p>
+</li>
+<li>
+<p>Change only the following lines in the <code>.env</code> file so that the resulting values look like the following: <strong>Please note: the following below is an example not actual values you should use. Use one word to describe your project and follow the conventions below accordingly</strong></p>
+</li>
+<li><code>COMPOSE_PROJECT_NAME=yourprojectnamehere_local</code></li>
+<li><code>BASE_DOMAIN=yourprojectnamehere.localdomain</code></li>
+<li><code>CONTAINER_SHORT_ID=ld</code> <em>leave default setting of <code>ld</code> as is. Do not change.</em></li>
+<li>
+<p><code>COMPOSE_FILE=docker-compose.local.yml</code></p>
+</li>
+<li>
+<p>If you want to use a MySQL client with a GUI to import the Production MySQL Drupal database you'll need to uncomment the <code>ports</code> section of the MySQL service within the <code>docker-compose.local.yml</code> to open up the <code>3306</code> port. If you are already running MySQL on your local laptop, you'll have a port conflict either shutdown that service prior to running ISLE or change 3306:3306 to something like <code>9306:3306</code>. Please double-check.</p>
+</li>
+<li>
+<p>Enter <code>Cntrl</code> and the letter <code>o</code> together to write the changes to the file.</p>
+</li>
+<li>
+<p>Enter <code>Cntrl</code> and the letter <code>x</code> together to exit the file</p>
+</li>
+</ul>
+<hr />
+<h2 id="step-4-create-new-users-and-passwords-by-editing-localenv">Step 4: Create new users and passwords by editing <code>local.env</code></h2>
+<ul>
+<li>
+<p>Open up the <code>local.env</code> file in a text editor of your choice.</p>
+</li>
+<li>
+<p>Where ever there is a comment like:</p>
+</li>
+<li>
+<p><code># Replace this comment with a ...</code> - add a value of your choice. Typically there are suggestions like <code>26 alpha-numeric characters</code> but in some cases the instructions change to <code># Replace this comment with a easy to read but short database user e.g.</code> so <strong>review</strong> carefully.</p>
+</li>
+<li>
+<p>In many cases the username is already pre-populated. If it doesn't have a comment directing you to change or add a value after the <code>=</code>, then don't change it.</p>
+</li>
+<li>
+<p>Once finished, save the file and close it.</p>
+</li>
+<li>
+<p>Once you have added all of the passwords, database and user names as directed by the in-line comments of the <code>local.env</code>, there is one additional file to be updated.</p>
+</li>
+<li>Open up the <code>config/apache/settings_php/settings.local.php</code> file.</li>
+<li>Search for the <code># ISLE Configuration</code></li>
+<li>Follow the in-line instructions below that comment</li>
+<li>
+<p>Between the '', replace the <code>#Replace this...</code> comments with the appropriate values from the <code>local.env</code> file.</p>
+<ul>
+<li>Copy the value of <code>DRUPAL_DB</code> from the local.env and paste it into the '' below for the database e.g <code>'database' =&gt; 'institution_db',</code></li>
+<li>Copy the value of <code>DRUPAL_DB_USER</code> from the local.env between the '' below for the username e.g <code>'username' =&gt; 'institution_db_user',</code></li>
+<li>Copy the value of <code>DRUPAL_DB_PASS</code> from the local.env between the '' below for the password e.g <code>'password' =&gt; 'yourpasswordhere',</code></li>
+<li>Search for <code># ISLE Configuration again</code></li>
+<li>Follow the in-line instructions below that comment</li>
+<li>Copy the value of <code>DRUPAL_HASH_SALT</code> from the local.env between the '' below for the Drupal hash salt e.g <code>$drupal_hash_salt = 'yourhashhere';</code></li>
+</ul>
+</li>
+<li>
+<p>Once finished, save the file and close it.</p>
+</li>
+</ul>
+<hr />
+<h2 id="step-5-create-new-self-signed-certs-for-your-project">Step 5: Create new self-signed certs for your project</h2>
+<ul>
+<li>
+<p>Open up the <code>./scripts/proxy/ssl-certs/local.sh</code> in a text editor of your choice.</p>
+</li>
+<li>
+<p>Follow the in-line instructions to add your project's name to the appropriate areas.</p>
+</li>
+<li>
+<p>Once finished, save the file and close it.</p>
+</li>
+<li>
+<p><em>Using the same open terminal / Powershell</em>, navigate to <code>/pathto/yourprojectnamehere/scripts/proxy/ssl-certs/</code></p>
+</li>
+<li>
+<p><code>cd /pathto/yourprojectnamehere/scripts/proxy/ssl-certs/</code></p>
+</li>
+<li>
+<p><code>chmod +x local.sh</code></p>
+</li>
+<li>
+<p>This command will generate new self-signed SSL keys using your <code>yourprojectnamehere.localdomain</code> domain. This now secures the local site.</p>
+</li>
+<li><code>./local.sh</code></li>
+<li>
+<p>The generated keys can now be found in <code>./config/proxy/ssl-certs</code></p>
+</li>
+<li>
+<p>Add the SSL .pem and .key file names generated from running <code>local.sh</code> to the <code>./config/proxy/traefik.local.toml</code> file.</p>
+</li>
+<li>Example:<ul>
+<li>
+<ul>
+<li><code>certFile = "/certs/yourprojectnamehere.localdomain.pem"</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>keyFile = "/certs/yourprojectnamehere.localdomain.key"</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="step-6-download-the-isle-images">Step 6: Download the ISLE images</h2>
+<ul>
+<li>Download all of the latest ISLE Docker images (<em>~6 GB of data may take 5-10 minutes</em>):</li>
+<li><em>Using the same open terminal / Powershell</em><ul>
+<li>Navigate to the root of your ISLE project</li>
+<li><code>cd ~/pathto/yourprojectnamehere</code></li>
+</ul>
+</li>
+<li><code>docker-compose pull</code></li>
+</ul>
+<h2 id="step-7-launch-process">Step 7: Launch Process</h2>
+<ul>
+<li><em>Using the same open terminal / Powershell</em></li>
+<li>
+<p><code>docker-compose up -d</code></p>
+</li>
+<li>
+<p>Please wait a few moments for the stack to fully come up. Approximately 3-5 minutes.</p>
+</li>
+<li>
+<p>After the above process is completed using the already open terminal or Powershell again.</p>
+<ul>
+<li>View only the running containers: <code>docker ps</code></li>
+<li>View all containers (both those running and stopped): <code>docker ps -a</code></li>
+<li>All containers prefixed with <code>isle-</code> are expected to have a <code>STATUS</code> of <code>Up</code> (for x time).</li>
+<li><strong>If any of these are not <code>UP</code>, then use <a href="../install-troubleshooting/">ISLE Installations: Troubleshooting</a> to solve before continuing below.</strong>
+  <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running, oe (c) older exited ISLE containers that maybe should be removed. ---></li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="step-8-run-islandora-drupal-site-install-script">Step 8: Run Islandora / Drupal site Install Script</h2>
+<p>We highly recommend that you first review the contents of the <code>docker-compose.local.yml</code> file as the ISLE Apache service uses bind mounts for the intended Drupal Code instead of using default Docker volumes. This allows users to perform local Drupal site development with an IDE. This line is a suggested path and users are free to change values to the left of the <code>:</code> to match their Apache data folder of choice. However we recommend starting out with the default setting below.
+Default: <code>- ./data/apache/html:/var/www/html:cached</code></p>
+<p>Initially when starting up, end-users will need to run the install script and then ultimately check the resulting Drupal code into a git repository. If you are familiar with that process then Step 9.</p>
+<p>This process may take 10 - 20 minutes (<em>depending on system and internet speeds</em>)</p>
+<ul>
+<li>Run the install site script on the Apache container by copying and pasting this command:</li>
+</ul>
+<pre><code>docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">For Windows Users only</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">You may be prompted by Windows to:</td>
+</tr>
+<tr>
+<td align="left">- Share the C drive with Docker.  Click Okay or Allow.</td>
+</tr>
+<tr>
+<td align="left">- Enter your username and password. Do this.</td>
+</tr>
+<tr>
+<td align="left">- Allow vpnkit.exe to communicate with the network.  Click Okay or Allow (accept default selection).</td>
+</tr>
+<tr>
+<td align="left">- If the process seems to halt, check the taskbar for background windows.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>You should see a lot of green [ok] messages.</li>
+<li>If the script appears to pause or prompt for <code>y/n</code>, DO NOT enter any values; the script will automatically answer for you.</li>
+<li><strong>Proceed only after this message appears:</strong> <code>Clearing Drupal Caches. 'all' cache was cleared.</code></li>
+</ul>
+<hr />
+<h2 id="step-9-test-the-site">Step 9: Test the Site</h2>
+<ul>
+<li>In your web browser, enter this URL: <code>https://yourprojectnamehere.localdomain</code>
+<!--- TODO: Add error message and how to proceed (click 'Advanced...') ---></li>
+<li>Note: You may see an SSL error warning that the site is unsafe. It is safe, it simply uses "self-signed" SSL certs. Ignore the error and proceed to the site.</li>
+<li>Log in to the local Islandora site with the credentials you created in <code>local.env</code> (<code>DRUPAL_ADMIN_USER</code> and <code>DRUPAL_ADMIN_PASS</code>)</li>
+</ul>
+<hr />
+<h2 id="step-10-ingest-sample-objects">Step 10: Ingest Sample Objects</h2>
+<p>The Islandora Collaboration Group provides a set of <a href="https://github.com/Islandora-Collaboration-Group/islandora-sample-objects">Islandora Sample Objects</a> with corresponding metadata for testing Islandora's ingest process. These sample objects are organized by solution pack and are zipped for faster bulk ingestion.</p>
+<ul>
+<li>To download these sample objects, clone them to your computer's desktop:</li>
+</ul>
+<pre><code>git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-objects.git
+</code></pre>
+
+<ul>
+<li>Follow these ingestion instructions <a href="https://wiki.duraspace.org/display/ISLANDORA/How+to+Add+an+Item+to+a+Digital+Collection">How to Add an Item to a Digital Collection</a></li>
+<li>(Note: <a href="https://wiki.duraspace.org/display/ISLANDORA/Getting+Started+with+Islandora">Getting Started with Islandora</a> contains explanations about content models, collections, and datastreams.)</li>
+<li>After ingesting content, you will need to add an Islandora Simple Search block to the Drupal structure. (The default search box will only search Drupal content, not Islandora content.)<ul>
+<li>Select from the menu: <code>Structure &gt; Blocks &gt; Islandora Simple Search</code></li>
+<li>Select: <code>Sidebar Second</code></li>
+<li>Click: <code>Save Blocks</code> at bottom of page</li>
+<li>You may now search for ingested objects that have been indexed by SOLR</li>
+</ul>
+</li>
+</ul>
+<h2 id="step-11-check-in-the-newly-created-drupal-islandora-site-code-into-a-git-repository">Step 11: Check-in the newly created Drupal / Islandora site code into a git repository</h2>
+<ul>
+<li>
+<p><em>Using the same open terminal / Powershell</em></p>
+</li>
+<li>
+<p>Navigate to the <code>data</code> directory within your local ISLE project</p>
+</li>
+<li>
+<p><code>cd data/apache/html</code></p>
+</li>
+<li>
+<p>Create a local git repository</p>
+</li>
+<li>
+<p><code>git init</code></p>
+</li>
+<li>
+<p>Add all of the files to this local git repository</p>
+</li>
+<li>
+<p><code>git add .</code></p>
+</li>
+<li>
+<p>Create a local git commit with an appropriate message to preserve these changes.</p>
+</li>
+<li>
+<p><code>git commit -m "message here"</code></p>
+<ul>
+<li>Between the <code>""</code> add a message like "Setting up Drupal site" that reflects the changes you are making in the Drupal code.</li>
+<li><code>git commit -m "Setting up Drupal site"</code></li>
+</ul>
+</li>
+<li>
+<p>Add the git <code>remote</code> (this will be remote / cloud based git repository that you'll push changes to) This can be Bitbucket, Github or Gitlab.</p>
+</li>
+<li>
+<p>For example: <code>git remote add origin https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-islandora.git</code></p>
+</li>
+<li>
+<p>Push the changes to the remote git repository on the <code>master</code> branch</p>
+</li>
+<li>
+<p><code>git push -u origin master</code></p>
+</li>
+<li>
+<p>Then continue to develop work within this follow your institutional best practice to application git repository</p>
+</li>
+</ul>
+<hr />
+<h2 id="next-steps">Next Steps</h2>
+<p>Once you are ready to deploy your finished Drupal site, you may progress to:</p>
+<ul>
+<li><a href="../install-staging-new/">Staging ISLE Installation: New Site</a></li>
+</ul>
+<hr />
+<h2 id="additional-resources">Additional Resources</h2>
+<ul>
+<li><a href="../install-environments/">ISLE Installation: Environments</a> documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE endusers should use for the <code>.env</code>, <code>local.env</code>, etc.</li>
+<li><a href="../install-local-resources/">Local ISLE Installation: Resources</a> contains Docker container passwords and URLs for administrator tools.</li>
+<li><a href="../install-troubleshooting/">ISLE Installation: Troubleshooting</a> contains help for port conflicts, non-running Docker containers, etc.</li>
+</ul>
+<hr />
+<h3 id="end-of-local-isle-installation-new-site">End of Local ISLE Installation: New Site</h3>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../install-environments/" title="ISLE Environments" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                ISLE Environments
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../install-local-migrate/" title="Local Installation: Migrate Islandora Site" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Local Installation: Migrate Islandora Site
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.583bbe55.js"></script>
+      
+      <script>app.initialize({version:"1.0",url:{base:"../.."}})</script>
+      
+        <script src="../../extra.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>
