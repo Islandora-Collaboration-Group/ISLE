@@ -16,13 +16,13 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 ## Assumptions / Prerequisites
 
-* This Local ISLE installation is intended for an existing Production Drupal site to be imported for further ISLE migration testing, Drupal theme development, ingest testing etc on a local laptop or workstation.
+* This Local ISLE installation is intended for an existing Production Drupal site to be imported for further ISLE migration testing, Drupal theme development, ingest testing, etc. on a local laptop or workstation.
 
 * Using ISLE version `1.2.0` or higher
 
 * Using Docker-compose `1.24.0` or higher
 
-* You have git installed on your local laptop or workstation.
+* You have `git` installed on your local laptop or workstation.
 
 * You have access to a private git repository in [Github](https://github.com), [Bitbucket](https://bitbucket.org/), [Gitlab](https://gitlab.com) etc.
   * If you do not, please contact your IT department for git resources
@@ -35,7 +35,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 ## Index of Instructions
 
-* Step 0: Copy Production data to your local
+* Step 0: Copy Production data to your local computer
 * Step 1: Edit `/etc/hosts` File
 * Step 2: Setup git for the ISLE project
 * Step 3: Git clone the Production Drupal site code
@@ -57,7 +57,7 @@ Be sure to run a backup of any current non-ISLE systems prior to copying or expo
 
 #### Drupal Site Files and Code
 
-1. Copy the `/var/www/html/sites/default/files` directory from your Production Apache server to an appropriate storage /project area on your local. You'll move this directory in later steps.
+1. Copy the `/var/www/html/sites/default/files` directory from your Production Apache server to an appropriate storage /project area on your local computer. You'll move this directory in later steps.
 
 2. Locate and note the previously existing private Drupal / Islandora git repository. You'll be cloning this into place once the ISLE project has been cloned in later steps.
 
@@ -77,7 +77,7 @@ Prior to attempting this step, do consider the following:
 
 ##### Production Drupal site database export process
 
-* Export the MySQL database for the current Production Drupal site in use and copy it to your local in an easy to find place. In later steps you'll be directed to import this file. **Please be careful** performing any of these potential actions below as the process impacts your Production site. If you are not comfortable or familiar with performing these actions, we recommend that you instead work with your available IT resources to do so.
+* Export the MySQL database for the current Production Drupal site in use and copy it to your local computer in an easy to find place. In later steps you'll be directed to import this file. **Please be careful** performing any of these potential actions below as the process impacts your Production site. If you are not comfortable or familiar with performing these actions, we recommend that you instead work with your available IT resources to do so.
   * You can use a MySQL GUI client for this process or if you have command line access to the MySQL database server
   `mysqldump -u username -p database_name > prod_drupal_site_082019.sql`
   * Copy this file down to your local laptop or workstation.
@@ -107,7 +107,7 @@ Bind mount in existing transforms and schemas  to override ISLE settings with yo
 
 **WARNING** _This approach assumes you are running Solr 4.10.x.; **only attempt** if you are running that version on Production._
 
-* Copy these current production files and directory to your local laptop in an appropriate location.
+* Copy these current production files and directory to your local computer in an appropriate location.
   * Solr `schema.xml`
   * GSearch `foxmltoSolr.xslt` file
   * GSearch `islandora_transforms`
@@ -117,7 +117,7 @@ Bind mount in existing transforms and schemas  to override ISLE settings with yo
 * **Please note:** You may need to further review paths in the files mentioned above, and edit them to match ISLE system paths.  
 
 ##### Strategy 3: **Advanced** - Diff and Merge Current Production Customization Edits into ISLE Configs
-* Copy these current production files and directory to your local laptop in an appropriate location.
+* Copy these current production files and directory to your local computer in an appropriate location.
 
   * Solr `schema.xml`
   * GSearch `foxmltoSolr.xslt` file
@@ -216,7 +216,7 @@ origin	https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-i
   * This will take 2 - 5 mins depending on your internet speed.
 
 
-* Now you have the current ISLE project code checked into git as foundation to make changes on specific to your local and project needs. You'll use this git upstream `icg-upstream` and process in the future to pull updates / releases from the main ISLE project.
+* Now you have the current ISLE project code checked into git as foundation to make changes specific to your local and project needs. You'll use this git upstream `icg-upstream` and process in the future to pull updates / releases from the main ISLE project.
 
 ### Step 2a: Add Customizations from `Step 0` to the Git Workflow
 This step is intended for users who followed either the "**Intermediate**" or "**Advanced**" migration options in `Step 0` above.  If you choose the **Easy** migration option you may safely skip `Step 2a`.
@@ -277,7 +277,7 @@ If not then you'll need to check your Drupal site into a git repo following the 
   * `CONTAINER_SHORT_ID=ld` _leave default setting of `ld` as is. Do not change._
   * `COMPOSE_FILE=docker-compose.local.yml`
 
-* If you want to use a MySQL client with a GUI to import the Production MySQL Drupal database you'll need to uncomment the `ports` section of the MySQL service within the `docker-compose.local.yml` to open up the `3306` port. If you are already running MySQL on your local laptop, you'll have a port conflict either shutdown that service prior to running ISLE or change 3306:3306 to something like `9306:3306`. Please double-check.
+* If you want to use a MySQL client with a GUI to import the Production MySQL Drupal database you'll need to uncomment the `ports` section of the MySQL service within the `docker-compose.local.yml` to open up the `3306` port. If you are already running MySQL on your local computer, you'll have a port conflict either shutdown that service prior to running ISLE or change 3306:3306 to something like `9306:3306`. Please double-check.
 
 * Enter `Cntrl` and the letter `o` together to write the changes to the file.
 
