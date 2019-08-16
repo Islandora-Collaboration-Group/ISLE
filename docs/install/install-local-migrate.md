@@ -40,7 +40,6 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 * Step 2: Setup git for the ISLE project
 * Step 3: Git clone the Production Drupal site code
 * Step 4: Edit the `.env` File to change to the Local Environment
-
 * Step 5: Create new users and passwords by editing `local.env`
 * Step 6: Create new self-signed certs for your project
 * Step 7: Download the ISLE images
@@ -87,53 +86,64 @@ Prior to attempting this step, do consider the following:
 
 While this will depend on your pre-existing Production system, it is important to double-check this. If you have a larger hash size than the default ISLE system (##), and don't follow the settings below, ISLE may not function properly when your data has been migrated.
 
-*  If you have larger Fedora collections, there is a possibility that you made changes to the `akubra-llstore.xml` file to allow for the creation of larger or deeper hash directories)
-  * You will need to copy your `/usr/local/fedora/server/config/spring/akubra-llstore.xml` from your Production Fedora System to `./config/fedora/akubra-llstore.xml`
+*  If you have larger Fedora collections, there is a possibility that you made changes to the `akubra-llstore.xml` file to allow for the creation of larger or deeper hash directories)  
+
+  * You will need to copy your `/usr/local/fedora/server/config/spring/akubra-llstore.xml` from your Production Fedora System to `./config/fedora/akubra-llstore.xml`  
+
   * You will then need to add an extra line in the Fedora service (fedora) volumes section to bind mount this file in. This will guarantee proper Fedora data hash structure.
     * `- ./config/fedora/akubra-llstore.xml:/usr/local/fedora/server/config/spring/akubra-llstore.xml`
 
-#### Solr schema & Islandora transforms
+#### Solr Schema & Islandora Transforms
 
 This data can be challenging depending on the level of customizations to contend with and as such, ISLE maintainers recommends following one of the three strategies outlined below.
 
-##### (**Easy**) - Run "stock" ISLE
+##### **Easy** - Run "Stock" ISLE
 
-Don't copy any existing production Solr schemas, Gsearch xslts etc and opt instead to use ISLE's default versions. Import some objects from your existing Fedora repository and see if they display properly in searches as you like.
+Don't copy any existing production Solr schemas, GSearch .xslt files, etc., and opt instead to use ISLE's default versions. Import some objects from your existing Fedora repository and see if they display properly in searches as you like.
 
-##### (**Intermediate**) - Bind mount in existing transforms and schemas
+##### **Intermediate** - Bind Mount in Existing Transforms and Schemas
 
 Bind mount in existing transforms and schemas  to override ISLE settings with your current Production version.
 
-**WARNING** _Assumes you are running Solr 4.10.x., **only attempt** if you are running that version on Production._
+**WARNING** _This approach assumes you are running Solr 4.10.x.; **only attempt** if you are running that version on Production._
 
 * Copy these current production files and directory to your local laptop in an appropriate location.
   * Solr `schema.xml`
-  * Gsearch `foxmltoSolr.xslt` file
-  * Gsearch `islandora_transforms`
+  * GSearch `foxmltoSolr.xslt` file
+  * GSearch `islandora_transforms`
 
   * Keep the files you create during this process; you will need them again for `Step 2a` (below)!
 
-* **Please note:** You may need to further review paths in these above files and edit them to match ISLE system paths.  
+* **Please note:** You may need to further review paths in the files mentioned above, and edit them to match ISLE system paths.  
 
-##### (**Advanced**) - Diff & merge current production customization edits into ISLE configs
+##### **Advanced** - Diff & Merge Current Production Customization Edits into ISLE Configs
 * Copy these current production files and directory to your local laptop in an appropriate location.
   * Solr `schema.xml`
-  * Gsearch `foxmltoSolr.xslt` file
-  * Gsearch `islandora_transforms`
+  * GSearch `foxmltoSolr.xslt` file
+  * GSearch `islandora_transforms`
 
-* Run the Demo ISLE briefly to pull files for modification and correct ISLE system paths.
-  * You can find these paths by running the Demo and copying these files out to an appropriate location.
-    * `docker cp isle-solr-ld:/usr/local/solr/collection1/conf/schema.xml schema.xml`
-    * `docker cp isle-fedora-ld:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/foxmlToSolr.xslt foxmlToSolr.xslt`
+* Run the Demo ISLE briefly to pull files for modification and correct ISLE system paths.  
+
+  * You can find these paths by running the Demo and copying these files out to an appropriate location.  
+
+    * `docker cp isle-solr-ld:/usr/local/solr/collection1/conf/schema.xml schema.xml`  
+
+    * `docker cp isle-fedora-ld:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/foxmlToSolr.xslt foxmlToSolr.xslt`  
+
     * `docker cp isle-fedora-ld:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms islandora_transforms`
 
-* Using a diff tool (_software that allows one to compare and find the differences between two files_), compare:
-  * your Production Solr `schema.xml` file to the ISLE demo `schema.xml` file.
-  * your Production Gsearch `foxmltoSolr.xslt` file to the ISLE demo `foxmltoSolr.xslt` file.
-  * your Production Gsearch `islandora_transforms` directory to the ISLE demo `islandora_transforms` directory.
+* Using a "diff" tool (_software that allows one to compare and find the differences between two files_), compare:  
 
-* Look for edits and comments that indicate specific customization and make note of the differences.
+  * your Production Solr `schema.xml` file to the ISLE demo `schema.xml` file.  
+
+  * your Production GSearch `foxmltoSolr.xslt` file to the ISLE demo `foxmltoSolr.xslt` file.  
+
+  * your Production GSearch `islandora_transforms` directory to the ISLE demo `islandora_transforms` directory.
+
+* Look for edits and comments that indicate specific customization and make note of the differences.  
+
   * Merge in the customizations into the ISLE versions.
+
   * Keep the files you create during this merge process; you will need them again for `Step 2a` (below)!
 
 ---
@@ -153,23 +163,29 @@ Enable the Local ISLE Installation to be viewed locally on workstation browser a
 **Please note:** The commands given below are for command line usage of git. GUI based clients such as the [SourceTree App](https://www.sourcetreeapp.com/) may be easier for endusers to use for the git process.
 
 * Within your git repository provider / hoster e.g [Github](https://github.com), [Bitbucket](https://bitbucket.org/), [Gitlab](https://gitlab.com), create these new empty git repositories, if they do not already exist:
+
   1. ISLE project config - e.g. `yourprojectnamehere-isle`
   2. Drupal / Islandora code - e.g. `yourprojectnamehere-islandora`
 
 The git project name can be your institution name or the name of the collections you plan to deploy; your choice entirely. A very clear distinction between the ISLE and Islandora code should be made in the repo name. Do not confuse or label Drupal / Islandora site code as ISLE and vice-versa.
 
-* Clone this newly created ISLE project to your local laptop or workstation.
-  * Open a `terminal` (Windows: open `PowerShell`)
-  * Navigate to an directory that will house your new ISLE project directory using the `cd` command.
+* Clone this newly created ISLE project to your local laptop or workstation.  
+
+  * Open a `terminal` (Windows: open `PowerShell`)  
+
+  * Navigate to an directory that will house your new ISLE project directory using the `cd` command.  
+
   * `git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git`
 
+* Navigate to the directory created by the clone operation
 
-* Navigate to this directory
   * `cd /path/to/your/repo`  
 
 
-* Add the ICG ISLE git repository as a git upstream. (_the code below is a real path and command_)
+* Add the ICG ISLE git repository as a git upstream. (_The code shown below is a real path and command_.)  
+
   * `git remote add icg-upstream https://github.com/Islandora-Collaboration-Group/ISLE.git`
+
   * You can check by running this command: `git remote -v`  
 
 ```bash  
@@ -180,22 +196,29 @@ origin	https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-i
 ```
 
 * Run a git fetch  
+
   * `git fetch icg-upstream`
 
 
-* Pull down the ICG ISLE `master` branch into your local project's `master` branch
-  * `git pull icg-upstream master`
-  * if you `ls -lha` in this directory, you'll now have code.  
+* Pull down the ICG ISLE `master` branch into your local project's `master` branch  
+
+  * `git pull icg-upstream master`  
+
+  * If you `ls -lha` in this directory, you should now see a listing of the code you now have.  
 
 
 * Push this code to your online git provider ISLE  
+
   * `git push -u origin master`
+
   * This will take 2 - 5 mins depending on your internet speed.
 
 
 * Now you have the current ISLE project code checked into git as foundation to make changes on specific to your local and project needs. You'll use this git upstream `icg-upstream` and process in the future to pull updates / releases from the main ISLE project.
 
-### Step 2a: Add Customizations from `Step 0`
+### Step 2a: Add Customizations from `Step 0` to the Git Workflow
+This step is intended for users who followed either the "**Intermediate**" or "**Advanced**" migration options in `Step 0` above.  If you choose the **Easy** migration option you may safely skip `Step 2a`.
+
 In your local `ISLE` directory (`cd /path/to/your/repo`) create new directories under `./config` to hold the Solr and GSearch files you retrieved in `Step 0`.  Generally this can be done like so:
 
 ```
@@ -222,7 +245,7 @@ Continue the local setup as directed below and ultimately import some objects fr
 
 ---
 
-## Step 3: Git clone the Production Drupal site code
+## Step 3: Git Clone the Production Drupal Site Code
 
 This step assumes you have an existing Drupal /Islandora site checked into a git repository.
 
