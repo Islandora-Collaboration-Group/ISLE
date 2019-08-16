@@ -101,7 +101,12 @@ The use and setup of TICK within the ISLE platform is as an optional [sidecar](h
 
 The Telegraf agent used for ISLE has a default configuration which runs the following plugins to monitor various services whether it is on a Production or Staging system.
 
-* To review or configure plugins, edit the `./config/tick/telegraf/telegraf.conf` file and navigate to the `INPUT PLUGINS` section starting Line 154.
+There are three `.conf` files found within `./config/tick/telegraf`
+  * `telegraf.conf` - Use this as a genric configuration for any system you'd like to monitor. Use this template file as a method to monitor ISLE environments that are not `Staging` or `Production`
+  * `telegraf.staging.conf` - Edit this file to run a full TICK stack on your ISLE Staging server which can monitor both your Staging and Production systems. 
+  * `telegraf.production.conf` - Edit this file to point to your full TICK stack running on your ISLE Staging server.
+
+* To review or configure plugins, edit the appropriate `telegraf.conf` file for your environment and navigate to the `INPUT PLUGINS` section.
 
 If an ISLE User would like to add a plugin to monitor additional services, please review the additional information below on Telegraf plugins which can be found in two places:
 
@@ -136,7 +141,6 @@ If an ISLE User would like to add a plugin to monitor additional services, pleas
 
 * `inputs.varnish` - [Gather metrics from a Varnish cache](https://github.com/influxdata/telegraf/blob/release-1.10/plugins/inputs/varnish/README.md)
 
-
 ---
 
 ## Adoption Process Overview
@@ -151,7 +155,7 @@ The data from both systems will be collected, analyzed and accessed on / from th
 
 * You'll download new ISLE images tagged as `1.2.0`
 
-- You'll copy over a new configuration file for a service called `rsyslog`. 
+- You'll copy over a new configuration file for a service called `rsyslog`.
   * This will allow TICK to get information from the ISLE Host server `syslog` logger.
   * You may also need to ensure that the `rsyslog` service and software is installed on your ISLE Host Server as well.
 
@@ -163,15 +167,15 @@ The data from both systems will be collected, analyzed and accessed on / from th
   * `staging.env`
   * `production.env`  
 
-* You'll edit the Telegraf Agent's empty or default settings to properly monitor the various local ISLE services and send metrics to the local Influxdb database on the Staging system.
+* You'll edit the `Staging` Telegraf Agent's empty or default settings to properly monitor the various local ISLE services and send metrics to the local Influxdb database on the Staging system.
 
 - You'll restart your containers with the new services having been added and configured.
 
-* Using a web browser, you'll navigate to the new Chronograf dashboard and complete the configuration of the Influxdb, Chronograf and Kapacitor services. 
+* Using a web browser, you'll navigate to the new Chronograf dashboard on the `Staging` server and complete the configuration of the Influxdb, Chronograf and Kapacitor services.
   * You'll have the option to create new dashboards
   * If desired, you'll add additional alerts
 
-- You'll repeat the steps to edit the Telegraf Agent's configuration for your Production system only. You do not need to install the remaining "ICK" stack on Production though.
+- You'll repeat the steps to edit the Telegraf Agent's configuration for your `Production` system only. You do not need to install the remaining "ICK" stack on `Production` though.
 
 * You can then review the `Using Chronograf` section to learn how to review the new added hosts, dashboards and Log Viewer to review ISLE services log streams.
 
@@ -287,7 +291,7 @@ Aug 13 17:23:32 ip-172-31-69-204 rsyslogd[9995]: action 'action 8' suspended (mo
 
 #### 03. Edits - docker-compose.staging.yml file
 
-* Edit the `docker-compose.staging.yml` file and uncomment lines `205` through `296` to enable the new `TICK` services. There is a section called `# Start - TICK stack services section`, underneath that is the `TICK` code to be uncommented. (_remove the # before and ensure all code aligns properly like the services above it._)
+* Edit the `docker-compose.staging.yml` file and uncomment lines to enable the new `TICK` services. There is a section called `# Start - TICK stack services section`, underneath that is all of the `TICK` code to be uncommented. (_remove the # before and ensure all code aligns properly like the services above it._)
 
 * At the end of every service definition (_mysql, fedora, solr etc_) within the `docker-compose.staging.yml`, uncomment the following:
 
@@ -317,7 +321,7 @@ Uncommented example:
         tag: "{{.Name}}"
 ```
 
-* Uncomment the following lines `313 - 315` for the TICK stack data volumes to the end of the `volumes` section of the `docker-compose.staging.yml` file.
+* Uncomment the lines below for the TICK stack data volumes to the end of the `volumes` section of the `docker-compose.staging.yml` file.
 
 Uncommented TICK volumes example:
 
@@ -342,13 +346,13 @@ volumes:
 
 The instructions to setup only the Telegraf Agent on an ISLE system e.g. your Production system are found below in the section called `06. Telegraf Agent (Agent only) installation on Production`.
 
-* You'll need to edit the `./config/tick/telegraf/telegraf.conf` to add the following:
-  * **Line 76**: `hostname = ""`
+* You'll need to edit the `./config/tick/telegraf/telegraf.staging.conf` to add the following:
+  * `hostname = ""`
     * Enter the name of the server you will be monitoring e.g. `isle-server-staging` or `icg-staging` etc. This value can be a [FQDN](https://kb.iu.edu/d/aiuv), an IP or any name really.
-  * **Line 97**: `database = "telegraf"`
+  * `database = "telegraf"`
     * By default, the ISLE TICK setup assumes this database as it is the easiest but pools all data received by individual monitored hosts into one database. For first time users, recommend leaving this value in place.
     * Users are free to change this to any value to segregate data by systems, group etc.
-  * **Line 291**: Change `servers = ["root:<ISLE_ROOT_PASSWORD_HERE>@tcp(mysql:3306)/?tls=false"]` to use your `Staging` MySQL Root password. Typically this value is in your `staging.env` file. Swap out the `<ISLE_ROOT_PASSWORD_HERE>` with your `Staging` MySQL Root password.
+  * Change `servers = ["root:<ISLE_ROOT_PASSWORD_HERE>@tcp(mysql:3306)/?tls=false"]` to use your `Staging` MySQL Root password. Typically this value is in your `staging.env` file. Swap out the `<ISLE_ROOT_PASSWORD_HERE>` with your `Staging` MySQL Root password.
 
 - Start up the ISLE Docker containers again. `docker-compose up -d`
 
@@ -454,20 +458,20 @@ To install the Telegraf agent on a `Production` system:
 
 * Shut down all running ISLE containers on the Production system
 
-- You'll need to edit the `./config/tick/telegraf/telegraf.conf` to add the following:
-  * **Line 76**: `hostname = ""`
+- You'll need to edit the `./config/tick/telegraf/telegraf.production.conf` to add the following:
+  * `hostname = ""`
     * Enter the name of the server you will be monitoring e.g. `isle-server-prod` or `icg-production` etc. This value can be a [FQDN](https://kb.iu.edu/d/aiuv) i.e. `production-server.domain.edu`, an IP or any name really. Recommend a short name to be easily read and understood.
-  * **Line 94**: `urls = ["http://influxdb:8086"]`
+  * `urls = ["http://influxdb:8086"]`
     * Replace the `influxdb` value with the [FQDN](https://kb.iu.edu/d/aiuv) of the `Staging` server that is running the full TICK stack and that this Telegraf agent will be sending data to e.g.
   `urls = ["http://staging-server.domain.edu:8086"]`
-  * **Line 97**: `database = "telegraf"`
+  * `database = "telegraf"`
     * By default, the ISLE TICK setup assumes this database as it is the easiest but pools all data received by individual monitored hosts into one database. For first time users, recommend leaving this value in place.
     * Users are free to change this to any value to segregate data by systems, group etc.
-  * **Line 290**: Change `servers = ["root:<ISLE_ROOT_PASSWORD_HERE>@tcp(mysql:3306)/?tls=false"]` to use your `Production` MySQL Root password. Typically this value is in your `production.env` file. Swap out the `<ISLE_ROOT_PASSWORD_HERE>` with your `Production` MySQL Root password.
+  * Change `servers = ["root:<ISLE_ROOT_PASSWORD_HERE>@tcp(mysql:3306)/?tls=false"]` to use your `Production` MySQL Root password. Typically this value is in your `production.env` file. Swap out the `<ISLE_ROOT_PASSWORD_HERE>` with your `Production` MySQL Root password.
 
 #### Edits - docker-compose.production.yml file 
 
-* Edit the `docker-compose.production.yml` file and uncomment lines `205` through `228` to enable the new `TICK - Telegraf` agent / service. There is a section called `# Start - TICK stack services section`, underneath that is the `TICK` code to be uncommented. (_remove the # before and ensure all code aligns properly like the services above it._)
+* Edit the `docker-compose.production.yml` file and uncomment lines to enable the new `TICK - Telegraf` agent / service. There is a section called `# Start - TICK stack services section`, underneath that is the `TICK` code to be uncommented. (_remove the # before and ensure all code aligns properly like the services above it._)
 
 * At the end of every service definition (_mysql, fedora, solr etc_) within the `docker-compose.production.yml`, uncomment the following:
 
@@ -508,7 +512,7 @@ Uncommented example:
 
 - Depending on your internet connection, this startup process may take a few minutes, as the new TICK images are being downloaded and started.
 
-* Once the `Production` containers are back online, the services are running e.g. you see the Drupal site etc. navigate to the `Hosts` section within the `Chronograf` dashboard. You should now see your new `Production` server name. This means the Telegraf Agent on your `Production` ISLE system is now reporting properly. 
+* Once the `Production` containers are back online, the services are running e.g. you see the Drupal site etc. navigate to the `Hosts` section within the `Chronograf` dashboard. You should now see your new `Production` server name. This means the Telegraf Agent on your `Production` ISLE system is now reporting properly.
 
 ---
 
@@ -609,7 +613,7 @@ The instructions below are going to:
 #### Assumptions
 
 * Ability to send emails from the ISLE host server has already been setup.
-  * You may already be using an existing off host email server or service that is integrated with the ISLE Drupal site. 
+  * You may already be using an existing off host email server or service that is integrated with the ISLE Drupal site.
   * Alternatively your IT dept may provide you with an existing email server or account details as well. 
   * We recommend setting up a [SendGrid](https://sendgrid.com/) or [MailGun](https://www.mailgun.com/) account which are cloud-based email delivery platforms. While both these services have "free" tiers, both are commercial products. However, the ease of use in setting up, using and keeping your ISLE system free of additional complex email service or software installations are why they're recommended here.
 
@@ -621,7 +625,7 @@ While TICK supports a wide variety of alert types and delivery mechanisms we're 
 
 * Prior to starting, you will need to have your SMTP credentials (user name, password and location of the 3rd party email server)  at the ready. This information may have been provided to you by your IT department or from when you may have used one of the recommended cloud-based email delivery platforms;  [SendGrid](https://sendgrid.com/) or [MailGun](https://www.mailgun.com/).
 
-- When you have these credentials, click on the `Configuration` (wrench icon) button on the left hand side of the Chronograf dashboard. 
+- When you have these credentials, click on the `Configuration` (wrench icon) button on the left hand side of the Chronograf dashboard.
 
 * Under the `Kapacitor Connection` column
   * click into the Kapacitor settings dropdown
@@ -638,7 +642,7 @@ While TICK supports a wide variety of alert types and delivery mechanisms we're 
   * `Password` - enter the password for the email account you'll be using to send alerts **with**
   * Click the `Configuration Enabled` checkbox
   * Click the blue `Save Changes` button
-  * Click the `Send Test Alert` and confirm that a new test email has been sent to the email account you'll be receiving alerts **to /at** 
+  * Click the `Send Test Alert` and confirm that a new test email has been sent to the email account you'll be receiving alerts **to /at**
 
 You can now use this delivery mechanism when you set up individual alerts.
 
@@ -666,7 +670,7 @@ These instructions are for Sendgrid users only but demonstrate the easy of use i
   * `Password` - Enter the long API key generated from the above steps 
   * Click the `Configuration Enabled` checkbox
   * Click the blue `Save Changes` button
-  * Click the `Send Test Alert` and confirm that a new test email has been sent to the email account you'll be receiving alerts **to /at** 
+  * Click the `Send Test Alert` and confirm that a new test email has been sent to the email account you'll be receiving alerts **to /at**
 
 ##### Sendgrid Resource
 
@@ -680,13 +684,13 @@ These instructions are for Sendgrid users only but demonstrate the easy of use i
 
 [COMING SOON in the 1.2.1 release]
 
-This alert is designed to warn you when one of the ISLE host server disk(s) is/are almost full. Please note this setting should not alert you when the disk is already full. We suggest you use a lower value (e.g. 75%) such that you can safely shutdown containers, backup data and then expand the affected disk's capacity as needed.
+* This alert is designed to warn you when one of the ISLE host server disk(s) is/are almost full. Please note this setting should not alert you when the disk is already full. We suggest you use a lower value (e.g. 75%) such that you can safely shutdown containers, backup data and then expand the affected disk's capacity as needed.
 
 #### Deadman Alert
 
 [COMING SOON in the 1.2.1 release]
 
-This alert is designed to warn you when one of the ISLE host server disk(s) is unresponsive or offline.
+* This alert is designed to warn you when one of the ISLE host server disk(s) is unresponsive or offline.
 
 ---
 
@@ -726,11 +730,9 @@ Additional changes were made to the ISLE base images to allow for:
 
 * Please use the following as resources for institutions or endusers needing support
 
-  * [Islandora ISLE Interest Group](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group) - Meetings open to everybody!   
+  * [Islandora ISLE Interest Group](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group) - Meetings open to everybody!
     * The [Schedule](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group/#how-to-join) is alternating Wednesdays, 3:00pm EDT
 
   * [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle) - Post your questions here and subscribe for updates, meeting announcements, and technical support
 
   * [ISLE Github Issues queue](https://github.com/Islandora-Collaboration-Group/ISLE/issues) - Post your issues, bugs and requests for technical documentation here.
-
- --- 
