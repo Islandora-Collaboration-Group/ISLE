@@ -51,17 +51,17 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 ---
 
-## Step 0: Copy Production data to your local
+## Step 0: Copy Production Data to Your Local Computer
 
 Be sure to run a backup of any current non-ISLE systems prior to copying or exporting any files.
 
-#### Drupal site files & code
+#### Drupal Site Files and Code
 
 1. Copy the `/var/www/html/sites/default/files` directory from your Production Apache server to an appropriate storage /project area on your local. You'll move this directory in later steps.
 
 2. Locate and note the previously existing private Drupal / Islandora git repository. You'll be cloning this into place once the ISLE project has been cloned in later steps.
 
-#### Drupal site database
+#### Drupal Site Database
 
 Prior to attempting this step, do consider the following:
 
@@ -93,15 +93,15 @@ While this will depend on your pre-existing Production system, it is important t
   * You will then need to add an extra line in the Fedora service (fedora) volumes section to bind mount this file in. This will guarantee proper Fedora data hash structure.
     * `- ./config/fedora/akubra-llstore.xml:/usr/local/fedora/server/config/spring/akubra-llstore.xml`
 
-#### Solr Schema & Islandora Transforms
+#### Solr Schema and Islandora Transforms
 
-This data can be challenging depending on the level of customizations to contend with and as such, ISLE maintainers recommends following one of the three strategies outlined below.
+This data can be challenging depending on the level of customizations to contend with and as such, ISLE maintainers recommends following one of the three (3), "Easy", "Intermediate", and "Advanced" strategies outlined below.
 
-##### **Easy** - Run "Stock" ISLE
+##### Strategy 1: **Easy** - Run "Stock" ISLE
 
 Don't copy any existing production Solr schemas, GSearch .xslt files, etc., and opt instead to use ISLE's default versions. Import some objects from your existing Fedora repository and see if they display properly in searches as you like.
 
-##### **Intermediate** - Bind Mount in Existing Transforms and Schemas
+##### Strategy 2: **Intermediate** - Bind Mount in Existing Transforms and Schemas
 
 Bind mount in existing transforms and schemas  to override ISLE settings with your current Production version.
 
@@ -116,11 +116,13 @@ Bind mount in existing transforms and schemas  to override ISLE settings with yo
 
 * **Please note:** You may need to further review paths in the files mentioned above, and edit them to match ISLE system paths.  
 
-##### **Advanced** - Diff & Merge Current Production Customization Edits into ISLE Configs
+##### Strategy 3: **Advanced** - Diff and Merge Current Production Customization Edits into ISLE Configs
 * Copy these current production files and directory to your local laptop in an appropriate location.
+
   * Solr `schema.xml`
   * GSearch `foxmltoSolr.xslt` file
   * GSearch `islandora_transforms`
+
 
 * Run the Demo ISLE briefly to pull files for modification and correct ISLE system paths.  
 
@@ -432,18 +434,29 @@ You can determine the name of the Apache container by running `docker ps`. make 
 ## Step 11: Test the Site
 
 * In your web browser, enter this URL: `https://yourprojectnamehere.localdomain`
+
 <!--- TODO: Add error message and how to proceed (click 'Advanced...') --->
+
 * Note: You may see an SSL error warning that the site is unsafe. It is safe, it simply uses "self-signed" SSL certs. Ignore the error and proceed to the site.
-* Log in to the local Islandora site with the credentials you created in `local.env` (`DRUPAL_ADMIN_USER` and `DRUPAL_ADMIN_PASS`)
+
+* Log in to the local Islandora site with the credentials you created in `local.env` (`DRUPAL_ADMIN_USER` and `DRUPAL_ADMIN_PASS`)  
+
   * You can also attempt to use login credentials that the Production server would have stored in its database.
+
 * If the newly created Drupal login doesn't work then, you'll need to:
+
   * Shell into the Apache container:
+
     * `docker exec -it your-apache-containername bash`
-  * `cd /var/www/html`
-  * Create the user found in `DRUPAL_ADMIN_USER` and set its password to the value of `DRUPAL_ADMIN_PASS` as you previously created in `local.env`. In the example below swap-out `DRUPAL_ADMIN_USER` & `DRUPAL_ADMIN_PASS` with those found in `local.env`
+    * `cd /var/www/html`
+
+  * Create the user found in `DRUPAL_ADMIN_USER` and set its password to the value of `DRUPAL_ADMIN_PASS` as you previously created in `local.env`. In the example below swap-out `DRUPAL_ADMIN_USER` and `DRUPAL_ADMIN_PASS` with those found in `local.env`
+
     * `drush user-create DRUPAL_ADMIN_USER --mail="youremailaddresshere" --password="DRUPAL_ADMIN_PASS";`
     * `drush user-add-role "administrator" DRUPAL_ADMIN_USER`
-    * exit the container
+
+    * Exit the container
+
     * Attempt to login again
 
 ---
@@ -460,11 +473,17 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
 ```
 
 * Follow these ingestion instructions [How to Add an Item to a Digital Collection](https://wiki.duraspace.org/display/ISLANDORA/How+to+Add+an+Item+to+a+Digital+Collection)
+
 * (Note: [Getting Started with Islandora](https://wiki.duraspace.org/display/ISLANDORA/Getting+Started+with+Islandora) contains explanations about content models, collections, and datastreams.)
+
 * After ingesting content, you may need to add an Islandora Simple Search block to the Drupal structure. (The default search box will only search Drupal content, not Islandora content.) This might already exist in your current Drupal Production site as a feature.
+
     * Select from the menu: `Structure > Blocks > Islandora Simple Search`
+
     * Select: `Sidebar Second`
+
     * Click: `Save Blocks` at bottom of page
+
     * You may now search for ingested objects that have been indexed by SOLR
 
 * After ingesting either the ICG sample objects or a selection of your pre-existing Fedora Production objects, continue to QC the migrated site, ensuring that objects display properly, the theme and design continue to work properly, there are no errors in the Drupal watchdog and everything matches the functionality of the previous non-ISLE Production Islandora Drupal site.
