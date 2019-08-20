@@ -1,9 +1,11 @@
-# ISLE Installation: Troubleshooting
+# ISLE: Troubleshooting Installations
 
 **Please select a topic:**
 
 - [Port Conflicts](#port-conflicts)
 - [Non-Running Docker Containers](#non-running-docker-containers)
+- [Viewing Logs in ISLE 1.2.0](#viewing-logs-in-isle-120)
+- [Fedora Hash Size (Conditional)](#fedora-hash-size-conditional)
 
 ---
 
@@ -35,6 +37,7 @@ Once your web server(s) have been disabled, resume the ISLE install process by r
 ---
 
 ## Non-Running Docker Containers
+
 If you don't see all containers running, then stop the running containers with `docker-compose down` and start the containers one at a time following the instructions below:
 
 *  MySQL image pull & container launch
@@ -74,6 +77,8 @@ If you don't see all containers running, then stop the running containers with `
 
     `docker-compose up -d apache`
 
+---
+
 ## Viewing Logs in ISLE 1.2.0
 
 As of ISLE release logging to physical file has been turned off, stdout & stderr are to console only no more physical files. This means if you need to view logs for debugging, here are some methods:
@@ -90,11 +95,27 @@ All containers: docker-compose logs --tail=0 --follow
 
 ---
 
-Pick one of the following:
-**Return to [Demo ISLE Installation](../install/install-demo.md).**
-**Return to [Local ISLE Installation: New site](../install/install-local-new.md).**
-**Return to [Local ISLE Installation: Migrate existing Islandora site](../install/install-local-migrate.md).**
-**Return to [Staging ISLE Installation: New site](../install/install-staging-new.md).**
-**Return to [Staging ISLE Installation: Migrate existing Islandora site](../install/install-staging-migrate.md).**
-**Return to [Production ISLE Installation: New site](../install/install-production-new.md).**
-**Return to [Production ISLE Installation: Migrate existing Islandora site](../install/install-production-migrate.md).**
+## Fedora Hash Size (Conditional)
+
+**Are you migrating an existing Islandora site that has greater than one million objects?**
+
+This is a power user setting and is an incredibly rare sitation, so do this step only if you have an akubra level 2 or greater.
+
+While this will depend on your pre-existing Production system, it is important to double-check this. If you have a larger hash size than the default ISLE system (##), and don't follow the settings below, ISLE may not function properly when your data has been migrated.
+
+*  If you have larger Fedora collections, there is a possibility that you made changes to the `akubra-llstore.xml` file to allow for the creation of larger or deeper hash directories)
+  * You will need to copy your `/usr/local/fedora/server/config/spring/akubra-llstore.xml` from your Production Fedora System to `./config/fedora/akubra-llstore.xml`
+  * You will then need to add an extra line in the Fedora service (fedora) volumes section to bind mount this file in. This will guarantee proper Fedora data hash structure.
+    * `- ./config/fedora/akubra-llstore.xml:/usr/local/fedora/server/config/spring/akubra-llstore.xml`
+
+---
+
+**Return to one of the following:**
+
+- [Demo ISLE Installation](../install/install-demo.md)
+- [Local ISLE Installation: New Site](../install/install-local-new.md)
+- [Local ISLE Installation: Migrate Existing Islandora Site](../install/install-local-migrate.md)
+- [Staging ISLE Installation: New Site](../install/install-staging-new.md)
+- [Staging ISLE Installation: Migrate Existing Islandora Site](../install/install-staging-migrate.md)
+- [Production ISLE Installation: New Site](../install/install-production-new.md)
+- [Production ISLE Installation: Migrate Existing Islandora Site](../install/install-production-migrate.md)

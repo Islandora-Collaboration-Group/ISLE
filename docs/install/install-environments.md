@@ -1,4 +1,4 @@
-# ISLE Installation: Environments
+# Overview: ISLE Installation Environments
 
 As of the ISLE `1.2.0` release, ISLE now has the option to use clearly defined but different environments based on enduser's needs. Depending on the environment choice, additional configuration changes will need to be made to ISLE configuration files, domain names etc. When an ISLE enduser is ready to progress past using the default Demo environment, it is recommended that their learning path and workflow proceed in this suggested order.
 
