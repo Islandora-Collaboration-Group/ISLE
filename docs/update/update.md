@@ -12,70 +12,72 @@ Update an existing ISLE installation to install the newest improvements and secu
 
 We strongly recommend that you start the update process on your `Local` environment first to determine what type of testing is required for your projects, troubleshoot any issues and make any necessary adjustments or merges from the git code.
 
-On your local version of ISLE:
+On your Local version of ISLE:
 
-* In the command line, navigate to the ISLE directory.  This directory should contain the `docker-compose.local.yml` file.
+* In the command line, navigate to the ISLE directory, which should contain the `docker-compose.local.yml` file.
 
 * Stop and remove your existing ISLE containers
     * `docker-compose down`
 
+* Check your git remotes: `git remote -v`
+    * If you do not have a remote named `icg-upstream` then do this:
+    * `git remote add icg-upstream https://github.com/Islandora-Collaboration-Group/ISLE.git`
+
 * Run a git fetch from the ICG upstream
-  * `git fetch icg-upstream`
+    * `git fetch icg-upstream`
 
 * Checkout a new git branch as a precaution for performing the update on your project. This way your `master` branch stays safe and untouched until you have tested thoroughly and are ready to merge in changes from the recent update. The new local branch can be anything. An example is given below.
-  * `git checkout isle-update-numberhere`
+    * `git checkout isle-update-numberhere`
 
 * Pull down the ICG ISLE `master` branch into your local project's new `isle-update-numberhere` branch
-  * `git pull icg-upstream master`
-  * if you `ls -lha` in this directory, you'll now have code.
+    * `git pull icg-upstream master`
+    * if you `ls -lha` in this directory, you'll now have code.
 
-* You'll need to use an text editor or IDE to determine if there are git merges to be worked out.
-  * Large ISLE point releases e.g. `1.1.2` to `1.2.0` will more than likely introduce merge conflicts and breaking changes. Move through this update process slowly and carefully.
-    * Changes will usually include but are not limited to:
-      * new configuration files
-      * new explanatory comments
-      * new ISLE services optional or otherwise
-      * new ISLE docker image tags
-      * new comments
-      * new documentation
+* You'll need to use an text editor or IDE to determine if there are git merges to be worked out. Large ISLE point releases e.g. `1.1.2` to `1.2.0` will more than likely introduce merge conflicts and breaking changes. Move through this update process slowly and carefully. Changes will usually include but are not limited to:
+    * new configuration files
+    * new explanatory comments
+    * new ISLE services optional or otherwise
+    * new ISLE docker image tags
+    * new comments
+    * new documentation
 
 * Make the appropriate changes and then commit to your local
-  * `git add <changedfileshere>`
-  * `git commit -m "ISLE update from version # to version #"
+    * `git add <changedfileshere>`
+    * `git commit -m "ISLE update from version # to version #"
 
 * You can choose to push this new branch to your remote git or keep it on your local. Ultimately after testing on your local, you'll merge to `master` and then deploy the new code to your `Staging` and `Production` environments.
 
 * On your local, using the still open terminal / Powershell, pull down the new containers. Be sure to be in the root of your ISLE project directory. Download the new ISLE images.
-  * `cd ~/yourprojecthere/`
-  * `docker-compose pull`
+    * `cd ~/yourprojecthere/`
+    * `docker-compose pull`
 
 * Start up your existing local ISLE project with the new code and ISLE images.
-  * `docker-compose up -d`
+    * `docker-compose up -d`
 
 * QC your existing site and ensure the following:
-  * The site functions as it did before
-  * All services are functional and without apparent ERROR warnings in log console output.
-  * You can ingest test objects without any issue.
-  * You can modify existing object data without any issue.
+    * The site functions as it did before
+    * All services are functional and without apparent ERROR warnings in log console output.
+    * You can ingest test objects without any issue.
+    * You can modify existing object data without any issue.
 
 * Once testing has completed and any further adjustments have been made. Merge your `isle-update-numberhere` branch's code to `master`.
-  * `git checkout master`
-  * `git merge isle-update-numberhere`
+    * `git checkout master`
+    * `git merge isle-update-numberhere`
 
 * Push this code to your online git provider ISLE
-  * `git push -u origin master`
-  * This will take 2 - 5 mins depending on your internet speed.
+    * `git push -u origin master`
+    * This will take 2 - 5 mins depending on your internet speed.
 
 * Now you have the current ISLE project code checked into git as foundation to make changes on your `Staging` and `Production` servers.
 
 ## Staging Server update
 
 * SSH into your `Staging` ISLE Host Server
-  * `ssh islandora@yourstagingserver.institution.edu`
-  * `cd /opt/yourprojecthere`
+    * `ssh islandora@yourstagingserver.institution.edu`
+    * `cd /opt/yourprojecthere`
 
 * Shut down the running containers
-  * `docker-compose down`
+    * `docker-compose down`
 
 * Update the docker files via git
     * `git pull`
@@ -92,10 +94,10 @@ On your local version of ISLE:
 The new containers should start up and your `Staging` Islandora site should be available, without any loss of existing content.
 
 * QC the existing ISLE `Staging` site and ensure the following:
-  * The site functions as it did before
-  * All services are functional and without apparent ERROR warnings in log console output.
-  * You can ingest test objects without any issue.
-  * You can modify existing object data without any issue.
+    * The site functions as it did before
+    * All services are functional and without apparent ERROR warnings in log console output.
+    * You can ingest test objects without any issue.
+    * You can modify existing object data without any issue.
 
 * Recommend giving this installation a few days or a week at the minimum before repeating process on Production.
 

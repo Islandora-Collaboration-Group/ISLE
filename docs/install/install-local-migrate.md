@@ -82,17 +82,6 @@ Prior to attempting this step, do consider the following:
   `mysqldump -u username -p database_name > prod_drupal_site_082019.sql`
   * Copy this file down to your local laptop or workstation.
 
-#### Fedora hash size (Conditional)
-
-While this will depend on your pre-existing Production system, it is important to double-check this. If you have a larger hash size than the default ISLE system (##), and don't follow the settings below, ISLE may not function properly when your data has been migrated.
-
-*  If you have larger Fedora collections, there is a possibility that you made changes to the `akubra-llstore.xml` file to allow for the creation of larger or deeper hash directories)  
-
-  * You will need to copy your `/usr/local/fedora/server/config/spring/akubra-llstore.xml` from your Production Fedora System to `./config/fedora/akubra-llstore.xml`  
-
-  * You will then need to add an extra line in the Fedora service (fedora) volumes section to bind mount this file in. This will guarantee proper Fedora data hash structure.
-    * `- ./config/fedora/akubra-llstore.xml:/usr/local/fedora/server/config/spring/akubra-llstore.xml`
-
 #### Solr Schema and Islandora Transforms
 
 This data can be challenging depending on the level of customizations to contend with and as such, ISLE maintainers recommends following one of the three (3), "Easy", "Intermediate", and "Advanced" strategies outlined below.
@@ -369,7 +358,8 @@ You can reuse some of the older Production settings in the `local.env` if you li
 
 ## Step 9: Import the Production MySQL Drupal database
 
-* Method A: Use a MySQL client with a GUI
+**Method A: Use a MySQL client with a GUI**
+
   * Configure the client with the following:
     * Host = `127.0.0.1`
     * Port: `3306` _or a different port if you changed it_
@@ -380,7 +370,8 @@ You can reuse some of the older Production settings in the `local.env` if you li
   * Select your exported Production Drupal database file e.g. `prod_drupal_site_082019.sql.gz`
   * The import process will take 1 -3 minutes depending on the size.
 
-* Method B: Use the command line
+**Method B: Use the command line**
+
   * Copy the Production Drupal database file e.g. `prod_drupal_site_082019.sql.gz` to your ISLE MySQL container
     * Run `docker ps` to determine the mysql container name
     * `docker cp /pathto/prod_drupal_site_082019.sql.gz yourmysql-container-name:/prod_drupal_site_082019.sql.gz`

@@ -37,8 +37,12 @@ Sections within a section that is specific to a certain type of circumstance sho
 
 ## Terms We Use
 - Demo ISLE Installation
-- Remote Server ISLE Installation
-- Migrate to ISLE Environment
+- Local ISLE Installation: New Site
+- Local ISLE Installation: Migrate Existing Islandora Site
+- Staging ISLE Installation: New Site
+- Staging ISLE Installation: Migrate Existing Islandora Site
+- Production ISLE Installation: New Site
+- Production ISLE Installation: Migrate Existing Islandora Site
 - Update ISLE
 - end users (not endusers)
 
