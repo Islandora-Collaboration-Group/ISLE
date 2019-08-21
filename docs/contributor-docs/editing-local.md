@@ -35,7 +35,7 @@ The example used below is how to create a new documentation page that will be ab
 
 * Create a new empty file in the `docs/contributor-docs` directory e.g. `building_giant_robots.md`
 
-* Open up the `mkdocs.yml` file in a text editor of your choice.
+* Open up the `mkdocs.yml` file in a text editor.
 
 In order for `mkdocs` to understand that there is a new page and page title to display in the rendered documentation, one must use the YAML code convention (syntax) to enter.
 
@@ -97,7 +97,7 @@ You now need to add these changed / new files to git.
 
 ####  Git Commit with Message
 
-Now it is time to package up all these additions with a git commit command. Please ensure that you commit with a descriptive message of changes etc.
+Now it is time to package up all these additions with a git commit command. Please ensure that you commit with a descriptive message of changes, etc.
 
 * `git commit -m "Tweaked some specs in diagram-network.md. Updated the Glossary with more terms. Made new Building Giant Robots page. I love big robots. Added new files and titles to mkdocs.yml "`
 

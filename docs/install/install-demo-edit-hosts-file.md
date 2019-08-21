@@ -1,6 +1,6 @@
 # Demo ISLE Installation: Edit the "/etc/hosts" File
 
-Edit the `/etc/hosts` file to view ISLE locally on a workstation browser.
+Edit the `/etc/hosts` file to view ISLE locally on a personal computer browser.
 
 **Please select your operating system and software:**
 
@@ -15,12 +15,12 @@ Edit the `/etc/hosts` file to view ISLE locally on a workstation browser.
 
 * **Docker For Mac** If you are using Docker For Mac, then use the IP address of `127.0.0.1` to resolve to `localhost` and to the `isle.localdomain localhost isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain` domain names
 
-* Open a terminal on the local laptop
+* Open a terminal on the personal computer
 
 * Enter: `sudo nano /etc/hosts`
-  * _For endusers familiar with editing files on the command line, vim, emacs or alternative tools can be used in lieu of nano_
+    * _For endusers familiar with editing files on the command line, vim, emacs or alternative tools can be used in lieu of nano_
 
-* Enter the laptop end user password
+* Enter the personal computer end user password
 
 * Find the `127.0.0.1 localhost` entry in the `/etc/hosts` file.
 * Go to end of same line, add one space, and then paste the following:
@@ -43,17 +43,17 @@ Edit the `/etc/hosts` file to view ISLE locally on a workstation browser.
 
 * For endusers running MacOS and Ubuntu Desktop:
 
-   * Open a terminal on the local laptop
+   * Open a terminal on the personal computer
 
    * Enter: `sudo nano /etc/hosts`
-     * _For endusers familiar with editing files on the command line, vim, emacs or alternative tools can be used in lieu of nano_
+       * _For endusers familiar with editing files on the command line, vim, emacs or alternative tools can be used in lieu of nano_
 
-   * Enter the laptop end user password
+   * Enter the personal computer end user password
 
    * Add the values below the `127.0.0.1` entry in the `/etc/hosts` file.
 
        * `10.10.10.130 localhost isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain`  
-       * **Example**
+       * **Example:**
 
 ```
         127.0.0.1 localhost

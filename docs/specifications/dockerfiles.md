@@ -70,9 +70,9 @@ Following [standard Docker convention](https://docs.docker.com/engine/reference/
 
 * LABEL - For ISLE Committers to version control image descriptions, functionality and additional meta-data. (_optional_)
 
-* RUN - Execute commands e.g. `RUN apt-get update` etc.
+* RUN - Execute commands e.g. `RUN apt-get update`, etc.
 
-* COPY - Within each ISLE image directory there are additional files or subdirectories are copied from the local laptop to the image itself.
+* COPY - Within each ISLE image directory there are additional files or subdirectories are copied from the personal computer to the image itself.
 
 * ENV - sets any environmental variables necessary for software to run or be configured properly.
 
