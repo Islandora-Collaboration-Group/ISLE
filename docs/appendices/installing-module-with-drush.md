@@ -37,7 +37,7 @@ In this command sequence, the `cd /var/www/html/sites/default` command sets our 
 
 The `drush dl devel` command instructs our container to download, `dl` is Drush shorthand for 'download', the module identified as `devel`.  Drush will automatically determine where to put the downloaded module, but it may prompt you for confirmation of location depending on your circumstances.
 
-The third command, `drush en devel`, instructs our container to 'enable', `en` is Drush shorthand for 'enable', the module identified as `devel`.  This command, as specified, must be run from a particular working directory so that Drush can determine in which Drupal/Islandora site the module should be applied.  Like the `dl` command, `drush en` may prompt you to confirm certain operations as it attempts to resolve any dependencies that the module may have.  
+The third command, `drush en devel`, instructs our container to 'enable', `en` is Drush shorthand for 'enable', the module identified as `devel`.  This command, as specified, must be run from a particular working directory so that Drush can determine in which Islandora Drupal site the module should be applied.  Like the `dl` command, `drush en` may prompt you to confirm certain operations as it attempts to resolve any dependencies that the module may have.  
 
 The final command, `drush cc all`, instructs our container to 'clear all caches', `cc` is Drush shorthand for 'clear cache. This command is not required, but it is highly recommended, since Drupal and Islandora typically cache a great deal of module information, and failing to clear caches may cause temporary, but unexpected results after a new module is installed.
 
@@ -65,7 +65,7 @@ The `git clone...` command downloads the Oral History solution pack code from it
 
 The `cd /var/www/html/sites/default` command sets our working directory to the location of our site's `settings.php` file.  This directory, and file, hold key information about our site, and working from this directory makes subsequent commands easier to use.
 
-The command, `drush en islandora_oralhistories -y`, instructs our container to 'enable', `en` is Drush shorthand for 'enable', the module identified as `islandora_oralhistories`.  This command, as specified, must be run from a particular working directory so that Drush can determine in which Drupal/Islandora site the module should be applied.  Note that `drush en` may prompt you to confirm certain operations as it attempts to resolve any dependencies that the module may have.  
+The command, `drush en islandora_oralhistories -y`, instructs our container to 'enable', `en` is Drush shorthand for 'enable', the module identified as `islandora_oralhistories`.  This command, as specified, must be run from a particular working directory so that Drush can determine in which Islandora Drupal site the module should be applied.  Note that `drush en` may prompt you to confirm certain operations as it attempts to resolve any dependencies that the module may have.  
 
 The final command, `drush cc all`, instructs our container to 'clear all caches', `cc` is Drush shorthand for 'clear cache. This command is not required, but it is highly recommended, since Drupal and Islandora typically cache a great deal of module information, and failing to clear caches may cause temporary, but unexpected results after a new module is installed.
 

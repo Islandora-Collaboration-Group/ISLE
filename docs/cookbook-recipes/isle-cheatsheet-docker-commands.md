@@ -111,7 +111,7 @@ Docker commands that are useful to installing or updating ISLE.
 
 1. Stop all current containers
     * `docker-compose stop`
-1. **WARNING!** This will remove: all stopped containers; etc.
+1. **WARNING!** This will remove: all stopped containers;, etc.
     * `docker system prune --all`
 1. Delete "data" folder in ISLE-Developer folder so logs are fresh and clean
     * `sudo rm -rf data`

@@ -29,7 +29,7 @@
   * As the batch ingest proceeds or perhaps when it has finished:
     * `docker exec -it isle-apache-ld bash`
     * `cd /tmp`
-    * Are there chunk, tmp, tmp.txt etc files as described in:
+    * Are there chunk, tmp, tmp.txt, etc. files as described in:
       * https://github.com/Islandora-Collaboration-Group/isle-apache/pull/5
       * https://github.com/Islandora-Collaboration-Group/ISLE/issues/96
       * https://github.com/Islandora-Collaboration-Group/ISLE/issues/206
