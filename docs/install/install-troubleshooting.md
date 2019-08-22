@@ -4,7 +4,7 @@
 
 - [Port Conflicts](#port-conflicts)
 - [Non-Running Docker Containers](#non-running-docker-containers)
-- [Viewing Logs in ISLE 1.2.0](#viewing-logs-in-isle-120)
+- [Viewing Logs in ISLE 1.2.0 or Higher](#viewing-logs-in-isle-120-or-higher)
 - [Fedora Hash Size (Conditional)](#fedora-hash-size-conditional)
 
 ---
@@ -79,7 +79,7 @@ If you don't see all containers running, then stop the running containers with `
 
 ---
 
-## Viewing Logs in ISLE 1.2.0
+## Viewing Logs in ISLE 1.2.0 or Higher
 
 As of ISLE release logging to physical file has been turned off, stdout & stderr are to console only no more physical files. This means if you need to view logs for debugging, here are some methods:
 
@@ -101,7 +101,7 @@ All containers: docker-compose logs --tail=0 --follow
 
 This is a power user setting and is an incredibly rare sitation, so do this step only if you have an akubra level 2 or greater.
 
-While this will depend on your pre-existing Production system, it is important to double-check this. If you have a larger hash size than the default ISLE system (##), and don't follow the settings below, ISLE may not function properly when your data has been migrated.
+While this will depend on your pre-existing Production system, it is important to double-check this. If you have a larger hash size than the default ISLE system (##), and don't follow the settings below, ISLE may not function properly when your data has been migrated. (Note: even though it looks like a placeholder, the actual syntax value is actually `##`.)
 
 *  If you have larger Fedora collections, there is a possibility that you made changes to the `akubra-llstore.xml` file to allow for the creation of larger or deeper hash directories)
   * You will need to copy your `/usr/local/fedora/server/config/spring/akubra-llstore.xml` from your Production Fedora System to `./config/fedora/akubra-llstore.xml`
