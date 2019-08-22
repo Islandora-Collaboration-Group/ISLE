@@ -82,6 +82,11 @@ Prior to attempting this step, do consider the following:
   `mysqldump -u username -p database_name > prod_drupal_site_082019.sql`
   * Copy this file down to your local laptop or workstation.
 
+### Fedora Hash Size (Conditional)
+Are you migrating an existing Islandora site that has greater than one million objects? 
+
+If true, then please carefully read about the [Fedora Hash Size (Conditional)](../install/install-troubleshooting.md/#fedora-hash-size-conditional).
+
 #### Solr Schema and Islandora Transforms
 
 This data can be challenging depending on the level of customizations to contend with and as such, ISLE maintainers recommends following one of the three (3), "Easy", "Intermediate", and "Advanced" strategies outlined below.
