@@ -119,7 +119,7 @@ Solr - an open source enterprise search platform with the such features as full-
 
     * Generate SSL certificates by using ONE of the following methods:
 
-    * Ask your IT department to provision a complete [SSL Certificate Chain](https://support.dnsimple.com/articles/what-is-ssl-certificate-chain/). On your Remote Server ISLE Installation you will place the SSL certificates into the `./ISLE/config/proxy/ssl-certs` directory. These SSL certificates are used by the `apache` & `proxy` Docker containers.
+    * Ask your IT department to provision a complete [SSL Certificate Chain](https://support.dnsimple.com/articles/what-is-ssl-certificate-chain/). On your remote server ISLE Installation you will place the SSL certificates into the `./ISLE/config/proxy/ssl-certs` directory. These SSL certificates are used by the `apache` & `proxy` Docker containers.
 
     * Use [Let's Encrypt](https://letsencrypt.org/), a free, automated, and open Certificate Authority for generating SSL certificates for your ISLE environment. In order to get a certificate for your website’s domain from Let’s Encrypt, you have to demonstrate control over the domain. With Let’s Encrypt, you do this using software that uses the ACME protocol, which typically runs on your web host. To begin, visit the [Let's Encrypt: Free SSL Certificates](../appendices/configuring-lets-encrypt.md) ISLE guide.
 
