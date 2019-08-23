@@ -56,5 +56,3 @@ The .env and tomcat.env Docker files are located in the folder with the docker-c
 | TOMCAT_MANAGER_USER   | Fedora, Solr, ImageServices   | Set the manager username to login to the admin panel.   |
 | TOMCAT_MANAGER_PASS   | Fedora, Solr, ImageServices   | Set the manager password to login to the admin panel.   |
 
-
-**Return to [Remote Server ISLE Installation](../install/install-server.md).**
