@@ -51,8 +51,12 @@ Mkdocs is finicky and requires double indentations to create properly indented s
 ## Terms We Use
 - personal computer (**we use a generic term and NOT specific variants like:** laptop, workstation, desktop computer, or tablet, etc.)
 - Demo ISLE Installation
-- Remote Server ISLE Installation
-- Migrate to ISLE Environment
+- Local ISLE Installation: New Site
+- Local ISLE Installation: Migrate Existing Islandora Site
+- Staging ISLE Installation: New Site
+- Staging ISLE Installation: Migrate Existing Islandora Site
+- Production ISLE Installation: New Site
+- Production ISLE Installation: Migrate Existing Islandora Site
 - Update ISLE
 - end users (not endusers)
 

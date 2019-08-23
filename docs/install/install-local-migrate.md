@@ -35,7 +35,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 ## Index of Instructions
 
-* Step 0: Copy Production data to your local
+* Step 0: Copy Production data to your local computer
 * Step 1: Edit `/etc/hosts` File
 * Step 2: Setup git for the ISLE project
 * Step 3: Git clone the Production Islandora Drupal site code
@@ -51,17 +51,17 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 ---
 
-## Step 0: Copy Production data to your local
+## Step 0: Copy Production Data to Your Local Computer
 
 Be sure to run a backup of any current non-ISLE systems prior to copying or exporting any files.
 
-### Drupal site files & code
+### Drupal Site Files and Code
 
-1. Copy the `/var/www/html/sites/default/files` directory from your Production Apache server to an appropriate storage /project area on your local. You'll move this directory in later steps.
+1. Copy the `/var/www/html/sites/default/files` directory from your Production Apache server to an appropriate storage /project area on your local computer. You'll move this directory in later steps.
 
 2. Locate and note the previously existing private Islandora Drupal git repository. You'll be cloning this into place once the ISLE project has been cloned in later steps.
 
-### Drupal site database
+### Drupal Site Database
 
 Prior to attempting this step, do consider the following:
 
@@ -77,89 +77,66 @@ Prior to attempting this step, do consider the following:
 
 #### Production Islandora Drupal site database export process
 
-* Export the MySQL database for the current Production Islandora Drupal site in use and copy it to your local in an easy to find place. In later steps you'll be directed to import this file. **Please be careful** performing any of these potential actions below as the process impacts your Production site.
+* Export the MySQL database for the current Production Islandora Drupal site in use and copy it to your personal computer (local) in an easy to find place. In later steps you'll be directed to import this file. **Please be careful** performing any of these potential actions below as the process impacts your Production site.
+
 * If you are not comfortable or familiar with performing these actions, we recommend that you instead work with your available IT resources to do so.
     * You can use a MySQL GUI client for this process or if you have command line access to the MySQL database server
     `mysqldump -u username -p database_name > prod_drupal_site_082019.sql`
     * Copy this file down to your personal computer.
 
-### Solr schema & Islandora transforms
+### Fedora Hash Size (Conditional)
 
-This data can be challenging depending on the level of customizations to contend with and as such, ISLE maintainers recommends following one of the three strategies outlined below.
+* Are you migrating an existing Islandora site that has greater than one million objects? 
 
-#### (**Easy**) - Run "stock" ISLE
+* If true, then please carefully read about the [Fedora Hash Size (Conditional)](../install/install-troubleshooting.md/#fedora-hash-size-conditional).
 
-Don't copy any existing production Solr schemas, Gsearch xslts, etc. and opt instead to use ISLE's default versions. Import some objects from your existing Fedora repository and see if they display properly in searches as you like.
+### Solr Schema and Islandora Transforms
 
-#### (**Intermediate**) - Bind mount in existing transforms and schemas
+This data can be challenging depending on the level of customizations to contend with and as such, ISLE maintainers recommends following one of the three (3), "Easy", "Intermediate", and "Advanced" strategies outlined below.
+
+##### Strategy 1: **Easy** - Run "Stock" ISLE
+
+Don't copy any existing production Solr schemas, GSearch .xslt files, etc., and opt instead to use ISLE's default versions. Import some objects from your existing Fedora repository and see if they display properly in searches as you like.
+
+##### Strategy 2: **Intermediate** - Bind Mount in Existing Transforms and Schemas
 
 Bind mount in existing transforms and schemas  to override ISLE settings with your current Production version.
 
-**WARNING** _Assumes you are running Solr 4.10.x., **only attempt** if you are running that version on Production._
+**WARNING** _This approach assumes you are running Solr 4.10.x.; **only attempt** if you are running that version on Production._
 
 * Copy these current production files and directory to your personal computer in an appropriate location.
     * Solr `schema.xml`
-    * Gsearch `foxmltoSolr.xslt` file
-    * Gsearch `islandora_transforms`
+    * GSearch `foxmltoSolr.xslt` file
+    * GSearch `islandora_transforms`
+    * Keep the files you create during this process; you will need them again for `Step 2a` (below)!
 
-* Once Step 2 has been completed and the ISLE project is cloned to your personal computer and checked into git, create a new directory in:
-    * `config/solr`
-    * `config/fedora/gsearch`
+* **Please note:** You may need to further review paths in the files mentioned above, and edit them to match ISLE system paths.  
 
-* Move your `schema.xml` file into `config/solr/`
+##### Strategy 3: **Advanced** - Diff and Merge Current Production Customization Edits into ISLE Configs
 
-* Move your `foxmltoSolr.xslt` file & `islandora_transforms` directory into `config/fedora/gsearch/`
-
-* Add a new line in the Solr volumes section of your `docker-compose.local.yml`
-    * `config/solr/schema.xml:/usr/local/solr/collection1/conf/schema.xml`
-
-* Add new lines in the Fedora volumes section of your `docker-compose.local.yml`
-```bash
-- ./config/fedora/gsearch/islandora_transforms:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms`
-- ./config/fedora/gsearch/foxmlToSolr.xslt:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/foxmlToSolr.xslt`
-```
-
-* **Please note:** You may need to further review paths in these above files and edit them to match ISLE system paths.  
-
-* Continue the local setup as directed below and ultimately import some objects from your existing Fedora repository and see if they display properly in searches as you like.
-
-#### (**Advanced**) - Diff & merge current production customization edits into ISLE configs
-* Copy these current production files and directory to your personal computer in an appropriate location.
+* Copy these current production files and directory to your local computer in an appropriate location.
     * Solr `schema.xml`
-    * Gsearch `foxmltoSolr.xslt` file
-    * Gsearch `islandora_transforms`
+    * GSearch `foxmltoSolr.xslt` file
+    * GSearch `islandora_transforms`
 
-* Run the Demo ISLE briefly to pull files for modification and correct ISLE system paths. You can find these paths by running the Demo and copying these files out to an appropriate location. 
-    * `docker cp isle-solr-ld:/usr/local/solr/collection1/conf/schema.xml schema.xml`
-    * `docker cp isle-fedora-ld:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/foxmlToSolr.xslt foxmlToSolr.xslt`
+* Run the Demo ISLE briefly to pull files for modification and correct ISLE system paths.  
+
+* You can find these paths by running the Demo and copying these files out to an appropriate location.  
+
+    * `docker cp isle-solr-ld:/usr/local/solr/collection1/conf/schema.xml schema.xml`  
+    * `docker cp isle-fedora-ld:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/foxmlToSolr.xslt foxmlToSolr.xslt`  
     * `docker cp isle-fedora-ld:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms islandora_transforms`
 
-* Using a diff tool (_software that allows one to compare and find the differences between two files_), compare:
-    * your Production Solr `schema.xml` file to the ISLE demo `schema.xml` file.
-    * your Production Gsearch `foxmltoSolr.xslt` file to the ISLE demo `foxmltoSolr.xslt` file.
-    * your Production Gsearch `islandora_transforms` directory to the ISLE demo `islandora_transforms` directory.
+* Using a "diff" tool (_software that allows one to compare and find the differences between two files_), compare:  
 
-* Look for edits and comments that indicate specific customization and make note of the differences.
+    * your Production Solr `schema.xml` file to the ISLE demo `schema.xml` file.  
+    * your Production GSearch `foxmltoSolr.xslt` file to the ISLE demo `foxmltoSolr.xslt` file.  
+    * your Production GSearch `islandora_transforms` directory to the ISLE demo `islandora_transforms` directory.
+
+* Look for edits and comments that indicate specific customization and make note of the differences.  
+
     * Merge in the customizations into the ISLE versions.
-
-* Once Step 2 has been completed  and the ISLE project is cloned to your personal computer and checked into git, create a new directory in:
-    * `config/solr`
-    * `config/fedora/gsearch`
-
-* Move your newly edited `schema.xml` file into the `config/solr/` directory.
-
-* Move your newly edited `foxmltoSolr.xslt` file & `islandora_transforms` directory into the `config/fedora/gsearch/` directory
-
-* Add a new line in the Solr volumes section of your `docker-compose.local.yml`
-    * `config/solr/schema.xml:/usr/local/solr/collection1/conf/schema.xml`
-
-* Add new lines in the Fedora volumes section of your `docker-compose.local.yml`
-```bash
-- ./config/fedora/gsearch/islandora_transforms:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms
-- ./config/fedora/gsearch/foxmlToSolr.xslt:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/foxmlToSolr.xslt
-```
-
-* Continue the local setup as directed below and ultimately import some objects from your existing Fedora repository and see if they display properly in searches as you like.
+    * Keep the files you create during this merge process; you will need them again for `Step 2a` (below)!
 
 ---
 
@@ -173,30 +150,31 @@ Enable the Local ISLE Installation to be viewed locally on personal computer bro
 
 ---
 
-## Step 2: Setup git for the ISLE project
+## Step 2: Setup `git` for the ISLE Project
 
 **Please note:** The commands given below are for command line usage of git. GUI based clients such as the [SourceTree App](https://www.sourcetreeapp.com/) may be easier for endusers to use for the git process.
 
-Within your git repository provider / hoster (e.g [Github](https://github.com), [Bitbucket](https://bitbucket.org/), [Gitlab](https://gitlab.com)), create one new empty git repository:
+Within your git repository provider / hoster (e.g [Github](https://github.com), [Bitbucket](https://bitbucket.org/), [Gitlab](https://gitlab.com)), create these two new empty git repositories, if they do not already exist:
 
-1. ISLE project config - e.g. `yourprojectnamehere-isle`
+    1. ISLE project configuration (e.g. `yourprojectnamehere-isle`)
+    2. Islandora Drupal code (e.g. `yourprojectnamehere-islandora`)
 
 The git project name can be your institution name or the name of the collections you plan to deploy; your choice entirely. A very clear distinction between the ISLE and Islandora code should be made in the repo name. Do not confuse or label Islandora Drupal site code as ISLE and vice-versa.
 
 Clone this newly created ISLE project to your personal computer
 
-  * Open a `terminal` (Windows: open `PowerShell`)
-  * Navigate to an directory that will house your new ISLE project directory using the `cd` command.
-  * `git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git`
+    * Open a `terminal` (Windows: open `PowerShell`)
+    * Navigate to an directory that will house your new ISLE project directory using the `cd` command.
+    * `git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git`
 
-Navigate to this directory
+* Navigate to the directory created by the clone operation:
 
-  * `cd /path/to/your/repo`
+    * `cd /path/to/your/repo`
 
-Add the ICG ISLE git repository as a git upstream. (_the code below is a real path and command_)
+* Add the ICG ISLE git repository as a git upstream. (_The code shown below is a real path and command_.)
 
-  * `git remote add icg-upstream https://github.com/Islandora-Collaboration-Group/ISLE.git`
-  * you can check by running this command: `git remote -v`
+    * `git remote add icg-upstream https://github.com/Islandora-Collaboration-Group/ISLE.git`
+    * You can check by running this command: `git remote -v`  
 
 ```bash  
 icg-upstream	https://github.com/Islandora-Collaboration-Group/ISLE.git (fetch)
@@ -205,25 +183,53 @@ origin	https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-i
 origin	https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git (push)
 ```
 
-Run a git fetch
+* Run a git fetch
 
-  * `git fetch icg-upstream`
+    * `git fetch icg-upstream`
 
-Pull down the ICG ISLE `master` branch into your local project's `master` branch
+* Pull down the ICG ISLE `master` branch into your local project's `master` branch
 
-  * `git pull icg-upstream master`
-  * if you `ls -lha` in this directory, you'll now have code.
+    * `git pull icg-upstream master`
+    * If you `ls -lha` in this directory, you should now see a listing of the code you now have.
 
-Push this code to your online git provider ISLE
+* Push this code to your online git provider ISLE
 
-  * `git push -u origin master`
-  * This will take 2 - 5 mins depending on your internet speed.
+    * `git push -u origin master`
 
-Now you have the current ISLE project code checked into git as foundation to make changes on specific to your local and project needs. You'll use this git upstream `icg-upstream` and process in the future to pull updates / releases from the main ISLE project.
+    * This will take 2 - 5 mins depending on your internet speed.
+
+* Now you have the current ISLE project code checked into git as foundation to make changes specific to your local and project needs. You'll use this git upstream `icg-upstream` and process in the future to pull updates / releases from the main ISLE project.
+
+### Step 2a: Add Customizations from `Step 0` to the Git Workflow
+This step is intended for users who followed either the "**Intermediate**" or "**Advanced**" migration options in `Step 0` above.  If you choose the **Easy** migration option you may safely skip `Step 2a`.
+
+In your local `ISLE` directory (`cd /path/to/your/repo`) create new directories under `./config` to hold the Solr and GSearch files you retrieved in `Step 0`.  Generally this can be done like so:
+
+```
+mkdir -p ./config/solr
+mkdir -p ./config/fedora/gsearch
+```
+
+* Copy your `schema.xml` file from `Step 0` into the new `./config/solr/` directory.
+
+* Copy your `foxmltoSolr.xslt` file and `islandora_transforms` directory from `Step 0` into the `config/fedora/gsearch/` directory.
+
+* Add a new line in the Solr volumes section of your `docker-compose.local.yml`  
+```
+  - config/solr/schema.xml:/usr/local/solr/collection1/conf/schema.xml`  
+```
+
+* Add new lines in the Fedora volumes section of your `docker-compose.local.yml`  
+```
+  - ./config/fedora/gsearch/islandora_transforms:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms
+  - ./config/fedora/gsearch/foxmlToSolr.xslt:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/foxmlToSolr.xslt
+```
+
+Continue the local setup as directed below and ultimately import some objects from your existing Fedora repository and see if they display properly in searches as you like.
 
 ---
 
-## Step 3: Git clone the Production Islandora Drupal site code
+## Step 3: Git Clone the Production Islandora Drupal Site Code
 
 This step assumes you have an existing Drupal /Islandora site checked into a git repository.
 
@@ -231,8 +237,8 @@ If not then you'll need to check your Drupal site into a git repo following the 
 
 Using the still open `terminal` (Windows: `PowerShell`):
 
-  * `mkdir -p data/apache/html`
-  * `git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-islandora.git data/apache/html`
+* `mkdir -p data/apache/html`
+* `git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-islandora.git data/apache/html`
     * (Optional) You can chose another directory of your choice as the bind-mounts match in the Apache services volume section within the `docker-compose.local.yml` matches that other location
 
 * Move the previously copied Production Islandora Drupal `files` directory to inside the `data/apache/html/sites/default/` directory.
@@ -332,27 +338,28 @@ You can reuse some of the older Production settings in the `local.env` if you li
 
 **Method A: Use a MySQL client with a GUI**
 
-  * Configure the client with the following:
-      * Host = `127.0.0.1`
-      * Port: `3306` _or a different port if you changed it_
-      * Username: `root`
-      * Password: `YOUR_MYSQL_ROOT_PASSWORD` in the `local.env`)
-  * Select the Drupal database `DRUPAL_DB` in the `local.env`)
-  * Click File > Import (_or equivalent_)
-  * Select your exported Production Islandora Drupal database file e.g. `prod_drupal_site_082019.sql.gz`
-  * The import process will take 1 -3 minutes depending on the size.
+* Configure the client with the following:
+    * Host = `127.0.0.1`
+    * Port: `3306` _or a different port if you changed it_
+    * Username: `root`
+    * Password: `YOUR_MYSQL_ROOT_PASSWORD` in the `local.env`)
+* Select the Drupal database `DRUPAL_DB` in the `local.env`)
+* Click File > Import (_or equivalent_)
+* Select your exported Production Islandora Drupal database file e.g. `prod_drupal_site_082019.sql.gz`
+* The import process will take 1 -3 minutes depending on the size.
 
 **Method B: Use the command line**
 
-  * Copy the Production Islandora Drupal database file e.g. `prod_drupal_site_082019.sql.gz` to your ISLE MySQL container
-      * Run `docker ps` to determine the mysql container name
-      * `docker cp /pathto/prod_drupal_site_082019.sql.gz yourmysql-container-name:/prod_drupal_site_082019.sql.gz`
-      * This might take a few minutes depending on the size of the file.
-  * Shell into the mysql container. Replace the `DRUPAL...` below with the values from the `local.env`
-      * `docker exec -it yourmysql-container-name bash`
-      * `mysql -u DRUPAL_DB_USER -p DRUPAL_DB < prod_drupal_site_082019.sql.gz`
-      * This might take a few minutes depending on the size of the file.
-      * Exit out of the container when finished.
+* Copy the Production Islandora Drupal database file e.g. `prod_drupal_site_082019.sql.gz` to your ISLE MySQL container
+    * Run `docker ps` to determine the mysql container name
+    * `docker cp /pathto/prod_drupal_site_082019.sql.gz yourmysql-container-name:/prod_drupal_site_082019.sql.gz`
+    * This might take a few minutes depending on the size of the file.
+
+* Shell into the mysql container. Replace the `DRUPAL...` below with the values from the `local.env`
+    * `docker exec -it yourmysql-container-name bash`
+    * `mysql -u DRUPAL_DB_USER -p DRUPAL_DB < prod_drupal_site_082019.sql.gz`
+    * This might take a few minutes depending on the size of the file.
+    * Exit out of the container when finished.
 
 ---
 
@@ -361,21 +368,21 @@ You can reuse some of the older Production settings in the `local.env` if you li
 You can determine the name of the Apache container by running `docker ps`. make note of the Apache container name, you'll need to use it for the commands below.
 
 * Run the `migration_site_vsets.sh` script on the Apache container. This will change Drupal database site settings only for ISLE connectivity.
-  * Copy the `scripts/apache/migration_site_vsets.sh` to the root of the Drupal directory on your Apache container
+* Copy the `scripts/apache/migration_site_vsets.sh` to the root of the Drupal directory on your Apache container
     * `docker cp scripts/apache/migration_site_vsets.sh yourapache-container-name:/var/www/html/migration_site_vsets.sh`
-  * Change the permissions on the script to make it executable
+* Change the permissions on the script to make it executable
     * `docker exec -it your-apache-containername chmod +x /var/www/html/migration_site_vsets.sh`
-  * Run the script
-      * `docker exec -it your-apache-containername bash /var/www/html/migration_site_vsets.sh`
+* Run the script
+    * `docker exec -it your-apache-containername bash /var/www/html/migration_site_vsets.sh`
 
 * Since you've imported an existing Drupal database, you'll need to reinstall the Islandora solution packs so the Fedora repository will be ready to ingest objects.
-  * Copy the `scripts/apache/install_solution_packs.sh` to the root of the Drupal directory on your Apache container
+* Copy the `scripts/apache/install_solution_packs.sh` to the root of the Drupal directory on your Apache container
     * `docker cp scripts/apache/install_solution_packs.sh yourapache-container-name:/var/www/html/install_solution_packs.sh`
-  * Change the permissions on the script to make it executable
+* Change the permissions on the script to make it executable
     * `docker exec -it your-apache-containername chmod +x /var/www/html/install_solution_packs.sh`
-  * Run the script
-      * `docker exec -it your-apache-containername bash /var/www/html/install_solution_packs.sh`  
-      * This process will take a few minutes depending on the speed of your local and Internet connection.
+* Run the script
+    * `docker exec -it your-apache-containername bash /var/www/html/install_solution_packs.sh`  
+    * This process will take a few minutes depending on the speed of your local and Internet connection.
 
 ```
 | For Windows Users only |
@@ -397,18 +404,30 @@ You can determine the name of the Apache container by running `docker ps`. make 
 ## Step 11: Test the Site
 
 * In your web browser, enter this URL: `https://yourprojectnamehere.localdomain`
+
 <!--- TODO: Add error message and how to proceed (click 'Advanced...') --->
+
 * Note: You may see an SSL error warning that the site is unsafe. It is safe, it simply uses "self-signed" SSL certs. Ignore the error and proceed to the site.
+
 * Log in to the local Islandora site with the credentials you created in `local.env` (`DRUPAL_ADMIN_USER` and `DRUPAL_ADMIN_PASS`)
+
     * You can also attempt to use login credentials that the Production server would have stored in its database.
+    
 * If the newly created Drupal login doesn't work then, you'll need to Shell into the Apache container:
+
     * `docker exec -it your-apache-containername bash`
+    
     * `cd /var/www/html`
+    
     * Create the user found in `DRUPAL_ADMIN_USER` and set its password to the value of `DRUPAL_ADMIN_PASS` as you previously created in `local.env`. In the example below swap-out `DRUPAL_ADMIN_USER` & `DRUPAL_ADMIN_PASS` with those found in `local.env`
+    
         * `drush user-create DRUPAL_ADMIN_USER --mail="youremailaddresshere" --password="DRUPAL_ADMIN_PASS";`
+        
         * `drush user-add-role "administrator" DRUPAL_ADMIN_USER`
+        
     * `exit` the container
-* Attempt to login again
+
+    * Attempt to login again
 
 ---
 
@@ -424,11 +443,17 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
 ```
 
 * Follow these ingestion instructions [How to Add an Item to a Digital Collection](https://wiki.duraspace.org/display/ISLANDORA/How+to+Add+an+Item+to+a+Digital+Collection)
+
 * (Note: [Getting Started with Islandora](https://wiki.duraspace.org/display/ISLANDORA/Getting+Started+with+Islandora) contains explanations about content models, collections, and datastreams.)
+
 * After ingesting content, you may need to add an Islandora Simple Search block to the Drupal structure. (The default search box will only search Drupal content, not Islandora content.) This might already exist in your current Drupal Production site as a feature.
+
     * Select from the menu: `Structure > Blocks > Islandora Simple Search`
+
     * Select: `Sidebar Second`
+
     * Click: `Save Blocks` at bottom of page
+
     * You may now search for ingested objects that have been indexed by SOLR
 
 * After ingesting either the ICG sample objects or a selection of your pre-existing Fedora Production objects, continue to QC the migrated site, ensuring that objects display properly, the theme and design continue to work properly, there are no errors in the Drupal watchdog and everything matches the functionality of the previous non-ISLE Production Islandora Drupal site.

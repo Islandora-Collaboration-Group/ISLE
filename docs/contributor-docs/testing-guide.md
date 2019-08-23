@@ -1,17 +1,13 @@
 <!--- PAGE_TITLE --->
 
-The ISLE project is currently testing the ISLE 1.1 Release Candidate.  We are actively soliciting volunteers to test the following scenarios:
+The ISLE project is seeking volunteers to test our next Release Candidate. This includes testing the following scenarios:
 
-* Installing a Remote Server ISLE Installation on Ubuntu 18.04
-* Installing a Remote Server ISLE Installation on Centos 7.x
-* Updating an existing ISLE site to the latest 1.1 Release Candidate
-* Installing a Demo version of ISLE on Windows 10 using Docker
-* Installing a Demo version of ISLE on Mac OSX High Sierra using Docker
+* Installing a remote server ISLE Installation on Ubuntu 18.04
+* Installing a remote server ISLE Installation on Centos 7.x
+* Updating an existing ISLE site to the latest Release Candidate
+* Installing a Demo and Local version of ISLE on Windows 10 using Docker
+* Installing a Demo and Local version of ISLE on Mac OSX High Sierra using Docker
 
-After testing the above scenarios, the project will announce a second round of testing for migrations:
-
-* Migrating an existing Islandora site to ISLE on Ubuntu 18.04
-* Migrating an existing Islandora site to ISLE on Centos 7.x
 
 If you want to be involved as a tester, please see the following documents:
 
