@@ -25,7 +25,9 @@ If you are not familiar with the Ansible, it is recommended to start with their 
 
 * Familiarity or knowledge of Ansible
 
-* Ansible control personal computer or server that runs only MacOs, BSD or Linux with the following:
+* Note: The "Ansible Control Node" is the machine where Ansible is installed.
+
+* Ansible Control Node Requirements: Currently Ansible can be run from any machine with Python 2 (version 2.7) or Python 3 (versions 3.5 and higher) installed. Windows isn’t supported for the control node. This includes Red Hat, Debian, CentOS, macOS, any of the BSDs, and so on.
     * `Ansible 2.2+` (choice of [install methods](http://docs.ansible.com/ansible/latest/intro_installation.html#installing-the-control-machine))
     * `openssh` (2.2.x+)
     * `git` (2.15.1+)
