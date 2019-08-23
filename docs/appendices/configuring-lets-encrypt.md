@@ -67,6 +67,3 @@ _Note:_ You do **not** need to stop your stack to complete these steps.
 
 * [Let's Encrypt & Docker](https://docs.traefik.io/user-guide/docker-and-lets-encrypt/)
 
----
-
-**Return to [Remote Server ISLE Installation](../install/install-server.md).**

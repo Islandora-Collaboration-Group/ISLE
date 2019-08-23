@@ -171,12 +171,12 @@ A Remote Server ISLE Installation requires that you provision and place a comple
     * Change lines:
       *  `certFile = "/certs/sample.cert"`  ## Change to reflect your ".cer", ".crt" or ".pem"
       *  `keyFile = "/certs/sample-key.key"`  ## Change to reflect your ".key" or ".pem"
-4. Proceed to the section below: [Step 9: Spin up ISLE Containers](../install/install-server.md#step-9-spin-up-isle-containers).
+4. Proceed to the section below: [Step 9: Spin up ISLE Containers](../install/_obsolete_install-server.md#step-9-spin-up-isle-containers).
 
 ####Method 2:
 1. Use [Let's Encrypt](https://letsencrypt.org/), a free, automated, and open Certificate Authority for generating SSL certificates for your ISLE environment. In order to get a certificate for your website’s domain from Let’s Encrypt, you have to demonstrate control over the domain. With Let’s Encrypt, you do this using software that uses the ACME protocol, which typically runs on your web host.
 2. Complete the [Let's Encrypt: Free SSL Certificates](../appendices/configuring-lets-encrypt.md) ISLE guide.
-3. Proceed to the section below: [Step 9: Spin up ISLE Containers](../install/install-server.md#step-9-spin-up-isle-containers).
+3. Proceed to the section below: [Step 9: Spin up ISLE Containers](../install/_obsolete_install-server.md#step-9-spin-up-isle-containers).
 
 ---
 
@@ -221,4 +221,4 @@ docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isl
 ---
 
 ## Migrate to ISLE Environment 
-* Please click [Migrate to ISLE Environment](../migrate/install-migration.md) if you are installing ISLE to migrate your existing production Islandora 7.x environment to an ISLE environment. This documentation will help you identify and copy your institution's preexisting Islandora data, files, and themes (including your data volume, Drupal site(s) and theme(s), and commonly customized xml and xslt files) to your ISLE environment.
+* Please click [Migrate to ISLE Environment]() if you are installing ISLE to migrate your existing production Islandora 7.x environment to an ISLE environment. This documentation will help you identify and copy your institution's preexisting Islandora data, files, and themes (including your data volume, Drupal site(s) and theme(s), and commonly customized xml and xslt files) to your ISLE environment.
