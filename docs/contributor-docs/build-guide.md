@@ -1,6 +1,6 @@
 <!--- PAGE_TITLE --->
 
-_Expectations:  It can take an up to an average of **2 -4 hours** to read this documentation and complete this installation. Highly dependent on the Developer's local laptop and Internet speed._
+_Expectations:  It can take an up to an average of **2 -4 hours** to read this documentation and complete this installation. Highly dependent on the Developer's personal computer and Internet speed._
 
 **Caution**: This guide is recommended for ISLE Committers or Developers only and not for end-users.
 
@@ -10,7 +10,7 @@ Developers can follow this guide if they have edited their Dockerfiles with cust
 
 These images will contain the necessary base code, scripts and files to run the default sample `https://isle.localdomain`.
 
-The Demo ISLE Installation creates a local Islandora platform (`https://isle.localdomain`) on your workstation. This process includes an un-themed Drupal website and an empty Fedora repository so you may ingest test objects, add or edit metadata, update fields in SOLR indexing, develop code, and otherwise "kick the tires" on ISLE.
+The Demo ISLE Installation creates a local Islandora platform (`https://isle.localdomain`) on your personal computer. This process includes an un-themed Drupal website and an empty Fedora repository so you may ingest test objects, add or edit metadata, update fields in SOLR indexing, develop code, and otherwise "kick the tires" on ISLE.
 
 Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive emails. The [Glossary](../appendices/glossary.md) defines terms used in this documentation.
 
@@ -20,7 +20,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 * This image build site guide is designed for a local personal computer that has already followed the appropriate setup and configuration instructions in the [Demo ISLE Installation](../install/install-demo.md) guide.
 
-* Instructions below assume a MacOS or Linux workstation. Windows users may have to adjust / swap out various tools as needed.
+* Instructions below assume a MacOS or Linux personal computer. Windows users may have to adjust / swap out various tools as needed.
 
 * The ISLE project has been cloned from the ISLE project repository using the `master` branch. Do not build ISLE images with untested and developmental code. Only stable releases please.
 
@@ -174,7 +174,7 @@ Repeat the process with any additional tags. **Please note:** _Depending on your
 
 Steps below are mandatory for any ISLE Committer but optional (though recommended) for any Developer.
 
-### Step 9: Delete All Recently Built and Pushed ISLE Images on Local Laptop
+### Step 9: Delete All Recently Built and Pushed ISLE Images on personal computer
 
 * `docker image ls`
 
@@ -191,6 +191,6 @@ Pull down the newly pushed images.
 
 Follow the instructions within the `docker-compose.yml` file or within the [Demo ISLE Installation](../install/install-demo.md) to start up containers and install the Demo ISLE Installation (`https://isle.localdomain`).
 
-Ensure that all components, connections etc are working, otherwise troubleshoot as required, making the appropriate fixes to the associated Dockerfiles, pushing changes to the ISLE project git repository and then REPEATING this entire build and push process.
+Ensure that all components, connections, etc. are working, otherwise troubleshoot as required, making the appropriate fixes to the associated Dockerfiles, pushing changes to the ISLE project git repository and then REPEATING this entire build and push process.
 
 Always test prior and post to ensure there are no issues pushed to end users.

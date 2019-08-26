@@ -1,16 +1,16 @@
 # Overview: ISLE Installation Environments
 
-As of the ISLE `1.2.0` release, ISLE now has the option to use clearly defined but different environments based on enduser's needs. Depending on the environment choice, additional configuration changes will need to be made to ISLE configuration files, domain names etc. When an ISLE enduser is ready to progress past using the default Demo environment, it is recommended that their learning path and workflow proceed in this suggested order.
+As of the ISLE `1.2.0` release, ISLE now has the option to use clearly defined but different environments based on enduser's needs. Depending on the environment choice, additional configuration changes will need to be made to ISLE configuration files, domain names, etc. When an ISLE enduser is ready to progress past using the default Demo environment, it is recommended that their learning path and workflow proceed in this suggested order.
 
 * **Demo** - *Default* - Used for trying out ISLE for the first time, having a sandbox for tests etc
 
-* **Local** - Used for Drupal site development, more extensive metadata, Solr and Fedora development work on a local laptop or workstation
+* **Local** - Used for Drupal site development, more extensive metadata, Solr and Fedora development work on a personal computer
 
-* **Staging** - Used for remote (non-local / cloud) hosting of a Staging site. Islandora / Drupal site code here is almost finished but viewed privately prior to pushing to public Production. Fedora data might have tests collections.
+* **Staging** - Used for remote (non-local / cloud) hosting of a Staging site. Islandora Drupal site code here is almost finished but viewed privately prior to pushing to public Production. Fedora data might have tests collections.
 
 * **Production** - Used for remote (non-local / cloud) hosting of a Production site. Site and collections are public and accessible to the world. Drupal site code is finished, functional and polished. Fedora data has full non test collections. Test collections are not recommended here.
 
-* **Test** - Used by ISLE Maintainers for testing ISLE releases, pull releases and ISLE development etc.
+* **Test** - Used by ISLE Maintainers for testing ISLE releases, pull releases and ISLE development, etc.
 
 ## ISLE Project Structure
 
@@ -18,62 +18,62 @@ ISLE endusers will make the appropriate changes to the values found in the ISLE 
 
 * `.env` - 
   
-  * **Demo** (Default)
-    * `docker-compose.demo.yml`
-      * `demo.env`
-      * `config/apache/php_ini/php.demo.ini`
-      * `config/mysql/ISLE.cnf`
-      * `config/proxy/ssl-certs/isle.localdomain.cert`
-      * `config/proxy/ssl-certs/isle.localdomain.key`
-      * `config/proxy/traefik.demo.toml`
-  
-  * **Local** 
-    * `docker-compose.local.yml`
-      * `local.env`
-      * `config/apache/php_ini/php.local.ini`
-      * `config/apache/settings_php/settings.local.php`
-      * `config/mysql/ISLE.cnf`
-      * `config/proxy/ssl-certs/yourprojectnamehere.localdomain.cert`
-      * `config/proxy/ssl-certs/yourprojectnamehere.localdomain.key`
-      * `config/proxy/traefik.local.toml`
-  
-  * **Staging**
-    * `docker-compose.staging.yml`
-      * `staging.env`
-      * `config/apache/php_ini/php.local.ini`
-      * `config/apache/settings_php/settings.local.php`
-      * `config/mysql/ISLE.cnf`
-      * `config/proxy/ssl-certs`
-        * If using Let's Encrypt:
-           * `acme.json`
-        * If using Commercial SSL Certs:
-           * `yourprojectnamehere.domain-staging.cert`
-           * `yourprojectnamehere.domain-staging.key`
-      * `config/proxy/traefik.staging.toml`
+    * **Demo** (Default)
+        * `docker-compose.demo.yml`
+            * `demo.env`
+            * `config/apache/php_ini/php.demo.ini`
+            * `config/mysql/ISLE.cnf`
+            * `config/proxy/ssl-certs/isle.localdomain.cert`
+            * `config/proxy/ssl-certs/isle.localdomain.key`
+            * `config/proxy/traefik.demo.toml`
+    
+    * **Local** 
+        * `docker-compose.local.yml`
+            * `local.env`
+            * `config/apache/php_ini/php.local.ini`
+            * `config/apache/settings_php/settings.local.php`
+            * `config/mysql/ISLE.cnf`
+            * `config/proxy/ssl-certs/yourprojectnamehere.localdomain.cert`
+            * `config/proxy/ssl-certs/yourprojectnamehere.localdomain.key`
+            * `config/proxy/traefik.local.toml`
+    
+    * **Staging**
+        * `docker-compose.staging.yml`
+            * `staging.env`
+            * `config/apache/php_ini/php.local.ini`
+            * `config/apache/settings_php/settings.local.php`
+            * `config/mysql/ISLE.cnf`
+            * `config/proxy/ssl-certs`
+                * If using Let's Encrypt:
+                    * `acme.json`
+                * If using Commercial SSL Certs:
+                    * `yourprojectnamehere.domain-staging.cert`
+                    * `yourprojectnamehere.domain-staging.key`
+            * `config/proxy/traefik.staging.toml`
 
-  * **Production**
-    * `docker-compose.production.yml`
-      * `production.env`
-      * `config/apache/php_ini/php.production.ini`
-      * `config/apache/settings_php/settings.production.php`
-      * `config/mysql/ISLE.cnf`
-      * `config/proxy/ssl-certs`
-        * If using Let's Encrypt:
-           * `acme.json`
-        * If using Commercial SSL Certs:
-           * `yourprojectnamehere.domain-production.cert`
-           * `yourprojectnamehere.domain-production.key`
-      * `config/proxy/traefik.production.toml`
+    * **Production**
+        * `docker-compose.production.yml`
+            * `production.env`
+            * `config/apache/php_ini/php.production.ini`
+            * `config/apache/settings_php/settings.production.php`
+            * `config/mysql/ISLE.cnf`
+            * `config/proxy/ssl-certs`
+                * If using Let's Encrypt:
+                     * `acme.json`
+                * If using Commercial SSL Certs:
+                     * `yourprojectnamehere.domain-production.cert`
+                     * `yourprojectnamehere.domain-production.key`
+            * `config/proxy/traefik.production.toml`
 
-  * **Test**
-    * `docker-compose.test.yml`
-      * `test.env`
-      * `config/apache/php_ini/php.test.ini`
-      * `config/apache/settings_php/settings.test.php`
-      * `config/mysql/ISLE.cnf`
-      * `config/proxy/ssl-certs/isle.localdomain.cert`
-      * `config/proxy/ssl-certs/isle.localdomain.key`
-      * `config/proxy/traefik.test.toml`
+    * **Test**
+        * `docker-compose.test.yml`
+            * `test.env`
+            * `config/apache/php_ini/php.test.ini`
+            * `config/apache/settings_php/settings.test.php`
+            * `config/mysql/ISLE.cnf`
+            * `config/proxy/ssl-certs/isle.localdomain.cert`
+            * `config/proxy/ssl-certs/isle.localdomain.key`
+            * `config/proxy/traefik.test.toml`
 
 ---
 
@@ -83,7 +83,7 @@ Please note this section is for reference only when are ISLE endusers making cha
 
 ### Demo
 
-* Used for trying out ISLE for the first time, having a sandbox for tests etc.
+* Used for trying out ISLE for the first time, having a sandbox for tests, etc.
 
 * The Demo environment is the "default" activated environment.
 
@@ -98,7 +98,7 @@ COMPOSE_FILE=docker-compose.demo.yml
 
 ### Local
 
-* Used for Drupal site development, more extensive metadata, Solr and Fedora development work on a local laptop or workstation
+* Used for Drupal site development, more extensive metadata, Solr and Fedora development work on a personal computer
 
 * To use this environment, change the values in the Activated ISLE environment to match the values described below and save the file.
 
@@ -113,7 +113,7 @@ COMPOSE_FILE=docker-compose.local.yml # (Mandatory) The docker-compose file used
 
 ---
 
-#### Staging
+### Staging
 
 * Used for remote (non-local / cloud) hosting of a Staging site. Code here is almost finished but viewed privately prior to pushing to public Production.
 
@@ -132,7 +132,7 @@ COMPOSE_FILE=docker-compose.staging.yml # (Mandatory) The docker-compose file us
 
 ---
 
-#### Production
+### Production
 
 * Used for remote (non-local / cloud) hosting of a Production site. Site and collections are public and accessible to the world.
 
@@ -151,9 +151,9 @@ COMPOSE_FILE=docker-compose.production.yml # (Mandatory) The docker-compose file
 
 ---
 
-#### Test
+### Test
 
-* Used by ISLE Maintainers for testing ISLE releases, pull releases and ISLE development etc.
+* Used by ISLE Maintainers for testing ISLE releases, pull releases and ISLE development, etc.
 
 * To use this environment, change the values in the Activated ISLE environment to match the values described below and save the file.
 

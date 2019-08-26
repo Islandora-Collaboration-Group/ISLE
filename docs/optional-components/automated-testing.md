@@ -54,7 +54,7 @@
   * `BASE_DOMAIN=isle.localdomain`
   * `CONTAINER_SHORT_ID=ld`
   * If your use case uses other values for these variables, you may need to find/replace in the instructions below (e.g. `isle-apache-ld` corresponds with the CONTAINER_SHORT_ID above)
-* The full series of commands to install a clean new ISLE with a clean new Drupal/Islandora, then add extra modules to support our test cases, and then execute the tests is as follows.
+* The full series of commands to install a clean new ISLE with a clean new Islandora Drupal, then add extra modules to support our test cases, and then execute the tests is as follows.
   * Get a good ISLE base for this test run:
 ```bash
 git clone https://github.com/Born-Digital-US/ISLE.git
@@ -94,7 +94,7 @@ docker exec -it isle-apache-ld bash -c "ln -s /var/www/html/isle-ingest-samples/
 docker exec -it isle-apache-ld bash -c "mkdir /var/www/html/isle-ingest-samples/behat/debug/logs/"
 docker exec -it isle-apache-ld bash -c "cd /var/www/html/sites/behat && composer install"
 ```
-  * A few more basics, again only necessary if this is a BRAND NEW Drupal/Islandora site:
+  * A few more basics, again only necessary if this is a BRAND NEW Islandora Drupal site:
 ```bash
 docker exec -it isle-apache-ld bash -c "cd /var/www/html && drush dis overlay -y"
 docker exec -it isle-apache-ld bash -c "cd /var/www/html && drush -u 1 islandora_batch_with_derivs_preprocess --key_datastream=MODS --scan_target=/var/www/html/isle-ingest-samples/Batches-by-CModel/Collections/files --use_pids=true --namespace=samples --parent=islandora:root --content_models=islandora:collectionCModel"

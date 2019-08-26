@@ -22,7 +22,7 @@
   
   * A new Fedora image that has slight image and functional changes is required to be used in tandem with Blazegraph. These image changes are primarily edits to the `fedora.fcg` file to use Blazegraph instead of Mulgara. 
   
-  * Additionally, a new `confd` configuration within the Fedora image and linked environmental variable has been added to the `.env` to allow users to "toggle" between Blazegraph and Mulgara as desired. In the event a user toggles between either desired triplestore, a reindex of the Fedora repository is required. With Fedora repositories of 600K+ objects or more, **the indexing process will take double-digit hours to days** depending on the complexity of the object relationships, ontology etc.
+  * Additionally, a new `confd` configuration within the Fedora image and linked environmental variable has been added to the `.env` to allow users to "toggle" between Blazegraph and Mulgara as desired. In the event a user toggles between either desired triplestore, a reindex of the Fedora repository is required. With Fedora repositories of 600K+ objects or more, **the indexing process will take double-digit hours to days** depending on the complexity of the object relationships, ontology, etc.
 
 * No new software is required to be installed on the ISLE host machine, only new Docker containers, images and configurations are added to the ISLE platform.
 
@@ -370,7 +370,7 @@ FEDORA_WEBAPP_HOME=/usr/local/tomcat/webapps/fedora
 
 * If you have switched to Blazegraph, then you'll need to re-index the Fedora repository so that the new Blazegraph triplestore is used instead of the previously used Mulgara triplestore. 
 
-  * **WARNING** - With Fedora repositories of 600K+ objects or more, **these indexing processes will take double-digit hours to days** depending on the complexity of the object relationships, ontology etc. 
+  * **WARNING** - With Fedora repositories of 600K+ objects or more, **these indexing processes will take double-digit hours to days** depending on the complexity of the object relationships, ontology, etc. 
   
   * When re-indexing in this manner, we recommend the use of the `screen` program which will allow an end-user to disengage from a long continuous bash session and terminal based command without breaking the process.
 
