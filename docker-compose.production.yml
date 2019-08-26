@@ -211,7 +211,7 @@ services:
 #      - "6514:6514"
 #    volumes:
 #      # Mount for telegraf configuration
-#      - ./config/tick/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+#      - ./config/tick/telegraf/telegraf.production.conf:/etc/telegraf/telegraf.conf:ro
 #      # Mount for Docker API access
 #      - /var/run/docker.sock:/var/run/docker.sock:ro
 #      # To get metrics off the host
