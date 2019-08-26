@@ -2,25 +2,25 @@
 
 _Expectations:  It takes an average of **45 minutes** to read this documentation and complete this installation._
 
-This Demo ISLE Installation creates an Islandora environment on your workstation that you can view locally in your browser as `https://isle.localdomain`. This process includes an un-themed Drupal website and an empty Fedora repository so you may ingest test objects, add or edit metadata, update fields in SOLR indexing, develop code, and otherwise "kick the tires" on ISLE.
+This Demo ISLE Installation creates an Islandora environment on your personal computer that you can view locally in your browser as `https://isle.localdomain`. This process includes an un-themed Drupal website and an empty Fedora repository so you may ingest test objects, add or edit metadata, update fields in SOLR indexing, develop code, and otherwise "kick the tires" on ISLE.
 
 Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive emails. The [Glossary](../appendices/glossary.md) defines terms used in this documentation.
 
 ## Assumptions / Prerequisites
 
-* This Demo ISLE Installation is intended for a local laptop or workstation.
+* This Demo ISLE Installation is intended for a personal computer.
 
-* Using ISLE version `1.2.0` or higher
+* You will be using ISLE version `1.2.0` or higher
 
-* Using Docker-compose `1.24.0` or higher
+* You are using Docker-compose `1.24.0` or higher
 
-* You have already git cloned the ISLE Project to your local workstation.
+* You have already git cloned the ISLE Project to your personal computer.
 
 ---
 
 ## Step 1: Edit `/etc/hosts` File
 
-Enable the Demo ISLE Installation to be viewed locally on workstation browser as: `https://isle.localdomain`.
+Enable the Demo ISLE Installation to be viewed locally on personal computer browser as: `https://isle.localdomain`.
 
 * Please use these instructions to [Edit the "/etc/hosts" File](../install/install-demo-edit-hosts-file.md).
 
@@ -40,7 +40,7 @@ Enable the Demo ISLE Installation to be viewed locally on workstation browser as
 ## Step 3: Launch Process
 
 * _Using the same open terminal / Powershell_
-  * `docker-compose up -d`
+    * `docker-compose up -d`
   * **Please note:** the “ -d” argument stands for “detached” meaning the command will persist even if you close your terminal or your computer sleeps etc…)
 
 * Please wait a few moments for the stack to fully come up. Approximately 3-5 minutes.
@@ -54,7 +54,7 @@ Enable the Demo ISLE Installation to be viewed locally on workstation browser as
 
 ---
 
-## Step 4: Run Islandora / Drupal site Install Script
+## Step 4: Run Islandora Drupal site Install Script
 
 This process may take 10 - 20 minutes (_depending on system and internet speeds_)
 

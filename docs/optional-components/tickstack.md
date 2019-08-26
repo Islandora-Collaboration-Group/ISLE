@@ -3,15 +3,15 @@
 ## Use Cases & User Stories
 
 * As a repository administrator, I expect to be able to view real-time and some historic systems/performance metrics without digging around in server logs.
-  * As a repository administrator, I should be able to use the dashboard to troubleshoot the repo (_like when it’s hanging or objects are slow to load_)
+* As a repository administrator, I should be able to use the dashboard to troubleshoot the repo (_like when it’s hanging or objects are slow to load_)
 
-- As a repository owner/manager, I expect logging to be handled in a way that does not endanger my systems health and performance over time.
+* As a repository owner/manager, I expect logging to be handled in a way that does not endanger my systems health and performance over time.
 
 * As a repository owner/manager, I expect to be able to set logging levels for all relevant log streams.
 
-- As a repository administrator, I expect to be able to view in a web dashboard:
-  * Real-time and recent historic systems/performance metrics
-  * Real-time and recent historic system and application logs
+* As a repository administrator, I expect to be able to view in a web dashboard:
+    * Real-time and recent historic systems/performance metrics
+    * Real-time and recent historic system and application logs
 
 * As a repository administrator, I expect to be able to use monitoring tools that do not burden the target server thus I can setup monitoring tools remotely and pull data from the ISLE server for review.
 
@@ -24,32 +24,32 @@ The "TICK" stack is a suite of open-source applications that are used together f
 The TICK stack is used with ISLE to:
 
 * Monitor running systems in Development, Staging or Production
-  * Do note that users can monitor **ANY** system or systems with these tools, not just ISLE-related platforms.
+    * Do note that users can monitor **ANY** system or systems with these tools, not just ISLE-related platforms.
 
-- Create alerts that can be sent to email, text or Slack™ to warn users, system-administrators of potential issues, storage or memory challenges and much more.
+* Create alerts that can be sent to email, text or Slack™ to warn users, system-administrators of potential issues, storage or memory challenges and much more.
 
-* As a one-stop "search-engine" of log and metric data for all ISLE containers, services and applications, host servers etc.
+* As a one-stop "search-engine" of log and metric data for all ISLE containers, services and applications, host servers, etc.
 
-- Help ISLE users to better understand how their systems work, how Islandora works and to greatly improve visibility on applications, services and processes within ISLE
+* Help ISLE users to better understand how their systems work, how Islandora works and to greatly improve visibility on applications, services and processes within ISLE
 
 The use and setup of TICK within the ISLE platform is as an optional [sidecar](https://docs.microsoft.com/en-us/azure/architecture/patterns/sidecar) to ISLE. There are various ways one can setup TICK in general as a software, as services on the ISLE Host server or to be run as Docker containers.
 
 * TICK is comprised of the following main services and software:
 
-  * [**T**elegraf](https://www.influxdata.com/time-series-platform/telegraf/) - a plugin-driven server agent for collecting and sending metrics and events from databases, systems, and IoT sensors.
+    * [**T**elegraf](https://www.influxdata.com/time-series-platform/telegraf/) - a plugin-driven server agent for collecting and sending metrics and events from databases, systems, and IoT sensors.
 
-  * [**I**nfluxdb](https://www.influxdata.com/time-series-platform/) - the open source time series database   is designed to handle high write and query loads and provides a SQL-like query language called InfluxQL   for interacting with data.
-  
-  * [**C**hronograf](https://www.influxdata.com/time-series-platform/chronograf/) - the user interface and   administrative component for using templates and libraries to rapidly build dashboards with real-time   visualizations.
-  
-  * [**K**apacitor](https://www.influxdata.com/time-series-platform/kapacitor/) - the native data processing engine which can process both stream and batch data from InfluxDB, acting on this data in real-time via its programming language TICKscript.
+    * [**I**nfluxdb](https://www.influxdata.com/time-series-platform/) - the open source time series database   is designed to handle high write and query loads and provides a SQL-like query language called InfluxQL   for interacting with data.
+    
+    * [**C**hronograf](https://www.influxdata.com/time-series-platform/chronograf/) - the user interface and   administrative component for using templates and libraries to rapidly build dashboards with real-time   visualizations.
+    
+    * [**K**apacitor](https://www.influxdata.com/time-series-platform/kapacitor/) - the native data processing engine which can process both stream and batch data from InfluxDB, acting on this data in real-time via its programming language TICKscript.
 
 ---
 
 ## System Requirements
 
 * [ISLE](https://github.com/Islandora-Collaboration-Group/ISLE) release version `1.2.0`
-  * `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
+    * `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
 
 ### ISLE Images
 
@@ -68,32 +68,32 @@ The use and setup of TICK within the ISLE platform is as an optional [sidecar](h
 
 * Additional systems overhead, including:
 
-- For any system that is running the full TICK stack as a side car
-  * Recommend an additional 2 - 3 GB of RAM
-  * Recommend an additional 5 - 10 GB of storage disk space
+* For any system that is running the full TICK stack as a side car
+    * Recommend an additional 2 - 3 GB of RAM
+    * Recommend an additional 5 - 10 GB of storage disk space
 
-- For any system that is running the Telegraf agent only
-  * Recommend an additional 512MB to 1 GB of RAM
+* For any system that is running the Telegraf agent only
+    * Recommend an additional 512MB to 1 GB of RAM
 
 * Use the `docker-compose-tick.yml` file for setup and/or modification. This file will have not only the correct setup with the TICK stack but the necessary `syslog` driver code and tagging.
 
-- Use the `latest` tags for the TICK base images
-  * `image: telegraf:latest`
-  * `image: influxdb:latest`
-  * `image: chronograf:latest`
-  * `image: kapacitor:latest`
+* Use the `latest` tags for the TICK base images
+    * `image: telegraf:latest`
+    * `image: influxdb:latest`
+    * `image: chronograf:latest`
+    * `image: kapacitor:latest`
 
 * [Rsyslog](https://www.rsyslog.com/) has to be installed on any ISLE Host server that is to be monitored whether that system is running fullstack TICK or simply the Telegraf agent.
 
-  - Rsyslog is used to help the Telegraf agent forward log messages from Docker, the running ISLE containers and the host system to Influxdb.
+    * Rsyslog is used to help the Telegraf agent forward log messages from Docker, the running ISLE containers and the host system to Influxdb.
 
-  * Use the default Ansible script in the ISLE repository that can install `rsyslog` on any host server.
+    * Use the default Ansible script in the ISLE repository that can install `rsyslog` on any host server.
 
-  - Manual options
-    * [Red Hat / CentOS](https://www.rsyslog.com/rhelcentos-rpms/)
-    * [Ubuntu / Debian](https://www.rsyslog.com/ubuntu-repository/)
+    * Manual options
+        * [Red Hat / CentOS](https://www.rsyslog.com/rhelcentos-rpms/)
+        * [Ubuntu / Debian](https://www.rsyslog.com/ubuntu-repository/)
 
-- (_Optional_) Use some of the "canned" `.tick` (_tickscript_) templates to create dashboards and alerts provided in the `./config/tick/chronograf/tickscripts` directory. See the section Templates for more detail. (TO DO)
+* (_Optional_) Use some of the "canned" `.tick` (_tickscript_) templates to create dashboards and alerts provided in the `./config/tick/chronograf/tickscripts` directory. See the section Templates for more detail. (TO DO)
 
 ---
 
@@ -147,35 +147,35 @@ The data from both systems will be collected, analyzed and accessed on / from th
 
 * You'll start by backing up all important data as needed.
 
-- You'll stop any running containers
+* You'll stop any running containers
 
 * You'll download new ISLE images tagged as `1.2.0`
 
 - You'll copy over a new configuration file for a service called `rsyslog`. 
-  * This will allow TICK to get information from the ISLE Host server `syslog` logger.
-  * You may also need to ensure that the `rsyslog` service and software is installed on your ISLE Host Server as well.
+    * This will allow TICK to get information from the ISLE Host server `syslog` logger.
+    * You may also need to ensure that the `rsyslog` service and software is installed on your ISLE Host Server as well.
 
 * You'll copy over a new Docker `daemon.json` file to get Docker the right log driver; which will change from `json` to `syslog`.
 
-- You'll make additional edits and modifications to the following ISLE configuration files:
-  * `docker-compose.staging.yml`
-  * `docker-compose.production.yml`  
-  * `staging.env`
-  * `production.env`  
+* You'll make additional edits and modifications to the following ISLE configuration files:
+    * `docker-compose.staging.yml`
+    * `docker-compose.production.yml`  
+    * `staging.env`
+    * `production.env`  
 
 * You'll edit the Telegraf Agent's empty or default settings to properly monitor the various local ISLE services and send metrics to the local Influxdb database on the Staging system.
 
-- You'll restart your containers with the new services having been added and configured.
+* You'll restart your containers with the new services having been added and configured.
 
 * Using a web browser, you'll navigate to the new Chronograf dashboard and complete the configuration of the Influxdb, Chronograf and Kapacitor services. 
-  * You'll have the option to create new dashboards
-  * If desired, you'll add additional alerts
+    * You'll have the option to create new dashboards
+    * If desired, you'll add additional alerts
 
-- You'll repeat the steps to edit the Telegraf Agent's configuration for your Production system only. You do not need to install the remaining "ICK" stack on Production though.
+* You'll repeat the steps to edit the Telegraf Agent's configuration for your Production system only. You do not need to install the remaining "ICK" stack on Production though.
 
 * You can then review the `Using Chronograf` section to learn how to review the new added hosts, dashboards and Log Viewer to review ISLE services log streams.
 
-- Lastly and optionally, you can setup alerts in Chronograf to warn you and your team of when certain events or issues have occurred on your newly monitored systems.
+* Lastly and optionally, you can setup alerts in Chronograf to warn you and your team of when certain events or issues have occurred on your newly monitored systems.
 
 ---
 
@@ -185,16 +185,16 @@ The data from both systems will be collected, analyzed and accessed on / from th
 
 * Previously installed and running Production and Staging ISLE Host systems are in place already
 
-- You'll need to use the ISLE images tagged as `1.2.0` and higher for the syslog driver changes to be in place.
+* You'll need to use the ISLE images tagged as `1.2.0` and higher for the syslog driver changes to be in place.
 
 * That the "sidecar" method will be the installation type running on the Staging system to receive data from Staging and Production.
 
-- A firewall configuration that allows incoming public traffic to port `8086` traffic
+* A firewall configuration that allows incoming public traffic to port `8086` traffic
 
 * A firewall configuration that allows incoming private traffic access to port `8888`. It is recommended that this not be general public access but whitelisted to a select range of IP addresses given this will be the `Chronograf` dashboard port. Trusted users only please.
 
-- Only installation on Linux based host systems e.g. Debian / Ubuntu 18.04+ and Red Hat / CentOS 7.x+
-  * Attempting to run TICK locally on a MacOS system can fail https://github.com/docker/for-mac/issues/3303
+* Only installation on Linux based host systems e.g. Debian / Ubuntu 18.04+ and Red Hat / CentOS 7.x+
+    * Attempting to run TICK locally on a MacOS system can fail https://github.com/docker/for-mac/issues/3303
 
 * Other TICK / ISLE configurations are possible but **are not supported or detailed** as of yet in this documentation. Endusers seeking alternative setup possibilities are encouraged to further review and mine from the official Influxdata [documentation](https://docs.influxdata.com/platform/introduction/).
 
@@ -210,14 +210,14 @@ The data from both systems will be collected, analyzed and accessed on / from th
 
 * You will need to use the `sudo` command or become the `root` user for the steps below. Copying this file allows the Docker Daemon to use the `syslog` driver for log files and reporting to the `telegraf` agent.
 
-- Check if you already have an existing `/etc/docker/daemon.json` file. 
-  * If **YES**, add / merge  the contents of `./config/tick/docker/daemon.json` with your current `/etc/docker/daemon.json` file.
-  * If **NO**, copy `./config/tick/docker/daemon.json` to `/etc/docker/`
-    * Example: `sudo cp ./config/tick/docker/daemon.json /etc/docker/`
+* Check if you already have an existing `/etc/docker/daemon.json` file. 
+    * If **YES**, add / merge  the contents of `./config/tick/docker/daemon.json` with your current `/etc/docker/daemon.json` file.
+    * If **NO**, copy `./config/tick/docker/daemon.json` to `/etc/docker/`
+        * Example: `sudo cp ./config/tick/docker/daemon.json /etc/docker/`
 
 * Restart the Docker service
-  * `sudo service docker restart` or `sudo systemctl restart docker`
-  * You can check if the service is running with `sudo service docker status`
+    * `sudo service docker restart` or `sudo systemctl restart docker`
+    * You can check if the service is running with `sudo service docker status`
 
 ---
 
@@ -225,20 +225,20 @@ The data from both systems will be collected, analyzed and accessed on / from th
 
 * You will need to use the `sudo` command or become the `root` user for the steps below. Copying this file allows the information from the host `syslog` be forwarded to the `telegraf` agent.
 
-- Copy the Telegraf configuration file to the Rsyslog.d directory so Rsyslog will forward logs to the Telegraf agent with correct formatting. Assumes you are in the ISLE project root directory.
+* Copy the Telegraf configuration file to the Rsyslog.d directory so Rsyslog will forward logs to the Telegraf agent with correct formatting. Assumes you are in the ISLE project root directory.
   
-  * `sudo cp ./config/tick/rsyslog/50-telegraf.conf /etc/rsyslog.d/`
+    * `sudo cp ./config/tick/rsyslog/50-telegraf.conf /etc/rsyslog.d/`
 
 * Please note on `Ubuntu` systems, you will need to also reset the `/var/spool/rsyslog` permissions due to a bug. This has not been observed behavior on `CentOS` Host servers _yet_.
   
   * Reset permissions process:
-    * `sudo chown -Rv syslog:adm /var/spool/rsyslog`
+      * `sudo chown -Rv syslog:adm /var/spool/rsyslog`
   
   * Restart the `rsyslog` service 
-    * `sudo service rsyslog restart` or `sudo systemctl restart rsyslog`
+      * `sudo service rsyslog restart` or `sudo systemctl restart rsyslog`
   
   * You can check if the service is running
-    * `sudo service rsyslog status`
+      * `sudo service rsyslog status`
 
 **Example output:**
 
@@ -343,14 +343,14 @@ volumes:
 The instructions to setup only the Telegraf Agent on an ISLE system e.g. your Production system are found below in the section called `06. Telegraf Agent (Agent only) installation on Production`.
 
 * You'll need to edit the `./config/tick/telegraf/telegraf.conf` to add the following:
-  * **Line 76**: `hostname = ""`
-    * Enter the name of the server you will be monitoring e.g. `isle-server-staging` or `icg-staging` etc. This value can be a [FQDN](https://kb.iu.edu/d/aiuv), an IP or any name really.
-  * **Line 97**: `database = "telegraf"`
-    * By default, the ISLE TICK setup assumes this database as it is the easiest but pools all data received by individual monitored hosts into one database. For first time users, recommend leaving this value in place.
-    * Users are free to change this to any value to segregate data by systems, group etc.
-  * **Line 291**: Change `servers = ["root:<ISLE_ROOT_PASSWORD_HERE>@tcp(mysql:3306)/?tls=false"]` to use your `Staging` MySQL Root password. Typically this value is in your `staging.env` file. Swap out the `<ISLE_ROOT_PASSWORD_HERE>` with your `Staging` MySQL Root password.
+    * **Line 76**: `hostname = ""`
+        * Enter the name of the server you will be monitoring e.g. `isle-server-staging` or `icg-staging`, etc. This value can be a [FQDN](https://kb.iu.edu/d/aiuv), an IP or any name really.
+    * **Line 97**: `database = "telegraf"`
+        * By default, the ISLE TICK setup assumes this database as it is the easiest but pools all data received by individual monitored hosts into one database. For first time users, recommend leaving this value in place.
+        * Users are free to change this to any value to segregate data by systems, group, etc.
+    * **Line 291**: Change `servers = ["root:<ISLE_ROOT_PASSWORD_HERE>@tcp(mysql:3306)/?tls=false"]` to use your `Staging` MySQL Root password. Typically this value is in your `staging.env` file. Swap out the `<ISLE_ROOT_PASSWORD_HERE>` with your `Staging` MySQL Root password.
 
-- Start up the ISLE Docker containers again. `docker-compose up -d`
+* Start up the ISLE Docker containers again. `docker-compose up -d`
 
 * Depending on your internet connection, this startup process may take a few minutes, as the new TICK images are being downloaded and started.
 
@@ -358,8 +358,8 @@ The instructions to setup only the Telegraf Agent on an ISLE system e.g. your Pr
     * `sudo service rsyslog restart` or `sudo systemctl restart rsyslog`
   
   * You can check if the service is running
-    * `sudo service rsyslog status`
-    * Note the any previous errors have stopped.
+      * `sudo service rsyslog status`
+      * Note the any previous errors have stopped.
 
 ```bash
 
@@ -388,43 +388,43 @@ Aug 13 17:24:49 ip-172-31-69-204 rsyslogd[28257]:  [origin software="rsyslogd" s
 
 * To configure and setup your new TICK stack, navigate to http://**<replacethiswithyourdomain_here>**:8888
 
-- Click the `Get Started` button on the `Welcome to Chronograf` page.
+* Click the `Get Started` button on the `Welcome to Chronograf` page.
 
 * The `InfluxDB connection` page should now appear. Change the values within the following fields.
 
-  * `Connection URL` - Change `http://localhost:8086` to `http://influxdb:8086`
+    * `Connection URL` - Change `http://localhost:8086` to `http://influxdb:8086`
 
-  * `Connection Name` - Change `Influx 1` to simply `Influx`
+    * `Connection Name` - Change `Influx 1` to simply `Influx`
 
-  * Add a `Username` and / or `Password`. This can be any `username` & `password` combination of your choice. If you are just testing, you can leave this blank to move forward but this is not recommended.
+    * Add a `Username` and / or `Password`. This can be any `username` & `password` combination of your choice. If you are just testing, you can leave this blank to move forward but this is not recommended.
 
-  * `Telegraf Database Name`: Keep this as the default `telegraf`. You can add additional databases and hosts as needed later.
+    * `Telegraf Database Name`: Keep this as the default `telegraf`. You can add additional databases and hosts as needed later.
 
-  * `Default Retention Policy`: Keep this blank as the default.
+    * `Default Retention Policy`: Keep this blank as the default.
 
-  * Click the blue `Add connection` button at the bottom of the page.
+    * Click the blue `Add connection` button at the bottom of the page.
 
-- The `Dashboards` page should now appear. If using the default ISLE TICK setup, then we 
+* The `Dashboards` page should now appear. If using the default ISLE TICK setup, then we 
   
-  * In the `Suggested Dashboards for your Source` section, single click all three of the following:
-    * `MySQL`
-    * `Docker`
-    * `System`
+    * In the `Suggested Dashboards for your Source` section, single click all three of the following:
+        * `MySQL`
+        * `Docker`
+        * `System`
     * They will get highlighted in green with a checkmark in the top left hand corner.
-  * Click the blue `Create 3 Dashboards` button
+    * Click the blue `Create 3 Dashboards` button
 
 * The `Kapacitor Connection` page should now appear. Change the values within the following fields.
-  * `Kapacitor URL` - Change this from `http://influxdb:9092/` to `http://kapacitor:9092/`
+    * `Kapacitor URL` - Change this from `http://influxdb:9092/` to `http://kapacitor:9092/`
 
-  * `Name` - Change `New Kapacitor` to simply `Kapacitor`
+    * `Name` - Change `New Kapacitor` to simply `Kapacitor`
 
-  * Add a `Username` and / or `Password`. This can be any `username` & `password` combination of your choice. If you are just testing, you can leave this blank to move forward but this is not recommended.
-  
-  * Click the blue `Continue` button
+    * Add a `Username` and / or `Password`. This can be any `username` & `password` combination of your choice. If you are just testing, you can leave this blank to move forward but this is not recommended.
+    
+    * Click the blue `Continue` button
 
-- The `Setup Complete` page should now appear. If everything is working properly, there should be green checkmarks below.
+* The `Setup Complete` page should now appear. If everything is working properly, there should be green checkmarks below.
 
-  * Click the `View All Connections` button
+* Click the `View All Connections` button
 
 * The `Connections` page should now appear. If everything is working properly, there should be in green `Influx (Default)` under the `InfluxDB Connection` section.
 
@@ -440,11 +440,11 @@ Aug 13 17:24:49 ip-172-31-69-204 rsyslogd[28257]:  [origin software="rsyslogd" s
 
 * A previously installed and running ISLE Host Production system is in place already.
 
-- You'll need to use ISLE version `1.2.0` for the syslog driver changes to be in place.
+* You'll need to use ISLE version `1.2.0` for the syslog driver changes to be in place.
 
 * That the "sidecar" TICK installation is already in place on the `Staging` server prior.
 
-- Your firewall allows outbound port `8086` traffic
+* Your firewall allows outbound port `8086` traffic
 
 ####  Installation
 
@@ -454,16 +454,16 @@ To install the Telegraf agent on a `Production` system:
 
 * Shut down all running ISLE containers on the Production system
 
-- You'll need to edit the `./config/tick/telegraf/telegraf.conf` to add the following:
-  * **Line 76**: `hostname = ""`
-    * Enter the name of the server you will be monitoring e.g. `isle-server-prod` or `icg-production` etc. This value can be a [FQDN](https://kb.iu.edu/d/aiuv) i.e. `production-server.domain.edu`, an IP or any name really. Recommend a short name to be easily read and understood.
-  * **Line 94**: `urls = ["http://influxdb:8086"]`
-    * Replace the `influxdb` value with the [FQDN](https://kb.iu.edu/d/aiuv) of the `Staging` server that is running the full TICK stack and that this Telegraf agent will be sending data to e.g.
-  `urls = ["http://staging-server.domain.edu:8086"]`
-  * **Line 97**: `database = "telegraf"`
-    * By default, the ISLE TICK setup assumes this database as it is the easiest but pools all data received by individual monitored hosts into one database. For first time users, recommend leaving this value in place.
-    * Users are free to change this to any value to segregate data by systems, group etc.
-  * **Line 290**: Change `servers = ["root:<ISLE_ROOT_PASSWORD_HERE>@tcp(mysql:3306)/?tls=false"]` to use your `Production` MySQL Root password. Typically this value is in your `production.env` file. Swap out the `<ISLE_ROOT_PASSWORD_HERE>` with your `Production` MySQL Root password.
+* You'll need to edit the `./config/tick/telegraf/telegraf.conf` to add the following:
+    * **Line 76**: `hostname = ""`
+        * Enter the name of the server you will be monitoring e.g. `isle-server-prod` or `icg-production`, etc. This value can be a [FQDN](https://kb.iu.edu/d/aiuv) i.e. `production-server.domain.edu`, an IP or any name really. Recommend a short name to be easily read and understood.
+    * **Line 94**: `urls = ["http://influxdb:8086"]`
+        * Replace the `influxdb` value with the [FQDN](https://kb.iu.edu/d/aiuv) of the `Staging` server that is running the full TICK stack and that this Telegraf agent will be sending data to e.g.
+    `urls = ["http://staging-server.domain.edu:8086"]`
+    * **Line 97**: `database = "telegraf"`
+        * By default, the ISLE TICK setup assumes this database as it is the easiest but pools all data received by individual monitored hosts into one database. For first time users, recommend leaving this value in place.
+        * Users are free to change this to any value to segregate data by systems, group, etc.
+    * **Line 290**: Change `servers = ["root:<ISLE_ROOT_PASSWORD_HERE>@tcp(mysql:3306)/?tls=false"]` to use your `Production` MySQL Root password. Typically this value is in your `production.env` file. Swap out the `<ISLE_ROOT_PASSWORD_HERE>` with your `Production` MySQL Root password.
 
 #### Edits - docker-compose.production.yml file 
 
@@ -498,17 +498,17 @@ Uncommented example:
 ```
 
 * Copy the Telegraf configuration file to the Rsyslog.d directory so Rsyslog will forward logs to the Telegraf agent with correct formatting. Assumes you are in the ISLE project root directory.
-  * Example: `sudo cp ./config/tick/rsyslog/50-telegraf.conf /etc/rsyslog.d/50-telegraf.conf`
+    * Example: `sudo cp ./config/tick/rsyslog/50-telegraf.conf /etc/rsyslog.d/50-telegraf.conf`
 
-- Copy over the Docker log driver configuration and then restart the Docker service.
-  * Example: `sudo cp ./config/tick/docker/daemon.json /etc/docker/daemon.json`
-  * `sudo service docker restart`
+* Copy over the Docker log driver configuration and then restart the Docker service.
+    * Example: `sudo cp ./config/tick/docker/daemon.json /etc/docker/daemon.json`
+    * `sudo service docker restart`
 
 * Start up the ISLE Docker containers again. `docker-compose up -d`
 
-- Depending on your internet connection, this startup process may take a few minutes, as the new TICK images are being downloaded and started.
+* Depending on your internet connection, this startup process may take a few minutes, as the new TICK images are being downloaded and started.
 
-* Once the `Production` containers are back online, the services are running e.g. you see the Drupal site etc. navigate to the `Hosts` section within the `Chronograf` dashboard. You should now see your new `Production` server name. This means the Telegraf Agent on your `Production` ISLE system is now reporting properly. 
+* Once the `Production` containers are back online, the services are running e.g. you see the Drupal site, etc. navigate to the `Hosts` section within the `Chronograf` dashboard. You should now see your new `Production` server name. This means the Telegraf Agent on your `Production` ISLE system is now reporting properly. 
 
 ---
 
@@ -519,20 +519,19 @@ If you are not seeing your server(s) appear in the `Hosts` section nor seeing lo
 * Check that any potential firewalls are allowing communication between the `Production` and `Staging` servers on port `8086`
 
 * Ensure that all configuration files have been copied over:
-  * The new Docker log driver configuration should be found here `/etc/docker/daemon.json`
-  * The new rsyslog / Telegraf configuration should be found here: `/etc/rsyslog.d/50-telegraf.conf`
+    * The new Docker log driver configuration should be found here `/etc/docker/daemon.json`
+    * The new rsyslog / Telegraf configuration should be found here: `/etc/rsyslog.d/50-telegraf.conf`
 
 * Check that the TICK related containers are running without exit codes. 
-  * `docker ps -a`
+    * `docker ps -a`
   
 * Check that the new `Telegraf` docker container is running on `Production`
 
 * You can check if the Telegraf agent is communicating properly with the Influxdb database and if the Influxdb database is running by using the following command in your terminal:
 
-  * Shell into the telegraph container
-    * `docker exec -it isle-telegraf-ld bash`
-
-  * `curl -I http://influxdb:8086/ping`
+    * Shell into the telegraph container
+        * `docker exec -it isle-telegraf-ld bash`
+        * `curl -I http://influxdb:8086/ping`
 
 The output should confirm connectivity by looking like this:
 
@@ -557,13 +556,13 @@ Date: Fri, 31 May 2019 13:03:16 GMT
 
 ### Adoption Process Overview
 
-* Use these instructions below to learn how to view all monitored hosts, their services and log streams within Chronograf using dashboards and the built-in Log viewer. There are additional optional steps for setting up alerts to warn you and your team by email of when certain events happen e.g. running out of disk space, server crashes etc.
+* Use these instructions below to learn how to view all monitored hosts, their services and log streams within Chronograf using dashboards and the built-in Log viewer. There are additional optional steps for setting up alerts to warn you and your team by email of when certain events happen e.g. running out of disk space, server crashes, etc.
 
 ### Viewing Host Systems
 
 * Using a web browser, navigate to your new Chronograf dashboard e.g. http://**<replacethiswithyourdomain_here>**:8888
 
-- To view hosts, click the `Host List` button to the left. It should appear as an eye symbol in the left navigational panel. Your host(s) should appear in the `Host List`. You can click on the name to investigate the system further.
+* To view hosts, click the `Host List` button to the left. It should appear as an eye symbol in the left navigational panel. Your host(s) should appear in the `Host List`. You can click on the name to investigate the system further.
   
 * By default in the `Apps` section, the three dashboards that you just setup i.e. `system`, `docker` and `mysql` should also appear. Click on any one of them to view stats specific to that reporting plugin.
 
@@ -572,7 +571,7 @@ Date: Fri, 31 May 2019 13:03:16 GMT
 ### Viewing Logs
 
 * To view logs ordered by hosts, click the `Log Viewer` button to the left. It should appear as cut log symbol in the left navigational panel. Your host(s) should appear in the `Log Viewer`.
-  * **Please note:** This will be a lot of information at any given time especially if you connect multiple hosts.
+    * **Please note:** This will be a lot of information at any given time especially if you connect multiple hosts.
 
 ---
 
@@ -582,13 +581,13 @@ Within the `Log Viewer` page:
 
 * Scroll at the bottom of the page over to the `Host` column in the viewer and click on the name e.g. `your-hostname-here`
 
-  * This should now filter out all other host information
+    * This should now filter out all other host information
 
-  * At the top left hand corner below the search bar, the following appears `host == your-hostname-here`. This is the syntax used for searching by host e.g. `host == your-hostname-here` this is the same shorthand name used to configure the Telegraf agent.
+    * At the top left hand corner below the search bar, the following appears `host == your-hostname-here`. This is the syntax used for searching by host e.g. `host == your-hostname-here` this is the same shorthand name used to configure the Telegraf agent.
 
-  * Alternatively, you can now use this value `host == your-hostname-here` within the _Search logs using keywords or regular expressions_ search bar.
+    * Alternatively, you can now use this value `host == your-hostname-here` within the _Search logs using keywords or regular expressions_ search bar.
 
-  * You can even single click into the `host == your-hostname-here` posted query and change the name to a different host.
+    * You can even single click into the `host == your-hostname-here` posted query and change the name to a different host.
 
 * You can also search using ISLE key service words to drill down on log reporting. e.g. `apache`, `fedora`, `varnish` etc
 
@@ -602,18 +601,18 @@ The instructions below are going to:
 
 * Setup an "alert handler" in the Chronograf dashboard for delivery of alert messages. We'll use email as the example alert handler service.
 
-- Show you how to set up two basic alerts using your new alert handler
-  * `Disk Space` Alert - Alerts you when your disks are running out of space
-  * `Deadman` Alert - Alerts you when the ISLE host server is unresponsive, has crashed or is "dead."
+* Show you how to set up two basic alerts using your new alert handler
+    * `Disk Space` Alert - Alerts you when your disks are running out of space
+    * `Deadman` Alert - Alerts you when the ISLE host server is unresponsive, has crashed or is "dead."
 
 #### Assumptions
 
 * Ability to send emails from the ISLE host server has already been setup.
-  * You may already be using an existing off host email server or service that is integrated with the ISLE Drupal site. 
-  * Alternatively your IT dept may provide you with an existing email server or account details as well. 
-  * We recommend setting up a [SendGrid](https://sendgrid.com/) or [MailGun](https://www.mailgun.com/) account which are cloud-based email delivery platforms. While both these services have "free" tiers, both are commercial products. However, the ease of use in setting up, using and keeping your ISLE system free of additional complex email service or software installations are why they're recommended here.
+    * You may already be using an existing off host email server or service that is integrated with the ISLE Drupal site. 
+    * Alternatively your IT dept may provide you with an existing email server or account details as well. 
+    * We recommend setting up a [SendGrid](https://sendgrid.com/) or [MailGun](https://www.mailgun.com/) account which are cloud-based email delivery platforms. While both these services have "free" tiers, both are commercial products. However, the ease of use in setting up, using and keeping your ISLE system free of additional complex email service or software installations are why they're recommended here.
 
-- Additional alerts may be contributed by the ISLE maintainers and/or community over time.
+* Additional alerts may be contributed by the ISLE maintainers and/or community over time.
 
 ### Chronograf Alert Handler Setup
 
@@ -621,24 +620,24 @@ While TICK supports a wide variety of alert types and delivery mechanisms we're 
 
 * Prior to starting, you will need to have your SMTP credentials (user name, password and location of the 3rd party email server)  at the ready. This information may have been provided to you by your IT department or from when you may have used one of the recommended cloud-based email delivery platforms;  [SendGrid](https://sendgrid.com/) or [MailGun](https://www.mailgun.com/).
 
-- When you have these credentials, click on the `Configuration` (wrench icon) button on the left hand side of the Chronograf dashboard. 
+* When you have these credentials, click on the `Configuration` (wrench icon) button on the left hand side of the Chronograf dashboard. 
 
 * Under the `Kapacitor Connection` column
-  * click into the Kapacitor settings dropdown
-  * click on the pencil symbol (_Not the trashcan_)
-    * If that doesn't work, try navigating to http://yourdomainhere:8888/sources/1/kapacitors/1/edit 
+    * click into the Kapacitor settings dropdown
+    * click on the pencil symbol (_Not the trashcan_)
+        * If that doesn't work, try navigating to http://yourdomainhere:8888/sources/1/kapacitors/1/edit 
 
-- Within the `Configure Alert Endpoints` page, click on the `SMTP` section / button and fill in your creds.
+* Within the `Configure Alert Endpoints` page, click on the `SMTP` section / button and fill in your creds.
 
-  * `SMTP Host` - change `localhost` to the correct host name
-  * `SMTP Port` - change `25` to the correct port
-  * `From Email` - enter the email account you'll be using to send alerts **with**
-  * `To Email` - enter the email account you'll be sending alerts **to**
-  * `User` - enter the username for the email account you'll be using to send alerts **with**
-  * `Password` - enter the password for the email account you'll be using to send alerts **with**
-  * Click the `Configuration Enabled` checkbox
-  * Click the blue `Save Changes` button
-  * Click the `Send Test Alert` and confirm that a new test email has been sent to the email account you'll be receiving alerts **to /at** 
+    * `SMTP Host` - change `localhost` to the correct host name
+    * `SMTP Port` - change `25` to the correct port
+    * `From Email` - enter the email account you'll be using to send alerts **with**
+    * `To Email` - enter the email account you'll be sending alerts **to**
+    * `User` - enter the username for the email account you'll be using to send alerts **with**
+    * `Password` - enter the password for the email account you'll be using to send alerts **with**
+    * Click the `Configuration Enabled` checkbox
+    * Click the blue `Save Changes` button
+    * Click the `Send Test Alert` and confirm that a new test email has been sent to the email account you'll be receiving alerts **to /at** 
 
 You can now use this delivery mechanism when you set up individual alerts.
 
@@ -649,24 +648,24 @@ You can now use this delivery mechanism when you set up individual alerts.
 These instructions are for Sendgrid users only but demonstrate the easy of use in setup and lack of additional infrastructural overhead.
 
 * Create the API Key for the ISLE host server.
-  * **Please note**; you should repeat this process for each server e.g. Production and Staging sending email.
-- Log into your Sendgrid account
+    * **Please note**; you should repeat this process for each server e.g. Production and Staging sending email.
+* Log into your Sendgrid account
 * Navigate to Settings > API Keys
-- Click on the `Create API Key` button
+* Click on the `Create API Key` button
 * Set the level of API Key Permissions (_recommend Restricted Access_)
-  * Set the appropriate level of permissions for each section
-- Copy the generated API Key to a password manager. This is the token you'll use to send email with. You'll need to use it again below.
+    * Set the appropriate level of permissions for each section
+* Copy the generated API Key to a password manager. This is the token you'll use to send email with. You'll need to use it again below.
 
 * Log into the Chronograf Dasboard and repeat the steps above to configure the SMTP Alert handler.
-  * `SMTP Host` - change `localhost` to `smtp.sendgrid.net`
-  * `SMTP Port` - change `25` to `587`
-  * `From Email` - enter the email account you'll be using to send alerts **with**
-  * `To Email` - enter the email account you'll be sending alerts **to**
-  * `User` - Enter the username of `apikey`
-  * `Password` - Enter the long API key generated from the above steps 
-  * Click the `Configuration Enabled` checkbox
-  * Click the blue `Save Changes` button
-  * Click the `Send Test Alert` and confirm that a new test email has been sent to the email account you'll be receiving alerts **to /at** 
+    * `SMTP Host` - change `localhost` to `smtp.sendgrid.net`
+    * `SMTP Port` - change `25` to `587`
+    * `From Email` - enter the email account you'll be using to send alerts **with**
+    * `To Email` - enter the email account you'll be sending alerts **to**
+    * `User` - Enter the username of `apikey`
+    * `Password` - Enter the long API key generated from the above steps 
+    * Click the `Configuration Enabled` checkbox
+    * Click the blue `Save Changes` button
+    * Click the `Send Test Alert` and confirm that a new test email has been sent to the email account you'll be receiving alerts **to /at** 
 
 ##### Sendgrid Resource
 
@@ -704,11 +703,11 @@ Additional changes were made to the ISLE base images to allow for:
 
 * Logging in ISLE is now set to `stdout` and `stderr` by default instead of log files.
 
-  * Choice in Docker log drivers e.g. `syslog` vs `json` etc.
+    * Choice in Docker log drivers e.g. `syslog` vs `json`, etc.
 
-  * TICK uses the Docker `syslog` log driver by default.
+    * TICK uses the Docker `syslog` log driver by default.
 
-  * Flexibility for users using monitoring tools other than TICK
+    * Flexibility for users using monitoring tools other than TICK
 
 ---
 
@@ -726,11 +725,11 @@ Additional changes were made to the ISLE base images to allow for:
 
 * Please use the following as resources for institutions or endusers needing support
 
-  * [Islandora ISLE Interest Group](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group) - Meetings open to everybody!   
-    * The [Schedule](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group/#how-to-join) is alternating Wednesdays, 3:00pm EDT
+    * [Islandora ISLE Interest Group](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group) - Meetings open to everybody!   
+        * The [Schedule](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group/#how-to-join) is alternating Wednesdays, 3:00pm EDT
 
-  * [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle) - Post your questions here and subscribe for updates, meeting announcements, and technical support
+    * [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle) - Post your questions here and subscribe for updates, meeting announcements, and technical support
 
-  * [ISLE Github Issues queue](https://github.com/Islandora-Collaboration-Group/ISLE/issues) - Post your issues, bugs and requests for technical documentation here.
+    * [ISLE Github Issues queue](https://github.com/Islandora-Collaboration-Group/ISLE/issues) - Post your issues, bugs and requests for technical documentation here.
 
  --- 

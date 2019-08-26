@@ -9,7 +9,7 @@
 * Fork ISLE to personal / company github.com repo 
   * https://github.com/Islandora-Collaboration-Group/ISLE
 
-* Fork all ISLE images to personal / company github.com repos
+* Fork all ISLE images to personal / company github.com repositories
   * isle-ubuntu-basebox https://github.com/Islandora-Collaboration-Group/isle-ubuntu-basebox
   * isle-tomcat https://github.com/Islandora-Collaboration-Group/isle-tomcat
   * isle-fedora https://github.com/Islandora-Collaboration-Group/isle-fedora
@@ -18,9 +18,9 @@
   * isle-apache https://github.com/Islandora-Collaboration-Group/isle-apache
   * isle-mysql https://github.com/Islandora-Collaboration-Group/isle-mysql
 
-* Git clone the forked ISLE project git repo to your local development workstation.
+* Git clone the forked ISLE project git repo to your local development personal computer.
 
-* Git clone the forked ISLE images git repos into a sibling "images" directory
+* Git clone the forked ISLE images git repositories into a sibling "images" directory
 
 * Git checkout (make new) release branch in each repo for each image starting with and descending in this order:
   * isle-ubuntu-basebox
@@ -103,7 +103,7 @@ The following software packages will be handled and updated by `apt-get`. Please
 #### isle-ubuntu-basebox - Build Actions / Steps
 
 * Start the update process with the `isle-ubuntu-basebox` image
-  * Clone down the **FORKED** `isle-ubuntu-basebox` to your local development workstation.
+  * Clone down the **FORKED** `isle-ubuntu-basebox` to your local development personal computer.
   * Create a new branch e.g. `ISLE-v.1.1.1`
 
 * Edit the following files with the version changes:
@@ -217,7 +217,7 @@ The following software packages will be handled and updated by `apt-get`. Please
 Assumptions: The `isle-ubuntu-basebox` has been already updated, built and pushed to Dockerhub. This image will work (build) from that foundational image.
 
 * Start the update process with the `isle-tomcat` image
-  * Clone down the **FORKED** `isle-tomcat` to your local development workstation.
+  * Clone down the **FORKED** `isle-tomcat` to your local development personal computer.
   * Create a new branch e.g. `ISLE-v.1.1.1`
 
 * Edit the following files with the version changes:
@@ -387,7 +387,7 @@ The following software packages will be handled and updated by `apt-get`. Please
 Assumptions: The `isle-ubuntu-basebox` & `isle-tomcat` images have been already updated, built and pushed to Dockerhub. This image will work (build) from those foundational images.
 
 * Start the update process with the `isle-fedora` image
-  * Clone down the **FORKED** `isle-fedora` to your local development workstation.
+  * Clone down the **FORKED** `isle-fedora` to your local development personal computer.
   * Create a new branch e.g. `ISLE-v.1.1.1`
 
 * Edit the following files with the version changes:
@@ -499,7 +499,7 @@ The following software packages will be handled and updated by `apt-get`. Please
 Assumptions: The `isle-ubuntu-basebox` & `isle-tomcat` images have been already updated, built and pushed to Dockerhub. This image will work (build) from those foundational images.
 
 * Start the update process with the `isle-image-services` image
-  * Clone down the **FORKED** `isle-image-services` to your local development workstation.
+  * Clone down the **FORKED** `isle-image-services` to your local development personal computer.
   * Create a new branch e.g. `ISLE-v.1.1.1`
 
 * Edit the following files with the version changes:
@@ -586,7 +586,7 @@ Suggested outcome:
 Assumptions: The `isle-ubuntu-basebox` & `isle-tomcat` images have been already updated, built and pushed to Dockerhub. This image will work (build) from those foundational images.
 
 * Start the update process with the `isle-solr` image
-  * Clone down the **FORKED** `isle-solr` to your local development workstation.
+  * Clone down the **FORKED** `isle-solr` to your local development personal computer.
   * Create a new branch e.g. `ISLE-v.1.1.1`
 
 * Edit the following files with the version changes:
@@ -810,7 +810,7 @@ The following software packages will be handled and updated by `composer`. Pleas
 Assumptions: The `isle-ubuntu-basebox` & `isle-tomcat` images have been already updated, built and pushed to Dockerhub. This image will work (build) from those foundational images.
 
 * Start the update process with the `isle-apache` image
-  * Clone down the **FORKED** `isle-apache` to your local development workstation.
+  * Clone down the **FORKED** `isle-apache` to your local development personal computer.
   * Create a new branch e.g. `ISLE-v.1.1.1`
 
 * Edit the following files with the version changes:
@@ -890,7 +890,7 @@ Suggested Outcome:
 ### Review & Build Process
 
 * Start the update process with the `isle-mysql` image
-  * Clone down the **FORKED** `isle-mysql` to your local development workstation.
+  * Clone down the **FORKED** `isle-mysql` to your local development personal computer.
   * Create a new branch e.g. `ISLE-v.1.1.1`
 
 * Edit the following files with the version changes:
@@ -906,7 +906,7 @@ Suggested Outcome:
 
 * Test with new images
 
-* Run Makefile with `docker-build` etc.
+* Run Makefile with `docker-build`, etc.
 
 ```bash
 

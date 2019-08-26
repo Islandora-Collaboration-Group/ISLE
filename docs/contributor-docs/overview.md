@@ -1,6 +1,6 @@
 <!--- PAGE_TITLE --->
 
-The ISLE project uses `mkdocs` a static site generator designed for building project documentation. Documentation source files are written in `Markdown`, and configured with a single `YAML` configuration file. The `mkdocs` software then creates static `HTML` pages for hosting on GitHub Pages. This software can also be used locally on an end user's workstation for review and editing of materials.
+The ISLE project uses `mkdocs` a static site generator designed for building project documentation. Documentation source files are written in `Markdown`, and configured with a single `YAML` configuration file. The `mkdocs` software then creates static `HTML` pages for hosting on GitHub Pages. This software can also be used locally on an end user's personal computer for review and editing of materials.
 
 Please note there are two key elements to the ISLE Documentation.
 
