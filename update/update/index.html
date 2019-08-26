@@ -258,8 +258,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../install/install-environments/" title="ISLE Environments" class="md-nav__link">
-      ISLE Environments
+    <a href="../../install/install-environments/" title="Overview: ISLE Environments" class="md-nav__link">
+      Overview: ISLE Environments
     </a>
   </li>
 
@@ -270,8 +270,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../install/install-local-new/" title="Local Installation: New Site" class="md-nav__link">
-      Local Installation: New Site
+    <a href="../../install/install-local-new/" title="Local: New Site" class="md-nav__link">
+      Local: New Site
     </a>
   </li>
 
@@ -282,8 +282,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../install/install-local-migrate/" title="Local Installation: Migrate Islandora Site" class="md-nav__link">
-      Local Installation: Migrate Islandora Site
+    <a href="../../install/install-local-migrate/" title="Local: Migrate Site" class="md-nav__link">
+      Local: Migrate Site
     </a>
   </li>
 
@@ -294,8 +294,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../install/install-staging-new/" title="Staging Installation: New Site" class="md-nav__link">
-      Staging Installation: New Site
+    <a href="../../install/install-staging-new/" title="Staging: New Site" class="md-nav__link">
+      Staging: New Site
     </a>
   </li>
 
@@ -306,8 +306,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../install/install-staging-migrate/" title="Staging Installation: Migrate Existing Islandora Site" class="md-nav__link">
-      Staging Installation: Migrate Existing Islandora Site
+    <a href="../../install/install-staging-migrate/" title="Staging: Migrate Site" class="md-nav__link">
+      Staging: Migrate Site
     </a>
   </li>
 
@@ -318,8 +318,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../install/install-production-new/" title="Production Installation: New Site" class="md-nav__link">
-      Production Installation: New Site
+    <a href="../../install/install-production-new/" title="Production: New Site" class="md-nav__link">
+      Production: New Site
     </a>
   </li>
 
@@ -330,8 +330,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../install/install-production-migrate/" title="Production Installation: Migrate Existing Islandora Site" class="md-nav__link">
-      Production Installation: Migrate Existing Islandora Site
+    <a href="../../install/install-production-migrate/" title="Production: Migrate Site" class="md-nav__link">
+      Production: Migrate Site
     </a>
   </li>
 
@@ -493,6 +493,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../appendices/configuring-lets-encrypt/" title="Let's Encrypt: Free SSL Certificates" class="md-nav__link">
+      Let's Encrypt: Free SSL Certificates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../appendices/open-terminal-in-running-container/" title="Opening a Terminal in a Running Container" class="md-nav__link">
       Opening a Terminal in a Running Container
     </a>
@@ -530,13 +542,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9" type="checkbox" id="nav-4-9">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10" type="checkbox" id="nav-4-10">
     
-    <label class="md-nav__link" for="nav-4-9">
+    <label class="md-nav__link" for="nav-4-10">
       User Stories
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-9">
+      <label class="md-nav__title" for="nav-4-10">
         User Stories
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -580,18 +592,6 @@
         
       </ul>
     </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../appendices/configuring-lets-encrypt/" title="Let's Encrypt: Free SSL Certificates" class="md-nav__link">
-      Let's Encrypt: Free SSL Certificates
-    </a>
   </li>
 
         
@@ -954,10 +954,10 @@
 </ul>
 <p><strong>Update your version of ISLE to the latest release:</strong></p>
 <p>We strongly recommend that you start the update process on your <code>Local</code> environment first to determine what type of testing is required for your projects, troubleshoot any issues and make any necessary adjustments or merges from the git code.</p>
-<p>On your local version of ISLE:</p>
+<p>On your Local version of ISLE:</p>
 <ul>
 <li>
-<p>In the command line, navigate to the ISLE directory.  This directory should contain the <code>docker-compose.local.yml</code> file.</p>
+<p>In the command line, navigate to the ISLE directory, which should contain the <code>docker-compose.local.yml</code> file.</p>
 </li>
 <li>
 <p>Stop and remove your existing ISLE containers</p>
@@ -966,31 +966,34 @@
 </ul>
 </li>
 <li>
-<p>Run a git fetch from the ICG upstream</p>
+<p>Check your git remotes: <code>git remote -v</code></p>
+<ul>
+<li>If you do not have a remote named <code>icg-upstream</code> then do this:</li>
+<li><code>git remote add icg-upstream https://github.com/Islandora-Collaboration-Group/ISLE.git</code></li>
+</ul>
 </li>
 <li>
-<p><code>git fetch icg-upstream</code></p>
+<p>Run a git fetch from the ICG upstream</p>
+<ul>
+<li><code>git fetch icg-upstream</code></li>
+</ul>
 </li>
 <li>
 <p>Checkout a new git branch as a precaution for performing the update on your project. This way your <code>master</code> branch stays safe and untouched until you have tested thoroughly and are ready to merge in changes from the recent update. The new local branch can be anything. An example is given below.</p>
-</li>
-<li>
-<p><code>git checkout isle-update-numberhere</code></p>
+<ul>
+<li><code>git checkout isle-update-numberhere</code></li>
+</ul>
 </li>
 <li>
 <p>Pull down the ICG ISLE <code>master</code> branch into your local project's new <code>isle-update-numberhere</code> branch</p>
-</li>
-<li><code>git pull icg-upstream master</code></li>
-<li>
-<p>if you <code>ls -lha</code> in this directory, you'll now have code.</p>
-</li>
-<li>
-<p>You'll need to use an text editor or IDE to determine if there are git merges to be worked out.</p>
-</li>
-<li>
-<p>Large ISLE point releases e.g. <code>1.1.2</code> to <code>1.2.0</code> will more than likely introduce merge conflicts and breaking changes. Move through this update process slowly and carefully.</p>
 <ul>
-<li>Changes will usually include but are not limited to:</li>
+<li><code>git pull icg-upstream master</code></li>
+<li>if you <code>ls -lha</code> in this directory, you'll now have code.</li>
+</ul>
+</li>
+<li>
+<p>You'll need to use an text editor or IDE to determine if there are git merges to be worked out. Large ISLE point releases e.g. <code>1.1.2</code> to <code>1.2.0</code> will more than likely introduce merge conflicts and breaking changes. Move through this update process slowly and carefully. Changes will usually include but are not limited to:</p>
+<ul>
 <li>new configuration files</li>
 <li>new explanatory comments</li>
 <li>new ISLE services optional or otherwise</li>
@@ -1001,49 +1004,49 @@
 </li>
 <li>
 <p>Make the appropriate changes and then commit to your local</p>
-</li>
+<ul>
 <li><code>git add &lt;changedfileshere&gt;</code></li>
-<li>
-<p>`git commit -m "ISLE update from version # to version #"</p>
+<li>`git commit -m "ISLE update from version # to version #"</li>
+</ul>
 </li>
 <li>
 <p>You can choose to push this new branch to your remote git or keep it on your local. Ultimately after testing on your local, you'll merge to <code>master</code> and then deploy the new code to your <code>Staging</code> and <code>Production</code> environments.</p>
 </li>
 <li>
 <p>On your local, using the still open terminal / Powershell, pull down the new containers. Be sure to be in the root of your ISLE project directory. Download the new ISLE images.</p>
-</li>
+<ul>
 <li><code>cd ~/yourprojecthere/</code></li>
-<li>
-<p><code>docker-compose pull</code></p>
+<li><code>docker-compose pull</code></li>
+</ul>
 </li>
 <li>
 <p>Start up your existing local ISLE project with the new code and ISLE images.</p>
-</li>
-<li>
-<p><code>docker-compose up -d</code></p>
+<ul>
+<li><code>docker-compose up -d</code></li>
+</ul>
 </li>
 <li>
 <p>QC your existing site and ensure the following:</p>
-</li>
+<ul>
 <li>The site functions as it did before</li>
 <li>All services are functional and without apparent ERROR warnings in log console output.</li>
 <li>You can ingest test objects without any issue.</li>
-<li>
-<p>You can modify existing object data without any issue.</p>
+<li>You can modify existing object data without any issue.</li>
+</ul>
 </li>
 <li>
 <p>Once testing has completed and any further adjustments have been made. Merge your <code>isle-update-numberhere</code> branch's code to <code>master</code>.</p>
-</li>
+<ul>
 <li><code>git checkout master</code></li>
-<li>
-<p><code>git merge isle-update-numberhere</code></p>
+<li><code>git merge isle-update-numberhere</code></li>
+</ul>
 </li>
 <li>
 <p>Push this code to your online git provider ISLE</p>
-</li>
+<ul>
 <li><code>git push -u origin master</code></li>
-<li>
-<p>This will take 2 - 5 mins depending on your internet speed.</p>
+<li>This will take 2 - 5 mins depending on your internet speed.</li>
+</ul>
 </li>
 <li>
 <p>Now you have the current ISLE project code checked into git as foundation to make changes on your <code>Staging</code> and <code>Production</code> servers.</p>
@@ -1051,16 +1054,18 @@
 </ul>
 <h2 id="staging-server-update">Staging Server update</h2>
 <ul>
-<li>SSH into your <code>Staging</code> ISLE Host Server</li>
-<li><code>ssh islandora@yourstagingserver.institution.edu</code></li>
 <li>
-<p><code>cd /opt/yourprojecthere</code></p>
+<p>SSH into your <code>Staging</code> ISLE Host Server</p>
+<ul>
+<li><code>ssh islandora@yourstagingserver.institution.edu</code></li>
+<li><code>cd /opt/yourprojecthere</code></li>
+</ul>
 </li>
 <li>
 <p>Shut down the running containers</p>
-</li>
-<li>
-<p><code>docker-compose down</code></p>
+<ul>
+<li><code>docker-compose down</code></li>
+</ul>
 </li>
 <li>
 <p>Update the docker files via git</p>
@@ -1087,12 +1092,14 @@
 </ul>
 <p>The new containers should start up and your <code>Staging</code> Islandora site should be available, without any loss of existing content.</p>
 <ul>
-<li>QC the existing ISLE <code>Staging</code> site and ensure the following:</li>
+<li>
+<p>QC the existing ISLE <code>Staging</code> site and ensure the following:</p>
+<ul>
 <li>The site functions as it did before</li>
 <li>All services are functional and without apparent ERROR warnings in log console output.</li>
 <li>You can ingest test objects without any issue.</li>
-<li>
-<p>You can modify existing object data without any issue.</p>
+<li>You can modify existing object data without any issue.</li>
+</ul>
 </li>
 <li>
 <p>Recommend giving this installation a few days or a week at the minimum before repeating process on Production.</p>

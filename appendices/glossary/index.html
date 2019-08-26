@@ -258,8 +258,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../install/install-environments/" title="ISLE Environments" class="md-nav__link">
-      ISLE Environments
+    <a href="../../install/install-environments/" title="Overview: ISLE Environments" class="md-nav__link">
+      Overview: ISLE Environments
     </a>
   </li>
 
@@ -270,8 +270,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../install/install-local-new/" title="Local Installation: New Site" class="md-nav__link">
-      Local Installation: New Site
+    <a href="../../install/install-local-new/" title="Local: New Site" class="md-nav__link">
+      Local: New Site
     </a>
   </li>
 
@@ -282,8 +282,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../install/install-local-migrate/" title="Local Installation: Migrate Islandora Site" class="md-nav__link">
-      Local Installation: Migrate Islandora Site
+    <a href="../../install/install-local-migrate/" title="Local: Migrate Site" class="md-nav__link">
+      Local: Migrate Site
     </a>
   </li>
 
@@ -294,8 +294,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../install/install-staging-new/" title="Staging Installation: New Site" class="md-nav__link">
-      Staging Installation: New Site
+    <a href="../../install/install-staging-new/" title="Staging: New Site" class="md-nav__link">
+      Staging: New Site
     </a>
   </li>
 
@@ -306,8 +306,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../install/install-staging-migrate/" title="Staging Installation: Migrate Existing Islandora Site" class="md-nav__link">
-      Staging Installation: Migrate Existing Islandora Site
+    <a href="../../install/install-staging-migrate/" title="Staging: Migrate Site" class="md-nav__link">
+      Staging: Migrate Site
     </a>
   </li>
 
@@ -318,8 +318,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../install/install-production-new/" title="Production Installation: New Site" class="md-nav__link">
-      Production Installation: New Site
+    <a href="../../install/install-production-new/" title="Production: New Site" class="md-nav__link">
+      Production: New Site
     </a>
   </li>
 
@@ -330,8 +330,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../install/install-production-migrate/" title="Production Installation: Migrate Existing Islandora Site" class="md-nav__link">
-      Production Installation: Migrate Existing Islandora Site
+    <a href="../../install/install-production-migrate/" title="Production: Migrate Site" class="md-nav__link">
+      Production: Migrate Site
     </a>
   </li>
 
@@ -526,6 +526,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../configuring-lets-encrypt/" title="Let's Encrypt: Free SSL Certificates" class="md-nav__link">
+      Let's Encrypt: Free SSL Certificates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../open-terminal-in-running-container/" title="Opening a Terminal in a Running Container" class="md-nav__link">
       Opening a Terminal in a Running Container
     </a>
@@ -563,13 +575,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9" type="checkbox" id="nav-4-9">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10" type="checkbox" id="nav-4-10">
     
-    <label class="md-nav__link" for="nav-4-9">
+    <label class="md-nav__link" for="nav-4-10">
       User Stories
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-9">
+      <label class="md-nav__title" for="nav-4-10">
         User Stories
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -613,18 +625,6 @@
         
       </ul>
     </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../configuring-lets-encrypt/" title="Let's Encrypt: Free SSL Certificates" class="md-nav__link">
-      Let's Encrypt: Free SSL Certificates
-    </a>
   </li>
 
         
@@ -1046,11 +1046,11 @@
 <p><strong>Dockerhub</strong>: <a href="https://hub.docker.com/website/repository">website / repository</a> that provides access to the latest Docker images for the ISLE containers.</p>
 </li>
 <li>
-<p><strong>Host Server</strong>: Also called "the host" - this is the base computer upon which the entire ISLE stack is built - this can be a virtual machine on a laptop (LOCAL), or
+<p><strong>Host Server</strong>: Also called "the host" - this is the base computer upon which the entire ISLE stack is built - this can be a virtual machine on a personal computer (LOCAL), or
 a server you connected to via ssh (REMOTE).</p>
 </li>
 <li>
-<p><strong>Images</strong>: <a href="https://docs.docker.com/engine/reference/commandline/images/">Docker images</a> - source for the containers - these are built with installed software and updated by ISLE developers and stored on Dockerhub. You can see what software is used in each of the image's Dockerfiles e.g. <code>apache/Dockerfile</code> etc. This will contain additional information on official Docker images used as a Docker <a href="https://docs.docker.com/develop/develop-images/baseimages/">base image</a></p>
+<p><strong>Images</strong>: <a href="https://docs.docker.com/engine/reference/commandline/images/">Docker images</a> - source for the containers - these are built with installed software and updated by ISLE developers and stored on Dockerhub. You can see what software is used in each of the image's Dockerfiles e.g. <code>apache/Dockerfile</code>, etc. This will contain additional information on official Docker images used as a Docker <a href="https://docs.docker.com/develop/develop-images/baseimages/">base image</a></p>
 </li>
 <li>
 <p><strong>ISLE on GitHub</strong>: the ISLE repository on github.com contains documentation and configuration files necessary to build ISLE.</p>
@@ -1091,7 +1091,7 @@ a server you connected to via ssh (REMOTE).</p>
 </ul>
 </li>
 <li>
-<p><strong>TL;DR</strong> - "Too long; didn't read." - used to indicate a large post, article etc. that has a brief summary of said post, article etc. as it might be too long to read.</p>
+<p><strong>TL;DR</strong> - "Too long; didn't read." - used to indicate a large post, article, etc. that has a brief summary of said post, article, etc. as it might be too long to read.</p>
 </li>
 <li>
 <p><strong>YAML</strong> (YAML Ain't Markup Language) is a human-readable data serialization language. It is commonly used for configuration files, but could be used in many applications where data is being stored (e.g. debugging output) or transmitted (e.g. document headers).</p>
@@ -1166,10 +1166,13 @@ a server you connected to via ssh (REMOTE).</p>
 <li>
 <p>a <strong>development</strong> ISLE environment is a separate ISLE instance running all development (experimental and untested) private (non-public) facing code, themes, databases and a limited amount of collection data or objects.</p>
 <ul>
-<li><strong>development</strong> should not be a mirror of production and can be greatly limited and underpowered in its resource footprint e.g. less RAM, CPU, HD etc.  </li>
+<li><strong>development</strong> should not be a mirror of production and can be greatly limited and underpowered in its resource footprint e.g. less RAM, CPU, HD, etc.  </li>
 </ul>
 </li>
 </ul>
+</li>
+<li>
+<p><strong>personal computer</strong> - a personal computer represents a personal laptop or desk computer (workstation).</p>
 </li>
 <li>
 <p><strong>Root User</strong> - the user name or account that by default has access to all commands and files on a Linux or other Unix-like operating system. It is also referred to as the root account, root, root user and the superuser. <a href="http://www.linfo.org/root.html">Learn more about root user</a></p>
@@ -1188,7 +1191,7 @@ a server you connected to via ssh (REMOTE).</p>
 <p>Generate SSL certificates by using ONE of the following methods:</p>
 </li>
 <li>
-<p>Ask your IT department to provision a complete <a href="https://support.dnsimple.com/articles/what-is-ssl-certificate-chain/">SSL Certificate Chain</a>. On your Remote Server ISLE Installation you will place the SSL certificates into the <code>./ISLE/config/proxy/ssl-certs</code> directory. These SSL certificates are used by the <code>apache</code> &amp; <code>proxy</code> Docker containers.</p>
+<p>Ask your IT department to provision a complete <a href="https://support.dnsimple.com/articles/what-is-ssl-certificate-chain/">SSL Certificate Chain</a>. On your remote server ISLE Installation you will place the SSL certificates into the <code>./ISLE/config/proxy/ssl-certs</code> directory. These SSL certificates are used by the <code>apache</code> &amp; <code>proxy</code> Docker containers.</p>
 </li>
 <li>
 <p>Use <a href="https://letsencrypt.org/">Let's Encrypt</a>, a free, automated, and open Certificate Authority for generating SSL certificates for your ISLE environment. In order to get a certificate for your website’s domain from Let’s Encrypt, you have to demonstrate control over the domain. With Let’s Encrypt, you do this using software that uses the ACME protocol, which typically runs on your web host. To begin, visit the <a href="../configuring-lets-encrypt/">Let's Encrypt: Free SSL Certificates</a> ISLE guide.</p>
@@ -1208,9 +1211,6 @@ a server you connected to via ssh (REMOTE).</p>
 <li>
 <p><strong>sudo</strong> - short for "substitute user do" and it allows the user to have root permissions when entered in front of a command. <a href="https://www.sudo.ws/intro.html">Learn more about sudo</a></p>
 </li>
-<li>
-<p><strong>workstation</strong> - a workstation represents a personal laptop or desk computer.</p>
-</li>
 </ul>
 <hr />
 <h2 id="virtualization">Virtualization</h2>
@@ -1219,7 +1219,7 @@ a server you connected to via ssh (REMOTE).</p>
 <p><strong>Vagrant</strong>: <a href="https://www.vagrantup.com/">Vagrant</a> provides easy to configure, reproducible, and portable work environments. Vagrant works on Mac, Linux, Windows, and more. Within the ISLE project there is a vagrant folder.</p>
 </li>
 <li>
-<p><strong>Vagrantfile</strong>: <a href="https://www.vagrantup.com/docs/vagrantfile/">Vagrantfile</a> used to describe the type of virtual machine required for the ISLE project, and how to configure and provision these virtual  machines. Vagrantfiles are called Vagrantfiles because the actual literal filename for the file is Vagrantfile. Vagrant is meant to run with one Vagrantfile per project which allows endusers to check out the code, run vagrant up, and be on their way. Vagrantfiles are used primarily for use on local workstations and laptops running a Ubuntu or CentOS ISLE Host server.</p>
+<p><strong>Vagrantfile</strong>: <a href="https://www.vagrantup.com/docs/vagrantfile/">Vagrantfile</a> used to describe the type of virtual machine required for the ISLE project, and how to configure and provision these virtual  machines. Vagrantfiles are called Vagrantfiles because the actual literal filename for the file is Vagrantfile. Vagrant is meant to run with one Vagrantfile per project which allows endusers to check out the code, run vagrant up, and be on their way. Vagrantfiles are used primarily for use on personal computers running a Ubuntu or CentOS ISLE Host server.</p>
 </li>
 <li>
 <p><strong>Virtualbox</strong>: <a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a> is a general-purpose full virtualizer for x86 hardware, targeted at server, desktop and embedded use.</p>

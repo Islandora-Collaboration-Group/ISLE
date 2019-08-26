@@ -258,8 +258,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../install-environments/" title="ISLE Environments" class="md-nav__link">
-      ISLE Environments
+    <a href="../install-environments/" title="Overview: ISLE Environments" class="md-nav__link">
+      Overview: ISLE Environments
     </a>
   </li>
 
@@ -270,8 +270,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../install-local-new/" title="Local Installation: New Site" class="md-nav__link">
-      Local Installation: New Site
+    <a href="../install-local-new/" title="Local: New Site" class="md-nav__link">
+      Local: New Site
     </a>
   </li>
 
@@ -282,8 +282,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../install-local-migrate/" title="Local Installation: Migrate Islandora Site" class="md-nav__link">
-      Local Installation: Migrate Islandora Site
+    <a href="../install-local-migrate/" title="Local: Migrate Site" class="md-nav__link">
+      Local: Migrate Site
     </a>
   </li>
 
@@ -294,8 +294,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../install-staging-new/" title="Staging Installation: New Site" class="md-nav__link">
-      Staging Installation: New Site
+    <a href="../install-staging-new/" title="Staging: New Site" class="md-nav__link">
+      Staging: New Site
     </a>
   </li>
 
@@ -306,8 +306,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../install-staging-migrate/" title="Staging Installation: Migrate Existing Islandora Site" class="md-nav__link">
-      Staging Installation: Migrate Existing Islandora Site
+    <a href="../install-staging-migrate/" title="Staging: Migrate Site" class="md-nav__link">
+      Staging: Migrate Site
     </a>
   </li>
 
@@ -318,8 +318,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../install-production-new/" title="Production Installation: New Site" class="md-nav__link">
-      Production Installation: New Site
+    <a href="../install-production-new/" title="Production: New Site" class="md-nav__link">
+      Production: New Site
     </a>
   </li>
 
@@ -330,8 +330,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../install-production-migrate/" title="Production Installation: Migrate Existing Islandora Site" class="md-nav__link">
-      Production Installation: Migrate Existing Islandora Site
+    <a href="../install-production-migrate/" title="Production: Migrate Site" class="md-nav__link">
+      Production: Migrate Site
     </a>
   </li>
 
@@ -455,6 +455,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../appendices/configuring-lets-encrypt/" title="Let's Encrypt: Free SSL Certificates" class="md-nav__link">
+      Let's Encrypt: Free SSL Certificates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../appendices/open-terminal-in-running-container/" title="Opening a Terminal in a Running Container" class="md-nav__link">
       Opening a Terminal in a Running Container
     </a>
@@ -492,13 +504,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9" type="checkbox" id="nav-4-9">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10" type="checkbox" id="nav-4-10">
     
-    <label class="md-nav__link" for="nav-4-9">
+    <label class="md-nav__link" for="nav-4-10">
       User Stories
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-9">
+      <label class="md-nav__title" for="nav-4-10">
         User Stories
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -542,18 +554,6 @@
         
       </ul>
     </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../appendices/configuring-lets-encrypt/" title="Let's Encrypt: Free SSL Certificates" class="md-nav__link">
-      Let's Encrypt: Free SSL Certificates
-    </a>
   </li>
 
         
@@ -928,7 +928,7 @@
                 
                 
                 <h1 id="demo-isle-installation-edit-the-etchosts-file">Demo ISLE Installation: Edit the "/etc/hosts" File</h1>
-<p>Edit the <code>/etc/hosts</code> file to view ISLE locally on a workstation browser.</p>
+<p>Edit the <code>/etc/hosts</code> file to view ISLE locally on a personal computer browser.</p>
 <p><strong>Please select your operating system and software:</strong></p>
 <ul>
 <li><a href="#mac-or-ubuntu-using-docker">Mac or Ubuntu Using Docker</a></li>
@@ -943,16 +943,16 @@
 <p><strong>Docker For Mac</strong> If you are using Docker For Mac, then use the IP address of <code>127.0.0.1</code> to resolve to <code>localhost</code> and to the <code>isle.localdomain localhost isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain</code> domain names</p>
 </li>
 <li>
-<p>Open a terminal on the local laptop</p>
+<p>Open a terminal on the personal computer</p>
 </li>
 <li>
 <p>Enter: <code>sudo nano /etc/hosts</code></p>
+<ul>
+<li><em>For endusers familiar with editing files on the command line, vim, emacs or alternative tools can be used in lieu of nano</em></li>
+</ul>
 </li>
 <li>
-<p><em>For endusers familiar with editing files on the command line, vim, emacs or alternative tools can be used in lieu of nano</em></p>
-</li>
-<li>
-<p>Enter the laptop end user password</p>
+<p>Enter the personal computer end user password</p>
 </li>
 <li>
 <p>Find the <code>127.0.0.1 localhost</code> entry in the <code>/etc/hosts</code> file.</p>
@@ -984,7 +984,7 @@
 <p>For endusers running MacOS and Ubuntu Desktop:</p>
 </li>
 <li>
-<p>Open a terminal on the local laptop</p>
+<p>Open a terminal on the personal computer</p>
 </li>
 <li>
 <p>Enter: <code>sudo nano /etc/hosts</code></p>
@@ -993,13 +993,13 @@
 </ul>
 </li>
 <li>
-<p>Enter the laptop end user password</p>
+<p>Enter the personal computer end user password</p>
 </li>
 <li>
 <p>Add the values below the <code>127.0.0.1</code> entry in the <code>/etc/hosts</code> file.</p>
 <ul>
 <li><code>10.10.10.130 localhost isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain</code>  </li>
-<li><strong>Example</strong></li>
+<li><strong>Example:</strong></li>
 </ul>
 </li>
 </ul>

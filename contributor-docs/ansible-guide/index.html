@@ -258,8 +258,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../install/install-environments/" title="ISLE Environments" class="md-nav__link">
-      ISLE Environments
+    <a href="../../install/install-environments/" title="Overview: ISLE Environments" class="md-nav__link">
+      Overview: ISLE Environments
     </a>
   </li>
 
@@ -270,8 +270,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../install/install-local-new/" title="Local Installation: New Site" class="md-nav__link">
-      Local Installation: New Site
+    <a href="../../install/install-local-new/" title="Local: New Site" class="md-nav__link">
+      Local: New Site
     </a>
   </li>
 
@@ -282,8 +282,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../install/install-local-migrate/" title="Local Installation: Migrate Islandora Site" class="md-nav__link">
-      Local Installation: Migrate Islandora Site
+    <a href="../../install/install-local-migrate/" title="Local: Migrate Site" class="md-nav__link">
+      Local: Migrate Site
     </a>
   </li>
 
@@ -294,8 +294,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../install/install-staging-new/" title="Staging Installation: New Site" class="md-nav__link">
-      Staging Installation: New Site
+    <a href="../../install/install-staging-new/" title="Staging: New Site" class="md-nav__link">
+      Staging: New Site
     </a>
   </li>
 
@@ -306,8 +306,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../install/install-staging-migrate/" title="Staging Installation: Migrate Existing Islandora Site" class="md-nav__link">
-      Staging Installation: Migrate Existing Islandora Site
+    <a href="../../install/install-staging-migrate/" title="Staging: Migrate Site" class="md-nav__link">
+      Staging: Migrate Site
     </a>
   </li>
 
@@ -318,8 +318,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../install/install-production-new/" title="Production Installation: New Site" class="md-nav__link">
-      Production Installation: New Site
+    <a href="../../install/install-production-new/" title="Production: New Site" class="md-nav__link">
+      Production: New Site
     </a>
   </li>
 
@@ -330,8 +330,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../install/install-production-migrate/" title="Production Installation: Migrate Existing Islandora Site" class="md-nav__link">
-      Production Installation: Migrate Existing Islandora Site
+    <a href="../../install/install-production-migrate/" title="Production: Migrate Site" class="md-nav__link">
+      Production: Migrate Site
     </a>
   </li>
 
@@ -455,6 +455,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../appendices/configuring-lets-encrypt/" title="Let's Encrypt: Free SSL Certificates" class="md-nav__link">
+      Let's Encrypt: Free SSL Certificates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../appendices/open-terminal-in-running-container/" title="Opening a Terminal in a Running Container" class="md-nav__link">
       Opening a Terminal in a Running Container
     </a>
@@ -492,13 +504,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9" type="checkbox" id="nav-4-9">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10" type="checkbox" id="nav-4-10">
     
-    <label class="md-nav__link" for="nav-4-9">
+    <label class="md-nav__link" for="nav-4-10">
       User Stories
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-9">
+      <label class="md-nav__title" for="nav-4-10">
         User Stories
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -542,18 +554,6 @@
         
       </ul>
     </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../appendices/configuring-lets-encrypt/" title="Let's Encrypt: Free SSL Certificates" class="md-nav__link">
-      Let's Encrypt: Free SSL Certificates
-    </a>
   </li>
 
         
@@ -1063,7 +1063,7 @@
 <p><strong>Notes:</strong></p>
 <ul>
 <li>
-<p>For MacOS users using a local ISLE Host VM on their workstation, please scroll down to line <strong>395</strong> the section called
+<p>For MacOS users using a local ISLE Host VM on their personal computer, please scroll down to line <strong>395</strong> the section called
 <code>Using Ansible on MacOS</code>.</p>
 </li>
 <li>
@@ -1082,7 +1082,10 @@
 <p>Familiarity or knowledge of Ansible</p>
 </li>
 <li>
-<p>Ansible control workstation, laptop or server that runs only MacOs, BSD or Linux with the following:</p>
+<p>Note: The "Ansible Control Node" is the machine where Ansible is installed.</p>
+</li>
+<li>
+<p>Ansible Control Node Requirements: Currently Ansible can be run from any machine with Python 2 (version 2.7) or Python 3 (versions 3.5 and higher) installed. Windows isn’t supported for the control node. This includes Red Hat, Debian, CentOS, macOS, any of the BSDs, and so on.</p>
 <ul>
 <li><code>Ansible 2.2+</code> (choice of <a href="http://docs.ansible.com/ansible/latest/intro_installation.html#installing-the-control-machine">install methods</a>)</li>
 <li><code>openssh</code> (2.2.x+)</li>
@@ -1226,7 +1229,7 @@
 </tbody>
 </table>
 <h4 id="makes-isle-host-service-changes">Makes ISLE Host Service Changes</h4>
-<p><strong>Please Note:</strong> <em>Any of these services can be re-enabled post installation see appropriate documentation for opening ports on firewalls etc.</em></p>
+<p><strong>Please Note:</strong> <em>Any of these services can be re-enabled post installation see appropriate documentation for opening ports on firewalls, etc.</em></p>
 <table>
 <thead>
 <tr>
@@ -1327,7 +1330,7 @@
 <li><code>ansible/host_vars/isle-prod-project.institution.yml</code></li>
 </ul>
 <p>Basically wherever <code>isle-prod-project.institution</code> appears as a value in these three files, please replace with the appropriate ISLE Host server fully qualified domain name (<strong>fqdn</strong>) e.g. <code>yourislesite.institution.com</code></p>
-<p>One can open up and edit all files in a text editor e.g. Atom, Textedit, Textwrangler etc.</p>
+<p>One can open up and edit all files in a text editor e.g. Atom, Textedit, Textwrangler, etc.</p>
 <h4 id="ansibledocker_installyml"><code>ansible/docker_install.yml</code></h4>
 <p><em>This is the Ansible playbook necessary to deploy software to the ISLE host server.</em></p>
 <ul>
@@ -1342,13 +1345,13 @@
 </li>
 <li>
 <p>Line 8: Add the appropriate ISLE Host server user account that has <code>sudo</code> passwordless permissions to the end of <code>ansible_ssh_user=</code></p>
-<p><strong>Example</strong>: <code>ansible_ssh_user=janesmith</code></p>
+<p><strong>Example:</strong>: <code>ansible_ssh_user=janesmith</code></p>
 </li>
 <li>
 <p>Line 8: Add the appropriate path to this ISLE Host Server user accounts public ssh key to the end of <code>ansible_ssh_private_key_file=</code></p>
 </li>
 <li>
-<p><strong>Example</strong> of inventory using settings for local Ansible deploy laptop:</p>
+<p><strong>Example:</strong> of inventory using settings for local Ansible deploy personal computer:</p>
 </li>
 </ul>
 <pre><code>ansible_ssh_private_key_file=/home/janesmith/.ssh/id_rsa.pub
@@ -1368,7 +1371,7 @@ yourislesite.institution.com ansible_connection=ssh ansible_ssh_user=janesmith a
 <p>Copy this file and rename the copy to with the appropriate <strong>fqdn</strong></p>
 </li>
 <li>
-<p><strong>Example</strong> of how <code>host_vars</code> directory should now contain two files:  </p>
+<p><strong>Example:</strong> of how <code>host_vars</code> directory should now contain two files:  </p>
 </li>
 </ul>
 <pre><code>ansible
@@ -1420,7 +1423,7 @@ ansible -i inventory isle-host-server -m ping
 </code></pre>
 
 <ul>
-<li><strong>Example</strong> output of above command (<em>IGNORE THE WARNING</em>)</li>
+<li><strong>Example:</strong> output of above command (<em>IGNORE THE WARNING</em>)</li>
 </ul>
 <pre><code>[WARNING]: Found both group and host with same name: isle-host-server   
 
@@ -1430,7 +1433,7 @@ isle-host-server | SUCCESS =&gt; {
    }
 </code></pre>
 
-<p><strong>Please Note:</strong> <em>If SUCCESS does not appear as a value or if the wording of the prompt is in RED with "host does not exist ...", review all steps above and check the settings. Do not advance until the <strong>Example</strong> output above matches.</em>  </p>
+<p><strong>Please Note:</strong> <em>If SUCCESS does not appear as a value or if the wording of the prompt is in RED with "host does not exist ...", review all steps above and check the settings. Do not advance until the <strong>Example:</strong> output above matches.</em>  </p>
 <h3 id="ansible-commands-for-deploy">Ansible Commands for Deploy</h3>
 <ul>
 <li>
@@ -1441,8 +1444,8 @@ isle-host-server | SUCCESS =&gt; {
 <p>Ansible will start displaying output within the terminal. If any turn red and the script terminates, please review the above settings and connectivity to the server. Attempt to rerun the script.</p>
 <h3 id="qc-review-checklist">QC Review Checklist</h3>
 <p>To ensure a successful deploy to the ISLE Server, please review the following to ensure that the deploy to the Islandora Host server was successful.</p>
-<p>Open a terminal window on the Ansible control laptop /workstation and <code>ssh</code> into the Islandora Host server using the appropriate end user account setup prior to the deploy.</p>
-<p><strong>Example</strong>:</p>
+<p>Open a terminal window on the Ansible control personal computer and <code>ssh</code> into the Islandora Host server using the appropriate end user account setup prior to the deploy.</p>
+<p><strong>Example:</strong>:</p>
 <p><code>ssh enduser@isle-prod-project.institution</code></p>
 <hr />
 <h4 id="docker">Docker</h4>
@@ -1450,19 +1453,19 @@ isle-host-server | SUCCESS =&gt; {
 <li>
 <p>To check where Docker has been installed to, enter:  </p>
 <p><code>which docker</code>    </p>
-<p><strong>Example</strong> output:      </p>
+<p><strong>Example:</strong> output:      </p>
 <p><code>/usr/bin/docker</code></p>
 </li>
 <li>
 <p>To check which version of Docker has been installed, enter:</p>
 <p><code>docker --version</code></p>
-<p><strong>Example</strong> output:</p>
+<p><strong>Example:</strong> output:</p>
 <p><code>Docker version 17.12.0-ce, build c97c6d6</code></p>
 </li>
 <li>
 <p>To check if Docker is running, enter:</p>
 <p><code>service docker status</code>   </p>
-<p><strong>Example</strong> output:</p>
+<p><strong>Example:</strong> output:</p>
 </li>
 </ul>
 <pre><code>Redirecting to /bin/systemctl status docker.service
@@ -1479,7 +1482,7 @@ Main PID: 23066 (dockerd)
 <li>
 <p>To check if the ISLE images have been downloaded on the ISLE Host server, enter:</p>
 <p><code>docker image ls</code></p>
-<p><strong>Example</strong> output:  </p>
+<p><strong>Example:</strong> output:  </p>
 </li>
 </ul>
 <pre><code>REPOSITORY                         TAG                 IMAGE ID            CREATED             SIZE
@@ -1495,13 +1498,13 @@ islandoracollabgroup/isle-proxy    latest              5gdc45f1a074        2 wee
 <li>
 <p>To check where Docker-compose has been installed to, enter:  </p>
 <p><code>which docker-compose</code></p>
-<p><strong>Example</strong> output:</p>
+<p><strong>Example:</strong> output:</p>
 <p><code>/usr/local/bin/docker-compose</code></p>
 </li>
 <li>
 <p>To check which version of Docker-compose has been installed, enter:</p>
 <p><code>docker-compose -version</code></p>
-<p><strong>Example</strong> output:</p>
+<p><strong>Example:</strong> output:</p>
 <p><code>docker-compose version 1.20.1, build 1719ceb</code></p>
 </li>
 </ul>
@@ -1510,7 +1513,7 @@ islandoracollabgroup/isle-proxy    latest              5gdc45f1a074        2 wee
 <li>
 <p>To check if the <code>islandora</code> user has been created, enter:</p>
 <p><code>cat /etc/passwd</code>  </p>
-<p><strong>Example</strong> output:</p>
+<p><strong>Example:</strong> output:</p>
 <p><code>islandora:x:1002:1002::/home/islandora:/bin/bash</code></p>
 </li>
 </ul>
@@ -1519,7 +1522,7 @@ islandoracollabgroup/isle-proxy    latest              5gdc45f1a074        2 wee
 <li>
 <p>To check if the ISLE project git repository has been cloned to <code>/opt/ISLE</code>, enter:</p>
 <p><code>ls -lh /opt/ISLE</code></p>
-<p><strong>Example</strong> output:</p>
+<p><strong>Example:</strong> output:</p>
 </li>
 </ul>
 <pre><code>total 24K
@@ -1578,7 +1581,7 @@ drwxr-xr-x. 4 islandora islandora   50 Jan 17 09:17 solr
 </ul>
 </li>
 </ul>
-<p><strong>Example</strong></p>
+<p><strong>Example:</strong></p>
 <pre><code>[host_local_macos_isle_localdomain]
 host_local_macos_isle_localdomain ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_private_key_file=/Users/enduser/.vagrant.d/insecure_private_key
 </code></pre>
@@ -1603,7 +1606,7 @@ host_local_macos_isle_localdomain ansible_connection=ssh ansible_ssh_user=vagran
 </ul>
 </li>
 </ul>
-<p><strong>Example</strong> output of above command (<em>IGNORE THE WARNING</em>)</p>
+<p><strong>Example:</strong> output of above command (<em>IGNORE THE WARNING</em>)</p>
 <pre><code>[WARNING]: Found both group and host with same name: host_local_macos_isle_localdomain   
 host_local_macos_isle_localdomain | SUCCESS =&gt; {
    &quot;changed&quot;: false,
@@ -1611,7 +1614,7 @@ host_local_macos_isle_localdomain | SUCCESS =&gt; {
  }
 </code></pre>
 
-<p><strong>Please Note:</strong> <em>If SUCCESS does not appear as a value or if the wording of the prompt is in RED with "host does not exist ...", review all steps above and check the settings. Do not advance until the <strong>Example</strong> output above matches.</em>  </p>
+<p><strong>Please Note:</strong> <em>If SUCCESS does not appear as a value or if the wording of the prompt is in RED with "host does not exist ...", review all steps above and check the settings. Do not advance until the <strong>Example:</strong> output above matches.</em>  </p>
 <ul>
 <li>To deploy to the ISLE Host Server, run this command.</li>
 </ul>
