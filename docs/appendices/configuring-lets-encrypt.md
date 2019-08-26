@@ -16,7 +16,7 @@ _Time required: approximately 30 minutes._
 
 _Note:_ You do **not** need to stop your stack to complete these steps.
 
-1. Open a terminal on your local workstation and ssh to the server or VM **that is hosting your ISLE environment**.
+1. Open a terminal on your personal computer and ssh to the server or VM **that is hosting your ISLE environment**.
 2. Change to the "ISLE" directory that contains the "docker-compose.yml": `cd /opt/ISLE`
 3. Change to the "config/proxy" directory: `cd config/proxy`
 4. Create a blank file called "acme.json": `touch acme.json`
@@ -67,6 +67,3 @@ _Note:_ You do **not** need to stop your stack to complete these steps.
 
 * [Let's Encrypt & Docker](https://docs.traefik.io/user-guide/docker-and-lets-encrypt/)
 
----
-
-**Return to [Remote Server ISLE Installation](../install/install-server.md).**

@@ -13,7 +13,7 @@
 
 ### Step 1: Install Server Prerequisites and Git
 
-- Open a terminal on your local workstation and ssh to the server or VM.
+- Open a terminal on your personal computer and ssh to the server or VM.
 
 - You must have `root` level permissions.
     - If you are not already `root`, enter either `sudo -s` or `sudo su` to become root.
@@ -108,7 +108,7 @@ Your host server is now configured and ready to run ISLE.
 
 ### Step 1: Install Server Prerequisites and Git
 
-- Open a terminal on your local workstation and ssh to the server or VM.
+- Open a terminal on your personal computer and ssh to the server or VM.
 
 - You must have `root` level permissions.
     - If you are not already `root`, enter either `sudo -s` or `sudo su` to become root.

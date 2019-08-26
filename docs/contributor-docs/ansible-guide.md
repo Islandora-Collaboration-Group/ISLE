@@ -12,7 +12,7 @@ If you are not familiar with the Ansible, it is recommended to start with their 
 
 **Notes:**
 
-* For MacOS users using a local ISLE Host VM on their workstation, please scroll down to line **395** the section called
+* For MacOS users using a local ISLE Host VM on their personal computer, please scroll down to line **395** the section called
 `Using Ansible on MacOS`.
 
 * Windows sadly as of yet [cannot be used](http://docs.ansible.com/ansible/latest/intro_installation.html#control-machine-requirements) as a Ansible control machine  
@@ -25,7 +25,9 @@ If you are not familiar with the Ansible, it is recommended to start with their 
 
 * Familiarity or knowledge of Ansible
 
-* Ansible control workstation, laptop or server that runs only MacOs, BSD or Linux with the following:
+* Note: The "Ansible Control Node" is the machine where Ansible is installed.
+
+* Ansible Control Node Requirements: Currently Ansible can be run from any machine with Python 2 (version 2.7) or Python 3 (versions 3.5 and higher) installed. Windows isn’t supported for the control node. This includes Red Hat, Debian, CentOS, macOS, any of the BSDs, and so on.
     * `Ansible 2.2+` (choice of [install methods](http://docs.ansible.com/ansible/latest/intro_installation.html#installing-the-control-machine))
     * `openssh` (2.2.x+)
     * `git` (2.15.1+)
@@ -85,7 +87,7 @@ The Ansible script will deploy the following to the ISLE Host server:
 
 #### Makes ISLE Host Service Changes
 
-**Please Note:** _Any of these services can be re-enabled post installation see appropriate documentation for opening ports on firewalls etc._
+**Please Note:** _Any of these services can be re-enabled post installation see appropriate documentation for opening ports on firewalls, etc._
 
 | Ubuntu / Debian             | CentOS                        |
 | -------------               | -------------                 |
@@ -168,7 +170,7 @@ To configure the Ansible script to deploy to one's institutional ISLE Host Serve
 
 Basically wherever `isle-prod-project.institution` appears as a value in these three files, please replace with the appropriate ISLE Host server fully qualified domain name (**fqdn**) e.g. `yourislesite.institution.com`
 
-One can open up and edit all files in a text editor e.g. Atom, Textedit, Textwrangler etc.
+One can open up and edit all files in a text editor e.g. Atom, Textedit, Textwrangler, etc.
 
 #### `ansible/docker_install.yml`
 
@@ -186,11 +188,11 @@ _This is the possible list of server(s) to deploy to using Ansible and its assoc
 
 * Line 8: Add the appropriate ISLE Host server user account that has `sudo` passwordless permissions to the end of `ansible_ssh_user=`
 
-     **Example**: `ansible_ssh_user=janesmith`
+     **Example:**: `ansible_ssh_user=janesmith`
 
 * Line 8: Add the appropriate path to this ISLE Host Server user accounts public ssh key to the end of `ansible_ssh_private_key_file=`
 
-  * **Example** of inventory using settings for local Ansible deploy laptop:
+  * **Example:** of inventory using settings for local Ansible deploy personal computer:
 
 ```
 ansible_ssh_private_key_file=/home/janesmith/.ssh/id_rsa.pub
@@ -211,7 +213,7 @@ yourislesite.institution.com ansible_connection=ssh ansible_ssh_user=janesmith a
 
 * Copy this file and rename the copy to with the appropriate **fqdn**
 
-  * **Example** of how `host_vars` directory should now contain two files:  
+  * **Example:** of how `host_vars` directory should now contain two files:  
 
 ```
 ansible
@@ -250,7 +252,7 @@ cd /path/to/ISLE/repo/ansible
 ansible -i inventory isle-host-server -m ping
 ```
 
-  * **Example** output of above command (_IGNORE THE WARNING_)
+  * **Example:** output of above command (_IGNORE THE WARNING_)
 
 ```
 [WARNING]: Found both group and host with same name: isle-host-server   
@@ -262,7 +264,7 @@ isle-host-server | SUCCESS => {
 ```
 
 
-**Please Note:** _If SUCCESS does not appear as a value or if the wording of the prompt is in RED with "host does not exist ...", review all steps above and check the settings. Do not advance until the **Example** output above matches._  
+**Please Note:** _If SUCCESS does not appear as a value or if the wording of the prompt is in RED with "host does not exist ...", review all steps above and check the settings. Do not advance until the **Example:** output above matches._  
 
 
 ### Ansible Commands for Deploy
@@ -277,9 +279,9 @@ Ansible will start displaying output within the terminal. If any turn red and th
 
 To ensure a successful deploy to the ISLE Server, please review the following to ensure that the deploy to the Islandora Host server was successful.
 
-Open a terminal window on the Ansible control laptop /workstation and `ssh` into the Islandora Host server using the appropriate end user account setup prior to the deploy.
+Open a terminal window on the Ansible control personal computer and `ssh` into the Islandora Host server using the appropriate end user account setup prior to the deploy.
 
-**Example**:
+**Example:**:
 
    `ssh enduser@isle-prod-project.institution`
 
@@ -291,7 +293,7 @@ Open a terminal window on the Ansible control laptop /workstation and `ssh` into
 
     `which docker`    
 
-    **Example** output:      
+    **Example:** output:      
 
     `/usr/bin/docker`
 
@@ -299,7 +301,7 @@ Open a terminal window on the Ansible control laptop /workstation and `ssh` into
 
     `docker --version`
 
-    **Example** output:
+    **Example:** output:
 
     `Docker version 17.12.0-ce, build c97c6d6`
 
@@ -307,7 +309,7 @@ Open a terminal window on the Ansible control laptop /workstation and `ssh` into
 
     `service docker status`   
 
-    **Example** output:
+    **Example:** output:
 
 ```
 Redirecting to /bin/systemctl status docker.service
@@ -324,7 +326,7 @@ Main PID: 23066 (dockerd)
 
     `docker image ls`
 
-     **Example** output:  
+     **Example:** output:  
 
 ```
 REPOSITORY                         TAG                 IMAGE ID            CREATED             SIZE
@@ -342,7 +344,7 @@ islandoracollabgroup/isle-proxy    latest              5gdc45f1a074        2 wee
 
     `which docker-compose`
 
-    **Example** output:
+    **Example:** output:
 
     `/usr/local/bin/docker-compose`
 
@@ -351,7 +353,7 @@ islandoracollabgroup/isle-proxy    latest              5gdc45f1a074        2 wee
 
     `docker-compose -version`
 
-    **Example** output:
+    **Example:** output:
 
     `docker-compose version 1.20.1, build 1719ceb`
 
@@ -362,7 +364,7 @@ islandoracollabgroup/isle-proxy    latest              5gdc45f1a074        2 wee
 
     `cat /etc/passwd`  
 
-    **Example** output:
+    **Example:** output:
 
     `islandora:x:1002:1002::/home/islandora:/bin/bash`
 
@@ -373,7 +375,7 @@ islandoracollabgroup/isle-proxy    latest              5gdc45f1a074        2 wee
 
     `ls -lh /opt/ISLE`
 
-    **Example** output:
+    **Example:** output:
 
 
 ```
@@ -417,7 +419,7 @@ Proceed to bottom of this page for next steps.
 
     * Use `~/Users/enduser/.vagrant.d/insecure_private_key` for the `ansible_ssh_private_key_file` value in the `ansible/inventory` file
 
-**Example**
+**Example:**
 ```    
 [host_local_macos_isle_localdomain]
 host_local_macos_isle_localdomain ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_private_key_file=/Users/enduser/.vagrant.d/insecure_private_key
@@ -435,7 +437,7 @@ host_local_macos_isle_localdomain ansible_connection=ssh ansible_ssh_user=vagran
 
     * `ansible -i inventory host_local_macos_isle_localdomain -m ping`
 
-**Example** output of above command (_IGNORE THE WARNING_)
+**Example:** output of above command (_IGNORE THE WARNING_)
 ```
 [WARNING]: Found both group and host with same name: host_local_macos_isle_localdomain   
 host_local_macos_isle_localdomain | SUCCESS => {
@@ -443,7 +445,7 @@ host_local_macos_isle_localdomain | SUCCESS => {
    "ping": "pong"
  }
 ```
-**Please Note:** _If SUCCESS does not appear as a value or if the wording of the prompt is in RED with "host does not exist ...", review all steps above and check the settings. Do not advance until the **Example** output above matches._  
+**Please Note:** _If SUCCESS does not appear as a value or if the wording of the prompt is in RED with "host does not exist ...", review all steps above and check the settings. Do not advance until the **Example:** output above matches._  
 
 
 * To deploy to the ISLE Host Server, run this command.

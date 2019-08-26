@@ -1,6 +1,6 @@
 # Hardware Requirements
 
-The ISLE host server can be a workstation, physical server, virtual machine (VM) or cloud service. An SSH connection with a user that has root or admin privileges is necessary. 
+The ISLE host server can be a personal computer, physical server, virtual machine (VM) or cloud service. An SSH connection with a user that has root or admin privileges is necessary. 
 
 If you need help requesting a server environment, please see the [Sample IT Department Request Letter](../appendices/sample-it-department-request.md).
 
@@ -16,7 +16,7 @@ If you need help requesting a server environment, please see the [Sample IT Depa
 
 - [Production Server](#production-server)
 - [Staging Server](#staging-server)
-- [Personal Computer: Demo or Local](#personal-computer-demo-or-local)
+- [Personal Computer (Demo or Local)](#personal-computer-demo-or-local)
 
 ---
 
@@ -52,9 +52,9 @@ Below are the recommended minimum specifications for a staging server. The serve
 
 ---
 
-## Personal Computer: Demo or Local
+## Personal Computer (Demo or Local)
 
-Below are the recommended specifications for a workstation running a Demo ISLE Installation:
+Below are the recommended specifications for a personal computer running a Demo ISLE Installation:
 
 * Your own OS (whatever it is)
 * Minimum of 2 CPU cores

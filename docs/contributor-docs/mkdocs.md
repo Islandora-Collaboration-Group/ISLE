@@ -43,7 +43,7 @@ INFO    -  Cleaning site directory
 * It is critical for this terminal to keep running
     * as mkdocs will report file changes and any potential issues.
     * To review changes in real time via the browser
-* Use the terminal output for debugging issues or missing files, links etc.
+* Use the terminal output for debugging issues or missing files, links, etc.
 * To stop `mkdocs`, click the `Cntrl` and `c` key at the same time. `(Cntrl-C)`
 
 ---

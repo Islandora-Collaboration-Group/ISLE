@@ -26,10 +26,10 @@
 
 * **Dockerhub**: [website / repository](https://hub.docker.com/website/repository) that provides access to the latest Docker images for the ISLE containers.
 
-* **Host Server**: Also called "the host" - this is the base computer upon which the entire ISLE stack is built - this can be a virtual machine on a laptop (LOCAL), or
+* **Host Server**: Also called "the host" - this is the base computer upon which the entire ISLE stack is built - this can be a virtual machine on a personal computer (LOCAL), or
 a server you connected to via ssh (REMOTE).
 
-* **Images**: [Docker images](https://docs.docker.com/engine/reference/commandline/images/) - source for the containers - these are built with installed software and updated by ISLE developers and stored on Dockerhub. You can see what software is used in each of the image's Dockerfiles e.g. `apache/Dockerfile` etc. This will contain additional information on official Docker images used as a Docker [base image](https://docs.docker.com/develop/develop-images/baseimages/)
+* **Images**: [Docker images](https://docs.docker.com/engine/reference/commandline/images/) - source for the containers - these are built with installed software and updated by ISLE developers and stored on Dockerhub. You can see what software is used in each of the image's Dockerfiles e.g. `apache/Dockerfile`, etc. This will contain additional information on official Docker images used as a Docker [base image](https://docs.docker.com/develop/develop-images/baseimages/)
 
 * **ISLE on GitHub**: the ISLE repository on github.com contains documentation and configuration files necessary to build ISLE.
 
@@ -56,7 +56,7 @@ a server you connected to via ssh (REMOTE).
     * [http://kirkstrobeck.github.io/whatismarkdown.com/](http://kirkstrobeck.github.io/whatismarkdown.com/)
     * [https://help.github.com/categories/writing-on-github/](https://help.github.com/categories/writing-on-github/)
 
-* **TL;DR** - "Too long; didn't read." - used to indicate a large post, article etc. that has a brief summary of said post, article etc. as it might be too long to read.
+* **TL;DR** - "Too long; didn't read." - used to indicate a large post, article, etc. that has a brief summary of said post, article, etc. as it might be too long to read.
 
 * **YAML** (YAML Ain't Markup Language) is a human-readable data serialization language. It is commonly used for configuration files, but could be used in many applications where data is being stored (e.g. debugging output) or transmitted (e.g. document headers).
     * [https://en.wikipedia.org/wiki/YAML](https://en.wikipedia.org/wiki/YAML)
@@ -108,7 +108,9 @@ Solr - an open source enterprise search platform with the such features as full-
         * **staging** should be an exact mirror of production (RAM, CPU, storage etc) with the exception of new code to be reviewed and tested internally prior to pushing to production.
 
     * a **development** ISLE environment is a separate ISLE instance running all development (experimental and untested) private (non-public) facing code, themes, databases and a limited amount of collection data or objects.
-        * **development** should not be a mirror of production and can be greatly limited and underpowered in its resource footprint e.g. less RAM, CPU, HD etc.  
+        * **development** should not be a mirror of production and can be greatly limited and underpowered in its resource footprint e.g. less RAM, CPU, HD, etc.  
+
+* **personal computer** - a personal computer represents a personal laptop or desk computer (workstation).
 
 * **Root User** - the user name or account that by default has access to all commands and files on a Linux or other Unix-like operating system. It is also referred to as the root account, root, root user and the superuser. [Learn more about root user](http://www.linfo.org/root.html)
 
@@ -119,7 +121,7 @@ Solr - an open source enterprise search platform with the such features as full-
 
     * Generate SSL certificates by using ONE of the following methods:
 
-    * Ask your IT department to provision a complete [SSL Certificate Chain](https://support.dnsimple.com/articles/what-is-ssl-certificate-chain/). On your Remote Server ISLE Installation you will place the SSL certificates into the `./ISLE/config/proxy/ssl-certs` directory. These SSL certificates are used by the `apache` & `proxy` Docker containers.
+    * Ask your IT department to provision a complete [SSL Certificate Chain](https://support.dnsimple.com/articles/what-is-ssl-certificate-chain/). On your remote server ISLE Installation you will place the SSL certificates into the `./ISLE/config/proxy/ssl-certs` directory. These SSL certificates are used by the `apache` & `proxy` Docker containers.
 
     * Use [Let's Encrypt](https://letsencrypt.org/), a free, automated, and open Certificate Authority for generating SSL certificates for your ISLE environment. In order to get a certificate for your website’s domain from Let’s Encrypt, you have to demonstrate control over the domain. With Let’s Encrypt, you do this using software that uses the ACME protocol, which typically runs on your web host. To begin, visit the [Let's Encrypt: Free SSL Certificates](../appendices/configuring-lets-encrypt.md) ISLE guide.
 
@@ -132,15 +134,13 @@ Solr - an open source enterprise search platform with the such features as full-
 
 * **sudo** - short for "substitute user do" and it allows the user to have root permissions when entered in front of a command. [Learn more about sudo](https://www.sudo.ws/intro.html)
 
-* **workstation** - a workstation represents a personal laptop or desk computer.
-
 ---
 
 ## Virtualization
 
 * **Vagrant**: [Vagrant](https://www.vagrantup.com/) provides easy to configure, reproducible, and portable work environments. Vagrant works on Mac, Linux, Windows, and more. Within the ISLE project there is a vagrant folder.
 
-* **Vagrantfile**: [Vagrantfile](https://www.vagrantup.com/docs/vagrantfile/) used to describe the type of virtual machine required for the ISLE project, and how to configure and provision these virtual  machines. Vagrantfiles are called Vagrantfiles because the actual literal filename for the file is Vagrantfile. Vagrant is meant to run with one Vagrantfile per project which allows endusers to check out the code, run vagrant up, and be on their way. Vagrantfiles are used primarily for use on local workstations and laptops running a Ubuntu or CentOS ISLE Host server.
+* **Vagrantfile**: [Vagrantfile](https://www.vagrantup.com/docs/vagrantfile/) used to describe the type of virtual machine required for the ISLE project, and how to configure and provision these virtual  machines. Vagrantfiles are called Vagrantfiles because the actual literal filename for the file is Vagrantfile. Vagrant is meant to run with one Vagrantfile per project which allows endusers to check out the code, run vagrant up, and be on their way. Vagrantfiles are used primarily for use on personal computers running a Ubuntu or CentOS ISLE Host server.
 
 * **Virtualbox**: [VirtualBox](https://www.virtualbox.org/wiki/Downloads) is a general-purpose full virtualizer for x86 hardware, targeted at server, desktop and embedded use.
 
