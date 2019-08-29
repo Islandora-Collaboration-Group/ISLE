@@ -231,17 +231,23 @@ Continue the local setup as directed below and ultimately import some objects fr
 
 ## Step 3: Git Clone the Production Islandora Drupal Site Code
 
-This step assumes you have an existing Drupal /Islandora site checked into a git repository.
+This step assumes you have an existing Islandora Drupal site checked into a git repository. (If not, then you'll need to check your Drupal site into a git repository following the same commands from [Local ISLE Installation: New Site](../install/install-local-new.md) documentation.)
 
-If not then you'll need to check your Drupal site into a git repo following the same commands from [Local ISLE Installation: New Site](../install/install-local-new.md) documentation.
+**Note:** If below you see a "fatal: Could not read from remote repository." error, then please read [Fatal: Could not read from remote repository](../install/install-troubleshooting.md#fatal-could-not-read-from-remote-repository).
 
 Using the still open `terminal` (Windows: `PowerShell`):
 
-* `mkdir -p data/apache/html`
-* `git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-islandora.git data/apache/html`
-    * (Optional) You can chose another directory of your choice as the bind-mounts match in the Apache services volume section within the `docker-compose.local.yml` matches that other location
-
-* Move the previously copied Production Islandora Drupal `files` directory to inside the `data/apache/html/sites/default/` directory.
+* Create a local bind-mount (persistent) and store your Production Islandora Drupal site code outside of your ISLE directory
+* While you may create your new bind-mount directory anywhere, we suggest that you put it at the same level as your existing ISLE directory.
+* `cd ..`
+* `git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-islandora.git`
+    * Example: The above process created a folder named "yourprojectnamehere-islandora"
+* Open `docker-compose.local.yml`
+    * Search for "apache:"
+    * Find the sub-section called "volumes:"
+    * Find this line: "- ./data/apache/html:/var/www/html:cached"
+    * Edit the above line to be like this: ` - ../yourprojectnamehere-islandora:/var/www/html:cached`
+* Your bind-mount is now complete.
 
 ---
 
