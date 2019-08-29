@@ -66,17 +66,17 @@ Within your git repository provider / hoster (e.g [Github](https://github.com), 
 2. Islandora Drupal site code - e.g. `yourprojectnamehere-islandora`
     * This Git repository will hold your copy of the Islandora Drupal code along with your site specific customizations. Storing this in a code repository and following the workflow described here will save you a lot of time and confusion.
 
-The git project name can be your institution name or the name of the collections you plan to deploy; your choice entirely. A very clear distinction between the ISLE and Islandora code should be made in the repo name. Do not confuse or label Islandora Drupal site code as ISLE and vice-versa.
+The git project name can be your institution name or the name of the collections you plan to deploy; your choice entirely. A very clear distinction between the ISLE and Islandora code should be made in the repository name. Do not confuse or label Islandora Drupal site code as ISLE and vice-versa.
 
 Clone this newly created ISLE project to your personal computer
 
   * Open a `terminal` (Windows: open `PowerShell`)
-  * Navigate to an directory that will house your new ISLE project directory using the `cd` command.
+  * Navigate to a directory that will house your new ISLE project directory using the `cd` command.
   * `git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git`
 
 Navigate to this directory
 
-  * `cd /path/to/your/repo`
+  * `cd /path/to/your/repository`
 
 Add the ICG ISLE git repository as a git upstream. (_the code below is a real path and command_)
 
@@ -104,7 +104,7 @@ Push this code to your online git provider ISLE
   * `git push -u origin master`
   * This will take 2 - 5 mins depending on your internet speed.
 
-Now you have the current ISLE project code checked into git as foundation to make changes on specific to your local and project needs. You'll use this git upstream `icg-upstream` and process in the future to pull updates / releases from the main ISLE project.
+Now you have the current ISLE project code checked into git as foundation to make changes on specific to your local and project needs. You'll use this git "icg-upstream" process in the future to pull updates and releases from the main ISLE project.
 
 ---
 

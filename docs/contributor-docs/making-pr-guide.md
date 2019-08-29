@@ -16,7 +16,7 @@ Prerequisites:
 
 Log into github.com and fork the ISLE repository into your github.com account.
 Navigate to https://github.com/Islandora-Collaboration-Group/ISLE and then click
-the “Fork” box (upper right corner of screen) to make a copy of this repo in your
+the “Fork” box (upper right corner of screen) to make a copy of this repository in your
 own github.com account that you can then clone down to  your local development
 environment:
 
