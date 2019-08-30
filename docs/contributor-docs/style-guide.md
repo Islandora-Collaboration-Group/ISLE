@@ -50,7 +50,7 @@ Mkdocs is finicky and requires double indentations to create properly indented s
 
 ## Terms We Use
 - personal computer (**we use a generic term and NOT specific variants like:** laptop, workstation, desktop computer, or tablet, etc.)
-- repository (not "repository")
+- repository (not "repo")
 - end users (not endusers)
 - Demo ISLE Installation
 - Local ISLE Installation: New Site
