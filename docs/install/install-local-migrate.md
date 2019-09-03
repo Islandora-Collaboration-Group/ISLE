@@ -237,17 +237,19 @@ This step assumes you have an existing Islandora Drupal site checked into a git 
 
 Using the still open `terminal` (Windows: `PowerShell`):
 
-* Create a local bind-mount (persistent) and store your Production Islandora Drupal site code outside of your ISLE directory
-* While you may create your new bind-mount directory anywhere, we suggest that you put it at the same level as your existing ISLE directory.
-* `cd ..`
-* `git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-islandora.git`
-    * Example: The above process created a folder named "yourprojectnamehere-islandora"
-* Open `docker-compose.local.yml`
+* Create a location outside of your ISLE directory where your Islandora Drupal site code will be stored.
+  While you may create this location anywhere, we suggest that you put it at the same level as your existing ISLE directory.
+    * From your ISLE directory:
+        * `cd ..`
+        * `git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-islandora.git`
+        * Example: The above process created a folder named "yourprojectnamehere-islandora"
+* Now update the `docker-compose.local.yml` in the ISLE repository to create a bind-mount to the Islandora Drupal site code:
     * Search for "apache:"
     * Find the sub-section called "volumes:"
     * Find this line: "- ./data/apache/html:/var/www/html:cached"
-    * Edit the above line to be like this: ` - ../yourprojectnamehere-islandora:/var/www/html:cached`
-* Your bind-mount is now complete.
+    * Edit the above line to be like this:
+        * ` - ../yourprojectnamehere-islandora:/var/www/html:cached`
+* Your Production Islandora site code is now configured to be used in this local setup.
 
 ---
 
