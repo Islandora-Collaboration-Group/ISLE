@@ -86,7 +86,7 @@ then ISLE may have encountered a conflict with the `xxxx` port identified in the
 
 In MacOS, this can frequently be caused by a local Apache or Nginx web server, or local MySQL server.  
 
-You may need to remove or disable these local web servers before you can successfully install ISLE.
+You may need to remove or disable these local web servers before you can successfully install ISLE. (Please first ensure it's not being used.)
 
 * If you have a local Apache web server that ships with most MacOS machines may conflict with port 80, and can usually be disabled from a terminal using these commands:
 
