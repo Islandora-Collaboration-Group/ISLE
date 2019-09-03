@@ -99,9 +99,6 @@ You may need to remove or disable these local web servers before you can success
 
 Once your web server(s) have been disabled, resume the ISLE install process by repeating your last installation command, presumably `docker-compose up -d`.
 
-
-**Return to [Demo ISLE Installation](../install/install-demo.md).**
-
 ---
 
 ## Viewing Logs in ISLE 1.2.0 or Higher
