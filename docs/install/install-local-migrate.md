@@ -300,16 +300,19 @@ You can reuse some of the older Production settings in the `local.env` if you li
     * Once finished, save and close the file.
 
 * _Using the same open terminal_, navigate to `/pathto/yourprojectnamehere/scripts/proxy/ssl-certs/`
-    * `cd /pathto/yourprojectnamehere/scripts/proxy/ssl-certs/`
+    * `cd ./scripts/proxy/ssl-certs/`
     * **Mac/Ubuntu/CentOS/Unix** - `chmod +x local.sh`
     * **For Windows Users only** - `chmod +x local-windows-only.sh`
 
 * The following command will generate new self-signed SSL keys using your `yourprojectnamehere.localdomain` domain. This now secures the local site.
     * **Mac/Ubuntu/CentOS/Unix** - `./local.sh`
     * **For Windows Users only** - `./local-windows-only.sh`
-    * The generated keys can now be found in `./config/proxy/ssl-certs`
+    * The generated keys can now be found in:
+    * `cd ../../../config/proxy/ssl-certs`
 
 * Add the SSL .pem and .key file names generated from running the above script to the `./config/proxy/traefik.local.toml` file.
+    * `cd ..`
+    * Open `traefik.local.toml` in a text editor.
     * Example:
     * `certFile = "/certs/yourprojectnamehere.localdomain.pem"`
     * `keyFile = "/certs/yourprojectnamehere.localdomain.key"`
