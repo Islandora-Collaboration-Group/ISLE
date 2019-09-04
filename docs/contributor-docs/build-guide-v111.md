@@ -6,7 +6,7 @@
   * `docker image ls`
   * `docker image rm -f <Docker IMAGE ID>`
 
-* Fork ISLE to personal / company github.com repo 
+* Fork ISLE to personal / company github.com repository 
   * https://github.com/Islandora-Collaboration-Group/ISLE
 
 * Fork all ISLE images to personal / company github.com repositories
@@ -18,11 +18,11 @@
   * isle-apache https://github.com/Islandora-Collaboration-Group/isle-apache
   * isle-mysql https://github.com/Islandora-Collaboration-Group/isle-mysql
 
-* Git clone the forked ISLE project git repo to your local development personal computer.
+* Git clone the forked ISLE project git repository to your local development personal computer.
 
 * Git clone the forked ISLE images git repositories into a sibling "images" directory
 
-* Git checkout (make new) release branch in each repo for each image starting with and descending in this order:
+* Git checkout (make new) release branch in each repository for each image starting with and descending in this order:
   * isle-ubuntu-basebox
   * isle-tomcat
   * isle-fedora
@@ -946,6 +946,6 @@ Suggested outcome:
 
 ## All images  - Release
 
-* **Image Code** - git push image repo edits to personal / company remotes
+* **Image Code** - git push image repository edits to personal / company remotes
 
 * **ISLE** code comment out build / context blocks and any other local dev edits

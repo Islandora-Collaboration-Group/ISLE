@@ -31,7 +31,7 @@ nav:
     - 'Staging: Migrate Site': 'install/install-staging-migrate.md'
     - 'Production: New Site': 'install/install-production-new.md'
     - 'Production: Migrate Site': 'install/install-production-migrate.md'    
-    - 'Troubleshooting Installations': 'install/install-troubleshooting.md'
+    - 'Troubleshooting Guide': 'install/install-troubleshooting.md'
 - 'Update ISLE': 'update/update.md'
 - 'Appendices':
   - 'Data Persistence in Docker': 'appendices/data-persistence.md'

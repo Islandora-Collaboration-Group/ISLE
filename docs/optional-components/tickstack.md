@@ -3,7 +3,7 @@
 ## Use Cases & User Stories
 
 * As a repository administrator, I expect to be able to view real-time and some historic systems/performance metrics without digging around in server logs.
-* As a repository administrator, I should be able to use the dashboard to troubleshoot the repo (_like when it’s hanging or objects are slow to load_)
+* As a repository administrator, I should be able to use the dashboard to troubleshoot the repository (_like when it’s hanging or objects are slow to load_)
 
 * As a repository owner/manager, I expect logging to be handled in a way that does not endanger my systems health and performance over time.
 
