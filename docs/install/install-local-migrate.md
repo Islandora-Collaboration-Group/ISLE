@@ -31,6 +31,8 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
     * **WARNING:** Only use **Private** git repositories given the sensitive nature of the configuration files.
     * **DO NOT** share these git repositories publicly.
 
+* For Windows Users only: You must install [Git for Windows](https://gitforwindows.org/) and use its provided Git BASH command line; this behaves more similarly to LINUX and UNIX environments. (Powershell is not recommended as it is unable to run UNIX commands or execute bash scripts without a moderate degree of customization.) Git for Windows also installs `openssl.exe` which will be needed to generate self-signed SSL certs.
+
 ---
 
 ## Index of Instructions
@@ -298,22 +300,27 @@ You can reuse some of the older Production settings in the `local.env` if you li
 
 ---
 
-## Step 6: Create New Self-Signed Certs for Your Project
-**This step is optional, and does not currently work on Windows.**
+## Step 6: Create new self-signed certs for your project
 
-* Open up the `./scripts/proxy/ssl-certs/local.sh` in a text editor.
+* **Mac/Ubuntu/CentOS/Unix** - Open `./scripts/proxy/ssl-certs/local.sh` in a text editor.
+* **For Windows Users only** - Open `./scripts/proxy/ssl-certs/local-windows-only.sh` in a text editor.
     * Follow the in-line instructions to add your project's name to the appropriate areas.
     * Once finished, save and close the file.
 
-* _Using the same open terminal / Powershell_, navigate to `/pathto/yourprojectnamehere/scripts/proxy/ssl-certs/`
-    * `cd ~/pathto/yourprojectnamehere/scripts/proxy/ssl-certs/`
-    * `chmod +x local.sh`
+* _Using the same open terminal_, navigate to `/pathto/yourprojectnamehere/scripts/proxy/ssl-certs/`
+    * `cd ./scripts/proxy/ssl-certs/`
+    * **Mac/Ubuntu/CentOS/Unix** - `chmod +x local.sh`
+    * **For Windows Users only** - `chmod +x local-windows-only.sh`
 
 * The following command will generate new self-signed SSL keys using your `yourprojectnamehere.localdomain` domain. This now secures the local site.
-    * `./local.sh`
-    * The generated keys can now be found in `./config/proxy/ssl-certs`
+    * **Mac/Ubuntu/CentOS/Unix** - `./local.sh`
+    * **For Windows Users only** - `./local-windows-only.sh`
+    * The generated keys can now be found in:
+    * `cd ../../../config/proxy/ssl-certs`
 
-* Add the SSL .pem and .key file names generated from running `local.sh` to the `./config/proxy/traefik.local.toml` file.
+* Add the SSL .pem and .key file names generated from running the above script to the `./config/proxy/traefik.local.toml` file.
+    * `cd ..`
+    * Open `traefik.local.toml` in a text editor.
     * Example:
     * `certFile = "/certs/yourprojectnamehere.localdomain.pem"`
     * `keyFile = "/certs/yourprojectnamehere.localdomain.key"`
@@ -323,14 +330,14 @@ You can reuse some of the older Production settings in the `local.env` if you li
 ## Step 7: Download the ISLE Images
 
 * Download all of the latest ISLE Docker images (_~6 GB of data may take 5-10 minutes_):
-* _Using the same open terminal / Powershell_
+* _Using the same open terminal_
     * Navigate to the root of your ISLE project
     * `cd ~/pathto/yourprojectnamehere`
     * `docker-compose pull`
 
 ## Step 8: Launch Process
 
-* _Using the same open terminal / Powershell_
+* _Using the same open terminal_
     * `docker-compose up -d`
 
 * Please wait a few moments for the stack to fully come up. Approximately 3-5 minutes.
