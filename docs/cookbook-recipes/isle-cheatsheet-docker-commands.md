@@ -22,14 +22,14 @@ Docker commands that are useful to installing or updating ISLE.
   * `docker-compose stop` # Stops running containers without removing them
   * `docker stop [CONTAINER_NAME(S)]` # Stop one or more named containers
     * example: `docker stop isle-tomcat isle-solr`
-  * `docker stop $(docker ps -a -q)` # Stop all running and stopped containers
+  * `docker stop $(docker ps -a -q)` # **WARNING!** This will stop ALL containers running on the machine.
 
 ### [Stop and Remove Containers](https://docs.docker.com/compose/reference/down/)
   * `docker-compose down` # Stops containers and removes containers and networks for services defined in the Compose file
 
 ### [Pull Containers](https://docs.docker.com/compose/reference/pull/)
   * `docker-compose pull` # Pull down all images from Docker Hub
-  * `docker pull [GROUP]/[REPO]` # Pull one specific image from Docker Hub
+  * `docker pull [GROUP]/[REPOSITORY]` # Pull one specific image from Docker Hub
     * example: `docker pull islandoracollabgroup/isle-fedora:latest`
 
 ### [Up Containers](https://docs.docker.com/compose/reference/up/)

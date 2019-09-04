@@ -65,7 +65,7 @@ docker-compose up -d
 
 sleep 40
 ```
-  * Now install Islandora from scratch, and init your Fedora repo using the tools provided by ISLE:
+  * Now install Islandora from scratch, and init your Fedora repository using the tools provided by ISLE:
 ```bash
 set -x && docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh
 ```
@@ -108,7 +108,7 @@ docker exec -it isle-apache-ld bash -c "cd /var/www/html/sites/behat && ./run-is
 # "Testing complete"
 ```
 * If you want to just run this as a script, you can find that here: https://github.com/Born-Digital-US/ISLE/blob/travis/local_setup.sh. There are a few extra steps in there, but nothing that should get in the way of basic test usage.
-* If you have your own ISLE already, just omit that initial `git clone` for ISLE. If you use the script, we're assuming you've cloned our whole repo, switched to the `travis` branch, and are running it from there.
+* If you have your own ISLE already, just omit that initial `git clone` for ISLE. If you use the script, we're assuming you've cloned our whole repository, switched to the `travis` branch, and are running it from there.
 * If you're running this many times a day for active development, you'll eventually want to teardown. Recommended steps:
 ```bash
 docker-compose down -v
