@@ -32,7 +32,7 @@ For example...
 
 ### Verifying changes
 * Since we are using the Aspell `--dont-backup` flag, Aspell will make changes to the files themselves.
-* We can then use `git status` and `git diff file_name` to verify what was changed by Aspell before committing changes back to the repo.
+* We can then use `git status` and `git diff file_name` to verify what was changed by Aspell before committing changes back to the repository.
 
 ### Interactive commands
 
@@ -44,6 +44,6 @@ Common interactive commands used:
 
 ## Updating Aspell "word list" after checking spellings
 
-* Copy the existing "~/.aspell.en.pws" file in your home directory to the ISLE documentation repo.
+* Copy the existing "~/.aspell.en.pws" file in your home directory to the ISLE documentation repository.
 * Commit the change(s) to the Aspell word list file.
 * Submit a pull request with your changes to be considered by the project committers.
