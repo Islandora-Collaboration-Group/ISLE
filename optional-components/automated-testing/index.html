@@ -342,8 +342,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../install/install-troubleshooting/" title="Troubleshooting Installations" class="md-nav__link">
-      Troubleshooting Installations
+    <a href="../../install/install-troubleshooting/" title="Troubleshooting Guide" class="md-nav__link">
+      Troubleshooting Guide
     </a>
   </li>
 
@@ -1165,7 +1165,7 @@ sleep 40
 </code></pre>
 
 <ul>
-<li>Now install Islandora from scratch, and init your Fedora repo using the tools provided by ISLE:</li>
+<li>Now install Islandora from scratch, and init your Fedora repository using the tools provided by ISLE:</li>
 </ul>
 <pre><code class="bash">set -x &amp;&amp; docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh
 </code></pre>
@@ -1218,7 +1218,7 @@ docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html/sites/behat &amp;&
 
 <ul>
 <li>If you want to just run this as a script, you can find that here: https://github.com/Born-Digital-US/ISLE/blob/travis/local_setup.sh. There are a few extra steps in there, but nothing that should get in the way of basic test usage.</li>
-<li>If you have your own ISLE already, just omit that initial <code>git clone</code> for ISLE. If you use the script, we're assuming you've cloned our whole repo, switched to the <code>travis</code> branch, and are running it from there.</li>
+<li>If you have your own ISLE already, just omit that initial <code>git clone</code> for ISLE. If you use the script, we're assuming you've cloned our whole repository, switched to the <code>travis</code> branch, and are running it from there.</li>
 <li>If you're running this many times a day for active development, you'll eventually want to teardown. Recommended steps:</li>
 </ul>
 <pre><code class="bash">docker-compose down -v

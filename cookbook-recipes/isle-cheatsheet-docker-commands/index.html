@@ -342,8 +342,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../install/install-troubleshooting/" title="Troubleshooting Installations" class="md-nav__link">
-      Troubleshooting Installations
+    <a href="../../install/install-troubleshooting/" title="Troubleshooting Guide" class="md-nav__link">
+      Troubleshooting Guide
     </a>
   </li>
 
@@ -1344,7 +1344,7 @@
 <li>example: <code>docker stop isle-tomcat isle-solr</code></li>
 </ul>
 </li>
-<li><code>docker stop $(docker ps -a -q)</code> # Stop all running and stopped containers</li>
+<li><code>docker stop $(docker ps -a -q)</code> # <strong>WARNING!</strong> This will stop ALL containers running on the machine.</li>
 </ul>
 <h3 id="stop-and-remove-containers"><a href="https://docs.docker.com/compose/reference/down/">Stop and Remove Containers</a></h3>
 <ul>
@@ -1353,7 +1353,7 @@
 <h3 id="pull-containers"><a href="https://docs.docker.com/compose/reference/pull/">Pull Containers</a></h3>
 <ul>
 <li><code>docker-compose pull</code> # Pull down all images from Docker Hub</li>
-<li><code>docker pull [GROUP]/[REPO]</code> # Pull one specific image from Docker Hub<ul>
+<li><code>docker pull [GROUP]/[REPOSITORY]</code> # Pull one specific image from Docker Hub<ul>
 <li>example: <code>docker pull islandoracollabgroup/isle-fedora:latest</code></li>
 </ul>
 </li>

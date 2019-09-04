@@ -495,8 +495,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../install-troubleshooting/" title="Troubleshooting Installations" class="md-nav__link">
-      Troubleshooting Installations
+    <a href="../install-troubleshooting/" title="Troubleshooting Guide" class="md-nav__link">
+      Troubleshooting Guide
     </a>
   </li>
 
@@ -1199,6 +1199,9 @@
 <li><strong>DO NOT</strong> share these git repositories publicly.</li>
 </ul>
 </li>
+<li>
+<p>For Windows Users only: You must install <a href="https://gitforwindows.org/">Git for Windows</a> and use its provided Git BASH command line; this behaves more similarly to LINUX and UNIX environments. (Powershell is not recommended as it is unable to run UNIX commands or execute bash scripts without a moderate degree of customization.) Git for Windows also installs <code>openssl.exe</code> which will be needed to generate self-signed SSL certs.</p>
+</li>
 </ul>
 <hr />
 <h2 id="index-of-instructions">Index of Instructions</h2>
@@ -1240,16 +1243,16 @@
 </ul>
 </li>
 </ol>
-<p>The git project name can be your institution name or the name of the collections you plan to deploy; your choice entirely. A very clear distinction between the ISLE and Islandora code should be made in the repo name. Do not confuse or label Islandora Drupal site code as ISLE and vice-versa.</p>
+<p>The git project name can be your institution name or the name of the collections you plan to deploy; your choice entirely. A very clear distinction between the ISLE and Islandora code should be made in the repository name. Do not confuse or label Islandora Drupal site code as ISLE and vice-versa.</p>
 <p>Clone this newly created ISLE project to your personal computer</p>
 <ul>
 <li>Open a <code>terminal</code> (Windows: open <code>PowerShell</code>)</li>
-<li>Navigate to an directory that will house your new ISLE project directory using the <code>cd</code> command.</li>
+<li>Navigate to a directory that will house your new ISLE project directory using the <code>cd</code> command.</li>
 <li><code>git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git</code></li>
 </ul>
 <p>Navigate to this directory</p>
 <ul>
-<li><code>cd /path/to/your/repo</code></li>
+<li><code>cd /path/to/your/repository</code></li>
 </ul>
 <p>Add the ICG ISLE git repository as a git upstream. (<em>the code below is a real path and command</em>)</p>
 <ul>
@@ -1276,7 +1279,7 @@ origin  https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-
 <li><code>git push -u origin master</code></li>
 <li>This will take 2 - 5 mins depending on your internet speed.</li>
 </ul>
-<p>Now you have the current ISLE project code checked into git as foundation to make changes on specific to your local and project needs. You'll use this git upstream <code>icg-upstream</code> and process in the future to pull updates / releases from the main ISLE project.</p>
+<p>Now you have the current ISLE project code checked into git as foundation to make changes on specific to your local and project needs. You'll use this git "icg-upstream" process in the future to pull updates and releases from the main ISLE project.</p>
 <hr />
 <h2 id="step-3-edit-the-env-file-to-change-to-the-local-environment">Step 3: Edit the <code>.env</code> File to change to the Local Environment</h2>
 <p>Open a <code>terminal</code> (Windows: open <code>PowerShell</code>)</p>
@@ -1334,31 +1337,33 @@ origin  https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-
 </ul>
 <hr />
 <h2 id="step-5-create-new-self-signed-certs-for-your-project">Step 5: Create new self-signed certs for your project</h2>
-<p><strong>This step is optional, and does not currently work on Windows.</strong></p>
 <ul>
+<li><strong>Mac/Ubuntu/CentOS/Unix</strong> - Open <code>./scripts/proxy/ssl-certs/local.sh</code> in a text editor.</li>
 <li>
-<p>Open up the <code>./scripts/proxy/ssl-certs/local.sh</code> in a text editor.</p>
+<p><strong>For Windows Users only</strong> - Open <code>./scripts/proxy/ssl-certs/local-windows-only.sh</code> in a text editor.</p>
 <ul>
 <li>Follow the in-line instructions to add your project's name to the appropriate areas.</li>
 <li>Once finished, save and close the file.</li>
 </ul>
 </li>
 <li>
-<p><em>Using the same open terminal / Powershell</em>, navigate to <code>/pathto/yourprojectnamehere/scripts/proxy/ssl-certs/</code></p>
+<p><em>Using the same open terminal</em>, navigate to <code>/pathto/yourprojectnamehere/scripts/proxy/ssl-certs/</code></p>
 <ul>
 <li><code>cd /pathto/yourprojectnamehere/scripts/proxy/ssl-certs/</code></li>
-<li><code>chmod +x local.sh</code></li>
+<li><strong>Mac/Ubuntu/CentOS/Unix</strong> - <code>chmod +x local.sh</code></li>
+<li><strong>For Windows Users only</strong> - <code>chmod +x local-windows-only.sh</code></li>
 </ul>
 </li>
 <li>
 <p>The following command will generate new self-signed SSL keys using your <code>yourprojectnamehere.localdomain</code> domain. This now secures the local site.</p>
 <ul>
-<li><code>./local.sh</code></li>
+<li><strong>Mac/Ubuntu/CentOS/Unix</strong> - <code>./local.sh</code></li>
+<li><strong>For Windows Users only</strong> - <code>./local-windows-only.sh</code></li>
 <li>The generated keys can now be found in <code>./config/proxy/ssl-certs</code></li>
 </ul>
 </li>
 <li>
-<p>Add the SSL .pem and .key file names generated from running <code>local.sh</code> to the <code>./config/proxy/traefik.local.toml</code> file.</p>
+<p>Add the SSL .pem and .key file names generated from running the above script to the <code>./config/proxy/traefik.local.toml</code> file.</p>
 <ul>
 <li>Example:</li>
 <li><code>certFile = "/certs/yourprojectnamehere.localdomain.pem"</code></li>

@@ -38,7 +38,7 @@
     
     
       
-        <title>Troubleshooting Installations - Islandora Enterprise (ISLE)</title>
+        <title>Troubleshooting Guide - Islandora Enterprise (ISLE)</title>
       
     
     
@@ -75,7 +75,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../../#isle-troubleshooting-installations" tabindex="1" class="md-skip">
+      <a href="../../#isle-troubleshooting-guide" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -101,7 +101,7 @@
                 Islandora Enterprise (ISLE)
               </span>
               <span class="md-header-nav__topic">
-                Troubleshooting Installations
+                Troubleshooting Guide
               </span>
             
           
@@ -355,11 +355,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Troubleshooting Installations
+        Troubleshooting Guide
       </label>
     
-    <a href="./" title="Troubleshooting Installations" class="md-nav__link md-nav__link--active">
-      Troubleshooting Installations
+    <a href="./" title="Troubleshooting Guide" class="md-nav__link md-nav__link--active">
+      Troubleshooting Guide
     </a>
     
       
@@ -373,8 +373,15 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#port-conflicts" title="Port Conflicts" class="md-nav__link">
-    Port Conflicts
+  <a href="#fatal-could-not-read-from-remote-repository" title="Fatal: Could Not Read From Remote Repository" class="md-nav__link">
+    Fatal: Could Not Read From Remote Repository
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fedora-hash-size-conditional" title="Fedora Hash Size (Conditional)" class="md-nav__link">
+    Fedora Hash Size (Conditional)
   </a>
   
 </li>
@@ -387,15 +394,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#viewing-logs-in-isle-120-or-higher" title="Viewing Logs in ISLE 1.2.0 or Higher" class="md-nav__link">
-    Viewing Logs in ISLE 1.2.0 or Higher
+  <a href="#port-conflicts" title="Port Conflicts" class="md-nav__link">
+    Port Conflicts
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#fedora-hash-size-conditional" title="Fedora Hash Size (Conditional)" class="md-nav__link">
-    Fedora Hash Size (Conditional)
+  <a href="#viewing-logs-in-isle-120-or-higher" title="Viewing Logs in ISLE 1.2.0 or Higher" class="md-nav__link">
+    Viewing Logs in ISLE 1.2.0 or Higher
   </a>
   
 </li>
@@ -946,8 +953,15 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#port-conflicts" title="Port Conflicts" class="md-nav__link">
-    Port Conflicts
+  <a href="#fatal-could-not-read-from-remote-repository" title="Fatal: Could Not Read From Remote Repository" class="md-nav__link">
+    Fatal: Could Not Read From Remote Repository
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fedora-hash-size-conditional" title="Fedora Hash Size (Conditional)" class="md-nav__link">
+    Fedora Hash Size (Conditional)
   </a>
   
 </li>
@@ -960,15 +974,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#viewing-logs-in-isle-120-or-higher" title="Viewing Logs in ISLE 1.2.0 or Higher" class="md-nav__link">
-    Viewing Logs in ISLE 1.2.0 or Higher
+  <a href="#port-conflicts" title="Port Conflicts" class="md-nav__link">
+    Port Conflicts
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#fedora-hash-size-conditional" title="Fedora Hash Size (Conditional)" class="md-nav__link">
-    Fedora Hash Size (Conditional)
+  <a href="#viewing-logs-in-isle-120-or-higher" title="Viewing Logs in ISLE 1.2.0 or Higher" class="md-nav__link">
+    Viewing Logs in ISLE 1.2.0 or Higher
   </a>
   
 </li>
@@ -990,38 +1004,36 @@
               
                 
                 
-                <h1 id="isle-troubleshooting-installations">ISLE: Troubleshooting Installations</h1>
+                <h1 id="isle-troubleshooting-guide">ISLE: Troubleshooting Guide</h1>
 <p><strong>Please select a topic:</strong></p>
 <ul>
-<li><a href="#port-conflicts">Port Conflicts</a></li>
-<li><a href="#non-running-docker-containers">Non-Running Docker Containers</a></li>
-<li><a href="#viewing-logs-in-isle-120-or-higher">Viewing Logs in ISLE 1.2.0 or Higher</a></li>
+<li><a href="#fatal-could-not-read-from-remote-repository">Fatal: Could Not Read From Remote Repository</a></li>
 <li><a href="#fedora-hash-size-conditional">Fedora Hash Size (Conditional)</a></li>
+<li><a href="#non-running-docker-containers">Non-Running Docker Containers</a></li>
+<li><a href="#port-conflicts">Port Conflicts</a></li>
+<li><a href="#viewing-logs-in-isle-120-or-higher">Viewing Logs in ISLE 1.2.0 or Higher</a></li>
 </ul>
 <hr />
-<h2 id="port-conflicts">Port Conflicts</h2>
+<h2 id="fatal-could-not-read-from-remote-repository">Fatal: Could Not Read From Remote Repository</h2>
 <p>If you encounter an error like this:</p>
-<p><code>Error starting userland proxy: Bind for 0.0.0.0:xxxx failed: port is already allocated</code></p>
-<p>then ISLE may have encountered a conflict with the <code>xxxx</code> port identified in the error message.</p>
-<p>In MacOS, this can frequently be caused by a local Apache or Nginx web server, or local MySQL server.  </p>
-<p>You may need to remove or disable these local web servers before you can successfully install ISLE.</p>
 <ul>
-<li>
-<p>If you have a local Apache web server that ships with most MacOS machines may conflict with port 80, and can usually be disabled from a terminal using these commands:</p>
+<li>Set up an SSH key and add it to your local ssh-agent to add access rights to read from your remote repository.</li>
+<li>This will allow you to pull from your git repository provider / hoster. </li>
+<li>See SSH key "How To" instructions on <a href="https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Github</a> or <a href="https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html">Bitbucket</a> or <a href="https://docs.gitlab.com/ee/ssh/">Gitlab</a>.</li>
+</ul>
+<hr />
+<h2 id="fedora-hash-size-conditional">Fedora Hash Size (Conditional)</h2>
+<p><strong>Are you migrating an existing Islandora site that has greater than one million objects?</strong></p>
+<p>This is a power user setting and is an incredibly rare sitation, so do this step only if you have an akubra level 2 or greater.</p>
+<p>While this will depend on your pre-existing Production system, it is important to double-check this. If you have a larger hash size than the default ISLE system (##), and don't follow the settings below, ISLE may not function properly when your data has been migrated. (Note: even though it looks like a placeholder, the actual syntax value is actually <code>##</code>.)</p>
 <ul>
-<li><code>sudo apachectl stop</code></li>
-<li><code>sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist 2&gt;/dev/null</code></li>
+<li>If you have larger Fedora collections, there is a possibility that you made changes to the <code>akubra-llstore.xml</code> file to allow for the creation of larger or deeper hash directories)</li>
+<li>You will need to copy your <code>/usr/local/fedora/server/config/spring/akubra-llstore.xml</code> from your Production Fedora System to <code>./config/fedora/akubra-llstore.xml</code></li>
+<li>You will then need to add an extra line in the Fedora service (fedora) volumes section to bind mount this file in. This will guarantee proper Fedora data hash structure.<ul>
+<li><code>- ./config/fedora/akubra-llstore.xml:/usr/local/fedora/server/config/spring/akubra-llstore.xml</code></li>
 </ul>
 </li>
-<li>
-<p>If you have a local <code>Nginx</code> web server it may conflict with port 8080, and it can usually be disabled from a terminal using:</p>
-<ul>
-<li><code>sudo nginx -s stop</code></li>
 </ul>
-</li>
-</ul>
-<p>Once your web server(s) have been disabled, resume the ISLE install process by repeating your last installation command, presumably <code>docker-compose up -d</code>.</p>
-<p><strong>Return to <a href="../install-demo/">Demo ISLE Installation</a>.</strong></p>
 <hr />
 <h2 id="non-running-docker-containers">Non-Running Docker Containers</h2>
 <p>If you don't see all containers running, then stop the running containers with <code>docker-compose down</code> and start the containers one at a time following the instructions below:</p>
@@ -1061,6 +1073,29 @@
 </li>
 </ul>
 <hr />
+<h2 id="port-conflicts">Port Conflicts</h2>
+<p>If you encounter an error like this:</p>
+<p><code>Error starting userland proxy: Bind for 0.0.0.0:xxxx failed: port is already allocated</code></p>
+<p>then ISLE may have encountered a conflict with the <code>xxxx</code> port identified in the error message.</p>
+<p>In MacOS, this can frequently be caused by a local Apache or Nginx web server, or local MySQL server.  </p>
+<p>You may need to remove or disable these local web servers before you can successfully install ISLE. (Please first ensure it's not being used.)</p>
+<ul>
+<li>
+<p>If you have a local Apache web server that ships with most MacOS machines may conflict with port 80, and can usually be disabled from a terminal using these commands:</p>
+<ul>
+<li><code>sudo apachectl stop</code></li>
+<li><code>sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist 2&gt;/dev/null</code></li>
+</ul>
+</li>
+<li>
+<p>If you have a local <code>Nginx</code> web server it may conflict with port 8080, and it can usually be disabled from a terminal using:</p>
+<ul>
+<li><code>sudo nginx -s stop</code></li>
+</ul>
+</li>
+</ul>
+<p>Once your web server(s) have been disabled, resume the ISLE install process by repeating your last installation command, presumably <code>docker-compose up -d</code>.</p>
+<hr />
 <h2 id="viewing-logs-in-isle-120-or-higher">Viewing Logs in ISLE 1.2.0 or Higher</h2>
 <p>As of ISLE release logging to physical file has been turned off, stdout &amp; stderr are to console only no more physical files. This means if you need to view logs for debugging, here are some methods:</p>
 <ul>
@@ -1076,19 +1111,6 @@ All containers: docker-compose logs --tail=0 --follow</p>
 </li>
 <li>
 <p>Use the <a href="../../optional-components/tickstack/">TICK Log viewer</a> if TICK is setup and using the Docker syslog driver (Production / Staging only) </p>
-</li>
-</ul>
-<hr />
-<h2 id="fedora-hash-size-conditional">Fedora Hash Size (Conditional)</h2>
-<p><strong>Are you migrating an existing Islandora site that has greater than one million objects?</strong></p>
-<p>This is a power user setting and is an incredibly rare sitation, so do this step only if you have an akubra level 2 or greater.</p>
-<p>While this will depend on your pre-existing Production system, it is important to double-check this. If you have a larger hash size than the default ISLE system (##), and don't follow the settings below, ISLE may not function properly when your data has been migrated. (Note: even though it looks like a placeholder, the actual syntax value is actually <code>##</code>.)</p>
-<ul>
-<li>If you have larger Fedora collections, there is a possibility that you made changes to the <code>akubra-llstore.xml</code> file to allow for the creation of larger or deeper hash directories)</li>
-<li>You will need to copy your <code>/usr/local/fedora/server/config/spring/akubra-llstore.xml</code> from your Production Fedora System to <code>./config/fedora/akubra-llstore.xml</code></li>
-<li>You will then need to add an extra line in the Fedora service (fedora) volumes section to bind mount this file in. This will guarantee proper Fedora data hash structure.<ul>
-<li><code>- ./config/fedora/akubra-llstore.xml:/usr/local/fedora/server/config/spring/akubra-llstore.xml</code></li>
-</ul>
 </li>
 </ul>
 <hr />
