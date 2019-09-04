@@ -109,7 +109,7 @@ The instructions that follow below will have either a `On Local` or a `On Remote
 
 You are repeating this step given that data may have changed on the Production site since creating your local. It is critical that Production be a mirror or close to exact copy of Production.
 
-Prior to attempting this step, do consider the following:
+**Prior to attempting this step, please consider the following:**
 
 * Drupal website databases can have a multitude of names and conventions. Confer with the appropriate IT departments for your institution's database naming conventions.
 
@@ -270,7 +270,7 @@ Since the `/opt` directory might not let you do this at first, we suggest the fo
 
 * Shell into your `Production` ISLE host server as the `Islandora` user.
 
-* Clone your ISLE project repo with the newly committed changes for `Production` to the `Islandora` user home directory.
+* Clone your ISLE project repository with the newly committed changes for `Production` to the `Islandora` user home directory.
     * `git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git /home/islandora/`
     * This may take a few minutes (2 - 4) depending on your server's Internet connection.
 
@@ -437,7 +437,7 @@ git commit -m "Added the edited .env configuration file for Production. DO NOT P
 
 ## Step 15: On Remote Production - Import the Local MySQL Drupal database
 
-Prior to attempting this step, do consider the following:
+**Prior to attempting this step, please consider the following:**
 
 * If the end user is running multi-sites, there will be additional databases to export.
 

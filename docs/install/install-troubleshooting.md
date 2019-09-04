@@ -1,38 +1,36 @@
-# ISLE: Troubleshooting Installations
+# ISLE: Troubleshooting Guide
 
 **Please select a topic:**
 
-- [Port Conflicts](#port-conflicts)
-- [Non-Running Docker Containers](#non-running-docker-containers)
-- [Viewing Logs in ISLE 1.2.0 or Higher](#viewing-logs-in-isle-120-or-higher)
+- [Fatal: Could Not Read From Remote Repository](#fatal-could-not-read-from-remote-repository)
 - [Fedora Hash Size (Conditional)](#fedora-hash-size-conditional)
+- [Non-Running Docker Containers](#non-running-docker-containers)
+- [Port Conflicts](#port-conflicts)
+- [Viewing Logs in ISLE 1.2.0 or Higher](#viewing-logs-in-isle-120-or-higher)
 
 ---
 
-## Port Conflicts
+## Fatal: Could Not Read From Remote Repository
 If you encounter an error like this:
 
-`Error starting userland proxy: Bind for 0.0.0.0:xxxx failed: port is already allocated`
+* Set up an SSH key and add it to your local ssh-agent to add access rights to read from your remote repository.
+* This will allow you to pull from your git repository provider / hoster. 
+* See SSH key "How To" instructions on [Github](https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) or [Bitbucket](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html) or [Gitlab](https://docs.gitlab.com/ee/ssh/).
 
-then ISLE may have encountered a conflict with the `xxxx` port identified in the error message.
+---
 
-In MacOS, this can frequently be caused by a local Apache or Nginx web server, or local MySQL server.  
+## Fedora Hash Size (Conditional)
 
-You may need to remove or disable these local web servers before you can successfully install ISLE.
+**Are you migrating an existing Islandora site that has greater than one million objects?**
 
-* If you have a local Apache web server that ships with most MacOS machines may conflict with port 80, and can usually be disabled from a terminal using these commands:
+This is a power user setting and is an incredibly rare sitation, so do this step only if you have an akubra level 2 or greater.
 
-    * `sudo apachectl stop`
-    * `sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist 2>/dev/null`
+While this will depend on your pre-existing Production system, it is important to double-check this. If you have a larger hash size than the default ISLE system (##), and don't follow the settings below, ISLE may not function properly when your data has been migrated. (Note: even though it looks like a placeholder, the actual syntax value is actually `##`.)
 
-* If you have a local `Nginx` web server it may conflict with port 8080, and it can usually be disabled from a terminal using:
-
-    * `sudo nginx -s stop`
-
-Once your web server(s) have been disabled, resume the ISLE install process by repeating your last installation command, presumably `docker-compose up -d`.
-
-
-**Return to [Demo ISLE Installation](../install/install-demo.md).**
+*  If you have larger Fedora collections, there is a possibility that you made changes to the `akubra-llstore.xml` file to allow for the creation of larger or deeper hash directories)
+* You will need to copy your `/usr/local/fedora/server/config/spring/akubra-llstore.xml` from your Production Fedora System to `./config/fedora/akubra-llstore.xml`
+* You will then need to add an extra line in the Fedora service (fedora) volumes section to bind mount this file in. This will guarantee proper Fedora data hash structure.
+    * `- ./config/fedora/akubra-llstore.xml:/usr/local/fedora/server/config/spring/akubra-llstore.xml`
 
 ---
 
@@ -79,6 +77,30 @@ If you don't see all containers running, then stop the running containers with `
 
 ---
 
+## Port Conflicts
+If you encounter an error like this:
+
+`Error starting userland proxy: Bind for 0.0.0.0:xxxx failed: port is already allocated`
+
+then ISLE may have encountered a conflict with the `xxxx` port identified in the error message.
+
+In MacOS, this can frequently be caused by a local Apache or Nginx web server, or local MySQL server.  
+
+You may need to remove or disable these local web servers before you can successfully install ISLE. (Please first ensure it's not being used.)
+
+* If you have a local Apache web server that ships with most MacOS machines may conflict with port 80, and can usually be disabled from a terminal using these commands:
+
+    * `sudo apachectl stop`
+    * `sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist 2>/dev/null`
+
+* If you have a local `Nginx` web server it may conflict with port 8080, and it can usually be disabled from a terminal using:
+
+    * `sudo nginx -s stop`
+
+Once your web server(s) have been disabled, resume the ISLE install process by repeating your last installation command, presumably `docker-compose up -d`.
+
+---
+
 ## Viewing Logs in ISLE 1.2.0 or Higher
 
 As of ISLE release logging to physical file has been turned off, stdout & stderr are to console only no more physical files. This means if you need to view logs for debugging, here are some methods:
@@ -92,21 +114,6 @@ Single container: docker-compose logs -f  <container-name>
 All containers: docker-compose logs --tail=0 --follow
 
 * Use the [TICK Log viewer](../optional-components/tickstack.md) if TICK is setup and using the Docker syslog driver (Production / Staging only) 
-
----
-
-## Fedora Hash Size (Conditional)
-
-**Are you migrating an existing Islandora site that has greater than one million objects?**
-
-This is a power user setting and is an incredibly rare sitation, so do this step only if you have an akubra level 2 or greater.
-
-While this will depend on your pre-existing Production system, it is important to double-check this. If you have a larger hash size than the default ISLE system (##), and don't follow the settings below, ISLE may not function properly when your data has been migrated. (Note: even though it looks like a placeholder, the actual syntax value is actually `##`.)
-
-*  If you have larger Fedora collections, there is a possibility that you made changes to the `akubra-llstore.xml` file to allow for the creation of larger or deeper hash directories)
-  * You will need to copy your `/usr/local/fedora/server/config/spring/akubra-llstore.xml` from your Production Fedora System to `./config/fedora/akubra-llstore.xml`
-  * You will then need to add an extra line in the Fedora service (fedora) volumes section to bind mount this file in. This will guarantee proper Fedora data hash structure.
-    * `- ./config/fedora/akubra-llstore.xml:/usr/local/fedora/server/config/spring/akubra-llstore.xml`
 
 ---
 
