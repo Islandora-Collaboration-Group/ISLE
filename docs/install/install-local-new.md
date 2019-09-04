@@ -27,6 +27,8 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
     * **WARNING:** Only use **Private** git repositories given the sensitive nature of the configuration files.
     * **DO NOT** share these git repositories publicly.
 
+* For Windows Users only: You must install [Git for Windows](https://gitforwindows.org/) and use its provided Git BASH command line; this behaves more similarly to LINUX and UNIX environments. (Powershell is not recommended as it is unable to run UNIX commands or execute bash scripts without a moderate degree of customization.) Git for Windows also installs `openssl.exe` which will be needed to generate self-signed SSL certs.
+
 ---
 
 ## Index of Instructions
@@ -147,21 +149,23 @@ Open a `terminal` (Windows: open `PowerShell`)
 ---
 
 ## Step 5: Create new self-signed certs for your project
-**This step is optional, and does not currently work on Windows.**
 
-* Open up the `./scripts/proxy/ssl-certs/local.sh` in a text editor.
+* **Mac/Ubuntu/CentOS/Unix** - Open `./scripts/proxy/ssl-certs/local.sh` in a text editor.
+* **For Windows Users only** - Open `./scripts/proxy/ssl-certs/local-windows-only.sh` in a text editor.
     * Follow the in-line instructions to add your project's name to the appropriate areas.
     * Once finished, save and close the file.
 
-* _Using the same open terminal / Powershell_, navigate to `/pathto/yourprojectnamehere/scripts/proxy/ssl-certs/`
+* _Using the same open terminal_, navigate to `/pathto/yourprojectnamehere/scripts/proxy/ssl-certs/`
     * `cd /pathto/yourprojectnamehere/scripts/proxy/ssl-certs/`
-    * `chmod +x local.sh`
+    * **Mac/Ubuntu/CentOS/Unix** - `chmod +x local.sh`
+    * **For Windows Users only** - `chmod +x local-windows-only.sh`
 
 * The following command will generate new self-signed SSL keys using your `yourprojectnamehere.localdomain` domain. This now secures the local site.
-    * `./local.sh`
+    * **Mac/Ubuntu/CentOS/Unix** - `./local.sh`
+    * **For Windows Users only** - `./local-windows-only.sh`
     * The generated keys can now be found in `./config/proxy/ssl-certs`
 
-* Add the SSL .pem and .key file names generated from running `local.sh` to the `./config/proxy/traefik.local.toml` file.
+* Add the SSL .pem and .key file names generated from running the above script to the `./config/proxy/traefik.local.toml` file.
     * Example:
     * `certFile = "/certs/yourprojectnamehere.localdomain.pem"`
     * `keyFile = "/certs/yourprojectnamehere.localdomain.key"`
