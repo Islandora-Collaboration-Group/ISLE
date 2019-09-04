@@ -18,7 +18,7 @@
 |                                     |              | Fedora                       | 3.8.1              | /usr/local/fedora/server/logs/fedora.log                        |
 |                                     |              | Gsearch                      | DG Patched (2.8.x) | /usr/local/fedora/server/logs/fedoragsearch.daily.log           |
 |                                     |              | GSearch Extensions           | 0.1.3              |                                                                 |
-|                                     |              | Islandora Transforms (XSLTs) | latest XSLTs from DG [repo](https://github.com/discoverygarden/islandora_transforms) |
+|                                     |              | Islandora Transforms (XSLTs) | latest XSLTs from DG [repository](https://github.com/discoverygarden/islandora_transforms) |
 |                                     |              | MySQL (client)               | 5.6                |                                                                 |
 |                                     |              | OpenJDK                      | JDK 8.x            |                                                                 |
 |                                     |              | Tomcat                       | 8.x                | /usr/local/tomcat/logs/                                         |

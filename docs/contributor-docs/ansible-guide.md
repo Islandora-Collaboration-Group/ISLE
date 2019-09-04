@@ -247,7 +247,7 @@ ansible
 * Test if the Ansible control personal computer can connect to the ISLE Host server by running these commands. On the local Ansible control personal computer, open a terminal window and enter the following:
 
 ```
-cd /path/to/ISLE/repo/ansible
+cd /path/to/ISLE/repository/ansible
 
 ansible -i inventory isle-host-server -m ping
 ```
