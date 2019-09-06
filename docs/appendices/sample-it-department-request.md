@@ -11,8 +11,8 @@ We require access to a server meeting the following [Hardware Requirements](../i
  * Ubuntu 18.04 LTS or CentOS 7.x running on a server or virtual machine
  * Minimum 2 CPU's (w/1-4 cores each)
  * Sufficient hard drive or attached storage to hold your collection
- * 30 - 50GB for the server OS and overhead
- * 16 - 32 GB of RAM
+ * 30-50GB for the server OS and overhead
+ * 16-32 GB of RAM
 
 Our team will either need root access, or a user called "islandora" that has sudo privileges.
 

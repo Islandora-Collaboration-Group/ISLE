@@ -42,8 +42,6 @@ a server you connected to via ssh (REMOTE).
 
 ## Documentation / Development
 
-* **CLI / cli** - A command-line interface or command language interpreter (CLI), also known as command-line user interface, console user interface[1] and character user interface (CUI), is a means of interacting with a computer program where the user (or client) issues commands to the program in the form of successive lines of text (command lines). A program which handles the interface is called a command language interpreter or shell.
-
 * **Git** - A free and open source distributed software version control system designed to handle everything from small to very large projects with speed and efficiency. Git is easy to learn and has a tiny footprint with lightning fast performance.
     * [https://git-scm.com/](https://git-scm.com/)
     * The ISLE project and its documentation is hosted by an online git service called [Github.com](https://github.com/)
@@ -55,6 +53,8 @@ a server you connected to via ssh (REMOTE).
     * [https://daringfireball.net/projects/markdown/syntax](https://daringfireball.net/projects/markdown/syntax)
     * [http://kirkstrobeck.github.io/whatismarkdown.com/](http://kirkstrobeck.github.io/whatismarkdown.com/)
     * [https://help.github.com/categories/writing-on-github/](https://help.github.com/categories/writing-on-github/)
+
+* **Terminal (CLI)** - A command-line interface or command language interpreter (CLI), also known as command-line user interface, console user interface[1] and character user interface (CUI), is a means of interacting with a computer program where the user (or client) issues commands to the program in the form of successive lines of text (command lines). A program which handles the interface is called a command language interpreter or shell.
 
 * **TL;DR** - "Too long; didn't read." - used to indicate a large post, article, etc. that has a brief summary of said post, article, etc. as it might be too long to read.
 

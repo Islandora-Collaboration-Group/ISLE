@@ -16,9 +16,11 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 * You have already git cloned the ISLE Project to your personal computer.
 
+* **For Microsoft Windows:** You have installed [Git for Windows](../install/host-software-dependencies.md#windows) and will use its provided "Git BASH" as your command line interface; this behaves more similarly to LINUX and UNIX environments.
+
 ---
 
-## Step 1: Edit `/etc/hosts` File
+## Step 1: Edit "/etc/hosts" File
 
 Enable the Demo ISLE Installation to be viewed locally on personal computer browser as: `https://isle.localdomain`.
 
@@ -26,9 +28,9 @@ Enable the Demo ISLE Installation to be viewed locally on personal computer brow
 
 ---
 
-## Step 2: Download the ISLE images
+## Step 2: Download the ISLE Images
 
-* Open a `terminal` (Windows: open `PowerShell`)
+* Open a `terminal` (Windows: open `Git Bash`)
 
 * Navigate to your ISLE project directory. (You may already be in this directory if you are coming from the [Software Dependencies](../install/host-software-dependencies.md).)
 
@@ -39,13 +41,13 @@ Enable the Demo ISLE Installation to be viewed locally on personal computer brow
 
 ## Step 3: Launch Process
 
-* _Using the same open terminal / Powershell_
+* _Using the same open terminal:_
     * `docker-compose up -d`
   * **Please note:** the “ -d” argument stands for “detached” meaning the command will persist even if you close your terminal or your computer sleeps etc…)
 
 * Please wait a few moments for the stack to fully come up. Approximately 3-5 minutes.
 
-* After the above process is completed using the already open terminal or Powershell again.
+* _Using the same open terminal:_
     * View only the running containers: `docker ps`
     * View all containers (both those running and stopped): `docker ps -a`
     * All containers prefixed with `isle-` are expected to have a `STATUS` of `Up` (for x time).
@@ -54,17 +56,16 @@ Enable the Demo ISLE Installation to be viewed locally on personal computer brow
 
 ---
 
-## Step 4: Run Islandora Drupal site Install Script
+## Step 4: Run Islandora Drupal Site Install Script
 
-This process may take 10 - 20 minutes (_depending on system and internet speeds_)
+This process may take 10-20 minutes (_depending on system and internet speeds_)
 
-* Run the install site script on the Apache container by copying and pasting this command:
-```
-docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh
-```
+* Run the install site script on the Apache container by copying and pasting the appropriate command:
+    * **For Mac/Ubuntu/CentOS/etc:** `docker exec -it isle-apache-ld bash -c "cd /utility-scripts/isle_drupal_build_tools && ./isle_islandora_installer.sh"`
+    * **For Microsoft Windows:** `winpty docker exec -it isle-apache-ld bash -c "cd /utility-scripts/isle_drupal_build_tools && ./isle_islandora_installer.sh"`
 
 
-| For Windows Users only |
+| Microsoft Windows |
 | :-------------      |
 | You may be prompted by Windows to: |
 | - Share the C drive with Docker.  Click Okay or Allow.|
@@ -74,7 +75,7 @@ docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isl
 
 * You should see a lot of green [ok] messages.
 * If the script appears to pause or prompt for `y/n`, DO NOT enter any values; the script will automatically answer for you.
-* **Proceed only after this message appears:** `Clearing Drupal Caches. 'all' cache was cleared.`
+* **Proceed only after this message appears:** "Clearing Drupal Caches. 'all' cache was cleared."
 
 ---
 

@@ -1,12 +1,12 @@
 # Local ISLE Installation: Migrate Existing Islandora Site
 
-_Expectations:  It takes an average of **60 - 120 minutes** to read this documentation and complete this installation._
+_Expectations:  It takes an average of **60-120 minutes** to read this documentation and complete this installation._
 
 This `Local` ISLE Installation builds a local environment for the express purpose of migrating a previously existing Islandora site onto the ISLE platform. If you need to build a brand new local development site, please **stop** and use the [Local ISLE Installation: New Site](../install/install-local-new.md) instructions instead.
 
 This `Local` ISLE Installation will use a copy of a currently running Production Islandora Drupal website and an empty Fedora repository for endusers to test migration to ISLE and do site development and design with the end goal of deploying to ISLE Staging and Production environments for public use. The final goal would be to cut over from the existing non-ISLE Production and Staging servers to their new ISLE counterparts.
 
-This `Local` ISLE Installation will allow you to locally view this site in your browser with the domain of your choice (for example: `https://yourprojectnamehere.localdomain`), instead of being constrained to the Demo url (`https://isle.localdomain`).
+This `Local` ISLE Installation will allow you to locally view this site in your browser with the domain of your choice (**Example:** `https://yourprojectnamehere.localdomain`), instead of being constrained to the Demo url (`https://isle.localdomain`).
 
 This document has directions on how you can check in newly created ISLE code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging and finally to Production. The [ISLE Installation: Environments](../install/install-environments.md) documentation offers an overview of the ISLE structure, the associated files, and what values ISLE endusers should use for the `.env`, `local.env`, etc.
 
@@ -28,21 +28,22 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 * You have access to a private git repository in [Github](https://github.com), [Bitbucket](https://bitbucket.org/), [Gitlab](https://gitlab.com), etc.
     * If you do not, please contact your IT department for git resources, or else create an account with one of the above providers.
-    * **WARNING:** Only use **Private** git repositories given the sensitive nature of the configuration files.
-    * **DO NOT** share these git repositories publicly.
+    * **WARNING:** Only use **Private** git repositories given the sensitive nature of the configuration files. **DO NOT** share these git repositories publicly.
 
-* For Windows Users only: You must install [Git for Windows](https://gitforwindows.org/) and use its provided Git BASH command line; this behaves more similarly to LINUX and UNIX environments. (Powershell is not recommended as it is unable to run UNIX commands or execute bash scripts without a moderate degree of customization.) Git for Windows also installs `openssl.exe` which will be needed to generate self-signed SSL certs.
+* **For Microsoft Windows:**
+    * You have installed [Git for Windows](../install/host-software-dependencies.md#windows) and will use its provided "Git BASH" as your command line interface; this behaves more similarly to LINUX and UNIX environments. Git for Windows also installs `openssl.exe` which will be needed to generate self-signed SSL certs. (Note: Powershell is not recommended as it is unable to run UNIX commands or execute bash scripts without a moderate degree of customization.)
+    * Set your text editor to use UNIX style line endings for files. (Text files created on DOS/Windows machines have different line endings than files created on Unix/Linux. DOS uses carriage return and line feed ("\r\n") as a line ending, which Unix uses just line feed ("\n").)
 
 ---
 
 ## Index of Instructions
 
 * Step 0: Copy Production Data to Your Personal Computer
-* Step 1: Edit `/etc/hosts` File
-* Step 2: Setup git for the ISLE Project
+* Step 1: Edit "/etc/hosts" File
+* Step 2: Setup Git for the ISLE Project
 * Step 3: Git Clone the Production Islandora Drupal Site Code
 * Step 4: Edit the .env File to Change to the Local Environment
-* Step 5: Create New Users and Passwords by Editing local.env
+* Step 5: Create New Users and Passwords by Editing "local.env"
 * Step 6: Create New Self-Signed Certs for Your Project
 * Step 7: Download the ISLE Images
 * Step 8: Launch Process
@@ -77,7 +78,7 @@ Be sure to run a backup of any current non-ISLE systems prior to copying or expo
 
 * If possible, on the production Apache webserver, run `drush cc all` from the command line on the production server in the `/var/www/html` directory PRIOR to any db export(s). Otherwise issues can occur on import due to all cache tables being larger than `innodb_log_file_size` allows
 
-#### Production Islandora Drupal site database export process
+#### Export the Production MySQL Islandora Drupal Database
 
 * Export the MySQL database for the current Production Islandora Drupal site in use and copy it to your personal computer (local) in an easy to find place. In later steps you'll be directed to import this file. **Please be careful** performing any of these potential actions below as the process impacts your Production site.
 
@@ -114,7 +115,7 @@ Bind mount in existing transforms and schemas  to override ISLE settings with yo
 
 * **Please note:** You may need to further review paths in the files mentioned above, and edit them to match ISLE system paths.  
 
-#### Strategy 3: **Advanced** - Diff and Merge Current Production Customization Edits into ISLE Configs
+#### Strategy 3: **Advanced** - Diff and Merge Current Production Customization Edits Into ISLE Configs
 
 * Copy these current production files and directory to your personal computer in an appropriate location.
     * Solr `schema.xml`
@@ -142,7 +143,7 @@ Bind mount in existing transforms and schemas  to override ISLE settings with yo
 
 ---
 
-## Step 1: Edit `/etc/hosts` File
+## Step 1: Edit "/etc/hosts" File
 
 Enable the Local ISLE Installation to be viewed locally on personal computer browser as: e.g. `https://yourprojectnamehere.localdomain`.
 
@@ -152,7 +153,7 @@ Enable the Local ISLE Installation to be viewed locally on personal computer bro
 
 ---
 
-## Step 2: Setup git for the ISLE Project
+## Step 2: Setup Git for the ISLE Project
 
 **Please note:** The commands given below are for command line usage of git. GUI based clients such as the [SourceTree App](https://www.sourcetreeapp.com/) may be easier for endusers to use for the git process.
 
@@ -165,7 +166,7 @@ The git project name can be your institution name or the name of the collections
 
 Clone this newly created ISLE project to your personal computer
 
-    * Open a `terminal` (Windows: open `PowerShell`)
+    * Open a `terminal` (Windows: open `Git Bash`)
     * Navigate to a directory that will house your new ISLE project directory using the `cd` command.
     * `git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git`
 
@@ -198,23 +199,24 @@ origin	https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-i
 
     * `git push -u origin master`
 
-    * This will take 2 - 5 mins depending on your internet speed.
+    * This will take 2-5 mins depending on your internet speed.
 
 * Now you have the current ISLE project code checked into git as foundation to make changes specific to your local and project needs. You'll use this git "icg-upstream" process in the future to pull updates and releases from the main ISLE project.
 
-### Step 2a: Add Customizations from `Step 0` to the Git Workflow
-This step is intended for users who followed either the "**Intermediate**" or "**Advanced**" migration options in `Step 0` above.  If you choose the **Easy** migration option you may safely skip `Step 2a`.
+### Step 2a: Add Customizations from "Step 0" to the Git Workflow
 
-In your local `ISLE` directory (`cd /path/to/your/repository`) create new directories under `./config` to hold the Solr and GSearch files you retrieved in `Step 0`.  Generally this can be done like so:
+This step is intended for users who followed either the "**Intermediate**" or "**Advanced**" migration options in "Step 0" above.  If you choose the **Easy** migration option you may safely skip `Step 2a`.
+
+In your local `ISLE` directory (`cd /path/to/your/repository`) create new directories under `./config` to hold the Solr and GSearch files you retrieved in "Step 0".  Generally this can be done like so:
 
 ```
 mkdir -p ./config/solr
 mkdir -p ./config/fedora/gsearch
 ```
 
-* Copy your `schema.xml` file from `Step 0` into the new `./config/solr/` directory.
+* Copy your `schema.xml` file from "Step 0" into the new `./config/solr/` directory.
 
-* Copy your `foxmltoSolr.xslt` file and `islandora_transforms` directory from `Step 0` into the `config/fedora/gsearch/` directory.
+* Copy your `foxmltoSolr.xslt` file and `islandora_transforms` directory from "Step 0" into the `config/fedora/gsearch/` directory.
 
 * Add a new line in the Solr volumes section of your `docker-compose.local.yml`  
 ```
@@ -237,7 +239,7 @@ This step assumes you have an existing Islandora Drupal site checked into a git 
 
 **Note:** If below you see a "fatal: Could not read from remote repository." error, then please read [Fatal: Could not read from remote repository](../install/install-troubleshooting.md#fatal-could-not-read-from-remote-repository).
 
-Using the still open `terminal` (Windows: `PowerShell`):
+_Using the same open terminal:_
 
 * Create a location outside of your ISLE directory where your Islandora Drupal site code will be stored.
   While you may create this location anywhere, we suggest that you put it at the same level as your existing ISLE directory.
@@ -257,7 +259,7 @@ Using the still open `terminal` (Windows: `PowerShell`):
 
 ## Step 4: Edit the .env File to Change to the Local Environment
 
-Open a `terminal` (Windows: open `PowerShell`)
+Open a `terminal` (Windows: open `Git Bash`)
 
 * Navigate to your ISLE project directory. (You may already be in this directory if you are coming from the [Software Dependencies](../install/host-software-dependencies.md).)
 
@@ -270,7 +272,7 @@ Open a `terminal` (Windows: open `PowerShell`)
     * `CONTAINER_SHORT_ID=ld` _leave default setting of `ld` as is. Do not change._
     * `COMPOSE_FILE=docker-compose.local.yml`
 
-* If you want to use a MySQL client with a GUI to import the Production MySQL Drupal database you'll need to uncomment the `ports` section of the MySQL service within the `docker-compose.local.yml` to open up the `3306` port. If you are already running MySQL on your personal computer, you'll have a port conflict either shutdown that service prior to running ISLE or change 3306:3306 to something like `9306:3306`. Please double-check.
+* If you want to use a MySQL client with a GUI to import the Production MySQL Drupal database you'll need to uncomment the `ports` section of the MySQL service within the `docker-compose.local.yml` to Open the `3306` port. If you are already running MySQL on your personal computer, you'll have a port conflict either shutdown that service prior to running ISLE or change 3306:3306 to something like `9306:3306`. Please double-check.
 
 * Enter `Cntrl` and the letter `o` together to write the changes to the file.
 
@@ -279,44 +281,47 @@ Open a `terminal` (Windows: open `PowerShell`)
 **Please note:** We highly recommend that you also review the contents of the `docker-compose.local.yml` file as the Apache service volume section uses bind mounts for the intended Drupal Code instead of using default Docker volumes. This allows users to perform Local Islandora Drupal site development with an IDE. This line is a suggested path and users are free to change values to the left of the `:` to match their Apache data folder of choice. However we recommend starting out with the default setting below.
 Default: `- ./data/apache/html:/var/www/html:cached`
 
-* Additionally, depending on your decision from **Step 0**, you may need to make additional edits to `docker-compose.local.yml` and move files into place as directed from the (**Intermediate**) and (**Advanced**) sections.
+* Additionally, depending on your decision from "Step 0", you may need to make additional edits to `docker-compose.local.yml` and move files into place as directed from the (**Intermediate**) and (**Advanced**) sections.
 
 ---
 
-## Step 5: Create New Users and Passwords by Editing local.env
+## Step 5: Create New Users and Passwords by Editing "local.env"
 
-You can reuse some of the older Production settings in the `local.env` if you like (e.g. the database name `DRUPAL_DB`, database user `DRUPAL_DB_USER` even the drupal database user password `DRUPAL_DB_PASS` if that makes it easier). It is important to avoid repeating passwords in the ISLE Staging and Production environments.
+You can reuse some of the older Production settings in the "local.env" if you like (e.g. the database name `DRUPAL_DB`, database user `DRUPAL_DB_USER` even the drupal database user password `DRUPAL_DB_PASS` if that makes it easier). It is important to avoid repeating passwords in the ISLE Staging and Production environments.
 
-* Open up the `local.env` file in a text editor.
+* Open the "local.env" file in a text editor.
     * Find each comment that begins with: `# Replace this comment with a ...` and follow the commented instructions to edit the passwords, database and user names.
         * **Review carefully** as some comments request that you replace with `...26 alpha-numeric characters` while others request that you create an `...easy to read but short database name`.
         * In many cases the username is already pre-populated. If it doesn't have a comment directing you to change or add a value after the `=`, then don't change it.
     * Once finished, save and close the file.
 
-* Open up the `config/apache/settings_php/settings.local.php` file in a text editor.
+* Open the `config/apache/settings_php/settings.local.php` file in a text editor.
     * Find the first comment that begins with: `# ISLE Configuration` and follow the commented instructions to edit the database, username and password.
     * Find the second comment that begins with: `# ISLE Configuration` and follow the instructions to edit the Drupal hash salt.
     * Once finished, save and close the file.
 
 ---
 
-## Step 6: Create new self-signed certs for your project
+## Step 6: Create New Self-Signed Certs for Your Project
 
-* **Mac/Ubuntu/CentOS/Unix** - Open `./scripts/proxy/ssl-certs/local.sh` in a text editor.
-* **For Windows Users only** - Open `./scripts/proxy/ssl-certs/local-windows-only.sh` in a text editor.
-    * Follow the in-line instructions to add your project's name to the appropriate areas.
+* Open the appropriate file in a text editor:
+    * **For Mac/Ubuntu/CentOS/etc:** `./scripts/proxy/ssl-certs/local.sh`
+    * **For Microsoft Windows:** `./scripts/proxy/ssl-certs/local-windows-only.sh`
+* Follow the in-line instructions to add your project's name to the appropriate areas.
     * Once finished, save and close the file.
 
-* _Using the same open terminal_, navigate to `/pathto/yourprojectnamehere/scripts/proxy/ssl-certs/`
+* _Using the same open terminal:_, navigate to `/pathto/yourprojectnamehere/scripts/proxy/ssl-certs/`
     * `cd ./scripts/proxy/ssl-certs/`
-    * **Mac/Ubuntu/CentOS/Unix** - `chmod +x local.sh`
-    * **For Windows Users only** - `chmod +x local-windows-only.sh`
 
-* The following command will generate new self-signed SSL keys using your `yourprojectnamehere.localdomain` domain. This now secures the local site.
-    * **Mac/Ubuntu/CentOS/Unix** - `./local.sh`
-    * **For Windows Users only** - `./local-windows-only.sh`
+* Change the permissions on the script to make it executable
+    * **For Mac/Ubuntu/CentOS/etc:** `chmod +x local.sh`
+    * **For Microsoft Windows:** `chmod +x local-windows-only.sh`
+
+* Run the following command to generate new self-signed SSL keys using your `yourprojectnamehere.localdomain` domain. This now secures the local site.
+    * **For Mac/Ubuntu/CentOS/etc:** `./local.sh`
+    * **For Microsoft Windows:** `./local-windows-only.sh`
     * The generated keys can now be found in:
-    * `cd ../../../config/proxy/ssl-certs`
+        * `cd ../../../config/proxy/ssl-certs`
 
 * Add the SSL .pem and .key file names generated from running the above script to the `./config/proxy/traefik.local.toml` file.
     * `cd ..`
@@ -330,19 +335,19 @@ You can reuse some of the older Production settings in the `local.env` if you li
 ## Step 7: Download the ISLE Images
 
 * Download all of the latest ISLE Docker images (_~6 GB of data may take 5-10 minutes_):
-* _Using the same open terminal_
+* _Using the same open terminal:_
     * Navigate to the root of your ISLE project
     * `cd ~/pathto/yourprojectnamehere`
     * `docker-compose pull`
 
 ## Step 8: Launch Process
 
-* _Using the same open terminal_
+* _Using the same open terminal:_
     * `docker-compose up -d`
 
 * Please wait a few moments for the stack to fully come up. Approximately 3-5 minutes.
 
-* After the above process is completed using the already open terminal or Powershell again.
+* _Using the same open terminal:_
     * View only the running containers: `docker ps`
     * View all containers (both those running and stopped): `docker ps -a`
     * All containers prefixed with `isle-` are expected to have a `STATUS` of `Up` (for x time).
@@ -357,8 +362,8 @@ You can reuse some of the older Production settings in the `local.env` if you li
     * Host = `127.0.0.1`
     * Port: `3306` _or a different port if you changed it_
     * Username: `root`
-    * Password: `YOUR_MYSQL_ROOT_PASSWORD` in the `local.env`)
-* Select the Drupal database `DRUPAL_DB` in the `local.env`)
+    * Password: `YOUR_MYSQL_ROOT_PASSWORD` in the "local.env")
+* Select the Drupal database `DRUPAL_DB` in the "local.env")
 * Click File > Import (_or equivalent_)
 * Select your exported Production Islandora Drupal database file e.g. `prod_drupal_site_082019.sql.gz`
 * The import process will take 1 -3 minutes depending on the size.
@@ -367,40 +372,52 @@ You can reuse some of the older Production settings in the `local.env` if you li
 
 * Copy the Production Islandora Drupal database file e.g. `prod_drupal_site_082019.sql.gz` to your ISLE MySQL container
     * Run `docker ps` to determine the mysql container name
-    * `docker cp /pathto/prod_drupal_site_082019.sql.gz yourmysql-container-name:/prod_drupal_site_082019.sql.gz`
+    * `docker cp /pathto/prod_drupal_site_082019.sql.gz your-mysql-containername:/prod_drupal_site_082019.sql.gz`
+    * **Example:**
+        * `docker cp /c/db_backups/prod_drupal_site_082019.sql.gz isle-mysql-ld:/prod_drupal_site_082019.sql.gz`
     * This might take a few minutes depending on the size of the file.
 
-* Shell into the mysql container. Replace the `DRUPAL...` below with the values from the `local.env`
-    * `docker exec -it yourmysql-container-name bash`
+* Shell into the mysql container by copying and pasting the appropriate command:
+    * **For Mac/Ubuntu/CentOS/etc:** `docker exec -it your-mysql-containername bash`
+    * **For Microsoft Windows:** `winpty docker exec -it your-mysql-containername bash`
+* Import the Production Islandora Drupal database. Replace the "DRUPAL_DB_USER" and "DRUPAL_DB" in the command below with the values found in your "local.env" file.
     * `mysql -u DRUPAL_DB_USER -p DRUPAL_DB < prod_drupal_site_082019.sql.gz`
-    * This might take a few minutes depending on the size of the file.
-    * Exit out of the container when finished.
+* This might take a few minutes depending on the size of the file.
+* Type `exit` to exit the container
 
 ---
 
 ## Step 10: Run Islandora Drupal Site Scripts
 
-You can determine the name of the Apache container by running `docker ps`. make note of the Apache container name, you'll need to use it for the commands below.
+This step will show you how to run the "migration_site_vsets.sh" script on the Apache container to change Drupal database site settings for ISLE connectivity.
 
-* Run the `migration_site_vsets.sh` script on the Apache container. This will change Drupal database site settings only for ISLE connectivity.
-* Copy the `scripts/apache/migration_site_vsets.sh` to the root of the Drupal directory on your Apache container
-    * `docker cp scripts/apache/migration_site_vsets.sh yourapache-container-name:/var/www/html/migration_site_vsets.sh`
+ _Using the same open terminal:_
+ 
+* Run `docker ps` to determine the apache container name
+* Copy the "migration_site_vsets.sh" to the root of the Drupal directory on your Apache container
+    * `docker cp scripts/apache/migration_site_vsets.sh your-apache-containername:/var/www/html/migration_site_vsets.sh`
 * Change the permissions on the script to make it executable
-    * `docker exec -it your-apache-containername chmod +x /var/www/html/migration_site_vsets.sh`
+    * **For Mac/Ubuntu/CentOS/etc:** `docker exec -it your-apache-containername bash -c "chmod +x /var/www/html/migration_site_vsets.sh"`
+    * **For Microsoft Windows:** `winpty docker exec -it your-apache-containername bash -c "chmod +x /var/www/html/migration_site_vsets.sh"`
 * Run the script
-    * `docker exec -it your-apache-containername bash /var/www/html/migration_site_vsets.sh`
+    * **For Mac/Ubuntu/CentOS/etc:** `docker exec -it your-apache-containername bash -c "cd /var/www/html && ./migration_site_vsets.sh"`
+    * **For Microsoft Windows:** `winpty docker exec -it your-apache-containername bash -c "cd /var/www/html && ./migration_site_vsets.sh"`
 
-* Since you've imported an existing Drupal database, you'll need to reinstall the Islandora solution packs so the Fedora repository will be ready to ingest objects.
-* Copy the `scripts/apache/install_solution_packs.sh` to the root of the Drupal directory on your Apache container
-    * `docker cp scripts/apache/install_solution_packs.sh yourapache-container-name:/var/www/html/install_solution_packs.sh`
+Since you've imported an existing Drupal database, you must now reinstall the Islandora solution packs so the Fedora repository will be ready to ingest objects.
+
+* Copy the "install_solution_packs.sh" to the root of the Drupal directory on your Apache container
+    * `docker cp scripts/apache/install_solution_packs.sh your-apache-containername:/var/www/html/install_solution_packs.sh`
 * Change the permissions on the script to make it executable
-    * `docker exec -it your-apache-containername chmod +x /var/www/html/install_solution_packs.sh`
+    * **For Mac/Ubuntu/CentOS/etc:** `docker exec -it your-apache-containername bash -c "chmod +x /var/www/html/install_solution_packs.sh"`
+    * **For Microsoft Windows:** `winpty docker exec -it your-apache-containername bash -c "chmod +x /var/www/html/install_solution_packs.sh"`
 * Run the script
-    * `docker exec -it your-apache-containername bash /var/www/html/install_solution_packs.sh`  
-    * This process will take a few minutes depending on the speed of your local and Internet connection.
+    * **For Mac/Ubuntu/CentOS/etc:** `docker exec -it your-apache-containername bash -c "cd /var/www/html && ./install_solution_packs.sh"`
+    * **For Microsoft Windows:** `winpty docker exec -it your-apache-containername bash -c "cd /var/www/html && ./install_solution_packs.sh"`
+* The above process will take a few minutes depending on the speed of your local and Internet connection.
+    * You should see a lot of green [ok] messages.
+    * If the script appears to pause or prompt for `y/n`, DO NOT enter any values; the script will automatically answer for you.
 
-```
-| For Windows Users only |
+| Microsoft Windows |
 | :-------------      |
 | You may be prompted by Windows to: |
 | - Share the C drive with Docker.  Click Okay or Allow.|
@@ -408,11 +425,7 @@ You can determine the name of the Apache container by running `docker ps`. make 
 | - Allow vpnkit.exe to communicate with the network.  Click Okay or Allow (accept default selection).|
 | - If the process seems to halt, check the taskbar for background windows.|
 
-
-* You should see a lot of green [ok] messages.
-* If the script appears to pause or prompt for `y/n`, DO NOT enter any values; the script will automatically answer for you.
-* **Proceed only after this message appears:** `Clearing Drupal Caches. 'all' cache was cleared.`
-```
+* **Proceed only after this message appears:** "Clearing Drupal Caches. 'all' cache was cleared."
 
 ---
 
@@ -424,25 +437,29 @@ You can determine the name of the Apache container by running `docker ps`. make 
 
 * Note: You may see an SSL error warning that the site is unsafe. It is safe, it simply uses "self-signed" SSL certs. Ignore the error and proceed to the site.
 
-* Log in to the local Islandora site with the credentials you created in `local.env` (`DRUPAL_ADMIN_USER` and `DRUPAL_ADMIN_PASS`)
+* Log in to the local Islandora site with the credentials ("DRUPAL_ADMIN_USER" and "DRUPAL_ADMIN_PASS") you created in "local.env".
 
     * You can also attempt to use login credentials that the Production server would have stored in its database.
     
 * If the newly created Drupal login doesn't work then, you'll need to Shell into the Apache container:
 
-    * `docker exec -it your-apache-containername bash`
-    
+    * **For Mac/Ubuntu/CentOS/etc:** `docker exec -it your-apache-containername bash`
+    * **For Microsoft Windows:** `winpty docker exec -it your-apache-containername bash`
+
+* Navigate to this directory
     * `cd /var/www/html`
     
-    * Create the user found in `DRUPAL_ADMIN_USER` and set its password to the value of `DRUPAL_ADMIN_PASS` as you previously created in `local.env`. In the example below swap-out `DRUPAL_ADMIN_USER` & `DRUPAL_ADMIN_PASS` with those found in `local.env`
-    
-        * `drush user-create DRUPAL_ADMIN_USER --mail="youremailaddresshere" --password="DRUPAL_ADMIN_PASS";`
-        
-        * `drush user-add-role "administrator" DRUPAL_ADMIN_USER`
-        
-    * `exit` the container
+* Create the user found in "DRUPAL_ADMIN_USER" and set its password to the value of "DRUPAL_ADMIN_PASS" as you previously created in "local.env". 
 
-    * Attempt to login again
+    * In the example below swap-out "DRUPAL_ADMIN_USER" and "DRUPAL_ADMIN_PASS" with those found in "local.env".
+
+    * `drush user-create DRUPAL_ADMIN_USER --mail="youremailaddresshere" --password="DRUPAL_ADMIN_PASS";`
+    
+    * `drush user-add-role "administrator" DRUPAL_ADMIN_USER`
+    
+* Type `exit` to exit the container
+
+* Attempt to login again
 
 ---
 

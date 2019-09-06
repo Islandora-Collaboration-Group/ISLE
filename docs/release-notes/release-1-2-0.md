@@ -32,11 +32,11 @@
 * Logging to physical files is turned off in each Docker container.  To view the logs now, you can use
   one of these methods:
   * Docker method: (when using the Docker json driver and TICK is not on)
-    * Single container: docker logs -f <container-name>
+    * Single container: docker logs -f <containername>
     * All containers: docker logs --tail=0 --follow
     * To learn more: https://docs.docker.com/engine/reference/commandline/logs/
   * Docker-compose method: (when using the Docker json driver and TICK is not on)
-    * Single container: docker-compose logs -f  <container-name>
+    * Single container: docker-compose logs -f  <containername>
     * All containers: docker-compose logs --tail=0 --follow
     * To learn more: https://docs.docker.com/compose/reference/logs/
   * Use the TICK Log viewer if TICK is setup and using the Docker syslog driver. Please read the 

@@ -59,7 +59,7 @@
 
 * Additional systems overhead, including:
 
-  * Add an additional 1 - 2 GB RAM in total ISLE Host memory for Varnish to keep the cache in memory.
+  * Add an additional 1-2 GB RAM in total ISLE Host memory for Varnish to keep the cache in memory.
     * You can adjust the amount that Varnish puts into memory in the supplied `.env` file
       * On the line: `VARNISH_MALLOC=256m` you can change the amount of memory to a higher value other than the default `256` Megabytes. We recommend that you do not attempt to exceed 1 GB for now.
 
@@ -349,7 +349,7 @@ VARNISH_VARNISH_PORT=6081
         tag: "{{.Name}}"
 ```
 
-**For example:**
+****Example:****
 
 ```bash
 varnish:
@@ -380,7 +380,7 @@ varnish:
 
 * Additionally you'll need to remove or comment out every line or reference to logs from the `volumes` section of each service. Varnish by default doesn't log unless directed to manually.
 
-**For example:**
+****Example:****
 
 ```bash
     volumes:

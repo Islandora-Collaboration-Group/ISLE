@@ -84,7 +84,7 @@ sudo usermod -aG docker $USER
 
 Please run these steps as your normal user (not `root`):
 
-* Clone the repository.
+* Clone the repository:
 ```
 git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 ```
@@ -170,7 +170,7 @@ sudo usermod -aG docker $USER
 
 Please run these steps as your normal user (not `root`):
 
-* Clone the repository.
+* Clone the repository:
 ```
 git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 ```
@@ -197,7 +197,7 @@ Git must be installed to get a copy (called a `clone`) of the current ISLE proje
 
  * Open a `terminal` (launch Spotlight, type "Terminal," double-click result "Terminal")
  * Enter: `git --version`.
- * If git is already installed, the above command will output the installed version number. For example:  
+ * If git is already installed, the above command will output the installed version number. **Example:**  
 
 ```
 $git --version
@@ -228,7 +228,7 @@ git version 2.15.1
 
 * As instructed within the prompt, drag and drop the whale icon to the right towards the `Applications` directory shortcut, a tiny green plus sign should appear, now let go from the mouse or trackpad.
 
-* The application should start to copy data to the `Applications` directory, this process may take 1 - 5 mins depending on the speed of your hard-drive.
+* The application should start to copy data to the `Applications` directory, this process may take 1-5 mins depending on the speed of your hard-drive.
 
 * Launch the `Docker` application from the `Applications` directory
 
@@ -245,7 +245,7 @@ git version 2.15.1
 
 Please run these steps as your normal user (not `root`):
 
-* Clone the repository.
+* Clone the repository:
 ```
 git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 ```
@@ -256,7 +256,7 @@ cd ISLE
 ```
 _To improve performance on Mac OSX:_
 
-* Open `docker-compose.yml` in a text editor and go to the the `apache` section
+* Open "docker-compose.yml" in a text editor and go to the the `apache` section
 * Under `volumes` find the following line:
     * `- ./mnt/html:/var/www/html`
     * Change to: `- ./mnt/html:/var/www/html:cached`
@@ -273,24 +273,21 @@ Your host server is now configured and ready to run ISLE.
 
 ## Windows
 
-### Step 1: Install Git
+### Step 1: Install "Git for Windows"
 Git must be installed to get a copy (called a `clone`) of the current ISLE project. (Git is a software version control system for tracking changes in computer files and coordinating work on those files among multiple people.)
 
 * Press the Windows key.
-* Type `PowerShell`.
-* In the search results, RIGHT-CLICK `Windows PowerShell`, select `Run as administrator`, and enter `Yes` to prompt.
-* Enter: `git --version`.
-* If git is already installed, the above command will output the installed version number. For example:  
-
-```
-$git --version
-git version 2.15.1
-```
-
-* If git is not installed, then
-    * [Download Git for Windows](https://gitforwindows.org/).
-    * Click `Download`, `Save` the file to your Desktop, `double-click` that file to install, then click `Yes` to the prompt.
-    * Click `Next` to accept all of the installer's default selections.
+* Type `Git Bash`.
+    * If you have "Git Bash" installed, then RIGHT-CLICK `Git Bash`, select `Run as administrator`, and enter `Yes` to the prompt.
+        * Enter: `git --version`.
+            * If git is already installed, the above command will output the installed version number. **Example:** "git version 2.23.0.windows.1"
+    * Otherwise, you must install "Git Bash".
+        * [Download "Git for Windows"](https://gitforwindows.org/).
+        * Click `Download`, `Save` the file to your Desktop, `double-click` that file to install, then click `Yes` to the prompt.
+        * Click `Next` and accept all of the installer's default selections.
+            * Optional: **Choosing the default editor used by Git** - Select preferred text editor. [ATOM](https://atom.io/) integrates particularly nicely with Git for Windows.
+    * Check for updates:
+        * Enter: `git update-git-for-windows`
 
 ### Step 2: Install Docker Desktop for Windows
 
@@ -328,10 +325,9 @@ git version 2.15.1
 ### Step 4: Clone ISLE Repository
 **Please note:** The location you select to clone the ISLE repository becomes your project directory. We recommend using the default user home directory; this location will include your configuration and log output of the Docker containers. (You may choose a different location, but it must not be a protected folder such as system or root directory.)
 
-* Use `PowerShell` (and remember to `Run as administrator`).
+* Use `Git Bash` (and remember to `Run as administrator`).
 * Enter `cd ~` (to change to the user's home directory).
-* Clone the repository.
-
+* Clone the repository:
 ```
 git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 ```
