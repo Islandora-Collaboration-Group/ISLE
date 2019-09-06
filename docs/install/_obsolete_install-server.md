@@ -1,6 +1,6 @@
 # Remote Server ISLE Installation
 
-_Expectations:  It may take at least **4 - 6 hours or more** to read this documentation and complete this installation. Please proceed slowly._
+_Expectations:  It may take at least **4-6 hours or more** to read this documentation and complete this installation. Please proceed slowly._
 
 This Remote Server ISLE Installation creates an Islandora environment with a unique domain (URL) on your host server, virtual machine, or cloud hosted platform.
 You may also use this documentation to install ISLE on several host servers, virtual machines, or cloud hosted platforms to create multiple Islandora environments (e.g. development, staging, and production). This process will result in an un-themed Drupal website and an empty Fedora repository. (Please refer back to the [Hardware Requirements](../install/host-hardware-requirements.md) as the development environment needs fewer resources than the staging and production environments; the latter two should mirror each other in resource usage and setup.)
@@ -190,13 +190,11 @@ docker-compose up -d
 * Wait for the stack to completely initialize.
 
 
-This process may take 10 - 20 minutes (_depending on system and internet speeds_)
+This process may take 10-20 minutes (_depending on system and internet speeds_)
 
 * Run the install site script on the Apache container by copying and pasting this command:
 [TODO: A server install should not be told to run this script: we want the install to be persistent, not ephemeral.]
-```
-docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh
-```
+    * `docker exec -it isle-apache-ld bash -c "cd /utility-scripts/isle_drupal_build_tools && ./isle_islandora_installer.sh`
 
 * Check the newly created and running new site by opening a browser and navigating to your site domain e.g. `https://project-name.yourdomain.edu`, you should now see an un-themed Drupal site.
 

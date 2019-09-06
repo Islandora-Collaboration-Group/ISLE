@@ -1,6 +1,6 @@
 # Staging ISLE Installation: Migrate Existing Islandora Site
 
-_Expectations:  It takes an average of **2 - 4+ hours** to read this documentation and complete this installation._
+_Expectations:  It takes an average of **2-4+ hours** to read this documentation and complete this installation._
 
 This `Staging` ISLE Installation will be similar to the [Local ISLE Installation: Migrate Existing Islandora Site](../install/install-local-migrate.md) instructions you just followed but in addition to using a copy of your currently running Production themed Drupal website, a copy of the Production Fedora repository will also be needed for you to continue migrating to ISLE with the end goal of first deploying to an ISLE Production environment and then cut over from the existing non-ISLE Production and Staging servers to their new ISLE counterparts.
 
@@ -53,8 +53,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 * You have access to a private git repository in [Github](https://github.com), [Bitbucket](https://bitbucket.org/), [Gitlab](https://gitlab.com), etc.
     * If you do not, please contact your IT department for git resources, or else create an account with one of the above providers.
-    * **WARNING:** Only use **Private** git repositories given the sensitive nature of the configuration files.
-    * **DO NOT** share these git repositories publicly.
+    * **WARNING:** Only use **Private** git repositories given the sensitive nature of the configuration files. **DO NOT** share these git repositories publicly.
 
 * You have already have the appropriate A record entered into your institutions DNS system and can resolve the Staging domain (https://yourprojectnamehere-staging.institution.edu) using a tool like https://www.whatsmydns.net/
 
@@ -74,36 +73,36 @@ This process will differ slightly from previous builds in that there is work to 
 
 The instructions that follow below will have either a `On Local` or a `On Remote Staging` pre-fix to indicate where the work and focus should be. In essence, the git workflow established during the local build process will be extended for deploying on `Staging` and for future ISLE updates and upgrades.
 
-**Steps 1 - 6** - `On Local - Configure the ISLE Staging environment profile for deploy to Remote`
+**Steps 1-6: On Local - Configure the ISLE Staging Environment Profile for Deploy to Remote**
 
-  * Step 1: Copy Production data to your local
-  * Step 2: On Local - Shutdown any local containers & review local code
-  * Step 3: On Local - Create new users and passwords by editing `staging.env`
-  * Step 4: On Local - Review and edit docker-compose.staging.yml
-  * Step 4A: On Local - (Optional) changes for  docker-compose.staging.yml
-  * Step 5: On Local Staging - If using Commercial SSLs
-  * Step 6: On Local - Commit ISLE code to git repository
+  * Step 1: Copy Production Data to Your Local
+  * Step 2: On Local - Shutdown Any Local Containers & Review Local Code
+  * Step 3: On Local - Create New Users and Passwords by Editing "staging.env"
+  * Step 4: On Local - Review and Edit "docker-compose.staging.yml"
+  * Step 4A: On Local - (Optional) Changes for "docker-compose.staging.yml"
+  * Step 5: On Local Staging - If Using Commercial SSLs
+  * Step 6: On Local - Commit ISLE Code to Git Repository
 
-**Steps 7 - 18**   - `On Remote Staging - Configure the ISLE Staging environment profile for launch and usage`
+**Steps 7-18: On Remote Staging - Configure the ISLE Staging Environment Profile for Launch and Usage**
 
-  * Step 7: On Remote Staging - Git clone the ISLE repository to the remote Staging ISLE host server
-  * Step 8: On Remote Staging - Create the appropriate local data paths for Apache, Fedora and log data
-  * Step 9: On Remote Staging - Clone your Production Islandora code
-  * Step 10: On Remote Staging - Copy over the Production Data directories
-  * Step 11: On Remote Staging - If using Let's Encrypt
-  * Step 12: On Remote Staging - Edit the .env file to change to the Staging environment
-  * Step 13: On Remote Staging - Download the ISLE images
+  * Step 7: On Remote Staging - Git Clone the ISLE Repository to the Remote Staging ISLE Host Server
+  * Step 8: On Remote Staging - Create the Appropriate Local Data Paths for Apache, Fedora and Log Data
+  * Step 9: On Remote Staging - Clone Your Production Islandora Code
+  * Step 10: On Remote Staging - Copy Over the Production Data Directories
+  * Step 11: On Remote Staging - If Using Let's Encrypt
+  * Step 12: On Remote Staging - Edit the ".env" File to Change to the Staging Environment
+  * Step 13: On Remote Staging - Download the ISLE Images
   * Step 14: On Remote Staging - Start Containers
-  * Step 15: On Remote Staging - Import the Production MySQL Drupal database
-  * Step 16: On Remote Staging - Run ISLE scripts
-  * Step 17: On Remote Staging - Re-index Fedora & Solr
-  * Step 18: On Remote Staging - Review and test the Drupal Staging site
+  * Step 15: On Remote Staging - Import the Production MySQL Drupal Database
+  * Step 16: On Remote Staging - Run ISLE Scripts
+  * Step 17: On Remote Staging - Re-Index Fedora & Solr
+  * Step 18: On Remote Staging - Review and Test the Drupal Staging Site
 
 ---
 
-## Step 1: Copy Production data to your local
+## Step 1: Copy Production Data to Your Local
 
-### Drupal site database
+### Drupal Site Database
 
 You are repeating this step given that data may have changed on the Production site since creating your local. It is critical that Staging be a mirror or close to exact copy of Production.
 
@@ -119,7 +118,7 @@ You are repeating this step given that data may have changed on the Production s
 
 * If possible, on the production Apache webserver, run `drush cc all` from the command line on the production server in the `/var/www/html` directory PRIOR to any db export(s). Otherwise issues can occur on import due to all cache tables being larger than `innodb_log_file_size` allows
 
-#### Production Islandora Drupal site database export process
+#### Export the Production MySQL Islandora Drupal Database
 
 * Export the MySQL database for the current Production Islandora Drupal site in use and copy it to your local in an easy to find place. In later steps you'll be directed to import this file. **Please be careful** performing any of these potential actions below as the process impacts your Production site. If you are not comfortable or familiar with performing these actions, we recommend that you instead work with your available IT resources to do so.
     * You can use a MySQL GUI client for this process or if you have command line access to the MySQL database server
@@ -128,33 +127,33 @@ You are repeating this step given that data may have changed on the Production s
 
 ---
 
-## Step 2: On Local - Shutdown any local containers & review local code
+## Step 2: On Local - Shutdown Any Local Containers & Review Local Code
 
 * Ensure that your ISLE and Islandora git repositories have all the latest commits and pushes from the development process that took place on your personal computer. If you haven't yet finished, do not proceed until everything is completed.
 
-* Once finished, open a `terminal` (Windows: open `PowerShell`)
+* Once finished, open a `terminal` (Windows: open `Git Bash`)
     * Navigate to your local ISLE directory
     * Shut down any local containers e.g. `docker-compose down`
 
 ---
 
-## Step 3: On Local - Create new users and passwords by editing `staging.env`
+## Step 3: On Local - Create New Users and Passwords by Editing "staging.env"
 
-* Open up the `staging.env` file in a text editor.
+* Open the "staging.env" file in a text editor.
     * Find each comment that begins with: `# Replace this comment with a ...` and follow the commented instructions to edit the passwords, database and user names.
         * **Review carefully** as some comments request that you replace with `...26 alpha-numeric characters` while others request that you create an `...easy to read but short database name`.
         * It is okay if you potentially repeat the values previously entered for your local `(DRUPAL_DB)` & `(DRUPAL_DB_USER)` in this `Staging` environment but we strongly recommend not reusing all passwords for environments e.g. `(DRUPAL_DB_PASS)` & `(DRUPAL_HASH_SALT)` should be unique values for each environment.
         * In many cases the username is already pre-populated. If it doesn't have a comment directing you to change or add a value after the `=`, then don't change it.
     * Once finished, save and close the file.
 
-* Open up the `config/apache/settings_php/settings.staging.php` file.
+* Open the `config/apache/settings_php/settings.staging.php` file.
     * Find the first comment that begins with: `# ISLE Configuration` and follow the commented instructions to edit the database, username and password.
     * Find the second comment that begins with: `# ISLE Configuration` and follow the instructions to edit the Drupal hash salt.
     * Once finished, save and close the file.
 
 ---
 
-## Step 4: On Local - Review and edit docker-compose.staging.yml
+## Step 4: On Local - Review and Edit "docker-compose.staging.yml"
 
 * Review the disks and volumes on your remote `Staging` ISLE Host server to ensure they are of an adequate capacity for your collection needs and match what has been written in the `docker-compose.staging.yml` file.
 
@@ -167,7 +166,7 @@ You are repeating this step given that data may have changed on the Production s
 
 * Review the your `docker-compose.local.yml` file for custom edits made and copy them to the `docker-compose.staging.yml` file as needed, this can include changes to Fedora Gsearch Transforms, Fedora hash size and more.
 
-### SSL certificates
+### SSL Certificates
 
 * Depending on your choice of SSL type (Commercial SSL files or the Let's Encrypt service), you'll need to uncomment only one line of the `traefik` services section. There are also inline instructions to this effect in the `docker-compose.staging.yml` file.
     * To use `Let's Encrypt for SSL`, uncomment:
@@ -181,7 +180,7 @@ You are repeating this step given that data may have changed on the Production s
 
 ---
 
-## Step 4A: On Local - (Optional) changes for  docker-compose.staging.yml
+## Step 4A: On Local - (Optional) Changes for "docker-compose.staging.yml"
 
 This section is for optional changes for the `docker-compose.staging.yml`, end-users do not have feel like they have to make any choices here and can continue to **Step 4** as needed.
 
@@ -213,7 +212,7 @@ The options include PHP settings, Java Memory Allocation, MySQL configuration an
 
 ---
 
-## Step 5: On Local Staging - If using Commercial SSLs
+## Step 5: On Local Staging - If Using Commercial SSLs
 
 If you are going to use Let's Encrypt instead, you can skip this step and move onto the next one. There will be additional steps further in this document, to help you configure it.
 
@@ -246,7 +245,7 @@ If you have decided to use Commercial SSL certs supplied to you by your IT team 
 
 ---
 
-## Step 6: On Local - Commit ISLE code to git repository
+## Step 6: On Local - Commit ISLE Code to Git Repository
 
 * Once you have made all of the appropriate changes to your `Staging` profile. Please note the steps below are suggestions. You might use a different git commit message. Substitute `<changedfileshere>` with the actual file names and paths. You may need to do this repeatedly prior to the commit message.
     * `git add <changedfileshere>`
@@ -255,9 +254,9 @@ If you have decided to use Commercial SSL certs supplied to you by your IT team 
 
 ---
 
-## On Remote Staging - Configure the ISLE Staging environment profile for launch and usage
+## On Remote Staging - Configure the ISLE Staging Environment Profile for Launch and Usage
 
-## Step 7: On Remote Staging - Git clone the ISLE repository to the remote Staging ISLE host server
+## Step 7: On Remote Staging - Git Clone the ISLE Repository to the Remote Staging ISLE Host Server
 
 * This assumes you have setup an `Islandora` deploy user. If not use a different non-root user for this purpose.
 
@@ -269,7 +268,7 @@ Since the `/opt` directory might not let you do this at first, we suggest the fo
 
 * Clone your ISLE project repository with the newly committed changes for `Staging` to the `Islandora` user home directory.
     * `git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git /home/islandora/`
-    * This may take a few minutes (2 - 4) depending on your server's Internet connection.
+    * This may take a few minutes (2-4) depending on your server's Internet connection.
 
 * Move the newly cloned directory to the `/opt` directory as the root user
     * `sudo mv /home/islandora/yourprojectnamehere-isle /opt/yourprojectnamehere-isle`
@@ -279,7 +278,7 @@ Since the `/opt` directory might not let you do this at first, we suggest the fo
 
 ---
 
-## Step 8: On Remote Staging - Create the appropriate local data paths for Apache, Fedora and log data
+## Step 8: On Remote Staging - Create the Appropriate Local Data Paths for Apache, Fedora and Log Data
 
 * Create the `/opt/data` directory
     * `sudo mkdir -p /opt/data`
@@ -288,7 +287,7 @@ Since the `/opt` directory might not let you do this at first, we suggest the fo
 
 ---
 
-## Step 9: On Remote Staging - Clone your Production Islandora code
+## Step 9: On Remote Staging - Clone Your Production Islandora Code
 
 Please clone from your existing Production Islandora git repository.
 
@@ -299,11 +298,11 @@ Please clone from your existing Production Islandora git repository.
 
 ---
 
-## Step 10: On Remote Staging - Copy over the Production Data directories
+## Step 10: On Remote Staging - Copy Over the Production Data Directories
 
 * It is recommended that you schedule a content freeze for all Production Fedora ingests and additions to your Production website. This will allow you to get up to date data from Production to Staging.
 
-* As you may have made some critical decisions potentially from `Step 0: Copy Production data to your local` of the [Local ISLE Installation: Migrate Existing Islandora Site](../install/install-local-migrate.md) instructions, you need to re-follow the steps to get your:
+* As you may have made some critical decisions potentially from "Step 0: Copy Production Data to Your Local" of the [Local ISLE Installation: Migrate Existing Islandora Site](../install/install-local-migrate.md) instructions, you need to re-follow the steps to get your:
     * `Production` Drupal site `files` directory
     * `Solr schema & Islandora transforms`
         * If you picked **Easy** option:
@@ -320,7 +319,7 @@ Please clone from your existing Production Islandora git repository.
 
 ---
 
-## Step 11: On Remote Staging - If using Let's Encrypt
+## Step 11: On Remote Staging - If Using Let's Encrypt
 
 If you are using Commercial SSLs, then please stop and move onto the next step.
 
@@ -335,7 +334,7 @@ If using Let's Encrypt, please continue to follow this step.
 
 ---
 
-## Step 12: On Remote Staging - Edit the .env file to change to the Staging environment
+## Step 12: On Remote Staging - Edit the ".env" File to Change to the Staging Environment
 
 This step is a multi-step, involved process that allows an end-user to make appropriate changes to the `.env` and then commit it locally to git. This local commit that never gets pushed back to the git repository is critical to allow future ISLE updates or config changes.
 
@@ -401,10 +400,10 @@ git commit -m "Added the edited .env configuration file for Staging. DO NOT PUSH
 
 ---
 
-## Step 13: On Remote Staging - Download the ISLE images
+## Step 13: On Remote Staging - Download the ISLE Images
 
 * Download all of the latest ISLE Docker images (_~6 GB of data may take 5-10 minutes_).
-* _Using the same open terminal / Powershell_
+* _Using the same open terminal:_
     * Navigate to the root of your ISLE project
     * `cd ~/opt/yourprojectnamehere`
     * `docker-compose pull`
@@ -415,12 +414,12 @@ git commit -m "Added the edited .env configuration file for Staging. DO NOT PUSH
 
 **Please note:** Prior to starting the launch process, it is recommended that you briefly open your firewall to allow ports 80 and 443 access to the world. You'll only need to keep this open for 3 -5 minutes and then promptly close access once the Let's Encrypt SSL certificates have been generated.
 
-* _Using the same open terminal / Powershell_
+* _Using the same open terminal:_
     * `docker-compose up -d`
 
 * Please wait a few moments for the stack to fully come up. Approximately 3-5 minutes.
 
-* After the above process is completed using the already open terminal or Powershell again.
+* _Using the same open terminal:_
     * View only the running containers: `docker ps`
     * View all containers (both those running and stopped): `docker ps -a`
     * All containers prefixed with `isle-` are expected to have a `STATUS` of `Up` (for x time).
@@ -432,7 +431,7 @@ git commit -m "Added the edited .env configuration file for Staging. DO NOT PUSH
 
 ---
 
-## Step 15: On Remote Staging - Import the Local MySQL Drupal database
+## Step 15: On Remote Staging - Import the Local MySQL Drupal Database
 
 **Prior to attempting this step, please consider the following:**
 
@@ -442,48 +441,48 @@ git commit -m "Added the edited .env configuration file for Staging. DO NOT PUSH
 
 ---
 
-### Local Islandora Drupal site database import process
+### Import the Local MySQL Islandora Drupal Database
 
 * Copy the `local_drupal_site_082019.sql` created in Step 1 to the Remote Staging server.
 
 * Import the exported `Local` MySQL database for use in the current `Staging` Drupal site. Refer to your `staging.env` for the usernames and passwords used below.
     * You can use a MySQL GUI client for this process instead but the command line directions are only included below.
     * Run `docker ps` to determine the MySQL container name
-    * _Using the same open terminal / Powershell_  
-    * Shell into your currently running `Staging` MySQL container
-        * `docker exec -it yourmysql-container-name bash`
-    * Import the Local Islandora Drupal database. Replace the `DRUPAL_DB` & `DRUPAL_DB_USER` below in the command with the values found in your `staging.env`.
+    * _Using the same open terminal:_  
+    * Shell into your currently running "Staging" MySQL container
+        * `docker exec -it your-mysql-containername bash`
+    * Import the Local Islandora Drupal database. Replace the "DRUPAL_DB_USER" and "DRUPAL_DB" in the command below with the values found in your "staging.env" file.
         * `mysql -u DRUPAL_DB_USER -p DRUPAL_DB < local_drupal_site_082019.sql`
-        * Enter the appropriate password: value of `DRUPAL_DB_PASS` in the `staging.env`)
+        * Enter the appropriate password: value of `DRUPAL_DB_PASS` in the "staging.env")
         * This might take a few minutes depending on the size of the file.
-        * Exit out of the container when finished.
+        * Type `exit` to exit the container
 
 ---
 
-## Step 16: On Remote Staging - Run ISLE scripts
+## Step 16: On Remote Staging - Run ISLE Scripts
 
-You can determine the name of the Apache container by running `docker ps`. make note of the Apache container name, you'll need to use it for the commands below.
+This step will show you how to run the "migration_site_vsets.sh" script on the Apache container to change Drupal database site settings for ISLE connectivity.
 
-### Run migration_site_vsets.sh script on the Apache container
+ _Using the same open terminal:_
+ 
+* Run `docker ps` to determine the apache container name
+* Copy the "migration_site_vsets.sh" to the root of the Drupal directory on your Apache container
+    * `docker cp ./scripts/apache/migration_site_vsets.sh your-apache-containername:/var/www/html/migration_site_vsets.sh`
+* Change the permissions on the script to make it executable
+    * `docker exec -it your-apache-containername bash -c "chmod +x /var/www/html/migration_site_vsets.sh"`
+* Run the script
+    * `docker exec -it your-apache-containername bash -c "cd /var/www/html && ./migration_site_vsets.sh"`
 
-* _Using the same open terminal / Powershell_
-    * Run the `migration_site_vsets.sh` script on the Apache container. This will change Drupal database site settings only for ISLE connectivity.
-    * Copy the `./scripts/apache/migration_site_vsets.sh` to the root of the Drupal directory on your Apache container
-        * `docker cp ./scripts/apache/migration_site_vsets.sh yourapache-container-name:/var/www/html/migration_site_vsets.sh`
-    * Change the permissions on the script to make it executable
-        * `docker exec -it your-apache-containername chmod +x /var/www/html/migration_site_vsets.sh`
-    * Run the script
-        * `docker exec -it your-apache-containername bash /var/www/html/migration_site_vsets.sh`
+This step will show you how to shell into your currently running "Staging" Apache container, and run the "fix-permissions.sh" script to fix the Drupal site permissions.
 
-### Run fix-permissions.sh script on the Apache container
-* You'll need to fix the Drupal site permissions by running the `/fix-permissions.sh` script from the Apache container
-  * Shell into your currently running `Staging` Apache container
-    * `docker exec -it yourapache-container-name bash`
-    * `sh /utility-scripts/isle_drupal_build_tools/drupal/fix-permissions.sh --drupal_path=/var/www/html --drupal_user=islandora --httpd_group=www-data`
-    * This process will take 2 - 5 mins depending
-    * Type `exit` to exit the container
+* `docker exec -it your-apache-containername bash`
+* `sh /utility-scripts/isle_drupal_build_tools/drupal/fix-permissions.sh --drupal_path=/var/www/html --drupal_user=islandora --httpd_group=www-data`
+* This process will take 2-5 minutes
+* You should see a lot of green [ok] messages.
+* If the script appears to pause or prompt for `y/n`, DO NOT enter any values; the script will automatically answer for you.
+* Type `exit` to exit the container
 
-| For Windows Users only |
+| Microsoft Windows |
 | :-------------      |
 | You may be prompted by Windows to: |
 | - Share the C drive with Docker.  Click Okay or Allow.|
@@ -491,11 +490,9 @@ You can determine the name of the Apache container by running `docker ps`. make 
 | - Allow vpnkit.exe to communicate with the network.  Click Okay or Allow (accept default selection).|
 | - If the process seems to halt, check the taskbar for background windows.|
 
-* If the script appears to pause or prompt for `y/n`, DO NOT enter any values; the script will automatically answer for you.
-
 ---
 
-## Step 17: On Remote Staging - Re-index Fedora & Solr
+## Step 17: On Remote Staging - Re-Index Fedora & Solr
 
 When migrating any non-ISLE Islandora site, it is crucial to rebuild (reindex) the following three indices from the FOXML and datastream files on disk.
 
@@ -515,9 +512,9 @@ Since this command can take minutes or hours depending on the size of your repos
 
 **Please note:** The method described below is a longer way of doing this process to onboard users.
 
-* Shell into your currently running `Staging` Fedora container
+* Shell into your currently running "Staging" Fedora container
     * Run `docker ps` to determine the Fedora container name
-    * `docker exec -it yourfedora-container-name bash`
+    * `docker exec -it your-fedora-containername bash`
 
 * Navigate to the `utility_scripts` directory
     * `cd utility_scripts`
@@ -552,7 +549,7 @@ OK - Started application at context path [/fedora]
 
 ### Reindex Solr (3/3)
 
-**WARNING** - This reindex process takes the longest of all three, with up to **1 - 30 or more hours** to complete depending on the size of your Fedora collection. As such, it is recommended starting a screen session prior to running the following command. Learn more about [screen here](https://www.tecmint.com/screen-command-examples-to-manage-linux-terminals/)
+**WARNING** - This reindex process takes the longest of all three, with up to **1-30 or more hours** to complete depending on the size of your Fedora collection. As such, it is recommended starting a screen session prior to running the following command. Learn more about [screen here](https://www.tecmint.com/screen-command-examples-to-manage-linux-terminals/)
 
 * Still staying within the `utility_scripts` directory on the Fedora container or reenter the Fedora container having started a new screen session, now run the `updateSolrIndex.sh` script. This script will give you output like the example below.
     * `./updateSolrIndex.sh`
@@ -585,12 +582,12 @@ Args
 
 ---
 
-## Step 18: On Remote Staging - Review and test the Drupal Staging site
+## Step 18: On Remote Staging - Review and Test the Drupal Staging Site
 
 * In your web browser, enter this URL: `https://yourprojectnamehere.institution.edu`
     * Please note: You should not see any errors with respect to the SSL certifications. If so, please review your previous steps especially if using Let's Encrypt. You may need to repeat those steps to get rid of the errors.
 
-* Log in to the local Islandora site with the credentials you created in `staging.env` (`DRUPAL_ADMIN_USER` and `DRUPAL_ADMIN_PASS`)
+* Log in to the local Islandora site with the credentials ("DRUPAL_ADMIN_USER" and "DRUPAL_ADMIN_PASS") you created in "staging.env".
     * **Please note:** You are free to use previously Drupal admin or user accounts created during the `Local` site development process.
 
 * You can decide to further QC and review the site as you wish or start to add digital collections and objects.

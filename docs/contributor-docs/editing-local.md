@@ -35,7 +35,7 @@ The example used below is how to create a new documentation page that will be ab
 
 * Create a new empty file in the `docs/contributor-docs` directory e.g. `building_giant_robots.md`
 
-* Open up the `mkdocs.yml` file in a text editor.
+* Open the `mkdocs.yml` file in a text editor.
 
 In order for `mkdocs` to understand that there is a new page and page title to display in the rendered documentation, one must use the YAML code convention (syntax) to enter.
 

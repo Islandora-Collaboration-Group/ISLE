@@ -31,15 +31,17 @@ Sections within a section that is specific to a certain type of circumstance sho
 ---
 
 ## Headers: Follow the APA Style Guide for Capitalization of All Important Words.
-### For example:
+- Solution: Sublime Text 3, install and use this package: `Smart Title Case.sublime-package`
+
+### **Example:**
 - H1: Page Title
 - H2: Main Subheaders
-- H3: Subheaders found within "Main Subheaders"
+- H3: Copy Production Data to Your Local
 
 ---
 
 ## Bullets and Indentations
-### For example:
+### **Example:**
 Mkdocs is finicky and requires double indentations to create properly indented sub-bullets.
 
 * Item A
