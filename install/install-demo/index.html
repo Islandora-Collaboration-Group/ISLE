@@ -263,15 +263,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-1-edit-etchosts-file" title="Step 1: Edit /etc/hosts File" class="md-nav__link">
-    Step 1: Edit /etc/hosts File
+  <a href="#step-1-edit-etchosts-file" title="Step 1: Edit "/etc/hosts" File" class="md-nav__link">
+    Step 1: Edit "/etc/hosts" File
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-2-download-the-isle-images" title="Step 2: Download the ISLE images" class="md-nav__link">
-    Step 2: Download the ISLE images
+  <a href="#step-2-download-the-isle-images" title="Step 2: Download the ISLE Images" class="md-nav__link">
+    Step 2: Download the ISLE Images
   </a>
   
 </li>
@@ -284,8 +284,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-4-run-islandora-drupal-site-install-script" title="Step 4: Run Islandora Drupal site Install Script" class="md-nav__link">
-    Step 4: Run Islandora Drupal site Install Script
+  <a href="#step-4-run-islandora-drupal-site-install-script" title="Step 4: Run Islandora Drupal Site Install Script" class="md-nav__link">
+    Step 4: Run Islandora Drupal Site Install Script
   </a>
   
 </li>
@@ -999,15 +999,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-1-edit-etchosts-file" title="Step 1: Edit /etc/hosts File" class="md-nav__link">
-    Step 1: Edit /etc/hosts File
+  <a href="#step-1-edit-etchosts-file" title="Step 1: Edit "/etc/hosts" File" class="md-nav__link">
+    Step 1: Edit "/etc/hosts" File
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-2-download-the-isle-images" title="Step 2: Download the ISLE images" class="md-nav__link">
-    Step 2: Download the ISLE images
+  <a href="#step-2-download-the-isle-images" title="Step 2: Download the ISLE Images" class="md-nav__link">
+    Step 2: Download the ISLE Images
   </a>
   
 </li>
@@ -1020,8 +1020,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-4-run-islandora-drupal-site-install-script" title="Step 4: Run Islandora Drupal site Install Script" class="md-nav__link">
-    Step 4: Run Islandora Drupal site Install Script
+  <a href="#step-4-run-islandora-drupal-site-install-script" title="Step 4: Run Islandora Drupal Site Install Script" class="md-nav__link">
+    Step 4: Run Islandora Drupal Site Install Script
   </a>
   
 </li>
@@ -1102,18 +1102,21 @@
 <li>
 <p>You have already git cloned the ISLE Project to your personal computer.</p>
 </li>
+<li>
+<p><strong>For Microsoft Windows:</strong> You have installed <a href="../host-software-dependencies/#windows">Git for Windows</a> and will use its provided "Git BASH" as your command line interface; this behaves more similarly to LINUX and UNIX environments.</p>
+</li>
 </ul>
 <hr />
-<h2 id="step-1-edit-etchosts-file">Step 1: Edit <code>/etc/hosts</code> File</h2>
+<h2 id="step-1-edit-etchosts-file">Step 1: Edit "/etc/hosts" File</h2>
 <p>Enable the Demo ISLE Installation to be viewed locally on personal computer browser as: <code>https://isle.localdomain</code>.</p>
 <ul>
 <li>Please use these instructions to <a href="../install-demo-edit-hosts-file/">Edit the "/etc/hosts" File</a>.</li>
 </ul>
 <hr />
-<h2 id="step-2-download-the-isle-images">Step 2: Download the ISLE images</h2>
+<h2 id="step-2-download-the-isle-images">Step 2: Download the ISLE Images</h2>
 <ul>
 <li>
-<p>Open a <code>terminal</code> (Windows: open <code>PowerShell</code>)</p>
+<p>Open a <code>terminal</code> (Windows: open <code>Git Bash</code>)</p>
 </li>
 <li>
 <p>Navigate to your ISLE project directory. (You may already be in this directory if you are coming from the <a href="../host-software-dependencies/">Software Dependencies</a>.)</p>
@@ -1126,7 +1129,7 @@
 <hr />
 <h2 id="step-3-launch-process">Step 3: Launch Process</h2>
 <ul>
-<li><em>Using the same open terminal / Powershell</em><ul>
+<li><em>Using the same open terminal:</em><ul>
 <li><code>docker-compose up -d</code></li>
 </ul>
 </li>
@@ -1137,7 +1140,7 @@
 <p>Please wait a few moments for the stack to fully come up. Approximately 3-5 minutes.</p>
 </li>
 <li>
-<p>After the above process is completed using the already open terminal or Powershell again.</p>
+<p><em>Using the same open terminal:</em></p>
 <ul>
 <li>View only the running containers: <code>docker ps</code></li>
 <li>View all containers (both those running and stopped): <code>docker ps -a</code></li>
@@ -1148,18 +1151,19 @@
 </li>
 </ul>
 <hr />
-<h2 id="step-4-run-islandora-drupal-site-install-script">Step 4: Run Islandora Drupal site Install Script</h2>
-<p>This process may take 10 - 20 minutes (<em>depending on system and internet speeds</em>)</p>
+<h2 id="step-4-run-islandora-drupal-site-install-script">Step 4: Run Islandora Drupal Site Install Script</h2>
+<p>This process may take 10-20 minutes (<em>depending on system and internet speeds</em>)</p>
 <ul>
-<li>Run the install site script on the Apache container by copying and pasting this command:</li>
+<li>Run the install site script on the Apache container by copying and pasting the appropriate command:<ul>
+<li><strong>For Mac/Ubuntu/CentOS/etc:</strong> <code>docker exec -it isle-apache-ld bash -c "cd /utility-scripts/isle_drupal_build_tools &amp;&amp; ./isle_islandora_installer.sh"</code></li>
+<li><strong>For Microsoft Windows:</strong> <code>winpty docker exec -it isle-apache-ld bash -c "cd /utility-scripts/isle_drupal_build_tools &amp;&amp; ./isle_islandora_installer.sh"</code></li>
 </ul>
-<pre><code>docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh
-</code></pre>
-
+</li>
+</ul>
 <table>
 <thead>
 <tr>
-<th align="left">For Windows Users only</th>
+<th align="left">Microsoft Windows</th>
 </tr>
 </thead>
 <tbody>
@@ -1183,7 +1187,7 @@
 <ul>
 <li>You should see a lot of green [ok] messages.</li>
 <li>If the script appears to pause or prompt for <code>y/n</code>, DO NOT enter any values; the script will automatically answer for you.</li>
-<li><strong>Proceed only after this message appears:</strong> <code>Clearing Drupal Caches. 'all' cache was cleared.</code></li>
+<li><strong>Proceed only after this message appears:</strong> "Clearing Drupal Caches. 'all' cache was cleared."</li>
 </ul>
 <hr />
 <h2 id="step-5-test-the-site">Step 5: Test the Site</h2>

@@ -1135,7 +1135,7 @@
 <p>Additional systems overhead, including:</p>
 </li>
 <li>
-<p>Add an additional 1 - 2 GB RAM in total ISLE Host memory for Varnish to keep the cache in memory.</p>
+<p>Add an additional 1-2 GB RAM in total ISLE Host memory for Varnish to keep the cache in memory.</p>
 <ul>
 <li>You can adjust the amount that Varnish puts into memory in the supplied <code>.env</code> file</li>
 <li>On the line: <code>VARNISH_MALLOC=256m</code> you can change the amount of memory to a higher value other than the default <code>256</code> Megabytes. We recommend that you do not attempt to exceed 1 GB for now.</li>
@@ -1459,7 +1459,7 @@ VARNISH_VARNISH_PORT=6081
         tag: &quot;{{.Name}}&quot;
 </code></pre>
 
-<p><strong>For example:</strong></p>
+<p><strong><em>*Example:</em></strong>*</p>
 <pre><code class="bash">varnish:
   # build:
   #   context: ../images/isle-varnish
@@ -1489,7 +1489,7 @@ VARNISH_VARNISH_PORT=6081
 <ul>
 <li>Additionally you'll need to remove or comment out every line or reference to logs from the <code>volumes</code> section of each service. Varnish by default doesn't log unless directed to manually.</li>
 </ul>
-<p><strong>For example:</strong></p>
+<p><strong><em>*Example:</em></strong>*</p>
 <pre><code class="bash">    volumes:
       - isle-solr-data:/usr/local/solr
       - ./logs/solr:/usr/local/tomcat/logs

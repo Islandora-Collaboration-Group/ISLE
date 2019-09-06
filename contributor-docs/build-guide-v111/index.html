@@ -1890,7 +1890,7 @@ docker build --build-arg BUILD_DATE=`date -u +&quot;%Y-%m-%dT%H:%M:%SZ&quot;` --
 <li><code>git checkout last used build commit</code> i.e. <code>git checkout ee7e9d32a71381abfa5c3ead13255c0c5b66ed45</code></li>
 <li>Compare both directories using a visual diff tool like <code>Kaleidoscope</code> (MAC), <code>diff</code> or <code>KDiff3</code> (Linux)</li>
 <li>Note the differences in files and the line numbers for inclusion in release notes.</li>
-<li><code>datastream_info_to_solr.xslt</code> - Lines 35 - 49 - new lines &amp; content added</li>
+<li><code>datastream_info_to_solr.xslt</code> - Lines 35-49 - new lines &amp; content added</li>
 <li><code>RELS-EXT_to_solr.xslt</code><ul>
 <li>Line 7 - modified</li>
 <li>Line 8 - new line &amp; content added</li>
@@ -1898,7 +1898,7 @@ docker build --build-arg BUILD_DATE=`date -u +&quot;%Y-%m-%dT%H:%M:%SZ&quot;` --
 <li>Line 49 - new line &amp; content added</li>
 </ul>
 </li>
-<li><code>slurp_all_MODS_to_solr.xslt</code> - Lines 289 - 300 new lines &amp; content added</li>
+<li><code>slurp_all_MODS_to_solr.xslt</code> - Lines 289-300 new lines &amp; content added</li>
 </ul>
 </li>
 </ul>
@@ -2572,7 +2572,7 @@ docker build --build-arg BUILD_DATE=`date -u +&quot;%Y-%m-%dT%H:%M:%SZ&quot;` --
 <p>Install site</p>
 </li>
 <li>
-<p><code>docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh</code></p>
+<p><code>docker exec -it isle-apache-ld bash -c "cd /utility-scripts/isle_drupal_build_tools &amp;&amp; ./isle_islandora_installer.sh</code></p>
 </li>
 <li>
 <p>Test ingest for all content types</p>

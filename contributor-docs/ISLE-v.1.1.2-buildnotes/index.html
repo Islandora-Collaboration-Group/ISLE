@@ -961,7 +961,7 @@
 <li>Please wait a few moments for the stack to fully come up. Approximately 3-5 minutes.</li>
 <li>Install Islandora on the isle-apache-ld container:</li>
 <li>
-<p><code>docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh</code></p>
+<p><code>docker exec -it isle-apache-ld bash -c "cd /utility-scripts/isle_drupal_build_tools &amp;&amp; ./isle_islandora_installer.sh</code></p>
 <ul>
 <li>Please note this will run the <code>https://github.com/Born-Digital-US/ISLE-Drupal-Build-Tools.git</code> version which has changes to the installer vsets.</li>
 </ul>

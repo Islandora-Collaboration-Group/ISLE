@@ -1023,7 +1023,7 @@
                 
                 
                 <h1 id="remote-server-isle-installation">Remote Server ISLE Installation</h1>
-<p><em>Expectations:  It may take at least <strong>4 - 6 hours or more</strong> to read this documentation and complete this installation. Please proceed slowly.</em></p>
+<p><em>Expectations:  It may take at least <strong>4-6 hours or more</strong> to read this documentation and complete this installation. Please proceed slowly.</em></p>
 <p>This Remote Server ISLE Installation creates an Islandora environment with a unique domain (URL) on your host server, virtual machine, or cloud hosted platform.
 You may also use this documentation to install ISLE on several host servers, virtual machines, or cloud hosted platforms to create multiple Islandora environments (e.g. development, staging, and production). This process will result in an un-themed Drupal website and an empty Fedora repository. (Please refer back to the <a href="../host-hardware-requirements/">Hardware Requirements</a> as the development environment needs fewer resources than the staging and production environments; the latter two should mirror each other in resource usage and setup.)</p>
 <p>Please post questions to the public <a href="https://groups.google.com/forum/#!forum/islandora-isle">Islandora ISLE Google group</a>, or subscribe to receive emails. The <a href="../../appendices/glossary/">Glossary</a> defines terms used in this documentation.</p>
@@ -1231,16 +1231,18 @@ image-services:
 <ul>
 <li>Wait for the stack to completely initialize.</li>
 </ul>
-<p>This process may take 10 - 20 minutes (<em>depending on system and internet speeds</em>)</p>
+<p>This process may take 10-20 minutes (<em>depending on system and internet speeds</em>)</p>
 <ul>
-<li>Run the install site script on the Apache container by copying and pasting this command:
-[TODO: A server install should not be told to run this script: we want the install to be persistent, not ephemeral.]</li>
+<li>
+<p>Run the install site script on the Apache container by copying and pasting this command:
+[TODO: A server install should not be told to run this script: we want the install to be persistent, not ephemeral.]</p>
+<ul>
+<li><code>docker exec -it isle-apache-ld bash -c "cd /utility-scripts/isle_drupal_build_tools &amp;&amp; ./isle_islandora_installer.sh</code></li>
 </ul>
-<pre><code>docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh
-</code></pre>
-
-<ul>
-<li>Check the newly created and running new site by opening a browser and navigating to your site domain e.g. <code>https://project-name.yourdomain.edu</code>, you should now see an un-themed Drupal site.</li>
+</li>
+<li>
+<p>Check the newly created and running new site by opening a browser and navigating to your site domain e.g. <code>https://project-name.yourdomain.edu</code>, you should now see an un-themed Drupal site.</p>
+</li>
 </ul>
 <hr />
 <p>(Good points for somewhere else:)</p>

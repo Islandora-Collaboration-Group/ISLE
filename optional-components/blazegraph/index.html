@@ -1148,7 +1148,7 @@
 <p>Add an additional 2 GB RAM in total ISLE Host memory for Blazegraph to run</p>
 </li>
 <li>
-<p>Plan on an additional 25 - 100+ GB disk space for “big_data” resource index persistence.</p>
+<p>Plan on an additional 25-100+ GB disk space for “big_data” resource index persistence.</p>
 <ul>
 <li>This index (<code>/var/bigdata/bigdata.jnl</code>) will grow quickly overtime and file sizes of over 25GB or more are possible with Fedora repositories that have over 1 million objects.</li>
 </ul>
@@ -1156,11 +1156,11 @@
 <li>
 <p>To persist this file and directory in a bind-mount instead of a Docker volume, an edit will need to be made to the <code>docker-compose.yml</code> file in the <code>blazegraph</code> service, <code>volume</code> section.</p>
 <ul>
-<li>Change <code>isle-blazegraph-data</code> to your ISLE Host system specific bind-mount path. For example: </li>
+<li>Change <code>isle-blazegraph-data</code> to your ISLE Host system specific bind-mount path. <strong>Example:</strong> </li>
 <li><code>- /mnt/isle-blazegraph-data:/var/bigdata</code></li>
 </ul>
 </li>
-<li>This disk should be a separate data disk that should be 25 - 100+ GB in capacity. Plan on resizing this disk when using Blazegraph with large Fedora repositories of over 600K+ of objects.</li>
+<li>This disk should be a separate data disk that should be 25-100+ GB in capacity. Plan on resizing this disk when using Blazegraph with large Fedora repositories of over 600K+ of objects.</li>
 </ul>
 <hr />
 <h2 id="adoption-process-overview">Adoption Process Overview</h2>
@@ -1491,7 +1491,7 @@ FEDORA_WEBAPP_HOME=/usr/local/tomcat/webapps/fedora
 <p><code>docker-compose up -d</code></p>
 </li>
 <li>
-<p>Wait a few minutes (<em>3 - 8 depending on the size of your site</em>) for the site and services to come up.</p>
+<p>Wait a few minutes (<em>3-8 depending on the size of your site</em>) for the site and services to come up.</p>
 </li>
 </ul>
 <h4 id="check-fedora">Check Fedora</h4>
@@ -1593,7 +1593,7 @@ FEDORA_WEBAPP_HOME=/usr/local/tomcat/webapps/fedora
         tag: &quot;{{.Name}}&quot;
 </code></pre>
 
-<p><strong>For example:</strong></p>
+<p><strong><em>*Example:</em></strong>*</p>
 <pre><code class="bash">
   isle-blazegraph:
     #build:
@@ -1620,7 +1620,7 @@ FEDORA_WEBAPP_HOME=/usr/local/tomcat/webapps/fedora
 <ul>
 <li>Additionally you'll need to remove or comment out every line or reference to logs from the <code>volumes</code> section of each service.</li>
 </ul>
-<p><strong>For example:</strong></p>
+<p><strong><em>*Example:</em></strong>*</p>
 <pre><code class="bash">    volumes:
       - isle-blazegraph-data:/var/bigdata
       - ./logs/blazegraph:/usr/local/tomcat/logs

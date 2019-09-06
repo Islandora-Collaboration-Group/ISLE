@@ -1100,13 +1100,13 @@
 <p>As of ISLE release logging to physical file has been turned off, stdout &amp; stderr are to console only no more physical files. This means if you need to view logs for debugging, here are some methods:</p>
 <ul>
 <li><a href="https://docs.docker.com/engine/reference/commandline/logs/">Docker method:</a> (<em>when using the Docker json driver and TICK is not on</em>)</li>
-<li>Single container: <code>docker logs -f &lt;container-name&gt;</code></li>
+<li>Single container: <code>docker logs -f &lt;containername&gt;</code></li>
 <li>
 <p>All containers: <code>docker logs --tail=0 --follow</code></p>
 </li>
 <li>
 <p>[Docker-compose method:(https://docs.docker.com/compose/reference/logs/)] (when using the Docker json driver and TICK is not on)
-Single container: docker-compose logs -f  <container-name>
+Single container: docker-compose logs -f  <containername>
 All containers: docker-compose logs --tail=0 --follow</p>
 </li>
 <li>

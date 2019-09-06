@@ -1382,8 +1382,8 @@
 <li>example: <code>docker exec -it isle-apache-ld bash</code></li>
 </ul>
 </li>
-<li><code>docker exec -it [CONTAINER_NAME] [FILE_NAME]</code> # Shell Into Docker Container and Open a File<ul>
-<li>example: <code>docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh</code></li>
+<li><code>docker exec -it [CONTAINER_NAME] [FILE_NAME]</code> # Shell Into Docker Container and Run Script<ul>
+<li>example: <code>docker exec -it isle-apache-ld bash -c "cd /utility-scripts/isle_drupal_build_tools &amp;&amp; ./isle_islandora_installer.sh</code></li>
 </ul>
 </li>
 </ul>

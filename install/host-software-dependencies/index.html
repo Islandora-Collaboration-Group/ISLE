@@ -389,8 +389,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#step-1-install-git_1" title="Step 1: Install Git" class="md-nav__link">
-    Step 1: Install Git
+  <a href="#step-1-install-git-for-windows" title="Step 1: Install "Git for Windows"" class="md-nav__link">
+    Step 1: Install "Git for Windows"
   </a>
   
 </li>
@@ -1239,8 +1239,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#step-1-install-git_1" title="Step 1: Install Git" class="md-nav__link">
-    Step 1: Install Git
+  <a href="#step-1-install-git-for-windows" title="Step 1: Install "Git for Windows"" class="md-nav__link">
+    Step 1: Install "Git for Windows"
   </a>
   
 </li>
@@ -1385,7 +1385,7 @@
 <p><strong>Please note:</strong> The location you clone the repository to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.</p>
 <p>Please run these steps as your normal user (not <code>root</code>):</p>
 <ul>
-<li>Clone the repository.</li>
+<li>Clone the repository:</li>
 </ul>
 <pre><code>git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 </code></pre>
@@ -1482,7 +1482,7 @@
 <p><strong>Please note:</strong> The location you clone the repository to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.</p>
 <p>Please run these steps as your normal user (not <code>root</code>):</p>
 <ul>
-<li>Clone the repository.</li>
+<li>Clone the repository:</li>
 </ul>
 <pre><code>git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 </code></pre>
@@ -1507,7 +1507,7 @@
 <ul>
 <li>Open a <code>terminal</code> (launch Spotlight, type "Terminal," double-click result "Terminal")</li>
 <li>Enter: <code>git --version</code>.</li>
-<li>If git is already installed, the above command will output the installed version number. For example:  </li>
+<li>If git is already installed, the above command will output the installed version number. <strong>Example:</strong>  </li>
 </ul>
 <pre><code>$git --version
 git version 2.15.1
@@ -1551,7 +1551,7 @@ git version 2.15.1
 <p>As instructed within the prompt, drag and drop the whale icon to the right towards the <code>Applications</code> directory shortcut, a tiny green plus sign should appear, now let go from the mouse or trackpad.</p>
 </li>
 <li>
-<p>The application should start to copy data to the <code>Applications</code> directory, this process may take 1 - 5 mins depending on the speed of your hard-drive.</p>
+<p>The application should start to copy data to the <code>Applications</code> directory, this process may take 1-5 mins depending on the speed of your hard-drive.</p>
 </li>
 <li>
 <p>Launch the <code>Docker</code> application from the <code>Applications</code> directory</p>
@@ -1571,7 +1571,7 @@ git version 2.15.1
 <p><strong>Please note:</strong> The location you clone the repository to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.</p>
 <p>Please run these steps as your normal user (not <code>root</code>):</p>
 <ul>
-<li>Clone the repository.</li>
+<li>Clone the repository:</li>
 </ul>
 <pre><code>git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 </code></pre>
@@ -1584,7 +1584,7 @@ git version 2.15.1
 
 <p><em>To improve performance on Mac OSX:</em></p>
 <ul>
-<li>Open <code>docker-compose.yml</code> in a text editor and go to the the <code>apache</code> section</li>
+<li>Open "docker-compose.yml" in a text editor and go to the the <code>apache</code> section</li>
 <li>Under <code>volumes</code> find the following line:<ul>
 <li><code>- ./mnt/html:/var/www/html</code></li>
 <li>Change to: <code>- ./mnt/html:/var/www/html:cached</code></li>
@@ -1600,24 +1600,31 @@ git version 2.15.1
 </ul>
 <hr />
 <h2 id="windows">Windows</h2>
-<h3 id="step-1-install-git_1">Step 1: Install Git</h3>
+<h3 id="step-1-install-git-for-windows">Step 1: Install "Git for Windows"</h3>
 <p>Git must be installed to get a copy (called a <code>clone</code>) of the current ISLE project. (Git is a software version control system for tracking changes in computer files and coordinating work on those files among multiple people.)</p>
 <ul>
 <li>Press the Windows key.</li>
-<li>Type <code>PowerShell</code>.</li>
-<li>In the search results, RIGHT-CLICK <code>Windows PowerShell</code>, select <code>Run as administrator</code>, and enter <code>Yes</code> to prompt.</li>
-<li>Enter: <code>git --version</code>.</li>
-<li>If git is already installed, the above command will output the installed version number. For example:  </li>
+<li>Type <code>Git Bash</code>.<ul>
+<li>If you have "Git Bash" installed, then RIGHT-CLICK <code>Git Bash</code>, select <code>Run as administrator</code>, and enter <code>Yes</code> to the prompt.<ul>
+<li>Enter: <code>git --version</code>.<ul>
+<li>If git is already installed, the above command will output the installed version number. <strong>Example:</strong> "git version 2.23.0.windows.1"</li>
 </ul>
-<pre><code>$git --version
-git version 2.15.1
-</code></pre>
-
-<ul>
-<li>If git is not installed, then<ul>
-<li><a href="https://gitforwindows.org/">Download Git for Windows</a>.</li>
+</li>
+</ul>
+</li>
+<li>Otherwise, you must install "Git Bash".<ul>
+<li><a href="https://gitforwindows.org/">Download "Git for Windows"</a>.</li>
 <li>Click <code>Download</code>, <code>Save</code> the file to your Desktop, <code>double-click</code> that file to install, then click <code>Yes</code> to the prompt.</li>
-<li>Click <code>Next</code> to accept all of the installer's default selections.</li>
+<li>Click <code>Next</code> and accept all of the installer's default selections.<ul>
+<li>Optional: <strong>Choosing the default editor used by Git</strong> - Select preferred text editor. <a href="https://atom.io/">ATOM</a> integrates particularly nicely with Git for Windows.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Check for updates:<ul>
+<li>Enter: <code>git update-git-for-windows</code></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1669,9 +1676,9 @@ git version 2.15.1
 <h3 id="step-4-clone-isle-repository_1">Step 4: Clone ISLE Repository</h3>
 <p><strong>Please note:</strong> The location you select to clone the ISLE repository becomes your project directory. We recommend using the default user home directory; this location will include your configuration and log output of the Docker containers. (You may choose a different location, but it must not be a protected folder such as system or root directory.)</p>
 <ul>
-<li>Use <code>PowerShell</code> (and remember to <code>Run as administrator</code>).</li>
+<li>Use <code>Git Bash</code> (and remember to <code>Run as administrator</code>).</li>
 <li>Enter <code>cd ~</code> (to change to the user's home directory).</li>
-<li>Clone the repository.</li>
+<li>Clone the repository:</li>
 </ul>
 <pre><code>git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 </code></pre>
