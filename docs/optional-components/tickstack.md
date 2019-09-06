@@ -69,8 +69,8 @@ The use and setup of TICK within the ISLE platform is as an optional [sidecar](h
 * Additional systems overhead, including:
 
 * For any system that is running the full TICK stack as a side car
-    * Recommend an additional 2 - 3 GB of RAM
-    * Recommend an additional 5 - 10 GB of storage disk space
+    * Recommend an additional 2-3 GB of RAM
+    * Recommend an additional 5-10 GB of storage disk space
 
 * For any system that is running the Telegraf agent only
     * Recommend an additional 512MB to 1 GB of RAM

@@ -374,13 +374,13 @@ The following software packages will be handled and updated by `apt-get`. Please
     * `git checkout last used build commit` i.e. `git checkout ee7e9d32a71381abfa5c3ead13255c0c5b66ed45`
     * Compare both directories using a visual diff tool like `Kaleidoscope` (MAC), `diff` or `KDiff3` (Linux)
     * Note the differences in files and the line numbers for inclusion in release notes.
-      * `datastream_info_to_solr.xslt` - Lines 35 - 49 - new lines & content added
+      * `datastream_info_to_solr.xslt` - Lines 35-49 - new lines & content added
       * `RELS-EXT_to_solr.xslt`
         * Line 7 - modified
         * Line 8 - new line & content added
         * Line 42 - new line & content added
         * Line 49 - new line & content added
-      * `slurp_all_MODS_to_solr.xslt` - Lines 289 - 300 new lines & content added
+      * `slurp_all_MODS_to_solr.xslt` - Lines 289-300 new lines & content added
 
 #### isle-fedora - Build Actions / Steps
 
@@ -938,7 +938,7 @@ Suggested outcome:
   * Did all containers start?
 
 * Install site
-  * `docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh`
+  * `docker exec -it isle-apache-ld bash -c "cd /utility-scripts/isle_drupal_build_tools && ./isle_islandora_installer.sh`
 
 * Test ingest for all content types
 

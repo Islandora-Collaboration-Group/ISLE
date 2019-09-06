@@ -46,8 +46,8 @@ Docker commands that are useful to installing or updating ISLE.
 ### [Shell Into Docker Container](https://docs.docker.com/v17.12/engine/reference/commandline/exec/)
   * `docker exec -it [CONTAINER_NAME] bash` # Shell Into Docker Container
     * example: `docker exec -it isle-apache-ld bash`
-  * `docker exec -it [CONTAINER_NAME] [FILE_NAME]` # Shell Into Docker Container and Open a File
-    * example: `docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh`
+  * `docker exec -it [CONTAINER_NAME] [FILE_NAME]` # Shell Into Docker Container and Run Script
+    * example: `docker exec -it isle-apache-ld bash -c "cd /utility-scripts/isle_drupal_build_tools && ./isle_islandora_installer.sh`
 
 ### [Docker Service](https://docs.docker.com/engine/reference/commandline/docker/)
   * `sudo service docker status` # Show Docker Status

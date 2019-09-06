@@ -57,13 +57,13 @@
   
   * Add an additional 2 GB RAM in total ISLE Host memory for Blazegraph to run
   
-  * Plan on an additional 25 - 100+ GB disk space for “big_data” resource index persistence.
+  * Plan on an additional 25-100+ GB disk space for “big_data” resource index persistence.
     * This index (`/var/bigdata/bigdata.jnl`) will grow quickly overtime and file sizes of over 25GB or more are possible with Fedora repositories that have over 1 million objects.
 
   * To persist this file and directory in a bind-mount instead of a Docker volume, an edit will need to be made to the `docker-compose.yml` file in the `blazegraph` service, `volume` section.
-    * Change `isle-blazegraph-data` to your ISLE Host system specific bind-mount path. For example: 
+    * Change `isle-blazegraph-data` to your ISLE Host system specific bind-mount path. **Example:** 
       * `- /mnt/isle-blazegraph-data:/var/bigdata`
-  * This disk should be a separate data disk that should be 25 - 100+ GB in capacity. Plan on resizing this disk when using Blazegraph with large Fedora repositories of over 600K+ of objects.
+  * This disk should be a separate data disk that should be 25-100+ GB in capacity. Plan on resizing this disk when using Blazegraph with large Fedora repositories of over 600K+ of objects.
 
 ---
 
@@ -358,7 +358,7 @@ FEDORA_WEBAPP_HOME=/usr/local/tomcat/webapps/fedora
 * Spin up new containers
   * `docker-compose up -d`
 
-* Wait a few minutes (_3 - 8 depending on the size of your site_) for the site and services to come up.
+* Wait a few minutes (_3-8 depending on the size of your site_) for the site and services to come up.
 
 #### Check Fedora
 
@@ -440,7 +440,7 @@ SELECT (COUNT(*) AS ?triples) WHERE {?s ?p ?o}
         tag: "{{.Name}}"
 ```
 
-**For example:**
+****Example:****
 
 ```bash
 
@@ -468,7 +468,7 @@ SELECT (COUNT(*) AS ?triples) WHERE {?s ?p ?o}
 
 * Additionally you'll need to remove or comment out every line or reference to logs from the `volumes` section of each service.
 
-**For example:**
+****Example:****
 
 ```bash
     volumes:

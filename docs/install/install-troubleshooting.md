@@ -106,11 +106,11 @@ Once your web server(s) have been disabled, resume the ISLE install process by r
 As of ISLE release logging to physical file has been turned off, stdout & stderr are to console only no more physical files. This means if you need to view logs for debugging, here are some methods:
 
 * [Docker method:](https://docs.docker.com/engine/reference/commandline/logs/) (_when using the Docker json driver and TICK is not on_)
-  * Single container: `docker logs -f <container-name>`
+  * Single container: `docker logs -f <containername>`
   * All containers: `docker logs --tail=0 --follow`
 
 * [Docker-compose method:(https://docs.docker.com/compose/reference/logs/)] (when using the Docker json driver and TICK is not on)
-Single container: docker-compose logs -f  <container-name>
+Single container: docker-compose logs -f  <containername>
 All containers: docker-compose logs --tail=0 --follow
 
 * Use the [TICK Log viewer](../optional-components/tickstack.md) if TICK is setup and using the Docker syslog driver (Production / Staging only) 
