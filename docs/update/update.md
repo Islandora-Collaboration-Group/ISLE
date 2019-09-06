@@ -14,7 +14,7 @@ We strongly recommend that you start the update process on your `Local` environm
 
 On your Local version of ISLE:
 
-* In the command line, navigate to the ISLE directory, which should contain the `docker-compose.local.yml` file.
+* In the command line (Windows: open Git Bash), navigate to the ISLE directory, which should contain the `docker-compose.local.yml` file.
 
 * Stop and remove your existing ISLE containers
     * `docker-compose down`
@@ -47,7 +47,7 @@ On your Local version of ISLE:
 
 * You can choose to push this new branch to your remote git or keep it on your local. Ultimately after testing on your local, you'll merge to `master` and then deploy the new code to your `Staging` and `Production` environments.
 
-* On your local, using the still open terminal / Powershell, pull down the new containers. Be sure to be in the root of your ISLE project directory. Download the new ISLE images.
+* On your local (personal computer), using the same open terminal, pull down the new containers. Be sure to be in the root of your ISLE project directory. Download the new ISLE images.
     * `cd ~/yourprojecthere/`
     * `docker-compose pull`
 
@@ -66,7 +66,7 @@ On your Local version of ISLE:
 
 * Push this code to your online git provider ISLE
     * `git push -u origin master`
-    * This will take 2 - 5 mins depending on your internet speed.
+    * This will take 2-5 mins depending on your internet speed.
 
 * Now you have the current ISLE project code checked into git as foundation to make changes on your `Staging` and `Production` servers.
 
@@ -82,7 +82,7 @@ On your Local version of ISLE:
 * Update the docker files via git
     * `git pull`
 
-* You'll need to fix the `.env` file again as you did in the `On Remote Staging - Edit the .env file to change to the Staging environment` stop of either the [Staging ISLE Installation: New Site](../install/install-staging-new.md) or the [Staging ISLE Installation: Migrate Existing Islandora Site](../install/install-staging-migrate.md) instructions. As described, this step is a multi-step, involved process that allows an end-user to make appropriate changes to the `.env` and then commit it locally to git. This local commit that never gets pushed back to the git repository is critical to allow future ISLE updates or config changes. Basically you are just restoring what you had in the `.env` to the `Staging` settings in case they are overwriten.
+* You'll need to fix the `.env` file again as you did in the `On Remote Staging - Edit the ".env" File to Change to the Staging Environment` stop of either the [Staging ISLE Installation: New Site](../install/install-staging-new.md) or the [Staging ISLE Installation: Migrate Existing Islandora Site](../install/install-staging-migrate.md) instructions. As described, this step is a multi-step, involved process that allows an end-user to make appropriate changes to the `.env` and then commit it locally to git. This local commit that never gets pushed back to the git repository is critical to allow future ISLE updates or config changes. Basically you are just restoring what you had in the `.env` to the `Staging` settings in case they are overwriten.
 
 * Download the new ISLE docker images on the remote Staging system
     * `docker-compose pull`

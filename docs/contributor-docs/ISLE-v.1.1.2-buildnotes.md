@@ -17,7 +17,7 @@
     * `docker-compose up -d`
   * Please wait a few moments for the stack to fully come up. Approximately 3-5 minutes.
   * Install Islandora on the isle-apache-ld container:
-  * `docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh`
+  * `docker exec -it isle-apache-ld bash -c "cd /utility-scripts/isle_drupal_build_tools && ./isle_islandora_installer.sh`
     * Please note this will run the `https://github.com/Born-Digital-US/ISLE-Drupal-Build-Tools.git` version which has changes to the installer vsets.
 
 * Recommend a test of all ingest and content types and especially Large Image format using the open-seadragon viewer.

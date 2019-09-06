@@ -1,6 +1,6 @@
 # Production ISLE Installation: New Site
 
-_Expectations:  It takes an average of **2 - 4+ hours** to read this documentation and complete this installation._
+_Expectations:  It takes an average of **2-4+ hours** to read this documentation and complete this installation._
 
 This `Production` ISLE Installation will use the themed Drupal website created during the [Local ISLE Installation: New Site](../install/install-local-new.md) process and will create an empty Fedora repository for remote (non-local / cloud) hosting of a `Production` site. Islandora Drupal site code here should be considered finished and ready for public access. The previously used `Production` system might have Fedora data & collections that should then be synced to this `Production` site or endusers can choose to only ingest on `Production`. It is recommended that this remote site not be publicly accessible until ready to launch.
 
@@ -35,7 +35,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
         * [Hardware Requirements](host-hardware-requirements.md)
         * [Software Dependencies](host-software-dependencies.md)
     * This server should be running at the time of deploy.
-    * This server has enough disk space to store a large Fedora repository e.g. 1 - 5 TB or larger depending on how many objects you plan on ingesting.  
+    * This server has enough disk space to store a large Fedora repository e.g. 1-5 TB or larger depending on how many objects you plan on ingesting.  
 
 * You have already created the two private git repositories for your projects ISLE and Islandora code in [Github](https://github.com), [Bitbucket](https://bitbucket.org/), [Gitlab](https://gitlab.com), etc. having followed Step 2 from the [Local ISLE Installation: New Site](../install/install-local-new.md) instructions. You will continue to use these two git repositories for all environments.
 
@@ -56,36 +56,36 @@ This process will differ slightly from previous builds in that there is work to 
 
 The instructions that follow below will have either a `On Local` or a `On Remote Production` pre-fix to indicate where the work and focus should be. In essence, the git workflow established during the local build process will be extended for deploying on `Production` and for future ISLE updates and upgrades.
 
-**Steps 1 - 6** - `On Local - Configure the ISLE Production environment profile for deploy to Remote`
+**Steps 1-6: On Local - Configure the ISLE Production Environment Profile for Deploy to Remote**
 
-  * Step 1: On Local - Export the Local MySQL database
-      * Local Islandora Drupal site database export process
-  * Step 2: On Local - Shutdown any local containers & review local code
-  * Step 3: On Local - Create new users and passwords by editing `production.env`
-  * Step 4: On Local - Review and edit docker-compose.production.yml
-  * Step 4A: On Local - (Optional) changes for docker-compose.production.yml
-  * Step 5: On Local Production - If using Commercial SSLs
-  * Step 6: On Local - Commit ISLE code to git repository
+  * Step 1: On Local - Export the Local MySQL Database
+        * Export the Local MySQL Islandora Drupal Database
+  * Step 2: On Local - Shutdown Any Local Containers & Review Local Code
+  * Step 3: On Local - Create New Users and Passwords by Editing "production.env"
+  * Step 4: On Local - Review and Edit "docker-compose.production.yml"
+  * Step 4A: On Local - (Optional) Changes for "docker-compose.production.yml"
+  * Step 5: On Local Production - If Using Commercial SSLs
+  * Step 6: On Local - Commit ISLE Code to Git Repository
 
-**Steps 7 - 17**   - `On Remote Production - Configure the ISLE Production environment profile for launch and usage`
+**Steps 7-17: On Remote Production - Configure the ISLE Production Environment Profile for Launch and Usage**
 
-  * Step 7: On Remote Production - Git clone the ISLE repository to the remote Production ISLE host server
-  * Step 8: On Remote Production - Create the appropriate local data paths for Apache, Fedora and log data
-  * Step 9: On Remote Production - Clone your Islandora code
-  * Step 10: On Remote Production - Copy over the Local Islandora Drupal files directory
-  * Step 11: On Remote Production - If using Let's Encrypt
-  * Step 12: On Remote Production - Edit the .env file to change to the Production environment
-  * Step 13: On Remote Production - Download the ISLE images
+  * Step 7: On Remote Production - Git Clone the ISLE Repository to the Remote Production ISLE Host Server
+  * Step 8: On Remote Production - Create the Appropriate Local Data Paths for Apache, Fedora and Log Data
+  * Step 9: On Remote Production - Clone Your Islandora Code
+  * Step 10: On Remote Production - Copy Over the Local Islandora Drupal Files Directory
+  * Step 11: On Remote Production - If Using Let's Encrypt
+  * Step 12: On Remote Production - Edit the ".env" File to Change to the Production Environment
+  * Step 13: On Remote Production - Download the ISLE Images
   * Step 14: On Remote Production - Start Containers
-  * Step 15: On Remote Production - Import the Local MySQL Drupal database
-  * Step 16: On Remote Production - Run the fix-permissions.sh script
-  * Step 17: On Remote Production - Review and test the Drupal Production site
+  * Step 15: On Remote Production - Import the Local MySQL Drupal Database
+  * Step 16: On Remote Production - Run the "fix-permissions.sh" Script
+  * Step 17: On Remote Production - Review and Test the Drupal Production Site
 
 ---
 
 ## On Local - Configure the ISLE Production environment profile for deploy to Remote
 
-## Step 1: On Local - Export the Local MySQL database
+## Step 1: On Local - Export the Local MySQL Database
 
 **Prior to attempting this step, please consider the following:**
 
@@ -95,48 +95,48 @@ The instructions that follow below will have either a `On Local` or a `On Remote
 
 * If possible, on the production Apache webserver, run `drush cc all` from the command line on the local Apache container in the `/var/www/html` directory PRIOR to any db export(s). Otherwise issues can occur on import due to all cache tables being larger than `innodb_log_file_size` allows
 
-### Local Islandora Drupal site database export process
+### Export the Local MySQL Islandora Drupal Database
 
 * Export the MySQL database for the current `Local` Drupal site in use and copy it on your local in an easy to find place. In later steps you'll be directed to import this file. **Please be careful** performing any of these potential actions below as the process impacts your newly created and themed new Islandora site. Refer to your `local.env` for the usernames and passwords used below.
     * You can use a MySQL GUI client for this process instead but the command line directions are only included below.
     * Shell into your currently running Local MySQL container
-        * `docker exec -it yourmysql-container-name bash`
-    * Export the Local Islandora Drupal database. Replace the `DRUPAL_DB` & `DRUPAL_DB_USER` below in the command with the values found in your `local.env`.
+        * `docker exec -it your-mysql-containername bash`
+    * Export the Local Islandora Drupal database. Replace the "DRUPAL_DB_USER" and "DRUPAL_DB" in the command below with the values found in your "local.env" file.
         * `mysqldump -u DRUPAL_DB_USER -p DRUPAL_DB > local_drupal_site_082019.sql`
-        * Enter the appropriate password: value of `DRUPAL_DB_PASS` in the `local.env`)
+        * Enter the appropriate password: value of `DRUPAL_DB_PASS` in the "local.env")
         * Upon completion, exit the MySQL container  
     * Copy this file from the MySQL container to a location on your personal computer.
-        * `docker cp yourmysql-container-name:/local_drupal_site_082019.sql /path/to/location`
+        * `docker cp your-mysql-containername:/local_drupal_site_082019.sql /path/to/location`
 
 ---
 
-## Step 2: On Local - Shutdown any local containers & review local code
+## Step 2: On Local - Shutdown Any Local Containers & Review Local Code
 
 * Ensure that your ISLE and Islandora git repositories have all the latest commits and pushes from the development process that took place on your personal computer. If you haven't yet finished, do not proceed until everything is completed.
 
-* Once finished, open a `terminal` (Windows: open `PowerShell`)
+* Once finished, open a `terminal` (Windows: open `Git Bash`)
     * Navigate to your local ISLE directory
     * Shut down any local containers e.g. `docker-compose down`
 
 ---
 
-## Step 3: On Local - Create new users and passwords by editing production.env
+## Step 3: On Local - Create New Users and Passwords by Editing "production.env"
 
-* Open up the `production.env` file in a text editor.
+* Open the "production.env" file in a text editor.
     * Find each comment that begins with: `# Replace this comment with a ...` and follow the commented instructions to edit the passwords, database and user names.
         * **Review carefully** as some comments request that you replace with `...26 alpha-numeric characters` while others request that you create an `...easy to read but short database name`.
         * It is okay if you potentially repeat the values previously entered for your local `(DRUPAL_DB)` & `(DRUPAL_DB_USER)` in this `Production` environment but we strongly recommend not reusing all passwords for environments (e.g. `(DRUPAL_DB_PASS)` & `(DRUPAL_HASH_SALT)` should be unique values for each environment).
         * In many cases the username is already pre-populated. If it doesn't have a comment directing you to change or add a value after the `=`, then don't change it.
     * Once finished, save and close the file.
 
-* Open up the `config/apache/settings_php/settings.production.php` file.
+* Open the `config/apache/settings_php/settings.production.php` file.
     * Find the first comment that begins with: `# ISLE Configuration` and follow the commented instructions to edit the database, username and password.
     * Find the second comment that begins with: `# ISLE Configuration` and follow the instructions to edit the Drupal hash salt.
     * Once finished, save and close the file.
 
 ---
 
-## Step 4: On Local - Review and edit docker-compose.production.yml
+## Step 4: On Local - Review and Edit "docker-compose.production.yml"
 
 * Review the disks and volumes on your remote `Production` ISLE Host server to ensure they are of an adequate capacity for your collection needs and match what has been written in the `docker-compose.production.yml` file.
 
@@ -157,7 +157,7 @@ The instructions that follow below will have either a `On Local` or a `On Remote
 
 * Based on the choice of SSL type made above, you'll need to refer to to the `./config/proxy/traefik.production.toml` file for further configuration instructions.
 
-## Step 4A: On Local - (Optional) changes for docker-compose.production.yml
+## Step 4A: On Local - (Optional) Changes for "docker-compose.production.yml"
 
 This section is for optional changes for the `docker-compose.production.yml`, end-users do not have feel like they have to make any choices here and can continue to **Step 4** as needed.
 
@@ -189,7 +189,7 @@ The options include PHP settings, Java Memory Allocation, MySQL configuration an
 
 ---
 
-## Step 5: On Local Production - If using Commercial SSLs
+## Step 5: On Local Production - If Using Commercial SSLs
 
 If you are going to use Let's Encrypt instead, you can skip this step and move onto the next one. There will be additional steps further in this document, to help you configure it.
 
@@ -222,7 +222,7 @@ If you have decided to use Commercial SSL certs supplied to you by your IT team 
 
 ---
 
-## Step 6: On Local - Commit ISLE code to git repository
+## Step 6: On Local - Commit ISLE Code to Git Repository
 
 * Once you have made all of the appropriate changes to your `Production` profile. Please note the steps below are suggestions. You might use a different git commit message. Substitute `<changedfileshere>` with the actual file names and paths. You may need to do this repeatedly prior to the commit message.
     * `git add <changedfileshere>`
@@ -231,9 +231,9 @@ If you have decided to use Commercial SSL certs supplied to you by your IT team 
 
 ---
 
-## On Remote Production - Configure the ISLE Production environment profile for launch and usage
+## On Remote Production - Configure the ISLE Production Environment Profile for Launch and Usage
 
-## Step 7: On Remote Production - Git clone the ISLE repository to the remote Production ISLE host server
+## Step 7: On Remote Production - Git Clone the ISLE Repository to the Remote Production ISLE Host Server
 
 * This assumes you have setup an `Islandora` deploy user. If not use a different non-root user for this purpose.
 
@@ -245,7 +245,7 @@ Since the `/opt` directory might not let you do this at first, we suggest the fo
 
 * Clone your ISLE project repository with the newly committed changes for `Production` to the `Islandora` user home directory.
     * `git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git /home/islandora/`
-    * This may take a few minutes (2 - 4) depending on your server's Internet connection.
+    * This may take a few minutes (2-4) depending on your server's Internet connection.
 
 * Move the newly cloned directory to the `/opt` directory as the root user
     * `sudo mv /home/islandora/yourprojectnamehere-isle /opt/yourprojectnamehere-isle`
@@ -255,7 +255,7 @@ Since the `/opt` directory might not let you do this at first, we suggest the fo
 
 ---
 
-## Step 8: On Remote Production - Create the appropriate local data paths for Apache, Fedora and log data
+## Step 8: On Remote Production - Create the Appropriate Local Data Paths for Apache, Fedora and Log Data
 
 * Create the `/opt/data` directory
     * `sudo mkdir -p /opt/data`
@@ -264,7 +264,7 @@ Since the `/opt` directory might not let you do this at first, we suggest the fo
 
 ---
 
-## Step 9: On Remote Production - Clone your Islandora code
+## Step 9: On Remote Production - Clone Your Islandora Code
 
 * `git clone git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-islandora.git /opt/data/apache/html`
 
@@ -273,7 +273,7 @@ Since the `/opt` directory might not let you do this at first, we suggest the fo
 
 ---
 
-## Step 10: On Remote Production - Copy over the Local Islandora Drupal files directory
+## Step 10: On Remote Production - Copy Over the Local Islandora Drupal Files Directory
 
 This `files` directory should be on your personal computer and should be copied to the remote Production server.
 
@@ -284,7 +284,7 @@ This `files` directory should be on your personal computer and should be copied 
 
 ---
 
-## Step 11: On Remote Production - If using Let's Encrypt
+## Step 11: On Remote Production - If Using Let's Encrypt
 
 If you are using Commercial SSLs, then please stop and move onto the next step.
 
@@ -299,7 +299,7 @@ If using Let's Encrypt, please continue to follow this step.
 
 ---
 
-## Step 12: On Remote Production - Edit the .env file to change to the Production environment
+## Step 12: On Remote Production - Edit the ".env" File to Change to the Production Environment
 
 This step is a multi-step, involved process that allows an end-user to make appropriate changes to the `.env` and then commit it locally to git. This local commit that never gets pushed back to the git repository is critical to allow future ISLE updates or config changes.
 
@@ -365,10 +365,10 @@ git commit -m "Added the edited .env configuration file for Production. DO NOT P
 
 ---
 
-## Step 13: On Remote Production - Download the ISLE images
+## Step 13: On Remote Production - Download the ISLE Images
 
 * Download all of the latest ISLE Docker images (_~6 GB of data may take 5-10 minutes_):
-* _Using the same open terminal / Powershell_
+* _Using the same open terminal:_
       * Navigate to the root of your ISLE project
       * `cd ~/opt/yourprojectnamehere`
       * `docker-compose pull`
@@ -379,12 +379,12 @@ git commit -m "Added the edited .env configuration file for Production. DO NOT P
 
 **Please note:** Prior to starting the launch process, it is recommended that you briefly open your firewall to allow ports 80 and 443 access to the world. You'll only need to keep this open for 3 -5 minutes and then promptly close access once the Let's Encrypt SSL certificates have been generated.
 
-* _Using the same open terminal / Powershell_
+* _Using the same open terminal:_
     * `docker-compose up -d`
 
 * Please wait a few moments for the stack to fully come up. Approximately 3-5 minutes.
 
-* After the above process is completed using the already open terminal or Powershell again.
+* _Using the same open terminal:_
     * View only the running containers: `docker ps`
     * View all containers (both those running and stopped): `docker ps -a`
     * All containers prefixed with `isle-` are expected to have a `STATUS` of `Up` (for x time).
@@ -396,7 +396,7 @@ git commit -m "Added the edited .env configuration file for Production. DO NOT P
 
 ---
 
-## Step 15: On Remote Production - Import the Local MySQL Drupal database
+## Step 15: On Remote Production - Import the Local MySQL Drupal Database
 
 **Prior to attempting this step, please consider the following:**
 
@@ -406,33 +406,35 @@ git commit -m "Added the edited .env configuration file for Production. DO NOT P
 
 ---
 
-### Local Islandora Drupal site database import process
+### Import the Local MySQL Islandora Drupal Database
 
 * Copy the `local_drupal_site_082019.sql` created in Step 1 to the Remote Production server.
 
 * Import the exported `Local` MySQL database for use in the current `Production` Drupal site. Refer to your `production.env` for the usernames and passwords used below.
     * You can use a MySQL GUI client for this process instead but the command line directions are only included below.
     * Run `docker ps` to determine the MySQL container name
-    * Shell into your currently running `Production` MySQL container
-        * `docker exec -it yourmysql-container-name bash`
-    * Import the Local Islandora Drupal database. Replace the `DRUPAL_DB` & `DRUPAL_DB_USER` below in the command with the values found in your `production.env`.
+    * Shell into your currently running "Production" MySQL container
+        * `docker exec -it your-mysql-containername bash`
+    * Import the Local Islandora Drupal database. Replace the "DRUPAL_DB_USER" and "DRUPAL_DB" in the command below with the values found in your "production.env" file.
         * `mysql -u DRUPAL_DB_USER -p DRUPAL_DB < local_drupal_site_082019.sql`
-        * Enter the appropriate password: value of `DRUPAL_DB_PASS` in the `production.env`)
+        * Enter the appropriate password: value of `DRUPAL_DB_PASS` in the "production.env")
         * This might take a few minutes depending on the size of the file.
-        * Exit out of the container when finished.
+        * Type `exit` to exit the container
 
 ---
 
-## Step 16: On Remote Production - Run the fix-permissions.sh script
+## Step 16: On Remote Production - Run the "fix-permissions.sh" Script
 
 * You'll need to fix the Drupal site permissions by running the `/fix-permissions.sh` script from the Apache container
     * Run `docker ps` to determine the Apache container name
-    * Shell into your currently running `Production` Apache container
-        * `docker exec -it yourapache-container-name bash`
+    * Shell into your currently running "Production" Apache container
+        * `docker exec -it your-apache-containername bash`
         * `sh /utility-scripts/isle_drupal_build_tools/drupal/fix-permissions.sh --drupal_path=/var/www/html --drupal_user=islandora --httpd_group=www-data`
-        * This process will take 2 - 5 mins depending
+        * This process will take 2-5 minutes
+        * You should see a lot of green [ok] messages.
+        * If the script appears to pause or prompt for `y/n`, DO NOT enter any values; the script will automatically answer for you.
 
-| For Windows Users only |
+| Microsoft Windows |
 | :-------------      |
 | You may be prompted by Windows to: |
 | - Share the C drive with Docker.  Click Okay or Allow.|
@@ -440,18 +442,16 @@ git commit -m "Added the edited .env configuration file for Production. DO NOT P
 | - Allow vpnkit.exe to communicate with the network.  Click Okay or Allow (accept default selection).|
 | - If the process seems to halt, check the taskbar for background windows.|
 
-* You should see a lot of green [ok] messages.
-* If the script appears to pause or prompt for `y/n`, DO NOT enter any values; the script will automatically answer for you.
-* **Proceed only after this message appears:** `Clearing Drupal Caches. 'all' cache was cleared.`
+* **Proceed only after this message appears:** "Clearing Drupal Caches. 'all' cache was cleared."
 
 ---
 
-## Step 17: On Remote Production - Review and test the Drupal Production site
+## Step 17: On Remote Production - Review and Test the Drupal Production Site
 
 * In your web browser, enter this URL: `https://yourprojectnamehere.institution.edu`
     * Please note: You should not see any errors with respect to the SSL certifications. If so, please review your previous steps especially if using Let's Encrypt. You may need to repeat those steps to get rid of the errors.
 
-* Log in to the local Islandora site with the credentials you created in `production.env` (`DRUPAL_ADMIN_USER` and `DRUPAL_ADMIN_PASS`)
+* Log in to the local Islandora site with the credentials ("DRUPAL_ADMIN_USER" and "DRUPAL_ADMIN_PASS") you created in "production.env".
     * **Please note:** You are free to use previously Drupal admin or user accounts created during the `Local` site development process.
 
 * You can decide to further QC and review the site as you wish or start to add digital collections and objects.
