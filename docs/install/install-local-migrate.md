@@ -406,8 +406,7 @@ This step will show you how to run the "migration_site_vsets.sh" script on the A
 Since you've imported an existing Drupal database, you must now reinstall the Islandora solution packs so the Fedora repository will be ready to ingest objects.
 
 * Copy the "install_solution_packs.sh" to the root of the Drupal directory on your Apache container
-    * **For Mac/Ubuntu/CentOS/etc:** `docker cp scripts/apache/install_solution_packs.sh your-apache-containername:/var/www/html/install_solution_packs.sh`
-    * **For Microsoft Windows:** `winpty docker cp scripts/apache/install_solution_packs.sh your-apache-containername:/var/www/html/install_solution_packs.sh`
+    * `docker cp scripts/apache/install_solution_packs.sh your-apache-containername:/var/www/html/install_solution_packs.sh`
 * Change the permissions on the script to make it executable
     * **For Mac/Ubuntu/CentOS/etc:** `docker exec -it your-apache-containername bash -c "chmod +x /var/www/html/install_solution_packs.sh"`
     * **For Microsoft Windows:** `winpty docker exec -it your-apache-containername bash -c "chmod +x /var/www/html/install_solution_packs.sh"`
