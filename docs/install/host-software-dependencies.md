@@ -195,22 +195,23 @@ Your host server is now configured and ready to run ISLE.
 ### Step 1: Install Git
 Git must be installed to get a copy (called a `clone`) of the current ISLE project. (Git is a software version control system for tracking changes in computer files and coordinating work on those files among multiple people.)
 
- * Open a `terminal` (launch Spotlight, type "Terminal," double-click result "Terminal")
- * Enter: `git --version`.
- * If git is already installed, the above command will output the installed version number. **Example:**  
+* Open a `terminal` (launch Spotlight, type "Terminal," double-click result "Terminal")
 
-```
-$git --version
-git version 2.15.1
-```
+* Enter: `git --version`
 
-* If git is not installed, the above command may trigger the `Install Command Line Developer Tools` prompt to appear. If so:
+* If git is already installed, the above command will output the installed version number.
+    * **Example:** "git version 2.15.1"
+
+* If git is not installed, the above command may trigger the "Install Command Line Developer Tools" prompt to appear. If so:
     * Click on the blue `Install` button for the license agreement.
     * Click the white `Agree` button.
     * The package will take 1-2 minutes to download.
-    * Click the `Done` button once finished.
+    * Click the `Done` button.
 
 * If git is not installed and the prompt does not show, then use this tutorial to [Install Git on Mac OS X](https://www.atlassian.com/git/tutorials/install-git).
+
+* Enter the following to fix a potential issue with long filenames:
+    * `git config --system core.longpaths true`
 
 ### Step 2: Install Docker for Mac
 
@@ -226,7 +227,7 @@ git version 2.15.1
 
 * Double-click the `Docker.dmg` file. The file should open and mount in a new window / prompt.
 
-* As instructed within the prompt, drag and drop the whale icon to the right towards the `Applications` directory shortcut, a tiny green plus sign should appear, now let go from the mouse or trackpad.
+* As instructed within the prompt, drag and drop the whale icon to the right towards the `Applications` directory shortcut, a tiny green plus sign should appear, now let go from the mouse.
 
 * The application should start to copy data to the `Applications` directory, this process may take 1-5 mins depending on the speed of your hard-drive.
 
@@ -274,20 +275,29 @@ Your host server is now configured and ready to run ISLE.
 ## Windows
 
 ### Step 1: Install "Git for Windows"
-Git must be installed to get a copy (called a `clone`) of the current ISLE project. (Git is a software version control system for tracking changes in computer files and coordinating work on those files among multiple people.)
+
+"Git for Windows" will install both "Git" and "Git Bash". Git must be installed so you may get a copy (called a "clone") of the current ISLE project. Git is a software version control system for tracking changes in computer files and coordinating work on those files among multiple people. Git Bash is a useful command line interface that behaves similarly to LINUX and UNIX environments; you will use this to enter commands provided below.
+
+Let's begin by checking to see if you have "Git Bash" already installed.
 
 * Press the Windows key.
 * Type `Git Bash`.
-    * If you have "Git Bash" installed, then RIGHT-CLICK `Git Bash`, select `Run as administrator`, and enter `Yes` to the prompt.
-        * Enter: `git --version`.
-            * If git is already installed, the above command will output the installed version number. **Example:** "git version 2.23.0.windows.1"
-    * Otherwise, you must install "Git Bash".
-        * [Download "Git for Windows"](https://gitforwindows.org/).
+    * If you see "Git Bash" listed, then it is installed. 
+        * RIGHT-CLICK `Git Bash`, select `Run as administrator`, and enter `Yes` to the prompt.
+        * Enter: `git --version`
+        * The above command will output the installed version number. This confirms that git is already installed.
+            * **Example:** "git version 2.23.0.windows.1"
+    * If "Git Bash" is not installed, please install "Git for Windows" now:
+        * Click ["Git for Windows"](https://gitforwindows.org/).
         * Click `Download`, `Save` the file to your Desktop, `double-click` that file to install, then click `Yes` to the prompt.
-        * Click `Next` and accept all of the installer's default selections.
-            * Optional: **Choosing the default editor used by Git** - Select preferred text editor. [ATOM](https://atom.io/) integrates particularly nicely with Git for Windows.
+        * Click `Next` and accept ALL of the installer's default selections, with the one following exception:
+            * **Choosing the default editor used by Git**
+            * Please select your preferred text editor (we recommend [ATOM](https://atom.io/) as it integrates well with Git for Windows).
+            * If you selected ATOM and do not yet have it installed, please install [ATOM](https://atom.io/) now.
     * Check for updates:
         * Enter: `git update-git-for-windows`
+    * Enter the following to fix a potential issue with long filenames:
+        * `git config --system core.longpaths true`
 
 ### Step 2: Install Docker Desktop for Windows
 
@@ -325,41 +335,33 @@ Git must be installed to get a copy (called a `clone`) of the current ISLE proje
 ### Step 4: Clone ISLE Repository
 **Please note:** The location you select to clone the ISLE repository becomes your project directory. We recommend using the default user home directory; this location will include your configuration and log output of the Docker containers. (You may choose a different location, but it must not be a protected folder such as system or root directory.)
 
-* Use `Git Bash` (and remember to `Run as administrator`).
-* Enter `cd ~` (to change to the user's home directory).
+#### Use "Git Bash"
+
+* Enter the following to change to the user's home directory:
+    * `cd ~`
 * Clone the repository:
-```
-git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
-```
-
+    * `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
 * Change to the directory containing ISLE.
-```
-cd ISLE
-```
+    * `cd ISLE`
+* Enter the following to display the present working directory
+    * `pwd`
+* Highlight the full path (i.e. `C:\Users\somebody\ISLE`) and click `Enter` to copy to clipboard.
 
-* Copy the path of the present working directory.
-```
-pwd
-```
-* Use mouse/trackpad to highlight the full path (i.e. `C:\Users\somebody\ISLE`) and Click `Enter` to copy to clipboard.
+#### Edit ".env" file.
 
-* Edit .env file.
-  * Press the Windows key.
-  * Type `Notepad`.
-  * In the search results, RIGHT-CLICK `Notepad`, select `Run as administrator`, and enter `Yes` to prompt.
-  * Select `File -> Open`
-  * In the `File name:` input box, paste the above copied path. Click `Enter`.
-    * Use dropdown on right to change `Text Documents (*.txt)` to `All Files (*.*)` (if needed, see [How to show hidden files](https://support.microsoft.com/en-us/help/4028316/windows-view-hidden-files-and-folders-in-windows-10)).
-    * Select the `.env` file and click `Open`.
-    * Find the following line and uncomment it (by deleting the preceding `#` character):
-
-    ```# COMPOSE_CONVERT_WINDOWS_PATHS=1```
-
-    * to:
-
-    ```COMPOSE_CONVERT_WINDOWS_PATHS=1```
-
-    * Click `File > Save`, and then `File -> Exit`.
+* Press the Windows key.
+* Type `Notepad`.
+* In the search results, RIGHT-CLICK `Notepad`, select `Run as administrator`, and enter `Yes` to prompt.
+* Select `File -> Open`
+* In the `File name:` input box, paste the above copied path. Click `Enter`.
+* Use dropdown on right to change `Text Documents (*.txt)` to `All Files (*.*)`
+    * (Optional: see [How to show hidden files](https://support.microsoft.com/en-us/help/4028316/windows-view-hidden-files-and-folders-in-windows-10)).
+* Select the `.env` file and click `Open`.
+* Find the following line:
+    * `# COMPOSE_CONVERT_WINDOWS_PATHS=1`
+* In the above line, delete the `#` character so as to uncomment the line. It should now look like this:
+    * `COMPOSE_CONVERT_WINDOWS_PATHS=1`
+* Click `File > Save`, and then `File -> Exit`.
 
 Your host server is now configured and ready to run ISLE.
 

@@ -16,7 +16,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 * You have already git cloned the ISLE Project to your personal computer.
 
-* **For Microsoft Windows:** You have installed [Git for Windows](../install/host-software-dependencies.md#windows) and will use its provided "Git BASH" as your command line interface; this behaves more similarly to LINUX and UNIX environments.
+* **For Microsoft Windows:** You have installed [Git for Windows](../install/host-software-dependencies.md#windows) and will use its provided "Git Bash" as your command line interface; this behaves similarly to LINUX and UNIX environments.
 
 ---
 

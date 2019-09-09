@@ -7,7 +7,7 @@ Always use the `https://yourprojectnamehere.localdomain` domain to view and log 
 
 ### Docker Containers: Passwords
 
-As instructed in the `## Step 4: Create New Users and Passwords by Editing "local.env"` section of the [Local ISLE Installation: New Site](../install/install-local-new.md) documentation, you'll need to refer to the edited `local.env` for your password choices.
+As instructed in the `## Step 4: Create New Users and Passwords by Editing "local.env" File` section of the [Local ISLE Installation: New Site](../install/install-local-new.md) documentation, you'll need to refer to the edited `local.env` for your password choices.
 
 * `islandora` user on the ISLE host server uses `islandora` as the password. This might not apply to your setup if using local Docker clients.
 

@@ -31,7 +31,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
     * **WARNING:** Only use **Private** git repositories given the sensitive nature of the configuration files. **DO NOT** share these git repositories publicly.
 
 * **For Microsoft Windows:**
-    * You have installed [Git for Windows](../install/host-software-dependencies.md#windows) and will use its provided "Git BASH" as your command line interface; this behaves more similarly to LINUX and UNIX environments. Git for Windows also installs `openssl.exe` which will be needed to generate self-signed SSL certs. (Note: Powershell is not recommended as it is unable to run UNIX commands or execute bash scripts without a moderate degree of customization.)
+    * You have installed [Git for Windows](../install/host-software-dependencies.md#windows) and will use its provided "Git Bash" as your command line interface; this behaves similarly to LINUX and UNIX environments. Git for Windows also installs `openssl.exe` which will be needed to generate self-signed SSL certs. (Note: Powershell is not recommended as it is unable to run UNIX commands or execute bash scripts without a moderate degree of customization.)
     * Set your text editor to use UNIX style line endings for files. (Text files created on DOS/Windows machines have different line endings than files created on Unix/Linux. DOS uses carriage return and line feed ("\r\n") as a line ending, which Unix uses just line feed ("\n").)
 
 ---
@@ -43,7 +43,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 * Step 2: Setup Git for the ISLE Project
 * Step 3: Git Clone the Production Islandora Drupal Site Code
 * Step 4: Edit the .env File to Change to the Local Environment
-* Step 5: Create New Users and Passwords by Editing "local.env"
+* Step 5: Create New Users and Passwords by Editing "local.env" File
 * Step 6: Create New Self-Signed Certs for Your Project
 * Step 7: Download the ISLE Images
 * Step 8: Launch Process
@@ -272,7 +272,7 @@ Open a `terminal` (Windows: open `Git Bash`)
     * `CONTAINER_SHORT_ID=ld` _leave default setting of `ld` as is. Do not change._
     * `COMPOSE_FILE=docker-compose.local.yml`
 
-* If you want to use a MySQL client with a GUI to import the Production MySQL Drupal database you'll need to uncomment the `ports` section of the MySQL service within the `docker-compose.local.yml` to Open the `3306` port. If you are already running MySQL on your personal computer, you'll have a port conflict either shutdown that service prior to running ISLE or change 3306:3306 to something like `9306:3306`. Please double-check.
+* If you want to use a MySQL client with a GUI to import the Production MySQL Drupal database you'll need to uncomment the `ports` section of the MySQL service within the `docker-compose.local.yml` to make it so you can access port `3306` from the host computer. If you are already running MySQL on your personal computer, you'll have a port conflict and will need to either shutdown that service prior to running ISLE or change `3306:3306` to something like `9306:3306`. Please double-check.
 
 * Enter `Cntrl` and the letter `o` together to write the changes to the file.
 
@@ -285,7 +285,7 @@ Default: `- ./data/apache/html:/var/www/html:cached`
 
 ---
 
-## Step 5: Create New Users and Passwords by Editing "local.env"
+## Step 5: Create New Users and Passwords by Editing "local.env" File
 
 You can reuse some of the older Production settings in the "local.env" if you like (e.g. the database name `DRUPAL_DB`, database user `DRUPAL_DB_USER` even the drupal database user password `DRUPAL_DB_PASS` if that makes it easier). It is important to avoid repeating passwords in the ISLE Staging and Production environments.
 
