@@ -7,6 +7,10 @@ Update an existing ISLE installation to install the newest improvements and secu
 - These instructions assume you have already installed a version of ISLE using git whether you used the [Local ISLE Installation: New Site](../install/install-local-new.md) or the [Local ISLE Installation: Migrate Existing Islandora Site](../install/install-local-migrate.md) on your local personal computer.
 - As with any enterprise system, it is strongly suggested you run these update steps in a test environment before updating your production server.
 - Please always read the latest [Release Notes](../release-notes/release-1-1-2.md).
+- Docker Desktop Update: If Docker alerts you that updates are available for your personal computer, please follow these steps:
+    1. Go to your local ISLE site: `docker-compose down`
+    2. Install the new updated version of Docker Desktop.
+    3. Go to your local ISLE site: `docker-compose up -d`
 
 **Update your version of ISLE to the latest release:**
 
@@ -70,7 +74,7 @@ On your Local version of ISLE:
 
 * Now you have the current ISLE project code checked into git as foundation to make changes on your `Staging` and `Production` servers.
 
-## Staging Server update
+## Staging Server Update
 
 * SSH into your `Staging` ISLE Host Server
     * `ssh islandora@yourstagingserver.institution.edu`
