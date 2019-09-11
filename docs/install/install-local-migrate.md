@@ -42,7 +42,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 * Step 1: Edit "/etc/hosts" File
 * Step 2: Setup Git for the ISLE Project
 * Step 3: Git Clone the Production Islandora Drupal Site Code
-* Step 4: Edit the .env File to Change to the Local Environment
+* Step 4: Edit the ".env" File to Change to the Local Environment
 * Step 5: Create New Users and Passwords by Editing "local.env" File
 * Step 6: Create New Self-Signed Certs for Your Project
 * Step 7: Download the ISLE Images
@@ -257,7 +257,7 @@ _Using the same open terminal:_
 
 ---
 
-## Step 4: Edit the .env File to Change to the Local Environment
+## Step 4: Edit the ".env" File to Change to the Local Environment
 
 Open a `terminal` (Windows: open `Git Bash`)
 

@@ -278,45 +278,43 @@ Your host server is now configured and ready to run ISLE.
 
 "Git for Windows" will install both "Git" and "Git Bash". Git must be installed so you may get a copy (called a "clone") of the current ISLE project. Git is a software version control system for tracking changes in computer files and coordinating work on those files among multiple people. Git Bash is a useful command line interface that behaves similarly to LINUX and UNIX environments; you will use this to enter commands provided below.
 
-Let's begin by checking to see if you have "Git Bash" already installed.
-
-* Press the Windows key.
-* Type `Git Bash`.
+* Let's begin by checking to see if you have "Git Bash" already installed.
+    * Press the Windows key.
+    * Type `Git Bash`
+* Is "Git Bash" installed?
     * If you see "Git Bash" listed, then it is installed. 
-        * RIGHT-CLICK `Git Bash`, select `Run as administrator`, and enter `Yes` to the prompt.
-        * Enter: `git --version`
-        * The above command will output the installed version number. This confirms that git is already installed.
-            * **Example:** "git version 2.23.0.windows.1"
     * If "Git Bash" is not installed, please install "Git for Windows" now:
-        * Click ["Git for Windows"](https://gitforwindows.org/).
-        * Click `Download`, `Save` the file to your Desktop, `double-click` that file to install, then click `Yes` to the prompt.
+        * Download: [Git for Windows](https://gitforwindows.org/)
+        * Click `Download`; `Save` this file to your Desktop; `double-click` that file to install; then click `Yes` to the prompt.
         * Click `Next` and accept ALL of the installer's default selections, with the one following exception:
             * **Choosing the default editor used by Git**
-            * Please select your preferred text editor (we recommend [ATOM](https://atom.io/) as it integrates well with Git for Windows).
-            * If you selected ATOM and do not yet have it installed, please install [ATOM](https://atom.io/) now.
-    * Check for updates:
-        * Enter: `git update-git-for-windows`
-    * Enter the following to fix a potential issue with long filenames:
-        * `git config --system core.longpaths true`
+            * Please select your preferred text editor (we recommend ATOM).
+            * If you selected ATOM and do not yet have it installed, please install [ATOM](https://atom.io/) now, then continue below.
+* Press the Windows key
+* Type `Git Bash`
+* RIGHT-CLICK `Git Bash` to open it; select `More`; select `Run as administrator`; then click `Yes` to the prompt.
+* In the Git Bash terminal:
+    * Enter: `git --version`
+    * The above command will output the installed version number. This confirms that git is properly installed.
+    * **Example:** "git version 2.23.0.windows.1"
+* Check for updates:
+    * Enter: `git update-git-for-windows`
+* Enter the following to fix a potential issue with long filenames:
+    * `git config --system core.longpaths true`
 
-### Step 2: Install Docker Desktop for Windows
+### Step 2: Install "Docker Desktop for Windows"
 
 **Important: Docker requires Windows Professional or Windows Enterprise**
 
-* [Download Docker Desktop for Windows](https://store.docker.com/editions/community/docker-ce-desktop-windows)
-
-* Click the `Please Login to Download` button on the right of the page (click: `Sign In` or `Create Account`)
-
-* Click the `Get Docker` button on the right of the page, `Save` the file to your Desktop, `double-click` that file to install, then click `Yes` to the prompt.
-
-* Click `OK` or `Next` to accept all of the installer's default selections.
-
+* Download: [Docker Desktop for Windows](https://store.docker.com/editions/community/docker-ce-desktop-windows)
+* Click the button: `Please Login to Download`
+    * Click: `Sign In` or `Sign Up`
+* Click the button: `Get Docker`
+    * `Save` this file to your Desktop; `double-click` that file to install; then click `Yes` to the prompt.
+* Click `OK` or `Next` and accept ALL of the installer's default selections.
 * You will be required to `Close and log out` when the installation is complete.
-
 * The computer will reboot; please sign in.
-
 * If prompted to enable `Hyper-V and Containers features`, click `OK`.
-
 * If prompted with a Docker popup dialogue to `Login with your Docker ID`, you may do so with your Docker.com account information, or you may simply close the window.  Docker is running and you do not need to login to use it.
 
 * Once fully started, a whale icon will appear in the notification area. If clicked, a dropdown should appear indicating that Docker is now running.
@@ -345,21 +343,23 @@ Let's begin by checking to see if you have "Git Bash" already installed.
     * `cd ISLE`
 * Enter the following to display the present working directory
     * `pwd`
-* Highlight the full path (i.e. `C:\Users\somebody\ISLE`) and click `Enter` to copy to clipboard.
+* Note that the output represents the full path of your ISLE project. You will use this path in the next step.
+    * **Example output:** "/c/Users/somebody/ISLE"
 
-#### Edit ".env" file.
+#### Edit "demo.env" and "local.env"
 
 * Press the Windows key.
 * Type `Notepad`.
 * In the search results, RIGHT-CLICK `Notepad`, select `Run as administrator`, and enter `Yes` to prompt.
 * Select `File -> Open`
-* In the `File name:` input box, paste the above copied path. Click `Enter`.
-* Use dropdown on right to change `Text Documents (*.txt)` to `All Files (*.*)`
+* At top of dialog window, go to your ISLE project (see full path in previous step).
+* At right side of dialog window, use the dropdown menu to change `Text Documents (*.txt)` to `All Files (*.*)`
     * (Optional: see [How to show hidden files](https://support.microsoft.com/en-us/help/4028316/windows-view-hidden-files-and-folders-in-windows-10)).
-* Select the `.env` file and click `Open`.
+* Select a file based on your desired type of installation: `demo.env` or `local.env`
+    * Click `Open`.
 * Find the following line:
     * `# COMPOSE_CONVERT_WINDOWS_PATHS=1`
-* In the above line, delete the `#` character so as to uncomment the line. It should now look like this:
+* In the above line, delete the first two characters (`# `) so as to uncomment the line. It should now look like this:
     * `COMPOSE_CONVERT_WINDOWS_PATHS=1`
 * Click `File > Save`, and then `File -> Exit`.
 
