@@ -3,9 +3,6 @@ jobs:
   build:
     machine: true
     working_directory: ~/isle
-    # branches:
-    #   only:
-    #     - travis
     parallelism: 1
     shell: /bin/bash --login
     steps:
@@ -68,14 +65,6 @@ jobs:
             docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && composer install "
             docker exec -it isle-apache-td bash -c "chmod 700 /var/www/html/sites/behat/run-isle-tests.sh"
             sudo chmod -R 777 ~/isle/data/apache/html/sites/behat/debug
-
-      # sudo chmod -R 777 ~/isle/data/apache/sites/behat/
-      # - run:
-      #     name: Ingest base collection
-      #     command: |
-      #       docker exec -it isle-apache-td bash -c "cd /var/www/html && drush -u 1 islandora_batch_with_derivs_preprocess --key_datastream=MODS --scan_target=/var/www/html/isle-behat/Batches-by-CModel/Collections/files --use_pids=true --namespace=samples --parent=islandora:root --content_models=islandora:collectionCModel"
-      #       docker exec -it isle-apache-td bash -c "cd /var/www/html && drush -u 1 islandora_batch_ingest"
-      #     # no_output_timeout: 20m
 
       - run:
           name: Run the behat tests
