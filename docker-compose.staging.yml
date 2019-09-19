@@ -183,7 +183,7 @@ services:
       # - ./config/proxy/acme.json:/acme.json
       # SSL Choice 2: To use commercial SSLs - uncomment ONLY the line below. Add your SSL certs (.cert, .pem, .key) files to config/proxy/ssl-certs
       # - ./config/proxy/ssl-certs:/certs:ro
-      # Based on the choice of SSL type made above, you'll need to refer to the /config/proxy/traefik.staging.toml file for further configuration instructions.      
+      # Based on the choice of SSL type made above, you'll need to refer to the /config/proxy/traefik.staging.toml file for further configuration instructions.
       - ./config/proxy/traefik.staging.toml:/etc/traefik/traefik.toml
     labels:
       - traefik.port=8080
@@ -215,7 +215,7 @@ services:
 #      # Mount for influxdb data directory
 #      - isle-influxdb-data:/var/lib/influxdb
 #      # Mount for influxdb configuration
-#      - ./config/tick/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf        
+#      - ./config/tick/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf
 #    logging:
 #      driver: syslog
 #      options:
@@ -227,7 +227,7 @@ services:
 #    # Telegraf requires network access to InfluxDB
 #    container_name: isle-telegraf-${CONTAINER_SHORT_ID}
 #    networks:
-#      isle-internal:    
+#      isle-internal:
 #    depends_on:
 #      - influxdb
 #    ports:
@@ -254,7 +254,7 @@ services:
 #    image: kapacitor:latest
 #    container_name: isle-kapacitor-${CONTAINER_SHORT_ID}
 #    networks:
-#      isle-internal:    
+#      isle-internal:
 #    # Kapacitor requires network access to Influxdb
 #    ports:
 #    # The API for Kapacitor is served on port 9092
@@ -272,7 +272,7 @@ services:
 
 #  chronograf:
 #    image: chronograf:latest
-#    container_name: isle-chronograf-${CONTAINER_SHORT_ID}    
+#    container_name: isle-chronograf-${CONTAINER_SHORT_ID}
 #    environment:
 #      - RESOURCES_PATH="/usr/share/chronograf/resources"
 #      - LOG_LEVEL=error
@@ -300,7 +300,7 @@ services:
 ## (Optional-component): Uncomment lines below to run ISLE with the Blazegraph triplestore instead of default Mulgara
 
 #  isle-blazegraph:
-#    image: borndigital/isle-blazegraph:1.30-dev
+#    image: borndigital/isle-blazegraph:1.3.0-dev
 #    container_name: isle-blazegraph-${CONTAINER_SHORT_ID}
 #    environment:
 #      - JAVA_MAX_MEM=4096M

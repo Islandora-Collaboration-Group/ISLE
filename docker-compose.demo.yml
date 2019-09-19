@@ -156,7 +156,7 @@ services:
 ## (Optional-component): Uncomment lines below to run ISLE with the Blazegraph triplestore instead of default Mulgara
 
 #  isle-blazegraph:
-#    image: borndigital/isle-blazegraph:1.30-dev
+#    image: borndigital/isle-blazegraph:1.3.0-dev
 #    container_name: isle-blazegraph-${CONTAINER_SHORT_ID}
 #    environment:
 #      - JAVA_MAX_MEM=4096M

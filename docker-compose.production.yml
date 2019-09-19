@@ -183,7 +183,7 @@ services:
       # - ./config/proxy/acme.json:/acme.json
       # SSL Choice 2: To use commercial SSLs - uncomment ONLY the line below. Add your SSL certs (.cert, .pem, .key) files to config/proxy/ssl-certs
       # - ./config/proxy/ssl-certs:/certs:ro
-      # Based on the choice of SSL type made above, you'll need to refer to this /config/proxy/traefik.production.toml file for further configuration instructions.      
+      # Based on the choice of SSL type made above, you'll need to refer to this /config/proxy/traefik.production.toml file for further configuration instructions.
       - ./config/proxy/traefik.production.toml:/etc/traefik/traefik.toml
     labels:
       - traefik.port=8080
@@ -205,7 +205,7 @@ services:
 #    # Telegraf requires network access to InfluxDB
 #    container_name: isle-telegraf-${CONTAINER_SHORT_ID}
 #    networks:
-#      isle-internal:    
+#      isle-internal:
 #    ports:
 #      # This port should be for rsyslog
 #      - "6514:6514"
@@ -233,7 +233,7 @@ services:
 ## (Optional-component): Uncomment lines below to run ISLE with the Blazegraph triplestore instead of default Mulgara
 
 #  isle-blazegraph:
-#    image: borndigital/isle-blazegraph:1.30-dev
+#    image: borndigital/isle-blazegraph:1.3.0-dev
 #    container_name: isle-blazegraph-${CONTAINER_SHORT_ID}
 #    environment:
 #      - JAVA_MAX_MEM=4096M
