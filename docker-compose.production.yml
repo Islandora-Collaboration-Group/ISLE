@@ -2,7 +2,7 @@ version: '3.7'
 
 #### docker-compose up -d;
 ## Production Environment - Used for remote (non-local / cloud) hosting of a Production site. Site and collections are public and accessible to the world.
-## Updated 2019-08 - Release 1.2.0 (@ 1.2.0)
+## Updated 2019-09 - Release 1.3.0-dev (@ 1.3.0-dev)
 
 services:
   isle-portainer: ## Renamed to avoid conflicts on systems/servers with portainer already running.
@@ -31,7 +31,7 @@ services:
 
 
   mysql:
-    image: islandoracollabgroup/isle-mysql:1.2.0
+    image: borndigital/isle-mysql:1.3.0-dev
     container_name: isle-mysql-${CONTAINER_SHORT_ID}
     env_file:
       - production.env
@@ -53,7 +53,7 @@ services:
 
 
   fedora:
-    image: islandoracollabgroup/isle-fedora:1.2.0
+    image: borndigital/isle-fedora:1.3.0-dev
     container_name: isle-fedora-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=4096M
@@ -83,7 +83,7 @@ services:
 
 
   solr:
-    image: islandoracollabgroup/isle-solr:1.2.0
+    image: borndigital/isle-solr:1.3.0-dev
     container_name: isle-solr-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=2048M
@@ -106,7 +106,7 @@ services:
 
 
   image-services:
-    image: islandoracollabgroup/isle-imageservices:1.2.0
+    image: borndigital/isle-imageservices:1.3.0-dev
     container_name: isle-images-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=2048M
@@ -133,7 +133,7 @@ services:
 
 
   apache:
-    image: islandoracollabgroup/isle-apache:1.2.0
+    image: borndigital/isle-apache:1.3.0-dev
     container_name: isle-apache-${CONTAINER_SHORT_ID}
     env_file:
       - .env
@@ -228,6 +228,32 @@ services:
 
 # END - TICK stack services section
 
+
+# Start - Blazegraph service section
+## (Optional-component): Uncomment lines below to run ISLE with the Blazegraph triplestore instead of default Mulgara
+
+#  isle-blazegraph:
+#    image: borndigital/isle-blazegraph:1.30-dev
+#    container_name: isle-blazegraph-${CONTAINER_SHORT_ID}
+#    environment:
+#      - JAVA_MAX_MEM=4096M
+#      - JAVA_MIN_MEM=1024M
+#    env_file:
+#      - production.env
+#    networks:
+#      - isle-internal
+#    ports:
+#      - "8084:8080"
+#    volumes:
+#      - isle-blazegraph-data:/var/bigdata
+#    logging:
+#      driver: syslog
+#      options:
+#        tag: "{{.Name}}"
+
+# END - Blazegraph service section
+
+
 # Defined networks
 networks:
   isle-internal:
@@ -241,6 +267,9 @@ volumes:
   isle-fedora-resourceIndex:
   isle-fedora-activemq:
   isle-fedora-XACML:
+  ## (Optional component): Uncomment line below to run ISLE with the Blazegraph triplestore instead of default Mulgara
+  #isle-blazegraph-data:
+
 
 # Customization: Bindmounts used instead of docker volumes
 # removed isle-apache-data: Bind-mounting for custom Drupal code
