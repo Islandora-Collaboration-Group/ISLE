@@ -83,3 +83,9 @@ jobs:
       - store_artifacts:
           path: /home/circleci/artifacts/
           destination: behat-artifacts
+
+workflows:
+  version: 2
+  main:
+    jobs:
+    - build:
