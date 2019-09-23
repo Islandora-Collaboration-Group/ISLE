@@ -2,7 +2,7 @@
 
 
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="no-js">
   <head>
     
@@ -34,31 +34,35 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0, mkdocs-material-3.0.3">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
     
     
       
-        <title>Demo ISLE Installation: Edit the "/etc/hosts" File - Islandora Enterprise (ISLE)</title>
+        <title>Demo or Local: Edit the "/etc/hosts" File - Islandora Enterprise (ISLE)</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
       
       
     
     
-      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
     
     
-      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
       
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
     <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
     
+    
       <link rel="stylesheet" href="../../extra.css">
+    
+    
+      
     
     
   </head>
@@ -75,7 +79,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../../#demo-isle-installation-edit-the-etchosts-file" tabindex="1" class="md-skip">
+      <a href="#demo-or-local-edit-the-etchosts-file" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -96,22 +100,21 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           
-            
-              <span class="md-header-nav__topic">
-                Islandora Enterprise (ISLE)
-              </span>
-              <span class="md-header-nav__topic">
-                Demo ISLE Installation: Edit the "/etc/hosts" File
-              </span>
-            
+            <span class="md-header-nav__topic">
+              Islandora Enterprise (ISLE)
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Demo or Local: Edit the "/etc/hosts" File
+              
+            </span>
           
         </div>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
         
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
           
-            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
-            
 <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
@@ -134,7 +137,6 @@
     </div>
   </div>
 </div>
-          
         
       </div>
       
@@ -147,7 +149,7 @@
         
       
       
-      <main class="md-main">
+      <main class="md-main" role="main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
             
@@ -883,28 +885,28 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#mac-or-ubuntu-using-docker" title="Mac or Ubuntu Using Docker" class="md-nav__link">
+  <a href="#mac-or-ubuntu-using-docker" class="md-nav__link">
     Mac or Ubuntu Using Docker
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#mac-or-ubuntu-desktop-using-virtualbox-vm-non-vagrant" title="Mac or Ubuntu Desktop Using Virtualbox VM (non-Vagrant)" class="md-nav__link">
+  <a href="#mac-or-ubuntu-desktop-using-virtualbox-vm-non-vagrant" class="md-nav__link">
     Mac or Ubuntu Desktop Using Virtualbox VM (non-Vagrant)
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#windows-using-docker" title="Windows Using Docker" class="md-nav__link">
+  <a href="#windows-using-docker" class="md-nav__link">
     Windows Using Docker
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#windows-using-virtualbox-vm-non-vagrant" title="Windows Using Virtualbox VM (non-Vagrant)" class="md-nav__link">
+  <a href="#windows-using-virtualbox-vm-non-vagrant" class="md-nav__link">
     Windows Using Virtualbox VM (non-Vagrant)
   </a>
   
@@ -927,7 +929,7 @@
               
                 
                 
-                <h1 id="demo-isle-installation-edit-the-etchosts-file">Demo ISLE Installation: Edit the "/etc/hosts" File</h1>
+                <h1 id="demo-or-local-edit-the-etchosts-file">Demo or Local: Edit the "/etc/hosts" File</h1>
 <p>Edit the <code>/etc/hosts</code> file to view ISLE locally on a personal computer browser.</p>
 <p><strong>Please select your operating system and software:</strong></p>
 <ul>
@@ -940,10 +942,7 @@
 <h2 id="mac-or-ubuntu-using-docker">Mac or Ubuntu Using Docker</h2>
 <ul>
 <li>
-<p><strong>Docker For Mac</strong> If you are using Docker For Mac, then use the IP address of <code>127.0.0.1</code> to resolve to <code>localhost</code> and to the <code>isle.localdomain localhost isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain</code> domain names</p>
-</li>
-<li>
-<p>Open a terminal on the personal computer</p>
+<p>Open a terminal on the personal computer.</p>
 </li>
 <li>
 <p>Enter: <code>sudo nano /etc/hosts</code></p>
@@ -955,14 +954,33 @@
 <p>Enter the personal computer end user password</p>
 </li>
 <li>
-<p>Find the <code>127.0.0.1 localhost</code> entry in the <code>/etc/hosts</code> file.</p>
-</li>
+<p>Select the appropriate installation scenario, below:</p>
+<ol>
 <li>
-<p>Go to end of same line, add one space, and then paste the following:</p>
+<p><strong>For Demo ISLE Installations:</strong></p>
 <ul>
+<li>Find the <code>127.0.0.1 localhost</code> entry in the <code>/etc/hosts</code> file.</li>
+<li>Go to end of same line, add one space, and then paste the following:</li>
 <li><code>isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain</code></li>
 </ul>
 </li>
+<li>
+<p><strong>For Local ISLE Installations:</strong></p>
+<ul>
+<li>Find the <code>127.0.0.1 localhost</code> entry in the <code>/etc/hosts</code> file.</li>
+<li>Go to end of same line, add one space, and then paste the following, substituting <code>yourprojectnamehere</code> with your preferred name:</li>
+<li><code>yourprojectnamehere.localdomain admin.yourprojectnamehere.localdomain images.yourprojectnamehere.localdomain portainer.yourprojectnamehere.localdomain</code></li>
+<li>Note: While not required, it is perfectly okay to have multiple lines so as to define both the Demo and the Local ISLE installations, as shown in the example below:</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<pre><code>127.0.0.1 localhost isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain
+127.0.0.1 localhost yourprojectnamehere.localdomain admin.yourprojectnamehere.localdomain images.yourprojectnamehere.localdomain portainer.yourprojectnamehere.localdomain
+</code></pre>
+
+<ul>
 <li>
 <p>Enter <code>Cntrl</code> and the letter <code>o</code> together to write the changes to the file.</p>
 </li>
@@ -970,38 +988,37 @@
 <p>Enter <code>Cntrl</code> and the letter <code>x</code> together to exit the file.</p>
 </li>
 </ul>
-<p><strong>Please return to <a href="../install-demo/#step-2-launch-process">Demo ISLE Installation</a> and continue with <em>Step 2: Launch Process</em>.</strong></p>
+<p><strong>Please return to the appropriate installation:</strong></p>
+<ul>
+<li><a href="../install-demo/#step-1-edit-etchosts-file">Demo ISLE Installation</a> and continue with <em>Step 2</em>.</li>
+<li><a href="../install-local-new/#step-1-edit-etchosts-file">Local ISLE Installation: New Site</a> and continue with <em>Step 2</em>.</li>
+<li><a href="../install-local-migrate/#step-1-edit-etchosts-file">Local ISLE Installation: Migrate Existing Islandora Site</a> and continue with <em>Step 2</em>.</li>
+</ul>
 <hr />
 <h2 id="mac-or-ubuntu-desktop-using-virtualbox-vm-non-vagrant">Mac or Ubuntu Desktop Using Virtualbox VM (non-Vagrant)</h2>
 <ul>
 <li>
-<p>From the instructions in setting up the Virtualbox VM on your OS (MacOS, Ubuntu or Windows), the IP used to setup the Host-Only network was <code>10.10.10.130</code></p>
+<p>Note: From the instructions in setting up the Virtualbox VM on your MacOS or Ubuntu, the IP used to setup the Host-Only network was <code>10.10.10.130</code>.</p>
 </li>
 <li>
-<p>Add the value of <code>10.10.10.130 isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain</code> to the personal computer's <code>/etc/hosts</code> file.   </p>
-</li>
-<li>
-<p>For endusers running MacOS and Ubuntu Desktop:</p>
-</li>
-<li>
-<p>Open a terminal on the personal computer</p>
+<p>Open a terminal on the personal computer.</p>
 </li>
 <li>
 <p>Enter: <code>sudo nano /etc/hosts</code></p>
-<ul>
-<li><em>For endusers familiar with editing files on the command line, vim, emacs or alternative tools can be used in lieu of nano</em></li>
-</ul>
+</li>
+<li>
+<p><em>For endusers familiar with editing files on the command line, vim, emacs or alternative tools can be used in lieu of nano</em></p>
 </li>
 <li>
 <p>Enter the personal computer end user password</p>
 </li>
 <li>
 <p>Add the values below the <code>127.0.0.1</code> entry in the <code>/etc/hosts</code> file.</p>
-<ul>
-<li><code>10.10.10.130 localhost isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain</code>  </li>
-<li><strong>Example:</strong></li>
-</ul>
 </li>
+<li>
+<p><code>10.10.10.130 localhost isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain</code>  </p>
+</li>
+<li><strong>Example:</strong></li>
 </ul>
 <pre><code>        127.0.0.1 localhost
         10.10.10.130 localhost isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain
@@ -1011,13 +1028,18 @@
 <li>Enter <code>Cntrl</code> and the letter <code>o</code> together to write the changes to the file.</li>
 <li>Enter <code>Cntrl</code> and the letter <code>x</code> together to exit the file.</li>
 </ul>
-<p><strong>Please return to <a href="../install-demo/#step-2-launch-process">Demo ISLE Installation</a> and continue with <em>Step 2: Launch Process</em>.</strong></p>
+<p><strong>Please return to the appropriate installation:</strong></p>
+<ul>
+<li><a href="../install-demo/#step-1-edit-etchosts-file">Demo ISLE Installation</a> and continue with <em>Step 2</em>.</li>
+<li><a href="../install-local-new/#step-1-edit-etchosts-file">Local ISLE Installation: New Site</a> and continue with <em>Step 2</em>.</li>
+<li><a href="../install-local-migrate/#step-1-edit-etchosts-file">Local ISLE Installation: Migrate Existing Islandora Site</a> and continue with <em>Step 2</em>.</li>
+</ul>
 <hr />
 <h2 id="windows-using-docker">Windows Using Docker</h2>
 <ul>
 <li>
 <p>For endusers running Windows 10:</p>
-<ul>
+</li>
 <li>
 <p>Press the Windows key.</p>
 </li>
@@ -1037,27 +1059,47 @@
 <p>Click <code>Open</code>.</p>
 </li>
 <li>
-<p>Find the <code>127.0.0.1 localhost</code> entry and uncomment it (by deleting the preceding <code>#</code> character).</p>
-</li>
+<p>Select the appropriate installation scenario, below:</p>
+<ol>
 <li>
-<p>Go to end of same line, add one space, and then paste the following:</p>
+<p><strong>For Demo ISLE Installations:</strong></p>
 <ul>
+<li>Find the <code>127.0.0.1 localhost</code> entry and uncomment it (by deleting the preceding <code>#</code> character).</li>
+<li>Go to end of same line, add one space, and then paste the following:</li>
 <li><code>isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain</code></li>
 </ul>
 </li>
 <li>
-<p>Click <code>File &gt; Save</code>, and then <code>File -&gt; Exit</code>.</p>
-</li>
+<p><strong>For Local ISLE Installations:</strong></p>
+<ul>
+<li>Find the <code>127.0.0.1 localhost</code> entry and uncomment it (by deleting the preceding <code>#</code> character).</li>
+<li>Go to end of same line, add one space, and then paste the following, substituting <code>yourprojectnamehere</code> with your preferred name:</li>
+<li><code>yourprojectnamehere.localdomain admin.yourprojectnamehere.localdomain images.yourprojectnamehere.localdomain portainer.yourprojectnamehere.localdomain</code></li>
+<li>Note: While not required, it is perfectly okay to have multiple lines so as to define both the Demo and the Local ISLE installations, as shown in the example below:</li>
 </ul>
 </li>
+</ol>
+</li>
 </ul>
-<p><strong>Please return to <a href="../install-demo/#step-2-launch-process">Demo ISLE Installation</a> and continue with <em>Step 2: Launch Process</em>.</strong></p>
+<pre><code>127.0.0.1 localhost isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain
+127.0.0.1 localhost yourprojectnamehere.localdomain admin.yourprojectnamehere.localdomain images.yourprojectnamehere.localdomain portainer.yourprojectnamehere.localdomain
+</code></pre>
+
+<ul>
+<li>Click <code>File &gt; Save</code>, and then <code>File -&gt; Exit</code>.</li>
+</ul>
+<p><strong>Please return to the appropriate installation:</strong></p>
+<ul>
+<li><a href="../install-demo/#step-1-edit-etchosts-file">Demo ISLE Installation</a> and continue with <em>Step 2</em>.</li>
+<li><a href="../install-local-new/#step-1-edit-etchosts-file">Local ISLE Installation: New Site</a> and continue with <em>Step 2</em>.</li>
+<li><a href="../install-local-migrate/#step-1-edit-etchosts-file">Local ISLE Installation: Migrate Existing Islandora Site</a> and continue with <em>Step 2</em>.</li>
+</ul>
 <hr />
 <h2 id="windows-using-virtualbox-vm-non-vagrant">Windows Using Virtualbox VM (non-Vagrant)</h2>
 <ul>
 <li>
 <p>For endusers running Windows 10:</p>
-<ul>
+</li>
 <li>
 <p>Press the Windows key.</p>
 </li>
@@ -1086,9 +1128,12 @@
 <p>Click <code>File &gt; Save</code>, and then <code>File -&gt; Exit</code>.</p>
 </li>
 </ul>
-</li>
+<p><strong>Please return to the appropriate installation:</strong></p>
+<ul>
+<li><a href="../install-demo/#step-1-edit-etchosts-file">Demo ISLE Installation</a> and continue with <em>Step 2</em>.</li>
+<li><a href="../install-local-new/#step-1-edit-etchosts-file">Local ISLE Installation: New Site</a> and continue with <em>Step 2</em>.</li>
+<li><a href="../install-local-migrate/#step-1-edit-etchosts-file">Local ISLE Installation: Migrate Existing Islandora Site</a> and continue with <em>Step 2</em>.</li>
 </ul>
-<p><strong>Please return to <a href="../install-demo/#step-2-launch-process">Demo ISLE Installation</a> and continue with <em>Step 2: Launch Process</em>.</strong></p>
                 
                   
                 
@@ -1117,22 +1162,17 @@
           Material for MkDocs</a>
       </div>
       
-        
-      
     </div>
   </div>
 </footer>
       
     </div>
     
-      <script src="../../assets/javascripts/application.583bbe55.js"></script>
+      <script src="../../assets/javascripts/application.c648116f.js"></script>
       
-      <script>app.initialize({version:"1.0",url:{base:"../.."}})</script>
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
         <script src="../../extra.js"></script>
-      
-    
-    
       
     
   </body>

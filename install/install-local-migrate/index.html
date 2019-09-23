@@ -2,7 +2,7 @@
 
 
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="no-js">
   <head>
     
@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0, mkdocs-material-3.0.3">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
     
     
       
@@ -42,23 +42,27 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
       
       
     
     
-      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
     
     
-      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
       
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
     <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
     
+    
       <link rel="stylesheet" href="../../extra.css">
+    
+    
+      
     
     
   </head>
@@ -75,7 +79,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../../#local-isle-installation-migrate-existing-islandora-site" tabindex="1" class="md-skip">
+      <a href="#local-isle-installation-migrate-existing-islandora-site" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -96,22 +100,21 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           
-            
-              <span class="md-header-nav__topic">
-                Islandora Enterprise (ISLE)
-              </span>
-              <span class="md-header-nav__topic">
+            <span class="md-header-nav__topic">
+              Islandora Enterprise (ISLE)
+            </span>
+            <span class="md-header-nav__topic">
+              
                 Local: Migrate Site
-              </span>
-            
+              
+            </span>
           
         </div>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
         
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
           
-            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
-            
 <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
@@ -134,7 +137,6 @@
     </div>
   </div>
 </div>
-          
         
       </div>
       
@@ -147,7 +149,7 @@
         
       
       
-      <main class="md-main">
+      <main class="md-main" role="main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
             
@@ -313,21 +315,21 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#assumptions-prerequisites" title="Assumptions / Prerequisites" class="md-nav__link">
+  <a href="#assumptions-prerequisites" class="md-nav__link">
     Assumptions / Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#index-of-instructions" title="Index of Instructions" class="md-nav__link">
+  <a href="#index-of-instructions" class="md-nav__link">
     Index of Instructions
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-0-copy-production-data-to-your-personal-computer" title="Step 0: Copy Production Data to Your Personal Computer" class="md-nav__link">
+  <a href="#step-0-copy-production-data-to-your-personal-computer" class="md-nav__link">
     Step 0: Copy Production Data to Your Personal Computer
   </a>
   
@@ -335,14 +337,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#drupal-site-files-and-code" title="Drupal Site Files and Code" class="md-nav__link">
+  <a href="#drupal-site-files-and-code" class="md-nav__link">
     Drupal Site Files and Code
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#drupal-site-database" title="Drupal Site Database" class="md-nav__link">
+  <a href="#drupal-site-database" class="md-nav__link">
     Drupal Site Database
   </a>
   
@@ -350,7 +352,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#export-the-production-mysql-islandora-drupal-database" title="Export the Production MySQL Islandora Drupal Database" class="md-nav__link">
+  <a href="#export-the-production-mysql-islandora-drupal-database" class="md-nav__link">
     Export the Production MySQL Islandora Drupal Database
   </a>
   
@@ -362,14 +364,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#fedora-hash-size-conditional" title="Fedora Hash Size (Conditional)" class="md-nav__link">
+  <a href="#fedora-hash-size-conditional" class="md-nav__link">
     Fedora Hash Size (Conditional)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#solr-schema-and-islandora-transforms" title="Solr Schema and Islandora Transforms" class="md-nav__link">
+  <a href="#solr-schema-and-islandora-transforms" class="md-nav__link">
     Solr Schema and Islandora Transforms
   </a>
   
@@ -377,21 +379,21 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#strategy-1-easy-run-stock-isle" title="Strategy 1: Easy - Run "Stock" ISLE" class="md-nav__link">
+  <a href="#strategy-1-easy-run-stock-isle" class="md-nav__link">
     Strategy 1: Easy - Run "Stock" ISLE
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#strategy-2-intermediate-bind-mount-in-existing-transforms-and-schemas" title="Strategy 2: Intermediate - Bind Mount in Existing Transforms and Schemas" class="md-nav__link">
+  <a href="#strategy-2-intermediate-bind-mount-in-existing-transforms-and-schemas" class="md-nav__link">
     Strategy 2: Intermediate - Bind Mount in Existing Transforms and Schemas
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#strategy-3-advanced-diff-and-merge-current-production-customization-edits-into-isle-configs" title="Strategy 3: Advanced - Diff and Merge Current Production Customization Edits Into ISLE Configs" class="md-nav__link">
+  <a href="#strategy-3-advanced-diff-and-merge-current-production-customization-edits-into-isle-configs" class="md-nav__link">
     Strategy 3: Advanced - Diff and Merge Current Production Customization Edits Into ISLE Configs
   </a>
   
@@ -408,14 +410,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-1-edit-etchosts-file" title="Step 1: Edit "/etc/hosts" File" class="md-nav__link">
-    Step 1: Edit "/etc/hosts" File
+  <a href="#step-1-choose-a-project-name" class="md-nav__link">
+    Step 1: Choose a Project Name
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-2-setup-git-for-the-isle-project" title="Step 2: Setup Git for the ISLE Project" class="md-nav__link">
+  <a href="#step-15-edit-etchosts-file" class="md-nav__link">
+    Step 1.5: Edit "/etc/hosts" File
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-setup-git-for-the-isle-project" class="md-nav__link">
     Step 2: Setup Git for the ISLE Project
   </a>
   
@@ -423,7 +432,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#step-2a-add-customizations-from-step-0-to-the-git-workflow" title="Step 2a: Add Customizations from "Step 0" to the Git Workflow" class="md-nav__link">
+  <a href="#step-2a-add-customizations-from-step-0-to-the-git-workflow" class="md-nav__link">
     Step 2a: Add Customizations from "Step 0" to the Git Workflow
   </a>
   
@@ -435,84 +444,84 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-3-git-clone-the-production-islandora-drupal-site-code" title="Step 3: Git Clone the Production Islandora Drupal Site Code" class="md-nav__link">
+  <a href="#step-3-git-clone-the-production-islandora-drupal-site-code" class="md-nav__link">
     Step 3: Git Clone the Production Islandora Drupal Site Code
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-4-edit-the-env-file-to-change-to-the-local-environment" title="Step 4: Edit the ".env" File to Change to the Local Environment" class="md-nav__link">
+  <a href="#step-4-edit-the-env-file-to-change-to-the-local-environment" class="md-nav__link">
     Step 4: Edit the ".env" File to Change to the Local Environment
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-5-create-new-users-and-passwords-by-editing-localenv-file" title="Step 5: Create New Users and Passwords by Editing "local.env" File" class="md-nav__link">
+  <a href="#step-5-create-new-users-and-passwords-by-editing-localenv-file" class="md-nav__link">
     Step 5: Create New Users and Passwords by Editing "local.env" File
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-6-create-new-self-signed-certs-for-your-project" title="Step 6: Create New Self-Signed Certs for Your Project" class="md-nav__link">
+  <a href="#step-6-create-new-self-signed-certs-for-your-project" class="md-nav__link">
     Step 6: Create New Self-Signed Certs for Your Project
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-7-download-the-isle-images" title="Step 7: Download the ISLE Images" class="md-nav__link">
+  <a href="#step-7-download-the-isle-images" class="md-nav__link">
     Step 7: Download the ISLE Images
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-8-launch-process" title="Step 8: Launch Process" class="md-nav__link">
+  <a href="#step-8-launch-process" class="md-nav__link">
     Step 8: Launch Process
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-9-import-the-production-mysql-drupal-database" title="Step 9: Import the Production MySQL Drupal Database" class="md-nav__link">
+  <a href="#step-9-import-the-production-mysql-drupal-database" class="md-nav__link">
     Step 9: Import the Production MySQL Drupal Database
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-10-run-islandora-drupal-site-scripts" title="Step 10: Run Islandora Drupal Site Scripts" class="md-nav__link">
+  <a href="#step-10-run-islandora-drupal-site-scripts" class="md-nav__link">
     Step 10: Run Islandora Drupal Site Scripts
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-11-test-the-site" title="Step 11: Test the Site" class="md-nav__link">
+  <a href="#step-11-test-the-site" class="md-nav__link">
     Step 11: Test the Site
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-12-ingest-sample-objects" title="Step 12: Ingest Sample Objects" class="md-nav__link">
+  <a href="#step-12-ingest-sample-objects" class="md-nav__link">
     Step 12: Ingest Sample Objects
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#next-steps" title="Next Steps" class="md-nav__link">
+  <a href="#next-steps" class="md-nav__link">
     Next Steps
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#additional-resources" title="Additional Resources" class="md-nav__link">
+  <a href="#additional-resources" class="md-nav__link">
     Additional Resources
   </a>
   
@@ -520,7 +529,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#end-of-local-isle-installation-migrate-existing-islandora-site" title="End of Local ISLE Installation: Migrate Existing Islandora Site" class="md-nav__link">
+  <a href="#end-of-local-isle-installation-migrate-existing-islandora-site" class="md-nav__link">
     End of Local ISLE Installation: Migrate Existing Islandora Site
   </a>
   
@@ -1137,21 +1146,21 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#assumptions-prerequisites" title="Assumptions / Prerequisites" class="md-nav__link">
+  <a href="#assumptions-prerequisites" class="md-nav__link">
     Assumptions / Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#index-of-instructions" title="Index of Instructions" class="md-nav__link">
+  <a href="#index-of-instructions" class="md-nav__link">
     Index of Instructions
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-0-copy-production-data-to-your-personal-computer" title="Step 0: Copy Production Data to Your Personal Computer" class="md-nav__link">
+  <a href="#step-0-copy-production-data-to-your-personal-computer" class="md-nav__link">
     Step 0: Copy Production Data to Your Personal Computer
   </a>
   
@@ -1159,14 +1168,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#drupal-site-files-and-code" title="Drupal Site Files and Code" class="md-nav__link">
+  <a href="#drupal-site-files-and-code" class="md-nav__link">
     Drupal Site Files and Code
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#drupal-site-database" title="Drupal Site Database" class="md-nav__link">
+  <a href="#drupal-site-database" class="md-nav__link">
     Drupal Site Database
   </a>
   
@@ -1174,7 +1183,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#export-the-production-mysql-islandora-drupal-database" title="Export the Production MySQL Islandora Drupal Database" class="md-nav__link">
+  <a href="#export-the-production-mysql-islandora-drupal-database" class="md-nav__link">
     Export the Production MySQL Islandora Drupal Database
   </a>
   
@@ -1186,14 +1195,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#fedora-hash-size-conditional" title="Fedora Hash Size (Conditional)" class="md-nav__link">
+  <a href="#fedora-hash-size-conditional" class="md-nav__link">
     Fedora Hash Size (Conditional)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#solr-schema-and-islandora-transforms" title="Solr Schema and Islandora Transforms" class="md-nav__link">
+  <a href="#solr-schema-and-islandora-transforms" class="md-nav__link">
     Solr Schema and Islandora Transforms
   </a>
   
@@ -1201,21 +1210,21 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#strategy-1-easy-run-stock-isle" title="Strategy 1: Easy - Run "Stock" ISLE" class="md-nav__link">
+  <a href="#strategy-1-easy-run-stock-isle" class="md-nav__link">
     Strategy 1: Easy - Run "Stock" ISLE
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#strategy-2-intermediate-bind-mount-in-existing-transforms-and-schemas" title="Strategy 2: Intermediate - Bind Mount in Existing Transforms and Schemas" class="md-nav__link">
+  <a href="#strategy-2-intermediate-bind-mount-in-existing-transforms-and-schemas" class="md-nav__link">
     Strategy 2: Intermediate - Bind Mount in Existing Transforms and Schemas
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#strategy-3-advanced-diff-and-merge-current-production-customization-edits-into-isle-configs" title="Strategy 3: Advanced - Diff and Merge Current Production Customization Edits Into ISLE Configs" class="md-nav__link">
+  <a href="#strategy-3-advanced-diff-and-merge-current-production-customization-edits-into-isle-configs" class="md-nav__link">
     Strategy 3: Advanced - Diff and Merge Current Production Customization Edits Into ISLE Configs
   </a>
   
@@ -1232,14 +1241,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-1-edit-etchosts-file" title="Step 1: Edit "/etc/hosts" File" class="md-nav__link">
-    Step 1: Edit "/etc/hosts" File
+  <a href="#step-1-choose-a-project-name" class="md-nav__link">
+    Step 1: Choose a Project Name
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-2-setup-git-for-the-isle-project" title="Step 2: Setup Git for the ISLE Project" class="md-nav__link">
+  <a href="#step-15-edit-etchosts-file" class="md-nav__link">
+    Step 1.5: Edit "/etc/hosts" File
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-setup-git-for-the-isle-project" class="md-nav__link">
     Step 2: Setup Git for the ISLE Project
   </a>
   
@@ -1247,7 +1263,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#step-2a-add-customizations-from-step-0-to-the-git-workflow" title="Step 2a: Add Customizations from "Step 0" to the Git Workflow" class="md-nav__link">
+  <a href="#step-2a-add-customizations-from-step-0-to-the-git-workflow" class="md-nav__link">
     Step 2a: Add Customizations from "Step 0" to the Git Workflow
   </a>
   
@@ -1259,84 +1275,84 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-3-git-clone-the-production-islandora-drupal-site-code" title="Step 3: Git Clone the Production Islandora Drupal Site Code" class="md-nav__link">
+  <a href="#step-3-git-clone-the-production-islandora-drupal-site-code" class="md-nav__link">
     Step 3: Git Clone the Production Islandora Drupal Site Code
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-4-edit-the-env-file-to-change-to-the-local-environment" title="Step 4: Edit the ".env" File to Change to the Local Environment" class="md-nav__link">
+  <a href="#step-4-edit-the-env-file-to-change-to-the-local-environment" class="md-nav__link">
     Step 4: Edit the ".env" File to Change to the Local Environment
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-5-create-new-users-and-passwords-by-editing-localenv-file" title="Step 5: Create New Users and Passwords by Editing "local.env" File" class="md-nav__link">
+  <a href="#step-5-create-new-users-and-passwords-by-editing-localenv-file" class="md-nav__link">
     Step 5: Create New Users and Passwords by Editing "local.env" File
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-6-create-new-self-signed-certs-for-your-project" title="Step 6: Create New Self-Signed Certs for Your Project" class="md-nav__link">
+  <a href="#step-6-create-new-self-signed-certs-for-your-project" class="md-nav__link">
     Step 6: Create New Self-Signed Certs for Your Project
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-7-download-the-isle-images" title="Step 7: Download the ISLE Images" class="md-nav__link">
+  <a href="#step-7-download-the-isle-images" class="md-nav__link">
     Step 7: Download the ISLE Images
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-8-launch-process" title="Step 8: Launch Process" class="md-nav__link">
+  <a href="#step-8-launch-process" class="md-nav__link">
     Step 8: Launch Process
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-9-import-the-production-mysql-drupal-database" title="Step 9: Import the Production MySQL Drupal Database" class="md-nav__link">
+  <a href="#step-9-import-the-production-mysql-drupal-database" class="md-nav__link">
     Step 9: Import the Production MySQL Drupal Database
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-10-run-islandora-drupal-site-scripts" title="Step 10: Run Islandora Drupal Site Scripts" class="md-nav__link">
+  <a href="#step-10-run-islandora-drupal-site-scripts" class="md-nav__link">
     Step 10: Run Islandora Drupal Site Scripts
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-11-test-the-site" title="Step 11: Test the Site" class="md-nav__link">
+  <a href="#step-11-test-the-site" class="md-nav__link">
     Step 11: Test the Site
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-12-ingest-sample-objects" title="Step 12: Ingest Sample Objects" class="md-nav__link">
+  <a href="#step-12-ingest-sample-objects" class="md-nav__link">
     Step 12: Ingest Sample Objects
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#next-steps" title="Next Steps" class="md-nav__link">
+  <a href="#next-steps" class="md-nav__link">
     Next Steps
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#additional-resources" title="Additional Resources" class="md-nav__link">
+  <a href="#additional-resources" class="md-nav__link">
     Additional Resources
   </a>
   
@@ -1344,7 +1360,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#end-of-local-isle-installation-migrate-existing-islandora-site" title="End of Local ISLE Installation: Migrate Existing Islandora Site" class="md-nav__link">
+  <a href="#end-of-local-isle-installation-migrate-existing-islandora-site" class="md-nav__link">
     End of Local ISLE Installation: Migrate Existing Islandora Site
   </a>
   
@@ -1373,12 +1389,12 @@
                 
                 
                 <h1 id="local-isle-installation-migrate-existing-islandora-site">Local ISLE Installation: Migrate Existing Islandora Site</h1>
-<p><em>Expectations:  It takes an average of <strong>60-120 minutes</strong> to read this documentation and complete this installation.</em></p>
-<p>This <code>Local</code> ISLE Installation builds a local environment for the express purpose of migrating a previously existing Islandora site onto the ISLE platform. If you need to build a brand new local development site, please <strong>stop</strong> and use the <a href="../install-local-new/">Local ISLE Installation: New Site</a> instructions instead.</p>
-<p>This <code>Local</code> ISLE Installation will use a copy of a currently running Production Islandora Drupal website and an empty Fedora repository for endusers to test migration to ISLE and do site development and design with the end goal of deploying to ISLE Staging and Production environments for public use. The final goal would be to cut over from the existing non-ISLE Production and Staging servers to their new ISLE counterparts.</p>
-<p>This <code>Local</code> ISLE Installation will allow you to locally view this site in your browser with the domain of your choice (<strong>Example:</strong> <code>https://yourprojectnamehere.localdomain</code>), instead of being constrained to the Demo url (<code>https://isle.localdomain</code>).</p>
-<p>This document has directions on how you can check in newly created ISLE code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging and finally to Production. The <a href="../install-environments/">ISLE Installation: Environments</a> documentation offers an overview of the ISLE structure, the associated files, and what values ISLE endusers should use for the <code>.env</code>, <code>local.env</code>, etc.</p>
-<p>This document <strong>does not</strong> have directions on how you can check in previously existing Islandora Drupal code into a git repository and assumes this step has already happened. The directions below will explain how to clone Islandora Drupal code from a previously existing Islandora Drupal git repository that should already be accessible to you.</p>
+<p><em>Expectations:  It takes an average of <strong>2-4+ hours</strong> to read this documentation and complete this installation.</em></p>
+<p>This Local ISLE Installation builds a local environment for the express purpose of migrating a previously existing Islandora site onto the ISLE platform. If you need to build a brand new local development site, please <strong>stop</strong> and use the <a href="../install-local-new/">Local ISLE Installation: New Site</a>  instead.</p>
+<p>This Local ISLE Installation will use a copy of a currently running Production Islandora Drupal website and an empty Fedora repository for endusers to test migration to ISLE and do site development and design with the end goal of deploying to ISLE Staging and Production environments for public use. The final goal would be to cut over from the existing non-ISLE Production and Staging servers to their new ISLE counterparts.</p>
+<p>This Local ISLE Installation will allow you to locally view this site in your browser with the domain of your choice (<strong>Example:</strong> "https://yourprojectnamehere.localdomain"), instead of being constrained to the Demo URL ("https://isle.localdomain").</p>
+<p>This document has directions on how you can save newly created ISLE code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging to Production. The <a href="../install-environments/">ISLE Installation: Environments</a> documentation offers an overview of the ISLE structure, the associated files, and what values ISLE endusers should use for the ".env", "local.env", etc.</p>
+<p>This document <strong>does not</strong> have directions on how you can save previously existing Islandora Drupal code into a git repository and assumes this step has already happened. The directions below will explain how to clone Islandora Drupal code from a previously existing Islandora Drupal git repository that should already be accessible to you.</p>
 <p>Please post questions to the public <a href="https://groups.google.com/forum/#!forum/islandora-isle">Islandora ISLE Google group</a>, or subscribe to receive emails. The <a href="../../appendices/glossary/">Glossary</a> defines terms used in this documentation.</p>
 <h2 id="assumptions-prerequisites">Assumptions / Prerequisites</h2>
 <ul>
@@ -1386,16 +1402,16 @@
 <p>This Local ISLE installation expects that an existing Production Islandora Drupal site will be imported on a personal computer for further ISLE migration testing, Drupal theme development, ingest testing, etc.</p>
 </li>
 <li>
-<p>You will be using ISLE version <code>1.2.0</code> or higher</p>
+<p>You will be using ISLE version <strong>1.2.0</strong> or higher.</p>
 </li>
 <li>
-<p>You are using Docker-compose <code>1.24.0</code> or higher</p>
+<p>You are using Docker-compose <strong>1.24.0</strong> or higher.</p>
 </li>
 <li>
 <p>You have git installed on your personal computer.</p>
 </li>
 <li>
-<p>You have a previously existing private Islandora Drupal git repository</p>
+<p>You have a previously existing private Islandora Drupal git repository.</p>
 </li>
 <li>
 <p>You have access to a private git repository in <a href="https://github.com">Github</a>, <a href="https://bitbucket.org/">Bitbucket</a>, <a href="https://gitlab.com">Gitlab</a>, etc.</p>
@@ -1407,8 +1423,9 @@
 <li>
 <p><strong>For Microsoft Windows:</strong></p>
 <ul>
-<li>You have installed <a href="../host-software-dependencies/#windows">Git for Windows</a> and will use its provided "Git Bash" as your command line interface; this behaves similarly to LINUX and UNIX environments. Git for Windows also installs <code>openssl.exe</code> which will be needed to generate self-signed SSL certs. (Note: Powershell is not recommended as it is unable to run UNIX commands or execute bash scripts without a moderate degree of customization.)</li>
+<li>You have installed <a href="../host-software-dependencies/#windows">Git for Windows</a> and will use its provided "Git Bash" as your command line interface; this behaves similarly to LINUX and UNIX environments. Git for Windows also installs "openssl.exe" which will be needed to generate self-signed SSL certs. (Note: Powershell is not recommended as it is unable to run UNIX commands or execute bash scripts without a moderate degree of customization.)</li>
 <li>Set your text editor to use UNIX style line endings for files. (Text files created on DOS/Windows machines have different line endings than files created on Unix/Linux. DOS uses carriage return and line feed ("\r\n") as a line ending, which Unix uses just line feed ("\n").)</li>
+<li>In the "local.env" file, you must uncomment the line "# COMPOSE_CONVERT_WINDOWS_PATHS=1". (See Software Dependencies: <a href="../host-software-dependencies/#edit-demoenv-or-localenv">Edit "demo.env" or "local.env"</a>)</li>
 </ul>
 </li>
 </ul>
@@ -1416,7 +1433,8 @@
 <h2 id="index-of-instructions">Index of Instructions</h2>
 <ul>
 <li>Step 0: Copy Production Data to Your Personal Computer</li>
-<li>Step 1: Edit "/etc/hosts" File</li>
+<li>Step 1: Choose a Project Name</li>
+<li>Step 1.5: Edit "/etc/hosts" File</li>
 <li>Step 2: Setup Git for the ISLE Project</li>
 <li>Step 3: Git Clone the Production Islandora Drupal Site Code</li>
 <li>Step 4: Edit the ".env" File to Change to the Local Environment</li>
@@ -1448,16 +1466,16 @@
 <p>Drupal website databases can have a multitude of names and conventions. Confer with the appropriate IT departments for your institution's database naming conventions.</p>
 </li>
 <li>
-<p>Recommended that the production databases be exported using the <code>.sql</code> /or <code>.gz</code> file formats e.g. <code>prod_drupal_site_082019.sql.gz</code> for better compression and minimal storage footprint.</p>
+<p>Recommended that the production databases be exported using the ".sql" /or ".gz" file formats (e.g. "prod_drupal_site_082019.sql.gz") for better compression and minimal storage footprint.</p>
 </li>
 <li>
 <p>If the end user is running multi-sites, there will be additional databases to export.</p>
 </li>
 <li>
-<p>Do not export the <code>fedora3</code> database or any system tables (such as <code>information_schema</code>, <code>performance_schema</code>, <code>mysql</code>)</p>
+<p>Do not export the "fedora3" database or any system tables (such as "information_schema", "performance_schema", "mysql")</p>
 </li>
 <li>
-<p>If possible, on the production Apache webserver, run <code>drush cc all</code> from the command line on the production server in the <code>/var/www/html</code> directory PRIOR to any db export(s). Otherwise issues can occur on import due to all cache tables being larger than <code>innodb_log_file_size</code> allows</p>
+<p>If possible, on the production Apache webserver, run <code>drush cc all</code> from the command line on the production server in the <code>/var/www/html</code> directory PRIOR to any db export(s). Otherwise issues can occur on import due to all cache tables being larger than "innodb_log_file_size" allows</p>
 </li>
 </ul>
 <h4 id="export-the-production-mysql-islandora-drupal-database">Export the Production MySQL Islandora Drupal Database</h4>
@@ -1468,8 +1486,8 @@
 <li>
 <p>If you are not comfortable or familiar with performing these actions, we recommend that you instead work with your available IT resources to do so.</p>
 <ul>
-<li>You can use a MySQL GUI client for this process or if you have command line access to the MySQL database server
-<code>mysqldump -u username -p database_name &gt; prod_drupal_site_082019.sql</code></li>
+<li>To complete this process, you may use a MySQL GUI client or, if you have command line access to the MySQL database server, you may run the following command, substituting your actual user and database names:</li>
+<li><strong>Example:</strong> <code>mysqldump -u username -p database_name &gt; prod_drupal_site_082019.sql</code></li>
 <li>Copy this file down to your personal computer.</li>
 </ul>
 </li>
@@ -1492,7 +1510,7 @@
 <p><strong>WARNING</strong> <em>This approach assumes you are running Solr 4.10.x.; <strong>only attempt</strong> if you are running that version on Production.</em></p>
 <ul>
 <li>
-<p>Copy these current production files and directory to your personal computer in an appropriate location.</p>
+<p>Copy these current Production files and directory to your personal computer in an appropriate location.</p>
 <ul>
 <li>Solr <code>schema.xml</code></li>
 <li>GSearch <code>foxmltoSolr.xslt</code> file</li>
@@ -1542,42 +1560,58 @@
 </li>
 </ul>
 <hr />
-<h2 id="step-1-edit-etchosts-file">Step 1: Edit "/etc/hosts" File</h2>
-<p>Enable the Local ISLE Installation to be viewed locally on personal computer browser as: e.g. <code>https://yourprojectnamehere.localdomain</code>.</p>
+<h2 id="step-1-choose-a-project-name">Step 1: Choose a Project Name</h2>
+<p>Please choose a project name (concatenated, with no spaces) that describes your institution or your collection platform. You will substitute in your preferred project name whenever the documentation refers to "yourprojectnamehere". (Be creative. Some real-life examples include: arminda, dhinitiative, digital, digitalcollections, digitallibrary, unbound, etc.)</p>
+<hr />
+<h2 id="step-15-edit-etchosts-file">Step 1.5: Edit "/etc/hosts" File</h2>
+<p>Enable the Local ISLE Installation to be viewed locally on a personal computer browser using "yourprojectnamehere" (e.g. "https://yourprojectnamehere.localdomain").</p>
 <ul>
-<li>
-<p>Please use these instructions to <a href="../install-demo-edit-hosts-file/">Edit the "/etc/hosts" File</a>.</p>
-</li>
-<li>
-<p>Replace <code>isle</code> or <code>yourprojectnamehere</code> with your domain or project name: e.g. <code>yourprojectnamehere.localdomain</code></p>
-</li>
+<li>Please use these instructions to <a href="../install-demo-edit-hosts-file/">Edit the "/etc/hosts" File</a>.</li>
 </ul>
 <hr />
 <h2 id="step-2-setup-git-for-the-isle-project">Step 2: Setup Git for the ISLE Project</h2>
-<p><strong>Please note:</strong> The commands given below are for command line usage of git. GUI based clients such as the <a href="https://www.sourcetreeapp.com/">SourceTree App</a> may be easier for endusers to use for the git process.</p>
-<p>Within your git repository provider / hoster (e.g <a href="https://github.com">Github</a>, <a href="https://bitbucket.org/">Bitbucket</a>, <a href="https://gitlab.com">Gitlab</a>), create these two new empty git repositories, if they do not already exist:</p>
-<pre><code>1. ISLE project configuration (e.g. `yourprojectnamehere-isle`)
-2. Islandora Drupal code (e.g. `yourprojectnamehere-islandora`)
-</code></pre>
-<p>The git project name can be your institution name or the name of the collections you plan to deploy; your choice entirely. A very clear distinction between the ISLE and Islandora code should be made in the repository name. Do not confuse or label Islandora Drupal site code as ISLE and vice-versa.</p>
-<p>Clone this newly created ISLE project to your personal computer</p>
-<pre><code>* Open a `terminal` (Windows: open `Git Bash`)
-* Navigate to a directory that will house your new ISLE project directory using the `cd` command.
-* `git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git`
-</code></pre>
+<p><strong>Please note:</strong> The commands given below are for command line usage of git. (GUI based clients such as the <a href="https://www.sourcetreeapp.com/">SourceTree App</a> may be easier for endusers to use for the git process.)</p>
+<p>Each "suggested git repository name" (below) serves to clearly name and distinguish your ISLE code from your Islandora code. It's very important to understand that these are two separate code repositories, and not to confuse them.</p>
+<p>Create the following two new, empty, private git repositories (if they do not already exist) within your git repository hosting service (e.g <a href="https://github.com">Github</a>, <a href="https://bitbucket.org/">Bitbucket</a>, <a href="https://gitlab.com">Gitlab</a>):</p>
+<ol>
+<li>ISLE project configuration repository<ul>
+<li><strong>Suggested git repository name:</strong> <code>yourprojectnamehere-isle</code></li>
+<li>This Git repository will hold your copy of the ISLE code along with your environment-specific customizations. Storing this in a private repository and following the workflow below will save you a lot of time and confusion.</li>
+</ul>
+</li>
+<li>Islandora Drupal code repository<ul>
+<li><strong>Suggested git repository name:</strong> <code>yourprojectnamehere-islandora</code></li>
+<li>This Git repository will hold your copy of the Islandora Drupal code along with your site specific customizations. Storing this in a private repository and following the workflow below will save you a lot of time and confusion.</li>
+</ul>
+</li>
+</ol>
+<p>Clone this newly created ISLE project to your personal computer:</p>
 <ul>
+<li>Open a <code>terminal</code> (Windows: open <code>Git Bash</code>)</li>
+<li>Navigate to a directory that will house your new ISLE project directory using the <code>cd</code> command.</li>
 <li>
-<p>Navigate to the directory created by the clone operation:</p>
+<p><strong>Example:</strong> <code>git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git</code></p>
+</li>
+<li>
+<p>Navigate to the directory that was just created by the clone operation:</p>
 <ul>
 <li><code>cd /path/to/your/repository</code></li>
 </ul>
 </li>
 <li>
-<p>Add the ICG ISLE git repository as a git upstream. (<em>The code shown below is a real path and command</em>.)</p>
+<p>Add the ICG ISLE git repository as a git upstream:</p>
 <ul>
 <li><code>git remote add icg-upstream https://github.com/Islandora-Collaboration-Group/ISLE.git</code></li>
-<li>You can check by running this command: <code>git remote -v</code>  </li>
 </ul>
+</li>
+<li>
+<p>View your remotes:</p>
+<ul>
+<li><code>git remote -v</code></li>
+</ul>
+</li>
+<li>
+<p>You should now see the following:</p>
 </li>
 </ul>
 <pre><code class="bash">icg-upstream    https://github.com/Islandora-Collaboration-Group/ISLE.git (fetch)
@@ -1594,50 +1628,55 @@ origin  https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-
 </ul>
 </li>
 <li>
-<p>Pull down the ICG ISLE <code>master</code> branch into your local project's <code>master</code> branch</p>
+<p>Pull down the ICG ISLE "master" branch into your local project's "master" branch</p>
 <ul>
 <li><code>git pull icg-upstream master</code></li>
-<li>If you <code>ls -lha</code> in this directory, you should now see a listing of the code you now have.</li>
+</ul>
+</li>
+<li>
+<p>View the ISLE code you now have in this directory:</p>
+<ul>
+<li><code>ls -lha</code></li>
 </ul>
 </li>
 <li>
 <p>Push this code to your online git provider ISLE</p>
 <ul>
-<li>
-<p><code>git push -u origin master</code></p>
-</li>
-<li>
-<p>This will take 2-5 mins depending on your internet speed.</p>
-</li>
+<li><code>git push -u origin master</code></li>
+<li>This will take 2-5 minutes depending on your internet speed.</li>
 </ul>
 </li>
 <li>
-<p>Now you have the current ISLE project code checked into git as foundation to make changes specific to your local and project needs. You'll use this git "icg-upstream" process in the future to pull updates and releases from the main ISLE project.</p>
+<p>Now you have the current ISLE project code checked into git as a foundation to make changes specific to your local and project needs. You'll use this git "icg-upstream" process in the future to pull updates and releases from the main ISLE project.</p>
 </li>
 </ul>
 <h3 id="step-2a-add-customizations-from-step-0-to-the-git-workflow">Step 2a: Add Customizations from "Step 0" to the Git Workflow</h3>
 <p>This step is intended for users who followed either the "<strong>Intermediate</strong>" or "<strong>Advanced</strong>" migration options in "Step 0" above.  If you choose the <strong>Easy</strong> migration option you may safely skip <code>Step 2a</code>.</p>
-<p>In your local <code>ISLE</code> directory (<code>cd /path/to/your/repository</code>) create new directories under <code>./config</code> to hold the Solr and GSearch files you retrieved in "Step 0".  Generally this can be done like so:</p>
+<p>Navigate to your local "ISLE" directory</p>
+<ul>
+<li><code>cd /path/to/your/repository</code></li>
+</ul>
+<p>Create new directories under "./config" to hold the Solr and GSearch files you retrieved in "Step 0".  Do the following::</p>
 <pre><code>mkdir -p ./config/solr
 mkdir -p ./config/fedora/gsearch
 </code></pre>
 
 <ul>
 <li>
-<p>Copy your <code>schema.xml</code> file from "Step 0" into the new <code>./config/solr/</code> directory.</p>
+<p>Copy your "schema.xml" file from "Step 0" into the new "./config/solr/" directory.</p>
 </li>
 <li>
-<p>Copy your <code>foxmltoSolr.xslt</code> file and <code>islandora_transforms</code> directory from "Step 0" into the <code>config/fedora/gsearch/</code> directory.</p>
+<p>Copy your "foxmltoSolr.xslt" file and "islandora_transforms" directory from "Step 0" into the "config/fedora/gsearch/" directory.</p>
 </li>
 <li>
-<p>Add a new line in the Solr volumes section of your <code>docker-compose.local.yml</code>  </p>
+<p>Add a new line in the Solr volumes section of your "docker-compose.local.yml"  </p>
 </li>
 </ul>
 <pre><code>  - config/solr/schema.xml:/usr/local/solr/collection1/conf/schema.xml`  
 </code></pre>
 
 <ul>
-<li>Add new lines in the Fedora volumes section of your <code>docker-compose.local.yml</code>  </li>
+<li>Add new lines in the Fedora volumes section of your "docker-compose.local.yml"  </li>
 </ul>
 <pre><code>  - ./config/fedora/gsearch/islandora_transforms:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms
   - ./config/fedora/gsearch/foxmlToSolr.xslt:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/foxmlToSolr.xslt
@@ -1651,19 +1690,19 @@ mkdir -p ./config/fedora/gsearch
 <p><em>Using the same open terminal:</em></p>
 <ul>
 <li>Create a location outside of your ISLE directory where your Islandora Drupal site code will be stored.
-  While you may create this location anywhere, we suggest that you put it at the same level as your existing ISLE directory.<ul>
-<li>From your ISLE directory:<ul>
+  While you may create this location anywhere, we suggest that you put it at the same level as your existing ISLE directory. From your ISLE directory, go up one level:<ul>
 <li><code>cd ..</code></li>
 <li><code>git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-islandora.git</code></li>
-<li>Example: The above process created a folder named "yourprojectnamehere-islandora"</li>
+<li><strong>Example:</strong> The above process created a folder named "yourprojectnamehere-islandora"</li>
 </ul>
 </li>
-</ul>
-</li>
-<li>Now update the <code>docker-compose.local.yml</code> in the ISLE repository to create a bind-mount to the Islandora Drupal site code:<ul>
+<li>Now update the "docker-compose.local.yml" in the ISLE repository to create a bind-mount to the Islandora Drupal site code:<ul>
 <li>Search for "apache:"</li>
 <li>Find the sub-section called "volumes:"</li>
-<li>Find this line: "- ./data/apache/html:/var/www/html:cached"</li>
+<li>Find this line:<ul>
+<li>"- ./data/apache/html:/var/www/html:cached"</li>
+</ul>
+</li>
 <li>Edit the above line to be like this:<ul>
 <li><code>- ../yourprojectnamehere-islandora:/var/www/html:cached</code></li>
 </ul>
@@ -1674,19 +1713,15 @@ mkdir -p ./config/fedora/gsearch
 </ul>
 <hr />
 <h2 id="step-4-edit-the-env-file-to-change-to-the-local-environment">Step 4: Edit the ".env" File to Change to the Local Environment</h2>
-<p>Open a <code>terminal</code> (Windows: open <code>Git Bash</code>)</p>
 <ul>
 <li>
-<p>Navigate to your ISLE project directory. (You may already be in this directory if you are coming from the <a href="../host-software-dependencies/">Software Dependencies</a>.)</p>
+<p>Navigate to your ISLE project directory.</p>
 </li>
 <li>
-<p>Open <code>.env</code> file by running: <code>nano .env</code></p>
-<ul>
-<li><em>For endusers familiar with editing files on the command line, vim, emacs or alternative tools can be used in lieu of nano</em></li>
-</ul>
+<p>Open the ".env" file in a text editor.</p>
 </li>
 <li>
-<p>Change only the following lines in the <code>.env</code> file so that the resulting values look like the following: <strong>Please note: the following below is an example not actual values you should use. Use one word to describe your project and follow the conventions below accordingly</strong></p>
+<p>Change only the following lines in the ".env" file so that the resulting values look like the following: <strong>Please note: the following below is an example not actual values you should use. Use one word to describe your project and follow the conventions below accordingly</strong></p>
 <ul>
 <li><code>COMPOSE_PROJECT_NAME=yourprojectnamehere_local</code></li>
 <li><code>BASE_DOMAIN=yourprojectnamehere.localdomain</code></li>
@@ -1695,23 +1730,18 @@ mkdir -p ./config/fedora/gsearch
 </ul>
 </li>
 <li>
-<p>If you want to use a MySQL client with a GUI to import the Production MySQL Drupal database you'll need to uncomment the <code>ports</code> section of the MySQL service within the <code>docker-compose.local.yml</code> to make it so you can access port <code>3306</code> from the host computer. If you are already running MySQL on your personal computer, you'll have a port conflict and will need to either shutdown that service prior to running ISLE or change <code>3306:3306</code> to something like <code>9306:3306</code>. Please double-check.</p>
+<p>Save and close the file.</p>
 </li>
 <li>
-<p>Enter <code>Cntrl</code> and the letter <code>o</code> together to write the changes to the file.</p>
-</li>
-<li>
-<p>Enter <code>Cntrl</code> and the letter <code>x</code> together to exit the file</p>
+<p>Additionally, depending on your decision from "Step 0", you may need to make additional edits to <code>docker-compose.local.yml</code> and move files into place as directed from the (<strong>Intermediate</strong>) and (<strong>Advanced</strong>) sections.</p>
 </li>
 </ul>
+<p><strong>Please note:</strong> If you want to use a MySQL client with a GUI to import the Production MySQL Drupal database you'll need to uncomment the <code>ports</code> section of the MySQL service within the <code>docker-compose.local.yml</code> to make it so you can access port <code>3306</code> from the host computer. If you are already running MySQL on your personal computer, you'll have a port conflict and will need to either shutdown that service prior to running ISLE or change <code>3306:3306</code> to something like <code>9306:3306</code>. Please double-check.</p>
 <p><strong>Please note:</strong> We highly recommend that you also review the contents of the <code>docker-compose.local.yml</code> file as the Apache service volume section uses bind mounts for the intended Drupal Code instead of using default Docker volumes. This allows users to perform Local Islandora Drupal site development with an IDE. This line is a suggested path and users are free to change values to the left of the <code>:</code> to match their Apache data folder of choice. However we recommend starting out with the default setting below.
 Default: <code>- ./data/apache/html:/var/www/html:cached</code></p>
-<ul>
-<li>Additionally, depending on your decision from "Step 0", you may need to make additional edits to <code>docker-compose.local.yml</code> and move files into place as directed from the (<strong>Intermediate</strong>) and (<strong>Advanced</strong>) sections.</li>
-</ul>
 <hr />
 <h2 id="step-5-create-new-users-and-passwords-by-editing-localenv-file">Step 5: Create New Users and Passwords by Editing "local.env" File</h2>
-<p>You can reuse some of the older Production settings in the "local.env" if you like (e.g. the database name <code>DRUPAL_DB</code>, database user <code>DRUPAL_DB_USER</code> even the drupal database user password <code>DRUPAL_DB_PASS</code> if that makes it easier). It is important to avoid repeating passwords in the ISLE Staging and Production environments.</p>
+<p>You can reuse some of the older Production settings in the "local.env" if you like (e.g. the database name "DRUPAL_DB", database user "DRUPAL_DB_USER" even the drupal database user password "DRUPAL_DB_PASS" if that makes it easier). It is important to avoid repeating passwords in the ISLE Staging and Production environments.</p>
 <ul>
 <li>
 <p>Open the "local.env" file in a text editor.</p>
@@ -1725,7 +1755,7 @@ Default: <code>- ./data/apache/html:/var/www/html:cached</code></p>
 </ul>
 </li>
 <li>
-<p>Open the <code>config/apache/settings_php/settings.local.php</code> file in a text editor.</p>
+<p>Open the "config/apache/settings_php/settings.local.php" file in a text editor.</p>
 <ul>
 <li>Find the first comment that begins with: <code># ISLE Configuration</code> and follow the commented instructions to edit the database, username and password.</li>
 <li>Find the second comment that begins with: <code># ISLE Configuration</code> and follow the instructions to edit the Drupal hash salt.</li>
@@ -1736,9 +1766,11 @@ Default: <code>- ./data/apache/html:/var/www/html:cached</code></p>
 <hr />
 <h2 id="step-6-create-new-self-signed-certs-for-your-project">Step 6: Create New Self-Signed Certs for Your Project</h2>
 <ul>
-<li>Open the appropriate file in a text editor:<ul>
-<li><strong>For Mac/Ubuntu/CentOS/etc:</strong> <code>./scripts/proxy/ssl-certs/local.sh</code></li>
-<li><strong>For Microsoft Windows:</strong> <code>./scripts/proxy/ssl-certs/local-windows-only.sh</code></li>
+<li>
+<p>Open the appropriate file in a text editor:</p>
+<ul>
+<li><strong>For Mac/Ubuntu/CentOS/etc:</strong> "./scripts/proxy/ssl-certs/local.sh"</li>
+<li><strong>For Microsoft Windows:</strong> "./scripts/proxy/ssl-certs/local-windows-only.sh"</li>
 </ul>
 </li>
 <li>
@@ -1748,7 +1780,7 @@ Default: <code>- ./data/apache/html:/var/www/html:cached</code></p>
 </ul>
 </li>
 <li>
-<p><em>Using the same open terminal:</em>, navigate to <code>/pathto/yourprojectnamehere/scripts/proxy/ssl-certs/</code></p>
+<p><em>Using the same open terminal:</em>, navigate to "/pathto/yourprojectnamehere/scripts/proxy/ssl-certs/"</p>
 <ul>
 <li><code>cd ./scripts/proxy/ssl-certs/</code></li>
 </ul>
@@ -1761,7 +1793,7 @@ Default: <code>- ./data/apache/html:/var/www/html:cached</code></p>
 </ul>
 </li>
 <li>
-<p>Run the following command to generate new self-signed SSL keys using your <code>yourprojectnamehere.localdomain</code> domain. This now secures the local site.</p>
+<p>Run the following command to generate new self-signed SSL keys using your "yourprojectnamehere.localdomain" domain. This now secures the local site.</p>
 <ul>
 <li><strong>For Mac/Ubuntu/CentOS/etc:</strong> <code>./local.sh</code></li>
 <li><strong>For Microsoft Windows:</strong> <code>./local-windows-only.sh</code></li>
@@ -1772,13 +1804,15 @@ Default: <code>- ./data/apache/html:/var/www/html:cached</code></p>
 </ul>
 </li>
 <li>
-<p>Add the SSL .pem and .key file names generated from running the above script to the <code>./config/proxy/traefik.local.toml</code> file.</p>
+<p>Add the SSL .pem and .key file names generated from running the above script to the "./config/proxy/traefik.local.toml" file.</p>
 <ul>
 <li><code>cd ..</code></li>
 <li>Open <code>traefik.local.toml</code> in a text editor.</li>
-<li>Example:</li>
+<li><strong>Example:</strong><ul>
 <li><code>certFile = "/certs/yourprojectnamehere.localdomain.pem"</code></li>
 <li><code>keyFile = "/certs/yourprojectnamehere.localdomain.key"</code></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1809,8 +1843,8 @@ Default: <code>- ./data/apache/html:/var/www/html:cached</code></p>
 <ul>
 <li>View only the running containers: <code>docker ps</code></li>
 <li>View all containers (both those running and stopped): <code>docker ps -a</code></li>
-<li>All containers prefixed with <code>isle-</code> are expected to have a <code>STATUS</code> of <code>Up</code> (for x time).</li>
-<li><strong>If any of these are not <code>UP</code>, then use <a href="../install-troubleshooting/#non-running-docker-containers">Non-Running Docker Containers</a> to solve before continuing below.</strong>
+<li>All containers prefixed with "isle-" are expected to have a "STATUS" of "Up" (for x time).</li>
+<li><strong>If any of these are not "UP", then use <a href="../install-troubleshooting/#non-running-docker-containers">Non-Running Docker Containers</a> to solve before continuing below.</strong>
   <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running, oe (c) older exited ISLE containers that maybe should be removed. ---></li>
 </ul>
 </li>
@@ -1825,15 +1859,15 @@ Default: <code>- ./data/apache/html:/var/www/html:cached</code></p>
 <li>Password: <code>YOUR_MYSQL_ROOT_PASSWORD</code> in the "local.env")</li>
 </ul>
 </li>
-<li>Select the Drupal database <code>DRUPAL_DB</code> in the "local.env")</li>
+<li>Select the Drupal database "DRUPAL_DB" in the "local.env")</li>
 <li>Click File &gt; Import (<em>or equivalent</em>)</li>
-<li>Select your exported Production Islandora Drupal database file e.g. <code>prod_drupal_site_082019.sql.gz</code></li>
+<li>Select your exported Production Islandora Drupal database file (e.g. "prod_drupal_site_082019.sql.gz")</li>
 <li>The import process will take 1 -3 minutes depending on the size.</li>
 </ul>
 <p><strong>Method B: Use the command line</strong></p>
 <ul>
 <li>
-<p>Copy the Production Islandora Drupal database file e.g. <code>prod_drupal_site_082019.sql.gz</code> to your ISLE MySQL container</p>
+<p>Copy the Production Islandora Drupal database file (e.g. "prod_drupal_site_082019.sql.gz") to your ISLE MySQL container</p>
 <ul>
 <li>Run <code>docker ps</code> to determine the mysql container name</li>
 <li><code>docker cp /pathto/prod_drupal_site_082019.sql.gz your-mysql-containername:/prod_drupal_site_082019.sql.gz</code></li>
@@ -1897,7 +1931,7 @@ Default: <code>- ./data/apache/html:/var/www/html:cached</code></p>
 </li>
 <li>The above process will take a few minutes depending on the speed of your local and Internet connection.<ul>
 <li>You should see a lot of green [ok] messages.</li>
-<li>If the script appears to pause or prompt for <code>y/n</code>, DO NOT enter any values; the script will automatically answer for you.</li>
+<li>If the script appears to pause or prompt for "y/n", DO NOT enter any values; the script will automatically answer for you.</li>
 </ul>
 </li>
 </ul>
@@ -1926,7 +1960,7 @@ Default: <code>- ./data/apache/html:/var/www/html:cached</code></p>
 </tbody>
 </table>
 <ul>
-<li><strong>Proceed only after this message appears:</strong> "Clearing Drupal Caches. 'all' cache was cleared."</li>
+<li><strong>Proceed only after this message appears:</strong> "Done. 'all' cache was cleared."</li>
 </ul>
 <hr />
 <h2 id="step-11-test-the-site">Step 11: Test the Site</h2>
@@ -2026,8 +2060,8 @@ Default: <code>- ./data/apache/html:/var/www/html:cached</code></p>
 <hr />
 <h2 id="additional-resources">Additional Resources</h2>
 <ul>
-<li><a href="../install-environments/">ISLE Installation: Environments</a> documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE endusers should use for the <code>.env</code>, <code>local.env</code>, etc.</li>
-<li><a href="../install-local-resources/">Local ISLE Installation: Resources</a> contains Docker container passwords and URLs for administrator tools.</li>
+<li><a href="../install-environments/">ISLE Installation: Environments</a> helps explain the ISLE workflow structure, the associated files, and what values ISLE endusers should use for the ".env", "local.env", etc.</li>
+<li><a href="../install-local-resources/">Local ISLE Installation: Resources</a> contains Docker container passwords and URLs for administrator testing.</li>
 <li><a href="../install-troubleshooting/">ISLE Installation: Troubleshooting</a> contains help for port conflicts, non-running Docker containers, etc.</li>
 </ul>
 <hr />
@@ -2095,22 +2129,17 @@ Default: <code>- ./data/apache/html:/var/www/html:cached</code></p>
           Material for MkDocs</a>
       </div>
       
-        
-      
     </div>
   </div>
 </footer>
       
     </div>
     
-      <script src="../../assets/javascripts/application.583bbe55.js"></script>
+      <script src="../../assets/javascripts/application.c648116f.js"></script>
       
-      <script>app.initialize({version:"1.0",url:{base:"../.."}})</script>
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
         <script src="../../extra.js"></script>
-      
-    
-    
       
     
   </body>
