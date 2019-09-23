@@ -164,9 +164,9 @@ A Remote Server ISLE Installation requires that you provision and place a comple
 2. Copy these SSL certificates into the `./ISLE/config/proxy/ssl-certs` directory.
     * You are required to have exactly two files: (names will differ from examples)
         * (1) SSL Certificate Key File (file extension may be: ".key" or ".pem")
-            * Example: `sample-key.key` or `sample-key.pem`
+            * **Example:** `sample-key.key` or `sample-key.pem`
         * (1) SSL Certificate File (file extension may be: ".cer", ".crt" or ".pem")
-            * Example: `sample.cer` or `sample.crt` or `sample.pem`
+            * **Example:** `sample.cer` or `sample.crt` or `sample.pem`
 3. Edit the `./ISLE/config/proxy/traefik.toml` file.
     * Change lines:
       *  `certFile = "/certs/sample.cert"`  ## Change to reflect your ".cer", ".crt" or ".pem"
@@ -209,7 +209,7 @@ This process may take 10-20 minutes (_depending on system and internet speeds_)
 ---
 
 ## Additional Resources
-* TBD: [Demo ISLE Installation: Resources](../install/install-demo-resources.md) contains Docker container passwords and URLs for administrator tools.
+* TBD: [Demo ISLE Installation: Resources](../install/install-demo-resources.md) contains Docker container passwords and URLs for administrator testing.
 * TBD: [Demo ISLE Installation: Troubleshooting](../install/install-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
 
 ---

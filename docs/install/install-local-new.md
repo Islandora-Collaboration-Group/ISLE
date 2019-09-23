@@ -1,14 +1,14 @@
 # Local ISLE Installation: New Site
 
-_Expectations:  It takes an average of **60-120 minutes** to read this documentation and complete this installation._
+_Expectations:  It takes an average of **1-2 hours** to read this documentation and complete this installation._
 
-This `Local` ISLE Installation creates an un-themed Drupal website and an empty Fedora repository similar to the `Demo` installation but one that you can use to develop and design your Drupal site and Fedora collections with the end goal of deploying to ISLE Staging and Production environments for public use.
+This Local ISLE Installation creates an un-themed Drupal website and an empty Fedora repository (similar to the Demo installation) but one that you can use to develop and design your Drupal site and Fedora collections with the end goal of deploying to ISLE Staging and Production environments for public use.
 
-You will now be able to change the ability to view locally in your browser from the Demo url `https://isle.localdomain` to a new domain of your choice for example `https://yourprojectnamehere.localdomain`.
+This Local ISLE Installation will allow you to locally view this site in your browser with the domain of your choice (**Example:** "https://yourprojectnamehere.localdomain"), instead of being constrained to the Demo URL ("https://isle.localdomain").
 
-While this installation gets you a brand new local development site, it is **not** intended as a migration process of a previously existing Islandora site. If you need to build a local environment to migrate a previously existing Islandora site, please use the [Local ISLE Installation: Migrate Existing Islandora Site](../install/install-local-migrate.md) instructions instead.
+While this installation provides you a brand new local development site, it is **not** intended as a migration process of a previously existing Islandora site. If you need to build a local environment to migrate a previously existing Islandora site, please use the [Local ISLE Installation: Migrate Existing Islandora Site](../install/install-local-migrate.md)  instead.
 
-This document also has directions on how you can check in newly created ISLE and Islandora code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging and finally to Production. The [ISLE Installation: Environments](../install/install-environments.md) documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE endusers should use for the `.env`, `local.env`, etc.
+This document also has directions on how you can save newly created ISLE and Islandora code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging to Production. The [ISLE Installation: Environments](../install/install-environments.md) helps explain the ISLE workflow structure, the associated files, and what values ISLE endusers should use for the ".env", "local.env", etc.
 
 Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive emails. The [Glossary](../appendices/glossary.md) defines terms used in this documentation.
 
@@ -16,9 +16,9 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 * This Local ISLE installation is intended for a brand new ISLE site for further Drupal theme development, ingest testing, etc. on a personal computer.
 
-* You will be using ISLE version `1.2.0` or higher
+* You will be using ISLE version **1.2.0** or higher.
 
-* You are using Docker-compose `1.24.0` or higher
+* You are using Docker-compose **1.24.0** or higher.
 
 * You have git installed on your personal computer.
 
@@ -27,14 +27,16 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
     * **WARNING:** Only use **Private** git repositories given the sensitive nature of the configuration files. **DO NOT** share these git repositories publicly.
 
 * **For Microsoft Windows:**
-    * You have installed [Git for Windows](../install/host-software-dependencies.md#windows) and will use its provided "Git Bash" as your command line interface; this behaves similarly to LINUX and UNIX environments. Git for Windows also installs `openssl.exe` which will be needed to generate self-signed SSL certs. (Note: Powershell is not recommended as it is unable to run UNIX commands or execute bash scripts without a moderate degree of customization.)
+    * You have installed [Git for Windows](../install/host-software-dependencies.md#windows) and will use its provided "Git Bash" as your command line interface; this behaves similarly to LINUX and UNIX environments. Git for Windows also installs "openssl.exe" which will be needed to generate self-signed SSL certs. (Note: Powershell is not recommended as it is unable to run UNIX commands or execute bash scripts without a moderate degree of customization.)
     * Set your text editor to use UNIX style line endings for files. (Text files created on DOS/Windows machines have different line endings than files created on Unix/Linux. DOS uses carriage return and line feed ("\r\n") as a line ending, which Unix uses just line feed ("\n").)
+    * In the "local.env" file, you must uncomment the line "# COMPOSE_CONVERT_WINDOWS_PATHS=1". (See Software Dependencies: [Edit "demo.env" or "local.env"](../install/host-software-dependencies.md#edit-demoenv-or-localenv))
 
 ---
 
 ## Index of Instructions
 
-* Step 1: Edit "/etc/hosts" File
+* Step 1: Choose a Project Name
+* Step 1.5: Edit "/etc/hosts" File
 * Step 2: Setup Git for the ISLE Project
 * Step 3: Edit the ".env" File to Point to the Local Environment
 * Step 4: Create New Users and Passwords by Editing "local.env" File
@@ -48,43 +50,54 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 ---
 
-## Step 1: Edit "/etc/hosts" File
+## Step 1: Choose a Project Name
 
-Enable the Local ISLE Installation to be viewed locally on personal computer browser as: e.g. `https://yourprojectnamehere.localdomain`.
+Please choose a project name (concatenated, with no spaces) that describes your institution or your collection platform. You will substitute in your preferred project name whenever the documentation refers to "yourprojectnamehere". (Be creative. Some real-life examples include: arminda, dhinitiative, digital, digitalcollections, digitallibrary, unbound, etc.)
+
+---
+
+## Step 1.5: Edit "/etc/hosts" File
+
+Enable the Local ISLE Installation to be viewed locally on a personal computer browser using "yourprojectnamehere" (e.g. "https://yourprojectnamehere.localdomain").
 
 * Please use these instructions to [Edit the "/etc/hosts" File](../install/install-demo-edit-hosts-file.md).
-
-* Replace `isle` or `yourprojectnamehere` with your domain or project name: e.g. `yourprojectnamehere.localdomain`
 
 ---
 
 ## Step 2: Setup Git for the ISLE Project
 
-**Please note:** The commands given below are for command line usage of git. GUI based clients such as the [SourceTree App](https://www.sourcetreeapp.com/) may be easier for endusers to use for the git process.
+**Please note:** The commands given below are for command line usage of git. (GUI based clients such as the [SourceTree App](https://www.sourcetreeapp.com/) may be easier for endusers to use for the git process.)
 
-Within your git repository provider / hoster (e.g [Github](https://github.com), [Bitbucket](https://bitbucket.org/), [Gitlab](https://gitlab.com)), create two new empty git repositories:
+Each "suggested git repository name" (below) serves to clearly name and distinguish your ISLE code from your Islandora code. It's very important to understand that these are two separate code repositories, and not to confuse them.
 
-1. ISLE project config - e.g. `yourprojectnamehere-isle`
-    * This Git repository will hold your copy of the ISLE code along with your environment-specific customizations. Storing this in a code repository and following the workflow described here will save you a lot of time and confusion.
-2. Islandora Drupal site code - e.g. `yourprojectnamehere-islandora`
-    * This Git repository will hold your copy of the Islandora Drupal code along with your site specific customizations. Storing this in a code repository and following the workflow described here will save you a lot of time and confusion.
+Create the following two new, empty, private git repositories within your git repository hosting service (e.g [Github](https://github.com), [Bitbucket](https://bitbucket.org/), [Gitlab](https://gitlab.com)):
 
-The git project name can be your institution name or the name of the collections you plan to deploy; your choice entirely. A very clear distinction between the ISLE and Islandora code should be made in the repository name. Do not confuse or label Islandora Drupal site code as ISLE and vice-versa.
+1. ISLE project configuration repository
+    * **Suggested git repository name:** `yourprojectnamehere-isle`
+    * This Git repository will hold your copy of the ISLE code along with your environment-specific customizations. Storing this in a private repository and following the workflow below will save you a lot of time and confusion.
+2. Islandora Drupal code repository
+    * **Suggested git repository name:** `yourprojectnamehere-islandora`
+    * This Git repository will hold your copy of the Islandora Drupal code along with your site specific customizations. Storing this in a private repository and following the workflow below will save you a lot of time and confusion.
 
-Clone this newly created ISLE project to your personal computer
+Clone this newly created ISLE project to your personal computer:
 
-  * Open a `terminal` (Windows: open `Git Bash`)
-  * Navigate to a directory that will house your new ISLE project directory using the `cd` command.
-  * `git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git`
+* Open a `terminal` (Windows: open `Git Bash`)
+* Navigate to a directory that will house your new ISLE project directory using the `cd` command.
+* **Example:** `git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git`
 
-Navigate to this directory
+* Navigate to the directory that was just created by the clone operation:
 
-  * `cd /path/to/your/repository`
+    * `cd /path/to/your/repository`
 
-Add the ICG ISLE git repository as a git upstream. (_the code below is a real path and command_)
+* Add the ICG ISLE git repository as a git upstream:
 
-  * `git remote add icg-upstream https://github.com/Islandora-Collaboration-Group/ISLE.git`
-  * you can check by running this command: `git remote -v`
+    * `git remote add icg-upstream https://github.com/Islandora-Collaboration-Group/ISLE.git`
+
+* View your remotes:
+
+    * `git remote -v`
+
+* You should now see the following:
 
 ```bash  
 icg-upstream	https://github.com/Islandora-Collaboration-Group/ISLE.git (fetch)
@@ -93,44 +106,42 @@ origin	https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-i
 origin	https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git (push)
 ```
 
-Run a git fetch
+* Run a git fetch
 
-  * `git fetch icg-upstream`
+    * `git fetch icg-upstream`
 
-Pull down the ICG ISLE `master` branch into your local project's `master` branch
+* Pull down the ICG ISLE "master" branch into your local project's "master" branch
 
-  * `git pull icg-upstream master`
-  * if you `ls -lha` in this directory, you'll now have code.
+    * `git pull icg-upstream master`
 
-Push this code to your online git provider ISLE
+* View the ISLE code you now have in this directory:
 
-  * `git push -u origin master`
-  * This will take 2-5 mins depending on your internet speed.
+    * `ls -lha`
 
-Now you have the current ISLE project code checked into git as foundation to make changes on specific to your local and project needs. You'll use this git "icg-upstream" process in the future to pull updates and releases from the main ISLE project.
+* Push this code to your online git provider ISLE
+
+    * `git push -u origin master`
+    * This will take 2-5 minutes depending on your internet speed.
+
+Now you have the current ISLE project code checked into git as a foundation to make changes on specific to your local and project needs. You'll use this git "icg-upstream" process in the future to pull updates and releases from the main ISLE project.
 
 ---
 
 ## Step 3: Edit the ".env" File to Point to the Local Environment
 
-Open a `terminal` (Windows: open `Git Bash`)
+* Navigate to your ISLE project directory.
 
-* Navigate to your ISLE project directory. (You may already be in this directory if you are coming from the [Software Dependencies](../install/host-software-dependencies.md).)
+* Open the ".env" file in a text editor.
 
-* Open `.env` file by running: `nano .env`
-    * _For endusers familiar with editing files on the command line, vim, emacs or alternative tools can be used in lieu of nano_
-
-* Change only the following lines in the `.env` file so that the resulting values look like the following: **Please note: the following below is an example not actual values you should use. Use one word to describe your project and follow the conventions below accordingly**
+* Change only the following lines in the ".env" file so that the resulting values look like the following: **Please note: the following below is an example not actual values you should use. Use one word to describe your project and follow the conventions below accordingly**
     * `COMPOSE_PROJECT_NAME=yourprojectnamehere_local`
     * `BASE_DOMAIN=yourprojectnamehere.localdomain`
     * `CONTAINER_SHORT_ID=ld` _leave default setting of `ld` as is. Do not change._
     * `COMPOSE_FILE=docker-compose.local.yml`
 
-* If you want to use a MySQL client with a GUI to import the Production MySQL Drupal database you'll need to uncomment the `ports` section of the MySQL service within the `docker-compose.local.yml` to make it so you can access port `3306` from the host computer. If you are already running MySQL on your personal computer, you'll have a port conflict and will need to either shutdown that service prior to running ISLE or change `3306:3306` to something like `9306:3306`. Please double-check.
+* Save and close the file.
 
-* Enter `Cntrl` and the letter `o` together to write the changes to the file.
-
-* Enter `Cntrl` and the letter `x` together to exit the file
+**Please note:** If you want to use a MySQL client with a GUI to import the Production MySQL Drupal database you'll need to uncomment the `ports` section of the MySQL service within the `docker-compose.local.yml` to make it so you can access port `3306` from the host computer. If you are already running MySQL on your personal computer, you'll have a port conflict and will need to either shutdown that service prior to running ISLE or change `3306:3306` to something like `9306:3306`. Please double-check.
 
 ---
 
@@ -142,7 +153,7 @@ Open a `terminal` (Windows: open `Git Bash`)
         * In many cases the username is already pre-populated. If it doesn't have a comment directing you to change or add a value after the `=`, then don't change it.
     * Once finished, save and close the file.
 
-* Open the `config/apache/settings_php/settings.local.php` file in a text editor.
+* Open the "config/apache/settings_php/settings.local.php" file in a text editor.
     * Find the first comment that begins with: `# ISLE Configuration` and follow the commented instructions to edit the database, username and password.
     * Find the second comment that begins with: `# ISLE Configuration` and follow the instructions to edit the Drupal hash salt.
     * Once finished, save and close the file.
@@ -152,25 +163,31 @@ Open a `terminal` (Windows: open `Git Bash`)
 ## Step 5: Create New Self-Signed Certs for Your Project
 
 * Open the appropriate file in a text editor:
-    * **For Mac/Ubuntu/CentOS/etc:** `./scripts/proxy/ssl-certs/local.sh`
-    * **For Microsoft Windows:** `./scripts/proxy/ssl-certs/local-windows-only.sh`
+    * **For Mac/Ubuntu/CentOS/etc:** "./scripts/proxy/ssl-certs/local.sh"
+    * **For Microsoft Windows:** "./scripts/proxy/ssl-certs/local-windows-only.sh"
+
 * Follow the in-line instructions to add your project's name to the appropriate areas.
     * Once finished, save and close the file.
 
-* _Using the same open terminal:_, navigate to `/pathto/yourprojectnamehere/scripts/proxy/ssl-certs/`
-    * `cd /pathto/yourprojectnamehere/scripts/proxy/ssl-certs/`
+* _Using the same open terminal:_, navigate to "/pathto/yourprojectnamehere/scripts/proxy/ssl-certs/"
+    * `cd ./scripts/proxy/ssl-certs/`
+
+* Change the permissions on the script to make it executable
     * **For Mac/Ubuntu/CentOS/etc:** `chmod +x local.sh`
     * **For Microsoft Windows:** `chmod +x local-windows-only.sh`
 
-* The following command will generate new self-signed SSL keys using your `yourprojectnamehere.localdomain` domain. This now secures the local site.
+* Run the following command to generate new self-signed SSL keys using your "yourprojectnamehere.localdomain" domain. This now secures the local site.
     * **For Mac/Ubuntu/CentOS/etc:** `./local.sh`
     * **For Microsoft Windows:** `./local-windows-only.sh`
-    * The generated keys can now be found in `./config/proxy/ssl-certs`
+    * The generated keys can now be found in:
+        * `cd ../../../config/proxy/ssl-certs`
 
 * Add the SSL .pem and .key file names generated from running the above script to the `./config/proxy/traefik.local.toml` file.
-    * Example:
-    * `certFile = "/certs/yourprojectnamehere.localdomain.pem"`
-    * `keyFile = "/certs/yourprojectnamehere.localdomain.key"`
+    * `cd ..`
+    * Open `traefik.local.toml` in a text editor.
+    * **Example:**
+        * `certFile = "/certs/yourprojectnamehere.localdomain.pem"`
+        * `keyFile = "/certs/yourprojectnamehere.localdomain.key"`
 
 ---
 
@@ -192,25 +209,26 @@ Open a `terminal` (Windows: open `Git Bash`)
 * _Using the same open terminal:_
     * View only the running containers: `docker ps`
     * View all containers (both those running and stopped): `docker ps -a`
-    * All containers prefixed with `isle-` are expected to have a `STATUS` of `Up` (for x time).
-      * **If any of these are not `UP`, then use [ISLE Installations: Troubleshooting](install-troubleshooting.md) to solve before continuing below.**
+    * All containers prefixed with "isle-" are expected to have a "STATUS" of "Up" (for x time).
+      * **If any of these are not "UP", then use [Non-Running Docker Containers](../install/install-troubleshooting.md#non-running-docker-containers) to solve before continuing below.**
       <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running, oe (c) older exited ISLE containers that maybe should be removed. --->
 
 ---
 
 ## Step 8: Run Islandora Drupal Site Install Script
 
-We highly recommend that you first review the contents of the `docker-compose.local.yml` file as the ISLE Apache service uses bind mounts for the intended Drupal Code instead of using default Docker volumes. This allows users to perform Local Islandora Drupal site development with an IDE. This line is a suggested path and users are free to change values to the left of the `:` to match their Apache data folder of choice. However we recommend starting out with the default setting below.
-Default: `- ./data/apache/html:/var/www/html:cached`
+We highly recommend that you first review the contents of the "docker-compose.local.yml" file as the ISLE Apache service uses bind mounts for the intended Drupal Code instead of using default Docker volumes. This allows users to perform Local Islandora Drupal site development with an IDE. This line is a suggested path and users are free to change values to the left of the `:` to match their Apache data folder of choice. We recommend starting out with the default setting: "- ./data/apache/html:/var/www/html:cached"
 
-Initially when starting up, end-users will need to run the install script and then ultimately check the resulting Drupal code into a git repository. If you are familiar with that process then Step 9.
+Run the install site script on the Apache container by copying and pasting the appropriate command:
 
-* Run the install site script on the Apache container by copying and pasting the appropriate command:
-    * **For Mac/Ubuntu/CentOS/etc:** `docker exec -it isle-apache-ld bash -c "cd /utility-scripts/isle_drupal_build_tools && ./isle_islandora_installer.sh`
-    * **For Microsoft Windows:** `winpty docker exec -it isle-apache-ld bash -c "cd /utility-scripts/isle_drupal_build_tools && ./isle_islandora_installer.sh`
-* The above process may take 10-20 minutes (_depending on system and internet speeds_)
-    * You should see a lot of green [ok] messages.
-    * If the script appears to pause or prompt for `y/n`, DO NOT enter any values; the script will automatically answer for you.
+* **For Mac/Ubuntu/CentOS/etc:** `docker exec -it isle-apache-ld bash -c "cd /utility-scripts/isle_drupal_build_tools && ./isle_islandora_installer.sh`
+* **For Microsoft Windows:** `winpty docker exec -it isle-apache-ld bash -c "cd /utility-scripts/isle_drupal_build_tools && ./isle_islandora_installer.sh`
+
+The above process may take 10-20 minutes (_depending on system and internet speeds_)
+
+* You should see a lot of green [ok] messages.
+* If the script appears to pause or prompt for "y/n", DO NOT enter any values; the script will automatically answer for you.
+
 
 | Microsoft Windows |
 | :-------------      |
@@ -220,7 +238,7 @@ Initially when starting up, end-users will need to run the install script and th
 | - Allow vpnkit.exe to communicate with the network.  Click Okay or Allow (accept default selection).|
 | - If the process seems to halt, check the taskbar for background windows.|
 
-* **Proceed only after this message appears:** "Clearing Drupal Caches. 'all' cache was cleared."
+* **Proceed only after this message appears:** "Done. 'all' cache was cleared."
 
 ---
 
@@ -254,7 +272,7 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
 
 * _Using the same open terminal:_
 
-* Navigate to the `data` directory within your local ISLE project
+* Navigate to the "data" directory within your local ISLE project
     * `cd data/apache/html`
 
 * Create a local git repository
@@ -267,10 +285,10 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
     * Between the `""` add a message like "Setting up Drupal site" that reflects the changes you are making in the Drupal code.
     * `git commit -m "Setting up Drupal site"`
 
-* Add the git `remote` (this will be remote / cloud based git repository that you'll push changes to). This can be Bitbucket, Github or Gitlab.
+* Add the git "remote" (this represents your git repository hosting service that you'll push changes to). This can be Bitbucket, Github or Gitlab.
     * **Example:** `git remote add origin https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-islandora.git`
 
-* Push the changes to the remote git repository on the `master` branch
+* Push the changes to the remote git repository on the "master" branch
     * `git push -u origin master`
 
 * Then continue to develop work within this follow your institutional best practice to application git repository.
@@ -286,8 +304,8 @@ Once you are ready to deploy your finished Drupal site, you may progress to:
 ---
 
 ## Additional Resources
-* [ISLE Installation: Environments](../install/install-environments.md) documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE endusers should use for the `.env`, `local.env`, etc.
-* [Local ISLE Installation: Resources](../install/install-local-resources.md) contains Docker container passwords and URLs for administrator tools.
+* [ISLE Installation: Environments](../install/install-environments.md) helps explain the ISLE workflow structure, the associated files, and what values ISLE endusers should use for the ".env", "local.env", etc.
+* [Local ISLE Installation: Resources](../install/install-local-resources.md) contains Docker container passwords and URLs for administrator testing.
 * [ISLE Installation: Troubleshooting](../install/install-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
 
 ---

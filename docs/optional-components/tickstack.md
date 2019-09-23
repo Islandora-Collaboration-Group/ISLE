@@ -102,7 +102,7 @@ The use and setup of TICK within the ISLE platform is as an optional [sidecar](h
 The Telegraf agent used for ISLE has a default configuration which runs the following plugins to monitor various services whether it is on a Production or Staging system.
 
 There are three `.conf` files found within `./config/tick/telegraf`
-  * `telegraf.conf` - Use this as a genric configuration for any system you'd like to monitor. Use this template file as a method to monitor ISLE environments that are not `Staging` or `Production`
+  * `telegraf.conf` - Use this as a genric configuration for any system you'd like to monitor. Use this template file as a method to monitor ISLE environments that are not Staging or Production
   * `telegraf.staging.conf` - Edit this file to run a full TICK stack on your ISLE Staging server which can monitor both your Staging and Production systems. 
   * `telegraf.production.conf` - Edit this file to point to your full TICK stack running on your ISLE Staging server.
 
@@ -145,9 +145,9 @@ If an ISLE User would like to add a plugin to monitor additional services, pleas
 
 ## Adoption Process Overview
 
-The installation instructions below will walk you through how to run the full TICK stack on a `Staging` ISLE host system but only run  a Telegraf container (agent) on the `Production` system. This will be referred to from now on as the "sidecar" setup.
+The installation instructions below will walk you through how to run the full TICK stack on a Staging ISLE host system but only run  a Telegraf container (agent) on the Production system. This will be referred to from now on as the "sidecar" setup.
 
-The data from both systems will be collected, analyzed and accessed on / from the the `Staging` host system via a dashboard called Chronograf. You can also setup alerts from this dashboard too.
+The data from both systems will be collected, analyzed and accessed on / from the the Staging host system via a dashboard called Chronograf. You can also setup alerts from this dashboard too.
 
 * You'll start by backing up all important data as needed.
 
@@ -168,15 +168,15 @@ The data from both systems will be collected, analyzed and accessed on / from th
     * `staging.env`
     * `production.env`  
 
-* You'll edit the `Staging` Telegraf Agent's empty or default settings to properly monitor the various local ISLE services and send metrics to the local Influxdb database on the Staging system.
+* You'll edit the Staging Telegraf Agent's empty or default settings to properly monitor the various local ISLE services and send metrics to the local Influxdb database on the Staging system.
 
 * You'll restart your containers with the new services having been added and configured.
 
-* Using a web browser, you'll navigate to the new Chronograf dashboard on the `Staging` server and complete the configuration of the Influxdb, Chronograf and Kapacitor services.
+* Using a web browser, you'll navigate to the new Chronograf dashboard on the Staging server and complete the configuration of the Influxdb, Chronograf and Kapacitor services.
     * You'll have the option to create new dashboards
     * If desired, you'll add additional alerts
 
-- You'll repeat the steps to edit the Telegraf Agent's configuration for your `Production` system only. You do not need to install the remaining "ICK" stack on `Production` though.
+- You'll repeat the steps to edit the Telegraf Agent's configuration for your Production system only. You do not need to install the remaining "ICK" stack on Production though.
 
 * You can then review the `Using Chronograf` section to learn how to review the new added hosts, dashboards and Log Viewer to review ISLE services log streams.
 
@@ -218,7 +218,7 @@ The data from both systems will be collected, analyzed and accessed on / from th
 * Check if you already have an existing `/etc/docker/daemon.json` file. 
     * If **YES**, add / merge  the contents of `./config/tick/docker/daemon.json` with your current `/etc/docker/daemon.json` file.
     * If **NO**, copy `./config/tick/docker/daemon.json` to `/etc/docker/`
-        * Example: `sudo cp ./config/tick/docker/daemon.json /etc/docker/`
+        * **Example:** `sudo cp ./config/tick/docker/daemon.json /etc/docker/`
 
 * Restart the Docker service
     * `sudo service docker restart` or `sudo systemctl restart docker`
@@ -354,7 +354,7 @@ The instructions to setup only the Telegraf Agent on an ISLE system e.g. your Pr
     * `database = "telegraf"`
         * By default, the ISLE TICK setup assumes this database as it is the easiest but pools all data received by individual monitored hosts into one database. For first time users, recommend leaving this value in place.
         * Users are free to change this to any value to segregate data by systems, group etc.
-    * Change `servers = ["root:<ISLE_ROOT_PASSWORD_HERE>@tcp(mysql:3306)/?tls=false"]` to use your `Staging` MySQL Root password. Typically this value is in your `staging.env` file. Swap out the `<ISLE_ROOT_PASSWORD_HERE>` with your `Staging` MySQL Root password.
+    * Change `servers = ["root:<ISLE_ROOT_PASSWORD_HERE>@tcp(mysql:3306)/?tls=false"]` to use your Staging MySQL Root password. Typically this value is in your `staging.env` file. Swap out the `<ISLE_ROOT_PASSWORD_HERE>` with your Staging MySQL Root password.
 
 
 * Start up the ISLE Docker containers again. `docker-compose up -d`
@@ -441,7 +441,7 @@ Aug 13 17:24:49 ip-172-31-69-204 rsyslogd[28257]:  [origin software="rsyslogd" s
 
 #### Adoption Process Overview
 
-* Use these instructions to add an additional Docker Telegraf container on a `Production` system. Once you've followed the instructions below, a new `Production` host will appear in your Chronograf dashboard for you to review alongside your previously configured `Staging` host.
+* Use these instructions to add an additional Docker Telegraf container on a Production system. Once you've followed the instructions below, a new Production host will appear in your Chronograf dashboard for you to review alongside your previously configured Staging host.
 
 #### Assumptions
 
@@ -449,15 +449,15 @@ Aug 13 17:24:49 ip-172-31-69-204 rsyslogd[28257]:  [origin software="rsyslogd" s
 
 * You'll need to use ISLE version `1.2.0` for the syslog driver changes to be in place.
 
-* That the "sidecar" TICK installation is already in place on the `Staging` server prior.
+* That the "sidecar" TICK installation is already in place on the Staging server prior.
 
 * Your firewall allows outbound port `8086` traffic
 
 ####  Installation
 
-In the recommended setup and usage of TICK, the `Staging` server will be running the full stack of TICK as a collection point for all `Staging` data and any `Production` system will only need the Telegraf agent installed.
+In the recommended setup and usage of TICK, the Staging server will be running the full stack of TICK as a collection point for all Staging data and any Production system will only need the Telegraf agent installed.
 
-To install the Telegraf agent on a `Production` system:
+To install the Telegraf agent on a Production system:
 
 * Shut down all running ISLE containers on the Production system
 
@@ -465,12 +465,12 @@ To install the Telegraf agent on a `Production` system:
     * `hostname = ""`
         * Enter the name of the server you will be monitoring e.g. `isle-server-prod` or `icg-production` etc. This value can be a [FQDN](https://kb.iu.edu/d/aiuv) i.e. `production-server.domain.edu`, an IP or any name really. Recommend a short name to be easily read and understood.
     * `urls = ["http://influxdb:8086"]`
-        * Replace the `influxdb` value with the [FQDN](https://kb.iu.edu/d/aiuv) of the `Staging` server that is running the full TICK stack and that this Telegraf agent will be sending data to e.g.
+        * Replace the `influxdb` value with the [FQDN](https://kb.iu.edu/d/aiuv) of the Staging server that is running the full TICK stack and that this Telegraf agent will be sending data to e.g.
       `urls = ["http://staging-server.domain.edu:8086"]`
     * `database = "telegraf"`
         * By default, the ISLE TICK setup assumes this database as it is the easiest but pools all data received by individual monitored hosts into one database. For first time users, recommend leaving this value in place.
         * Users are free to change this to any value to segregate data by systems, group etc.
-    * Change `servers = ["root:<ISLE_ROOT_PASSWORD_HERE>@tcp(mysql:3306)/?tls=false"]` to use your `Production` MySQL Root password. Typically this value is in your `production.env` file. Swap out the `<ISLE_ROOT_PASSWORD_HERE>` with your `Production` MySQL Root password.
+    * Change `servers = ["root:<ISLE_ROOT_PASSWORD_HERE>@tcp(mysql:3306)/?tls=false"]` to use your Production MySQL Root password. Typically this value is in your `production.env` file. Swap out the `<ISLE_ROOT_PASSWORD_HERE>` with your Production MySQL Root password.
 
 
 #### Edits - docker-compose.production.yml file 
@@ -506,17 +506,17 @@ Uncommented example:
 ```
 
 * Copy the Telegraf configuration file to the Rsyslog.d directory so Rsyslog will forward logs to the Telegraf agent with correct formatting. Assumes you are in the ISLE project root directory.
-    * Example: `sudo cp ./config/tick/rsyslog/50-telegraf.conf /etc/rsyslog.d/50-telegraf.conf`
+    * **Example:** `sudo cp ./config/tick/rsyslog/50-telegraf.conf /etc/rsyslog.d/50-telegraf.conf`
 
 * Copy over the Docker log driver configuration and then restart the Docker service.
-    * Example: `sudo cp ./config/tick/docker/daemon.json /etc/docker/daemon.json`
+    * **Example:** `sudo cp ./config/tick/docker/daemon.json /etc/docker/daemon.json`
     * `sudo service docker restart`
 
 * Start up the ISLE Docker containers again. `docker-compose up -d`
 
 * Depending on your internet connection, this startup process may take a few minutes, as the new TICK images are being downloaded and started.
 
-* Once the `Production` containers are back online, the services are running e.g. you see the Drupal site, etc. navigate to the `Hosts` section within the `Chronograf` dashboard. You should now see your new `Production` server name. This means the Telegraf Agent on your `Production` ISLE system is now reporting properly. 
+* Once the Production containers are back online, the services are running e.g. you see the Drupal site, etc. navigate to the `Hosts` section within the `Chronograf` dashboard. You should now see your new Production server name. This means the Telegraf Agent on your Production ISLE system is now reporting properly. 
 
 ---
 
@@ -524,7 +524,7 @@ Uncommented example:
 
 If you are not seeing your server(s) appear in the `Hosts` section nor seeing log information flowing into the `Log Viewer` section, recommend the following:
 
-* Check that any potential firewalls are allowing communication between the `Production` and `Staging` servers on port `8086`
+* Check that any potential firewalls are allowing communication between the Production and Staging servers on port `8086`
 
 * Ensure that all configuration files have been copied over:
     * The new Docker log driver configuration should be found here `/etc/docker/daemon.json`
@@ -533,7 +533,7 @@ If you are not seeing your server(s) appear in the `Hosts` section nor seeing lo
 * Check that the TICK related containers are running without exit codes. 
     * `docker ps -a`
   
-* Check that the new `Telegraf` docker container is running on `Production`
+* Check that the new `Telegraf` docker container is running on Production
 
 * You can check if the Telegraf agent is communicating properly with the Influxdb database and if the Influxdb database is running by using the following command in your terminal:
 
