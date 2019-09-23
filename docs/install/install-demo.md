@@ -10,19 +10,21 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 * This Demo ISLE Installation is intended for a personal computer.
 
-* You will be using ISLE version `1.2.0` or higher
+* You will be using ISLE version **1.2.0** or higher.
 
-* You are using Docker-compose `1.24.0` or higher
+* You are using Docker-compose **1.24.0** or higher.
 
 * You have already git cloned the ISLE Project to your personal computer.
 
-* **For Microsoft Windows:** You have installed [Git for Windows](../install/host-software-dependencies.md#windows) and will use its provided "Git Bash" as your command line interface; this behaves similarly to LINUX and UNIX environments.
+* **For Microsoft Windows:**
+    * You have installed [Git for Windows](../install/host-software-dependencies.md#windows) and will use its provided "Git Bash" as your command line interface; this behaves similarly to LINUX and UNIX environments.
+    * In the "demo.env" file, you must uncomment the line "# COMPOSE_CONVERT_WINDOWS_PATHS=1". (See Software Dependencies: [Edit "demo.env" or "local.env"](../install/host-software-dependencies.md#edit-demoenv-or-localenv))
 
 ---
 
 ## Step 1: Edit "/etc/hosts" File
 
-Enable the Demo ISLE Installation to be viewed locally on personal computer browser as: `https://isle.localdomain`.
+Enable the Demo ISLE Installation to be viewed locally on a personal computer browser as: `https://isle.localdomain`.
 
 * Please use these instructions to [Edit the "/etc/hosts" File](../install/install-demo-edit-hosts-file.md).
 
@@ -75,7 +77,7 @@ This process may take 10-20 minutes (_depending on system and internet speeds_)
 
 * You should see a lot of green [ok] messages.
 * If the script appears to pause or prompt for `y/n`, DO NOT enter any values; the script will automatically answer for you.
-* **Proceed only after this message appears:** "Clearing Drupal Caches. 'all' cache was cleared."
+* **Proceed only after this message appears:** "Done. 'all' cache was cleared."
 
 ---
 
@@ -120,7 +122,7 @@ Once you are ready, you may progress to either:
 ---
 
 ## Additional Resources
-* [Demo ISLE Installation: Resources](../install/install-demo-resources.md) contains Docker container passwords and URLs for administrator tools.
+* [Demo ISLE Installation: Resources](../install/install-demo-resources.md) contains Docker container passwords and URLs for administrator testing.
 * [ISLE Installation: Troubleshooting](../install/install-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
 
 ---
