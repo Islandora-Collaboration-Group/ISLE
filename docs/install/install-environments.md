@@ -1,20 +1,20 @@
 # Overview: ISLE Installation Environments
 
-As of the ISLE `1.2.0` release, ISLE now has the option to use clearly defined but different environments based on enduser's needs. Depending on the environment choice, additional configuration changes will need to be made to ISLE configuration files, domain names, etc. When an ISLE enduser is ready to progress past using the default Demo environment, it is recommended that their learning path and workflow proceed in this suggested order.
+As of the ISLE `1.2.0` release, ISLE has the option to use clearly defined but different environments based on enduser's needs. Depending on the environment choice, additional configuration changes will need to be made to ISLE configuration files, domain names, etc. We recommend that you install ISLE using the workflow and suggested order below.
 
-* **Demo** - *Default* - Used for trying out ISLE for the first time, having a sandbox for tests etc
+* **Demo** (Default) - Used for trying out ISLE for the first time, having a sandbox for tests etc
 
-* **Local** - Used for Drupal site development, more extensive metadata, Solr and Fedora development work on a personal computer
+* **Local** - Used for Drupal site development, more extensive metadata, Solr and Fedora development work on a Local personal computer
 
-* **Staging** - Used for remote (non-local / cloud) hosting of a Staging site. Islandora Drupal site code here is almost finished but viewed privately prior to pushing to public Production. Fedora data might have tests collections.
+* **Staging** - Used for remote (non-local or cloud) hosting of a Staging site. Islandora Drupal site code here is almost finished but viewed privately prior to pushing to public Production. Fedora data might have tests collections.
 
-* **Production** - Used for remote (non-local / cloud) hosting of a Production site. Site and collections are public and accessible to the world. Drupal site code is finished, functional and polished. Fedora data has full non test collections. Test collections are not recommended here.
+* **Production** - Used for remote (non-local or cloud) hosting of a Production site. Site and collections are public and accessible to the world. Drupal site code is finished, functional and polished. Fedora data has full non test collections. Test collections are not recommended here.
 
 * **Test** - Used by ISLE Maintainers for testing ISLE releases, pull releases and ISLE development, etc.
 
 ## ISLE Project Structure
 
-ISLE endusers will make the appropriate changes to the values found in the ISLE project `.env` to be able to define and launch their working environment. This `.env` should then have values that point to an corresponding `docker-compose.*.yml` file. As you can see from the root of the ISLE project now (ISLE version 1.2.0+), there additional `docker-compose` files that match an environment as well as additional named `.env` files. Below is a potential outline of all the files that an ISLE enduser might have to edit, change or add as a result of choosing an environment. (_Subject to change_)
+The ISLE project `.env` file enables you to be define and launch a variety of ISLE environments. On each ISLE environment, you will edit the `.env` file to point to a corresponding `docker-compose.*.yml` file configured for that environment. The root of the ISLE project (ISLE version 1.2.0+) comes with multiple, pre-configured examples of `docker-compose` and `.env` files to match the variety of environments shown below. The outline below lists the files that you may have to edit, change or add to support each ISLE environment. 
 
 * `.env` - 
   
@@ -77,9 +77,9 @@ ISLE endusers will make the appropriate changes to the values found in the ISLE 
 
 ---
 
-## ISLE Environments `.env` reference
+## ISLE Environments ".env" reference
 
-Please note this section is for reference only when are ISLE endusers making changes. In some cases, environment descriptions and settings are suggestions not actual values. ISLE endusers can copy values to the Activated ISLE environment section within the ISLE project `.env`.
+This reference includes a combination of suggestions and actual values. You may use these environment descriptions or settings in each of your corresponding ISLE project `.env` files.
 
 ### Demo
 
@@ -115,7 +115,7 @@ COMPOSE_FILE=docker-compose.local.yml # (Mandatory) The docker-compose file used
 
 ### Staging
 
-* Used for remote (non-local / cloud) hosting of a Staging site. Code here is almost finished but viewed privately prior to pushing to public Production.
+* Used for remote (non-local or cloud) hosting of a Staging site. Code here is almost finished but viewed privately prior to pushing to public Production.
 
 * Please read through the `docker-compose.staging.yml` file as there are bind mount points that need to be configured on the host machine, to ensure data persistence. There are suggested bind mounts that the end-user can change to fit their needs or they can setup additional volumes or disks to match the suggestions.
 
@@ -134,7 +134,7 @@ COMPOSE_FILE=docker-compose.staging.yml # (Mandatory) The docker-compose file us
 
 ### Production
 
-* Used for remote (non-local / cloud) hosting of a Production site. Site and collections are public and accessible to the world.
+* Used for remote (non-local or cloud) hosting of a Production site. Site and collections are public and accessible to the world.
 
 * Please read through the `docker-compose.production.yml` file as there are bind mount points that need to be configured on the host machine, to ensure data persistence. There are suggested bind mounts that the end-user can change to fit their needs or they can setup additional volumes or disks to match the suggestions.
 

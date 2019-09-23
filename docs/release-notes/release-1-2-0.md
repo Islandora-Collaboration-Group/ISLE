@@ -65,9 +65,9 @@ COMPOSE_FILE=docker-compose.demo.yml
 
 * All other users, names and passwords from your previous ISLE 1.1.1 & 1.1.2 `.env` will now need to be copied into the new environment .env files
   * `demo.env` - Prepopulated. Nothing to change.
-  * `local.env` - Copy over all users, names and passwords from your previous `Local` ISLE 1.1.1 & 1.1.2 `.env` to the appropriate variable. Remove the comments and replace with the appropriate `Local` values.
-  * `staging.env` - Copy over all users, names and passwords from your previous `Staging` ISLE 1.1.1 & 1.1.2 `.env` to the appropriate variable. Remove the comments and replace with the appropriate `Staging` values.
-  * `production.env` - Copy over all users, names and passwords from your previous `Production` ISLE 1.1.1 & 1.1.2 `.env` to the appropriate variable. Remove the comments and replace with the appropriate `Production` values.
+  * `local.env` - Copy over all users, names and passwords from your previous Local ISLE 1.1.1 & 1.1.2 `.env` to the appropriate variable. Remove the comments and replace with the appropriate Local values.
+  * `staging.env` - Copy over all users, names and passwords from your previous Staging ISLE 1.1.1 & 1.1.2 `.env` to the appropriate variable. Remove the comments and replace with the appropriate Staging values.
+  * `production.env` - Copy over all users, names and passwords from your previous Production ISLE 1.1.1 & 1.1.2 `.env` to the appropriate variable. Remove the comments and replace with the appropriate Production values.
 
 * `docker-compose.yml` - This file no longer exists in ISLE 1.2.0 and has been replaced by new docker-compose files and environment profiles created for:
   * **Demo** - `docker-compose.demo.yml` - use this to spin up ISLE quickly just to check it out.

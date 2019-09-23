@@ -2,31 +2,31 @@
 
 _Expectations:  It takes an average of **2-4+ hours** to read this documentation and complete this installation._
 
-This `Staging` ISLE Installation will be similar to the [Local ISLE Installation: Migrate Existing Islandora Site](../install/install-local-migrate.md) instructions you just followed but in addition to using a copy of your currently running Production themed Drupal website, a copy of the Production Fedora repository will also be needed for you to continue migrating to ISLE with the end goal of first deploying to an ISLE Production environment and then cut over from the existing non-ISLE Production and Staging servers to their new ISLE counterparts.
+This Staging ISLE Installation will be similar to the [Local ISLE Installation: Migrate Existing Islandora Site](../install/install-local-migrate.md) instructions you just followed but in addition to using a copy of your currently running Production themed Drupal website, a copy of the Production Fedora repository will also be needed for you to continue migrating to ISLE with the end goal of first deploying to an ISLE Production environment and then cut over from the existing non-ISLE Production and Staging servers to their new ISLE counterparts.
 
-Islandora Drupal site code here should be considered almost finished but hosted here for last touches and team review privately prior to pushing to public `Production`. Fedora data will be a mirror of your currently running Production Fedora repository. It is recommended that this remote site not be publicly accessible.
+Islandora Drupal site code here should be considered almost finished but hosted here for last touches and team review privately prior to pushing to public Production. Fedora data will be a mirror of your currently running Production Fedora repository. It is recommended that this remote site not be publicly accessible.
 
-This installation builds a `Staging` environment for the express purpose of migrating a previously existing Islandora site onto the ISLE platform. If you need to build a brand new `Staging` site for development and are not migrating an existing Islandora site, then please **stop** and use the [Local ISLE Installation: New Site](../install/install-local-new.md) instructions first and then the [Staging ISLE Installation: New Site](../install/install-staging-new.md) instead.
+This installation builds a Staging environment for the express purpose of migrating a previously existing Islandora site onto the ISLE platform. If you need to build a brand new Staging site for development and are not migrating an existing Islandora site, then please **stop** and use the [Local ISLE Installation: New Site](../install/install-local-new.md) instructions first and then the [Staging ISLE Installation: New Site](../install/install-staging-new.md) instead.
 
-As this `Staging` domain will require a real domain name or [FQDN](https://kb.iu.edu/d/aiuv), we recommend the following:
+As this Staging domain will require a real domain name or [FQDN](https://kb.iu.edu/d/aiuv), we recommend the following:
 
-* If you do not have a `Staging` server:
-    * Work with your IT department or appropriate resource for an "A record" to be added for your domain to "point" to your new `Staging` Host Server IP address in your institution's DNS records. We recommend that this sub-domain use `-staging` to differentiate it from the Production site
+* If you do not have a Staging server:
+    * Work with your IT department or appropriate resource for an "A record" to be added for your domain to "point" to your new Staging Host Server IP address in your institution's DNS records. We recommend that this sub-domain use `-staging` to differentiate it from the Production site
     * Example:`https://yourprojectnamehere-staging.institution.edu`
 
-* If you have a current non-ISLE `Staging` server(s):
-    * You shutdown any current non-ISLE `Staging` servers and only use the ISLE server from now on.
-    * Work with your IT department or appropriate resource for the existing "A record" for the current non-ISLE `Staging` domain to now "point" to your new `Staging` Host Server IP address in your institution's DNS records. **This is critical to be performed PRIOR to any further work below.**
+* If you have a current non-ISLE Staging server(s):
+    * You shutdown any current non-ISLE Staging servers and only use the ISLE server from now on.
+    * Work with your IT department or appropriate resource for the existing "A record" for the current non-ISLE Staging domain to now "point" to your new Staging Host Server IP address in your institution's DNS records. **This is critical to be performed PRIOR to any further work below.**
 
 Once this has been completed, if you do not want to use Let's Encrypt, you can also request commercial SSL certificates from your IT department for this domain as well. Please note the DNS records will need to exist prior to the creation of any SSL certificate (Commercial or Let's Encrypt.)
 
-* If you already have pre-existing `Staging` commercial SSL certificates, they can certainly be reused and copied into the ISLE project as directed.
+* If you already have pre-existing Staging commercial SSL certificates, they can certainly be reused and copied into the ISLE project as directed.
 
 Unlike the Local and Demo setups, you will not have to edit `/etc/localhosts` to view your domain given that DNS is now involved. Your new domain will no longer use the `.localdomain` but instead something like `https://yourprojectnamehere-staging.institution.edu`
 
-This document also has directions on how you can check in newly updated ISLE code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging and finally to Production. The [ISLE Installation: Environments](../install/install-environments.md) documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE end-users should use for the `.env`, `staging.env`, etc.
+This document also has directions on how you can save newly updated ISLE code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging to Production. The [ISLE Installation: Environments](../install/install-environments.md) documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE end-users should use for the `.env`, `staging.env`, etc.
 
-This document **does not** have directions on how you can check in previously existing Islandora Drupal code into a git repository and assumes this step has already happened. The directions below will explain how to clone Islandora Drupal code from a previously existing Islandora Drupal git repository that should already be accessible to you.
+This document **does not** have directions on how you can save previously existing Islandora Drupal code into a git repository and assumes this step has already happened. The directions below will explain how to clone Islandora Drupal code from a previously existing Islandora Drupal git repository that should already be accessible to you.
 
 Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive emails. The [Glossary](../appendices/glossary.md) defines terms used in this documentation.
 
@@ -35,9 +35,9 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 * This Staging ISLE installation is intended for an existing Production Islandora Drupal site to be imported along with a copy of the current Production Fedora Repository for further ISLE migration testing, Drupal theme development, ingest testing, etc. on a remote ISLE host server.
     * Some materials are to be "migrated" from the work you performed on your personal computer from the prior steps and processes in [Local ISLE Installation: Migrate Existing Islandora Site](../install/install-local-migrate.md) instructions.
 
-* You will be using ISLE version `1.2.0` or higher
+* You will be using ISLE version **1.2.0** or higher.
 
-* You are using Docker-compose `1.24.0` or higher
+* You are using Docker-compose **1.24.0** or higher.
 
 * You have git installed on your personal computer as well as the remote ISLE host server.
 
@@ -47,9 +47,9 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
         * [Hardware Requirements](host-hardware-requirements.md)
         * [Software Dependencies](host-software-dependencies.md)
     * This server should be running at the time of deploy.
-    * **Critical** - This `Staging` server has the same amount of disk space as your current Production Fedora server does in order to store a copy of the Fedora repository. Please ensure that these sizes match. Please also plan on adding additional capacity as needed for any potential ingest testing, etc.
+    * **Critical** - This Staging server has the same amount of disk space as your current Production Fedora server does in order to store a copy of the Fedora repository. Please ensure that these sizes match. Please also plan on adding additional capacity as needed for any potential ingest testing, etc.
 
-* You have a previously existing private Islandora Drupal git repository
+* You have a previously existing private Islandora Drupal git repository.
 
 * You have access to a private git repository in [Github](https://github.com), [Bitbucket](https://bitbucket.org/), [Gitlab](https://gitlab.com), etc.
     * If you do not, please contact your IT department for git resources, or else create an account with one of the above providers.
@@ -57,9 +57,9 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 * You have already have the appropriate A record entered into your institutions DNS system and can resolve the Staging domain (https://yourprojectnamehere-staging.institution.edu) using a tool like https://www.whatsmydns.net/
 
-* You have reviewed the [ISLE Installation: Environments](../install/install-environments.md) for more information about suggested `Staging` values.
+* You have reviewed the [ISLE Installation: Environments](../install/install-environments.md) for more information about suggested Staging values.
 
-* You are familiar with using tools like `scp, cp or rsync` to move configurations, files and data from your local to the remote `Staging` server.
+* You are familiar with using tools like `scp, cp or rsync` to move configurations, files and data from your local to the remote Staging server.
 
 * You have access to your Production Islandora Drupal, Solr and Fedora data and copy from your servers to the new ISLE Staging server.
 
@@ -69,9 +69,9 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 ## Index of Instructions
 
-This process will differ slightly from previous builds in that there is work to be done on the local to then be pushed to the `Staging` ISLE Host server with additional followup work to be performed on the remote `Staging` ISLE Host server.
+This process will differ slightly from previous builds in that there is work to be done on the local to then be pushed to the Staging ISLE Host server with additional followup work to be performed on the remote Staging ISLE Host server.
 
-The instructions that follow below will have either a `On Local` or a `On Remote Staging` pre-fix to indicate where the work and focus should be. In essence, the git workflow established during the local build process will be extended for deploying on `Staging` and for future ISLE updates and upgrades.
+The instructions that follow below will have either a `On Local` or a `On Remote Staging` pre-fix to indicate where the work and focus should be. In essence, the git workflow established during the local build process will be extended for deploying on Staging and for future ISLE updates and upgrades.
 
 **Steps 1-6: On Local - Configure the ISLE Staging Environment Profile for Deploy to Remote**
 
@@ -110,7 +110,7 @@ You are repeating this step given that data may have changed on the Production s
 
 * Drupal website databases can have a multitude of names and conventions. Confer with the appropriate IT departments for your institution's database naming conventions.
 
-* Recommended that the production databases be exported using the `.sql` /or `.gz` file formats e.g. `prod_drupal_site_082019.sql.gz` for better compression and minimal storage footprint.
+* Recommended that the production databases be exported using the `.sql` /or `.gz` file formats (e.g. "prod_drupal_site_082019.sql.gz") for better compression and minimal storage footprint.
 
 * If the end user is running multi-sites, there will be additional databases to export.
 
@@ -121,8 +121,8 @@ You are repeating this step given that data may have changed on the Production s
 #### Export the Production MySQL Islandora Drupal Database
 
 * Export the MySQL database for the current Production Islandora Drupal site in use and copy it to your local in an easy to find place. In later steps you'll be directed to import this file. **Please be careful** performing any of these potential actions below as the process impacts your Production site. If you are not comfortable or familiar with performing these actions, we recommend that you instead work with your available IT resources to do so.
-    * You can use a MySQL GUI client for this process or if you have command line access to the MySQL database server
-    `mysqldump -u username -p database_name > prod_drupal_site_082019.sql`
+    * To complete this process, you may use a MySQL GUI client or, if you have command line access to the MySQL database server, you may run the following command, substituting your actual user and database names:
+    * **Example:** `mysqldump -u username -p database_name > prod_drupal_site_082019.sql`
     * Copy this file down to your personal computer.
 
 ---
@@ -132,7 +132,7 @@ You are repeating this step given that data may have changed on the Production s
 * Ensure that your ISLE and Islandora git repositories have all the latest commits and pushes from the development process that took place on your personal computer. If you haven't yet finished, do not proceed until everything is completed.
 
 * Once finished, open a `terminal` (Windows: open `Git Bash`)
-    * Navigate to your local ISLE directory
+    * Navigate to your Local ISLE repository
     * Shut down any local containers e.g. `docker-compose down`
 
 ---
@@ -142,7 +142,7 @@ You are repeating this step given that data may have changed on the Production s
 * Open the "staging.env" file in a text editor.
     * Find each comment that begins with: `# Replace this comment with a ...` and follow the commented instructions to edit the passwords, database and user names.
         * **Review carefully** as some comments request that you replace with `...26 alpha-numeric characters` while others request that you create an `...easy to read but short database name`.
-        * It is okay if you potentially repeat the values previously entered for your local `(DRUPAL_DB)` & `(DRUPAL_DB_USER)` in this `Staging` environment but we strongly recommend not reusing all passwords for environments e.g. `(DRUPAL_DB_PASS)` & `(DRUPAL_HASH_SALT)` should be unique values for each environment.
+        * It is okay if you potentially repeat the values previously entered for your local `(DRUPAL_DB)` & `(DRUPAL_DB_USER)` in this Staging environment but we strongly recommend not reusing all passwords for environments e.g. `(DRUPAL_DB_PASS)` & `(DRUPAL_HASH_SALT)` should be unique values for each environment.
         * In many cases the username is already pre-populated. If it doesn't have a comment directing you to change or add a value after the `=`, then don't change it.
     * Once finished, save and close the file.
 
@@ -155,7 +155,7 @@ You are repeating this step given that data may have changed on the Production s
 
 ## Step 4: On Local - Review and Edit "docker-compose.staging.yml"
 
-* Review the disks and volumes on your remote `Staging` ISLE Host server to ensure they are of an adequate capacity for your collection needs and match what has been written in the `docker-compose.staging.yml` file.
+* Review the disks and volumes on your remote Staging ISLE Host server to ensure they are of an adequate capacity for your collection needs and match what has been written in the `docker-compose.staging.yml` file.
 
 * Please read through the `docker-compose.staging.yml` file as there are bind mount points that need to be configured on the host machine, to ensure data persistence. There are suggested bind mounts that the end-user can change to fit their needs or they can setup additional volumes or disks to match the suggestions.
     * In the `fedora` services section
@@ -193,7 +193,7 @@ The options include PHP settings, Java Memory Allocation, MySQL configuration an
 
 * _(Optional)_ - This line is already uncommented by default in ISLE but we're calling it out here that you can changes to the suggested levels or values within the `./config/mysql/ISLE.cnf` file if needed. When setting up for the first time, it is best practice to leave these settings in place. Over time, you can experiment with further tuning and experimentation based on your project or system needs.
 
-* _(Optional)_ - You can change the suggested `JAVA_MAX_MEM` & `JAVA_MIN_MEM` levels but do not exceed more than 50% of your system memory. When setting up for the first time, it is best practice to leave these settings in place as they are configured for a `Staging` ISLE Host Server using 16 GB of RAM. Over time, you can experiment with further tuning and experimentation based on your project or system needs.
+* _(Optional)_ - You can change the suggested `JAVA_MAX_MEM` & `JAVA_MIN_MEM` levels but do not exceed more than 50% of your system memory. When setting up for the first time, it is best practice to leave these settings in place as they are configured for a Staging ISLE Host Server using 16 GB of RAM. Over time, you can experiment with further tuning and experimentation based on your project or system needs.
 
 * _(Optional)_ - You can opt to uncomment the TICK stack settings for monitoring but you'll need to follow the [TICK Stack](../optional-components/tickstack.md) instructions prior to committing changes to your ISLE git repository.
     * All TICK related code can be found at the end of all ISLE services within the `docker-compose.staging.yml` file.
@@ -206,7 +206,7 @@ The options include PHP settings, Java Memory Allocation, MySQL configuration an
       tag: "{{.Name}}"
 ```
 
-  * Uncomment the lines found in the new TICK stack services section of the `docker-compose.staging.yml` file for hosting of that monitoring service on the `Staging` ISLE Host server.
+  * Uncomment the lines found in the new TICK stack services section of the `docker-compose.staging.yml` file for hosting of that monitoring service on the Staging ISLE Host server.
       * There are additional configurations to be made to files contained within `./config/tick` but you'll need to follow the [TICK Stack](../optional-components/tickstack.md) instructions prior to committing changes to your ISLE git repository.
   * Uncomment the TICK stack data volumes as well at the bottom of the file.
 
@@ -247,7 +247,7 @@ If you have decided to use Commercial SSL certs supplied to you by your IT team 
 
 ## Step 6: On Local - Commit ISLE Code to Git Repository
 
-* Once you have made all of the appropriate changes to your `Staging` profile. Please note the steps below are suggestions. You might use a different git commit message. Substitute `<changedfileshere>` with the actual file names and paths. You may need to do this repeatedly prior to the commit message.
+* Once you have made all of the appropriate changes to your Staging profile. Please note the steps below are suggestions. You might use a different git commit message. Substitute `<changedfileshere>` with the actual file names and paths. You may need to do this repeatedly prior to the commit message.
     * `git add <changedfileshere>`
     * `git commit -m "Changes for Staging"`
     * `git push origin master`
@@ -264,9 +264,9 @@ If you have decided to use Commercial SSL certs supplied to you by your IT team 
 
 Since the `/opt` directory might not let you do this at first, we suggest the following workaround which you'll only need to do once. Future ISLE updates will not require this step.
 
-* Shell into your `Staging` ISLE host server as the `Islandora` user.
+* Shell into your Staging ISLE host server as the `Islandora` user.
 
-* Clone your ISLE project repository with the newly committed changes for `Staging` to the `Islandora` user home directory.
+* Clone your ISLE project repository with the newly committed changes for Staging to the `Islandora` user home directory.
     * `git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git /home/islandora/`
     * This may take a few minutes (2-4) depending on your server's Internet connection.
 
@@ -303,17 +303,17 @@ Please clone from your existing Production Islandora git repository.
 * It is recommended that you schedule a content freeze for all Production Fedora ingests and additions to your Production website. This will allow you to get up to date data from Production to Staging.
 
 * As you may have made some critical decisions potentially from "Step 0: Copy Production Data to Your Local" of the [Local ISLE Installation: Migrate Existing Islandora Site](../install/install-local-migrate.md) instructions, you need to re-follow the steps to get your:
-    * `Production` Drupal site `files` directory
+    * Production Drupal site `files` directory
     * `Solr schema & Islandora transforms`
         * If you picked **Easy** option:
           * then you don't need to do anything here for the `Solr schema & Islandora transforms`
         * If you picked the **Intermediate** or **Advanced** options:
           * You'll need to copy in the customizations and files you created during the `local` environment into the `docker-compose.staging.yml`. Ensure that one set of transforms and schema are used across all environments.
-    * `Production` Fedora `datastreamStore` directory
+    * Production Fedora `datastreamStore` directory
         * You'll need to adjust the paths below in case your setup differs on either the non-ISLE Production server or the ISLE Staging server.
         * Copy your `/usr/local/fedora/data/datastreamStore` data to the suggested path of `/mnt/data/fedora/datastreamStore`
             * You may need to change the permissions to `root:root` on the Staging `/mnt/data/fedora/datastreamStore` directory above after copying so the Fedora container can access properly. Do not do this on your existing Production system please.
-    * `Production` Fedora `objectStore`. 
+    * Production Fedora `objectStore`. 
         * Copy your `/usr/local/fedora/data/objectStore` data to the suggested path of `/opt/data/fedora/objectStore`
             * You may need to change the permissions to `root:root` on the Staging `/opt/data/fedora/objectStore` above after copying so the Fedora container can access properly. Do not do this on your existing Production system please.
 
@@ -386,7 +386,7 @@ fatal: empty ident name (for <islandora@yourprojectnamehere-staging.institution.
 ```
 
 * Configure your server git client but don't use the `--global` setting as that could interfere with other git repositories e.g. your Islandora Drupal code.
-    * Example: Within `/opt/yourprojectnamehere`
+    * **Example:** Within `/opt/yourprojectnamehere`
     * `git config user.email "jane@institution.edu"`
     * `git config user.name "Jane Doe"`
 
@@ -445,11 +445,11 @@ git commit -m "Added the edited .env configuration file for Staging. DO NOT PUSH
 
 * Copy the `local_drupal_site_082019.sql` created in Step 1 to the Remote Staging server.
 
-* Import the exported `Local` MySQL database for use in the current `Staging` Drupal site. Refer to your `staging.env` for the usernames and passwords used below.
+* Import the exported Local MySQL database for use in the current Staging Drupal site. Refer to your `staging.env` for the usernames and passwords used below.
     * You can use a MySQL GUI client for this process instead but the command line directions are only included below.
     * Run `docker ps` to determine the MySQL container name
     * _Using the same open terminal:_  
-    * Shell into your currently running "Staging" MySQL container
+    * Shell into your currently running Staging MySQL container
         * `docker exec -it your-mysql-containername bash`
     * Import the Local Islandora Drupal database. Replace the "DRUPAL_DB_USER" and "DRUPAL_DB" in the command below with the values found in your "staging.env" file.
         * `mysql -u DRUPAL_DB_USER -p DRUPAL_DB < local_drupal_site_082019.sql`
@@ -473,7 +473,7 @@ This step will show you how to run the "migration_site_vsets.sh" script on the A
 * Run the script
     * `docker exec -it your-apache-containername bash -c "cd /var/www/html && ./migration_site_vsets.sh"`
 
-This step will show you how to shell into your currently running "Staging" Apache container, and run the "fix-permissions.sh" script to fix the Drupal site permissions.
+This step will show you how to shell into your currently running Staging Apache container, and run the "fix-permissions.sh" script to fix the Drupal site permissions.
 
 * `docker exec -it your-apache-containername bash`
 * `sh /utility-scripts/isle_drupal_build_tools/drupal/fix-permissions.sh --drupal_path=/var/www/html --drupal_user=islandora --httpd_group=www-data`
@@ -512,7 +512,7 @@ Since this command can take minutes or hours depending on the size of your repos
 
 **Please note:** The method described below is a longer way of doing this process to onboard users.
 
-* Shell into your currently running "Staging" Fedora container
+* Shell into your currently running Staging Fedora container
     * Run `docker ps` to determine the Fedora container name
     * `docker exec -it your-fedora-containername bash`
 
@@ -562,7 +562,7 @@ Find logs at /usr/local/tomcat/logs/fgs-update-foxml.out and /usr/local/tomcat/l
 You can watch log file 'tail -f /usr/local/tomcat/logs/fedoragsearch.daily.log' as the process runs.
 ```
 
-**Please note:** Within this output, options to tail logs and watch progress are offered. Depending on the size of your collection this process may take hours, however it is okay to exit out of the container and even log off the remote `Staging` server. You can check back frequently by running `tail -f /usr/local/tomcat/logs/fgs-update-foxml.out` on the Fedora container. If you visit your Drupal site and run a Solr search, you should start to see objects and facets start to work. The number of objects will increase over time.
+**Please note:** Within this output, options to tail logs and watch progress are offered. Depending on the size of your collection this process may take hours, however it is okay to exit out of the container and even log off the remote Staging server. You can check back frequently by running `tail -f /usr/local/tomcat/logs/fgs-update-foxml.out` on the Fedora container. If you visit your Drupal site and run a Solr search, you should start to see objects and facets start to work. The number of objects will increase over time.
 
 * After a good period of time, again depending on the size of your Fedora collection, when the Solr re-index process finishes, output like the example below will appear in the `/usr/local/tomcat/logs/fgs-update-foxml.out` log. This indicates that the Solr reindex process was completed. The number of objects rebuilt will vary. You can hit the CNTRL and C keys to exit out of the tail process, if need be.
 
@@ -588,10 +588,10 @@ Args
     * Please note: You should not see any errors with respect to the SSL certifications. If so, please review your previous steps especially if using Let's Encrypt. You may need to repeat those steps to get rid of the errors.
 
 * Log in to the local Islandora site with the credentials ("DRUPAL_ADMIN_USER" and "DRUPAL_ADMIN_PASS") you created in "staging.env".
-    * **Please note:** You are free to use previously Drupal admin or user accounts created during the `Local` site development process.
+    * **Please note:** You are free to use previously Drupal admin or user accounts created during the Local site development process.
 
 * You can decide to further QC and review the site as you wish or start to add digital collections and objects.
-    * You could also further test using the [Islandora Sample Objects](https://github.com/Islandora-Collaboration-Group/islandora-sample-objects) as you may have done in the previous `Local` installation.
+    * You could also further test using the [Islandora Sample Objects](https://github.com/Islandora-Collaboration-Group/islandora-sample-objects) as you may have done in the previous Local installation.
 
 ---
 
@@ -604,8 +604,8 @@ Once you are ready to deploy your finished Drupal site, you may progress to:
 ---
 
 ## Additional Resources
-* [ISLE Installation: Environments](../install/install-environments.md) documentation can also help with explaining the new ISLE structure, the associated files and what values ISLE end-users should use for the `.env`, `local.env`, etc.
-* [Local ISLE Installation: Resources](../install/install-local-resources.md) contains Docker container passwords and URLs for administrator tools.
+* [ISLE Installation: Environments](../install/install-environments.md) help with explaining the ISLE structure, the associated files, and what values ISLE end-users should use for the ".env", "local.env", etc.
+* [Local ISLE Installation: Resources](../install/install-local-resources.md) contains Docker container passwords and URLs for administrator testing.
 * [ISLE Installation: Troubleshooting](../install/install-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
 
 ---
