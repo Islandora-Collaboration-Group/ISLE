@@ -14,7 +14,7 @@
 If you encounter an error like this:
 
 * Set up an SSH key and add it to your local ssh-agent to add access rights to read from your remote repository.
-* This will allow you to pull from your git repository provider / hoster. 
+* This will allow you to pull from your git repository hosting service. 
 * See SSH key "How To" instructions on [Github](https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) or [Bitbucket](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html) or [Gitlab](https://docs.gitlab.com/ee/ssh/).
 
 ---

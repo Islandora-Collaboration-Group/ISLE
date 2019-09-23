@@ -56,10 +56,9 @@ Below are the recommended minimum specifications for a staging server. The serve
 
 Below are the recommended specifications for a personal computer running a Demo ISLE Installation:
 
-* Your own OS (whatever it is)
+* Your own OS (Mac OSX, Windows 10, Linux, etc.)
 * Minimum of 2 CPU cores
 * 8-16 GB of RAM is recommended
-* 128-500GB for the Desktop OS
 * Sufficient hard drive or attached storage to hold a small test collection (depending on your testing ~5-10GB for objects and their derivatives)
 
 **Please continue by selecting: [Software Dependencies](../install/host-software-dependencies.md).**
