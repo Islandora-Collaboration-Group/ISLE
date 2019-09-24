@@ -3,7 +3,7 @@
 ## Use Cases & User Stories
 
 * As a repository administrator, I expect that ISLE allows use of server-side caching to optimize the end-user experience without any input from me.
-  * If I have a complex pages (including Solr search results), then I expect ISLE provides an optional HTTP accelerator to deliver cached versions 
+  * If I have a complex pages (including Solr search results), then I expect ISLE provides an optional HTTP accelerator to deliver cached versions
   * _Negative user story:_ I do not expect that this optional HTTP accelerator will necessarily speed up asset delivery. Various Islandora components have their own caches for this purpose. ISLE documentation should, however, direct repository administrators to good resources if they have this use case.
 
 * As a repository browser, I expect to be able to performantly browse an Islandora site, taking advantage of server-side caching to ensure speedy delivery of frequently-viewed pages.
@@ -15,75 +15,88 @@
 
 ## New Functionality
 
-* The new `isle-varnish` image was built using [Varnish](https://varnish-cache.org/intro/) software to improve end-user performance when and if Drupal/Apache performance is inadequate. The intended use is solely for high-traffic production environments.
+* The `isle-varnish` image was built using [Varnish](https://www.varnish-cache.org/) software to improve end-user performance when and if Drupal/Apache performance is inadequate for high-traffic production environments. Varnish can help to reduce load on the Apache web server and to increase the responsiveness of the Drupal site and Solr searches.
 
-* Several paragraphs describing the functional differences between Apache and Varnish
+* The ISLE Varnish configuration uses an memory (RAM) based cache or _malloc_ with a default setting of `256 MB` which can and should be increased as needed. If you need to read more about how to use or change Varnish's cache settings, please start [here](https://varnish-cache.org/docs/4.1/users-guide/storage-backends.html)
+  * **Please note:** There is a new Docker ENV setting within the `production.env` which allows users to dynamically increase or decrease the amount of stored materials within the Varnish _malloc_ cache.
+    ```bash
+    ## Varnish Cache Memory Allocation
+    VARNISH_MALLOC=256m
+    ```
 
-* Setting expectations for the upgrade.
-
-* Additional notes commenting on tradeoffs
-
-* Additional notes concerning administrative overhead and/or necessary process changes
-
-* Additional systems overhead, including:
-  * __ GB RAM for Varnish to run in memory
-  * __ GB disk space for Varnish cache persistence
-
-* No new software required on host machine
+* The Drupal module [Varnish](https://www.drupal.org/project/varnish) will need to be installed on the Drupal / Islandora site to provide further integration between the Varnish container and your website. There is an included script (isle_varnish_drupal_module_installer.sh) to install enable and configure the Drupal module on an existing site found in the ISLE `scripts/varnish` directory. This script will also include the Drupal [Purge](https://www.drupal.org/project/purge) and [Expire](https://www.drupal.org/project/expire) modules.
 
 ---
 
 ## System Requirements
 
-* [ISLE](https://github.com/Islandora-Collaboration-Group/ISLE) release version `1.1.1`
+* [ISLE](https://github.com/Islandora-Collaboration-Group/ISLE) release version `1.3.0`
   * `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
+
+* Ability to allocate additional free memory to the Varnish container. The tuning and configuration of Varnish can vary based on system resources and traffic, as we recommend that you start out with a smaller memory allocation and test the results.
+  * **Example configuration** for a Production ISLE host server using `16 GB` of memory.
+    * Expect to allocate about 40 - 50% of the host server memory for all of the Java / Tomcat based images
+      * `isle-fedora` should have the most e.g. `4096 MB` or `4 GB`
+      * `isle-solr` should have the second most e.g. `2048 MB` or `2 GB`
+      * `isle-imageservices` should have the third most e.g. `1024 MB` or `1 GB`
+      * If using `isle-blazegraph`, this image should also be using a minimum of `4096 MB` or `4 GB` of memory
+    * Keep about `2 -3 GB` free for the remaining images e.g. `isle-apache`, `isle-mysql` etc.
+    * This would leave you roughly `1 - 2 GB` to allocate to the Varnish cache. Start with `256` to `512 MB` and work your way up as needed.
+      * You can adjust the amount that Varnish puts into memory in the supplied `.env` file
+        * On the line: `VARNISH_MALLOC=256m` you can change the amount of memory to a higher value other than the default `256` Megabytes. We recommend that you start with 1-2 GB for now to tune further as your resources and needs warrant.
+  * There are additional potential memory allocation and tuning recommendations for Varnish from [Varnish-software](https://info.varnish-software.com/blog/understanding-varnish-cache-memory-usage)
+  * If you need to read more about how to use or change Varnish's cache settings, please start [here](https://varnish-cache.org/docs/4.1/users-guide/storage-backends.html)
+
+* **Recommendation** Adding more memory to the `Production` ISLE host system from the default recommended `16 GB` might be recommended here if running all optional components e.g. `isle-varnish`,  `isle-blazegraph`, the TICK stack, etc.
+
+* There is no new software required on any ISLE host machine.
+
+---
 
 ### ISLE Images
 
 * Following the installation steps below, an enduser will configure  / edit their ISLE running system(s) to ultimately use the following images and tags from Docker-Hub:
 
-(_These tags are for usage during Phase II Sprints only and will change during the release process._)
-
-(_Phase II Sprints only_)
+(_**Please note:** The tags below are for testing during Phase II Sprints only and will change during the release process._)
 
 | Service | Repository | Tag |
-| ---     | ---        | --- | 
-| Apache | [islandoracollabgroup/isle-apache](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-apache/tags) | `dashboards-dev`|
-| Fedora | [islandoracollabgroup/isle-fedora](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-fedora/tags) | `blazegraph.dashboards-dev`|
-| Image-services | [islandoracollabgroup/isle-imageservices](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-imageservices) | `dashboards-dev` |
-| MySQL | [islandoracollabgroup/isle-mysql](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-mysql) | `dashboards-dev` |
+| ---     | ---        | --- |
+| Apache | [borndigital/isle-apache](https://cloud.docker.com/u/borndigital/repository/docker/borndigital/isle-apache/tags) | `1.3.0-dev`|
+| Blazegraph | [borndigital/isle-blazegraph](https://cloud.docker.com/u/borndigital/repository/docker/borndigital/isle-blazegraph/tags) | `1.3.0-dev`|
+| Fedora | [borndigital/isle-fedora](https://cloud.docker.com/u/borndigital/repository/docker/borndigital/isle-fedora/tags) | `1.3.0-dev`|
+| Image-services | [borndigital/isle-imageservices](https://cloud.docker.com/u/borndigital/repository/docker/borndigital/isle-imageservices) | `1.3.0-dev` |
+| MySQL | [borndigital/isle-mysql](https://cloud.docker.com/u/borndigital/repository/docker/borndigital/isle-mysql) | `1.3.0-dev` |
 | Portainer | [portainer/portainer](https://hub.docker.com/r/portainer/portainer) | `latest` |
-| Solr  | [islandoracollabgroup/isle-solr](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-solr/tags) | `dashboards-dev` |
+| Solr  | [borndigital/isle-solr](https://cloud.docker.com/u/borndigital/repository/docker/borndigital/isle-solr/tags) | `1.3.0-dev` |
 | Traefik | [traefik/traefik](https://hub.docker.com/_/traefik) | `1.7.9` |
-| Varnish | [islandoracollabgroup/isle-varnish](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-varnish) | `1.1.1`|
-
-* Additional systems overhead, including:
-
-  * Add an additional 1-2 GB RAM in total ISLE Host memory for Varnish to keep the cache in memory.
-    * You can adjust the amount that Varnish puts into memory in the supplied `.env` file
-      * On the line: `VARNISH_MALLOC=256m` you can change the amount of memory to a higher value other than the default `256` Megabytes. We recommend that you do not attempt to exceed 1 GB for now.
+| Varnish | [borndigital/isle-varnish](https://cloud.docker.com/u/borndigital/repository/docker/borndigital/isle-varnish) | `1.3.0-dev`|
 
 ---
 
 ## Adoption Process Overview
 
-* The installation instructions below will walk you through how to setup and run the optional Varnish container to cache assets for highly trafficked Islandora sites.
+* The installation instructions below will walk you through how to setup and run the optional Varnish container on only your ISLE `Production` system to cache assets for highly trafficked Islandora sites in addition to adding a new Drupal module to your existing `Production` Drupal / Islandora website.
 
 * You'll start by backing up all important data as needed.
 
-- You'll stop any running containers
+* You'll stop any running containers
 
-* You'll download new ISLE images temporarily tagged as `dashboards-dev` instead of the standard ISLE `1.1.1`. 
+* **RELEASE TESTING** You'll download new ISLE images temporarily tagged as `1.3.0-dev` instead of the standard ISLE `1.2.0`.
   * **Please note:** _This is a temporary process until all ISLE Phase II UAT testing is completed and the images can be released._
-  * You'll download a new ISLE image called `isle-varnish:1.1.1`
+  * You'll download a new ISLE image called `isle-varnish:1.3.0-dev`
 
-- You'll make additional edits and modifications to the following ISLE configuration files:
-  * `docker-compose.yml`
-  * `.env`
+* You'll make additional edits and modifications to the following ISLE configuration files on your `Production` system.
+  * `docker-compose.production.yml`
+    * Uncommenting the varnish service section
+    * Commenting out a line in the apache service section
+  * `production.env`
+    * Making any necessary edits to the new Varnish ENV section
 
 * You'll restart your containers with the new services having been added and configured.
 
-- You can test by inspecting content in your web-browser and/or using Varnish command line tools to ensure that the new caching is occuring.
+* You'll install the new Drupal module called Varnish.
+
+* You can test by inspecting content in your web-browser and/or using Varnish command line tools to ensure that the new caching is occuring.
 
 ---
 
@@ -91,9 +104,9 @@
 
 ### Assumptions
 
-* Prior to installation, enduser will have a running ISLE system using the current release of `1.1.1.` images.
+* Prior to installation, enduser will have a running ISLE system using the current release of `1.3.0.` images.
 
-* This installation process will give the functionality as stated in the `Systems Requirements` image table above for `Varnish` testing and even [TICK](tickstack.md) stack usage.
+* This installation process will give the functionality as stated in the `Systems Requirements` image table above for `Varnish` testing and usage.
 
 ---
 
@@ -102,21 +115,54 @@
 * Shut down your running containers
   * `docker-compose down`
 
-* Make the below mentioned edits to:
-  * `docker-compose.yml` file
-  * `.env` file
+#### Edits - docker-compose.production.yml
 
-#### Varnish Edits - docker-compose.yml file
+* **Release testers** - (You'll need to copy this commented out Varnish section below into your `docker-compose.local.yml` or `docker-compose.demo.yml` at the bottom below the Blazegraph section and above the `# Defined networks` section. You'll then need to uncomment everything between `varnish:` and `labels`. Do not uncomment the `logging` section on your test demo or local as most likely they don't use TICK.)
 
-* Add a new service to your docker-compose file:
+* Within your `docker-compose.production.yml` file, you'll need to uncomment the following section:
 
-```bash 
+```bash
+# Start - Varnish service section
+## (Optional-component): Uncomment lines below to run ISLE with the Varnish cache
+
+#  varnish:
+#    image: borndigital/isle-varnish:1.3.0-dev
+#    container_name: isle-varnish-${CONTAINER_SHORT_ID}
+#    env_file:
+#      - production.env
+#      - .env
+#    networks:
+#      isle-internal:
+#    depends_on:
+#      - mysql
+#      - fedora
+#      - solr
+#      - apache
+#      - traefik
+#    labels:
+#      - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
+#      - traefik.port=6081
+#      - traefik.enable=true
+#      - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /cantaloupe"
+#    logging:
+#      driver: syslog
+#      options:
+#        tag: "{{.Name}}"
+
+# END - Varnish service section
+```
+
+so that it will now look like this and its formatting should line up appropriately with other ISLE services.
+
+```bash
+# Start - Varnish service section
+## (Optional-component): Uncomment lines below to run ISLE with the Varnish cache
+
   varnish:
-    # build:
-    #   context: ../images/isle-varnish
-    image: islandoracollabgroup/isle-varnish:1.1.1
+    image: borndigital/isle-varnish:1.3.0-dev
     container_name: isle-varnish-${CONTAINER_SHORT_ID}
     env_file:
+      - production.env
       - .env
     networks:
       isle-internal:
@@ -130,27 +176,23 @@
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
       - traefik.port=6081
       - traefik.enable=true
-      - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
-  ```
+      - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /cantaloupe"
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
 
-* For Phase II UAT testing of [TICK](tickstack.md), [Blazegraph](blazegraph.md) and Varnish please change the following image tags of these services from `1.1.1` to `dashboards-dev`
-  * Apache
-      * `image: islandoracollabgroup/isle-apache:1.1.1` should now become `image: islandoracollabgroup/isle-apache:dashboards-dev`
-  * Fedora
-      * `image: islandoracollabgroup/isle-fedora:1.1.1` should now become `image: islandoracollabgroup/isle-fedora:dashboards-dev`
-  * Image-services
-      * `image: islandoracollabgroup/isle-imageservices:1.1.1` should now become `image: islandoracollabgroup/isle-imageservices:dashboards-dev`
-  * MySQL 
-    * `image: islandoracollabgroup/isle-mysql:1.1.1` should now become `image: islandoracollabgroup/isle-mysql:dashboards-dev`
-  * Solr
-    * `image: islandoracollabgroup/isle-solr:1.1.1` should now become `image: islandoracollabgroup/isle-solr:dashboards-dev`
+# END - Varnish service section
+```
 
-* Edit your apache service to remove the `traefik` labels so that Varnish can "take over" handling and routing web traffic.
+* **Please note:** If you **are not** using TICK with your `Production` system, then you don't need to uncomment the entire `logging:` area and lines. Leave them uncommented.
+
+* Comment out the last line in your `apache` service `labels` section so that Varnish can "take over" handling and routing web traffic.
 
 ```bash
-    #labels:
-    #  - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
-    #  - traefik.enable=true
+    labels:
+      - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
+      - traefik.enable=true
     #  - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
 ```
 
@@ -158,147 +200,34 @@
 
 ---
 
-#### Varnish Edits - .env file
+#### Varnish Edits - production.env file
 
-* Due to the usage of `dashboards-dev` images and an upcoming ISLE release that will by default change ISLE's log handling, the following block of ENV variables need to be added to your main .env for the `dashboards-dev` images to work in testing.
+* **Release testers** - (You'll need to copy this commented out Varnish section below into your `local.env` or `demo.env` at the bottom below the Blazegraph section and above the `Logs` section. You'll then need to follow the same instructions for uncommenting lines.
 
-* Add this new block of ENV variables to your main .env file beneath all other defined services but above the `###################### Please stop editing! #######################` section is ideal.
+* Within your `docker-compose.production.yml` file, you'll need to uncomment the following section and lines so that:
 
 ```bash
-
-###################### LOGS ######################
-# Endusers can change log levels here for debugging
-# Changing log levels will require a container restart.
-
-## Apache Container Logs and Levels
-#
-### Apache Error log - lowercase only please
-# This log is a combination of the Apache web server error and access log 
-# for the domain. Please note it will register only web traffic from the
-# the traefik container.
-#
-# Available output values range from most verbose to least (left to right): 
-# trace8, ..., trace1, debug, info, notice, warn, error, crit, alert, emerg
-#
-### Recommended level is warn
-APACHE_ERROR_LOGLEVEL=warn
-
-## FITS Tool Set Log and Levels
-# The File Information Tool Set (FITS) identifies, validates and extracts technical 
-# metadata for a wide range of file formats.
-# Use the following logs below to debug ingests of PDF, Video, audio and more.
-# 
-# Available output values range from most verbose to least (left to right): 
-# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
-#
-### Recommended levels are ERROR or FATAL
-#
-# Use these logs for general purpose debugging
-FITS_ROOTLOGGER_LOG_LEVEL=ERROR
-FITS_CONSOLE_LOG_LEVEL=ERROR
-
-FITS_UK_GOV_NATIONALARCHIVES_DROID_LOG_LEVEL=FATAL
-FITS_EDU_HARVARD_HUL_OIS_JHOVE_LOG_LEVEL=FATAL
-FITS_ORG_APACHE_TIKA_LOG_LEVEL=ERROR
-FITS_NET_SF_LOG_LEVEL=ERROR
-FITS_ORG_APACHE_PDFBOX_LOG_LEVEL=ERROR
-
-## Fedora Container Loggers and Levels
-#
-# These logs contain information and output concerning the Fedora Commons Repository
-#
-# Available output values range from most verbose to least (left to right): 
-# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
-#
-### Recommended levels are WARN
-#
-# Use these two logs below for general purpose debugging of Fedora
-# Main FEDORA Logger
-FEDORA_ORG_FCREPO_LOG=WARN
-# All other Fedora loggers default level
-FEDORA_ROOT_LOG=WARN
-
-# Fedora Apache CXF™ services framework logger
-FEDORA_ORG_APACHE_CXF_LOG=WARN
-
-# Fedora Security Loggers previously known as the fesl.log
-# This log is typically used for auditing and logging access to Fedora
-FEDORA_ORG_FCREPO_SERVER_SECURITY_JAAS_LOG=WARN
-FEDORA_ORG_FCREPO_SERVER_SECURITY_XACML_LOG=WARN
-
-# Fedora Gsearch logs
-#
-# These logs contain information and output concerning the interaction of Fedora, Gsearch and 
-# Solr Search. Given that most output is the result of successful Gsearch transforms & Solr search queries
-# It is highly recommended that these logs be set to WARN due to the large amount of output.
-#
-# Available output values range from most verbose to least (left to right): 
-# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
-#
-### Recommended levels are WARN
-# 
-# Use these two logs below for general purpose debugging of Fedoragsearch
-GSEARCH_DK_DEFXWS_FEDORAGSEARCH_LOG=WARN
-GSEARCH_ROOT_LOG=WARN
-
-# All other Gsearch loggers default level. 
-# Change levels below only for a larger scale of debugging.
-### Recommended levels are WARN
-GSEARCH_DK_DEFXWS_FGSZEBRA_LOG=WARN
-GSEARCH_DK_DEFXWS_FGSLUCENE_LOG=WARN
-GSEARCH_DK_DEFXWS_FGSSOLR_LOG=WARN
-
-
-## Image Services Container Logs and Levels
-# These logs contain information and output concerning the two image servers
-# Cantaloupe and Adore-Djatoka.
-# 
-# Available output values range from most verbose to least (left to right): 
-# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
-#
-### Recommended levels are ERROR
-#
-# Adore-Djatoka
-ADORE_DJATOKA_ROOT_LOGGER=ERROR
-
-# Cantaloupe (change this one first to debug)
-# Cantaloupe loggers appear to prefer loglevels to be lowercase.
-# otherwise values fail.
-#
-# Available output values range from most verbose to least (left to right): 
-# `trace`, `debug`, `info`, `warn`, `error`, `all`, or `off`
-#
-### Recommended level is error
-CANTALOUPE_LOG_APPLICATION_LEVEL=error
-
-##### SOLR Log Levels #####
-# These logs contain information and output concerning the Solr Search
-# Given that most output is the result of successful Solr search queries
-# It is highly recommended that these logs be set to OFF or WARN due to the
-# large amount of output.
-#
-# Available output values range from most verbose to least (left to right): 
-# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
-#
-### Recommended levels are WARN or OFF
-#
-# Main Solr log (change this one first to debug)
-SOLR_ROOT_LOGGER=WARN
-# These logs most likely can be kept at their default levels of WARN and for the third OFF.
-SOLR_ORG_APACHE_ZOOKEEPER_LOG=WARN
-SOLR_ORG_APACHE_HADOOP_LOG=WARN
-SOLR_ORG_APACHE_SOLR_UPDATE_LOGGINGINFORSTREAM=OFF
-
-## End Logs
+## Varnish
+## Varnish Admin port is 6082
+## varnish is substituted for default value of localhost to be open to apache
+## otherwise Drupal varnish module cannot connect via CLI
+#VARNISH_ADMIN=varnish
+#VARNISH_ADMIN_PORT=6082
+## Varnish backend
+## the apache service is the "backend" for varnish
+#VARNISH_BACKEND=apache
+#VARNISH_BACKEND_PORT=80
+## Varnish Cache Memory Allocation
+#VARNISH_MALLOC=256m
+## Maximum amount of connections
+#VARNISH_MAX_CONNECTIONS=300
+## Varnish secret aka Control key
+#VARNISH_SECRET=isle_varnish_secret
+## Varnish port
+#VARNISH_VARNISH_PORT=6081
 ```
 
-* Add another new block of ENV variables to your main .env file. Above the logging section and beneath all other defined services is fine. 
-
-* Please note we recommned that ISLE endusers only make changes to the following:
-
-  * VARNISH_MALLOC=256m
-  * VARNISH_MAX_CONNECTIONS=300
-  * VARNISH_SECRET=isle_varnish_secret
+becomes:
 
 ```bash
 ## Varnish
@@ -321,18 +250,165 @@ VARNISH_SECRET=isle_varnish_secret
 VARNISH_VARNISH_PORT=6081
 ```
 
+* **Please note** ISLE endusers should only make edits or changes to the following lines:
+  * VARNISH_MALLOC=256m - _you can increase this default setting as needed otherwise leave the default._
+  
+  * VARNISH_MAX_CONNECTIONS=300 - _you can increase this default setting as needed otherwise leave the default._
+  
+  * VARNISH_SECRET=isle_varnish_secret - _you can change this value to any alpha-numeric sequence._
+
+---
+
 * Pull down the new isle images
   * `docker-compose pull`
 
 * Spin up new containers
   * `docker-compose up -d`
 
-* Verify it's working by:
-  * Navigating to https://yourdomain and you can still see the Drupal site. This may take a few minutes depending on the size of the site.
-  * Inspecting the headers of different Drupal pages for the words hit. 
-    * (TO DO) Expand on `hit` or `miss` examples
-  * Checking the Varnish cli for registered content / page requests
-    * (TO DO) Expand on using Varnish console with 1 -2 examples
+* Open up a web browser and navigate to your website.
+  * If you recently restarted your Docker containers, this may take a few minutes depending on the size of the site.
+    * You might first see a Traefik `Bad Gateway` page for a minute or two. You'll need to refresh the page.
+    * You might then see a Varnish followed by a `Error 503 Backend fetch failed` page for a minute or two. You'll need to again refresh the page.
+      * Example Varnish error upon site startup.
+
+```bash
+Error 503 Backend fetch failed
+
+Backend fetch failed
+Guru Meditation:
+
+XID: 3
+
+Varnish cache server
+```
+  
+  * You should now see your website after a few minutes.
+
+* Install the Varnish Drupal modules on your Drupal site
+  * You can choose to run the supplied installer script: (_Examples given below, you may need to change container ids and paths accordingly to match your Production environment_)
+    * On the `Production` host server, copy this script to your apache container. Replace `{{ container_short_id }}` with your respective container id.
+      * `docker cp scripts/varnish/isle_varnish_drupal_module_installer.sh isle-apache-{{ container_short_id }}:/var/www/html/isle_varnish_drupal_installer.sh`
+    * Change permissions on the script
+      * `docker exec isle-apache-{{ container_short_id }} bash -c "cd /var/www/html/ && chmod +x isle_varnish_drupal_installer.sh"`
+    * Run the script
+      * `docker exec isle-apache-{{ container_short_id }} bash -c "cd /var/www/html && ./isle_varnish_drupal_installer.sh"`
+
+* You can now access this new module in the `Home >> Administration >> Configuration >> Development >> Varnish` section of your Drupal site.
+  * Please note: We recommend the following settings. All other settings should be handled by the vsets within the installer script.
+    * `Flush page cache on cron?` set to `Disabled`
+    * `Varnish version` set to `4.x`
+    * `Varnish Control Key Append newline` checkbox should be `checked` with a `check mark`
+    * `The Front domains list` can be left empty
+    * `Varnish Cache Clearing` set to `Drupal Default`
+    * `Varnish ban type` set to `Normal`
+
+  * All other settings e.g. `Varnish Control Terminal` and `Varnish Control Key` are handled by the production.env ENV variables.
+
+* There will also be two other new Drupal modules to access and use:
+  * **Purge** - Accessible from `Home » Administration » Configuration » Development » Performance`
+    * The setting here is handled by the installer script, vset and Varnish ENV. No need to change this value by the enduser.
+  * **Cache Expiration** - Accessible from `Home » Administration » Configuration » System`
+    * The setting here is initially handled by the installer script, vset and Varnish ENV. Enduser can modify as needed but a further explination beyond default settings is out of scope of this document. Recommend using this Drupal modules help page if needed.
+
+* There should be a nice green checkmark at the bottom to indicate `Varnish running`
+
+---
+
+## How to verify that Varnish is working
+
+### Method 1 - Visit your website in a web browser
+
+* Open up a web browser and navigate to your website.
+
+* If you recently restarted your Docker containers, this may take a few minutes depending on the size of the site.
+  * You might first see a Traefik `Bad Gateway` page for a minute or two. You'll need to refresh the page.
+  * You might then see a Varnish followed by a `Error 503 Backend fetch failed` page for a minute or two. You'll need to again refresh the page.
+    * Example Varnish error upon site startup.
+
+```bash
+Error 503 Backend fetch failed
+
+Backend fetch failed
+Guru Meditation:
+
+XID: 3
+
+Varnish cache server
+```
+  
+  * You should now see your website after a few minutes.
+
+### Method 2 - Inspect the headers on one of your site's webpages
+
+* Launch a web
+
+* Inspecting the headers of different Drupal pages for the words hit.
+  * (TO DO) Expand on `hit` or `miss` examples
+
+### Check the Varnish backend admin tool for links
+* Checking the Varnish cli for registered content / page requests
+  * (TO DO) Expand on using Varnish console with 1 -2 examples
+
+### Curl a url and review the headers
+
+* Run a curl command on your local laptop to your site with `curl -I https://yourwebsitehere.com`
+
+The output should look something like this example output below:
+
+```bash
+curl -I https://demo.born-digital.com
+
+HTTP/2 200 
+accept-ranges: bytes
+age: 2075
+cache-control: public, max-age=10800
+content-language: en
+content-type: text/html; charset=utf-8
+date: Mon, 23 Sep 2019 19:27:42 GMT
+etag: W/"1569264015-0-gzip"
+expires: Sun, 19 Nov 1978 05:00:00 GMT
+last-modified: Mon, 23 Sep 2019 18:40:15 GMT
+server: Apache/2.4.41 (Ubuntu)
+vary: Cookie,Accept-Encoding
+via: 1.1 varnish-v4
+x-cache: HIT
+x-cache-hits: 19
+x-content-type-options: nosniff
+x-drupal-cache: HIT
+x-frame-options: SAMEORIGIN
+x-generator: Drupal 7 (http://drupal.org)
+x-varnish: 983097 3
+```
+
+**Please note:** This information specifically
+
+```bash
+via: 1.1 varnish-v4
+x-cache: HIT
+x-cache-hits: 19
+```
+
+indicates that Varnish is not only caching the page but the Varnish cache has received previous "hits" or requests for this page and its contents.
+
+---
+
+## How to clear the Varnish cache
+
+* Everytime the Varnish container is stopped and restarted, the Varnish cache will be reset and rebuilt. (_Easiest and most recommended method_)
+
+* Shell into the Varnish container (_Shouldn't involve restarting the container_). Replace `{{ container_short_id }}` with your respective container id.
+  * `docker exec -it isle-varnish-{{ container_short_id }} bash`
+  * `varnishadm -T 127.0.0.1:6082 url.purge .`
+
+* Additional curl commands and vcl edits can be found within the [Varnish 4.1 documentation](https://varnish-cache.org/docs/4.1/users-guide/purging.html)
+
+## How to review Varnish stats
+
+* Shell into the Varnish container
+  * `docker exec -it isle-varnish-ld bash`
+  * 
+
+* Additional commands can be found in the [Varnish Reporting & Statistics section](https://varnish-cache.org/docs/4.1/users-guide/operation-statistics.html)
 
 ---
 
@@ -340,7 +416,7 @@ VARNISH_VARNISH_PORT=6081
 
 * Please first follow the instructions for installing and using the [TICK stack](tickstack.md)
 
-* If you're pushing log events to [TICK](tickstack.md), add this snippet of code below (_logging instructions_) to the bottom of **every** ISLE service within your `docker-compose.yml` file.
+* If you're pushing log events to [TICK](tickstack.md), this snippet of code below (_logging instructions_) at the bottom of **every** ISLE service within your `docker-compose.production.yml` file should be uncommented. This should include the Varnish service.
 
 ```bash
     logging:
@@ -353,9 +429,7 @@ VARNISH_VARNISH_PORT=6081
 
 ```bash
 varnish:
-  # build:
-  #   context: ../images/isle-varnish
-  image: islandoracollabgroup/isle-varnish:1.1.1
+  image: islandoracollabgroup/isle-varnish:1.3.0
   container_name: isle-varnish-${CONTAINER_SHORT_ID}
   env_file:
     - .env
@@ -375,34 +449,23 @@ varnish:
   logging:
     driver: syslog
     options:
-      tag: "{{.Name}}"        
-```
-
-* Additionally you'll need to remove or comment out every line or reference to logs from the `volumes` section of each service. Varnish by default doesn't log unless directed to manually.
-
-****Example:****
-
-```bash
-    volumes:
-      - isle-solr-data:/usr/local/solr
-      - ./logs/solr:/usr/local/tomcat/logs
-```
-
-becomes
-
-```bash
-    volumes:
-      - isle-solr-data:/usr/local/solr
+      tag: "{{.Name}}"
 ```
 
 ---
 
 ## Uninstallation Instructions
 
-*
-
-*
-
+* Shutdown the ISLE containers
+* Comment out the Varnish service section within the `docker-compose.production.yml` file
+  * Uncomment the last line in the Apache `labels` section.
+* Comment out the Varnish section again in the `production.env` file
+* Startup the ISLE containers again.
+* Shell into the Apache container
+  * `cd /var/www/html`
+  * `drush dis varnish purge expire`
+  * `drush pm-uninstall varnish purge expire`
+  
 ---
 
 ## Maintenance Notes
@@ -429,6 +492,8 @@ becomes
 ## Additional Resources
 
 * [Varnish 4.x Documentation](https://varnish-cache.org/docs/4.1/index.html)
+
+* [The Varnish Users Guide](https://varnish-cache.org/docs/4.1/users-guide/index.html)
 
 * **Please note:**: 
   * [Varnish Software](https://www.varnish-software.com/) is the commercial wing of the Varnish.

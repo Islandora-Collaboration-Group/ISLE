@@ -254,6 +254,36 @@ services:
 # END - Blazegraph service section
 
 
+# Start - Varnish service section
+## (Optional-component): Uncomment lines below to run ISLE with the Varnish cache
+
+#  varnish:
+#    image: borndigital/isle-varnish:1.3.0-dev
+#    container_name: isle-varnish-${CONTAINER_SHORT_ID}
+#    env_file:
+#      - production.env
+#      - .env
+#    networks:
+#      isle-internal:
+#    depends_on:
+#      - mysql
+#      - fedora
+#      - solr
+#      - apache
+#      - traefik
+#    labels:
+#      - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
+#      - traefik.port=6081
+#      - traefik.enable=true
+#      - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /cantaloupe"
+#    logging:
+#      driver: syslog
+#      options:
+#        tag: "{{.Name}}"
+
+# END - Varnish service section
+
+
 # Defined networks
 networks:
   isle-internal:
