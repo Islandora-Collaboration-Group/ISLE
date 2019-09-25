@@ -21,7 +21,7 @@ Docker commands that are useful to installing or updating ISLE.
 ### [Stop Containers](https://docs.docker.com/compose/reference/stop/)
   * `docker-compose stop` # Stops running containers without removing them
   * `docker stop [CONTAINER_NAME(S)]` # Stop one or more named containers
-    * example: `docker stop isle-tomcat isle-solr`
+    * **Example:** `docker stop isle-tomcat isle-solr`
   * `docker stop $(docker ps -a -q)` # **WARNING!** This will stop ALL containers running on the machine.
 
 ### [Stop and Remove Containers](https://docs.docker.com/compose/reference/down/)
@@ -30,24 +30,24 @@ Docker commands that are useful to installing or updating ISLE.
 ### [Pull Containers](https://docs.docker.com/compose/reference/pull/)
   * `docker-compose pull` # Pull down all images from Docker Hub
   * `docker pull [GROUP]/[REPOSITORY]` # Pull one specific image from Docker Hub
-    * example: `docker pull islandoracollabgroup/isle-fedora:latest`
+    * **Example:** `docker pull islandoracollabgroup/isle-fedora:latest`
 
 ### [Up Containers](https://docs.docker.com/compose/reference/up/)
   * `docker-compose up -d` # Launch all containers for this service
 
 ### [Remove Volumes](https://docs.docker.com/engine/reference/commandline/volume_rm/)
   * `docker volume rm [VOLUME_NAME]` # Remove one or more volumes. You cannot remove a volume that is in use by a container.
-    * example: `docker volume rm isle_fed-data`
+    * **Example:** `docker volume rm isle_fed-data`
 
 ### [Remove Containers](https://docs.docker.com/engine/reference/commandline/rm/)
   * `docker rm [CONTAINER_NAME(S)]` # Remove one or more containers
-    * example: `docker rm isle_fed-data`
+    * **Example:** `docker rm isle_fed-data`
 
 ### [Shell Into Docker Container](https://docs.docker.com/v17.12/engine/reference/commandline/exec/)
   * `docker exec -it [CONTAINER_NAME] bash` # Shell Into Docker Container
-    * example: `docker exec -it isle-apache-ld bash`
+    * **Example:** `docker exec -it isle-apache-ld bash`
   * `docker exec -it [CONTAINER_NAME] [FILE_NAME]` # Shell Into Docker Container and Run Script
-    * example: `docker exec -it isle-apache-ld bash -c "cd /utility-scripts/isle_drupal_build_tools && ./isle_islandora_installer.sh`
+    * **Example:** `docker exec -it isle-apache-ld bash -c "cd /utility-scripts/isle_drupal_build_tools && ./isle_islandora_installer.sh`
 
 ### [Docker Service](https://docs.docker.com/engine/reference/commandline/docker/)
   * `sudo service docker status` # Show Docker Status
@@ -56,11 +56,11 @@ Docker commands that are useful to installing or updating ISLE.
 
 ### [Watching Docker Logs](https://docs.docker.com/engine/reference/commandline/logs/)
   * `docker logs -f --tail 10 [CONTAINER_NAME]` # Show the last 10 lines (`--tail 10`) of a container's logs; `-f` means continuous/live feed
-    * example: `docker logs -f --tail 10 isle-apache-ld`
+    * **Example:** `docker logs -f --tail 10 isle-apache-ld`
 
 ### [Locate Docker Volume](https://docs.docker.com/engine/reference/commandline/volume_inspect/)
   * `docker volume inspect [VOLUME_NAME]` # Locate Docker Volume
-    * example: `docker volume inspect isle_fed-data`
+    * **Example:** `docker volume inspect isle_fed-data`
     * resultant display is a JSON array that contains a location like this:
         * `"Mountpoint": "/var/lib/docker/volumes/isle_fed-data/_data"`
 
@@ -87,21 +87,21 @@ Docker commands that are useful to installing or updating ISLE.
 
 ### Quickly View a File, Using `cat`
   * usage: `cat [FILE_NAME]`
-  * example: `cat /etc/hosts`
+  * **Example:** `cat /etc/hosts`
 
 ### Ping to Test Connectivity
   * usage: `ping [DOMAIN]`
-  * example: `ping www.google.com`
-  * example: `ping isle.localdomain`
+  * **Example:** `ping www.google.com`
+  * **Example:** `ping isle.localdomain`
 
 ### DNS Lookup and Querying Tool
   * usage: `dig [DOMAIN]`
-  * example: `dig www.google.com`
-  * example: `dig isle.localdomain`
+  * **Example:** `dig www.google.com`
+  * **Example:** `dig isle.localdomain`
 
 ### EXTREME CAUTION: Remove Directory: Recursively and with Force
   * usage: `sudo rm -rf [DIRECTORY_NAME]`
-  * example: `sudo rm -rf /var/tmp/scrap/`
+  * **Example:** `sudo rm -rf /var/tmp/scrap/`
 
 
 # *CAREFUL! BELOW THERE BE DRAGONS*
