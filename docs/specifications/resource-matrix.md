@@ -56,6 +56,21 @@ The tuning and configuration of ISLE can vary based on system resources and traf
 
 ---
 
+### High Volume Ingest
+
+When planning for ingesting objects at a high volume and rate, it would be highly advisable to consider the following prior to starting any large ingest:
+
+* As the Apache container will be under a high load to create derivatives:
+  * Add a minimum of at least `4 GB` of memory to your Staging and Production systems.
+  * If possible, add an additional `1 -2 CPUs` to your Staging and Production systems.
+
+* Anticipate the size of the incoming objects or collections (data) to be ingested and double-check that you have storage capacity on your Staging and Production systems.
+  * This can vary greatly depending on content types and size of objects to be ingested.
+  * A good rule of thumb is to conservatively factor in that newly created derivatives and additional datastreams will take up to 1.25 to 1.5 x your storage space.  
+    * For example if an ISLE enduser has `50 GB` of tiffs to be ingested, they should plan on having a minimum of `60 - 75 GB` of available storage space. This isn't always a hard and fast rule but will avoid situations where space runs out mid-ingest.
+
+---
+
 #### Varnish allocation for a Production system
 
 * **Example configuration** for a Production ISLE host server using `16 GB` of memory.
