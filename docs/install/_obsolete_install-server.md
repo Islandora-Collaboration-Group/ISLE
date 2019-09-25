@@ -194,7 +194,7 @@ This process may take 10-20 minutes (_depending on system and internet speeds_)
 
 * Run the install site script on the Apache container by copying and pasting this command:
 [TODO: A server install should not be told to run this script: we want the install to be persistent, not ephemeral.]
-    * `docker exec -it isle-apache-ld bash -c "cd /utility-scripts/isle_drupal_build_tools && ./isle_islandora_installer.sh`
+    * `docker exec -it isle-apache-ld bash -c "cd /utility-scripts/isle_drupal_build_tools && ./isle_islandora_installer.sh"`
 
 * Check the newly created and running new site by opening a browser and navigating to your site domain e.g. `https://project-name.yourdomain.edu`, you should now see an un-themed Drupal site.
 
