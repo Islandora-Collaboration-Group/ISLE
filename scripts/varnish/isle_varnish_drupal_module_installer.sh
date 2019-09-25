@@ -4,11 +4,11 @@
 ##
 ## Example steps for running this script
 ## On the host server, copy this script to the apache container
-## docker cp isle_varnish_drupal_installer.sh isle-apache-{{ container_short_id }}:/var/www/html/isle_varnish_drupal_installer.sh
+## docker cp isle_varnish_drupal_module_installer.sh isle-apache-{{ container_short_id }}:/var/www/html/isle_varnish_drupal_module_installer.sh
 ## Change permissions on the script
-## docker exec isle-apache-{{ container_short_id }} bash -c "cd /var/www/html/ && chmod +x isle_varnish_drupal_installer.sh"
+## docker exec isle-apache-{{ container_short_id }} bash -c "cd /var/www/html/ && chmod +x isle_varnish_drupal_module_installer.sh"
 ## Run the script
-## docker exec isle-apache-{{ container_short_id }} bash -c "cd /var/www/html && ./isle_varnish_drupal_installer.sh"
+## docker exec isle-apache-{{ container_short_id }} bash -c "cd /var/www/html && ./isle_varnish_drupal_module_installer.sh"
 
 ## Install Varnish related Drupal Modules
 echo "Download, install and enable the Drupal varnish module"
