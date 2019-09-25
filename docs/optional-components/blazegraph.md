@@ -254,13 +254,6 @@ Example is for a `Staging` instance
 
 ---
 
-## Maintenance Notes
-
-*
-*
-
----
-
 ## Need help?
 
 * Please use the following as resources for institutions or endusers needing support
