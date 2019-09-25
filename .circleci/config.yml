@@ -47,9 +47,9 @@ jobs:
       - run:
           name: Set up Varnish
           command: |
-            docker cp scripts/isle_varnish_drupal_installer.sh isle-apache-td:/var/www/html/isle_varnish_drupal_installer.sh
-            docker exec isle-apache-td bash -c "cd /var/www/html/ && chmod +x isle_varnish_drupal_installer.sh"
-            docker exec isle-apache-td bash -c "cd /var/www/html && ./isle_varnish_drupal_installer.sh"
+            docker cp scripts/varnish/isle_varnish_drupal_module_installer.sh isle-apache-td:/var/www/html/isle_varnish_drupal_installer.sh
+            docker exec isle-apache-td bash -c "cd /var/www/html/ && chmod +x isle_varnish_drupal_module_installer.sh"
+            docker exec isle-apache-td bash -c "cd /var/www/html && ./isle_varnish_drupal_module_installer.sh"
           no_output_timeout: 10m
       - run:
           # While we don't need these if we're not doing bulk ingest, sometimes they are dependencies for batch functions
