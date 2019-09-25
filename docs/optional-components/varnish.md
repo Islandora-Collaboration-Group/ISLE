@@ -33,7 +33,7 @@
 * [ISLE](https://github.com/Islandora-Collaboration-Group/ISLE) release version `1.3.0`
   * `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
 
-* Existing ISLE `Local`, `Staging` and `Production` systems and running websites
+* Existing ISLE Local, Staging and Production systems and running websites
 
 * Existing ISLE git repository
 
@@ -53,7 +53,7 @@
   * There are additional potential memory allocation and tuning recommendations for Varnish from [Varnish-software](https://info.varnish-software.com/blog/understanding-varnish-cache-memory-usage)
   * If you need to read more about how to use or change Varnish's cache settings, please start [here](https://varnish-cache.org/docs/4.1/users-guide/storage-backends.html)
 
-* **Recommendation** Adding more memory to the `Production` ISLE host system from the default recommended `16 GB` might be recommended here if running all optional components e.g. `isle-varnish`,  `isle-blazegraph`, the TICK stack, etc.
+* **Recommendation** Adding more memory to the Production ISLE host system from the default recommended `16 GB` might be recommended here if running all optional components e.g. `isle-varnish`,  `isle-blazegraph`, the TICK stack, etc.
 
 * There is no new software required on any ISLE host machine.
 
@@ -81,21 +81,21 @@
 
 ## Adoption Process Overview
 
-The installation instructions below will walk you through how to setup and run the optional Varnish container on only your ISLE `Production` system to cache assets for highly trafficked Islandora sites in addition to adding new Drupal modules to your existing `Production` Drupal / Islandora website to interact and manage the Varnish cache.
+The installation instructions below will walk you through how to setup and run the optional Varnish container on only your ISLE Production system to cache assets for highly trafficked Islandora sites in addition to adding new Drupal modules to your existing Production Drupal / Islandora website to interact and manage the Varnish cache.
 
-**Please note**: ISLE endusers are of course welcome to run Varnish on their `Staging` systems if they want but it is recommended that endusers simply test on their `Local` instances, deploy code changes to both `Staging` and `Production` but only run Varnish on their `Production` ISLE systems.
+**Please note**: ISLE endusers are of course welcome to run Varnish on their Staging systems if they want but it is recommended that endusers simply test on their Local instances, deploy code changes to both Staging and Production but only run Varnish on their Production ISLE systems.
 
 * You'll start by backing up all important data as needed.
 
-* On your `Local` ISLE Apache container, you'll run the Varnish installation script and then check in the resulting Drupal code changes into your Islandora / Drupal git repository.
+* On your Local ISLE Apache container, you'll run the Varnish installation script and then check in the resulting Drupal code changes into your Islandora / Drupal git repository.
 
-* Following best practices of "code up and data down", pull the resulting Drupal code changes from your `Local` upstream to your `Staging` and `Production` systems.
+* Following best practices of "code up and data down", pull the resulting Drupal code changes from your Local upstream to your Staging and Production systems.
 
 * **RELEASE TESTING** You'll download new ISLE images temporarily tagged as `1.3.0-dev` instead of the standard ISLE `1.3.0`.
   * **Please note:** _This is a temporary process until all ISLE Phase II UAT testing is completed and the images can be released._
   * You'll download a new ISLE image called `isle-varnish:1.3.0-dev`
 
-* You'll make additional edits and modifications to the following ISLE configuration files on your `Local` system, check them into git and then pull the code on your `Staging` and `Production` systems.
+* You'll make additional edits and modifications to the following ISLE configuration files on your Local system, check them into git and then pull the code on your Staging and Production systems.
   * `docker-compose.production.yml`
     * Uncommenting the varnish service section
     * Commenting out a line in the apache service section
@@ -122,7 +122,7 @@ The installation instructions below will walk you through how to setup and run t
 
 * This installation process will give the functionality as stated in the `Systems Requirements` image table above for `Varnish` testing and usage.
 
-* Running ISLE `Local`, `Staging` and `Production` sites and systems with ingested objects and content.
+* Running ISLE Local, Staging and Production sites and systems with ingested objects and content.
 
 ---
 
@@ -130,7 +130,7 @@ The installation instructions below will walk you through how to setup and run t
 
 #### ISLE Local development
 
-* Shut down your running containers on your ISLE `Local` instance.
+* Shut down your running containers on your ISLE Local instance.
   * `docker-compose down`
 
 #### Edits - docker-compose.production.yml file
@@ -203,7 +203,7 @@ so that it will now look like this and its formatting should line up appropriate
 # END - Varnish service section
 ```
 
-* **Please note:** If you **are not** using TICK with your `Production` system, then you don't need to uncomment the entire `logging:` area and lines. Leave them uncommented.
+* **Please note:** If you **are not** using TICK with your Production system, then you don't need to uncomment the entire `logging:` area and lines. Leave them uncommented.
 
 * Comment out the last line in your `apache` service `labels` section so that Varnish can "take over" handling and routing web traffic.
 
@@ -283,9 +283,9 @@ VARNISH_VARNISH_PORT=6081
 * Spin up new containers
   * `docker-compose up -d`
 
-* Install the Varnish Drupal modules on your `Local` Drupal site
+* Install the Varnish Drupal modules on your Local Drupal site
   * Use the supplied installer script: (_Examples given below, you may need to change container ids and paths accordingly to match your local environment_)
-    * On the `Production` host server, copy this script to your apache container. Replace `{{ container_short_id }}` with your respective `Local` container id.
+    * On the Production host server, copy this script to your apache container. Replace `{{ container_short_id }}` with your respective Local container id.
       * `docker cp scripts/varnish/isle_varnish_drupal_module_installer.sh isle-apache-{{ container_short_id }}:/var/www/html/isle_varnish_drupal_installer.sh`
     * Change permissions on the script
       * `docker exec isle-apache-{{ container_short_id }} bash -c "cd /var/www/html/ && chmod +x isle_varnish_drupal_installer.sh"`
@@ -293,7 +293,7 @@ VARNISH_VARNISH_PORT=6081
       * `docker exec isle-apache-{{ container_short_id }} bash -c "cd /var/www/html && ./isle_varnish_drupal_installer.sh"`
 
 * Commit the changed files to your Islandora / Drupal git repository.
-  * Navigate to this path on your `Local` host machine, typically this is the path bind-mounted in your `docker-compose.local.yml` to the Apache container's `/var/www/html` directory
+  * Navigate to this path on your Local host machine, typically this is the path bind-mounted in your `docker-compose.local.yml` to the Apache container's `/var/www/html` directory
   * `git status` - this will show you all of the changed files.
   * `git add path/file` - add each changed file as necessary
   * `git commit -m "Adding Varnish Drupal modules"` - Your git message can be anything of your choosing
@@ -316,9 +316,9 @@ VARNISH_VARNISH_PORT=6081
   * **Cache Expiration** - Accessible from `Home » Administration » Configuration » System`
     * The setting here is initially handled by the installer script, vset and Varnish ENV. Enduser can modify as needed but a further explination beyond default settings is out of scope of this document. Recommend using this Drupal modules help page if needed.
 
-* There should be a nice green checkmark at the bottom to indicate `Varnish running` once / if you have also spun up the Varnish container. If you choose to not spin up and configure the Varnish container on your `Local`, your `Local` ISLE system will continue to run properly but these three Drupal modules may have a red warning or two about not being able to connect to Varnish.
+* There should be a nice green checkmark at the bottom to indicate `Varnish running` once / if you have also spun up the Varnish container. If you choose to not spin up and configure the Varnish container on your Local, your Local ISLE system will continue to run properly but these three Drupal modules may have a red warning or two about not being able to connect to Varnish.
 
-* If testing Varnish on your `Local`, open up a web browser and navigate to your `Local` website.
+* If testing Varnish on your Local, open up a web browser and navigate to your Local website.
   * If you recently restarted your Docker containers, this may take a few minutes depending on the size of the site.
     * You might first see a Traefik `Bad Gateway` page for a minute or two. You'll need to refresh the page.
     * You might then see a Varnish followed by a `Error 503 Backend fetch failed` page for a minute or two. You'll need to again refresh the page.
@@ -337,15 +337,15 @@ XID: 3
 Varnish cache server
 ```
 
-* If continuing to test on your `Local`, please review the section below `How to verify that Varnish is working` for available testing methods.
+* If continuing to test on your Local, please review the section below `How to verify that Varnish is working` for available testing methods.
 
-* Once satisfied that everything is running properly on your `Local`, move onto the `Deployment to Production and Staging` section.
+* Once satisfied that everything is running properly on your Local, move onto the `Deployment to Production and Staging` section.
 
 ---
 
 #### Deployment to Production and Staging
 
-* Once satisfied that everything is running properly on your `Local`, you'll need to commit all remaining ISLE config changes as well to push upstream to your `Production` instance. While you can keep Varnish running on your local, we suggest that you instead back out the ISLE config changes on your `Local` and only keep them on `Production`.
+* Once satisfied that everything is running properly on your Local, you'll need to commit all remaining ISLE config changes as well to push upstream to your Production instance. While you can keep Varnish running on your local, we suggest that you instead back out the ISLE config changes on your Local and only keep them on Production.
 
 * Commit the changed files to your ISLE git repository.
   * Navigate to the root of your ISLE project via a terminal or git GUI client.
@@ -356,26 +356,26 @@ Varnish cache server
 
 ##### Quick deployment to Staging for code parity
 
-* On your `Staging` system:
+* On your Staging system:
   * Shutdown your containers from your ISLE project directory root found typically in `/opt/`
     * `docker-compose down`
   * Run `git pull origin master` - (_Replace `master` with the actual git branch you are using for ISLE development if needed_)
-    * While you may not be deploying Varnish to your `Staging` system, it is a wise idea to not have code drift.
-  * Repeat this process with your Islandora / Drupal code to ensure parity between `Staging` and `Production`
+    * While you may not be deploying Varnish to your Staging system, it is a wise idea to not have code drift.
+  * Repeat this process with your Islandora / Drupal code to ensure parity between Staging and Production
   * Spin your containers back up
   * Run the supplied installer script: (_Examples given below, you may need to change container ids and paths accordingly to match your Staging environment_)
-    * On the `Staging` host server, copy this script to your apache container. Replace `{{ container_short_id }}` with your respective `Staging` container id.
+    * On the Staging host server, copy this script to your apache container. Replace `{{ container_short_id }}` with your respective Staging container id.
       * `docker cp scripts/varnish/isle_varnish_drupal_module_installer.sh isle-apache-{{ container_short_id }}:/var/www/html/isle_varnish_drupal_installer.sh`
     * Change permissions on the script
       * `docker exec isle-apache-{{ container_short_id }} bash -c "cd /var/www/html/ && chmod +x isle_varnish_drupal_installer.sh"`
     * Run the script
       * `docker exec isle-apache-{{ container_short_id }} bash -c "cd /var/www/html && ./isle_varnish_drupal_installer.sh"`
     * The script will complain about the Drupal modules being enabled but will complete.
-   * Perform a quick QC of the site and system to ensure no issues have resulted. Once finished move onto deploying to `Production`
+   * Perform a quick QC of the site and system to ensure no issues have resulted. Once finished move onto deploying to Production
 
 ##### Deployment to Production
 
-* On your `Production` system:
+* On your Production system:
   * Shutdown your containers from your ISLE project directory root found typically in `/opt/`
     * `docker-compose down`
   * Run `git pull origin master` - (_Replace `master` with the actual git branch you are using for ISLE development if needed_)
@@ -388,7 +388,7 @@ Varnish cache server
   * `docker-compose up -d`
 
  * Run the supplied installer script: (_Examples given below, you may need to change container ids and paths accordingly to match your Production environment_)
-  * On the `Production` host server, copy this script to your apache container. Replace `{{ container_short_id }}` with your respective `Staging` container id.
+  * On the Production host server, copy this script to your apache container. Replace `{{ container_short_id }}` with your respective Staging container id.
     * `docker cp scripts/varnish/isle_varnish_drupal_module_installer.sh isle-apache-{{ container_short_id }}:/var/www/html/isle_varnish_drupal_installer.sh`
   * Change permissions on the script
     * `docker exec isle-apache-{{ container_short_id }} bash -c "cd /var/www/html/ && chmod +x isle_varnish_drupal_installer.sh"`
@@ -415,7 +415,7 @@ Varnish cache server
 
 * There should be a nice green checkmark at the bottom to indicate `Varnish running` once / if you have also spun up the Varnish container. If any of the three Drupal modules have a red warning or two about not being able to connect to Varnish, then you'll need to retrace your steps and troubleshoot.
 
-* Open up a web browser and navigate to your `Production` website.
+* Open up a web browser and navigate to your Production website.
   * If you recently restarted your Docker containers, this may take a few minutes depending on the size of the site.
     * You might first see a Traefik `Bad Gateway` page for a minute or two. You'll need to refresh the page.
     * You might then see a Varnish followed by a `Error 503 Backend fetch failed` page for a minute or two. You'll need to again refresh the page.
@@ -434,15 +434,15 @@ XID: 3
 Varnish cache server
 ```
 
-* If continuing to test on your `Production` system, please review the section below `How to verify that Varnish is working` for available testing methods.
+* If continuing to test on your Production system, please review the section below `How to verify that Varnish is working` for available testing methods.
 
-* We also recommend a final QC on your `Production` system, reviewing all logs, displayed objects and searches.
+* We also recommend a final QC on your Production system, reviewing all logs, displayed objects and searches.
 
 ---
 
 ## How to verify that Varnish is working
 
-Any of these methods below will work for testing on your `Local` or general use on `Production`
+Any of these methods below will work for testing on your Local or general use on Production
 
 ### Method 1 - Visit your website in a web browser
 
@@ -545,7 +545,7 @@ There are multiple tools that can be used to interacte with the Varnish cache. A
 
 * Please first follow the instructions for installing and using the [TICK stack](tickstack.md)
 
-* If you're pushing log events to [TICK](tickstack.md), this snippet of code below (_logging instructions_) at the bottom of **every** ISLE service within your `docker-compose.production.yml` file should be uncommented. This should include the Varnish service. By default the uncommented Varnish section in the `Production` `docker-compose.production.yml` file will have this snippet of code below.
+* If you're pushing log events to [TICK](tickstack.md), this snippet of code below (_logging instructions_) at the bottom of **every** ISLE service within your `docker-compose.production.yml` file should be uncommented. This should include the Varnish service. By default the uncommented Varnish section in the Production `docker-compose.production.yml` file will have this snippet of code below.
 
 ```bash
     logging:
@@ -585,7 +585,7 @@ varnish:
 
 ## Uninstallation Instructions
 
-* Shutdown the ISLE containers on your `Local` system
+* Shutdown the ISLE containers on your Local system
   * Comment out the Varnish service section in either of the `docker-compose.production.yml` or `docker-compose.local.yml` file(s)
     * Uncomment the last line in the Apache `labels` section in either of the `docker-compose.production.yml` or `docker-compose.local.yml` file(s)
 * Comment out the Varnish section again in the `production.env` or `local.env` file
@@ -595,7 +595,7 @@ varnish:
   * `drush dis varnish purge expire`
   * `drush pm-uninstall varnish purge expire`
 * Commit the resulting code changes in both the ISLE and Islandora git repositories.
-* Deploy these changes to your `Staging` and `Production` systems
+* Deploy these changes to your Staging and Production systems
 
 ---
 
