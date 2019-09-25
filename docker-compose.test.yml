@@ -197,8 +197,6 @@ services:
     image: selenium/node-chrome:3.141.59-neon # latest
     container_name: isle-chrome-${CONTAINER_SHORT_ID}
     environment:
-      # - HUB_PORT_4444_TCP_ADDR=hub
-      # - HUB_PORT_4444_TCP_PORT=4444
       - HUB_PORT=4444
       - HUB_HOST=hub
     networks:

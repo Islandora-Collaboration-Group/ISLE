@@ -19,7 +19,7 @@
     * Blazegraph / Fedora service changes in the .envs to allow toggling
     * Blazegraph logging added in the .envs
     * Optional Blazegraph service added to all docker-compose(s) (commented out)
-* Automated Testing  (TO DO - description)
+* Automated Testing  - updated to include Varnish and Blazegraph in base test suite; and updated instructions to correspond with revised test repository location and keywords/names.
 * Updates for High Volume Ingest - Loc.gov local Proxy (TO DO - description)
 * Resource matrix document for - Local, staging, production e.g. RAM, CPU, tuning etc.
 
