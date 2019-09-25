@@ -96,10 +96,10 @@ The installation instructions below will walk you through how to setup and run t
   * You'll download a new ISLE image called `isle-varnish:1.3.0-dev`
 
 * You'll make additional edits and modifications to the following ISLE configuration files on your Local system, check them into git and then pull the code on your Staging and Production systems.
-  * `docker-compose.production.yml`
+  * `docker-compose.production.yml` &  `docker-compose.local.yml`
     * Uncommenting the varnish service section
     * Commenting out a line in the apache service section
-  * `production.env`
+  * `production.env` & `local.env`
     * Making any necessary edits to the new Varnish ENV section
 
 * You'll perform a `docker-compose pull` to pull down any new images.
@@ -137,7 +137,77 @@ The installation instructions below will walk you through how to setup and run t
 
 * **Release testers** - (You'll need to copy this commented out Varnish section below into your `docker-compose.local.yml` or `docker-compose.demo.yml` at the bottom below the Blazegraph section and above the `# Defined networks` section. You'll then need to uncomment everything between `varnish:` and `labels`. Do not uncomment the `logging` section on your test demo or local as most likely they don't use TICK.)
 
-* Within your `docker-compose.production.yml` file, you'll need to uncomment the following section:
+* Within your `docker-compose.production.yml` & `docker-compose.local.yml` files, you'll need to uncomment the following section:
+
+**Example: docker-compose.local.yml**
+
+```bash
+# Start - Varnish service section
+## (Optional-component): Uncomment lines below to run ISLE with the Varnish cache
+
+#  varnish:
+#    image: borndigital/isle-varnish:1.3.0-dev
+#    container_name: isle-varnish-${CONTAINER_SHORT_ID}
+#    env_file:
+#      - local.env
+#      - .env
+#    networks:
+#      isle-internal:
+#    depends_on:
+#      - mysql
+#      - fedora
+#      - solr
+#      - apache
+#      - traefik
+#    labels:
+#      - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
+#      - traefik.port=6081
+#      - traefik.enable=true
+#      - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /cantaloupe"
+#    logging:
+#      driver: syslog
+#      options:
+#        tag: "{{.Name}}"
+
+# END - Varnish service section
+```
+
+so that it will now look like this and its formatting should line up appropriately with other ISLE services.
+
+**Example: docker-compose.local.yml**
+
+```bash
+# Start - Varnish service section
+## (Optional-component): Uncomment lines below to run ISLE with the Varnish cache
+
+  varnish:
+    image: borndigital/isle-varnish:1.3.0-dev
+    container_name: isle-varnish-${CONTAINER_SHORT_ID}
+    env_file:
+      - local.env
+      - .env
+    networks:
+      isle-internal:
+    depends_on:
+      - mysql
+      - fedora
+      - solr
+      - apache
+      - traefik
+    labels:
+      - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
+      - traefik.port=6081
+      - traefik.enable=true
+      - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /cantaloupe"
+    logging:
+      driver: syslog
+      options:
+        tag: "{{.Name}}"
+
+# END - Varnish service section
+```
+
+**Example: docker-compose.production.yml**
 
 ```bash
 # Start - Varnish service section
@@ -171,6 +241,8 @@ The installation instructions below will walk you through how to setup and run t
 ```
 
 so that it will now look like this and its formatting should line up appropriately with other ISLE services.
+
+**Example: docker-compose.production.yml**
 
 ```bash
 # Start - Varnish service section
@@ -218,11 +290,9 @@ so that it will now look like this and its formatting should line up appropriate
 
 ---
 
-#### Varnish Edits - production.env file
+#### Varnish Edits - production.env & local.env file(s)
 
-* **Release testers** - (You'll need to copy this commented out Varnish section below into your `local.env` or `demo.env` at the bottom below the Blazegraph section and above the `Logs` section. You'll then need to follow the same instructions for uncommenting lines.
-
-* Within your `docker-compose.production.yml` file, you'll need to uncomment the following section and lines so that:
+* Within your `production.env` and `local.env` file`, you'll need to uncomment the following section and lines so that:
 
 ```bash
 ## Varnish
