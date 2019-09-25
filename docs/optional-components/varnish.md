@@ -468,16 +468,22 @@ Varnish cache server
 
 ### Method 2 - Inspect the headers on one of your site's webpages
 
-* Launch a web
+* Launch a web browser (_Chrome., Safari or Firefox_) and navigate to your website
 
-* Inspecting the headers of different Drupal pages for the words hit.
-  * (TO DO) Expand on `hit` or `miss` examples
+* To inspect the headers, right click on the page and choose `Inspect`
 
-### Check the Varnish backend admin tool for links
-* Checking the Varnish cli for registered content / page requests
-  * (TO DO) Expand on using Varnish console with 1 -2 examples
+* This should launch the browser's built-in tools suite, select `Network`
+  * You'll need to refresh / reload the page again to see objects
+  * Look for the page url and click on it.
+    * Your should see entries like the following:
 
-### Curl a url and review the headers
+```bash
+via: 1.1 varnish-v4
+x-cache: HIT
+x-cache-hits: 2
+```
+
+### Method 3 - Curl a url and review the headers
 
 * Run a curl command on your local laptop to your site with `curl -I https://yourwebsitehere.com`
 
@@ -515,6 +521,11 @@ via: 1.1 varnish-v4
 x-cache: HIT
 x-cache-hits: 19
 ```
+
+### Method 4 - Backend tools
+
+* You can use tools like `varnishtop`, `varnishstat`, `varnishlog` or `varnishhist` to view traffic on the Varnish container.
+  * Please navigate down to the `Varnish utilities and tools` section for more details.
 
 ---
 
