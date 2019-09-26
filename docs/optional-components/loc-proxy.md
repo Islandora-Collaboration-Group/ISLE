@@ -93,7 +93,7 @@ becomes
 **Code snippet:**
 
 ```bash
-    ,Host:loc.gov
+    ,Host:www-loc.gov
 ```          
 
 **Example on a Production system**
@@ -112,9 +112,9 @@ becomes
     labels:
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
       - traefik.enable=true
-      - "traefik.frontend.rule=Host:${BASE_DOMAIN},Host:loc.gov; PathPrefix: /, /cantaloupe"
+      - "traefik.frontend.rule=Host:${BASE_DOMAIN},Host:www-loc.gov; PathPrefix: /, /cantaloupe"
 ```
-* Please note: There is no space between `${BASE_DOMAIN},Host:loc.gov;`
+* Please note: There is no space between `${BASE_DOMAIN},Host:www-loc.gov;`
 
 ---
 
