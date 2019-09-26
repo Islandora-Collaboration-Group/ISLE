@@ -29,26 +29,22 @@
 
 ### ISLE Images
 
-(_These tags are for usage during Phase II Sprints only and will change during the release process._)
-
-(_Phase II Sprints only_)
-
 | Service | Repository | Tag |
 | ---     | ---        | --- |
-| Apache | [islandoracollabgroup/isle-apache](https://cloud.docker.com/u/borndigital/repository/docker/islandoracollabgroup/isle-apache/tags) | `ISLE-v.1.3.0-dev`|
-| Blazegraph | [islandoracollabgroup/isle-blazegraph](https://cloud.docker.com/u/borndigital/repository/docker/islandoracollabgroup/isle-blazegraph) | `ISLE-v.1.3.0-dev`|
-| Fedora | [islandoracollabgroup/isle-fedora](https://cloud.docker.com/u/borndigital/repository/docker/islandoracollabgroup/isle-fedora/tags) | `ISLE-v.1.3.0-dev`|
-| Image-services | [islandoracollabgroup/isle-imageservices](https://cloud.docker.com/u/borndigital/repository/docker/islandoracollabgroup/isle-imageservices) | `ISLE-v.1.3.0-dev` |
-| MySQL | [islandoracollabgroup/isle-mysql](https://cloud.docker.com/u/borndigital/repository/docker/islandoracollabgroup/isle-mysql) | `ISLE-v.1.3.0-dev` |
+| Apache | [islandoracollabgroup/isle-apache](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-apache/tags) | `1.3.0`|
+| Blazegraph | [islandoracollabgroup/isle-blazegraph](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-blazegraph) | `1.3.0`|
+| Fedora | [islandoracollabgroup/isle-fedora](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-fedora/tags) | `1.3.0`|
+| Image-services | [islandoracollabgroup/isle-imageservices](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-imageservices) | `1.3.0` |
+| MySQL | [islandoracollabgroup/isle-mysql](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-mysql) | `1.3.0` |
 | Portainer | [portainer/portainer](https://hub.docker.com/r/portainer/portainer) | `latest` |
-| Solr  | [islandoracollabgroup/isle-solr](https://cloud.docker.com/u/borndigital/repository/docker/islandoracollabgroup/isle-solr/tags) | `ISLE-v.1.3.0-dev` |
+| Solr  | [islandoracollabgroup/isle-solr](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-solr/tags) | `1.3.0` |
 | Traefik | [traefik/traefik](https://hub.docker.com/_/traefik) | `1.7.9` |
 
 * Additional systems overhead, including:
   
   * Add an additional 2 GB RAM in total ISLE Host memory for Blazegraph to run
   
-  * Plan on an additional 25-100+ GB disk space for “big_data” resource index persistence if running on `Staging` and/or `Production` ISLE instances.
+  * Plan on an additional 25-100+ GB disk space for “big_data” resource index persistence if running on Staging and/or Production ISLE instances.
     * This index (`/var/bigdata/bigdata.jnl`) will grow quickly overtime and file sizes of over 25GB or more are possible with Fedora repositories that have over 1 million objects.
 
   * To persist this file and directory in a bind-mount instead of a Docker volume, an edit will need to be made to the `docker-compose.yml` file in the `blazegraph` service, `volume` section.
@@ -66,9 +62,7 @@
 
 * You'll stop any running containers
 
-* You'll download new ISLE images temporarily tagged as `ISLE-v.1.3.0-dev` instead of the standard ISLE `1.3.0`.
-  * **Please note:** _This is a temporary process until all ISLE Phase II UAT testing is completed and the images can be released._
-  * You'll download a new ISLE image called `isle-blazegraph:ISLE-v.1.3.0-dev`
+* You'll download ISLE images including a new ISLE image called `isle-blazegraph`
 
 * You'll make additional edits and modifications to the following ISLE configuration files:
   * `docker-compose.local.yml`
@@ -78,7 +72,7 @@
 
 * You'll re-index your Fedora Resource & SQL indices and ensure that the new Blazegraph triplestore is displaying triples.
 
-* You can _optionally_ use and/or setup the new [TICK stack](tickstack.md) to monitor this container and service on `Staging` and `Production` instances.
+* You can _optionally_ use and/or setup the new [TICK stack](tickstack.md) to monitor this container and service on Staging and Production instances.
 
 ---
 
@@ -101,9 +95,7 @@
 * Shut down your running containers if any. Precautionary step.
   * `docker-compose down`
 
-* For Phase II UAT testing of Blazegraph and Varnish the image tags of these services are already in place to use the newly created `borndigital` images for testing.
-
-* Within the `local.env` or `demo.env` file for testing, there is a new block of ENV variables.
+* Within the environment (.env files e.g. demo.env, local.env etc) there is a new block of ENV variables to use.
 
   * If using Blazegraph, you will have to change the `FEDORA_RESOURCE_INDEX=mulgara` to `FEDORA_RESOURCE_INDEX=blazegraph`
 
@@ -121,7 +113,7 @@
 # Please note: If you mistype or leave this value blank, more than likely Fedora won't work properly.
 FEDORA_RESOURCE_INDEX=mulgara
 
-# Set below as a variable for Fedora to start up properly, helps with env-set.sh 
+# Set below as a variable for Fedora to start up properly, helps with env-set.sh
 FEDORA_WEBAPP_HOME=/usr/local/tomcat/webapps/fedora
 
 ## End Fedora Repository
@@ -147,9 +139,9 @@ FEDORA_WEBAPP_HOME=/usr/local/tomcat/webapps/fedora
 
 * If you have switched to Blazegraph, then you'll need to re-index the Fedora repository so that the new Blazegraph triplestore is used instead of the previously used Mulgara triplestore.
 
-  * **WARNING** - With Fedora repositories of 600K+ objects or more, **these indexing processes will take double-digit hours to days** depending on the complexity of the object relationships, ontology, etc.
+  * **WARNING** - With Fedora repositories of 600K+ objects or more, **these indexing processes will take double-digit hours to days** depending on the complexity of the object relationships, ontology, etc. when re-indexing on Staging or Production systems.
   
-  * When re-indexing in this manner, we recommend the use of the `screen` program which will allow an end-user to disengage from a long continuous bash session and terminal based command without breaking the process. (_optional and typically used more often in a `Staging` and/or `Production` environment_)
+  * When re-indexing in this manner, we recommend the use of the `screen` program which will allow an end-user to disengage from a long continuous bash session and terminal based command without breaking the process. (_optional and typically used more often in a Staging and/or Production environment_)
 
     * You may need to install `screen` on your ISLE host server. Skip this if using on a demo or local instance.
       * Ubuntu - `sudo apt-get install screen`
@@ -182,7 +174,7 @@ Checking the triples count is an easy way to double-check if objects are being i
 To check the triples count in Blazegraph:
 
 * Navigate to the Blazegraph Admin panel http://isle.localdomain:8084/blazegraph/#query
-  * Replace `isle.localdomain` with your real domain when using in Staging or Production
+  * Replace `isle.localdomain` with your real domain when using in a Local, Staging or Production
 
 * Copy and paste the following query into the field with the text (_Input a SPARQL query_):
 
@@ -219,12 +211,12 @@ SELECT (COUNT(*) AS ?triples) WHERE {?s ?p ?o}
 
 ****Example:****
 
-Example is for a `Staging` instance
+Example is for a Staging instance
 
 ```bash
 
   isle-blazegraph:
-    image: borndigital/isle-blazegraph:ISLE-v.1.3.0-dev
+    image: islandoracollabgroup/isle-blazegraph:1.3.0
     container_name: isle-blazegraph-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=4096M
@@ -258,7 +250,7 @@ Example is for a `Staging` instance
 
 * Please use the following as resources for institutions or endusers needing support
 
-  * [Islandora ISLE Interest Group](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group) - Meetings open to everybody!   
+  * [Islandora ISLE Interest Group](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group) - Meetings open to everybody!
     * The [Schedule](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group/#how-to-join) is alternating Wednesdays, 3:00pm EDT
 
   * [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle) - Post your questions here and subscribe for updates, meeting announcements, and technical support
