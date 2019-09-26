@@ -55,7 +55,7 @@ The following files have new Varnish and Blazegraph information and ENVs which m
 * `adoptopenjdk/openjdk8` base image (security updates)
 * Server package management updates via `apt-get`
 * Updated `GEN_DEP_PACKS` dependencies via `apt-get`
-* Upgraded `tomcat` to `8.5.45`
+* Upgraded `tomcat` to `8.5.46`
 
 #### isle-fedora
 
