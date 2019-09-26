@@ -13,14 +13,14 @@
 
 * Adds two new optional components for use on Production sytems
   * Varnish - caching web accelearator for high traffic sites
-    * Optional Varnish service added to only `Production` docker-compose file (commented out)
+    * Optional Varnish service added to only Production & Local docker-compose files (commented out)
     * Varnish logging added in the .envs
   * Blazegraph - triplestore replacment for Mulgara for high volume ingest
     * Blazegraph / Fedora service changes in the .envs to allow toggling
     * Blazegraph logging added in the .envs
     * Optional Blazegraph service added to all docker-compose(s) (commented out)
 * Automated Testing  - updated to include Varnish and Blazegraph in base test suite; and updated instructions to correspond with revised test repository location and keywords/names.
-* Updates for High Volume Ingest - Loc.gov local Proxy (TO DO - description)
+* Library of Congress standards proxy - High Volume Ingest
 * Resource matrix document for - Local, staging, production e.g. RAM, CPU, tuning etc.
 
 ### Upgrade
@@ -37,10 +37,16 @@ The following files have new Varnish and Blazegraph information and ENVs which m
   * There are in-line instructions on how to switch between the default mulgara and optional component blazegraph
 
 * All `docker-compose.*.yml` files have a new optional Blazegraph service section, (_commented out_) along with a (_commented out_) Blazegraph volume definition
+  * **Test** - `test.env` by default now tests Blazegraph instead of mulgara.
 
 * **Production** - `docker-compose.production.yml` - New Varnish service added but commented out.
   * `production.env` - New Varnish section with ENV variables (_commented out_)
 
+* **Local** - `docker-compose.local.yml` - New Varnish service added but commented out.
+  * `local.env` - New Varnish section with ENV variables (_commented out_)
+
+* **Test** - `docker-compose.test.yml` - New Varnish service added.
+  * `test.env` - New Varnish section with ENV variables
 
 ### ISLE Docker Images
 
