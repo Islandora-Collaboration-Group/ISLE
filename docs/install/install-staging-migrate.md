@@ -482,7 +482,7 @@ This step will show you how to shell into your currently running Staging Apache 
 * If the script appears to pause or prompt for `y/n`, DO NOT enter any values; the script will automatically answer for you.
 * Type `exit` to exit the container
 
-| Microsoft Windows |
+| For Microsoft Windows: |
 | :-------------      |
 | You may be prompted by Windows to: |
 | - Share the C drive with Docker.  Click Okay or Allow.|

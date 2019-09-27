@@ -6,7 +6,7 @@ This Production ISLE Installation will be similar to the [Local ISLE Installatio
 
 Islandora Drupal site code here should be finished and ready for public consumption. Fedora data will be a mirror of your currently running non-ISLE Production Fedora repository. It is recommended that this remote site not be publicly accessible until you are ready to cutover and give public access.
 
-This installation builds a Production environment for the express purpose of migrating a previously existing Islandora site onto the ISLE platform. If you need to build a brand new Production site for development and are not migrating an existing Islandora site, then please **stop** and use the [Production ISLE Installation: New Site](../install/install-production-new.md)  instead.
+This installation builds a Production environment for the express purpose of migrating a previously existing Islandora site onto the ISLE platform. If you need to build a brand new Production site for development and are not migrating an existing Islandora site, then please **stop** and use the [Production ISLE Installation: New Site](../install/install-production-new.md) instead.
 
 As this Production domain will require a real domain name or [FQDN](https://kb.iu.edu/d/aiuv), you will need to ask your IT department or appropriate resource for an "A record" to be added for your domain to "point" to your Production Host Server IP address in your institution's DNS records.
 
@@ -485,7 +485,7 @@ This step will show you how to shell into your currently running Production Apac
 * If the script appears to pause or prompt for `y/n`, DO NOT enter any values; the script will automatically answer for you.
 * Type `exit` to exit the container
 
-| Microsoft Windows |
+| For Microsoft Windows: |
 | :-------------      |
 | You may be prompted by Windows to: |
 | - Share the C drive with Docker.  Click Okay or Allow.|

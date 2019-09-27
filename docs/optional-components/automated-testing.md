@@ -16,50 +16,60 @@
 
 ## Running ISLE Tests
 
-* The most straightforward example of use is available in Born-Digital's working branch: https://github.com/Born-Digital-US/ISLE/tree/travis
+* The most straightforward example of use is ISLE's testing environment: https://github.com/Islandora-Collaboration-Group/ISLE/blob/master/docker-compose.test.yml as configured by the CircleCI configuration: https://github.com/Islandora-Collaboration-Group/ISLE/blob/master/.circleci/config.yml
 * This use case is abstracted and summarized below:
 
 ### Installation Instructions:
 
 * Docker-compose.yml additions: several new services, for running Chrome/Selenium
 ```bash
-  chrome:
-    image: selenium/node-chrome:3.11.0-dysprosium
-    volumes:
-      - /dev/shm:/dev/shm
-      - ./data/isle-apache-data:/var/www/html:ro
-    depends_on:
-      - apache
-      - hub
-    environment:
-      - HUB_PORT=4444
-      - HUB_HOST=hub
-    container_name: bd-ld-chrome
-    networks:
-      - isle-internal
-  hub:
-    image: selenium/hub:3.11.0-dysprosium
-    ports:
-      - "4444:4444"
-    container_name: bd-ld-hub
-    networks:
-      - isle-internal
+chrome:
+  image: selenium/node-chrome:3.141.59-neon # latest
+  container_name: isle-chrome-${CONTAINER_SHORT_ID}
+  environment:
+    - HUB_PORT=4444
+    - HUB_HOST=hub    
+  networks:
+    - isle-internal    
+  depends_on:
+    - apache
+    - hub
+  volumes:
+    - /dev/shm:/dev/shm
+    - ./data/apache/html:/var/www/html:ro
+
+hub:
+  image: selenium/hub:3.141.59-neon # latest
+  container_name: isle-hub-${CONTAINER_SHORT_ID}
+  networks:
+    - isle-internal
+  ports:
+    - "4444:4444"
 ```
 * Notes:
-  * To allow uploads in tests, we must mount in the Apache file root.
+  * To allow uploads in tests, we must mount in the Apache file root into the "chrome" container.
   * `/dev/shm` must be shared by all testing services or they will run out of RAM and crash
-  * Newer `selenium` images are available, but are untested. YMMV.
+  * Newer `selenium` images may be available, but are untested. YMMV.
 * No changes to `.env` file(s) are necessary, although for the examples shown here we have:
-  * `COMPOSE_PROJECT_NAME=isledevelopment`
+  * `COMPOSE_PROJECT_NAME=isle_test`
   * `BASE_DOMAIN=isle.localdomain`
-  * `CONTAINER_SHORT_ID=ld`
-  * If your use case uses other values for these variables, you may need to find/replace in the instructions below (e.g. `isle-apache-ld` corresponds with the CONTAINER_SHORT_ID above)
-* The full series of commands to install a clean new ISLE with a clean new Islandora Drupal, then add extra modules to support our test cases, and then execute the tests is as follows.
+  * `CONTAINER_SHORT_ID=td`
+  * `COMPOSE_FILE-COMPOSE-FILE=test.env`
+  * If your use case uses other values for these variables, you may need to find/replace in the instructions below (e.g. `isle-apache-td` corresponds with the CONTAINER_SHORT_ID above)
+* The full series of commands to install a clean new ISLE with a clean new Islandora Drupal, then add extra modules to support our test cases, and then execute the tests are as follows.
   * Get a good ISLE base for this test run:
 ```bash
-git clone https://github.com/Born-Digital-US/ISLE.git
-git checkout -b travis origin/travis
-
+git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
+```
+  * Then edit the `.env` file to contain the test suite config:
+```bash
+COMPOSE_PROJECT_NAME=isle_test
+BASE_DOMAIN=isle.localdomain
+CONTAINER_SHORT_ID=td
+COMPOSE_FILE-COMPOSE-FILE=test.env
+```
+  * Then fire everything back up
+```bash
 docker-compose pull
 docker-compose up -d
 
@@ -67,69 +77,46 @@ sleep 40
 ```
   * Now install Islandora from scratch, and init your Fedora repository using the tools provided by ISLE:
 ```bash
-set -x && docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh
+set -x && docker exec -it isle-apache-td bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh
 ```
   * Now install bulk-ingest dependencies (some not required for our tests) and extra modules required by test coverage:
 ```bash
-docker exec -it isle-apache-ld bash -c "cd /var/www/html/sites/all/modules/islandora && git clone https://github.com/Islandora-Labs/islandora_solution_pack_oralhistories.git"
-docker exec -it isle-apache-ld bash -c "cd /var/www/html && drush -y -u 1 en islandora_oralhistories"
-
-docker exec -it isle-apache-ld bash -c "cd /var/www/html && drush -y -u 1 en islandora_batch"
-docker exec -it isle-apache-ld bash -c "cd /var/www/html/sites/all/modules/islandora && git clone https://github.com/mjordan/islandora_batch_with_derivs.git"
-docker exec -it isle-apache-ld bash -c "cd /var/www/html && drush -y -u 1 en islandora_batch_with_derivs"
-docker exec -it isle-apache-ld bash -c "cd /var/www/html && drush -y -u 1 en islandora_book_batch"
-docker exec -it isle-apache-ld bash -c "cd /var/www/html && drush -y -u 1 en islandora_newspaper_batch"
-docker exec -it isle-apache-ld bash -c "cd /var/www/html/sites/all/modules/islandora && git clone https://github.com/MarcusBarnes/islandora_compound_batch.git"
-docker exec -it isle-apache-ld bash -c "cd /var/www/html && drush -y -u 1 en islandora_compound_batch"
-# "Batch Ingest dependencies are installed"
-docker exec -it isle-apache-ld bash -c "cd /var/www/html/sites/all/modules/islandora && git clone https://github.com/mnylc/islandora_multi_importer.git"
-docker exec -it isle-apache-ld bash -c "cd /var/www/html/sites/all/modules/islandora/islandora_multi_importer &&  composer install"
-docker exec -it isle-apache-ld bash -c "cd /var/www/html && drush en islandora_multi_importer -y"
-# "IMI dependencies installed"
+docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/all/modules/islandora && git clone https://github.com/Islandora-Labs/islandora_solution_pack_oralhistories.git"
+docker exec -it isle-apache-td bash -c "cd /var/www/html && drush -y -u 1 en islandora_oralhistories"
+docker exec -it isle-apache-td bash -c "cd /var/www/html && drush dis overlay -y"
+docker exec -it isle-apache-td bash -c "cd /var/www/html && drush -y -u 1 en islandora_batch"
+docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/all/modules/islandora && git clone https://github.com/mjordan/islandora_batch_with_derivs.git"
+docker exec -it isle-apache-td bash -c "cd /var/www/html && drush -y -u 1 en islandora_batch_with_derivs"
+docker exec -it isle-apache-td bash -c "cd /var/www/html && drush -y -u 1 en islandora_book_batch"
+docker exec -it isle-apache-td bash -c "cd /var/www/html && drush -y -u 1 en islandora_newspaper_batch"
+docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/all/modules/islandora && git clone https://github.com/MarcusBarnes/islandora_compound_batch.git"
+docker exec -it isle-apache-td bash -c "cd /var/www/html && drush -y -u 1 en islandora_compound_batch"
 ```
+  * Make sure your `/etc/hosts` has an entry for the domain you'll be using (`isle.localdomain` in this example)
   * Now clone the repository with the tests, put it where Drupal expects it (`sites/all/behat`), and install Behat dependencies with Composer:
 ```bash
-git clone git@github.com:Born-Digital-US/isle-ingest-samples.git data/isle-apache-data/isle-ingest-samples
-docker exec -it isle-apache-ld bash -c "ln -s /var/www/html/isle-ingest-samples/behat /var/www/html/sites/behat && chown -R islandora:www-data /var/www/html/isle-ingest-samples/behat" # symlink up to the ingest samples location
-docker exec -it isle-apache-ld bash -c "mkdir /var/www/html/isle-ingest-samples/behat/debug/logs/"
-docker exec -it isle-apache-ld bash -c "cd /var/www/html/sites/behat && composer install"
+git clone git@github.com:Born-Digital-US/isle-behat.git data/isle-behat
+docker cp data/isle-behat isle-apache-td:/var/www/html/sites/behat
+docker exec -it isle-apache-td bash -c "chown -R islandora:www-data /var/www/html/sites/behat/"
+docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && composer install "
+docker exec -it isle-apache-td bash -c "chmod 700 /var/www/html/sites/behat/run-isle-tests.sh"
+sudo chmod -R 777 ~/isle/data/apache/html/sites/behat/debug
 ```
-  * A few more basics, again only necessary if this is a BRAND NEW Islandora Drupal site:
+   * And now we're ready to run tests:
 ```bash
-docker exec -it isle-apache-ld bash -c "cd /var/www/html && drush dis overlay -y"
-docker exec -it isle-apache-ld bash -c "cd /var/www/html && drush -u 1 islandora_batch_with_derivs_preprocess --key_datastream=MODS --scan_target=/var/www/html/isle-ingest-samples/Batches-by-CModel/Collections/files --use_pids=true --namespace=samples --parent=islandora:root --content_models=islandora:collectionCModel"
-docker exec -it isle-apache-ld bash -c "cd /var/www/html && drush -u 1 islandora_batch_ingest"
-# "Samples ingested"
+docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && ./run-isle-tests.sh --run=services"
+docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && ./run-isle-tests.sh --run=apache"
 ```
-   * And now we're finally ready to run tests:
-```bash
-docker exec -it isle-apache-ld bash -c "cd /var/www/html/sites/behat && ./run-isle-tests.sh --run=services"
-docker exec -it isle-apache-ld bash -c "cd /var/www/html/sites/behat && ./run-isle-tests.sh --run=apache"
-# "Testing complete"
-```
-* If you want to just run this as a script, you can find that here: https://github.com/Born-Digital-US/ISLE/blob/travis/local_setup.sh. There are a few extra steps in there, but nothing that should get in the way of basic test usage.
+
+## Additional Notes
 * If you have your own ISLE already, just omit that initial `git clone` for ISLE. If you use the script, we're assuming you've cloned our whole repository, switched to the `travis` branch, and are running it from there.
-* If you're running this many times a day for active development, you'll eventually want to teardown. Recommended steps:
-```bash
-docker-compose down -v
-rm -rf isle-ingest-samples && rm -rf data/isle-apache-data/isle-ingest-samples
-```
+* Modifications to tests may be necessary based on your institutional theme and configuration.
 
 ---
 
 ## Automated test triggers
 
-* It turned out Travis couldn't run long enough (greater than 50 minutes) to complete a full test run. CircleCI can, and Born-Digital has configured this to run on their branch: https://github.com/Born-Digital-US/ISLE/blob/travis/.circleci/config.yml
-* Next steps:
-  * Decide what CI workflows we want to run automatically, alter/fork CI scripts to enable
-
-
----
-
-## Extending the test suite
-
-* TK
-*
+* CircleCI runs these tests every time an update is pushed to the main ISLE repo. Sometimes things fail because the wind was blowing the wrong way, so we run it again and it will pass.
 
 
 ---
@@ -138,7 +125,6 @@ rm -rf isle-ingest-samples && rm -rf data/isle-apache-data/isle-ingest-samples
 ## Troubleshooting
 
 * Come discuss on the ISLE Interest Group email list and/or bi-weekly meetings.
-*
 
 
 ---
@@ -160,8 +146,6 @@ rm -rf isle-ingest-samples && rm -rf data/isle-apache-data/isle-ingest-samples
 * 1-6	Able to view Tomcat admin panel for image-services container?
     * Covered by isle-services.feature "imageservices online
 * 1-7	Able to view Cantaloupe admin panel for image-services container?
-    * Covered by isle-services.feature "imageservices online"
-* 1-8	Able to view Adore-djatoka admin panel for image-services container?
     * Covered by isle-services.feature "imageservices online"
 * 1-9	Able to view Tomcat admin panel for fedora container?
     * Covered by isle-services.feature "fedora online"
