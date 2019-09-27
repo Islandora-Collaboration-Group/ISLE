@@ -38,7 +38,7 @@
     
     
       
-        <title>1.2.0 - Islandora Enterprise (ISLE)</title>
+        <title>Latest release: 1.3.0 - Islandora Enterprise (ISLE)</title>
       
     
     
@@ -79,7 +79,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#release-notes-isle-v120-2019-08-13" tabindex="1" class="md-skip">
+      <a href="#release-notes-isle-v130-2019-09" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -104,7 +104,7 @@
               Islandora Enterprise (ISLE)
             </span>
             <span class="md-header-nav__topic">
-              1.2.0
+              Latest release: 1.3.0
             </span>
           
         </div>
@@ -791,39 +791,6 @@
           
           
 
-
-  <li class="md-nav__item">
-    <a href="../release-1-3-0/" title="Latest release: 1.3.0" class="md-nav__link">
-      Latest release: 1.3.0
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2" checked>
-    
-    <label class="md-nav__link" for="nav-7-2">
-      Previous releases
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-7-2">
-        Previous releases
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
   
 
 
@@ -835,11 +802,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        1.2.0
+        Latest release: 1.3.0
       </label>
     
-    <a href="./" title="1.2.0" class="md-nav__link md-nav__link--active">
-      1.2.0
+    <a href="./" title="Latest release: 1.3.0" class="md-nav__link md-nav__link--active">
+      Latest release: 1.3.0
     </a>
     
       
@@ -923,6 +890,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#isle-blazegraph" title="isle-blazegraph" class="md-nav__link">
+    isle-blazegraph
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isle-varnish" title="isle-varnish" class="md-nav__link">
+    isle-varnish
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -936,6 +917,37 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2">
+    
+    <label class="md-nav__link" for="nav-7-2">
+      Previous releases
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-2">
+        Previous releases
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../release-1-2-0/" title="1.2.0" class="md-nav__link">
+      1.2.0
+    </a>
   </li>
 
         
@@ -1076,6 +1088,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#isle-blazegraph" title="isle-blazegraph" class="md-nav__link">
+    isle-blazegraph
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isle-varnish" title="isle-varnish" class="md-nav__link">
+    isle-varnish
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1098,154 +1124,134 @@
               
                 
                 
-                <h1 id="release-notes-isle-v120-2019-08-13">Release Notes - ISLE v.1.2.0, 2019-08-13</h1>
+                <h1 id="release-notes-isle-v130-2019-09">Release Notes - ISLE v.1.3.0, 2019-09</h1>
 <h3 id="contributions-to-this-release-from">Contributions to this release from:</h3>
 <ul>
 <li>David Keiser-Clark (Williams College), documentation</li>
+<li>Francesca Livermore (Wesleyan University), documentation</li>
 <li>Gavin Morris (Born-Digital), code updates and testing</li>
 <li>Mark McFate (Grinnell College), testing and documentation</li>
-<li>Bethany Seeger (Amherst College), testing and release manager</li>
+<li>Mark Sandford (Colgate University), documentation</li>
+<li>Bethany Seeger (Amherst College), code updates, testing and release manager</li>
 <li>Noah Smith (Born Digital), code updates and testing</li>
-<li>Shaun Trujillo (Mount Holyoke College), code updates and testing</li>
+<li>Shaun Trujillo (Mount Holyoke College), testing</li>
 </ul>
 <h3 id="isle-main-project">ISLE (main project)</h3>
 <ul>
-<li>New structure for launching <a href="../../install/install-environments/">ISLE environments</a>. 
-  This allows guidance in how one would configure ISLE for different scenarios.  If you are upgrading from ISLE versions 1.1.1 or 1.1.2, see the <a href="../../update/update/">upgrade instructions</a> to configure your existing environments for the updated workflow.</li>
-<li>New docker-compose files and environment profiles created for:<ul>
-<li><a href="../../install/install-demo/">Demo</a> - use this to spin up ISLE quickly just to check it out</li>
-<li>Local (<a href="../../install/install-local-new/">new</a>, <a href="../../install/install-local-migrate/">migrate</a>) - use this for a local development environment</li>
-<li>Staging (<a href="../../install/install-staging-new/">new</a>, <a href="../../install/install-staging-migrate/">migrate</a>) -- use this to setup a staging environment for your production website</li>
-<li>Production (<a href="../../install/install-production-new/">new</a>, <a href="../../install/install-production-migrate/">migrate</a>) - use this for your production environment</li>
-<li>Test - an environment for ISLE contributors; it includes automated testing code</li>
+<li>Adds two new optional components for use on Production sytems<ul>
+<li>Varnish - caching web accelearator for high traffic sites<ul>
+<li>Optional Varnish service added to only Production &amp; Local docker-compose files (commented out)</li>
+<li>Varnish logging added in the .envs</li>
 </ul>
 </li>
-<li>New settings.php and php.ini files for each of the above configurations.</li>
-<li>
-<p>New traefik.toml files for each configuration.</p>
-</li>
-<li>
-<p>Adds TICK Dashboard as an optional feature in the Staging/Production/Test environments.
-  TICK is a suite of open-source applications
-  that are used together for the storing, visualization and monitoring of data (time series metrics)
-  gathered from running systems. The TICK stack was created and is developed by Influxdata which is
-  "...dedicated to open source and truly cares about helping developers get to results faster with
-  less complexity and less code." To enable TICK on your system, please read through <a href="../../optional-components/tickstack/">Tick Stack Page</a></p>
-</li>
-<li>
-<p>Logging to physical files is turned off in each Docker container.  To view the logs now, you can use
-  one of these methods:</p>
-</li>
-<li>Docker method: (when using the Docker json driver and TICK is not on)<ul>
-<li>Single container: docker logs -f <containername></li>
-<li>All containers: docker logs --tail=0 --follow</li>
-<li>To learn more: https://docs.docker.com/engine/reference/commandline/logs/</li>
+<li>Blazegraph - triplestore replacment for Mulgara for high volume ingest<ul>
+<li>Blazegraph / Fedora service changes in the .envs to allow toggling</li>
+<li>Blazegraph logging added in the .envs</li>
+<li>Optional Blazegraph service added to all docker-compose(s) (commented out)</li>
 </ul>
 </li>
-<li>Docker-compose method: (when using the Docker json driver and TICK is not on)<ul>
-<li>Single container: docker-compose logs -f  <containername></li>
-<li>All containers: docker-compose logs --tail=0 --follow</li>
-<li>To learn more: https://docs.docker.com/compose/reference/logs/</li>
 </ul>
 </li>
-<li>Use the TICK Log viewer if TICK is setup and using the Docker syslog driver. Please read the 
-    ISLE TICK documentation to see how to set this up <a href="../../optional-components/tickstack/">TICK Stack Page</a></li>
+<li>Automated Testing  - updated to include Varnish and Blazegraph in base test suite; and updated instructions to correspond with revised test repository location and keywords/names.</li>
+<li>Library of Congress standards proxy - High Volume Ingest</li>
+<li>Resource matrix document for - Local, staging, production e.g. RAM, CPU, tuning etc.</li>
 </ul>
 <h3 id="upgrade">Upgrade</h3>
-<p>If you are coming from ISLE releases <code>1.1.1</code> &amp; <code>1.1.2</code> - there will be some additional steps to take to migrate to this new release. </p>
+<p>If you are coming from ISLE releases <code>1.2.0</code> - there will be some additional steps to take to migrate to this new release.</p>
 <ul>
-<li>We recommend that you also review the following:</li>
+<li>We recommend that you also review the following:<ul>
 <li><a href="../../install/install-environments/">ISLE Installation: Environments</a></li>
-<li><a href="../../update/update/">Update ISLE</a> documentation as well. </li>
+<li><a href="../../update/update/">Update ISLE</a> documentation as well.</li>
 </ul>
-<p>The following files will need you to review, edit and/or merge in previous settings:</p>
-<ul>
-<li><code>.env</code> - All previous variables with the exception of the four below have been moved to the demo, local, staging and production .env files. By default this file will be set to the demo environment. </li>
-<li>Default settings for ISLE. Change for other environments as needed.</li>
+</li>
 </ul>
-<pre><code class="bash">COMPOSE_PROJECT_NAME=isle_demo
-BASE_DOMAIN=isle.localdomain
-CONTAINER_SHORT_ID=ld
-COMPOSE_FILE=docker-compose.demo.yml
-</code></pre>
-
+<p>The following files have new Varnish and Blazegraph information and ENVs which may need you to review, edit and/or merge in previous settings:</p>
 <ul>
 <li>
-<p>You'll need to change the settings above to match whatever ISLE environment you would like. You'll need to copy over the settings from your previous local, Staging and Production. Please note on Staging and Production, you'll be making a local commit but NOT pushing back to your main ISLE git repository. </p>
-</li>
-<li>
-<p>All other users, names and passwords from your previous ISLE 1.1.1 &amp; 1.1.2 <code>.env</code> will now need to be copied into the new environment .env files</p>
-</li>
-<li><code>demo.env</code> - Prepopulated. Nothing to change.</li>
-<li><code>local.env</code> - Copy over all users, names and passwords from your previous Local ISLE 1.1.1 &amp; 1.1.2 <code>.env</code> to the appropriate variable. Remove the comments and replace with the appropriate Local values.</li>
-<li><code>staging.env</code> - Copy over all users, names and passwords from your previous Staging ISLE 1.1.1 &amp; 1.1.2 <code>.env</code> to the appropriate variable. Remove the comments and replace with the appropriate Staging values.</li>
-<li>
-<p><code>production.env</code> - Copy over all users, names and passwords from your previous Production ISLE 1.1.1 &amp; 1.1.2 <code>.env</code> to the appropriate variable. Remove the comments and replace with the appropriate Production values.</p>
-</li>
-<li>
-<p><code>docker-compose.yml</code> - This file no longer exists in ISLE 1.2.0 and has been replaced by new docker-compose files and environment profiles created for:</p>
-</li>
-<li><strong>Demo</strong> - <code>docker-compose.demo.yml</code> - use this to spin up ISLE quickly just to check it out.</li>
-<li><strong>Local</strong> - <code>docker-compose.local.yml</code> - use this for a local development environment. <ul>
-<li>Copy over your previous ISLE Local docker-compose.yml settings as needed and merge into this file.</li>
-</ul>
-</li>
-<li><strong>Staging</strong> - <code>docker-compose.staging.yml</code> -- use this for your staging environment. <ul>
-<li>Copy over your previous ISLE Staging docker-compose.yml settings as needed and merge into this file.</li>
-</ul>
-</li>
-<li>
-<p><strong>Production</strong> - <code>docker-compose.production.yml</code>- use this for your production environment.</p>
+<p>All <code>demo</code>, <code>local</code>, <code>staging</code>, <code>production</code> and <code>test</code> .env files have a new <code>### Fedora Resource Index</code> section with two new ENV variables.</p>
 <ul>
-<li>Copy over your previous ISLE Production docker-compose.yml settings as needed and merge into this file.</li>
+<li>There are in-line instructions on how to switch between the default mulgara and optional component blazegraph</li>
 </ul>
 </li>
 <li>
-<p>There are also new <code>./config/apache/settings_php/settings.*.php</code> files used in ISLE 1.2.0 which are also seperated by enviornment e.g. <code>settings.local.php</code>, etc.</p>
+<p>All <code>docker-compose.*.yml</code> files have a new optional Blazegraph service section, (<em>commented out</em>) along with a (<em>commented out</em>) Blazegraph volume definition</p>
+<ul>
+<li><strong>Test</strong> - <code>test.env</code> by default now tests Blazegraph instead of mulgara.</li>
+</ul>
 </li>
-<li>As instructed above, you'll need to ensure that for every <code>settings.*.php</code> file, the values from your previous <code>.env</code> file are copied in here as well.</li>
-<li>Within the new <code>settings.*.php</code> files, search for two sections called <code>ISLE Configuration</code>. Follow the inline instructions as directed to determine which values should be copied in.</li>
+<li>
+<p><strong>Production</strong> - <code>docker-compose.production.yml</code> - New Varnish service added but commented out.</p>
+<ul>
+<li><code>production.env</code> - New Varnish section with ENV variables (<em>commented out</em>)</li>
+</ul>
+</li>
+<li>
+<p><strong>Local</strong> - <code>docker-compose.local.yml</code> - New Varnish service added but commented out.</p>
+<ul>
+<li><code>local.env</code> - New Varnish section with ENV variables (<em>commented out</em>)</li>
+</ul>
+</li>
+<li>
+<p><strong>Test</strong> - <code>docker-compose.test.yml</code> - New Varnish service added.</p>
+<ul>
+<li><code>test.env</code> - New Varnish section with ENV variables</li>
+</ul>
+</li>
 </ul>
 <h3 id="isle-docker-images">ISLE Docker Images</h3>
 <h4 id="isle-tomcat">isle-tomcat</h4>
 <ul>
+<li><code>adoptopenjdk/openjdk8</code> base image (security updates)</li>
 <li>Server package management updates via <code>apt-get</code></li>
 <li>Updated <code>GEN_DEP_PACKS</code> dependencies via <code>apt-get</code></li>
-<li>Upgraded <code>tomcat</code> to <code>8.5.43</code></li>
-<li>Upgraded <code>S6 overlay</code> to <code>1.22.1</code></li>
-<li>Logging configuration changed</li>
+<li>Upgraded <code>tomcat</code> to <code>8.5.46</code></li>
 </ul>
 <h4 id="isle-fedora">isle-fedora</h4>
 <ul>
 <li>Server package management updates via <code>apt-get</code></li>
 <li>Updated <code>GEN_DEP_PACKS</code> dependencies via <code>apt-get</code></li>
-<li>Upgraded <code>Maven</code> to <code>3.6.1</code></li>
-<li>Upgraded <code>Ant</code> to <code>1.10.6</code></li>
-<li>Logging configuration changed</li>
+<li>Upgraded <code>Maven</code> to <code>3.6.2</code></li>
+<li>Upgraded <code>Ant</code> to <code>1.10.7</code></li>
+<li>Islandora transforms changes from August 15th</li>
+<li>Blazegraph work integrated</li>
+<li>Bug fix https://github.com/Islandora-Collaboration-Group/ISLE/issues/317</li>
 </ul>
 <h4 id="isle-imageservices">isle-imageservices</h4>
 <ul>
 <li>Server package management updates via <code>apt-get</code></li>
 <li>Updated <code>GEN_DEP_PACKS</code> dependencies via <code>apt-get</code></li>
-<li>Logging configuration changed</li>
+<li>Canteloupe upgraded from <code>4.0.1</code> to <code>4.0.3</code></li>
+<li>Cleanup of service paths https://github.com/Islandora-Collaboration-Group/ISLE/issues/226</li>
 </ul>
 <h4 id="isle-solr">isle-solr</h4>
 <ul>
-<li>Readme change</li>
-<li>Logging configuration changed</li>
+<li>Server package management updates via <code>apt-get</code></li>
 </ul>
 <h4 id="isle-apache">isle-apache</h4>
 <ul>
+<li><code>adoptopenjdk/openjdk8</code> base image (sec updates)</li>
 <li>Server package management updates via <code>apt-get</code></li>
-<li>Upgraded <code>PHP</code> to version <code>7.1</code> from <code>5.61</code></li>
-<li>Upgraded <code>FITS</code> to version <code>1.4.1</code></li>
-<li>Upgraded <code>S6 overlay</code> to <code>1.22.1</code></li>
-<li>Upgraded <code>ImageMagick</code> to version <code>7.0.8-56</code></li>
-<li>Logging configuration changed</li>
+<li><code>PHP</code> version <code>7.1</code> updates</li>
+<li>Upgraded <code>FITS</code> to version <code>1.5.0</code></li>
+<li>Upgraded <code>ImageMagick</code> to version <code>7.0.8-66</code></li>
+<li><code>Composer</code> upgraded from commit / hash August 2, 2019 to Sept 2, 2019 (stil v 1.9.0)</li>
 </ul>
 <h4 id="isle-mysql">isle-mysql</h4>
 <ul>
-<li>Logging configuration changed</li>
+<li><code>apt-get</code> dist-upgrades for dependencies (sec updates)</li>
+</ul>
+<h4 id="isle-blazegraph">isle-blazegraph</h4>
+<ul>
+<li><code>adoptopenjdk/openjdk8</code> base image (sec updates)</li>
+<li>Server package management updates via `apt-get</li>
+<li>ISLE Tomcat base image upgrade from <code>1.1.1</code> to <code>1.3.0</code></li>
+<li>Blazegraph upgraded from <code>2.1.4</code> to <code>2.1.5</code></li>
+</ul>
+<h4 id="isle-varnish">isle-varnish</h4>
+<ul>
+<li>Server package management updates via <code>apt-get</code></li>
+<li>ISLE base image change from discontinued <code>isle-ubuntu-basebox</code> to <code>ubuntu:xenial</code> base image (sec updates)</li>
+<li>Varnish upgraded from <code>4.1.3-12</code> to <code>4.1.11</code></li>
 </ul>
                 
                   
@@ -1267,7 +1273,7 @@ COMPOSE_FILE=docker-compose.demo.yml
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../release-1-3-0/" title="Latest release: 1.3.0" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../../about/get-help/" title="Get Help" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1276,19 +1282,19 @@ COMPOSE_FILE=docker-compose.demo.yml
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Latest release: 1.3.0
+                Get Help
               </span>
             </div>
           </a>
         
         
-          <a href="../release-1-1-2/" title="1.1.2" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../release-1-2-0/" title="1.2.0" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                1.1.2
+                1.2.0
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

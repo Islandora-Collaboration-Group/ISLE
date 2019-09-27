@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.2.0">
     
     
       
@@ -42,7 +42,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.750b69bd.css">
       
       
     
@@ -52,7 +52,7 @@
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
@@ -104,9 +104,7 @@
               Islandora Enterprise (ISLE)
             </span>
             <span class="md-header-nav__topic">
-              
-                Varnish
-              
+              Varnish
             </span>
           
         </div>
@@ -149,7 +147,7 @@
         
       
       
-      <main class="md-main" role="main">
+      <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
             
@@ -793,8 +791,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release-notes/release-1-2-0/" title="Latest release: 1.2.0" class="md-nav__link">
-      Latest release: 1.2.0
+    <a href="../../release-notes/release-1-3-0/" title="Latest release: 1.3.0" class="md-nav__link">
+      Latest release: 1.3.0
     </a>
   </li>
 
@@ -817,6 +815,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-2-0/" title="1.2.0" class="md-nav__link">
+      1.2.0
+    </a>
+  </li>
+
         
           
           
@@ -885,21 +895,21 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#use-cases-user-stories" class="md-nav__link">
+  <a href="#use-cases-user-stories" title="Use Cases &amp; User Stories" class="md-nav__link">
     Use Cases &amp; User Stories
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#new-functionality" class="md-nav__link">
+  <a href="#new-functionality" title="New Functionality" class="md-nav__link">
     New Functionality
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#system-requirements" class="md-nav__link">
+  <a href="#system-requirements" title="System Requirements" class="md-nav__link">
     System Requirements
   </a>
   
@@ -907,7 +917,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#isle-images" class="md-nav__link">
+  <a href="#isle-images" title="ISLE Images" class="md-nav__link">
     ISLE Images
   </a>
   
@@ -919,14 +929,14 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#adoption-process-overview" class="md-nav__link">
+  <a href="#adoption-process-overview" title="Adoption Process Overview" class="md-nav__link">
     Adoption Process Overview
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
+  <a href="#installation" title="Installation" class="md-nav__link">
     Installation
   </a>
   
@@ -934,14 +944,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#assumptions" class="md-nav__link">
+  <a href="#assumptions" title="Assumptions" class="md-nav__link">
     Assumptions
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#installation-instructions" class="md-nav__link">
+  <a href="#installation-instructions" title="Installation Instructions" class="md-nav__link">
     Installation Instructions
   </a>
   
@@ -949,16 +959,50 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#varnish-edits-docker-composeyml-file" class="md-nav__link">
-    Varnish Edits - docker-compose.yml file
+  <a href="#isle-local-development" title="ISLE Local development" class="md-nav__link">
+    ISLE Local development
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#varnish-edits-env-file" class="md-nav__link">
-    Varnish Edits - .env file
+  <a href="#edits-docker-composeproductionyml-file" title="Edits - docker-compose.production.yml file" class="md-nav__link">
+    Edits - docker-compose.production.yml file
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#varnish-edits-productionenv-localenv-files" title="Varnish Edits - production.env &amp; local.env file(s)" class="md-nav__link">
+    Varnish Edits - production.env &amp; local.env file(s)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-to-production-and-staging" title="Deployment to Production and Staging" class="md-nav__link">
+    Deployment to Production and Staging
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quick-deployment-to-staging-for-code-parity" title="Quick deployment to Staging for code parity" class="md-nav__link">
+    Quick deployment to Staging for code parity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-to-production" title="Deployment to Production" class="md-nav__link">
+    Deployment to Production
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -973,35 +1017,83 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-varnish-the-tick-stack" class="md-nav__link">
+  <a href="#how-to-verify-that-varnish-is-working" title="How to verify that Varnish is working" class="md-nav__link">
+    How to verify that Varnish is working
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#method-1-visit-your-website-in-a-web-browser" title="Method 1 - Visit your website in a web browser" class="md-nav__link">
+    Method 1 - Visit your website in a web browser
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#method-2-inspect-the-headers-on-one-of-your-sites-webpages" title="Method 2 - Inspect the headers on one of your site's webpages" class="md-nav__link">
+    Method 2 - Inspect the headers on one of your site's webpages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#method-3-curl-a-url-and-review-the-headers" title="Method 3 - Curl a url and review the headers" class="md-nav__link">
+    Method 3 - Curl a url and review the headers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#method-4-backend-tools" title="Method 4 - Backend tools" class="md-nav__link">
+    Method 4 - Backend tools
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-clear-the-varnish-cache" title="How to clear the Varnish cache" class="md-nav__link">
+    How to clear the Varnish cache
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#varnish-utilities-and-tools" title="Varnish utilities and tools" class="md-nav__link">
+    Varnish utilities and tools
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-varnish-the-tick-stack" title="Using Varnish &amp; the TICK stack" class="md-nav__link">
     Using Varnish &amp; the TICK stack
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#uninstallation-instructions" class="md-nav__link">
+  <a href="#uninstallation-instructions" title="Uninstallation Instructions" class="md-nav__link">
     Uninstallation Instructions
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#maintenance-notes" class="md-nav__link">
-    Maintenance Notes
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#need-help" class="md-nav__link">
+  <a href="#need-help" title="Need help?" class="md-nav__link">
     Need help?
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#additional-resources" class="md-nav__link">
+  <a href="#additional-resources" title="Additional Resources" class="md-nav__link">
     Additional Resources
   </a>
   
@@ -1028,7 +1120,7 @@
 <h2 id="use-cases-user-stories">Use Cases &amp; User Stories</h2>
 <ul>
 <li>As a repository administrator, I expect that ISLE allows use of server-side caching to optimize the end-user experience without any input from me.</li>
-<li>If I have a complex pages (including Solr search results), then I expect ISLE provides an optional HTTP accelerator to deliver cached versions </li>
+<li>If I have a complex pages (including Solr search results), then I expect ISLE provides an optional HTTP accelerator to deliver cached versions</li>
 <li>
 <p><em>Negative user story:</em> I do not expect that this optional HTTP accelerator will necessarily speed up asset delivery. Various Islandora components have their own caches for this purpose. ISLE documentation should, however, direct repository administrators to good resources if they have this use case.</p>
 </li>
@@ -1044,43 +1136,70 @@
 <h2 id="new-functionality">New Functionality</h2>
 <ul>
 <li>
-<p>The new <code>isle-varnish</code> image was built using <a href="https://varnish-cache.org/intro/">Varnish</a> software to improve end-user performance when and if Drupal/Apache performance is inadequate. The intended use is solely for high-traffic production environments.</p>
+<p>The <code>isle-varnish</code> image was built using <a href="https://www.varnish-cache.org/">Varnish</a> software to improve end-user performance when and if Drupal/Apache performance is inadequate for high-traffic production environments. Varnish can help to reduce load on the Apache web server and to increase the responsiveness of the Drupal site and Solr searches.</p>
 </li>
 <li>
-<p>Several paragraphs describing the functional differences between Apache and Varnish</p>
+<p>The ISLE Varnish configuration uses an memory (RAM) based cache or <em>malloc</em> with a default setting of <code>256 MB</code> which can and should be increased as needed. If you need to read more about how to use or change Varnish's cache settings, please start <a href="https://varnish-cache.org/docs/4.1/users-guide/storage-backends.html">here</a></p>
 </li>
 <li>
-<p>Setting expectations for the upgrade.</p>
+<p><strong>Please note:</strong> There is a new Docker ENV setting within the <code>production.env</code> which allows users to dynamically increase or decrease the amount of stored materials within the Varnish <em>malloc</em> cache.
+    <code>bash
+    ## Varnish Cache Memory Allocation
+    VARNISH_MALLOC=256m</code></p>
 </li>
 <li>
-<p>Additional notes commenting on tradeoffs</p>
-</li>
-<li>
-<p>Additional notes concerning administrative overhead and/or necessary process changes</p>
-</li>
-<li>
-<p>Additional systems overhead, including:</p>
-</li>
-<li>__ GB RAM for Varnish to run in memory</li>
-<li>
-<p>__ GB disk space for Varnish cache persistence</p>
-</li>
-<li>
-<p>No new software required on host machine</p>
+<p>The Drupal module <a href="https://www.drupal.org/project/varnish">Varnish</a> will need to be installed on the Drupal / Islandora site to provide further integration between the Varnish container and your website. There is an included script (isle_varnish_drupal_module_installer.sh) to install enable and configure the Drupal module on an existing site found in the ISLE <code>scripts/varnish</code> directory. This script will also include the Drupal <a href="https://www.drupal.org/project/purge">Purge</a> and <a href="https://www.drupal.org/project/expire">Expire</a> modules.</p>
 </li>
 </ul>
 <hr />
 <h2 id="system-requirements">System Requirements</h2>
 <ul>
-<li><a href="https://github.com/Islandora-Collaboration-Group/ISLE">ISLE</a> release version <code>1.1.1</code></li>
-<li><code>git clone https://github.com/Islandora-Collaboration-Group/ISLE.git</code></li>
+<li><a href="https://github.com/Islandora-Collaboration-Group/ISLE">ISLE</a> release version <code>1.3.0</code></li>
+<li>
+<p><code>git clone https://github.com/Islandora-Collaboration-Group/ISLE.git</code></p>
+</li>
+<li>
+<p>Existing ISLE Local, Staging and Production systems and running websites</p>
+</li>
+<li>
+<p>Existing ISLE git repository</p>
+</li>
+<li>
+<p>Existing Drupal / Islandora git repository</p>
+</li>
+<li>
+<p>Ability to allocate additional free memory to the Varnish container as needed. The tuning and configuration of Varnish can vary based on system resources and traffic, as we recommend that you start out with a smaller memory allocation and test the results.</p>
+</li>
+<li><strong>Example configuration</strong> for a Production ISLE host server using <code>16 GB</code> of memory.<ul>
+<li>Expect to allocate about 40 - 50% of the host server memory for all of the Java / Tomcat based images</li>
+<li><code>isle-fedora</code> should have the most e.g. <code>4096 MB</code> or <code>4 GB</code></li>
+<li><code>isle-solr</code> should have the second most e.g. <code>2048 MB</code> or <code>2 GB</code></li>
+<li><code>isle-imageservices</code> should have the third most e.g. <code>1024 MB</code> or <code>1 GB</code></li>
+<li>If using <code>isle-blazegraph</code>, this image should also be using a minimum of <code>4096 MB</code> or <code>4 GB</code> of memory</li>
+<li>Keep about <code>2 -3 GB</code> free for the remaining images e.g. <code>isle-apache</code>, <code>isle-mysql</code> etc.</li>
+<li>This would leave you roughly <code>1 - 2 GB</code> to allocate to the Varnish cache. Start with <code>256</code> to <code>512 MB</code> and work your way up as needed.</li>
+<li>You can adjust the amount that Varnish puts into memory in the supplied <code>.env</code> file<ul>
+<li>On the line: <code>VARNISH_MALLOC=256m</code> you can change the amount of memory to a higher value other than the default <code>256</code> Megabytes. We recommend that you start with 1-2 GB for now to tune further as your resources and needs warrant.</li>
 </ul>
+</li>
+</ul>
+</li>
+<li>There are additional potential memory allocation and tuning recommendations for Varnish from <a href="https://info.varnish-software.com/blog/understanding-varnish-cache-memory-usage">Varnish-software</a></li>
+<li>
+<p>If you need to read more about how to use or change Varnish's cache settings, please start <a href="https://varnish-cache.org/docs/4.1/users-guide/storage-backends.html">here</a></p>
+</li>
+<li>
+<p><strong>Recommendation</strong> Adding more memory to the Production ISLE host system from the default recommended <code>16 GB</code> might be recommended here if running all optional components e.g. <code>isle-varnish</code>,  <code>isle-blazegraph</code>, the TICK stack, etc.</p>
+</li>
+<li>
+<p>There is no new software required on any ISLE host machine.</p>
+</li>
+</ul>
+<hr />
 <h3 id="isle-images">ISLE Images</h3>
 <ul>
 <li>Following the installation steps below, an enduser will configure  / edit their ISLE running system(s) to ultimately use the following images and tags from Docker-Hub:</li>
 </ul>
-<p>(<em>These tags are for usage during Phase II Sprints only and will change during the release process.</em>)</p>
-<p>(<em>Phase II Sprints only</em>)</p>
 <table>
 <thead>
 <tr>
@@ -1093,22 +1212,27 @@
 <tr>
 <td>Apache</td>
 <td><a href="https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-apache/tags">islandoracollabgroup/isle-apache</a></td>
-<td><code>dashboards-dev</code></td>
+<td><code>1.3.0</code></td>
+</tr>
+<tr>
+<td>Blazegraph</td>
+<td><a href="https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-blazegraph/tags">islandoracollabgroup/isle-blazegraph</a></td>
+<td><code>1.3.0</code></td>
 </tr>
 <tr>
 <td>Fedora</td>
 <td><a href="https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-fedora/tags">islandoracollabgroup/isle-fedora</a></td>
-<td><code>blazegraph.dashboards-dev</code></td>
+<td><code>1.3.0</code></td>
 </tr>
 <tr>
 <td>Image-services</td>
 <td><a href="https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-imageservices">islandoracollabgroup/isle-imageservices</a></td>
-<td><code>dashboards-dev</code></td>
+<td><code>1.3.0</code></td>
 </tr>
 <tr>
 <td>MySQL</td>
 <td><a href="https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-mysql">islandoracollabgroup/isle-mysql</a></td>
-<td><code>dashboards-dev</code></td>
+<td><code>1.3.0</code></td>
 </tr>
 <tr>
 <td>Portainer</td>
@@ -1118,7 +1242,7 @@
 <tr>
 <td>Solr</td>
 <td><a href="https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-solr/tags">islandoracollabgroup/isle-solr</a></td>
-<td><code>dashboards-dev</code></td>
+<td><code>1.3.0</code></td>
 </tr>
 <tr>
 <td>Traefik</td>
@@ -1128,53 +1252,55 @@
 <tr>
 <td>Varnish</td>
 <td><a href="https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-varnish">islandoracollabgroup/isle-varnish</a></td>
-<td><code>1.1.1</code></td>
+<td><code>1.3.0</code></td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>
-<p>Additional systems overhead, including:</p>
-</li>
-<li>
-<p>Add an additional 1-2 GB RAM in total ISLE Host memory for Varnish to keep the cache in memory.</p>
-<ul>
-<li>You can adjust the amount that Varnish puts into memory in the supplied <code>.env</code> file</li>
-<li>On the line: <code>VARNISH_MALLOC=256m</code> you can change the amount of memory to a higher value other than the default <code>256</code> Megabytes. We recommend that you do not attempt to exceed 1 GB for now.</li>
-</ul>
-</li>
-</ul>
 <hr />
 <h2 id="adoption-process-overview">Adoption Process Overview</h2>
+<p>The installation instructions below will walk you through how to setup and run the optional Varnish container on only your ISLE Production system to cache assets for highly trafficked Islandora sites in addition to adding new Drupal modules to your existing Production Drupal / Islandora website to interact and manage the Varnish cache.</p>
+<p><strong>Please note</strong>: ISLE endusers are of course welcome to run Varnish on their Staging systems if they want but it is recommended that endusers simply test on their Local instances, deploy code changes to both Staging and Production but only run Varnish on their Production ISLE systems.</p>
 <ul>
-<li>
-<p>The installation instructions below will walk you through how to setup and run the optional Varnish container to cache assets for highly trafficked Islandora sites.</p>
-</li>
 <li>
 <p>You'll start by backing up all important data as needed.</p>
 </li>
 <li>
-<p>You'll stop any running containers</p>
+<p>On your Local ISLE Apache container, you'll run the Varnish installation script and then check in the resulting Drupal code changes into your Islandora / Drupal git repository.</p>
 </li>
 <li>
-<p>You'll download new ISLE images temporarily tagged as <code>dashboards-dev</code> instead of the standard ISLE <code>1.1.1</code>. </p>
-</li>
-<li><strong>Please note:</strong> <em>This is a temporary process until all ISLE Phase II UAT testing is completed and the images can be released.</em></li>
-<li>
-<p>You'll download a new ISLE image called <code>isle-varnish:1.1.1</code></p>
+<p>Following best practices of "code up and data down", pull the resulting Drupal code changes from your Local upstream to your Staging and Production systems.</p>
 </li>
 <li>
-<p>You'll make additional edits and modifications to the following ISLE configuration files:</p>
+<p>You'll download ISLE images along with a new ISLE image called <code>isle-varnish</code></p>
 </li>
-<li><code>docker-compose.yml</code></li>
 <li>
-<p><code>.env</code></p>
+<p>You'll make additional edits and modifications to the following ISLE configuration files on your Local system, check them into git and then pull the code on your Staging and Production systems.</p>
+</li>
+<li><code>docker-compose.production.yml</code> &amp;  <code>docker-compose.local.yml</code><ul>
+<li>Uncommenting the varnish service section</li>
+<li>Commenting out a line in the apache service section</li>
+</ul>
+</li>
+<li>
+<p><code>production.env</code> &amp; <code>local.env</code></p>
+<ul>
+<li>Making any necessary edits to the new Varnish ENV section</li>
+</ul>
+</li>
+<li>
+<p>You'll perform a <code>docker-compose pull</code> to pull down any new images.</p>
 </li>
 <li>
 <p>You'll restart your containers with the new services having been added and configured.</p>
 </li>
 <li>
-<p>You can test by inspecting content in your web-browser and/or using Varnish command line tools to ensure that the new caching is occuring.</p>
+<p>You'll install the new Drupal module called Varnish.</p>
+</li>
+<li>
+<p>You can employ some of the methods mentioned below to ensure that the new Varnish caching service is working.</p>
+</li>
+<li>
+<p>You can use the production.env to change settings and "tune" the resource allocation for Varnish.</p>
 </li>
 </ul>
 <hr />
@@ -1182,35 +1308,67 @@
 <h3 id="assumptions">Assumptions</h3>
 <ul>
 <li>
-<p>Prior to installation, enduser will have a running ISLE system using the current release of <code>1.1.1.</code> images.</p>
+<p>Prior to installation, enduser will have a running ISLE system using the current release of <code>1.3.0.</code> images.</p>
 </li>
 <li>
-<p>This installation process will give the functionality as stated in the <code>Systems Requirements</code> image table above for <code>Varnish</code> testing and even <a href="../tickstack/">TICK</a> stack usage.</p>
+<p>This installation process will give the functionality as stated in the <code>Systems Requirements</code> image table above for <code>Varnish</code> testing and usage.</p>
+</li>
+<li>
+<p>Running ISLE Local, Staging and Production sites and systems with ingested objects and content.</p>
 </li>
 </ul>
 <hr />
 <h3 id="installation-instructions">Installation Instructions</h3>
+<h4 id="isle-local-development">ISLE Local development</h4>
 <ul>
-<li>Shut down your running containers</li>
-<li>
-<p><code>docker-compose down</code></p>
-</li>
-<li>
-<p>Make the below mentioned edits to:</p>
-</li>
-<li><code>docker-compose.yml</code> file</li>
-<li><code>.env</code> file</li>
+<li>Shut down your running containers on your ISLE Local instance.</li>
+<li><code>docker-compose down</code></li>
 </ul>
-<h4 id="varnish-edits-docker-composeyml-file">Varnish Edits - docker-compose.yml file</h4>
+<h4 id="edits-docker-composeproductionyml-file">Edits - docker-compose.production.yml file</h4>
 <ul>
-<li>Add a new service to your docker-compose file:</li>
+<li>Within your <code>docker-compose.production.yml</code> &amp; <code>docker-compose.local.yml</code> files, you'll need to uncomment the following section:</li>
 </ul>
-<pre><code class="bash">  varnish:
-    # build:
-    #   context: ../images/isle-varnish
-    image: islandoracollabgroup/isle-varnish:1.1.1
+<p><strong>Example: docker-compose.local.yml</strong></p>
+<pre><code class="bash"># Start - Varnish service section
+## (Optional-component): Uncomment lines below to run ISLE with the Varnish cache
+
+#  varnish:
+#    image: islandoracollabgroup/isle-varnish:1.3.0
+#    container_name: isle-varnish-${CONTAINER_SHORT_ID}
+#    env_file:
+#      - local.env
+#      - .env
+#    networks:
+#      isle-internal:
+#    depends_on:
+#      - mysql
+#      - fedora
+#      - solr
+#      - apache
+#      - traefik
+#    labels:
+#      - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
+#      - traefik.port=6081
+#      - traefik.enable=true
+#      - &quot;traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /cantaloupe&quot;
+#    logging:
+#      driver: syslog
+#      options:
+#        tag: &quot;{{.Name}}&quot;
+
+# END - Varnish service section
+</code></pre>
+
+<p>so that it will now look like this and its formatting should line up appropriately with other ISLE services.</p>
+<p><strong>Example: docker-compose.local.yml</strong></p>
+<pre><code class="bash"># Start - Varnish service section
+## (Optional-component): Uncomment lines below to run ISLE with the Varnish cache
+
+  varnish:
+    image: islandoracollabgroup/isle-varnish:1.3.0
     container_name: isle-varnish-${CONTAINER_SHORT_ID}
     env_file:
+      - local.env
       - .env
     networks:
       isle-internal:
@@ -1224,27 +1382,89 @@
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
       - traefik.port=6081
       - traefik.enable=true
-      - &quot;traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe&quot;
-  ```
+      - &quot;traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /cantaloupe&quot;
+    logging:
+      driver: syslog
+      options:
+        tag: &quot;{{.Name}}&quot;
 
-* For Phase II UAT testing of [TICK](tickstack.md), [Blazegraph](blazegraph.md) and Varnish please change the following image tags of these services from `1.1.1` to `dashboards-dev`
-  * Apache
-      * `image: islandoracollabgroup/isle-apache:1.1.1` should now become `image: islandoracollabgroup/isle-apache:dashboards-dev`
-  * Fedora
-      * `image: islandoracollabgroup/isle-fedora:1.1.1` should now become `image: islandoracollabgroup/isle-fedora:dashboards-dev`
-  * Image-services
-      * `image: islandoracollabgroup/isle-imageservices:1.1.1` should now become `image: islandoracollabgroup/isle-imageservices:dashboards-dev`
-  * MySQL 
-    * `image: islandoracollabgroup/isle-mysql:1.1.1` should now become `image: islandoracollabgroup/isle-mysql:dashboards-dev`
-  * Solr
-    * `image: islandoracollabgroup/isle-solr:1.1.1` should now become `image: islandoracollabgroup/isle-solr:dashboards-dev`
+# END - Varnish service section
+</code></pre>
 
-* Edit your apache service to remove the `traefik` labels so that Varnish can &quot;take over&quot; handling and routing web traffic.
+<p><strong>Example: docker-compose.production.yml</strong></p>
+<pre><code class="bash"># Start - Varnish service section
+## (Optional-component): Uncomment lines below to run ISLE with the Varnish cache
 
-```bash
-    #labels:
-    #  - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
-    #  - traefik.enable=true
+#  varnish:
+#    image: islandoracollabgroup/isle-varnish:1.3.0
+#    container_name: isle-varnish-${CONTAINER_SHORT_ID}
+#    env_file:
+#      - production.env
+#      - .env
+#    networks:
+#      isle-internal:
+#    depends_on:
+#      - mysql
+#      - fedora
+#      - solr
+#      - apache
+#      - traefik
+#    labels:
+#      - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
+#      - traefik.port=6081
+#      - traefik.enable=true
+#      - &quot;traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /cantaloupe&quot;
+#    logging:
+#      driver: syslog
+#      options:
+#        tag: &quot;{{.Name}}&quot;
+
+# END - Varnish service section
+</code></pre>
+
+<p>so that it will now look like this and its formatting should line up appropriately with other ISLE services.</p>
+<p><strong>Example: docker-compose.production.yml</strong></p>
+<pre><code class="bash"># Start - Varnish service section
+## (Optional-component): Uncomment lines below to run ISLE with the Varnish cache
+
+  varnish:
+    image: islandoracollabgroup/isle-varnish:1.3.0
+    container_name: isle-varnish-${CONTAINER_SHORT_ID}
+    env_file:
+      - production.env
+      - .env
+    networks:
+      isle-internal:
+    depends_on:
+      - mysql
+      - fedora
+      - solr
+      - apache
+      - traefik
+    labels:
+      - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
+      - traefik.port=6081
+      - traefik.enable=true
+      - &quot;traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /cantaloupe&quot;
+    logging:
+      driver: syslog
+      options:
+        tag: &quot;{{.Name}}&quot;
+
+# END - Varnish service section
+</code></pre>
+
+<ul>
+<li>
+<p><strong>Please note:</strong> If you <strong>are not</strong> using TICK with your Production system, then you don't need to uncomment the entire <code>logging:</code> area and lines. Leave them uncommented.</p>
+</li>
+<li>
+<p>Comment out the last line in your <code>apache</code> service <code>labels</code> section so that Varnish can "take over" handling and routing web traffic.</p>
+</li>
+</ul>
+<pre><code class="bash">    labels:
+      - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
+      - traefik.enable=true
     #  - &quot;traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe&quot;
 </code></pre>
 
@@ -1252,155 +1472,31 @@
 <li>No change to traefik service: the varnish service now handles web traffic to your main domain.</li>
 </ul>
 <hr />
-<h4 id="varnish-edits-env-file">Varnish Edits - .env file</h4>
+<h4 id="varnish-edits-productionenv-localenv-files">Varnish Edits - production.env &amp; local.env file(s)</h4>
 <ul>
-<li>
-<p>Due to the usage of <code>dashboards-dev</code> images and an upcoming ISLE release that will by default change ISLE's log handling, the following block of ENV variables need to be added to your main .env for the <code>dashboards-dev</code> images to work in testing.</p>
-</li>
-<li>
-<p>Add this new block of ENV variables to your main .env file beneath all other defined services but above the <code>###################### Please stop editing! #######################</code> section is ideal.</p>
-</li>
+<li>Within your <code>production.env</code> and <code>local.env</code> file`, you'll need to uncomment the following section and lines so that:</li>
 </ul>
-<pre><code class="bash">
-###################### LOGS ######################
-# Endusers can change log levels here for debugging
-# Changing log levels will require a container restart.
-
-## Apache Container Logs and Levels
-#
-### Apache Error log - lowercase only please
-# This log is a combination of the Apache web server error and access log 
-# for the domain. Please note it will register only web traffic from the
-# the traefik container.
-#
-# Available output values range from most verbose to least (left to right): 
-# trace8, ..., trace1, debug, info, notice, warn, error, crit, alert, emerg
-#
-### Recommended level is warn
-APACHE_ERROR_LOGLEVEL=warn
-
-## FITS Tool Set Log and Levels
-# The File Information Tool Set (FITS) identifies, validates and extracts technical 
-# metadata for a wide range of file formats.
-# Use the following logs below to debug ingests of PDF, Video, audio and more.
-# 
-# Available output values range from most verbose to least (left to right): 
-# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
-#
-### Recommended levels are ERROR or FATAL
-#
-# Use these logs for general purpose debugging
-FITS_ROOTLOGGER_LOG_LEVEL=ERROR
-FITS_CONSOLE_LOG_LEVEL=ERROR
-
-FITS_UK_GOV_NATIONALARCHIVES_DROID_LOG_LEVEL=FATAL
-FITS_EDU_HARVARD_HUL_OIS_JHOVE_LOG_LEVEL=FATAL
-FITS_ORG_APACHE_TIKA_LOG_LEVEL=ERROR
-FITS_NET_SF_LOG_LEVEL=ERROR
-FITS_ORG_APACHE_PDFBOX_LOG_LEVEL=ERROR
-
-## Fedora Container Loggers and Levels
-#
-# These logs contain information and output concerning the Fedora Commons Repository
-#
-# Available output values range from most verbose to least (left to right): 
-# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
-#
-### Recommended levels are WARN
-#
-# Use these two logs below for general purpose debugging of Fedora
-# Main FEDORA Logger
-FEDORA_ORG_FCREPO_LOG=WARN
-# All other Fedora loggers default level
-FEDORA_ROOT_LOG=WARN
-
-# Fedora Apache CXF™ services framework logger
-FEDORA_ORG_APACHE_CXF_LOG=WARN
-
-# Fedora Security Loggers previously known as the fesl.log
-# This log is typically used for auditing and logging access to Fedora
-FEDORA_ORG_FCREPO_SERVER_SECURITY_JAAS_LOG=WARN
-FEDORA_ORG_FCREPO_SERVER_SECURITY_XACML_LOG=WARN
-
-# Fedora Gsearch logs
-#
-# These logs contain information and output concerning the interaction of Fedora, Gsearch and 
-# Solr Search. Given that most output is the result of successful Gsearch transforms &amp; Solr search queries
-# It is highly recommended that these logs be set to WARN due to the large amount of output.
-#
-# Available output values range from most verbose to least (left to right): 
-# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
-#
-### Recommended levels are WARN
-# 
-# Use these two logs below for general purpose debugging of Fedoragsearch
-GSEARCH_DK_DEFXWS_FEDORAGSEARCH_LOG=WARN
-GSEARCH_ROOT_LOG=WARN
-
-# All other Gsearch loggers default level. 
-# Change levels below only for a larger scale of debugging.
-### Recommended levels are WARN
-GSEARCH_DK_DEFXWS_FGSZEBRA_LOG=WARN
-GSEARCH_DK_DEFXWS_FGSLUCENE_LOG=WARN
-GSEARCH_DK_DEFXWS_FGSSOLR_LOG=WARN
-
-
-## Image Services Container Logs and Levels
-# These logs contain information and output concerning the two image servers
-# Cantaloupe and Adore-Djatoka.
-# 
-# Available output values range from most verbose to least (left to right): 
-# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
-#
-### Recommended levels are ERROR
-#
-# Adore-Djatoka
-ADORE_DJATOKA_ROOT_LOGGER=ERROR
-
-# Cantaloupe (change this one first to debug)
-# Cantaloupe loggers appear to prefer loglevels to be lowercase.
-# otherwise values fail.
-#
-# Available output values range from most verbose to least (left to right): 
-# `trace`, `debug`, `info`, `warn`, `error`, `all`, or `off`
-#
-### Recommended level is error
-CANTALOUPE_LOG_APPLICATION_LEVEL=error
-
-##### SOLR Log Levels #####
-# These logs contain information and output concerning the Solr Search
-# Given that most output is the result of successful Solr search queries
-# It is highly recommended that these logs be set to OFF or WARN due to the
-# large amount of output.
-#
-# Available output values range from most verbose to least (left to right): 
-# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
-#
-### Recommended levels are WARN or OFF
-#
-# Main Solr log (change this one first to debug)
-SOLR_ROOT_LOGGER=WARN
-# These logs most likely can be kept at their default levels of WARN and for the third OFF.
-SOLR_ORG_APACHE_ZOOKEEPER_LOG=WARN
-SOLR_ORG_APACHE_HADOOP_LOG=WARN
-SOLR_ORG_APACHE_SOLR_UPDATE_LOGGINGINFORSTREAM=OFF
-
-## End Logs
+<pre><code class="bash">## Varnish
+## Varnish Admin port is 6082
+## varnish is substituted for default value of localhost to be open to apache
+## otherwise Drupal varnish module cannot connect via CLI
+#VARNISH_ADMIN=varnish
+#VARNISH_ADMIN_PORT=6082
+## Varnish backend
+## the apache service is the &quot;backend&quot; for varnish
+#VARNISH_BACKEND=apache
+#VARNISH_BACKEND_PORT=80
+## Varnish Cache Memory Allocation
+#VARNISH_MALLOC=256m
+## Maximum amount of connections
+#VARNISH_MAX_CONNECTIONS=300
+## Varnish secret aka Control key
+#VARNISH_SECRET=isle_varnish_secret
+## Varnish port
+#VARNISH_VARNISH_PORT=6081
 </code></pre>
 
-<ul>
-<li>
-<p>Add another new block of ENV variables to your main .env file. Above the logging section and beneath all other defined services is fine. </p>
-</li>
-<li>
-<p>Please note we recommned that ISLE endusers only make changes to the following:</p>
-</li>
-<li>
-<p>VARNISH_MALLOC=256m</p>
-</li>
-<li>VARNISH_MAX_CONNECTIONS=300</li>
-<li>VARNISH_SECRET=isle_varnish_secret</li>
-</ul>
+<p>becomes:</p>
 <pre><code class="bash">## Varnish
 ## Varnish Admin port is 6082
 ## varnish is substituted for default value of localhost to be open to apache
@@ -1422,6 +1518,19 @@ VARNISH_VARNISH_PORT=6081
 </code></pre>
 
 <ul>
+<li><strong>Please note</strong> ISLE endusers should only make edits or changes to the following lines:</li>
+<li>
+<p>VARNISH_MALLOC=256m - <em>you can increase this default setting as needed otherwise leave the default.</em></p>
+</li>
+<li>
+<p>VARNISH_MAX_CONNECTIONS=300 - <em>you can increase this default setting as needed otherwise leave the default.</em></p>
+</li>
+<li>
+<p>VARNISH_SECRET=isle_varnish_secret - <em>you can change this value to any alpha-numeric sequence.</em></p>
+</li>
+</ul>
+<hr />
+<ul>
 <li>Pull down the new isle images</li>
 <li>
 <p><code>docker-compose pull</code></p>
@@ -1433,17 +1542,354 @@ VARNISH_VARNISH_PORT=6081
 <p><code>docker-compose up -d</code></p>
 </li>
 <li>
-<p>Verify it's working by:</p>
+<p>Install the Varnish Drupal modules on your Local Drupal site</p>
 </li>
-<li>Navigating to https://yourdomain and you can still see the Drupal site. This may take a few minutes depending on the size of the site.</li>
-<li>Inspecting the headers of different Drupal pages for the words hit. <ul>
-<li>(TO DO) Expand on <code>hit</code> or <code>miss</code> examples</li>
+<li>
+<p>Use the supplied installer script: (<em>Examples given below, you may need to change container ids and paths accordingly to match your local environment</em>)</p>
+<ul>
+<li>On the Production host server, copy this script to your apache container. Replace <code>{{ container_short_id }}</code> with your respective Local container id.</li>
+<li><code>docker cp scripts/varnish/isle_varnish_drupal_module_installer.sh isle-apache-{{ container_short_id }}:/var/www/html/isle_varnish_drupal_installer.sh</code></li>
+<li>Change permissions on the script</li>
+<li><code>docker exec isle-apache-{{ container_short_id }} bash -c "cd /var/www/html/ &amp;&amp; chmod +x isle_varnish_drupal_installer.sh"</code></li>
+<li>Run the script</li>
+<li><code>docker exec isle-apache-{{ container_short_id }} bash -c "cd /var/www/html &amp;&amp; ./isle_varnish_drupal_installer.sh"</code></li>
 </ul>
 </li>
-<li>Checking the Varnish cli for registered content / page requests<ul>
-<li>(TO DO) Expand on using Varnish console with 1 -2 examples</li>
+<li>
+<p>Commit the changed files to your Islandora / Drupal git repository.</p>
+</li>
+<li>Navigate to this path on your Local host machine, typically this is the path bind-mounted in your <code>docker-compose.local.yml</code> to the Apache container's <code>/var/www/html</code> directory</li>
+<li><code>git status</code> - this will show you all of the changed files.</li>
+<li><code>git add path/file</code> - add each changed file as necessary</li>
+<li><code>git commit -m "Adding Varnish Drupal modules"</code> - Your git message can be anything of your choosing</li>
+<li>
+<p><code>git push origin your_git_branch</code> - Replace <code>your_git_branch</code> with the actual git branch you are using for Islandora / Drupal development</p>
+</li>
+<li>
+<p>You can now access this new module in the <code>Home &gt;&gt; Administration &gt;&gt; Configuration &gt;&gt; Development &gt;&gt; Varnish</code> section of your Drupal site.</p>
+</li>
+<li>
+<p>Please note: We recommend the following settings. All other settings should be handled by the vsets within the installer script.</p>
+<ul>
+<li><code>Flush page cache on cron?</code> set to <code>Disabled</code></li>
+<li><code>Varnish version</code> set to <code>4.x</code></li>
+<li><code>Varnish Control Key Append newline</code> checkbox should be <code>checked</code> with a <code>check mark</code></li>
+<li><code>The Front domains list</code> can be left empty</li>
+<li><code>Varnish Cache Clearing</code> set to <code>Drupal Default</code></li>
+<li><code>Varnish ban type</code> set to <code>Normal</code></li>
 </ul>
 </li>
+<li>
+<p>All other settings e.g. <code>Varnish Control Terminal</code> and <code>Varnish Control Key</code> are handled by the local.env ENV variables. (<em>if testing on local</em>)</p>
+</li>
+<li>
+<p>There will also be two other new Drupal modules to access and use:</p>
+</li>
+<li><strong>Purge</strong> - Accessible from <code>Home » Administration » Configuration » Development » Performance</code><ul>
+<li>The setting here is handled by the installer script, vset and Varnish ENV. No need to change this value by the enduser.</li>
+</ul>
+</li>
+<li>
+<p><strong>Cache Expiration</strong> - Accessible from <code>Home » Administration » Configuration » System</code></p>
+<ul>
+<li>The setting here is initially handled by the installer script, vset and Varnish ENV. Enduser can modify as needed but a further explination beyond default settings is out of scope of this document. Recommend using this Drupal modules help page if needed.</li>
+</ul>
+</li>
+<li>
+<p>There should be a nice green checkmark at the bottom to indicate <code>Varnish running</code> once / if you have also spun up the Varnish container. If you choose to not spin up and configure the Varnish container on your Local, your Local ISLE system will continue to run properly but these three Drupal modules may have a red warning or two about not being able to connect to Varnish.</p>
+</li>
+<li>
+<p>If testing Varnish on your Local, open up a web browser and navigate to your Local website.</p>
+</li>
+<li>If you recently restarted your Docker containers, this may take a few minutes depending on the size of the site.<ul>
+<li>You might first see a Traefik <code>Bad Gateway</code> page for a minute or two. You'll need to refresh the page.</li>
+<li>You might then see a Varnish followed by a <code>Error 503 Backend fetch failed</code> page for a minute or two. You'll need to again refresh the page.</li>
+<li>Example Varnish error upon site startup.</li>
+<li>You should now see your Drupal website after a few minutes.  </li>
+</ul>
+</li>
+</ul>
+<p><strong>Example Varnish error</strong></p>
+<pre><code class="bash">Error 503 Backend fetch failed
+
+Backend fetch failed
+Guru Meditation:
+
+XID: 3
+
+Varnish cache server
+</code></pre>
+
+<ul>
+<li>
+<p>If continuing to test on your Local, please review the section below <code>How to verify that Varnish is working</code> for available testing methods.</p>
+</li>
+<li>
+<p>Once satisfied that everything is running properly on your Local, move onto the <code>Deployment to Production and Staging</code> section.</p>
+</li>
+</ul>
+<hr />
+<h4 id="deployment-to-production-and-staging">Deployment to Production and Staging</h4>
+<ul>
+<li>
+<p>Once satisfied that everything is running properly on your Local, you'll need to commit all remaining ISLE config changes as well to push upstream to your Production instance. While you can keep Varnish running on your local, we suggest that you instead back out the ISLE config changes on your Local and only keep them on Production.</p>
+</li>
+<li>
+<p>Commit the changed files to your ISLE git repository.</p>
+</li>
+<li>Navigate to the root of your ISLE project via a terminal or git GUI client.</li>
+<li><code>git status</code> - this will show you all of the changed files.</li>
+<li><code>git add path/file</code> - add each changed file as necessary</li>
+<li><code>git commit -m "Adding Varnish to Production"</code> - Your git message can be anything of your choosing</li>
+<li><code>git push origin master</code> - (<em>Replace <code>master</code> with the actual git branch you are using for ISLE development if needed</em>)</li>
+</ul>
+<h5 id="quick-deployment-to-staging-for-code-parity">Quick deployment to Staging for code parity</h5>
+<ul>
+<li>On your Staging system:</li>
+<li>Shutdown your containers from your ISLE project directory root found typically in <code>/opt/</code><ul>
+<li><code>docker-compose down</code></li>
+</ul>
+</li>
+<li>Run <code>git pull origin master</code> - (<em>Replace <code>master</code> with the actual git branch you are using for ISLE development if needed</em>)<ul>
+<li>While you may not be deploying Varnish to your Staging system, it is a wise idea to not have code drift.</li>
+</ul>
+</li>
+<li>Repeat this process with your Islandora / Drupal code to ensure parity between Staging and Production</li>
+<li>Spin your containers back up</li>
+<li>Run the supplied installer script: (<em>Examples given below, you may need to change container ids and paths accordingly to match your Staging environment</em>)<ul>
+<li>On the Staging host server, copy this script to your apache container. Replace <code>{{ container_short_id }}</code> with your respective Staging container id.</li>
+<li><code>docker cp scripts/varnish/isle_varnish_drupal_module_installer.sh isle-apache-{{ container_short_id }}:/var/www/html/isle_varnish_drupal_installer.sh</code></li>
+<li>Change permissions on the script</li>
+<li><code>docker exec isle-apache-{{ container_short_id }} bash -c "cd /var/www/html/ &amp;&amp; chmod +x isle_varnish_drupal_installer.sh"</code></li>
+<li>Run the script</li>
+<li><code>docker exec isle-apache-{{ container_short_id }} bash -c "cd /var/www/html &amp;&amp; ./isle_varnish_drupal_installer.sh"</code></li>
+<li>The script will complain about the Drupal modules being enabled but will complete.</li>
+</ul>
+</li>
+<li>Perform a quick QC of the site and system to ensure no issues have resulted. Once finished move onto deploying to Production</li>
+</ul>
+<h5 id="deployment-to-production">Deployment to Production</h5>
+<ul>
+<li>On your Production system:</li>
+<li>Shutdown your containers from your ISLE project directory root found typically in <code>/opt/</code><ul>
+<li><code>docker-compose down</code></li>
+</ul>
+</li>
+<li>Run <code>git pull origin master</code> - (<em>Replace <code>master</code> with the actual git branch you are using for ISLE development if needed</em>)</li>
+<li>
+<p>Repeat this process with your Islandora / Drupal code using the appropriate git branch as needed</p>
+</li>
+<li>
+<p>Pull down the new isle images</p>
+</li>
+<li>
+<p><code>docker-compose pull</code></p>
+</li>
+<li>
+<p>Spin up new containers</p>
+</li>
+<li>
+<p><code>docker-compose up -d</code></p>
+</li>
+<li>
+<p>Run the supplied installer script: (<em>Examples given below, you may need to change container ids and paths accordingly to match your Production environment</em>)</p>
+</li>
+<li>On the Production host server, copy this script to your apache container. Replace <code>{{ container_short_id }}</code> with your respective Staging container id.<ul>
+<li><code>docker cp scripts/varnish/isle_varnish_drupal_module_installer.sh isle-apache-{{ container_short_id }}:/var/www/html/isle_varnish_drupal_installer.sh</code></li>
+</ul>
+</li>
+<li>Change permissions on the script<ul>
+<li><code>docker exec isle-apache-{{ container_short_id }} bash -c "cd /var/www/html/ &amp;&amp; chmod +x isle_varnish_drupal_installer.sh"</code></li>
+</ul>
+</li>
+<li>Run the script<ul>
+<li><code>docker exec isle-apache-{{ container_short_id }} bash -c "cd /var/www/html &amp;&amp; ./isle_varnish_drupal_installer.sh"</code></li>
+</ul>
+</li>
+<li>
+<p>The script will complain about the Drupal modules being enabled but will complete.</p>
+</li>
+<li>
+<p>You can now access this new module in the <code>Home &gt;&gt; Administration &gt;&gt; Configuration &gt;&gt; Development &gt;&gt; Varnish</code> section of your Drupal site.</p>
+</li>
+<li>
+<p>Please note: We recommend the following settings. All other settings should be handled by the vsets within the installer script.</p>
+<ul>
+<li><code>Flush page cache on cron?</code> set to <code>Disabled</code></li>
+<li><code>Varnish version</code> set to <code>4.x</code></li>
+<li><code>Varnish Control Key Append newline</code> checkbox should be <code>checked</code> with a <code>check mark</code></li>
+<li><code>The Front domains list</code> can be left empty</li>
+<li><code>Varnish Cache Clearing</code> set to <code>Drupal Default</code></li>
+<li><code>Varnish ban type</code> set to <code>Normal</code></li>
+</ul>
+</li>
+<li>
+<p>All other settings e.g. <code>Varnish Control Terminal</code> and <code>Varnish Control Key</code> are handled by the production.env ENV variables.</p>
+</li>
+<li>
+<p>There will also be two other new Drupal modules to access and use:</p>
+</li>
+<li><strong>Purge</strong> - Accessible from <code>Home » Administration » Configuration » Development » Performance</code><ul>
+<li>The setting here is handled by the installer script, vset and Varnish ENV. No need to change this value by the enduser.</li>
+</ul>
+</li>
+<li>
+<p><strong>Cache Expiration</strong> - Accessible from <code>Home » Administration » Configuration » System</code></p>
+<ul>
+<li>The setting here is initially handled by the installer script, vset and Varnish ENV. Enduser can modify as needed but a further explination beyond default settings is out of scope of this document. Recommend using this Drupal modules help page if needed.</li>
+</ul>
+</li>
+<li>
+<p>There should be a nice green checkmark at the bottom to indicate <code>Varnish running</code> once / if you have also spun up the Varnish container. If any of the three Drupal modules have a red warning or two about not being able to connect to Varnish, then you'll need to retrace your steps and troubleshoot.</p>
+</li>
+<li>
+<p>Open up a web browser and navigate to your Production website.</p>
+</li>
+<li>If you recently restarted your Docker containers, this may take a few minutes depending on the size of the site.<ul>
+<li>You might first see a Traefik <code>Bad Gateway</code> page for a minute or two. You'll need to refresh the page.</li>
+<li>You might then see a Varnish followed by a <code>Error 503 Backend fetch failed</code> page for a minute or two. You'll need to again refresh the page.</li>
+<li>Example Varnish error upon site startup.</li>
+<li>You should now see your Drupal website after a few minutes.  </li>
+</ul>
+</li>
+</ul>
+<p><strong>Example Varnish error</strong></p>
+<pre><code class="bash">Error 503 Backend fetch failed
+
+Backend fetch failed
+Guru Meditation:
+
+XID: 3
+
+Varnish cache server
+</code></pre>
+
+<ul>
+<li>
+<p>If continuing to test on your Production system, please review the section below <code>How to verify that Varnish is working</code> for available testing methods.</p>
+</li>
+<li>
+<p>We also recommend a final QC on your Production system, reviewing all logs, displayed objects and searches.</p>
+</li>
+</ul>
+<hr />
+<h2 id="how-to-verify-that-varnish-is-working">How to verify that Varnish is working</h2>
+<p>Any of these methods below will work for testing on your Local or general use on Production</p>
+<h3 id="method-1-visit-your-website-in-a-web-browser">Method 1 - Visit your website in a web browser</h3>
+<ul>
+<li>
+<p>Open up a web browser and navigate to your website.</p>
+</li>
+<li>
+<p>If you recently restarted your Docker containers, this may take a few minutes depending on the size of the site.</p>
+</li>
+<li>You might first see a Traefik <code>Bad Gateway</code> page for a minute or two. You'll need to refresh the page.</li>
+<li>You might then see a Varnish followed by a <code>Error 503 Backend fetch failed</code> page for a minute or two. You'll need to again refresh the page.<ul>
+<li>Example Varnish error upon site startup.</li>
+</ul>
+</li>
+</ul>
+<pre><code class="bash">Error 503 Backend fetch failed
+
+Backend fetch failed
+Guru Meditation:
+
+XID: 3
+
+Varnish cache server
+</code></pre>
+
+<ul>
+<li>You should now see your website after a few minutes.</li>
+</ul>
+<h3 id="method-2-inspect-the-headers-on-one-of-your-sites-webpages">Method 2 - Inspect the headers on one of your site's webpages</h3>
+<ul>
+<li>
+<p>Launch a web browser (<em>Chrome., Safari or Firefox</em>) and navigate to your website</p>
+</li>
+<li>
+<p>To inspect the headers, right click on the page and choose <code>Inspect</code></p>
+</li>
+<li>
+<p>This should launch the browser's built-in tools suite, select <code>Network</code></p>
+</li>
+<li>You'll need to refresh / reload the page again to see objects</li>
+<li>Look for the page url and click on it.<ul>
+<li>Your should see entries like the following:</li>
+</ul>
+</li>
+</ul>
+<pre><code class="bash">via: 1.1 varnish-v4
+x-cache: HIT
+x-cache-hits: 2
+</code></pre>
+
+<h3 id="method-3-curl-a-url-and-review-the-headers">Method 3 - Curl a url and review the headers</h3>
+<ul>
+<li>Run a curl command on your local laptop to your site with <code>curl -I https://yourwebsitehere.com</code></li>
+</ul>
+<p>The output should look something like this example output below:</p>
+<pre><code class="bash">curl -I https://demo.born-digital.com
+
+HTTP/2 200 
+accept-ranges: bytes
+age: 2075
+cache-control: public, max-age=10800
+content-language: en
+content-type: text/html; charset=utf-8
+date: Mon, 23 Sep 2019 19:27:42 GMT
+etag: W/&quot;1569264015-0-gzip&quot;
+expires: Sun, 19 Nov 1978 05:00:00 GMT
+last-modified: Mon, 23 Sep 2019 18:40:15 GMT
+server: Apache/2.4.41 (Ubuntu)
+vary: Cookie,Accept-Encoding
+via: 1.1 varnish-v4
+x-cache: HIT
+x-cache-hits: 19
+x-content-type-options: nosniff
+x-drupal-cache: HIT
+x-frame-options: SAMEORIGIN
+x-generator: Drupal 7 (http://drupal.org)
+x-varnish: 983097 3
+</code></pre>
+
+<p><strong>Please note:</strong> This information below is a callout for the enduser to understand indicates that Varnish is not only caching the page but the Varnish cache has received previous "hits" or requests for this page and its contents.</p>
+<pre><code class="bash">via: 1.1 varnish-v4
+x-cache: HIT
+x-cache-hits: 19
+</code></pre>
+
+<h3 id="method-4-backend-tools">Method 4 - Backend tools</h3>
+<ul>
+<li>You can use tools like <code>varnishtop</code>, <code>varnishstat</code>, <code>varnishlog</code> or <code>varnishhist</code> to view traffic on the Varnish container.</li>
+<li>Please navigate down to the <code>Varnish utilities and tools</code> section for more details.</li>
+</ul>
+<hr />
+<h2 id="how-to-clear-the-varnish-cache">How to clear the Varnish cache</h2>
+<ul>
+<li>
+<p>Everytime the Varnish container is stopped and restarted, the Varnish cache will be reset and rebuilt. (<em>Easiest and most recommended method</em>)</p>
+</li>
+<li>
+<p>Shell into the Varnish container (<em>Shouldn't involve restarting the container</em>). Replace <code>{{ container_short_id }}</code> with your respective container id.</p>
+</li>
+<li><code>docker exec -it isle-varnish-{{ container_short_id }} bash</code></li>
+<li>
+<p><code>varnishadm -T 127.0.0.1:6082 url.purge .</code></p>
+</li>
+<li>
+<p>Additional curl commands and vcl edits can be found within the <a href="https://varnish-cache.org/docs/4.1/users-guide/purging.html">Varnish 4.1 documentation</a></p>
+</li>
+</ul>
+<h2 id="varnish-utilities-and-tools">Varnish utilities and tools</h2>
+<p>There are multiple tools that can be used to interacte with the Varnish cache. All will require that you use them on the running Varnish container.</p>
+<ul>
+<li><a href="https://varnish-cache.org/docs/4.1/reference/varnishlog.html">varnishtop</a> - The varnishtop utility reads varnishd shared memory logs and presents a continuously updated list of the most commonly occurring log entries.</li>
+<li><a href="https://varnish-cache.org/docs/4.1/reference/varnishstat.html#varnishstat-1">varnishstat</a> - for Varnish cache statistics</li>
+<li><a href="https://varnish-cache.org/docs/4.1/reference/varnishlog.html">varnishlog</a> - a utility that can read the contents of the in-memory log that Varnish provides</li>
+<li><a href="https://varnish-cache.org/docs/4.1/reference/varnishhist.html">varnishhist</a> - The varnishhist utility reads varnishd(1) shared memory logs and presents a continuously updated histogram</li>
+<li><a href="https://varnish-cache.org/docs/4.1/reference/varnishadm.html">varnishadm</a> - type in <code>varnishadm</code> and then <code>help</code> for additional commands. Utility used to control the Varnish cache.</li>
+<li>Additional commands can be found in the <a href="https://varnish-cache.org/docs/4.1/users-guide/operation-statistics.html">Varnish Reporting &amp; Statistics section</a></li>
 </ul>
 <hr />
 <h2 id="using-varnish-the-tick-stack">Using Varnish &amp; the TICK stack</h2>
@@ -1452,7 +1898,7 @@ VARNISH_VARNISH_PORT=6081
 <p>Please first follow the instructions for installing and using the <a href="../tickstack/">TICK stack</a></p>
 </li>
 <li>
-<p>If you're pushing log events to <a href="../tickstack/">TICK</a>, add this snippet of code below (<em>logging instructions</em>) to the bottom of <strong>every</strong> ISLE service within your <code>docker-compose.yml</code> file.</p>
+<p>If you're pushing log events to <a href="../tickstack/">TICK</a>, this snippet of code below (<em>logging instructions</em>) at the bottom of <strong>every</strong> ISLE service within your <code>docker-compose.production.yml</code> file should be uncommented. This should include the Varnish service. By default the uncommented Varnish section in the Production <code>docker-compose.production.yml</code> file will have this snippet of code below.</p>
 </li>
 </ul>
 <pre><code class="bash">    logging:
@@ -1463,9 +1909,7 @@ VARNISH_VARNISH_PORT=6081
 
 <p><strong><em>*Example:</em></strong>*</p>
 <pre><code class="bash">varnish:
-  # build:
-  #   context: ../images/isle-varnish
-  image: islandoracollabgroup/isle-varnish:1.1.1
+  image: islandoracollabgroup/isle-varnish:1.3.0
   container_name: isle-varnish-${CONTAINER_SHORT_ID}
   env_file:
     - .env
@@ -1485,31 +1929,26 @@ VARNISH_VARNISH_PORT=6081
   logging:
     driver: syslog
     options:
-      tag: &quot;{{.Name}}&quot;        
-</code></pre>
-
-<ul>
-<li>Additionally you'll need to remove or comment out every line or reference to logs from the <code>volumes</code> section of each service. Varnish by default doesn't log unless directed to manually.</li>
-</ul>
-<p><strong><em>*Example:</em></strong>*</p>
-<pre><code class="bash">    volumes:
-      - isle-solr-data:/usr/local/solr
-      - ./logs/solr:/usr/local/tomcat/logs
-</code></pre>
-
-<p>becomes</p>
-<pre><code class="bash">    volumes:
-      - isle-solr-data:/usr/local/solr
+      tag: &quot;{{.Name}}&quot;
 </code></pre>
 
 <hr />
 <h2 id="uninstallation-instructions">Uninstallation Instructions</h2>
-<p>*</p>
-<p>*</p>
-<hr />
-<h2 id="maintenance-notes">Maintenance Notes</h2>
-<p>*</p>
-<p>*</p>
+<ul>
+<li>Shutdown the ISLE containers on your Local system</li>
+<li>Comment out the Varnish service section in either of the <code>docker-compose.production.yml</code> or <code>docker-compose.local.yml</code> file(s)<ul>
+<li>Uncomment the last line in the Apache <code>labels</code> section in either of the <code>docker-compose.production.yml</code> or <code>docker-compose.local.yml</code> file(s)</li>
+</ul>
+</li>
+<li>Comment out the Varnish section again in the <code>production.env</code> or <code>local.env</code> file</li>
+<li>Startup the ISLE containers again.</li>
+<li>Shell into the Apache container</li>
+<li><code>cd /var/www/html</code></li>
+<li><code>drush dis varnish purge expire</code></li>
+<li><code>drush pm-uninstall varnish purge expire</code></li>
+<li>Commit the resulting code changes in both the ISLE and Islandora git repositories.</li>
+<li>Deploy these changes to your Staging and Production systems</li>
+</ul>
 <hr />
 <h2 id="need-help">Need help?</h2>
 <ul>
@@ -1517,7 +1956,7 @@ VARNISH_VARNISH_PORT=6081
 <p>Please use the following as resources for institutions or endusers needing support</p>
 </li>
 <li>
-<p><a href="https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group">Islandora ISLE Interest Group</a> - Meetings open to everybody!   </p>
+<p><a href="https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group">Islandora ISLE Interest Group</a> - Meetings open to everybody!</p>
 <ul>
 <li>The <a href="https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group/#how-to-join">Schedule</a> is alternating Wednesdays, 3:00pm EDT</li>
 </ul>
@@ -1533,16 +1972,19 @@ VARNISH_VARNISH_PORT=6081
 <h2 id="additional-resources">Additional Resources</h2>
 <ul>
 <li>
-<p><a href="https://varnish-cache.org/docs/4.1/index.html">Varnish 4.x Documentation</a></p>
+<p><a href="https://varnish-cache.org/docs/4.1/index.html">Varnish 4.1.x Documentation</a></p>
 </li>
 <li>
-<p><strong>Please note:</strong>: </p>
+<p><a href="https://varnish-cache.org/docs/4.1/users-guide/index.html">The Varnish Users Guide</a></p>
+</li>
+<li>
+<p><strong>Please note:</strong>:</p>
 </li>
 <li><a href="https://www.varnish-software.com/">Varnish Software</a> is the commercial wing of the Varnish.<ul>
 <li>Varnish Admin Console is a <a href="https://www.varnish-software.com/solutions/varnish-enterprise/varnish-administration-console-2/">paid</a> not for free product that is a GUI for Varnish Cache. The language around this feature is vague and sometimes misleadingly used in tutorials as software anyone can use. There are trials but ultimately this is a paid product.</li>
 </ul>
 </li>
-<li><a href="https://www.varnish-software.com/community/varnish-cache/">Varnish Cache</a> is the open-source project maintained by Varnish Software and intended to be used by anyone.</li>
+<li><a href="https://www.varnish-software.com/community/varnish-cache/">Varnish Cache</a> is the open-source project maintained by Varnish Software and intended to be used by anyone for free.</li>
 </ul>
                 
                   
@@ -1578,7 +2020,7 @@ VARNISH_VARNISH_PORT=6081
       
     </div>
     
-      <script src="../../assets/javascripts/application.c648116f.js"></script>
+      <script src="../../assets/javascripts/application.39abc4af.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       

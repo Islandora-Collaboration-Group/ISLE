@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.2.0">
     
     
       
@@ -42,7 +42,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.750b69bd.css">
       
       
     
@@ -52,7 +52,7 @@
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
@@ -104,9 +104,7 @@
               Islandora Enterprise (ISLE)
             </span>
             <span class="md-header-nav__topic">
-              
-                Replacing Mulgara with Blazegraph
-              
+              Replacing Mulgara with Blazegraph
             </span>
           
         </div>
@@ -149,7 +147,7 @@
         
       
       
-      <main class="md-main" role="main">
+      <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
             
@@ -793,8 +791,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release-notes/release-1-2-0/" title="Latest release: 1.2.0" class="md-nav__link">
-      Latest release: 1.2.0
+    <a href="../../release-notes/release-1-3-0/" title="Latest release: 1.3.0" class="md-nav__link">
+      Latest release: 1.3.0
     </a>
   </li>
 
@@ -817,6 +815,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-2-0/" title="1.2.0" class="md-nav__link">
+      1.2.0
+    </a>
+  </li>
+
         
           
           
@@ -885,21 +895,21 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#use-cases-user-stories" class="md-nav__link">
+  <a href="#use-cases-user-stories" title="Use Cases &amp; User Stories" class="md-nav__link">
     Use Cases &amp; User Stories
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#new-functionality" class="md-nav__link">
+  <a href="#new-functionality" title="New Functionality" class="md-nav__link">
     New Functionality
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#system-requirements" class="md-nav__link">
+  <a href="#system-requirements" title="System Requirements" class="md-nav__link">
     System Requirements
   </a>
   
@@ -907,7 +917,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#isle-images" class="md-nav__link">
+  <a href="#isle-images" title="ISLE Images" class="md-nav__link">
     ISLE Images
   </a>
   
@@ -919,14 +929,14 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#adoption-process-overview" class="md-nav__link">
+  <a href="#adoption-process-overview" title="Adoption Process Overview" class="md-nav__link">
     Adoption Process Overview
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
+  <a href="#installation" title="Installation" class="md-nav__link">
     Installation
   </a>
   
@@ -934,14 +944,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#assumptions" class="md-nav__link">
+  <a href="#assumptions" title="Assumptions" class="md-nav__link">
     Assumptions
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#installation-instructions" class="md-nav__link">
+  <a href="#installation-instructions" title="Installation Instructions" class="md-nav__link">
     Installation Instructions
   </a>
   
@@ -949,22 +959,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#blazegraph-edits-docker-composeyml-file" class="md-nav__link">
-    Blazegraph Edits - docker-compose.yml file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#blazegraph-edits-env-file" class="md-nav__link">
-    Blazegraph Edits - .env file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#check-fedora" class="md-nav__link">
-    Check Fedora
+  <a href="#check-rebuild-fedora-when-using-blazegraph" title="Check &amp; Rebuild Fedora when using Blazegraph" class="md-nav__link">
+    Check &amp; Rebuild Fedora when using Blazegraph
   </a>
   
 </li>
@@ -975,7 +971,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#check-the-blazegraph-triples-count" class="md-nav__link">
+  <a href="#check-the-blazegraph-triples-count" title="Check the Blazegraph triples count" class="md-nav__link">
     Check the Blazegraph triples count
   </a>
   
@@ -987,35 +983,28 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-blazegraph-the-tick-stack" class="md-nav__link">
+  <a href="#using-blazegraph-the-tick-stack" title="Using Blazegraph &amp; the TICK stack" class="md-nav__link">
     Using Blazegraph &amp; the TICK stack
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#uninstallation-instructions" class="md-nav__link">
+  <a href="#uninstallation-instructions" title="Uninstallation Instructions" class="md-nav__link">
     Uninstallation Instructions
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#maintenance-notes" class="md-nav__link">
-    Maintenance Notes
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#need-help" class="md-nav__link">
+  <a href="#need-help" title="Need help?" class="md-nav__link">
     Need help?
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#additional-resources" class="md-nav__link">
+  <a href="#additional-resources" title="Additional Resources" class="md-nav__link">
     Additional Resources
   </a>
   
@@ -1046,31 +1035,22 @@
 <h2 id="new-functionality">New Functionality</h2>
 <ul>
 <li>
-<p>Several paragraphs describing the functional differences between Blazegraph and Mulgara</p>
-</li>
-<li>
 <p>The new <code>isle-blazegraph</code> image was built using <a href="https://www.blazegraph.com/">Blazegraph™</a> which is a ultra high-performance graph database supporting Apache TinkerPop™ and RDF/SPARQL APIs. It supports up to 50 Billion edges on a single machine. Formerly known as BigData. The intended use is solely for maintaining performant support of large Fedora repositories containing millions of objects.</p>
 </li>
 <li>
 <p>Why use this component with ISLE?</p>
-<ul>
-<li>Islandora users who have Fedora repositories with over 600K~ objects ingested have reported issues with using the default Mulgara triplestore used for indexing objects ingested into the Fedora repository. These issues include crashes, extreme performance slowdowns,system timeouts and more. Blazegraph is used to replace Mulgara as the triplestore and to deliver a higher level of performance for larger Fedora repositories. Please note the threshold given above for object count is an compilation of the anecdotal ranges gathered by the Islandora community. In some cases the number is as low as 600K~ when endusers report challenges, others haven't encountered issues until the 1 million object count.</li>
-</ul>
+</li>
+<li>
+<p>Islandora users who have Fedora repositories with over 600K~ objects ingested have reported issues with using the default Mulgara triplestore used for indexing objects ingested into the Fedora repository. These issues include crashes, extreme performance slowdowns,system timeouts and more. Blazegraph is used to replace Mulgara as the triplestore and to deliver a higher level of performance for larger Fedora repositories. Please note the threshold given above for object count is an compilation of the anecdotal ranges gathered by the Islandora community. In some cases the number is as low as 600K~ when endusers report challenges, others haven't encountered issues until the 1 million object count.</p>
 </li>
 <li>
 <p>How can I tell how many Fedora objects I have to determine if I should use this component?</p>
-<ul>
-<li>Walkthrough on getting triple counts. (TO DO)</li>
-</ul>
 </li>
 <li>
-<p>Additional notes commenting on tradeoffs in removing Mulgara</p>
+<p>Walkthrough on getting triple counts. (TO DO)</p>
 </li>
 <li>
-<p>Additional notes concerning administrative overhead and/or necessary process changes</p>
-</li>
-<li>
-<p>A new Fedora image that has slight image and functional changes is required to be used in tandem with Blazegraph. These image changes are primarily edits to the <code>fedora.fcg</code> file to use Blazegraph instead of Mulgara. </p>
+<p>A new Fedora image that has slight image and functional changes is required to be used in tandem with Blazegraph. These image changes are primarily edits to the <code>fedora.fcg</code> file to use Blazegraph instead of Mulgara.</p>
 </li>
 <li>
 <p>Additionally, a new <code>confd</code> configuration within the Fedora image and linked environmental variable has been added to the <code>.env</code> to allow users to "toggle" between Blazegraph and Mulgara as desired. In the event a user toggles between either desired triplestore, a reindex of the Fedora repository is required. With Fedora repositories of 600K+ objects or more, <strong>the indexing process will take double-digit hours to days</strong> depending on the complexity of the object relationships, ontology, etc.</p>
@@ -1082,15 +1062,10 @@
 <hr />
 <h2 id="system-requirements">System Requirements</h2>
 <ul>
-<li><a href="https://github.com/Islandora-Collaboration-Group/ISLE">ISLE</a> release version <code>1.1.1</code></li>
+<li><a href="https://github.com/Islandora-Collaboration-Group/ISLE">ISLE</a> release version <code>1.3.0</code></li>
 <li><code>git clone https://github.com/Islandora-Collaboration-Group/ISLE.git</code></li>
 </ul>
 <h3 id="isle-images">ISLE Images</h3>
-<ul>
-<li>Following the installation steps below, an enduser will configure  / edit their ISLE running system(s) to ultimately use the following images and tags from Docker-Hub:</li>
-</ul>
-<p>(<em>These tags are for usage during Phase II Sprints only and will change during the release process.</em>)</p>
-<p>(<em>Phase II Sprints only</em>)</p>
 <table>
 <thead>
 <tr>
@@ -1103,27 +1078,27 @@
 <tr>
 <td>Apache</td>
 <td><a href="https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-apache/tags">islandoracollabgroup/isle-apache</a></td>
-<td><code>dashboards-dev</code></td>
+<td><code>1.3.0</code></td>
 </tr>
 <tr>
 <td>Blazegraph</td>
 <td><a href="https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-blazegraph">islandoracollabgroup/isle-blazegraph</a></td>
-<td><code>dashboards-dev</code></td>
+<td><code>1.3.0</code></td>
 </tr>
 <tr>
 <td>Fedora</td>
 <td><a href="https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-fedora/tags">islandoracollabgroup/isle-fedora</a></td>
-<td><code>blazegraph.dashboards-dev</code></td>
+<td><code>1.3.0</code></td>
 </tr>
 <tr>
 <td>Image-services</td>
 <td><a href="https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-imageservices">islandoracollabgroup/isle-imageservices</a></td>
-<td><code>dashboards-dev</code></td>
+<td><code>1.3.0</code></td>
 </tr>
 <tr>
 <td>MySQL</td>
 <td><a href="https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-mysql">islandoracollabgroup/isle-mysql</a></td>
-<td><code>dashboards-dev</code></td>
+<td><code>1.3.0</code></td>
 </tr>
 <tr>
 <td>Portainer</td>
@@ -1133,7 +1108,7 @@
 <tr>
 <td>Solr</td>
 <td><a href="https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-solr/tags">islandoracollabgroup/isle-solr</a></td>
-<td><code>dashboards-dev</code></td>
+<td><code>1.3.0</code></td>
 </tr>
 <tr>
 <td>Traefik</td>
@@ -1150,7 +1125,7 @@
 <p>Add an additional 2 GB RAM in total ISLE Host memory for Blazegraph to run</p>
 </li>
 <li>
-<p>Plan on an additional 25-100+ GB disk space for “big_data” resource index persistence.</p>
+<p>Plan on an additional 25-100+ GB disk space for “big_data” resource index persistence if running on Staging and/or Production ISLE instances.</p>
 <ul>
 <li>This index (<code>/var/bigdata/bigdata.jnl</code>) will grow quickly overtime and file sizes of over 25GB or more are possible with Fedora repositories that have over 1 million objects.</li>
 </ul>
@@ -1158,7 +1133,7 @@
 <li>
 <p>To persist this file and directory in a bind-mount instead of a Docker volume, an edit will need to be made to the <code>docker-compose.yml</code> file in the <code>blazegraph</code> service, <code>volume</code> section.</p>
 <ul>
-<li>Change <code>isle-blazegraph-data</code> to your ISLE Host system specific bind-mount path. <strong>Example:</strong> </li>
+<li>Change <code>isle-blazegraph-data</code> to your ISLE Host system specific bind-mount path. <strong>Example:</strong></li>
 <li><code>- /mnt/isle-blazegraph-data:/var/bigdata</code></li>
 </ul>
 </li>
@@ -1168,7 +1143,7 @@
 <h2 id="adoption-process-overview">Adoption Process Overview</h2>
 <ul>
 <li>
-<p>The installation instructions below will walk you through how to setup and run the optional Blazegraph container for use as an replacement triplestore for Fedora repositories with 600K+ of objects.</p>
+<p>The installation instructions below will walk you through how to setup and run the optional Blazegraph container for use as an replacement triplestore for Fedora repositories with 600K+ of objects on either an ISLE demo or local instance.</p>
 </li>
 <li>
 <p>You'll start by backing up all important data as needed.</p>
@@ -1177,18 +1152,14 @@
 <p>You'll stop any running containers</p>
 </li>
 <li>
-<p>You'll download new ISLE images temporarily tagged as <code>dashboards-dev</code> instead of the standard ISLE <code>1.1.1</code>. </p>
-</li>
-<li><strong>Please note:</strong> <em>This is a temporary process until all ISLE Phase II UAT testing is completed and the images can be released.</em></li>
-<li>
-<p>You'll download a new ISLE image called <code>isle-blazegraph:dashboards-dev</code></p>
+<p>You'll download ISLE images including a new ISLE image called <code>isle-blazegraph</code></p>
 </li>
 <li>
 <p>You'll make additional edits and modifications to the following ISLE configuration files:</p>
 </li>
-<li><code>docker-compose.yml</code></li>
+<li><code>docker-compose.local.yml</code></li>
 <li>
-<p><code>.env</code></p>
+<p><code>local.env</code></p>
 </li>
 <li>
 <p>You'll restart your containers with the new services having been added and configured.</p>
@@ -1197,7 +1168,7 @@
 <p>You'll re-index your Fedora Resource &amp; SQL indices and ensure that the new Blazegraph triplestore is displaying triples.</p>
 </li>
 <li>
-<p>You can <em>optionally</em> use and/or setup the new <a href="../tickstack/">TICK stack</a> to monitor this container and service.</p>
+<p>You can <em>optionally</em> use and/or setup the new <a href="../tickstack/">TICK stack</a> to monitor this container and service on Staging and Production instances.</p>
 </li>
 </ul>
 <hr />
@@ -1205,7 +1176,7 @@
 <h3 id="assumptions">Assumptions</h3>
 <ul>
 <li>
-<p>Prior to installation, enduser will have a running ISLE system using the current release of <code>1.1.1.</code> images.</p>
+<p>Prior to installation, enduser will have a running ISLE system using the current release of <code>1.3.0</code> images.</p>
 </li>
 <li>
 <p>This installation process will give the functionality as stated in the <code>Systems Requirements</code> image table above for <code>Blazegraph</code> testing and even <code>TICK</code> stack usage.</p>
@@ -1220,243 +1191,12 @@
 <hr />
 <h3 id="installation-instructions">Installation Instructions</h3>
 <ul>
-<li>Shut down your running containers</li>
+<li>Shut down your running containers if any. Precautionary step.</li>
 <li>
 <p><code>docker-compose down</code></p>
 </li>
 <li>
-<p>Make the below mentioned edits to:</p>
-</li>
-<li><code>docker-compose.yml</code> file</li>
-<li><code>.env</code> file</li>
-</ul>
-<h4 id="blazegraph-edits-docker-composeyml-file">Blazegraph Edits - docker-compose.yml file</h4>
-<ul>
-<li>For Phase II UAT testing of TICK, Blazegraph and Varnish please change the following image tags of these services from <code>1.1.1</code> to <code>dashboards-dev</code></li>
-<li>Apache<ul>
-<li><code>image: islandoracollabgroup/isle-apache:1.1.1</code> should now become <code>image: islandoracollabgroup/isle-apache:dashboards-dev</code></li>
-</ul>
-</li>
-<li>Image-services<ul>
-<li><code>image: islandoracollabgroup/isle-imageservices:1.1.1</code> should now become <code>image: islandoracollabgroup/isle-imageservices:dashboards-dev</code></li>
-</ul>
-</li>
-<li>MySQL <ul>
-<li><code>image: islandoracollabgroup/isle-mysql:1.1.1</code> should now become <code>image: islandoracollabgroup/isle-mysql:dashboards-dev</code></li>
-</ul>
-</li>
-<li>
-<p>Solr</p>
-<ul>
-<li><code>image: islandoracollabgroup/isle-solr:1.1.1</code> should now become <code>image: islandoracollabgroup/isle-solr:dashboards-dev</code></li>
-</ul>
-</li>
-<li>
-<p>Add the new <code>Blazegraph</code>service to your docker-compose file:</p>
-</li>
-</ul>
-<pre><code class="bash">isle-blazegraph:
-    #build:
-    #  context: ./images/isle-blazegraph
-    image: islandoracollabgroup/isle-blazegraph:dashboards-dev
-    container_name: isle-blazegraph-${CONTAINER_SHORT_ID}
-    environment:
-      - JAVA_MAX_MEM=4096M
-      - JAVA_MIN_MEM=1024M
-    env_file:
-      - tomcat.env
-    networks:
-      - isle-internal
-    ports:
-      - &quot;8084:8080&quot;
-    volumes:
-      - isle-blazegraph-data:/var/bigdata
-</code></pre>
-
-<ul>
-<li>Edit the <code>Fedora</code> service definition so that the default Fedora tag (1.1.1. as of June 5,2019_)is replaced with the <code>isle-fedora:blazegraph.dashboards-dev</code> image for use with Blazegraph. This Fedora image is configured to use either the Blazegraph or default Mulgara triplestore. By default it is set to Mulgara  </li>
-</ul>
-<pre><code class="bash">  fedora:
-    # build:
-    #   context: ../images/isle-fedora
-    image: islandoracollabgroup/isle-fedora:1.1.1
-</code></pre>
-
-<p>becomes</p>
-<pre><code class="bash">
- fedora:
-    # build:
-    #   context: ../images/isle-fedora
-    image: islandoracollabgroup/isle-fedora:blazegraph.dashboards-dev
-</code></pre>
-
-<hr />
-<h4 id="blazegraph-edits-env-file">Blazegraph Edits - .env file</h4>
-<ul>
-<li>
-<p>Due to the usage of <code>dashboards-dev</code> images and an upcoming ISLE release that will by default change ISLE's log handling, the following block of ENV variables need to be added to your main .env for the <code>dashboards-dev</code> images to work in testing.</p>
-</li>
-<li>
-<p>Add this new block of ENV variables to your main .env file beneath all other defined services but above the <code>###################### Please stop editing! #######################</code> section is ideal.</p>
-</li>
-</ul>
-<pre><code class="bash">
-###################### LOGS ######################
-# Endusers can change log levels here for debugging
-# Changing log levels will require a container restart.
-
-## Apache Container Logs and Levels
-#
-### Apache Error log - lowercase only please
-# This log is a combination of the Apache web server error and access log 
-# for the domain. Please note it will register only web traffic from the
-# the traefik container.
-#
-# Available output values range from most verbose to least (left to right): 
-# trace8, ..., trace1, debug, info, notice, warn, error, crit, alert, emerg
-#
-### Recommended level is warn
-APACHE_ERROR_LOGLEVEL=warn
-
-## FITS Tool Set Log and Levels
-# The File Information Tool Set (FITS) identifies, validates and extracts technical 
-# metadata for a wide range of file formats.
-# Use the following logs below to debug ingests of PDF, Video, audio and more.
-# 
-# Available output values range from most verbose to least (left to right): 
-# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
-#
-### Recommended levels are ERROR or FATAL
-#
-# Use these logs for general purpose debugging
-FITS_ROOTLOGGER_LOG_LEVEL=ERROR
-FITS_CONSOLE_LOG_LEVEL=ERROR
-
-FITS_UK_GOV_NATIONALARCHIVES_DROID_LOG_LEVEL=FATAL
-FITS_EDU_HARVARD_HUL_OIS_JHOVE_LOG_LEVEL=FATAL
-FITS_ORG_APACHE_TIKA_LOG_LEVEL=ERROR
-FITS_NET_SF_LOG_LEVEL=ERROR
-FITS_ORG_APACHE_PDFBOX_LOG_LEVEL=ERROR
-
-## Fedora Container Loggers and Levels
-#
-# These logs contain information and output concerning the Fedora Commons Repository
-#
-# Available output values range from most verbose to least (left to right): 
-# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
-#
-### Recommended levels are WARN
-#
-# Use these two logs below for general purpose debugging of Fedora
-# Main FEDORA Logger
-FEDORA_ORG_FCREPO_LOG=WARN
-# All other Fedora loggers default level
-FEDORA_ROOT_LOG=WARN
-
-# Fedora Apache CXF™ services framework logger
-FEDORA_ORG_APACHE_CXF_LOG=WARN
-
-# Fedora Security Loggers previously known as the fesl.log
-# This log is typically used for auditing and logging access to Fedora
-FEDORA_ORG_FCREPO_SERVER_SECURITY_JAAS_LOG=WARN
-FEDORA_ORG_FCREPO_SERVER_SECURITY_XACML_LOG=WARN
-
-# Fedora Gsearch logs
-#
-# These logs contain information and output concerning the interaction of Fedora, Gsearch and 
-# Solr Search. Given that most output is the result of successful Gsearch transforms &amp; Solr search queries
-# It is highly recommended that these logs be set to WARN due to the large amount of output.
-#
-# Available output values range from most verbose to least (left to right): 
-# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
-#
-### Recommended levels are WARN
-# 
-# Use these two logs below for general purpose debugging of Fedoragsearch
-GSEARCH_DK_DEFXWS_FEDORAGSEARCH_LOG=WARN
-GSEARCH_ROOT_LOG=WARN
-
-# All other Gsearch loggers default level. 
-# Change levels below only for a larger scale of debugging.
-### Recommended levels are WARN
-GSEARCH_DK_DEFXWS_FGSZEBRA_LOG=WARN
-GSEARCH_DK_DEFXWS_FGSLUCENE_LOG=WARN
-GSEARCH_DK_DEFXWS_FGSSOLR_LOG=WARN
-
-
-## Image Services Container Logs and Levels
-# These logs contain information and output concerning the two image servers
-# Cantaloupe and Adore-Djatoka.
-# 
-# Available output values range from most verbose to least (left to right): 
-# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
-#
-### Recommended levels are ERROR
-#
-# Adore-Djatoka
-ADORE_DJATOKA_ROOT_LOGGER=ERROR
-
-# Cantaloupe (change this one first to debug)
-# Cantaloupe loggers appear to prefer loglevels to be lowercase.
-# otherwise values fail.
-#
-# Available output values range from most verbose to least (left to right): 
-# `trace`, `debug`, `info`, `warn`, `error`, `all`, or `off`
-#
-### Recommended level is error
-CANTALOUPE_LOG_APPLICATION_LEVEL=error
-
-##### SOLR Log Levels #####
-# These logs contain information and output concerning the Solr Search
-# Given that most output is the result of successful Solr search queries
-# It is highly recommended that these logs be set to OFF or WARN due to the
-# large amount of output.
-#
-# Available output values range from most verbose to least (left to right): 
-# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
-#
-### Recommended levels are WARN or OFF
-#
-# Main Solr log (change this one first to debug)
-SOLR_ROOT_LOGGER=WARN
-# These logs most likely can be kept at their default levels of WARN and for the third OFF.
-SOLR_ORG_APACHE_ZOOKEEPER_LOG=WARN
-SOLR_ORG_APACHE_HADOOP_LOG=WARN
-SOLR_ORG_APACHE_SOLR_UPDATE_LOGGINGINFORSTREAM=OFF
-
-## End Logs
-</code></pre>
-
-<ul>
-<li>Add another new block of ENV variables to your main .env file. Above the logging section and beneath all other defined services is fine. These ENV variables are for Blazegraph logging.</li>
-</ul>
-<pre><code class="bash">
-## Blazegraph
-# These logs contain information and output concerning the Blazegraph
-# graph-database and Fedora triplestore
-# 
-# Available output values range from most verbose to least (left to right): 
-# ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF (Turns off logging)
-#
-### Recommended levels are WARN for all logs except the Rule execution log otherwise
-# performance issues could occur. This is a lot of data suddenly being logged. Only
-# Use in the event of needed issue debugging. Otherwise do not change from default settings.
-#
-# Change these log levels below for only for general purpose debugging of Blazegraph
-# Default setting is: WARN
-BLAZEGRAPH_ROOT_CATEGORY_LOG=WARN
-BLAZEGRAPH_BIGDATA_LOG=WARN
-BLAZEGRAPH_BIGDATA_BTREE_LOG=WARN
-
-# Rule execution log.
-# Default setting is: INFO
-BLAZEGRAPH_BIGDATA_RULE_LOG=INFO
-
-</code></pre>
-
-<ul>
-<li>
-<p>Add another new block of ENV variables to your main .env file. Underneath the <code>### Fedora internal call password</code> section and above the <code>## End Fedora Repository</code> section is ideal.</p>
+<p>Within the environment (.env files e.g. demo.env, local.env etc) there is a new block of ENV variables to use.</p>
 </li>
 <li>
 <p>If using Blazegraph, you will have to change the <code>FEDORA_RESOURCE_INDEX=mulgara</code> to <code>FEDORA_RESOURCE_INDEX=blazegraph</code></p>
@@ -1465,6 +1205,7 @@ BLAZEGRAPH_BIGDATA_RULE_LOG=INFO
 <p>Whether using Mulgara or Blazegraph, please leave the <code>FEDORA_WEBAPP_HOME</code> value to the default below.</p>
 </li>
 </ul>
+<p><strong>Example:</strong></p>
 <pre><code class="bash">### Fedora Resource Index
 #
 # Only one of two values (mulgara) or (blazegraph) can be used below for FEDORA_RESOURCE_INDEX 
@@ -1475,14 +1216,19 @@ BLAZEGRAPH_BIGDATA_RULE_LOG=INFO
 # Please note: If you mistype or leave this value blank, more than likely Fedora won't work properly.
 FEDORA_RESOURCE_INDEX=mulgara
 
-# Set below as a variable for Fedora to start up properly, helps with env-set.sh 
+# Set below as a variable for Fedora to start up properly, helps with env-set.sh
 FEDORA_WEBAPP_HOME=/usr/local/tomcat/webapps/fedora
 
 ## End Fedora Repository
 </code></pre>
 
 <ul>
-<li>Pull down the new isle images</li>
+<li>
+<p>On the <code>demo</code> and/or <code>local</code> instance, you will have to uncomment the volume at the bottom of the <code>docker-compose.demo.yml</code> or <code>docker-compose.local.yml</code> file to use Blazegraph.</p>
+</li>
+<li>
+<p>Pull down the new isle images</p>
+</li>
 <li>
 <p><code>docker-compose pull</code></p>
 </li>
@@ -1496,25 +1242,25 @@ FEDORA_WEBAPP_HOME=/usr/local/tomcat/webapps/fedora
 <p>Wait a few minutes (<em>3-8 depending on the size of your site</em>) for the site and services to come up.</p>
 </li>
 </ul>
-<h4 id="check-fedora">Check Fedora</h4>
+<h4 id="check-rebuild-fedora-when-using-blazegraph">Check &amp; Rebuild Fedora when using Blazegraph</h4>
 <ul>
 <li>Q: Does Fedora start up properly?</li>
-<li>Navigate to your domain e.g. http://yourdomain:8081/manager/html or </li>
+<li>Navigate to your domain e.g. http://yourdomain:8081/manager/html</li>
 <li>Login using the correct admin / tomcat pw ) (check tomcat.env)</li>
-<li>Click on the Fedora link or navigate to http://yourdomain:8081/fedora/objects and click search. </li>
+<li>Click on the Fedora link or navigate to http://yourdomain:8081/fedora/objects and click search.</li>
 <li>
 <p>Objects might appear if working but they should only be a small amount of content models at this point.</p>
 </li>
 <li>
-<p>If you have switched to Blazegraph, then you'll need to re-index the Fedora repository so that the new Blazegraph triplestore is used instead of the previously used Mulgara triplestore. </p>
+<p>If you have switched to Blazegraph, then you'll need to re-index the Fedora repository so that the new Blazegraph triplestore is used instead of the previously used Mulgara triplestore.</p>
 </li>
 <li>
-<p><strong>WARNING</strong> - With Fedora repositories of 600K+ objects or more, <strong>these indexing processes will take double-digit hours to days</strong> depending on the complexity of the object relationships, ontology, etc. </p>
+<p><strong>WARNING</strong> - With Fedora repositories of 600K+ objects or more, <strong>these indexing processes will take double-digit hours to days</strong> depending on the complexity of the object relationships, ontology, etc. when re-indexing on Staging or Production systems.</p>
 </li>
 <li>
-<p>When re-indexing in this manner, we recommend the use of the <code>screen</code> program which will allow an end-user to disengage from a long continuous bash session and terminal based command without breaking the process.</p>
+<p>When re-indexing in this manner, we recommend the use of the <code>screen</code> program which will allow an end-user to disengage from a long continuous bash session and terminal based command without breaking the process. (<em>optional and typically used more often in a Staging and/or Production environment</em>)</p>
 <ul>
-<li>You may need to install <code>screen</code> on your ISLE host server.</li>
+<li>You may need to install <code>screen</code> on your ISLE host server. Skip this if using on a demo or local instance.</li>
 <li>Ubuntu - <code>sudo apt-get install screen</code></li>
 <li>CentOS - <code>sudo yum install screen</code></li>
 </ul>
@@ -1523,7 +1269,7 @@ FEDORA_WEBAPP_HOME=/usr/local/tomcat/webapps/fedora
 <p>Once installed simply run <code>screen</code> in your terminal. You might be instructed to hit the Spacebar or the Return key to proceed with the <code>screen</code> session.</p>
 </li>
 <li>
-<p><code>docker-exec -it isle-fedora-ld bash</code></p>
+<p><code>docker-exec -it isle-fedora-ld bash</code> (<em>Example for demo and/or local</em>)</p>
 </li>
 <li>
 <p><code>cd utility_scripts</code></p>
@@ -1557,7 +1303,7 @@ FEDORA_WEBAPP_HOME=/usr/local/tomcat/webapps/fedora
 <ul>
 <li>Navigate to the Blazegraph Admin panel http://isle.localdomain:8084/blazegraph/#query</li>
 <li>
-<p>Replace <code>isle.localdomain</code> with your real domain when using in Staging or Production</p>
+<p>Replace <code>isle.localdomain</code> with your real domain when using in a Local, Staging or Production</p>
 </li>
 <li>
 <p>Copy and paste the following query into the field with the text (<em>Input a SPARQL query</em>):</p>
@@ -1596,17 +1342,16 @@ FEDORA_WEBAPP_HOME=/usr/local/tomcat/webapps/fedora
 </code></pre>
 
 <p><strong><em>*Example:</em></strong>*</p>
+<p>Example is for a Staging instance</p>
 <pre><code class="bash">
   isle-blazegraph:
-    #build:
-    #  context: ./images/isle-blazegraph
-    image: islandoracollabgroup/isle-blazegraph:dashboards-dev
+    image: islandoracollabgroup/isle-blazegraph:1.3.0
     container_name: isle-blazegraph-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=4096M
       - JAVA_MIN_MEM=1024M
     env_file:
-      - tomcat_blazegraph.env
+      - staging.env
     networks:
       - isle-internal
     ports:
@@ -1619,28 +1364,14 @@ FEDORA_WEBAPP_HOME=/usr/local/tomcat/webapps/fedora
         tag: &quot;{{.Name}}&quot;
 </code></pre>
 
-<ul>
-<li>Additionally you'll need to remove or comment out every line or reference to logs from the <code>volumes</code> section of each service.</li>
-</ul>
-<p><strong><em>*Example:</em></strong>*</p>
-<pre><code class="bash">    volumes:
-      - isle-blazegraph-data:/var/bigdata
-      - ./logs/blazegraph:/usr/local/tomcat/logs
-</code></pre>
-
-<p>becomes</p>
-<pre><code class="bash">    volumes:
-      - isle-blazegraph-data:/var/bigdata
-</code></pre>
-
 <hr />
 <h2 id="uninstallation-instructions">Uninstallation Instructions</h2>
-<p>*
-*</p>
-<hr />
-<h2 id="maintenance-notes">Maintenance Notes</h2>
-<p>*
-*</p>
+<ul>
+<li>Comment out the <code>isle-blazegraph</code> service again within your <code>docker-compose.*.yml</code> file</li>
+<li>Change the the <code>blazegraph</code> back to <code>mulgara</code> within your <code>local.env</code> or <code>demo.env</code> file</li>
+<li>Start up the ISLE containers again.</li>
+<li>Re-index Fedora following the Fedora re-indexing steps provided in the <code>Check &amp; Rebuild Fedora when using Blazegraph</code> section.</li>
+</ul>
 <hr />
 <h2 id="need-help">Need help?</h2>
 <ul>
@@ -1648,7 +1379,7 @@ FEDORA_WEBAPP_HOME=/usr/local/tomcat/webapps/fedora
 <p>Please use the following as resources for institutions or endusers needing support</p>
 </li>
 <li>
-<p><a href="https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group">Islandora ISLE Interest Group</a> - Meetings open to everybody!   </p>
+<p><a href="https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group">Islandora ISLE Interest Group</a> - Meetings open to everybody!</p>
 <ul>
 <li>The <a href="https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group/#how-to-join">Schedule</a> is alternating Wednesdays, 3:00pm EDT</li>
 </ul>
@@ -1699,7 +1430,7 @@ FEDORA_WEBAPP_HOME=/usr/local/tomcat/webapps/fedora
       
     </div>
     
-      <script src="../../assets/javascripts/application.c648116f.js"></script>
+      <script src="../../assets/javascripts/application.39abc4af.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       

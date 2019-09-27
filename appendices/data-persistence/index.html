@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.2.0">
     
     
       
@@ -42,7 +42,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.750b69bd.css">
       
       
     
@@ -52,7 +52,7 @@
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
@@ -104,9 +104,7 @@
               Islandora Enterprise (ISLE)
             </span>
             <span class="md-header-nav__topic">
-              
-                Data Persistence in Docker
-              
+              Data Persistence in Docker
             </span>
           
         </div>
@@ -149,7 +147,7 @@
         
       
       
-      <main class="md-main" role="main">
+      <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
             
@@ -426,7 +424,7 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#bind-mounts-vs-volumes" class="md-nav__link">
+  <a href="#bind-mounts-vs-volumes" title="Bind mounts vs volumes:" class="md-nav__link">
     Bind mounts vs volumes:
   </a>
   
@@ -434,14 +432,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#volumes" class="md-nav__link">
+  <a href="#volumes" title="Volumes" class="md-nav__link">
     Volumes
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#bind-mounts" class="md-nav__link">
+  <a href="#bind-mounts" title="Bind Mounts" class="md-nav__link">
     Bind Mounts
   </a>
   
@@ -453,21 +451,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-should-be-persisted-this-way" class="md-nav__link">
+  <a href="#what-should-be-persisted-this-way" title="What should be persisted this way?" class="md-nav__link">
     What should be persisted this way?
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-should-not-be-persisted" class="md-nav__link">
+  <a href="#what-should-not-be-persisted" title="What should NOT be persisted?" class="md-nav__link">
     What should NOT be persisted?
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#which-should-i-use-bind-mounts-or-volumes" class="md-nav__link">
+  <a href="#which-should-i-use-bind-mounts-or-volumes" title="Which should I use, bind mounts or volumes?" class="md-nav__link">
     Which should I use, bind mounts or volumes?
   </a>
   
@@ -874,8 +872,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release-notes/release-1-2-0/" title="Latest release: 1.2.0" class="md-nav__link">
-      Latest release: 1.2.0
+    <a href="../../release-notes/release-1-3-0/" title="Latest release: 1.3.0" class="md-nav__link">
+      Latest release: 1.3.0
     </a>
   </li>
 
@@ -898,6 +896,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-2-0/" title="1.2.0" class="md-nav__link">
+      1.2.0
+    </a>
+  </li>
+
         
           
           
@@ -966,7 +976,7 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#bind-mounts-vs-volumes" class="md-nav__link">
+  <a href="#bind-mounts-vs-volumes" title="Bind mounts vs volumes:" class="md-nav__link">
     Bind mounts vs volumes:
   </a>
   
@@ -974,14 +984,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#volumes" class="md-nav__link">
+  <a href="#volumes" title="Volumes" class="md-nav__link">
     Volumes
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#bind-mounts" class="md-nav__link">
+  <a href="#bind-mounts" title="Bind Mounts" class="md-nav__link">
     Bind Mounts
   </a>
   
@@ -993,21 +1003,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-should-be-persisted-this-way" class="md-nav__link">
+  <a href="#what-should-be-persisted-this-way" title="What should be persisted this way?" class="md-nav__link">
     What should be persisted this way?
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-should-not-be-persisted" class="md-nav__link">
+  <a href="#what-should-not-be-persisted" title="What should NOT be persisted?" class="md-nav__link">
     What should NOT be persisted?
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#which-should-i-use-bind-mounts-or-volumes" class="md-nav__link">
+  <a href="#which-should-i-use-bind-mounts-or-volumes" title="Which should I use, bind mounts or volumes?" class="md-nav__link">
     Which should I use, bind mounts or volumes?
   </a>
   
@@ -1133,7 +1143,7 @@ apache-data:/var/www/html
       
     </div>
     
-      <script src="../../assets/javascripts/application.c648116f.js"></script>
+      <script src="../../assets/javascripts/application.39abc4af.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       

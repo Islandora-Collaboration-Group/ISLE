@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.2.0">
     
     
       
@@ -42,7 +42,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.750b69bd.css">
       
       
     
@@ -52,7 +52,7 @@
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
@@ -104,9 +104,7 @@
               Islandora Enterprise (ISLE)
             </span>
             <span class="md-header-nav__topic">
-              
-                Utilizing and Extending ISLE’s Test Suite
-              
+              Utilizing and Extending ISLE’s Test Suite
             </span>
           
         </div>
@@ -149,7 +147,7 @@
         
       
       
-      <main class="md-main" role="main">
+      <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
             
@@ -793,8 +791,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release-notes/release-1-2-0/" title="Latest release: 1.2.0" class="md-nav__link">
-      Latest release: 1.2.0
+    <a href="../../release-notes/release-1-3-0/" title="Latest release: 1.3.0" class="md-nav__link">
+      Latest release: 1.3.0
     </a>
   </li>
 
@@ -817,6 +815,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-2-0/" title="1.2.0" class="md-nav__link">
+      1.2.0
+    </a>
+  </li>
+
         
           
           
@@ -885,14 +895,14 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-is-this-component" class="md-nav__link">
+  <a href="#what-is-this-component" title="What is this component?" class="md-nav__link">
     What is this component?
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#running-isle-tests" class="md-nav__link">
+  <a href="#running-isle-tests" title="Running ISLE Tests" class="md-nav__link">
     Running ISLE Tests
   </a>
   
@@ -900,7 +910,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#installation-instructions" class="md-nav__link">
+  <a href="#installation-instructions" title="Installation Instructions:" class="md-nav__link">
     Installation Instructions:
   </a>
   
@@ -912,28 +922,28 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#automated-test-triggers" class="md-nav__link">
+  <a href="#additional-notes" title="Additional Notes" class="md-nav__link">
+    Additional Notes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#automated-test-triggers" title="Automated test triggers" class="md-nav__link">
     Automated test triggers
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#extending-the-test-suite" class="md-nav__link">
-    Extending the test suite
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
+  <a href="#troubleshooting" title="Troubleshooting" class="md-nav__link">
     Troubleshooting
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#test-coverage" class="md-nav__link">
+  <a href="#test-coverage" title="Test Coverage" class="md-nav__link">
     Test Coverage
   </a>
   
@@ -941,21 +951,21 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#isledocker-images" class="md-nav__link">
+  <a href="#isledocker-images" title="ISLE/DOCKER IMAGES" class="md-nav__link">
     ISLE/DOCKER IMAGES
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#drupal-installation" class="md-nav__link">
+  <a href="#drupal-installation" title="DRUPAL INSTALLATION" class="md-nav__link">
     DRUPAL INSTALLATION
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#sample-object-ingestion" class="md-nav__link">
+  <a href="#sample-object-ingestion" title="SAMPLE OBJECT INGESTION" class="md-nav__link">
     SAMPLE OBJECT INGESTION
   </a>
   
@@ -963,91 +973,91 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#collections" class="md-nav__link">
+  <a href="#collections" title="Collections" class="md-nav__link">
     Collections
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#audio-content-model" class="md-nav__link">
+  <a href="#audio-content-model" title="Audio Content Model" class="md-nav__link">
     Audio Content Model
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#basic-image-content-model" class="md-nav__link">
+  <a href="#basic-image-content-model" title="Basic Image Content Model" class="md-nav__link">
     Basic Image Content Model
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#book-content-model" class="md-nav__link">
+  <a href="#book-content-model" title="Book Content Model" class="md-nav__link">
     Book Content Model
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#compound-object-content-model" class="md-nav__link">
+  <a href="#compound-object-content-model" title="Compound Object Content Model" class="md-nav__link">
     Compound Object Content Model
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#large-image-content-model" class="md-nav__link">
+  <a href="#large-image-content-model" title="Large Image Content Model" class="md-nav__link">
     Large Image Content Model
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#newspaper-content-model" class="md-nav__link">
+  <a href="#newspaper-content-model" title="Newspaper Content Model" class="md-nav__link">
     Newspaper Content Model
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#oral-history-content-model" class="md-nav__link">
+  <a href="#oral-history-content-model" title="Oral History Content Model" class="md-nav__link">
     Oral History Content Model
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#pdf-content-model" class="md-nav__link">
+  <a href="#pdf-content-model" title="PDF Content Model" class="md-nav__link">
     PDF Content Model
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#video-content-model" class="md-nav__link">
+  <a href="#video-content-model" title="Video Content Model" class="md-nav__link">
     Video Content Model
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#warc-content-model" class="md-nav__link">
+  <a href="#warc-content-model" title="WARC Content Model" class="md-nav__link">
     WARC Content Model
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#maintenance-tasks" class="md-nav__link">
+  <a href="#maintenance-tasks" title="MAINTENANCE TASKS" class="md-nav__link">
     MAINTENANCE TASKS
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#additional-testing" class="md-nav__link">
+  <a href="#additional-testing" title="Additional Testing" class="md-nav__link">
     Additional Testing
   </a>
   
@@ -1059,14 +1069,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#fedora-able-to-overide-existing-settings-for" class="md-nav__link">
+  <a href="#fedora-able-to-overide-existing-settings-for" title="FEDORA - Able to overide existing settings for:" class="md-nav__link">
     FEDORA - Able to overide existing settings for:
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#solr-able-to-overide-existing-settings-for" class="md-nav__link">
+  <a href="#solr-able-to-overide-existing-settings-for" title="SOLR - Able to overide existing settings for:" class="md-nav__link">
     SOLR - Able to overide existing settings for:
   </a>
   
@@ -1078,7 +1088,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#additional-resources" class="md-nav__link">
+  <a href="#additional-resources" title="Additional Resources" class="md-nav__link">
     Additional Resources
   </a>
   
@@ -1114,53 +1124,67 @@
 <hr />
 <h2 id="running-isle-tests">Running ISLE Tests</h2>
 <ul>
-<li>The most straightforward example of use is available in Born-Digital's working branch: https://github.com/Born-Digital-US/ISLE/tree/travis</li>
+<li>The most straightforward example of use is ISLE's testing environment: https://github.com/Islandora-Collaboration-Group/ISLE/blob/master/docker-compose.test.yml as configured by the CircleCI configuration: https://github.com/Islandora-Collaboration-Group/ISLE/blob/master/.circleci/config.yml</li>
 <li>This use case is abstracted and summarized below:</li>
 </ul>
 <h3 id="installation-instructions">Installation Instructions:</h3>
 <ul>
 <li>Docker-compose.yml additions: several new services, for running Chrome/Selenium</li>
 </ul>
-<pre><code class="bash">  chrome:
-    image: selenium/node-chrome:3.11.0-dysprosium
-    volumes:
-      - /dev/shm:/dev/shm
-      - ./data/isle-apache-data:/var/www/html:ro
-    depends_on:
-      - apache
-      - hub
-    environment:
-      - HUB_PORT=4444
-      - HUB_HOST=hub
-    container_name: bd-ld-chrome
-    networks:
-      - isle-internal
-  hub:
-    image: selenium/hub:3.11.0-dysprosium
-    ports:
-      - &quot;4444:4444&quot;
-    container_name: bd-ld-hub
-    networks:
-      - isle-internal
+<pre><code class="bash">chrome:
+  image: selenium/node-chrome:3.141.59-neon # latest
+  container_name: isle-chrome-${CONTAINER_SHORT_ID}
+  environment:
+    - HUB_PORT=4444
+    - HUB_HOST=hub    
+  networks:
+    - isle-internal    
+  depends_on:
+    - apache
+    - hub
+  volumes:
+    - /dev/shm:/dev/shm
+    - ./data/apache/html:/var/www/html:ro
+
+hub:
+  image: selenium/hub:3.141.59-neon # latest
+  container_name: isle-hub-${CONTAINER_SHORT_ID}
+  networks:
+    - isle-internal
+  ports:
+    - &quot;4444:4444&quot;
 </code></pre>
 
 <ul>
 <li>Notes:</li>
-<li>To allow uploads in tests, we must mount in the Apache file root.</li>
+<li>To allow uploads in tests, we must mount in the Apache file root into the "chrome" container.</li>
 <li><code>/dev/shm</code> must be shared by all testing services or they will run out of RAM and crash</li>
-<li>Newer <code>selenium</code> images are available, but are untested. YMMV.</li>
+<li>Newer <code>selenium</code> images may be available, but are untested. YMMV.</li>
 <li>No changes to <code>.env</code> file(s) are necessary, although for the examples shown here we have:</li>
-<li><code>COMPOSE_PROJECT_NAME=isledevelopment</code></li>
+<li><code>COMPOSE_PROJECT_NAME=isle_test</code></li>
 <li><code>BASE_DOMAIN=isle.localdomain</code></li>
-<li><code>CONTAINER_SHORT_ID=ld</code></li>
-<li>If your use case uses other values for these variables, you may need to find/replace in the instructions below (e.g. <code>isle-apache-ld</code> corresponds with the CONTAINER_SHORT_ID above)</li>
-<li>The full series of commands to install a clean new ISLE with a clean new Islandora Drupal, then add extra modules to support our test cases, and then execute the tests is as follows.</li>
+<li><code>CONTAINER_SHORT_ID=td</code></li>
+<li><code>COMPOSE_FILE-COMPOSE-FILE=test.env</code></li>
+<li>If your use case uses other values for these variables, you may need to find/replace in the instructions below (e.g. <code>isle-apache-td</code> corresponds with the CONTAINER_SHORT_ID above)</li>
+<li>The full series of commands to install a clean new ISLE with a clean new Islandora Drupal, then add extra modules to support our test cases, and then execute the tests are as follows.</li>
 <li>Get a good ISLE base for this test run:</li>
 </ul>
-<pre><code class="bash">git clone https://github.com/Born-Digital-US/ISLE.git
-git checkout -b travis origin/travis
+<pre><code class="bash">git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
+</code></pre>
 
-docker-compose pull
+<ul>
+<li>Then edit the <code>.env</code> file to contain the test suite config:</li>
+</ul>
+<pre><code class="bash">COMPOSE_PROJECT_NAME=isle_test
+BASE_DOMAIN=isle.localdomain
+CONTAINER_SHORT_ID=td
+COMPOSE_FILE-COMPOSE-FILE=test.env
+</code></pre>
+
+<ul>
+<li>Then fire everything back up</li>
+</ul>
+<pre><code class="bash">docker-compose pull
 docker-compose up -d
 
 sleep 40
@@ -1169,82 +1193,57 @@ sleep 40
 <ul>
 <li>Now install Islandora from scratch, and init your Fedora repository using the tools provided by ISLE:</li>
 </ul>
-<pre><code class="bash">set -x &amp;&amp; docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh
+<pre><code class="bash">set -x &amp;&amp; docker exec -it isle-apache-td bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh
 </code></pre>
 
 <ul>
 <li>Now install bulk-ingest dependencies (some not required for our tests) and extra modules required by test coverage:</li>
 </ul>
-<pre><code class="bash">docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html/sites/all/modules/islandora &amp;&amp; git clone https://github.com/Islandora-Labs/islandora_solution_pack_oralhistories.git&quot;
-docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html &amp;&amp; drush -y -u 1 en islandora_oralhistories&quot;
-
-docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html &amp;&amp; drush -y -u 1 en islandora_batch&quot;
-docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html/sites/all/modules/islandora &amp;&amp; git clone https://github.com/mjordan/islandora_batch_with_derivs.git&quot;
-docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html &amp;&amp; drush -y -u 1 en islandora_batch_with_derivs&quot;
-docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html &amp;&amp; drush -y -u 1 en islandora_book_batch&quot;
-docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html &amp;&amp; drush -y -u 1 en islandora_newspaper_batch&quot;
-docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html/sites/all/modules/islandora &amp;&amp; git clone https://github.com/MarcusBarnes/islandora_compound_batch.git&quot;
-docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html &amp;&amp; drush -y -u 1 en islandora_compound_batch&quot;
-# &quot;Batch Ingest dependencies are installed&quot;
-docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html/sites/all/modules/islandora &amp;&amp; git clone https://github.com/mnylc/islandora_multi_importer.git&quot;
-docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html/sites/all/modules/islandora/islandora_multi_importer &amp;&amp;  composer install&quot;
-docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html &amp;&amp; drush en islandora_multi_importer -y&quot;
-# &quot;IMI dependencies installed&quot;
+<pre><code class="bash">docker exec -it isle-apache-td bash -c &quot;cd /var/www/html/sites/all/modules/islandora &amp;&amp; git clone https://github.com/Islandora-Labs/islandora_solution_pack_oralhistories.git&quot;
+docker exec -it isle-apache-td bash -c &quot;cd /var/www/html &amp;&amp; drush -y -u 1 en islandora_oralhistories&quot;
+docker exec -it isle-apache-td bash -c &quot;cd /var/www/html &amp;&amp; drush dis overlay -y&quot;
+docker exec -it isle-apache-td bash -c &quot;cd /var/www/html &amp;&amp; drush -y -u 1 en islandora_batch&quot;
+docker exec -it isle-apache-td bash -c &quot;cd /var/www/html/sites/all/modules/islandora &amp;&amp; git clone https://github.com/mjordan/islandora_batch_with_derivs.git&quot;
+docker exec -it isle-apache-td bash -c &quot;cd /var/www/html &amp;&amp; drush -y -u 1 en islandora_batch_with_derivs&quot;
+docker exec -it isle-apache-td bash -c &quot;cd /var/www/html &amp;&amp; drush -y -u 1 en islandora_book_batch&quot;
+docker exec -it isle-apache-td bash -c &quot;cd /var/www/html &amp;&amp; drush -y -u 1 en islandora_newspaper_batch&quot;
+docker exec -it isle-apache-td bash -c &quot;cd /var/www/html/sites/all/modules/islandora &amp;&amp; git clone https://github.com/MarcusBarnes/islandora_compound_batch.git&quot;
+docker exec -it isle-apache-td bash -c &quot;cd /var/www/html &amp;&amp; drush -y -u 1 en islandora_compound_batch&quot;
 </code></pre>
 
 <ul>
+<li>Make sure your <code>/etc/hosts</code> has an entry for the domain you'll be using (<code>isle.localdomain</code> in this example)</li>
 <li>Now clone the repository with the tests, put it where Drupal expects it (<code>sites/all/behat</code>), and install Behat dependencies with Composer:</li>
 </ul>
-<pre><code class="bash">git clone git@github.com:Born-Digital-US/isle-ingest-samples.git data/isle-apache-data/isle-ingest-samples
-docker exec -it isle-apache-ld bash -c &quot;ln -s /var/www/html/isle-ingest-samples/behat /var/www/html/sites/behat &amp;&amp; chown -R islandora:www-data /var/www/html/isle-ingest-samples/behat&quot; # symlink up to the ingest samples location
-docker exec -it isle-apache-ld bash -c &quot;mkdir /var/www/html/isle-ingest-samples/behat/debug/logs/&quot;
-docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html/sites/behat &amp;&amp; composer install&quot;
+<pre><code class="bash">git clone git@github.com:Born-Digital-US/isle-behat.git data/isle-behat
+docker cp data/isle-behat isle-apache-td:/var/www/html/sites/behat
+docker exec -it isle-apache-td bash -c &quot;chown -R islandora:www-data /var/www/html/sites/behat/&quot;
+docker exec -it isle-apache-td bash -c &quot;cd /var/www/html/sites/behat &amp;&amp; composer install &quot;
+docker exec -it isle-apache-td bash -c &quot;chmod 700 /var/www/html/sites/behat/run-isle-tests.sh&quot;
+sudo chmod -R 777 ~/isle/data/apache/html/sites/behat/debug
 </code></pre>
 
 <ul>
-<li>A few more basics, again only necessary if this is a BRAND NEW Islandora Drupal site:</li>
+<li>And now we're ready to run tests:</li>
 </ul>
-<pre><code class="bash">docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html &amp;&amp; drush dis overlay -y&quot;
-docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html &amp;&amp; drush -u 1 islandora_batch_with_derivs_preprocess --key_datastream=MODS --scan_target=/var/www/html/isle-ingest-samples/Batches-by-CModel/Collections/files --use_pids=true --namespace=samples --parent=islandora:root --content_models=islandora:collectionCModel&quot;
-docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html &amp;&amp; drush -u 1 islandora_batch_ingest&quot;
-# &quot;Samples ingested&quot;
+<pre><code class="bash">docker exec -it isle-apache-td bash -c &quot;cd /var/www/html/sites/behat &amp;&amp; ./run-isle-tests.sh --run=services&quot;
+docker exec -it isle-apache-td bash -c &quot;cd /var/www/html/sites/behat &amp;&amp; ./run-isle-tests.sh --run=apache&quot;
 </code></pre>
 
+<h2 id="additional-notes">Additional Notes</h2>
 <ul>
-<li>And now we're finally ready to run tests:</li>
-</ul>
-<pre><code class="bash">docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html/sites/behat &amp;&amp; ./run-isle-tests.sh --run=services&quot;
-docker exec -it isle-apache-ld bash -c &quot;cd /var/www/html/sites/behat &amp;&amp; ./run-isle-tests.sh --run=apache&quot;
-# &quot;Testing complete&quot;
-</code></pre>
-
-<ul>
-<li>If you want to just run this as a script, you can find that here: https://github.com/Born-Digital-US/ISLE/blob/travis/local_setup.sh. There are a few extra steps in there, but nothing that should get in the way of basic test usage.</li>
 <li>If you have your own ISLE already, just omit that initial <code>git clone</code> for ISLE. If you use the script, we're assuming you've cloned our whole repository, switched to the <code>travis</code> branch, and are running it from there.</li>
-<li>If you're running this many times a day for active development, you'll eventually want to teardown. Recommended steps:</li>
+<li>Modifications to tests may be necessary based on your institutional theme and configuration.</li>
 </ul>
-<pre><code class="bash">docker-compose down -v
-rm -rf isle-ingest-samples &amp;&amp; rm -rf data/isle-apache-data/isle-ingest-samples
-</code></pre>
-
 <hr />
 <h2 id="automated-test-triggers">Automated test triggers</h2>
 <ul>
-<li>It turned out Travis couldn't run long enough (greater than 50 minutes) to complete a full test run. CircleCI can, and Born-Digital has configured this to run on their branch: https://github.com/Born-Digital-US/ISLE/blob/travis/.circleci/config.yml</li>
-<li>Next steps:</li>
-<li>Decide what CI workflows we want to run automatically, alter/fork CI scripts to enable</li>
-</ul>
-<hr />
-<h2 id="extending-the-test-suite">Extending the test suite</h2>
-<ul>
-<li>TK
-*</li>
+<li>CircleCI runs these tests every time an update is pushed to the main ISLE repo. Sometimes things fail because the wind was blowing the wrong way, so we run it again and it will pass.</li>
 </ul>
 <hr />
 <h2 id="troubleshooting">Troubleshooting</h2>
 <ul>
-<li>Come discuss on the ISLE Interest Group email list and/or bi-weekly meetings.
-*</li>
+<li>Come discuss on the ISLE Interest Group email list and/or bi-weekly meetings.</li>
 </ul>
 <hr />
 <h2 id="test-coverage">Test Coverage</h2>
@@ -1275,10 +1274,6 @@ rm -rf isle-ingest-samples &amp;&amp; rm -rf data/isle-apache-data/isle-ingest-s
 </ul>
 </li>
 <li>1-7   Able to view Cantaloupe admin panel for image-services container?<ul>
-<li>Covered by isle-services.feature "imageservices online"</li>
-</ul>
-</li>
-<li>1-8   Able to view Adore-djatoka admin panel for image-services container?<ul>
 <li>Covered by isle-services.feature "imageservices online"</li>
 </ul>
 </li>
@@ -1976,7 +1971,7 @@ rm -rf isle-ingest-samples &amp;&amp; rm -rf data/isle-apache-data/isle-ingest-s
       
     </div>
     
-      <script src="../../assets/javascripts/application.c648116f.js"></script>
+      <script src="../../assets/javascripts/application.39abc4af.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
