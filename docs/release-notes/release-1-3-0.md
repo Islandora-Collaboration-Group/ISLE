@@ -1,8 +1,8 @@
-# Release Notes - ISLE v.1.3.0, 2019-09
+# Release Notes - ISLE v.1.3.0, 2019-09-27
 
 ### Contributions to this release from:
 
-* David Keiser-Clark (Williams College), documentation
+* David Keiser-Clark (Williams College), documentation and testing
 * Francesca Livermore (Wesleyan University), documentation
 * Gavin Morris (Born-Digital), code updates and testing
 * Mark McFate (Grinnell College), testing and documentation
