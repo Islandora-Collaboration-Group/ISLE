@@ -1,6 +1,9 @@
 version: 2
 jobs:
   build:
+    branches:
+      ignore:
+        - gh-pages
     machine: true
     working_directory: ~/isle
     parallelism: 1
