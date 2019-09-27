@@ -4,7 +4,7 @@ _Expectations:  It takes an average of **2-4+ hours** to read this documentation
 
 This Production ISLE Installation will use the themed Drupal website created during the [Local ISLE Installation: New Site](../install/install-local-new.md) process and will create an empty Fedora repository for remote (non-local or cloud) hosting of a Production site. Islandora Drupal site code here should be considered finished and ready for public access. The previously used Production system might have Fedora data & collections that should then be synced to this Production site or endusers can choose to only ingest on Production. It is recommended that this remote site not be publicly accessible until ready to launch.
 
-While this installation will get you a brand new Production site, it is **not** intended as a migration process of a previously existing Islandora site. If you need to build a Production environment to migrate a previously existing Islandora site, please use the [Production ISLE Installation: Migrate Existing Islandora Site](../install/install-production-migrate.md)  instead.
+While this installation will get you a brand new Production site, it is **not** intended as a migration process of a previously existing Islandora site. If you need to build a Production environment to migrate a previously existing Islandora site, please use the [Production ISLE Installation: Migrate Existing Islandora Site](../install/install-production-migrate.md) instead.
 
 As this Production domain will require a real domain name or [FQDN](https://kb.iu.edu/d/aiuv), you will need to ask your IT department or appropriate resource for an "A record" to be added for your domain to "point" to your Production Host Server IP address in your institution's DNS records. 
 
@@ -434,7 +434,7 @@ git commit -m "Added the edited .env configuration file for Production. DO NOT P
         * You should see a lot of green [ok] messages.
         * If the script appears to pause or prompt for `y/n`, DO NOT enter any values; the script will automatically answer for you.
 
-| Microsoft Windows |
+| For Microsoft Windows: |
 | :-------------      |
 | You may be prompted by Windows to: |
 | - Share the C drive with Docker.  Click Okay or Allow.|

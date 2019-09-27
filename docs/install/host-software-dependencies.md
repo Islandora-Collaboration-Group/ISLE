@@ -63,16 +63,6 @@ Allow your user to run Docker commands and to launch the entire ISLE stack.
 
 - Type `exit` and then reconnect (this allows your effective groups to update).
 
-### Step 5: Clone ISLE Repository
-**Please note:** The location you clone the repository to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
-
-Please run these steps as your normal user (not `root`):
-
-* Clone the repository:
-    * `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
-
-* Change to the directory containing ISLE:
-    * `cd ISLE`
 
 Your host server is now configured and ready to install ISLE.
 
@@ -131,16 +121,6 @@ Allow your user to run Docker commands and to launch the entire ISLE stack.
 
 - Type `exit` and then reconnect (this allows your effective groups to update).
 
-### Step 5: Clone ISLE Repository
-**Please note:** The location you clone the repository to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
-
-Please run these steps as your normal user (not `root`):
-
-* Clone the repository:
-    * `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
-
-* Change to the directory containing ISLE:
-    * `cd ISLE`
 
 Your host server is now configured and ready to install ISLE.
 
@@ -200,26 +180,6 @@ Git must be installed to get a copy (called a `clone`) of the current ISLE proje
 
 - The Docker installation has installed the newest version of `docker-compose`.
 
-### Step 4: Clone ISLE Repository
-**Please note:** The location you clone the repository to becomes your project directory. It can be located anywhere and will include your configuration and log output of the containers.
-
-Please run these steps as your normal user (not `root`):
-
-* Clone the repository:
-    * `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
-
-* Change to the directory containing ISLE:
-    * `cd ISLE`
-
-_To improve performance on Mac OSX:_
-
-* Depending on your current desired type of installation, open one of the two following files in a text editor:
-    * `docker-compose.demo.yml`
-    * `docker-compose.local.yml`
-* Go to the the "apache" section, and under "volumes" find the following line:
-    * `- ./mnt/html:/var/www/html`
-    * Change it to be:
-    * `- ./mnt/html:/var/www/html:cached`
 
 Your host server is now configured and ready to install ISLE.
 
@@ -294,38 +254,6 @@ Your host server is now configured and ready to install ISLE.
 
 - The Docker installation has installed the newest version of `docker-compose`.
 
-### Step 4: Clone ISLE Repository
-**Please note:** The location you select to clone the ISLE repository becomes your project directory. We recommend using the default user home directory; this location will include your configuration and log output of the Docker containers. (You may choose a different location, but it must not be a protected folder such as system or root directory.)
-
-#### Use "Git Bash"
-
-* Enter the following to change to the user's home directory:
-    * `cd ~`
-* Clone the repository:
-    * `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
-* Change to the directory containing ISLE:
-    * `cd ISLE`
-* Enter the following command to display the present working directory (full path) of your ISLE project.
-    * `pwd`
-* You will use this full path (output of the above command) in the next step.
-    * **Example output:** "/c/Users/somebody/ISLE"
-
-#### Edit "demo.env" or "local.env"
-
-* Press the Windows key.
-* Type `Notepad`.
-* In the search results, RIGHT-CLICK `Notepad`, select `Run as administrator`, and enter `Yes` to prompt.
-* Select `File -> Open`
-* At top of dialog window, navigate to your ISLE project (refer to the "full path" displayed in previous step).
-* At right side of dialog window, use the dropdown menu to change `Text Documents (*.txt)` to `All Files (*.*)`
-    * (Optional: see [How to show hidden files](https://support.microsoft.com/en-us/help/4028316/windows-view-hidden-files-and-folders-in-windows-10)).
-* Select the file based on your current desired type of installation: `demo.env` or `local.env`
-    * Click `Open`.
-* Find the following line:
-    * `# COMPOSE_CONVERT_WINDOWS_PATHS=1`
-* In the above line, delete the first two characters (`# `) so as to uncomment the line. It should now look like this:
-    * `COMPOSE_CONVERT_WINDOWS_PATHS=1`
-* Click `File > Save`, and then `File -> Exit`.
 
 Your host server is now configured and ready to install ISLE.
 

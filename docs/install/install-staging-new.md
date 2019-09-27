@@ -4,7 +4,7 @@ _Expectations:  It takes an average of **2-4+ hours** to read this documentation
 
 This Staging ISLE Installation will use the themed Drupal website created during the [Local ISLE Installation: New Site](../install/install-local-new.md) process and will create an empty Fedora repository for remote (non-local or cloud) hosting of a Staging site. Islandora Drupal site code here should be considered almost finished but hosted here for last touches and team review privately prior to pushing to public Production. Fedora data might have tests collections or collections that should then be synced to the Production site. It is recommended that this remote site not be publicly accessible.
 
-While this installation will get you a brand new Staging site, it is **not** intended as a migration process of a previously existing Islandora site. If you need to build a Staging environment to migrate a previously existing Islandora site, please use the [Staging ISLE Installation: Migrate Existing Islandora Site](../install/install-staging-migrate.md)  instead.
+While this installation will get you a brand new Staging site, it is **not** intended as a migration process of a previously existing Islandora site. If you need to build a Staging environment to migrate a previously existing Islandora site, please use the [Staging ISLE Installation: Migrate Existing Islandora Site](../install/install-staging-migrate.md) instead.
 
 As this Staging domain will require a real domain name or [FQDN](https://kb.iu.edu/d/aiuv), you will need to ask your IT department or appropriate resource for an "A record" to be added for your domain to "point" to your Staging Host Server IP address in your institution's DNS records. We recommend that this sub-domain use `-staging` to differentiate it from the Production site.
 
@@ -433,7 +433,7 @@ git commit -m "Added the edited .env configuration file for Staging. DO NOT PUSH
         * You should see a lot of green [ok] messages.
         * If the script appears to pause or prompt for `y/n`, DO NOT enter any values; the script will automatically answer for you.
 
-| Microsoft Windows |
+| For Microsoft Windows: |
 | :-------------      |
 | You may be prompted by Windows to: |
 | - Share the C drive with Docker.  Click Okay or Allow.|

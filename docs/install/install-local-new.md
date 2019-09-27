@@ -6,7 +6,7 @@ This Local ISLE Installation creates an un-themed Drupal website and an empty Fe
 
 This Local ISLE Installation will allow you to locally view this site in your browser with the domain of your choice (**Example:** "https://yourprojectnamehere.localdomain"), instead of being constrained to the Demo URL ("https://isle.localdomain").
 
-While this installation provides you a brand new local development site, it is **not** intended as a migration process of a previously existing Islandora site. If you need to build a local environment to migrate a previously existing Islandora site, please use the [Local ISLE Installation: Migrate Existing Islandora Site](../install/install-local-migrate.md)  instead.
+While this installation provides you a brand new local development site, it is **not** intended as a migration process of a previously existing Islandora site. If you need to build a local environment to migrate a previously existing Islandora site, please use the [Local ISLE Installation: Migrate Existing Islandora Site](../install/install-local-migrate.md) instead.
 
 This document also has directions on how you can save newly created ISLE and Islandora code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging to Production. The [ISLE Installation: Environments](../install/install-environments.md) helps explain the ISLE workflow structure, the associated files, and what values ISLE endusers should use for the ".env", "local.env", etc.
 
@@ -29,7 +29,6 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 * **For Microsoft Windows:**
     * You have installed [Git for Windows](../install/host-software-dependencies.md#windows) and will use its provided "Git Bash" as your command line interface; this behaves similarly to LINUX and UNIX environments. Git for Windows also installs "openssl.exe" which will be needed to generate self-signed SSL certs. (Note: Powershell is not recommended as it is unable to run UNIX commands or execute bash scripts without a moderate degree of customization.)
     * Set your text editor to use UNIX style line endings for files. (Text files created on DOS/Windows machines have different line endings than files created on Unix/Linux. DOS uses carriage return and line feed ("\r\n") as a line ending, which Unix uses just line feed ("\n").)
-    * In the "local.env" file, you must uncomment the line "# COMPOSE_CONVERT_WINDOWS_PATHS=1". (See Software Dependencies: [Edit "demo.env" or "local.env"](../install/host-software-dependencies.md#edit-demoenv-or-localenv))
 
 ---
 
@@ -79,15 +78,20 @@ Create the following two new, empty, private git repositories within your git re
     * **Suggested git repository name:** `yourprojectnamehere-islandora`
     * This Git repository will hold your copy of the Islandora Drupal code along with your site specific customizations. Storing this in a private repository and following the workflow below will save you a lot of time and confusion.
 
-Clone this newly created ISLE project to your personal computer:
+These steps will show you how to clone this newly created ISLE project (from your git repository hosting service) to your personal computer:
 
 * Open a `terminal` (Windows: open `Git Bash`)
-* Navigate to a directory that will house your new ISLE project directory using the `cd` command.
-* **Example:** `git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git`
 
-* Navigate to the directory that was just created by the clone operation:
+* Use the "cd" command to navigate to a directory that will become your new ISLE project directory. We recommend using the default user home directory. (You may choose a different location, but it must not be a protected folder such as system or root directory.)
+    * **Example (Mac):** `cd ~`
+    * **Example (Windows):** `cd /c/Users/somebody/`
 
-    * `cd /path/to/your/repository`
+* Clone your new ISLE project to your personal computer:
+    * **Example:** `git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git`
+
+* Navigate within the directory created by the above clone operation:
+
+    * `cd ISLE`
 
 * Add the ICG ISLE git repository as a git upstream:
 
@@ -156,7 +160,14 @@ Now you have the current ISLE project code checked into git as a foundation to m
 * Open the "config/apache/settings_php/settings.local.php" file in a text editor.
     * Find the first comment that begins with: `# ISLE Configuration` and follow the commented instructions to edit the database, username and password.
     * Find the second comment that begins with: `# ISLE Configuration` and follow the instructions to edit the Drupal hash salt.
-    * Once finished, save and close the file.
+
+* **For Microsoft Windows:**
+    * Find the following line:
+        * `# COMPOSE_CONVERT_WINDOWS_PATHS=1`
+    * In the above line, delete the first two characters (`# `) so as to uncomment the line. It should now look like this:
+        * `COMPOSE_CONVERT_WINDOWS_PATHS=1`
+
+* Once finished, save and close the file.
 
 ---
 
@@ -201,7 +212,9 @@ Now you have the current ISLE project code checked into git as a foundation to m
 
 ## Step 7: Launch Process
 
-* _Using the same open terminal:_
+_Using the same open terminal:_
+
+* Run the docker containers:
     * `docker-compose up -d`
 
 * Please wait a few moments for the stack to fully come up. Approximately 3-5 minutes.
@@ -230,7 +243,7 @@ The above process may take 10-20 minutes (_depending on system and internet spee
 * If the script appears to pause or prompt for "y/n", DO NOT enter any values; the script will automatically answer for you.
 
 
-| Microsoft Windows |
+| For Microsoft Windows: |
 | :-------------      |
 | You may be prompted by Windows to: |
 | - Share the C drive with Docker.  Click Okay or Allow.|
@@ -268,30 +281,25 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
     * Click: `Save Blocks` at bottom of page
     * You may now search for ingested objects that have been indexed by SOLR
 
-## Step 11: Check-In the Newly Created Islandora Drupal Site Code Into a Git Repository
+## Step 11: Check-In the Newly Created Islandora Drupal Site Code Into is Git Repository
 
-* _Using the same open terminal:_
-
-* Navigate to the "data" directory within your local ISLE project
-    * `cd data/apache/html`
-
-* Create a local git repository
+*_Using to where same open terminal to where Bitbucket, Github or Git:    )* `cd data/apache/html`
+* Create a local git repository:
     * `git init`
 
-* Add all of the files to this local git repository
+* Add all of the files to this Local git repository:
     * `git add .`
 
-* Create a local git commit with an appropriate message to preserve these changes.
-    * Between the `""` add a message like "Setting up Drupal site" that reflects the changes you are making in the Drupal code.
+* Commit these files to your Local environment with an appropriate message to preserve these changes:
     * `git commit -m "Setting up Drupal site"`
 
-* Add the git "remote" (this represents your git repository hosting service that you'll push changes to). This can be Bitbucket, Github or Gitlab.
+* Add the git "remote" (this is your git repository hosting service to where you'll push changes, such as Bitbucket, Github or Gitlab):
     * **Example:** `git remote add origin https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-islandora.git`
 
 * Push the changes to the remote git repository on the "master" branch
     * `git push -u origin master`
 
-* Then continue to develop work within this follow your institutional best practice to application git repository.
+* Your Local install is now complete.
 
 ---
 
