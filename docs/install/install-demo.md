@@ -18,7 +18,6 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 * **For Microsoft Windows:**
     * You have installed [Git for Windows](../install/host-software-dependencies.md#windows) and will use its provided "Git Bash" as your command line interface; this behaves similarly to LINUX and UNIX environments.
-    * In the "demo.env" file, you must uncomment the line "# COMPOSE_CONVERT_WINDOWS_PATHS=1". (See Software Dependencies: [Edit "demo.env" or "local.env"](../install/host-software-dependencies.md#edit-demoenv-or-localenv))
 
 ---
 
@@ -30,35 +29,74 @@ Enable the Demo ISLE Installation to be viewed locally on a personal computer br
 
 ---
 
-## Step 2: Download the ISLE Images
+## Step 2: Clone ISLE Repository
+
+**Please note:** The location you select to clone the ISLE repository becomes your project directory. We recommend using the default user home directory. (You may choose a different location, but it must not be a protected folder such as system or root directory.)
 
 * Open a `terminal` (Windows: open `Git Bash`)
+* Enter the following to change to the user's home directory:
+    * `cd ~`
+* Clone the repository:
+    * `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
+* Change to the directory containing ISLE:
+    * `cd ISLE`
+* Enter the following command to display the present working directory (full path) of your ISLE project.
+    * `pwd`
+* Please note the location of your ISLE project (from above command) as you will use that location path in subsequent steps.
+    * **Example output (Mac):** "/Users/localmacaccount/ISLE"
+    * **Example output (Windows):** "/c/Users/somebody/ISLE"
 
-* Navigate to your ISLE project directory. (You may already be in this directory if you are coming from the [Software Dependencies](../install/host-software-dependencies.md).)
+* **For Microsoft Windows:** 
+    * Please follow the steps below to edit the "demo.env" file:
+    * Press the Windows key.
+    * Type `Notepad`
+    * In the search results, RIGHT-CLICK `Notepad`, select `Run as administrator`, and enter `Yes` to prompt.
+    * Select `File -> Open`
+    * At top of dialog window, navigate to your ISLE project (refer to the output of the "pwd" command).
+    * At right side of dialog window, use the dropdown menu to change `Text Documents (*.txt)` to `All Files (*.*)`
+        * (Optional: see [How to show hidden files](https://support.microsoft.com/en-us/help/4028316/windows-view-hidden-files-and-folders-in-windows-10)).
+    * Select the file: `demo.env`
+        * Click `Open`
+    * Find the following line:
+        * `# COMPOSE_CONVERT_WINDOWS_PATHS=1`
+    * In the above line, delete the first two characters (`# `) so as to uncomment the line. It should now look like this:
+        * `COMPOSE_CONVERT_WINDOWS_PATHS=1`
+    * Click `File > Save`, and then `File -> Exit`.
+
+---
+
+## Step 3: Download the ISLE Images
+
+_Using the same open terminal:_
+
+* Navigate to your ISLE project directory. (You may already be in this directory.)
 
 * Download all of the latest ISLE Docker images (_~6 GB of data may take 5-10 minutes_):
   * `docker-compose pull`
 
 ---
 
-## Step 3: Launch Process
+## Step 4: Launch Process
 
-* _Using the same open terminal:_
+_Using the same open terminal:_
+
+* Run the docker containers:
     * `docker-compose up -d`
-  * **Please note:** the “ -d” argument stands for “detached” meaning the command will persist even if you close your terminal or your computer sleeps etc…)
+    * **Please note:** the “ -d” argument stands for “detached” meaning the command will persist even if you close your terminal or your computer sleeps etc…)
 
 * Please wait a few moments for the stack to fully come up. Approximately 3-5 minutes.
 
-* _Using the same open terminal:_
-    * View only the running containers: `docker ps`
-    * View all containers (both those running and stopped): `docker ps -a`
-    * All containers prefixed with `isle-` are expected to have a `STATUS` of `Up` (for x time).
-      * **If any of these are not `UP`, then use [Demo ISLE Installation: Troubleshooting](../install/install-troubleshooting.md) to solve before continuing below.**
-      <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running, oe (c) older exited ISLE containers that maybe should be removed. --->
+_Using the same open terminal:_
+
+* View only the running containers: `docker ps`
+* View all containers (both those running and stopped): `docker ps -a`
+* All containers prefixed with `isle-` are expected to have a `STATUS` of `Up` (for x time).
+  * **If any of these are not `UP`, then use [Demo ISLE Installation: Troubleshooting](../install/install-troubleshooting.md) to solve before continuing below.**
+  <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running, oe (c) older exited ISLE containers that maybe should be removed. --->
 
 ---
 
-## Step 4: Run Islandora Drupal Site Install Script
+## Step 5: Run Islandora Drupal Site Install Script
 
 This process may take 10-20 minutes (_depending on system and internet speeds_)
 
@@ -67,7 +105,7 @@ This process may take 10-20 minutes (_depending on system and internet speeds_)
     * **For Microsoft Windows:** `winpty docker exec -it isle-apache-ld bash -c "cd /utility-scripts/isle_drupal_build_tools && ./isle_islandora_installer.sh"`
 
 
-| Microsoft Windows |
+| For Microsoft Windows: |
 | :-------------      |
 | You may be prompted by Windows to: |
 | - Share the C drive with Docker.  Click Okay or Allow.|
@@ -81,7 +119,7 @@ This process may take 10-20 minutes (_depending on system and internet speeds_)
 
 ---
 
-## Step 5: Test the Site
+## Step 6: Test the Site
 
 * In your web browser, enter this URL: `https://isle.localdomain`
 <!--- TODO: Add error message and how to proceed (click 'Advanced...') --->
@@ -92,7 +130,7 @@ This process may take 10-20 minutes (_depending on system and internet speeds_)
 
 ---
 
-## Step 6: Ingest Sample Objects
+## Step 7: Ingest Sample Objects
 
 The Islandora Collaboration Group provides a set of [Islandora Sample Objects](https://github.com/Islandora-Collaboration-Group/islandora-sample-objects) with corresponding metadata for testing Islandora's ingest process. These sample objects are organized by solution pack and are zipped for faster bulk ingestion.
 
