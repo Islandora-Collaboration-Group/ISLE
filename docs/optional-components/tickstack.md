@@ -53,7 +53,7 @@ The use and setup of TICK within the ISLE platform is as an optional [sidecar](h
 
 ### ISLE Images
 
-* Following the installation steps below, an enduser will configure  / edit their ISLE running system(s) to ultimately use the following images and tags from Docker-Hub:
+* Following the installation steps below, an end user will configure  / edit their ISLE running system(s) to ultimately use the following images and tags from Docker-Hub:
 
 
 | Service | Repository | Tag |
@@ -102,7 +102,7 @@ The use and setup of TICK within the ISLE platform is as an optional [sidecar](h
 The Telegraf agent used for ISLE has a default configuration which runs the following plugins to monitor various services whether it is on a Production or Staging system.
 
 There are three `.conf` files found within `./config/tick/telegraf`
-  * `telegraf.conf` - Use this as a genric configuration for any system you'd like to monitor. Use this template file as a method to monitor ISLE environments that are not Staging or Production
+  * `telegraf.conf` - Use this as a generic configuration for any system you'd like to monitor. Use this template file as a method to monitor ISLE environments that are not Staging or Production
   * `telegraf.staging.conf` - Edit this file to run a full TICK stack on your ISLE Staging server which can monitor both your Staging and Production systems. 
   * `telegraf.production.conf` - Edit this file to point to your full TICK stack running on your ISLE Staging server.
 
@@ -111,7 +111,7 @@ There are three `.conf` files found within `./config/tick/telegraf`
 If an ISLE User would like to add a plugin to monitor additional services, please review the additional information below on Telegraf plugins which can be found in two places:
 
 * Telegraf Plugins Documentation https://docs.influxdata.com/telegraf/v1.10/plugins/inputs/
-* Individual plugin's README.md files on Github.com https://github.com/influxdata/telegraf
+* Individual plugin's README.md files on github.com https://github.com/influxdata/telegraf
 
 #### List of Telegraf Agent Plugins used for ISLE:
 
@@ -201,7 +201,7 @@ The data from both systems will be collected, analyzed and accessed on / from th
 * Only installation on Linux based host systems e.g. Debian / Ubuntu 18.04+ and Red Hat / CentOS 7.x+
     * Attempting to run TICK locally on a MacOS system can fail https://github.com/docker/for-mac/issues/3303
 
-* Other TICK / ISLE configurations are possible but **are not supported or detailed** as of yet in this documentation. Endusers seeking alternative setup possibilities are encouraged to further review and mine from the official Influxdata [documentation](https://docs.influxdata.com/platform/introduction/).
+* Other TICK / ISLE configurations are possible but **are not supported or detailed** as of yet in this documentation. End users seeking alternative setup possibilities are encouraged to further review and mine from the official Influxdata [documentation](https://docs.influxdata.com/platform/introduction/).
 
 ---
 
@@ -664,7 +664,7 @@ These instructions are for Sendgrid users only but demonstrate the easy of use i
     * Set the appropriate level of permissions for each section
 * Copy the generated API Key to a password manager. This is the token you'll use to send email with. You'll need to use it again below.
 
-* Log into the Chronograf Dasboard and repeat the steps above to configure the SMTP Alert handler.
+* Log into the Chronograf Dashboard and repeat the steps above to configure the SMTP Alert handler.
     * `SMTP Host` - change `localhost` to `smtp.sendgrid.net`
     * `SMTP Port` - change `25` to `587`
     * `From Email` - enter the email account you'll be using to send alerts **with**
@@ -731,7 +731,7 @@ Additional changes were made to the ISLE base images to allow for:
 
 ## Need help?
 
-* Please use the following as resources for institutions or endusers needing support
+* Please use the following as resources for institutions or end users needing support
 
 
     * [Islandora ISLE Interest Group](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group) - Meetings open to everybody!
@@ -739,7 +739,7 @@ Additional changes were made to the ISLE base images to allow for:
 
     * [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle) - Post your questions here and subscribe for updates, meeting announcements, and technical support
 
-    * [ISLE Github Issues queue](https://github.com/Islandora-Collaboration-Group/ISLE/issues) - Post your issues, bugs and requests for technical documentation here.
+    * [ISLE GitHub Issues queue](https://github.com/Islandora-Collaboration-Group/ISLE/issues) - Post your issues, bugs and requests for technical documentation here.
 
  --- 
 

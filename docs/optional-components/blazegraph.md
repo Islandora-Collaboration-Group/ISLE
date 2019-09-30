@@ -9,7 +9,7 @@
 * The new `isle-blazegraph` image was built using [Blazegraph™](https://www.blazegraph.com/) which is a ultra high-performance graph database supporting Apache TinkerPop™ and RDF/SPARQL APIs. It supports up to 50 Billion edges on a single machine. Formerly known as BigData. The intended use is solely for maintaining performant support of large Fedora repositories containing millions of objects.
 
 * Why use this component with ISLE?
-  * Islandora users who have Fedora repositories with over 600K~ objects ingested have reported issues with using the default Mulgara triplestore used for indexing objects ingested into the Fedora repository. These issues include crashes, extreme performance slowdowns,system timeouts and more. Blazegraph is used to replace Mulgara as the triplestore and to deliver a higher level of performance for larger Fedora repositories. Please note the threshold given above for object count is an compilation of the anecdotal ranges gathered by the Islandora community. In some cases the number is as low as 600K~ when endusers report challenges, others haven't encountered issues until the 1 million object count.
+  * Islandora users who have Fedora repositories with over 600K~ objects ingested have reported issues with using the default Mulgara triplestore used for indexing objects ingested into the Fedora repository. These issues include crashes, extreme performance slowdowns,system timeouts and more. Blazegraph is used to replace Mulgara as the triplestore and to deliver a higher level of performance for larger Fedora repositories. Please note the threshold given above for object count is an compilation of the anecdotal ranges gathered by the Islandora community. In some cases the number is as low as 600K~ when end users report challenges, others haven't encountered issues until the 1 million object count.
 
 * How can I tell how many Fedora objects I have to determine if I should use this component?
   * Walkthrough on getting triple counts. (TO DO)
@@ -80,7 +80,7 @@
 
 ### Assumptions
 
-* Prior to installation, enduser will have a running ISLE system using the current release of `1.3.0` images.
+* Prior to installation, end user will have a running ISLE system using the current release of `1.3.0` images.
 
 * This installation process will give the functionality as stated in the `Systems Requirements` image table above for `Blazegraph` testing and even `TICK` stack usage.
 
@@ -248,14 +248,14 @@ Example is for a Staging instance
 
 ## Need help?
 
-* Please use the following as resources for institutions or endusers needing support
+* Please use the following as resources for institutions or end users needing support
 
   * [Islandora ISLE Interest Group](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group) - Meetings open to everybody!
     * The [Schedule](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group/#how-to-join) is alternating Wednesdays, 3:00pm EDT
 
   * [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle) - Post your questions here and subscribe for updates, meeting announcements, and technical support
 
-  * [ISLE Github Issues queue](https://github.com/Islandora-Collaboration-Group/ISLE/issues) - Post your issues, bugs and requests for technical documentation here.
+  * [ISLE GitHub Issues queue](https://github.com/Islandora-Collaboration-Group/ISLE/issues) - Post your issues, bugs and requests for technical documentation here.
 
 ---
 

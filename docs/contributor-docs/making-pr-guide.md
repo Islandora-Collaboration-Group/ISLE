@@ -8,7 +8,7 @@ accepted into the project.
 *Please keep PRs small, focused and frequent.*
 
 Prerequisites:
-* You’ll need a Github.com account
+* You’ll need a github.com account
 * Git installed on your local development machine
 * CLA on file with ISLE
 
@@ -132,7 +132,7 @@ $ git status
 On branch issue_1234_fix
 nothing to commit, working tree clean
 ```
-Complete your work on the branch and when done, add it to your fork on github.
+Complete your work on the branch and when done, add it to your fork on GitHub.
 If you are working on a change to an ISLE docker container, please read the
 `Changing a Docker Container` section below on additional steps to do when
 submitting a PR.
@@ -140,7 +140,7 @@ submitting a PR.
 To do this, first commit your changes on that branch:
 ```
 $ git add git add docker-compose.yml
-$ git commit -m "Putting mysql logs into a volume to avoid issues with permissions and the container crashing”
+$ git commit -m "Putting MySQL logs into a volume to avoid issues with permissions and the container crashing”
 ```
 
 If you do not include -m you will be taken into a text editor where you can craft
@@ -232,7 +232,7 @@ You’ll be taken to a screen that looks like this:
 In the banner above, the “base repository” should be the repository you want the
 changes to end up in.  In this case it’s: “Islandora-Collaboration-Group/ISLE”
 on branch “master”.  The “head repository” should be your repository and branch
-information containing the new changes.  **Most of the time github fills this in
+information containing the new changes.  **Most of the time GitHub fills this in
 correctly for you and you just need to double check it.**
 
 Also, it should say `Able to merge`, which means there are no conflicts between
@@ -252,13 +252,13 @@ When ready, click `Create pull request`.
 From there, a committer will review your PR and ask questions or give feedback
 about it.  If the feedback you get requests changes, you’ll need to  make the
 updates on your branch (locally), then push them back up to your fork again -
-like above. You don’t need to re-submit the PR.  Github will notice you changed
+like above. You don’t need to re-submit the PR.  GitHub will notice you changed
 the branch and will show those changes in the PR automatically.
 
 ### Changing a Docker Container
 
 One more tool you'll need if you're working with containers is an account on DockerHub.com.
-Accounts are free and you can signup for one here: https://hub.docker.com/signup.
+Accounts are free and you can sign up for one here: https://hub.docker.com/signup.
 
 **If you're only making changes to the main ISLE repository, you do not need to
 do this.**

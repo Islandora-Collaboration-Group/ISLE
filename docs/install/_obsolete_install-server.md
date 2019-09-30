@@ -38,7 +38,7 @@ Note: Since public forks can’t be made private, we will duplicate (instead of 
 
 * Open a terminal and navigate to `/opt/ISLE` (or where you cloned the ISLE directory).
 * Type `git remote -v`
-* You want to have four lines returned, two that describe your private repository (called `origin`) and two that describe the source ISLE github site (called `upstream`):
+* You want to have four lines returned, two that describe your private repository (called `origin`) and two that describe the source ISLE GitHub site (called `upstream`):
 
 ```
 origin  https://github.com/your-github-name/ISLE.git (fetch)
@@ -51,13 +51,13 @@ upstream        https://github.com/Islandora-Collaboration-Group/ISLE.git (push)
     * Remove the non-upstream name: `git remote rm non-upstream-name-here`
     * Rename it to be "upstream": `git remote add upstream https://github.com/Islandora-Collaboration-Group/ISLE`
   
-* Add your private insitutional repository as the remote `origin`.
+* Add your private institutional repository as the remote `origin`.
     * In the line below, substitute `your-institution` and "project-name", then enter it in your terminal.
     `git remote add origin https://github.com/your-institution/project-name-ISLE`
 
 * Pull from the remote upstream master and update the remote origin master branch.
     * Pull from upstream: `git pull upstream master`
-    * Git will ask you to authenicate with username and password:
+    * Git will ask you to authenticate with username and password:
         * $> Username for 'https://github.com': your-github-name
         * $> Password for 'https://your-github-name@github.com': xxxxx
         * TODO: Lookup how to have your server remember your pwd and link to that here.
@@ -102,13 +102,13 @@ TODO:
 FLOW of Customization:
 
 If New Installation....
-- Explain that ISLE creates the mysql, fedora, etc. servers from Docker images, and that data for these can be stored with persistence on a bind mount.
-  - Explain how to update usernames and passwords for mysql, fedora, etc.
+- Explain that ISLE creates the MySQL, fedora, etc. servers from Docker images, and that data for these can be stored with persistence on a bind mount.
+  - Explain how to update usernames and passwords for MySQL, fedora, etc.
 
 If Migrate to ISLE Environment...
 - Explain how to find pwds, how to rsync data:
-  - mysql, fedora installations on bind mount
-  - usernames and passwords for mysql, fedora, etc.
+  - MySQL, fedora installations on bind mount
+  - usernames and passwords for MySQL, fedora, etc.
 
 Explain Git Workflow and how to setup
 

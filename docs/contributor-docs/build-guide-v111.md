@@ -302,7 +302,7 @@ The following software packages will be handled and updated by `apt-get`. Please
   * version `3.8.1`
   * **Not eligible for upgrade**
 
-* **Gsearch**
+* **GSearch**
   * `v2.9.0`
   * `git clone https://github.com/discoverygarden/gsearch.git`
   * `Latest commit 701400e  on Dec 11, 2017`
@@ -393,7 +393,7 @@ Assumptions: The `isle-ubuntu-basebox` & `isle-tomcat` images have been already 
 * Edit the following files with the version changes:
   * `Dockerfile`
     * Line 1: change the tag from `FROM islandoracollabgroup/isle-tomcat:x` to `isle-tomcat:1.1.1`
-    * Line 53: change `vx.x.x` in the curl url to `v.7.1.12`
+    * Line 53: change `vx.x.x` in the curl URL to `v.7.1.12`
     * Line 62: change `MAVEN_VERSION:-x.x.x` to `MAVEN_VERSION:-3.6.0`
     * Line 63: change `ANT_VERSION:-x.xx.x` to `ANT_VERSION:-1.9.14`
 
@@ -505,7 +505,7 @@ Assumptions: The `isle-ubuntu-basebox` & `isle-tomcat` images have been already 
 * Edit the following files with the version changes:
   * `Dockerfile`
     * Line 1: change the tag from `FROM islandoracollabgroup/isle-tomcat:x` to `isle-tomcat:1.1.1`
-    * Line 87: change `vx.x.x` in the curl url to `v4.0.1` (Not done on March 25)
+    * Line 87: change `vx.x.x` in the curl URL to `v4.0.1` (Not done on March 25)
 
 * Commit the changes to git
 
@@ -882,7 +882,7 @@ Suggested Outcome:
 
 ### Recommendations
 
-* Upgrade this image by simple reruning the build process. It will pull the newest version (`5.7.25-1debian9`)of the official image.
+* Upgrade this image by simple rerunning the build process. It will pull the newest version (`5.7.25-1debian9`)of the official image.
 
 ### (Optional) Manual method of reviewing image
 * `docker run -p 3306:3306 -it --rm islandoracollabgroup/isle-mysql:1.1 bash`
@@ -927,8 +927,8 @@ Suggested outcome:
 * `1.1.1` (new image build with sec updates 3/25/2019)
 * `latest ` (new image build with sec updates 3/25/2019)
 
-* deprecate 5.6 (april 2018)
-* fix latest from april 2018 to 3/25/2019)
+* deprecate 5.6 (April 2018)
+* fix latest from April 2018 to 3/25/2019)
 
 ---
 

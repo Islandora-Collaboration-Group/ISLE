@@ -92,7 +92,7 @@ _Using the same open terminal:_
 * View all containers (both those running and stopped): `docker ps -a`
 * All containers prefixed with `isle-` are expected to have a `STATUS` of `Up` (for x time).
   * **If any of these are not `UP`, then use [Demo ISLE Installation: Troubleshooting](../install/install-troubleshooting.md) to solve before continuing below.**
-  <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running, oe (c) older exited ISLE containers that maybe should be removed. --->
+  <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running, or (c) older exited ISLE containers that maybe should be removed. --->
 
 ---
 

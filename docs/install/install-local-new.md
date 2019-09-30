@@ -8,7 +8,7 @@ This Local ISLE Installation will allow you to locally view this site in your br
 
 While this installation provides you a brand new local development site, it is **not** intended as a migration process of a previously existing Islandora site. If you need to build a local environment to migrate a previously existing Islandora site, please use the [Local ISLE Installation: Migrate Existing Islandora Site](../install/install-local-migrate.md) instead.
 
-This document also has directions on how you can save newly created ISLE and Islandora code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging to Production. The [ISLE Installation: Environments](../install/install-environments.md) helps explain the ISLE workflow structure, the associated files, and what values ISLE endusers should use for the ".env", "local.env", etc.
+This document also has directions on how you can save newly created ISLE and Islandora code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging to Production. The [ISLE Installation: Environments](../install/install-environments.md) helps explain the ISLE workflow structure, the associated files, and what values ISLE end users should use for the ".env", "local.env", etc.
 
 Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive emails. The [Glossary](../appendices/glossary.md) defines terms used in this documentation.
 
@@ -27,7 +27,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
     * **WARNING:** Only use **Private** git repositories given the sensitive nature of the configuration files. **DO NOT** share these git repositories publicly.
 
 * **For Microsoft Windows:**
-    * You have installed [Git for Windows](../install/host-software-dependencies.md#windows) and will use its provided "Git Bash" as your command line interface; this behaves similarly to LINUX and UNIX environments. Git for Windows also installs "openssl.exe" which will be needed to generate self-signed SSL certs. (Note: Powershell is not recommended as it is unable to run UNIX commands or execute bash scripts without a moderate degree of customization.)
+    * You have installed [Git for Windows](../install/host-software-dependencies.md#windows) and will use its provided "Git Bash" as your command line interface; this behaves similarly to LINUX and UNIX environments. Git for Windows also installs "openssl.exe" which will be needed to generate self-signed SSL certs. (Note: PowerShell is not recommended as it is unable to run UNIX commands or execute bash scripts without a moderate degree of customization.)
     * Set your text editor to use UNIX style line endings for files. (Text files created on DOS/Windows machines have different line endings than files created on Unix/Linux. DOS uses carriage return and line feed ("\r\n") as a line ending, which Unix uses just line feed ("\n").)
 
 ---
@@ -65,7 +65,7 @@ Enable the Local ISLE Installation to be viewed locally on a personal computer b
 
 ## Step 2: Setup Git for the ISLE Project
 
-**Please note:** The commands given below are for command line usage of git. (GUI based clients such as the [SourceTree App](https://www.sourcetreeapp.com/) may be easier for endusers to use for the git process.)
+**Please note:** The commands given below are for command line usage of git. (GUI based clients such as the [SourceTree App](https://www.sourcetreeapp.com/) may be easier for end users to use for the git process.)
 
 Each "suggested git repository name" (below) serves to clearly name and distinguish your ISLE code from your Islandora code. It's very important to understand that these are two separate code repositories, and not to confuse them.
 
@@ -224,7 +224,7 @@ _Using the same open terminal:_
     * View all containers (both those running and stopped): `docker ps -a`
     * All containers prefixed with "isle-" are expected to have a "STATUS" of "Up" (for x time).
       * **If any of these are not "UP", then use [Non-Running Docker Containers](../install/install-troubleshooting.md#non-running-docker-containers) to solve before continuing below.**
-      <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running, oe (c) older exited ISLE containers that maybe should be removed. --->
+      <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running, or (c) older exited ISLE containers that maybe should be removed. --->
 
 ---
 
@@ -283,7 +283,7 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
 
 ## Step 11: Check-In the Newly Created Islandora Drupal Site Code Into is Git Repository
 
-*_Using to where same open terminal to where Bitbucket, Github or Git:    )* `cd data/apache/html`
+*_Using to where same open terminal to where Bitbucket, GitHub or Git:    )* `cd data/apache/html`
 * Create a local git repository:
     * `git init`
 
@@ -293,7 +293,7 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
 * Commit these files to your Local environment with an appropriate message to preserve these changes:
     * `git commit -m "Setting up Drupal site"`
 
-* Add the git "remote" (this is your git repository hosting service to where you'll push changes, such as Bitbucket, Github or Gitlab):
+* Add the git "remote" (this is your git repository hosting service to where you'll push changes, such as Bitbucket, GitHub or Gitlab):
     * **Example:** `git remote add origin https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-islandora.git`
 
 * Push the changes to the remote git repository on the "master" branch
@@ -312,7 +312,7 @@ Once you are ready to deploy your finished Drupal site, you may progress to:
 ---
 
 ## Additional Resources
-* [ISLE Installation: Environments](../install/install-environments.md) helps explain the ISLE workflow structure, the associated files, and what values ISLE endusers should use for the ".env", "local.env", etc.
+* [ISLE Installation: Environments](../install/install-environments.md) helps explain the ISLE workflow structure, the associated files, and what values ISLE end users should use for the ".env", "local.env", etc.
 * [Local ISLE Installation: Resources](../install/install-local-resources.md) contains Docker container passwords and URLs for administrator testing.
 * [ISLE Installation: Troubleshooting](../install/install-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
 

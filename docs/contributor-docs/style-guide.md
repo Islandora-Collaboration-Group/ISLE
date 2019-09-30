@@ -3,7 +3,7 @@
 ## MkDocs Configurations
 - Site Theme: [MdDocs Themes](https://www.mkdocs.org/user-guide/styling-your-docs/#built-in-themes)
 - CSS Overrides: The `extra.css` file overrides some basic CSS styles.
-- Javascript Overrides: The `extra.js` file (could) override some basic JS styles.
+- JavaScript Overrides: The `extra.js` file (could) override some basic JS styles.
 
 ---
 
@@ -25,7 +25,7 @@ Sections within a section that is specific to a certain type of circumstance sho
 | Example Subheader |
 | :-------------      |
 | Instructions here: |
-| - We use this dash since `mkdocs` cannot accomodate true bullets inside tables. |
+| - We use this dash since `mkdocs` cannot accommodate true bullets inside tables. |
 | - Another dash and another line. |
 
 ---

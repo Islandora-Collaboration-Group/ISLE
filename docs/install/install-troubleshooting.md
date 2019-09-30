@@ -23,7 +23,7 @@ If you encounter an error like this:
 
 **Are you migrating an existing Islandora site that has greater than one million objects?**
 
-This is a power user setting and is an incredibly rare sitation, so do this step only if you have an akubra level 2 or greater.
+This is a power user setting and is an incredibly rare situation, so do this step only if you have an akubra level 2 or greater.
 
 While this will depend on your pre-existing Production system, it is important to double-check this. If you have a larger hash size than the default ISLE system (##), and don't follow the settings below, ISLE may not function properly when your data has been migrated. (Note: even though it looks like a placeholder, the actual syntax value is actually `##`.)
 

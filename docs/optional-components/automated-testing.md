@@ -6,8 +6,8 @@
   * The test coverage section of this document identifies (by Spreadsheet id number) where in the test suite we have addressed the testing requirement.
   * The tests themselves are currently in a temporary location: https://github.com/Born-Digital-US/isle-ingest-samples/tree/master/behat
 * ISLE Phase 2 included budget to automate this test suite, and to make it easy to trigger for various ISLE use cases on every build, as well as for use by implementing institutions to check the integrity of their ISLE builds.
-* We chose to use Behat to do behavioral testing as it is the most similar to an end-user, and ultimately we want to make sure that ISLE delivers a good end-user experience. Running Unit tests was deemed insufficient, as it only tests programatic aspects, not whether the Drupal UI allows utilization of Islandora's features.
-* We chose to use Selinium and Chrome as Docker sidecars for actually executing the tests.
+* We chose to use Behat to do behavioral testing as it is the most similar to an end-user, and ultimately we want to make sure that ISLE delivers a good end-user experience. Running Unit tests was deemed insufficient, as it only tests programmatic aspects, not whether the Drupal UI allows utilization of Islandora's features.
+* We chose to use Selenium and Chrome as Docker sidecars for actually executing the tests.
 
 
 ---
@@ -468,7 +468,7 @@ docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && ./run-is
 * 5-3	Able to create new config directories for services
     * N/A - To be covered by one or more CI configurations
 
-#### FEDORA - Able to overide existing settings for:
+#### FEDORA - Able to override existing settings for:
 * 5-4	      - ./config/fedora/akubra-llstore.xml:/usr/local/fedora/server/config/spring/akubra-llstore.xml (Allows for deeper hash directories for larger Fedora collections)
     * N/A - To be covered by one or more CI configurations
 * 5-5	foxmltoSolr.xslt
@@ -476,7 +476,7 @@ docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && ./run-is
 * 5-6	islandora_transforms
     * N/A - To be covered by one or more CI configurations
 
-#### SOLR - Able to overide existing settings for:
+#### SOLR - Able to override existing settings for:
 * 5-7	schema.xml
     * N/A - To be covered by one or more CI configurations
 * 5-8	solrconfig.xml

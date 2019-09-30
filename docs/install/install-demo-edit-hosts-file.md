@@ -16,7 +16,7 @@ Edit the `/etc/hosts` file to view ISLE locally on a personal computer browser.
 * Open a terminal on the personal computer.
 
 * Enter: `sudo nano /etc/hosts`
-    * _For endusers familiar with editing files on the command line, vim, emacs or alternative tools can be used in lieu of nano_
+    * _For end users familiar with editing files on the command line, vim, emacs or alternative tools can be used in lieu of nano_
 
 * Enter the personal computer end user password
 
@@ -55,7 +55,7 @@ Edit the `/etc/hosts` file to view ISLE locally on a personal computer browser.
 * Open a terminal on the personal computer.
 
 * Enter: `sudo nano /etc/hosts`
-   * _For endusers familiar with editing files on the command line, vim, emacs or alternative tools can be used in lieu of nano_
+   * _For end users familiar with editing files on the command line, vim, emacs or alternative tools can be used in lieu of nano_
 
 * Enter the personal computer end user password
 
@@ -83,7 +83,7 @@ Edit the `/etc/hosts` file to view ISLE locally on a personal computer browser.
 
 ## Windows Using Docker
 
-* For endusers running Windows 10:
+* For end users running Windows 10:
 
 * Press the Windows key.
 
@@ -125,7 +125,7 @@ Edit the `/etc/hosts` file to view ISLE locally on a personal computer browser.
 
 ## Windows Using Virtualbox VM (non-Vagrant)
 
-* For endusers running Windows 10:
+* For end users running Windows 10:
 
 * Press the Windows key.
 
