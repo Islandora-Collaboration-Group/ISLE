@@ -2,7 +2,7 @@
 
 You have the choice of using Ansible to deploy the Docker Host server dependencies instead of performing manual commands on either a CentOS or Ubuntu OS. The Ansible script and configuration files can be found in the root folder of the ISLE git repository in a directory named [ansible](https://github.com/Islandora-Collaboration-Group/ISLE/tree/master/ansible). Additionally, the Ansible script is designed to detect the chosen operating system and then install the appropriate dependencies with minimal user interaction or prior configuration.
 
-Ansible is an free open source automation platform / tool which runs on Linux, Mac or BSD, doesn’t use local or remote agents and is relatively easy to setup. Ansible can help with server configuration management, application deployment, task automation and IT orchestration (_running tasks in sequence on several different servers or devices_).
+Ansible is an free open source automation platform / tool which runs on Linux, Mac or BSD, doesn't use local or remote agents and is relatively easy to setup. Ansible can help with server configuration management, application deployment, task automation and IT orchestration (_running tasks in sequence on several different servers or devices_).
 
 If you are not familiar with the Ansible, it is recommended to start with their documentation.
 
@@ -27,7 +27,7 @@ If you are not familiar with the Ansible, it is recommended to start with their 
 
 * Note: The "Ansible Control Node" is the machine where Ansible is installed.
 
-* Ansible Control Node Requirements: Currently Ansible can be run from any machine with Python 2 (version 2.7) or Python 3 (versions 3.5 and higher) installed. Windows isn’t supported for the control node. This includes Red Hat, Debian, CentOS, macOS, any of the BSDs, and so on.
+* Ansible Control Node Requirements: Currently Ansible can be run from any machine with Python 2 (version 2.7) or Python 3 (versions 3.5 and higher) installed. Windows isn't supported for the control node. This includes Red Hat, Debian, CentOS, macOS, any of the BSDs, and so on.
     * `Ansible 2.2+` (choice of [install methods](http://docs.ansible.com/ansible/latest/intro_installation.html#installing-the-control-machine))
     * `openssh` (2.2.x+)
     * `git` (2.15.1+)
@@ -87,7 +87,7 @@ The Ansible script will deploy the following to the ISLE Host server:
 
 #### Makes ISLE Host Service Changes
 
-**Please Note:** _Any of these services can be re-enabled post installation see appropriate documentation for opening ports on firewalls, etc._
+**Note:** _Any of these services can be re-enabled post installation see appropriate documentation for opening ports on firewalls, etc._
 
 | Ubuntu / Debian             | CentOS                        |
 | -------------               | -------------                 |
@@ -182,7 +182,7 @@ _This is the Ansible playbook necessary to deploy software to the ISLE host serv
 #### `ansible/inventory.yml`
 _This is the possible list of server(s) to deploy to using Ansible and its associated playbook(s)._
 
-**Please Note:** These instructions below are repeated within the file itself.
+**Note:** These instructions below are repeated within the file itself.
 
 * Line 7: remove `isle-prod-project.institution` from in between the brackets and replace with the appropriate **FQDN**
 
@@ -198,7 +198,7 @@ _This is the possible list of server(s) to deploy to using Ansible and its assoc
 ansible_ssh_private_key_file=/home/janesmith/.ssh/id_rsa.pub
 ```
 
-**Please Note:** This key is typically found on the local control (Ansible deploy personal computer) system and should have been previously copied to the appropriate ISLE Host server user account's `/home/islehostserver_user/.ssh/authorized_keys` file.
+**Note:** This key is typically found on the local control (Ansible deploy personal computer) system and should have been previously copied to the appropriate ISLE Host server user account's `/home/islehostserver_user/.ssh/authorized_keys` file.
 
 
   * **Final Example** end result for inventory file with all settings above
@@ -227,7 +227,7 @@ ansible
 
 * Edit the following lines within the newly created file i.e. `yourislesite.institution.com.yml` and remove the comments (#) as asked
 
-* **Please Note:** _The **FQDN** in the `inventory` file should match this filename as well._
+* **Note:** _The **FQDN** in the `inventory` file should match this filename as well._
 
 **Examples ONLY** (_Do not enter these literal values_)  
 
@@ -264,7 +264,7 @@ isle-host-server | SUCCESS => {
 ```
 
 
-**Please Note:** _If SUCCESS does not appear as a value or if the wording of the prompt is in RED with "host does not exist ...", review all steps above and check the settings. Do not advance until the **Example:** output above matches._  
+**Note:** _If SUCCESS does not appear as a value or if the wording of the prompt is in RED with "host does not exist ...", review all steps above and check the settings. Do not advance until the **Example:** output above matches._  
 
 
 ### Ansible Commands for Deploy
@@ -445,7 +445,7 @@ host_local_macos_isle_localdomain | SUCCESS => {
    "ping": "pong"
  }
 ```
-**Please Note:** _If SUCCESS does not appear as a value or if the wording of the prompt is in RED with "host does not exist ...", review all steps above and check the settings. Do not advance until the **Example:** output above matches._  
+**Note:** _If SUCCESS does not appear as a value or if the wording of the prompt is in RED with "host does not exist ...", review all steps above and check the settings. Do not advance until the **Example:** output above matches._  
 
 
 * To deploy to the ISLE Host Server, run this command.

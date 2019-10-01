@@ -1,6 +1,6 @@
 This document is a suggested guide for allocating ISLE host resources based on your ISLE environment.
 
-* **Please note:** These are recommended defaults which sometimes include a range. Your needs may require more resources to be added. It is **not recommended** to go below the defaults for the Staging and Production environments.
+* **Note:** These are recommended defaults which sometimes include a range. Your needs may require more resources to be added. It is **not recommended** to go below the defaults for the Staging and Production environments.
 
 * For the Production and Staging storage needs, ISLE End users should plan on these numbers increasing over time as their collections grow.
 
@@ -86,4 +86,4 @@ When planning for ingesting objects at a high volume and rate, it would be highl
   * There are additional potential memory allocation and tuning recommendations for Varnish from [Varnish-software](https://info.varnish-software.com/blog/understanding-varnish-cache-memory-usage)
   * If you need to read more about how to use or change Varnish's cache settings, please start [here](https://varnish-cache.org/docs/4.1/users-guide/storage-backends.html)
 
-* **Recommendation** Adding more memory to the Production ISLE host system from the default recommended `16 GB` might be recommended here if running all optional components e.g. `isle-varnish`,  `isle-blazegraph`, the TICK stack, etc.
+* **Recommendation:** Adding more memory to the Production ISLE host system from the default recommended `16 GB` might be recommended here if running all optional components e.g. `isle-varnish`,  `isle-blazegraph`, the TICK stack, etc.

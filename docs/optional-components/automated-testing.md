@@ -1,18 +1,15 @@
-# Utilizing and Extending ISLE’s Test Suite
+# Automated Testing: Utilizing and Extending ISLE's Test Suite
 
-## What is this component?
+## What Is This Component?
 
-* Early in the history of ISLE, we did all build tests manually. We even developed a checklist spreadsheet for it: https://docs.google.com/spreadsheets/d/1L-wrivXq2pUz7vcGsMCx3X7yKf27uokoaR8SovU_BsU/edit#gid=0
-  * The test coverage section of this document identifies (by Spreadsheet id number) where in the test suite we have addressed the testing requirement.
-  * The tests themselves are currently in a temporary location: https://github.com/Born-Digital-US/isle-ingest-samples/tree/master/behat
+* Early in the history of ISLE, we did all build tests manually. We even developed a [checklist spreadsheet for it](https://docs.google.com/spreadsheets/d/1L-wrivXq2pUz7vcGsMCx3X7yKf27uokoaR8SovU_BsU/edit#gid=0).
+    * The test coverage section of this document identifies (by Spreadsheet id number) where in the test suite we have addressed the testing requirement.
+    * The tests themselves are currently in a temporary location: https://github.com/Born-Digital-US/isle-ingest-samples/tree/master/behat
 * ISLE Phase 2 included budget to automate this test suite, and to make it easy to trigger for various ISLE use cases on every build, as well as for use by implementing institutions to check the integrity of their ISLE builds.
 * We chose to use Behat to do behavioral testing as it is the most similar to an end-user, and ultimately we want to make sure that ISLE delivers a good end-user experience. Running Unit tests was deemed insufficient, as it only tests programmatic aspects, not whether the Drupal UI allows utilization of Islandora's features.
 * We chose to use Selenium and Chrome as Docker sidecars for actually executing the tests.
 
-
 ---
-
-
 
 ## Running ISLE Tests
 
@@ -47,39 +44,46 @@ hub:
     - "4444:4444"
 ```
 * Notes:
-  * To allow uploads in tests, we must mount in the Apache file root into the "chrome" container.
-  * `/dev/shm` must be shared by all testing services or they will run out of RAM and crash
-  * Newer `selenium` images may be available, but are untested. YMMV.
+    * To allow uploads in tests, we must mount in the Apache file root into the "chrome" container.
+    * `/dev/shm` must be shared by all testing services or they will run out of RAM and crash
+    * Newer `selenium` images may be available, but are untested. YMMV.
 * No changes to `.env` file(s) are necessary, although for the examples shown here we have:
-  * `COMPOSE_PROJECT_NAME=isle_test`
-  * `BASE_DOMAIN=isle.localdomain`
-  * `CONTAINER_SHORT_ID=td`
-  * `COMPOSE_FILE-COMPOSE-FILE=test.env`
-  * If your use case uses other values for these variables, you may need to find/replace in the instructions below (e.g. `isle-apache-td` corresponds with the CONTAINER_SHORT_ID above)
-* The full series of commands to install a clean new ISLE with a clean new Islandora Drupal, then add extra modules to support our test cases, and then execute the tests are as follows.
-  * Get a good ISLE base for this test run:
+    * `COMPOSE_PROJECT_NAME=isle_test`
+    * `BASE_DOMAIN=isle.localdomain`
+    * `CONTAINER_SHORT_ID=td`
+    * `COMPOSE_FILE-COMPOSE-FILE=test.env`
+    * If your use case uses other values for these variables, you may need to find/replace in the instructions below (e.g. `isle-apache-td` corresponds with the CONTAINER_SHORT_ID above)
+* The full series of commands to install a clean new ISLE with a clean new Islandora Drupal, then add extra modules to support our test cases, and then execute the tests are as follows:
+
+* Get a good ISLE base for this test run:
 ```bash
 git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 ```
-  * Then edit the `.env` file to contain the test suite config:
+
+* Then edit the `.env` file to contain the test suite config:
+
+
 ```bash
 COMPOSE_PROJECT_NAME=isle_test
 BASE_DOMAIN=isle.localdomain
 CONTAINER_SHORT_ID=td
 COMPOSE_FILE-COMPOSE-FILE=test.env
 ```
-  * Then fire everything back up
+
+* Then fire everything back up
 ```bash
 docker-compose pull
 docker-compose up -d
 
 sleep 40
 ```
-  * Now install Islandora from scratch, and init your Fedora repository using the tools provided by ISLE:
+
+* Now install Islandora from scratch, and init your Fedora repository using the tools provided by ISLE:
 ```bash
 set -x && docker exec -it isle-apache-td bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh
 ```
-  * Now install bulk-ingest dependencies (some not required for our tests) and extra modules required by test coverage:
+
+* Now install bulk-ingest dependencies (some not required for our tests) and extra modules required by test coverage:
 ```bash
 docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/all/modules/islandora && git clone https://github.com/Islandora-Labs/islandora_solution_pack_oralhistories.git"
 docker exec -it isle-apache-td bash -c "cd /var/www/html && drush -y -u 1 en islandora_oralhistories"
@@ -92,8 +96,9 @@ docker exec -it isle-apache-td bash -c "cd /var/www/html && drush -y -u 1 en isl
 docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/all/modules/islandora && git clone https://github.com/MarcusBarnes/islandora_compound_batch.git"
 docker exec -it isle-apache-td bash -c "cd /var/www/html && drush -y -u 1 en islandora_compound_batch"
 ```
-  * Make sure your `/etc/hosts` has an entry for the domain you'll be using (`isle.localdomain` in this example)
-  * Now clone the repository with the tests, put it where Drupal expects it (`sites/all/behat`), and install Behat dependencies with Composer:
+
+* Make sure your `/etc/hosts` has an entry for the domain you'll be using (`isle.localdomain` in this example)
+* Now clone the repository with the tests, put it where Drupal expects it (`sites/all/behat`), and install Behat dependencies with Composer:
 ```bash
 git clone git@github.com:Born-Digital-US/isle-behat.git data/isle-behat
 docker cp data/isle-behat isle-apache-td:/var/www/html/sites/behat
@@ -102,7 +107,8 @@ docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && composer
 docker exec -it isle-apache-td bash -c "chmod 700 /var/www/html/sites/behat/run-isle-tests.sh"
 sudo chmod -R 777 ~/isle/data/apache/html/sites/behat/debug
 ```
-   * And now we're ready to run tests:
+
+* And now we're ready to run tests:
 ```bash
 docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && ./run-isle-tests.sh --run=services"
 docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && ./run-isle-tests.sh --run=apache"
@@ -114,7 +120,7 @@ docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && ./run-is
 
 ---
 
-## Automated test triggers
+## Automated Test Triggers
 
 * CircleCI runs these tests every time an update is pushed to the main ISLE repo. Sometimes things fail because the wind was blowing the wrong way, so we run it again and it will pass.
 
@@ -184,9 +190,9 @@ docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && ./run-is
     * Covered by audio.feature: "Check for Audio OBJ download"
 * 3-7	Able to search for newly ingested AUDIO object using Islandora simple search?
     * Covered by audio.feature: "Check for Audio Objects using simple search"
-* 3-8	Able to edit AUDIO object’s title using the XML form?
+* 3-8	Able to edit AUDIO object's title using the XML form?
     * Covered by audio.feature: "Edit Audio object title"
-* 3-9	Able to search for newly edited AUDIO object’s title using Islandora simple search?
+* 3-9	Able to search for newly edited AUDIO object's title using Islandora simple search?
     * Covered by audio.feature: "Edit Audio object title"
 * 3-10	Able to edit the Item Label of an AUDIO object's Properties?
     * Covered by audio.feature: "Edit Audio object Item Label"
@@ -210,9 +216,9 @@ docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && ./run-is
     * Covered by basicimage.feature: "Check for Basic Image OBJ download"
 * 3-19	Able to search for newly ingested BASIC IMAGE object using Islandora simple search?
     * Covered by basicimage.feature: "Check for Basic Image Objects using simple search"
-* 3-20	Able to edit BASIC IMAGE object’s title using the XML form?
+* 3-20	Able to edit BASIC IMAGE object's title using the XML form?
     * Covered by basicimage.feature: "Edit Basic Image object title"
-* 3-21	Able to search for newly edited BASIC IMAGE object’s title using Islandora simple search?
+* 3-21	Able to search for newly edited BASIC IMAGE object's title using Islandora simple search?
     * Covered by basicimage.feature: "Edit Basic Image object title"
 * 3-22	Able to edit the Item Label of an BASIC IMAGE object's Properties?
     * Covered by basicimage.feature: "Edit Basic Image object Item Label"
@@ -236,9 +242,9 @@ docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && ./run-is
     * Covered by book.feature: "Check for BOOK OBJ download"
 * 3-31	Able to search for newly ingested BOOK object using Islandora simple search?
     * Covered by book.feature: "Check for BOOK Objects using simple search"
-* 3-32	Able to edit BOOK object’s title using the XML form?
+* 3-32	Able to edit BOOK object's title using the XML form?
     * Covered by book.feature: "Edit BOOK object title"
-* 3-33	Able to search for newly edited BOOK object’s title using Islandora simple search?
+* 3-33	Able to search for newly edited BOOK object's title using Islandora simple search?
     * Covered by book.feature: "Edit BOOK object title"
 * 3-34	Able to edit the Item Label of an BOOK object's Properties?
     * Covered by book.feature: "Edit BOOK object Item Label"
@@ -262,9 +268,9 @@ docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && ./run-is
     * This is theme specific.
 * 3-43	Able to search for newly ingested COMPOUND OBJECT object using Islandora simple search?
     * Covered by compound.feature: "Check for Compound Object Objects using simple search"
-* 3-44	Able to edit COMPOUND OBJECT object’s title using the XML form?
+* 3-44	Able to edit COMPOUND OBJECT object's title using the XML form?
     * Covered by compound.feature: "Edit Compound Object object title"
-* 3-45	Able to search for newly edited COMPOUND OBJECT object’s title using Islandora simple search?
+* 3-45	Able to search for newly edited COMPOUND OBJECT object's title using Islandora simple search?
     * Covered by compound.feature: "Edit Compound Object object title"
 * 3-46	Able to edit the Item Label of an COMPOUND OBJECT object's Properties?
     * Covered by compound.feature: "Edit Compound Object object Item Label"
@@ -291,9 +297,9 @@ docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && ./run-is
     * Covered by largeimage.feature: "Check for Large Image OBJ download"
 * 3-55	Able to search for newly ingested LARGE IMAGE object using Islandora simple search?
     * Covered by largeimage.feature: "Check for Large Image Objects using simple search"
-* 3-56	Able to edit LARGE IMAGE object’s title using the XML form?
+* 3-56	Able to edit LARGE IMAGE object's title using the XML form?
     * Covered by largeimage.feature: "Edit Large Image object title"
-* 3-57	Able to search for newly edited  LARGE IMAGE object’s title using Islandora simple search?
+* 3-57	Able to search for newly edited  LARGE IMAGE object's title using Islandora simple search?
     * Covered by largeimage.feature: "Edit Large Image object title"
 * 3-58	Able to edit the Item Label of an LARGE IMAGE object's Properties?
     * Covered by largeimage.feature: "Edit Large Image object Item Label"
@@ -317,9 +323,9 @@ docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && ./run-is
     * Covered by newspaper.feature: "Check for Newspaper OBJ download"
 * 3-67	Able to search for newly ingested NEWSPAPER object using Islandora simple search?
     * Covered by newspaper.feature: "Check for Newspaper Objects using simple search"
-* 3-68	Able to edit NEWSPAPER object’s title using the XML form?
+* 3-68	Able to edit NEWSPAPER object's title using the XML form?
     * Covered by newspaper.feature: "Edit Newspaper object title"
-* 3-69	Able to search for newly edited NEWSPAPER object’s title using Islandora simple search?
+* 3-69	Able to search for newly edited NEWSPAPER object's title using Islandora simple search?
     * Covered by newspaper.feature: "Edit Newspaper object title"
 * 3-70	Able to edit the Item Label of an NEWSPAPER object's Properties?
     * Covered by newspaper.feature: "Edit Newspaper object Item Label"
@@ -343,9 +349,9 @@ docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && ./run-is
     * Covered by oralhistories.feature: "Check for ORAL HISTORIES OBJ download"
 * 3-79	Able to search for newly ingested ORAL HISTORY object using Islandora simple search?
     * Covered by oralhistories.feature: "Check for ORAL HISTORIES Objects using simple search"
-* 3-80	Able to edit ORAL HISTORY object’s title using the XML form?
+* 3-80	Able to edit ORAL HISTORY object's title using the XML form?
     * Covered by oralhistories.feature: "Edit ORAL HISTORIES object title"
-* 3-81	Able to search for newly edited ORAL HISTORY object’s title using Islandora simple search?
+* 3-81	Able to search for newly edited ORAL HISTORY object's title using Islandora simple search?
     * Covered by oralhistories.feature: "Edit ORAL HISTORIES object title"
 * 3-82	Able to edit the Item Label of an ORAL HISTORY object's Properties?
     * Covered by oralhistories.feature: "Edit ORAL HISTORIES object Item Label"
@@ -369,9 +375,9 @@ docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && ./run-is
     * Covered by pdf.feature: "Check for PDF OBJ download"
 * 3-91	Able to search for newly ingested PDF object using Islandora simple search?
     * Covered by pdf.feature: "Check for PDF Objects using simple search"
-* 3-92	Able to edit PDF object’s title using the XML form?
+* 3-92	Able to edit PDF object's title using the XML form?
     * Covered by pdf.feature: "Edit PDF object title"
-* 3-93	Able to search for newly edited PDF object’s title using Islandora simple search?
+* 3-93	Able to search for newly edited PDF object's title using Islandora simple search?
     * Covered by pdf.feature: "Edit PDF object title"
 * 3-94	Able to edit the Item Label of an PDF object's Properties?
     * Covered by pdf.feature: "Edit PDF object Item Label"
@@ -395,9 +401,9 @@ docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && ./run-is
     * Covered by video.feature: "Check for Video OBJ download"
 * 3-103	Able to search for newly ingested VIDEO object using Islandora simple search?
     * Covered by video.feature: "Check for Video Objects using simple search"
-* 3-104	Able to edit VIDEO object’s title using the XML form?
+* 3-104	Able to edit VIDEO object's title using the XML form?
     * Covered by video.feature: "Edit Video object title"
-* 3-105	Able to search for newly edited VIDEO object’s title using Islandora simple search?
+* 3-105	Able to search for newly edited VIDEO object's title using Islandora simple search?
     * Covered by video.feature: "Edit Video object title"
 * 3-106	Able to edit the Item Label of an VIDEO object's Properties?
     * Covered by video.feature: "Edit Video object Item Label"
@@ -425,9 +431,9 @@ docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && ./run-is
     * Covered by warc.feature: "Check for WARC OBJ download"
 * 3-117	Able to search for newly ingested WEB ARCHIVE object using Islandora simple search?
     * Covered by warc.feature: "Check for WARC Objects using simple search"
-* 3-118	Able to edit WEB ARCHIVE object’s title using the XML form?
+* 3-118	Able to edit WEB ARCHIVE object's title using the XML form?
     * Covered by warc.feature: "Edit WARC object title"
-* 3-119	Able to search for newly edited WEB ARCHIVE object’s title using Islandora simple search?
+* 3-119	Able to search for newly edited WEB ARCHIVE object's title using Islandora simple search?
     * Covered by warc.feature: "Edit WARC object title"
 * 3-120	Able to edit the Item Label of an WEB ARCHIVE object's Properties?
     * Covered by warc.feature: "Edit WARC object Item Label"
@@ -468,7 +474,7 @@ docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && ./run-is
 * 5-3	Able to create new config directories for services
     * N/A - To be covered by one or more CI configurations
 
-#### FEDORA - Able to override existing settings for:
+#### FEDORA - Able to Override Existing Settings For:
 * 5-4	      - ./config/fedora/akubra-llstore.xml:/usr/local/fedora/server/config/spring/akubra-llstore.xml (Allows for deeper hash directories for larger Fedora collections)
     * N/A - To be covered by one or more CI configurations
 * 5-5	foxmltoSolr.xslt
@@ -476,7 +482,7 @@ docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && ./run-is
 * 5-6	islandora_transforms
     * N/A - To be covered by one or more CI configurations
 
-#### SOLR - Able to override existing settings for:
+#### SOLR - Able to Override Existing Settings For:
 * 5-7	schema.xml
     * N/A - To be covered by one or more CI configurations
 * 5-8	solrconfig.xml

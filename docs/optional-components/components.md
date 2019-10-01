@@ -1,8 +1,8 @@
-# Optional ISLE components
+# Optional ISLE Components
 
-This documentation area provides instructions on how to use the following optional ISLE components. 
+Please note that these ISLE components are optional, and are built to be modular and thus can be installed independently or can work together.
 
-Please note all ISLE components are built to be modular and thus can be installed independently or can work together.
+* [Automated Testing](automated-testing.md): Utilize and extend ISLE's test suite for use with your institution's repository
 
 * [Blazegraph](blazegraph.md): High-performance replacement triplestore for larger Fedora repositories
 
@@ -10,14 +10,3 @@ Please note all ISLE components are built to be modular and thus can be installe
 
 * [TICK stack](tickstack.md): A suite of open-source applications that are used together for the storing, visualization and monitoring of data (time series metrics) gathered from running systems.
 
----
-
-## Assumptions
-
-For June 4, 2019 during ISLE Phase II
-
-* You will need to pull down the `dashboards-dev` images.
-  * List here: (TO DO)
-
-* Assumes you've cloned the BD-forked version of ISLE for a template to work from.
-  * `git clone -b dashboards-dev https://github.com/Born-Digital-US/ISLE.git`
