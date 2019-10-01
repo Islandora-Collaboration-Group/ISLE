@@ -13,8 +13,9 @@
 
 ### ISLE (main project)
 
-* Adds two new optional components for use on Production systems
-    * Varnish - caching web accelerator for high traffic sites
+
+* Adds two new optional components for use on Production systems:
+    * Varnish - caching web accelearator for high traffic sites
         * Optional Varnish service added to only Production & Local docker-compose files (commented out)
         * Varnish logging added in the .envs
     * Blazegraph - triplestore replacement for Mulgara for high volume ingest
