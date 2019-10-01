@@ -168,7 +168,7 @@ To configure the Ansible script to deploy to one's institutional ISLE Host Serve
 - `ansible/inventory`
 - `ansible/host_vars/isle-prod-project.institution.yml`
 
-Basically wherever `isle-prod-project.institution` appears as a value in these three files, please replace with the appropriate ISLE Host server fully qualified domain name (**fqdn**) e.g. `yourislesite.institution.com`
+Basically wherever `isle-prod-project.institution` appears as a value in these three files, please replace with the appropriate ISLE Host server fully qualified domain name (**FQDN**) e.g. `yourislesite.institution.com`
 
 One can open up and edit all files in a text editor e.g. Atom, Textedit, Textwrangler, etc.
 
@@ -176,7 +176,7 @@ One can open up and edit all files in a text editor e.g. Atom, Textedit, Textwra
 
 _This is the Ansible playbook necessary to deploy software to the ISLE host server._
 
-* At the top of the file remove `isle-prod-project.institution` and replace with the appropriate **fqdn**.  
+* At the top of the file remove `isle-prod-project.institution` and replace with the appropriate **FQDN**.  
 
 
 #### `ansible/inventory.yml`
@@ -184,7 +184,7 @@ _This is the possible list of server(s) to deploy to using Ansible and its assoc
 
 **Please Note:** These instructions below are repeated within the file itself.
 
-* Line 7: remove `isle-prod-project.institution` from in between the brackets and replace with the appropriate **fqdn**
+* Line 7: remove `isle-prod-project.institution` from in between the brackets and replace with the appropriate **FQDN**
 
 * Line 8: Add the appropriate ISLE Host server user account that has `sudo` passwordless permissions to the end of `ansible_ssh_user=`
 
@@ -211,7 +211,7 @@ yourislesite.institution.com ansible_connection=ssh ansible_ssh_user=janesmith a
 
 #### `ansible/isle-prod-project.institution.yml`
 
-* Copy this file and rename the copy to with the appropriate **fqdn**
+* Copy this file and rename the copy to with the appropriate **FQDN**
 
   * **Example:** of how `host_vars` directory should now contain two files:  
 
@@ -227,7 +227,7 @@ ansible
 
 * Edit the following lines within the newly created file i.e. `yourislesite.institution.com.yml` and remove the comments (#) as asked
 
-* **Please Note:** _The **fqdn** in the `inventory` file should match this filename as well._
+* **Please Note:** _The **FQDN** in the `inventory` file should match this filename as well._
 
 **Examples ONLY** (_Do not enter these literal values_)  
 

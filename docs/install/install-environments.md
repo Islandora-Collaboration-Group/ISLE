@@ -1,6 +1,6 @@
 # Overview: ISLE Installation Environments
 
-As of the ISLE `1.2.0` release, ISLE has the option to use clearly defined but different environments based on enduser's needs. Depending on the environment choice, additional configuration changes will need to be made to ISLE configuration files, domain names, etc. We recommend that you install ISLE using the workflow and suggested order below.
+As of the ISLE `1.2.0` release, ISLE has the option to use clearly defined but different environments based on end user's needs. Depending on the environment choice, additional configuration changes will need to be made to ISLE configuration files, domain names, etc. We recommend that you install ISLE using the workflow and suggested order below.
 
 * **Demo** (Default) - Used for trying out ISLE for the first time, having a sandbox for tests etc
 

@@ -23,7 +23,7 @@ If you encounter an error like this:
 
 **Are you migrating an existing Islandora site that has greater than one million objects?**
 
-This is a power user setting and is an incredibly rare sitation, so do this step only if you have an akubra level 2 or greater.
+This is a power user setting and is an incredibly rare situation, so do this step only if you have an akubra level 2 or greater.
 
 While this will depend on your pre-existing Production system, it is important to double-check this. If you have a larger hash size than the default ISLE system (##), and don't follow the settings below, ISLE may not function properly when your data has been migrated. (Note: even though it looks like a placeholder, the actual syntax value is actually `##`.)
 
@@ -58,9 +58,9 @@ If you don't see all containers running, then stop the running containers with `
     * Enter the user name of `admin` and the password of `isle_admin`
     * Upon login a large display of running Tomcat applications should display, scroll down to fedora
     * The application state / status should be true
-    * If false appears instead, attempt to restart the fedora service manually.
+    * If false appears instead, attempt to restart the Fedora service manually.
     * Select the restart button to the right of the status area.
-    * If it still fails, review the mounted fedora logs. The docker-compose.yml file will indicate where the logs are located.
+    * If it still fails, review the mounted Fedora logs. The docker-compose.yml file will indicate where the logs are located.
     * Using terminal and then entering a command like `tail -n 300 - <path to ISLE project/data/fedora/log/tomcat:/usr/local/tomcat/logs/fedora.log` should display enough information to troubleshoot or restart the entire startup process.
 
 * Solr image pull & container launch

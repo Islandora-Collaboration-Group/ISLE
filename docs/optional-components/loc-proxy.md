@@ -52,7 +52,7 @@ becomes
 
 #### Edit 2: Add a new Apache Bind mount
 
-There is a new directory within the ISLE `config/apache/` directory called `loc_proxy` which contains a file named `loc-proxy-cache.conf`. This file is a new Apache site configruation to enable caching and proxying for `https://www.loc.gov/standards`.
+There is a new directory within the ISLE `config/apache/` directory called `loc_proxy` which contains a file named `loc-proxy-cache.conf`. This file is a new Apache site configuration to enable caching and proxying for `https://www.loc.gov/standards`.
 
 * Within your `docker-compose.*.yml`, add the following bind-mount code snippet to the `Apache` service section under the `volumes` area so that:
 
@@ -129,20 +129,20 @@ becomes
   * `curl -O http://www.loc.gov/standards/mods/xml.xsd`
   * `curl http://www.loc.gov/standards/mods/xml.xsd`
   * `ls -lha /var/cache/apache2/mod_cache_disk/` - Is there a new hash created?
-  * `echo "TEST 123 TEST 123" >> /var/cache/apache2/mod_cache_disk/Fr/m6/gz8YIqKWS_tQjfBGgw.header.vary/HM/wl/M1FJKOuWg0YokaKfCA.data` - Check if the file is being pulled locallly from the cache by editing it.
+  * `echo "TEST 123 TEST 123" >> /var/cache/apache2/mod_cache_disk/Fr/m6/gz8YIqKWS_tQjfBGgw.header.vary/HM/wl/M1FJKOuWg0YokaKfCA.data` - Check if the file is being pulled locally from the cache by editing it.
   * `curl http://www.loc.gov/standards/mods/xml.xsd` - you should now see `TEST 123 TEST 123` at the bottom of the file.
 
 ---
 
 ## Need help?
 
-* Please use the following as resources for institutions or endusers needing support
+* Please use the following as resources for institutions or end users needing support
 
   * [Islandora ISLE Interest Group](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group) - Meetings open to everybody!
     * The [Schedule](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group/#how-to-join) is alternating Wednesdays, 3:00pm EDT
 
   * [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle) - Post your questions here and subscribe for updates, meeting announcements, and technical support
 
-  * [ISLE Github Issues queue](https://github.com/Islandora-Collaboration-Group/ISLE/issues) - Post your issues, bugs and requests for technical documentation here.
+  * [ISLE GitHub Issues queue](https://github.com/Islandora-Collaboration-Group/ISLE/issues) - Post your issues, bugs and requests for technical documentation here.
 
 ---

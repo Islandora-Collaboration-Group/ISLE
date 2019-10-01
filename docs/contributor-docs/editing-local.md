@@ -4,15 +4,15 @@
 * Run the `mkdocs` software
 * Edit documentation files locally
 * Commit changes to git
-* Push committed changes to the online ISLE Github.com git repository
-* Create pull request for review on ISLE Github.com
+* Push committed changes to the online ISLE github.com git repository
+* Create pull request for review on ISLE github.com
 
 #### Assumptions / Prerequisites
 
 * `mkdocs` and `mkdocs-material` theme are installed following the [Installing Mkdocs](../contributor-docs/mkdocs.md) documentation.
 * The ISLE project directory has been cloned to the end user's personal computer in an appropriate Code or Project Directory.
    * `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
-* Familiarity or comfortability with git and cli commands.
+* Familiarity or comfortability with git and CLI commands.
 * End user has a web browser opened to this URL: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 * End user has a terminal open with `mkdocs serve` running.
 
@@ -101,15 +101,15 @@ Now it is time to package up all these additions with a git commit command. Plea
 
 * `git commit -m "Tweaked some specs in diagram-network.md. Updated the Glossary with more terms. Made new Building Giant Robots page. I love big robots. Added new files and titles to mkdocs.yml "`
 
-###  Git Push to ISLE Github Repository
+###  Git Push to ISLE GitHub Repository
 
 * `git push origin githubusername-docs-fix2`
 
-### Create a Pull Request on ISLE Github.com Repository
+### Create a Pull Request on ISLE github.com Repository
 
 In order for the ISLE Committers to review suggested changes a "pull request" will need to be created. This process is a way for Committers to see a summary of the suggested changes to be made with any helpful comments and a catalog of potential differences between the original files and the new ones.
 
-If you run into trouble, this Github.com support page may be of use: [https://help.github.com/articles/creating-a-pull-request/](https://help.github.com/articles/creating-a-pull-request/)
+If you run into trouble, this github.com support page may be of use: [https://help.github.com/articles/creating-a-pull-request/](https://help.github.com/articles/creating-a-pull-request/)
 
 * On GitHub, navigate to the main page of the ISLE repository.
 

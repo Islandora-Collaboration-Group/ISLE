@@ -3,7 +3,7 @@
 The ISLE project is seeking volunteers to test our next Release Candidate. This includes testing the following scenarios:
 
 * Installing a remote server ISLE Installation on Ubuntu 18.04
-* Installing a remote server ISLE Installation on Centos 7.x
+* Installing a remote server ISLE Installation on CentOS 7.x
 * Updating an existing ISLE site to the latest Release Candidate
 * Installing a Demo and Local version of ISLE on Windows 10 using Docker
 * Installing a Demo and Local version of ISLE on Mac OSX High Sierra using Docker

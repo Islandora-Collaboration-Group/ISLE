@@ -20,7 +20,7 @@
   
 * Switched to using OpenJDK for Java because of Oracle license changes. This has resulted in a few changes to the docker images:
   * `isle-ubuntu-basebox` is removed from ISLE, replaced with [adoptopenjdk:openjdk8 image](https://hub.docker.com/r/adoptopenjdk/openjdk8), whose base image is `ubuntu:18.04` (ubuntu-bionic).  This means the underlying operating system setup is the same.
-  * Tools pulled in from the `isle-ubuntu-basebox` and needed by child images have been moved to `isle-tomcat` and `isle-apache` as appropritate.
+  * Tools pulled in from the `isle-ubuntu-basebox` and needed by child images have been moved to `isle-tomcat` and `isle-apache` as appropriate.
   * Djatoka is no longer running in `isle-imageservices`.  
   
 * Installer script updates/changes:

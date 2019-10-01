@@ -51,7 +51,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 * You have already have the appropriate A record entered into your institutions DNS system and can resolve the Production domain (https://yourprojectnamehere.institution.edu) using a tool like https://www.whatsmydns.net/
 
-* **RECOMMENDATION:** We recommend that you use a temporary domain name e.g. `https://yourprojectnamehere-newprod.institution.edu` to check the new Production ISLE site while an existing non-ISLE Production site is still running and compare for differences. This will also allow endusers to still access the old Production system while the work for the new ISLE system is ongoing.
+* **RECOMMENDATION:** We recommend that you use a temporary domain name e.g. `https://yourprojectnamehere-newprod.institution.edu` to check the new Production ISLE site while an existing non-ISLE Production site is still running and compare for differences. This will also allow end users to still access the old Production system while the work for the new ISLE system is ongoing.
     * You'll need to add an additional A record for `yourprojectnamehere-newprod.institution.edu` to point to the same ISLE Production Host Server IP.
     * Please adjust all involved domain names and configuration files accordingly. 
     * When ready to launch the new ISLE production site publicly, you can remove the `-newprod` from all domain references and configuration files.
@@ -118,7 +118,7 @@ You are repeating this step given that data may have changed on the Production s
 
 * Do not export the `fedora3` database
 
-* If possible, on the production Apache webserver, run `drush cc all` from the command line on the production server in the `/var/www/html` directory PRIOR to any db export(s). Otherwise issues can occur on import due to all cache tables being larger than `innodb_log_file_size` allows
+* If possible, on the production Apache web server, run `drush cc all` from the command line on the production server in the `/var/www/html` directory PRIOR to any db export(s). Otherwise issues can occur on import due to all cache tables being larger than `innodb_log_file_size` allows
 
 #### Export the Production MySQL Islandora Drupal Database
 
@@ -166,7 +166,7 @@ You are repeating this step given that data may have changed on the Production s
     * In the `apache` services section
         * `- /opt/data/apache/html:/var/www/html`
 
-* Review the your `docker-compose.local.yml` file for custom edits made and copy them to the `docker-compose.production.yml` file as needed, this can include changes to Fedora Gsearch Transforms, Fedora hash size and more.
+* Review the your `docker-compose.local.yml` file for custom edits made and copy them to the `docker-compose.production.yml` file as needed, this can include changes to Fedora GSearch Transforms, Fedora hash size and more.
 
 ### SSL Certificates
 
@@ -535,7 +535,7 @@ Automatically tailing the log file...
 Press CTRL+C to stop watching at any time. This will NOT stop the rebuild process
 ```
 
-* After a good period of time, again depending on the size of your Fedora collection there should be output like the example below. This indicates that the Fedora RI & SQL reindex process was sucessful. The number of objects rebuilt will vary. You can hit the CNTRL and C keys to exit out of the process, if need be. Do not exit the Fedora container yet, one more index to go; Solr.
+* After a good period of time, again depending on the size of your Fedora collection there should be output like the example below. This indicates that the Fedora RI & SQL reindex process was successful. The number of objects rebuilt will vary. You can hit the CNTRL and C keys to exit out of the process, if need be. Do not exit the Fedora container yet, one more index to go; Solr.
 
 ```bash
 Adding object #31: islandora:sp_web_archive_collection

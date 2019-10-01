@@ -18,7 +18,7 @@
     * ImageMagick, the tool which converts and handles derivative generation (in most part) has been updated to the latest 7.x branch and is compiled with JP2 read and write support from [OpenJPEG](http://www.openjpeg.org/).
     * This update also includes the PHP Imagick extension which is now built from source to support the new version of ImageMagick with JP2 support.
 * ISLE-Proxy is now magiek
-    * We have replaced NGiNX with [Traefik](https://traefik.io/)
+    * We have replaced Nginx with [Traefik](https://traefik.io/)
     * Traefik is a modern reverse proxy with several key benefits
         * Institutions and users alike can use ACME for the automatic and free creation and maintenance of SSL certificates from Let's Encrypt (https://letsencrypt.org/)
 * Added [Portainer](https://portainer.io), a visual dashboard of your running stack(s)

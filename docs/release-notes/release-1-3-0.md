@@ -13,11 +13,12 @@
 
 ### ISLE (main project)
 
+
 * Adds two new optional components for use on Production systems:
     * Varnish - caching web accelearator for high traffic sites
         * Optional Varnish service added to only Production & Local docker-compose files (commented out)
         * Varnish logging added in the .envs
-    * Blazegraph - triplestore replacment for Mulgara for high volume ingest
+    * Blazegraph - triplestore replacement for Mulgara for high volume ingest
         * Blazegraph / Fedora service changes in the .envs to allow toggling
         * Blazegraph logging added in the .envs
         * Optional Blazegraph service added to all docker-compose(s) (commented out)
@@ -73,7 +74,7 @@ The following files have new Varnish and Blazegraph information and ENVs which m
 
 * Server package management updates via `apt-get`
 * Updated `GEN_DEP_PACKS` dependencies via `apt-get`
-* Canteloupe upgraded from `4.0.1` to `4.0.3`
+* Cantaloupe upgraded from `4.0.1` to `4.0.3`
 * Cleanup of service paths https://github.com/Islandora-Collaboration-Group/ISLE/issues/226
 
 #### isle-solr
@@ -87,7 +88,7 @@ The following files have new Varnish and Blazegraph information and ENVs which m
 * `PHP` version `7.1` updates
 * Upgraded `FITS` to version `1.5.0`
 * Upgraded `ImageMagick` to version `7.0.8-66`
-* `Composer` upgraded from commit / hash August 2, 2019 to Sept 2, 2019 (stil v 1.9.0)
+* `Composer` upgraded from commit / hash August 2, 2019 to Sept 2, 2019 (still v 1.9.0)
 
 #### isle-mysql
 

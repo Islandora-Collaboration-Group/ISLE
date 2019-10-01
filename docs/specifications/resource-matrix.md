@@ -2,7 +2,7 @@ This document is a suggested guide for allocating ISLE host resources based on y
 
 * **Please note:** These are recommended defaults which sometimes include a range. Your needs may require more resources to be added. It is **not recommended** to go below the defaults for the Staging and Production environments.
 
-* For the Production and Staging storage needs, ISLE Endusers should plan on these numbers increasing over time as their collections grow.
+* For the Production and Staging storage needs, ISLE End users should plan on these numbers increasing over time as their collections grow.
 
 * It is generally recommended that Staging and Production mirror each other in size.
 
@@ -12,7 +12,7 @@ This document is a suggested guide for allocating ISLE host resources based on y
 
 | Resource  | Demo  | Local | Test | Staging    | Production   |
 | ---       | ---   | ---   |  --- | ---        | ---          |
-| OS | Mac/Windows/Linux | Mac/Windows/Linux | Mac/Windows/Linux | Ubuntu / Centos | Ubuntu / Centos |
+| OS | Mac/Windows/Linux | Mac/Windows/Linux | Mac/Windows/Linux | Ubuntu / CentOS | Ubuntu / CentOS |
 | RAM | 4 GB | 4 - 8+ GB | 4 GB | 16 GB | 16 - 32+ GB |
 | CPU | 1 | 1 - 2 | 1 - 2 | 2 - 4 | 2 - 4+ |
 | Storage - OS | 3 - 5+ GB | 6 - 10+ GB | 3 - 5+ GB | 50 - 100+ GB | 50 - 100+ GB |
@@ -67,7 +67,7 @@ When planning for ingesting objects at a high volume and rate, it would be highl
 * Anticipate the size of the incoming objects or collections (data) to be ingested and double-check that you have storage capacity on your Staging and Production systems.
   * This can vary greatly depending on content types and size of objects to be ingested.
   * A good rule of thumb is to conservatively factor in that newly created derivatives and additional datastreams will take up to 1.25 to 1.5 x your storage space.  
-    * For example if an ISLE enduser has `50 GB` of tiffs to be ingested, they should plan on having a minimum of `60 - 75 GB` of available storage space. This isn't always a hard and fast rule but will avoid situations where space runs out mid-ingest.
+    * For example if an ISLE end user has `50 GB` of tiffs to be ingested, they should plan on having a minimum of `60 - 75 GB` of available storage space. This isn't always a hard and fast rule but will avoid situations where space runs out mid-ingest.
 
 ---
 

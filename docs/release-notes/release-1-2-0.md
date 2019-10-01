@@ -78,7 +78,7 @@ COMPOSE_FILE=docker-compose.demo.yml
   * **Production** - `docker-compose.production.yml`- use this for your production environment.
     * Copy over your previous ISLE Production docker-compose.yml settings as needed and merge into this file.
 
-* There are also new `./config/apache/settings_php/settings.*.php` files used in ISLE 1.2.0 which are also seperated by enviornment e.g. `settings.local.php`, etc.
+* There are also new `./config/apache/settings_php/settings.*.php` files used in ISLE 1.2.0 which are also separated by environment e.g. `settings.local.php`, etc.
   * As instructed above, you'll need to ensure that for every `settings.*.php` file, the values from your previous `.env` file are copied in here as well.
   * Within the new `settings.*.php` files, search for two sections called `ISLE Configuration`. Follow the inline instructions as directed to determine which values should be copied in.
 

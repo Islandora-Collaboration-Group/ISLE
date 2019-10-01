@@ -61,7 +61,7 @@
 
 ### ISLE Images
 
-* Following the installation steps below, an enduser will configure  / edit their ISLE running system(s) to ultimately use the following images and tags from Docker-Hub:
+* Following the installation steps below, an end user will configure  / edit their ISLE running system(s) to ultimately use the following images and tags from Docker-Hub:
 
 | Service | Repository | Tag |
 | ---     | ---        | --- |
@@ -81,7 +81,7 @@
 
 The installation instructions below will walk you through how to setup and run the optional Varnish container on only your ISLE Production system to cache assets for highly trafficked Islandora sites in addition to adding new Drupal modules to your existing Production Drupal / Islandora website to interact and manage the Varnish cache.
 
-**Please note**: ISLE endusers are of course welcome to run Varnish on their Staging systems if they want but it is recommended that endusers simply test on their Local instances, deploy code changes to both Staging and Production but only run Varnish on their Production ISLE systems.
+**Please note**: ISLE end users are of course welcome to run Varnish on their Staging systems if they want but it is recommended that end users simply test on their Local instances, deploy code changes to both Staging and Production but only run Varnish on their Production ISLE systems.
 
 * You'll start by backing up all important data as needed.
 
@@ -114,7 +114,7 @@ The installation instructions below will walk you through how to setup and run t
 
 ### Assumptions
 
-* Prior to installation, enduser will have a running ISLE system using the current release of `1.3.0.` images.
+* Prior to installation, end user will have a running ISLE system using the current release of `1.3.0.` images.
 
 * This installation process will give the functionality as stated in the `Systems Requirements` image table above for `Varnish` testing and usage.
 
@@ -332,7 +332,7 @@ VARNISH_SECRET=isle_varnish_secret
 VARNISH_VARNISH_PORT=6081
 ```
 
-* **Please note** ISLE endusers should only make edits or changes to the following lines:
+* **Please note** ISLE end users should only make edits or changes to the following lines:
   * VARNISH_MALLOC=256m - _you can increase this default setting as needed otherwise leave the default._
   
   * VARNISH_MAX_CONNECTIONS=300 - _you can increase this default setting as needed otherwise leave the default._
@@ -376,9 +376,9 @@ VARNISH_VARNISH_PORT=6081
 
 * There will also be two other new Drupal modules to access and use:
   * **Purge** - Accessible from `Home » Administration » Configuration » Development » Performance`
-    * The setting here is handled by the installer script, vset and Varnish ENV. No need to change this value by the enduser.
+    * The setting here is handled by the installer script, vset and Varnish ENV. No need to change this value by the end user.
   * **Cache Expiration** - Accessible from `Home » Administration » Configuration » System`
-    * The setting here is initially handled by the installer script, vset and Varnish ENV. Enduser can modify as needed but a further explination beyond default settings is out of scope of this document. Recommend using this Drupal modules help page if needed.
+    * The setting here is initially handled by the installer script, vset and Varnish ENV. End user can modify as needed but a further explanation beyond default settings is out of scope of this document. Recommend using this Drupal modules help page if needed.
 
 * There should be a nice green checkmark at the bottom to indicate `Varnish running` once / if you have also spun up the Varnish container. If you choose to not spin up and configure the Varnish container on your Local, your Local ISLE system will continue to run properly but these three Drupal modules may have a red warning or two about not being able to connect to Varnish.
 
@@ -473,9 +473,9 @@ Varnish cache server
 
 * There will also be two other new Drupal modules to access and use:
   * **Purge** - Accessible from `Home » Administration » Configuration » Development » Performance`
-    * The setting here is handled by the installer script, vset and Varnish ENV. No need to change this value by the enduser.
+    * The setting here is handled by the installer script, vset and Varnish ENV. No need to change this value by the end user.
   * **Cache Expiration** - Accessible from `Home » Administration » Configuration » System`
-    * The setting here is initially handled by the installer script, vset and Varnish ENV. Enduser can modify as needed but a further explination beyond default settings is out of scope of this document. Recommend using this Drupal modules help page if needed.
+    * The setting here is initially handled by the installer script, vset and Varnish ENV. End user can modify as needed but a further explanation beyond default settings is out of scope of this document. Recommend using this Drupal modules help page if needed.
 
 * There should be a nice green checkmark at the bottom to indicate `Varnish running` once / if you have also spun up the Varnish container. If any of the three Drupal modules have a red warning or two about not being able to connect to Varnish, then you'll need to retrace your steps and troubleshoot.
 
@@ -538,7 +538,7 @@ Varnish cache server
 
 * This should launch the browser's built-in tools suite, select `Network`
   * You'll need to refresh / reload the page again to see objects
-  * Look for the page url and click on it.
+  * Look for the page URL and click on it.
     * Your should see entries like the following:
 
 ```bash
@@ -547,7 +547,7 @@ x-cache: HIT
 x-cache-hits: 2
 ```
 
-### Method 3 - Curl a url and review the headers
+### Method 3 - Curl a URL and review the headers
 
 * Run a curl command on your local laptop to your site with `curl -I https://yourwebsitehere.com`
 
@@ -578,7 +578,7 @@ x-generator: Drupal 7 (http://drupal.org)
 x-varnish: 983097 3
 ```
 
-**Please note:** This information below is a callout for the enduser to understand indicates that Varnish is not only caching the page but the Varnish cache has received previous "hits" or requests for this page and its contents.
+**Please note:** This information below is a callout for the end user to understand indicates that Varnish is not only caching the page but the Varnish cache has received previous "hits" or requests for this page and its contents.
 
 ```bash
 via: 1.1 varnish-v4
@@ -595,7 +595,7 @@ x-cache-hits: 19
 
 ## How to clear the Varnish cache
 
-* Everytime the Varnish container is stopped and restarted, the Varnish cache will be reset and rebuilt. (_Easiest and most recommended method_)
+* Every time the Varnish container is stopped and restarted, the Varnish cache will be reset and rebuilt. (_Easiest and most recommended method_)
 
 * Shell into the Varnish container (_Shouldn't involve restarting the container_). Replace `{{ container_short_id }}` with your respective container id.
   * `docker exec -it isle-varnish-{{ container_short_id }} bash`
@@ -605,7 +605,7 @@ x-cache-hits: 19
 
 ## Varnish utilities and tools
 
-There are multiple tools that can be used to interacte with the Varnish cache. All will require that you use them on the running Varnish container.
+There are multiple tools that can be used to interact with the Varnish cache. All will require that you use them on the running Varnish container.
 
 * [varnishtop](https://varnish-cache.org/docs/4.1/reference/varnishlog.html) - The varnishtop utility reads varnishd shared memory logs and presents a continuously updated list of the most commonly occurring log entries.
 * [varnishstat](https://varnish-cache.org/docs/4.1/reference/varnishstat.html#varnishstat-1) - for Varnish cache statistics
@@ -676,14 +676,14 @@ varnish:
 
 ## Need help?
 
-* Please use the following as resources for institutions or endusers needing support
+* Please use the following as resources for institutions or end users needing support
 
   * [Islandora ISLE Interest Group](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group) - Meetings open to everybody!
     * The [Schedule](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group/#how-to-join) is alternating Wednesdays, 3:00pm EDT
 
   * [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle) - Post your questions here and subscribe for updates, meeting announcements, and technical support
 
-  * [ISLE Github Issues queue](https://github.com/Islandora-Collaboration-Group/ISLE/issues) - Post your issues, bugs and requests for technical documentation here.
+  * [ISLE GitHub Issues queue](https://github.com/Islandora-Collaboration-Group/ISLE/issues) - Post your issues, bugs and requests for technical documentation here.
 
 ---
 
