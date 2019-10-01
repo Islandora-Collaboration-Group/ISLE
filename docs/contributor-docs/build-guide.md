@@ -134,7 +134,7 @@ Developers, please note you are welcome to use tags that are useful for your ins
 
 ### Step 6: Push the Images to the Image Repository
 
-**Please note:** These steps assume use of Dockerhub. If you use a different Docker image repository, you'll need to change the following steps per their specific instructions.
+**Note:** These steps assume use of Dockerhub. If you use a different Docker image repository, you'll need to change the following steps per their specific instructions.
 
 `docker login`
 
@@ -146,7 +146,7 @@ Example output:
 * Enter your Dockerhub username
 * Enter your Dockerhub user password.
 
-Push the images one at a time. **Please note:** _Depending on your Internet connection's upload speed this process may take several hours._
+Push the images one at a time. **Note:** _Depending on your Internet connection's upload speed this process may take several hours._
 
 * `docker push islandoracollabgroup/isle-apache:latest`
 * `docker push islandoracollabgroup/isle-fedora:latest`
@@ -154,7 +154,7 @@ Push the images one at a time. **Please note:** _Depending on your Internet conn
 * `docker push islandoracollabgroup/isle-proxy:latest`
 * `docker push islandoracollabgroup/isle-solr:latest`
 
-Repeat the process with any additional tags. **Please note:** _Depending on your Internet connection's upload speed this process may take several minutes._
+Repeat the process with any additional tags. **Note:** _Depending on your Internet connection's upload speed this process may take several minutes._
 
 * `docker push islandoracollabgroup/isle-apache:2.4`
 * `docker push islandoracollabgroup/isle-fedora:3.8.1`

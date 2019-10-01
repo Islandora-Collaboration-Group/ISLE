@@ -36,7 +36,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 * Step 1: Choose a Project Name
 * Step 1.5: Edit "/etc/hosts" File
-* Step 2: Setup Git for the ISLE Project
+* Step 2: Setup Git Project Repositories
 * Step 3: Edit the ".env" File to Point to the Local Environment
 * Step 4: Create New Users and Passwords by Editing "local.env" File
 * Step 5: Create New Self-Signed Certs for Your Project
@@ -51,7 +51,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 ## Step 1: Choose a Project Name
 
-Please choose a project name (concatenated, with no spaces) that describes your institution or your collection platform. You will substitute in your preferred project name whenever the documentation refers to "yourprojectnamehere". (Be creative. Some real-life examples include: arminda, dhinitiative, digital, digitalcollections, digitallibrary, unbound, etc.)
+Please choose a project name (concatenated, with no spaces) that describes your institution or your collection platform. You will substitute in your preferred project name whenever the documentation refers to **"yourprojectnamehere"**. (Be creative. Some real-life examples include: arminda, dhinitiative, digital, digitalcollections, digitallibrary, unbound, etc.)
 
 ---
 
@@ -63,41 +63,42 @@ Enable the Local ISLE Installation to be viewed locally on a personal computer b
 
 ---
 
-## Step 2: Setup Git for the ISLE Project
+## Step 2: Setup Git Project Repositories
 
-**Please note:** The commands given below are for command line usage of git. (GUI based clients such as the [SourceTree App](https://www.sourcetreeapp.com/) may be easier for end users to use for the git process.)
+You will create two new, empty, private git repositories within your git repository hosting service (e.g [Github](https://github.com), [Bitbucket](https://bitbucket.org/), [Gitlab](https://gitlab.com)). Below, we suggest a naming convention that will clearly distinguish your ISLE code from your Islandora code. It's very important to understand that these are two separate code repositories, and not to confuse them.
 
-Each "suggested git repository name" (below) serves to clearly name and distinguish your ISLE code from your Islandora code. It's very important to understand that these are two separate code repositories, and not to confuse them.
+* Login to your git repository hosting service.
+* Create a new private repository for **ISLE**.
+    * **We suggest you name it:** `yourprojectnamehere-isle`
+    * (This git repository will hold your ISLE code and your environment-specific customizations. Storing this in a private repository and following the workflow below will save you a lot of time and confusion.)
+* Create a new private repository for **Islandora Drupal**.
+    * **We suggest you name it:** `yourprojectnamehere-islandora`
+    * (This git repository will hold your Islandora Drupal code and your site specific customizations. Storing this in a private repository and following the workflow below will save you a lot of time and confusion.)
 
-Create the following two new, empty, private git repositories within your git repository hosting service (e.g [Github](https://github.com), [Bitbucket](https://bitbucket.org/), [Gitlab](https://gitlab.com)):
+**Note:** This documentation will walk you through using git on the command line.
 
-1. ISLE project configuration repository
-    * **Suggested git repository name:** `yourprojectnamehere-isle`
-    * This Git repository will hold your copy of the ISLE code along with your environment-specific customizations. Storing this in a private repository and following the workflow below will save you a lot of time and confusion.
-2. Islandora Drupal code repository
-    * **Suggested git repository name:** `yourprojectnamehere-islandora`
-    * This Git repository will hold your copy of the Islandora Drupal code along with your site specific customizations. Storing this in a private repository and following the workflow below will save you a lot of time and confusion.
-
-These steps will show you how to clone this newly created ISLE project (from your git repository hosting service) to your personal computer:
+You will open a terminal and use the command line to clone your newly created (and empty) ISLE project from your git repository hosting service to your personal computer:
 
 * Open a `terminal` (Windows: open `Git Bash`)
 
-* Use the "cd" command to navigate to a directory that will become your new ISLE project directory. We recommend using the default user home directory. (You may choose a different location, but it must not be a protected folder such as system or root directory.)
+* Use the "cd" command to navigate to a directory where you want to locate your new ISLE project. (We recommend using the default user home directory. You may choose a different location, but it must not be a protected folder such as system or root directory.)
     * **Example (Mac):** `cd ~`
     * **Example (Windows):** `cd /c/Users/somebody/`
 
 * Clone your new ISLE project to your personal computer:
     * **Example:** `git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git`
 
-* Navigate within the directory created by the above clone operation:
+* **Note:** It is OKAY if you see this warning message: "warning: You appear to have cloned an empty repository."
 
-    * `cd ISLE`
+* Navigate to the new directory created by the above clone operation:
+
+    * **Example:** `cd yourprojectnamehere-isle`
 
 * Add the ICG ISLE git repository as a git upstream:
 
     * `git remote add icg-upstream https://github.com/Islandora-Collaboration-Group/ISLE.git`
 
-* View your remotes:
+* View your tracked connections to remote git repositories:
 
     * `git remote -v`
 
@@ -127,7 +128,7 @@ origin	https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-i
     * `git push -u origin master`
     * This will take 2-5 minutes depending on your internet speed.
 
-Now you have the current ISLE project code checked into git as a foundation to make changes on specific to your local and project needs. You'll use this git "icg-upstream" process in the future to pull updates and releases from the main ISLE project.
+You now have the current ISLE project code checked into git as a foundation to make changes on specific to your local and project needs. You'll use this git "icg-upstream" process in the future to pull updates and new releases from the main ISLE project.
 
 ---
 
@@ -145,7 +146,7 @@ Now you have the current ISLE project code checked into git as a foundation to m
 
 * Save and close the file.
 
-**Please note:** If you want to use a MySQL client with a GUI to import the Production MySQL Drupal database you'll need to uncomment the `ports` section of the MySQL service within the `docker-compose.local.yml` to make it so you can access port `3306` from the host computer. If you are already running MySQL on your personal computer, you'll have a port conflict and will need to either shutdown that service prior to running ISLE or change `3306:3306` to something like `9306:3306`. Please double-check.
+**Note:** If you want to use a MySQL client with a GUI to import the Production MySQL Drupal database you'll need to uncomment the `ports` section of the MySQL service within the `docker-compose.local.yml` to make it so you can access port `3306` from the host computer. If you are already running MySQL on your personal computer, you'll have a port conflict and will need to either shutdown that service prior to running ISLE or change `3306:3306` to something like `9306:3306`. Please double-check.
 
 ---
 
