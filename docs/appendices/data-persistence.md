@@ -4,7 +4,7 @@
 
 **Data**, in this context, can include digital objects, files, logs, code, or information stored in MySQL, Solr, or Fedora.  Essentially, anything typically written to or read from disk in some format, is data. 
 
-Each time a docker container is brought up using a command like `docker-compose up -d` the container is recreated using the base container image. When a process in the container creates or changes a file (for example, an Apache log file) those changes only exist while the container is running.  If the container is brought down and back up again, it is recreated using the base image, which will not include the Apache log. In order to preserve certain data--for example, the Fedora datastore, Drupal’s database and files, etc, ISLE uses volumes and/or bind mounts defined in 'docker-compose.yml'.  
+Each time a docker container is brought up using a command like `docker-compose up -d` the container is recreated using the base container image. When a process in the container creates or changes a file (for example, an Apache log file) those changes only exist while the container is running.  If the container is brought down and back up again, it is recreated using the base image, which will not include the Apache log. In order to preserve certain data--for example, the Fedora datastore, Drupal's database and files, etc, ISLE uses volumes and/or bind mounts defined in 'docker-compose.yml'.  
 
 Data written to volumes and bind mounts are different to other data in Docker in two important ways: 
 
@@ -25,7 +25,7 @@ Below is an example docker-compose.yml directive for an Apache container using a
     apache-data:/var/www/html
 
 
-  Explanation: If not already created, docker will create a directory on the host at '/var/lib/docker' and use that for the apache container’s '/var/www/html' directory.
+  Explanation: If not already created, docker will create a directory on the host at '/var/lib/docker' and use that for the apache container's '/var/www/html' directory.
 
 ### Bind Mounts
 
@@ -36,9 +36,9 @@ Below is an example 'docker-compose.yml' directive for an apache container using
     volumes:
     /opt/ISLE/apache/html:/var/www/html
 
-  Explanation:  Data in the host’s /opt/ISLE/apache/html directory will be in the apache container’s /var/www/html.  If the directory does not exist on the host, it will NOT be created on `docker-compose up -d`, so be sure to create any necessary directories on the host manually.  
+  Explanation:  Data in the host's /opt/ISLE/apache/html directory will be in the apache container's /var/www/html.  If the directory does not exist on the host, it will NOT be created on `docker-compose up -d`, so be sure to create any necessary directories on the host manually.  
 
-  If the container’s '/var/www/html/' directory has content, it will be masked by the contents of the host’s '/opt/ISLE/apache/html/' directory.
+  If the container's '/var/www/html/' directory has content, it will be masked by the contents of the host's '/opt/ISLE/apache/html/' directory.
 
 ## What should be persisted this way?
 
@@ -50,8 +50,8 @@ If your workflows involve moving digital objects onto the Islandora server for l
 
 ## What should NOT be persisted?
 
-Application data that is not meant to be customized or unique to your institution should not be persisted, but instead managed within the docker container (as it is by default).   Example:  The ISLE team updates the apache container to apache2’s latest security release.  If the directory containing apache’s binary is in a persisted directory, then updating ISLE will NOT automatically provide the latest apache, and you will continue to run the older, insecure apache until you manually update it inside the container.  This negates many of the benefits of using ISLE.  
+Application data that is not meant to be customized or unique to your institution should not be persisted, but instead managed within the docker container (as it is by default).   Example:  The ISLE team updates the apache container to apache2's latest security release.  If the directory containing apache's binary is in a persisted directory, then updating ISLE will NOT automatically provide the latest apache, and you will continue to run the older, insecure apache until you manually update it inside the container.  This negates many of the benefits of using ISLE.  
 
 ## Which should I use, bind mounts or volumes?
 
-The answer for this is “it depends”.   Bind mounts may be easier to get to on a host machine as you have more control over where they are.  If you are migrating an existing installation, you will almost certainly want to copy over things like your /var/www/html directory and Fedora store and use a bind mount to point to them.  The Solr index, however, should not be migrated over but rather rebuilt.  It doesn’t need to exist before the containers do. It is also unlikely that a user would want to navigate to the Solr directory via command line on the host and edit files directly.  A named volume would probably work fine in this case, and be more easily managed by docker. 
+The answer for this is "it depends".   Bind mounts may be easier to get to on a host machine as you have more control over where they are.  If you are migrating an existing installation, you will almost certainly want to copy over things like your /var/www/html directory and Fedora store and use a bind mount to point to them.  The Solr index, however, should not be migrated over but rather rebuilt.  It doesn't need to exist before the containers do. It is also unlikely that a user would want to navigate to the Solr directory via command line on the host and edit files directly.  A named volume would probably work fine in this case, and be more easily managed by docker. 

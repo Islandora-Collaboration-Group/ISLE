@@ -31,7 +31,7 @@ Enable the Demo ISLE Installation to be viewed locally on a personal computer br
 
 ## Step 2: Clone ISLE Repository
 
-**Please note:** The location you select to clone the ISLE repository becomes your project directory. We recommend using the default user home directory. (You may choose a different location, but it must not be a protected folder such as system or root directory.)
+**Note:** The location you select to clone the ISLE repository becomes your project directory. We recommend using the default user home directory. (You may choose a different location, but it must not be a protected folder such as system or root directory.)
 
 * Open a `terminal` (Windows: open `Git Bash`)
 * Enter the following to change to the user's home directory:
@@ -82,7 +82,7 @@ _Using the same open terminal:_
 
 * Run the docker containers:
     * `docker-compose up -d`
-    * **Please note:** the “ -d” argument stands for “detached” meaning the command will persist even if you close your terminal or your computer sleeps etc…)
+    * **Note:** the " -d" argument stands for "detached" meaning the command will persist even if you close your terminal or your computer sleeps etc…)
 
 * Please wait a few moments for the stack to fully come up. Approximately 3-5 minutes.
 

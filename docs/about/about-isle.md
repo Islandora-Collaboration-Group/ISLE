@@ -6,7 +6,7 @@
 
 ISLE is an orchestrated group of Docker containers to be run on a server, personal computer or cloud instance with a minimal suite of tools enabling an efficient deploy and release of an updated production-ready Islandora environment.
 
-ISLE functions as both an initial installer and maintenance updater with the ability to build new production, staging, or development environments as distributable, lightweight and fast “containers” in a [Docker Engine](https://docs.docker.com/engine/) environment.
+ISLE functions as both an initial installer and maintenance updater with the ability to build new production, staging, or development environments as distributable, lightweight and fast "containers" in a [Docker Engine](https://docs.docker.com/engine/) environment.
 
 This process allows folks to choose between hosting:
 
@@ -14,7 +14,7 @@ This process allows folks to choose between hosting:
 * on site in an institutional data center
 * in a cloud environment such as [Amazon Web Services](https://aws.amazon.com/) or [Google Cloud Platform](https://cloud.google.com/).
 
-ISLE’s production-ready platform will be updated monthly with:
+ISLE's production-ready platform will be updated monthly with:
 
 * critical security patches
 * full stack software updates
@@ -28,13 +28,13 @@ ISLE is designed to be an evolving but trusted environment to help create a mana
 ISLE public repository: [https://github.com/Islandora-Collaboration-Group/ISLE](https://github.com/Islandora-Collaboration-Group/ISLE)
 
 ## How Does It Work?
-ISLE separates an institution’s customizations from core code, and moves that core code into containers that are easily updated, simplifying and largely automating the process of installation and updates of Islandora. ISLE also bundles together the best shared modules into a common, production-ready and security-hardened platform.
+ISLE separates an institution's customizations from core code, and moves that core code into containers that are easily updated, simplifying and largely automating the process of installation and updates of Islandora. ISLE also bundles together the best shared modules into a common, production-ready and security-hardened platform.
 
 ## Why Is It Needed?
 Islandora is a powerful digital repository comprised of more than 80 different open-source software libraries. This complex ecosystem makes Islandora difficult and expensive to install, maintain and customize. ISLE lowers the barrier to entry for new schools while allowing existing institutions to reallocate funds towards development or ingestion instead of maintenance.
 
 ## High Level Objective
-To deliver a secure and production-ready Islandora stack (“ISLE”) that reduces the involved support time and effort for installation, maintenance and customization.
+To deliver a secure and production-ready Islandora stack ("ISLE") that reduces the involved support time and effort for installation, maintenance and customization.
 
 ## ISLE Functional Definition
 By ISLE, it is meant a system that will:  

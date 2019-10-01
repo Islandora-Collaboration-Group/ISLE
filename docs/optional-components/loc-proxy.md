@@ -1,4 +1,4 @@
-# Library of Congress standards proxy - High Volume Ingest
+# Library of Congress Standards Proxy - High Volume Ingest
 
 ## Installation
 
@@ -16,7 +16,7 @@ To cache the Library of Congress (LOC) MODS standards, please take these steps b
 
 * Shut down all running ISLE containers.
 
-#### Edit 1: Add a new Apache Alias
+#### Edit 1: Add a New Apache Alias
 
 * Within your `docker-compose.*.yml`, add the following alias code snippet to the `Apache` service section under the `networks:` area so that:
 
@@ -27,7 +27,7 @@ aliases:
           - www.loc.gov
 ```          
 
-**Example**
+**Example:**
 
 ```bash
     networks:
@@ -37,7 +37,7 @@ aliases:
 
 becomes
 
-**Example**
+**Example:**
 ```bash
     networks:
       isle-internal:
@@ -50,7 +50,7 @@ becomes
 
 ---
 
-#### Edit 2: Add a new Apache Bind mount
+#### Edit 2: Add a New Apache Bind Mount
 
 There is a new directory within the ISLE `config/apache/` directory called `loc_proxy` which contains a file named `loc-proxy-cache.conf`. This file is a new Apache site configuration to enable caching and proxying for `https://www.loc.gov/standards`.
 
@@ -86,7 +86,7 @@ becomes
 
 ---
 
-#### Edit 3: Add a new Apache Host for www.loc.gov
+#### Edit 3: Add a New Apache Host for www.loc.gov
 
 * Within your `docker-compose.*.yml`, add the following host code snippet to the `Apache` service section under the `labels` area so that:
 
@@ -134,15 +134,13 @@ becomes
 
 ---
 
-## Need help?
+## Need Help?
 
-* Please use the following as resources for institutions or end users needing support
+We welcome questions, suggestions, contributions, and respond promptly to requests for technical help. Please join us in the following:
 
-  * [Islandora ISLE Interest Group](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group) - Meetings open to everybody!
-    * The [Schedule](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group/#how-to-join) is alternating Wednesdays, 3:00pm EDT
+* [Islandora ISLE Interest Group](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group) - Meetings are public and open to everybody!
+    * [Schedule](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group/#how-to-join) is alternating Wednesdays at 3:00pm EST.
 
-  * [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle) - Post your questions here and subscribe for updates, meeting announcements, and technical support
+* [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle) - Post your questions here and subscribe for updates, meeting announcements, and technical support.
 
-  * [ISLE GitHub Issues queue](https://github.com/Islandora-Collaboration-Group/ISLE/issues) - Post your issues, bugs and requests for technical documentation here.
-
----
+* [ISLE GitHub Issues queue](https://github.com/Islandora-Collaboration-Group/ISLE/issues) - Post your issues, bugs and requests for technical documentation here.

@@ -201,7 +201,7 @@ If you have decided to use Commercial SSL certs supplied to you by your IT team 
 
 * Edit the `./config/proxy/traefik.staging.toml` and follow the in-line instructions. Replace the .pem & .key with the name of your Staging SSL certificate and associated key. Do note the positioning of the added lines. Third character indentation.
 
-**Please note** despite the instruction examples differing on file type, (`.pem` or `cert`), either one is compatible, use what you have been given. Merely change the file type suffix accordingly.
+**Note:** despite the instruction examples differing on file type, (`.pem` or `cert`), either one is compatible, use what you have been given. Merely change the file type suffix accordingly.
 
 **Example: .cert**
 ```bash
@@ -376,7 +376,7 @@ git commit -m "Added the edited .env configuration file for Staging. DO NOT PUSH
 
 ## Step 14: On Remote Staging - Start Containers
 
-**Please note:** Prior to starting the launch process, it is recommended that you briefly open your firewall to allow ports 80 and 443 access to the world. You'll only need to keep this open for 3 -5 minutes and then promptly close access once the Let's Encrypt SSL certificates have been generated.
+**Note:** Prior to starting the launch process, it is recommended that you briefly open your firewall to allow ports 80 and 443 access to the world. You'll only need to keep this open for 3 -5 minutes and then promptly close access once the Let's Encrypt SSL certificates have been generated.
 
 * _Using the same open terminal:_
     * `docker-compose up -d`
@@ -391,7 +391,7 @@ git commit -m "Added the edited .env configuration file for Staging. DO NOT PUSH
       <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running, or (c) older exited ISLE containers that maybe should be removed. --->
 
 * In your web browser, enter your Staging site URL: `https://yourprojectnamehere-staging.institution.edu`
-    * **Please note:** You should not see any errors with respect to the SSL certifications, you should see a nice green lock padlock for the site security. If you see a red error or unknown SSL cert provider, you'll need to shut the containers down and review the previous steps taken especially if using Let's Encrypt. You may need to repeat those steps to get rid of the errors.
+    * **Note:** You should not see any errors with respect to the SSL certifications, you should see a nice green lock padlock for the site security. If you see a red error or unknown SSL cert provider, you'll need to shut the containers down and review the previous steps taken especially if using Let's Encrypt. You may need to repeat those steps to get rid of the errors.
 
 ---
 
@@ -451,7 +451,7 @@ git commit -m "Added the edited .env configuration file for Staging. DO NOT PUSH
     * Please note: You should not see any errors with respect to the SSL certifications. If so, please review your previous steps especially if using Let's Encrypt. You may need to repeat those steps to get rid of the errors.
 
 * Log in to the local Islandora site with the credentials ("DRUPAL_ADMIN_USER" and "DRUPAL_ADMIN_PASS") you created in "staging.env".
-    * **Please note:** You are free to use previously Drupal admin or user accounts created during the Local site development process.
+    * **Note:** You are free to use previously Drupal admin or user accounts created during the Local site development process.
 
 * You can decide to further QC and review the site as you wish or start to add digital collections and objects.
     * You could also further test using the [Islandora Sample Objects](https://github.com/Islandora-Collaboration-Group/islandora-sample-objects) as you may have done in the previous Local installation.
