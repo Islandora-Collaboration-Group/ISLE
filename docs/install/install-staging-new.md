@@ -92,7 +92,7 @@ The instructions that follow below will have either a `On Local` or a `On Remote
 
 * Do not export the `fedora3` database
 
-* If possible, on the production Apache webserver, run `drush cc all` from the command line on the local Apache container in the `/var/www/html` directory PRIOR to any db export(s). Otherwise issues can occur on import due to all cache tables being larger than `innodb_log_file_size` allows
+* If possible, on the production Apache web server, run `drush cc all` from the command line on the local Apache container in the `/var/www/html` directory PRIOR to any db export(s). Otherwise issues can occur on import due to all cache tables being larger than `innodb_log_file_size` allows
 
 ### Export the Local MySQL Islandora Drupal Database
 

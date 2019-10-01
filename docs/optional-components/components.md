@@ -4,7 +4,7 @@ This documentation area provides instructions on how to use the following option
 
 Please note all ISLE components are built to be modular and thus can be installed independently or can work together.
 
-* [Blazegraph](blazegraph.md): High-perfomance replacement triplestore for larger Fedora repositories
+* [Blazegraph](blazegraph.md): High-performance replacement triplestore for larger Fedora repositories
 
 * [Varnish](varnish.md): HTTP accelerator and caching designed for content-heavy dynamic web sites 
 

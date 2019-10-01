@@ -4,11 +4,11 @@ _Expectations:  It takes an average of **2-4+ hours** to read this documentation
 
 This Local ISLE Installation builds a local environment for the express purpose of migrating a previously existing Islandora site onto the ISLE platform. If you need to build a brand new local development site, please **stop** and use the [Local ISLE Installation: New Site](../install/install-local-new.md) instead.
 
-This Local ISLE Installation will use a copy of a currently running Production Islandora Drupal website and an empty Fedora repository for endusers to test migration to ISLE and do site development and design with the end goal of deploying to ISLE Staging and Production environments for public use. The final goal would be to cut over from the existing non-ISLE Production and Staging servers to their new ISLE counterparts.
+This Local ISLE Installation will use a copy of a currently running Production Islandora Drupal website and an empty Fedora repository for end users to test migration to ISLE and do site development and design with the end goal of deploying to ISLE Staging and Production environments for public use. The final goal would be to cut over from the existing non-ISLE Production and Staging servers to their new ISLE counterparts.
 
 This Local ISLE Installation will allow you to locally view this site in your browser with the domain of your choice (**Example:** "https://yourprojectnamehere.localdomain"), instead of being constrained to the Demo URL ("https://isle.localdomain").
 
-This document has directions on how you can save newly created ISLE code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging to Production. The [ISLE Installation: Environments](../install/install-environments.md) documentation offers an overview of the ISLE structure, the associated files, and what values ISLE endusers should use for the ".env", "local.env", etc.
+This document has directions on how you can save newly created ISLE code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging to Production. The [ISLE Installation: Environments](../install/install-environments.md) documentation offers an overview of the ISLE structure, the associated files, and what values ISLE end users should use for the ".env", "local.env", etc.
 
 This document **does not** have directions on how you can save previously existing Islandora Drupal code into a git repository and assumes this step has already happened. The directions below will explain how to clone Islandora Drupal code from a previously existing Islandora Drupal git repository that should already be accessible to you.
 
@@ -31,7 +31,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
     * **WARNING:** Only use **Private** git repositories given the sensitive nature of the configuration files. **DO NOT** share these git repositories publicly.
 
 * **For Microsoft Windows:**
-    * You have installed [Git for Windows](../install/host-software-dependencies.md#windows) and will use its provided "Git Bash" as your command line interface; this behaves similarly to LINUX and UNIX environments. Git for Windows also installs "openssl.exe" which will be needed to generate self-signed SSL certs. (Note: Powershell is not recommended as it is unable to run UNIX commands or execute bash scripts without a moderate degree of customization.)
+    * You have installed [Git for Windows](../install/host-software-dependencies.md#windows) and will use its provided "Git Bash" as your command line interface; this behaves similarly to LINUX and UNIX environments. Git for Windows also installs "openssl.exe" which will be needed to generate self-signed SSL certs. (Note: PowerShell is not recommended as it is unable to run UNIX commands or execute bash scripts without a moderate degree of customization.)
     * Set your text editor to use UNIX style line endings for files. (Text files created on DOS/Windows machines have different line endings than files created on Unix/Linux. DOS uses carriage return and line feed ("\r\n") as a line ending, which Unix uses just line feed ("\n").)
 
 ---
@@ -77,7 +77,7 @@ Be sure to run a backup of any current non-ISLE systems prior to copying or expo
 
 * Do not export the "fedora3" database or any system tables (such as "information_schema", "performance_schema", "mysql")
 
-* If possible, on the production Apache webserver, run `drush cc all` from the command line on the production server in the `/var/www/html` directory PRIOR to any db export(s). Otherwise issues can occur on import due to all cache tables being larger than "innodb_log_file_size" allows
+* If possible, on the production Apache web server, run `drush cc all` from the command line on the production server in the `/var/www/html` directory PRIOR to any db export(s). Otherwise issues can occur on import due to all cache tables being larger than "innodb_log_file_size" allows
 
 #### Export the Production MySQL Islandora Drupal Database
 
@@ -160,7 +160,7 @@ Enable the Local ISLE Installation to be viewed locally on a personal computer b
 
 ## Step 2: Setup Git for the ISLE Project
 
-**Please note:** The commands given below are for command line usage of git. (GUI based clients such as the [SourceTree App](https://www.sourcetreeapp.com/) may be easier for endusers to use for the git process.)
+**Please note:** The commands given below are for command line usage of git. (GUI based clients such as the [SourceTree App](https://www.sourcetreeapp.com/) may be easier for end users to use for the git process.)
 
 Each "suggested git repository name" (below) serves to clearly name and distinguish your ISLE code from your Islandora code. It's very important to understand that these are two separate code repositories, and not to confuse them.
 
@@ -382,7 +382,7 @@ You can reuse some of the older Production settings in the "local.env" if you li
     * View all containers (both those running and stopped): `docker ps -a`
     * All containers prefixed with "isle-" are expected to have a "STATUS" of "Up" (for x time).
       * **If any of these are not "UP", then use [Non-Running Docker Containers](../install/install-troubleshooting.md#non-running-docker-containers) to solve before continuing below.**
-      <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running, oe (c) older exited ISLE containers that maybe should be removed. --->
+      <!---TODO: This could be confusing if (a) there are other, non-ISLE containers, or (b) the isle-varnish container is installed but intentionally not running, or (c) older exited ISLE containers that maybe should be removed. --->
 
 ## Step 9: Import the Production MySQL Drupal Database
 
@@ -495,7 +495,7 @@ Since you've imported an existing Drupal database, you must now reinstall the Is
 
 ## Step 12: Ingest Sample Objects
 
-It is recommended that endusers migrating their sites opt to either import sample objects from their non-ISLE Production Fedora servers or use the following below:
+It is recommended that end users migrating their sites opt to either import sample objects from their non-ISLE Production Fedora servers or use the following below:
 
 The Islandora Collaboration Group provides a set of [Islandora Sample Objects](https://github.com/Islandora-Collaboration-Group/islandora-sample-objects) with corresponding metadata for testing Islandora's ingest process. These sample objects are organized by solution pack and are zipped for faster bulk ingestion.
 
@@ -531,7 +531,7 @@ Once you are ready to deploy your finished Drupal site, you may progress to:
 ---
 
 ## Additional Resources
-* [ISLE Installation: Environments](../install/install-environments.md) helps explain the ISLE workflow structure, the associated files, and what values ISLE endusers should use for the ".env", "local.env", etc.
+* [ISLE Installation: Environments](../install/install-environments.md) helps explain the ISLE workflow structure, the associated files, and what values ISLE end users should use for the ".env", "local.env", etc.
 * [Local ISLE Installation: Resources](../install/install-local-resources.md) contains Docker container passwords and URLs for administrator testing.
 * [ISLE Installation: Troubleshooting](../install/install-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
 

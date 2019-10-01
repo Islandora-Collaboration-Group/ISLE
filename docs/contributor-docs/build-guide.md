@@ -75,7 +75,7 @@ islandoracollabgroup/isle-proxy    <none>              23cb1c73c232        2 wee
 
 ### Step 3a: Alternative for Non-ISLE Committers only (e.g. developers)
 
-If you're working in your own dockerhub environment (ie, not the offical `islandoracollabgroup` environment, then you'll need to change the following lines in the newly renamed `docker-compose.yml` file.
+If you're working in your own dockerhub environment (ie, not the official `islandoracollabgroup` environment, then you'll need to change the following lines in the newly renamed `docker-compose.yml` file.
 ```
     image: islandoracollabgroup/isle-mysql:latest
     image: islandoracollabgroup/isle-fedora:latest
@@ -115,7 +115,7 @@ This renamed `docker-compose-build.yml` file will tag all builds by default with
 
 Review the current tags found on the [Docker Containers & Images](../specifications/docker-containers-images.md) Specifications Page. Should the software version change, update this document with the new tags. You will need to tag each image further as needed. There are always two tags for every image, e.g. `latest` and the specific version of the primary software package used on the image or container. It is possible there will be more tags for different image versions in the future.
 
-For example if the installed proxy nginx software changes from `1.13` to `1.14`, change or add the new tag of `1.14`
+For example if the installed proxy Nginx software changes from `1.13` to `1.14`, change or add the new tag of `1.14`
 
 To learn more about tagging, read the official Docker [tag](https://docs.docker.com/engine/reference/commandline/tag/) documentation.
 

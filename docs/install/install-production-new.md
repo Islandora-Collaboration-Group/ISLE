@@ -2,7 +2,7 @@
 
 _Expectations:  It takes an average of **2-4+ hours** to read this documentation and complete this installation._
 
-This Production ISLE Installation will use the themed Drupal website created during the [Local ISLE Installation: New Site](../install/install-local-new.md) process and will create an empty Fedora repository for remote (non-local or cloud) hosting of a Production site. Islandora Drupal site code here should be considered finished and ready for public access. The previously used Production system might have Fedora data & collections that should then be synced to this Production site or endusers can choose to only ingest on Production. It is recommended that this remote site not be publicly accessible until ready to launch.
+This Production ISLE Installation will use the themed Drupal website created during the [Local ISLE Installation: New Site](../install/install-local-new.md) process and will create an empty Fedora repository for remote (non-local or cloud) hosting of a Production site. Islandora Drupal site code here should be considered finished and ready for public access. The previously used Production system might have Fedora data & collections that should then be synced to this Production site or end users can choose to only ingest on Production. It is recommended that this remote site not be publicly accessible until ready to launch.
 
 While this installation will get you a brand new Production site, it is **not** intended as a migration process of a previously existing Islandora site. If you need to build a Production environment to migrate a previously existing Islandora site, please use the [Production ISLE Installation: Migrate Existing Islandora Site](../install/install-production-migrate.md) instead.
 
@@ -93,7 +93,7 @@ The instructions that follow below will have either a `On Local` or a `On Remote
 
 * Do not export the `fedora3` database
 
-* If possible, on the production Apache webserver, run `drush cc all` from the command line on the local Apache container in the `/var/www/html` directory PRIOR to any db export(s). Otherwise issues can occur on import due to all cache tables being larger than `innodb_log_file_size` allows
+* If possible, on the production Apache web server, run `drush cc all` from the command line on the local Apache container in the `/var/www/html` directory PRIOR to any db export(s). Otherwise issues can occur on import due to all cache tables being larger than `innodb_log_file_size` allows
 
 ### Export the Local MySQL Islandora Drupal Database
 
