@@ -24,7 +24,7 @@
         * Optional Blazegraph service added to all docker-compose(s) (commented out)
 * Automated Testing  - updated to include Varnish and Blazegraph in base test suite; and updated instructions to correspond with revised test repository location and keywords/names.
 * Library of Congress standards proxy - High Volume Ingest
-* Resource matrix document for - Local, staging, production e.g. RAM, CPU, tuning etc.
+* Resource matrix document for - Local, Staging, Production e.g. RAM, CPU, tuning etc.
 
 ### Upgrade
 

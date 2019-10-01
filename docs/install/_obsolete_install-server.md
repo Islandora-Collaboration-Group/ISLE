@@ -27,7 +27,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 ### Create Two Private Institutional GIT Repositories
 
-Note: Since public forks can’t be made private, we will duplicate (instead of forking) the repository to enable them to be private.
+Note: Since public forks can't be made private, we will duplicate (instead of forking) the repository to enable them to be private.
 
 1. Create a new PRIVATE repository on your institution's GitHub (or Bitbucket) account.
 2. Name it: `[project-name]-ISLE` (example: `digital-ISLE`). Leave this repository empty.
@@ -174,7 +174,7 @@ A Remote Server ISLE Installation requires that you provision and place a comple
 4. Proceed to the section below: [Step 9: Spin up ISLE Containers](../install/_obsolete_install-server.md#step-9-spin-up-isle-containers).
 
 ####Method 2:
-1. Use [Let's Encrypt](https://letsencrypt.org/), a free, automated, and open Certificate Authority for generating SSL certificates for your ISLE environment. In order to get a certificate for your website’s domain from Let’s Encrypt, you have to demonstrate control over the domain. With Let’s Encrypt, you do this using software that uses the ACME protocol, which typically runs on your web host.
+1. Use [Let's Encrypt](https://letsencrypt.org/), a free, automated, and open Certificate Authority for generating SSL certificates for your ISLE environment. In order to get a certificate for your website's domain from Let's Encrypt, you have to demonstrate control over the domain. With Let's Encrypt, you do this using software that uses the ACME protocol, which typically runs on your web host.
 2. Complete the [Let's Encrypt: Free SSL Certificates](../appendices/configuring-lets-encrypt.md) ISLE guide.
 3. Proceed to the section below: [Step 9: Spin up ISLE Containers](../install/_obsolete_install-server.md#step-9-spin-up-isle-containers).
 

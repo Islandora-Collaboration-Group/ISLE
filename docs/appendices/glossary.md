@@ -45,6 +45,7 @@ a server you connected to via ssh (REMOTE).
 * **Git** - A free and open source distributed software version control system designed to handle everything from small to very large projects with speed and efficiency. Git is easy to learn and has a tiny footprint with lightning fast performance.
     * [https://git-scm.com/](https://git-scm.com/)
     * The ISLE project and its documentation is hosted by an online git service called [Github.com](https://github.com/)
+    * Note: GUI based clients such as the [SourceTree App](https://www.sourcetreeapp.com/) may be provide a helpful visual aid for using git.
 
 * **Git branches** - Branching means you diverge from the main line of development and continue to do work without messing with that main line. [Learn more about branching here](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell)
 
@@ -66,7 +67,7 @@ a server you connected to via ssh (REMOTE).
 
 ## Solr
 
-**Please note:** Online versions of the SOLR documentation are for 6.6+ or higher, ISLE currently users version 4.10.4 only.
+**Note:** Online versions of the SOLR documentation are for 6.6+ or higher, ISLE currently users version 4.10.4 only.
 
 Solr - an open source enterprise search platform with the such features as full-text search, hit highlighting, faceted search, real-time indexing, dynamic clustering, database integration, NoSQL features[1] and rich document (e.g., Word, PDF) handling. Providing distributed search and index replication, Solr is designed for scalability and fault tolerance.
 
@@ -117,13 +118,13 @@ Solr - an open source enterprise search platform with the such features as full-
 * **SSH** - is a cryptographic network protocol for operating network services securely over an unsecured network. The best known example application is for remote login to computer systems by users. [Learn more about SSH](https://en.wikipedia.org/wiki/Secure_Shell)
 
 <!-- TODO: Review SSL certificates and cut out obsolete stuff -->
-* **SSL certificates** - files that digitally bind a cryptographic key to an organization’s web domain (URL). To enable HTTPS on your website, you need to get a certificate (a type of file) from a Certificate Authority (CA). When installed on a web server, the browser will display a padlock icon and `https` will appear as the prefix to the URL to indicate a secure connection between the web server and user's browser. SSL certificates are used to secure credit card transactions, data transfer, logins, and more. 
+* **SSL certificates** - files that digitally bind a cryptographic key to an organization's web domain (URL). To enable HTTPS on your website, you need to get a certificate (a type of file) from a Certificate Authority (CA). When installed on a web server, the browser will display a padlock icon and `https` will appear as the prefix to the URL to indicate a secure connection between the web server and user's browser. SSL certificates are used to secure credit card transactions, data transfer, logins, and more. 
 
     * Generate SSL certificates by using ONE of the following methods:
 
     * Ask your IT department to provision a complete [SSL Certificate Chain](https://support.dnsimple.com/articles/what-is-ssl-certificate-chain/). On your remote server ISLE Installation you will place the SSL certificates into the `./ISLE/config/proxy/ssl-certs` directory. These SSL certificates are used by the `apache` & `proxy` Docker containers.
 
-    * Use [Let's Encrypt](https://letsencrypt.org/), a free, automated, and open Certificate Authority for generating SSL certificates for your ISLE environment. In order to get a certificate for your website’s domain from Let’s Encrypt, you have to demonstrate control over the domain. With Let’s Encrypt, you do this using software that uses the ACME protocol, which typically runs on your web host. To begin, visit the [Let's Encrypt: Free SSL Certificates](../appendices/configuring-lets-encrypt.md) ISLE guide.
+    * Use [Let's Encrypt](https://letsencrypt.org/), a free, automated, and open Certificate Authority for generating SSL certificates for your ISLE environment. In order to get a certificate for your website's domain from Let's Encrypt, you have to demonstrate control over the domain. With Let's Encrypt, you do this using software that uses the ACME protocol, which typically runs on your web host. To begin, visit the [Let's Encrypt: Free SSL Certificates](../appendices/configuring-lets-encrypt.md) ISLE guide.
 
     * Additional resources:
         * [Why SSL? The Purpose of using SSL Certificates](https://www.sslshopper.com/why-ssl-the-purpose-of-using-ssl-certificates.html)

@@ -8,7 +8,7 @@
 * Commit changes using a new branch
 * Create pull request for review
 
-**Please note:** You'll need to create separate pull requests for each type of change whether editing or adding new pages with a `mkdocs.yml` file update. Using the online editor means you can only do one thing at a time.
+**Note:** You'll need to create separate pull requests for each type of change whether editing or adding new pages with a `mkdocs.yml` file update. Using the online editor means you can only do one thing at a time.
 
 If you need to edit more than one file or want to create more than one new page of content, it is recommended to instead follow the steps contained within the [Documentation Editing - Local](../contributor-docs/editing-local.md) Guide.
 
@@ -34,7 +34,7 @@ If you need to edit more than one file or want to create more than one new page 
 ---
 
 ### Adding New Pages
-**Please note:** If you are adding new pages to the Documentation, in addition to creating the new page, you'll need to edit the `mkdocs.yml` (YAML) file at the root (base) of the ISLE project directory in order for the page to show up in the documentation after adding the new page.
+**Note:** If you are adding new pages to the Documentation, in addition to creating the new page, you'll need to edit the `mkdocs.yml` (YAML) file at the root (base) of the ISLE project directory in order for the page to show up in the documentation after adding the new page.
 
 The example used below is how to create a new documentation page that will be about building giant ISLE robots with the title of "Building Giant ISLE Robots" and be located in the Development section.
 
