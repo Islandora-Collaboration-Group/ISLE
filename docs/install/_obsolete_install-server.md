@@ -102,13 +102,13 @@ TODO:
 FLOW of Customization:
 
 If New Installation....
-- Explain that ISLE creates the MySQL, fedora, etc. servers from Docker images, and that data for these can be stored with persistence on a bind mount.
-  - Explain how to update usernames and passwords for MySQL, fedora, etc.
+- Explain that ISLE creates the MySQL, Fedora etc. servers from Docker images, and that data for these can be stored with persistence on a bind mount.
+  - Explain how to update usernames and passwords for MySQL, Fedora etc.
 
 If Migrate to ISLE Environment...
 - Explain how to find pwds, how to rsync data:
-  - MySQL, fedora installations on bind mount
-  - usernames and passwords for MySQL, fedora, etc.
+  - MySQL, Fedora installations on bind mount
+  - usernames and passwords for MySQL, Fedora etc.
 
 Explain Git Workflow and how to setup
 
