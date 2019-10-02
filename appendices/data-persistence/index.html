@@ -2,7 +2,7 @@
 
 
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="no-js">
   <head>
     
@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.2.0">
+      <meta name="generator" content="mkdocs-1.0, mkdocs-material-3.0.3">
     
     
       
@@ -42,27 +42,23 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.750b69bd.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
       
       
     
     
-      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
     
     
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
       
-        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
     <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
     
-    
       <link rel="stylesheet" href="../../extra.css">
-    
-    
-      
     
     
   </head>
@@ -79,7 +75,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#data-persistence-in-docker" tabindex="1" class="md-skip">
+      <a href="../../#data-persistence-in-docker" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -100,19 +96,22 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           
-            <span class="md-header-nav__topic">
-              Islandora Enterprise (ISLE)
-            </span>
-            <span class="md-header-nav__topic">
-              Data Persistence in Docker
-            </span>
+            
+              <span class="md-header-nav__topic">
+                Islandora Enterprise (ISLE)
+              </span>
+              <span class="md-header-nav__topic">
+                Data Persistence in Docker
+              </span>
+            
           
         </div>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
         
-          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
           
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
 <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
@@ -135,6 +134,7 @@
     </div>
   </div>
 </div>
+          
         
       </div>
       
@@ -345,6 +345,102 @@
     <a href="../../install/install-troubleshooting/" title="Troubleshooting Guide" class="md-nav__link">
       Troubleshooting Guide
     </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4-9" type="checkbox" id="nav-2-4-9">
+    
+    <label class="md-nav__link" for="nav-2-4-9">
+      Optional Components
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-4-9">
+        Optional Components
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../optional-components/components/" title="Optional Components Overview" class="md-nav__link">
+      Optional Components Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../optional-components/automated-testing/" title="Automated Testing" class="md-nav__link">
+      Automated Testing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../optional-components/blazegraph/" title="Blazegraph" class="md-nav__link">
+      Blazegraph
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../optional-components/loc-proxy/" title="loc.gov Proxy" class="md-nav__link">
+      loc.gov Proxy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../optional-components/tickstack/" title="TICK Stack" class="md-nav__link">
+      TICK Stack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../optional-components/varnish/" title="Varnish" class="md-nav__link">
+      Varnish
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -1042,8 +1138,8 @@
                 
                 <h1 id="data-persistence-in-docker">Data Persistence in Docker</h1>
 <p><strong>Please note this is a simplified explanation of how Docker stores data in relation to a typical ISLE installation.</strong> This document assumes the use of the docker-compose command and docker-compose.yml, though there are other ways to specify how docker uses volumes and bind mounts.  For more complete descriptions of bind mounts and volumes, and their management, please see the official docker documentation.</p>
-<p><strong>Data</strong>, in this context, can include digital objects, files, logs, code, or information stored in mysql, solr, or fedora.  Essentially, anything typically written to or read from disk in some format, is data. </p>
-<p>Each time a docker container is brought up using a command like <code>docker-compose up -d</code> the container is recreated using the base container image. When a process in the container creates or changes a file (for example, an apache log file) those changes only exist while the container is running.  If the container is brought down and back up again, it is recreated using the base image, which will not include the apache log. In order to preserve certain data--for example, the Fedora datastore, Drupal’s database and files, etc, ISLE uses volumes and/or bind mounts defined in 'docker-compose.yml'.  </p>
+<p><strong>Data</strong>, in this context, can include digital objects, files, logs, code, or information stored in MySQL, Solr, or Fedora.  Essentially, anything typically written to or read from disk in some format, is data. </p>
+<p>Each time a docker container is brought up using a command like <code>docker-compose up -d</code> the container is recreated using the base container image. When a process in the container creates or changes a file (for example, an Apache log file) those changes only exist while the container is running.  If the container is brought down and back up again, it is recreated using the base image, which will not include the Apache log. In order to preserve certain data--for example, the Fedora datastore, Drupal's database and files, etc, ISLE uses volumes and/or bind mounts defined in 'docker-compose.yml'.  </p>
 <p>Data written to volumes and bind mounts are different to other data in Docker in two important ways: </p>
 <ul>
 <li>It is persistent, so it will survive when there is an update to the base ISLE docker images</li>
@@ -1053,27 +1149,27 @@
 <p>Docker provides two different ways to persist data: <strong>Volumes</strong> and <strong>bind mounts</strong>, described below.  For simplicity, in this document, <strong>persisted</strong> refers to any data or directory stored in either a bind mount or volume.</p>
 <h3 id="volumes">Volumes</h3>
 <p>Volumes can be named in the docker-compose.yml file and are managed by docker.  In the host system, the directories will be created in the Docker store (on Linux, usually /var/lib/docker).  If the volume does not already exist, it will be created on docker-compose up.</p>
-<p>Below is an example docker-compose.yml directive for an apache container using a volume:</p>
+<p>Below is an example docker-compose.yml directive for an Apache container using a volume:</p>
 <pre><code>volumes:
 apache-data:/var/www/html
 </code></pre>
-<p>Explanation: If not already created, docker will create a directory on the host at '/var/lib/docker' and use that for the apache container’s '/var/www/html' directory.</p>
+<p>Explanation: If not already created, docker will create a directory on the host at '/var/lib/docker' and use that for the apache container's '/var/www/html' directory.</p>
 <h3 id="bind-mounts">Bind Mounts</h3>
 <p>Bind mounts map a directory in the container to a directory anywhere on the host and are not managed directly by docker.  </p>
 <p>Below is an example 'docker-compose.yml' directive for an apache container using a bind mount:</p>
 <pre><code>volumes:
 /opt/ISLE/apache/html:/var/www/html
 </code></pre>
-<p>Explanation:  Data in the host’s /opt/ISLE/apache/html directory will be in the apache container’s /var/www/html.  If the directory does not exist on the host, it will NOT be created on <code>docker-compose up -d</code>, so be sure to create any necessary directories on the host manually.  </p>
-<p>If the container’s '/var/www/html/' directory has content, it will be masked by the contents of the host’s '/opt/ISLE/apache/html/' directory.</p>
+<p>Explanation:  Data in the host's /opt/ISLE/apache/html directory will be in the apache container's /var/www/html.  If the directory does not exist on the host, it will NOT be created on <code>docker-compose up -d</code>, so be sure to create any necessary directories on the host manually.  </p>
+<p>If the container's '/var/www/html/' directory has content, it will be masked by the contents of the host's '/opt/ISLE/apache/html/' directory.</p>
 <h2 id="what-should-be-persisted-this-way">What should be persisted this way?</h2>
-<p>Data and directories that store data unique to your Islandora, such as the Fedora datastore, Solr index, and the full Drupal directory, should be persisted, as should the mysql data directories and some configuration files (those not generated via the .env files).  This will ensure that your customizations and content remain even after ISLE containers are updated.</p>
+<p>Data and directories that store data unique to your Islandora, such as the Fedora datastore, Solr index, and the full Drupal directory, should be persisted, as should the MySQL data directories and some configuration files (those not generated via the .env files).  This will ensure that your customizations and content remain even after ISLE containers are updated.</p>
 <p>It may be useful to write logs to a persisted directory to make accessing and managing the logs easier, and to provide sufficient capacity for log storage.  </p>
 <p>If your workflows involve moving digital objects onto the Islandora server for local ingest, it may be useful to have a persisted directory designated for those objects.  The alternative is to put them on the host server, then use <code>scp</code> or <code>docker cp</code> to copy them into the container, which adds steps to the process.</p>
 <h2 id="what-should-not-be-persisted">What should NOT be persisted?</h2>
-<p>Application data that is not meant to be customized or unique to your institution should not be persisted, but instead managed within the docker container (as it is by default).   Example:  The ISLE team updates the apache container to apache2’s latest security release.  If the directory containing apache’s binary is in a persisted directory, then updating ISLE will NOT automatically provide the latest apache, and you will continue to run the older, insecure apache until you manually update it inside the container.  This negates many of the benefits of using ISLE.  </p>
+<p>Application data that is not meant to be customized or unique to your institution should not be persisted, but instead managed within the docker container (as it is by default).   Example:  The ISLE team updates the apache container to apache2's latest security release.  If the directory containing apache's binary is in a persisted directory, then updating ISLE will NOT automatically provide the latest apache, and you will continue to run the older, insecure apache until you manually update it inside the container.  This negates many of the benefits of using ISLE.  </p>
 <h2 id="which-should-i-use-bind-mounts-or-volumes">Which should I use, bind mounts or volumes?</h2>
-<p>The answer for this is “it depends”.   Bind mounts may be easier to get to on a host machine as you have more control over where they are.  If you are migrating an existing installation, you will almost certainly want to copy over things like your /var/www/html directory and Fedora store and use a bind mount to point to them.  The solr index, however, should not be migrated over but rather rebuilt.  It doesn’t need to exist before the containers do. It is also unlikely that a user would want to navigate to the solr directory via command line on the host and edit files directly.  A named volume would probably work fine in this case, and be more easily managed by docker. </p>
+<p>The answer for this is "it depends".   Bind mounts may be easier to get to on a host machine as you have more control over where they are.  If you are migrating an existing installation, you will almost certainly want to copy over things like your /var/www/html directory and Fedora store and use a bind mount to point to them.  The Solr index, however, should not be migrated over but rather rebuilt.  It doesn't need to exist before the containers do. It is also unlikely that a user would want to navigate to the Solr directory via command line on the host and edit files directly.  A named volume would probably work fine in this case, and be more easily managed by docker. </p>
                 
                   
                 
@@ -1137,17 +1233,22 @@ apache-data:/var/www/html
           Material for MkDocs</a>
       </div>
       
+        
+      
     </div>
   </div>
 </footer>
       
     </div>
     
-      <script src="../../assets/javascripts/application.39abc4af.js"></script>
+      <script src="../../assets/javascripts/application.583bbe55.js"></script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      <script>app.initialize({version:"1.0",url:{base:"../.."}})</script>
       
         <script src="../../extra.js"></script>
+      
+    
+    
       
     
   </body>
