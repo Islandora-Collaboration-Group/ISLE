@@ -1,4 +1,4 @@
-# Replacing Mulgara with Blazegraph (High-Performance Low-Level Storage)
+# Replacing Mulgara with Blazegraph for High-Performance Low-Level Storage
 
 ## Use Cases & User Stories
 

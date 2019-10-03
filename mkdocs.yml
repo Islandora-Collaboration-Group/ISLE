@@ -33,10 +33,10 @@ nav:
     - 'Production: Migrate Site': 'install/install-production-migrate.md'    
     - 'Troubleshooting Guide': 'install/install-troubleshooting.md'
     - 'Optional Components': 
-      - 'Optional Components Overview': 'optional-components/components.md'
+      - 'Overview: Components': 'optional-components/components.md'
       - 'Automated Testing': 'optional-components/automated-testing.md'
       - 'Blazegraph': 'optional-components/blazegraph.md'
-      - 'loc.gov Proxy': 'optional-components/loc-proxy.md'
+      - 'Loc.gov Proxy': 'optional-components/loc-proxy.md'
       - 'TICK Stack': 'optional-components/tickstack.md'
       - 'Varnish': 'optional-components/varnish.md'
 - 'Update ISLE': 'update/update.md'
@@ -57,17 +57,17 @@ nav:
   - 'Warning about Red Hat Install': 'appendices/redhat.md'
 - 'Cookbook Recipes':
   - 'ISLE Cheat Sheet: Docker Commands': 'cookbook-recipes/isle-cheatsheet-docker-commands.md'
+  - 'How to Boot From External Drive': 'cookbook-recipes/boot-from-external-drive.md'
 - 'About':
-  - 'Contributing to ISLE': 'about/contributing.md'
   - 'About ISLE': 'about/about-isle.md'
-  - 'About Committers': 'about/committers.md'
+  - 'Contributing to ISLE': 'about/contributing.md'
   - 'Contributor Docs':
     - 'Docs: MkDocs': 'contributor-docs/mkdocs.md'
     - 'Docs: Spell Checker': 'contributor-docs/spell-checker.md'
     - 'Docs: Style Guide': 'contributor-docs/style-guide.md'
-    - 'Release Process': 'contributor-docs/release-process.md'
     - 'Testing Guide': 'contributor-docs/testing-guide.md'
   - 'Get Help': 'about/get-help.md'
+  - 'Release Process': 'contributor-docs/release-process.md'
 - 'Release Notes':
   - 'Latest release: 1.3.0': 'release-notes/release-1-3-0.md'
   - 'Previous releases':

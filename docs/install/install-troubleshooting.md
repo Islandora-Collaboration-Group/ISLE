@@ -2,11 +2,19 @@
 
 **Please select a topic:**
 
+- [Browser Caching and the Warning: "Bad Gateway"](#browser-caching-and-the-warning-bad-gateway)
 - [Fatal: Could Not Read From Remote Repository](#fatal-could-not-read-from-remote-repository)
 - [Fedora Hash Size (Conditional)](#fedora-hash-size-conditional)
+- [How to Use a MySQL GUI Client to Import Drupal Database](#how-to-use-a-mysql-gui-client-to-import-drupal-database)
 - [Non-Running Docker Containers](#non-running-docker-containers)
 - [Port Conflicts](#port-conflicts)
 - [Viewing Logs in ISLE 1.2.0 or Higher](#viewing-logs-in-isle-120-or-higher)
+
+---
+
+## Browser Caching and the Warning: "Bad Gateway"
+* Problem: While attempting to access "https://yourprojectnamehere.localdomain/" you see the browser result: "Bad Gateway"
+* Possible Solution: Open "https://yourprojectnamehere.localdomain/" in an Incognito window (that prevents the browser from using prior cached pages). (Alternately, you can empty your browser cache in your regular browser.)
 
 ---
 
@@ -31,6 +39,12 @@ While this will depend on your pre-existing Production system, it is important t
 * You will need to copy your `/usr/local/fedora/server/config/spring/akubra-llstore.xml` from your Production Fedora System to `./config/fedora/akubra-llstore.xml`
 * You will then need to add an extra line in the Fedora service (fedora) volumes section to bind mount this file in. This will guarantee proper Fedora data hash structure.
     * `- ./config/fedora/akubra-llstore.xml:/usr/local/fedora/server/config/spring/akubra-llstore.xml`
+
+---
+
+## How to Use a MySQL GUI Client to Import Drupal Database
+
+* If you want to use a MySQL client with a GUI to import the Production MySQL Drupal database you'll need to uncomment the `ports` section of the MySQL service within the `docker-compose.local.yml` to make it so you can access port `3306` from the host computer. If you are already running MySQL on your personal computer, you'll have a port conflict and will need to either shutdown that service prior to running ISLE or change `3306:3306` to something like `9306:3306`. Please double-check.
 
 ---
 

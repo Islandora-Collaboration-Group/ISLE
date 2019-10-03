@@ -1,6 +1,6 @@
 <!--- PAGE_TITLE --->
 
-## How to contribute to ISLE
+## How to Contribute to ISLE
 
 We welcome questions, suggestions, contributions, and respond promptly to requests for technical help. Please join us in the following:
 
