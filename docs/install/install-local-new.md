@@ -181,8 +181,7 @@ You now have the current ISLE project code checked into git as a foundation to m
 * Follow the in-line instructions to add your project's name to the appropriate areas.
     * Once finished, save and close the file.
 
-* _Using the same open terminal:_
-    * navigate to "/pathto/yourprojectnamehere/scripts/proxy/ssl-certs/"
+* _Using the same open terminal:_ navigate to "/pathto/yourprojectnamehere/scripts/proxy/ssl-certs/"
     * `cd ./scripts/proxy/ssl-certs/`
 
 * Change the permissions on the script to make it executable
