@@ -181,7 +181,8 @@ You now have the current ISLE project code checked into git as a foundation to m
 * Follow the in-line instructions to add your project's name to the appropriate areas.
     * Once finished, save and close the file.
 
-* _Using the same open terminal:_, navigate to "/pathto/yourprojectnamehere/scripts/proxy/ssl-certs/"
+* _Using the same open terminal:_
+    * navigate to "/pathto/yourprojectnamehere/scripts/proxy/ssl-certs/"
     * `cd ./scripts/proxy/ssl-certs/`
 
 * Change the permissions on the script to make it executable
@@ -284,7 +285,11 @@ git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-obje
 
 ## Step 11: Check-In the Newly Created Islandora Drupal Site Code Into is Git Repository
 
-*_Using to where same open terminal to where Bitbucket, GitHub or Git:    )* `cd data/apache/html`
+_Using the same open terminal:_
+
+* Navigate to the `data` directory within your local ISLE project
+    * `cd data/apache/html`
+
 * Create a local git repository:
     * `git init`
 
