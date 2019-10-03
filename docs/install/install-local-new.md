@@ -98,7 +98,7 @@ You will open a terminal and use the command line to clone your newly created (a
 
     * `git remote add icg-upstream https://github.com/Islandora-Collaboration-Group/ISLE.git`
 
-* View your tracked connections to remote git repositories:
+* View your connections to remote git repositories:
 
     * `git remote -v`
 
@@ -146,29 +146,30 @@ You now have the current ISLE project code checked into git as a foundation to m
 
 * Save and close the file.
 
-**Note:** If you want to use a MySQL client with a GUI to import the Production MySQL Drupal database you'll need to uncomment the `ports` section of the MySQL service within the `docker-compose.local.yml` to make it so you can access port `3306` from the host computer. If you are already running MySQL on your personal computer, you'll have a port conflict and will need to either shutdown that service prior to running ISLE or change `3306:3306` to something like `9306:3306`. Please double-check.
-
 ---
 
 ## Step 4: Create New Users and Passwords by Editing "local.env" File
 
 * Open the "local.env" file in a text editor.
+
     * Find each comment that begins with: `# Replace this comment with a ...` and follow the commented instructions to edit the passwords, database and user names.
+
         * **Review carefully** as some comments request that you replace with `...26 alpha-numeric characters` while others request that you create an `...easy to read but short database name`.
+
         * In many cases the username is already pre-populated. If it doesn't have a comment directing you to change or add a value after the `=`, then don't change it.
+
+    * **For Microsoft Windows:**
+        * Find the following line:
+            * `# COMPOSE_CONVERT_WINDOWS_PATHS=1`
+        * In the above line, delete the first two characters (`# `) so as to uncomment the line. It should now look like this:
+            * `COMPOSE_CONVERT_WINDOWS_PATHS=1`
+
     * Once finished, save and close the file.
 
 * Open the "config/apache/settings_php/settings.local.php" file in a text editor.
     * Find the first comment that begins with: `# ISLE Configuration` and follow the commented instructions to edit the database, username and password.
     * Find the second comment that begins with: `# ISLE Configuration` and follow the instructions to edit the Drupal hash salt.
-
-* **For Microsoft Windows:**
-    * Find the following line:
-        * `# COMPOSE_CONVERT_WINDOWS_PATHS=1`
-    * In the above line, delete the first two characters (`# `) so as to uncomment the line. It should now look like this:
-        * `COMPOSE_CONVERT_WINDOWS_PATHS=1`
-
-* Once finished, save and close the file.
+    * Once finished, save and close the file.
 
 ---
 

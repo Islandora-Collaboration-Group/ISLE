@@ -158,10 +158,10 @@ Git must be installed to get a copy (called a `clone`) of the current ISLE proje
 ### Step 2: Install Docker for Mac
 
 * Click [Docker Desktop](https://www.docker.com/products/docker-desktop) and follow these instructions to download and install:
-    * Click the button: `Download for Mac`
+    * Click the button: `Download Desktop for Mac`
     * Click the button: `Please Login to Download`
         * Click: `Sign In` or `Sign Up`
-    * Click the button: `Get Docker`
+    * Click the button: `Download Docker Desktop`
         * The `Docker.dmg` file should start to download. Check your `Downloads` directory.
     * Double-click the `Docker.dmg` file. The file should open and mount in a new window or prompt.
     * As instructed within the prompt, drag and drop the whale icon to the right towards the `Applications` directory shortcut, a tiny green plus sign should appear, now let go from the mouse.
@@ -205,10 +205,10 @@ Your host server is now configured and ready to install ISLE.
     * If "Git Bash" is not installed, please install "Git for Windows" now:
         * Download: [Git for Windows](https://gitforwindows.org/)
         * Click `Download`; `Save` this file to your Desktop; `double-click` that file to install; then click `Yes` to the prompt.
-        * Click `Next` and accept ALL of the installer's default selections, with the one following exception:
+        * Click `Next` and accept ALL of the installer's default selections, with one exception:
             * **Choosing the default editor used by Git: Which editor would you like Git to use?**
             * Select your preferred text editor (we recommend "Atom").
-            * If you selected "Atom" and do not yet have it installed, please [install Atom](https://atom.io/) now, then continue below.
+            * If you select "Atom" and do not yet have it installed, the installer expects you to use the provided [Atom](https://atom.io/) link to download and install Atom. When that is completed, return to the `Git for Windows` installer, click `Next` and complete that installation. (If `Next` is greyed out, click `Back` then `Next` to continue...)
 * Press the Windows key
 * Type `Git Bash`
 * RIGHT-CLICK the "Git Bash" app to open it; select `Run as administrator`; then click `Yes` to the prompt.
@@ -228,7 +228,7 @@ Your host server is now configured and ready to install ISLE.
 * Click [Docker Desktop for Windows](https://store.docker.com/editions/community/docker-ce-desktop-windows) and follow these instructions to download and install:
     * Click the button: `Please Login to Download`
         * Click: `Sign In` or `Sign Up`
-    * Click the button: `Get Docker`
+    * Click the button: `Download Docker Desktop` (or `Get Docker`)
         * `Save` this file to your Desktop; `double-click` that file to install; then click `Yes` to the prompt.
     * Click `OK` or `Next` and accept ALL of the installer's default selections.
 * Important Docker installation notes:

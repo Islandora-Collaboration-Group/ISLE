@@ -1,4 +1,4 @@
-# Varnish: End-User Performance
+# Varnish: Caching Performance and Accelerator
 
 ## Use Cases & User Stories
 
