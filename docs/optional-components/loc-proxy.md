@@ -1,4 +1,4 @@
-# Library of Congress Standards Proxy - High Volume Ingest
+# Library of Congress Standards Proxy for High Volume Ingest
 
 ## Installation
 
