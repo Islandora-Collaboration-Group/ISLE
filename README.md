@@ -1,3 +1,9 @@
+| Attention! |
+| --- |
+| In this repository the project name is `public` and it's accessible at https://public.localdomain.  Whenever possible, the username and password combination has been set to: |
+| Username: `public` |
+| Password: `password` |
+
 # ISLE: Islandora Enterprise
 
 ## Introduction
@@ -37,7 +43,7 @@ Please use the [ISLE Documentation](https://islandora-collaboration-group.github
 8. To wrap up testing:
     - In the folder with the docker-compose.yml `docker-compose down -v` (nb: the -v removes all volumes, and will delete any work. This option **does not persist your data**)
 
-### Quick Stop and Cleanup 
+### Quick Stop and Cleanup
 If you have been testing the stack extensively you may want to `prune` your Docker daemon as you test.
 1. In the folder with the `docker-compose.demo.yml`
     - `docker-compose down -v`
@@ -85,7 +91,7 @@ All Tomcat services come with the default users and passwords:
 * `admin`:`isle_admin`
 * `manager`:`isle_manager`
 
-Portainer's authentication can be configured: 
+Portainer's authentication can be configured:
 * By default there is no username or password required to login to Portainer.
 * [Portainer Configuration](https://portainer.readthedocs.io/en/stable/configuration.html)
 
