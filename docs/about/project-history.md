@@ -1,4 +1,4 @@
-# ISLE: Islandora Enterprise
+# ISLandora Enterprise (ISLE)
 
 ## ISLE Documents
 * [ISLE Executive Summary](https://docs.google.com/document/d/17tAFxR6_b7sxXkE1teNDQZv0UZ0LLSkX8K05-U6A6nw/edit?usp=sharing) (project overview)

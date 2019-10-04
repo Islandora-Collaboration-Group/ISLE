@@ -19,7 +19,7 @@ We strongly recommend that you begin the update process on your Local environmen
 * On your Local (personal computer), open a terminal (Windows: open Git Bash) and navigate to your Local ISLE repository (this contains the "docker-compose.local.yml" file):
     * **Example:** `cd /path/to/your/repository`
 
-* Stop and remove the existing ISLE containers:
+* Stop the existing ISLE containers:
     * `docker-compose down`
 
 * Check your git remotes:
@@ -87,7 +87,7 @@ We strongly recommend that you begin the update process on your Local environmen
     * **Example:** `ssh islandora@yourstagingserver.institution.edu`
     * **Example:** `cd /opt/yourprojecthere`
 
-* Stop and remove the existing ISLE containers:
+* Stop the existing ISLE containers:
     * `docker-compose down`
 
 * Update the docker files via git:
