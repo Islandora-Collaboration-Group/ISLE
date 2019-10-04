@@ -1,4 +1,4 @@
-# TICK Stack: Dashboard Visualization for Systems Health and Log Records
+# TICK Stack: Dashboard Visualization for Systems Metrics and Logging Events
 
 ## Use Cases & User Stories
 
