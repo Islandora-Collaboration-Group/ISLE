@@ -24,8 +24,8 @@ defaultEntryPoints = ["http", "https"]
   address = ":443"
     [entryPoints.https.tls]
       [[entryPoints.https.tls.certificates]]
-      certFile = "/certs/.localdomain.pem"
-      keyFile = "/certs/.localdomain.key"
+      certFile = "/certs/public.localdomain.pem"
+      keyFile = "/certs/public.localdomain.key"
 
 # Lines above are for use of self-signed SSL certificates only.
 # Let's Encrypt cannot be used with locals or demos.
