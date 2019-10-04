@@ -1,6 +1,6 @@
 <!--- PAGE_TITLE --->
 
-# Islandora Enterprise (ISLE)
+# ISLandora Enterprise (ISLE)
 
 ISLE is a community developed open-source project that bundles the [Islandora](https://islandora.ca) stack into a set of [Docker](https://docker.com) images that are easy to install and update. ISLE allows for persistent customizations and provides a fully functioning Islandora platform for production, staging, and development digital repositories.
 
