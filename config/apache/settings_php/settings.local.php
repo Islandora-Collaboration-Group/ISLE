@@ -253,9 +253,9 @@
 
 $databases['default']['default'] = array(
   'driver' => 'mysql',
-  'database' => '',
-  'username' => '',
-  'password' => '',
+  'database' => 'public',
+  'username' => 'public',
+  'password' => 'password',
   'host' => 'mysql',
   'prefix' => '',
   'charset' => 'utf8mb4',
@@ -292,7 +292,7 @@ $update_free_access = FALSE;
  *   $drupal_hash_salt = file_get_contents('/home/example/salt.txt');
  *
  * # ISLE Configuration - Replace the value below with the value of DRUPAL_HASH_SALT from the local.env */
-$drupal_hash_salt = '';
+$drupal_hash_salt = 'aRecommendedHashOf45AlphaNumericCharacters45';
 
 /**
  * Base URL (optional).
@@ -636,5 +636,5 @@ $conf['404_fast_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
 # $conf['theme_debug'] = TRUE;
 
 # Please note your drupal instance is behind a proxy and does have free access
-# to the internet. 
+# to the internet.
 $conf['drupal_http_request_fails'] = FALSE;

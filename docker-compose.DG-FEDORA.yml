@@ -1,0 +1,12 @@
+version: '3.7'
+
+#### docker-compose up -d;
+## Local Environment - Used for Drupal site development, more extensive metadata, Solr and Fedora development work on a local laptop or workstation
+## Updated 2019-09 - Release 1.3.0-dev (@ 1.3.0-dev)
+
+services:
+
+  fedora:
+    volumes:
+      - /Volumes/DG-FEDORA/datastreamStore:/usr/local/fedora/data/datastreamStore
+      - /Volumes/DG-FEDORA/objectStore:/usr/local/fedora/data/objectStore
