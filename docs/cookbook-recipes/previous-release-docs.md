@@ -8,7 +8,7 @@ Documentation can be viewed a few ways:
 
   - The raw markdown text files can be viewed directly.
   - Many text editors include a markdown viewer, or one can be installed as an add-on.  This will interpret the markdown, so formatting will be correct and embedded links should work.  This method is simple, but because the ISLE pages are compiled with MkDocs, some formatting will differ from the original, and the navigation menu will not be rendered at all.
-  - **Preferred** MkDocs can be installed and run locally.  Documentation pages will appear exactly as they do on the github.io site, and the navigation menu will function properly.  Importantly, some obsolete pages may still be in the /docs directory but will not be linked to on the MkDocs version which can help avoid confusion. Read further for instructions for using MkDocs.
+  - **Preferred** MkDocs can be installed and run locally.  Documentation pages will appear exactly as they do on the GitHub.io site, and the navigation menu will function properly.  Importantly, some obsolete pages may still be in the /docs directory but will not be linked to on the MkDocs version which can help avoid confusion. Read further for instructions for using MkDocs.
 
 ## About MkDocs
 
@@ -16,16 +16,16 @@ MkDocs performs two basic functions:
   - It uses a theme template and YAML file to generate static HTML pages.
   - It functions as a local web server so the resulting HTML pages can be viewed in a browser.
 
-## Prerequisits
+## Prerequisites
 
-  - MkDocs requires Python.  The [MkDocs website](https://www.mkdocs.org/) has good documentation on how to set up Python and is a good place to start, especially Windows users as it contains useful advice necessary to make the commands below work smoothly.  MkDocs generall runs well on Windows, MacOSX and Linux.
+  - MkDocs requires Python.  The [MkDocs website](https://www.mkdocs.org/) has good documentation on how to set up Python and is a good place to start, especially Windows users as it contains useful advice necessary to make the commands below work smoothly.  MkDocs generally runs well on Windows, MacOSX and Linux.
   - Once MkDocs is installed and working properly, install the Material theme:
     - `pip install mkdocs-material`
     - or `pip install mkdocs-material --user` if you get permissions errors on Linux
 
 ## Running MkDocs
 
-  - In a terminal (Powershell or Git Bash in Windows), cd to the directory you have cloned ISLE into:
+  - In a terminal (PowerShell or Git Bash in Windows), cd to the directory you have cloned ISLE into:
     - `cd /path/to/ISLE`
     - Run the MkDocs server:
     - `mkdocs serve`
@@ -64,4 +64,4 @@ MkDocs performs two basic functions:
    [I 191008 12:04:07 handlers:64] Start detecting changes
 ```
 
- - You can safely ingore the INFO about pages not in the "nav" configuration.  The important piece of information here is the local web address for the site, usuall [http://127.0.0.1:8000](http://127.0.0.1:8000). Paste that into your browser to view the documentation.
+ - You can safely ignore the INFO about pages not in the "nav" configuration.  The important piece of information here is the local web address for the site, usually [http://127.0.0.1:8000](http://127.0.0.1:8000). Paste that into your browser to view the documentation.
