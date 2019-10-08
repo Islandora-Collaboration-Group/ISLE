@@ -58,6 +58,7 @@ nav:
 - 'Cookbook Recipes':
   - 'ISLE Cheat Sheet: Docker Commands': 'cookbook-recipes/isle-cheatsheet-docker-commands.md'
   - 'How to Boot From External Drive': 'cookbook-recipes/boot-from-external-drive.md'
+  - 'Finding and Using Documentation for a Previous Release': 'cookbook-recipes/previous-release-docs.md'
 - 'About':
   - 'About ISLE': 'about/about-isle.md'
   - 'Contributing to ISLE': 'about/contributing.md'
