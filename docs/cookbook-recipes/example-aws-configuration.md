@@ -13,14 +13,14 @@ Colgate University Libraries' Digital Collections currently holds over 115000 in
  - Production:
    - m4.xlarge EC2 Reserved Instance **Note**: have a 3 year contract for the m4.xlarge.  Amazon offers newer m5 instances for this tier which would be preferred.
    - 75 GB EBS storage, type gp2, for the operating system, docker images, etc.
-   - 8 TB EBS storage, tpe st1, for the Fedora datastore.  This is where all digital objects, derivates, and metadata are stored.
+   - 8 TB EBS storage, toe st1, for the Fedora datastore.  This is where all digital objects, derives, and metadata are stored.
     - 300 GB EBS storage, type gp2, used as a temporary holding location for objects to be ingested.  After successful ingest, the objects are deleted from this volume.  
  - Staging:
    - Staging differs from Production in 2 ways:
    - m4.large instance rather than xlarge, as performance is less of a concern on staging.  The system works, but can be sluggish compared to production.
    - No 300 GB holding location permanently attached.  This can be added fairly easily if a need to test a large ingest arose.
 
-Rather than a separate 300 EB volume, it would be possible to simply increase the size of the OS disk from 75 GB to something greater to allow room for object prior to ingestion.  Hwoever, having it separate provides a few advantages:
+Rather than a separate 300 EB volume, it would be possible to simply increase the size of the OS disk from 75 GB to something greater to allow room for object prior to ingestion.  However, having it separate provides a few advantages:
   - Volumes cannot be resized on the fly.  If temporary storage needs exceed what is available, the server would need to be shut down, a new volume created, and the existing volume copied over to it.  
   - If we are not ingesting anything for a period of time, we can easily turn off the 300 GB volume.  Because all data on it is meant to be temporary, we could delete it entirely to avoid being charged for storage we are not using.  A new volume could be quickly and easily re-attached as needed at a later date with minimal interruption to the production site.
 
@@ -34,7 +34,7 @@ Colgate's ISLE host server' fstab has the following entry:
 
 which mounts the 300 GB volume at /mnt/tempstorage
 
-In order for the Apache docker container to be able to access /mnt/tempstorage, it must be added as a bind mount.  If ISLE is currently running, issue `docker-compose down` to shut it down before making changes to the confguration file.
+In order for the Apache docker container to be able to access /mnt/tempstorage, it must be added as a bind mount.  If ISLE is currently running, issue `docker-compose down` to shut it down before making changes to the configuration file.
 
 Colgate's docker-compose.production.yml contains the following line under the "apache" "volumes" section:
 
