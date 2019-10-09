@@ -11,14 +11,14 @@ Colgate University Libraries' Digital Collections currently holds over 115000 in
 ## AWS configuration
 
  - Production:
-   - m4.xlarge EC2 Reserved Instance **Note**: have a 3 year contract for the m4.xlarge.  Amazon offers newer m5 instances for this tier which would be preferred.
+   - m4.xlarge EC2 Reserved Instance **Note**: We have a 3 year contract for the m4.xlarge.  Amazon offers newer m5 instances for this tier which would be preferred.
    - 75 GB EBS storage, type gp2, for the operating system, docker images, etc.
    - 8 TB EBS storage, toe st1, for the Fedora datastore.  This is where all digital objects, derivatives, and metadata are stored.
-    - 300 GB EBS storage, type gp2, used as a temporary holding location for objects to be ingested.  After successful ingest, the objects are deleted from this volume.  
+   - 300 GB EBS storage, type gp2, used as a temporary holding location for objects to be ingested.  After successful ingest, the objects are deleted from this volume.  
  - Staging:
    - Staging differs from Production in 2 ways:
    - m4.large instance rather than xlarge, as performance is less of a concern on staging.  The system works, but can be sluggish compared to production.
-   - No 300 GB holding location permanently attached.  This can be added fairly easily if a need to test a large ingest arose.
+   - No 300 GB holding location permanently attached.  This can be added fairly easily if a need to test a large ingest arose (see below).
 
 Rather than a separate 300 EBS volume, it would be possible to simply increase the size of the OS disk from 75 GB to something greater to allow room for object prior to ingestion.  However, having it separate provides a few advantages:
   - Volumes cannot be resized on the fly.  If temporary storage needs exceed what is available, the server would need to be shut down, a new volume created, and the existing volume copied over to it.  
@@ -40,9 +40,9 @@ Colgate's docker-compose.production.yml contains the following line under the "a
 
   >\- /mnt/tempstorage:/mnt/ingest
 
-Note that either of these paths can point to any location as long as it is not otherwise in use (e.g do not bind this to /var/www/ on the docker container, as that directory already contains the Drupal files).  /mnt is commonly used as the default directory for mounting volumes in Linux.
+Note that either of these paths can point to any location as long as it is not otherwise in use (e.g do not bind this to /var/www/ on the docker container, as that directory already contains the Drupal files).  /mnt is commonly used as the default directory for mounting volumes in Linux.  It is also possible to mount them in the same place, eg "/mnt/ingest:/mnt/ingest" but that may make it difficult to tell them apart later on.
 
-Any files or directories added to /mnt/tempstorage/ on the host server will be immediately available to the Apache docker container aft er bringing ISLE back up with `docker-compose up -d`.
+Any files or directories added to /mnt/tempstorage/ on the host server will be immediately available to the Apache docker container after bringing ISLE back up with `docker-compose up -d`.
 
 ## Workflow
 
@@ -53,6 +53,13 @@ Colgate primarily uses the Islandora Multi Importer (IMI) module for ingesting n
  - The metadata spreadsheet has a column for object location called "filepath" that refers to where Islandora will find it within the Docker container, e.g. /mnt/ingest/studentnews/page1.tif
  - In the IMI GUI, the "local" location is selected, and object is mapped to the spreadsheet column "filepath"
  - Files are ingested.  Upon completion and verification that the ingest was successful, the archivist deletes /studentnews subdirectory.  This can be done at any time after ingest so long as there is still capacity on the volume.  Because AWS charges for the GB allocated rather than used, there is no cost savings for deleting the files quickly.  Only deleting the volume entirely via the AWS console would avoid charges.
+
+## Accessing the server
+
+The above workflow assumes the archivist has access to the AWS server
+  - AWS block all ports by default.  A static IP address for anyone moving files to the server would be ideal.  Barring that, limiting the range to a library staff vlan would be better than opening the SSH port to all of campus.
+  - SSH keys are required to connect to the AWS server.  There are various tools to generate these for Windows and Mac.  Amazon has [documentation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) on this process.
+  - At Colgate, provisions were made for a remote worker without a static IP address by setting up an rsync script to move files from a server on campus that the worker did have access to, to the AWS server.  This was preferred over whitelisting the entire VPN IP range, but setting that up is outside the scope of this document.
 
 ## Removing or resizing the ingest volume
 
@@ -71,3 +78,4 @@ Colgate primarily uses the Islandora Multi Importer (IMI) module for ingesting n
  - Unmount the drive from the host server:
     - `sudo umount -d /mnt/tempstorage` replacing /mnt/tempstorage with the path you used on the host server.
  - See the AWS site for further instructions for [detaching](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-detaching-volume.html) then [deleting](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-deleting-volume.html) volumes.
+ - To resize the volume, create a new EBS volume of the desired size and add it to your AWS instance and fstab as described above.  Note you will need to change the UUID in /etc/fstab to match the newly created volume.  If you mount it to the same directory as the previous volume, you should not need to change the docker-compose.production.yml entry.
