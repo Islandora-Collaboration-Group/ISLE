@@ -20,7 +20,7 @@ Colgate University Libraries' Digital Collections currently holds over 115000 in
    - m4.large instance rather than xlarge, as performance is less of a concern on staging.  The system works, but can be sluggish compared to production.
    - No 300 GB holding location permanently attached.  This can be added fairly easily if a need to test a large ingest arose.
 
-Rather than a separate 300 EB volume, it would be possible to simply increase the size of the OS disk from 75 GB to something greater to allow room for object prior to ingestion.  However, having it separate provides a few advantages:
+Rather than a separate 300 EBS volume, it would be possible to simply increase the size of the OS disk from 75 GB to something greater to allow room for object prior to ingestion.  However, having it separate provides a few advantages:
   - Volumes cannot be resized on the fly.  If temporary storage needs exceed what is available, the server would need to be shut down, a new volume created, and the existing volume copied over to it.  
   - If we are not ingesting anything for a period of time, we can easily turn off the 300 GB volume.  Because all data on it is meant to be temporary, we could delete it entirely to avoid being charged for storage we are not using.  A new volume could be quickly and easily re-attached as needed at a later date with minimal interruption to the production site.
 
