@@ -758,7 +758,7 @@ For more details, please consult the official [Kapacitor documentation](https://
 
 * `{{ .ID }}` = Name of the Alert
 * `{{ index .Tags "host" }}` = Name of server
-* `{{ .Level }}.` = `Critical` or `ON`
+* `{{ .Level }}.` = `Critical` or `OK`
 
 This message is slightly formatted for readability and context.
 
@@ -770,6 +770,124 @@ By using this starter message via email effectively you'll get two alerts for th
 
 * Once you've taken manual steps on the affected server to restore connectivity and the ISLE system, its containers and services are effectively backup and running, you'll get a follow-up email that indicates that the server is back up and running.
   * For example: `Offline Server-host=acme-prod - acme-prod server is OK`
+  * There may be additional information put in the email body for review. It will be formatted in JSON notation.
+
+Please note: The code suggestions above use Influxdata `Flux` syntax, for more information on how to change messages and their values please use the official [Flux syntax basics documentation](https://docs.influxdata.com/flux/v0.36/introduction/getting-started/syntax-basics/) for more information.
+
+---
+
+#### Alert - Disk Space
+
+The Disk Space Alert handler can be used to alert you when one or more of your disk(s) are potentially running out of space.
+
+The instructions below are to setup an Alert on your monitored ISLE host system to email you when the ISLE host system operating system disk has passed a threshold of `75%` disk used (full) capacity. You are welcome to change this threshold to a lower or higher value as needed to give yourself or your IT staff time to anticipate the potential disk growth prior to system challenges or errors.
+
+This will mean the alert can be triggered by the following events:
+  * An increase in disk usage by the ISLE host system operating system disk that surpasses `75%` usage
+
+##### Assumptions:
+ * You have already setup an alert handler e.g. the Email Alert handler.
+ * Any testing of the alert and involved system should start with a non-production system to avoid downtime or confusion.
+
+##### Alert - Disk Space setup steps
+
+* Within your running TICK system dashboard, click on the Alerting section and from the dropdown choose the `Manage Tasks` link.
+
+* Click on the blue `Build Alert Rule` button on the right.
+
+* Within the `Name` section, enter a name of your choice for your alert
+  * Example: `Disk Space Exceeded`
+
+* Within the `Alert Type` section, select `Threshold`
+
+* Within the `Time Series` section, select `telegraf.autogen` from the  `DB.RetentionPolicy` section on the left.
+  * Within the `Measurements & Tags` section, scroll down to the bottom and expand `disk` then `host`.
+    * Please note: There may be a number associated with `host`, e.g. `host-8`, this is how many servers or systems you have reporting to this dashboard and TICK system.
+    * Select some or all appropriate hosts, you may have only two (Production and Staging) or you may have more. There will be green dots filling the previously empty checkbox to indicate a selected host.
+    * Once selected, click the `Group By host` button directly above this field. It should now be highlighted in blue.
+    * Within the `Fields` section, select `used_percent`
+      * There will be green dots filling the previously empty checkbox to indicate a selected field.
+
+* Within the `Conditions` section:
+  * Select the `greater than` value in the `Send Alert where` section dropdown box. This value may be pre-populated by default.
+  * Enter the percent value of `90` in the empty `Send Alert where used_percent is greater than ` section's dropdown list.
+    * **Recommendation:** You can change this value as need but a numeric value between `75` and `90` is recommended.
+
+* Within the `Alert Handlers` section, select `email` from the `Send this Alert to` section's dropdown list.
+  * This should pre-populate the appropriate fields with your previously configured email alert handler.
+  * You will need to add the apppropriate `Recipient E-mail Addresses` (_the email address you want these alerts to be sent to_)
+  * You can opt to add additional formatting for the body of the email as needed but we'll leave this field empty for the purposes of this setup. As a result, you'll get additional JSON formated output in the body of any sent alert email which can be useful for further debugging.
+
+* Within the `Message` section, copy and paste the following starter message below into this blank field please.
+  * `{{.ID }} - {{ index .Tags "host"}} {{ .Name }} usage is at {{ index .Fields "value" | printf "%0.2f" }}% - {{ .Level }}`
+
+* Click on the green `Save Rule` button at the top right hand side of the dashboard.
+  * You should get a notification on the Alert webpage that your rule was saved. It is brief, small and disappears quickly. The Alert is now saved and active.
+  * You should now see `1 Alert Rule` with the name of your alert e.g `Disk Space Exceeded` in blue.
+  * You should now see `1 TICKscript` with the name of your alert e.g `Disk Space Exceeded` in green.
+  * These two entries are the same alert rule but if you wanted more granular changes, you could edit the green `TICKscript` to add more specific `flux` code.
+    * These changes once saved would also reflect in the blue Alert rule as well. One is really for GUI access the other for granular code.
+  * No further steps are needed other than testing your alert should you choose.
+
+* (Optional) - Test your alert
+  * First, check the current disk usage on your monitored ISLE host system by sshing into the system and running `df -h`, the output should look something like:
+
+**Example:**  Your output below may not match exactly.
+```bash
+df -h
+
+Filesystem      Size  Used Avail Use% Mounted on
+udev            1.9G     0  1.9G   0% /dev
+tmpfs           389M  1.4M  388M   1% /run
+/dev/nvme0n1p1   18G   68G   50G  26% /
+tmpfs           1.9G     0  1.9G   0% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+tmpfs           1.9G     0  1.9G   0% /sys/fs/cgroup
+tmpfs           389M     0  389M   0% /run/user/10000
+```
+
+  * The system disk used in the example above is mounted on `/`. Your system disk will also most likely be mounted on `/`. If you are not sure, check with your IT team or appropriate system administration resource prior to proceeding.
+
+  * You can now test this alert in one of two ways:
+
+    * **Method 1:** (_Conservative, no test changes on server_)
+      * Lowering or raising the percentage to closer match what your current system using in terms of disk capacity.
+      * Waiting until the monitored ISLE host server actually exceeds the desired disk capacity percentage, triggers the alert and then tune or adjust as needed.
+
+    * **Method 2:** (_Faster but caution ahead on using these commands, you'll be creating fake data_)
+      * Lower the percentage to closer match what your current system using in terms of disk capacity.
+      * Create test conditions to exceed your ISLE system disk usage and trigger the alert.
+        * Change the Alert percentage to something closer to the current `Use%` displayed from the `df -h` command.
+        * Try to set it within 1 percentage point or so of that above value.
+        * Create a dummy `1 GB` text file on your server. Use your user home directory for this process and not in an ISLE data location.
+          * Run `dd if=/dev/zero of=file1.txt count=1024 bs=1048576` to create the dummy 1 GB file
+      * Check your email account for the Alert message with:
+        * For example: `Disk Space Alert-host=acme-prod - acme-prod disk usage is at 76.03% - Critical` in the email message header
+        * If you get your alert email, great!
+        * If the alert doesn't show up, then retrace your steps, perhaps use a lower percentage of capacity and tune as necessary.
+      * Change the percentage back to the higher value. Repeat as necessary on all additional servers.
+      * Delete the dummy `file1.txt` file
+        * Note this will trigger a followup Alert email that the server disk capacity is below the Alert level again and as such "OK."
+        * For example: `Disk Space Alert-host=acme-prod - acme-prod disk usage is at 45.01% - OK`
+
+##### Alert - Disk Space Flux code explanation
+
+* `{{ .ID }}` = Name of the Alert
+* `{{ index .Tags "host" }}` = Name of server
+* `{{ .Name }}.` = Name of impacted service in this case `disk`
+* `{{ index .Fields "value" | printf "%0.2f" }}%` = Reported disk used space from monitored server formatted to display properly in email
+* `{{ .Level }}.` = `Critical` or `OK`
+
+This message is slightly formatted for readability and context.
+
+By using this starter message via email effectively you'll get two alerts for the following conditions:
+
+* When the system (server) is passes the disk used % threshold, you'll get an alert email.
+  * For example, the system name is `acme-prod` and the alert is set to `75%`: `Disk Space Alert-host=acme-prod - acme-prod disk usage is at 76.03% - Critical`
+  * There may be additional information put in the email body for review. It will be formatted in JSON notation.
+
+* Once you've taken manual steps on the affected server to increase disk capacity and the ISLE system, its containers and services are effectively backup and running, you'll get a follow-up email that indicates that the disk capacity is back below the given Alert level and thus acceptable. This alert may not always fire due to the involved steps of increasing disk size. You may see this message if using the optional test steps above.
+  * For example: `Disk Space Alert-host=acme-prod - acme-prod disk usage is at 45.01% - OK`
   * There may be additional information put in the email body for review. It will be formatted in JSON notation.
 
 Please note: The code suggestions above use Influxdata `Flux` syntax, for more information on how to change messages and their values please use the official [Flux syntax basics documentation](https://docs.influxdata.com/flux/v0.36/introduction/getting-started/syntax-basics/) for more information.
