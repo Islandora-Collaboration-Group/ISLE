@@ -48,7 +48,7 @@ The use and setup of TICK within the ISLE platform is as an optional [sidecar](h
 
 ## System Requirements
 
-* [ISLE](https://github.com/Islandora-Collaboration-Group/ISLE) release version `1.2.0`
+* [ISLE](https://github.com/Islandora-Collaboration-Group/ISLE) release version `1.3.0`
     * `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
 
 ### ISLE Images
@@ -58,12 +58,12 @@ The use and setup of TICK within the ISLE platform is as an optional [sidecar](h
 
 | Service | Repository | Tag |
 | ---     | ---        | --- | 
-| Apache | [islandoracollabgroup/isle-apache](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-apache/tags) | `1.2.0`|
-| Fedora | [islandoracollabgroup/isle-fedora](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-fedora/tags) | `1.2.0`|
-| Image-services | [islandoracollabgroup/isle-imageservices](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-imageservices) | `1.2.0` |
-| MySQL | [islandoracollabgroup/isle-mysql](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-mysql) | `1.2.0` |
+| Apache | [islandoracollabgroup/isle-apache](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-apache/tags) | `1.3.0`|
+| Fedora | [islandoracollabgroup/isle-fedora](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-fedora/tags) | `1.3.0`|
+| Image-services | [islandoracollabgroup/isle-imageservices](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-imageservices) | `1.3.0` |
+| MySQL | [islandoracollabgroup/isle-mysql](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-mysql) | `1.3.0` |
 | Portainer | [portainer/portainer](https://hub.docker.com/r/portainer/portainer) | `latest` |
-| Solr  | [islandoracollabgroup/isle-solr](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-solr/tags) | `1.2.0` |
+| Solr  | [islandoracollabgroup/isle-solr](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-solr/tags) | `1.3.0` |
 | Traefik | [traefik/traefik](https://hub.docker.com/_/traefik) | `1.7.9` |
 
 * Additional systems overhead, including:
@@ -154,7 +154,7 @@ The data from both systems will be collected, analyzed and accessed on / from th
 
 * You'll stop any running containers
 
-* You'll download new ISLE images tagged as `1.2.0`
+* You'll download new ISLE images tagged as `1.3.0`
 
 
 * You'll copy over a new configuration file for a service called `rsyslog`. 
@@ -191,7 +191,7 @@ The data from both systems will be collected, analyzed and accessed on / from th
 
 * Previously installed and running Production and Staging ISLE Host systems are in place already
 
-* You'll need to use the ISLE images tagged as `1.2.0` and higher for the syslog driver changes to be in place.
+* You'll need to use the ISLE images tagged as `1.3.0` and higher for the syslog driver changes to be in place.
 
 * That the "sidecar" method will be the installation type running on the Staging system to receive data from Staging and Production.
 
@@ -308,7 +308,7 @@ Uncommented example:
 
 ```bash
   mysql:
-    image: islandoracollabgroup/isle-mysql:1.2.0
+    image: islandoracollabgroup/isle-mysql:1.3.0
     container_name: isle-mysql-${CONTAINER_SHORT_ID}
     networks:
       - isle-internal
@@ -448,7 +448,7 @@ Aug 13 17:24:49 ip-172-31-69-204 rsyslogd[28257]:  [origin software="rsyslogd" s
 
 * A previously installed and running ISLE Host Production system is in place already.
 
-* You'll need to use ISLE version `1.2.0` for the syslog driver changes to be in place.
+* You'll need to use ISLE version `1.3.0` for the syslog driver changes to be in place.
 
 * That the "sidecar" TICK installation is already in place on the Staging server prior.
 
@@ -491,7 +491,7 @@ Uncommented example:
 
 ```bash
   mysql:
-    image: islandoracollabgroup/isle-mysql:1.2.0
+    image: islandoracollabgroup/isle-mysql:1.3.0
     container_name: isle-mysql-${CONTAINER_SHORT_ID}
     networks:
       - isle-internal
@@ -611,8 +611,8 @@ The instructions below are going to:
 * Setup an "alert handler" in the Chronograf dashboard for delivery of alert messages. We'll use email as the example alert handler service.
 
 * Show you how to set up two basic alerts using your new alert handler
-    * `Disk Space` Alert - Alerts you when your disks are running out of space
     * `Deadman` Alert - Alerts you when the ISLE host server is unresponsive, has crashed or is "dead."
+    * `Disk Space` Alert - Alerts you when your disks are running out of space
 
 #### Assumptions
 
@@ -623,11 +623,13 @@ The instructions below are going to:
     
 * Additional alerts may be contributed by the ISLE maintainers and/or community over time.
 
-### Chronograf Alert Handler Setup
+---
 
-While TICK supports a wide variety of alert types and delivery mechanisms we're going to configure the basic alerts using email.
+### Chronograf Alert Handler - Email Setup
 
-* Prior to starting, you will need to have your SMTP credentials (user name, password and location of the 3rd party email server)  at the ready. This information may have been provided to you by your IT department or from when you may have used one of the recommended cloud-based email delivery platforms;  [SendGrid](https://sendgrid.com/) or [MailGun](https://www.mailgun.com/).
+While TICK supports a wide variety of alert types and delivery mechanisms we're going to configure the basic alerts using **email**. You can opt to setup additional alert handlers e.g. Slack, hipChat, pagerDuty and more using the official [Chronograf documentation](https://docs.influxdata.com/chronograf/v1.7/guides/configuring-alert-endpoints/)
+
+* Prior to starting, you will need to have your SMTP credentials (user name, password and location of the 3rd party email server) at the ready. This information may have been provided to you by your IT department or from when you may have used one of the recommended cloud-based email delivery platforms;  [SendGrid](https://sendgrid.com/) or [MailGun](https://www.mailgun.com/).
 
 * When you have these credentials, click on the `Configuration` (wrench icon) button on the left hand side of the Chronograf dashboard.
 
@@ -639,7 +641,7 @@ While TICK supports a wide variety of alert types and delivery mechanisms we're 
 - Within the `Configure Alert Endpoints` page, click on the `SMTP` section / button and fill in your creds.
 
     * `SMTP Host` - change `localhost` to the correct host name
-    * `SMTP Port` - change `25` to the correct port
+    * `SMTP Port` - change `25` to the correct port e.g. `465` (SSL) or `587` (TLS)
     * `From Email` - enter the email account you'll be using to send alerts **with**
     * `To Email` - enter the email account you'll be sending alerts **to**
     * `User` - enter the username for the email account you'll be using to send alerts **with**
@@ -652,49 +654,88 @@ You can now use this delivery mechanism when you set up individual alerts.
 
 ---
 
-#### Sendgrid Email
+#### Alert - Deadman (system)
 
-These instructions are for Sendgrid users only but demonstrate the easy of use in setup and lack of additional infrastructural overhead.
+The Deadman Alert handler can be used for any state, system or service. The instructions below are to setup an Alert on your monitored system to email you when the ISLE host system has been unresponsive for a period of time that you choose.
 
-* Create the API Key for the ISLE host server.
-    * **Note:** you should repeat this process for each server e.g. Production and Staging sending email.
-* Log into your Sendgrid account
-* Navigate to Settings > API Keys
-* Click on the `Create API Key` button
-* Set the level of API Key Permissions (_recommend Restricted Access_)
-    * Set the appropriate level of permissions for each section
-* Copy the generated API Key to a password manager. This is the token you'll use to send email with. You'll need to use it again below.
+This will mean the alert can be triggered by the following events:
+  * The monitored ISLE host server:
+    * has crashed or is "dead".
+    * has been shutdown
+  * The ISLE Docker containers:
+    * have been shutdown
 
-* Log into the Chronograf Dashboard and repeat the steps above to configure the SMTP Alert handler.
-    * `SMTP Host` - change `localhost` to `smtp.sendgrid.net`
-    * `SMTP Port` - change `25` to `587`
-    * `From Email` - enter the email account you'll be using to send alerts **with**
-    * `To Email` - enter the email account you'll be sending alerts **to**
-    * `User` - Enter the username of `apikey`
-    * `Password` - Enter the long API key generated from the above steps 
-    * Click the `Configuration Enabled` checkbox
-    * Click the blue `Save Changes` button
-    * Click the `Send Test Alert` and confirm that a new test email has been sent to the email account you'll be receiving alerts **to /at**
+For more details, please consult the official [Kapacitor documentation](https://docs.influxdata.com/kapacitor/v1.5/nodes/alert_node/#deadman) for this alert handler.
 
-##### Sendgrid Resource
+##### Assumptions:
+ * You have already setup an alert handler e.g. the Email Alert handler.
+ * Any testing of the alert and involved system should start with a non-production system to avoid downtime or confusion.
 
-* Sendgrid SMTP [Documentation](https://sendgrid.com/docs/API_Reference/SMTP_API/integrating_with_the_smtp_api.html)
+##### Alert - Deadman setup steps
 
----
+* Within your running TICK system dashboard, click on the Alerting section and from the dropdown choose the `Manage Tasks` link.
 
-### Chronograf Alerts Setup
+* Click on the blue `Build Alert Rule` button on the right.
 
-#### Disk Space Alert
+* Within the `Name` section, enter a name of your choice for your alert
+  * Example: `Offline Server`
 
-[COMING SOON in the 1.2.1 release]
+* Within the `Alert Type` section, select `Deadman`
 
-* This alert is designed to warn you when one of the ISLE host server disk(s) is/are almost full. Please note this setting should not alert you when the disk is already full. We suggest you use a lower value (e.g. 75%) such that you can safely shutdown containers, backup data and then expand the affected disk's capacity as needed.
+* Within the `Time Series` section, select `telegraf.autogen` from the  `DB.RetentionPolicy` section on the left.
+  * Within the `Measurements & Tags` section, scroll down to the bottom and expand `system` then `host`.
+    * Please note: There may be a number associated with `host`, e.g. `host-8`, this is how many servers or systems you have reporting to this dashboard and TICK system.
+    * Select some or all appropriate hosts, you may have only two (Production and Staging) or you may have more. There will be green dots filling the previously empty checkbox to indicate a selected host.
+    * Once selected, click the `Group By host` button directly above this field. It should now be highlighted in blue.
 
-#### Deadman Alert
+* Within the `Conditions` section, select a value of time from the `Send Alert if Data is missing for` section's dropdown list.
+  * **Recommendation:** Select a value between 5 and 30 minutes per your alerting needs. Typically we recommend about `5 - 10 mins`
 
-[COMING SOON in the 1.2.1 release]
+* Within the `Alert Handlers` section, select `email` from the `Send this Alert to` section's dropdown list.
+  * This should pre-populate the appropriate fields with your previously configured email alert handler.
+  * You will need to add the apppropriate `Recipient E-mail Addresses` (_the email address you want these alerts to be sent to_)
+  * You can opt to add additional formatting for the body of the email as needed but we'll leave this field empty for the purposes of this setup. As a result, you'll get additional JSON formated output in the body of any sent alert email which can be useful for further debugging.
 
-* This alert is designed to warn you when one of the ISLE host server disk(s) is unresponsive or offline.
+* Within the `Message` section, copy and paste the following starter message below into this blank field please.
+  * `{{ .ID }} - {{ index .Tags "host" }} server is {{ .Level }}.`
+
+* Click on the green `Save Rule` button at the top right hand side of the dashboard.
+  * You should get a notification on the Alert webpage that your rule was saved. It is brief, small and disappears quickly. The Alert is now saved and active.
+  * You should now see `1 Alert Rule` with the name of your alert e.g `Offline Server` in blue.
+  * You should now see `1 TICKscript` with the name of your alert e.g `Offline Server` in green.
+  * These two entries are the same alert rule but if you wanted more granular changes, you could edit the green `TICKscript` to add more specific `flux` code.
+    * These changes once saved would also reflect in the blue Alert rule as well. One is really for GUI access the other for granular code.
+  * No further steps are needed other than testing your alert should you choose.
+
+* (Optional) - Test your alert
+  * It is recommended that you test your alert by either:
+    * (Fast) - Shut down the ISLE Docker containers running on the monitored system.
+      * Shut down your ISLE containers on the monitored system.
+      * Wait for the alloted amount of time you choose above.
+      * Check your email account for the Alert message with (Critical) in the email header
+      * If you get your alert email, great! Now restart your Docker containers
+      * Check your email account for the Alert message with (OK) in the email header
+  * Repeat as necessary on your Production system(s)
+
+##### Alert - Deadman Flux code explanation
+
+* `{{ .ID }}` = Name of the Alert
+* `{{ index .Tags "host" }}` = Name of server
+* `{{ .Level }}.` = `Critical` or `ON`
+
+This message is slightly formatted for readability and context.
+
+By using this starter message via email effectively you'll get two alerts for the following conditions:
+
+* When the system (server) is "down" or unreachable for the duration of time you selected, you'll get only one alert email.
+  * For example, the system name is `acme-prod`: `Offline Server-host=acme-server - acme-prod server is CRITICAL.`
+  * There may be additional information put in the email body for review. It will be formatted in JSON notation.
+
+* Once you've taken manual steps on the affected server to restore connectivity and the ISLE system, its containers and services are effectively backup and running, you'll get a follow-up email that indicates that the server is back up and running.
+  * For example: `Offline Server-host=acme-prod - acme-prod server is OK`
+  * There may be additional information put in the email body for review. It will be formatted in JSON notation.
+
+Please note: The code suggestions above use Influxdata `Flux` syntax, for more information on how to change messages and their values please use the official [Flux syntax basics documentation](https://docs.influxdata.com/flux/v0.36/introduction/getting-started/syntax-basics/) for more information.
 
 ---
 
@@ -712,11 +753,11 @@ Additional changes were made to the ISLE base images to allow for:
 
 * Logging in ISLE is now set to `stdout` and `stderr` by default instead of log files.
 
-    * Choice in Docker log drivers e.g. `syslog` vs `json`, etc.
+  * Choice in Docker log drivers e.g. `syslog` vs `json`, etc.
 
-    * TICK uses the Docker `syslog` log driver by default.
+  * TICK uses the Docker `syslog` log driver by default.
 
-    * Flexibility for users using monitoring tools other than TICK
+  * Flexibility for users using monitoring tools other than TICK
 
 ---
 
@@ -740,6 +781,3 @@ We welcome questions, suggestions, contributions, and respond promptly to reques
 * [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle) - Post your questions here and subscribe for updates, meeting announcements, and technical support.
 
 * [ISLE GitHub Issues queue](https://github.com/Islandora-Collaboration-Group/ISLE/issues) - Post your issues, bugs and requests for technical documentation here.
-
- --- 
-
