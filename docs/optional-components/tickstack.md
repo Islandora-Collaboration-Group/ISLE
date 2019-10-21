@@ -629,17 +629,31 @@ The instructions below are going to:
 
 While TICK supports a wide variety of alert types and delivery mechanisms we're going to configure the basic alerts using **email**. You can opt to setup additional alert handlers e.g. Slack, hipChat, pagerDuty and more using the official [Chronograf documentation](https://docs.influxdata.com/chronograf/v1.7/guides/configuring-alert-endpoints/)
 
+#### Assumptions
+
 * Prior to starting, you will need to have your SMTP credentials (user name, password and location of the 3rd party email server) at the ready. This information may have been provided to you by your IT department or from when you may have used one of the recommended cloud-based email delivery platforms;  [SendGrid](https://sendgrid.com/) or [MailGun](https://www.mailgun.com/).
+
+* Please note for Sendgrid email users **only**, you'll need to create an appropriate API Key for each ISLE host server.
+  * Log into your Sendgrid account
+  * Navigate to Settings > API Keys
+  * Click on the `Create API Key` button
+  * Set the level of API Key Permissions (_recommend Restricted Access_)
+      * Set the appropriate level of permissions for each section
+  * Copy the generated API Key to a password manager or secure place for documents or documentation.
+    * This is the token you'll use to send email with. You'll need to use it again below.
+  * Sendgrid SMTP [Documentation](https://sendgrid.com/docs/API_Reference/SMTP_API/integrating_with_the_smtp_api.html)
+
+### Chronograf Alert Handler - Email Setup steps
 
 * When you have these credentials, click on the `Configuration` (wrench icon) button on the left hand side of the Chronograf dashboard.
 
 * Under the `Kapacitor Connection` column
     * click into the Kapacitor settings dropdown
     * click on the pencil symbol (_Not the trashcan_)
-        * If that doesn't work, try navigating to http://yourdomainhere:8888/sources/1/kapacitors/1/edit 
+        * If that doesn't work, try navigating to http://yourdomainhere:8888/sources/1/kapacitors/1/edit
 
-- Within the `Configure Alert Endpoints` page, click on the `SMTP` section / button and fill in your creds.
-
+- Within the `Configure Alert Endpoints` page, click on the `SMTP` section / button and fill in your creds. Please note, the directions below are for both conventional email and [Sendgrid](https://sendgrid.com/docs/API_Reference/SMTP_API/integrating_with_the_smtp_api.html). Only pick **one** to follow.
+  * **For conventional email users:**
     * `SMTP Host` - change `localhost` to the correct host name
     * `SMTP Port` - change `25` to the correct port e.g. `465` (SSL) or `587` (TLS)
     * `From Email` - enter the email account you'll be using to send alerts **with**
@@ -649,8 +663,20 @@ While TICK supports a wide variety of alert types and delivery mechanisms we're 
     * Click the `Configuration Enabled` checkbox
     * Click the blue `Save Changes` button
     * Click the `Send Test Alert` and confirm that a new test email has been sent to the email account you'll be receiving alerts **to /at**
+      * Move onto the next step, ignoring the `Sendgrid` information below.
+  * **For Sendgrid email users only:
+    * `SMTP Host` - change `localhost` to `smtp.sendgrid.net`
+    * `SMTP Port` - change `25` to `587`
+    * `From Email` - enter the email account you'll be using to send alerts **with**
+    * `To Email` - enter the email account you'll be sending alerts **to**
+    * `User` - Enter the username of `apikey`
+    * `Password` - Enter the long API key generated from the above steps 
+    * Click the `Configuration Enabled` checkbox
+    * Click the blue `Save Changes` button
+    * Click the `Send Test Alert` and confirm that a new test email has been sent to the email account you'll be receiving alerts **to /at**
+      * Move onto the next step.
 
-You can now use this delivery mechanism when you set up individual alerts.
+You can now use this delivery mechanism (alert handler) when you set up individual alerts.
 
 ---
 
