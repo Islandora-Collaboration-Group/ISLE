@@ -641,7 +641,7 @@ While TICK supports a wide variety of alert types and delivery mechanisms we're 
       * Set the appropriate level of permissions for each section
   * Copy the generated API Key to a password manager or secure place for documents or documentation.
     * This is the token you'll use to send email with. You'll need to use it again below.
-  * Sendgrid SMTP [Documentation](https://sendgrid.com/docs/API_Reference/SMTP_API/integrating_with_the_smtp_api.html)
+    * For more information as needed: Sendgrid SMTP [Documentation](https://sendgrid.com/docs/API_Reference/SMTP_API/integrating_with_the_smtp_api.html)
 
 ### Chronograf Alert Handler - Email Setup steps
 
@@ -652,7 +652,7 @@ While TICK supports a wide variety of alert types and delivery mechanisms we're 
     * click on the pencil symbol (_Not the trashcan_)
         * If that doesn't work, try navigating to http://yourdomainhere:8888/sources/1/kapacitors/1/edit
 
-- Within the `Configure Alert Endpoints` page, click on the `SMTP` section / button and fill in your creds. Please note, the directions below are for both conventional email and [Sendgrid](https://sendgrid.com/docs/API_Reference/SMTP_API/integrating_with_the_smtp_api.html). Only pick **one** to follow.
+- Within the `Configure Alert Endpoints` page, click on the `SMTP` section / button and fill in your creds. Please note, the directions below are for both conventional email and Sendgrid. Only pick **one** to follow please.
   * **For conventional email users:**
     * `SMTP Host` - change `localhost` to the correct host name
     * `SMTP Port` - change `25` to the correct port e.g. `465` (SSL) or `587` (TLS)
@@ -664,7 +664,7 @@ While TICK supports a wide variety of alert types and delivery mechanisms we're 
     * Click the blue `Save Changes` button
     * Click the `Send Test Alert` and confirm that a new test email has been sent to the email account you'll be receiving alerts **to /at**
       * Move onto the next step, ignoring the `Sendgrid` information below.
-  * **For Sendgrid email users only:
+  * **For Sendgrid email users only:**
     * `SMTP Host` - change `localhost` to `smtp.sendgrid.net`
     * `SMTP Port` - change `25` to `587`
     * `From Email` - enter the email account you'll be using to send alerts **with**
@@ -739,9 +739,20 @@ For more details, please consult the official [Kapacitor documentation](https://
       * Shut down your ISLE containers on the monitored system.
       * Wait for the alloted amount of time you choose above.
       * Check your email account for the Alert message with (Critical) in the email header
-      * If you get your alert email, great! Now restart your Docker containers
+      * If you get your alert email, great!
+        * Restart your ISLE Docker containers
       * Check your email account for the Alert message with (OK) in the email header
-  * Repeat as necessary on your Production system(s)
+    * (Long) _ Shut down your ISLE Docker containers running on the monitored system and then your ISLE host server.
+      * Shut down your ISLE containers on the monitored system.
+      * Shutdown your monitored ISLE host server.
+      * Wait for the alloted amount of time you choose above.
+      * Check your email account for the Alert message with (Critical) in the email header
+      * If you get your alert email, great!
+        * Now restart your server
+        * Now restart your Docker containers
+      * Check your email account for the Alert message with (OK) in the email header
+  * If the alert doesn't show up, then retrace your steps, perhaps use a lower value of time and tune as necessary.
+  * Repeat as necessary on either your Production or additional system(s)
 
 ##### Alert - Deadman Flux code explanation
 
