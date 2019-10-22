@@ -694,8 +694,10 @@ This will mean the alert can be triggered by the following events:
 For more details, please consult the official [Kapacitor documentation](https://docs.influxdata.com/kapacitor/v1.5/nodes/alert_node/#deadman) for this alert handler.
 
 ##### Assumptions:
- * You have already setup an alert handler e.g. the Email Alert handler.
- * Any testing of the alert and involved system should start with a non-production system to avoid downtime or confusion.
+
+* You have already setup an alert handler e.g. the Email Alert handler.
+
+* Any testing of the alert and involved system should start with a non-production system to avoid downtime or confusion.
 
 ##### Alert - Deadman setup steps
 
@@ -746,13 +748,15 @@ For more details, please consult the official [Kapacitor documentation](https://
       * Shut down your ISLE containers on the monitored system.
       * Shutdown your monitored ISLE host server.
       * Wait for the alloted amount of time you choose above.
-      * Check your email account for the Alert message with (Critical) in the email header
+      * Check your email account for the Alert message with (Critical) in the email header. You'll start getting one every minute.
       * If you get your alert email, great!
         * Now restart your server
         * Now restart your Docker containers
       * Check your email account for the Alert message with (OK) in the email header
   * If the alert doesn't show up, then retrace your steps, perhaps use a lower value of time and tune as necessary.
   * Repeat as necessary on either your Production or additional system(s)
+
+* **Please note:** If you only want one alert when your server is down, you'll need to edit your TICKScript (_the green one_) and add the following piece of code `.stateChangesOnly()` to the end of the `var trigger = data` section, ensure that it is indented and is aligned with the line above it. Then click on the green `Save Rule` button at the top right hand side of the dashboard.
 
 ##### Alert - Deadman Flux code explanation
 
@@ -764,9 +768,10 @@ This message is slightly formatted for readability and context.
 
 By using this starter message via email effectively you'll get two alerts for the following conditions:
 
-* When the system (server) is "down" or unreachable for the duration of time you selected, you'll get only one alert email.
+* When the system (server) is "down" or unreachable for the duration of time you selected, you'll get an alert email every minute.
   * For example, the system name is `acme-prod`: `Offline Server-host=acme-server - acme-prod server is CRITICAL.`
   * There may be additional information put in the email body for review. It will be formatted in JSON notation.
+  * If you only want one alert, you'll need to edit your TICKScript (_the green one_) and add the following piece of code `.stateChangesOnly()` to the end of the `var trigger = data` section, ensure that it is indented and is aligned with the line above it. Then click on the green `Save Rule` button at the top right hand side of the dashboard.
 
 * Once you've taken manual steps on the affected server to restore connectivity and the ISLE system, its containers and services are effectively backup and running, you'll get a follow-up email that indicates that the server is back up and running.
   * For example: `Offline Server-host=acme-prod - acme-prod server is OK`
