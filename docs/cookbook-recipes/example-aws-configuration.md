@@ -13,7 +13,7 @@ Colgate University Libraries' Digital Collections currently holds over 115000 in
  - Production:
    - m4.xlarge EC2 Reserved Instance **Note**: We have a 3 year contract for the m4.xlarge.  Amazon offers newer m5 instances for this tier which would be preferred.
    - 75 GB EBS storage, type gp2, for the operating system, docker images, etc.
-   - 8 TB EBS storage, toe st1, for the Fedora datastore.  This is where all digital objects, derivatives, and metadata are stored.
+   - 8 TB EBS storage, type st1, for the Fedora datastore.  This is where all digital objects, derivatives, and metadata are stored.
    - 300 GB EBS storage, type gp2, used as a temporary holding location for objects to be ingested.  After successful ingest, the objects are deleted from this volume.  
  - Staging:
    - Staging differs from Production in 2 ways:
