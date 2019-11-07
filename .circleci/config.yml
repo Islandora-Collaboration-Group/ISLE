@@ -16,7 +16,7 @@ jobs:
           command: |
             mkdir data
             cd ~/isle
-            git clone git@github.com:Born-Digital-US/isle-behat.git isle-behat
+            git clone https://github.com/Islandora-Collaboration-Group/isle-behat.git isle-behat
       - run:
           name: Switch to using TEST profile for docker-compose
           command: |
