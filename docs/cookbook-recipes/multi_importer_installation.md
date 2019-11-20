@@ -1,8 +1,8 @@
 # IMI Ingest: Setup and Use with ISLE
 
-These instruction will walk users through the installation of the Islandora Multi-Importer (IMI) Module and a test batch ingest of sample items.  They assume you have followed the instructions for [Local ISLE Installation: New Site](/install/install-local-new/).  Staging and Production servers may require a different entry in the docker-compose.yml volume section.
+These instructions will walk users through the installation of the Islandora Multi-Importer (IMI) Module and a test batch ingest of sample items.  They assume you have followed the instructions for [Local ISLE Installation: New Site](/install/install-local-new/).  Staging and Production servers may require a different entry in the docker-compose.yml volume section.
 
-## Docker down, Add new volume in the Apache section for staging server side ingest, Docker up
+## Docker Down, Add New Volume in the Apache Section for Staging Server Side Ingest, Docker Up
 
 In a terminal, cd to directory containing your local ISLE repository.  If you have just completed installing the local ISLE site, your are likely already in that directory.  Otherwise:
 
@@ -37,11 +37,11 @@ isle-apache-data:/var/www/hpl:cached
 ```
 run `docker-compose up -d`
 
-## Set up batch functionality and the IMI module
+## Set Up Batch Functionality and the IMI Module
 
 `cd ingest_data`
 
-Copy and the entire block of code below and paste the entire block into the command line to create the installer script:
+Copy and paste the entire block of code below into the command line to create the installer script:
 
 ```
 echo 'cd /var/www/html && drush -y -u 1 en islandora_batch
@@ -63,14 +63,14 @@ Update the script file permissions on the container:
 
 `docker exec -it isle-apache-ld bash -c "chmod 744 /mnt/ingest/batch_installer.sh"`
 
-run batch_installer.sh on the container:
+Run batch_installer.sh on the container:
 
 `docker exec -it isle-apache-ld bash -c "/mnt/ingest/batch_installer.sh"`
 
 
 ## Islandora ingest overview and IMI demonstration
 
-The script will have unpacked a set of sample files in the local ingest_data directory
+The script will pack a set of sample files in the local ingest_data directory
 
 Drill down to the ./ingest_data/isle-ingest-samples/IMI directory and look for the following three files:
 
@@ -78,23 +78,24 @@ mods_twig_base.txt
 testCol-tn.png.zip
 testCol.csv
 
-Visit this page on the demo site > https://isle.localdomain/multi_importer
+Visit one of these two pages:
+
+  * on your Demo site > https://isle.localdomain/multi_importer
+  * on your Local site > https://yourlocalnamehere.localdomain/multi_importer
 
 Use the data in mods_twig_base.txt to create and save an IMI metadata template
 
-### Use the IMI ingest samples testCol.csv and testCol-tn.png.zip to create a parent Islandora collection for test objects using the ZIP file option. In depth instructions for this step follow (and can also be found in the README.md file in the ingest_data/isle-ingest-samples/IMI directory):
+In the Drupal site, Navigation section on the left, click the "Multi Import Objects" link
 
-* In the Drupal site, Navigation section on the left, click the "Multi Import Objects" link
+In the "Choose your Data source type" drop down, select "Spreadsheet File to be uploaded" aka a ".csv file" and click the "Next" button.
 
-* In the "Choose your Data source type" drop down, select "Spreadsheet File to be uploaded" aka a ".csv file" and click the "Next" button.
+Click the "Choose File" button and select the csv file: "testCol.csv" and then click the "Upload" button.
 
-* Click the "Choose File" button and select the csv file: "testCol.csv" and then click the "Upload" button.
+Click the "Preprocess" button
 
-* Click the "Preprocess" button
+In the "Your data" tab, toggle / click the "Preview submitted..." drop-down to verify there's data in your rows
 
-* In the "Your data" tab, toggle / click the "Preview submitted..." drop-down to verify there's data in your rows
-
-* Go to the "Templating" tab:
+Go to the "Templating" tab:
 
   * If there is not yet a twig template:
 
@@ -108,7 +109,7 @@ Use the data in mods_twig_base.txt to create and save an IMI metadata template
 
   * Else if there is a preexisting twig template -select the previously saved template.
 
-* Go to the "CMODEL Mapping" tab:
+Go to the "CMODEL Mapping" tab:
 
   * Select from the drop-down list; "cmodel" and click the "Check CMODELS" button.
 
@@ -117,7 +118,7 @@ Use the data in mods_twig_base.txt to create and save an IMI metadata template
 
       * TN - select "tn"
 
-* Go to the "Object Properties Tab" and within the "Source Field Mapping" table:
+Go to the "Object Properties Tab" and within the "Source Field Mapping" table:
 
   * Set "Object Pid" to "collection_pid" and **uncheck** the checkbox for "Check to let Islandora build PID..."
 
@@ -129,56 +130,56 @@ Use the data in mods_twig_base.txt to create and save an IMI metadata template
 
   * Set "Remote DS sources" to "ZIP"
 
-* Leave the "What Type of Batch Action…" as it is ("ingest new objects") (_most likely default_)
+Leave the "What Type of Batch Action…" as it is ("ingest new objects") (_most likely default_)
 
-* Click on the "Ingest" button
+Click on the "Ingest" button
 
-* Click the "Choose File" button and select the zip file: "testCol-tn.png.zip" and the click the "Upload" button.
+Click the "Choose File" button and select the zip file: "testCol-tn.png.zip" and the click the "Upload" button.
 
-  * **Please note:** There will be this warning "For security reasons, your upload has been renamed to testCol-tn.png_.zip." Ignore it.
+**Please note:** There will be this warning "For security reasons, your upload has been renamed to testCol-tn.png_.zip." Ignore it.
 
 
-* Click the "Ingest" button
+Click the "Ingest" button
 
-* Now you should see a green message box e.g. "You are all set( id = 1)!" with a set ID that is a link. Click on the "id = " link.
+Now you should see a green message box e.g. "You are all set( id = 1)!" with a set ID that is a link. Click on the "id = " link.
 
-* The "Set __ Batch Queue" prompt / overlay should appear. Click on the link: "Process Set"
+The "Set __ Batch Queue" prompt / overlay should appear. Click on the link: "Process Set"
 
-* Click on the "Start Batch Processing" button
+Click on the "Start Batch Processing" button
 
-* You should see "Processing complete" message.
+You should see "Processing complete" message.
 
-* Click on the "home" icon at the top left hand of the site to get back to the homepage.
+Click on the "home" icon at the top left hand of the site to get back to the homepage.
 
-* Within the "Navigation" links, click on "Islandora Repository".
+Within the "Navigation" links, click on "Islandora Repository".
 
-* Within the list of collections you should see your new "Test Collection" with a witty thumbnail icon. Click on the icon.
+Within the list of collections you should see your new "Test Collection" with a witty thumbnail icon. Click on the icon.
 
-* To set the CMODELS for this collection, click on the "Manage" tab.
+To set the CMODELS for this collection, click on the "Manage" tab.
 
-* Go to the "Collection" sub-tab, then to the "Manage Collection Policy" sub-tab (_should be there by default_) and then check **ALL** the check boxes within the "About Collection Policies" table to the right.
+Go to the "Collection" sub-tab, then to the "Manage Collection Policy" sub-tab (_should be there by default_) and then check **ALL** the check boxes within the "About Collection Policies" table to the right.
 
-* Click the "Update Collection Policy" button. A green check mark message "updated collection policy..." should appear.
+Click the "Update Collection Policy" button. A green check mark message "updated collection policy..." should appear.
 
 ### Proceed to test a full IMI ingest using the local file system option.  Objects will be ingested in to the test collection created above.
 
 In this section, we will use a [Google sheet](https://docs.google.com/spreadsheets/d/1sZ0FY27nxkhM4lCrSZ9nY9mLbr-ljKaZdqTyiRmknTM/edit?usp=sharing) for our sample metadata
 
-* In the Drupal site, Navigation section on the left, click the "Multi Import Objects" link
+In the Drupal site, Navigation section on the left, click the "Multi Import Objects" link
 
-* In the "Choose your Data source type" drop down, select "Google Sheet URL" and click the "Next" button.
+In the "Choose your Data source type" drop down, select "Google Sheet URL" and click the "Next" button.
 
-* In the "ID of your Google sheet" box, paste in: `1sZ0FY27nxkhM4lCrSZ9nY9mLbr-ljKaZdqTyiRmknTM`
+In the "ID of your Google sheet" box, paste in: `1sZ0FY27nxkhM4lCrSZ9nY9mLbr-ljKaZdqTyiRmknTM`
 
-* Cell Range: `Sheet1!A1:AF14`
+Cell Range: `Sheet1!A1:AF14`
 
-* Click the "Preprocess" button
+Click the "Preprocess" button
 
-* In the "Your data" tab, toggle / click the "Preview submitted..." drop-down to verify there's data in your rows
+In the "Your data" tab, toggle / click the "Preview submitted..." drop-down to verify there's data in your rows
 
-* Go to the "Templating" tab and select the template created above.  E.g. "bd_mods_template"
+Go to the "Templating" tab and select the template created above.  E.g. "bd_mods_template"
 
-* Go to the "CMODEL Mapping" tab:
+Go to the "CMODEL Mapping" tab:
 
   * Select from the drop-down list; "cmodel" and click the "Check CMODELS" button.
 
@@ -195,7 +196,7 @@ In this section, we will use a [Google sheet](https://docs.google.com/spreadshee
 
       * All others: "Build Using islandora generated derivatives" OR "-- Don't Create --", depending on how fully you want to test ingest.  The more derivatives you create, the longer the ingest process will be.
 
-* Go to the "Object Properties Tab" and within the "Source Field Mapping" table:
+Go to the "Object Properties Tab" and within the "Source Field Mapping" table:
 
   * Set "Object Pid" to "collection_pid" and **uncheck** the checkbox for "Check to let Islandora build PID..."
 
@@ -207,27 +208,27 @@ In this section, we will use a [Google sheet](https://docs.google.com/spreadshee
 
   * Set "Remote DS sources" to "local"
 
-* Leave the "What Type of Batch Action…" as it is ("ingest new objects") (_most likely default_)
+Leave the "What Type of Batch Action…" as it is ("ingest new objects") (_most likely default_)
 
-* Click on the "Ingest" button
+Click on the "Ingest" button
 
-* Now you should see a green message box e.g. "You are all set( id = #)!" with a set ID that is a link. Click on the "id = " link.
+Now you should see a green message box e.g. "You are all set( id = #)!" with a set ID that is a link. Click on the "id = " link.
 
-* The "Set __ Batch Queue" prompt / overlay should appear. Click on the link: "Process Set"
+The "Set __ Batch Queue" prompt / overlay should appear. Click on the link: "Process Set"
 
-* Click on the "Start Batch Processing" button
+Click on the "Start Batch Processing" button
 
-* You should see "Processing complete" message.
+You should see "Processing complete" message.
 
 ### View the test objects
 
-* Click on the "home" icon at the top left hand of the site to get back to the homepage.
+Click on the "home" icon at the top left hand of the site to get back to the homepage.
 
-* Within the "Navigation" links, click on "Islandora Repository".
+Within the "Navigation" links, click on "Islandora Repository".
 
-* Click on the "Test Collection" Thumbnail
+Click on the "Test Collection" Thumbnail
 
-* The ingested objects should be listed.
+The ingested objects should be listed.
 
 
 Other Useful links:
