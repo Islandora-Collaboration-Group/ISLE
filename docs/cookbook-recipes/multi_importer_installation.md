@@ -85,7 +85,7 @@ Visit one of these two pages:
 
 Use the data in mods_twig_base.txt to create and save an IMI metadata template
 
-In the Drupal site, Navigation section on the left, click the "Multi Import Objects" link
+In the Drupal site, in the Navigation section on the left, click the "Multi Import Objects" link
 
 In the "Choose your Data source type" drop down, select "Spreadsheet File to be uploaded" aka a ".csv file" and click the "Next" button.
 
@@ -231,9 +231,9 @@ Click on the "Test Collection" Thumbnail
 The ingested objects should be listed.
 
 
-Other Useful links:
-[ISLE Documentation Site](https://github.com/Islandora-Collaboration-Group/ISLE)
-[More Sample Ingest Objects from Born Digital](https://github.com/Born-Digital-US/isle-ingest-samples)
-[IMI Github](https://github.com/mnylc/islandora_multi_importer)
-[Islandora Documentation - How to Add an Item to a Digital Collection](https://wiki.duraspace.org/display/ISLANDORA/How+to+Add+an+Item+to+a+Digital+Collection)
-[Islandora Documentation - How to Batch Ingest Files](https://wiki.duraspace.org/display/ISLANDORA7112/How+to+Batch+Ingest+Files)
+### Other Useful links:
+* [ISLE Documentation Site](https://github.com/Islandora-Collaboration-Group/ISLE)
+* [More Sample Ingest Objects from Born Digital](https://github.com/Born-Digital-US/isle-ingest-samples)
+* [IMI Github](https://github.com/mnylc/islandora_multi_importer)
+* [Islandora Documentation - How to Add an Item to a Digital Collection](https://wiki.duraspace.org/display/ISLANDORA/How+to+Add+an+Item+to+a+Digital+Collection)
+* [Islandora Documentation - How to Batch Ingest Files](https://wiki.duraspace.org/display/ISLANDORA7112/How+to+Batch+Ingest+Files)
