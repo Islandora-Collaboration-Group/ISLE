@@ -8,7 +8,7 @@ This is the current (as of October 2019) configuration used by Colgate Universit
 
 Colgate University Libraries' Digital Collections currently holds over 115000 individual objects/pages.  The collection uses just under 5 Tb of storage, which includes high resolution TIFFs for the majority of the objects.
 
-## AWS configuration
+## AWS Configuration
 
  - Production:
    - m4.xlarge EC2 Reserved Instance **Note**: We have a 3 year contract for the m4.xlarge.  Amazon offers newer m5 instances for this tier which would be preferred.
@@ -28,7 +28,7 @@ Rather than a separate 300 EBS volume, it would be possible to simply increase t
 
 Adding volumes in AWS is a fairly simple process, and is well documented [on their site](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html)  Be sure to check the AWS site for current pricing.  EBS volumes are billed based on the size allotted, not used.
 
-Colgate's ISLE host server' fstab has the following entry:
+Colgate's ISLE host server's fstab has the following entry:
 
   >UUID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx  /mnt/tempstorage  xfs  defaults,nofail  0  2
 
@@ -54,14 +54,14 @@ Colgate primarily uses the Islandora Multi Importer (IMI) module for ingesting n
  - In the IMI GUI, the "local" location is selected, and object is mapped to the spreadsheet column "filepath"
  - Files are ingested.  Upon completion and verification that the ingest was successful, the archivist deletes /studentnews subdirectory.  This can be done at any time after ingest so long as there is still capacity on the volume.  Because AWS charges for the GB allocated rather than used, there is no cost savings for deleting the files quickly.  Only deleting the volume entirely via the AWS console would avoid charges.
 
-## Accessing the server
+## Accessing the Server
 
 The above workflow assumes the archivist has access to the AWS server
   - AWS block all ports by default.  A static IP address for anyone moving files to the server would be ideal.  Barring that, limiting the range to a library staff vlan would be better than opening the SSH port to all of campus.
   - SSH keys are required to connect to the AWS server.  There are various tools to generate these for Windows and Mac.  Amazon has [documentation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) on this process.
   - At Colgate, provisions were made for a remote worker without a static IP address by setting up an rsync script to move files from a server on campus that the worker did have access to, to the AWS server.  This was preferred over whitelisting the entire VPN IP range, but setting that up is outside the scope of this document.
 
-## Removing or resizing the ingest volume
+## Removing or Resizing the Ingest Volume
 
 **Note**: These instructions assume that the *only* data stored in the temporary volume is meant to be ephemeral and everything on it can be safely deleted.  
 
