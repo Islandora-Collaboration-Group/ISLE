@@ -48,7 +48,7 @@ The use and setup of TICK within the ISLE platform is as an optional [sidecar](h
 
 ## System Requirements
 
-* [ISLE](https://github.com/Islandora-Collaboration-Group/ISLE) release version `1.2.0`
+* [ISLE](https://github.com/Islandora-Collaboration-Group/ISLE) release version `1.3.0`
     * `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
 
 ### ISLE Images
@@ -58,12 +58,12 @@ The use and setup of TICK within the ISLE platform is as an optional [sidecar](h
 
 | Service | Repository | Tag |
 | ---     | ---        | --- | 
-| Apache | [islandoracollabgroup/isle-apache](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-apache/tags) | `1.2.0`|
-| Fedora | [islandoracollabgroup/isle-fedora](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-fedora/tags) | `1.2.0`|
-| Image-services | [islandoracollabgroup/isle-imageservices](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-imageservices) | `1.2.0` |
-| MySQL | [islandoracollabgroup/isle-mysql](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-mysql) | `1.2.0` |
+| Apache | [islandoracollabgroup/isle-apache](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-apache/tags) | `1.3.0`|
+| Fedora | [islandoracollabgroup/isle-fedora](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-fedora/tags) | `1.3.0`|
+| Image-services | [islandoracollabgroup/isle-imageservices](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-imageservices) | `1.3.0` |
+| MySQL | [islandoracollabgroup/isle-mysql](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-mysql) | `1.3.0` |
 | Portainer | [portainer/portainer](https://hub.docker.com/r/portainer/portainer) | `latest` |
-| Solr  | [islandoracollabgroup/isle-solr](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-solr/tags) | `1.2.0` |
+| Solr  | [islandoracollabgroup/isle-solr](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-solr/tags) | `1.3.0` |
 | Traefik | [traefik/traefik](https://hub.docker.com/_/traefik) | `1.7.9` |
 
 * Additional systems overhead, including:
@@ -154,7 +154,7 @@ The data from both systems will be collected, analyzed and accessed on / from th
 
 * You'll stop any running containers
 
-* You'll download new ISLE images tagged as `1.2.0`
+* You'll download new ISLE images tagged as `1.3.0`
 
 
 * You'll copy over a new configuration file for a service called `rsyslog`. 
@@ -191,7 +191,7 @@ The data from both systems will be collected, analyzed and accessed on / from th
 
 * Previously installed and running Production and Staging ISLE Host systems are in place already
 
-* You'll need to use the ISLE images tagged as `1.2.0` and higher for the syslog driver changes to be in place.
+* You'll need to use the ISLE images tagged as `1.3.0` and higher for the syslog driver changes to be in place.
 
 * That the "sidecar" method will be the installation type running on the Staging system to receive data from Staging and Production.
 
@@ -308,7 +308,7 @@ Uncommented example:
 
 ```bash
   mysql:
-    image: islandoracollabgroup/isle-mysql:1.2.0
+    image: islandoracollabgroup/isle-mysql:1.3.0
     container_name: isle-mysql-${CONTAINER_SHORT_ID}
     networks:
       - isle-internal
@@ -448,7 +448,7 @@ Aug 13 17:24:49 ip-172-31-69-204 rsyslogd[28257]:  [origin software="rsyslogd" s
 
 * A previously installed and running ISLE Host Production system is in place already.
 
-* You'll need to use ISLE version `1.2.0` for the syslog driver changes to be in place.
+* You'll need to use ISLE version `1.3.0` for the syslog driver changes to be in place.
 
 * That the "sidecar" TICK installation is already in place on the Staging server prior.
 
@@ -491,7 +491,7 @@ Uncommented example:
 
 ```bash
   mysql:
-    image: islandoracollabgroup/isle-mysql:1.2.0
+    image: islandoracollabgroup/isle-mysql:1.3.0
     container_name: isle-mysql-${CONTAINER_SHORT_ID}
     networks:
       - isle-internal
@@ -611,8 +611,8 @@ The instructions below are going to:
 * Setup an "alert handler" in the Chronograf dashboard for delivery of alert messages. We'll use email as the example alert handler service.
 
 * Show you how to set up two basic alerts using your new alert handler
-    * `Disk Space` Alert - Alerts you when your disks are running out of space
     * `Deadman` Alert - Alerts you when the ISLE host server is unresponsive, has crashed or is "dead."
+    * `Disk Space` Alert - Alerts you when your disks are running out of space
 
 #### Assumptions
 
@@ -623,23 +623,39 @@ The instructions below are going to:
     
 * Additional alerts may be contributed by the ISLE maintainers and/or community over time.
 
-### Chronograf Alert Handler Setup
+---
 
-While TICK supports a wide variety of alert types and delivery mechanisms we're going to configure the basic alerts using email.
+### Chronograf Alert Handler - Email Setup
 
-* Prior to starting, you will need to have your SMTP credentials (user name, password and location of the 3rd party email server)  at the ready. This information may have been provided to you by your IT department or from when you may have used one of the recommended cloud-based email delivery platforms;  [SendGrid](https://sendgrid.com/) or [MailGun](https://www.mailgun.com/).
+While TICK supports a wide variety of alert types and delivery mechanisms we're going to configure the basic alerts using **email**. You can opt to setup additional alert handlers e.g. Slack, hipChat, pagerDuty and more using the official [Chronograf documentation](https://docs.influxdata.com/chronograf/v1.7/guides/configuring-alert-endpoints/)
+
+#### Assumptions
+
+* Prior to starting, you will need to have your SMTP credentials (user name, password and location of the 3rd party email server) at the ready. This information may have been provided to you by your IT department or from when you may have used one of the recommended cloud-based email delivery platforms;  [SendGrid](https://sendgrid.com/) or [MailGun](https://www.mailgun.com/).
+
+* Please note for Sendgrid email users **only**, you'll need to create an appropriate API Key for each ISLE host server.
+  * Log into your Sendgrid account
+  * Navigate to Settings > API Keys
+  * Click on the `Create API Key` button
+  * Set the level of API Key Permissions (_recommend Restricted Access_)
+      * Set the appropriate level of permissions for each section
+  * Copy the generated API Key to a password manager or secure place for documents or documentation.
+    * This is the token you'll use to send email with. You'll need to use it again below.
+    * For more information as needed: Sendgrid SMTP [Documentation](https://sendgrid.com/docs/API_Reference/SMTP_API/integrating_with_the_smtp_api.html)
+
+### Chronograf Alert Handler - Email Setup steps
 
 * When you have these credentials, click on the `Configuration` (wrench icon) button on the left hand side of the Chronograf dashboard.
 
 * Under the `Kapacitor Connection` column
     * click into the Kapacitor settings dropdown
     * click on the pencil symbol (_Not the trashcan_)
-        * If that doesn't work, try navigating to http://yourdomainhere:8888/sources/1/kapacitors/1/edit 
+        * If that doesn't work, try navigating to http://yourdomainhere:8888/sources/1/kapacitors/1/edit
 
-- Within the `Configure Alert Endpoints` page, click on the `SMTP` section / button and fill in your creds.
-
+- Within the `Configure Alert Endpoints` page, click on the `SMTP` section / button and fill in your creds. Please note, the directions below are for both conventional email and Sendgrid. Only pick **one** to follow please.
+  * **For conventional email users:**
     * `SMTP Host` - change `localhost` to the correct host name
-    * `SMTP Port` - change `25` to the correct port
+    * `SMTP Port` - change `25` to the correct port e.g. `465` (SSL) or `587` (TLS)
     * `From Email` - enter the email account you'll be using to send alerts **with**
     * `To Email` - enter the email account you'll be sending alerts **to**
     * `User` - enter the username for the email account you'll be using to send alerts **with**
@@ -647,25 +663,8 @@ While TICK supports a wide variety of alert types and delivery mechanisms we're 
     * Click the `Configuration Enabled` checkbox
     * Click the blue `Save Changes` button
     * Click the `Send Test Alert` and confirm that a new test email has been sent to the email account you'll be receiving alerts **to /at**
-
-You can now use this delivery mechanism when you set up individual alerts.
-
----
-
-#### Sendgrid Email
-
-These instructions are for Sendgrid users only but demonstrate the easy of use in setup and lack of additional infrastructural overhead.
-
-* Create the API Key for the ISLE host server.
-    * **Note:** you should repeat this process for each server e.g. Production and Staging sending email.
-* Log into your Sendgrid account
-* Navigate to Settings > API Keys
-* Click on the `Create API Key` button
-* Set the level of API Key Permissions (_recommend Restricted Access_)
-    * Set the appropriate level of permissions for each section
-* Copy the generated API Key to a password manager. This is the token you'll use to send email with. You'll need to use it again below.
-
-* Log into the Chronograf Dashboard and repeat the steps above to configure the SMTP Alert handler.
+      * Move onto the next step, ignoring the `Sendgrid` information below.
+  * **For Sendgrid email users only:**
     * `SMTP Host` - change `localhost` to `smtp.sendgrid.net`
     * `SMTP Port` - change `25` to `587`
     * `From Email` - enter the email account you'll be using to send alerts **with**
@@ -675,26 +674,228 @@ These instructions are for Sendgrid users only but demonstrate the easy of use i
     * Click the `Configuration Enabled` checkbox
     * Click the blue `Save Changes` button
     * Click the `Send Test Alert` and confirm that a new test email has been sent to the email account you'll be receiving alerts **to /at**
+      * Move onto the next step.
 
-##### Sendgrid Resource
-
-* Sendgrid SMTP [Documentation](https://sendgrid.com/docs/API_Reference/SMTP_API/integrating_with_the_smtp_api.html)
+You can now use this delivery mechanism (alert handler) when you set up individual alerts.
 
 ---
 
-### Chronograf Alerts Setup
+#### Alert - Deadman (system)
 
-#### Disk Space Alert
+The Deadman Alert handler can be used for any state, system or service. The instructions below are to setup an Alert on your monitored system to email you when the ISLE host system has been unresponsive for a period of time that you choose.
 
-[COMING SOON in the 1.2.1 release]
+This will mean the alert can be triggered by the following events:
+  * The monitored ISLE host server:
+    * has crashed or is "dead".
+    * has been shutdown
+  * The ISLE Docker containers:
+    * have been shutdown
 
-* This alert is designed to warn you when one of the ISLE host server disk(s) is/are almost full. Please note this setting should not alert you when the disk is already full. We suggest you use a lower value (e.g. 75%) such that you can safely shutdown containers, backup data and then expand the affected disk's capacity as needed.
+For more details, please consult the official [Kapacitor documentation](https://docs.influxdata.com/kapacitor/v1.5/nodes/alert_node/#deadman) for this alert handler.
 
-#### Deadman Alert
+##### Assumptions:
 
-[COMING SOON in the 1.2.1 release]
+* You have already setup an alert handler e.g. the Email Alert handler.
 
-* This alert is designed to warn you when one of the ISLE host server disk(s) is unresponsive or offline.
+* Any testing of the alert and involved system should start with a non-production system to avoid downtime or confusion.
+
+##### Alert - Deadman setup steps
+
+* Within your running TICK system dashboard, click on the Alerting section and from the dropdown choose the `Manage Tasks` link.
+
+* Click on the blue `Build Alert Rule` button on the right.
+
+* Within the `Name` section, enter a name of your choice for your alert
+  * Example: `Offline Server`
+
+* Within the `Alert Type` section, select `Deadman`
+
+* Within the `Time Series` section, select `telegraf.autogen` from the  `DB.RetentionPolicy` section on the left.
+  * Within the `Measurements & Tags` section, scroll down to the bottom and expand `system` then `host`.
+    * Please note: There may be a number associated with `host`, e.g. `host-8`, this is how many servers or systems you have reporting to this dashboard and TICK system.
+    * Select some or all appropriate hosts, you may have only two (Production and Staging) or you may have more. There will be green dots filling the previously empty checkbox to indicate a selected host.
+    * Once selected, click the `Group By host` button directly above this field. It should now be highlighted in blue.
+
+* Within the `Conditions` section, select a value of time from the `Send Alert if Data is missing for` section's dropdown list.
+  * **Recommendation:** Select a value between 5 and 30 minutes per your alerting needs. Typically we recommend about `5 - 10 mins`
+
+* Within the `Alert Handlers` section, select `email` from the `Send this Alert to` section's dropdown list.
+  * This should pre-populate the appropriate fields with your previously configured email alert handler.
+  * You will need to add the apppropriate `Recipient E-mail Addresses` (_the email address you want these alerts to be sent to_)
+  * You can opt to add additional formatting for the body of the email as needed but we'll leave this field empty for the purposes of this setup. As a result, you'll get additional JSON formated output in the body of any sent alert email which can be useful for further debugging.
+
+* Within the `Message` section, copy and paste the following starter message below into this blank field please.
+  * `{{ .ID }} - {{ index .Tags "host" }} server is {{ .Level }}.`
+
+* Click on the green `Save Rule` button at the top right hand side of the dashboard.
+  * You should get a notification on the Alert webpage that your rule was saved. It is brief, small and disappears quickly. The Alert is now saved and active.
+  * You should now see `1 Alert Rule` with the name of your alert e.g `Offline Server` in blue.
+  * You should now see `1 TICKscript` with the name of your alert e.g `Offline Server` in green.
+  * These two entries are the same alert rule but if you wanted more granular changes, you could edit the green `TICKscript` to add more specific `flux` code.
+    * These changes once saved would also reflect in the blue Alert rule as well. One is really for GUI access the other for granular code.
+  * No further steps are needed other than testing your alert should you choose.
+
+* (Optional) - Test your alert
+  * It is recommended that you test your alert by either:
+    * (Fast) - Shut down the ISLE Docker containers running on the monitored system.
+      * Shut down your ISLE containers on the monitored system.
+      * Wait for the alloted amount of time you choose above.
+      * Check your email account for the Alert message with (Critical) in the email header
+      * If you get your alert email, great!
+        * Restart your ISLE Docker containers
+      * Check your email account for the Alert message with (OK) in the email header
+    * (Long) _ Shut down your ISLE Docker containers running on the monitored system and then your ISLE host server.
+      * Shut down your ISLE containers on the monitored system.
+      * Shutdown your monitored ISLE host server.
+      * Wait for the alloted amount of time you choose above.
+      * Check your email account for the Alert message with (Critical) in the email header. You'll start getting one every minute.
+      * If you get your alert email, great!
+        * Now restart your server
+        * Now restart your Docker containers
+      * Check your email account for the Alert message with (OK) in the email header
+  * If the alert doesn't show up, then retrace your steps, perhaps use a lower value of time and tune as necessary.
+  * Repeat as necessary on either your Production or additional system(s)
+
+* **Please note:** If you only want one alert when your server is down, you'll need to edit your TICKScript (_the green one_) and add the following piece of code `.stateChangesOnly()` to the end of the `var trigger = data` section, ensure that it is indented and is aligned with the line above it. Then click on the green `Save Rule` button at the top right hand side of the dashboard.
+
+##### Alert - Deadman Flux code explanation
+
+* `{{ .ID }}` = Name of the Alert
+* `{{ index .Tags "host" }}` = Name of server
+* `{{ .Level }}.` = `Critical` or `OK`
+
+This message is slightly formatted for readability and context.
+
+By using this starter message via email effectively you'll get two alerts for the following conditions:
+
+* When the system (server) is "down" or unreachable for the duration of time you selected, you'll get an alert email every minute.
+  * For example, the system name is `acme-prod`: `Offline Server-host=acme-server - acme-prod server is CRITICAL.`
+  * There may be additional information put in the email body for review. It will be formatted in JSON notation.
+  * If you only want one alert, you'll need to edit your TICKScript (_the green one_) and add the following piece of code `.stateChangesOnly()` to the end of the `var trigger = data` section, ensure that it is indented and is aligned with the line above it. Then click on the green `Save Rule` button at the top right hand side of the dashboard.
+
+* Once you've taken manual steps on the affected server to restore connectivity and the ISLE system, its containers and services are effectively backup and running, you'll get a follow-up email that indicates that the server is back up and running.
+  * For example: `Offline Server-host=acme-prod - acme-prod server is OK`
+  * There may be additional information put in the email body for review. It will be formatted in JSON notation.
+
+Please note: The code suggestions above use Influxdata `Flux` syntax, for more information on how to change messages and their values please use the official [Flux syntax basics documentation](https://docs.influxdata.com/flux/v0.36/introduction/getting-started/syntax-basics/) for more information.
+
+---
+
+#### Alert - Disk Space
+
+The Disk Space Alert handler can be used to alert you when one or more of your disk(s) are potentially running out of space.
+
+The instructions below are to setup an Alert on your monitored ISLE host system to email you when the ISLE host system operating system disk has passed a threshold of `75%` disk used (full) capacity. You are welcome to change this threshold to a lower or higher value as needed to give yourself or your IT staff time to anticipate the potential disk growth prior to system challenges or errors.
+
+This will mean the alert can be triggered by the following events:
+  * An increase in disk usage by the ISLE host system operating system disk that surpasses `75%` usage
+
+##### Assumptions:
+ * You have already setup an alert handler e.g. the Email Alert handler.
+ * Any testing of the alert and involved system should start with a non-production system to avoid downtime or confusion.
+
+##### Alert - Disk Space setup steps
+
+* Within your running TICK system dashboard, click on the Alerting section and from the dropdown choose the `Manage Tasks` link.
+
+* Click on the blue `Build Alert Rule` button on the right.
+
+* Within the `Name` section, enter a name of your choice for your alert
+  * Example: `Disk Space Exceeded`
+
+* Within the `Alert Type` section, select `Threshold`
+
+* Within the `Time Series` section, select `telegraf.autogen` from the  `DB.RetentionPolicy` section on the left.
+  * Within the `Measurements & Tags` section, scroll down to the bottom and expand `disk` then `host`.
+    * Please note: There may be a number associated with `host`, e.g. `host-8`, this is how many servers or systems you have reporting to this dashboard and TICK system.
+    * Select some or all appropriate hosts, you may have only two (Production and Staging) or you may have more. There will be green dots filling the previously empty checkbox to indicate a selected host.
+    * Once selected, click the `Group By host` button directly above this field. It should now be highlighted in blue.
+    * Within the `Fields` section, select `used_percent`
+      * There will be green dots filling the previously empty checkbox to indicate a selected field.
+
+* Within the `Conditions` section:
+  * Select the `greater than` value in the `Send Alert where` section dropdown box. This value may be pre-populated by default.
+  * Enter the percent value of `90` in the empty `Send Alert where used_percent is greater than ` section's dropdown list.
+    * **Recommendation:** You can change this value as need but a numeric value between `75` and `90` is recommended.
+
+* Within the `Alert Handlers` section, select `email` from the `Send this Alert to` section's dropdown list.
+  * This should pre-populate the appropriate fields with your previously configured email alert handler.
+  * You will need to add the apppropriate `Recipient E-mail Addresses` (_the email address you want these alerts to be sent to_)
+  * You can opt to add additional formatting for the body of the email as needed but we'll leave this field empty for the purposes of this setup. As a result, you'll get additional JSON formated output in the body of any sent alert email which can be useful for further debugging.
+
+* Within the `Message` section, copy and paste the following starter message below into this blank field please.
+  * `{{.ID }} - {{ index .Tags "host"}} {{ .Name }} usage is at {{ index .Fields "value" | printf "%0.2f" }}% - {{ .Level }}`
+
+* Click on the green `Save Rule` button at the top right hand side of the dashboard.
+  * You should get a notification on the Alert webpage that your rule was saved. It is brief, small and disappears quickly. The Alert is now saved and active.
+  * You should now see `1 Alert Rule` with the name of your alert e.g `Disk Space Exceeded` in blue.
+  * You should now see `1 TICKscript` with the name of your alert e.g `Disk Space Exceeded` in green.
+  * These two entries are the same alert rule but if you wanted more granular changes, you could edit the green `TICKscript` to add more specific `flux` code.
+    * These changes once saved would also reflect in the blue Alert rule as well. One is really for GUI access the other for granular code.
+  * No further steps are needed other than testing your alert should you choose.
+
+* (Optional) - Test your alert
+  * First, check the current disk usage on your monitored ISLE host system by sshing into the system and running `df -h`, the output should look something like:
+
+**Example:**  Your output below may not match exactly.
+```bash
+df -h
+
+Filesystem      Size  Used Avail Use% Mounted on
+udev            1.9G     0  1.9G   0% /dev
+tmpfs           389M  1.4M  388M   1% /run
+/dev/nvme0n1p1   18G   68G   50G  26% /
+tmpfs           1.9G     0  1.9G   0% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+tmpfs           1.9G     0  1.9G   0% /sys/fs/cgroup
+tmpfs           389M     0  389M   0% /run/user/10000
+```
+
+  * The system disk used in the example above is mounted on `/`. Your system disk will also most likely be mounted on `/`. If you are not sure, check with your IT team or appropriate system administration resource prior to proceeding.
+
+  * You can now test this alert in one of two ways:
+
+    * **Method 1:** (_Conservative, no test changes on server_)
+      * Lowering or raising the percentage to closer match what your current system using in terms of disk capacity.
+      * Waiting until the monitored ISLE host server actually exceeds the desired disk capacity percentage, triggers the alert and then tune or adjust as needed.
+
+    * **Method 2:** (_Faster but caution ahead on using these commands, you'll be creating fake data_)
+      * Lower the percentage to closer match what your current system using in terms of disk capacity.
+      * Create test conditions to exceed your ISLE system disk usage and trigger the alert.
+        * Change the Alert percentage to something closer to the current `Use%` displayed from the `df -h` command.
+        * Try to set it within 1 percentage point or so of that above value.
+        * Create a dummy `1 GB` text file on your server. Use your user home directory for this process and not in an ISLE data location.
+          * Run `dd if=/dev/zero of=file1.txt count=1024 bs=1048576` to create the dummy 1 GB file
+      * Check your email account for the Alert message with:
+        * For example: `Disk Space Alert-host=acme-prod - acme-prod disk usage is at 76.03% - Critical` in the email message header
+        * If you get your alert email, great!
+        * If the alert doesn't show up, then retrace your steps, perhaps use a lower percentage of capacity and tune as necessary.
+      * Change the percentage back to the higher value. Repeat as necessary on all additional servers.
+      * Delete the dummy `file1.txt` file
+        * Note this will trigger a followup Alert email that the server disk capacity is below the Alert level again and as such "OK."
+        * For example: `Disk Space Alert-host=acme-prod - acme-prod disk usage is at 45.01% - OK`
+
+##### Alert - Disk Space Flux code explanation
+
+* `{{ .ID }}` = Name of the Alert
+* `{{ index .Tags "host" }}` = Name of server
+* `{{ .Name }}.` = Name of impacted service in this case `disk`
+* `{{ index .Fields "value" | printf "%0.2f" }}%` = Reported disk used space from monitored server formatted to display properly in email
+* `{{ .Level }}.` = `Critical` or `OK`
+
+This message is slightly formatted for readability and context.
+
+By using this starter message via email effectively you'll get two alerts for the following conditions:
+
+* When the system (server) is passes the disk used % threshold, you'll get an alert email.
+  * For example, the system name is `acme-prod` and the alert is set to `75%`: `Disk Space Alert-host=acme-prod - acme-prod disk usage is at 76.03% - Critical`
+  * There may be additional information put in the email body for review. It will be formatted in JSON notation.
+
+* Once you've taken manual steps on the affected server to increase disk capacity and the ISLE system, its containers and services are effectively backup and running, you'll get a follow-up email that indicates that the disk capacity is back below the given Alert level and thus acceptable. This alert may not always fire due to the involved steps of increasing disk size. You may see this message if using the optional test steps above.
+  * For example: `Disk Space Alert-host=acme-prod - acme-prod disk usage is at 45.01% - OK`
+  * There may be additional information put in the email body for review. It will be formatted in JSON notation.
+
+Please note: The code suggestions above use Influxdata `Flux` syntax, for more information on how to change messages and their values please use the official [Flux syntax basics documentation](https://docs.influxdata.com/flux/v0.36/introduction/getting-started/syntax-basics/) for more information.
 
 ---
 
@@ -712,11 +913,11 @@ Additional changes were made to the ISLE base images to allow for:
 
 * Logging in ISLE is now set to `stdout` and `stderr` by default instead of log files.
 
-    * Choice in Docker log drivers e.g. `syslog` vs `json`, etc.
+  * Choice in Docker log drivers e.g. `syslog` vs `json`, etc.
 
-    * TICK uses the Docker `syslog` log driver by default.
+  * TICK uses the Docker `syslog` log driver by default.
 
-    * Flexibility for users using monitoring tools other than TICK
+  * Flexibility for users using monitoring tools other than TICK
 
 ---
 
@@ -740,6 +941,3 @@ We welcome questions, suggestions, contributions, and respond promptly to reques
 * [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle) - Post your questions here and subscribe for updates, meeting announcements, and technical support.
 
 * [ISLE GitHub Issues queue](https://github.com/Islandora-Collaboration-Group/ISLE/issues) - Post your issues, bugs and requests for technical documentation here.
-
- --- 
-

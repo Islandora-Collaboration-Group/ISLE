@@ -90,7 +90,7 @@ Be sure to run a backup of any current non-ISLE systems prior to copying or expo
 
 ### Fedora Hash Size (Conditional)
 
-* Are you migrating an existing Islandora site that has greater than one million objects? 
+* Are you migrating an existing Islandora site that has greater than one million objects?
 
 * If true, then please carefully read about the [Fedora Hash Size (Conditional)](../install/install-troubleshooting.md#fedora-hash-size-conditional).
 
@@ -172,18 +172,18 @@ You will create two new, empty, private git repositories (if they do not already
 
 **Note:** This documentation will walk you through using git on the command line.
 
-You will open a terminal and use the command line to clone your newly created (and empty) ISLE project from your git repository hosting service to your personal computer:
+You will open a terminal and use the command line to clone your newly created (and empty) `yourprojectnamehere-isle` repository from your git hosting service to create a local directory/copy on your personal computer:
 
 * Open a `terminal` (Windows: open `Git Bash`)
 
-* Use the "cd" command to navigate to a directory where you want to locate your new ISLE project. (We recommend using the default user home directory. You may choose a different location, but it must not be a protected folder such as system or root directory.)
+* Use the "cd" command to navigate to a directory where you want to locate your new `yourprojectnamehere-isle` directory.  (We recommend using the default user home directory. You may choose a different location, but it must not be a protected folder such as system or root directory.)
     * **Example (Mac):** `cd ~`
     * **Example (Windows):** `cd /c/Users/somebody/`
 
-* Clone your new ISLE project to your personal computer:
+* Clone your new `yourprojectnamehere-isle` repository to your personal computer:
     * **Example:** `git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git`
 
-* **Note:** It is OKAY if you see this warning message: "warning: You appear to have cloned an empty repository."
+* **Note:** It is OKAY if you see this warning message: "Warning: You appear to have cloned an empty repository."
 
 * Navigate to the new directory created by the above clone operation:
 
@@ -206,11 +206,11 @@ origin	https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-i
 origin	https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git (push)
 ```
 
-* Run a git fetch
+* Run a "git fetch" from the `icg-upstream` repository:
 
     * `git fetch icg-upstream`
 
-* Pull down the ICG ISLE "master" branch into your local project's "master" branch
+* Pull down the ICG ISLE "master" branch into your `yourprojectnamehere-isle` local "master" branch:
 
     * `git pull icg-upstream master`
 
@@ -218,7 +218,7 @@ origin	https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-i
 
     * `ls -lha`
 
-* Push this code to your online git provider ISLE
+* Push this code to your git hosting provider:
 
     * `git push -u origin master`
     * This will take 2-5 minutes depending on your internet speed.
@@ -231,9 +231,9 @@ You now have the current ISLE project code checked into git as a foundation to m
 
 This step is intended for users who followed either the "**Intermediate**" or "**Advanced**" migration options in "Step 0" above.  If you choose the **Easy** migration option you may safely skip `Step 2a`.
 
-Navigate to your local "ISLE" directory
+Navigate to your local `yourprojectnamehere-isle` directory:
 
-* `cd /path/to/your/repository`
+* `cd /path/to/yourprojectnamehere-isle`
 
 Create new directories under "./config" to hold the Solr and GSearch files you retrieved in "Step 0".  Do the following::
 
@@ -263,18 +263,19 @@ Continue the local setup as directed below and ultimately import some objects fr
 
 ## Step 3: Git Clone the Production Islandora Drupal Site Code
 
-This step assumes you have an existing Islandora Drupal site checked into a git repository. (If not, then you'll need to check your Drupal site into a git repository following the same commands from [Local ISLE Installation: New Site](../install/install-local-new.md) documentation.)
+This step assumes you have an existing Islandora Drupal site, like `yourprojectnamehere-islandora`, checked into a git repository. (If not, then you'll need to check your Drupal site into a git repository following the same commands from [Local ISLE Installation: New Site](../install/install-local-new.md) documentation.)
 
 **Note:** If below you see a "fatal: Could not read from remote repository." error, then please read [Fatal: Could not read from remote repository](../install/install-troubleshooting.md#fatal-could-not-read-from-remote-repository).
 
 _Using the same open terminal:_
 
-* Create a location outside of your ISLE directory where your Islandora Drupal site code will be stored.
-  While you may create this location anywhere, we suggest that you put it at the same level as your existing ISLE directory. From your ISLE directory, go up one level:
+* Create a location outside of your `/path/to/yourprojectnamehere-isle` directory where your Islandora Drupal site code will be stored.
+  While you may create this location anywhere, we suggest that you put it at the same level as your existing `yourprojectnamehere-isle` directory. From your `/path/to/yourprojectnamehere-isle` directory, go up one level:
+    * `cd /path/to/yourprojectnamehere-isle`
     * `cd ..`
     * `git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-islandora.git`
     * **Example:** The above process created a folder named "yourprojectnamehere-islandora"
-* Now update the "docker-compose.local.yml" in the ISLE repository to create a bind-mount to the Islandora Drupal site code:
+* Now update the "docker-compose.local.yml" in the `yourprojectnamehere-isle` directory to create a bind-mount to the Islandora Drupal site code:
     * Search for "apache:"
     * Find the sub-section called "volumes:"
     * Find this line:
@@ -287,7 +288,7 @@ _Using the same open terminal:_
 
 ## Step 4: Edit the ".env" File to Change to the Local Environment
 
-* Navigate to your ISLE project directory.
+* Navigate to your local `yourprojectnamehere-isle` directory.
 
 * Open the ".env" file in a text editor.
 
@@ -308,7 +309,7 @@ Default: `- ./data/apache/html:/var/www/html:cached`
 
 ## Step 5: Create New Users and Passwords by Editing "local.env" File
 
-You can reuse some of the older Production settings in the "local.env" if you like (e.g. the database name "DRUPAL_DB", database user "DRUPAL_DB_USER" even the drupal database user password "DRUPAL_DB_PASS" if that makes it easier). It is important to avoid repeating passwords in the ISLE Staging and Production environments.
+You can reuse some of the older Production settings in the "local.env" if you like (e.g. the database name "DRUPAL_DB", database user "DRUPAL_DB_USER" even the Drupal database user password "DRUPAL_DB_PASS" if that makes it easier). It is important to avoid repeating passwords in the ISLE Staging and Production environments.
 
 * Open the "local.env" file in a text editor.
 
@@ -342,7 +343,7 @@ You can reuse some of the older Production settings in the "local.env" if you li
 * Follow the in-line instructions to add your project's name to the appropriate areas.
     * Once finished, save and close the file.
 
-* _Using the same open terminal:_, navigate to "/pathto/yourprojectnamehere/scripts/proxy/ssl-certs/"
+* _Using the same open terminal:_, navigate to "/path/to/yourprojectnamehere-isle/scripts/proxy/ssl-certs/"
     * `cd ./scripts/proxy/ssl-certs/`
 
 * Change the permissions on the script to make it executable
@@ -368,8 +369,8 @@ You can reuse some of the older Production settings in the "local.env" if you li
 
 * Download all of the latest ISLE Docker images (_~6 GB of data may take 5-10 minutes_):
 * _Using the same open terminal:_
-    * Navigate to the root of your ISLE project
-    * `cd ~/pathto/yourprojectnamehere`
+    * Navigate to the root of your local `yourprojectnamehere-isle` directory:
+        * `cd ~/path/to/yourprojectnamehere-isle`
     * `docker-compose pull`
 
 ## Step 8: Launch Process
@@ -424,7 +425,7 @@ You can reuse some of the older Production settings in the "local.env" if you li
 This step will show you how to run the "migration_site_vsets.sh" script on the Apache container to change Drupal database site settings for ISLE connectivity.
 
  _Using the same open terminal:_
- 
+
 * Run `docker ps` to determine the apache container name
 * Copy the "migration_site_vsets.sh" to the root of the Drupal directory on your Apache container
     * `docker cp scripts/apache/migration_site_vsets.sh your-apache-containername:/var/www/html/migration_site_vsets.sh`
@@ -472,7 +473,7 @@ Since you've imported an existing Drupal database, you must now reinstall the Is
 * Log in to the local Islandora site with the credentials ("DRUPAL_ADMIN_USER" and "DRUPAL_ADMIN_PASS") you created in "local.env".
 
     * You can also attempt to use login credentials that the Production server would have stored in its database.
-    
+
 * If the newly created Drupal login doesn't work then, you'll need to Shell into the Apache container:
 
     * **For Mac/Ubuntu/CentOS/etc:** `docker exec -it your-apache-containername bash`
@@ -480,15 +481,15 @@ Since you've imported an existing Drupal database, you must now reinstall the Is
 
 * Navigate to this directory
     * `cd /var/www/html`
-    
-* Create the user found in "DRUPAL_ADMIN_USER" and set its password to the value of "DRUPAL_ADMIN_PASS" as you previously created in "local.env". 
+
+* Create the user found in "DRUPAL_ADMIN_USER" and set its password to the value of "DRUPAL_ADMIN_PASS" as you previously created in "local.env".
 
     * In the example below swap-out "DRUPAL_ADMIN_USER" and "DRUPAL_ADMIN_PASS" with those found in "local.env".
 
     * `drush user-create DRUPAL_ADMIN_USER --mail="youremailaddresshere" --password="DRUPAL_ADMIN_PASS";`
-    
+
     * `drush user-add-role "administrator" DRUPAL_ADMIN_USER`
-    
+
 * Type `exit` to exit the container
 
 * Attempt to login again
