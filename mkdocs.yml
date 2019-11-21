@@ -49,6 +49,7 @@ nav:
   - 'Let''s Encrypt: Free SSL Certificates' : 'appendices/configuring-lets-encrypt.md'
   - 'Opening a Terminal in a Running Container': 'appendices/open-terminal-in-running-container.md'
   - 'Sample IT Department Request Letter': 'appendices/sample-it-department-request.md'
+  - 'Sample Server Setups' : 'appendices/server-setups.md'
   - 'Troubleshooting': 'appendices/install-troubleshooting.md'
   - 'User Stories':
     - 'Demo ISLE Installation Example User Story': 'appendices/user-story-demo-site.md'
@@ -57,8 +58,11 @@ nav:
   - 'Warning about Red Hat Install': 'appendices/redhat.md'
 - 'Cookbook Recipes':
   - 'ISLE Cheat Sheet: Docker Commands': 'cookbook-recipes/isle-cheatsheet-docker-commands.md'
+  - 'Setting Up and Testing the Islandora Multi Importer (IMI) Module': 'cookbook-recipes/multi_importer_installation.md'
+  - 'Example AWS Storage Configuration': 'cookbook-recipes/example-aws-configuration.md'
   - 'How to Boot From External Drive': 'cookbook-recipes/boot-from-external-drive.md'
   - 'Finding and Using Documentation for a Previous Release': 'cookbook-recipes/previous-release-docs.md'
+
 - 'About':
   - 'About ISLE': 'about/about-isle.md'
   - 'Contributing to ISLE': 'about/contributing.md'
