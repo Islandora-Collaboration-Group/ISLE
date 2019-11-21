@@ -74,9 +74,9 @@ The script will pack a set of sample files in the local ingest_data directory
 
 Drill down to the ./ingest_data/isle-ingest-samples/IMI directory and look for the following three files:
 
-mods_twig_base.txt
-testCol-tn.png.zip
-testCol.csv
+* mods_twig_base.txt
+* testCol-tn.png.zip
+* testCol.csv
 
 Visit one of these two pages:
 
