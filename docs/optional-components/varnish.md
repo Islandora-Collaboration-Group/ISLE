@@ -30,7 +30,7 @@ VARNISH_MALLOC=256m
 
 ## System Requirements
 
-* [ISLE](https://github.com/Islandora-Collaboration-Group/ISLE) release version `1.3.0`
+* [ISLE](https://github.com/Islandora-Collaboration-Group/ISLE) release version `1.4.0`
     * `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
 
 * Existing ISLE Local, Staging and Production systems and running websites
@@ -65,15 +65,15 @@ VARNISH_MALLOC=256m
 
 | Service | Repository | Tag |
 | ---     | ---        | --- |
-| Apache | [islandoracollabgroup/isle-apache](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-apache/tags) | `1.3.0`|
-| Blazegraph | [islandoracollabgroup/isle-blazegraph](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-blazegraph/tags) | `1.3.0`|
-| Fedora | [islandoracollabgroup/isle-fedora](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-fedora/tags) | `1.3.0`|
-| Image-services | [islandoracollabgroup/isle-imageservices](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-imageservices) | `1.3.0` |
-| MySQL | [islandoracollabgroup/isle-mysql](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-mysql) | `1.3.0` |
+| Apache | [islandoracollabgroup/isle-apache](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-apache/tags) | `1.4.0`|
+| Blazegraph | [islandoracollabgroup/isle-blazegraph](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-blazegraph/tags) | `1.4.0`|
+| Fedora | [islandoracollabgroup/isle-fedora](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-fedora/tags) | `1.4.0`|
+| Image-services | [islandoracollabgroup/isle-imageservices](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-imageservices) | `1.4.0` |
+| MySQL | [islandoracollabgroup/isle-mysql](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-mysql) | `1.4.0` |
 | Portainer | [portainer/portainer](https://hub.docker.com/r/portainer/portainer) | `latest` |
-| Solr  | [islandoracollabgroup/isle-solr](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-solr/tags) | `1.3.0` |
+| Solr  | [islandoracollabgroup/isle-solr](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-solr/tags) | `1.4.0` |
 | Traefik | [traefik/traefik](https://hub.docker.com/_/traefik) | `1.7.9` |
-| Varnish | [islandoracollabgroup/isle-varnish](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-varnish) | `1.3.0`|
+| Varnish | [islandoracollabgroup/isle-varnish](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-varnish) | `1.4.0`|
 
 ---
 
@@ -114,7 +114,7 @@ The installation instructions below will walk you through how to setup and run t
 
 ### Assumptions
 
-* Prior to installation, end user will have a running ISLE system using the current release of `1.3.0.` images.
+* Prior to installation, end user will have a running ISLE system using the current release of `1.4.0.` images.
 
 * This installation process will give the functionality as stated in the `Systems Requirements` image table above for `Varnish` testing and usage.
 
@@ -140,7 +140,7 @@ The installation instructions below will walk you through how to setup and run t
 ## (Optional-component): Uncomment lines below to run ISLE with the Varnish cache
 
 #  varnish:
-#    image: islandoracollabgroup/isle-varnish:1.3.0
+#    image: islandoracollabgroup/isle-varnish:1.4.0
 #    container_name: isle-varnish-${CONTAINER_SHORT_ID}
 #    env_file:
 #      - local.env
@@ -175,7 +175,7 @@ so that it will now look like this and its formatting should line up appropriate
 ## (Optional-component): Uncomment lines below to run ISLE with the Varnish cache
 
   varnish:
-    image: islandoracollabgroup/isle-varnish:1.3.0
+    image: islandoracollabgroup/isle-varnish:1.4.0
     container_name: isle-varnish-${CONTAINER_SHORT_ID}
     env_file:
       - local.env
@@ -208,7 +208,7 @@ so that it will now look like this and its formatting should line up appropriate
 ## (Optional-component): Uncomment lines below to run ISLE with the Varnish cache
 
 #  varnish:
-#    image: islandoracollabgroup/isle-varnish:1.3.0
+#    image: islandoracollabgroup/isle-varnish:1.4.0
 #    container_name: isle-varnish-${CONTAINER_SHORT_ID}
 #    env_file:
 #      - production.env
@@ -243,7 +243,7 @@ so that it will now look like this and its formatting should line up appropriate
 ## (Optional-component): Uncomment lines below to run ISLE with the Varnish cache
 
   varnish:
-    image: islandoracollabgroup/isle-varnish:1.3.0
+    image: islandoracollabgroup/isle-varnish:1.4.0
     container_name: isle-varnish-${CONTAINER_SHORT_ID}
     env_file:
       - production.env
@@ -633,7 +633,7 @@ There are multiple tools that can be used to interact with the Varnish cache. Al
 
 ```bash
 varnish:
-  image: islandoracollabgroup/isle-varnish:1.3.0
+  image: islandoracollabgroup/isle-varnish:1.4.0
   container_name: isle-varnish-${CONTAINER_SHORT_ID}
   env_file:
     - .env
