@@ -83,7 +83,7 @@ echo "New size $sizeafter"
 echo ""
 echo ""
 
-echo "This script has now completed but there are more steps. Please continue to read the directions at https://islandora-collaboration-group.github.io/ISLE/cookbook-recipes/isle-v140-git-cleanup.md/"
+echo "This script has now completed but there are more steps. Please continue to read the directions at https://islandora-collaboration-group.github.io/ISLE/cookbook-recipes/isle-v140-git-cleanup/"
 
 echo ""
 

@@ -20,6 +20,16 @@ Please use the [ISLE Documentation](https://islandora-collaboration-group.github
 * Time required < 30 minutes.
 * **Windows Users**: Please open the .env and uncomment `COMPOSE_CONVERT_WINDOWS_PATHS=1`
 
+## **AS OF THE ISLE v.1.4.0 release in November 2019 (MANDATORY)**
+
+Due to removal of older files and folders and git changes in the ISLE git repository as of `November 28 2019`, please review the following:
+
+* If you are a **new** ISLE user and are cloning or forking this project for the first time after `November 28, 2019`, then **NO** you don't need to pay attention to this notice and can move on to the Quick Start section as needed.
+
+- If you have **previously forked or cloned** the ISLE project **prior to** `November 28, 2019`, then **YES** you do need to follow the instructions given in the [Cleanup ISLE git repository for Release v.1.4.0](https://islandora-collaboration-group.github.io/ISLE/cookbook-recipes/isle-v140-git-cleanup/) documentation.
+
+* If you still feel like you're not sure or cannot tell if you need to do this, then please refer to the instructions given in the `Identification Tools` section of the [Cleanup ISLE git repository for Release v.1.4.0](https://islandora-collaboration-group.github.io/ISLE/cookbook-recipes/isle-v140-git-cleanup/) documentation.
+
 ### Quick Start
 1. Please read: [ISLE Release Candidate (RC): How to Test](https://docs.google.com/document/d/1VUiI_bXo6SLqqUjmInVjBg3-cs40Vj7I_92txjFUoQg/edit#heading=h.1e4943m60lsh)
 2. Clone this repo

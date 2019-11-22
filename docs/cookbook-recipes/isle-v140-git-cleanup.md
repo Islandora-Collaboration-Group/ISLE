@@ -10,7 +10,7 @@ As a result of the ISLE Phase II Sprint F - Optimize Docker Images in Fall 2019,
 
 ---
 
-## **AS OF THE ISLE v.1.4.0 release in November 2019** All ISLE endusers are asked to run this script following the criteria below in the `Do I need to run this script? section.`
+## **AS OF THE ISLE v.1.4.0 release in November 2019** All ISLE endusers are asked to run this script following the criteria below in the "Do I need to run this script? section."
 
 ---
 
