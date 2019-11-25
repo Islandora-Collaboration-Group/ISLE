@@ -4,23 +4,21 @@ As a result of the ISLE Phase II Sprint F - Optimize Docker Images in Fall 2019,
 
 - The cleaned up ISLE git repo size is now 6.6 MB and should take a minimum of less than 3 seconds to clone (_depending on one's Internet connection_)
 
-* a clean up script along with this documentation was created and run on the ISLE repository for the ISLE v.1.4.0 release.
+* a new clean up script called [isle-v140-git-cleanup-script.sh](../assets/isle-v140-git-cleanup-script.sh) has been added along with this documentation created for endusers to run on their ISLE repository.
 
 - Any new pull request will have to be created from a forked or cloned ISLE repository that has had this cleanup process performed on it.
 
 ---
 
-## **AS OF THE ISLE v.1.4.0 release in November 2019** All ISLE endusers are asked to run this script following the criteria below in the "Do I need to run this script? section."
+## **AS OF THE ISLE v.1.4.0 release in November 2019 (MANDATORY)**
 
----
+Due to removal of older files and folders and git changes in the ISLE git repository as of `November 25, 2019`, please review the following:
 
-## Do I need to run this script?
+* If you are a **new** ISLE user and are cloning or forking this project for the first time after `November 25, 2019`, then you can **ignore this documentation** and move on to the Quick Start section within the README.md as needed.
 
-* If you are a new ISLE user and are cloning or forking this project for the first time, then **NO** you don't need to run the script below.
+- If you have **previously forked or cloned** the ISLE project **prior to** `November 25, 2019`, then you **do need to follow the instructions** given in this documentation.
 
-- If you have previously forked or cloned the ISLE project **prior to** November 28, 2019, then **YES** you do need to run the script below.
-
-* If you still feel like you're not sure or cannot tell if you need to do this, please refer to the instructions below in the **Identification Tools** section.
+* If you still feel like you're not sure or cannot tell if you need to do this, then please refer to the instructions given in the `Identification Tools` section below within this documentation.
 
 - If you intend to submit pull requests (PRs) of any kind (documentation, code etc) to the ISLE project, ISLE maintainers will **NOT** accept PRs from repos that haven't had the script run on them as using an uncleaned forked repo will cause the removed files to return.
 
