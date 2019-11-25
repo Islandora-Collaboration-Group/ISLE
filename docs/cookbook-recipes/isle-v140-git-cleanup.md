@@ -22,6 +22,8 @@ As a result of the ISLE Phase II Sprint F - Optimize Docker Images in Fall 2019,
 
 * If you still feel like you're not sure or cannot tell if you need to do this, please refer to the instructions below in the **Identification Tools** section.
 
+- If you intend to submit pull requests (PRs) of any kind (documentation, code etc) to the ISLE project, ISLE maintainers will **NOT** accept PRs from repos that haven't had the script run on them as using an uncleaned forked repo will cause the removed files to return.
+
 There is a brief description of what the script actually does found below in the **Script commands - explained** section.
 
 ---

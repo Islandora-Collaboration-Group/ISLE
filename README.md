@@ -24,11 +24,13 @@ Please use the [ISLE Documentation](https://islandora-collaboration-group.github
 
 Due to removal of older files and folders and git changes in the ISLE git repository as of `November 28 2019`, please review the following:
 
-* If you are a **new** ISLE user and are cloning or forking this project for the first time after `November 28, 2019`, then **NO** you don't need to pay attention to this notice and can move on to the Quick Start section as needed.
+* If you are a **new** ISLE user and are cloning or forking this project for the first time after `November 28, 2019`, then you can **ignore this section and move on to the Quick Start section**.
 
-- If you have **previously forked or cloned** the ISLE project **prior to** `November 28, 2019`, then **YES** you do need to follow the instructions given in the [Cleanup ISLE git repository for Release v.1.4.0](https://islandora-collaboration-group.github.io/ISLE/cookbook-recipes/isle-v140-git-cleanup/) documentation.
+- If you have **previously forked or cloned** the ISLE project **prior to** `November 28, 2019`, then you **do need to follow the instructions** given in the [Cleanup ISLE git repository for Release v.1.4.0](https://islandora-collaboration-group.github.io/ISLE/cookbook-recipes/isle-v140-git-cleanup/) documentation.
 
 * If you still feel like you're not sure or cannot tell if you need to do this, then please refer to the instructions given in the `Identification Tools` section of the [Cleanup ISLE git repository for Release v.1.4.0](https://islandora-collaboration-group.github.io/ISLE/cookbook-recipes/isle-v140-git-cleanup/) documentation.
+
+- If you intend to submit pull requests (PRs) of any kind (documentation, code etc) to the ISLE project, ISLE maintainers will **NOT** accept PRs from repos that haven't had the script run on them as using an uncleaned forked repo will cause the removed files to return.
 
 ### Quick Start
 1. Please read: [ISLE Release Candidate (RC): How to Test](https://docs.google.com/document/d/1VUiI_bXo6SLqqUjmInVjBg3-cs40Vj7I_92txjFUoQg/edit#heading=h.1e4943m60lsh)
