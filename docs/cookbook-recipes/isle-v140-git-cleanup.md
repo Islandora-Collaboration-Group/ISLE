@@ -94,11 +94,13 @@ Enter the name here:
 
 ## Identification tools
 
+* **Please note:** In some of the examples given below, the title and/or names of the git repository examples use ISLE; your forked or cloned repo may be using a different project name or title, so please replace the `ISLE` for the name of your forked or cloned ISLE project git repository instead.
+
 If you would like to check if the files have been removed or are still present:
 
-* Clone this [repo](https://github.com/ivantikal/git-tools.git) to pinpoint offending files and folders to the parent directory of where your local forked or cloned ISLE git repository is located. **Do not** clone this tool into your local forked or cloned ISLE git repository.
+* Clone this [repo](https://github.com/ivantikal/git-tools.git) to pinpoint offending files and folders to the parent directory of where your local forked or cloned ISLE git repository is located. **Do not** clone this tool **into** your local forked or cloned ISLE git repository.
   * `git clone https://github.com/ivantikal/git-tools.git`
-  * Your parent directory should now look like this: (_again please note your local forked or cloned ISLE git repository may not use the ISLE as the title_)
+  * Your parent directory should now look like this example below: (_again please note your local forked or cloned ISLE git repository might not use the ISLE as the title_)
 
 ```bash
   directory/
