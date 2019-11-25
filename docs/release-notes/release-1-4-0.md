@@ -1,4 +1,4 @@
-# Release Notes - ISLE v.1.3.0, 2019-09-27
+# Release Notes - ISLE v.1.4.0, 2019-11-26
 
 ### Contributions to this release from:
 
