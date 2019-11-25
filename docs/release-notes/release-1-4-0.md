@@ -13,13 +13,18 @@
 ### ISLE (main project)
 
 
-* This is an ISLE security release.  Images have been updated and only minor adjustments in version happened.
+* This is an ISLE security release.  Images have been updated and only minor adjustments in versions happened.
 
 ### Upgrade
 
-If you are coming from ISLE releases `1.3.0` - there will be minamal steps to update. 
+If you are coming from ISLE releases `1.3.0` then you **need to follow the instructions** given in
+the [Cleanup ISLE git repository for Release v.1.4.0](https://islandora-collaboration-group.github.io/ISLE/cookbook-recipes/isle-v140-git-cleanup/)
+documentation.
+
 If you are coming from an ISLE release older then `1.3.0`, please read the release notes for `1.3.0` to understand
-the paradigm shift that happened between previous releases. 
+the paradigm shift that happened between previous releases. You will also need to follow the instructions given in
+the [Cleanup ISLE git repository for Release v.1.4.0](https://islandora-collaboration-group.github.io/ISLE/cookbook-recipes/isle-v140-git-cleanup/)
+documentation.
 
 ### ISLE Docker Images
 
