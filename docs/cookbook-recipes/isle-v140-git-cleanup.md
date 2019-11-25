@@ -64,8 +64,8 @@ The steps below in the section `Git cleanup process` will have you perform the f
   * `git clone --mirror git project url`
   * Example:
     * `git clone --mirror git@github.com:username/ISLE.git` (_as a fork using the same project name or title_)
-    * `git clone --mirror git@github.com:username/acmeorg_isle.git` (_as a fork or cloned repo using a different project name or title_)
-  * This will create a new directory called `ISLE.git` or `acmeorg_isle.git` which is not typical clone or fork output.
+    * `git clone --mirror git@github.com:username/yourreponame-isle.git` (_as a fork or cloned repo using a different project name or title_)
+  * This will create a new directory called `ISLE.git` or `yourreponame-isle.git` which is not typical clone or fork output.
 
 * Run the cleanup script
   * `./isle-v140-git-cleanup-script.sh`
@@ -76,7 +76,7 @@ The steps below in the section `Git cleanup process` will have you perform the f
 "Type in the name of your git repo only e.g. ISLE (do not include .git) and then press the [ENTER] or [RETURN] key to continue"`
 Enter the name here:  
 ```
-* Enter the name of your forked or cloned ISLE git repository without the .git extension e.g `ISLE` or `acmeorg-isle` etc.
+* Enter the name of your forked or cloned ISLE git repository without the .git extension e.g `ISLE` or `yourreponame-isle` etc.
 
 * The script will continue and the process takes about 30 - 45 seconds depending on the speed of your system with minimal output.
 
@@ -94,7 +94,7 @@ Enter the name here:
 
 ## Identification tools
 
-* **Please note:** In some of the examples given below, the title and/or names of the git repository examples use ISLE; your forked or cloned repo may be using a different project name or title, so please replace the `ISLE` for the name of your forked or cloned ISLE project git repository instead.
+* **Please note:** In some of the examples given below, the title and/or names of the git repository examples use ISLE; your forked or cloned repo may be using a different project name or title, so please replace the `ISLE` for the name of your forked or cloned ISLE project git repository instead e.g. `yourreponame-isle`.
 
 If you would like to check if the files have been removed or are still present:
 
@@ -109,7 +109,7 @@ If you would like to check if the files have been removed or are still present:
 ```
 
 * Run the tools against your existing local forked or cloned ISLE git repository.
-  * **Example** usage for finding the 50 biggest files or folders in your local forked or cloned ISLE git repository. You can swap out the `ISLE` for the name of your forked or cloned ISLE project git repository.
+  * **Example** usage for finding the 50 biggest files or folders in your local forked or cloned ISLE git repository. You can swap out the `ISLE` for the name of your forked or cloned ISLE project git repository e.g. `yourreponame-isle`
     * `./git-tools/clean-binaries/get_biggest_files_in_history.sh -r ./ISLE/ -n 50`
 
 * Review the resulting file to see if any of the files and folders listed in the `Files & Folder removed` section appear.
