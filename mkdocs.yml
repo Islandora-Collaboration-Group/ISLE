@@ -61,6 +61,7 @@ nav:
   - 'Setting Up and Testing the Islandora Multi Importer (IMI) Module': 'cookbook-recipes/multi_importer_installation.md'
   - 'Example AWS Storage Configuration': 'cookbook-recipes/example-aws-configuration.md'
   - 'How to Boot From External Drive': 'cookbook-recipes/boot-from-external-drive.md'
+  - 'Cleanup ISLE git repository for Release v.1.4.0': 'cookbook-recipes/isle-v140-git-cleanup.md'
   - 'Finding and Using Documentation for a Previous Release': 'cookbook-recipes/previous-release-docs.md'
 
 - 'About':
