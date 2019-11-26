@@ -78,13 +78,15 @@ Enter the name here:
 * The script will continue and the process takes about 30 - 45 seconds depending on the speed of your system with minimal output.
 
 * Your final step is to push this local smaller repo back to the remote repository
-* `git push origin master`
+  * `cd ISLE.git` or `cd yourprojectnamehere-isle.git`
+  * `git push`
 
 * Clone down your newly changed and smaller forked or cloned ISLE project directory again to ensure that the repositiory is smaller to a location of your choice.
 
-- Remove all previous larger size versions of your forked or cloned ISLE project directory. You can now delete the `ISLE_140_GIT_CLEANUP` directory and its contents.
+- **Remove all previous versions of your cloned ISLE project directory.**
+  * You can now delete the `ISLE_140_GIT_CLEANUP` directory and its contents.
 
-* Work from the newly resized and smaller forked or cloned ISLE project directory.
+* Work from a newly cloned `ISLE` or `yourprojectnamehere-isle` project directory.
 
 ---
 
