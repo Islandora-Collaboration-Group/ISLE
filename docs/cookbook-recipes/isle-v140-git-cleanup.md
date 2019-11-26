@@ -22,6 +22,8 @@ Due to removal of older files and folders and git changes in the ISLE git reposi
 
 - If you intend to submit pull requests (PRs) of any kind (documentation, code etc) to the ISLE project, ISLE maintainers will **NOT** accept PRs from repos that haven't had the script run on them as using an uncleaned forked repo will cause the removed files to return.
 
+- Please run this script and process **PRIOR** to attempting to follow the normal ISLE update procedure for version `1.4.0`.
+
 There is a brief description of what the script actually does found below in the **Script commands - explained** section.
 
 ---
@@ -42,51 +44,93 @@ The steps below in the section `Git cleanup process` will have you perform the f
 * Clone down your newly changed and smaller forked or cloned ISLE project directory again to ensure that the repositiory is smaller to a location of your choice.
 - Remove all previous larger size versions of your forked or cloned ISLE project directory. You can now delete the `ISLE_140_GIT_CLEANUP` directory and its contents.
 * Work from the newly resized and smaller forked or cloned ISLE project directory.
-  
+  * As needed re-clone and redeploy projects on locals, staging and production servers.
+
 ### Git cleanup process - Steps
 
-* Open up a terminal
+  * Open up a terminal
 
-* Change directory to a location of your choice
-  * `cd your_path_here`
+  * Change directory to a location of your choice
+    * `cd your_path_here`
 
-* Make a new temporary direcotory called `ISLE_140_GIT_CLEANUP`
-  * `mkdir ISLE_140_GIT_CLEANUP`
+  * Make a new temporary direcotory called `ISLE_140_GIT_CLEANUP`
+    * `mkdir ISLE_140_GIT_CLEANUP`
 
-* Download the script found and save it to the `ISLE_140_GIT_CLEANUP` directory and fix the permissions.
-  * `wget https://raw.githubusercontent.com/Islandora-Collaboration-Group/ISLE/master/docs/assets/isle-v140-git-cleanup-script.sh`
-  * `chmod 755 isle-v140-git-cleanup-script.sh`
+  * Download the script found and save it to the `ISLE_140_GIT_CLEANUP` directory and fix the permissions.
+    * `wget https://raw.githubusercontent.com/Islandora-Collaboration-Group/ISLE/master/docs/assets/isle-v140-git-cleanup-script.sh`
+    
+    * `chmod 755 isle-v140-git-cleanup-script.sh`
 
-* Run this git command to clone your forked or cloned ISLE project directory. This is not the usual `git clone` command, note the `--mirror` flag.
-  * `git clone --mirror git project url`
-  * Example:
-    * `git clone --mirror git@github.com:username/ISLE.git` (_as a fork using the same project name or title_)
-    * `git clone --mirror git@github.com:username/yourprojectnamehere-isle.git` (_as a fork or cloned repo using a different project name or title_)
-  * This will create a new directory called `ISLE.git` or `yourprojectnamehere-isle.git` which is not typical clone or fork output.
+  * Run this git command to clone your forked or cloned ISLE project directory. This is not the usual `git clone` command, note the `--mirror` flag.
+    * `git clone --mirror git project url`
+    
+    * Example:
+    
+      * `git clone --mirror git@github.com:username/ISLE.git` (_as a fork using the same project name or title_)
+      * `git clone --mirror git@github.com:username/yourprojectnamehere-isle.git` (_as a fork or cloned repo using a different project name or title_)
+      
+    * This will create a new directory called `ISLE.git` or `yourprojectnamehere-isle.git` which is not typical clone or fork output.
 
-* Run the cleanup script
-  * `./isle-v140-git-cleanup-script.sh`
+  * Run the cleanup script
+    * `./isle-v140-git-cleanup-script.sh`
 
-* At the start of the script, there will be an interactive input prompt asking you to:
+  * At the start of the script, there will be an interactive input prompt asking you to:
   
 ```bash
 "Type in the name of your git repo only e.g. ISLE (do not include .git) and then press the [ENTER] or [RETURN] key to continue"`
 Enter the name here:  
 ```
-* Enter the name of your forked or cloned ISLE git repository without the .git extension e.g `ISLE` or `yourprojectnamehere-isle` etc.
+  * Enter the name of your forked or cloned ISLE git repository without the .git extension e.g `ISLE` or `yourprojectnamehere-isle` etc.
 
-* The script will continue and the process takes about 30 - 45 seconds depending on the speed of your system with minimal output.
+  * The script will continue and the process takes about 30 - 45 seconds depending on the speed of your system with minimal output.
 
-* Your final step is to push this local smaller repo back to the remote repository
-  * `cd ISLE.git` or `cd yourprojectnamehere-isle.git`
-  * `git push`
+  * Your final step is to push this local smaller repo back to the remote repository
+    * `cd ISLE.git` or `cd yourprojectnamehere-isle.git`
+    
+    * `git push`
 
-* Clone down your newly changed and smaller forked or cloned ISLE project directory again to ensure that the repositiory is smaller to a location of your choice.
+  * Clone down your newly changed and smaller forked or cloned ISLE project directory again to ensure that the repositiory is smaller to a location of your choice.
 
 - **Remove all previous versions of your cloned ISLE project directory.**
   * You can now delete the `ISLE_140_GIT_CLEANUP` directory and its contents.
 
-* Work from a newly cloned `ISLE` or `yourprojectnamehere-isle` project directory.
+  * Work from a newly cloned `ISLE` or `yourprojectnamehere-isle` project directory and continue with the ISLE update process to `1.4.0` (_if/as needed_)
+
+### Git cleanup process - Example redeploy process
+
+  * To re-deploy on your local
+    * **Assumptions:** - You'll have already run the git cleanup steps and script on your forked ISLE git project.
+    * cd into your the parent directory that contains your `yourprojectnamehere-isle` directory e.g. `~/Code/`, `Documents`, `Projects`, or `Sites`.
+      * This will be the directory you chose to locate your `yourprojectnamehere-isle` directory.
+    * `sudo mkdir isle-archive`
+    * `mv yourprojectnamehere-isle isle-archive/`
+    * `git clone yourprojectnamehere-isle project`
+      * If you had any untracked files, you'll need to copy them back into place from `isle-archive/yourprojectnamehere-isle` to the new `yourprojectnamehere-isle`
+      * `docker-compose pull` (_just incase you didn't have any of the new images_)  
+     * If upgrading to ISLE `1.4.0`, then follow the usual [ISLE update steps](../update/update.md)
+
+  * To re-deploy on your staging & production server(s)
+    * **Assumptions:**
+      * You'll have already run the git cleanup steps and script on your forked ISLE git project.
+      * You have already re-cloned your local
+      * You have already followed the usual [ISLE update steps](../update/update.md) for version `1.4.0`
+  
+    * Start with `Staging` first
+      * ssh into your `Staging` ISLE host server
+      * `cd /opt/`
+      * `sudo mkdir isle-archive`
+      * `cd /opt/yourprojectnamehere-isle`
+      * `docker-compose down`
+      * `sudo chown -Rv islandora:islandora isle-archive`
+      * `sudo mv /opt/yourprojectnamehere-isle /opt/isle-archive/`
+      * `git clone yourprojectnamehere-isle project to /opt/`
+      * If you had any untracked files like `acme.json`, you'll need to copy them back into place from `/opt/isle-archive/yourprojectnamehere-isle`
+        * For example: `cp /opt/isle-archive/yourprojectnamehere-isle/config/proxy/acme.json /opt/yourprojectnamehere-isle/config/proxy/acme.json`
+      * Edit your .env for the correct environment and commit the change but do not push back.
+      * `docker-compose pull` (_just incase you didn't have any of the new images_)
+      * `docker-compose up -d` to start up the containers
+  
+    * Repeat these steps above on the `Production` server
 
 ---
 
@@ -97,9 +141,9 @@ Enter the name here:
 
 If you would like to check if the files have been removed or are still present:
 
-* Clone this [repo](https://github.com/ivantikal/git-tools.git) to pinpoint offending files and folders to the parent directory of where your local forked or cloned ISLE git repository is located. **Do not** clone this tool **into** your local forked or cloned ISLE git repository.
-  * `git clone https://github.com/ivantikal/git-tools.git`
-  * Your parent directory should now look like this example below: (_again please note your local forked or cloned ISLE git repository might not use the ISLE as the title_)
+  * Clone this [repo](https://github.com/ivantikal/git-tools.git) to pinpoint offending files and folders to the parent directory of where your local forked or cloned ISLE git repository is located. **Do not** clone this tool **into** your local forked or cloned ISLE git repository.
+    * `git clone https://github.com/ivantikal/git-tools.git`
+    * Your parent directory should now look like this example below: (_again please note your local forked or cloned ISLE git repository might not use the ISLE as the title_)
 
 ```bash
   directory/
@@ -107,18 +151,18 @@ If you would like to check if the files have been removed or are still present:
   └── ISLE
 ```
 
-* Run the tools against your existing local forked or cloned ISLE git repository.
-  * **Example** usage for finding the 50 biggest files or folders in your local forked or cloned ISLE git repository. You can swap out the `ISLE` for the name of your forked or cloned ISLE project git repository e.g. `yourprojectnamehere-isle`
-    * `./git-tools/clean-binaries/get_biggest_files_in_history.sh -r ./ISLE/ -n 50`
+  * Run the tools against your existing local forked or cloned ISLE git repository.
+    * **Example** usage for finding the 50 biggest files or folders in your local forked or cloned ISLE git repository. You can swap out the `ISLE` for the name of your forked or cloned ISLE project git repository e.g. `yourprojectnamehere-isle`
+      * `./git-tools/clean-binaries/get_biggest_files_in_history.sh -r ./ISLE/ -n 50`
 
-* Review the resulting file to see if any of the files and folders listed in the `Files & Folder removed` section appear.
-  * `cat ./git-tools/clean-binaries/get_biggest_files_in_history.sh.tmp/bigtosmall.txt`
+  * Review the resulting file to see if any of the files and folders listed in the `Files & Folder removed` section appear.
+    * `cat ./git-tools/clean-binaries/get_biggest_files_in_history.sh.tmp/bigtosmall.txt`
 
-* If none of the files appear, you don't need to run the script.
+  * If none of the files appear, you don't need to run the script.
 
-* If **any** of the files or folders appear, you **have** to run the script. Scroll back up to the top of this document and follow the steps as provided.
+  * If **any** of the files or folders appear, you **have** to run the script. Scroll back up to the top of this document and follow the steps as provided.
 
-* More information can be found here on to use this [tool](https://www.tikalk.com/posts/2017/04/19/delete-binaries-from-git-repository/)
+  * More information can be found here on to use this [tool](https://www.tikalk.com/posts/2017/04/19/delete-binaries-from-git-repository/)
 
 ---
 
@@ -154,11 +198,11 @@ You are welcome to open up the `isle-v140-git-cleanup-script.sh` in a text edito
 
 Essentially `isle-v140-git-cleanup-script.sh` will perform the following:
 
-* Download the [BFG-repo-cleaner](https://rtyley.github.io/bfg-repo-cleaner/) jar file `bfg-1.113.0.jar`
+  * Download the [BFG-repo-cleaner](https://rtyley.github.io/bfg-repo-cleaner/) jar file `bfg-1.113.0.jar`
 
-* Run the appropriate BFG java commands to delete files and folders
+  * Run the appropriate BFG java commands to delete files and folders
 
-* Run these git commands on your forked or cloned ISLE git repo
-  * `git reflog expire --expire=now --all && git gc --prune=now --aggressive`
+  * Run these git commands on your forked or cloned ISLE git repo
+    * `git reflog expire --expire=now --all && git gc --prune=now --aggressive`
 
-* **Please note:** This script will **not** push back to your source repo. That you need to do manually.
+  * **Please note:** This script will **not** push back to your source repo. That you need to do manually.
