@@ -54,7 +54,7 @@ The steps below in the section `Git cleanup process` will have you perform the f
   * `mkdir ISLE_140_GIT_CLEANUP`
 
 * Download the script found and save it to the `ISLE_140_GIT_CLEANUP` directory and fix the permissions.
-  * `wget https://raw.githubusercontent.com/Islandora-Collaboration-Group/ISLE/docs/assets/isle-v140-git-cleanup-script.sh`
+  * `wget https://raw.githubusercontent.com/Islandora-Collaboration-Group/ISLE/master/docs/assets/isle-v140-git-cleanup-script.sh`
   * `chmod 755 isle-v140-git-cleanup-script.sh`
 
 * Run this git command to clone your forked or cloned ISLE project directory. This is not the usual `git clone` command, note the `--mirror` flag.
