@@ -79,7 +79,7 @@ Enter the name here:
 
 * Your final step is to push this local smaller repo back to the remote repository
   * `cd ISLE.git` or `cd yourprojectnamehere-isle.git`
-  * `git push origin master`
+  * `git push`
 
 * Clone down your newly changed and smaller forked or cloned ISLE project directory again to ensure that the repositiory is smaller to a location of your choice.
 
