@@ -78,7 +78,8 @@ Enter the name here:
 * The script will continue and the process takes about 30 - 45 seconds depending on the speed of your system with minimal output.
 
 * Your final step is to push this local smaller repo back to the remote repository
-* `git push origin master`
+  * `cd ISLE.git` or `cd yourprojectnamehere-isle.git`
+  * `git push origin master`
 
 * Clone down your newly changed and smaller forked or cloned ISLE project directory again to ensure that the repositiory is smaller to a location of your choice.
 
