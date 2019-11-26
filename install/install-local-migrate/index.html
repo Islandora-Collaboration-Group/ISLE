@@ -848,6 +848,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../appendices/server-setups/" title="Sample Server Setups" class="md-nav__link">
+      Sample Server Setups
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../appendices/install-troubleshooting/" title="Troubleshooting" class="md-nav__link">
       Troubleshooting
     </a>
@@ -861,13 +873,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10" type="checkbox" id="nav-4-10">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-11" type="checkbox" id="nav-4-11">
     
-    <label class="md-nav__link" for="nav-4-10">
+    <label class="md-nav__link" for="nav-4-11">
       User Stories
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-10">
+      <label class="md-nav__title" for="nav-4-11">
         User Stories
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -968,8 +980,56 @@
 
 
   <li class="md-nav__item">
+    <a href="../../cookbook-recipes/multi_importer_installation/" title="Setting Up and Testing the Islandora Multi Importer (IMI) Module" class="md-nav__link">
+      Setting Up and Testing the Islandora Multi Importer (IMI) Module
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cookbook-recipes/example-aws-configuration/" title="Example AWS Storage Configuration" class="md-nav__link">
+      Example AWS Storage Configuration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../cookbook-recipes/boot-from-external-drive/" title="How to Boot From External Drive" class="md-nav__link">
       How to Boot From External Drive
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cookbook-recipes/isle-v140-git-cleanup/" title="Cleanup ISLE git repository for Release v.1.4.0" class="md-nav__link">
+      Cleanup ISLE git repository for Release v.1.4.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cookbook-recipes/previous-release-docs/" title="Finding and Using Documentation for a Previous Release" class="md-nav__link">
+      Finding and Using Documentation for a Previous Release
     </a>
   </li>
 
@@ -1148,8 +1208,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release-notes/release-1-3-0/" title="Latest release: 1.3.0" class="md-nav__link">
-      Latest release: 1.3.0
+    <a href="../../release-notes/release-1-4-0/" title="Latest release: 1.4.0" class="md-nav__link">
+      Latest release: 1.4.0
     </a>
   </li>
 
@@ -1172,6 +1232,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-3-0/" title="1.3.0" class="md-nav__link">
+      1.3.0
+    </a>
+  </li>
+
         
           
           
@@ -1600,7 +1672,7 @@
 <h3 id="fedora-hash-size-conditional">Fedora Hash Size (Conditional)</h3>
 <ul>
 <li>
-<p>Are you migrating an existing Islandora site that has greater than one million objects? </p>
+<p>Are you migrating an existing Islandora site that has greater than one million objects?</p>
 </li>
 <li>
 <p>If true, then please carefully read about the <a href="../install-troubleshooting/#fedora-hash-size-conditional">Fedora Hash Size (Conditional)</a>.</p>
@@ -1690,26 +1762,26 @@
 </li>
 </ul>
 <p><strong>Note:</strong> This documentation will walk you through using git on the command line.</p>
-<p>You will open a terminal and use the command line to clone your newly created (and empty) ISLE project from your git repository hosting service to your personal computer:</p>
+<p>You will open a terminal and use the command line to clone your newly created (and empty) <code>yourprojectnamehere-isle</code> repository from your git hosting service to create a local directory/copy on your personal computer:</p>
 <ul>
 <li>
 <p>Open a <code>terminal</code> (Windows: open <code>Git Bash</code>)</p>
 </li>
 <li>
-<p>Use the "cd" command to navigate to a directory where you want to locate your new ISLE project. (We recommend using the default user home directory. You may choose a different location, but it must not be a protected folder such as system or root directory.)</p>
+<p>Use the "cd" command to navigate to a directory where you want to locate your new <code>yourprojectnamehere-isle</code> directory.  (We recommend using the default user home directory. You may choose a different location, but it must not be a protected folder such as system or root directory.)</p>
 <ul>
 <li><strong>Example (Mac):</strong> <code>cd ~</code></li>
 <li><strong>Example (Windows):</strong> <code>cd /c/Users/somebody/</code></li>
 </ul>
 </li>
 <li>
-<p>Clone your new ISLE project to your personal computer:</p>
+<p>Clone your new <code>yourprojectnamehere-isle</code> repository to your personal computer:</p>
 <ul>
 <li><strong>Example:</strong> <code>git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-isle.git</code></li>
 </ul>
 </li>
 <li>
-<p><strong>Note:</strong> It is OKAY if you see this warning message: "warning: You appear to have cloned an empty repository."</p>
+<p><strong>Note:</strong> It is OKAY if you see this warning message: "Warning: You appear to have cloned an empty repository."</p>
 </li>
 <li>
 <p>Navigate to the new directory created by the above clone operation:</p>
@@ -1741,13 +1813,13 @@ origin  https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-
 
 <ul>
 <li>
-<p>Run a git fetch</p>
+<p>Run a "git fetch" from the <code>icg-upstream</code> repository:</p>
 <ul>
 <li><code>git fetch icg-upstream</code></li>
 </ul>
 </li>
 <li>
-<p>Pull down the ICG ISLE "master" branch into your local project's "master" branch</p>
+<p>Pull down the ICG ISLE "master" branch into your <code>yourprojectnamehere-isle</code> local "master" branch:</p>
 <ul>
 <li><code>git pull icg-upstream master</code></li>
 </ul>
@@ -1759,7 +1831,7 @@ origin  https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-
 </ul>
 </li>
 <li>
-<p>Push this code to your online git provider ISLE</p>
+<p>Push this code to your git hosting provider:</p>
 <ul>
 <li><code>git push -u origin master</code></li>
 <li>This will take 2-5 minutes depending on your internet speed.</li>
@@ -1770,9 +1842,9 @@ origin  https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-
 <hr />
 <h3 id="step-2a-add-customizations-from-step-0-to-the-git-workflow">Step 2a: Add Customizations from "Step 0" to the Git Workflow</h3>
 <p>This step is intended for users who followed either the "<strong>Intermediate</strong>" or "<strong>Advanced</strong>" migration options in "Step 0" above.  If you choose the <strong>Easy</strong> migration option you may safely skip <code>Step 2a</code>.</p>
-<p>Navigate to your local "ISLE" directory</p>
+<p>Navigate to your local <code>yourprojectnamehere-isle</code> directory:</p>
 <ul>
-<li><code>cd /path/to/your/repository</code></li>
+<li><code>cd /path/to/yourprojectnamehere-isle</code></li>
 </ul>
 <p>Create new directories under "./config" to hold the Solr and GSearch files you retrieved in "Step 0".  Do the following::</p>
 <pre><code>mkdir -p ./config/solr
@@ -1803,18 +1875,19 @@ mkdir -p ./config/fedora/gsearch
 <p>Continue the local setup as directed below and ultimately import some objects from your existing Fedora repository and see if they display properly in searches as you like.</p>
 <hr />
 <h2 id="step-3-git-clone-the-production-islandora-drupal-site-code">Step 3: Git Clone the Production Islandora Drupal Site Code</h2>
-<p>This step assumes you have an existing Islandora Drupal site checked into a git repository. (If not, then you'll need to check your Drupal site into a git repository following the same commands from <a href="../install-local-new/">Local ISLE Installation: New Site</a> documentation.)</p>
+<p>This step assumes you have an existing Islandora Drupal site, like <code>yourprojectnamehere-islandora</code>, checked into a git repository. (If not, then you'll need to check your Drupal site into a git repository following the same commands from <a href="../install-local-new/">Local ISLE Installation: New Site</a> documentation.)</p>
 <p><strong>Note:</strong> If below you see a "fatal: Could not read from remote repository." error, then please read <a href="../install-troubleshooting/#fatal-could-not-read-from-remote-repository">Fatal: Could not read from remote repository</a>.</p>
 <p><em>Using the same open terminal:</em></p>
 <ul>
-<li>Create a location outside of your ISLE directory where your Islandora Drupal site code will be stored.
-  While you may create this location anywhere, we suggest that you put it at the same level as your existing ISLE directory. From your ISLE directory, go up one level:<ul>
+<li>Create a location outside of your <code>/path/to/yourprojectnamehere-isle</code> directory where your Islandora Drupal site code will be stored.
+  While you may create this location anywhere, we suggest that you put it at the same level as your existing <code>yourprojectnamehere-isle</code> directory. From your <code>/path/to/yourprojectnamehere-isle</code> directory, go up one level:<ul>
+<li><code>cd /path/to/yourprojectnamehere-isle</code></li>
 <li><code>cd ..</code></li>
 <li><code>git clone https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-islandora.git</code></li>
 <li><strong>Example:</strong> The above process created a folder named "yourprojectnamehere-islandora"</li>
 </ul>
 </li>
-<li>Now update the "docker-compose.local.yml" in the ISLE repository to create a bind-mount to the Islandora Drupal site code:<ul>
+<li>Now update the "docker-compose.local.yml" in the <code>yourprojectnamehere-isle</code> directory to create a bind-mount to the Islandora Drupal site code:<ul>
 <li>Search for "apache:"</li>
 <li>Find the sub-section called "volumes:"</li>
 <li>Find this line:<ul>
@@ -1833,7 +1906,7 @@ mkdir -p ./config/fedora/gsearch
 <h2 id="step-4-edit-the-env-file-to-change-to-the-local-environment">Step 4: Edit the ".env" File to Change to the Local Environment</h2>
 <ul>
 <li>
-<p>Navigate to your ISLE project directory.</p>
+<p>Navigate to your local <code>yourprojectnamehere-isle</code> directory.</p>
 </li>
 <li>
 <p>Open the ".env" file in a text editor.</p>
@@ -1858,7 +1931,7 @@ mkdir -p ./config/fedora/gsearch
 Default: <code>- ./data/apache/html:/var/www/html:cached</code></p>
 <hr />
 <h2 id="step-5-create-new-users-and-passwords-by-editing-localenv-file">Step 5: Create New Users and Passwords by Editing "local.env" File</h2>
-<p>You can reuse some of the older Production settings in the "local.env" if you like (e.g. the database name "DRUPAL_DB", database user "DRUPAL_DB_USER" even the drupal database user password "DRUPAL_DB_PASS" if that makes it easier). It is important to avoid repeating passwords in the ISLE Staging and Production environments.</p>
+<p>You can reuse some of the older Production settings in the "local.env" if you like (e.g. the database name "DRUPAL_DB", database user "DRUPAL_DB_USER" even the Drupal database user password "DRUPAL_DB_PASS" if that makes it easier). It is important to avoid repeating passwords in the ISLE Staging and Production environments.</p>
 <ul>
 <li>
 <p>Open the "local.env" file in a text editor.</p>
@@ -1918,7 +1991,7 @@ Default: <code>- ./data/apache/html:/var/www/html:cached</code></p>
 </ul>
 </li>
 <li>
-<p><em>Using the same open terminal:</em>, navigate to "/pathto/yourprojectnamehere/scripts/proxy/ssl-certs/"</p>
+<p><em>Using the same open terminal:</em>, navigate to "/path/to/yourprojectnamehere-isle/scripts/proxy/ssl-certs/"</p>
 <ul>
 <li><code>cd ./scripts/proxy/ssl-certs/</code></li>
 </ul>
@@ -1959,8 +2032,10 @@ Default: <code>- ./data/apache/html:/var/www/html:cached</code></p>
 <ul>
 <li>Download all of the latest ISLE Docker images (<em>~6 GB of data may take 5-10 minutes</em>):</li>
 <li><em>Using the same open terminal:</em><ul>
-<li>Navigate to the root of your ISLE project</li>
-<li><code>cd ~/pathto/yourprojectnamehere</code></li>
+<li>Navigate to the root of your local <code>yourprojectnamehere-isle</code> directory:<ul>
+<li><code>cd ~/path/to/yourprojectnamehere-isle</code></li>
+</ul>
+</li>
 <li><code>docker-compose pull</code></li>
 </ul>
 </li>
@@ -2131,7 +2206,7 @@ Default: <code>- ./data/apache/html:/var/www/html:cached</code></p>
 </ul>
 </li>
 <li>
-<p>Create the user found in "DRUPAL_ADMIN_USER" and set its password to the value of "DRUPAL_ADMIN_PASS" as you previously created in "local.env". </p>
+<p>Create the user found in "DRUPAL_ADMIN_USER" and set its password to the value of "DRUPAL_ADMIN_PASS" as you previously created in "local.env".</p>
 <ul>
 <li>
 <p>In the example below swap-out "DRUPAL_ADMIN_USER" and "DRUPAL_ADMIN_PASS" with those found in "local.env".</p>
