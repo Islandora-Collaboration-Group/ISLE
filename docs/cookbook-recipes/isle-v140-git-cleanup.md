@@ -22,6 +22,8 @@ Due to removal of older files and folders and git changes in the ISLE git reposi
 
 - If you intend to submit pull requests (PRs) of any kind (documentation, code etc) to the ISLE project, ISLE maintainers will **NOT** accept PRs from repos that haven't had the script run on them as using an uncleaned forked repo will cause the removed files to return.
 
+- Please run this script and process **PRIOR** to attempting to follow the normal ISLE update procedure for version `1.4.0`.
+
 There is a brief description of what the script actually does found below in the **Script commands - explained** section.
 
 ---
@@ -42,7 +44,8 @@ The steps below in the section `Git cleanup process` will have you perform the f
 * Clone down your newly changed and smaller forked or cloned ISLE project directory again to ensure that the repositiory is smaller to a location of your choice.
 - Remove all previous larger size versions of your forked or cloned ISLE project directory. You can now delete the `ISLE_140_GIT_CLEANUP` directory and its contents.
 * Work from the newly resized and smaller forked or cloned ISLE project directory.
-  
+  * As needed re-clone and redeploy projects on locals, staging and production servers.
+
 ### Git cleanup process - Steps
 
 * Open up a terminal
@@ -86,7 +89,43 @@ Enter the name here:
 - **Remove all previous versions of your cloned ISLE project directory.**
   * You can now delete the `ISLE_140_GIT_CLEANUP` directory and its contents.
 
-* Work from a newly cloned `ISLE` or `yourprojectnamehere-isle` project directory.
+* Work from a newly cloned `ISLE` or `yourprojectnamehere-isle` project directory and continue with the ISLE update process to `1.4.0` (_if/as needed_)
+
+### Git cleanup process - Example redeploy process
+
+* To re-deploy on your local
+  * **Assumptions:** - You'll have already run the git cleanup steps and script on your forked ISLE git project.
+  * cd into your the parent directory that contains your `yourprojectnamehere-isle` directory e.g. `~/Code/`, `Documents`, `Projects`, or `Sites`.
+    * This will be the directory you chose to locate your `yourprojectnamehere-isle` directory.
+  * `sudo mkdir isle-archive`
+  * `mv yourprojectnamehere-isle isle-archive/`
+  * `git clone yourprojectnamehere-isle project`
+    * If you had any untracked files, you'll need to copy them back into place from `isle-archive/yourprojectnamehere-isle` to the new `yourprojectnamehere-isle`
+    * `docker-compose pull` (_just incase you didn't have any of the new images_)  
+  * If upgrading to ISLE `1.4.0`, then follow the usual [ISLE update steps](../update/update.md)
+
+* To re-deploy on your staging & production server(s)
+  * **Assumptions:**
+    * You'll have already run the git cleanup steps and script on your forked ISLE git project.
+    * You have already re-cloned your local
+    * You have already followed the usual [ISLE update steps](../update/update.md) for version `1.4.0`
+  
+  * Start with `Staging` first
+    * ssh into your `Staging` ISLE host server
+    * `cd /opt/`
+    * `sudo mkdir isle-archive`
+    * `cd /opt/yourprojectnamehere-isle`
+    * `docker-compose down`
+    * `sudo chown -Rv islandora:islandora isle-archive`
+    * `sudo mv /opt/yourprojectnamehere-isle /opt/isle-archive/`
+    * `git clone yourprojectnamehere-isle project to /opt/`
+    * If you had any untracked files like `acme.json`, you'll need to copy them back into place from `/opt/isle-archive/yourprojectnamehere-isle`
+      * For example: `cp /opt/isle-archive/yourprojectnamehere-isle/config/proxy/acme.json /opt/yourprojectnamehere-isle/config/proxy/acme.json`
+    * Edit your .env for the correct environment and commit the change but do not push back.
+    * `docker-compose pull` (_just incase you didn't have any of the new images_)
+    * `docker-compose up -d` to start up the containers
+  
+  * Repeat these steps above on the `Production` server
 
 ---
 
