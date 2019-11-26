@@ -83,9 +83,10 @@ Enter the name here:
 
 * Clone down your newly changed and smaller forked or cloned ISLE project directory again to ensure that the repositiory is smaller to a location of your choice.
 
-- Remove all previous larger size versions of your forked or cloned ISLE project directory. You can now delete the `ISLE_140_GIT_CLEANUP` directory and its contents.
+- **Remove all previous versions of your cloned ISLE project directory.**
+  * You can now delete the `ISLE_140_GIT_CLEANUP` directory and its contents.
 
-* Work from the newly resized and smaller forked or cloned ISLE project directory.
+* Work from a newly cloned `ISLE` or `yourprojectnamehere-isle` project directory.
 
 ---
 
