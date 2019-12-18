@@ -114,7 +114,7 @@ Bind mount in existing transforms and schemas  to override ISLE settings with yo
     * GSearch `islandora_transforms`
     * Keep the files you create during this process; you will need them again for `Step 2a` (below)!
 
-* **Note:** You may need to further review paths in the files mentioned above, and edit them to match ISLE system paths.  
+* **Note:** You may need to further review paths in the files mentioned above, and edit them to match ISLE system paths. i.e. If `foxmltoSolr.xslt` and any transforms within `islandora_transforms` include `xsl:include` statements, make sure they match the paths noted in Step 2a (i.e. `/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms`).
 
 #### Strategy 3: **Advanced** - Diff and Merge Current Production Customization Edits Into ISLE Configs
 
@@ -263,7 +263,7 @@ Continue the local setup as directed below and ultimately import some objects fr
 
 ## Step 3: Git Clone the Production Islandora Drupal Site Code
 
-This step assumes you have an existing Islandora Drupal site, like `yourprojectnamehere-islandora`, checked into a git repository. (If not, then you'll need to check your Drupal site into a git repository following the same commands from [Local ISLE Installation: New Site](../install/install-local-new.md) documentation.)
+This step assumes you have an existing Islandora Drupal site, like `yourprojectnamehere-islandora`, checked into a git repository. (If not, then you'll need to check your Drupal site into a git repository following the same commands from [Local ISLE Installation: New Site](../install/install-local-new.md) documentation. Your git repository should be initialized at the Drupal root.)
 
 **Note:** If below you see a "fatal: Could not read from remote repository." error, then please read [Fatal: Could not read from remote repository](../install/install-troubleshooting.md#fatal-could-not-read-from-remote-repository).
 
@@ -422,6 +422,8 @@ You can reuse some of the older Production settings in the "local.env" if you li
 
 ## Step 10: Run Islandora Drupal Site Scripts
 
+**migration_site_vsets.sh: updates Drupal database settings**
+
 This step will show you how to run the "migration_site_vsets.sh" script on the Apache container to change Drupal database site settings for ISLE connectivity.
 
  _Using the same open terminal:_
@@ -435,6 +437,8 @@ This step will show you how to run the "migration_site_vsets.sh" script on the A
 * Run the script
     * **For Mac/Ubuntu/CentOS/etc:** `docker exec -it your-apache-containername bash -c "cd /var/www/html && ./migration_site_vsets.sh"`
     * **For Microsoft Windows:** `winpty docker exec -it your-apache-containername bash -c "cd /var/www/html && ./migration_site_vsets.sh"`
+
+**install_solution_packs.sh: installs Islandora solution packs**
 
 Since you've imported an existing Drupal database, you must now reinstall the Islandora solution packs so the Fedora repository will be ready to ingest objects.
 
