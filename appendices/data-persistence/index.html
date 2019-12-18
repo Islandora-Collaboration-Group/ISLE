@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.2.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
     
     
       
@@ -42,17 +42,17 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.750b69bd.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
       
       
     
     
-      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
     
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
@@ -104,7 +104,9 @@
               ISLandora Enterprise (ISLE)
             </span>
             <span class="md-header-nav__topic">
-              Data Persistence in Docker
+              
+                Data Persistence in Docker
+              
             </span>
           
         </div>
@@ -147,7 +149,7 @@
         
       
       
-      <main class="md-main">
+      <main class="md-main" role="main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
             
@@ -520,7 +522,7 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#bind-mounts-vs-volumes" title="Bind mounts vs volumes:" class="md-nav__link">
+  <a href="#bind-mounts-vs-volumes" class="md-nav__link">
     Bind mounts vs volumes:
   </a>
   
@@ -528,14 +530,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#volumes" title="Volumes" class="md-nav__link">
+  <a href="#volumes" class="md-nav__link">
     Volumes
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#bind-mounts" title="Bind Mounts" class="md-nav__link">
+  <a href="#bind-mounts" class="md-nav__link">
     Bind Mounts
   </a>
   
@@ -547,21 +549,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-should-be-persisted-this-way" title="What should be persisted this way?" class="md-nav__link">
+  <a href="#what-should-be-persisted-this-way" class="md-nav__link">
     What should be persisted this way?
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-should-not-be-persisted" title="What should NOT be persisted?" class="md-nav__link">
+  <a href="#what-should-not-be-persisted" class="md-nav__link">
     What should NOT be persisted?
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#which-should-i-use-bind-mounts-or-volumes" title="Which should I use, bind mounts or volumes?" class="md-nav__link">
+  <a href="#which-should-i-use-bind-mounts-or-volumes" class="md-nav__link">
     Which should I use, bind mounts or volumes?
   </a>
   
@@ -1144,7 +1146,7 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#bind-mounts-vs-volumes" title="Bind mounts vs volumes:" class="md-nav__link">
+  <a href="#bind-mounts-vs-volumes" class="md-nav__link">
     Bind mounts vs volumes:
   </a>
   
@@ -1152,14 +1154,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#volumes" title="Volumes" class="md-nav__link">
+  <a href="#volumes" class="md-nav__link">
     Volumes
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#bind-mounts" title="Bind Mounts" class="md-nav__link">
+  <a href="#bind-mounts" class="md-nav__link">
     Bind Mounts
   </a>
   
@@ -1171,21 +1173,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-should-be-persisted-this-way" title="What should be persisted this way?" class="md-nav__link">
+  <a href="#what-should-be-persisted-this-way" class="md-nav__link">
     What should be persisted this way?
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-should-not-be-persisted" title="What should NOT be persisted?" class="md-nav__link">
+  <a href="#what-should-not-be-persisted" class="md-nav__link">
     What should NOT be persisted?
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#which-should-i-use-bind-mounts-or-volumes" title="Which should I use, bind mounts or volumes?" class="md-nav__link">
+  <a href="#which-should-i-use-bind-mounts-or-volumes" class="md-nav__link">
     Which should I use, bind mounts or volumes?
   </a>
   
@@ -1244,6 +1246,7 @@ apache-data:/var/www/html
 <p>The answer for this is "it depends".   Bind mounts may be easier to get to on a host machine as you have more control over where they are.  If you are migrating an existing installation, you will almost certainly want to copy over things like your /var/www/html directory and Fedora store and use a bind mount to point to them.  The Solr index, however, should not be migrated over but rather rebuilt.  It doesn't need to exist before the containers do. It is also unlikely that a user would want to navigate to the Solr directory via command line on the host and edit files directly.  A named volume would probably work fine in this case, and be more easily managed by docker. </p>
                 
                   
+                
                 
               
               
@@ -1311,7 +1314,7 @@ apache-data:/var/www/html
       
     </div>
     
-      <script src="../../assets/javascripts/application.39abc4af.js"></script>
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       

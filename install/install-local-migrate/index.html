@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.2.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
     
     
       
@@ -42,17 +42,17 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.750b69bd.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
       
       
     
     
-      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
     
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
@@ -104,7 +104,9 @@
               ISLandora Enterprise (ISLE)
             </span>
             <span class="md-header-nav__topic">
-              Local: Migrate Site
+              
+                Local: Migrate Site
+              
             </span>
           
         </div>
@@ -147,7 +149,7 @@
         
       
       
-      <main class="md-main">
+      <main class="md-main" role="main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
             
@@ -313,21 +315,21 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#assumptions-prerequisites" title="Assumptions / Prerequisites" class="md-nav__link">
+  <a href="#assumptions-prerequisites" class="md-nav__link">
     Assumptions / Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#index-of-instructions" title="Index of Instructions" class="md-nav__link">
+  <a href="#index-of-instructions" class="md-nav__link">
     Index of Instructions
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-0-copy-production-data-to-your-personal-computer" title="Step 0: Copy Production Data to Your Personal Computer" class="md-nav__link">
+  <a href="#step-0-copy-production-data-to-your-personal-computer" class="md-nav__link">
     Step 0: Copy Production Data to Your Personal Computer
   </a>
   
@@ -335,14 +337,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#drupal-site-files-and-code" title="Drupal Site Files and Code" class="md-nav__link">
+  <a href="#drupal-site-files-and-code" class="md-nav__link">
     Drupal Site Files and Code
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#drupal-site-database" title="Drupal Site Database" class="md-nav__link">
+  <a href="#drupal-site-database" class="md-nav__link">
     Drupal Site Database
   </a>
   
@@ -350,7 +352,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#export-the-production-mysql-islandora-drupal-database" title="Export the Production MySQL Islandora Drupal Database" class="md-nav__link">
+  <a href="#export-the-production-mysql-islandora-drupal-database" class="md-nav__link">
     Export the Production MySQL Islandora Drupal Database
   </a>
   
@@ -362,14 +364,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#fedora-hash-size-conditional" title="Fedora Hash Size (Conditional)" class="md-nav__link">
+  <a href="#fedora-hash-size-conditional" class="md-nav__link">
     Fedora Hash Size (Conditional)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#solr-schema-and-islandora-transforms" title="Solr Schema and Islandora Transforms" class="md-nav__link">
+  <a href="#solr-schema-and-islandora-transforms" class="md-nav__link">
     Solr Schema and Islandora Transforms
   </a>
   
@@ -377,21 +379,21 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#strategy-1-easy-run-stock-isle" title="Strategy 1: Easy - Run "Stock" ISLE" class="md-nav__link">
+  <a href="#strategy-1-easy-run-stock-isle" class="md-nav__link">
     Strategy 1: Easy - Run "Stock" ISLE
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#strategy-2-intermediate-bind-mount-in-existing-transforms-and-schemas" title="Strategy 2: Intermediate - Bind Mount in Existing Transforms and Schemas" class="md-nav__link">
+  <a href="#strategy-2-intermediate-bind-mount-in-existing-transforms-and-schemas" class="md-nav__link">
     Strategy 2: Intermediate - Bind Mount in Existing Transforms and Schemas
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#strategy-3-advanced-diff-and-merge-current-production-customization-edits-into-isle-configs" title="Strategy 3: Advanced - Diff and Merge Current Production Customization Edits Into ISLE Configs" class="md-nav__link">
+  <a href="#strategy-3-advanced-diff-and-merge-current-production-customization-edits-into-isle-configs" class="md-nav__link">
     Strategy 3: Advanced - Diff and Merge Current Production Customization Edits Into ISLE Configs
   </a>
   
@@ -408,21 +410,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-1-choose-a-project-name" title="Step 1: Choose a Project Name" class="md-nav__link">
+  <a href="#step-1-choose-a-project-name" class="md-nav__link">
     Step 1: Choose a Project Name
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-15-edit-etchosts-file" title="Step 1.5: Edit "/etc/hosts" File" class="md-nav__link">
+  <a href="#step-15-edit-etchosts-file" class="md-nav__link">
     Step 1.5: Edit "/etc/hosts" File
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-2-setup-git-project-repositories" title="Step 2: Setup Git Project Repositories" class="md-nav__link">
+  <a href="#step-2-setup-git-project-repositories" class="md-nav__link">
     Step 2: Setup Git Project Repositories
   </a>
   
@@ -430,7 +432,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#step-2a-add-customizations-from-step-0-to-the-git-workflow" title="Step 2a: Add Customizations from "Step 0" to the Git Workflow" class="md-nav__link">
+  <a href="#step-2a-add-customizations-from-step-0-to-the-git-workflow" class="md-nav__link">
     Step 2a: Add Customizations from "Step 0" to the Git Workflow
   </a>
   
@@ -442,84 +444,84 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-3-git-clone-the-production-islandora-drupal-site-code" title="Step 3: Git Clone the Production Islandora Drupal Site Code" class="md-nav__link">
+  <a href="#step-3-git-clone-the-production-islandora-drupal-site-code" class="md-nav__link">
     Step 3: Git Clone the Production Islandora Drupal Site Code
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-4-edit-the-env-file-to-change-to-the-local-environment" title="Step 4: Edit the ".env" File to Change to the Local Environment" class="md-nav__link">
+  <a href="#step-4-edit-the-env-file-to-change-to-the-local-environment" class="md-nav__link">
     Step 4: Edit the ".env" File to Change to the Local Environment
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-5-create-new-users-and-passwords-by-editing-localenv-file" title="Step 5: Create New Users and Passwords by Editing "local.env" File" class="md-nav__link">
+  <a href="#step-5-create-new-users-and-passwords-by-editing-localenv-file" class="md-nav__link">
     Step 5: Create New Users and Passwords by Editing "local.env" File
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-6-create-new-self-signed-certs-for-your-project" title="Step 6: Create New Self-Signed Certs for Your Project" class="md-nav__link">
+  <a href="#step-6-create-new-self-signed-certs-for-your-project" class="md-nav__link">
     Step 6: Create New Self-Signed Certs for Your Project
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-7-download-the-isle-images" title="Step 7: Download the ISLE Images" class="md-nav__link">
+  <a href="#step-7-download-the-isle-images" class="md-nav__link">
     Step 7: Download the ISLE Images
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-8-launch-process" title="Step 8: Launch Process" class="md-nav__link">
+  <a href="#step-8-launch-process" class="md-nav__link">
     Step 8: Launch Process
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-9-import-the-production-mysql-drupal-database" title="Step 9: Import the Production MySQL Drupal Database" class="md-nav__link">
+  <a href="#step-9-import-the-production-mysql-drupal-database" class="md-nav__link">
     Step 9: Import the Production MySQL Drupal Database
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-10-run-islandora-drupal-site-scripts" title="Step 10: Run Islandora Drupal Site Scripts" class="md-nav__link">
+  <a href="#step-10-run-islandora-drupal-site-scripts" class="md-nav__link">
     Step 10: Run Islandora Drupal Site Scripts
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-11-test-the-site" title="Step 11: Test the Site" class="md-nav__link">
+  <a href="#step-11-test-the-site" class="md-nav__link">
     Step 11: Test the Site
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-12-ingest-sample-objects" title="Step 12: Ingest Sample Objects" class="md-nav__link">
+  <a href="#step-12-ingest-sample-objects" class="md-nav__link">
     Step 12: Ingest Sample Objects
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#next-steps" title="Next Steps" class="md-nav__link">
+  <a href="#next-steps" class="md-nav__link">
     Next Steps
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#additional-resources" title="Additional Resources" class="md-nav__link">
+  <a href="#additional-resources" class="md-nav__link">
     Additional Resources
   </a>
   
@@ -527,7 +529,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#end-of-local-isle-installation-migrate-existing-islandora-site" title="End of Local ISLE Installation: Migrate Existing Islandora Site" class="md-nav__link">
+  <a href="#end-of-local-isle-installation-migrate-existing-islandora-site" class="md-nav__link">
     End of Local ISLE Installation: Migrate Existing Islandora Site
   </a>
   
@@ -1324,21 +1326,21 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#assumptions-prerequisites" title="Assumptions / Prerequisites" class="md-nav__link">
+  <a href="#assumptions-prerequisites" class="md-nav__link">
     Assumptions / Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#index-of-instructions" title="Index of Instructions" class="md-nav__link">
+  <a href="#index-of-instructions" class="md-nav__link">
     Index of Instructions
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-0-copy-production-data-to-your-personal-computer" title="Step 0: Copy Production Data to Your Personal Computer" class="md-nav__link">
+  <a href="#step-0-copy-production-data-to-your-personal-computer" class="md-nav__link">
     Step 0: Copy Production Data to Your Personal Computer
   </a>
   
@@ -1346,14 +1348,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#drupal-site-files-and-code" title="Drupal Site Files and Code" class="md-nav__link">
+  <a href="#drupal-site-files-and-code" class="md-nav__link">
     Drupal Site Files and Code
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#drupal-site-database" title="Drupal Site Database" class="md-nav__link">
+  <a href="#drupal-site-database" class="md-nav__link">
     Drupal Site Database
   </a>
   
@@ -1361,7 +1363,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#export-the-production-mysql-islandora-drupal-database" title="Export the Production MySQL Islandora Drupal Database" class="md-nav__link">
+  <a href="#export-the-production-mysql-islandora-drupal-database" class="md-nav__link">
     Export the Production MySQL Islandora Drupal Database
   </a>
   
@@ -1373,14 +1375,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#fedora-hash-size-conditional" title="Fedora Hash Size (Conditional)" class="md-nav__link">
+  <a href="#fedora-hash-size-conditional" class="md-nav__link">
     Fedora Hash Size (Conditional)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#solr-schema-and-islandora-transforms" title="Solr Schema and Islandora Transforms" class="md-nav__link">
+  <a href="#solr-schema-and-islandora-transforms" class="md-nav__link">
     Solr Schema and Islandora Transforms
   </a>
   
@@ -1388,21 +1390,21 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#strategy-1-easy-run-stock-isle" title="Strategy 1: Easy - Run "Stock" ISLE" class="md-nav__link">
+  <a href="#strategy-1-easy-run-stock-isle" class="md-nav__link">
     Strategy 1: Easy - Run "Stock" ISLE
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#strategy-2-intermediate-bind-mount-in-existing-transforms-and-schemas" title="Strategy 2: Intermediate - Bind Mount in Existing Transforms and Schemas" class="md-nav__link">
+  <a href="#strategy-2-intermediate-bind-mount-in-existing-transforms-and-schemas" class="md-nav__link">
     Strategy 2: Intermediate - Bind Mount in Existing Transforms and Schemas
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#strategy-3-advanced-diff-and-merge-current-production-customization-edits-into-isle-configs" title="Strategy 3: Advanced - Diff and Merge Current Production Customization Edits Into ISLE Configs" class="md-nav__link">
+  <a href="#strategy-3-advanced-diff-and-merge-current-production-customization-edits-into-isle-configs" class="md-nav__link">
     Strategy 3: Advanced - Diff and Merge Current Production Customization Edits Into ISLE Configs
   </a>
   
@@ -1419,21 +1421,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-1-choose-a-project-name" title="Step 1: Choose a Project Name" class="md-nav__link">
+  <a href="#step-1-choose-a-project-name" class="md-nav__link">
     Step 1: Choose a Project Name
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-15-edit-etchosts-file" title="Step 1.5: Edit "/etc/hosts" File" class="md-nav__link">
+  <a href="#step-15-edit-etchosts-file" class="md-nav__link">
     Step 1.5: Edit "/etc/hosts" File
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-2-setup-git-project-repositories" title="Step 2: Setup Git Project Repositories" class="md-nav__link">
+  <a href="#step-2-setup-git-project-repositories" class="md-nav__link">
     Step 2: Setup Git Project Repositories
   </a>
   
@@ -1441,7 +1443,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#step-2a-add-customizations-from-step-0-to-the-git-workflow" title="Step 2a: Add Customizations from "Step 0" to the Git Workflow" class="md-nav__link">
+  <a href="#step-2a-add-customizations-from-step-0-to-the-git-workflow" class="md-nav__link">
     Step 2a: Add Customizations from "Step 0" to the Git Workflow
   </a>
   
@@ -1453,84 +1455,84 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-3-git-clone-the-production-islandora-drupal-site-code" title="Step 3: Git Clone the Production Islandora Drupal Site Code" class="md-nav__link">
+  <a href="#step-3-git-clone-the-production-islandora-drupal-site-code" class="md-nav__link">
     Step 3: Git Clone the Production Islandora Drupal Site Code
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-4-edit-the-env-file-to-change-to-the-local-environment" title="Step 4: Edit the ".env" File to Change to the Local Environment" class="md-nav__link">
+  <a href="#step-4-edit-the-env-file-to-change-to-the-local-environment" class="md-nav__link">
     Step 4: Edit the ".env" File to Change to the Local Environment
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-5-create-new-users-and-passwords-by-editing-localenv-file" title="Step 5: Create New Users and Passwords by Editing "local.env" File" class="md-nav__link">
+  <a href="#step-5-create-new-users-and-passwords-by-editing-localenv-file" class="md-nav__link">
     Step 5: Create New Users and Passwords by Editing "local.env" File
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-6-create-new-self-signed-certs-for-your-project" title="Step 6: Create New Self-Signed Certs for Your Project" class="md-nav__link">
+  <a href="#step-6-create-new-self-signed-certs-for-your-project" class="md-nav__link">
     Step 6: Create New Self-Signed Certs for Your Project
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-7-download-the-isle-images" title="Step 7: Download the ISLE Images" class="md-nav__link">
+  <a href="#step-7-download-the-isle-images" class="md-nav__link">
     Step 7: Download the ISLE Images
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-8-launch-process" title="Step 8: Launch Process" class="md-nav__link">
+  <a href="#step-8-launch-process" class="md-nav__link">
     Step 8: Launch Process
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-9-import-the-production-mysql-drupal-database" title="Step 9: Import the Production MySQL Drupal Database" class="md-nav__link">
+  <a href="#step-9-import-the-production-mysql-drupal-database" class="md-nav__link">
     Step 9: Import the Production MySQL Drupal Database
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-10-run-islandora-drupal-site-scripts" title="Step 10: Run Islandora Drupal Site Scripts" class="md-nav__link">
+  <a href="#step-10-run-islandora-drupal-site-scripts" class="md-nav__link">
     Step 10: Run Islandora Drupal Site Scripts
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-11-test-the-site" title="Step 11: Test the Site" class="md-nav__link">
+  <a href="#step-11-test-the-site" class="md-nav__link">
     Step 11: Test the Site
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-12-ingest-sample-objects" title="Step 12: Ingest Sample Objects" class="md-nav__link">
+  <a href="#step-12-ingest-sample-objects" class="md-nav__link">
     Step 12: Ingest Sample Objects
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#next-steps" title="Next Steps" class="md-nav__link">
+  <a href="#next-steps" class="md-nav__link">
     Next Steps
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#additional-resources" title="Additional Resources" class="md-nav__link">
+  <a href="#additional-resources" class="md-nav__link">
     Additional Resources
   </a>
   
@@ -1538,7 +1540,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#end-of-local-isle-installation-migrate-existing-islandora-site" title="End of Local ISLE Installation: Migrate Existing Islandora Site" class="md-nav__link">
+  <a href="#end-of-local-isle-installation-migrate-existing-islandora-site" class="md-nav__link">
     End of Local ISLE Installation: Migrate Existing Islandora Site
   </a>
   
@@ -1696,7 +1698,7 @@
 </ul>
 </li>
 <li>
-<p><strong>Note:</strong> You may need to further review paths in the files mentioned above, and edit them to match ISLE system paths.  </p>
+<p><strong>Note:</strong> You may need to further review paths in the files mentioned above, and edit them to match ISLE system paths. i.e. If <code>foxmltoSolr.xslt</code> and any transforms within <code>islandora_transforms</code> include <code>xsl:include</code> statements, make sure they match the paths noted in Step 2a (i.e. <code>/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms</code>).</p>
 </li>
 </ul>
 <h4 id="strategy-3-advanced-diff-and-merge-current-production-customization-edits-into-isle-configs">Strategy 3: <strong>Advanced</strong> - Diff and Merge Current Production Customization Edits Into ISLE Configs</h4>
@@ -1875,7 +1877,7 @@ mkdir -p ./config/fedora/gsearch
 <p>Continue the local setup as directed below and ultimately import some objects from your existing Fedora repository and see if they display properly in searches as you like.</p>
 <hr />
 <h2 id="step-3-git-clone-the-production-islandora-drupal-site-code">Step 3: Git Clone the Production Islandora Drupal Site Code</h2>
-<p>This step assumes you have an existing Islandora Drupal site, like <code>yourprojectnamehere-islandora</code>, checked into a git repository. (If not, then you'll need to check your Drupal site into a git repository following the same commands from <a href="../install-local-new/">Local ISLE Installation: New Site</a> documentation.)</p>
+<p>This step assumes you have an existing Islandora Drupal site, like <code>yourprojectnamehere-islandora</code>, checked into a git repository. (If not, then you'll need to check your Drupal site into a git repository following the same commands from <a href="../install-local-new/">Local ISLE Installation: New Site</a> documentation. Your git repository should be initialized at the Drupal root.)</p>
 <p><strong>Note:</strong> If below you see a "fatal: Could not read from remote repository." error, then please read <a href="../install-troubleshooting/#fatal-could-not-read-from-remote-repository">Fatal: Could not read from remote repository</a>.</p>
 <p><em>Using the same open terminal:</em></p>
 <ul>
@@ -2107,6 +2109,7 @@ Default: <code>- ./data/apache/html:/var/www/html:cached</code></p>
 </ul>
 <hr />
 <h2 id="step-10-run-islandora-drupal-site-scripts">Step 10: Run Islandora Drupal Site Scripts</h2>
+<p><strong>migration_site_vsets.sh: updates Drupal database settings</strong></p>
 <p>This step will show you how to run the "migration_site_vsets.sh" script on the Apache container to change Drupal database site settings for ISLE connectivity.</p>
 <p><em>Using the same open terminal:</em></p>
 <ul>
@@ -2126,6 +2129,7 @@ Default: <code>- ./data/apache/html:/var/www/html:cached</code></p>
 </ul>
 </li>
 </ul>
+<p><strong>install_solution_packs.sh: installs Islandora solution packs</strong></p>
 <p>Since you've imported an existing Drupal database, you must now reinstall the Islandora solution packs so the Fedora repository will be ready to ingest objects.</p>
 <ul>
 <li>Copy the "install_solution_packs.sh" to the root of the Drupal directory on your Apache container<ul>
@@ -2282,6 +2286,7 @@ Default: <code>- ./data/apache/html:/var/www/html:cached</code></p>
                 
                   
                 
+                
               
               
                 
@@ -2348,7 +2353,7 @@ Default: <code>- ./data/apache/html:/var/www/html:cached</code></p>
       
     </div>
     
-      <script src="../../assets/javascripts/application.39abc4af.js"></script>
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       

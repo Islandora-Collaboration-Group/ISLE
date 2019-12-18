@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.2.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
     
     
       
@@ -42,17 +42,17 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.750b69bd.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
       
       
     
     
-      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
     
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
@@ -104,7 +104,9 @@
               ISLandora Enterprise (ISLE)
             </span>
             <span class="md-header-nav__topic">
-              Production: Migrate Site
+              
+                Production: Migrate Site
+              
             </span>
           
         </div>
@@ -147,7 +149,7 @@
         
       
       
-      <main class="md-main">
+      <main class="md-main" role="main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
             
@@ -361,21 +363,21 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#assumptions-prerequisites" title="Assumptions / Prerequisites" class="md-nav__link">
+  <a href="#assumptions-prerequisites" class="md-nav__link">
     Assumptions / Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#index-of-instructions" title="Index of Instructions" class="md-nav__link">
+  <a href="#index-of-instructions" class="md-nav__link">
     Index of Instructions
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-1-copy-production-data-to-your-local" title="Step 1: Copy Production Data to Your Local" class="md-nav__link">
+  <a href="#step-1-copy-production-data-to-your-local" class="md-nav__link">
     Step 1: Copy Production Data to Your Local
   </a>
   
@@ -383,7 +385,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#drupal-site-database" title="Drupal Site Database" class="md-nav__link">
+  <a href="#drupal-site-database" class="md-nav__link">
     Drupal Site Database
   </a>
   
@@ -391,7 +393,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#export-the-production-mysql-islandora-drupal-database" title="Export the Production MySQL Islandora Drupal Database" class="md-nav__link">
+  <a href="#export-the-production-mysql-islandora-drupal-database" class="md-nav__link">
     Export the Production MySQL Islandora Drupal Database
   </a>
   
@@ -408,21 +410,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-2-on-local-shutdown-any-local-containers-review-local-code" title="Step 2: On Local - Shutdown Any Local Containers &amp; Review Local Code" class="md-nav__link">
+  <a href="#step-2-on-local-shutdown-any-local-containers-review-local-code" class="md-nav__link">
     Step 2: On Local - Shutdown Any Local Containers &amp; Review Local Code
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-3-on-local-create-new-users-and-passwords-by-editing-productionenv" title="Step 3: On Local - Create New Users and Passwords by Editing "production.env"" class="md-nav__link">
+  <a href="#step-3-on-local-create-new-users-and-passwords-by-editing-productionenv" class="md-nav__link">
     Step 3: On Local - Create New Users and Passwords by Editing "production.env"
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-4-on-local-review-and-edit-docker-composeproductionyml" title="Step 4: On Local - Review and Edit "docker-compose.production.yml"" class="md-nav__link">
+  <a href="#step-4-on-local-review-and-edit-docker-composeproductionyml" class="md-nav__link">
     Step 4: On Local - Review and Edit "docker-compose.production.yml"
   </a>
   
@@ -430,7 +432,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#ssl-certificates" title="SSL Certificates" class="md-nav__link">
+  <a href="#ssl-certificates" class="md-nav__link">
     SSL Certificates
   </a>
   
@@ -442,91 +444,91 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-4a-on-local-optional-changes-for-docker-composeproductionyml" title="Step 4A: On Local - (Optional) Changes for "docker-compose.production.yml"" class="md-nav__link">
+  <a href="#step-4a-on-local-optional-changes-for-docker-composeproductionyml" class="md-nav__link">
     Step 4A: On Local - (Optional) Changes for "docker-compose.production.yml"
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-5-on-local-production-if-using-commercial-ssls" title="Step 5: On Local Production - If Using Commercial SSLs" class="md-nav__link">
+  <a href="#step-5-on-local-production-if-using-commercial-ssls" class="md-nav__link">
     Step 5: On Local Production - If Using Commercial SSLs
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-6-on-local-commit-isle-code-to-git-repository" title="Step 6: On Local - Commit ISLE Code to Git Repository" class="md-nav__link">
+  <a href="#step-6-on-local-commit-isle-code-to-git-repository" class="md-nav__link">
     Step 6: On Local - Commit ISLE Code to Git Repository
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#on-remote-production-configure-the-isle-production-environment-profile-for-launch-and-usage" title="On Remote Production - Configure the ISLE Production Environment Profile for Launch and Usage" class="md-nav__link">
+  <a href="#on-remote-production-configure-the-isle-production-environment-profile-for-launch-and-usage" class="md-nav__link">
     On Remote Production - Configure the ISLE Production Environment Profile for Launch and Usage
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-7-on-remote-production-git-clone-the-isle-repository-to-the-remote-production-isle-host-server" title="Step 7: On Remote Production - Git Clone the ISLE Repository to the Remote Production ISLE Host Server" class="md-nav__link">
+  <a href="#step-7-on-remote-production-git-clone-the-isle-repository-to-the-remote-production-isle-host-server" class="md-nav__link">
     Step 7: On Remote Production - Git Clone the ISLE Repository to the Remote Production ISLE Host Server
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-8-on-remote-production-create-the-appropriate-local-data-paths-for-apache-fedora-and-log-data" title="Step 8: On Remote Production - Create the Appropriate Local Data Paths for Apache, Fedora and Log Data" class="md-nav__link">
+  <a href="#step-8-on-remote-production-create-the-appropriate-local-data-paths-for-apache-fedora-and-log-data" class="md-nav__link">
     Step 8: On Remote Production - Create the Appropriate Local Data Paths for Apache, Fedora and Log Data
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-9-on-remote-production-clone-your-production-islandora-code" title="Step 9: On Remote Production - Clone Your Production Islandora Code" class="md-nav__link">
+  <a href="#step-9-on-remote-production-clone-your-production-islandora-code" class="md-nav__link">
     Step 9: On Remote Production - Clone Your Production Islandora Code
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-10-on-remote-production-copy-over-the-production-data-directories" title="Step 10: On Remote Production - Copy Over the Production Data Directories" class="md-nav__link">
+  <a href="#step-10-on-remote-production-copy-over-the-production-data-directories" class="md-nav__link">
     Step 10: On Remote Production - Copy Over the Production Data Directories
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-11-on-remote-production-if-using-lets-encrypt" title="Step 11: On Remote Production - If Using Let's Encrypt" class="md-nav__link">
+  <a href="#step-11-on-remote-production-if-using-lets-encrypt" class="md-nav__link">
     Step 11: On Remote Production - If Using Let's Encrypt
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-12-on-remote-production-edit-the-env-file-to-change-to-the-production-environment" title="Step 12: On Remote Production - Edit the ".env" File to Change to the Production Environment" class="md-nav__link">
+  <a href="#step-12-on-remote-production-edit-the-env-file-to-change-to-the-production-environment" class="md-nav__link">
     Step 12: On Remote Production - Edit the ".env" File to Change to the Production Environment
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-13-on-remote-production-download-the-isle-images" title="Step 13: On Remote Production - Download the ISLE Images" class="md-nav__link">
+  <a href="#step-13-on-remote-production-download-the-isle-images" class="md-nav__link">
     Step 13: On Remote Production - Download the ISLE Images
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-14-on-remote-production-start-containers" title="Step 14: On Remote Production - Start Containers" class="md-nav__link">
+  <a href="#step-14-on-remote-production-start-containers" class="md-nav__link">
     Step 14: On Remote Production - Start Containers
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-15-on-remote-production-import-the-local-mysql-drupal-database" title="Step 15: On Remote Production - Import the Local MySQL Drupal Database" class="md-nav__link">
+  <a href="#step-15-on-remote-production-import-the-local-mysql-drupal-database" class="md-nav__link">
     Step 15: On Remote Production - Import the Local MySQL Drupal Database
   </a>
   
@@ -534,7 +536,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#import-the-local-mysql-islandora-drupal-database" title="Import the Local MySQL Islandora Drupal Database" class="md-nav__link">
+  <a href="#import-the-local-mysql-islandora-drupal-database" class="md-nav__link">
     Import the Local MySQL Islandora Drupal Database
   </a>
   
@@ -546,14 +548,14 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-16-on-remote-production-run-isle-scripts" title="Step 16: On Remote Production - Run ISLE Scripts" class="md-nav__link">
+  <a href="#step-16-on-remote-production-run-isle-scripts" class="md-nav__link">
     Step 16: On Remote Production - Run ISLE Scripts
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-17-on-remote-production-re-index-fedora-solr" title="Step 17: On Remote Production - Re-Index Fedora &amp; Solr" class="md-nav__link">
+  <a href="#step-17-on-remote-production-re-index-fedora-solr" class="md-nav__link">
     Step 17: On Remote Production - Re-Index Fedora &amp; Solr
   </a>
   
@@ -561,14 +563,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#reindex-fedora-ri-fedora-sql-database-23" title="Reindex Fedora RI &amp; Fedora SQL Database (2/3)" class="md-nav__link">
+  <a href="#reindex-fedora-ri-fedora-sql-database-23" class="md-nav__link">
     Reindex Fedora RI &amp; Fedora SQL Database (2/3)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#reindex-solr-33" title="Reindex Solr (3/3)" class="md-nav__link">
+  <a href="#reindex-solr-33" class="md-nav__link">
     Reindex Solr (3/3)
   </a>
   
@@ -580,21 +582,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-18-on-remote-production-review-and-test-the-drupal-production-site" title="Step 18: On Remote Production - Review and Test the Drupal Production Site" class="md-nav__link">
+  <a href="#step-18-on-remote-production-review-and-test-the-drupal-production-site" class="md-nav__link">
     Step 18: On Remote Production - Review and Test the Drupal Production Site
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#next-steps" title="Next Steps" class="md-nav__link">
+  <a href="#next-steps" class="md-nav__link">
     Next Steps
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#additional-resources" title="Additional Resources" class="md-nav__link">
+  <a href="#additional-resources" class="md-nav__link">
     Additional Resources
   </a>
   
@@ -602,7 +604,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#end-of-production-isle-installation-new-site" title="End of Production ISLE Installation: New Site" class="md-nav__link">
+  <a href="#end-of-production-isle-installation-new-site" class="md-nav__link">
     End of Production ISLE Installation: New Site
   </a>
   
@@ -1351,21 +1353,21 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#assumptions-prerequisites" title="Assumptions / Prerequisites" class="md-nav__link">
+  <a href="#assumptions-prerequisites" class="md-nav__link">
     Assumptions / Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#index-of-instructions" title="Index of Instructions" class="md-nav__link">
+  <a href="#index-of-instructions" class="md-nav__link">
     Index of Instructions
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-1-copy-production-data-to-your-local" title="Step 1: Copy Production Data to Your Local" class="md-nav__link">
+  <a href="#step-1-copy-production-data-to-your-local" class="md-nav__link">
     Step 1: Copy Production Data to Your Local
   </a>
   
@@ -1373,7 +1375,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#drupal-site-database" title="Drupal Site Database" class="md-nav__link">
+  <a href="#drupal-site-database" class="md-nav__link">
     Drupal Site Database
   </a>
   
@@ -1381,7 +1383,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#export-the-production-mysql-islandora-drupal-database" title="Export the Production MySQL Islandora Drupal Database" class="md-nav__link">
+  <a href="#export-the-production-mysql-islandora-drupal-database" class="md-nav__link">
     Export the Production MySQL Islandora Drupal Database
   </a>
   
@@ -1398,21 +1400,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-2-on-local-shutdown-any-local-containers-review-local-code" title="Step 2: On Local - Shutdown Any Local Containers &amp; Review Local Code" class="md-nav__link">
+  <a href="#step-2-on-local-shutdown-any-local-containers-review-local-code" class="md-nav__link">
     Step 2: On Local - Shutdown Any Local Containers &amp; Review Local Code
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-3-on-local-create-new-users-and-passwords-by-editing-productionenv" title="Step 3: On Local - Create New Users and Passwords by Editing "production.env"" class="md-nav__link">
+  <a href="#step-3-on-local-create-new-users-and-passwords-by-editing-productionenv" class="md-nav__link">
     Step 3: On Local - Create New Users and Passwords by Editing "production.env"
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-4-on-local-review-and-edit-docker-composeproductionyml" title="Step 4: On Local - Review and Edit "docker-compose.production.yml"" class="md-nav__link">
+  <a href="#step-4-on-local-review-and-edit-docker-composeproductionyml" class="md-nav__link">
     Step 4: On Local - Review and Edit "docker-compose.production.yml"
   </a>
   
@@ -1420,7 +1422,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#ssl-certificates" title="SSL Certificates" class="md-nav__link">
+  <a href="#ssl-certificates" class="md-nav__link">
     SSL Certificates
   </a>
   
@@ -1432,91 +1434,91 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-4a-on-local-optional-changes-for-docker-composeproductionyml" title="Step 4A: On Local - (Optional) Changes for "docker-compose.production.yml"" class="md-nav__link">
+  <a href="#step-4a-on-local-optional-changes-for-docker-composeproductionyml" class="md-nav__link">
     Step 4A: On Local - (Optional) Changes for "docker-compose.production.yml"
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-5-on-local-production-if-using-commercial-ssls" title="Step 5: On Local Production - If Using Commercial SSLs" class="md-nav__link">
+  <a href="#step-5-on-local-production-if-using-commercial-ssls" class="md-nav__link">
     Step 5: On Local Production - If Using Commercial SSLs
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-6-on-local-commit-isle-code-to-git-repository" title="Step 6: On Local - Commit ISLE Code to Git Repository" class="md-nav__link">
+  <a href="#step-6-on-local-commit-isle-code-to-git-repository" class="md-nav__link">
     Step 6: On Local - Commit ISLE Code to Git Repository
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#on-remote-production-configure-the-isle-production-environment-profile-for-launch-and-usage" title="On Remote Production - Configure the ISLE Production Environment Profile for Launch and Usage" class="md-nav__link">
+  <a href="#on-remote-production-configure-the-isle-production-environment-profile-for-launch-and-usage" class="md-nav__link">
     On Remote Production - Configure the ISLE Production Environment Profile for Launch and Usage
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-7-on-remote-production-git-clone-the-isle-repository-to-the-remote-production-isle-host-server" title="Step 7: On Remote Production - Git Clone the ISLE Repository to the Remote Production ISLE Host Server" class="md-nav__link">
+  <a href="#step-7-on-remote-production-git-clone-the-isle-repository-to-the-remote-production-isle-host-server" class="md-nav__link">
     Step 7: On Remote Production - Git Clone the ISLE Repository to the Remote Production ISLE Host Server
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-8-on-remote-production-create-the-appropriate-local-data-paths-for-apache-fedora-and-log-data" title="Step 8: On Remote Production - Create the Appropriate Local Data Paths for Apache, Fedora and Log Data" class="md-nav__link">
+  <a href="#step-8-on-remote-production-create-the-appropriate-local-data-paths-for-apache-fedora-and-log-data" class="md-nav__link">
     Step 8: On Remote Production - Create the Appropriate Local Data Paths for Apache, Fedora and Log Data
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-9-on-remote-production-clone-your-production-islandora-code" title="Step 9: On Remote Production - Clone Your Production Islandora Code" class="md-nav__link">
+  <a href="#step-9-on-remote-production-clone-your-production-islandora-code" class="md-nav__link">
     Step 9: On Remote Production - Clone Your Production Islandora Code
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-10-on-remote-production-copy-over-the-production-data-directories" title="Step 10: On Remote Production - Copy Over the Production Data Directories" class="md-nav__link">
+  <a href="#step-10-on-remote-production-copy-over-the-production-data-directories" class="md-nav__link">
     Step 10: On Remote Production - Copy Over the Production Data Directories
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-11-on-remote-production-if-using-lets-encrypt" title="Step 11: On Remote Production - If Using Let's Encrypt" class="md-nav__link">
+  <a href="#step-11-on-remote-production-if-using-lets-encrypt" class="md-nav__link">
     Step 11: On Remote Production - If Using Let's Encrypt
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-12-on-remote-production-edit-the-env-file-to-change-to-the-production-environment" title="Step 12: On Remote Production - Edit the ".env" File to Change to the Production Environment" class="md-nav__link">
+  <a href="#step-12-on-remote-production-edit-the-env-file-to-change-to-the-production-environment" class="md-nav__link">
     Step 12: On Remote Production - Edit the ".env" File to Change to the Production Environment
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-13-on-remote-production-download-the-isle-images" title="Step 13: On Remote Production - Download the ISLE Images" class="md-nav__link">
+  <a href="#step-13-on-remote-production-download-the-isle-images" class="md-nav__link">
     Step 13: On Remote Production - Download the ISLE Images
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-14-on-remote-production-start-containers" title="Step 14: On Remote Production - Start Containers" class="md-nav__link">
+  <a href="#step-14-on-remote-production-start-containers" class="md-nav__link">
     Step 14: On Remote Production - Start Containers
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-15-on-remote-production-import-the-local-mysql-drupal-database" title="Step 15: On Remote Production - Import the Local MySQL Drupal Database" class="md-nav__link">
+  <a href="#step-15-on-remote-production-import-the-local-mysql-drupal-database" class="md-nav__link">
     Step 15: On Remote Production - Import the Local MySQL Drupal Database
   </a>
   
@@ -1524,7 +1526,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#import-the-local-mysql-islandora-drupal-database" title="Import the Local MySQL Islandora Drupal Database" class="md-nav__link">
+  <a href="#import-the-local-mysql-islandora-drupal-database" class="md-nav__link">
     Import the Local MySQL Islandora Drupal Database
   </a>
   
@@ -1536,14 +1538,14 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-16-on-remote-production-run-isle-scripts" title="Step 16: On Remote Production - Run ISLE Scripts" class="md-nav__link">
+  <a href="#step-16-on-remote-production-run-isle-scripts" class="md-nav__link">
     Step 16: On Remote Production - Run ISLE Scripts
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-17-on-remote-production-re-index-fedora-solr" title="Step 17: On Remote Production - Re-Index Fedora &amp; Solr" class="md-nav__link">
+  <a href="#step-17-on-remote-production-re-index-fedora-solr" class="md-nav__link">
     Step 17: On Remote Production - Re-Index Fedora &amp; Solr
   </a>
   
@@ -1551,14 +1553,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#reindex-fedora-ri-fedora-sql-database-23" title="Reindex Fedora RI &amp; Fedora SQL Database (2/3)" class="md-nav__link">
+  <a href="#reindex-fedora-ri-fedora-sql-database-23" class="md-nav__link">
     Reindex Fedora RI &amp; Fedora SQL Database (2/3)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#reindex-solr-33" title="Reindex Solr (3/3)" class="md-nav__link">
+  <a href="#reindex-solr-33" class="md-nav__link">
     Reindex Solr (3/3)
   </a>
   
@@ -1570,21 +1572,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-18-on-remote-production-review-and-test-the-drupal-production-site" title="Step 18: On Remote Production - Review and Test the Drupal Production Site" class="md-nav__link">
+  <a href="#step-18-on-remote-production-review-and-test-the-drupal-production-site" class="md-nav__link">
     Step 18: On Remote Production - Review and Test the Drupal Production Site
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#next-steps" title="Next Steps" class="md-nav__link">
+  <a href="#next-steps" class="md-nav__link">
     Next Steps
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#additional-resources" title="Additional Resources" class="md-nav__link">
+  <a href="#additional-resources" class="md-nav__link">
     Additional Resources
   </a>
   
@@ -1592,7 +1594,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#end-of-production-isle-installation-new-site" title="End of Production ISLE Installation: New Site" class="md-nav__link">
+  <a href="#end-of-production-isle-installation-new-site" class="md-nav__link">
     End of Production ISLE Installation: New Site
   </a>
   
@@ -2415,6 +2417,7 @@ Args
                 
                   
                 
+                
               
               
                 
@@ -2481,7 +2484,7 @@ Args
       
     </div>
     
-      <script src="../../assets/javascripts/application.39abc4af.js"></script>
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       

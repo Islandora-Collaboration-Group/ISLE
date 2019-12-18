@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.2.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
     
     
       
@@ -42,17 +42,17 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.750b69bd.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
       
       
     
     
-      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
     
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
@@ -104,7 +104,9 @@
               ISLandora Enterprise (ISLE)
             </span>
             <span class="md-header-nav__topic">
-              Ansible guide
+              
+                Ansible guide
+              
             </span>
           
         </div>
@@ -147,7 +149,7 @@
         
       
       
-      <main class="md-main">
+      <main class="md-main" role="main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
             
@@ -1061,14 +1063,14 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#prerequisites-assumptions" title="Prerequisites / Assumptions" class="md-nav__link">
+  <a href="#prerequisites-assumptions" class="md-nav__link">
     Prerequisites / Assumptions
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#ansible-deploy-script-explanation" title="Ansible Deploy Script Explanation" class="md-nav__link">
+  <a href="#ansible-deploy-script-explanation" class="md-nav__link">
     Ansible Deploy Script Explanation
   </a>
   
@@ -1076,35 +1078,35 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#installs-software-dependencies-and-tools" title="Installs Software Dependencies and Tools" class="md-nav__link">
+  <a href="#installs-software-dependencies-and-tools" class="md-nav__link">
     Installs Software Dependencies and Tools
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#makes-isle-host-service-changes" title="Makes ISLE Host Service Changes" class="md-nav__link">
+  <a href="#makes-isle-host-service-changes" class="md-nav__link">
     Makes ISLE Host Service Changes
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#adds-users-groups-and-updates-permissions" title="Adds Users, Groups and Updates Permissions" class="md-nav__link">
+  <a href="#adds-users-groups-and-updates-permissions" class="md-nav__link">
     Adds Users, Groups and Updates Permissions
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#installs-additional-software" title="Installs Additional Software" class="md-nav__link">
+  <a href="#installs-additional-software" class="md-nav__link">
     Installs Additional Software
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#ansible-script-directory-structure" title="Ansible Script Directory Structure" class="md-nav__link">
+  <a href="#ansible-script-directory-structure" class="md-nav__link">
     Ansible Script Directory Structure
   </a>
   
@@ -1116,7 +1118,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configure-ansible-script-to-deploy-to-isle-host" title="Configure Ansible Script to Deploy to ISLE Host" class="md-nav__link">
+  <a href="#configure-ansible-script-to-deploy-to-isle-host" class="md-nav__link">
     Configure Ansible Script to Deploy to ISLE Host
   </a>
   
@@ -1124,28 +1126,28 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#ansibledocker_installyml" title="ansible/docker_install.yml" class="md-nav__link">
+  <a href="#ansibledocker_installyml" class="md-nav__link">
     ansible/docker_install.yml
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#ansibleinventoryyml" title="ansible/inventory.yml" class="md-nav__link">
+  <a href="#ansibleinventoryyml" class="md-nav__link">
     ansible/inventory.yml
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#ansibleisle-prod-projectinstitutionyml" title="ansible/isle-prod-project.institution.yml" class="md-nav__link">
+  <a href="#ansibleisle-prod-projectinstitutionyml" class="md-nav__link">
     ansible/isle-prod-project.institution.yml
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#ansible-commands-to-test-connection" title="Ansible Commands to Test Connection" class="md-nav__link">
+  <a href="#ansible-commands-to-test-connection" class="md-nav__link">
     Ansible Commands to Test Connection
   </a>
   
@@ -1157,14 +1159,14 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ansible-commands-for-deploy" title="Ansible Commands for Deploy" class="md-nav__link">
+  <a href="#ansible-commands-for-deploy" class="md-nav__link">
     Ansible Commands for Deploy
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#qc-review-checklist" title="QC Review Checklist" class="md-nav__link">
+  <a href="#qc-review-checklist" class="md-nav__link">
     QC Review Checklist
   </a>
   
@@ -1172,28 +1174,28 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#docker" title="Docker" class="md-nav__link">
+  <a href="#docker" class="md-nav__link">
     Docker
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#docker-compose" title="Docker Compose" class="md-nav__link">
+  <a href="#docker-compose" class="md-nav__link">
     Docker Compose
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#islandora-user" title="islandora User" class="md-nav__link">
+  <a href="#islandora-user" class="md-nav__link">
     islandora User
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#isle-project-directory" title="ISLE Project Directory" class="md-nav__link">
+  <a href="#isle-project-directory" class="md-nav__link">
     ISLE Project Directory
   </a>
   
@@ -1205,7 +1207,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#walkthrough-using-ansible-on-a-macos-control-machine" title="Walkthrough: Using Ansible on a MacOS Control Machine" class="md-nav__link">
+  <a href="#walkthrough-using-ansible-on-a-macos-control-machine" class="md-nav__link">
     Walkthrough: Using Ansible on a MacOS Control Machine
   </a>
   
@@ -1804,6 +1806,7 @@ host_local_macos_isle_localdomain | SUCCESS =&gt; {
                 
                   
                 
+                
               
               
                 
@@ -1835,7 +1838,7 @@ host_local_macos_isle_localdomain | SUCCESS =&gt; {
       
     </div>
     
-      <script src="../../assets/javascripts/application.39abc4af.js"></script>
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
