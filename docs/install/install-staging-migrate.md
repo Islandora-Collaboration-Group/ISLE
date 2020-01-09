@@ -294,7 +294,7 @@ Please clone from your existing Production Islandora git repository.
 * `git clone git@yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-islandora.git /opt/data/apache/html`
 
 * Fix the permissions so that the `islandora` user has access.
-    * `sudo chown -Rv islandora:islandora /opt/yourprojectnamehere-islandora`
+    * `sudo chown -Rv islandora:islandora /opt/data/apache/html`
 
 ---
 
