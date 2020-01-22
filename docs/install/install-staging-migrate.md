@@ -325,9 +325,9 @@ If you are using Commercial SSLs, then please stop and move onto the next step.
 
 If using Let's Encrypt, please continue to follow this step.
 
-* Create an empty `acme.json` within the `./config/proxy/ssl-certs/` directory of your ISLE project.
-    * `touch /opt/yourprojectnamehere/config/proxy/ssl-certs/acme.json`
-        * `chmod 600 /opt/yourprojectnamehere/config/proxy/ssl-certs/acme.json`
+* Create an empty `acme.json` within the `./config/proxy/` directory of your ISLE project.
+    * `touch /opt/yourprojectnamehere/config/proxy/acme.json`
+        * `chmod 600 /opt/yourprojectnamehere/config/proxy/acme.json`
     * This file will be ignored by git and won't cause any errors with checking in code despite the location
     * Do note that you may need to open your firewall briefly to allow the SSL certs to be added to the `acme.json` file. This will be indicated in the following steps.
     * Open your firewall to ports 80, 443 prior to starting up the containers to ensure SSL cert creation.
@@ -461,6 +461,8 @@ git commit -m "Added the edited .env configuration file for Staging. DO NOT PUSH
 
 ## Step 16: On Remote Staging - Run ISLE Scripts
 
+**migration_site_vsets.sh: updates Drupal database settings**
+
 This step will show you how to run the "migration_site_vsets.sh" script on the Apache container to change Drupal database site settings for ISLE connectivity.
 
  _Using the same open terminal:_
@@ -472,6 +474,8 @@ This step will show you how to run the "migration_site_vsets.sh" script on the A
     * `docker exec -it your-apache-containername bash -c "chmod +x /var/www/html/migration_site_vsets.sh"`
 * Run the script
     * `docker exec -it your-apache-containername bash -c "cd /var/www/html && ./migration_site_vsets.sh"`
+
+**fix-permissions.sh: adjusts directory and file permissions in your Drupal site**
 
 This step will show you how to shell into your currently running Staging Apache container, and run the "fix-permissions.sh" script to fix the Drupal site permissions.
 
@@ -489,6 +493,24 @@ This step will show you how to shell into your currently running Staging Apache 
 | - Enter your username and password. Do this.|
 | - Allow vpnkit.exe to communicate with the network.  Click Okay or Allow (accept default selection).|
 | - If the process seems to halt, check the taskbar for background windows.|
+
+**install_solution_packs.sh: installs Islandora solution packs**
+
+Since you've imported an existing Drupal database, you must now reinstall the Islandora solution packs so the Fedora repository will be ready to ingest objects.
+
+* Copy the "install_solution_packs.sh" to the root of the Drupal directory on your Apache container
+    * `docker cp scripts/apache/install_solution_packs.sh your-apache-containername:/var/www/html/install_solution_packs.sh`
+* Change the permissions on the script to make it executable
+    * **For Mac/Ubuntu/CentOS/etc:** `docker exec -it your-apache-containername bash -c "chmod +x /var/www/html/install_solution_packs.sh"`
+    * **For Microsoft Windows:** `winpty docker exec -it your-apache-containername bash -c "chmod +x /var/www/html/install_solution_packs.sh"`
+* Run the script
+    * **For Mac/Ubuntu/CentOS/etc:** `docker exec -it your-apache-containername bash -c "cd /var/www/html && ./install_solution_packs.sh"`
+    * **For Microsoft Windows:** `winpty docker exec -it your-apache-containername bash -c "cd /var/www/html && ./install_solution_packs.sh"`
+* The above process will take a few minutes depending on the speed of your local and Internet connection.
+    * You should see a lot of green [ok] messages.
+    * If the script appears to pause or prompt for "y/n", DO NOT enter any values; the script will automatically answer for you.
+
+* **Proceed only after this message appears:** "Done. 'all' cache was cleared."
 
 ---
 
