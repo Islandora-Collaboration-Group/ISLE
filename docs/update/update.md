@@ -8,7 +8,7 @@ We strongly recommend that you begin the update process on your Local environmen
 
 - These instructions assume you have already installed either the [Local ISLE Installation: New Site](../install/install-local-new.md) or the [Local ISLE Installation: Migrate Existing Islandora Site](../install/install-local-migrate.md) on your Local personal computer and are using that described git workflow.
 - Please test these updates on your Local and Staging environments before updating your Production server.
-- Always read the [Release Notes](../release-notes/release-1-1-2.md) for any version(s) newer than that which you are currently running.
+- Always read the [Release Notes](../release-notes/release-1-4-1.md) for any version(s) newer than that which you are currently running.
 - **Docker Desktop Update:** If Docker prompts that updates are available for your personal computer, please follow these steps:
     1. Go to your Local ISLE site: `docker-compose down`
     2. Install the new updated version(s) of Docker Desktop.
@@ -115,7 +115,7 @@ The new containers should start up and your Staging Islandora site should be ava
 
 ## Update Production Server
 
- When you are confident that your Staging installation is working as expected: 
+ When you are confident that your Staging installation is working as expected:
 
  * Repeat the same above "Update Staging Server" process but do so on your Production server environment.
 
