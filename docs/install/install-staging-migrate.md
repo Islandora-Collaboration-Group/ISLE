@@ -406,6 +406,8 @@ git commit -m "Added the edited .env configuration file for Staging. DO NOT PUSH
 * _Using the same open terminal:_
     * Navigate to the root of your ISLE project
     * `cd ~/opt/yourprojectnamehere`
+    * Start Docker
+    * `systemctl start docker`
     * `docker-compose pull`
 
 ---
