@@ -502,10 +502,10 @@ Since you've imported an existing Drupal database, you must now reinstall the Is
     * `docker cp scripts/apache/install_solution_packs.sh your-apache-containername:/var/www/html/install_solution_packs.sh`
 * Change the permissions on the script to make it executable
     * **For Mac/Ubuntu/CentOS/etc:** `docker exec -it your-apache-containername bash -c "chmod +x /var/www/html/install_solution_packs.sh"`
-    * **For Microsoft Windows:** `winpty docker exec -it your-apache-containername bash -c "chmod +x /var/www/html/install_solution_packs.sh"`
+    * **For Microsoft Windows:** `docker exec -it your-apache-containername bash -c "chmod +x /var/www/html/install_solution_packs.sh"`
 * Run the script
     * **For Mac/Ubuntu/CentOS/etc:** `docker exec -it your-apache-containername bash -c "cd /var/www/html && ./install_solution_packs.sh"`
-    * **For Microsoft Windows:** `winpty docker exec -it your-apache-containername bash -c "cd /var/www/html && ./install_solution_packs.sh"`
+    * **For Microsoft Windows:** `docker exec -it your-apache-containername bash -c "cd /var/www/html && ./install_solution_packs.sh"`
 * The above process will take a few minutes depending on the speed of your local and Internet connection.
     * You should see a lot of green [ok] messages.
     * If the script appears to pause or prompt for "y/n", DO NOT enter any values; the script will automatically answer for you.
