@@ -443,7 +443,11 @@ git commit -m "Added the edited .env configuration file for Staging. DO NOT PUSH
 
 ### Import the Local MySQL Islandora Drupal Database
 
-* Copy the `local_drupal_site_082019.sql` created in Step 1 to the Remote Staging server.
+* Copy the `local_drupal_site_082019.sql` created in Step 1 to the Remote Staging server:
+    * Run docker ps to determine the mysql container name
+    * `docker cp /pathto/prod_drupal_site_082019.sql.gz your-mysql-containername:/prod_drupal_site_082019.sql.gz`
+        * Example: `docker cp /c/db_backups/prod_drupal_site_082019.sql.gz isle-mysql-ld:/prod_drupal_site_082019.sql.gz`
+    * This might take a few minutes depending on the size of the file.
 
 * Import the exported Local MySQL database for use in the current Staging Drupal site. Refer to your `staging.env` for the usernames and passwords used below.
     * You can use a MySQL GUI client for this process instead but the command line directions are only included below.
