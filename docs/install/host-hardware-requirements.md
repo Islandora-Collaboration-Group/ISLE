@@ -8,8 +8,8 @@ If you need help requesting a server environment, please see the [Sample IT Depa
 
 * Ubuntu 18.04 LTS (also: Ubuntu 16.04 LTS)
 * CentOS 7.x
-* MacOS (only for: Demo ISLE Installation)
-* Windows 10 Professional or Enterprise (only for: Demo ISLE Installation)
+* MacOS 
+* Windows 10 Professional or Enterprise 
 * (Read the [Warning about Red Hat Install](../appendices/redhat.md))
 
 **Please select your hardware environment:**
