@@ -3,6 +3,7 @@
 **Please select a topic:**
 
 - [Browser Caching and the Warning: "Bad Gateway"](#browser-caching-and-the-warning-bad-gateway)
+- [Error message: "Install Drupal"](#error-message-install-drupal)
 - [Fatal: Could Not Read From Remote Repository](#fatal-could-not-read-from-remote-repository)
 - [Fedora Hash Size (Conditional)](#fedora-hash-size-conditional)
 - [How to Use a MySQL GUI Client to Import Drupal Database](#how-to-use-a-mysql-gui-client-to-import-drupal-database)
@@ -13,8 +14,18 @@
 ---
 
 ## Browser Caching and the Warning: "Bad Gateway"
-* Problem: While attempting to access "https://yourprojectnamehere.localdomain/" you see the browser result: "Bad Gateway"
-* Possible Solution: Open "https://yourprojectnamehere.localdomain/" in an Incognito window (that prevents the browser from using prior cached pages). (Alternately, you can empty your browser cache in your regular browser.)
+* **Problem:** While attempting to access "https://yourprojectnamehere.localdomain/" you see the browser result: "Bad Gateway"
+* **Possible Solution:** Open "https://yourprojectnamehere.localdomain/" in an Incognito window (that prevents the browser from using prior cached pages). (Alternately, you can empty your browser cache in your regular browser.)
+
+---
+
+## Error message: "Install Drupal"
+* **Problem:** You install Docker software updates to your local; now, the browser no longer displays your local site and instead redirects you to "/install.php" so that you may "Install Drupal".
+* **Possible Cause:** Docker may have added additional dns entries to your hosts file, causing local havoc and confusion. This is easy to clean up and remedy.
+* **Possible Solution:** [Edit the "/etc/hosts" File](../install/install-demo-edit-hosts-file.md) and remove, or comment out, any of the following extra and problematic lines (note that your IP might be in place of the examples below):
+    * 127.0.0.1 kubernetes.docker.internal
+    * 111.222.333.4 host.docker.internal
+    * 111.222.333.4 gateway.docker.internal
 
 ---
 

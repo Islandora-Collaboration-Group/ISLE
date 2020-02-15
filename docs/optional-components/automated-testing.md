@@ -194,7 +194,7 @@ docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && ./run-is
     * Covered by isle-services.feature "imageservices online"
 * 1-9	Able to view Tomcat admin panel for fedora container?
     * Covered by isle-services.feature "fedora online"
-* 1-10	Able to view Fedora services panels e.g. /objects, /describe etc
+* 1-10	Able to view Fedora services panels e.g. /objects, /describe, etc.
     * Covered by isle-services.feature "fedora online"
 * 1-11	Able to view Fedoragsearch panels e.g. /fedoragsearch/rest?operation=updateIndex
     * Covered by isle-services.feature "fedora online"
