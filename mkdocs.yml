@@ -33,7 +33,7 @@ nav:
     - 'Production: Migrate Site': 'install/install-production-migrate.md'    
     - 'Troubleshooting Guide': 'install/install-troubleshooting.md'
     - 'Optional Components': 
-      - 'Overview: Components': 'optional-components/components.md'
+      - 'Overview': 'optional-components/components.md'
       - 'Automated Testing': 'optional-components/automated-testing.md'
       - 'Blazegraph': 'optional-components/blazegraph.md'
       - 'Loc.gov Proxy': 'optional-components/loc-proxy.md'
@@ -63,7 +63,8 @@ nav:
   - 'How to Boot From External Drive': 'cookbook-recipes/boot-from-external-drive.md'
   - 'Cleanup ISLE git repository for Release v.1.4.0': 'cookbook-recipes/isle-v140-git-cleanup.md'
   - 'Finding and Using Documentation for a Previous Release': 'cookbook-recipes/previous-release-docs.md'
-
+- 'Specifications':
+  - 'Resource Matrix': 'specifications/resource-matrix.md'
 - 'About':
   - 'About ISLE': 'about/about-isle.md'
   - 'Contributing to ISLE': 'about/contributing.md'

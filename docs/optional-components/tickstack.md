@@ -295,7 +295,7 @@ Aug 13 17:23:32 ip-172-31-69-204 rsyslogd[9995]: action 'action 8' suspended (mo
 
 * Edit the `docker-compose.staging.yml` file and uncomment lines to enable the new `TICK` services. There is a section called `# Start - TICK stack services section`, underneath that is all of the `TICK` code to be uncommented. (_remove the # before and ensure all code aligns properly like the services above it._)
 
-* At the end of every service definition (_mysql, fedora, solr etc_) within the `docker-compose.staging.yml`, uncomment the following:
+* At the end of every service definition (_mysql, fedora, solr, etc._) within the `docker-compose.staging.yml`, uncomment the following:
 
 ```bash
 #    logging:
@@ -351,10 +351,10 @@ The instructions to setup only the Telegraf Agent on an ISLE system e.g. your Pr
 
 * You'll need to edit the `./config/tick/telegraf/telegraf.staging.conf` to add the following:
     * `hostname = ""`
-        * Enter the name of the server you will be monitoring e.g. `isle-server-staging` or `icg-staging` etc. This value can be a [FQDN](https://kb.iu.edu/d/aiuv), an IP or any name really.
+        * Enter the name of the server you will be monitoring e.g. `isle-server-staging` or `icg-staging`, etc. This value can be a [FQDN](https://kb.iu.edu/d/aiuv), an IP or any name really.
     * `database = "telegraf"`
         * By default, the ISLE TICK setup assumes this database as it is the easiest but pools all data received by individual monitored hosts into one database. For first time users, recommend leaving this value in place.
-        * Users are free to change this to any value to segregate data by systems, group etc.
+        * Users are free to change this to any value to segregate data by systems, group, etc.
     * Change `servers = ["root:<ISLE_ROOT_PASSWORD_HERE>@tcp(mysql:3306)/?tls=false"]` to use your Staging MySQL Root password. Typically this value is in your `staging.env` file. Swap out the `<ISLE_ROOT_PASSWORD_HERE>` with your Staging MySQL Root password.
 
 
@@ -464,13 +464,13 @@ To install the Telegraf agent on a Production system:
 
 * You'll need to edit the `./config/tick/telegraf/telegraf.production.conf` to add the following:
     * `hostname = ""`
-        * Enter the name of the server you will be monitoring e.g. `isle-server-prod` or `icg-production` etc. This value can be a [FQDN](https://kb.iu.edu/d/aiuv) i.e. `production-server.domain.edu`, an IP or any name really. Recommend a short name to be easily read and understood.
+        * Enter the name of the server you will be monitoring e.g. `isle-server-prod` or `icg-production`, etc. This value can be a [FQDN](https://kb.iu.edu/d/aiuv) i.e. `production-server.domain.edu`, an IP or any name really. Recommend a short name to be easily read and understood.
     * `urls = ["http://influxdb:8086"]`
         * Replace the `influxdb` value with the [FQDN](https://kb.iu.edu/d/aiuv) of the Staging server that is running the full TICK stack and that this Telegraf agent will be sending data to e.g.
       `urls = ["http://staging-server.domain.edu:8086"]`
     * `database = "telegraf"`
         * By default, the ISLE TICK setup assumes this database as it is the easiest but pools all data received by individual monitored hosts into one database. For first time users, recommend leaving this value in place.
-        * Users are free to change this to any value to segregate data by systems, group etc.
+        * Users are free to change this to any value to segregate data by systems, group, etc.
     * Change `servers = ["root:<ISLE_ROOT_PASSWORD_HERE>@tcp(mysql:3306)/?tls=false"]` to use your Production MySQL Root password. Typically this value is in your `production.env` file. Swap out the `<ISLE_ROOT_PASSWORD_HERE>` with your Production MySQL Root password.
 
 
@@ -478,7 +478,7 @@ To install the Telegraf agent on a Production system:
 
 * Edit the `docker-compose.production.yml` file and uncomment lines to enable the new `TICK - Telegraf` agent / service. There is a section called `# Start - TICK stack services section`, underneath that is the `TICK` code to be uncommented. (_remove the # before and ensure all code aligns properly like the services above it._)
 
-* At the end of every service definition (_mysql, fedora, solr etc_) within the `docker-compose.production.yml`, uncomment the following:
+* At the end of every service definition (_mysql, fedora, solr, etc._) within the `docker-compose.production.yml`, uncomment the following:
 
 ```bash
 #    logging:
@@ -598,7 +598,7 @@ Within the `Log Viewer` page:
 
     * You can even single click into the `host == your-hostname-here` posted query and change the name to a different host.
 
-* You can also search using ISLE key service words to drill down on log reporting. e.g. `apache`, `fedora`, `varnish` etc
+* You can also search using ISLE key service words to drill down on log reporting. e.g. `apache`, `fedora`, `varnish`, etc
 
 ---
 

@@ -162,10 +162,7 @@ Git must be installed to get a copy (called a `clone`) of the current ISLE proje
     * Click the button: `Please Login to Download`
         * Click: `Sign In` or `Sign Up`
     * Click the button: `Download Docker Desktop`
-        * The `Docker.dmg` file should start to download. Check your `Downloads` directory.
-    * Double-click the `Docker.dmg` file. The file should open and mount in a new window or prompt.
-    * As instructed within the prompt, drag and drop the whale icon to the right towards the `Applications` directory shortcut, a tiny green plus sign should appear, now let go from the mouse.
-    * The application should start to copy data to the `Applications` directory, this process may take 1-5 minutes depending on the speed of your hard-drive.
+    * Finish installing Docker Desktop
 * Important Docker installation notes:
     * If Docker prompts you to restart the personal computer, please do so.
     * If Docker prompts you to install additional Docker updates, please do so.

@@ -4,7 +4,7 @@ As a result of the ISLE Phase II Sprint F - Optimize Docker Images in Fall 2019,
 
 - The cleaned up ISLE git repo size is now 6.6 MB and should take a minimum of less than 3 seconds to clone (_depending on one's Internet connection_)
 
-* a new clean up script called [isle-v140-git-cleanup-script.sh](../assets/isle-v140-git-cleanup-script.sh) has been added along with this documentation created for endusers to run on their ISLE repository.
+* a new clean up script called [isle-v140-git-cleanup-script.sh](../assets/isle-v140-git-cleanup-script.sh) has been added along with this documentation created for end users to run on their ISLE repository.
 
 - Any new pull request will have to be created from a forked or cloned ISLE repository that has had this cleanup process performed on it.
 

@@ -1,3 +1,5 @@
+# Resource Matrix
+
 This document is a suggested guide for allocating ISLE host resources based on your ISLE environment.
 
 * **Note:** These are recommended defaults which sometimes include a range. Your needs may require more resources to be added. It is **not recommended** to go below the defaults for the Staging and Production environments.
@@ -8,7 +10,7 @@ This document is a suggested guide for allocating ISLE host resources based on y
 
 ---
 
-## Resource matrix by ISLE environment / system
+## Resource Matrix by ISLE Environment / System
 
 | Resource  | Demo  | Local | Test | Staging    | Production   |
 | ---       | ---   | ---   |  --- | ---        | ---          |
@@ -32,7 +34,7 @@ This document is a suggested guide for allocating ISLE host resources based on y
 
 ---
 
-### Memory allocation and tuning concepts
+### Memory Allocation and Tuning Concepts
 
 The tuning and configuration of ISLE can vary based on system resources and traffic, it is recommended that you start out with the default memory allocations and test the results as you increase or decrease in key areas.
 
@@ -71,7 +73,7 @@ When planning for ingesting objects at a high volume and rate, it would be highl
 
 ---
 
-#### Varnish allocation for a Production system
+#### Varnish Allocation for a Production System
 
 * **Example configuration** for a Production ISLE host server using `16 GB` of memory.
   * Expect to allocate about 40 - 50% of the host server memory for all of the Java / Tomcat based images
