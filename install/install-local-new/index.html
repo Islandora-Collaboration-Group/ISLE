@@ -2,7 +2,7 @@
 
 
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="no-js">
   <head>
     
@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0, mkdocs-material-3.0.3">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
     
     
       
@@ -42,23 +42,27 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
       
       
     
     
-      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
     
     
-      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
       
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
     <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
     
+    
       <link rel="stylesheet" href="../../extra.css">
+    
+    
+      
     
     
   </head>
@@ -75,7 +79,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../../#local-isle-installation-new-site" tabindex="1" class="md-skip">
+      <a href="#local-isle-installation-new-site" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -96,22 +100,21 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           
-            
-              <span class="md-header-nav__topic">
-                ISLandora Enterprise (ISLE)
-              </span>
-              <span class="md-header-nav__topic">
+            <span class="md-header-nav__topic">
+              ISLandora Enterprise (ISLE)
+            </span>
+            <span class="md-header-nav__topic">
+              
                 Local: New Site
-              </span>
-            
+              
+            </span>
           
         </div>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
         
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
           
-            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
-            
 <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
@@ -134,7 +137,6 @@
     </div>
   </div>
 </div>
-          
         
       </div>
       
@@ -147,7 +149,7 @@
         
       
       
-      <main class="md-main">
+      <main class="md-main" role="main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
             
@@ -301,112 +303,112 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#assumptions-prerequisites" title="Assumptions / Prerequisites" class="md-nav__link">
+  <a href="#assumptions-prerequisites" class="md-nav__link">
     Assumptions / Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#index-of-instructions" title="Index of Instructions" class="md-nav__link">
+  <a href="#index-of-instructions" class="md-nav__link">
     Index of Instructions
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-1-choose-a-project-name" title="Step 1: Choose a Project Name" class="md-nav__link">
+  <a href="#step-1-choose-a-project-name" class="md-nav__link">
     Step 1: Choose a Project Name
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-15-edit-etchosts-file" title="Step 1.5: Edit "/etc/hosts" File" class="md-nav__link">
+  <a href="#step-15-edit-etchosts-file" class="md-nav__link">
     Step 1.5: Edit "/etc/hosts" File
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-2-setup-git-project-repositories" title="Step 2: Setup Git Project Repositories" class="md-nav__link">
+  <a href="#step-2-setup-git-project-repositories" class="md-nav__link">
     Step 2: Setup Git Project Repositories
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-3-edit-the-env-file-to-point-to-the-local-environment" title="Step 3: Edit the ".env" File to Point to the Local Environment" class="md-nav__link">
+  <a href="#step-3-edit-the-env-file-to-point-to-the-local-environment" class="md-nav__link">
     Step 3: Edit the ".env" File to Point to the Local Environment
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-4-create-new-users-and-passwords-by-editing-localenv-file" title="Step 4: Create New Users and Passwords by Editing "local.env" File" class="md-nav__link">
+  <a href="#step-4-create-new-users-and-passwords-by-editing-localenv-file" class="md-nav__link">
     Step 4: Create New Users and Passwords by Editing "local.env" File
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-5-create-new-self-signed-certs-for-your-project" title="Step 5: Create New Self-Signed Certs for Your Project" class="md-nav__link">
+  <a href="#step-5-create-new-self-signed-certs-for-your-project" class="md-nav__link">
     Step 5: Create New Self-Signed Certs for Your Project
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-6-download-the-isle-images" title="Step 6: Download the ISLE Images" class="md-nav__link">
+  <a href="#step-6-download-the-isle-images" class="md-nav__link">
     Step 6: Download the ISLE Images
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-7-launch-process" title="Step 7: Launch Process" class="md-nav__link">
+  <a href="#step-7-launch-process" class="md-nav__link">
     Step 7: Launch Process
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-8-run-islandora-drupal-site-install-script" title="Step 8: Run Islandora Drupal Site Install Script" class="md-nav__link">
+  <a href="#step-8-run-islandora-drupal-site-install-script" class="md-nav__link">
     Step 8: Run Islandora Drupal Site Install Script
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-9-test-the-site" title="Step 9: Test the Site" class="md-nav__link">
+  <a href="#step-9-test-the-site" class="md-nav__link">
     Step 9: Test the Site
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-10-ingest-sample-objects" title="Step 10: Ingest Sample Objects" class="md-nav__link">
+  <a href="#step-10-ingest-sample-objects" class="md-nav__link">
     Step 10: Ingest Sample Objects
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-11-check-in-the-newly-created-islandora-drupal-site-code-into-is-git-repository" title="Step 11: Check-In the Newly Created Islandora Drupal Site Code Into is Git Repository" class="md-nav__link">
+  <a href="#step-11-check-in-the-newly-created-islandora-drupal-site-code-into-is-git-repository" class="md-nav__link">
     Step 11: Check-In the Newly Created Islandora Drupal Site Code Into is Git Repository
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#next-steps" title="Next Steps" class="md-nav__link">
+  <a href="#next-steps" class="md-nav__link">
     Next Steps
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#additional-resources" title="Additional Resources" class="md-nav__link">
+  <a href="#additional-resources" class="md-nav__link">
     Additional Resources
   </a>
   
@@ -414,7 +416,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#end-of-local-isle-installation-new-site" title="End of Local ISLE Installation: New Site" class="md-nav__link">
+  <a href="#end-of-local-isle-installation-new-site" class="md-nav__link">
     End of Local ISLE Installation: New Site
   </a>
   
@@ -533,8 +535,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../optional-components/components/" title="Overview: Components" class="md-nav__link">
-      Overview: Components
+    <a href="../../optional-components/components/" title="Overview" class="md-nav__link">
+      Overview
     </a>
   </li>
 
@@ -948,10 +950,46 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
     <label class="md-nav__link" for="nav-6">
-      About
+      Specifications
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
       <label class="md-nav__title" for="nav-6">
+        Specifications
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../specifications/resource-matrix/" title="Resource Allocation" class="md-nav__link">
+      Resource Allocation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      About
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
         About
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -988,13 +1026,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-3" type="checkbox" id="nav-6-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-3" type="checkbox" id="nav-7-3">
     
-    <label class="md-nav__link" for="nav-6-3">
+    <label class="md-nav__link" for="nav-7-3">
       Contributor Docs
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-6-3">
+      <label class="md-nav__title" for="nav-7-3">
         Contributor Docs
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1089,13 +1127,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
     
-    <label class="md-nav__link" for="nav-7">
+    <label class="md-nav__link" for="nav-8">
       Release Notes
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-7">
+      <label class="md-nav__title" for="nav-8">
         Release Notes
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1120,13 +1158,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-2" type="checkbox" id="nav-8-2">
     
-    <label class="md-nav__link" for="nav-7-2">
+    <label class="md-nav__link" for="nav-8-2">
       Previous releases
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-7-2">
+      <label class="md-nav__title" for="nav-8-2">
         Previous releases
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1235,112 +1273,112 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#assumptions-prerequisites" title="Assumptions / Prerequisites" class="md-nav__link">
+  <a href="#assumptions-prerequisites" class="md-nav__link">
     Assumptions / Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#index-of-instructions" title="Index of Instructions" class="md-nav__link">
+  <a href="#index-of-instructions" class="md-nav__link">
     Index of Instructions
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-1-choose-a-project-name" title="Step 1: Choose a Project Name" class="md-nav__link">
+  <a href="#step-1-choose-a-project-name" class="md-nav__link">
     Step 1: Choose a Project Name
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-15-edit-etchosts-file" title="Step 1.5: Edit "/etc/hosts" File" class="md-nav__link">
+  <a href="#step-15-edit-etchosts-file" class="md-nav__link">
     Step 1.5: Edit "/etc/hosts" File
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-2-setup-git-project-repositories" title="Step 2: Setup Git Project Repositories" class="md-nav__link">
+  <a href="#step-2-setup-git-project-repositories" class="md-nav__link">
     Step 2: Setup Git Project Repositories
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-3-edit-the-env-file-to-point-to-the-local-environment" title="Step 3: Edit the ".env" File to Point to the Local Environment" class="md-nav__link">
+  <a href="#step-3-edit-the-env-file-to-point-to-the-local-environment" class="md-nav__link">
     Step 3: Edit the ".env" File to Point to the Local Environment
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-4-create-new-users-and-passwords-by-editing-localenv-file" title="Step 4: Create New Users and Passwords by Editing "local.env" File" class="md-nav__link">
+  <a href="#step-4-create-new-users-and-passwords-by-editing-localenv-file" class="md-nav__link">
     Step 4: Create New Users and Passwords by Editing "local.env" File
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-5-create-new-self-signed-certs-for-your-project" title="Step 5: Create New Self-Signed Certs for Your Project" class="md-nav__link">
+  <a href="#step-5-create-new-self-signed-certs-for-your-project" class="md-nav__link">
     Step 5: Create New Self-Signed Certs for Your Project
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-6-download-the-isle-images" title="Step 6: Download the ISLE Images" class="md-nav__link">
+  <a href="#step-6-download-the-isle-images" class="md-nav__link">
     Step 6: Download the ISLE Images
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-7-launch-process" title="Step 7: Launch Process" class="md-nav__link">
+  <a href="#step-7-launch-process" class="md-nav__link">
     Step 7: Launch Process
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-8-run-islandora-drupal-site-install-script" title="Step 8: Run Islandora Drupal Site Install Script" class="md-nav__link">
+  <a href="#step-8-run-islandora-drupal-site-install-script" class="md-nav__link">
     Step 8: Run Islandora Drupal Site Install Script
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-9-test-the-site" title="Step 9: Test the Site" class="md-nav__link">
+  <a href="#step-9-test-the-site" class="md-nav__link">
     Step 9: Test the Site
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-10-ingest-sample-objects" title="Step 10: Ingest Sample Objects" class="md-nav__link">
+  <a href="#step-10-ingest-sample-objects" class="md-nav__link">
     Step 10: Ingest Sample Objects
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-11-check-in-the-newly-created-islandora-drupal-site-code-into-is-git-repository" title="Step 11: Check-In the Newly Created Islandora Drupal Site Code Into is Git Repository" class="md-nav__link">
+  <a href="#step-11-check-in-the-newly-created-islandora-drupal-site-code-into-is-git-repository" class="md-nav__link">
     Step 11: Check-In the Newly Created Islandora Drupal Site Code Into is Git Repository
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#next-steps" title="Next Steps" class="md-nav__link">
+  <a href="#next-steps" class="md-nav__link">
     Next Steps
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#additional-resources" title="Additional Resources" class="md-nav__link">
+  <a href="#additional-resources" class="md-nav__link">
     Additional Resources
   </a>
   
@@ -1348,7 +1386,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#end-of-local-isle-installation-new-site" title="End of Local ISLE Installation: New Site" class="md-nav__link">
+  <a href="#end-of-local-isle-installation-new-site" class="md-nav__link">
     End of Local ISLE Installation: New Site
   </a>
   
@@ -1813,6 +1851,7 @@ origin  https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-
                 
                   
                 
+                
               
               
                 
@@ -1873,22 +1912,17 @@ origin  https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-
           Material for MkDocs</a>
       </div>
       
-        
-      
     </div>
   </div>
 </footer>
       
     </div>
     
-      <script src="../../assets/javascripts/application.583bbe55.js"></script>
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
       
-      <script>app.initialize({version:"1.0",url:{base:"../.."}})</script>
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
         <script src="../../extra.js"></script>
-      
-    
-    
       
     
   </body>
