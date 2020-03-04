@@ -8,7 +8,7 @@
 
 * You'll need to use the ISLE images tagged as `1.3.0` and higher.
 
-* See also: [Resource Allocation: High Volume Ingest](/specifications/resource-matrix/#high-volume-ingest)
+* See also: [Resource Allocation: High Volume Ingest](../../specifications/resource-matrix/#high-volume-ingest)
 
 ---
 
