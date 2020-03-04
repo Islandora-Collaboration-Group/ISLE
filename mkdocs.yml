@@ -64,7 +64,7 @@ nav:
   - 'Cleanup ISLE git repository for Release v.1.4.0': 'cookbook-recipes/isle-v140-git-cleanup.md'
   - 'Finding and Using Documentation for a Previous Release': 'cookbook-recipes/previous-release-docs.md'
 - 'Specifications':
-  - 'Resource Matrix': 'specifications/resource-matrix.md'
+  - 'Resource Allocation': 'specifications/resource-matrix.md'
 - 'About':
   - 'About ISLE': 'about/about-isle.md'
   - 'Contributing to ISLE': 'about/contributing.md'
