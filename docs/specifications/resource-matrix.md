@@ -1,4 +1,4 @@
-# Resource Matrix
+# Resource Allocation
 
 This document is a suggested guide for allocating ISLE host resources based on your ISLE environment.
 
@@ -10,7 +10,7 @@ This document is a suggested guide for allocating ISLE host resources based on y
 
 ---
 
-## Resource Matrix by ISLE Environment / System
+## Resource Allocation by ISLE Environment / System
 
 | Resource  | Demo  | Local | Test | Staging    | Production   |
 | ---       | ---   | ---   |  --- | ---        | ---          |
