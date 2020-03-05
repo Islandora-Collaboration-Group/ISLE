@@ -1,6 +1,6 @@
 # IMI Ingest: Setup and Use with ISLE
 
-These instructions will walk users through the installation of the Islandora Multi-Importer (IMI) Module and a test batch ingest of sample items.  They assume you have followed the instructions for [Local ISLE Installation: New Site](/install/install-local-new/).  Staging and Production servers may require a different entry in the docker-compose.yml volume section.
+These instructions will walk users through the installation of the Islandora Multi-Importer (IMI) Module and a test batch ingest of sample items.  They assume you have followed the instructions for [Local ISLE Installation: New Site](../../install/install-local-new/).  Staging and Production servers may require a different entry in the docker-compose.yml volume section.
 
 ## Docker Down, Add New Volume in the Apache Section for Staging Server Side Ingest, Docker Up
 

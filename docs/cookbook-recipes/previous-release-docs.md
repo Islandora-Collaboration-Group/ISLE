@@ -2,7 +2,7 @@
 
 # Using Documentation for an Earlier Release
 
-The documentation at https://islandora-collaboration-group.github.io/ISLE/ will always correspond to the latest release.  While the ISLE maintainers suggest always running the latest release to ensure the most up-to-date production environment, some situations may require a user to need to review or follow the documentation for a prior release.  When a previous release is checked out of git (ex: `git checkout ISLE-1.2.0`) the documentation for that release is included in the repository in the /docs directory.  This page assumes you have already [cloned the ISLE repository locally](/install/install-local-new/#step-2-setup-git-project-repositories).
+The documentation at https://islandora-collaboration-group.github.io/ISLE/ will always correspond to the latest release.  While the ISLE maintainers suggest always running the latest release to ensure the most up-to-date production environment, some situations may require a user to need to review or follow the documentation for a prior release.  When a previous release is checked out of git (ex: `git checkout ISLE-1.2.0`) the documentation for that release is included in the repository in the /docs directory.  This page assumes you have already [cloned the ISLE repository locally](../../install/install-local-new/#step-2-setup-git-project-repositories).
 
 Documentation can be viewed a few ways:
 
