@@ -102,16 +102,16 @@ Portainer's authentication can be configured:
 * [Portainer Configuration](https://portainer.readthedocs.io/en/stable/configuration.html)
 
 ## Maintainers
-* Bethany Seeger (Lead), Amherst College
-* Mark Sandford (Lead), Colgate University
-* Francesca Baird, Wesleyan University
-* David Keiser-Clark, Williams College
 * Gavin Morris, Born-Digital
-* Shaun Trujillo, Mount Holyoke College
+* Mark Sandford, Colgate University
+* David Keiser-Clark, Williams College
 
 ## Former Contributors
+* Francesca Baird, Wesleyan University
 * Carolyn Moritz, Vassar College
 * Benjamin Rosner (Lead Maintainer 2018-19), Barnard College
+* Bethany Seeger (Lead Maintainer 2019), Amherst College
+* Shaun Trujillo, Mount Holyoke College
 * Steve Young, Hamilton College
 
 ## Contributing to ISLE
