@@ -15,7 +15,8 @@
 
 ## Browser Caching and the Warning: "Bad Gateway"
 * **Problem:** While attempting to access "https://yourprojectnamehere.localdomain/" you see the browser result: "Bad Gateway"
-* **Possible Solution:** Open "https://yourprojectnamehere.localdomain/" in an Incognito window (that prevents the browser from using prior cached pages). (Alternately, you can empty your browser cache in your regular browser.)
+* **Solution #1:** Open "https://yourprojectnamehere.localdomain/" in an Incognito window (that prevents the browser from using prior cached pages). (Alternately, you can empty your browser cache in your regular browser.)
+* **Solution #2:** Implement the [Error message: "Install Drupal"](#error-message-install-drupal) solution (below). Docker software updates often silently adds an extraneous "127.0.0.1 kubernetes.docker.internal" line. Commenting that extra line will frequently resolve the "Bad Gateway" message.
 
 ---
 
