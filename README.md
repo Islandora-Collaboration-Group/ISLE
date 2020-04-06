@@ -15,7 +15,7 @@ Please use the [ISLE Documentation](https://islandora-collaboration-group.github
 
 ### Requirements  
 * Docker-CE or EE version `19.03.x`+
-* [Docker-compose](https://docs.docker.com/compose/install/) version `1.24.1`+
+* [Docker-compose](https://docs.docker.com/compose/install/) version `1.25.4`+
 * Git `2.0+`
 * Time required < 30 minutes.
 * **Windows Users**: Please open the .env and uncomment `COMPOSE_CONVERT_WINDOWS_PATHS=1`
@@ -97,7 +97,7 @@ All Tomcat services come with the default users and passwords:
 * `admin`:`isle_admin`
 * `manager`:`isle_manager`
 
-Portainer's authentication can be configured: 
+Portainer's authentication can be configured:
 * By default there is no username or password required to login to Portainer.
 * [Portainer Configuration](https://portainer.readthedocs.io/en/stable/configuration.html)
 
@@ -116,4 +116,4 @@ Portainer's authentication can be configured:
 
 ## Contributing to ISLE
 * [Islandora ISLE Interest Group](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group) - Meetings open to everybody! [Schedule](https://github.com/islandora-interest-groups/Islandora-ISLE-Interest-Group/#how-to-join) is alternating Wednesdays, 3:00pm EDT
-* [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle) - Post your questions here and subscribe for updates, meeting announcements, and technical support$
+* [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle) - Post your questions here and subscribe for updates, meeting announcements, and technical support.

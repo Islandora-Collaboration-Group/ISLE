@@ -48,7 +48,7 @@ The use and setup of TICK within the ISLE platform is as an optional [sidecar](h
 
 ## System Requirements
 
-* [ISLE](https://github.com/Islandora-Collaboration-Group/ISLE) release version `1.4.1`
+* [ISLE](https://github.com/Islandora-Collaboration-Group/ISLE) release version `1.4.2`
     * `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
 
 ### ISLE Images
@@ -58,12 +58,12 @@ The use and setup of TICK within the ISLE platform is as an optional [sidecar](h
 
 | Service | Repository | Tag |
 | ---     | ---        | --- | 
-| Apache | [islandoracollabgroup/isle-apache](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-apache/tags) | `1.4.1`|
-| Fedora | [islandoracollabgroup/isle-fedora](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-fedora/tags) | `1.4.1`|
-| Image-services | [islandoracollabgroup/isle-imageservices](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-imageservices) | `1.4.1` |
-| MySQL | [islandoracollabgroup/isle-mysql](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-mysql) | `1.4.1` |
+| Apache | [islandoracollabgroup/isle-apache](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-apache/tags) | `1.4.2`|
+| Fedora | [islandoracollabgroup/isle-fedora](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-fedora/tags) | `1.4.2`|
+| Image-services | [islandoracollabgroup/isle-imageservices](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-imageservices) | `1.4.2` |
+| MySQL | [islandoracollabgroup/isle-mysql](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-mysql) | `1.4.2` |
 | Portainer | [portainer/portainer](https://hub.docker.com/r/portainer/portainer) | `latest` |
-| Solr  | [islandoracollabgroup/isle-solr](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-solr/tags) | `1.4.1` |
+| Solr  | [islandoracollabgroup/isle-solr](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-solr/tags) | `1.4.2` |
 | Traefik | [traefik/traefik](https://hub.docker.com/_/traefik) | `1.7.9` |
 
 * Additional systems overhead, including:
@@ -154,7 +154,7 @@ The data from both systems will be collected, analyzed and accessed on / from th
 
 * You'll stop any running containers
 
-* You'll download new ISLE images tagged as `1.4.1`
+* You'll download new ISLE images tagged as `1.4.2`
 
 
 * You'll copy over a new configuration file for a service called `rsyslog`.
@@ -191,7 +191,7 @@ The data from both systems will be collected, analyzed and accessed on / from th
 
 * Previously installed and running Production and Staging ISLE Host systems are in place already
 
-* You'll need to use the ISLE images tagged as `1.4.1` and higher for the syslog driver changes to be in place.
+* You'll need to use the ISLE images tagged as `1.4.2` and higher for the syslog driver changes to be in place.
 
 * That the "sidecar" method will be the installation type running on the Staging system to receive data from Staging and Production.
 
@@ -308,7 +308,7 @@ Uncommented example:
 
 ```bash
   mysql:
-    image: islandoracollabgroup/isle-mysql:1.4.1
+    image: islandoracollabgroup/isle-mysql:1.4.2
     container_name: isle-mysql-${CONTAINER_SHORT_ID}
     networks:
       - isle-internal
@@ -448,7 +448,7 @@ Aug 13 17:24:49 ip-172-31-69-204 rsyslogd[28257]:  [origin software="rsyslogd" s
 
 * A previously installed and running ISLE Host Production system is in place already.
 
-* You'll need to use ISLE version `1.4.1` for the syslog driver changes to be in place.
+* You'll need to use ISLE version `1.4.2` for the syslog driver changes to be in place.
 
 * That the "sidecar" TICK installation is already in place on the Staging server prior.
 
@@ -491,7 +491,7 @@ Uncommented example:
 
 ```bash
   mysql:
-    image: islandoracollabgroup/isle-mysql:1.4.1
+    image: islandoracollabgroup/isle-mysql:1.4.2
     container_name: isle-mysql-${CONTAINER_SHORT_ID}
     networks:
       - isle-internal
