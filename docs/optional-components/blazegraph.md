@@ -24,20 +24,20 @@
 
 ## System Requirements
 
-* [ISLE](https://github.com/Islandora-Collaboration-Group/ISLE) release version `1.4.1`
+* [ISLE](https://github.com/Islandora-Collaboration-Group/ISLE) release version `1.4.2`
   * `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
 
 ### ISLE Images
 
 | Service | Repository | Tag |
 | ---     | ---        | --- |
-| Apache | [islandoracollabgroup/isle-apache](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-apache/tags) | `1.4.1`|
-| Blazegraph | [islandoracollabgroup/isle-blazegraph](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-blazegraph) | `1.4.1`|
-| Fedora | [islandoracollabgroup/isle-fedora](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-fedora/tags) | `1.4.1`|
-| Image-services | [islandoracollabgroup/isle-imageservices](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-imageservices) | `1.4.1` |
-| MySQL | [islandoracollabgroup/isle-mysql](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-mysql) | `1.4.1` |
+| Apache | [islandoracollabgroup/isle-apache](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-apache/tags) | `1.4.2`|
+| Blazegraph | [islandoracollabgroup/isle-blazegraph](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-blazegraph) | `1.4.2`|
+| Fedora | [islandoracollabgroup/isle-fedora](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-fedora/tags) | `1.4.2`|
+| Image-services | [islandoracollabgroup/isle-imageservices](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-imageservices) | `1.4.2` |
+| MySQL | [islandoracollabgroup/isle-mysql](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-mysql) | `1.4.2` |
 | Portainer | [portainer/portainer](https://hub.docker.com/r/portainer/portainer) | `latest` |
-| Solr  | [islandoracollabgroup/isle-solr](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-solr/tags) | `1.4.1` |
+| Solr  | [islandoracollabgroup/isle-solr](https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-solr/tags) | `1.4.2` |
 | Traefik | [traefik/traefik](https://hub.docker.com/_/traefik) | `1.7.9` |
 
 * Additional systems overhead, including:
@@ -80,7 +80,7 @@
 
 ### Assumptions
 
-* Prior to installation, end user will have a running ISLE system using the current release of `1.4.1` images.
+* Prior to installation, end user will have a running ISLE system using the current release of `1.4.2` images.
 
 * This installation process will give the functionality as stated in the `Systems Requirements` image table above for `Blazegraph` testing and even `TICK` stack usage.
 
@@ -214,7 +214,7 @@ Example is for a Staging instance
 ```bash
 
   isle-blazegraph:
-    image: islandoracollabgroup/isle-blazegraph:1.4.1
+    image: islandoracollabgroup/isle-blazegraph:1.4.2
     container_name: isle-blazegraph-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=4096M
