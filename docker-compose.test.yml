@@ -2,7 +2,7 @@ version: '3.7'
 
 #### docker-compose up -d;
 ## Test Environment - Used by ISLE contributors for testing ISLE releases, ISLE development and submitting pull releases etc.
-## Updated 2020-03-31 - Release 1.4.2-dev (@ 1.4.2-dev)
+## Updated 2020-04-06 - Release 1.4.2 (@ 1.4.2)
 
 services:
   isle-portainer: ## Renamed to avoid conflicts on systems/servers with portainer already running.
