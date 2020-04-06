@@ -1,10 +1,11 @@
-# Release Notes - ISLE v.1.4.2, 2020-03-31
+# Release Notes - ISLE v.1.4.2, 2020-04-06
 
 ### Contributions to this release from:
 
 * Gavin Morris (Born-Digital), code updates, documentation, testing and release manager for this version
 * Mark Sandford (Colgate University), documentation
-* Francis Dunham (Born Digital), testing
+* Francis Dunham (Born-Digital), testing & Behat fixes
+* Hertzel Armengol (Born-Digital), PHP, composer & Behat fixes
 
 
 ### ISLE (main project)
