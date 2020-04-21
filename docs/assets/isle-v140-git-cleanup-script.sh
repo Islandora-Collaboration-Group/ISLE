@@ -30,7 +30,7 @@ sizebefore=$(checksize)
 echo ""
 
 echo "Downloading BFG clean up tools about 13 MB"
-curl -o bfg-1.13.0.jar http://search.maven.org/classic/remotecontent?filepath=com/madgag/bfg/1.13.0/bfg-1.13.0.jar
+curl -o bfg-1.13.0.jar https://repo1.maven.org/maven2/com/madgag/bfg/1.13.0/bfg-1.13.0.jar
 
 echo ""
 
