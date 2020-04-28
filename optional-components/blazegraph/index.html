@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
     
     
       
@@ -42,17 +42,17 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
       
       
     
     
-      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
     
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
@@ -1138,8 +1138,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release-notes/release-1-4-1/" title="Latest release: 1.4.1" class="md-nav__link">
-      Latest release: 1.4.1
+    <a href="../../release-notes/release-1-4-2/" title="Latest release: 1.4.2" class="md-nav__link">
+      Latest release: 1.4.2
     </a>
   </li>
 
@@ -1162,6 +1162,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-4-1/" title="1.4.1" class="md-nav__link">
+      1.4.1
+    </a>
+  </li>
+
         
           
           
@@ -1433,7 +1445,7 @@
 <hr />
 <h2 id="system-requirements">System Requirements</h2>
 <ul>
-<li><a href="https://github.com/Islandora-Collaboration-Group/ISLE">ISLE</a> release version <code>1.4.1</code></li>
+<li><a href="https://github.com/Islandora-Collaboration-Group/ISLE">ISLE</a> release version <code>1.4.2</code></li>
 <li><code>git clone https://github.com/Islandora-Collaboration-Group/ISLE.git</code></li>
 </ul>
 <h3 id="isle-images">ISLE Images</h3>
@@ -1449,27 +1461,27 @@
 <tr>
 <td>Apache</td>
 <td><a href="https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-apache/tags">islandoracollabgroup/isle-apache</a></td>
-<td><code>1.4.1</code></td>
+<td><code>1.4.2</code></td>
 </tr>
 <tr>
 <td>Blazegraph</td>
 <td><a href="https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-blazegraph">islandoracollabgroup/isle-blazegraph</a></td>
-<td><code>1.4.1</code></td>
+<td><code>1.4.2</code></td>
 </tr>
 <tr>
 <td>Fedora</td>
 <td><a href="https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-fedora/tags">islandoracollabgroup/isle-fedora</a></td>
-<td><code>1.4.1</code></td>
+<td><code>1.4.2</code></td>
 </tr>
 <tr>
 <td>Image-services</td>
 <td><a href="https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-imageservices">islandoracollabgroup/isle-imageservices</a></td>
-<td><code>1.4.1</code></td>
+<td><code>1.4.2</code></td>
 </tr>
 <tr>
 <td>MySQL</td>
 <td><a href="https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-mysql">islandoracollabgroup/isle-mysql</a></td>
-<td><code>1.4.1</code></td>
+<td><code>1.4.2</code></td>
 </tr>
 <tr>
 <td>Portainer</td>
@@ -1479,7 +1491,7 @@
 <tr>
 <td>Solr</td>
 <td><a href="https://cloud.docker.com/u/islandoracollabgroup/repository/docker/islandoracollabgroup/isle-solr/tags">islandoracollabgroup/isle-solr</a></td>
-<td><code>1.4.1</code></td>
+<td><code>1.4.2</code></td>
 </tr>
 <tr>
 <td>Traefik</td>
@@ -1547,7 +1559,7 @@
 <h3 id="assumptions">Assumptions</h3>
 <ul>
 <li>
-<p>Prior to installation, end user will have a running ISLE system using the current release of <code>1.4.1</code> images.</p>
+<p>Prior to installation, end user will have a running ISLE system using the current release of <code>1.4.2</code> images.</p>
 </li>
 <li>
 <p>This installation process will give the functionality as stated in the <code>Systems Requirements</code> image table above for <code>Blazegraph</code> testing and even <code>TICK</code> stack usage.</p>
@@ -1725,7 +1737,7 @@ FEDORA_WEBAPP_HOME=/usr/local/tomcat/webapps/fedora
 <p>Example is for a Staging instance</p>
 <pre><code class="bash">
   isle-blazegraph:
-    image: islandoracollabgroup/isle-blazegraph:1.4.1
+    image: islandoracollabgroup/isle-blazegraph:1.4.2
     container_name: isle-blazegraph-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=4096M
@@ -1776,7 +1788,6 @@ FEDORA_WEBAPP_HOME=/usr/local/tomcat/webapps/fedora
 </ul>
                 
                   
-                
                 
               
               
@@ -1844,7 +1855,7 @@ FEDORA_WEBAPP_HOME=/usr/local/tomcat/webapps/fedora
       
     </div>
     
-      <script src="../../assets/javascripts/application.808e90bb.js"></script>
+      <script src="../../assets/javascripts/application.c648116f.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
