@@ -38,15 +38,17 @@ Due to removal of older files and folders and git changes in the ISLE git reposi
     - `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git`
 3. Change directory to the cloned directory:
     - `cd ISLE` (by default)
-4. Pull the latest images:
+4. Copy the sample.env to .env. By default, the Demo environment is setup. The .env is no longer tracked by git. (_ISLE versions =< 1.4.2_)
+    - `cp sample.env .env`
+5. Pull the latest images:
     - `docker-compose pull`
-5. Launch the ISLE stack:
+6. Launch the ISLE stack:
     - `docker-compose up -d`
     * **Please note:** the “ -d” argument stands for “detached” meaning the command will persist even if you close your terminal or your computer sleeps etc…)
-6. Please wait a few moments for the stack to fully come up.  Approximately 3-5 minutes.
-7. Install Islandora on the isle-apache-ld container:
+7. Please wait a few moments for the stack to fully come up.  Approximately 3-5 minutes.
+8. Install Islandora on the isle-apache-ld container:
     - `docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh`
-8. To wrap up testing:
+9. To wrap up testing:
     - In the folder with the docker-compose.yml `docker-compose down -v` (nb: the -v removes all volumes, and will delete any work. This option **does not persist your data**)
 
 ### Quick Stop and Cleanup 

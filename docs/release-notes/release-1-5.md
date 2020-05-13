@@ -14,7 +14,7 @@
 * Matomo docs and config files added
 * fix for bfg cleanup script URL
 * default .env removed and replaced with sample.env
-
+  * docs to be added on how to use sample.env
 
 ### Upgrade
 
