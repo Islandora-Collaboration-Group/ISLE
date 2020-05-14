@@ -16,6 +16,10 @@ Adapted from Diego's original example ISLE config: https://github.com/Islandora-
 
 #### Edit 1: Modify Docker-Compose & .env files
 
+* Create a `data/matomo` directory to persist your Matomo application. You will probably want to put this in a git repo if you're deploying to multiple servers and don't want to have to re-install plugins/etc for each environment. We recommend using an appropriate .gitignore before checking that in (e.g. https://raw.githubusercontent.com/matomo-org/matomo/4.x-dev/.gitignore)
+
+* Copy the files in `config/matomo` into a new directory `data/matomo/config` to seed your Matomo application's config. You'll probably want to commit this to your new Git repo. 
+
 * Within your `docker-compose.*.yml`, add the following blocks to enable new services:
 
 ```bash
@@ -32,8 +36,7 @@ matomo:
     - mysql
     - traefik
   volumes:
-    - ./config/matomo:/var/www/html/config
-    - isle-matomo-data:/var/www/html
+    - ./data/matomo/html/:/var/www/html
   labels:
     - traefik.enable=false
 
@@ -42,7 +45,7 @@ matomo-nginx:
   container_name: isle-matomo-nginx-${CONTAINER_SHORT_ID}
   volumes:
     - ./config/matomo-nginx/ngix.conf:/etc/nginx/nginx.conf:ro
-    - isle-matomo-data:/var/www/html
+    - ./data/matomo/html/:/var/www/html
   links:
     - matomo
   networks:
@@ -63,14 +66,6 @@ whoami:
   container_name: isle-whoami-${CONTAINER_SHORT_ID}
   labels:
     - "traefik.frontend.rule=Host:whoami.${BASE_DOMAIN};"
-```          
-
-You will also need to add a new volume `isle-matomo-data:` at the very bottom of those files.
-
-```bash
-    networks:
-      isle-internal:
-    depends_on:
 ```
 
 Your `traefik` service ports definition needs modifying like this:
@@ -91,14 +86,13 @@ And your `traefik` labels definition needs an extra line before the line selecti
       - traefik.frontend.passHostHeader=true
 ```
 
-
-Start up the ISLE Docker containers again. `docker-compose up -d`
+* Start up the ISLE Docker containers again. `docker-compose up -d`
 
 ---
 
 #### Install and Configure Matomo
 
-0. Create your new Matomo database and call it `matomo_db`. Drush should be able to do this, e.g. `drush sql-create --db-su=root --db-su-pw=REPLACE_W_MYSQL_ROOT_PWD --db-url="mysql://mysql/matomo_db"`. If you use a different method, make sure you make a database user and password to access it rather than use root credentials below.
+0. Create your new Matomo database and call it `matomo_db`. Drush should be able to do this, e.g. `drush sql-create --db-su="root" --db-su-pw="MYQSL_ROOT_PWD" --db-url="mysql://DRUPAL_DB_USER:DRUPAL_DB_PWD@mysql/matomo_db"`. If you use a different method, make sure you make a database user and password to access it rather than use root credentials below.
 
 1. Add matomo.<yourdomain> to your `/etc/hosts` file and visit that URL. You should see a Matomo install dialog. Additional support may be found here: https://matomo.org/docs/installation/
 
@@ -111,7 +105,7 @@ Start up the ISLE Docker containers again. `docker-compose up -d`
  - Table Prefix: "matomo_"
  - Adapter: PDO\\MYSQL
 
-FYI that this creates a config file called `config.ini.php` which is gitignored. This means you'll need to do this for each environment, or you'll need to manually copy that file between environments.
+FYI that this creates a config file called `config.ini.php` which is gitignored. This means you'll need to do this for each environment, or you'll need to manually copy (or use Git to sync) that file between environments.
 
 3. Click "Next" a couple times until you get to the "Super User" creation page. Enter (and save!) credentials for your Matomo login.
 
@@ -120,6 +114,8 @@ FYI that this creates a config file called `config.ini.php` which is gitignored.
 5. The next screen will provide you with a tracking code block. Copy it out for use later, or plan to log into the Matomo dashboard later to fetch it again.
 
 6. Log in. Allow Matomo to update if it wants to. You may have to do this inorder to access the settings areas.
+
+7. Don't forget to check in all the new files in your Matomo Git repo, if you're tracking it that way.
 
 ---
 
