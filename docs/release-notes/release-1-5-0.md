@@ -32,6 +32,8 @@ If you are coming from an ISLE release older then `1.3.0`, please read the relea
 * `ImageMagick` upgraded to version `7.0.10-11`
 * `Composer` upgraded to [commit / hash](https://github.com/composer/composer/commit/4d7f8d40f9788de07c7f7b8946f340bf89535453) May 6th, 2020 (v 1.10.1)
 * `OpenJpeg` upgraded to [commit / hash](https://github.com/uclouvain/openjpeg/commit/64689d05dfaaf52105581d93fb1eb173b20829a4) Apr 18th, 2020 (v. 2.3.1)
+* Volume removed from Dockerfile to stop overlay2 issues
+* Vhost fix for cantaloupe IIIF 4.1.5 upgrade and changes
 
 #### isle-blazegraph
 
@@ -55,6 +57,7 @@ If you are coming from an ISLE release older then `1.3.0`, please read the relea
   * `delegates.rb` able to use two configs
 * `ImageMagick` upgraded to version `7.0.10-11`
 * `OpenJpeg` upgraded to [commit / hash](https://github.com/uclouvain/openjpeg/commit/64689d05dfaaf52105581d93fb1eb173b20829a4) Apr 18th, 2020 (v. 2.3.1)
+* Adds new proxy settings for IIIF to allow X-islandora token to work in IAB and Openseadragon viewers for Books and Large Images
 
 #### isle-mysql
 
