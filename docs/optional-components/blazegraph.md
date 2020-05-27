@@ -214,7 +214,7 @@ Example is for a Staging instance
 ```bash
 
   isle-blazegraph:
-    image: islandoracollabgroup/isle-blazegraph:1.4.2
+    image: islandoracollabgroup/isle-blazegraph:1.5.0
     container_name: isle-blazegraph-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=4096M

@@ -1,8 +1,9 @@
-# Release Notes - ISLE v.1.5, 2020-05
+# Release Notes - ISLE v.1.5.0, 2020-05
 
 ### Contributions to this release from:
 
 * Gavin Morris (Born-Digital), code updates, documentation, testing and release manager for this version
+* Noah Smith (Born-Digital), code updates, documentation, Matomo profile addition.
 * Mark Sandford (Colgate University), documentation
 * Hertzel Armengol (Born-Digital), testing & Dockerfile fixes
 * Francis Dunham (Born-Digital), testing
@@ -18,14 +19,9 @@
 
 ### Upgrade
 
-If you are coming from ISLE releases `1.3.0` then you **need to follow the instructions** given in
-the [Cleanup ISLE git repository for Release v.1.4.0](https://islandora-collaboration-group.github.io/ISLE/cookbook-recipes/isle-v140-git-cleanup/)
-documentation.
+If you are coming from ISLE releases `1.3.0` then you **need to follow the instructions** given in the [Cleanup ISLE git repository for Release v.1.4.0](https://islandora-collaboration-group.github.io/ISLE/cookbook-recipes/isle-v140-git-cleanup/) documentation.
 
-If you are coming from an ISLE release older then `1.3.0`, please read the release notes for `1.3.0` to understand
-the paradigm shift that happened between previous releases. You will also need to follow the instructions given in
-the [Cleanup ISLE git repository for Release v.1.4.0](https://islandora-collaboration-group.github.io/ISLE/cookbook-recipes/isle-v140-git-cleanup/)
-documentation.
+If you are coming from an ISLE release older then `1.3.0`, please read the release notes for `1.3.0` to understand the paradigm shift that happened between previous releases. You will also need to follow the instructions given in the [Cleanup ISLE git repository for Release v.1.4.0](https://islandora-collaboration-group.github.io/ISLE/cookbook-recipes/isle-v140-git-cleanup/) documentation.
 
 ### ISLE Docker Images
 
@@ -39,19 +35,19 @@ documentation.
 
 #### isle-blazegraph
 
-* ISLE Tomcat base image upgrade from 1.4.2 to 1.5
+* ISLE Tomcat base image upgrade from 1.4.2 to 1.5.0
   * `adoptopenjdk/openjdk8` base image (sec updates)
 * `apt-get` dist-upgrades for dependencies (sec updates)
 
 #### isle-fedora
 
-* ISLE Tomcat base image upgrade from 1.4.2 to 1.5
+* ISLE Tomcat base image upgrade from 1.4.2 to 1.5.0
   * `adoptopenjdk/openjdk8` base image (sec updates)
 * `apt-get` dist-upgrades for dependencies (sec updates)
 
 #### isle-imageservices
 
-* ISLE Tomcat base image upgrade from 1.4.2 to 1.5
+* ISLE Tomcat base image upgrade from 1.4.2 to 1.5.0
   * `adoptopenjdk/openjdk8` base image (sec updates)
 * `apt-get` dist-upgrades for dependencies (sec updates)
 * `Cantaloupe` upgraded to version `4.1.5`
@@ -66,7 +62,7 @@ documentation.
 
 #### isle-solr
 
-* ISLE Tomcat base image upgrade from 1.4.2 to 1.5
+* ISLE Tomcat base image upgrade from 1.4.2 to 1.5.0
   * `adoptopenjdk/openjdk8` base image (sec updates)
 * `apt-get` dist-upgrades for dependencies (sec updates)
 
@@ -79,7 +75,3 @@ documentation.
 #### isle-varnish
 
 * `apt-get` dist-upgrades for dependencies (sec updates)
-
-#### ISLE-Ansible
-
-* Ansible deploy script received modifications for new versions of Docker, Docker-compose and additional software.

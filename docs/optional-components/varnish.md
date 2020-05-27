@@ -140,7 +140,7 @@ The installation instructions below will walk you through how to setup and run t
 ## (Optional-component): Uncomment lines below to run ISLE with the Varnish cache
 
 #  varnish:
-#    image: islandoracollabgroup/isle-varnish:1.4.2
+#    image: islandoracollabgroup/isle-varnish:1.5.0
 #    container_name: isle-varnish-${CONTAINER_SHORT_ID}
 #    env_file:
 #      - local.env
@@ -175,7 +175,7 @@ so that it will now look like this and its formatting should line up appropriate
 ## (Optional-component): Uncomment lines below to run ISLE with the Varnish cache
 
   varnish:
-    image: islandoracollabgroup/isle-varnish:1.4.2
+    image: islandoracollabgroup/isle-varnish:1.5.0
     container_name: isle-varnish-${CONTAINER_SHORT_ID}
     env_file:
       - local.env
@@ -208,7 +208,7 @@ so that it will now look like this and its formatting should line up appropriate
 ## (Optional-component): Uncomment lines below to run ISLE with the Varnish cache
 
 #  varnish:
-#    image: islandoracollabgroup/isle-varnish:1.4.2
+#    image: islandoracollabgroup/isle-varnish:1.5.0
 #    container_name: isle-varnish-${CONTAINER_SHORT_ID}
 #    env_file:
 #      - production.env
@@ -243,7 +243,7 @@ so that it will now look like this and its formatting should line up appropriate
 ## (Optional-component): Uncomment lines below to run ISLE with the Varnish cache
 
   varnish:
-    image: islandoracollabgroup/isle-varnish:1.4.2
+    image: islandoracollabgroup/isle-varnish:1.5.0
     container_name: isle-varnish-${CONTAINER_SHORT_ID}
     env_file:
       - production.env
@@ -633,7 +633,7 @@ There are multiple tools that can be used to interact with the Varnish cache. Al
 
 ```bash
 varnish:
-  image: islandoracollabgroup/isle-varnish:1.4.2
+  image: islandoracollabgroup/isle-varnish:1.5.0
   container_name: isle-varnish-${CONTAINER_SHORT_ID}
   env_file:
     - .env

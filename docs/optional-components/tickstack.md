@@ -308,7 +308,7 @@ Uncommented example:
 
 ```bash
   mysql:
-    image: islandoracollabgroup/isle-mysql:1.4.2
+    image: islandoracollabgroup/isle-mysql:1.5.0
     container_name: isle-mysql-${CONTAINER_SHORT_ID}
     networks:
       - isle-internal
@@ -491,7 +491,7 @@ Uncommented example:
 
 ```bash
   mysql:
-    image: islandoracollabgroup/isle-mysql:1.4.2
+    image: islandoracollabgroup/isle-mysql:1.5.0
     container_name: isle-mysql-${CONTAINER_SHORT_ID}
     networks:
       - isle-internal
