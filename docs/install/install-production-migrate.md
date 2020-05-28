@@ -341,7 +341,10 @@ If using Let's Encrypt, please continue to follow this step.
 
 This step is a multi-step, involved process that allows an end-user to make appropriate changes to the `.env` and then commit it locally to git. This local commit that never gets pushed back to the git repository is critical to allow future ISLE updates or config changes.
 
-* Edit the .env, remove the `local` settings and then commit locally
+* Copy the sample.env to .env. By default, the Demo environment is setup. You will need to edit this file to match the correct environment. Please note that the .env is no longer tracked by git as of ISLE version 1.5. Instructions below involving git are for ISLE versions below 1.5. However the settings recommended below for the environment can still be followed as needed.
+  * `cp sample.env .env`
+
+* Edit the .env, remove the `local` settings and then commit locally (only if using an ISLE version below 1.5)
     * `cd /opt/yourprojectnamehere`
     * `vi / nano / pico /opt/yourprojectnamehere/.env`
     * Edit `COMPOSE_PROJECT_NAME=` and replace the `local` settings with:
@@ -354,6 +357,9 @@ This step is a multi-step, involved process that allows an end-user to make appr
         * `COMPOSE_FILE=docker-compose.production.yml`
     * Save the file
 
+* For users of ISLE version 1.5 and above, these git instructions below are not needed. The .env file is no longer tracked in git. 
+
+* For users of ISLE versions 1.4.2 and below, you will need to continue to follow these instructions until you upgrade.
     * Enter `git status` - You'll now see the following:
 
 ```bash

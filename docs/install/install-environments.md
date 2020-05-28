@@ -16,7 +16,11 @@ As of the ISLE `1.2.0` release, ISLE has the option to use clearly defined but d
 
 The ISLE project `.env` file enables you to be define and launch a variety of ISLE environments. On each ISLE environment, you will edit the `.env` file to point to a corresponding `docker-compose.*.yml` file configured for that environment. The root of the ISLE project (ISLE version 1.2.0+) comes with multiple, pre-configured examples of `docker-compose` and `.env` files to match the variety of environments shown below. The outline below lists the files that you may have to edit, change or add to support each ISLE environment. 
 
-* `.env` - 
+Please note: as of ISLE release 1.5, the .env file is no longer tracked by git. Please copy the sample.env to .env and edit for the appropriate environment you'd like to use.
+  * Example: `cp sample.env .env`
+
+
+* `.env` -
   
     * **Demo**
         * `docker-compose.demo.yml`

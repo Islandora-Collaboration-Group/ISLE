@@ -159,7 +159,7 @@ commit them to the branch in their own commit, rather than with the code changes
 
 ```
 $ git add docs/migrate/install-migration.md
-$ git commit -m "Updated instructions for editing .env file"
+$ git commit -m "Updated instructions for editing files"
 ```
 If your changes do not require any updates to documentation, please indicate so in
 the comment when you submit your PR request (below).

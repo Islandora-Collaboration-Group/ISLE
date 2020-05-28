@@ -71,6 +71,9 @@ _Using the same open terminal:_
 
 * Navigate to your ISLE project directory. (You may already be in this directory.)
 
+* Copy the sample.env to .env. By default, the Demo environment is setup. The .env is no longer tracked by git. (_ISLE versions =< 1.4.2_)
+  * `cp sample.env .env`
+
 * Download all of the latest ISLE Docker images (_~6 GB of data may take 5-10 minutes_):
   * `docker-compose pull`
 

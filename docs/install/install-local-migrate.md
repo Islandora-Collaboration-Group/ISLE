@@ -290,6 +290,9 @@ _Using the same open terminal:_
 
 * Navigate to your local `yourprojectnamehere-isle` directory.
 
+* Copy the sample.env to .env. By default, the Demo environment is setup. You will need to edit this file to match the correct environment. Please note that the .env is no longer tracked by git as of ISLE version 1.5. Instructions below involving git are for ISLE versions below 1.5. However the settings recommended below for the environment can still be followed as needed.
+  * `cp sample.env .env`
+
 * Open the ".env" file in a text editor.
 
 * Change only the following lines in the ".env" file so that the resulting values look like the following: **Please note: the following below is an example not actual values you should use. Use one word to describe your project and follow the conventions below accordingly**
