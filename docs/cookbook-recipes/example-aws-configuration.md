@@ -59,7 +59,7 @@ Colgate primarily uses the Islandora Multi Importer (IMI) module for ingesting n
 The above workflow assumes the archivist has access to the AWS server
   - AWS block all ports by default.  A static IP address for anyone moving files to the server would be ideal.  Barring that, limiting the range to a library staff vlan would be better than opening the SSH port to all of campus.
   - SSH keys are required to connect to the AWS server.  There are various tools to generate these for Windows and Mac.  Amazon has [documentation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) on this process.
-  - At Colgate, provisions were made for a remote worker without a static IP address by setting up an rsync script to move files from a server on campus that the worker did have access to, to the AWS server.  This was preferred over whitelisting the entire VPN IP range, but setting that up is outside the scope of this document.
+  - At Colgate, provisions were made for a remote worker without a static IP address by setting up an rsync script to move files from a server on campus that the worker did have access to, to the AWS server.  This was preferred over allowlisting the entire VPN IP range, but setting that up is outside the scope of this document.
 
 ## Removing or Resizing the Ingest Volume
 
