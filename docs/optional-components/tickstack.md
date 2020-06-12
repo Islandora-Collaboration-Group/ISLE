@@ -197,7 +197,7 @@ The data from both systems will be collected, analyzed and accessed on / from th
 
 * A firewall configuration that allows incoming public traffic to port `8086` traffic
 
-* A firewall configuration that allows incoming private traffic access to port `8888`. It is recommended that this not be general public access but whitelisted to a select range of IP addresses given this will be the `Chronograf` dashboard port. Trusted users only please.
+* A firewall configuration that allows incoming private traffic access to port `8888`. It is recommended that this not be general public access but allowlisted to a select range of IP addresses given this will be the `Chronograf` dashboard port. Trusted users only please.
 
 * Only installation on Linux based host systems e.g. Debian / Ubuntu 18.04+ and Red Hat / CentOS 7.x+
     * Attempting to run TICK locally on a MacOS system can fail https://github.com/docker/for-mac/issues/3303

@@ -51,6 +51,7 @@ Mkdocs is finicky and requires double indentations to create properly indented s
 ---
 
 ## Terms We Use
+- allowlist/denylist (**we avoid using "whitelist" and "blacklist" due to stigma and racial stereotyping surrounding those terms**)
 - personal computer (**we use a generic term and NOT specific variants like:** laptop, workstation, desktop computer, or tablet, etc.)
 - repository (not "repo")
 - end users (not "endusers")
