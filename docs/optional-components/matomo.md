@@ -58,7 +58,7 @@ matomo-nginx:
     - traefik.frontend.entryPoints=https
     - traefik.port=9020
     - traefik.frontend.passHostHeader=true
-    - traefik.frontend.rule=Host:matomo.${BASE_DOMAIN};
+    - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefixStrip: /matomo;"
     - traefik.docker.network==${COMPOSE_PROJECT_NAME}_isle-internal
 
 whoami:
@@ -86,6 +86,14 @@ And your `traefik` labels definition needs an extra line before the line selecti
       - traefik.frontend.passHostHeader=true
 ```
 
+And your `apache` service needs to have any PathPrefix removed from the frontendrule. It was probably like this:
+
+`- "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /cantaloupe"`
+
+And now it should be like this so it doesn't intercept `/matomo` requests through the main domain. This change shouldn't interfere with other ISLE operation:
+
+`- "traefik.frontend.rule=Host:${BASE_DOMAIN};"`
+
 * Start up the ISLE Docker containers again. `docker-compose up -d`
 
 ---
@@ -105,7 +113,7 @@ And your `traefik` labels definition needs an extra line before the line selecti
  - Table Prefix: "matomo_"
  - Adapter: PDO\\MYSQL
 
-FYI that this creates a config file called `config.ini.php` which is gitignored. This means you'll need to do this for each environment, or you'll need to manually copy (or use Git to sync) that file between environments.
+FYI that this creates files in a config folder. This means you'll need to do this for each environment, or you'll need to manually copy (or use Git to sync) those files between environments.
 
 3. Click "Next" a couple times until you get to the "Super User" creation page. Enter (and save!) credentials for your Matomo login.
 
