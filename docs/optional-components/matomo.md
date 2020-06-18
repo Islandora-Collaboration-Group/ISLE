@@ -18,7 +18,7 @@ Adapted from @DiegoPino's original example ISLE config: https://github.com/Islan
 
 * Create a `data/matomo` directory to persist your Matomo application. You will probably want to put this in a git repo if you're deploying to multiple servers and don't want to have to re-install plugins/etc for each environment. We recommend using an appropriate .gitignore before checking that in (e.g. https://raw.githubusercontent.com/matomo-org/matomo/4.x-dev/.gitignore)
 
-* Copy the files in `config/matomo` into a new directory `data/matomo/config` to seed your Matomo application's config. You'll want to commit this to your new Git repo. 
+* Copy the files in `config/matomo` into a new directory `data/matomo/config` to seed your Matomo application's config. You'll want to commit this to your new Git repo. If you are going to use the instructions below to run Matomo through your main domain (via a /matomo proxy URL) you will need to add `proxy_uri_header = 1` to your `config/config.ini.php` file's "General" section.
 
 * Within your `docker-compose.*.yml`, add the following blocks to enable new services:
 
