@@ -37,6 +37,7 @@ nav:
       - 'Automated Testing': 'optional-components/automated-testing.md'
       - 'Blazegraph': 'optional-components/blazegraph.md'
       - 'Loc.gov Proxy': 'optional-components/loc-proxy.md'
+      - 'Matomo Analytics Platform': 'optional-components/matomo.md'
       - 'TICK Stack': 'optional-components/tickstack.md'
       - 'Varnish': 'optional-components/varnish.md'
 - 'Update ISLE': 'update/update.md'
