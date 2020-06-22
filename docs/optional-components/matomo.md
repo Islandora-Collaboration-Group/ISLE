@@ -4,7 +4,7 @@
 
 ### Assumptions
 
-* Previously installed and running Local, Production and Staging ISLE Host systems are in place already
+* Previously installed and running Local, Production and Staging ISLE Host systems are in place already.
 
 * You'll need to use the ISLE images tagged as `1.3.0` and higher.
 
@@ -12,13 +12,13 @@
 
 ### Installation Instructions
 
-Adapted from Diego's original example ISLE config: https://github.com/Islandora-Collaboration-Group/isle_matomo_docker
+Adapted from @DiegoPino's original example ISLE config: https://github.com/Islandora-Collaboration-Group/isle_matomo_docker
 
 #### Edit 1: Modify Docker-Compose & .env files
 
 * Create a `data/matomo` directory to persist your Matomo application. You will probably want to put this in a git repo if you're deploying to multiple servers and don't want to have to re-install plugins/etc for each environment. We recommend using an appropriate .gitignore before checking that in (e.g. https://raw.githubusercontent.com/matomo-org/matomo/4.x-dev/.gitignore)
 
-* Copy the files in `config/matomo` into a new directory `data/matomo/config` to seed your Matomo application's config. You'll probably want to commit this to your new Git repo. 
+* Copy the files in `config/matomo` into a new directory `data/matomo/config` to seed your Matomo application's config. You'll want to commit this to your new Git repo. If you are going to use the instructions below to run Matomo through your main domain (via a /matomo proxy URL) you will need to add `proxy_uri_header = 1` to your `config/config.ini.php` file's "General" section.
 
 * Within your `docker-compose.*.yml`, add the following blocks to enable new services:
 
@@ -58,7 +58,7 @@ matomo-nginx:
     - traefik.frontend.entryPoints=https
     - traefik.port=9020
     - traefik.frontend.passHostHeader=true
-    - traefik.frontend.rule=Host:matomo.${BASE_DOMAIN};
+    - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefixStrip: /matomo;"
     - traefik.docker.network==${COMPOSE_PROJECT_NAME}_isle-internal
 
 whoami:
@@ -80,11 +80,19 @@ Your `traefik` service ports definition needs modifying like this:
       - "8080:8080"
 ```
 
-And your `traefik` labels definition needs an extra line before the line selecting port 8080:
+Your `traefik` labels definition needs an extra line before the line selecting port 8080:
 
 ```bash
       - traefik.frontend.passHostHeader=true
 ```
+
+Your `apache` service needs to have any `PathPrefix` removed from the frontendrule. It was probably like this:
+
+`- "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /cantaloupe"`
+
+So now this rule should be changed such that `apache` doesn't intercept `/matomo` requests through the main domain. This new edit shouldn't interfere with other ISLE operations:
+
+`- "traefik.frontend.rule=Host:${BASE_DOMAIN};"`
 
 * Start up the ISLE Docker containers again. `docker-compose up -d`
 
@@ -92,9 +100,9 @@ And your `traefik` labels definition needs an extra line before the line selecti
 
 #### Install and Configure Matomo
 
-0. Create your new Matomo database and call it `matomo_db`. Drush should be able to do this, e.g. `drush sql-create --db-su="root" --db-su-pw="MYQSL_ROOT_PWD" --db-url="mysql://DRUPAL_DB_USER:DRUPAL_DB_PWD@mysql/matomo_db"`. If you use a different method, make sure you make a database user and password to access it rather than use root credentials below.
+0. Create your new Matomo database and call it `matomo_db`. Drush should be able to do this, e.g. `drush sql-create --db-su="root" --db-su-pw="MYQSL_ROOT_PWD" --db-url="mysql://DRUPAL_DB_USER:DRUPAL_DB_PWD@mysql/matomo_db"`. If you use a different method, ensure that you make a database user and password to access the database rather than using root credentials below.
 
-1. Add matomo.<yourdomain> to your `/etc/hosts` file and visit that URL. You should see a Matomo install dialog. Additional support may be found here: https://matomo.org/docs/installation/
+1. Add `<yourdomain>` to your `/etc/hosts` file and visit that URL. You should see a Matomo install dialog at `https://<yourdomain>/matomo`. Additional support may be found here: https://matomo.org/docs/installation/
 
 2. Use the following values for Database Setup:
 
@@ -105,7 +113,7 @@ And your `traefik` labels definition needs an extra line before the line selecti
  - Table Prefix: "matomo_"
  - Adapter: PDO\\MYSQL
 
-FYI that this creates a config file called `config.ini.php` which is gitignored. This means you'll need to do this for each environment, or you'll need to manually copy (or use Git to sync) that file between environments.
+This creates files in a config folder and you'll need to do this for each environment or manually copy (or use Git to sync) those files between environments.
 
 3. Click "Next" a couple times until you get to the "Super User" creation page. Enter (and save!) credentials for your Matomo login.
 
@@ -113,7 +121,7 @@ FYI that this creates a config file called `config.ini.php` which is gitignored.
 
 5. The next screen will provide you with a tracking code block. Copy it out for use later, or plan to log into the Matomo dashboard later to fetch it again.
 
-6. Log in. Allow Matomo to update if it wants to. You may have to do this inorder to access the settings areas.
+6. Log in. Allow Matomo to update if it wants to. You may have to do this in order to access the settings areas.
 
 7. Don't forget to check in all the new files in your Matomo Git repo, if you're tracking it that way.
 
@@ -130,13 +138,9 @@ Important sub-steps:
 
 2. Install the "Plugin" for "Custom Dimensions" to enable Islandora integration.
 
-3. Add the Custom Dimensions in the order requested
+3. Add the "Custom Dimensions" in the order requested
 
 4. Fetch your API code to paste into Islandora admin. 
-
----
-
-
 
 ---
 
