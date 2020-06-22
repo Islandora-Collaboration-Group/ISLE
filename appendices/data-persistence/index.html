@@ -2,7 +2,7 @@
 
 
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="no-js">
   <head>
     
@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0, mkdocs-material-3.0.3">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
     
     
       
@@ -42,23 +42,27 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
       
       
     
     
-      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
     
     
-      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
       
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
     <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
     
+    
       <link rel="stylesheet" href="../../extra.css">
+    
+    
+      
     
     
   </head>
@@ -75,7 +79,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../../#data-persistence-in-docker" tabindex="1" class="md-skip">
+      <a href="#data-persistence-in-docker" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -96,22 +100,21 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           
-            
-              <span class="md-header-nav__topic">
-                ISLandora Enterprise (ISLE)
-              </span>
-              <span class="md-header-nav__topic">
+            <span class="md-header-nav__topic">
+              ISLandora Enterprise (ISLE)
+            </span>
+            <span class="md-header-nav__topic">
+              
                 Data Persistence in Docker
-              </span>
-            
+              
+            </span>
           
         </div>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
         
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
           
-            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
-            
 <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
@@ -134,7 +137,6 @@
     </div>
   </div>
 </div>
-          
         
       </div>
       
@@ -147,7 +149,7 @@
         
       
       
-      <main class="md-main">
+      <main class="md-main" role="main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
             
@@ -421,6 +423,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../optional-components/matomo/" title="Matomo Analytics Platform" class="md-nav__link">
+      Matomo Analytics Platform
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../optional-components/tickstack/" title="TICK Stack" class="md-nav__link">
       TICK Stack
     </a>
@@ -520,7 +534,7 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#bind-mounts-vs-volumes" title="Bind mounts vs volumes:" class="md-nav__link">
+  <a href="#bind-mounts-vs-volumes" class="md-nav__link">
     Bind mounts vs volumes:
   </a>
   
@@ -528,14 +542,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#volumes" title="Volumes" class="md-nav__link">
+  <a href="#volumes" class="md-nav__link">
     Volumes
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#bind-mounts" title="Bind Mounts" class="md-nav__link">
+  <a href="#bind-mounts" class="md-nav__link">
     Bind Mounts
   </a>
   
@@ -547,21 +561,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-should-be-persisted-this-way" title="What should be persisted this way?" class="md-nav__link">
+  <a href="#what-should-be-persisted-this-way" class="md-nav__link">
     What should be persisted this way?
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-should-not-be-persisted" title="What should NOT be persisted?" class="md-nav__link">
+  <a href="#what-should-not-be-persisted" class="md-nav__link">
     What should NOT be persisted?
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#which-should-i-use-bind-mounts-or-volumes" title="Which should I use, bind mounts or volumes?" class="md-nav__link">
+  <a href="#which-should-i-use-bind-mounts-or-volumes" class="md-nav__link">
     Which should I use, bind mounts or volumes?
   </a>
   
@@ -1216,7 +1230,7 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#bind-mounts-vs-volumes" title="Bind mounts vs volumes:" class="md-nav__link">
+  <a href="#bind-mounts-vs-volumes" class="md-nav__link">
     Bind mounts vs volumes:
   </a>
   
@@ -1224,14 +1238,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#volumes" title="Volumes" class="md-nav__link">
+  <a href="#volumes" class="md-nav__link">
     Volumes
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#bind-mounts" title="Bind Mounts" class="md-nav__link">
+  <a href="#bind-mounts" class="md-nav__link">
     Bind Mounts
   </a>
   
@@ -1243,21 +1257,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-should-be-persisted-this-way" title="What should be persisted this way?" class="md-nav__link">
+  <a href="#what-should-be-persisted-this-way" class="md-nav__link">
     What should be persisted this way?
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-should-not-be-persisted" title="What should NOT be persisted?" class="md-nav__link">
+  <a href="#what-should-not-be-persisted" class="md-nav__link">
     What should NOT be persisted?
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#which-should-i-use-bind-mounts-or-volumes" title="Which should I use, bind mounts or volumes?" class="md-nav__link">
+  <a href="#which-should-i-use-bind-mounts-or-volumes" class="md-nav__link">
     Which should I use, bind mounts or volumes?
   </a>
   
@@ -1377,22 +1391,17 @@ apache-data:/var/www/html
           Material for MkDocs</a>
       </div>
       
-        
-      
     </div>
   </div>
 </footer>
       
     </div>
     
-      <script src="../../assets/javascripts/application.583bbe55.js"></script>
+      <script src="../../assets/javascripts/application.c648116f.js"></script>
       
-      <script>app.initialize({version:"1.0",url:{base:"../.."}})</script>
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
         <script src="../../extra.js"></script>
-      
-    
-    
       
     
   </body>
