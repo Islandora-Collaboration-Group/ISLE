@@ -26,7 +26,7 @@ services:
 
 
   mysql:
-    image: born-digital/isle-mysql:1.5.1-dev
+    image: borndigital/isle-mysql:1.5.1-dev
     container_name: isle-mysql-${CONTAINER_SHORT_ID}
     env_file:
       - local.env
@@ -43,7 +43,7 @@ services:
 
 
   fedora:
-    image: born-digital/isle-fedora:1.5.1-dev
+    image: borndigital/isle-fedora:1.5.1-dev
     container_name: isle-fedora-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=768M
@@ -66,7 +66,7 @@ services:
 
 
   solr:
-    image: born-digital/isle-solr:1.5.1-dev
+    image: borndigital/isle-solr:1.5.1-dev
     container_name: isle-solr-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=512M
@@ -84,7 +84,7 @@ services:
 
 
   image-services:
-    image: born-digital/isle-imageservices:1.5.1-dev
+    image: borndigital/isle-imageservices:1.5.1-dev
     container_name: isle-images-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=512M
@@ -106,7 +106,7 @@ services:
 
 
   apache:
-    image: born-digital/isle-apache:1.5.1-dev
+    image: borndigital/isle-apache:1.5.1-dev
     container_name: isle-apache-${CONTAINER_SHORT_ID}
     env_file:
       - .env
@@ -160,7 +160,7 @@ services:
 ## (Optional-component): Uncomment lines below to run ISLE with the Blazegraph triplestore instead of default Mulgara
 
 #  isle-blazegraph:
-#    image: born-digital/isle-blazegraph:1.5.1-dev
+#    image: borndigital/isle-blazegraph:1.5.1-dev
 #    container_name: isle-blazegraph-${CONTAINER_SHORT_ID}
 #    environment:
 #      - JAVA_MAX_MEM=4096M
@@ -181,7 +181,7 @@ services:
 ## (Optional-component): Uncomment lines below to run ISLE with the Varnish cache
 
 #  varnish:
-#    image: born-digital/isle-varnish:1.5.1-dev
+#    image: borndigital/isle-varnish:1.5.1-dev
 #    container_name: isle-varnish-${CONTAINER_SHORT_ID}
 #    env_file:
 #      - production.env
