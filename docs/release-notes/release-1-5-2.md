@@ -25,7 +25,7 @@ If you are coming from an ISLE release older then `1.3.0`, please read the relea
 * `apt-get` dist-upgrades for dependencies (sec updates)
 * `S6 overlay` upgraded to [2.1.0.0](https://github.com/just-containers/s6-overlay/releases/tag/v2.1.0.0)
 * `ImageMagick` upgraded to version `7.0.10-29`
-* `Composer` upgraded to [commit / hash](https://github.com/composer/composer/commit/bd2f321527c963475068e47856547e15fb5992e7) September 14th, 2020 (v 1.10.13)
+* `Composer` upgraded to [commit / hash](https://github.com/composer/getcomposer.org/commits/masterede2f57b5074fa0e21429430dcd521992bfd830f) September 11th, 2020 (v 1.10.13)
 * `OpenJpeg` upgraded to [commit / hash](https://github.com/uclouvain/openjpeg/commit/0f16986738725799237548ce6a2ea12516850e72) September 16th, 2020 (v. 2.3.1)
 
 #### isle-blazegraph
