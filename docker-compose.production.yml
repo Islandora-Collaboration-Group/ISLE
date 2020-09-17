@@ -258,7 +258,7 @@ services:
 ## (Optional-component): Uncomment lines below to run ISLE with the Varnish cache
 
 #  varnish:
-#    image: borndigital/isle-varnish:1.5.2-dev
+#    image: islandoracollabgroup/isle-varnish:1.5.2
 #    container_name: isle-varnish-${CONTAINER_SHORT_ID}
 #    env_file:
 #      - production.env
