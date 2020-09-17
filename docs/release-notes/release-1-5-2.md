@@ -63,7 +63,6 @@ If you are coming from an ISLE release older then `1.3.0`, please read the relea
 * `adoptopenjdk/openjdk8` base image (security updates)
 * `apt-get` dist-upgrades for dependencies (sec updates)
 * `S6 overlay` upgraded to [2.1.0.0](https://github.com/just-containers/s6-overlay/releases/tag/v2.1.0.0)
-* `tomcat` upgraded to `8.5.58`
 
 #### isle-varnish
 
