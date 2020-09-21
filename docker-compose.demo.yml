@@ -2,7 +2,7 @@ version: '3.7'
 
 #### docker-compose up -d;
 ## Demo Environment - Used for exploring a full sandboxed ISLE system with an un-themed Islandora / Drupal site.
-## Updated 2020-08 - Release 1.5.1 (@ 1.5.1)
+## Updated 2020-09 - Release 1.5.2 (@ 1.5.2)
 
 services:
   isle-portainer: ## Renamed to avoid conflicts on systems/servers with portainer already running.

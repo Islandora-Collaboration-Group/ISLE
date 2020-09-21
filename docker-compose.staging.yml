@@ -2,7 +2,7 @@ version: '3.7'
 
 #### docker-compose up -d;
 ## Staging Environment - Used for remote (non-local / cloud) hosting of a Staging site. Code here is almost finished but viewed privately prior to pushing to public Production.
-## Updated 2020-08 - Release 1.5.1 (@ 1.5.1)
+## Updated 2020-09 - Release 1.5.2 (@ 1.5.2)
 
 services:
   isle-portainer: ## Renamed to avoid conflicts on systems/servers with portainer already running.
