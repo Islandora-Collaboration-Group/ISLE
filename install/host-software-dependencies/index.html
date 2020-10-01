@@ -1735,12 +1735,8 @@
 <h3 id="step-2-install-docker-for-mac">Step 2: Install Docker for Mac</h3>
 <ul>
 <li>Click <a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a> and follow these instructions to download and install:<ul>
-<li>Click the button: <code>Download Desktop for Mac</code></li>
-<li>Click the button: <code>Please Login to Download</code><ul>
-<li>Click: <code>Sign In</code> or <code>Sign Up</code></li>
-</ul>
-</li>
-<li>Click the button: <code>Download Docker Desktop</code></li>
+<li>Click: <code>Sign In</code> (or <code>Sign Up</code> if you need an account)</li>
+<li>Click the button: <code>Get Stable</code> (or <code>Download Docker Desktop</code>)</li>
 <li>Finish installing Docker Desktop</li>
 </ul>
 </li>
@@ -1815,12 +1811,9 @@
 <h3 id="step-2-install-docker-desktop-for-windows">Step 2: Install "Docker Desktop for Windows"</h3>
 <p><strong>Important: Docker requires Windows Professional or Windows Enterprise</strong></p>
 <ul>
-<li>Click <a href="https://store.docker.com/editions/community/docker-ce-desktop-windows">Docker Desktop for Windows</a> and follow these instructions to download and install:<ul>
-<li>Click the button: <code>Please Login to Download</code><ul>
-<li>Click: <code>Sign In</code> or <code>Sign Up</code></li>
-</ul>
-</li>
-<li>Click the button: <code>Download Docker Desktop</code> (or <code>Get Docker</code>)<ul>
+<li>Click <a href="https://hub.docker.com/editions/community/docker-ce-desktop-windows">Docker Desktop for Windows</a> and follow these instructions to download and install:<ul>
+<li>Click: <code>Sign In</code> (or <code>Sign Up</code> if you need an account)</li>
+<li>Click the button: <code>Get Stable</code>)<ul>
 <li><code>Save</code> this file to your Desktop; <code>double-click</code> that file to install; then click <code>Yes</code> to the prompt.</li>
 </ul>
 </li>
@@ -1830,7 +1823,7 @@
 <li>Important Docker installation notes:<ul>
 <li>If Docker prompts you to restart the personal computer, please do so.</li>
 <li>If Docker prompts you to install additional Docker updates, please do so.</li>
-<li>If Docker prompts you to enable <code>Hyper-V and Containers features</code>, click <code>OK</code>.</li>
+<li>If Docker prompts you to enable <code>WSL 2</code> or <code>Hyper-V and Containers features</code>, click <code>OK</code>.</li>
 <li>If Docker prompts you (with a popup dialogue) to <code>Login with your Docker ID</code>, you may do so with your Docker.com account information, or you may skip it and close the window as Docker is already running; you do not need to login to use it.</li>
 </ul>
 </li>
@@ -1844,7 +1837,7 @@
 <p>When "Docker Desktop" is fully started, a whale icon will appear in the Windows "Notification Area". Hovering over this icon should show the message: "Docker Desktop is running".</p>
 </li>
 <li>
-<p>Enable Docker Shared Drives</p>
+<p>If you chose Hyper-V, then Enable Docker Shared Drives (ignore this if you are running WSL 2)</p>
 <ul>
 <li>Right-click on the Docker whale icon</li>
 <li>Select "Settings"</li>
