@@ -158,10 +158,8 @@ Git must be installed to get a copy (called a `clone`) of the current ISLE proje
 ### Step 2: Install Docker for Mac
 
 * Click [Docker Desktop](https://www.docker.com/products/docker-desktop) and follow these instructions to download and install:
-    * Click the button: `Download Desktop for Mac`
-    * Click the button: `Please Login to Download`
-        * Click: `Sign In` or `Sign Up`
-    * Click the button: `Download Docker Desktop`
+    * Click: `Sign In` (or `Sign Up` if you need an account)
+    * Click the button: `Get Stable` (or `Download Docker Desktop`)
     * Finish installing Docker Desktop
 * Important Docker installation notes:
     * If Docker prompts you to restart the personal computer, please do so.
@@ -222,16 +220,15 @@ Your host server is now configured and ready to install ISLE.
 
 **Important: Docker requires Windows Professional or Windows Enterprise**
 
-* Click [Docker Desktop for Windows](https://store.docker.com/editions/community/docker-ce-desktop-windows) and follow these instructions to download and install:
-    * Click the button: `Please Login to Download`
-        * Click: `Sign In` or `Sign Up`
-    * Click the button: `Download Docker Desktop` (or `Get Docker`)
+* Click [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows) and follow these instructions to download and install:
+    * Click: `Sign In` (or `Sign Up` if you need an account)
+    * Click the button: `Get Stable`)
         * `Save` this file to your Desktop; `double-click` that file to install; then click `Yes` to the prompt.
     * Click `OK` or `Next` and accept ALL of the installer's default selections.
 * Important Docker installation notes:
     * If Docker prompts you to restart the personal computer, please do so.
     * If Docker prompts you to install additional Docker updates, please do so.
-    * If Docker prompts you to enable `Hyper-V and Containers features`, click `OK`.
+    * If Docker prompts you to enable `WSL 2` or `Hyper-V and Containers features`, click `OK`.
     * If Docker prompts you (with a popup dialogue) to `Login with your Docker ID`, you may do so with your Docker.com account information, or you may skip it and close the window as Docker is already running; you do not need to login to use it.
 * When the installation is finished:
     * Press the Windows key
@@ -239,7 +236,7 @@ Your host server is now configured and ready to install ISLE.
     * Click the "Docker Desktop" app to open it
 * When "Docker Desktop" is fully started, a whale icon will appear in the Windows "Notification Area". Hovering over this icon should show the message: "Docker Desktop is running".
 
-* Enable Docker Shared Drives
+* If you chose Hyper-V, then Enable Docker Shared Drives (ignore this if you are running WSL 2)
     * Right-click on the Docker whale icon
     * Select "Settings"
     * Select "Shared Drives"
