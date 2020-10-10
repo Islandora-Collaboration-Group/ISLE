@@ -313,7 +313,7 @@ Please clone from your existing Production Islandora git repository.
         * You'll need to adjust the paths below in case your setup differs on either the non-ISLE Production server or the ISLE Staging server.
         * Copy your `/usr/local/fedora/data/datastreamStore` data to the suggested path of `/mnt/data/fedora/datastreamStore`
             * You may need to change the permissions to `root:root` on the Staging `/mnt/data/fedora/datastreamStore` directory above after copying so the Fedora container can access properly. Do not do this on your existing Production system please.
-    * Production Fedora `objectStore`. 
+    * Production Fedora `objectStore`.
         * Copy your `/usr/local/fedora/data/objectStore` data to the suggested path of `/opt/data/fedora/objectStore`
             * You may need to change the permissions to `root:root` on the Staging `/opt/data/fedora/objectStore` above after copying so the Fedora container can access properly. Do not do this on your existing Production system please.
 
@@ -354,7 +354,7 @@ This step is a multi-step, involved process that allows an end-user to make appr
       * `COMPOSE_FILE=docker-compose.staging.yml`
     * Save the file
 
-* For users of ISLE version 1.5 and above, these git instructions below are not needed. The .env file is no longer tracked in git. 
+* For users of ISLE version 1.5 and above, these git instructions below are not needed. The .env file is no longer tracked in git.
 
 * For users of ISLE versions 1.4.2 and below, you will need to continue to follow these instructions until you upgrade.
     * Enter `git status` - You'll now see the following:
@@ -480,7 +480,7 @@ git commit -m "Added the edited .env configuration file for Staging. DO NOT PUSH
 This step will show you how to run the "migration_site_vsets.sh" script on the Apache container to change Drupal database site settings for ISLE connectivity.
 
  _Using the same open terminal:_
- 
+
 * Run `docker ps` to determine the apache container name
 * Copy the "migration_site_vsets.sh" to the root of the Drupal directory on your Apache container
     * `docker cp ./scripts/apache/migration_site_vsets.sh your-apache-containername:/var/www/html/migration_site_vsets.sh`
@@ -524,7 +524,7 @@ Since you've imported an existing Drupal database, you must now reinstall the Is
     * You should see a lot of green [ok] messages.
     * If the script appears to pause or prompt for "y/n", DO NOT enter any values; the script will automatically answer for you.
 
-* **Proceed only after this message appears:** "Done. 'all' cache was cleared."
+* **Proceed only after this message appears:** "Drush script finished! ...exiting"
 
 ---
 
@@ -544,7 +544,7 @@ Depending on the size of your repository, this entire process may take minutes (
 
 ### Reindex Fedora RI & Fedora SQL Database (2/3)
 
-Since this command can take minutes or hours depending on the size of your repository, As such, it is recommended starting a screen session prior to running the following commands. Learn more about [screen here](https://www.tecmint.com/screen-command-examples-to-manage-linux-terminals/) 
+Since this command can take minutes or hours depending on the size of your repository, As such, it is recommended starting a screen session prior to running the following commands. Learn more about [screen here](https://www.tecmint.com/screen-command-examples-to-manage-linux-terminals/)
 
 **Note:** The method described below is a longer way of doing this process to onboard users.
 
