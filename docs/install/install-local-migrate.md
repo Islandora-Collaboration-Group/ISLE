@@ -465,7 +465,7 @@ Since you've imported an existing Drupal database, you must now reinstall the Is
 | - Allow vpnkit.exe to communicate with the network.  Click Okay or Allow (accept default selection).|
 | - If the process seems to halt, check the taskbar for background windows.|
 
-* **Proceed only after this message appears:** "Done. 'all' cache was cleared."
+* **Proceed only after this message appears:** "Drush script finished! ...exiting"
 
 ---
 
