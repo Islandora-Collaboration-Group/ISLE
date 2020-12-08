@@ -55,3 +55,33 @@ Application data that is not meant to be customized or unique to your institutio
 ## Which should I use, bind mounts or volumes?
 
 The answer for this is "it depends".   Bind mounts may be easier to get to on a host machine as you have more control over where they are.  If you are migrating an existing installation, you will almost certainly want to copy over things like your /var/www/html directory and Fedora store and use a bind mount to point to them.  The Solr index, however, should not be migrated over but rather rebuilt.  It doesn't need to exist before the containers do. It is also unlikely that a user would want to navigate to the Solr directory via command line on the host and edit files directly.  A named volume would probably work fine in this case, and be more easily managed by docker. 
+
+# Changes as of version 1.5.3
+
+* All Docker volumes and Bind mount paths in all docker-compose.*.yml and `*.env` files have been changed along except `Demo` to reduce and avoid merge conflicts when upgrading.
+  * `Demo` doesn't have these changes as endusers are not encouraged to make the same type of customizations.
+  * Endusers can now set if a Docker volume or a path on the host system can be used in the .env without having to constantly changed the docker-compose file and breaking paths.
+  * **NOTE:** Endusers will still need to take care when changing from a Docker volume to a path in the respective `*.env` file to **also** comment out the volume on the associated docker-compose.*.yml file.
+    * Portainer
+      * ` - ${PORTAINER_DATA_PATH:/data}` (local & test)
+    * Apache / Drupal
+      * `- ${APACHE_PATH}:/var/www/html:cached` (local & test)
+      * `- ${APACHE_PATH}:/var/www/html` (staging & production)
+    * MySQL
+      * `- ${MYSQL_PATH}:/var/lib/mysql` (all except demo)
+    * Fedora
+      * `- ${FEDORA_DATASTREAMSTORE_PATH}:/usr/local/fedora/data/datastreamStore` (all except demo)
+      * `- ${FEDORA_OBJECTSTORE_PATH}:/usr/local/fedora/data/objectStore` (all except demo)
+      * `- ${FEDORA_RESOURCE_INDEX_PATH}:/usr/local/fedora/data/resourceIndex` (all except demo)
+      * `- ${FEDORA_ACTIVEMQ_PATH}:/usr/local/fedora/data/activemq-data` (all except demo)
+      * `- ${FEDORA_XACML_PATH}:/usr/local/fedora/data/fedora-xacml-policies` (all except demo)
+    * Solr
+      * `- ${SOLR_DATA_PATH}:/usr/local/solr` (all except demo)
+    * Blazegraph
+      * `- ${BLAZEGRAPH_DATA_PATH}:/var/bigdata` (staging & production)
+    * Chrome
+      * `- ${APACHE_PATH}:/var/www/html:ro` (test)
+    * TICK
+      * `- ${INFLUXDB_DATA_PATH}::/var/lib/influxdb` (test & staging)
+      * `- ${KAPACITOR_DATA_PATH}:/var/lib/kapacitor` (test & staging)
+      * `- ${CHRONOGRAF_DATA_PATH}:/var/lib/chronograf` (test & staging)

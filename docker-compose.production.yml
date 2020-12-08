@@ -2,7 +2,7 @@ version: '3.7'
 
 #### docker-compose up -d;
 ## Production Environment - Used for remote (non-local / cloud) hosting of a Production site. Site and collections are public and accessible to the world.
-## Updated 2020-09 - Release 1.5.2 (@ 1.5.2)
+## Updated 2020-09 - Release 1.5.3-dev (@ 1.5.3-dev)
 
 services:
   isle-portainer: ## Renamed to avoid conflicts on systems/servers with portainer already running.
@@ -31,7 +31,7 @@ services:
 
 
   mysql:
-    image: islandoracollabgroup/isle-mysql:1.5.2
+    image: borndigital/isle-mysql:1.5.3-dev
     container_name: isle-mysql-${CONTAINER_SHORT_ID}
     env_file:
       - production.env
@@ -44,7 +44,7 @@ services:
     volumes:
     ## Customization: Allows for additional tuning of MySQL.
       - ./config/mysql/ISLE.cnf:/etc/mysql/mysql.conf.d/ISLE.cnf
-      - isle-db-data:/var/lib/mysql
+      - ${MYSQL_PATH}:/var/lib/mysql
     ## (Optional): Uncomment lines below to run ISLE with the TICK monitoring system
     #logging:
     #  driver: syslog
@@ -53,7 +53,7 @@ services:
 
 
   fedora:
-    image: islandoracollabgroup/isle-fedora:1.5.2
+    image: borndigital/isle-fedora:1.5.3-dev
     container_name: isle-fedora-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=4096M
@@ -68,13 +68,11 @@ services:
       - mysql
       - solr
     volumes:
-      ## Customization: Bind mounting the two Fedora data paths below instead of using default Docker volumes
-      ## Next two lines are suggested paths and users can change values to the left of the : to match their Fedora data folders of choice.
-      - /mnt/data/fedora/datastreamStore:/usr/local/fedora/data/datastreamStore
-      - /opt/data/fedora/objectStore:/usr/local/fedora/data/objectStore
-      - isle-fedora-resourceIndex:/usr/local/fedora/data/resourceIndex # (Optional) Migrators can change this to your local RI folder instead of using a Docker volume.
-      - isle-fedora-activemq:/usr/local/fedora/data/activemq-data # (Optional) Migrators can change this to your local MQ folder instead of using a Docker volume.
-      - isle-fedora-XACML:/usr/local/fedora/data/fedora-xacml-policies
+      - ${FEDORA_DATASTREAMSTORE_PATH}:/usr/local/fedora/data/datastreamStore
+      - ${FEDORA_OBJECTSTORE_PATH}:/usr/local/fedora/data/objectStore
+      - ${FEDORA_RESOURCE_INDEX_PATH}:/usr/local/fedora/data/resourceIndex
+      - ${FEDORA_ACTIVEMQ_PATH}:/usr/local/fedora/data/activemq-data
+      - ${FEDORA_XACML_PATH}:/usr/local/fedora/data/fedora-xacml-policies
     ## (Optional): Uncomment lines below to run ISLE with the TICK monitoring system
     #logging:
     #  driver: syslog
@@ -83,7 +81,7 @@ services:
 
 
   solr:
-    image: islandoracollabgroup/isle-solr:1.5.2
+    image: borndigital/isle-solr:1.5.3-dev
     container_name: isle-solr-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=2048M
@@ -97,7 +95,7 @@ services:
     depends_on:
       - mysql
     volumes:
-      - isle-solr-data:/usr/local/solr
+      - ${SOLR_DATA_PATH}:/usr/local/solr
     ## (Optional): Uncomment lines below to run ISLE with the TICK monitoring system
     #logging:
     #  driver: syslog
@@ -106,7 +104,7 @@ services:
 
 
   image-services:
-    image: islandoracollabgroup/isle-imageservices:1.5.2
+    image: borndigital/isle-imageservices:1.5.3-dev
     container_name: isle-images-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=2048M
@@ -133,7 +131,7 @@ services:
 
 
   apache:
-    image: islandoracollabgroup/isle-apache:1.5.2
+    image: borndigital/isle-apache:1.5.3-dev
     container_name: isle-apache-${CONTAINER_SHORT_ID}
     env_file:
       - .env
@@ -147,13 +145,12 @@ services:
       - traefik
     volumes:
       # Customization: Bind mounting Drupal Code instead of using default Docker volumes.
-      ## The next line is a suggested path and users can change values to the left of the : to match their Apache data folder of choice.
-      - /opt/data/apache/html:/var/www/html
+      - ${APACHE_PATH}:/var/www/html
       # Customization: Separate settings.php files based on environment.
       # Ensure that the values from the production.env have been inserted in the corresponding ISLE configuration sections of the settings.production.php
       - ./config/apache/settings_php/settings.production.php:/var/www/html/sites/default/settings.php
       ## (Optional): Uncomment line below to allow bind mounting of the php.ini file for editing of php memory, upload and max_post values.
-      #- ./config/apache/php_ini/php.production.ini:/etc/php/7.1/apache2/php.ini
+      - ./config/apache/php_ini/php.production.ini:/etc/php/7.1/apache2/php.ini
     labels:
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
       - traefik.enable=true
@@ -233,7 +230,7 @@ services:
 ## (Optional-component): Uncomment lines below to run ISLE with the Blazegraph triplestore instead of default Mulgara
 
 #  isle-blazegraph:
-#    image: islandoracollabgroup/isle-blazegraph:1.5.2
+#    image: borndigital/isle-blazegraph:1.5.3-dev
 #    container_name: isle-blazegraph-${CONTAINER_SHORT_ID}
 #    environment:
 #      - JAVA_MAX_MEM=4096M
@@ -245,7 +242,7 @@ services:
 #    ports:
 #      - "8084:8080"
 #    volumes:
-#      - isle-blazegraph-data:/var/bigdata
+#      - ${BLAZEGRAPH_DATA_PATH}:/var/bigdata
 #    logging:
 #      driver: syslog
 #      options:
@@ -258,7 +255,7 @@ services:
 ## (Optional-component): Uncomment lines below to run ISLE with the Varnish cache
 
 #  varnish:
-#    image: islandoracollabgroup/isle-varnish:1.5.2
+#    image: borndigital/isle-varnish:1.5.3-dev
 #    container_name: isle-varnish-${CONTAINER_SHORT_ID}
 #    env_file:
 #      - production.env
@@ -290,6 +287,7 @@ networks:
   isle-external:
 
 
+# If using a bindmount path instead of a volume within the production.env, comment out the docker volume below to avoid an issue.
 volumes:
   isle-db-data:
   isle-solr-data:
