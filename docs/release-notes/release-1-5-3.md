@@ -72,6 +72,7 @@ If you are coming from an ISLE release older then `1.3.0`, please read the relea
   * security and package updates
   * base image upgraded to `Ubuntu 20.04 LTS`
 * `apt-get` dist-upgrades for dependencies security and package updates
+* Apache `Tomcat` upgraded to `8.5.61`
 * `S6 overlay` upgraded to [2.1.0.2](https://github.com/just-containers/s6-overlay/releases/tag/v2.1.0.2)
 * Github Actions [workflow](https://github.com/marketplace/actions/build-and-push-docker-images) added for automated Docker image builds
 
