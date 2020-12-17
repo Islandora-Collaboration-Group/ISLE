@@ -117,6 +117,7 @@ services:
       - traefik
     volumes:
       # Customization: Bind mounting Drupal Code instead of using default Docker volumes for local development with an IDE.
+      ## The next line is a suggested path and users can change values to the left of the : to match their Apache data folder of choice.      
       - ./data/apache/html:/var/www/html:cached
       # Customization: Separate settings.php files based on environment.
       - ./config/apache/settings_php/settings.local.php:/var/www/html/sites/default/settings.php
@@ -205,7 +206,6 @@ networks:
   isle-external:
 
 
-# If using a bindmount path instead of a volume within the local.env, comment out the docker volume below to avoid an issue.
 volumes:
   isle-db-data:
   isle-solr-data:
