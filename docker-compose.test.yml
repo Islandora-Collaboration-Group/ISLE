@@ -45,7 +45,6 @@ services:
     ## Customization: Allows for additional tuning of MySQL.
       - ./config/mysql/ISLE.cnf:/etc/mysql/mysql.conf.d/ISLE.cnf
       - isle-db-data:/var/lib/mysql
-      #  - isle-db-data:/var/lib/mysql
     ## (Optional): Uncomment lines below to run ISLE with the TICK monitoring system
     logging:
       driver: syslog
