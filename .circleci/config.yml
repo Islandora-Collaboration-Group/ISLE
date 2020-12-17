@@ -41,8 +41,6 @@ jobs:
             docker exec -it isle-apache-td bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh
           no_output_timeout: 20m
 
-      - run: sleep 30
-
       - run:
           name: Drush en basic dependencies
           command: |
