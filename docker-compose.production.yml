@@ -147,7 +147,7 @@ services:
       - traefik
     volumes:
       # Customization: Bind mounting Drupal Code instead of using default Docker volumes.
-      ## The next line is a suggested path and users can change values to the left of the : to match their Apache data folder of choice.   
+      ## The next line is a suggested path and users can change values to the left of the : to match their Apache data folder of choice.
       - /opt/data/apache/html:/var/www/html
       # Customization: Separate settings.php files based on environment.
       # Ensure that the values from the production.env have been inserted in the corresponding ISLE configuration sections of the settings.production.php
