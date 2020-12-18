@@ -320,7 +320,8 @@ services:
 # Start - Blazegraph service section
 
   isle-blazegraph:
-    image: borndigital/isle-blazegraph:1.5.3
+    #image: borndigital/isle-blazegraph:1.5.3
+    image: islandoracollabgroup/isle-blazegraph:1.5.2
     container_name: isle-blazegraph-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=4096M
