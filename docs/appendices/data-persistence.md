@@ -2,16 +2,16 @@
 
 **Please note this is a simplified explanation of how Docker stores data in relation to a typical ISLE installation.** This document assumes the use of the docker-compose command and docker-compose.yml, though there are other ways to specify how docker uses volumes and bind mounts.  For more complete descriptions of bind mounts and volumes, and their management, please see the official docker documentation.
 
-**Data**, in this context, can include digital objects, files, logs, code, or information stored in MySQL, Solr, or Fedora.  Essentially, anything typically written to or read from disk in some format, is data. 
+**Data**, in this context, can include digital objects, files, logs, code, or information stored in MySQL, Solr, or Fedora.  Essentially, anything typically written to or read from disk in some format, is data.
 
 Each time a docker container is brought up using a command like `docker-compose up -d` the container is recreated using the base container image. When a process in the container creates or changes a file (for example, an Apache log file) those changes only exist while the container is running.  If the container is brought down and back up again, it is recreated using the base image, which will not include the Apache log. In order to preserve certain data--for example, the Fedora datastore, Drupal's database and files, etc, ISLE uses volumes and/or bind mounts defined in 'docker-compose.yml'.  
 
-Data written to volumes and bind mounts are different to other data in Docker in two important ways: 
+Data written to volumes and bind mounts are different to other data in Docker in two important ways:
 
 - It is persistent, so it will survive when there is an update to the base ISLE docker images
 - It can be read and written from the host easily and safely
 
-## Bind mounts vs volumes:
+## Bind mounts vs volumes
 
 Docker provides two different ways to persist data: **Volumes** and **bind mounts**, described below.  For simplicity, in this document, **persisted** refers to any data or directory stored in either a bind mount or volume.
 
@@ -23,7 +23,6 @@ Below is an example docker-compose.yml directive for an Apache container using a
 
     volumes:
     apache-data:/var/www/html
-
 
   Explanation: If not already created, docker will create a directory on the host at '/var/lib/docker' and use that for the apache container's '/var/www/html' directory.
 
@@ -54,4 +53,4 @@ Application data that is not meant to be customized or unique to your institutio
 
 ## Which should I use, bind mounts or volumes?
 
-The answer for this is "it depends".   Bind mounts may be easier to get to on a host machine as you have more control over where they are.  If you are migrating an existing installation, you will almost certainly want to copy over things like your /var/www/html directory and Fedora store and use a bind mount to point to them.  The Solr index, however, should not be migrated over but rather rebuilt.  It doesn't need to exist before the containers do. It is also unlikely that a user would want to navigate to the Solr directory via command line on the host and edit files directly.  A named volume would probably work fine in this case, and be more easily managed by docker. 
+The answer for this is "it depends".   Bind mounts may be easier to get to on a host machine as you have more control over where they are.  If you are migrating an existing installation, you will almost certainly want to copy over things like your /var/www/html directory and Fedora store and use a bind mount to point to them.  The Solr index, however, should not be migrated over but rather rebuilt.  It doesn't need to exist before the containers do. It is also unlikely that a user would want to navigate to the Solr directory via command line on the host and edit files directly.  A named volume would probably work fine in this case, and be more easily managed by docker.
