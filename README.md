@@ -20,17 +20,17 @@ Please use the [ISLE Documentation](https://islandora-collaboration-group.github
 * Time required < 30 minutes.
 * **Windows Users**: Please open the .env and uncomment `COMPOSE_CONVERT_WINDOWS_PATHS=1`
 
-## **AS OF THE ISLE v.1.4.0 release in November 2019 (MANDATORY)**
+## Warnings & Notes
 
-Due to removal of older files and folders and git changes in the ISLE git repository as of `November 25, 2019`, please review the following:
-
-* If you are a **new** ISLE user and are cloning or forking this project for the first time after `November 25, 2019`, then you can **ignore this section and move on to the Quick Start section**.
-
-- If you have **previously forked or cloned** the ISLE project **prior to** `November 25, 2019`, then you **do need to follow the instructions** given in the [Cleanup ISLE git repository for Release v.1.4.0](https://islandora-collaboration-group.github.io/ISLE/cookbook-recipes/isle-v140-git-cleanup/) documentation.
-
-* If you still feel like you're not sure or cannot tell if you need to do this, then please refer to the instructions given in the `Identification Tools` section of the [Cleanup ISLE git repository for Release v.1.4.0](https://islandora-collaboration-group.github.io/ISLE/cookbook-recipes/isle-v140-git-cleanup/) documentation.
-
-- If you intend to submit pull requests (PRs) of any kind (documentation, code etc) to the ISLE project, ISLE maintainers will **NOT** accept PRs from repos that haven't had the script run on them as using an uncleaned forked repo will cause the removed files to return.
+* **AS OF THE ISLE v.1.5.3 release in December 2020 (MANDATORY)**
+  * The ISLE maintainers in agreement with the wider Islandora community have changed the default branch of `master` to `main` to work towards a more inclusive and open culture with removing language like "master or slave" as an important step.
+  * As a result the `main` branch will now be the default branch.
+  * ISLE users will need to continue to checkout `main` and pull from `main` as they once did with the now defunct `master` on all of their projects.
+    * `git fetch --all`
+    * `git checkout main`
+    * `git pull origin main`
+  * All future releases will be built and tagged from the `main` branches on all ISLE Docker images Github repositories as well.
+  * After December 2020, no more updates will be avaible from the `master` branch which will be deprecated and ultimately deleted in 2021.
 
 ### Quick Start
 1. Please read: [ISLE Release Candidate (RC): How to Test](https://docs.google.com/document/d/1VUiI_bXo6SLqqUjmInVjBg3-cs40Vj7I_92txjFUoQg/edit#heading=h.1e4943m60lsh)
