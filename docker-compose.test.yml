@@ -54,7 +54,6 @@ services:
 
   fedora:
     image: islandoracollabgroup/isle-fedora:1.5.3
-    #image: islandoracollabgroup/isle-fedora:1.5.2
     container_name: isle-fedora-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=768M
@@ -321,7 +320,6 @@ services:
 
   isle-blazegraph:
     image: islandoracollabgroup/isle-blazegraph:1.5.3
-    #image: islandoracollabgroup/isle-blazegraph:1.5.2
     container_name: isle-blazegraph-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=4096M
