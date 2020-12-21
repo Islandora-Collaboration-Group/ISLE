@@ -34,7 +34,7 @@
   * base image upgraded to `Ubuntu 20.04 LTS`
 * `apt-get` dist-upgrades for dependencies security and package updates
 * `S6 overlay` upgraded to [2.1.0.2](https://github.com/just-containers/s6-overlay/releases/tag/v2.1.0.2)
-* `ImageMagick` upgraded to version `7.0.10-46`
+* `ImageMagick` upgraded to version `7.0.10-51`
 * `Composer` upgraded to [commit / hash](https://github.com/composer/getcomposer.org/commit/e3e43bde99447de1c13da5d1027545be81736b27) December 4th, 2020 (v 1.10.19)
 * `OpenJpeg` upgraded to [commit / hash](https://github.com/uclouvain/openjpeg/commit/5d0a8b08dcd3bcdf532c54702b5a88ec61b17918) December 5th, 2020 (v. 2.3.1)
 * Github Actions [workflow](https://github.com/marketplace/actions/build-and-push-docker-images) added for automated Docker image builds
@@ -57,7 +57,7 @@
 * ISLE Tomcat base image upgrade from 1.5.2 to 1.5.3
 * `apt-get` dist-upgrades for dependencies security and package updates
 * `Cantaloupe` upgraded to version `4.1.7`
-* `ImageMagick` upgraded to version `7.0.10-46`
+* `ImageMagick` upgraded to version `7.0.10-51`
 * `OpenJpeg` upgraded to [commit / hash](https://github.com/uclouvain/openjpeg/commit/5d0a8b08dcd3bcdf532c54702b5a88ec61b17918) December 5th, 2020 (v. 2.3.1)
 * Github Actions [workflow](https://github.com/marketplace/actions/build-and-push-docker-images) added for automated Docker image builds
 
