@@ -13,11 +13,17 @@
 * Branches change - `master` is no longer the default branch, `main` is now the default branch
   * `master` will be deprecated then moved out.
 
-### Upgrade
+### Warnings & Notes
 
-If you are coming from ISLE releases `1.3.0` then you **need to follow the instructions** given in the [Cleanup ISLE git repository for Release v.1.4.0](https://islandora-collaboration-group.github.io/ISLE/cookbook-recipes/isle-v140-git-cleanup/) documentation.
-
-If you are coming from an ISLE release older then `1.3.0`, please read the release notes for `1.3.0` to understand the paradigm shift that happened between previous releases. You will also need to follow the instructions given in the [Cleanup ISLE git repository for Release v.1.4.0](https://islandora-collaboration-group.github.io/ISLE/cookbook-recipes/isle-v140-git-cleanup/) documentation.
+* **AS OF THE ISLE v.1.5.3 release in December 2020 (MANDATORY)**
+  * The ISLE maintainers in agreement with the wider Islandora community have changed the default branch of `master` to `main` to work towards a more inclusive and open culture with removing language like "master or slave" as an important step.
+  * As a result the `main` branch will now be the default branch.
+  * ISLE users will need to continue to checkout `main` and pull from `main` as they once did with the now defunct `master` on all of their projects.
+    * `git fetch --all`
+    * `git checkout main`
+    * `git pull origin main`
+  * All future releases will be built and tagged from the `main` branches on all ISLE Docker images Github repositories as well.
+  * After December 2020, no more updates will be avaible from the `master` branch which will be deprecated and ultimately deleted in 2021.
 
 ### ISLE Docker Images
 
