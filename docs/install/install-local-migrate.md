@@ -1,6 +1,6 @@
 # Local ISLE Installation: Migrate Existing Islandora Site
 
-_Expectations:  It takes an average of **2-4+ hours** to read this documentation and complete this installation._
+_Expectations:  It takes an average of **6+ hours** to read this documentation and complete this installation._
 
 This Local ISLE Installation builds a local environment for the express purpose of migrating a previously existing Islandora site onto the ISLE platform. If you need to build a brand new local development site, please **stop** and use the [Local ISLE Installation: New Site](../install/install-local-new.md) instead.
 
@@ -100,7 +100,7 @@ This data can be challenging depending on the level of customizations to contend
 
 #### Strategy 1: **Easy** - Run "Stock" ISLE
 
-Don't copy any existing production Solr schemas, GSearch .xslt files, etc., and opt instead to use ISLE's default versions. Import some objects from your existing Fedora repository and see if they display properly in searches as you like.
+Don't copy any existing production Solr schemas, GSearch .xslt files, etc., and opt instead to use ISLE's default versions. Import some objects from your existing Fedora repository and see if they display properly in searches.
 
 #### Strategy 2: **Intermediate** - Bind Mount in Existing Transforms and Schemas
 
@@ -109,9 +109,9 @@ Bind mount in existing transforms and schemas  to override ISLE settings with yo
 **WARNING** _This approach assumes you are running Solr 4.10.x.; **only attempt** if you are running that version on Production._
 
 * Copy these current Production files and directory to your personal computer in an appropriate location.
-    * Solr `schema.xml`
-    * GSearch `foxmltoSolr.xslt` file
-    * GSearch `islandora_transforms`
+    * Solr `schema.xml` (Location in Fedora: /usr/share/tomcat/webapps/solr/collection1/conf/ OR /usr/local/fedora/solr/conf OR /usr/local/fedora/solr/collection1/conf)
+    * GSearch `foxmltoSolr.xslt` (Location in Fedora: /usr/share/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/)
+    * GSearch `islandora_transforms` (Location in Fedora: /usr/share/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms)
     * Keep the files you create during this process; you will need them again for `Step 2a` (below)!
 
 * **Note:** You may need to further review paths in the files mentioned above, and edit them to match ISLE system paths. i.e. If `foxmltoSolr.xslt` and any transforms within `islandora_transforms` include `xsl:include` statements, make sure they match the paths noted in Step 2a (i.e. `/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms`).
@@ -120,7 +120,7 @@ Bind mount in existing transforms and schemas  to override ISLE settings with yo
 
 * Copy these current production files and directory to your personal computer in an appropriate location.
     * Solr `schema.xml`
-    * GSearch `foxmltoSolr.xslt` file
+    * GSearch `foxmltoSolr.xslt`
     * GSearch `islandora_transforms`
 
 * Run the Demo ISLE briefly to pull files for modification and correct ISLE system paths.  
@@ -248,7 +248,7 @@ mkdir -p ./config/fedora/gsearch
 
 * Add a new line in the Solr volumes section of your "docker-compose.local.yml"  
 ```
-  - config/solr/schema.xml:/usr/local/solr/collection1/conf/schema.xml`  
+  - ./config/solr/schema.xml:/usr/local/solr/collection1/conf/schema.xml
 ```
 
 * Add new lines in the Fedora volumes section of your "docker-compose.local.yml"  
@@ -257,7 +257,7 @@ mkdir -p ./config/fedora/gsearch
   - ./config/fedora/gsearch/foxmlToSolr.xslt:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/foxmlToSolr.xslt
 ```
 
-Continue the local setup as directed below and ultimately import some objects from your existing Fedora repository and see if they display properly in searches as you like.
+Continue the local setup as directed below and ultimately import some objects from your existing Fedora repository and see if they display properly in searches.
 
 ---
 
