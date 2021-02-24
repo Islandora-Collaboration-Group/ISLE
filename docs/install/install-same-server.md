@@ -31,6 +31,7 @@ Follow all the directions from the install docs for a new or migrated ISLE site.
   - Bring the containers back online with `docker-compose up -d`
   
 ### In the new project's directory (Project 2):
+- Edit the `.env` file and choose a new value for `CONTAINER_SHORT_ID`. This will prevent conflicts between your new and old containers.
 - In `docker-compose.production.yml`, make the following edits:
   - Comment out the entire `portainer` and `traefik` sections
   - In the `apache` section, under `Depends on`, comment out `-traefik`
