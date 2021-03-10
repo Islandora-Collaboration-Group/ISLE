@@ -211,9 +211,9 @@ origin	https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-i
 
     * `git fetch icg-upstream`
 
-* Pull down the ICG ISLE "master" branch into your `yourprojectnamehere-isle` local "master" branch:
+* Pull down the ICG ISLE "main" branch into your `yourprojectnamehere-isle` local "main" branch:
 
-    * `git pull icg-upstream master`
+    * `git pull icg-upstream main`
 
 * View the ISLE code you now have in this directory:
 
@@ -221,7 +221,7 @@ origin	https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-i
 
 * Push this code to your git hosting provider:
 
-    * `git push -u origin master`
+    * `git push -u origin main`
     * This will take 2-5 minutes depending on your internet speed.
 
 You now have the current ISLE project code checked into git as a foundation to make changes on specific to your local and project needs. You'll use this git "icg-upstream" process in the future to pull updates and new releases from the main ISLE project.

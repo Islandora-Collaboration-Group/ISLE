@@ -61,7 +61,7 @@ Each subdirectory is grouped by the image / container software type and each con
 
 ## Dockerfile Composition
 
-Following [standard Docker convention](https://docs.docker.com/engine/reference/builder/), all ISLE Dockerfiles have similar structures. Examples displayed are from the [Apache Dockerfile](https://github.com/Islandora-Collaboration-Group/ISLE/blob/master/apache/Dockerfile)
+Following [standard Docker convention](https://docs.docker.com/engine/reference/builder/), all ISLE Dockerfiles have similar structures. Examples displayed are from the [Apache Dockerfile](https://github.com/Islandora-Collaboration-Group/ISLE/blob/main/apache/Dockerfile)
 
 * FROM command indicating which official Docker image is used as the base build.
     * The `Apache` image uses two base images to first compile `ffmpeg and ghostscript` and then copying the resulting binaries and libraries to a new clean base image so that the development tools are not installed on the final image. Reduces size.
@@ -82,7 +82,7 @@ Following [standard Docker convention](https://docs.docker.com/engine/reference/
 
 * ENTRYPOINT - Allows you to configure a container that will run as an executable.
 
-* Within the [apache Dockerfile](https://github.com/Islandora-Collaboration-Group/ISLE/blob/master/apache/Dockerfile), the server is told to "run" using the `apache2ctl` utility by this last line: `ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]`
+* Within the [apache Dockerfile](https://github.com/Islandora-Collaboration-Group/ISLE/blob/main/apache/Dockerfile), the server is told to "run" using the `apache2ctl` utility by this last line: `ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]`
 
 ## Dockerfile Commenting
 

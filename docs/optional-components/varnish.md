@@ -416,14 +416,14 @@ Varnish cache server
     * `git status` - this will show you all of the changed files.
     * `git add path/file` - add each changed file as necessary
     * `git commit -m "Adding Varnish to Production"` - Your git message can be anything of your choosing
-    * `git push origin master` - (_Replace `master` with the actual git branch you are using for ISLE development if needed_)
+    * `git push origin main` - (_Replace `main` with the actual git branch you are using for ISLE development if needed_)
 
 ##### Quick Deployment to Staging for Code Parity
 
 * On your Staging system:
     * Shutdown your containers from your ISLE project directory root found typically in `/opt/`
         * `docker-compose down`
-    * Run `git pull origin master` - (_Replace `master` with the actual git branch you are using for ISLE development if needed_)
+    * Run `git pull origin main` - (_Replace `main` with the actual git branch you are using for ISLE development if needed_)
         * While you may not be deploying Varnish to your Staging system, it is a wise idea to not have code drift.
     * Repeat this process with your Islandora / Drupal code to ensure parity between Staging and Production
     * Spin your containers back up
@@ -442,7 +442,7 @@ Varnish cache server
 * On your Production system:
     * Shutdown your containers from your ISLE project directory root found typically in `/opt/`
         * `docker-compose down`
-    * Run `git pull origin master` - (_Replace `master` with the actual git branch you are using for ISLE development if needed_)
+    * Run `git pull origin main` - (_Replace `main` with the actual git branch you are using for ISLE development if needed_)
     * Repeat this process with your Islandora / Drupal code using the appropriate git branch as needed
 
 * Pull down the new isle images

@@ -116,9 +116,9 @@ origin	https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-i
 
     * `git fetch icg-upstream`
 
-* Pull down the ICG ISLE "master" branch into your local project's "master" branch
+* Pull down the ICG ISLE "main" branch into your local project's "main" branch
 
-    * `git pull icg-upstream master`
+    * `git pull icg-upstream main`
 
 * View the ISLE code you now have in this directory:
 
@@ -126,7 +126,7 @@ origin	https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-i
 
 * Push this code to your online git provider ISLE
 
-    * `git push -u origin master`
+    * `git push -u origin main`
     * This will take 2-5 minutes depending on your internet speed.
 
 You now have the current ISLE project code checked into git as a foundation to make changes on specific to your local and project needs. You'll use this git "icg-upstream" process in the future to pull updates and new releases from the main ISLE project.
@@ -306,8 +306,8 @@ _Using the same open terminal:_
 * Add the git "remote" (this is your git repository hosting service to where you'll push changes, such as Bitbucket, GitHub or Gitlab):
     * **Example:** `git remote add origin https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-islandora.git`
 
-* Push the changes to the remote git repository on the "master" branch
-    * `git push -u origin master`
+* Push the changes to the remote git repository on the "main" branch
+    * `git push -u origin main`
 
 * Your Local install is now complete.
 

@@ -227,7 +227,7 @@ If you have decided to use Commercial SSL certs supplied to you by your IT team 
 * Once you have made all of the appropriate changes to your Production profile. Please note the steps below are suggestions. You might use a different git commit message. Substitute `<changedfileshere>` with the actual file names and paths. You may need to do this repeatedly prior to the commit message.
     * `git add <changedfileshere>`
     * `git commit -m "Changes for Production"`
-    * `git push origin master`
+    * `git push origin main`
 
 ---
 
@@ -327,8 +327,8 @@ This step is a multi-step, involved process that allows an end-user to make appr
     * Enter `git status` - You'll now see the following:
 
 ```bash
-On branch master
-Your branch is up to date with 'origin/master'.
+On branch main
+Your branch is up to date with 'origin/main'.
 
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
@@ -367,7 +367,7 @@ fatal: empty ident name (for <islandora@yourprojectnamehere.institution.edu>) no
 
 ```bash
 git commit -m "Added the edited .env configuration file for Production. DO NOT PUSH BACK TO UPSTREAM REPOSITORY - Jane Doe 8/2019"
-[master 7ab3fcf9] Added the edited .env configuration file for Production. DO NOT PUSH BACK TO UPSTREAM REPOSITORY - Jane Doe 8/2019
+[main 7ab3fcf9] Added the edited .env configuration file for Production. DO NOT PUSH BACK TO UPSTREAM REPOSITORY - Jane Doe 8/2019
  1 file changed, 4 insertions(+), 4 deletions(-)
 ```
 

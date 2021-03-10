@@ -96,7 +96,7 @@ In order for `mkdocs` to understand that there is a new page and page title to d
      * Change the branch name as needed or leave as the default.
      * Click the green `Propose File Change`
 
-**DO NOT** SELECT THE 1ST RADIO BUTTON - `Commit directly to the master branch` as this will cause issues though it is selected by default.
+**DO NOT** SELECT THE 1ST RADIO BUTTON - `Commit directly to the main branch` as this will cause issues though it is selected by default.
 
 ### Create Pull Request for Review
 

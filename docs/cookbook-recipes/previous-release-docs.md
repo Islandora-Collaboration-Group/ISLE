@@ -39,17 +39,12 @@ MkDocs performs two basic functions:
    INFO    -  The following pages exist in the docs directory, but are not included in the "nav" configuration:
      - about/project-history.md
      - appendices/environment-files.md
-     - contributor-docs/ISLE-v.1.1.2-buildnotes.md
-     - contributor-docs/ansible-guide.md
-     - contributor-docs/build-guide-v111.md
-     - contributor-docs/build-guide.md
      - contributor-docs/editing-local.md
      - contributor-docs/editing-online.md
      - contributor-docs/making-pr-guide.md
      - contributor-docs/overview.md
      - contributor-docs/policies.md
      - cookbook-recipes/preview-release-docs.md
-     - install/_obsolete_install-server.md
      - install/install-demo-edit-hosts-file.md
      - install/install-demo-resources.md
      - install/install-local-resources.md
