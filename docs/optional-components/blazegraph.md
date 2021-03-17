@@ -107,7 +107,7 @@
 #
 # Only one of two values (mulgara) or (blazegraph) can be used below for FEDORA_RESOURCE_INDEX 
 # By DEFAULT the value of (mulgara) is used to set which type of Fedora Resource Index can be used
-# https://wiki.duraspace.org/display/FEDORA38/Resource+Index
+# https://wiki.lyrasis.org/display/FEDORA38/Resource+Index
 # If you would like to use blazegraph instead, you'll also need to use its image
 # https://github.com/Islandora-Collaboration-Group/isle-blazegraph
 # Please note: If you mistype or leave this value blank, more than likely Fedora won't work properly.
