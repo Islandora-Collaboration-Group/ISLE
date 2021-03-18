@@ -509,13 +509,14 @@ When migrating any non-ISLE Islandora site, it is crucial to rebuild (reindex) t
     * Resource Index - The Resource Index is the Fedora module that provides the infrastructure for indexing relationships among objects and their components.
     * SQL database - `fedora3` contains information vital for the Drupal site to connect to Fedora correctly.
 
-* **Solr index** - Solr an open source enterprise search platform works in conjunction with the Islandora Solr module to provide a way to configure the Islandora search functions, the search results display, and the display of metadata on object pages. The index serves as a list of those objects for fast searching across large collections.
+* **Solr index**
+    * Solr is an open source enterprise search platform that works in conjunction with the Islandora Solr module to provide a way to configure the Islandora search functions, the search results display, and the display of metadata on object pages. The index serves as a list of those objects for fast searching across large collections.
 
 You can use the command-line interactive utility `fedora-rebuild.sh` on the `fedora` container to rebuild all indices when the Fedora (not Tomcat) server is offline.
 
 Depending on the size of your repository, this entire process may take minutes (thousands of objects) or hours (millions of objects) to complete.
 
-### Reindex Fedora RI & Fedora SQL Database (2/3)
+### Reindex Fedora RI & Fedora SQL Database (part 1 of 2)
 
 Since this command can take minutes or hours depending on the size of your repository, As such, it is recommended starting a screen session prior to running the following commands. Learn more about [screen here](https://www.tecmint.com/screen-command-examples-to-manage-linux-terminals/) 
 
@@ -556,7 +557,7 @@ SUCCESS: 38 objects rebuilt.
 OK - Started application at context path [/fedora]
 ```
 
-### Reindex Solr (3/3)
+### Reindex Solr (part 2 of 2)
 
 **WARNING** - This reindex process takes the longest of all three, with up to **1-30 or more hours** to complete depending on the size of your Fedora collection. As such, it is recommended starting a screen session prior to running the following command. Learn more about [screen here](https://www.tecmint.com/screen-command-examples-to-manage-linux-terminals/)
 
