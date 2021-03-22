@@ -11,6 +11,9 @@
 
 * This is an ISLE security and feature update release.  
   * Images have been updated along with the ISLE config
+### Release fixes
+
+* ISLE v.1.5.5 [release fixes](https://github.com/Islandora-Collaboration-Group/ISLE/projects/5)
 
 ### ISLE Docker Images
 
@@ -26,7 +29,7 @@
   * https://github.com/Islandora-Collaboration-Group/ISLE/issues/187
   * https://github.com/Islandora-Collaboration-Group/ISLE/issues/195
   * https://github.com/Islandora-Collaboration-Group/ISLE/issues/411
-
+  
 #### isle-blazegraph
 
 * ISLE Tomcat base image upgrade from 1.5.4 to 1.5.5
@@ -71,8 +74,9 @@
 * `apt-get` dist-upgrades for dependencies security and package updates
 * Github Actions [workflow](https://github.com/marketplace/actions/build-and-push-docker-images) updated
 
+#### isle-drupal-build-tools
+
+* pdf.js now default viewer for PDFs and working by default now in install & migation scripts.
+  * https://github.com/Islandora-Collaboration-Group/ISLE/issues/194
+
 ---
-
-### Release fixes
-
-* ISLE v.1.5.5 [release fixes](https://github.com/Islandora-Collaboration-Group/ISLE/projects/5)
