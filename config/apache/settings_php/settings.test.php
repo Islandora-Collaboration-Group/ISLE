@@ -248,9 +248,9 @@
 
 $databases['default']['default'] = array(
   'driver' => 'mysql',
-  'database' => 'isle_ld',
-  'username' => 'isle_ld_user',
-  'password' => 'isle_ld_db2018',
+  'database' => 'isle_demo',
+  'username' => 'isle_demo_user',
+  'password' => 'isle_demo_db',
   'host' => 'mysql',
   'prefix' => '',
   'charset' => 'utf8mb4',

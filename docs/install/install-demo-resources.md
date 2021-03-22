@@ -16,23 +16,23 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 
 #### 1. MySQL Container
 | Compose Service Name | Container Name  | Software      | Ports         |
-| :-------------:      | :-------------: | ------------- | ------------- |      
-| mysql                | isle-mysql-ld   | MySQL 5.7     | 3306          |
+| :-------------:      | :-------------: | ------------- | ------------- |
+| mysql                | isle-mysql-demo   | MySQL 5.7     | 3306          |
 
 
 | Account        | Password              | Database         | Perms                         |
-| -------------  | -------------         | -------------    | -------------                 |      
-| root           | ild_mysqlrt_2018      | **ALL**          | **ALL**                       |
-| fedora_admin   | ild_feddb_2018        | fedora3          | **All** except `Grant` option |
-| isle_ld_user   | isle_ld_db2018        | isle_ld          | **All** except `Grant` option |
+| -------------  | -------------         | -------------    | -------------                 |
+| root           | demo_mysqlrt      | **ALL**          | **ALL**                       |
+| fedora_admin   | demo_feddb        | fedora3          | **All** except `Grant` option |
+| isle_demo_user   | isle_demo_db      | isle_demo        | **All** except `Grant` option |
 
 ---
 
 #### 2. Fedora Container
-| Compose Service Name | Container Name  | Software      | Ports                                            |
-| :-------------:      | :-------------: | ------------- | -------------                                    |      
-| fedora               | isle-fedora-ld  | see below     | 8080 mapped to 8081 (on host) |
 
+| Compose Service Name | Container Name  | Software      | Ports                                            |
+| :-------------:      | :-------------: | ------------- | -------------                                    |
+| fedora               | isle-fedora-demo  | see below     | 8080 mapped to 8081 (on host) |
 
 | Software                         | Version           |
 | -------------                    | -------------     |
@@ -46,11 +46,11 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 | Open JDK                         | 8.x               |
 
 | Account           | Password                      | Service       | URL           |
-| -------------     | -------------                 | ------------- | ------------- |      
-| fedoraAdmin       | ild_fed_admin_2018            | Fedora        | http://hostip:8081/fedora/describe                          |
-| fedoraIntCallUser | ild_fed_IntCallUser_2018      | Fedora        | http://hostip:8081/fedora/objects                           |
+| -------------     | -------------                 | ------------- | ------------- |
+| fedoraAdmin       | demo_fed_admin            | Fedora        | http://hostip:8081/fedora/describe                          |
+| fedoraIntCallUser | demo_fed_IntCallUser      | Fedora        | http://hostip:8081/fedora/objects                           |
 | anonymous         | anonymous                     | Fedora        | ---                                                         |
-| fgsAdmin          | ild_fgs_admin_2018            | Gsearch       | http://hostip:8081/fedoragsearch/rest?operation=updateIndex |
+| fgsAdmin          | demo_fgs_admin            | Gsearch       | http://hostip:8081/fedoragsearch/rest?operation=updateIndex |
 | admin             | isle_admin                    | Tomcat        | http://hostip:8081/manager/html                             |
 | manager           | isle_manager                  | Tomcat        | http://hostip:8081/manager/html                             |
 
@@ -59,14 +59,13 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 #### 3. Solr Container
 
 | Compose Service Name | Container Name  | Software      | Ports                                              |
-| :-------------:      | :-------------: | ------------- | -------------                                      |      
-| solr                 | isle-solr-ld    | see below     | 8080 (on container) mapped to 8082 (on host)       |
-
+| :-------------:      | :-------------: | ------------- | -------------                                      |
+| solr                 | isle-solr-demo  | see below     | 8080 (on container) mapped to 8082 (on host)       |
 
 | Software               | Version       |
 | -------------          | ------------- |
 | Solr                   | 4.10.4        |
-| Tomcat                 | 8.5.x           |  
+| Tomcat                 | 8.5.x         |
 | OpenJDK                | 8.x           |
 | (DG) Basic Solr Config | 4.10.x branch |
 
@@ -81,9 +80,8 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 #### 4. Apache Container
 
 | Compose Service Name | Container Name  | Software      | Ports         |
-| :-------------:      | :-------------: | ------------- | ------------- |      
-| apache               | isle-apache-ld  | see below     | 80, 443       |
-
+| :-------------:      | :-------------: | ------------- | ------------- |
+| apache               | isle-apache-demo | see below    | 80, 443       |
 
 | Software      | Version       |
 | ------------- | ------------- |
@@ -117,8 +115,8 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 
 #### 6. Image Services
 | Compose Service Name | Container Name  | Software      | Ports                                            |
-| :-------------:      | :-------------: | ------------- | -------------                                    |      
-| image-services       |  isle-images-ld | see below     | 8080 (on container) mapped to 8083 (on host)     |
+| :-------------:      | :-------------: | ------------- | -------------                                    |
+| image-services       |  isle-images-demo | see below   | 8080 (on container) mapped to 8083 (on host)     |
 
 
 | Software                         | Version           |
@@ -128,8 +126,8 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 | Account           | Password                      | Service       | URL           |
 | -------------     | -------------                 | ------------- | ------------- |
 | admin             | isle_admin                    | Tomcat        | http://hostip:8082/manager/html   |
-| manager           | isle_manager                  | Tomcat        | http://hostip:8082/manager/html   |   
-| admin             | isle_admin                    | Cantaloupe    | http://hostip:8083/cantaloupe/admin   |
+| manager           | isle_manager                  | Tomcat        | http://hostip:8082/manager/html   |
+| admin             | isle_admin                    | Cantaloupe    | http://hostip:8083/cantaloupe/admin |
 
 ---
 
