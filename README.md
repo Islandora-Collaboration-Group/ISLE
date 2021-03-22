@@ -46,8 +46,8 @@ Please use the [ISLE Documentation](https://islandora-collaboration-group.github
     - `docker-compose up -d`
     * **Please note:** the “ -d” argument stands for “detached” meaning the command will persist even if you close your terminal or your computer sleeps etc…)
 7. Please wait a few moments for the stack to fully come up.  Approximately 3-5 minutes.
-8. Install Islandora on the isle-apache-ld container:
-    - `docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh`
+8. Install Islandora on the isle-apache-demo container:
+    - `docker exec -it isle-apache-demo bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh`
 9. To wrap up testing:
     - In the folder with the docker-compose.yml `docker-compose down -v` (nb: the -v removes all volumes, and will delete any work. This option **does not persist your data**)
 
@@ -81,7 +81,7 @@ If you have been testing the stack extensively you may want to `prune` your Dock
 * Make sure your /etc/hosts points isle.localdomain to 127.0.0.1. See original docs on [how-to](docs/install/install-demo-edit-hosts-file.md)
 * Islandora is available at http://isle.localdomain
   * **You may need to point directly to the IP address of isle-apache, here's how:**
-    - `docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' isle-apache-ld`
+    - `docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' isle-apache-demo`
     - Copy the IP and browse to it.  `http://{IP}/`
 * Traefik is available at http://admin.isle.localdomain OR http://localhost:8080/
 * Portainer is available at http://portainer.isle.localdomain OR http://localhost:9010/

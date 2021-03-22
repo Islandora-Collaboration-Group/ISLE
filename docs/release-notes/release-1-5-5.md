@@ -4,8 +4,9 @@
 
 * Gavin Morris (Born-Digital), code updates, documentation, testing and release manager for this version
 * Mark Sandford (Colgate University), documentation
-* David Keiser-Clark (Williams College), documentation
+* David Keiser-Clark (Williams College), documentation, code updates
 * Mark McFate, (Grinnell College), documentation, testing and code updates
+* Tom Shorock, (Univ. of Kansas), testing and code updates
 
 ### ISLE (main project)
 

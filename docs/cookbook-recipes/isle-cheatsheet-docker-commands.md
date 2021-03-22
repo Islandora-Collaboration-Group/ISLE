@@ -45,9 +45,9 @@ Docker commands that are useful to installing or updating ISLE.
 
 ### [Shell Into Docker Container](https://docs.docker.com/v17.12/engine/reference/commandline/exec/)
   * `docker exec -it [CONTAINER_NAME] bash` # Shell Into Docker Container
-    * **Example:** `docker exec -it isle-apache-ld bash`
+    * **Example:** `docker exec -it isle-apache-demo bash`
   * `docker exec -it [CONTAINER_NAME] [FILE_NAME]` # Shell Into Docker Container and Run Script
-    * **Example:** `docker exec -it isle-apache-ld bash -c "cd /utility-scripts/isle_drupal_build_tools && ./isle_islandora_installer.sh`
+    * **Example:** `docker exec -it isle-apache-demo bash -c "cd /utility-scripts/isle_drupal_build_tools && ./isle_islandora_installer.sh`
 
 ### [Docker Service](https://docs.docker.com/engine/reference/commandline/docker/)
   * `sudo service docker status` # Show Docker Status
@@ -56,7 +56,7 @@ Docker commands that are useful to installing or updating ISLE.
 
 ### [Watching Docker Logs](https://docs.docker.com/engine/reference/commandline/logs/)
   * `docker logs -f --tail 10 [CONTAINER_NAME]` # Show the last 10 lines (`--tail 10`) of a container's logs; `-f` means continuous/live feed
-    * **Example:** `docker logs -f --tail 10 isle-apache-ld`
+    * **Example:** `docker logs -f --tail 10 isle-apache-demo`
 
 ### [Locate Docker Volume](https://docs.docker.com/engine/reference/commandline/volume_inspect/)
   * `docker volume inspect [VOLUME_NAME]` # Locate Docker Volume

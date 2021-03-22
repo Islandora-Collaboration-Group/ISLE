@@ -80,7 +80,7 @@ Modules installed in this manner essentially become part of the container they'r
 ```
   apache:
     image: islandoracollabgroup/isle-apache:latest
-    container_name: isle-apache-ld
+    container_name: isle-apache-demo
     networks:
       isle-internal:
         aliases:
