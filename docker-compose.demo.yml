@@ -106,7 +106,7 @@ services:
 
 
   apache:
-    image: borndigital/isle-apache:1.5.5-dev
+    image: borndigital/isle-apache:1.5.5
     container_name: isle-apache-${CONTAINER_SHORT_ID}
     env_file:
       - .env
