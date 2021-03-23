@@ -25,14 +25,14 @@ _Note:_ You do **not** need to stop your stack to complete these steps.
 7. Locate the following lines
 
         [[entryPoints.https.tls.certificates]]  
-        certFile = "/certs/isle.localdomain.cert"  
-        keyFile = "/certs/isle.localdomain.key"  
+        certFile = "/certs/isle-demo.localdomain.cert"  
+        keyFile = "/certs/isle-demo.localdomain.key"  
 
 8. Comment the three lines out by adding a `#` to the beginning of the line:
 
         # [[entryPoints.https.tls.certificates]]  
-        # certFile = "/certs/isle.localdomain.cert"  
-        # keyFile = "/certs/isle.localdomain.key"  
+        # certFile = "/certs/isle-demo.localdomain.cert"  
+        # keyFile = "/certs/isle-demo.localdomain.key"  
 
 9. On a new line add the following, substituting in your email address:
 

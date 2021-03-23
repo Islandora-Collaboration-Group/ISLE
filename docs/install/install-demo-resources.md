@@ -1,7 +1,7 @@
 # Demo ISLE Installation: Resources
 
 ### Local URL
-Always use the `https://isle.localdomain` domain to view and log in to a local site. (Do not use an IP address, such as `https://10.10.10.130 or https://127.0.0.01` as some components may not function correctly.)
+Always use the `https://isle-demo.localdomain` domain to view and log in to a local site. (Do not use an IP address, such as `https://10.10.10.130 or https://127.0.0.01` as some components may not function correctly.)
 
 ---
 
@@ -9,7 +9,7 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 
 * `islandora` user on the ISLE host server uses `islandora` as the password.
 
-<!--- TODO this IP information conflicts with our statement to always use the `https://isle.localdomain` domain. Requires clarification. --->
+<!--- TODO this IP information conflicts with our statement to always use the `https://isle-demo.localdomain` domain. Requires clarification. --->
 * Some of the information below is for accessing the non Drupal site admin panels and resources only. (optional). In this context, `hostip` below can mean either
      * the IP address e.g. `http://10.10.10.130` of the Vagrant or Non-Vagrant Host VM (_CentOS / Ubuntu_)
      * the IP address e.g. `127.0.0.1` for `Docker for Mac`
@@ -96,7 +96,7 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 
 | Account                | Password                      | Service               | URL                                                  |
 | -------------          | -------------                 | -------------         | -------------                                        |
-| isle                  | isle                           | Drupal site admin     | [https://isle.localdomain](https://isle.localdomain) |
+| isle                  | isle                           | Drupal site admin     | [https://isle-demo.localdomain](https://isle-demo.localdomain) |
 
 ---
 
@@ -107,9 +107,9 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 
 | Account               | Password      | Service      | URL        |
 | :-------------:       | :-------------:   | :-------------: | :-------------: |
-| None Required         | None Required                 | Proxy UI     | [https://admin.isle.localdomain](https://admin.isle.localdomain) OR http://hostip:8080  |
+| None Required         | None Required                 | Proxy UI     | [https://admin.isle-demo.localdomain](https://admin.isle-demo.localdomain) OR http://hostip:8080  |
 
-* The Proxy Control Panel is available at [admin.isle.localdomain](https://admin.isle.localdomain).  No username/password are required.  This is unsafe for production environments.
+* The Proxy Control Panel is available at [admin.isle-demo.localdomain](https://admin.isle-demo.localdomain).  No username/password are required.  This is unsafe for production environments.
 
 ---
 
@@ -133,7 +133,7 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 
 #### 7. Portainer
 
-* Portainer (a Docker control panel) is available at [portainer.isle.localdomain](http://portainer.isle.localdomain). No username/password are required.  This is unsafe for production environments.
+* Portainer (a Docker control panel) is available at [portainer.isle-demo.localdomain](http://portainer.isle-demo.localdomain). No username/password are required.  This is unsafe for production environments.
 
 ---
 

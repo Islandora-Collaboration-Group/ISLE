@@ -41,7 +41,7 @@ The third command, `drush en devel`, instructs our container to 'enable', `en` i
 
 The final command, `drush cc all`, instructs our container to 'clear all caches', `cc` is Drush shorthand for 'clear cache. This command is not required, but it is highly recommended, since Drupal and Islandora typically cache a great deal of module information, and failing to clear caches may cause temporary, but unexpected results after a new module is installed.
 
-That's it.  Your new module is installed and ready to be configured and used.  You can visit 'https://isle.localdomain/admin/modules' in your browser to manage the module's configuration, permissions, and more.
+That's it.  Your new module is installed and ready to be configured and used.  You can visit 'https://isle-demo.localdomain/admin/modules' in your browser to manage the module's configuration, permissions, and more.
 
 ## Example: Oral Histories Solution Pack - A Non-Contrib Islandora Module
 
@@ -69,13 +69,13 @@ The command, `drush en islandora_oralhistories -y`, instructs our container to '
 
 The final command, `drush cc all`, instructs our container to 'clear all caches', `cc` is Drush shorthand for 'clear cache. This command is not required, but it is highly recommended, since Drupal and Islandora typically cache a great deal of module information, and failing to clear caches may cause temporary, but unexpected results after a new module is installed.
 
-That's it.  Your new module is installed and ready to be configured and used.  You can visit 'https://isle.localdomain/admin/modules' in your browser to manage the module's configuration, permissions, and more.
+That's it.  Your new module is installed and ready to be configured and used.  You can visit 'https://isle-demo.localdomain/admin/modules' in your browser to manage the module's configuration, permissions, and more.
 
 Other modules which use _Git_ and _Drush_ for installation can be obtained in a similar manner.
 
 ## Persistent Changes
 
-Modules installed in this manner essentially become part of the container they're installed in.  If the container is deleted the installation may not persist.  However, in most ISLE configurations, like isle.localdomain, the Apache portion of the governing docker-compose.yml file reads something like this:
+Modules installed in this manner essentially become part of the container they're installed in.  If the container is deleted the installation may not persist.  However, in most ISLE configurations, like isle-demo.localdomain, the Apache portion of the governing docker-compose.yml file reads something like this:
 
 ```
   apache:
@@ -84,7 +84,7 @@ Modules installed in this manner essentially become part of the container they'r
     networks:
       isle-internal:
         aliases:
-          - isle.localdomain
+          - isle-demo.localdomain
     tty: true
     depends_on:
       - mysql

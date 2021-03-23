@@ -36,8 +36,8 @@ defaultEntryPoints = ["http", "https"]
         "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256"
       ]
       [[entryPoints.https.tls.certificates]]
-      certFile = "/certs/isle.localdomain.cert"
-      keyFile = "/certs/isle.localdomain.key"
+      certFile = "/certs/isle-demo.localdomain.cert"
+      keyFile = "/certs/isle-demo.localdomain.key"
 
 ################################################################
 # Traefik logs configuration

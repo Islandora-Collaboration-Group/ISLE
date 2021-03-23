@@ -22,7 +22,7 @@ Edit the `/etc/hosts` file to view ISLE locally on a personal computer browser.
     1. **For Demo ISLE Installations:**
         * Find the `127.0.0.1 localhost` entry in the `/etc/hosts` file.
         * Go to end of same line, add one space, and then paste the following:
-        * `isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain`
+        * `isle-demo.localdomain admin.isle-demo.localdomain images.isle-demo.localdomain portainer.isle-demo.localdomain`
 
     2. **For Local ISLE Installations:**
         * Find the `127.0.0.1 localhost` entry in the `/etc/hosts` file.
@@ -30,7 +30,7 @@ Edit the `/etc/hosts` file to view ISLE locally on a personal computer browser.
         * `yourprojectnamehere.localdomain admin.yourprojectnamehere.localdomain images.yourprojectnamehere.localdomain portainer.yourprojectnamehere.localdomain`
         * Note: While not required, it is perfectly okay to have multiple lines so as to define both the Demo and the Local ISLE installations, as shown in the example below:
 ```
-127.0.0.1 localhost isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain
+127.0.0.1 localhost isle-demo.localdomain admin.isle-demo.localdomain images.isle-demo.localdomain portainer.isle-demo.localdomain
 127.0.0.1 localhost yourprojectnamehere.localdomain admin.yourprojectnamehere.localdomain images.yourprojectnamehere.localdomain portainer.yourprojectnamehere.localdomain
 ```
 
@@ -66,7 +66,7 @@ Edit the `/etc/hosts` file to view ISLE locally on a personal computer browser.
     1. **For Demo ISLE Installations:**
         * Find the `127.0.0.1 localhost` entry and uncomment it (by deleting the preceding `#` character).
         * Go to end of same line, add one space, and then paste the following:
-        * `isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain`
+        * `isle-demo.localdomain admin.isle-demo.localdomain images.isle-demo.localdomain portainer.isle-demo.localdomain`
 
     2. **For Local ISLE Installations:**
         * Find the `127.0.0.1 localhost` entry and uncomment it (by deleting the preceding `#` character).
@@ -74,7 +74,7 @@ Edit the `/etc/hosts` file to view ISLE locally on a personal computer browser.
         * `yourprojectnamehere.localdomain admin.yourprojectnamehere.localdomain images.yourprojectnamehere.localdomain portainer.yourprojectnamehere.localdomain`
         * Note: While not required, it is perfectly okay to have multiple lines so as to define both the Demo and the Local ISLE installations, as shown in the example below:
 ```
-127.0.0.1 localhost isle.localdomain admin.isle.localdomain images.isle.localdomain portainer.isle.localdomain
+127.0.0.1 localhost isle-demo.localdomain admin.isle-demo.localdomain images.isle-demo.localdomain portainer.isle-demo.localdomain
 127.0.0.1 localhost yourprojectnamehere.localdomain admin.yourprojectnamehere.localdomain images.yourprojectnamehere.localdomain portainer.yourprojectnamehere.localdomain
 ```
 

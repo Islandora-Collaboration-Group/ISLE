@@ -22,7 +22,7 @@ jobs:
           name: Switch to using TEST profile for docker-compose
           command: |
             rm .env
-            printf "COMPOSE_PROJECT_NAME=isle_test \nBASE_DOMAIN=isle.localdomain \nCONTAINER_SHORT_ID=td \nCOMPOSE_FILE=docker-compose.test.yml" > .env
+            printf "COMPOSE_PROJECT_NAME=isle_test \nBASE_DOMAIN=isle-demo.localdomain \nCONTAINER_SHORT_ID=td \nCOMPOSE_FILE=docker-compose.test.yml" > .env
       
       - run:
           name: Get docker-compose 1.27.4
@@ -47,7 +47,7 @@ jobs:
             docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/all/modules/islandora && git clone https://github.com/Islandora-Labs/islandora_solution_pack_oralhistories.git"
             docker exec -it isle-apache-td bash -c "cd /var/www/html && drush -y -u 1 en islandora_oralhistories"
             docker exec -it isle-apache-td bash -c "cd /var/www/html && drush dis overlay -y"
-            sudo -- sh -c "echo 127.0.0.1 isle.localdomain >> /etc/hosts"
+            sudo -- sh -c "echo 127.0.0.1 isle-demo.localdomain >> /etc/hosts"
           no_output_timeout: 20m
       
       - run:

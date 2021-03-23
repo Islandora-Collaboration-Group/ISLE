@@ -22,7 +22,7 @@
 
 * Recommend a test of all ingest and content types and especially Large Image format using the open-seadragon viewer.
   * Do things display properly etc?
-  * Check that within the Large Image format Solution Pack configuration page that Kakadu is "turned off" and the checkbox to use it is unchecked. https://isle.localdomain/node#overlay=admin/islandora/solution_pack_config/large_image
+  * Check that within the Large Image format Solution Pack configuration page that Kakadu is "turned off" and the checkbox to use it is unchecked. https://isle-demo.localdomain/node#overlay=admin/islandora/solution_pack_config/large_image
   * Can one ingest properly tiffs with this setting on and off?
 
 * Recommend a test with ingesting a large set of data / objects that need OCR.

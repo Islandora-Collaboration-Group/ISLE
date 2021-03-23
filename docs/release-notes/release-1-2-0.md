@@ -57,7 +57,7 @@ The following files will need you to review, edit and/or merge in previous setti
 
 ```bash
 COMPOSE_PROJECT_NAME=isle_demo
-BASE_DOMAIN=isle.localdomain
+BASE_DOMAIN=isle-demo.localdomain
 CONTAINER_SHORT_ID=ld
 COMPOSE_FILE=docker-compose.demo.yml
 ```

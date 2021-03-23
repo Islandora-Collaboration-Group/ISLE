@@ -27,8 +27,8 @@ Please note: as of ISLE release 1.5, the .env file is no longer tracked by git. 
             * `demo.env`
             * `config/apache/php_ini/php.demo.ini`
             * `config/mysql/ISLE.cnf`
-            * `config/proxy/ssl-certs/isle.localdomain.cert`
-            * `config/proxy/ssl-certs/isle.localdomain.key`
+            * `config/proxy/ssl-certs/isle-demo.localdomain.cert`
+            * `config/proxy/ssl-certs/isle-demo.localdomain.key`
             * `config/proxy/traefik.demo.toml`
 
     * **Local**
@@ -75,8 +75,8 @@ Please note: as of ISLE release 1.5, the .env file is no longer tracked by git. 
             * `config/apache/php_ini/php.test.ini`
             * `config/apache/settings_php/settings.test.php`
             * `config/mysql/ISLE.cnf`
-            * `config/proxy/ssl-certs/isle.localdomain.cert`
-            * `config/proxy/ssl-certs/isle.localdomain.key`
+            * `config/proxy/ssl-certs/isle-demo.localdomain.cert`
+            * `config/proxy/ssl-certs/isle-demo.localdomain.key`
             * `config/proxy/traefik.test.toml`
 
 ---
@@ -93,7 +93,7 @@ This reference includes a combination of suggestions and actual values. You may 
 
 ```bash
 COMPOSE_PROJECT_NAME=isle_demo
-BASE_DOMAIN=isle.localdomain
+BASE_DOMAIN=isle-demo.localdomain
 CONTAINER_SHORT_ID=ld
 COMPOSE_FILE=docker-compose.demo.yml
 ```
@@ -165,7 +165,7 @@ COMPOSE_FILE=docker-compose.production.yml # (Mandatory) The docker-compose file
 
 ```bash
 COMPOSE_PROJECT_NAME=isle_test       # (Mandatory)
-BASE_DOMAIN=isle.localdomain         # (Mandatory)
+BASE_DOMAIN=isle-demo.localdomain         # (Mandatory)
 CONTAINER_SHORT_ID=td                # (Mandatory)
 COMPOSE_FILE=docker-compose.test.yml # (Mandatory) The docker-compose file used for configuring and launching the Test environment.
 ```

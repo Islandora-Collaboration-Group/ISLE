@@ -413,7 +413,7 @@ Proceed to bottom of this page for next steps.
         * `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
         * `brew install ansible`
 
-* There is a ready made Ansible script for the MacOS hosted isle.localdomain called `ansible/host_vars/host_local_macos_isle_localdomain.yml`
+* There is a ready made Ansible script for the MacOS hosted isle-demo.localdomain called `ansible/host_vars/host_local_macos_isle_localdomain.yml`
 
     * Use `vagrant` for the `ansible_ssh_user=` value in the `ansible/inventory` file
 

@@ -8,9 +8,9 @@ ISLE Committers are to follow this guide to build the five Docker ISLE images us
 
 Developers can follow this guide if they have edited their Dockerfiles with custom software and they then can push to their own Docker image repository.
 
-These images will contain the necessary base code, scripts and files to run the default sample `https://isle.localdomain`.
+These images will contain the necessary base code, scripts and files to run the default sample `https://isle-demo.localdomain`.
 
-The Demo ISLE Installation creates a local Islandora platform (`https://isle.localdomain`) on your personal computer. This process includes an un-themed Drupal website and an empty Fedora repository so you may ingest test objects, add or edit metadata, update fields in SOLR indexing, develop code, and otherwise "kick the tires" on ISLE.
+The Demo ISLE Installation creates a local Islandora platform (`https://isle-demo.localdomain`) on your personal computer. This process includes an un-themed Drupal website and an empty Fedora repository so you may ingest test objects, add or edit metadata, update fields in SOLR indexing, develop code, and otherwise "kick the tires" on ISLE.
 
 Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive emails. The [Glossary](../appendices/glossary.md) defines terms used in this documentation.
 
@@ -189,7 +189,7 @@ Pull down the newly pushed images.
 
 * `docker-compose pull`
 
-Follow the instructions within the `docker-compose.yml` file or within the [Demo ISLE Installation](../install/install-demo.md) to start up containers and install the Demo ISLE Installation (`https://isle.localdomain`).
+Follow the instructions within the `docker-compose.yml` file or within the [Demo ISLE Installation](../install/install-demo.md) to start up containers and install the Demo ISLE Installation (`https://isle-demo.localdomain`).
 
 Ensure that all components, connections, etc. are working, otherwise troubleshoot as required, making the appropriate fixes to the associated Dockerfiles, pushing changes to the ISLE project git repository and then REPEATING this entire build and push process.
 

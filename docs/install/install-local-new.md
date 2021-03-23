@@ -4,7 +4,7 @@ _Expectations:  It takes an average of **1-2 hours** to read this documentation 
 
 This Local ISLE Installation creates an un-themed Drupal website and an empty Fedora repository (similar to the Demo installation) but one that you can use to develop and design your Drupal site and Fedora collections with the end goal of deploying to ISLE Staging and Production environments for public use.
 
-This Local ISLE Installation will allow you to locally view this site in your browser with the domain of your choice (**Example:** "https://yourprojectnamehere.localdomain"), instead of being constrained to the Demo URL ("https://isle.localdomain").
+This Local ISLE Installation will allow you to locally view this site in your browser with the domain of your choice (**Example:** "https://yourprojectnamehere.localdomain"), instead of being constrained to the Demo URL ("https://isle-demo.localdomain").
 
 While this installation provides you a brand new local development site, it is **not** intended as a migration process of a previously existing Islandora site. If you need to build a local environment to migrate a previously existing Islandora site, please use the [Local ISLE Installation: Migrate Existing Islandora Site](../install/install-local-migrate.md) instead.
 

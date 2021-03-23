@@ -37,7 +37,7 @@ Other modules which use _Composer_ for installation can be obtained in a similar
 
 ## Persistent Changes
 
-Modules installed in this manner essentially become part of the container they're installed in.  If the container is deleted the installation may not persist.  However, in most ISLE configurations, like isle.localdomain, the Apache portion of the governing docker-compose.yml file reads something like this:
+Modules installed in this manner essentially become part of the container they're installed in.  If the container is deleted the installation may not persist.  However, in most ISLE configurations, like isle-demo.localdomain, the Apache portion of the governing docker-compose.yml file reads something like this:
 
 ```
   apache:
@@ -46,7 +46,7 @@ Modules installed in this manner essentially become part of the container they'r
     networks:
       isle-internal:
         aliases:
-          - isle.localdomain
+          - isle-demo.localdomain
     tty: true
     depends_on:
       - mysql

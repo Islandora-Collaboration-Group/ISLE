@@ -80,7 +80,7 @@ Drill down to the ./ingest_data/isle-ingest-samples/IMI directory and look for t
 
 Visit one of these two pages:
 
-  * on your Demo site > https://isle.localdomain/multi_importer
+  * on your Demo site > https://isle-demo.localdomain/multi_importer
   * on your Local site > https://yourlocalnamehere.localdomain/multi_importer
 
 Use the data in mods_twig_base.txt to create and save an IMI metadata template

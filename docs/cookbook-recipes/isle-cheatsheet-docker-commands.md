@@ -92,12 +92,12 @@ Docker commands that are useful to installing or updating ISLE.
 ### Ping to Test Connectivity
   * usage: `ping [DOMAIN]`
   * **Example:** `ping www.google.com`
-  * **Example:** `ping isle.localdomain`
+  * **Example:** `ping isle-demo.localdomain`
 
 ### DNS Lookup and Querying Tool
   * usage: `dig [DOMAIN]`
   * **Example:** `dig www.google.com`
-  * **Example:** `dig isle.localdomain`
+  * **Example:** `dig isle-demo.localdomain`
 
 ### EXTREME CAUTION: Remove Directory: Recursively and with Force
   * usage: `sudo rm -rf [DIRECTORY_NAME]`
