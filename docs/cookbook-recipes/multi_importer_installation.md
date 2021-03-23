@@ -235,5 +235,5 @@ The ingested objects should be listed.
 * [ISLE Documentation Site](https://github.com/Islandora-Collaboration-Group/ISLE)
 * [More Sample Ingest Objects from Born Digital](https://github.com/Born-Digital-US/isle-ingest-samples)
 * [IMI Github](https://github.com/mnylc/islandora_multi_importer)
-* [Islandora Documentation - How to Add an Item to a Digital Collection](https://wiki.duraspace.org/display/ISLANDORA/How+to+Add+an+Item+to+a+Digital+Collection)
-* [Islandora Documentation - How to Batch Ingest Files](https://wiki.duraspace.org/display/ISLANDORA7112/How+to+Batch+Ingest+Files)
+* [Islandora Documentation - How to Add an Item to a Digital Collection](https://wiki.lyrasis.org/display/ISLANDORA/How+to+Add+an+Item+to+a+Digital+Collection)
+* [Islandora Documentation - How to Batch Ingest Files](https://wiki.lyrasis.org/display/ISLANDORA7112/How+to+Batch+Ingest+Files)

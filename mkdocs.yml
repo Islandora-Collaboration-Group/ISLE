@@ -52,10 +52,6 @@ nav:
   - 'Sample IT Department Request Letter': 'appendices/sample-it-department-request.md'
   - 'Sample Server Setups' : 'appendices/server-setups.md'
   - 'Troubleshooting': 'appendices/install-troubleshooting.md'
-  - 'User Stories':
-    - 'Demo ISLE Installation Example User Story': 'appendices/user-story-demo-site.md'
-    - 'New Site Example User Story': 'appendices/user-story-new-site.md'
-    - 'Migration Example User Story': 'appendices/user-story-migration-site.md'
   - 'Warning about Red Hat Install': 'appendices/redhat.md'
 - 'Cookbook Recipes':
   - 'ISLE Cheat Sheet: Docker Commands': 'cookbook-recipes/isle-cheatsheet-docker-commands.md'
@@ -77,8 +73,9 @@ nav:
   - 'Get Help': 'about/get-help.md'
   - 'Release Process': 'contributor-docs/release-process.md'
 - 'Release Notes':
-  - 'Latest release: 1.5.3': 'release-notes/release-1-5-3.md'
+  - 'Latest release: 1.5.4': 'release-notes/release-1-5-4.md'
   - 'Previous releases':
+     - '1.5.3': 'release-notes/release-1-5-3.md'
      - '1.5.2': 'release-notes/release-1-5-2.md'
      - '1.5.1': 'release-notes/release-1-5-1.md'
      - '1.5.0': 'release-notes/release-1-5-0.md'

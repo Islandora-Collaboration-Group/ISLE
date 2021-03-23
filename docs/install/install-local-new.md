@@ -116,9 +116,9 @@ origin	https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-i
 
     * `git fetch icg-upstream`
 
-* Pull down the ICG ISLE "master" branch into your local project's "master" branch
+* Pull down the ICG ISLE "main" branch into your local project's "main" branch
 
-    * `git pull icg-upstream master`
+    * `git pull icg-upstream main`
 
 * View the ISLE code you now have in this directory:
 
@@ -126,7 +126,7 @@ origin	https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-i
 
 * Push this code to your online git provider ISLE
 
-    * `git push -u origin master`
+    * `git push -u origin main`
     * This will take 2-5 minutes depending on your internet speed.
 
 You now have the current ISLE project code checked into git as a foundation to make changes on specific to your local and project needs. You'll use this git "icg-upstream" process in the future to pull updates and new releases from the main ISLE project.
@@ -279,8 +279,8 @@ The Islandora Collaboration Group provides a set of [Islandora Sample Objects](h
 git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-objects.git
 ```
 
-* Follow these ingestion instructions [How to Add an Item to a Digital Collection](https://wiki.duraspace.org/display/ISLANDORA/How+to+Add+an+Item+to+a+Digital+Collection)
-* (Note: [Getting Started with Islandora](https://wiki.duraspace.org/display/ISLANDORA/Getting+Started+with+Islandora) contains explanations about content models, collections, and datastreams.)
+* Follow these ingestion instructions [How to Add an Item to a Digital Collection](https://wiki.lyrasis.org/display/ISLANDORA/How+to+Add+an+Item+to+a+Digital+Collection)
+* (Note: [Getting Started with Islandora](https://wiki.lyrasis.org/display/ISLANDORA/Getting+Started+with+Islandora) contains explanations about content models, collections, and datastreams.)
 * After ingesting content, you will need to add an Islandora Simple Search block to the Drupal structure. (The default search box will only search Drupal content, not Islandora content.)
     * Select from the menu: `Structure > Blocks > Islandora Simple Search`
     * Select: `Sidebar Second`
@@ -306,8 +306,8 @@ _Using the same open terminal:_
 * Add the git "remote" (this is your git repository hosting service to where you'll push changes, such as Bitbucket, GitHub or Gitlab):
     * **Example:** `git remote add origin https://yourgitproviderhere.com/yourinstitutionhere/yourprojectnamehere-islandora.git`
 
-* Push the changes to the remote git repository on the "master" branch
-    * `git push -u origin master`
+* Push the changes to the remote git repository on the "main" branch
+    * `git push -u origin main`
 
 * Your Local install is now complete.
 

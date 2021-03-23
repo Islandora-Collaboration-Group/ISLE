@@ -142,8 +142,8 @@ The Islandora Collaboration Group provides a set of [Islandora Sample Objects](h
 git clone https://github.com/Islandora-Collaboration-Group/islandora-sample-objects.git
 ```
 
-* Follow these ingestion instructions [How to Add an Item to a Digital Collection](https://wiki.duraspace.org/display/ISLANDORA/How+to+Add+an+Item+to+a+Digital+Collection)
-* (Note: [Getting Started with Islandora](https://wiki.duraspace.org/display/ISLANDORA/Getting+Started+with+Islandora) contains explanations about content models, collections, and datastreams.)
+* Follow these ingestion instructions [How to Add an Item to a Digital Collection](https://wiki.lyrasis.org/display/ISLANDORA/How+to+Add+an+Item+to+a+Digital+Collection)
+* (Note: [Getting Started with Islandora](https://wiki.lyrasis.org/display/ISLANDORA/Getting+Started+with+Islandora) contains explanations about content models, collections, and datastreams.)
 * After ingesting content, you will need to add an Islandora Simple Search block to the Drupal structure. (The default search box will only search Drupal content, not Islandora content.)
     * Select from the menu: `Structure > Blocks > Islandora Simple Search`
     * Select: `Sidebar Second`

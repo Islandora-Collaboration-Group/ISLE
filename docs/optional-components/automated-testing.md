@@ -13,7 +13,7 @@
 
 ## Running ISLE Tests
 
-* The most straightforward example of use is ISLE's testing environment: https://github.com/Islandora-Collaboration-Group/ISLE/blob/master/docker-compose.test.yml as configured by the CircleCI configuration: https://github.com/Islandora-Collaboration-Group/ISLE/blob/master/.circleci/config.yml
+* The most straightforward example of use is ISLE's testing environment: https://github.com/Islandora-Collaboration-Group/ISLE/blob/main/docker-compose.test.yml as configured by the CircleCI configuration: https://github.com/Islandora-Collaboration-Group/ISLE/blob/main/.circleci/config.yml
 * This use case is abstracted and summarized below:
 
 ### Installation Instructions:

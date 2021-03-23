@@ -52,8 +52,8 @@ origin    https://github.com/your-user-name/ISLE.git (push)
 upstream  https://github.com/Islandora-Collaboration-Group/ISLE.git (fetch)
 upstream   https://github.com/Islandora-Collaboration-Group/ISLE.git (push)
 ```
-‘origin' and ‘upstream' are arbitrary, but common names. They can be anything
-you want. For this document, ‘origin' will mean your forked repository and ‘upstream'
+'origin' and 'upstream' are arbitrary, but common names. They can be anything
+you want. For this document, 'origin' will mean your forked repository and 'upstream'
 will be the main ISLE repository.   It's good to create a consistent paradigm for
 yourself when working with these names.
 
@@ -68,11 +68,11 @@ need to do this.  When you've had a local repository setup and haven't worked
 in it for a while, then it's good to follow these instructions below to make
 sure you have the latest changes before you start your work.
 
-First, make sure you're on your master branch in your fork:
+First, make sure you're on your main branch in your fork:
 ```
-$ git checkout master
+$ git checkout main
 $ git status
-# On branch master
+# On branch main
 nothing to commit (working directory clean)
 ```
 
@@ -91,13 +91,13 @@ It never hurts to double check that information.
 Now do this to get any recent updates to the main ISLE repository:
 
 ```
-$ git pull upstream master
+$ git pull upstream main
 ```
 Your local repository is now in sync with the main (remote) ISLE one.  Push that
 up to your GitHub fork:
 
 ```
-$ git push origin master
+$ git push origin main
 Enumerating objects: 40, done.
 Counting objects: 100% (40/40), done.
 Delta compression using up to 4 threads
@@ -106,7 +106,7 @@ Writing objects: 100% (37/37), 10.65 KiB | 5.33 MiB/s, done.
 Total 37 (delta 19), reused 0 (delta 0)
 remote: Resolving deltas: 100% (19/19), completed with 3 local objects.
 To https://github.com/your-user-name/ISLE.git
-   afe1a83..48ade81  master -> master
+   afe1a83..48ade81  main -> main
 ```
 Now your fork is up to date with any changes in the main ISLE repository. If you
 look at the `git log` for your repository, or up on github.com, you'll see that
@@ -167,30 +167,30 @@ the comment when you submit your PR request (below).
 The next step is to make sure your branch is up to date with any changes that happened
 while you were making your changes.
 ```
-$ git checkout master
-Switched to the 'master' branch
+$ git checkout main
+Switched to the 'main' branch
 ```
-Next, pull any new updates from `upstream/master` and merge onto your local `master`
+Next, pull any new updates from `upstream/main` and merge onto your local `main`
 branch. This helps avoid/resolve conflicts when you create your Pull Request.
 
 ```
-$ git pull upstream master
+$ git pull upstream main
 From https://github.com/Islandora-Collaboration-Group/ISLE
- * branch            master     -> FETCH_HEAD
+ * branch            main     -> FETCH_HEAD
 Already up to date.
 
-$ git push origin master
+$ git push origin main
 ```
 Now switch to your branch that contains your work:
 ```
 $ git checkout issue_1234_fix
 Switched to branch 'issue_1234_fix'
 ```
-Bring any changes to the master branch into your branch:
+Bring any changes to the main branch into your branch:
 ```
-$ git rebase origin/master
+$ git rebase origin/main
 First, rewinding head to replay your work on top of it...
-Fast-forwarded master to upstream/master.
+Fast-forwarded main to upstream/main.
 ```
 
 [Rebase](https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase),
@@ -199,9 +199,9 @@ Rebasing is a common way to integrate upstream changes into your local
 repository. Rebasing is like saying, "I want to base my changes on what
 everybody has already done." A Git rebase will take the work on the branch
 you specify and apply them over the branch you're currently checked out on.
-So the above command will take what's new on origin/master and bring that into
+So the above command will take what's new on origin/main and bring that into
 your currently checked out branch (origin/issue_1234_fix). This brings your branch
-up to date with anything new that happened on origin/master while you were
+up to date with anything new that happened on origin/main while you were
 making you're changes.
 
 This is important because it helps resolve any conflicts that might have arisen
@@ -231,7 +231,7 @@ You'll be taken to a screen that looks like this:
 
 In the banner above, the "base repository" should be the repository you want the
 changes to end up in.  In this case it's: "Islandora-Collaboration-Group/ISLE"
-on branch "master".  The "head repository" should be your repository and branch
+on branch "main".  The "head repository" should be your repository and branch
 information containing the new changes.  **Most of the time GitHub fills this in
 correctly for you and you just need to double check it.**
 

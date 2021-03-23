@@ -22,7 +22,7 @@ As there is a review process of any new changes to the ISLE code or documentatio
 
 * While `mkdocs serve` is running in the terminal, open up a new terminal or terminal tab and `cd to pathto/ISLE project directory`
 
-You will now create a new git branch which will allow you to make changes without fear of losing the original code / file versions kept in `master`. The new branch name can be anything you like but we suggest that you use a convention that identifies you clearly e.g. `githubusername-docs-fix2` or `janedoe-doc-fixes1`
+You will now create a new git branch which will allow you to make changes without fear of losing the original code / file versions kept in `main`. The new branch name can be anything you like but we suggest that you use a convention that identifies you clearly e.g. `githubusername-docs-fix2` or `janedoe-doc-fixes1`
 
 * `git checkout -b githubusername-docs-fix2`
 
@@ -117,9 +117,9 @@ If you run into trouble, this github.com support page may be of use: [https://he
 
 * To the right of the Branch menu, click `New pull request`.
 
-* Use the base branch dropdown menu to select the branch you'd like to merge your changes into (`master`), then use the compare branch drop-down menu to choose the topic branch you made your changes in.(`githubusername-docs-fix2`)
+* Use the base branch dropdown menu to select the branch you'd like to merge your changes into (`main`), then use the compare branch drop-down menu to choose the topic branch you made your changes in.(`githubusername-docs-fix2`)
 
-  * `base:master` <--- `compare:githubusername-docs-fix2`
+  * `base:main` <--- `compare:githubusername-docs-fix2`
 
 * Type a title and description for your pull request.
 

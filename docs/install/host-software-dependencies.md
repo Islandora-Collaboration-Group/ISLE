@@ -42,16 +42,11 @@ add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(
 
 ### Step 3: Install Docker-Compose
 
-- Copy and paste the command below.
-<!--- Why do we hardcode this version of docker-compose? Is there a way to get the latest stable release instead? Or do we create a list of software versions to update periodically? Note: This occurs 2 times in this file. --->
-```
-curl -L https://github.com/docker/compose/releases/download/1.23.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
-```
-
+- Find the latest Docker-Compose version here: [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)
+- Go to the "Install Compose" section, select your operating system, and complete the steps to install Docker-Compose.
 - Test the Installation.
     - `docker-compose --version`
-
-- **Example output:** `docker-compose version 1.23.1, build 1110ad01`
+- **Example output:** `docker-compose version 1.27.4, build 40524192`
 
 ### Step 4: Add Your User to the `docker` Group
 Allow your user to run Docker commands and to launch the entire ISLE stack.
@@ -101,15 +96,11 @@ Your host server is now configured and ready to install ISLE.
 
 ### Step 3: Install Docker-Compose
 
-- Copy and paste the command below.
-```
-curl -L https://github.com/docker/compose/releases/download/1.23.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
-```
-
+- Find the latest Docker-Compose version here: [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)
+- Go to the "Install Compose" section, select your operating system, and complete the steps to install Docker-Compose.
 - Test the Installation.
     - `docker-compose --version`
-
-- **Example output:** `docker-compose version 1.23.1, build 1110ad01`
+- **Example output:** `docker-compose version 1.27.4, build 40524192`
 
 ### Step 4: Add Your User to the `docker` Group
 Allow your user to run Docker commands and to launch the entire ISLE stack.

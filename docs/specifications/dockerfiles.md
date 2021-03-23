@@ -137,7 +137,7 @@ Following [standard Docker convention](https://docs.docker.com/engine/reference/
 
 * ENTRYPOINT - Allows you to configure a container that will run as an executable.
 
-* Within the [apache Dockerfile](https://github.com/Islandora-Collaboration-Group/ISLE/blob/master/apache/Dockerfile), the server is told to "run" using the `apache2ctl` utility by this last line: `ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]`
+* Within the [apache Dockerfile](https://github.com/Islandora-Collaboration-Group/ISLE/blob/main/apache/Dockerfile), the server is told to "run" using the `apache2ctl` utility by this last line: `ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]`
 
 ## Dockerfile Commenting
 
