@@ -30,11 +30,11 @@ We strongly recommend that you begin the update process on your Local environmen
 * Run a git fetch from the ICG upstream:
     * `git fetch icg-upstream`
 
-* Checkout a new git branch as a precaution for performing the update on your project. This way your "master" branch stays safe and untouched until you have tested thoroughly and are ready to merge in changes from the recent update. You may select any name for your new local branch.
+* Checkout a new git branch as a precaution for performing the update on your project. This way your "main" branch stays safe and untouched until you have tested thoroughly and are ready to merge in changes from the recent update. You may select any name for your new local branch.
     * **Example:** `git checkout -b isle-update-numberhere`
 
-* Pull down the ICG ISLE "master" branch into your Local project's new "isle-update-numberhere" branch:
-    * `git pull icg-upstream master`
+* Pull down the ICG ISLE "main" branch into your Local project's new "isle-update-numberhere" branch:
+    * `git pull icg-upstream main`
 * In your ISLE directory, you may view the newest release of ISLE code by entering:
     * `ls -lha`
 * Now that you have pulled down the latest code, there are likely to be conflicts between your existing code and the newer code. Run this command to determine if there are git merge conflicts:
@@ -50,7 +50,7 @@ We strongly recommend that you begin the update process on your Local environmen
     * **Example:** `git add <changedfileshere>`
     * **Example:** `git commit -m "ISLE update from version #X to version #Y"`
 
-* Optional: If you want to backup this new branch to your origin, then run this command: (Ultimately after testing on your Local, you'll merge to `master` and then deploy the new code to your Staging and Production environments.)
+* Optional: If you want to backup this new branch to your origin, then run this command: (Ultimately after testing on your Local, you'll merge to `main` and then deploy the new code to your Staging and Production environments.)
     * **Example:** `git push origin isle-update-numberhere`
 
 * Using the same open terminal, ensure you are in the root of your ISLE project directory:
@@ -70,13 +70,13 @@ We strongly recommend that you begin the update process on your Local environmen
     * All services are functional and without apparent ERROR warnings in the browser log console output.
         * **Example:** In Chrome, press the F12 button to open the [Console](https://developers.google.com/web/tools/chrome-devtools/console/), then select the "Console" tab.
 
-* When you have completed testing and have no further adjustments to make, switch from your "isle-update-numberhere" branch of code to your "master" branch:
-    * `git checkout master`
-* Merge your "isle-update-numberhere" branch of code to "master".
+* When you have completed testing and have no further adjustments to make, switch from your "isle-update-numberhere" branch of code to your "main" branch:
+    * `git checkout main`
+* Merge your "isle-update-numberhere" branch of code to "main".
     * **Example:** `git merge isle-update-numberhere`
 
 * Push this code to your online git provider ISLE
-    * `git push -u origin master`
+    * `git push -u origin main`
     * This will take 2-5 minutes depending on your internet speed.
 
 * You now have the current ISLE project code checked into git; this will be the foundation for making changes to your Staging and Production servers.
@@ -91,7 +91,7 @@ We strongly recommend that you begin the update process on your Local environmen
     * `docker-compose down`
 
 * Update the docker files via git:
-    * `git pull origin master`
+    * `git pull origin main`
 
 <!-- TODO: Break this down into simpler steps -->
 * You must now again fix the `.env` file as you did in the `On Remote Staging - Edit the ".env" File to Change to the Staging Environment` step of either the [Staging ISLE Installation: New Site](../install/install-staging-new.md) or the [Staging ISLE Installation: Migrate Existing Islandora Site](../install/install-staging-migrate.md) instructions. As described, this step is a multi-step, involved process that allows an end-user to make appropriate changes to the `.env` and then commit it locally to git. This local commit will never be pushed back to the git repository and this is critical because it allows future ISLE updates and/or configuration changes. In other words, you are restoring what you had in the `.env` to the Staging settings in case they are overwritten.
