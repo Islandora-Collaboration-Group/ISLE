@@ -56,7 +56,7 @@ The following files will need you to review, edit and/or merge in previous setti
   * Default settings for ISLE. Change for other environments as needed.
 
 ```bash
-COMPOSE_PROJECT_NAME=isle_ld
+COMPOSE_PROJECT_NAME=isle_demo
 BASE_DOMAIN=isle.localdomain
 CONTAINER_SHORT_ID=ld
 COMPOSE_FILE=docker-compose.demo.yml

@@ -92,7 +92,7 @@ This reference includes a combination of suggestions and actual values. You may 
 * The Demo environment is the "default" activated environment.
 
 ```bash
-COMPOSE_PROJECT_NAME=isle_ld
+COMPOSE_PROJECT_NAME=isle_demo
 BASE_DOMAIN=isle.localdomain
 CONTAINER_SHORT_ID=ld
 COMPOSE_FILE=docker-compose.demo.yml
