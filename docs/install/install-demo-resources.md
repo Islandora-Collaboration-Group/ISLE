@@ -17,7 +17,7 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 #### 1. MySQL Container
 | Compose Service Name | Container Name  | Software      | Ports         |
 | :-------------:      | :-------------: | ------------- | ------------- |
-| mysql                | isle-mysql-demo   | MySQL 5.7     | 3306          |
+| mysql                | isle-mysql-ld   | MySQL 5.7     | 3306          |
 
 
 | Account        | Password              | Database         | Perms                         |
@@ -32,7 +32,7 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 
 | Compose Service Name | Container Name  | Software      | Ports                                            |
 | :-------------:      | :-------------: | ------------- | -------------                                    |
-| fedora               | isle-fedora-demo  | see below     | 8080 mapped to 8081 (on host) |
+| fedora               | isle-fedora-ld  | see below     | 8080 mapped to 8081 (on host) |
 
 | Software                         | Version           |
 | -------------                    | -------------     |
@@ -47,7 +47,7 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 
 | Account           | Password                      | Service       | URL           |
 | -------------     | -------------                 | ------------- | ------------- |
-| fedoraAdmin       | demo_fed_admin            | Fedora        | http://hostip:8081/fedora/describe                          |
+| fedoraAdmin       | ild_fed_admin_2018            | Fedora        | http://hostip:8081/fedora/describe                          |
 | fedoraIntCallUser | ild_fed_IntCallUser_2018      | Fedora        | http://hostip:8081/fedora/objects                           |
 | anonymous         | anonymous                     | Fedora        | ---                                                         |
 | fgsAdmin          | ild_fgs_admin_2018            | Gsearch       | http://hostip:8081/fedoragsearch/rest?operation=updateIndex |
@@ -60,7 +60,7 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 
 | Compose Service Name | Container Name  | Software      | Ports                                              |
 | :-------------:      | :-------------: | ------------- | -------------                                      |
-| solr                 | isle-solr-demo  | see below     | 8080 (on container) mapped to 8082 (on host)       |
+| solr                 | isle-solr-ld  | see below     | 8080 (on container) mapped to 8082 (on host)       |
 
 | Software               | Version       |
 | -------------          | ------------- |
