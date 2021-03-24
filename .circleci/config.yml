@@ -16,7 +16,6 @@ jobs:
           command: |
             mkdir data
             cd ~/isle
-     #       git clone https://github.com/Islandora-Collaboration-Group/isle-behat.git isle-behat
             git clone -b ISLE-v.1.5.5-dev https://github.com/Born-Digital-US/isle-behat.git isle-behat
 
       - run:
