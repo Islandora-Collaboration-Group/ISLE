@@ -116,7 +116,7 @@ Always use the `https://isle.localdomain` domain to view and log in to a local s
 #### 6. Image Services
 | Compose Service Name | Container Name  | Software      | Ports                                            |
 | :-------------:      | :-------------: | ------------- | -------------                                    |
-| image-services       |  isle-images-demo | see below   | 8080 (on container) mapped to 8083 (on host)     |
+| image-services       |  isle-images-ld | see below   | 8080 (on container) mapped to 8083 (on host)     |
 
 
 | Software                         | Version           |

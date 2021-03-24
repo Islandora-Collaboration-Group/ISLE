@@ -46,7 +46,6 @@
 
 * Release fixes
   * https://github.com/Islandora-Collaboration-Group/ISLE/issues/190
-  * https://github.com/Islandora-Collaboration-Group/ISLE/issues/217
 
 #### isle-imageservices
 
