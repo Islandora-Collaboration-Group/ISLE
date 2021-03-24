@@ -6,7 +6,7 @@ This Local ISLE Installation builds a local environment for the express purpose 
 
 This Local ISLE Installation will use a copy of a currently running Production Islandora Drupal website and an empty Fedora repository for end users to test migration to ISLE and do site development and design with the end goal of deploying to ISLE Staging and Production environments for public use. The final goal would be to cut over from the existing non-ISLE Production and Staging servers to their new ISLE counterparts.
 
-This Local ISLE Installation will allow you to locally view this site in your browser with the domain of your choice (**Example:** "https://yourprojectnamehere.localdomain"), instead of being constrained to the Demo URL ("https://isle-demo.localdomain").
+This Local ISLE Installation will allow you to locally view this site in your browser with the domain of your choice (**Example:** "https://yourprojectnamehere.localdomain"), instead of being constrained to the Demo URL ("https://isle.localdomain").
 
 This document has directions on how you can save newly created ISLE code into a git software repository as a workflow process designed to manage and upgrade the environments throughout the development process from Local to Staging to Production. The [ISLE Installation: Environments](../install/install-environments.md) documentation offers an overview of the ISLE structure, the associated files, and what values ISLE end users should use for the ".env", "local.env", etc.
 

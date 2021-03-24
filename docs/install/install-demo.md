@@ -2,7 +2,7 @@
 
 _Expectations:  It takes an average of **45 minutes** to read this documentation and complete this installation._
 
-This Demo ISLE Installation creates an Islandora environment on your personal computer that you can view locally in your browser as `https://isle-demo.localdomain`. This process includes an un-themed Drupal website and an empty Fedora repository so you may ingest test objects, add or edit metadata, update fields in SOLR indexing, develop code, and otherwise "kick the tires" on ISLE.
+This Demo ISLE Installation creates an Islandora environment on your personal computer that you can view locally in your browser as `https://isle.localdomain`. This process includes an un-themed Drupal website and an empty Fedora repository so you may ingest test objects, add or edit metadata, update fields in SOLR indexing, develop code, and otherwise "kick the tires" on ISLE.
 
 Please post questions to the public [Islandora ISLE Google group](https://groups.google.com/forum/#!forum/islandora-isle), or subscribe to receive emails. The [Glossary](../appendices/glossary.md) defines terms used in this documentation.
 
@@ -23,7 +23,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 ## Step 1: Edit "/etc/hosts" File
 
-Enable the Demo ISLE Installation to be viewed locally on a personal computer browser as: `https://isle-demo.localdomain`.
+Enable the Demo ISLE Installation to be viewed locally on a personal computer browser as: `https://isle.localdomain`.
 
 * Please use these instructions to [Edit the "/etc/hosts" File](../install/install-demo-edit-hosts-file.md).
 
@@ -104,8 +104,8 @@ _Using the same open terminal:_
 This process may take 10-20 minutes (_depending on system and internet speeds_)
 
 * Run the install site script on the Apache container by copying and pasting the appropriate command:
-    * **For Mac/Ubuntu/CentOS/etc:** `docker exec -it isle-apache-demo bash -c "cd /utility-scripts/isle_drupal_build_tools && ./isle_islandora_installer.sh"`
-    * **For Microsoft Windows:** `winpty docker exec -it isle-apache-demo bash -c "cd /utility-scripts/isle_drupal_build_tools && ./isle_islandora_installer.sh"`
+    * **For Mac/Ubuntu/CentOS/etc:** `docker exec -it isle-apache-ld bash -c "cd /utility-scripts/isle_drupal_build_tools && ./isle_islandora_installer.sh"`
+    * **For Microsoft Windows:** `winpty docker exec -it isle-apache-ld bash -c "cd /utility-scripts/isle_drupal_build_tools && ./isle_islandora_installer.sh"`
 
 
 | For Microsoft Windows: |
@@ -124,7 +124,7 @@ This process may take 10-20 minutes (_depending on system and internet speeds_)
 
 ## Step 6: Test the Site
 
-* In your web browser, enter this URL: `https://isle-demo.localdomain`
+* In your web browser, enter this URL: `https://isle.localdomain`
 <!--- TODO: Add error message and how to proceed (click 'Advanced...') --->
 * Note: You may see an SSL error warning that the site is unsafe. It is safe, it simply uses "self-signed" SSL certs. Ignore the error and proceed to the site.
 * Log in to the local Islandora site:

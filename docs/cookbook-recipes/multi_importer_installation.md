@@ -61,11 +61,11 @@ chown -R islandora:www-data /mnt/ingest' > batch_installer.sh
 
 Update the script file permissions on the container:
 
-`docker exec -it isle-apache-demo bash -c "chmod 744 /mnt/ingest/batch_installer.sh"`
+`docker exec -it isle-apache-ld bash -c "chmod 744 /mnt/ingest/batch_installer.sh"`
 
 Run batch_installer.sh on the container:
 
-`docker exec -it isle-apache-demo bash -c "/mnt/ingest/batch_installer.sh"`
+`docker exec -it isle-apache-ld bash -c "/mnt/ingest/batch_installer.sh"`
 
 
 ## Islandora ingest overview and IMI demonstration
@@ -80,7 +80,7 @@ Drill down to the ./ingest_data/isle-ingest-samples/IMI directory and look for t
 
 Visit one of these two pages:
 
-  * on your Demo site > https://isle-demo.localdomain/multi_importer
+  * on your Demo site > https://isle.localdomain/multi_importer
   * on your Local site > https://yourlocalnamehere.localdomain/multi_importer
 
 Use the data in mods_twig_base.txt to create and save an IMI metadata template

@@ -171,8 +171,8 @@ Checking the triples count is an easy way to double-check if objects are being i
 
 To check the triples count in Blazegraph:
 
-* Navigate to the Blazegraph Admin panel http://isle-demo.localdomain:8084/blazegraph/#query
-    * Replace `isle-demo.localdomain` with your real domain when using in a Local, Staging or Production
+* Navigate to the Blazegraph Admin panel http://isle.localdomain:8084/blazegraph/#query
+    * Replace `isle.localdomain` with your real domain when using in a Local, Staging or Production
 
 * Copy and paste the following query into the field with the text (_Input a SPARQL query_):
 

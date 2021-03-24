@@ -49,7 +49,7 @@ hub:
     * Newer `selenium` images may be available, but are untested. YMMV.
 * No changes to `.env` file(s) are necessary, although for the examples shown here we have:
     * `COMPOSE_PROJECT_NAME=isle_test`
-    * `BASE_DOMAIN=isle-demo.localdomain`
+    * `BASE_DOMAIN=isle.localdomain`
     * `CONTAINER_SHORT_ID=td`
     * `COMPOSE_FILE-COMPOSE-FILE=test.env`
     * If your use case uses other values for these variables, you may need to find/replace in the instructions below (e.g. `isle-apache-td` corresponds with the CONTAINER_SHORT_ID above)
@@ -65,7 +65,7 @@ git clone https://github.com/Islandora-Collaboration-Group/ISLE.git
 
 ```bash
 COMPOSE_PROJECT_NAME=isle_test
-BASE_DOMAIN=isle-demo.localdomain
+BASE_DOMAIN=isle.localdomain
 CONTAINER_SHORT_ID=td
 COMPOSE_FILE-COMPOSE-FILE=test.env
 ```
@@ -97,7 +97,7 @@ docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/all/modules/islan
 docker exec -it isle-apache-td bash -c "cd /var/www/html && drush -y -u 1 en islandora_compound_batch"
 ```
 
-* Make sure your `/etc/hosts` has an entry for the domain you'll be using (`isle-demo.localdomain` in this example)
+* Make sure your `/etc/hosts` has an entry for the domain you'll be using (`isle.localdomain` in this example)
 * Now clone the repository with the tests, put it where Drupal expects it (`sites/all/behat`), and install Behat dependencies with Composer:
 ```bash
 git clone git@github.com:Born-Digital-US/isle-behat.git data/isle-behat

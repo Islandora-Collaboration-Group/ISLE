@@ -12,7 +12,7 @@ As instructed in the `## Step 4: Create New Users and Passwords by Editing "loca
 
 * `islandora` user on the ISLE host server uses `islandora` as the password. This might not apply to your setup if using local Docker clients.
 
-<!--- TODO this IP information conflicts with our statement to always use the `https://isle-demo.localdomain` domain. Requires clarification. --->
+<!--- TODO this IP information conflicts with our statement to always use the `https://isle.localdomain` domain. Requires clarification. --->
 * Some of the information below is for accessing the non Drupal site admin panels and resources only. (optional). In this context, `hostip` below can mean either
   * the IP address e.g. `http://10.10.10.130` of the Vagrant or Non-Vagrant Host VM (_CentOS / Ubuntu_)
   * the IP address e.g. `127.0.0.1` for `Docker for Mac`
@@ -27,7 +27,7 @@ As instructed in the `## Step 4: Create New Users and Passwords by Editing "loca
 | -------------  | -------------         | -------------    | -------------                 |
 | root           | Based on your `local.env` edits | **ALL**          | **ALL**                       |
 | fedora_admin   | Based on your `local.env` edits | fedora3          | **All** except `Grant` option |
-| isle_demo_user   | Based on your `local.env` edits        | Based on your `local.env` edits          | **All** except `Grant` option |
+| isle_ld_user   | Based on your `local.env` edits        | Based on your `local.env` edits          | **All** except `Grant` option |
 
 ---
 
@@ -137,7 +137,7 @@ As instructed in the `## Step 4: Create New Users and Passwords by Editing "loca
 
 #### 7. Portainer
 
-* Portainer (a Docker control panel) is available at [portainer.isle-demo.localdomain](http://portainer.isle-demo.localdomain). No username/password are required.  This is unsafe for production environments.
+* Portainer (a Docker control panel) is available at [portainer.isle.localdomain](http://portainer.isle.localdomain). No username/password are required.  This is unsafe for production environments.
 
 ---
 
