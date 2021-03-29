@@ -7,7 +7,7 @@
 * David Keiser-Clark (Williams College), documentation, code updates
 * Mark McFate, (Grinnell College), documentation, testing and code updates
 * Tom Shorock, (Univ. of Kansas), testing and code updates
-* Brandon Weigel, ([Arca](https://arcabc.ca), documentation, testing
+* Brandon Weigel, (Arca), documentation, testing
 
 ### ISLE (main project)
 
@@ -87,5 +87,3 @@
 
 * Release fixes
   * https://github.com/Islandora-Collaboration-Group/ISLE/issues/194
-
----

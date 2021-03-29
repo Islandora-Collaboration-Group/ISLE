@@ -31,7 +31,7 @@ services:
 
 
   mysql:
-    image: borndigital/isle-mysql:1.5.5
+    image: islandoracollabgroup/isle-mysql:1.5.5
     container_name: isle-mysql-${CONTAINER_SHORT_ID}
     env_file:
       - test.env
@@ -53,7 +53,7 @@ services:
 
 
   fedora:
-    image: borndigital/isle-fedora:1.5.5
+    image: islandoracollabgroup/isle-fedora:1.5.5
     container_name: isle-fedora-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=768M
@@ -81,7 +81,7 @@ services:
 
 
   solr:
-    image: borndigital/isle-solr:1.5.5
+    image: islandoracollabgroup/isle-solr:1.5.5
     container_name: isle-solr-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=512M
@@ -104,7 +104,7 @@ services:
 
 
   image-services:
-    image: borndigital/isle-imageservices:1.5.5
+    image: islandoracollabgroup/isle-imageservices:1.5.5
     container_name: isle-images-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=512M
@@ -131,7 +131,7 @@ services:
 
 
   apache:
-    image: borndigital/isle-apache:1.5.5
+    image: islandoracollabgroup/isle-apache:1.5.5
     container_name: isle-apache-${CONTAINER_SHORT_ID}
     env_file:
       - .env
@@ -319,7 +319,7 @@ services:
 # Start - Blazegraph service section
 
   isle-blazegraph:
-    image: borndigital/isle-blazegraph:1.5.5
+    image: islandoracollabgroup/isle-blazegraph:1.5.5
     container_name: isle-blazegraph-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=4096M
@@ -344,7 +344,7 @@ services:
 ## (Optional-component): Uncomment lines below to run ISLE with the Varnish cache
 
   varnish:
-    image: borndigital/isle-varnish:1.5.5
+    image: islandoracollabgroup/isle-varnish:1.5.5
     container_name: isle-varnish-${CONTAINER_SHORT_ID}
     env_file:
       - production.env

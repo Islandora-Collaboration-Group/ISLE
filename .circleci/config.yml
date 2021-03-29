@@ -23,7 +23,7 @@ jobs:
           command: |
             rm .env
             printf "COMPOSE_PROJECT_NAME=isle_test \nBASE_DOMAIN=isle.localdomain \nCONTAINER_SHORT_ID=td \nCOMPOSE_FILE=docker-compose.test.yml" > .env
-      
+
       - run:
           name: Get docker-compose 1.28.6
           command: |
