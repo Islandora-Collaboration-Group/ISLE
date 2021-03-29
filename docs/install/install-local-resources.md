@@ -1,11 +1,12 @@
 # Local ISLE Installation: Resources
 
-### Local URL
+## Local URL
+
 Always use the `https://yourprojectnamehere.localdomain` domain to view and log in to a local site. (Do not use an IP address, such as `https://10.10.10.130 or https://127.0.0.01` as some components may not function correctly.)
 
 ---
 
-### Docker Containers: Passwords
+## Docker Containers: Passwords
 
 As instructed in the `## Step 4: Create New Users and Passwords by Editing "local.env" File` section of the [Local ISLE Installation: New Site](../install/install-local-new.md) documentation, you'll need to refer to the edited `local.env` for your password choices.
 
@@ -13,28 +14,28 @@ As instructed in the `## Step 4: Create New Users and Passwords by Editing "loca
 
 <!--- TODO this IP information conflicts with our statement to always use the `https://isle.localdomain` domain. Requires clarification. --->
 * Some of the information below is for accessing the non Drupal site admin panels and resources only. (optional). In this context, `hostip` below can mean either
-     * the IP address e.g. `http://10.10.10.130` of the Vagrant or Non-Vagrant Host VM (_CentOS / Ubuntu_)
-     * the IP address e.g. `127.0.0.1` for `Docker for Mac`
+  * the IP address e.g. `http://10.10.10.130` of the Vagrant or Non-Vagrant Host VM (_CentOS / Ubuntu_)
+  * the IP address e.g. `127.0.0.1` for `Docker for Mac`
 
-#### 1. MySQL Container
+### 1. MySQL Container
+
 | Compose Service Name | Container Name  | Software      | Ports         |
-| :-------------:      | :-------------: | ------------- | ------------- |      
+| :-------------:      | :-------------: | ------------- | ------------- |
 | mysql                | Run `docker ps` to determine   | MySQL 5.7     | 3306          |
 
-
 | Account        | Password              | Database         | Perms                         |
-| -------------  | -------------         | -------------    | -------------                 |      
+| -------------  | -------------         | -------------    | -------------                 |
 | root           | Based on your `local.env` edits | **ALL**          | **ALL**                       |
 | fedora_admin   | Based on your `local.env` edits | fedora3          | **All** except `Grant` option |
 | isle_ld_user   | Based on your `local.env` edits        | Based on your `local.env` edits          | **All** except `Grant` option |
 
 ---
 
-#### 2. Fedora Container
-| Compose Service Name | Container Name  | Software      | Ports                                            |
-| :-------------:      | :-------------: | ------------- | -------------                                    |      
-| fedora               | Run `docker ps` to determine  | see below     | 8080 mapped to 8081 (on host) |
+### 2. Fedora Container
 
+| Compose Service Name | Container Name  | Software      | Ports                                            |
+| :-------------:      | :-------------: | ------------- | -------------                                    |
+| fedora               | Run `docker ps` to determine  | see below     | 8080 mapped to 8081 (on host) |
 
 | Software                         | Version           |
 | -------------                    | -------------     |
@@ -61,9 +62,8 @@ As instructed in the `## Step 4: Create New Users and Passwords by Editing "loca
 #### 3. Solr Container
 
 | Compose Service Name | Container Name  | Software      | Ports                                              |
-| :-------------:      | :-------------: | ------------- | -------------                                      |      
+| :-------------:      | :-------------: | ------------- | -------------                                      |
 | solr                 | isle-solr-ld    | see below     | 8080 (on container) mapped to 8082 (on host)       |
-
 
 | Software               | Version       |
 | -------------          | ------------- |
@@ -83,9 +83,8 @@ As instructed in the `## Step 4: Create New Users and Passwords by Editing "loca
 #### 4. Apache Container
 
 | Compose Service Name | Container Name  | Software      | Ports         |
-| :-------------:      | :-------------: | ------------- | ------------- |      
+| :-------------:      | :-------------: | ------------- | ------------- |
 | apache               | isle-apache-ld  | see below     | 80, 443       |
-
 
 | Software      | Version       |
 | ------------- | ------------- |
@@ -104,7 +103,8 @@ As instructed in the `## Step 4: Create New Users and Passwords by Editing "loca
 
 ---
 
-#### 5. Proxy Container
+### 5. Proxy Container
+
 | Compose Service Name | Container Name  | Software      | Ports         |
 | :-------------:      | :-------------: | ------------- | ------------- |
 | proxy                | isle-proxy      | Traefik       | 80, 443       |
@@ -117,11 +117,11 @@ As instructed in the `## Step 4: Create New Users and Passwords by Editing "loca
 
 ---
 
-#### 6. Image Services
-| Compose Service Name | Container Name  | Software      | Ports                                            |
-| :-------------:      | :-------------: | ------------- | -------------                                    |      
-| image-services       |  Run `docker ps` to determine | see below     | 8080 (on container) mapped to 8083 (on host)     |
+### 6. Image Services
 
+| Compose Service Name | Container Name  | Software      | Ports                                            |
+| :-------------:      | :-------------: | ------------- | -------------                                    |
+| image-services       |  Run `docker ps` to determine | see below     | 8080 (on container) mapped to 8083 (on host)     |
 
 | Software                         | Version           |
 | -------------                    | -------------     |
