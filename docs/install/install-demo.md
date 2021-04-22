@@ -165,6 +165,7 @@ Once you are ready, you may progress to either:
 ## Additional Resources
 * [Demo ISLE Installation: Resources](../install/install-demo-resources.md) contains Docker container passwords and URLs for administrator testing.
 * [ISLE Installation: Troubleshooting](../install/install-troubleshooting.md) contains help for port conflicts, non-running Docker containers, etc.
+* [ISLE Cheat Sheet: Docker Commands](../cookbook-recipes/isle-cheatsheet-docker-commands.md) contains reference information on Docker and Unix commands that are useful for installing, updating, and running ISLE.
 
 ---
 
