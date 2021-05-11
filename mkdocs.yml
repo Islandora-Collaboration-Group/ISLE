@@ -30,9 +30,9 @@ nav:
     - 'Staging: New Site': 'install/install-staging-new.md'
     - 'Staging: Migrate Site': 'install/install-staging-migrate.md'
     - 'Production: New Site': 'install/install-production-new.md'
-    - 'Production: Migrate Site': 'install/install-production-migrate.md'    
+    - 'Production: Migrate Site': 'install/install-production-migrate.md'
     - 'Troubleshooting Guide': 'install/install-troubleshooting.md'
-    - 'Optional Components': 
+    - 'Optional Components':
       - 'Overview': 'optional-components/components.md'
       - 'Automated Testing': 'optional-components/automated-testing.md'
       - 'Blazegraph': 'optional-components/blazegraph.md'
@@ -73,8 +73,9 @@ nav:
   - 'Get Help': 'about/get-help.md'
   - 'Release Process': 'contributor-docs/release-process.md'
 - 'Release Notes':
-  - 'Latest release: 1.5.5': 'release-notes/release-1-5-5.md'
+  - 'Latest release: 1.5.6': 'release-notes/release-1-5-6.md'
   - 'Previous releases':
+     - '1.5.5': 'release-notes/release-1-5-5.md'
      - '1.5.4': 'release-notes/release-1-5-4.md'
      - '1.5.3': 'release-notes/release-1-5-3.md'
      - '1.5.2': 'release-notes/release-1-5-2.md'
