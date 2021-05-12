@@ -1,6 +1,6 @@
 <!--- PAGE_TITLE --->
 
-[ISLandora Enterprise (ISLE)](https://github.com/Islandora-Collaboration-Group/ISLE) is a new project in development that will address two of the most significant pain-points in Islandora: installation and maintenance.
+[ISLandora Enterprise (ISLE)](https://github.com/Islandora-Collaboration-Group/ISLE) is a project that addresses two of the most significant pain-points in Islandora: installation and maintenance.
 
 [Islandora](http://islandora.ca/) is an open-source software [framework](https://github.com/Islandora) designed to help institutions and organizations and their audiences collaboratively manage, and discover digital assets using a best-practices framework.
 
@@ -14,13 +14,13 @@ This process allows folks to choose between hosting:
 * on site in an institutional data center
 * in a cloud environment such as [Amazon Web Services](https://aws.amazon.com/) or [Google Cloud Platform](https://cloud.google.com/).
 
-ISLE's production-ready platform will be updated monthly with:
+ISLE's production-ready platform is updated at least every 2 months with:
 
 * critical security patches
 * full stack software updates
 * a suite of commonly installed features and solution packs.
 
-ISLE is designed to be an evolving but trusted environment to help create a managed process for migrating to the next major release of Islandora (termed CLAW).
+ISLE is designed to be an evolving but trusted environment to help create a managed process for migrating to the next major release of Islandora (8/9).
 
 
 ## Project Overview
@@ -51,4 +51,3 @@ By ISLE, it is meant a system that will:
 - Encompass critical security patches, and full stack software updates, plus dependencies for commonly installed features and all available solution packs.
 - Include an integrated ISLE/Islandora test suite (expected to utilize TravisCI) to be utilized, developed in conjunction with the Islandora Foundation and the current Islandora release managers
 - Include documentation that covers end usage, a how-to guide to set up an initial ISLE installation, a how-to guide for an established installation to upgrade containers to the latest versions, and a functional description of mechanics, administrative system management and the process for future ISLE development
-
