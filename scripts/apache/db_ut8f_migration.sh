@@ -6,7 +6,7 @@ echo "Moving to /var/www/html"
 cd /var/www/html/ || exit;
 
 echo "Download the Drupal module"
-drush @none dl utf8mb4_convert-7.x.10 --pm-force
+drush @none dl utf8mb4_convert-7.x
 
 echo "Clear drush cache"
 drush cc drush
