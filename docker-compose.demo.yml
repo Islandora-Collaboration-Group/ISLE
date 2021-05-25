@@ -88,8 +88,8 @@ services:
     image: borndigital/isle-imageservices:1.5.7-dev
     container_name: isle-images-${CONTAINER_SHORT_ID}
     environment:
-      - JAVA_MAX_MEM=4096M
-      - JAVA_MIN_MEM=4096M
+      - JAVA_MAX_MEM=512M
+      - JAVA_MIN_MEM=0M
     env_file:
       - demo.env
     networks:
