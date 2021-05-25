@@ -89,7 +89,7 @@ services:
     container_name: isle-images-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=512M
-      - JAVA_MIN_MEM=0M
+      - JAVA_MIN_MEM=0
     env_file:
       - demo.env
     networks:
