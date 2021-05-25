@@ -84,8 +84,7 @@ services:
 
 
   image-services:
-    #image: borndigital/isle-imageservices:1.5.0
-    image: borndigital/isle-imageservices:1.5.7-dev
+    image: borndigital/isle-imageservices:1.5.7
     container_name: isle-images-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=512M
