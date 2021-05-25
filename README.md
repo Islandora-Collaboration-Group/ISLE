@@ -14,8 +14,8 @@ Please use the [ISLE Documentation](https://islandora-collaboration-group.github
 **Important:** This "Quick Start Guide" is for testing ISLE and **should not** be used in production.
 
 ### Requirements  
-* Docker-CE or EE version `19.03.x`+
-* [Docker-compose](https://docs.docker.com/compose/install/) version `1.29.1`+
+* Docker-CE or EE version `20.10.x`+
+* [Docker-compose](https://docs.docker.com/compose/install/) version `1.29.2`+
 * Git `2.0+`
 * Time required < 30 minutes.
 * **Windows Users**: Please open the .env and uncomment `COMPOSE_CONVERT_WINDOWS_PATHS=1`
