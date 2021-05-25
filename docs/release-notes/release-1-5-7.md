@@ -34,6 +34,7 @@
 * ISLE Tomcat base image upgrade from 1.5.6 to 1.5.7
 * `apt-get` dist-upgrades for dependencies security and package updates
 * Apache `Maven` **held** at version `3.6.3` despite a recent April `3.8.1` release. Breaks POM dependencies and blocks mirrors.
+* Apache `Ant` **held** at version `1.10.9` despite a recent April `1.10.10` release. Upstream dependencies fail to download in Github Actions.
 * Github Actions [workflow](https://github.com/marketplace/actions/build-and-push-docker-images) updated
 
 #### isle-imageservices
