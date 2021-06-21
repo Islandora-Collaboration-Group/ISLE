@@ -6,7 +6,7 @@ This Production ISLE Installation will use the themed Drupal website created dur
 
 While this installation will get you a brand new Production site, it is **not** intended as a migration process of a previously existing Islandora site. If you need to build a Production environment to migrate a previously existing Islandora site, please use the [Production ISLE Installation: Migrate Existing Islandora Site](../install/install-production-migrate.md) instead.
 
-As this Production domain will require a real domain name or [FQDN](https://kb.iu.edu/d/aiuv), you will need to ask your IT department or appropriate resource for an "A record" to be added for your domain to "point" to your Production Host Server IP address in your institution's DNS records. 
+As this Production domain will require a real domain name or [FQDN](https://kb.iu.edu/d/aiuv), you will need to ask your IT department or appropriate resource for an "A record" to be added for your domain to "point" to your Production Host Server IP address in your institution's DNS records.
 
 Example:`https://yourprojectnamehere.institution.edu`
 
@@ -206,7 +206,6 @@ If you have decided to use Commercial SSL certs supplied to you by your IT team 
 
 **Example: .cert**
 ```bash
-    [entryPoints.https.tls]
       [[entryPoints.https.tls.certificates]]
       certFile = "/certs/yourprojectnamehere.domain.cert"
       keyFile = "/certs/yourprojectnamehere.domain.key"
@@ -214,7 +213,6 @@ If you have decided to use Commercial SSL certs supplied to you by your IT team 
 
 **Example: .pem**
 ```bash
-    [entryPoints.https.tls]
       [[entryPoints.https.tls.certificates]]
       certFile = "/certs/yourprojectnamehere.institution.edu.pem"
       keyFile = "/certs/yourprojectnamehere.institution.edu.key"
@@ -319,7 +317,7 @@ This step is a multi-step, involved process that allows an end-user to make appr
         * `COMPOSE_FILE=docker-compose.production.yml`
     * Save the file
 
-* For users of ISLE version 1.5 and above, these git instructions below are not needed. The .env file is no longer tracked in git. 
+* For users of ISLE version 1.5 and above, these git instructions below are not needed. The .env file is no longer tracked in git.
 
 * For users of ISLE versions 1.4.2 and below, you will need to continue to follow these instructions until you upgrade.
     * Enter `git status` - You'll now see the following:

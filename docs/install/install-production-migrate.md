@@ -53,7 +53,7 @@ Please post questions to the public [Islandora ISLE Google group](https://groups
 
 * **RECOMMENDATION:** We recommend that you use a temporary domain name e.g. `https://yourprojectnamehere-newprod.institution.edu` to check the new Production ISLE site while an existing non-ISLE Production site is still running and compare for differences. This will also allow end users to still access the old Production system while the work for the new ISLE system is ongoing.
     * You'll need to add an additional A record for `yourprojectnamehere-newprod.institution.edu` to point to the same ISLE Production Host Server IP.
-    * Please adjust all involved domain names and configuration files accordingly. 
+    * Please adjust all involved domain names and configuration files accordingly.
     * When ready to launch the new ISLE production site publicly, you can remove the `-newprod` from all domain references and configuration files.
         * Update the DNS records to repoint the current non-ISLE Production server A record for `yourprojectnamehere.institution.edu` to the new ISLE host server IP.
         * Remove the temporary DNS A record for `yourprojectnamehere-newprod.institution.edu`
@@ -232,7 +232,6 @@ If you have decided to use Commercial SSL certs supplied to you by your IT team 
 
 **Example: .cert**
 ```bash
-    [entryPoints.https.tls]
       [[entryPoints.https.tls.certificates]]
       certFile = "/certs/yourprojectnamehere.domain.cert"
       keyFile = "/certs/yourprojectnamehere.domain.key"
@@ -240,7 +239,6 @@ If you have decided to use Commercial SSL certs supplied to you by your IT team 
 
 **Example: .pem**
 ```bash
-    [entryPoints.https.tls]
       [[entryPoints.https.tls.certificates]]
       certFile = "/certs/yourprojectnamehere.institution.edu.pem"
       keyFile = "/certs/yourprojectnamehere.institution.edu.key"
@@ -316,7 +314,7 @@ Please clone from your existing Production Islandora git repository.
         * You'll need to adjust the paths below in case your setup differs on either the non-ISLE Production server or the ISLE Production server.
         * Copy your `/usr/local/fedora/data/datastreamStore` data to the suggested path of `/mnt/data/fedora/datastreamStore`
             * You may need to change the permissions to `root:root` on the Production `/mnt/data/fedora/datastreamStore` directory above after copying so the Fedora container can access properly. Do not do this on your existing Production system please.
-    * Production Fedora `objectStore`. 
+    * Production Fedora `objectStore`.
         * Copy your `/usr/local/fedora/data/objectStore` data to the suggested path of `/opt/data/fedora/objectStore`
             * You may need to change the permissions to `root:root` on the Production `/opt/data/fedora/objectStore` above after copying so the Fedora container can access properly. Do not do this on your existing Production system please.
 
@@ -518,7 +516,7 @@ Depending on the size of your repository, this entire process may take minutes (
 
 ### Reindex Fedora RI & Fedora SQL Database (part 1 of 2)
 
-Since this command can take minutes or hours depending on the size of your repository, As such, it is recommended starting a screen session prior to running the following commands. Learn more about [screen here](https://www.tecmint.com/screen-command-examples-to-manage-linux-terminals/) 
+Since this command can take minutes or hours depending on the size of your repository, As such, it is recommended starting a screen session prior to running the following commands. Learn more about [screen here](https://www.tecmint.com/screen-command-examples-to-manage-linux-terminals/)
 
 **Note:** The method described below is a longer way of doing this process to onboard users.
 

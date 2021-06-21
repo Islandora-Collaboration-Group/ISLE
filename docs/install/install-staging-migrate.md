@@ -229,7 +229,6 @@ If you have decided to use Commercial SSL certs supplied to you by your IT team 
 
 **Example: .cert**
 ```bash
-    [entryPoints.https.tls]
       [[entryPoints.https.tls.certificates]]
       certFile = "/certs/yourprojectnamehere-staging.domain.cert"
       keyFile = "/certs/yourprojectnamehere-staging.domain.key"
@@ -237,7 +236,6 @@ If you have decided to use Commercial SSL certs supplied to you by your IT team 
 
 **Example: .pem**
 ```bash
-    [entryPoints.https.tls]
       [[entryPoints.https.tls.certificates]]
       certFile = "/certs/sitename-staging.institution.edu.pem"
       keyFile = "/certs/sitename-staging.institution.edu.key"
