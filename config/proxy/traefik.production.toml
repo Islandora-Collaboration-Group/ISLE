@@ -36,16 +36,15 @@ defaultEntryPoints = ["http", "https"]
         "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256"
       ]
 
-# To use a Let's Encrypt SSL certificate
-# Leave this above section [entryPoints] as is / untouched
-# Scroll down to the Let's Encrypt section and uncomment all lines starting with [acme]
-# Modify values as needed or directed.
-# 
-# To use a Commercial SSL certificate
-# Replace .pem & .key with the name of your Production SSL certificate and associated key
-# Do note the positioning of the added lines. Third character indentation.
-# Example: 
-#    [entryPoints.https.tls]
+      # To use a Let's Encrypt SSL certificate
+      # Leave this above section [entryPoints] as is / untouched
+      # Scroll down to the Let's Encrypt section and uncomment all lines starting with [acme]
+      # Modify values as needed or directed.
+      #
+      # To use a Commercial SSL certificate
+      # Replace .pem & .key with the name of your Production SSL certificate and associated key
+      # Do note the positioning of the added lines. Third character indentation.
+      # Example: 
 #      [[entryPoints.https.tls.certificates]]
 #      certFile = "/certs/sitename.institution.edu.pem"
 #      keyFile = "/certs/sitename.institution.edu.key"
@@ -157,7 +156,7 @@ watch = true
 # Uncomment to use Letsencrypt instead of self-signed or commercial SSLs.
 # Change settings as needed. The email used should be for an admin level user or group account.
 # For additional reference please see: https://docs.traefik.io/configuration/acme/
-# 
+#
 #[acme]
 #  email = "admin@sitename.institution.edu"
 #  storage = "acme.json"

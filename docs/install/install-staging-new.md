@@ -205,7 +205,6 @@ If you have decided to use Commercial SSL certs supplied to you by your IT team 
 
 **Example: .cert**
 ```bash
-    [entryPoints.https.tls]
       [[entryPoints.https.tls.certificates]]
       certFile = "/certs/yourprojectnamehere-staging.domain.cert"
       keyFile = "/certs/yourprojectnamehere-staging.domain.key"
@@ -213,7 +212,6 @@ If you have decided to use Commercial SSL certs supplied to you by your IT team 
 
 **Example: .pem**
 ```bash
-    [entryPoints.https.tls]
       [[entryPoints.https.tls.certificates]]
       certFile = "/certs/yourprojectnamehere-staging.institution.edu.pem"
       keyFile = "/certs/yourprojectnamehere-staging.institution.edu.key"
@@ -318,7 +316,7 @@ This step is a multi-step, involved process that allows an end-user to make appr
       * `COMPOSE_FILE=docker-compose.staging.yml`
     * Save the file
 
-* For users of ISLE version 1.5 and above, these git instructions below are not needed. The .env file is no longer tracked in git. 
+* For users of ISLE version 1.5 and above, these git instructions below are not needed. The .env file is no longer tracked in git.
 
 * For users of ISLE versions 1.4.2 and below, you will need to continue to follow these instructions until you upgrade.
     * Enter `git status` - You'll now see the following:
