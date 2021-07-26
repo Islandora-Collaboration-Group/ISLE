@@ -40,6 +40,9 @@ add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(
 - Enable and start Docker.
     - `systemctl enable docker && systemctl start docker`
 
+- Create the `docker` group
+    - `sudo groupadd docker`
+
 ### Step 3: Install Docker-Compose
 
 - Find the latest Docker-Compose version here: [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)
@@ -58,6 +61,14 @@ Allow your user to run Docker commands and to launch the entire ISLE stack.
 
 - Type `exit` and then reconnect (this allows your effective groups to update).
 
+## Step 5 - Configure Docker service to start on boot
+
+```bash
+sudo systemctl enable docker.service
+sudo systemctl enable containerd.service
+```
+
+---
 
 Your host server is now configured and ready to install ISLE.
 
@@ -94,6 +105,9 @@ Your host server is now configured and ready to install ISLE.
 - Install Docker.
     - `yum install -y docker-ce`
 
+- Create the `docker` group
+    - `sudo groupadd docker`
+
 ### Step 3: Install Docker-Compose
 
 - Find the latest Docker-Compose version here: [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)
@@ -112,6 +126,12 @@ Allow your user to run Docker commands and to launch the entire ISLE stack.
 
 - Type `exit` and then reconnect (this allows your effective groups to update).
 
+## Step 5 - Configure Docker service to start on boot
+
+```bash
+sudo systemctl enable docker.service
+sudo systemctl enable containerd.service
+```
 
 Your host server is now configured and ready to install ISLE.
 
