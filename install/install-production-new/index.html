@@ -1177,8 +1177,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release-notes/release-1-5-6/" title="Latest release: 1.5.6" class="md-nav__link">
-      Latest release: 1.5.6
+    <a href="../../release-notes/release-1-5-9/" title="Latest release: 1.5.9" class="md-nav__link">
+      Latest release: 1.5.9
     </a>
   </li>
 
@@ -1201,6 +1201,42 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-5-8/" title="1.5.8" class="md-nav__link">
+      1.5.8
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-5-7/" title="1.5.7" class="md-nav__link">
+      1.5.7
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-5-6/" title="1.5.6" class="md-nav__link">
+      1.5.6
+    </a>
+  </li>
+
         
           
           
@@ -1628,7 +1664,7 @@
 <p><em>Expectations:  It takes an average of <strong>2-4+ hours</strong> to read this documentation and complete this installation.</em></p>
 <p>This Production ISLE Installation will use the themed Drupal website created during the <a href="../install-local-new/">Local ISLE Installation: New Site</a> process and will create an empty Fedora repository for remote (non-local or cloud) hosting of a Production site. Islandora Drupal site code here should be considered finished and ready for public access. The previously used Production system might have Fedora data &amp; collections that should then be synced to this Production site or end users can choose to only ingest on Production. It is recommended that this remote site not be publicly accessible until ready to launch.</p>
 <p>While this installation will get you a brand new Production site, it is <strong>not</strong> intended as a migration process of a previously existing Islandora site. If you need to build a Production environment to migrate a previously existing Islandora site, please use the <a href="../install-production-migrate/">Production ISLE Installation: Migrate Existing Islandora Site</a> instead.</p>
-<p>As this Production domain will require a real domain name or <a href="https://kb.iu.edu/d/aiuv">FQDN</a>, you will need to ask your IT department or appropriate resource for an "A record" to be added for your domain to "point" to your Production Host Server IP address in your institution's DNS records. </p>
+<p>As this Production domain will require a real domain name or <a href="https://kb.iu.edu/d/aiuv">FQDN</a>, you will need to ask your IT department or appropriate resource for an "A record" to be added for your domain to "point" to your Production Host Server IP address in your institution's DNS records.</p>
 <p>Example:<code>https://yourprojectnamehere.institution.edu</code></p>
 <p>Once this has been completed, if you do not want to use Let's Encrypt, you can also request commercial SSL certificates from your IT department for this domain as well. Please note the DNS records will need to exist prior to the creation of any SSL certificate (Commercial or Let's Encrypt.)</p>
 <p>Unlike the Local and Demo setups, you will not have to edit <code>/etc/localhosts</code> to view your domain given that DNS is now involved. Your new domain will no longer use the <code>.localdomain</code> but instead something like <code>https://yourprojectnamehere.institution.edu</code></p>
@@ -1883,15 +1919,13 @@
 </ul>
 <p><strong>Note:</strong> despite the instruction examples differing on file type, (<code>.pem</code> or <code>cert</code>), either one is compatible, use what you have been given. Merely change the file type suffix accordingly.</p>
 <p><strong>Example: .cert</strong></p>
-<pre><code class="bash">    [entryPoints.https.tls]
-      [[entryPoints.https.tls.certificates]]
+<pre><code class="bash">      [[entryPoints.https.tls.certificates]]
       certFile = &quot;/certs/yourprojectnamehere.domain.cert&quot;
       keyFile = &quot;/certs/yourprojectnamehere.domain.key&quot;
 </code></pre>
 
 <p><strong>Example: .pem</strong></p>
-<pre><code class="bash">    [entryPoints.https.tls]
-      [[entryPoints.https.tls.certificates]]
+<pre><code class="bash">      [[entryPoints.https.tls.certificates]]
       certFile = &quot;/certs/yourprojectnamehere.institution.edu.pem&quot;
       keyFile = &quot;/certs/yourprojectnamehere.institution.edu.key&quot;
 </code></pre>
@@ -2028,7 +2062,7 @@
 </ul>
 </li>
 <li>
-<p>For users of ISLE version 1.5 and above, these git instructions below are not needed. The .env file is no longer tracked in git. </p>
+<p>For users of ISLE version 1.5 and above, these git instructions below are not needed. The .env file is no longer tracked in git.</p>
 </li>
 <li>
 <p>For users of ISLE versions 1.4.2 and below, you will need to continue to follow these instructions until you upgrade.</p>

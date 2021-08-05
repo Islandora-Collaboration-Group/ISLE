@@ -285,6 +285,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#step-5-configure-docker-service-to-start-on-boot" title="Step 5 - Configure Docker service to start on boot" class="md-nav__link">
+    Step 5 - Configure Docker service to start on boot
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#centos" title="CentOS" class="md-nav__link">
     CentOS
   </a>
@@ -322,6 +329,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5-configure-docker-service-to-start-on-boot_1" title="Step 5 - Configure Docker service to start on boot" class="md-nav__link">
+    Step 5 - Configure Docker service to start on boot
+  </a>
   
 </li>
       
@@ -1118,8 +1132,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release-notes/release-1-5-6/" title="Latest release: 1.5.6" class="md-nav__link">
-      Latest release: 1.5.6
+    <a href="../../release-notes/release-1-5-9/" title="Latest release: 1.5.9" class="md-nav__link">
+      Latest release: 1.5.9
     </a>
   </li>
 
@@ -1142,6 +1156,42 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-5-8/" title="1.5.8" class="md-nav__link">
+      1.5.8
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-5-7/" title="1.5.7" class="md-nav__link">
+      1.5.7
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-5-6/" title="1.5.6" class="md-nav__link">
+      1.5.6
+    </a>
+  </li>
+
         
           
           
@@ -1383,6 +1433,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#step-5-configure-docker-service-to-start-on-boot" title="Step 5 - Configure Docker service to start on boot" class="md-nav__link">
+    Step 5 - Configure Docker service to start on boot
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#centos" title="CentOS" class="md-nav__link">
     CentOS
   </a>
@@ -1420,6 +1477,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5-configure-docker-service-to-start-on-boot_1" title="Step 5 - Configure Docker service to start on boot" class="md-nav__link">
+    Step 5 - Configure Docker service to start on boot
+  </a>
   
 </li>
       
@@ -1564,6 +1628,12 @@
 <li><code>systemctl enable docker &amp;&amp; systemctl start docker</code></li>
 </ul>
 </li>
+<li>
+<p>Create the <code>docker</code> group</p>
+<ul>
+<li><code>sudo groupadd docker</code></li>
+</ul>
+</li>
 </ul>
 <h3 id="step-3-install-docker-compose">Step 3: Install Docker-Compose</h3>
 <ul>
@@ -1591,6 +1661,12 @@
 <p>Type <code>exit</code> and then reconnect (this allows your effective groups to update).</p>
 </li>
 </ul>
+<h2 id="step-5-configure-docker-service-to-start-on-boot">Step 5 - Configure Docker service to start on boot</h2>
+<pre><code class="bash">sudo systemctl enable docker.service
+sudo systemctl enable containerd.service
+</code></pre>
+
+<hr />
 <p>Your host server is now configured and ready to install ISLE.</p>
 <p><strong>Please continue by selecting your type of installation:</strong></p>
 <ul>
@@ -1643,6 +1719,12 @@
 <li><code>yum install -y docker-ce</code></li>
 </ul>
 </li>
+<li>
+<p>Create the <code>docker</code> group</p>
+<ul>
+<li><code>sudo groupadd docker</code></li>
+</ul>
+</li>
 </ul>
 <h3 id="step-3-install-docker-compose_1">Step 3: Install Docker-Compose</h3>
 <ul>
@@ -1670,6 +1752,11 @@
 <p>Type <code>exit</code> and then reconnect (this allows your effective groups to update).</p>
 </li>
 </ul>
+<h2 id="step-5-configure-docker-service-to-start-on-boot_1">Step 5 - Configure Docker service to start on boot</h2>
+<pre><code class="bash">sudo systemctl enable docker.service
+sudo systemctl enable containerd.service
+</code></pre>
+
 <p>Your host server is now configured and ready to install ISLE.</p>
 <p><strong>Please continue by selecting your type of installation:</strong></p>
 <ul>

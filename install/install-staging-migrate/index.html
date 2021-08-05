@@ -1223,8 +1223,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release-notes/release-1-5-6/" title="Latest release: 1.5.6" class="md-nav__link">
-      Latest release: 1.5.6
+    <a href="../../release-notes/release-1-5-9/" title="Latest release: 1.5.9" class="md-nav__link">
+      Latest release: 1.5.9
     </a>
   </li>
 
@@ -1247,6 +1247,42 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-5-8/" title="1.5.8" class="md-nav__link">
+      1.5.8
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-5-7/" title="1.5.7" class="md-nav__link">
+      1.5.7
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-5-6/" title="1.5.6" class="md-nav__link">
+      1.5.6
+    </a>
+  </li>
+
         
           
           
@@ -2007,15 +2043,13 @@
 </ul>
 <p><strong>Note:</strong> despite the instruction examples differing on file type, (<code>.pem</code> or <code>cert</code>), either one is compatible, use what you have been given. Merely change the file type suffix accordingly.</p>
 <p><strong>Example: .cert</strong></p>
-<pre><code class="bash">    [entryPoints.https.tls]
-      [[entryPoints.https.tls.certificates]]
+<pre><code class="bash">      [[entryPoints.https.tls.certificates]]
       certFile = &quot;/certs/yourprojectnamehere-staging.domain.cert&quot;
       keyFile = &quot;/certs/yourprojectnamehere-staging.domain.key&quot;
 </code></pre>
 
 <p><strong>Example: .pem</strong></p>
-<pre><code class="bash">    [entryPoints.https.tls]
-      [[entryPoints.https.tls.certificates]]
+<pre><code class="bash">      [[entryPoints.https.tls.certificates]]
       certFile = &quot;/certs/sitename-staging.institution.edu.pem&quot;
       keyFile = &quot;/certs/sitename-staging.institution.edu.key&quot;
 </code></pre>
