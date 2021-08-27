@@ -2,7 +2,7 @@ version: '3.7'
 
 #### docker-compose up -d;
 ## Local Environment - Used for Drupal site development, more extensive metadata, Solr and Fedora development work on a local laptop or workstation
-## Updated 2021-08 - Release 1.5.9 (@ 1.5.9)
+## Updated 2021-08 - Release 1.5.10 (@ 1.5.10)
 
 services:
   isle-portainer: ## Renamed to avoid conflicts on systems/servers with portainer already running.
