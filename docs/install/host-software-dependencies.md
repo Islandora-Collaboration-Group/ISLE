@@ -19,7 +19,7 @@
     - If you are not already `root`, enter either `sudo -s` or `sudo su` to become root.
 
 - Update and install the following required software:
-    - `apt-get update && upgrade`
+    - `apt-get update && apt-get upgrade`
     - `apt-get install -y openssl git htop ntp wget curl nano apt-transport-https ca-certificates software-properties-common`
 
 ### Step 2: Install Docker
