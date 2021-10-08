@@ -935,8 +935,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release-notes/release-1-5-9/" title="Latest release: 1.5.9" class="md-nav__link">
-      Latest release: 1.5.9
+    <a href="../../release-notes/release-1-5-11/" title="Latest release: 1.5.11" class="md-nav__link">
+      Latest release: 1.5.11
     </a>
   </li>
 
@@ -959,6 +959,30 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-5-10/" title="1.5.10" class="md-nav__link">
+      1.5.10
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/release-1-5-9/" title="1.5.9" class="md-nav__link">
+      1.5.9
+    </a>
+  </li>
+
         
           
           
@@ -1205,7 +1229,7 @@
                 <h1 id="migrate-your-mysql-databases-to-utf8-format">Migrate your MySQL databases to UTF8 format</h1>
 <ul>
 <li>
-<p>Within the <code>ISLE/scripts/apache/</code> directory there is now a <code>db_utf8_migration.sh</code> script that can be run to migrate your site's MySQL databases to UTF8 format.</p>
+<p>Within the <code>ISLE/scripts/apache/</code> directory there is now a <code>db_ut8f_migration.sh</code> script that can be run to migrate your site's MySQL databases to UTF8 format.</p>
 </li>
 <li>
 <p>More information can be found <a href="https://www.drupal.org/project/utf8mb4_convert">here</a></p>
@@ -1213,9 +1237,9 @@
 <li>
 <p>To use this script:</p>
 </li>
-<li><code>cp scripts/apache/db_utf8_migration.sh isle-apache-ld:/var/www/html</code></li>
+<li><code>docker cp scripts/apache/db_ut8f_migration.sh isle-apache-ld:/var/www/html</code></li>
 <li><code>docker exec -it isle-apache-ld bash chmod 755 /var/www/html/db_utf8_migration.sh</code></li>
-<li><code>docker exec -it isle-apache-ld bash /var/www/html/db_utf8_migration.sh</code></li>
+<li><code>docker exec -it isle-apache-ld bash /var/www/html/db_ut8f_migration.sh</code></li>
 <li>Please note this process can take a minimum of 10-15 mins or more depending on your site size etc.</li>
 </ul>
                 
