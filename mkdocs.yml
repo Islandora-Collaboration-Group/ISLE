@@ -75,7 +75,7 @@ nav:
 - 'Release Notes':
   - 'Latest release: 1.5.11': 'release-notes/release-1-5-11.md'
   - 'Previous releases':
-     - '1.5.9': 'release-notes/release-1-5-10.md'
+     - '1.5.10': 'release-notes/release-1-5-10.md'
      - '1.5.9': 'release-notes/release-1-5-9.md'
      - '1.5.8': 'release-notes/release-1-5-8.md'
      - '1.5.7': 'release-notes/release-1-5-7.md'
