@@ -83,6 +83,7 @@ jobs:
       - run:
           name: Run the behat tests
           command: |
+            docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && rm -f /var/www/html/sites/behat/features/newspaper.feature"
             docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && ./run-isle-tests.sh --run=services"
             docker exec -it isle-apache-td bash -c "cd /var/www/html/sites/behat && ./run-isle-tests.sh --run=apache"
           no_output_timeout: 20m
