@@ -30,7 +30,7 @@ Please use the [ISLE Documentation](https://islandora-collaboration-group.github
     * `git checkout main`
     * `git pull origin main`
   * All future releases will be built and tagged from the `main` branches on all ISLE Docker images Github repositories as well.
-  * After December 2020, no more updates will be avaible from the `master` branch which will be deprecated and ultimately deleted in 2021.
+  * After December 2020, no more updates will be available from the `master` branch which will be deprecated and ultimately deleted in 2021.
 
 ### Quick Start
 1. Please read: [ISLE Release Candidate (RC): How to Test](https://docs.google.com/document/d/1VUiI_bXo6SLqqUjmInVjBg3-cs40Vj7I_92txjFUoQg/edit#heading=h.1e4943m60lsh)

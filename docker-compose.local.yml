@@ -2,7 +2,7 @@ version: '3.7'
 
 #### docker-compose up -d;
 ## Local Environment - Used for Drupal site development, more extensive metadata, Solr and Fedora development work on a local laptop or workstation
-## Updated 2021-11 - Release 1.5.13 (@ 1.5.13))
+## Updated 2021-12 - Release 1.5.14 (@ 1.5.14))
 
 services:
   isle-portainer: ## Renamed to avoid conflicts on systems/servers with portainer already running.
@@ -26,7 +26,7 @@ services:
 
 
   mysql:
-    image: islandoracollabgroup/isle-mysql:1.5.13
+    image: islandoracollabgroup/isle-mysql:1.5.14
     container_name: isle-mysql-${CONTAINER_SHORT_ID}
     env_file:
       - local.env
@@ -42,7 +42,7 @@ services:
       - isle-db-data:/var/lib/mysql
 
   fedora:
-    image: islandoracollabgroup/isle-fedora:1.5.13
+    image: islandoracollabgroup/isle-fedora:1.5.14
     container_name: isle-fedora-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=768M
@@ -64,7 +64,7 @@ services:
       - isle-fedora-XACML:/usr/local/fedora/data/fedora-xacml-policies
       
   solr:
-    image: islandoracollabgroup/isle-solr:1.5.13
+    image: islandoracollabgroup/isle-solr:1.5.14
     container_name: isle-solr-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=512M
@@ -81,7 +81,7 @@ services:
       - isle-solr-data:/usr/local/solr
 
   image-services:
-    image: islandoracollabgroup/isle-imageservices:1.5.13
+    image: islandoracollabgroup/isle-imageservices:1.5.14
     container_name: isle-images-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=512M
@@ -103,7 +103,7 @@ services:
 
 
   apache:
-    image: islandoracollabgroup/isle-apache:1.5.13
+    image: islandoracollabgroup/isle-apache:1.5.14
     container_name: isle-apache-${CONTAINER_SHORT_ID}
     env_file:
       - .env
@@ -157,7 +157,7 @@ services:
 ## (Optional-component): Uncomment lines below to run ISLE with the Blazegraph triplestore instead of default Mulgara
 
 #  isle-blazegraph:
-#    image: islandoracollabgroup/isle-blazegraph:1.5.13
+#    image: islandoracollabgroup/isle-blazegraph:1.5.14
 #    container_name: isle-blazegraph-${CONTAINER_SHORT_ID}
 #    environment:
 #      - JAVA_MAX_MEM=4096M
@@ -178,7 +178,7 @@ services:
 ## (Optional-component): Uncomment lines below to run ISLE with the Varnish cache
 
 #  varnish:
-#    image: islandoracollabgroup/isle-varnish:1.5.13
+#    image: islandoracollabgroup/isle-varnish:1.5.14
 #    container_name: isle-varnish-${CONTAINER_SHORT_ID}
 #    env_file:
 #      - production.env
