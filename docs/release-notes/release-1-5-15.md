@@ -1,4 +1,4 @@
-# Release Notes - ISLE v.1.5.15, 2021-12
+# Release Notes - ISLE v.1.5.15, 2022-01
 
 ### Contributions to this release from:
 
@@ -17,10 +17,12 @@
 
 #### isle-apache
 
+* Docker base image changed to [eclipse-temurin:8-jdk](https://hub.docker.com/layers/eclipse-temurin/library/eclipse-temurin/8-jdk/images/sha256-83fb6396891390b6305af57aa4b0bc41d45d24d4e2645615cc56763519201eee?context=explore)
+  * Newer patched Java - `jdk8u312-b07` - Same foundation, same project new branding.
 * `apt-get` dist-upgrades for dependencies security and package updates
 * `ImageMagick` upgraded to version `7.1.0-19`
-* `Composer` upgraded to [commit / hash](9c234603a06f27041dca6b639a16ebc1f27ea22b) (v 1.10.25)
-* `FITS` **held** at version `1.5.0` despite a Jan 3, 2022 release. Breaks Behat tests and displays ingest and derivatives errors due to missing Java classpath and jars.
+* `Composer` upgraded to `1.10.25` - [commit / hash](9c234603a06f27041dca6b639a16ebc1f27ea22b)
+* `FITS` upgraded to version `1.5.1` with missing `xml-apis.jar` patch.
 * Github Actions [workflow](https://github.com/marketplace/actions/build-and-push-docker-images) updated
 
 #### isle-blazegraph
@@ -58,6 +60,8 @@
 
 #### isle-tomcat
 
+* Docker base image changed to [eclipse-temurin:8-jdk](https://hub.docker.com/layers/eclipse-temurin/library/eclipse-temurin/8-jdk/images/sha256-83fb6396891390b6305af57aa4b0bc41d45d24d4e2645615cc56763519201eee?context=explore)
+  * Newer patched Java - `jdk8u312-b07` - Same foundation, same project new branding.
 * `apt-get` dist-upgrades for dependencies security and package updates
 * Apache `Tomcat` upgraded to `8.5.75`
 * Github Actions [workflow](https://github.com/marketplace/actions/build-and-push-docker-images) updated
