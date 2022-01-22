@@ -73,11 +73,12 @@ nav:
   - 'Get Help': 'about/get-help.md'
   - 'Release Process': 'contributor-docs/release-process.md'
 - 'Release Notes':
-  - 'Latest release: 1.5.14': 'release-notes/release-1-5-14.md'
+  - 'Latest release: 1.5.15': 'release-notes/release-1-5-15.md'
   - 'Previous releases':
-     - '1.5.13': 'release-notes/release-1-5-13.md'  
-     - '1.5.12': 'release-notes/release-1-5-12.md'  
-     - '1.5.11': 'release-notes/release-1-5-11.md'  
+     - '1.5.14': 'release-notes/release-1-5-14.md'
+     - '1.5.13': 'release-notes/release-1-5-13.md'
+     - '1.5.12': 'release-notes/release-1-5-12.md'
+     - '1.5.11': 'release-notes/release-1-5-11.md'
      - '1.5.10': 'release-notes/release-1-5-10.md'
      - '1.5.9': 'release-notes/release-1-5-9.md'
      - '1.5.8': 'release-notes/release-1-5-8.md'
