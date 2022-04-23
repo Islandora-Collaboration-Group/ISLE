@@ -20,18 +20,6 @@ Please use the [ISLE Documentation](https://islandora-collaboration-group.github
 * Time required < 30 minutes.
 * **Windows Users**: Please open the .env and uncomment `COMPOSE_CONVERT_WINDOWS_PATHS=1`
 
-## Warnings & Notes
-
-* **AS OF THE ISLE v.1.5.3 release in December 2020 (MANDATORY)**
-  * The ISLE maintainers in agreement with the wider Islandora community have changed the default branch of `master` to `main` to work towards a more inclusive and open culture with removing language like "master or slave" as an important step.
-  * As a result the `main` branch will now be the default branch.
-  * ISLE users will need to continue to checkout `main` and pull from `main` as they once did with the now defunct `master` on all of their projects.
-    * `git fetch --all`
-    * `git checkout main`
-    * `git pull origin main`
-  * All future releases will be built and tagged from the `main` branches on all ISLE Docker images Github repositories as well.
-  * After December 2020, no more updates will be available from the `master` branch which will be deprecated and ultimately deleted in 2021.
-
 ### Quick Start
 1. Please read: [ISLE Release Candidate (RC): How to Test](https://docs.google.com/document/d/1VUiI_bXo6SLqqUjmInVjBg3-cs40Vj7I_92txjFUoQg/edit#heading=h.1e4943m60lsh)
 2. Clone this repo
@@ -70,7 +58,6 @@ If you have been testing the stack extensively you may want to `prune` your Dock
         - `docker volume rm {list of all volumes to be removed, tab auto-complete may work}` (Again, you may add as many as needed.)
     - `docker network ls` and take note of all ISLE-related networks:
         - `docker network rm {list of all networks to be removed, tab auto-complete may work}` (Again, you may add as many as needed.)
-
 
 ### Important Notes, Ports, Pages and Usernames/Passwords
 [Portainer](https://portainer.io/) is a GUI for managing Docker containers. It has been built into ISLE for your convenience.  
