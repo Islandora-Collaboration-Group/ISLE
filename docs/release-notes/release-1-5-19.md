@@ -54,7 +54,6 @@
 #### isle-tomcat
 
 * `apt-get` dist-upgrades for dependencies security and package updates
-* Apache `Tomcat` upgraded to `8.5.78`
 * Github Actions [workflow](https://github.com/marketplace/actions/build-and-push-docker-images) updated
 
 #### isle-varnish
