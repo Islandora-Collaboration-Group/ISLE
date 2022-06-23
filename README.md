@@ -15,7 +15,7 @@ Please use the [ISLE Documentation](https://islandora-collaboration-group.github
 
 ### Requirements  
 * Docker-CE or EE version `20.10.x`+
-* [Docker-compose](https://docs.docker.com/compose/install/) version `2.5.x`+
+* Hold at [Docker-compose](https://docs.docker.com/compose/install/) version `1.29.2`
 * Git `2.0+`
 * Time required < 30 minutes.
 * **Windows Users**: Please open the .env and uncomment `COMPOSE_CONVERT_WINDOWS_PATHS=1`
