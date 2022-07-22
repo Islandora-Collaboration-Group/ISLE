@@ -14,7 +14,7 @@
 #### isle-apache
 
 * `apt-get` dist-upgrades for dependencies security and package updates
-* `ImageMagick` upgraded to version `7.1.0-43`
+* `ImageMagick` upgraded to version `7.1.0.43`
 * Github Actions [workflow](https://github.com/marketplace/actions/build-and-push-docker-images) updated
 
 #### isle-blazegraph
@@ -35,7 +35,7 @@
 
 * ISLE Tomcat base image upgrade
 * `apt-get` dist-upgrades for dependencies security and package updates
-* `ImageMagick` upgraded to version `7.1.0-38`
+* `ImageMagick` upgraded to version `7.1.0.43`
 * Github Actions [workflow](https://github.com/marketplace/actions/build-and-push-docker-images) updated
 
 #### isle-mysql
@@ -52,7 +52,6 @@
 #### isle-tomcat
 
 * `apt-get` dist-upgrades for dependencies security and package updates
-* Apache `Tomcat` upgraded to `8.5.81`
 * Github Actions [workflow](https://github.com/marketplace/actions/build-and-push-docker-images) updated
 
 #### isle-varnish
