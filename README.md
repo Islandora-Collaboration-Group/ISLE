@@ -7,6 +7,15 @@ The ISLE [project maintainers](#maintainers) keep your Islandora stack smoothly 
 
 ISLE is quite flexible and may be run on an institution’s servers or in the cloud, or as a hybrid; similarly, it may be maintained by an institution’s staff, by a vendor, or as a shared project.
 
+## Announcements
+
+ISLE (legacy) has now switched to a quarterly release cycle.
+* `1.5.23` - October 2022 (Q4 2022)
+* _anticipated_ - `1.5.24` - January 2023 (Q1 2023)
+* _anticipated_ - `1.5.25` - April 2023 (Q2 2023)
+* _anticipated_ - `1.5.26` - July 2023 (Q3 2023)
+* _anticipated_ - `1.5.27` - October 2023 (Q4 2023)
+
 ## Documentation
 Please use the [ISLE Documentation](https://islandora-collaboration-group.github.io/ISLE) for using ISLE to install Islandora on server environments.
 
