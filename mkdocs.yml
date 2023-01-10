@@ -1,5 +1,5 @@
-site_name: ISLandora Enterprise (ISLE)
-site_description: Documentation for ISLandora Enterprise (ISLE)
+site_name: ISLandora Enterprise (ISLE) (legacy)
+site_description: Documentation for ISLandora Enterprise (ISLE) (legacy 7)
 
 site_dir: site
 docs_dir: docs
@@ -73,8 +73,9 @@ nav:
   - 'Get Help': 'about/get-help.md'
   - 'Release Process': 'contributor-docs/release-process.md'
 - 'Release Notes':
-  - 'Latest release: 1.5.23': 'release-notes/release-1-5-23.md'
+  - 'Latest release: 1.5.24': 'release-notes/release-1-5-24.md'
   - 'Previous releases':
+     - '1.5.23': 'release-notes/release-1-5-23.md' 
      - '1.5.22': 'release-notes/release-1-5-22.md' 
      - '1.5.21': 'release-notes/release-1-5-21.md' 
      - '1.5.20': 'release-notes/release-1-5-20.md'  
