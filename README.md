@@ -12,10 +12,9 @@ ISLE is quite flexible and may be run on an institution’s servers or in the cl
 ## Announcements
 
 ISLE (legacy) has now switched to a quarterly release cycle.
-* `1.5.23` - October 2022 (Q4 2022)
-* _anticipated_ - `1.5.24` - January 2023 (Q1 2023)
-* _anticipated_ - `1.5.25` - April 2023 (Q2 2023)
-* _anticipated_ - `1.5.26` - July 2023 (Q3 2023)
+* `1.5.24` - January 2023 (Q1 2023)
+* `1.5.25` - April 2023 (Q2 2023)
+* `1.5.26` - July 2023 (Q3 2023)
 * _anticipated_ - `1.5.27` - October 2023 (Q4 2023)
 
 ## Documentation
@@ -25,7 +24,7 @@ Please use the [ISLE Documentation](https://islandora-collaboration-group.github
 **Important:** This "Quick Start Guide" is for testing ISLE and **should not** be used in production.
 
 ### Requirements  
-* Docker-CE or EE version `20.10.x`+
+* Docker Engine (CE or EE) version `24.x`+
 * Hold at [Docker-compose](https://docs.docker.com/compose/install/) version `1.29.2`
 * Git `2.0+`
 * Time required < 30 minutes.
@@ -103,10 +102,11 @@ Portainer's authentication can be configured:
 
 ## Maintainers
 * Gavin Morris, Born-Digital
-* Mark Sandford, Colgate University
-* David Keiser-Clark, Williams College
+* Noah Smith, Born-Digital
 
 ## Former Contributors
+* Mark Sandford, Colgate University
+* David Keiser-Clark, Williams College
 * Francesca Baird, Wesleyan University
 * Carolyn Moritz, Vassar College
 * Benjamin Rosner (Lead Maintainer 2018-19), Barnard College
