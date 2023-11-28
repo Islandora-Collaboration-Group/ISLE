@@ -1,5 +1,9 @@
 # Hardware Requirements
 
+| WARNING |
+| :-------------      |
+| The ISLE Legacy project (also known as ISLE7) is no longer actively supported by the Islandora community, except for some security updates. When creating new sites, please see the currently supported installation options found in the official Islandora community [documentation site](https://islandora.github.io/documentation/).|
+
 The ISLE host server can be a personal computer, physical server, virtual machine (VM) or cloud service. An SSH connection with a user that has root or admin privileges is necessary. 
 
 If you need help requesting a server environment, please see the [Sample IT Department Request Letter](../appendices/sample-it-department-request.md).
@@ -14,9 +18,10 @@ If you need help requesting a server environment, please see the [Sample IT Depa
 
 **Please select your hardware environment:**
 
-- [Production Server](#production-server)
-- [Staging Server](#staging-server)
-- [Personal Computer (Demo or Local)](#personal-computer-demo-or-local)
+- [Hardware Requirements](#hardware-requirements)
+  - [Production Server](#production-server)
+  - [Staging Server](#staging-server)
+  - [Personal Computer (Demo or Local)](#personal-computer-demo-or-local)
 
 ---
 
