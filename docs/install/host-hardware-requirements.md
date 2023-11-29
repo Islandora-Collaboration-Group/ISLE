@@ -2,7 +2,7 @@
 
 | WARNING |
 | :-------------      |
-| The ISLE Legacy project (also known as ISLE7) is no longer actively supported by the Islandora community, except for some security updates. When creating new sites, please see the currently supported installation options found in the official Islandora community [documentation site](https://islandora.github.io/documentation/).|
+| The ISLE Legacy project (also known as ISLE7) is no longer actively supported by the Islandora community, except for some security updates. When creating new sites, please see the currently supported installation options found in the official Islandora community [documentation site](https://islandora.github.io/documentation/). For the latest ISLE, please use the isle-dc repository instead: https://github.com/Islandora-Devops/isle-dc|
 
 The ISLE host server can be a personal computer, physical server, virtual machine (VM) or cloud service. An SSH connection with a user that has root or admin privileges is necessary. 
 
