@@ -1,5 +1,9 @@
 # Overview: ISLE Installation Environments
 
+| WARNING |
+| :-------------      |
+| The ISLE Legacy project (also known as ISLE7) is no longer actively supported by the Islandora community, except for some security updates. When creating new sites, please see the currently supported installation options found in the official Islandora community [documentation site](https://islandora.github.io/documentation/). For the latest ISLE, please use the isle-dc repository instead: https://github.com/Islandora-Devops/isle-dc|
+
 As of the ISLE `1.2.0` release, ISLE has the option to use clearly defined but different environments based on end user's needs. Depending on the environment choice, additional configuration changes will need to be made to ISLE configuration files, domain names, etc. We recommend that you install ISLE using the workflow and suggested order below.
 
 * **Demo** - Used for trying out ISLE for the first time, having a sandbox for tests or to "kick the tires" on ISLE.

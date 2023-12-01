@@ -2,6 +2,10 @@
 
 # ISLandora Enterprise (ISLE)
 
+| WARNING |
+| :-------------      |
+| The ISLE Legacy project (also known as ISLE7) is no longer actively supported by the Islandora community, except for some security updates. When creating new sites, please see the currently supported installation options found in the official Islandora community [documentation site](https://islandora.github.io/documentation/). For the latest ISLE, please use the isle-dc repository instead: https://github.com/Islandora-Devops/isle-dc|
+
 ISLE is a community developed open-source project that bundles the [Islandora](https://islandora.ca) stack into a set of [Docker](https://docker.com) images that are easy to install and update. ISLE allows for persistent customizations and provides a fully functioning Islandora platform for production, staging, and development digital repositories.
 
 ## How to Install ISLE
