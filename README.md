@@ -12,11 +12,9 @@ ISLE is quite flexible and may be run on an institution’s servers or in the cl
 
 ## Announcements
 
-ISLE (legacy) has now switched to a quarterly release cycle.
-* `1.5.24` - January 2023 (Q1 2023)
-* `1.5.25` - April 2023 (Q2 2023)
-* `1.5.26` - July 2023 (Q3 2023)
-* _anticipated_ - `1.5.27` - October 2023 (Q4 2023)
+ISLE (legacy) is on a quarterly release cycle.
+* `1.5.27` - October 2023 (Q4 2023)
+* `1.5.28` - January 2024 (Q1 2024)
 
 ## Documentation
 Please use the [ISLE Documentation](https://islandora-collaboration-group.github.io/ISLE) for using ISLE to install Islandora on server environments.
