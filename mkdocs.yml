@@ -73,8 +73,9 @@ nav:
   - 'Get Help': 'about/get-help.md'
   - 'Release Process': 'contributor-docs/release-process.md'
 - 'Release Notes':
-  - 'Latest release: 1.5.27': 'release-notes/release-1-5-27.md'
+  - 'Latest release: 1.5.28': 'release-notes/release-1-5-28.md'
   - 'Previous releases':
+     - '1.5.27': 'release-notes/release-1-5-27.md'
      - '1.5.26': 'release-notes/release-1-5-26.md' 
      - '1.5.25': 'release-notes/release-1-5-25.md' 
      - '1.5.24': 'release-notes/release-1-5-24.md' 
