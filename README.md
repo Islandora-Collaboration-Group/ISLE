@@ -13,7 +13,6 @@ ISLE is quite flexible and may be run on an institution’s servers or in the cl
 ## Announcements
 
 ISLE (legacy) is on a quarterly release cycle.
-* `1.5.27` - October 2023 (Q4 2023)
 * `1.5.28` - January 2024 (Q1 2024)
 
 ## Documentation
